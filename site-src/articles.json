@@ -1,0 +1,714 @@
+[
+  {
+    "slug": "lisbonne-3-jours-sans-voiture",
+    "title": "Lisbonne en 3 jours, sans voiture et sans courir",
+    "shortTitle": "Lisbonne en 3 jours",
+    "destination": "Lisbonne",
+    "category": "Itinéraires",
+    "description": "Trois journées par quartier, les transports utiles et les réservations à prévoir pour découvrir Lisbonne sans louer de voiture.",
+    "readMinutes": 4,
+    "summary": "Pour trois jours complets à Lisbonne, consacrez une journée à Baixa et Chiado, une à Alfama et ses points de vue, puis une à Belém. Marchez à l’intérieur de chaque secteur et utilisez les transports entre eux. Gardez Sintra pour une journée supplémentaire.",
+    "sections": [
+      {
+        "id": "avant-de-partir",
+        "title": "Un programme à adapter à vos dates",
+        "paragraphs": [
+          "Cet itinéraire est une proposition éditoriale pour trois journées sur place, hors arrivée et départ. Son principe : un secteur par jour et une seule visite intérieure prioritaire. Cela laisse de la place à un déjeuner, aux pauses et aux détours. Si vous arrivez en milieu de journée, commencez simplement par Baixa et décalez la suite.",
+          "Informations pratiques vérifiées le 14 septembre 2026 auprès des sources officielles citées. Les horaires peuvent évoluer : consultez les exploitants avant de réserver. Prévoyez des chaussures adaptées aux pavés ; la marche à Lisbonne comprend de vraies montées, particulièrement dans Alfama."
+        ]
+      },
+      {
+        "id": "jour-1",
+        "title": "Jour 1 — Baixa, le Tage et Chiado",
+        "paragraphs": [
+          "Commencez au Rossio, descendez vers la Rua Augusta et gagnez la Praça do Comércio. Ce premier parcours donne des repères simples : les places du centre, le fleuve et les collines de chaque côté. Accordez toute la matinée à cette boucle, avec une pause en cours de route, plutôt que d’additionner les entrées payantes.",
+          "Après déjeuner, remontez vers Chiado pour les rues commerçantes et les cafés. Si un musée ou une exposition vous attire, faites-en votre visite principale. Terminez par une promenade vers Cais do Sodré, ou restez dans Chiado pour dîner. Notre conseil de rythme : laissez la soirée libre, surtout après un voyage matinal."
+        ]
+      },
+      {
+        "id": "jour-2",
+        "title": "Jour 2 — Alfama, un quartier à parcourir lentement",
+        "paragraphs": [
+          "Réservez la matinée à Alfama, avec la Sé, les abords de Santa Luzia et Portas do Sol comme points de repère. Visit Lisboa souligne les pentes et les ruelles pavées du quartier. Le trajet doit donc se penser en dénivelé autant qu’en distance. Si vous fatiguez facilement, rejoignez d’abord un point haut par un transport adapté, puis réduisez la boucle.",
+          "Choisissez ensuite entre la visite du château de São Jorge et davantage de temps dans les rues. Ne programmez pas tous les belvédères : deux arrêts où l’on s’assoit valent mieux qu’une chasse aux panoramas. Pour une soirée de fado, comparez la durée, les conditions de réservation et ce que comprend la formule avant de choisir une adresse."
+        ]
+      },
+      {
+        "id": "jour-3",
+        "title": "Jour 3 — Belém, avec une réservation centrale",
+        "paragraphs": [
+          "La ligne 15E de Carris dessert notamment Belém et Mosteiro Jerónimos ; vérifiez son service et ses éventuelles déviations le jour même. Organisez la journée autour du monastère si vous souhaitez entrer : la fiche officielle indique une fermeture le lundi et un système de réservation, y compris pour les détenteurs de la Lisboa Card.",
+          "Complétez avec les espaces extérieurs et une promenade au bord du Tage. La tour de Belém peut être un objectif de promenade, mais confirmez séparément ses conditions d’accès intérieur. N’achetez pas un programme de plusieurs monuments sans cette vérification. Si la visite choisie est indisponible, gardez le quartier et remplacez-la par une autre activité dont vous aurez vérifié l’ouverture."
+        ]
+      },
+      {
+        "id": "transports",
+        "title": "Les petits choix qui simplifient le séjour",
+        "paragraphs": [
+          "La ligne rouge du métro dessert l’aéroport. Pour vos déplacements, consultez le plan du réseau et l’accès réel à votre logement : une station proche sur la carte ne supprime pas toujours la pente finale. Dans le métro, le paiement sans contact est proposé ; ses conditions ne doivent pas être étendues automatiquement à tous les autres opérateurs."
+        ],
+        "bullets": [
+          "Placez Belém un autre jour si votre troisième journée tombe un lundi.",
+          "Comparez une carte touristique avec les seules visites réellement retenues et les transports nécessaires.",
+          "Gardez une marge avant chaque créneau ; une réservation ne dispense pas du trajet jusqu’à l’entrée.",
+          "Pour une poussette ou une mobilité réduite, vérifiez les accès précis avant de reprendre une boucle à pied."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Faut-il louer une voiture pour ces trois jours ?",
+        "answer": "Non pour cet itinéraire : les secteurs se visitent à pied, avec des transports entre eux. Le point à anticiper est surtout le dénivelé, pas le stationnement."
+      },
+      {
+        "question": "Peut-on ajouter Sintra le troisième jour ?",
+        "answer": "Oui, en remplaçant Belém. C’est un choix de programme : vous aurez alors deux journées à Lisbonne et une excursion, avec un rythme plus chargé."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Visit Lisboa — centre de Lisbonne",
+        "url": "https://www.visitlisboa.com/en/regions/lisboa-centro"
+      },
+      {
+        "label": "Visit Lisboa — Alfama",
+        "url": "https://www.visitlisboa.com/en/places/alfama"
+      },
+      {
+        "label": "Visit Lisboa — monastère des Jerónimos",
+        "url": "https://www.visitlisboa.com/en/places/jeronimos-monastery"
+      },
+      {
+        "label": "Visit Lisboa — tour de Belém",
+        "url": "https://www.visitlisboa.com/en/places/torre-de-belem"
+      },
+      {
+        "label": "Carris — parcours et alertes de la ligne 15E",
+        "url": "https://www.carris.pt/viaje/carreiras/15e/"
+      },
+      {
+        "label": "Métro de Lisbonne — réseau et paiement",
+        "url": "https://www.metrolisboa.pt/en/discovering-lisboa-by-metro/"
+      }
+    ],
+    "related": [
+      "ou-dormir-lisbonne-quartiers",
+      "sintra-depuis-lisbonne",
+      "lisbonne-ou-porto"
+    ]
+  },
+  {
+    "slug": "porto-3-jours-sans-voiture",
+    "title": "Porto en 3 jours : du Douro à l’océan, sans voiture",
+    "shortTitle": "Porto en 3 jours",
+    "destination": "Porto",
+    "category": "Itinéraires",
+    "description": "Un itinéraire de trois jours à Porto : centre historique, Gaia et Atlantique, avec les bons réflexes pour les transports.",
+    "readMinutes": 4,
+    "summary": "Sur trois jours complets, découvrez d’abord le centre historique de Porto, consacrez une deuxième journée à Gaia et au Douro, puis choisissez une promenade vers l’Atlantique. Une voiture n’est pas nécessaire pour ce programme ; les montées méritent davantage d’attention que les distances.",
+    "sections": [
+      {
+        "id": "preparer",
+        "title": "Trois journées avec une vraie respiration",
+        "paragraphs": [
+          "Voici une proposition éditoriale, pensée pour un premier séjour et vérifiée côté informations pratiques le 14 septembre 2026. Elle suppose trois journées complètes. Si vous disposez seulement de deux jours et de quelques heures, gardez le centre et Gaia, puis utilisez le temps restant pour une promenade libre près de votre logement.",
+          "Le centre historique regroupe beaucoup de lieux d’intérêt, mais une courte distance sur le plan peut cacher une montée. Évitez de descendre au fleuve puis de remonter plusieurs fois dans la même demi-journée. Emportez peu d’affaires et choisissez une seule visite avec billet par journée : vous conserverez des possibilités si le temps ou l’énergie changent."
+        ]
+      },
+      {
+        "id": "jour-1",
+        "title": "Jour 1 — São Bento, la Sé et Ribeira",
+        "paragraphs": [
+          "Commencez à São Bento, puis prenez la direction de la Sé avant de descendre vers Ribeira. La gare, la cathédrale et le quartier du fleuve font partie des points d’intérêt recensés par Visit Porto. Ce parcours proposé se prête à une matinée de découverte, avec des arrêts, sans chercher à tout visiter à l’intérieur.",
+          "Après déjeuner près du fleuve, choisissez une visite dans le secteur historique : le Palácio da Bolsa, par exemple, si ses conditions vous conviennent. Gardez ensuite le temps de remonter tranquillement. Si vous voulez absolument les Clérigos, placez cette visite au début ou à la fin du programme selon l’adresse de votre hébergement, pour limiter les allers-retours."
+        ]
+      },
+      {
+        "id": "jour-2",
+        "title": "Jour 2 — Gaia et les deux rives du Douro",
+        "paragraphs": [
+          "Traversez vers Vila Nova de Gaia pour regarder Porto depuis l’autre rive. Le pont Luís I et les caves de vin de Porto figurent dans le quartier historique présenté par l’office de tourisme. Nous proposons d’en faire une journée distincte afin de profiter des quais, puis de choisir éventuellement une visite de cave.",
+          "Réservez seulement après avoir comparé la langue de la visite, sa durée et le contenu de la formule. Une dégustation reste facultative : le panorama et la marche sur les quais suffisent à construire une demi-journée. Prévoyez le retour avant d’être fatigué et vérifiez le chemin choisi, notamment les escaliers et les différences de niveau autour du pont."
+        ]
+      },
+      {
+        "id": "jour-3",
+        "title": "Jour 3 — Une ouverture vers l’Atlantique",
+        "paragraphs": [
+          "Pour changer d’atmosphère, choisissez Foz ou Matosinhos. Visit Porto rassemble dans son quartier Atlantique les promenades du littoral, les plages, le Parque da Cidade et Serralves. Notre suggestion est de retenir une promenade de bord de mer et un déjeuner, avec un musée seulement si vous souhaitez une journée davantage culturelle.",
+          "La STCP répertorie la ligne 500 entre Praça da Liberdade et Matosinhos Mercado. Consultez le parcours et les alertes à votre date pour sélectionner votre arrêt. Ne cumulez pas l’ensemble du littoral et un long retour à pied. Par pluie ou vent fort, vous pouvez remplacer cette journée par une visite intérieure et une courte boucle commerçante autour de Santa Catarina."
+        ]
+      },
+      {
+        "id": "se-deplacer",
+        "title": "Arrivée et titres de transport",
+        "paragraphs": [
+          "L’aéroport de Porto indique une desserte par la ligne E du métro. Vérifiez le trajet vers votre station finale, plutôt que de retenir uniquement le nom d’une ligne : une correspondance peut être nécessaire selon votre destination. Ajoutez aussi le dernier parcours à pied jusqu’au logement.",
+          "Andante demande une validation au début du voyage et lors des changements de ligne ou de transport. Choisissez le titre adapté au trajet affiché par l’opérateur. Une carte de transport doit être comprise avant le premier déplacement, pas au moment de monter ; conservez-la accessible et vérifiez le signal de validation."
+        ],
+        "bullets": [
+          "Pour arriver en train, distinguez Campanhã de São Bento dans votre réservation et votre trajet final.",
+          "Consultez les itinéraires Accessible Porto si les marches ou les pentes posent difficulté.",
+          "Prévoyez une solution de transport pour la remontée depuis les quais.",
+          "Gardez la troisième journée flexible selon la météo."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Trois jours suffisent-ils pour Porto ?",
+        "answer": "Ils permettent une première découverte du centre, de Gaia et d’un secteur du littoral. Pour ajouter une excursion plus lointaine sans retirer une journée à la ville, prévoyez du temps supplémentaire."
+      },
+      {
+        "question": "Peut-on tout faire à pied ?",
+        "answer": "Les boucles du centre se prêtent à la marche si les pentes vous conviennent. Pour l’aéroport et le littoral, ce programme prévoit des transports ; ne comptez pas tout relier à pied."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Visit Porto — quartier historique",
+        "url": "https://visitporto.travel/en-GB/districts/historic"
+      },
+      {
+        "label": "Visit Porto — quartier Atlantique",
+        "url": "https://visitporto.travel/en-GB/districts/atlantic"
+      },
+      {
+        "label": "Visit Porto — rues commerçantes",
+        "url": "https://visitporto.travel/en-GB/attraction/shopping"
+      },
+      {
+        "label": "Visit Porto — accessibilité",
+        "url": "https://visitporto.travel/en-GB/accessible-porto"
+      },
+      {
+        "label": "Aéroport de Porto — transports publics",
+        "url": "https://www.portoairport.pt/en/opo/access-parking/getting-to-and-from-the-airport/public-transportation"
+      },
+      {
+        "label": "Andante — validation des titres",
+        "url": "https://andante.pt/en/purchase/silver-andante/"
+      },
+      {
+        "label": "STCP — lignes de bus",
+        "url": "https://stcp.pt/pt/linhas"
+      }
+    ],
+    "related": [
+      "lisbonne-ou-porto",
+      "lisbonne-porto-train",
+      "lisbonne-3-jours-sans-voiture"
+    ]
+  },
+  {
+    "slug": "sintra-depuis-lisbonne",
+    "title": "Sintra depuis Lisbonne : organiser une journée sans voiture",
+    "shortTitle": "Une journée à Sintra",
+    "destination": "Sintra",
+    "category": "Excursions",
+    "description": "Train, accès au palais de Pena et programme réaliste : les décisions à prendre pour visiter Sintra depuis Lisbonne.",
+    "readMinutes": 4,
+    "summary": "Rejoignez Sintra en train CP, puis choisissez un site principal. Pour Pena, prévoyez le transport depuis la gare, l’entrée au parc et environ trente minutes supplémentaires jusqu’au palais. Le créneau réservé correspond à l’entrée du palais, avec aucune tolérance de retard annoncée.",
+    "sections": [
+      {
+        "id": "choisir",
+        "title": "Commencez par choisir ce que vous voulez voir",
+        "paragraphs": [
+          "Sintra se prête à une excursion, à condition de ne pas la transformer en collection de palais. Notre proposition éditoriale est simple : un monument principal, du temps pour son environnement, puis le centre historique. Un second site devient une option seulement si vos horaires, votre énergie et les transports le permettent.",
+          "Informations vérifiées le 14 septembre 2026 sur les pages de Parques de Sintra et de CP. Le programme ci-dessous n’est pas un récit de visite personnelle. Les créneaux, ouvertures et conditions locales restent à contrôler à votre date, particulièrement avant un billet à heure fixe."
+        ]
+      },
+      {
+        "id": "train",
+        "title": "Prendre le train jusqu’à Sintra",
+        "paragraphs": [
+          "Parques de Sintra indique des départs possibles depuis Rossio, Oriente et Entrecampos sur la ligne de Sintra de CP. Choisissez la gare qui convient à votre hébergement, puis vérifiez le départ exact. Ne vous fiez pas seulement au nom de la ligne : regardez la destination du train et l’heure d’arrivée avant de monter.",
+          "Sur les trains urbains, CP demande de valider les titres avant l’embarquement. Prévoyez le temps d’acheter ou charger votre titre à l’aller et gardez-le pour le retour. La durée du train ne représente qu’une partie de l’excursion : l’attente à la gare, le trajet local et la marche dans les sites comptent aussi."
+        ]
+      },
+      {
+        "id": "pena",
+        "title": "Pena : le détail qui change toute la journée",
+        "paragraphs": [
+          "La desserte officielle mentionne le bus 434 depuis la gare de Sintra ou le parking de Lourel vers Pena. L’accès en voiture privée au monument n’est pas autorisé. Vous pouvez aussi envisager un sentier indiqué par le gestionnaire, en le traitant comme une marche à part entière, et non comme un raccourci automatique.",
+          "Pour l’intérieur du palais, la réservation comporte une date et une heure précises. Parques de Sintra annonce environ trente minutes entre l’entrée du parc et celle du parcours intérieur. Arriver au portail du parc à l’heure du billet est donc trop tard. Le gestionnaire indique également qu’un retard ne donne pas accès au palais : construisez votre marge en conséquence.",
+          "Le transfert interne éventuel au parc constitue encore une étape distincte du bus depuis la gare. Consultez ce qui est compris dans chaque billet. L’objectif pratique consiste à réserver une heure atteignable avec une marge, plutôt que de choisir le premier créneau visible sans calculer les déplacements."
+        ]
+      },
+      {
+        "id": "programme",
+        "title": "Notre proposition de journée",
+        "paragraphs": [
+          "Si Pena est votre priorité, faites-en le centre du programme. Rejoignez Sintra, montez vers le parc et organisez votre promenade en fonction du créneau intérieur. Prévoyez un déjeuner ou une pause sans obligation horaire. Redescendez ensuite vers le centre historique pour terminer la journée, selon le temps disponible.",
+          "Si vous souhaitez réduire les déplacements, privilégiez le palais national de Sintra et les rues du centre. Parques de Sintra situe ce palais dans le centre historique et indique dix à quinze minutes de marche depuis la gare. Ce choix réduit les transferts, mais ne garantit pas à lui seul un parcours sans pente ni obstacle."
+        ],
+        "table": {
+          "headers": [
+            "Votre priorité",
+            "Programme proposé"
+          ],
+          "rows": [
+            [
+              "Le palais de Pena",
+              "Pena et son parc, puis centre historique si le temps le permet"
+            ],
+            [
+              "Moins de transferts",
+              "Palais national de Sintra et promenade dans le centre"
+            ],
+            [
+              "Deux monuments",
+              "Un site prioritaire et un second seulement après vérification des trajets et créneaux"
+            ]
+          ]
+        }
+      },
+      {
+        "id": "retour",
+        "title": "Laissez de la place pour le retour",
+        "paragraphs": [
+          "Vérifiez les avis du gestionnaire avant le départ : certains accès peuvent être modifiés pour des travaux ou des conditions météorologiques. Préparez une solution de repli dans le centre ou une autre journée à Lisbonne. Pour rentrer, repérez plusieurs trains possibles et évitez de construire votre soirée autour d’une correspondance serrée.",
+          "Emportez de l’eau, de quoi patienter et une couche adaptée au temps annoncé. Pour une mobilité réduite, consultez directement la rubrique d’accessibilité du site choisi : un bus jusqu’au parc ne signifie pas que la totalité de la visite sera accessible."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Peut-on acheter le billet de Pena une fois sur place ?",
+        "answer": "La visite intérieure fonctionne avec un créneau réservé. Le plus simple est de consulter les disponibilités officielles avant le trajet ; une arrivée sur place ne garantit pas un horaire qui convient."
+      },
+      {
+        "question": "Faut-il absolument visiter Pena ?",
+        "answer": "Non. Le palais national du centre permet une autre journée cohérente. Choisissez selon vos envies et votre aisance dans les déplacements, plutôt que selon le nombre de photos à reproduire."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Parques de Sintra — accès aux monuments",
+        "url": "https://www.parquesdesintra.pt/en/plan-your-visit/how-to-get-there/"
+      },
+      {
+        "label": "Parques de Sintra — règles des billets de Pena",
+        "url": "https://www.parquesdesintra.pt/en/plan-your-visit/tickets-palace-of-pena/"
+      },
+      {
+        "label": "Parques de Sintra — avis et restrictions",
+        "url": "https://www.parquesdesintra.pt/en/notices/"
+      },
+      {
+        "label": "CP — informations avant le voyage et validation",
+        "url": "https://www.cp.pt/info/en/useful-information-travel"
+      }
+    ],
+    "related": [
+      "lisbonne-3-jours-sans-voiture",
+      "ou-dormir-lisbonne-quartiers",
+      "lisbonne-ou-porto"
+    ]
+  },
+  {
+    "slug": "lisbonne-ou-porto",
+    "title": "Lisbonne ou Porto : quelle ville choisir pour un premier séjour ?",
+    "shortTitle": "Lisbonne ou Porto ?",
+    "destination": "Portugal",
+    "category": "Bien choisir",
+    "description": "Comparez Lisbonne et Porto selon votre temps, vos envies et vos déplacements, sans réduire le choix à un classement.",
+    "readMinutes": 4,
+    "summary": "Pour trois jours et une découverte centrée sur les quais, le patrimoine et Gaia, notre choix éditorial est Porto. Pour varier quartiers, grands monuments et excursion à Sintra, choisissez Lisbonne et accordez-lui davantage de temps. Les deux se découvrent sans voiture.",
+    "sections": [
+      {
+        "id": "choix",
+        "title": "Le bon choix commence par le temps disponible",
+        "paragraphs": [
+          "Un séjour réussi dépend moins d’un palmarès que du nombre réel de journées sur place. Trois nuits avec une arrivée tardive et un départ matinal ne donnent que deux journées complètes. Avant de comparer les villes, retirez les transferts de votre calendrier : ce calcul évite de choisir un programme impossible à tenir.",
+          "Notre comparaison est une lecture éditoriale des possibilités de visite, à partir de sources officielles consultées le 14 septembre 2026. Elle ne repose ni sur un séjour personnel revendiqué, ni sur des tarifs d’hôtels présentés comme permanents. Le budget et les horaires doivent être comparés pour vos dates exactes."
+        ]
+      },
+      {
+        "id": "porto",
+        "title": "Choisissez Porto pour un séjour autour du Douro",
+        "paragraphs": [
+          "Le quartier historique présenté par Visit Porto réunit São Bento, la Sé, Ribeira, les Clérigos, le pont Luís I et les caves de Gaia. Cette concentration donne une base claire pour organiser deux journées, puis une troisième vers l’océan. C’est notre préférence si vous voulez un voyage lisible, avec peu de secteurs distincts à programmer.",
+          "Porto convient aussi si le vin de Porto ou la relation entre la ville et son fleuve constituent une envie forte. Vous pouvez choisir une cave, mais la promenade reste intéressante sans dégustation. En revanche, ne confondez pas proximité et facilité physique : les passages entre les quais et les points hauts doivent entrer dans votre calcul de marche."
+        ]
+      },
+      {
+        "id": "lisbonne",
+        "title": "Choisissez Lisbonne pour multiplier les atmosphères",
+        "paragraphs": [
+          "Lisbonne permet d’alterner Baixa et Chiado, les ruelles d’Alfama, les monuments de Belém et d’autres secteurs plus éloignés. Notre préférence va à Lisbonne si votre plaisir consiste à changer de quartier chaque jour. Un premier programme de trois jours exige alors quelques renoncements, surtout si vous souhaitez visiter plusieurs lieux à l’intérieur.",
+          "Sintra renforce ce choix si ses palais sont une priorité. Le gestionnaire des monuments indique les accès en train depuis Lisbonne, puis des transports locaux. Comptez cette excursion comme une vraie journée du séjour : l’ajouter à la fin d’une matinée de visites à Lisbonne rendrait les réservations et les déplacements plus contraignants."
+        ]
+      },
+      {
+        "id": "comparatif",
+        "title": "Décider selon votre priorité",
+        "paragraphs": [
+          "Ce tableau propose un choix de programme, pas un verdict sur la valeur des deux villes. Les variantes sont nombreuses : une personne passionnée de musées pourra rester longtemps à Porto, et un court séjour à Lisbonne peut être très agréable en réduisant le périmètre."
+        ],
+        "table": {
+          "headers": [
+            "Votre envie principale",
+            "Notre orientation"
+          ],
+          "rows": [
+            [
+              "Trois jours, un programme facile à organiser",
+              "Porto : centre, Gaia, puis littoral"
+            ],
+            [
+              "Changer de quartier et d’ambiance chaque jour",
+              "Lisbonne : un secteur par journée"
+            ],
+            [
+              "Voir Sintra",
+              "Lisbonne avec une journée d’excursion"
+            ],
+            [
+              "Explorer les caves et les quais du Douro",
+              "Porto et Gaia"
+            ],
+            [
+              "Éviter les montées",
+              "Aucune gagnante automatique : vérifier chaque parcours"
+            ],
+            [
+              "Voir les deux villes",
+              "Prévoir un changement d’hébergement et le trajet en train"
+            ]
+          ]
+        }
+      },
+      {
+        "id": "sans-voiture",
+        "title": "Sans voiture, les deux options tiennent",
+        "paragraphs": [
+          "Les aéroports disposent d’un accès par métro : ligne rouge à Lisbonne et ligne E à Porto, selon les informations des opérateurs. Le choix du logement reste décisif. Regardez l’ensemble du chemin depuis l’arrêt, les correspondances et le dénivelé final, surtout avec une valise ou une poussette.",
+          "Pour le coût, comparez un panier identique : transport d’arrivée, mêmes nuits, logement répondant aux mêmes critères, puis deux ou trois visites retenues. Une chambre moins chère mais loin de votre programme peut consommer du temps. Sans cette comparaison datée, annoncer une ville systématiquement moins chère donnerait une précision trompeuse."
+        ]
+      },
+      {
+        "id": "deux-villes",
+        "title": "Et si vous hésitez encore ?",
+        "paragraphs": [
+          "Sur un long week-end, choisissez une seule ville et gardez l’autre pour plus tard. Pour un voyage d’une semaine environ, vous pouvez envisager les deux avec un trajet en train CP. Cette répartition est notre suggestion : attribuez d’abord des journées complètes à chaque ville, puis réservez le transfert.",
+          "Regardez enfin les horaires d’arrivée et de départ disponibles. Le meilleur choix peut être celui qui vous laisse une matinée supplémentaire. Une visite de moins, un déjeuner tranquille et moins de déplacements changent souvent davantage le séjour que la ville choisie."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Quelle ville choisir pour deux jours complets ?",
+        "answer": "Notre suggestion est Porto si le centre historique et les deux rives vous attirent. Lisbonne fonctionne aussi en se limitant à deux secteurs et en gardant Sintra pour un autre séjour."
+      },
+      {
+        "question": "Peut-on dormir dans une ville et visiter l’autre à la journée ?",
+        "answer": "C’est possible en train, mais le trajet aller-retour prend une large place. Pour une première découverte, nous conseillons de changer d’hébergement et de garder une nuit sur place."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Visit Porto — quartier historique",
+        "url": "https://visitporto.travel/en-GB/districts/historic"
+      },
+      {
+        "label": "Visit Porto — quartier Atlantique",
+        "url": "https://visitporto.travel/en-GB/districts/atlantic"
+      },
+      {
+        "label": "Visit Portugal — découvrir Lisbonne",
+        "url": "https://www.visitportugal.com/en/destinos/lisboa/73775"
+      },
+      {
+        "label": "Parques de Sintra — accès depuis Lisbonne",
+        "url": "https://www.parquesdesintra.pt/en/plan-your-visit/how-to-get-there/"
+      },
+      {
+        "label": "Métro de Lisbonne — réseau",
+        "url": "https://www.metrolisboa.pt/en/discovering-lisboa-by-metro/"
+      },
+      {
+        "label": "Aéroport de Porto — transports publics",
+        "url": "https://www.portoairport.pt/en/opo/access-parking/getting-to-and-from-the-airport/public-transportation"
+      },
+      {
+        "label": "CP — horaires Lisbonne et Nord",
+        "url": "https://www.cp.pt/info/documents/d/cp/comboios-alfa-pendular-intercidades-lisboa-norte-sul"
+      }
+    ],
+    "related": [
+      "lisbonne-3-jours-sans-voiture",
+      "porto-3-jours-sans-voiture",
+      "lisbonne-porto-train"
+    ]
+  },
+  {
+    "slug": "lisbonne-porto-train",
+    "title": "Lisbonne–Porto en train : choisir les gares et réserver simplement",
+    "shortTitle": "Lisbonne–Porto en train",
+    "destination": "Portugal",
+    "category": "Transports",
+    "description": "Alfa Pendular ou Intercidades, gares de départ, arrivée à Campanhã et réservation : préparer son trajet Lisbonne–Porto.",
+    "readMinutes": 4,
+    "summary": "Réservez auprès de CP en comparant Alfa Pendular et Intercidades pour votre date. À Lisbonne, vérifiez Santa Apolónia ou Oriente ; à Porto, les liaisons principales passent par Campanhã. Prévoyez autour de trois heures de train selon le service, puis les trajets jusqu’aux logements.",
+    "sections": [
+      {
+        "id": "gares",
+        "title": "Choisir la gare avant de choisir le billet",
+        "paragraphs": [
+          "Le nom d’une ville ne suffit pas pour organiser le trajet. Le tableau officiel CP des liaisons Lisbonne–Nord distingue Lisboa Santa Apolónia, Lisboa Oriente et Porto Campanhã. Commencez par regarder laquelle des gares de Lisbonne convient à votre hébergement, puis comparez les trains qui la desservent réellement.",
+          "À l’arrivée, Campanhã et São Bento sont deux gares différentes. Si votre logement est proche de São Bento, préparez la suite du parcours dès la réservation. Les conditions de vente en ligne de CP prévoient, pour un billet depuis ou vers Campanhã, le trajet urbain de liaison avec São Bento dans une fenêtre d’une heure avant ou après le train principal, selon le sens. Vérifiez les conditions applicables à votre billet."
+        ]
+      },
+      {
+        "id": "train",
+        "title": "Alfa Pendular ou Intercidades ?",
+        "paragraphs": [
+          "Les deux catégories figurent dans l’offre officielle sur cet axe. Comparez l’heure d’arrivée et la durée exacte affichées, plutôt que de choisir uniquement un nom de train. Le repère d’environ trois heures sert à organiser la journée ; ce n’est ni un horaire garanti ni la durée totale entre vos deux hébergements.",
+          "Notre règle éditoriale est de prendre le service qui offre le meilleur compromis entre durée, prix disponible et conditions du billet. Une petite économie peut valoir un départ plus tôt ; elle peut aussi vous faire perdre un petit déjeuner ou imposer une arrivée peu pratique. Posez le coût complet du choix, y compris les transferts locaux."
+        ],
+        "table": {
+          "headers": [
+            "À comparer",
+            "Pourquoi"
+          ],
+          "rows": [
+            [
+              "Gares exactes",
+              "Éviter de rejoindre le mauvais point de départ"
+            ],
+            [
+              "Heure d’arrivée",
+              "Coordonner la réception du logement et la suite du trajet"
+            ],
+            [
+              "Durée affichée",
+              "Comparer les trains disponibles ce jour-là"
+            ],
+            [
+              "Tarif et conditions",
+              "Savoir ce qui est échangeable ou remboursable"
+            ],
+            [
+              "Places disponibles",
+              "Rester ensemble si vous voyagez à plusieurs"
+            ]
+          ]
+        }
+      },
+      {
+        "id": "reserver",
+        "title": "Réserver sur le site ou l’application CP",
+        "paragraphs": [
+          "Au 14 septembre 2026, CP annonce une vente en ligne jusqu’à soixante jours à l’avance, avec choix du siège. Si votre date n’est pas encore proposée au-delà de cette fenêtre, cela ne signifie pas nécessairement que tous les trains sont complets. Revenez lorsque les ventes correspondant à votre voyage sont ouvertes.",
+          "Saisissez les gares et la date, comparez les départs, renseignez les voyageurs, puis relisez le récapitulatif avant paiement. Vérifiez particulièrement le sens du trajet et les noms. Conservez le billet accessible hors connexion et prenez le document d’identité renseigné à l’achat. Les billets en ligne sont valables pour le jour et le train sélectionnés.",
+          "Les offres promotionnelles ont leurs conditions propres. Consultez les règles du tarif choisi avant de payer, notamment si votre arrivée au Portugal dépend d’un autre transport. Le prix le plus bas est intéressant seulement si vous pouvez respecter le départ prévu. Les montants changent selon le train, la classe et les disponibilités."
+        ]
+      },
+      {
+        "id": "jour-du-depart",
+        "title": "Le jour du départ : une transition, pas une visite de plus",
+        "paragraphs": [
+          "Notre proposition est de garder une demi-journée souple pour changer de ville. Quittez votre logement assez tôt pour trouver la gare, le quai et la voiture indiquée. Une marge de vingt à trente minutes en gare peut être un repère d’organisation personnel ; elle doit augmenter si votre accès est incertain ou si vous avez besoin d’assistance.",
+          "CP publie des conditions sur les bagages : une pièce de bagage à main est transportée gratuitement dans l’espace prévu, les petits effets comme un sac à main étant traités séparément. Consultez la règle complète si vous voyagez chargé, avec un vélo ou un objet volumineux. N’utilisez pas les sièges comme rangement."
+        ]
+      },
+      {
+        "id": "verifier",
+        "title": "Les derniers contrôles utiles",
+        "paragraphs": [
+          "Consultez les avis CP avant le voyage et les informations de départ en gare. Si vous avez besoin d’aide pour embarquer ou débarquer, préparez la demande auprès du service de mobilité CP. L’existence d’un train direct ne répond pas à elle seule aux questions d’accès au quai ou à bord.",
+          "Ce guide est une méthode de préparation et une proposition d’organisation, fondées sur les pages officielles vérifiées le 14 septembre 2026. Le moteur de réservation et les conditions de votre billet restent les références pour le départ effectivement acheté."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Faut-il imprimer son billet ?",
+        "answer": "CP prévoit des billets consultables en format numérique. Gardez-les disponibles sur votre appareil, avec suffisamment de batterie, ainsi que le document d’identité associé à la réservation."
+      },
+      {
+        "question": "Le train arrive-t-il directement à São Bento ?",
+        "answer": "Les principales liaisons longue distance de cet axe desservent Campanhã. São Bento constitue une étape locale distincte ; préparez la liaison et vérifiez les conditions incluses dans votre billet CP."
+      }
+    ],
+    "sources": [
+      {
+        "label": "CP — horaires officiels Lisbonne–Nord",
+        "url": "https://www.cp.pt/info/documents/d/cp/comboios-alfa-pendular-intercidades-lisboa-norte-sul"
+      },
+      {
+        "label": "CP — achat et choix du siège",
+        "url": "https://www.cp.pt/info/en/w/online-ticket-office"
+      },
+      {
+        "label": "CP — conditions de vente en ligne et correspondances",
+        "url": "https://cp.pt/info/en/online-ticket-office-terms"
+      },
+      {
+        "label": "CP — billets promotionnels",
+        "url": "https://www.cp.pt/info/en/w/promo-ticket"
+      },
+      {
+        "label": "CP — conditions de transport des bagages",
+        "url": "https://www.cp.pt/info/en/w/luggage"
+      }
+    ],
+    "related": [
+      "lisbonne-ou-porto",
+      "porto-3-jours-sans-voiture",
+      "lisbonne-3-jours-sans-voiture"
+    ]
+  },
+  {
+    "slug": "ou-dormir-lisbonne-quartiers",
+    "title": "Où dormir à Lisbonne sans voiture : choisir son quartier",
+    "shortTitle": "Où dormir à Lisbonne ?",
+    "destination": "Lisbonne",
+    "category": "Où dormir",
+    "description": "Baixa, Chiado, Alfama, Bairro Alto ou Cais do Sodré : choisir une base à Lisbonne selon les pentes, les transports et le bruit.",
+    "readMinutes": 4,
+    "summary": "Pour un premier séjour sans voiture, commencez vos recherches autour de Baixa et du Rossio, ou dans Chiado si la pente vous convient. Alfama privilégie les ruelles ; Bairro Alto et Cais do Sodré demandent une attention particulière au bruit. L’adresse exacte compte autant que le quartier.",
+    "sections": [
+      {
+        "id": "methode",
+        "title": "Choisir une base, puis vérifier une adresse",
+        "paragraphs": [
+          "Pour choisir où dormir, retenez deux secteurs, puis comparez les adresses. Le quartier ne garantit ni le calme de la chambre, ni l’absence d’escaliers. Deux logements voisins peuvent offrir des expériences différentes.",
+          "Cette comparaison éditoriale s’appuie sur les sources officielles consultées le 14 septembre 2026. Elle ne contient pas d’avis d’hôtels prétendument vécus. Vérifiez séparément les caractéristiques de la chambre, les conditions de réservation et les retours récents."
+        ]
+      },
+      {
+        "id": "baixa",
+        "title": "Baixa et Rossio : notre point de départ pour une première visite",
+        "paragraphs": [
+          "Baixa concentre commerces, places et parcours du centre. En partant du Rossio, vous pouvez organiser une promenade vers la Rua Augusta et la Praça do Comércio ; la gare de Rossio sert également de point de départ pour Sintra. C’est notre première zone de recherche pour un séjour consacré aux quartiers historiques.",
+          "Vérifiez toutefois la position exacte : une annonce peut utiliser le nom du quartier tout en se situant dans une rue qui monte. Comparez l’itinéraire à pied depuis votre transport d’arrivée. Demandez aussi si la chambre donne sur une rue passante ou une cour, plutôt que de déduire le calme d’une photographie."
+        ]
+      },
+      {
+        "id": "chiado",
+        "title": "Chiado : commerces, cafés et vie culturelle",
+        "paragraphs": [
+          "Visit Lisboa décrit Chiado par ses commerces, ateliers et cafés. Nous le proposons aux voyageurs qui souhaitent sortir à pied en journée et rejoindre facilement plusieurs secteurs centraux. C’est un bon candidat si votre programme comprend surtout Baixa, les environs du Chiado et quelques soirées dans le centre.",
+          "Vérifiez le dénivelé, la distance depuis la sortie du métro, les escaliers et l’ascenseur. Une mention « près du métro » ne suffit pas. Pour un séjour court, privilégiez une adresse qui réduit vos trajets quotidiens."
+        ]
+      },
+      {
+        "id": "alfama",
+        "title": "Alfama : choisir les ruelles en connaissance du relief",
+        "paragraphs": [
+          "Alfama est le choix à envisager si vous recherchez le cadre des ruelles historiques et la proximité des points de vue. L’office de tourisme souligne explicitement ses pavés et ses fortes pentes. Notre conseil est de vérifier le trajet à pied avant de réserver, surtout avec un bagage lourd.",
+          "Demandez au logement comment on rejoint la porte depuis le point de dépose ou l’arrêt le plus pratique. Contrôlez le nombre d’étages et la présence réelle d’un ascenseur. Si vous souhaitez rentrer souvent faire une pause, évaluez la montée plusieurs fois par jour ; une belle vue ne compense pas toujours ce besoin."
+        ]
+      },
+      {
+        "id": "soirees",
+        "title": "Bairro Alto et Cais do Sodré : pour profiter des soirées",
+        "paragraphs": [
+          "Visit Lisboa présente Bairro Alto comme un quartier de bars, de restaurants et de vie nocturne. Cais do Sodré associe également des lieux de sortie à un pôle de transport, avec métro, train et bateau. Ces secteurs peuvent donc convenir si vos soirées et vos déplacements depuis le fleuve comptent beaucoup.",
+          "Pour un sommeil léger, vérifiez la rue et l’orientation de la chambre avant tout engagement. Demandez des informations sur le vitrage et l’activité directement sous les fenêtres. Nous ne classons pas tout un quartier comme bruyant en permanence : l’enjeu est d’identifier une adresse compatible avec votre heure de coucher."
+        ]
+      },
+      {
+        "id": "comparaison",
+        "title": "Quel compromis vous convient ?",
+        "paragraphs": [
+          "Utilisez ce tableau pour réduire votre recherche, puis examinez chaque logement séparément. Ne transformez pas une préférence de quartier en garantie de confort."
+        ],
+        "table": {
+          "headers": [
+            "Secteur",
+            "À privilégier pour",
+            "À vérifier"
+          ],
+          "rows": [
+            [
+              "Baixa / Rossio",
+              "Une première base centrale",
+              "Rue exacte, passage, pente finale"
+            ],
+            [
+              "Chiado",
+              "Commerces, cafés, soirées centrales",
+              "Accès depuis le métro et escaliers"
+            ],
+            [
+              "Alfama",
+              "Ruelles et points de vue",
+              "Dénivelé et accès avec bagages"
+            ],
+            [
+              "Bairro Alto",
+              "Vie nocturne",
+              "Bruit sous les fenêtres"
+            ],
+            [
+              "Cais do Sodré",
+              "Transports et sorties",
+              "Orientation de la chambre et activité nocturne"
+            ]
+          ]
+        }
+      },
+      {
+        "id": "avant-reservation",
+        "title": "Quatre vérifications avant de payer",
+        "paragraphs": [
+          "Comparez des chambres équivalentes aux mêmes dates, frais et flexibilité compris. Obtenez les informations essentielles avant de vous engager."
+        ],
+        "bullets": [
+          "Le trajet complet depuis l’aéroport ou la gare, avec les correspondances.",
+          "L’étage, l’ascenseur et les marches jusqu’à la chambre.",
+          "L’orientation des fenêtres et les indices de bruit dans les retours récents.",
+          "Le total à payer, l’heure d’arrivée acceptée et les conditions d’annulation."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Quel quartier choisir avec une poussette ?",
+        "answer": "Commencez par examiner une adresse dans Baixa, puis vérifiez le parcours réel, les sorties de transport et l’immeuble. Le nom du quartier ne constitue pas une garantie d’accessibilité."
+      },
+      {
+        "question": "Faut-il dormir près de l’aéroport ?",
+        "answer": "Pour visiter plusieurs jours, comparez d’abord une base proche de votre programme. Une nuit près de l’aéroport peut répondre à un départ très matinal, selon les transports disponibles à cette heure."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Visit Lisboa — Baixa",
+        "url": "https://www.visitlisboa.com/en/places/baixa-chiado"
+      },
+      {
+        "label": "Visit Lisboa — Chiado",
+        "url": "https://www.visitlisboa.com/en/places/chiado-41699ec3-eda7-414e-a9c1-e985f2f0efb7"
+      },
+      {
+        "label": "Visit Lisboa — Alfama et ses pentes",
+        "url": "https://www.visitlisboa.com/en/places/alfama"
+      },
+      {
+        "label": "Visit Lisboa — Bairro Alto",
+        "url": "https://www.visitlisboa.com/en/places/bairro-alto"
+      },
+      {
+        "label": "Visit Lisboa — Cais do Sodré",
+        "url": "https://www.visitlisboa.com/en/places/cais-do-sodre"
+      },
+      {
+        "label": "Visit Portugal — quartiers et gare du Rossio",
+        "url": "https://www.visitportugal.com/en/destinos/lisboa/73775"
+      },
+      {
+        "label": "Métro de Lisbonne — réseau",
+        "url": "https://www.metrolisboa.pt/en/discovering-lisboa-by-metro/"
+      }
+    ],
+    "related": [
+      "lisbonne-3-jours-sans-voiture",
+      "sintra-depuis-lisbonne",
+      "lisbonne-porto-train"
+    ]
+  }
+]

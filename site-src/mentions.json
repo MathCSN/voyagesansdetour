@@ -1,0 +1,18 @@
+{
+  "editeur": {
+    "nom": "KOPRO",
+    "statut": "SAS au capital de 1 €",
+    "immatriculation": "RCS Paris 102 335 023",
+    "adresse": "47 rue Vivienne, 75002 Paris",
+    "telephone": "07 83 89 94 66",
+    "email": "contact@voyagesansdetour.fr",
+    "directeur_publication": "Mathis Cousin"
+  },
+  "hebergeur": {
+    "nom": "GitHub, Inc.",
+    "adresse": "88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis",
+    "telephone": "+1 877 448 4820",
+    "site": "https://github.com",
+    "confidentialite": "https://docs.github.com/fr/pages/getting-started-with-github-pages/about-github-pages#data-collection"
+  }
+}

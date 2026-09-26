@@ -1,0 +1,34 @@
+{
+  "photos": [
+    {
+      "id": "lisbonne",
+      "source_page": "https://commons.wikimedia.org/wiki/File:City_view_of_Lisbon_with_Castelo_de_S%C3%A3o_Jorge.jpg",
+      "author": "SIryn",
+      "author_url": "https://commons.wikimedia.org/wiki/User:SIryn",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "alt_fr": "Les toits de Lisbonne, le château São Jorge et le pont du 25 Avril sous un ciel bleu.",
+      "credit_fr": "Lisbonne — SIryn / Wikimedia Commons — CC BY-SA 4.0."
+    },
+    {
+      "id": "porto",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Porto-Panorama_de_Ribeira-Rabelos-20120910.jpg",
+      "author": "Daniel VILLAFRUELA",
+      "author_url": "https://commons.wikimedia.org/wiki/User:Daniel_VILLAFRUELA",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "alt_fr": "Les façades de Ribeira au bord du Douro à Porto, avec des bateaux rabelos au premier plan.",
+      "credit_fr": "Porto — Daniel VILLAFRUELA / Wikimedia Commons — CC BY-SA 4.0."
+    },
+    {
+      "id": "sintra",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Pena_Palace_Panorama.jpg",
+      "author": "Kamran Saraf",
+      "author_url": "https://commons.wikimedia.org/wiki/User:Ksaraf",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "alt_fr": "Les tours jaunes et rouges du palais de Pena à Sintra, sous un ciel bleu.",
+      "credit_fr": "Sintra — Kamran Saraf / Wikimedia Commons — CC BY 4.0."
+    }
+  ]
+}
