@@ -1,4 +1,5 @@
 import json,os,pathlib,re,shutil,subprocess,sys,tempfile,unittest
+import xml.etree.ElementTree as ET
 ROOT=pathlib.Path(__file__).parent
 ORIGIN='https://voyagesansdetour.fr'
 # Sensible à la casse : « quelques jours ailleurs » reste une expression courante, pas l'ancien nom.
@@ -95,6 +96,34 @@ class PublicBuildTest(unittest.TestCase):
         self.assertEqual({p.name for p in folder.iterdir()},expected)
         for name in expected:
             self.assertEqual((folder/name).read_bytes(),(ROOT/'social-media'/'lancement-2026-09'/name).read_bytes())
+
+    def test_pinterest_rss_has_only_the_approved_lisbon_pin(self):
+        rss=ET.parse(self.out/'pinterest/lisbonne.xml').getroot()
+        self.assertEqual(rss.tag,'rss')
+        self.assertEqual(rss.get('version'),'2.0')
+        items=rss.findall('channel/item')
+        self.assertEqual(len(items),1)
+        item=items[0]
+        self.assertEqual(item.findtext('title'),'Lisbonne en 3 jours sans voiture : un quartier par jour')
+        self.assertEqual(item.findtext('link'),ORIGIN+'/portugal/lisbonne-3-jours-sans-voiture/')
+        self.assertEqual(item.findtext('guid'),'urn:vsd:pinterest:pin-01-lisbonne-3-jours')
+        self.assertEqual(item.find('guid').get('isPermaLink'),'false')
+        self.assertIsNone(item.find('pubDate'))
+        self.assertIsNone(rss.find('channel/lastBuildDate'))
+        description=item.findtext('description')
+        self.assertLessEqual(len(description),500)
+        for credit in ('SIryn / Wikimedia Commons','Recadrage et composition','CC BY-SA 4.0',
+                       'https://creativecommons.org/licenses/by-sa/4.0/',ORIGIN+'/credits/'):
+            self.assertIn(credit,description)
+        image_path='/social-media/lancement-2026-09/pin-01-lisbonne-3-jours.jpg'
+        enclosure=item.find('enclosure')
+        media=item.find('{http://search.yahoo.com/mrss/}content')
+        for node in (enclosure,media):
+            self.assertEqual(node.get('url'),ORIGIN+image_path)
+            self.assertEqual(node.get('type'),'image/jpeg')
+        self.assertEqual(int(enclosure.get('length')),(self.out/image_path.lstrip('/')).stat().st_size)
+        self.assertEqual((media.get('width'),media.get('height')),('1000','1500'))
+        self.assertEqual(len(ET.parse(self.out/'feed.xml').findall('channel/item')),6)
 
     def test_every_internal_link_resolves(self):
         broken=set()

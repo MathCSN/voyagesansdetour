@@ -1,4 +1,5 @@
 import json,html,pathlib,datetime,os,shutil,sys
+import xml.etree.ElementTree as ET
 from urllib.parse import urlparse
 ROOT=pathlib.Path(__file__).parent
 STATIC=ROOT/'dist'
@@ -140,4 +141,37 @@ page('/404.html','Page introuvable | '+BRAND,'Retrouvez les guides pour prépare
 (OUT/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+''.join(f'<url><loc>{ORIGIN+p}</loc><lastmod>2026-09-14</lastmod></url>' for p in pages)+'</urlset>')
 (OUT/'robots.txt').write_text(('User-agent: *\nAllow: /\n\nUser-agent: OAI-SearchBot\nAllow: /\n\n' if PUBLIC else '# Preversion privee : indexation desactivee avant lancement public.\nUser-agent: *\nDisallow: /\n\n')+'Sitemap: '+ORIGIN+'/sitemap.xml\n')
 (OUT/'feed.xml').write_text('<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>'+e(BRAND)+'</title><link>'+ORIGIN+'</link><description>Le Portugal sans voiture</description><language>fr</language>'+''.join(f'<item><title>{e(a["title"])}</title><link>{ORIGIN+uri(a)}</link><guid>{ORIGIN+uri(a)}</guid><description>{e(a["description"])}</description><pubDate>Mon, 14 Sep 2026 12:00:00 +0200</pubDate></item>' for a in articles)+'</channel></rss>')
+if PUBLIC:
+    # Pilote distinct du flux éditorial : un seul Pin validé, sans date inventée.
+    config=json.loads((ROOT/'pinterest-rss.json').read_text())
+    pins=config['items']
+    if config.get('schema_version')!=1 or len(pins)>1:
+        sys.exit('Flux Pinterest pilote refusé : un seul élément est autorisé.')
+    media_ns='http://search.yahoo.com/mrss/'
+    ET.register_namespace('media',media_ns)
+    rss=ET.Element('rss',{'version':'2.0'})
+    channel=ET.SubElement(rss,'channel')
+    for tag,text in (('title',BRAND+' — Lisbonne'),('link',ORIGIN+'/'),('description','Un premier guide de Lisbonne à enregistrer.'),('language','fr')):
+        ET.SubElement(channel,tag).text=text
+    for pin in pins:
+        if pin.get('enabled') is not True:continue
+        if pin['id']!='pin-01-lisbonne-3-jours' or pin['link_path']!='/portugal/lisbonne-3-jours-sans-voiture/' or pin['image_path']!='/social-media/lancement-2026-09/pin-01-lisbonne-3-jours.jpg':
+            sys.exit('Flux Pinterest pilote refusé : identifiant, destination ou image non validé.')
+        if not 1<=len(pin['title'])<=100 or not 1<=len(pin['description'])<=500:
+            sys.exit('Flux Pinterest pilote refusé : longueur du titre ou de la description.')
+        image_file=OUT/pin['image_path'].lstrip('/')
+        if not image_file.is_file() or not (OUT/pin['link_path'].strip('/')/'index.html').is_file():
+            sys.exit('Flux Pinterest pilote refusé : média ou guide absent du site public.')
+        item=ET.SubElement(channel,'item')
+        ET.SubElement(item,'title').text=pin['title']
+        ET.SubElement(item,'description').text=pin['description']
+        ET.SubElement(item,'link').text=ORIGIN+pin['link_path']
+        ET.SubElement(item,'guid',{'isPermaLink':'false'}).text='urn:vsd:pinterest:'+pin['id']
+        image_url=ORIGIN+pin['image_path']
+        ET.SubElement(item,'enclosure',{'url':image_url,'length':str(image_file.stat().st_size),'type':'image/jpeg'})
+        ET.SubElement(item,'{'+media_ns+'}content',{'url':image_url,'type':'image/jpeg','medium':'image','width':'1000','height':'1500'})
+    target=OUT/'pinterest/lisbonne.xml'
+    target.parent.mkdir(parents=True,exist_ok=True)
+    ET.indent(rss)
+    ET.ElementTree(rss).write(target,encoding='utf-8',xml_declaration=True)
 print(f'Generated {len(pages)+1} pages, {len(articles)} articles; public={PUBLIC}; out={OUT}')

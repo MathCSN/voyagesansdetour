@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<rss xmlns:media="http://search.yahoo.com/mrss/" version="2.0">
+  <channel>
+    <title>Voyage Sans Détour — Lisbonne</title>
+    <link>https://voyagesansdetour.fr/</link>
+    <description>Un premier guide de Lisbonne à enregistrer.</description>
+    <language>fr</language>
+    <item>
+      <title>Lisbonne en 3 jours sans voiture : un quartier par jour</title>
+      <description>Trois journées complètes à Lisbonne : Baixa et Chiado, Alfama, puis Belém. Un itinéraire sans voiture, à pied dans chaque quartier et en transports entre les secteurs. Enregistrez ce guide pour préparer votre séjour. Photo : SIryn / Wikimedia Commons. Recadrage et composition sous CC BY-SA 4.0 : https://creativecommons.org/licenses/by-sa/4.0/ Source et crédits : https://voyagesansdetour.fr/credits/</description>
+      <link>https://voyagesansdetour.fr/portugal/lisbonne-3-jours-sans-voiture/</link>
+      <guid isPermaLink="false">urn:vsd:pinterest:pin-01-lisbonne-3-jours</guid>
+      <enclosure url="https://voyagesansdetour.fr/social-media/lancement-2026-09/pin-01-lisbonne-3-jours.jpg" length="434407" type="image/jpeg" />
+      <media:content url="https://voyagesansdetour.fr/social-media/lancement-2026-09/pin-01-lisbonne-3-jours.jpg" type="image/jpeg" medium="image" width="1000" height="1500" />
+    </item>
+  </channel>
+</rss>
