@@ -128,7 +128,27 @@ class PublicBuildTest(unittest.TestCase):
             self.assertEqual(node.get('type'),'image/jpeg')
         self.assertEqual(int(enclosure.get('length')),(self.out/image_path.lstrip('/')).stat().st_size)
         self.assertEqual((media.get('width'),media.get('height')),('1000','1500'))
-        self.assertEqual(len(ET.parse(self.out/'feed.xml').findall('channel/item')),6)
+        self.assertEqual(len(ET.parse(self.out/'feed.xml').findall('channel/item')),len(json.loads((ROOT/'articles.json').read_text())))
+
+    def test_new_guide_uses_its_review_and_publication_dates(self):
+        route='/portugal/aeroport-porto-centre-ville/'
+        article=read(self.out,route)
+        self.assertIn('Publié le 27 septembre 2026',article)
+        self.assertIn('Sources consultées le 27 septembre 2026',article)
+        schemas=json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>',article).group(1))
+        schema=next(item for item in schemas if item.get('@type')=='Article')
+        self.assertEqual(schema['datePublished'],'2026-09-27')
+        self.assertEqual(schema['dateModified'],'2026-09-27')
+        sitemap=ET.parse(self.out/'sitemap.xml')
+        ns={'s':'http://www.sitemaps.org/schemas/sitemap/0.9'}
+        dates={node.findtext('s:loc',namespaces=ns):node.findtext('s:lastmod',namespaces=ns) for node in sitemap.findall('s:url',ns)}
+        self.assertEqual(dates[ORIGIN+route],'2026-09-27')
+        self.assertEqual(dates[ORIGIN+'/portugal/'],'2026-09-27')
+        self.assertEqual(dates[ORIGIN+'/portugal/porto-3-jours-sans-voiture/'],'2026-09-14')
+        items=ET.parse(self.out/'feed.xml').findall('channel/item')
+        rss={node.findtext('link'):node.findtext('pubDate') for node in items}
+        self.assertEqual(rss[ORIGIN+route],'Sun, 27 Sep 2026 00:00:00 +0000')
+        self.assertEqual(rss[ORIGIN+'/portugal/porto-3-jours-sans-voiture/'],'Mon, 14 Sep 2026 12:00:00 +0200')
 
     def test_every_internal_link_resolves(self):
         broken=set()
