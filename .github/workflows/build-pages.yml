@@ -61,7 +61,7 @@ jobs:
           PY
       - name: Validate site
         if: steps.release.outputs.publish == 'true'
-        run: python -m unittest -q test_site test_stay22 test_editorial_queue
+        run: python -m unittest -q test_site test_stay22 test_editorial_queue test_public_media
       - name: Validate analytics consent without external calls
         if: steps.release.outputs.publish == 'true'
         run: node --test test_analytics.mjs

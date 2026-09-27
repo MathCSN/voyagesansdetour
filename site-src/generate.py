@@ -4,6 +4,7 @@ from email.utils import format_datetime
 from urllib.parse import urlparse
 import stay22
 import editorial_queue
+from public_media import approved_files
 ROOT=pathlib.Path(__file__).parent
 STATIC=ROOT/'dist'
 PUBLIC=os.environ.get('LJA_PUBLIC')=='1'
@@ -36,6 +37,7 @@ CAROUSEL_FILES=tuple('carrousels-2026-09/'+city+'-'+name+'.jpg'
     ('01-couverture','02-jour-1','03-jour-2','04-jour-3','05-bons-reflexes','06-guide-complet'))+tuple(
     'carrousels-2026-09/'+name for name in ('credits.txt','dmsans-OFL.txt','playfairdisplay-OFL.txt'))
 SOCIAL_FILES+=CAROUSEL_FILES
+SOCIAL_FILES+=approved_files(ROOT)
 # Les reels de démonstration portent l'ancien nom et une voix sans droits commerciaux : jamais publiés.
 SHOW_SHORTS=not PUBLIC and not AFFILIATE_PREVIEW
 REQUIRED_MENTIONS={'editeur':('nom','adresse','telephone','email','directeur_publication'),'hebergeur':('nom','adresse','telephone','site','confidentialite')}

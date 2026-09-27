@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "items": [
+    {
+      "contentId": "porto-aeroport-trois-reflexes-2026-09",
+      "approved": true,
+      "files": [
+        {
+          "name": "reel.mp4",
+          "bytes": 908712,
+          "sha256": "88f0a5f97d4db07aca87c706b47d92b56122269f376d8a2f6a58c8b6f59a1990"
+        },
+        {
+          "name": "poster.jpg",
+          "bytes": 198061,
+          "sha256": "3aff8f484463fd8e47b1205aa2609b684f2b73e2128a56c70af2b8f4ffe25e09"
+        },
+        {
+          "name": "credits.txt",
+          "bytes": 1299,
+          "sha256": "3896c8f7ec264abe96810b17ef19c10cfcf1cdb9c3d7a3c1dfab8cbbd8a6208f"
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "bytes": 4482,
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "bytes": 4449,
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+        }
+      ]
+    }
+  ]
+}
