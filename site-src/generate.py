@@ -3,6 +3,7 @@ import xml.etree.ElementTree as ET
 from email.utils import format_datetime
 from urllib.parse import urlparse
 import stay22
+import editorial_queue
 ROOT=pathlib.Path(__file__).parent
 STATIC=ROOT/'dist'
 PUBLIC=os.environ.get('LJA_PUBLIC')=='1'
@@ -68,8 +69,9 @@ def prepare_public_dir():
         shutil.copy2(social/name,target)
     if PUBLIC:(OUT/'CNAME').write_text(urlparse(ORIGIN).hostname+'\n')
     (OUT/'.nojekyll').write_text('')
+try:articles=editorial_queue.published_articles(ROOT)
+except (OSError,ValueError,TypeError,KeyError) as error:sys.exit(str(error))
 if PUBLIC or AFFILIATE_PREVIEW:prepare_public_dir()
-articles=json.loads((ROOT/'articles.json').read_text())
 LEGACY_DATE='2026-09-14'
 MONTHS_FR=('janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre')
 def article_date(article,key):
