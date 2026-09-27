@@ -1,8 +1,9 @@
-# Signed cloud control: reviewed social stock only. No content generation or paid calls.
+# Signed cloud control: reviewed social stock and read-only metrics. No content generation or paid calls.
 name: Voyage Sans Detour cloud control
 on:
   schedule:
     - cron: '13,43 * * * *'
+    - cron: '23 6,7,8 * * *'
   workflow_dispatch:
     inputs:
       kind:
@@ -27,7 +28,8 @@ jobs:
           VSD_SITE_ID: appgprj_6ab8ae0785988191a26f73b4a4e6c687
           VSD_CLOUD_KEY: ${{ secrets.VSD_CLOUD_KEY }}
           VSD_SITES_DISPATCH_TOKEN: ${{ secrets.VSD_SITES_DISPATCH_TOKEN }}
-          VSD_TICK_KIND: ${{ inputs.kind || 'publications' }}
+          # Route by the triggering cron, including when GitHub delays execution.
+          VSD_TICK_KIND: ${{ inputs.kind || (github.event.schedule == '23 6,7,8 * * *' && 'metrics' || 'publications') }}
         shell: bash
         run: |
           node --input-type=module <<'NODE'
