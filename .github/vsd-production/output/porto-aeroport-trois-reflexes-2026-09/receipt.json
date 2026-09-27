@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "contentId": "porto-aeroport-trois-reflexes-2026-09",
+  "status": "rendered_not_published",
+  "fingerprint": "e59d6264fe0d9792b8d0c77621428345349386e443b81b8741296f83193f3930",
+  "createdAt": "2026-09-27T17:58:20.938455Z",
+  "renderFinishedAt": "2026-09-27T17:58:32.498694Z",
+  "rendererContractVersion": 1,
+  "rendererSha256": "a1998e96d6183eaa52e30a7449d884a0f49b2d5e75a1bfdacbba229e5723284f",
+  "reviewValidUntil": "2026-10-27T00:00:00Z",
+  "sourceCheckedOn": "2026-09-27",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/aeroport-porto-centre-ville/",
+  "format": "music_text",
+  "presenter": "none",
+  "voice": null,
+  "sourceUrls": [
+    "https://andante.pt/perguntas-frequentes/",
+    "https://www.metrodoporto.pt/",
+    "https://www.metrodoporto.pt/pages/337"
+  ],
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "durationSeconds": 28.0,
+    "videoCodec": "h264",
+    "pixelFormat": "yuv420p",
+    "audioCodec": "aac",
+    "audioSampleRate": 48000,
+    "fullDecodePassed": true,
+    "loudness": {
+      "integratedLufs": -18.2,
+      "truePeakDbfs": -6.1
+    }
+  },
+  "files": [
+    {
+      "file": "apercu.jpg",
+      "sha256": "38568ec86a6d92fa74dd2a08577ad92f122ae1d4050957494bf5a7f0bf9dbbe9",
+      "bytes": 240449
+    },
+    {
+      "file": "credits.txt",
+      "sha256": "3896c8f7ec264abe96810b17ef19c10cfcf1cdb9c3d7a3c1dfab8cbbd8a6208f",
+      "bytes": 1299
+    },
+    {
+      "file": "dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "file": "encode.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "legende.txt",
+      "sha256": "9004be199e157cae94fc4ac25cff04d97701abc7b99202c36b3c510d8ae44b4d",
+      "bytes": 1102
+    },
+    {
+      "file": "playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    },
+    {
+      "file": "poster.jpg",
+      "sha256": "3aff8f484463fd8e47b1205aa2609b684f2b73e2128a56c70af2b8f4ffe25e09",
+      "bytes": 198061
+    },
+    {
+      "file": "reel.mp4",
+      "sha256": "2b923d341aa548c109720c765dc1fda992a0d38c137b748a811e064f2a9595b4",
+      "bytes": 1134894
+    },
+    {
+      "file": "scenario.json",
+      "sha256": "898738296b2ba92192aec113dff30ad0944ecff0c53f0a8f891826c73459dd6f",
+      "bytes": 7704
+    },
+    {
+      "file": "scene-01.jpg",
+      "sha256": "ae523505c8991f811cbe3092e19fd5bd18c4688492fea4c42988635a23b6a807",
+      "bytes": 168322
+    },
+    {
+      "file": "scene-02.jpg",
+      "sha256": "63528d997b4aa07c41a112ed89aed46b2e2ae8110acc42984f1bd7eebef7a873",
+      "bytes": 167975
+    },
+    {
+      "file": "scene-03.jpg",
+      "sha256": "c8b720acfa3ef86a1c535b74e4e2553d9e8037474209727c6719394556ff2550",
+      "bytes": 162367
+    },
+    {
+      "file": "scene-04.jpg",
+      "sha256": "83b64ac1425598e004a6a40d4da97802c4ce01aa84e23b64cab934a8a41dc178",
+      "bytes": 153762
+    },
+    {
+      "file": "scene-05.jpg",
+      "sha256": "70b75a5ad36e49554cc1da98e08885a2ff00d8927f58f3d2d158bd4b0ac58428",
+      "bytes": 157685
+    },
+    {
+      "file": "scene-06.jpg",
+      "sha256": "887c4b35351a1cdd1466b979db04f45725031d1373066fc769e93e6d17ef7cbe",
+      "bytes": 172224
+    }
+  ],
+  "runtime": {
+    "wallSeconds": 11.546,
+    "encoderThreads": 2,
+    "pillowVersion": "11.3.0",
+    "ffmpegVersion": "ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers"
+  },
+  "publication": {
+    "uploaded": false,
+    "scheduled": false,
+    "published": false,
+    "readyForAutomaticImport": false
+  },
+  "cost": {
+    "newPaidService": false,
+    "providerCalls": 0,
+    "monetarySpendEur": 0
+  },
+  "limitations": [
+    "No source refresh or editorial generation is performed by this job.",
+    "A rendered MP4 is not a final social payload review or publication.",
+    "Bit-identical encoding across different FFmpeg/Pillow builds is not promised; immutable inputs and exact output hashes are recorded."
+  ]
+}

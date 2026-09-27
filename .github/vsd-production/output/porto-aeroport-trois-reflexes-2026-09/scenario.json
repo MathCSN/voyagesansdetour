@@ -1,0 +1,240 @@
+{
+  "schemaVersion": 1,
+  "id": "porto-aeroport-trois-reflexes-2026-09",
+  "title": "Porto : trois réflexes avant de quitter l’aéroport",
+  "format": "music_text",
+  "presenter": "none",
+  "theme": "cobalt",
+  "aiAssisted": true,
+  "destination": "Porto",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/aeroport-porto-centre-ville/",
+  "caption": "🧳 Vous arrivez à Porto ? Gardez ces 3 réflexes avant de quitter l’aéroport.\n\n📍 Préparez le trajet jusqu’à votre adresse.\n🎫 Une carte Andante Azul par personne qui voyage en même temps.\n✅ Validez au départ et à chaque changement de ligne ou de transport.\n\n🌙 Arrivée tardive ? Vérifiez aussi la dernière correspondance et gardez un plan B.",
+  "review": {
+    "status": "reviewed_for_render",
+    "checkedAt": "2026-09-27T17:29:48.929873Z",
+    "validUntil": "2026-10-27T00:00:00Z",
+    "method": "Adaptation relue à partir du guide publié et du contrôle officiel daté du 27 septembre. Pas de nouvelle vérification externe lors du rendu."
+  },
+  "source": {
+    "checkedOn": "2026-09-27",
+    "article": {
+      "file": "evidence/porto-aeroport-article.json",
+      "sha256": "4d630abd63f21c0d798600ab0520170968a7f175f5ae1d8d9f9294093a9f2aef"
+    },
+    "researchEvidence": {
+      "file": "evidence/porto-aeroport-sources-2026-09-27.md",
+      "sha256": "dc0a0df162040034f0642e1053640cd5b0cc7912d2acf7846c4a998020e916c2"
+    },
+    "publicationEvidence": {
+      "file": "evidence/publication-portugal-porto.json",
+      "sha256": "2d58ee471422e19ad9b78e50c4de34342c6a5c140accef943a4bfa1e934cfed4"
+    }
+  },
+  "assets": {
+    "regular": {
+      "file": "assets/dmsans-regular.ttf",
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      }
+    },
+    "bold": {
+      "file": "assets/dmsans-bold.ttf",
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      }
+    },
+    "serif": {
+      "file": "assets/playfair.ttf",
+      "sha256": "adefc53e7b3d483f1fa5e85edd82b7689ca79db25a1f6786bd7949cdcfeec601",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+      }
+    },
+    "music": {
+      "file": "assets/almost-bliss.mp3",
+      "sha256": "731e191cef927e43d352bd099ac63cd6ea54a6a84deec3cba77fb59e6903754c",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "commercialUseAllowed": true,
+      "title": "Almost Bliss",
+      "author": "Kevin MacLeod",
+      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1900015",
+      "provenance": {
+        "file": "evidence/almost-bliss-provenance.json",
+        "sha256": "2d2303c1a70fed68560808853466c997870cd8156737d96ca287a4332a5cd04d"
+      }
+    }
+  },
+  "scenes": [
+    {
+      "layout": "intro",
+      "seconds": 4,
+      "label": "AVANT DE QUITTER L’AÉROPORT",
+      "title": [
+        "Porto.",
+        "3 bons réflexes."
+      ],
+      "body": [
+        "Pour préparer votre arrivée",
+        "jusqu’à la porte du logement."
+      ],
+      "note": "Une méthode pratique, sans horaire garanti.",
+      "evidence": [
+        {
+          "sectionId": "choisir-son-arrivee",
+          "url": "https://www.metrodoporto.pt/",
+          "supportingText": "Enregistrez l’adresse du logement, les consignes d’entrée et la station proposée par le planificateur."
+        }
+      ],
+      "graphicLabels": [
+        "HORAIRE",
+        "CORRESPONDANCE",
+        "PLAN B"
+      ]
+    },
+    {
+      "layout": "route",
+      "seconds": 5,
+      "label": "RÉFLEXE 01 · LA BONNE ADRESSE",
+      "title": [
+        "La porte.",
+        "Pas juste le centre."
+      ],
+      "body": [
+        "Enregistrez l’adresse, puis le trajet.",
+        "Regardez aussi la marche avec les valises."
+      ],
+      "note": "La station la plus proche ne suffit pas toujours.",
+      "evidence": [
+        {
+          "sectionId": "choisir-son-arrivee",
+          "url": "https://www.metrodoporto.pt/",
+          "supportingText": "Enregistrez l’adresse du logement, les consignes d’entrée et la station proposée par le planificateur."
+        }
+      ],
+      "graphicLabels": [
+        "HORAIRE",
+        "CORRESPONDANCE",
+        "PLAN B"
+      ]
+    },
+    {
+      "layout": "ticket",
+      "seconds": 5,
+      "label": "RÉFLEXE 02 · ANDANTE AZUL",
+      "title": [
+        "À deux ?",
+        "Deux cartes."
+      ],
+      "body": [
+        "Une carte par personne",
+        "qui voyage en même temps."
+      ],
+      "note": "Même si une carte contient plusieurs voyages.",
+      "evidence": [
+        {
+          "sectionId": "andante-validation",
+          "url": "https://andante.pt/perguntas-frequentes/",
+          "supportingText": "Une carte Andante Azul ne peut servir qu’à une personne à la fois."
+        }
+      ],
+      "graphicLabels": [
+        "HORAIRE",
+        "CORRESPONDANCE",
+        "PLAN B"
+      ]
+    },
+    {
+      "layout": "checklist",
+      "seconds": 5,
+      "label": "RÉFLEXE 03 · LA VALIDATION",
+      "title": [
+        "On change ?",
+        "On valide."
+      ],
+      "body": [
+        "Avant le départ, puis à chaque",
+        "changement de ligne ou de transport."
+      ],
+      "note": "Avec un titre valable pour votre parcours.",
+      "evidence": [
+        {
+          "sectionId": "andante-validation",
+          "url": "https://andante.pt/perguntas-frequentes/",
+          "supportingText": "Validez avant le départ et à chaque changement de ligne ou de transport."
+        }
+      ],
+      "graphicLabels": [
+        "DÉPART",
+        "CHANGEMENT",
+        "VALIDATION"
+      ]
+    },
+    {
+      "layout": "checklist",
+      "seconds": 5,
+      "label": "LE PETIT PLUS · ARRIVÉE TARDIVE",
+      "title": [
+        "Gardez",
+        "un plan B."
+      ],
+      "body": [
+        "Vérifiez la dernière correspondance,",
+        "pas seulement le premier départ."
+      ],
+      "note": "Les horaires et alertes restent à vérifier.",
+      "evidence": [
+        {
+          "sectionId": "arrivee-tardive",
+          "url": "https://www.metrodoporto.pt/pages/337",
+          "supportingText": "Vérifiez les départs depuis Aeroporto et la dernière correspondance éventuelle."
+        }
+      ],
+      "graphicLabels": [
+        "HORAIRE",
+        "CORRESPONDANCE",
+        "PLAN B"
+      ]
+    },
+    {
+      "layout": "outro",
+      "seconds": 4,
+      "label": "ENREGISTREZ POUR VOTRE ARRIVÉE",
+      "title": [
+        "Moins d’hésitation.",
+        "Plus de voyage."
+      ],
+      "body": [
+        "Le trajet complet et les sources",
+        "vous attendent sur le blog."
+      ],
+      "note": "Retrouvez le guide depuis le lien du profil.",
+      "evidence": [
+        {
+          "sectionId": "choisir-son-arrivee",
+          "url": "https://www.metrodoporto.pt/",
+          "supportingText": "Enregistrez l’adresse du logement, les consignes d’entrée et la station proposée par le planificateur."
+        }
+      ],
+      "graphicLabels": [
+        "HORAIRE",
+        "CORRESPONDANCE",
+        "PLAN B"
+      ]
+    }
+  ],
+  "hashtags": [
+    "#VoyageSansDetour",
+    "#Porto",
+    "#Portugal",
+    "#VoyageSansVoiture"
+  ]
+}
