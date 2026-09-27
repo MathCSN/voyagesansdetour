@@ -1,0 +1,68 @@
+# Cloud execution pilot: health only, no editorial generation or social publication.
+name: Voyage Sans Detour cloud control
+on:
+  schedule:
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+    inputs:
+      kind:
+        description: 'Server task (metrics/publications require private activation)'
+        required: true
+        default: health
+        type: choice
+        options: [health, metrics, publications]
+permissions: {}
+concurrency:
+  group: vsd-cloud-control
+  cancel-in-progress: false
+jobs:
+  invoke:
+    if: github.repository == 'MathCSN/voyagesansdetour' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - name: Invoke signed private server task once
+        env:
+          VSD_CLOUD_ORIGIN: https://voyage-sans-detour-admin.cousinmathis31.chatgpt.site
+          VSD_SITE_ID: appgprj_6ab8ae0785988191a26f73b4a4e6c687
+          VSD_CLOUD_KEY: ${{ secrets.VSD_CLOUD_KEY }}
+          VSD_SITES_DISPATCH_TOKEN: ${{ secrets.VSD_SITES_DISPATCH_TOKEN }}
+          VSD_TICK_KIND: ${{ inputs.kind || 'health' }}
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          // Intended for the standard GitHub-hosted runner. Never print credentials or raw responses.
+          import { createHash, createHmac, randomUUID } from 'node:crypto';
+          
+          try {
+            if (Date.now() > Date.parse('2027-09-14T23:59:59+02:00')) {
+              console.log('Follow-up period ended; no request sent.');
+              process.exit(0);
+            }
+            const origin = process.env.VSD_CLOUD_ORIGIN;
+            const id = process.env.VSD_SITE_ID;
+            const key = process.env.VSD_CLOUD_KEY;
+            const dispatcher = process.env.VSD_SITES_DISPATCH_TOKEN;
+            const kind = process.env.VSD_TICK_KIND || 'health';
+            if (origin !== 'https://voyage-sans-detour-admin.cousinmathis31.chatgpt.site' ||
+                id !== 'appgprj_6ab8ae0785988191a26f73b4a4e6c687' || !/^[A-Za-z0-9_-]{43}$/.test(key ?? '') ||
+                !dispatcher || !['health','metrics','publications'].includes(kind)) throw Error('configuration');
+            const path = '/internal/tick', body = JSON.stringify({kind}), sent = String(Date.now()), nonce = randomUUID();
+            const digest = createHash('sha256').update(body).digest('hex');
+            const canonical = ['vsd-cloud-v1',id,origin,'POST',path,sent,nonce,digest].join('\n');
+            const signature = createHmac('sha256',Buffer.from(key,'base64url')).update(canonical).digest('hex');
+            // Exactly one attempt. A timeout may follow a completed task; never replay blindly.
+            const response = await fetch(origin + path, {method:'POST',redirect:'error',signal:AbortSignal.timeout(60000),
+              headers:{'Content-Type':'application/json','OAI-Sites-Authorization':'Bearer '+dispatcher,
+                'X-VSD-Sent-At':sent,'X-VSD-Nonce':nonce,'X-VSD-Signature':signature},body});
+            if(response.status!==200 || !response.headers.get('content-type')?.includes('application/json'))throw Error('unavailable');
+            const text=await response.text();if(text.length>1024)throw Error('invalid_response');
+            const data=JSON.parse(text);
+            const allowed=kind==='health'?['healthy']:['disabled','idle','busy_or_recent','dispatched','reconciled','recovered','complete'];
+            if(data.kind!==kind || !allowed.includes(data.status))throw Error('task_attention_required');
+            console.log('Cloud receipt: '+kind+' / '+data.status+'.');
+          } catch {
+            console.error('Cloud task not confirmed. Check the private service; no automatic retry was made.');
+            process.exitCode=1;
+          }
+          NODE
