@@ -1,0 +1,14 @@
+{
+  "checkedAt": "2026-09-27T19:24:15.387457Z",
+  "scope": "Public guide read only. Its source-control date remains 2026-09-14; the separate source excerpt covers only this scenario.",
+  "url": "https://voyagesansdetour.fr/portugal/ou-dormir-lisbonne-quartiers/",
+  "finalUrl": "https://voyagesansdetour.fr/portugal/ou-dormir-lisbonne-quartiers/",
+  "httpStatus": 200,
+  "canonicalMatches": true,
+  "htmlSha256": "76d3d1e18fa6a4a9afd86956440c81b8fe8e157c3c8245ae51658e65c6dcdfdd",
+  "matchesLocalBuild": true,
+  "localBuildSha256": "76d3d1e18fa6a4a9afd86956440c81b8fe8e157c3c8245ae51658e65c6dcdfdd",
+  "localBuild": "Fresh root-agent regeneration of the deployed source snapshot; exact page bytes compared.",
+  "verificationNote": "The newly regenerated public page is byte-identical to the live HTTPS response. This does not change the guide source date or republish the article.",
+  "generatorSha256": "5cd13fba92587604303a7d89b2450d88447fa551e9332c1162c97fd66f43d261"
+}

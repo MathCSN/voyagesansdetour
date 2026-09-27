@@ -1,0 +1,56 @@
+{
+  "slug": "ou-dormir-lisbonne-quartiers",
+  "title": "Où dormir à Lisbonne sans voiture : choisir son quartier",
+  "sourcesCheckedOn": "2026-09-27",
+  "snapshotKind": "selected_public_guide_excerpts_reverified_for_this_scenario",
+  "publicGuideSourcesDateUnchanged": "2026-09-14",
+  "scope": "Only Baixa central area/shops, Alfama lanes/paving/slopes/views, and the reproduced editorial address-selection advice were rechecked. No claim that the complete guide was updated.",
+  "sections": [
+    {
+      "id": "methode",
+      "title": "Choisir une base, puis vérifier une adresse",
+      "paragraphs": [
+        "Pour choisir où dormir, retenez deux secteurs, puis comparez les adresses. Le quartier ne garantit ni le calme de la chambre, ni l’absence d’escaliers. Deux logements voisins peuvent offrir des expériences différentes."
+      ]
+    },
+    {
+      "id": "baixa",
+      "title": "Baixa et Rossio : notre point de départ pour une première visite",
+      "paragraphs": [
+        "Baixa concentre commerces, places et parcours du centre."
+      ]
+    },
+    {
+      "id": "alfama",
+      "title": "Alfama : choisir les ruelles en connaissance du relief",
+      "paragraphs": [
+        "Alfama est le choix à envisager si vous recherchez le cadre des ruelles historiques et la proximité des points de vue. L’office de tourisme souligne explicitement ses pavés et ses fortes pentes. Notre conseil est de vérifier le trajet à pied avant de réserver, surtout avec un bagage lourd."
+      ]
+    },
+    {
+      "id": "comparaison",
+      "title": "Quel compromis vous convient ?",
+      "paragraphs": [
+        "Utilisez ce tableau pour réduire votre recherche, puis examinez chaque logement séparément. Ne transformez pas une préférence de quartier en garantie de confort."
+      ]
+    },
+    {
+      "id": "avant-reservation",
+      "title": "Quatre vérifications avant de payer",
+      "bullets": [
+        "Le trajet complet depuis l’aéroport ou la gare, avec les correspondances.",
+        "L’étage, l’ascenseur et les marches jusqu’à la chambre."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "Visit Lisboa — Baixa",
+      "url": "https://www.visitlisboa.com/en/places/baixa-chiado"
+    },
+    {
+      "label": "Visit Lisboa — Alfama et ses pentes",
+      "url": "https://www.visitlisboa.com/en/places/alfama"
+    }
+  ]
+}

@@ -6,6 +6,12 @@
       "notBefore": "2026-09-27T17:29:48.929873Z",
       "file": "scenarios/porto-aeroport-trois-reflexes.json",
       "sha256": "898738296b2ba92192aec113dff30ad0944ecff0c53f0a8f891826c73459dd6f"
+    },
+    {
+      "contentId": "lisbonne-quartiers-sans-voiture-2026-10",
+      "notBefore": "2026-09-27T19:41:03.725607Z",
+      "file": "scenarios/lisbonne-quartiers-sans-voiture.json",
+      "sha256": "0d505aad0cca255334a99908ab737329f4b5d0d4f2d1e47f254262e2c9748194"
     }
   ]
 }
