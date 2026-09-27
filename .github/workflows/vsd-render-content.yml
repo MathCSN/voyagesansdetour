@@ -1,0 +1,72 @@
+# Render already-reviewed scenarios only. No provider API, paid generator or social send.
+name: Voyage Sans Detour reviewed media production
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 5 * * 1'
+
+permissions: {}
+concurrency:
+  group: vsd-reviewed-media-production
+  cancel-in-progress: false
+
+jobs:
+  render:
+    # Public standard GitHub runners only. A private repo is never a paid fallback.
+    # The weekly schedule stays off until a qualified manual run is inspected.
+    if: github.repository == 'MathCSN/voyagesansdetour' && github.ref == 'refs/heads/main' && github.event.repository.private == false && (github.event_name == 'workflow_dispatch' || vars.VSD_FREE_RENDER_SCHEDULE == 'true')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    defaults:
+      run:
+        working-directory: .github/vsd-production
+    steps:
+      - name: Stop before fetching dependencies after the authorised period
+        id: period
+        working-directory: ${{ github.workspace }}
+        run: |
+          python3 - <<'PY'
+          import datetime as dt, os
+          end = dt.datetime(2027, 9, 14, 21, 59, 59, tzinfo=dt.timezone.utc)
+          active = dt.datetime.now(dt.timezone.utc) <= end
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+              f.write('active=' + str(active).lower() + '\n')
+          PY
+      - name: Checkout the reviewed catalogue and existing render receipts
+        if: steps.period.outputs.active == 'true'
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: true
+      - name: Python 3.12
+        if: steps.period.outputs.active == 'true'
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.12'
+      - name: Confirm the free standard runner prerequisites
+        if: steps.period.outputs.active == 'true'
+        run: |
+          set -euo pipefail
+          command -v ffmpeg
+          command -v ffprobe
+          ffmpeg -version | head -n 1
+          python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Validate production guards
+        if: steps.period.outputs.active == 'true'
+        run: python -m unittest -q test_production
+      - name: Produce at most one eligible clip
+        if: steps.period.outputs.active == 'true'
+        run: python production.py
+      - name: Persist finished media and receipts atomically
+        if: steps.period.outputs.active == 'true'
+        run: |
+          set -euo pipefail
+          # Only this job's completed artifact directory is staged. Temporary
+          # files/lock files are excluded by the dedicated output .gitignore.
+          git add -- output
+          if ! git diff --cached --quiet; then
+            git -c user.name='Voyage Sans Détour' -c user.email='contact@voyagesansdetour.fr' commit -m 'Produce a reviewed media artifact with its receipt'
+            git push origin HEAD:main
+          fi

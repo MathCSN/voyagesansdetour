@@ -1,0 +1,10 @@
+{
+  "checkedAt": "2026-09-27T07:07:18.473640+00:00",
+  "scope": "Historical verified public article, no new network request by the render job",
+  "url": "https://voyagesansdetour.fr/portugal/aeroport-porto-centre-ville/",
+  "httpStatus": 200,
+  "htmlSha256": "373af19cab75dbe49e2f9cb444fbe1de9190ce6a04fed59107bfea9c7e5b5aac",
+  "matchesLocalBuild": true,
+  "runUrl": "https://github.com/MathCSN/voyagesansdetour/actions/runs/36302079807",
+  "sourceCommit": "6610fb7f59f0b380c333878d93c985cff34a6ee1"
+}

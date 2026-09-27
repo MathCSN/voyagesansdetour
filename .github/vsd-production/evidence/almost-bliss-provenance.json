@@ -1,0 +1,53 @@
+{
+  "title": "Almost Bliss",
+  "composer": "Kevin MacLeod",
+  "copyrightHolder": "Kevin MacLeod",
+  "isrc": "USUAN1900015",
+  "catalogDuration": "00:05:17",
+  "instruments": [
+    "Guitars",
+    "Percussion"
+  ],
+  "bpm": 90,
+  "sourceTrackPage": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1900015",
+  "sourceCatalog": "https://incompetech.com/music/royalty-free/pieces.json",
+  "officialCatalogLicense": "https://incompetech.com/agent-section/",
+  "officialLicenseOptions": "https://incompetech.com/music/royalty-free/licenses/",
+  "officialCreditFAQ": "https://incompetech.com/music/royalty-free/faq.html",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "costEur": 0,
+  "commercialUseAllowed": true,
+  "adaptationAllowed": true,
+  "requiredAttribution": true,
+  "download": {
+    "requestedUrl": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Almost%20Bliss.mp3",
+    "responseUrl": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Almost%20Bliss.mp3",
+    "httpStatus": 200,
+    "contentType": "application/octet-stream",
+    "bytes": 12667215,
+    "sha256": "731e191cef927e43d352bd099ac63cd6ea54a6a84deec3cba77fb59e6903754c",
+    "retrievedAt": "2026-09-27T15:50:47.311866+00:00",
+    "mediaProbe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "mp3",
+          "sample_rate": "44100",
+          "channels": 2
+        }
+      ],
+      "format": {
+        "duration": "316.577975"
+      }
+    }
+  },
+  "published": false,
+  "notes": [
+    "Commercial reuse and adaptation are allowed by CC BY 4.0 with attribution, license link and indication of changes.",
+    "Retain the credit in each publication caption or visible credits. No claim that Kevin MacLeod endorses the project.",
+    "MP3 acquired directly from the composer’s official catalog without login or payment.",
+    "Original downloaded track is unchanged; editing/mixing of any preview must be documented by the rendering agent."
+  ]
+}

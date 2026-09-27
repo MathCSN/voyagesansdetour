@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "items": [
+    {
+      "contentId": "porto-aeroport-trois-reflexes-2026-09",
+      "notBefore": "2026-09-27T17:29:48.929873Z",
+      "file": "scenarios/porto-aeroport-trois-reflexes.json",
+      "sha256": "898738296b2ba92192aec113dff30ad0944ecff0c53f0a8f891826c73459dd6f"
+    }
+  ]
+}
