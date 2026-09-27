@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "items": [
+    {
+      "path": ".github/vsd-production/reviewed-social/instagram-porto-aeroport-2026-10-11-v1.json",
+      "fileSha256": "40fc7c49416d6836b8a9b92df654ce77221fb6639a9fe676ef5f79d09530d97f",
+      "batchId": "instagram-porto-aeroport-2026-10-11-v1",
+      "batchSha256": "f74210229f99251f72d4280201273aa1234c92783ad8857aad85e0cab224f1bd",
+      "itemIds": [
+        "vsd-production:instagram:porto-aeroport-trois-reflexes-2026-09:ig96-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/instagram-lisbonne-quartiers-2026-10-18-v1.json",
+      "fileSha256": "0fbba01a310d039b092e85f9febfe7a9137744ac2b7c33858628a4caebf3baf6",
+      "batchId": "instagram-lisbonne-quartiers-2026-10-18-v1",
+      "batchSha256": "821b407fd9202000e1c2bff7bd332960545f09556c9233376df4b2c4e7d2620d",
+      "itemIds": [
+        "vsd-production:instagram:lisbonne-quartiers-sans-voiture-2026-10:cloud-v2"
+      ]
+    }
+  ]
+}
