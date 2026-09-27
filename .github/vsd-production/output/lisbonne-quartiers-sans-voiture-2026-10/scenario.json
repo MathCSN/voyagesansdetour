@@ -1,0 +1,251 @@
+{
+  "schemaVersion": 1,
+  "id": "lisbonne-quartiers-sans-voiture-2026-10",
+  "title": "Lisbonne : choisir son quartier sans voiture",
+  "format": "music_text",
+  "presenter": "none",
+  "theme": "ink",
+  "aiAssisted": true,
+  "destination": "Lisbonne",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/ou-dormir-lisbonne-quartiers/",
+  "caption": "🏙️ À Lisbonne sans voiture, vous préférez partir du centre ou retrouver les ruelles ?\n\n📍 Baixa : notre point de départ pour comparer une base centrale.\n👟 Alfama : les ruelles et les vues, en tenant compte des pentes.\n\nGardez deux adresses, puis comparez le chemin jusqu’à la porte, les escaliers et la chambre. Le nom d’un quartier ne suffit pas à choisir un logement.\n\n🔖 Enregistrez le comparatif pour préparer votre séjour.",
+  "review": {
+    "status": "reviewed_for_render",
+    "checkedAt": "2026-09-27T19:37:24.598307Z",
+    "validUntil": "2026-10-19T00:00:00Z",
+    "method": "Independent scenario review approved for rendering only; scoped source excerpt rechecked 27 September. Public guide source date unchanged. Exact rendered media require a subsequent independent review."
+  },
+  "source": {
+    "checkedOn": "2026-09-27",
+    "article": {
+      "file": "sources/lisbonne-quartiers-2026-09-27/article-excerpts.json",
+      "sha256": "27ebcd7686e83ec6edbc7897d71f9fc37907c1e6d238246d09bd9880d6e3ba97"
+    },
+    "researchEvidence": {
+      "file": "sources/lisbonne-quartiers-2026-09-27/source-review.md",
+      "sha256": "604eedbdb70be848a2cc015f0f356522a7255e0bd7a03107d77f0f7a1bf2747a"
+    },
+    "publicationEvidence": {
+      "file": "sources/lisbonne-quartiers-2026-09-27/publication-evidence.json",
+      "sha256": "fd05e4c8294a66a9e355f858f54ba93cbe425a4a1f8bff5588ff2cdb8f06df21"
+    }
+  },
+  "assets": {
+    "regular": {
+      "file": "assets/dmsans-regular.ttf",
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      }
+    },
+    "bold": {
+      "file": "assets/dmsans-bold.ttf",
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      }
+    },
+    "serif": {
+      "file": "assets/playfair.ttf",
+      "sha256": "adefc53e7b3d483f1fa5e85edd82b7689ca79db25a1f6786bd7949cdcfeec601",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+      }
+    },
+    "music": {
+      "file": "assets/almost-bliss.mp3",
+      "sha256": "731e191cef927e43d352bd099ac63cd6ea54a6a84deec3cba77fb59e6903754c",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "commercialUseAllowed": true,
+      "title": "Almost Bliss",
+      "author": "Kevin MacLeod",
+      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1900015",
+      "provenance": {
+        "file": "evidence/almost-bliss-provenance.json",
+        "sha256": "2d2303c1a70fed68560808853466c997870cd8156737d96ca287a4332a5cd04d"
+      }
+    }
+  },
+  "scenes": [
+    {
+      "layout": "intro",
+      "seconds": 4,
+      "label": "CHOISIR SA BASE SANS VOITURE",
+      "title": [
+        "Dormir au centre",
+        "ou dans les ruelles ?"
+      ],
+      "body": [
+        "Baixa ou Alfama :",
+        "le bon choix dépend de vos journées."
+      ],
+      "note": "Un choix de rythme, pas un classement d’hôtels.",
+      "graphicLabels": [
+        "BAIXA",
+        "ALFAMA",
+        "VOTRE RYTHME"
+      ],
+      "evidence": [
+        {
+          "sectionId": "methode",
+          "url": "https://www.visitlisboa.com/en/places/alfama",
+          "supportingText": "Pour choisir où dormir, retenez deux secteurs, puis comparez les adresses."
+        }
+      ]
+    },
+    {
+      "layout": "checklist",
+      "seconds": 5,
+      "label": "VOUS VOULEZ UNE BASE CENTRALE",
+      "title": [
+        "Baixa.",
+        "Le centre comme base."
+      ],
+      "body": [
+        "Pour partir vers les places et les commerces.",
+        "Notre point de départ pour comparer."
+      ],
+      "note": "Vérifiez la rue exacte et la marche depuis l’arrivée.",
+      "graphicLabels": [
+        "PLACES",
+        "COMMERCES",
+        "CENTRE HISTORIQUE"
+      ],
+      "evidence": [
+        {
+          "sectionId": "baixa",
+          "url": "https://www.visitlisboa.com/en/places/baixa-chiado",
+          "supportingText": "Baixa concentre commerces, places et parcours du centre."
+        }
+      ]
+    },
+    {
+      "layout": "checklist",
+      "seconds": 5,
+      "label": "VOUS PRÉFÉREZ LES RUELLES",
+      "title": [
+        "Alfama.",
+        "Le relief fait partie",
+        "du séjour."
+      ],
+      "body": [
+        "Pour les ruelles et les points de vue.",
+        "À mettre en balance avec les montées."
+      ],
+      "note": "Vérifiez l’accès avec vos bagages.",
+      "graphicLabels": [
+        "RUELLES",
+        "PAVÉS",
+        "PENTES"
+      ],
+      "evidence": [
+        {
+          "sectionId": "alfama",
+          "url": "https://www.visitlisboa.com/en/places/alfama",
+          "supportingText": "L’office de tourisme souligne explicitement ses pavés et ses fortes pentes."
+        }
+      ]
+    },
+    {
+      "layout": "route",
+      "seconds": 5,
+      "label": "IMAGINEZ VOTRE RETOUR LE SOIR",
+      "title": [
+        "Une pause au calme ?",
+        "Regardez l’adresse."
+      ],
+      "body": [
+        "Comparez la marche et les marches.",
+        "Le quartier ne garantit pas la chambre."
+      ],
+      "note": "Le trajet complet compte aussi avec les valises.",
+      "graphicLabels": [
+        "ADRESSE",
+        "PARCOURS",
+        "ARRIVÉE"
+      ],
+      "evidence": [
+        {
+          "sectionId": "methode",
+          "url": "https://www.visitlisboa.com/en/places/alfama",
+          "supportingText": "Pour choisir où dormir, retenez deux secteurs, puis comparez les adresses."
+        },
+        {
+          "sectionId": "comparaison",
+          "url": "https://www.visitlisboa.com/en/places/baixa-chiado",
+          "supportingText": "Ne transformez pas une préférence de quartier en garantie de confort."
+        }
+      ]
+    },
+    {
+      "layout": "checklist",
+      "seconds": 5,
+      "label": "VOTRE COMPROMIS",
+      "title": [
+        "Centre ou ruelles ?",
+        "Gardez deux adresses."
+      ],
+      "body": [
+        "Baixa pour commencer au centre.",
+        "Alfama si le relief vous convient."
+      ],
+      "note": "Comparez ensuite trajet, escaliers et chambre.",
+      "graphicLabels": [
+        "BAIXA · CENTRE",
+        "ALFAMA · RELIEF",
+        "ADRESSE · CONFORT"
+      ],
+      "evidence": [
+        {
+          "sectionId": "baixa",
+          "url": "https://www.visitlisboa.com/en/places/baixa-chiado",
+          "supportingText": "Baixa concentre commerces, places et parcours du centre."
+        },
+        {
+          "sectionId": "alfama",
+          "url": "https://www.visitlisboa.com/en/places/alfama",
+          "supportingText": "L’office de tourisme souligne explicitement ses pavés et ses fortes pentes."
+        }
+      ]
+    },
+    {
+      "layout": "outro",
+      "seconds": 4,
+      "label": "LE GUIDE POUR FAIRE VOTRE CHOIX",
+      "title": [
+        "Un quartier attire.",
+        "Une adresse décide."
+      ],
+      "body": [
+        "Le comparatif complet est sur le blog.",
+        "Enregistrez-le avant de réserver."
+      ],
+      "note": "Lien du profil · guide et sources.",
+      "graphicLabels": [
+        "BAIXA",
+        "ALFAMA",
+        "VOTRE ADRESSE"
+      ],
+      "evidence": [
+        {
+          "sectionId": "comparaison",
+          "url": "https://www.visitlisboa.com/en/places/baixa-chiado",
+          "supportingText": "Ne transformez pas une préférence de quartier en garantie de confort."
+        }
+      ]
+    }
+  ],
+  "hashtags": [
+    "#VoyageSansDetour",
+    "#Lisbonne",
+    "#Portugal",
+    "#VoyageSansVoiture"
+  ]
+}
