@@ -29,7 +29,8 @@ from PIL import Image, ImageDraw, ImageFont, __version__ as pillow_version
 HERE = Path(__file__).resolve().parent
 W, H, FPS = 1080, 1920, 30
 SCHEMA = 1
-RENDERER_CONTRACT = 1
+RENDERER_CONTRACT = 2
+SUPPORTED_RECEIPT_CONTRACTS = (1, 2)
 ID = re.compile(r"[a-z0-9][a-z0-9_-]{0,95}\Z")
 HASH = re.compile(r"[a-f0-9]{64}\Z")
 HARD_STOP = dt.datetime(2027, 9, 14, 21, 59, 59, tzinfo=dt.timezone.utc)
@@ -200,10 +201,11 @@ def validate_scenario(scenario, root, now):
     return {"duration": duration, "sourceUrls": sorted(used), "sourceCheckedOn": str(checked_on)}
 
 
-def fingerprint(scenario):
+def fingerprint(scenario, contract_version=RENDERER_CONTRACT):
     # An existing immutable artifact survives later bugfixes. Its own renderer
     # hash stays in the receipt; a new intended visual version needs a new ID.
-    return digest(canonical({"scenario": scenario, "rendererContractVersion": RENDERER_CONTRACT}))
+    ensure(contract_version in SUPPORTED_RECEIPT_CONTRACTS, "Unsupported historical renderer contract")
+    return digest(canonical({"scenario": scenario, "rendererContractVersion": contract_version}))
 
 
 @lru_cache(maxsize=128)
@@ -323,6 +325,7 @@ def verify_video(video, duration, audio):
     ensure(len(audios) == int(audio), "Audio stream count differs")
     if audio:
         ensure(audios[0]["codec_name"] == "aac" and audios[0]["sample_rate"] == "48000", "Audio specifications differ")
+        ensure(0 < int(audios[0].get("bit_rate", 0)) < 128000, "Instagram audio must remain below 128 kb/s")
     subprocess.run(["ffmpeg", "-hide_banner", "-v", "error", "-xerror", "-i", str(video), "-f", "null", "-"], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
     loudness = None
     if audio:
@@ -333,7 +336,7 @@ def verify_video(video, duration, audio):
         ensure(integrated and peak, "Loudness measurement unavailable")
         loudness = {"integratedLufs": float(integrated[1]), "truePeakDbfs": float(peak[1])}
         ensure(-22 <= loudness["integratedLufs"] <= -14 and loudness["truePeakDbfs"] <= -1, "Music level outside delivery range")
-    return {"width": W, "height": H, "fps": FPS, "durationSeconds": float(result["format"]["duration"]), "videoCodec": "h264", "pixelFormat": "yuv420p", "audioCodec": "aac" if audio else None, "audioSampleRate": 48000 if audio else None, "fullDecodePassed": True, "loudness": loudness}
+    return {"width": W, "height": H, "fps": FPS, "durationSeconds": float(result["format"]["duration"]), "videoCodec": "h264", "pixelFormat": "yuv420p", "videoBitrateBps": int(videos[0].get("bit_rate", 0)), "audioCodec": "aac" if audio else None, "audioSampleRate": 48000 if audio else None, "audioBitrateBps": int(audios[0]["bit_rate"]) if audio else None, "fullDecodePassed": True, "loudness": loudness}
 
 
 def verify_receipt(folder, expected_fingerprint):
@@ -361,7 +364,7 @@ def render(scenario, root, destination, now, info):
     video = destination / "reel.mp4"
     command = ["ffmpeg", "-hide_banner", "-loglevel", "error", "-nostdin", "-f", "rawvideo", "-pixel_format", "rgb24", "-video_size", f"{W}x{H}", "-framerate", str(FPS), "-i", "pipe:0"]
     if music:
-        command += ["-i", str(root / scenario["assets"]["music"]["file"]), "-map", "0:v:0", "-map", "1:a:0", "-af", f"atrim=0:{info['duration']},asetpts=PTS-STARTPTS,afade=t=in:d=0.5,afade=t=out:st={info['duration'] - 1.5}:d=1.5,loudnorm=I=-18:TP=-1.5:LRA=7", "-c:a", "aac", "-b:a", "160k", "-ar", "48000"]
+        command += ["-i", str(root / scenario["assets"]["music"]["file"]), "-map", "0:v:0", "-map", "1:a:0", "-af", f"atrim=0:{info['duration']},asetpts=PTS-STARTPTS,afade=t=in:d=0.5,afade=t=out:st={info['duration'] - 1.5}:d=1.5,loudnorm=I=-18:TP=-1.5:LRA=7", "-c:a", "aac", "-b:a", "96k", "-ar", "48000"]
     else:
         command += ["-an"]
     command += ["-t", str(info["duration"]), "-c:v", "libx264", "-threads", "2", "-preset", "veryfast", "-crf", "20", "-pix_fmt", "yuv420p", "-movflags", "+faststart", "-map_metadata", "-1", str(video)]
@@ -449,12 +452,17 @@ def run(root=HERE, output=None, *, now=None, validate_only=False):
         ensure(due < expiry, "Scenario expires before production date")
         entries.append((due, entry, scenario))
     with exclusive(output):
-        completed, skipped = [], []
+        completed, skipped, legacy = [], [], []
         for due, entry, scenario in sorted(entries, key=lambda item: (item[0], item[1]["contentId"])):
             destination = output / scenario["id"]
             ensure(not destination.is_symlink(), "Artifact symlink forbidden")
             if destination.exists():
-                verify_receipt(destination, fingerprint(scenario))
+                historical = load_json(safe_path(destination, "receipt.json"))
+                version = historical.get("rendererContractVersion", 1)
+                verify_receipt(destination, fingerprint(scenario, version))
+                if version < RENDERER_CONTRACT:
+                    legacy.append({"id": scenario["id"], "rendererContractVersion": version,
+                                   "reason": "Preserved historical artifact; qualify delivery audio before Instagram import. Never regenerated or reset."})
                 completed.append(scenario["id"])
                 continue
             if due > now:
@@ -476,7 +484,7 @@ def run(root=HERE, output=None, *, now=None, validate_only=False):
                 ensure(utcnow() < instant(scenario["review"]["validUntil"]) and utcnow() <= HARD_STOP, "Review expired during rendering")
                 staged.rename(destination)
             return {"status": "rendered_not_published", "contentId": scenario["id"], "produced": 1, "output": str(destination), "videoSha256": next(f["sha256"] for f in receipt["files"] if f["file"] == "reel.mp4"), "wallSeconds": receipt["runtime"]["wallSeconds"]}
-        return {"status": "idle", "produced": 0, "completed": completed, "skipped": skipped}
+        return {"status": "idle", "produced": 0, "completed": completed, "skipped": skipped, "legacyArtifacts": legacy}
 
 
 def main():

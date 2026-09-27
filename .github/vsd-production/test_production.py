@@ -36,7 +36,7 @@ class ProductionGuards(unittest.TestCase):
     def fake_render(self, scenario, root, destination, now, info):
         # Fixture is only for crash/retry semantics; it never asserts media QA.
         (destination / "sentinel.bin").write_bytes(b"test-artifact")
-        receipt = {"status": "rendered_not_published", "fingerprint": p.fingerprint(scenario), "runtime": {"wallSeconds": 0},
+        receipt = {"status": "rendered_not_published", "rendererContractVersion": p.RENDERER_CONTRACT, "fingerprint": p.fingerprint(scenario), "runtime": {"wallSeconds": 0},
                    "files": [{"file": "sentinel.bin", "sha256": p.digest(b"test-artifact")}, {"file": "reel.mp4", "sha256": p.digest(b"test-video")}]}
         (destination / "reel.mp4").write_bytes(b"test-video")
         p.write_json(destination / "receipt.json", receipt)
@@ -157,6 +157,37 @@ class ProductionGuards(unittest.TestCase):
         self.save()
         with self.assertRaisesRegex(p.Invalid, "different inputs"):
             p.run(self.root, self.output, now=self.now)
+
+    def test_contract_one_artifact_survives_audio_upgrade_without_regeneration(self):
+        with mock.patch.object(p, "render", side_effect=self.fake_render):
+            p.run(self.root, self.output, now=self.now)
+        file = self.output / self.scenario["id"] / "receipt.json"
+        receipt = p.load_json(file)
+        receipt.update(rendererContractVersion=1, fingerprint=p.fingerprint(self.scenario, 1))
+        p.write_json(file, receipt)
+        with mock.patch.object(p, "render") as render:
+            result = p.run(self.root, self.output, now=self.now)
+        render.assert_not_called()
+        self.assertEqual(result["produced"], 0)
+        self.assertEqual(result["legacyArtifacts"][0]["rendererContractVersion"], 1)
+        self.assertEqual(p.load_json(file), receipt)
+
+    def test_unknown_contract_never_accepted_as_existing_delivery(self):
+        with mock.patch.object(p, "render", side_effect=self.fake_render):
+            p.run(self.root, self.output, now=self.now)
+        file = self.output / self.scenario["id"] / "receipt.json"
+        receipt = p.load_json(file); receipt["rendererContractVersion"] = 999
+        p.write_json(file, receipt)
+        with self.assertRaisesRegex(p.Invalid, "Unsupported historical"):
+            p.run(self.root, self.output, now=self.now)
+
+    def test_video_qa_rejects_high_audio_bitrate_before_claiming_instagram_format(self):
+        result = {"streams": [{"codec_type": "video", "width": 1080, "height": 1920, "codec_name": "h264", "pix_fmt": "yuv420p", "r_frame_rate": "30/1"},
+                              {"codec_type": "audio", "codec_name": "aac", "sample_rate": "48000", "bit_rate": "161693"}],
+                  "format": {"duration": "28"}}
+        with mock.patch.object(p, "probe", return_value=result):
+            with self.assertRaisesRegex(p.Invalid, "below 128"):
+                p.verify_video(Path("not-read.mp4"), 28, True)
 
     def test_corrupted_artifact_never_claims_successful_retry(self):
         with mock.patch.object(p, "render", side_effect=self.fake_render):
