@@ -58,8 +58,10 @@ jobs:
             if(response.status!==200 || !response.headers.get('content-type')?.includes('application/json'))throw Error('unavailable');
             const text=await response.text();if(text.length>1024)throw Error('invalid_response');
             const data=JSON.parse(text);
-            const allowed=kind==='health'?['healthy']:['disabled','idle','busy_or_recent','dispatched','reconciled','recovered','complete'];
-            if(data.kind!==kind || !allowed.includes(data.status))throw Error('task_attention_required');
+            // A finished metrics tick confirms execution, not the presence or success of every provider report.
+            const allowed={health:['healthy'],metrics:['disabled','finished'],
+              publications:['disabled','idle','busy_or_recent','dispatched','reconciled','recovered']}[kind];
+            if(!allowed || data.kind!==kind || !allowed.includes(data.status))throw Error('task_attention_required');
             console.log('Cloud receipt: '+kind+' / '+data.status+'.');
           } catch {
             console.error('Cloud task not confirmed. Check the private service; no automatic retry was made.');
