@@ -92,22 +92,41 @@ credits=json.loads((ROOT/'image-sources.json').read_text())
 e=html.escape
 by_slug={a['slug']:a for a in articles}
 photos={a['id']:a for a in credits['photos']}
-SHARE_IMAGES={'brand':('brand-voyagesansdetour.png',1080,1080),'lisbonne':('lisbonne.jpg',1600,1066),'porto':('porto.jpg',2200,652),'sintra':('sintra.jpg',1800,818)}
+SHARE_IMAGES={
+    'brand':('brand-voyagesansdetour.png',1080,1080,'image/png'),
+    'lisbonne':('lisbonne.jpg',1600,1066,'image/jpeg'),
+    'porto':('porto.jpg',2200,652,'image/jpeg'),
+    'sintra':('sintra.jpg',1800,818,'image/jpeg'),
+    'guimaraes':('guimaraes-cover.png',1600,900,'image/png'),
+}
+DESTINATION_IMAGES={'Lisbonne':'lisbonne','Porto':'porto','Sintra':'sintra','Guimarães':'guimaraes'}
+ILLUSTRATIONS={'guimaraes':{
+    'caption':'Guimarães sans voiture — illustration typographique',
+    'creditText':'Illustration typographique originale — Voyage Sans Détour',
+}}
 def image_data(key):
-    filename,width,height=SHARE_IMAGES[key]
+    filename,width,height,mime_type=SHARE_IMAGES[key]
     url=ORIGIN+'/assets/'+filename
-    data={'@type':'ImageObject','@id':url+'#image','url':url,'contentUrl':url,'width':width,'height':height}
+    data={'@type':'ImageObject','@id':url+'#image','url':url,'contentUrl':url,'width':width,'height':height,'encodingFormat':mime_type}
     if key in photos:
         p=photos[key]
         data.update({'caption':p['alt_fr'],'creditText':p['credit_fr'],'license':p['license_url'],'creator':{'@type':'Person','name':p['author'],'url':p['author_url']}})
+    elif key in ILLUSTRATIONS:
+        data.update(ILLUSTRATIONS[key])
+        data['creator']={'@type':'Organization','name':BRAND}
     else:data.update({'caption':'Identité visuelle de '+BRAND,'creditText':BRAND})
     return data
-def photo(a):return 'porto' if a['destination']=='Porto' else 'sintra' if a['destination']=='Sintra' else 'lisbonne'
+def photo(a):return DESTINATION_IMAGES.get(a['destination'],'brand')
 def uri(a):return '/portugal/'+a['slug']+'/'
 def img(key,cls='',lazy=True):
-    p=photos[key]
-    return f'<img class="{cls}" src="/assets/{key}.jpg" alt="{e(p["alt_fr"])}" width="1600" height="1067" {"loading=lazy" if lazy else "fetchpriority=high"} decoding="async">'
+    filename,width,height,_=SHARE_IMAGES[key]
+    image=image_data(key)
+    return f'<img class="{cls}" src="/assets/{filename}" alt="{e(image["caption"])}" width="{width}" height="{height}" {"loading=lazy" if lazy else "fetchpriority=high"} decoding="async">'
 def credit(key):
+    if key in ILLUSTRATIONS:
+        return f'<p class="photo-credit">{e(ILLUSTRATIONS[key]["caption"])} · {e(ILLUSTRATIONS[key]["creditText"])}</p>'
+    if key not in photos:
+        return f'<p class="photo-credit">Identité visuelle de {e(BRAND)}</p>'
     p=photos[key]
     return f'<p class="photo-credit">Photo : <a href="{p["source_page"]}">{e(p["author"])} / Wikimedia Commons</a> · <a href="{p["license_url"]}">{p["license"]}</a> · redimensionnée, recadrée à l’affichage.</p>'
 header='''<a class="skip" href="#contenu">Aller au contenu</a><div class="topline">LE PORTUGAL, À VOTRE RYTHME — LE PREMIER DOSSIER DE VOYAGE SANS DÉTOUR</div><div class="wrap"><header class="header"><a class="brand" href="/" aria-label="Voyage Sans Détour, accueil"><small>VOYAGE</small><span>sans détour.</span></a><nav class="nav" aria-label="Navigation principale"><a href="/portugal/">Le Portugal</a><a href="/portugal/#guides">Tous les guides</a><a href="/a-propos/">L’esprit du blog</a></nav></header>'''
@@ -131,7 +150,7 @@ def page(path,title,description,content,schema=None,noindex=False,share_image='b
     analytics_tag=(f'<script type="module" src="/analytics.mjs" data-vsd-analytics data-enabled="true" data-measurement-id="{e(ANALYTICS["measurement_id"])}"></script>' if ANALYTICS_ACTIVE and path!='/404.html' else '')
     site_verifications='<meta name="p:domain_verify" content="c3f99d14884f31bf28b008c476ddfea3"/><meta name="google-site-verification" content="4AJ36ZanxjOuwRQIDsjdF0XBXaho8-Zd_5r7VBjY0P0" /><meta name="google-adsense-account" content="ca-pub-7879144993741676">' if PUBLIC and path=='/' else ''
     affiliate_style=stay22.CSS if AFFILIATE_PREVIEW or 'class="stay22-box"' in content else ''
-    dest.write_text(f'''<!doctype html><html lang="fr"><head>{site_verifications}<meta charset="utf-8"><meta name="referrer" content="strict-origin-when-cross-origin"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{e(title)}</title><meta name="description" content="{e(description)}"><meta name="robots" content="{robots}"><meta name="theme-color" content="#214fe6"><link rel="canonical" href="{full}"><meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(description)}"><meta property="og:url" content="{full}"><meta property="og:locale" content="fr_FR"><meta property="og:site_name" content="{BRAND}"><meta property="og:type" content="{'article' if '/portugal/' in path and path!='/portugal/' else 'website'}"><meta property="og:image" content="{e(sharing['url'])}"><meta property="og:image:secure_url" content="{e(sharing['url'])}"><meta property="og:image:type" content="{'image/png' if share_image=='brand' else 'image/jpeg'}"><meta property="og:image:width" content="{sharing['width']}"><meta property="og:image:height" content="{sharing['height']}"><meta property="og:image:alt" content="{e(sharing['caption'])}"><meta name="twitter:card" content="{'summary' if share_image=='brand' else 'summary_large_image'}"><meta name="twitter:image" content="{e(sharing['url'])}"><meta name="twitter:image:alt" content="{e(sharing['caption'])}"><meta name="twitter:title" content="{e(title)}"><meta name="twitter:description" content="{e(description)}"><link rel="icon" href="{favicon}"><link rel="stylesheet" href="/style.css"><link rel="alternate" type="application/rss+xml" title="{BRAND}" href="/feed.xml"><script type="application/ld+json">{ld}</script><script src="/site.js" defer></script>{analytics_tag}{affiliate_style}</head><body>{header}<main id="contenu">{content}</main>{footer}{audience_panel if path!="/404.html" else ""}</body></html>''')
+    dest.write_text(f'''<!doctype html><html lang="fr"><head>{site_verifications}<meta charset="utf-8"><meta name="referrer" content="strict-origin-when-cross-origin"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{e(title)}</title><meta name="description" content="{e(description)}"><meta name="robots" content="{robots}"><meta name="theme-color" content="#214fe6"><link rel="canonical" href="{full}"><meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(description)}"><meta property="og:url" content="{full}"><meta property="og:locale" content="fr_FR"><meta property="og:site_name" content="{BRAND}"><meta property="og:type" content="{'article' if '/portugal/' in path and path!='/portugal/' else 'website'}"><meta property="og:image" content="{e(sharing['url'])}"><meta property="og:image:secure_url" content="{e(sharing['url'])}"><meta property="og:image:type" content="{sharing['encodingFormat']}"><meta property="og:image:width" content="{sharing['width']}"><meta property="og:image:height" content="{sharing['height']}"><meta property="og:image:alt" content="{e(sharing['caption'])}"><meta name="twitter:card" content="{'summary' if share_image=='brand' else 'summary_large_image'}"><meta name="twitter:image" content="{e(sharing['url'])}"><meta name="twitter:image:alt" content="{e(sharing['caption'])}"><meta name="twitter:title" content="{e(title)}"><meta name="twitter:description" content="{e(description)}"><link rel="icon" href="{favicon}"><link rel="stylesheet" href="/style.css"><link rel="alternate" type="application/rss+xml" title="{BRAND}" href="/feed.xml"><script type="application/ld+json">{ld}</script><script src="/site.js" defer></script>{analytics_tag}{affiliate_style}</head><body>{header}<main id="contenu">{content}</main>{footer}{audience_panel if path!="/404.html" else ""}</body></html>''')
     if not noindex:pages.append(path)
 def card(a):
     return f'''<a class="card" href="{uri(a)}" data-destination="{e(a['destination'])}" data-search="{e(a['title']+' '+a['description']+' '+a['category'])}"><div class="card-image">{img(photo(a))}<span class="tag">{e(a['destination'])}</span></div><span class="meta">{e(a['category'].upper())} · {a['readMinutes']} MIN DE LECTURE</span><h3>{e(a['shortTitle'])}</h3><p>{e(a['description'])}</p></a>'''
@@ -179,6 +198,7 @@ basic('/confidentialite/','Confidentialité.','Ce que le site collecte, et surto
 basic('/mentions-legales/','Mentions légales.',f'Éditeur, hébergement et propriété des contenus de {BRAND}.',mentions_body())
 creditbody=f'<p>Les photographies représentent les lieux décrits. Elles ne sont pas présentées comme prises par {BRAND}. Elles sont redimensionnées et leur cadrage varie selon l’écran ; les adaptations des images sous CC BY-SA 4.0 sont mises à disposition sous cette même licence.</p>'
 for key,p in photos.items():creditbody+=f'<h2>{key.title()}</h2>{img(key)}{credit(key)}'
+for key in ILLUSTRATIONS:creditbody+=f'<h2>Guimarães : illustration originale</h2>{img(key)}{credit(key)}'
 creditbody+='<h2>Alma</h2><p>Portrait original généré avec l’outil image_gen le 14 septembre 2026. Personnage adulte entièrement fictif, sans référence à une personne réelle.</p>'
 basic('/credits/','Les images, et leurs auteurs.','Sources et licences des images utilisées sur '+BRAND+'.',creditbody)
 checklist=['Choisir mes dates et compter les journées complètes sur place','Vérifier les horaires de transport sur le site de l’opérateur','Choisir le quartier du logement et vérifier l’accès avec les bagages','Confirmer les conditions et le prix total avant réservation','Réserver les visites à créneau et noter l’heure à l’entrée concernée','Garder les billets et l’adresse du logement accessibles hors connexion','Prévoir chaussures adaptées, eau et pauses','Laisser une demi-journée libre et une solution en cas de pluie']

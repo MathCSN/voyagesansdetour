@@ -11,18 +11,18 @@ MENTIONS={
     'hebergeur':{'nom':'GitHub, Inc.','adresse':'88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis','telephone':'+1 000 000 0000','site':'https://github.com','confidentialite':'https://docs.github.com/fr/site-policy/privacy-policies/github-general-privacy-statement'},
 }
 
-def build(workdir,public,mentions,out=None,analytics=None):
+def build(workdir,public,mentions,out=None,analytics=None,source_root=ROOT):
     mentions_file=workdir/'mentions.json'
     if mentions is not None:mentions_file.write_text(json.dumps(mentions,ensure_ascii=False))
     out=out or workdir/('public' if public else 'dist')
-    if not public and not out.exists():shutil.copytree(ROOT/'dist',out)
+    if not public and not out.exists():shutil.copytree(source_root/'dist',out)
     env=dict(os.environ,SITE_OUT=str(out),SITE_ORIGIN=ORIGIN,SITE_MENTIONS=str(mentions_file),LJA_PUBLIC='1' if public else '0')
     env.pop('SITE_ANALYTICS',None)
     if analytics is not None:
         analytics_file=workdir/'analytics-test.json'
         analytics_file.write_text(json.dumps(analytics))
         env['SITE_ANALYTICS']=str(analytics_file)
-    result=subprocess.run([sys.executable,str(ROOT/'generate.py')],env=env,capture_output=True,text=True)
+    result=subprocess.run([sys.executable,str(source_root/'generate.py')],env=env,capture_output=True,text=True)
     return result,out
 
 def text_files(out):
@@ -195,6 +195,105 @@ class PublicBuildTest(unittest.TestCase):
         page=read(self.out,'/confidentialite/')
         self.assertIn('hébergé par GitHub, Inc.',page)
         self.assertIn('mailto:contact@voyagesansdetour.fr',page)
+
+class DestinationImageBuildTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.workdir=pathlib.Path(tempfile.mkdtemp(prefix='vsd-destination-images-'))
+        cls.addClassCleanup(shutil.rmtree,cls.workdir,True)
+        source=cls.workdir/'source'
+        source.mkdir()
+        for name in ('generate.py','editorial_queue.py','articles.json','image-sources.json',
+                     'stay22.py','stay22.json','pinterest-rss.json','analytics.json'):
+            shutil.copyfile(ROOT/name,source/name)
+        # Only disposable copies receive synthetic articles; the live catalogue and
+        # its reviewed release queue are never edited by these regression tests.
+        shutil.copytree(ROOT/'dist',source/'dist')
+        shutil.copytree(ROOT/'social-media',source/'social-media')
+        (source/'editorial-queue.json').write_text(json.dumps({'schemaVersion':1,'drafts':[],'promotions':[]}))
+        articles=json.loads((source/'articles.json').read_text())
+        cls.destinations={'lisbonne':'Lisbonne','porto':'Porto','sintra':'Sintra',
+                          'guimaraes':'Guimarães','inconnue':'Destination inconnue'}
+        for key,destination in cls.destinations.items():
+            articles.append({
+                'slug':'test-image-'+key,'title':'Guide de '+destination,'shortTitle':destination,
+                'destination':destination,'category':'Test','description':'Vérification de la couverture.',
+                'readMinutes':1,'summary':'Article temporaire de contrôle.',
+                'sections':[{'id':'controle','title':'Contrôle','paragraphs':['Texte de test.']}],
+                'faq':[],'sources':[{'label':'Source de contrôle','url':'https://www.visitportugal.com/'}],
+                'related':['lisbonne-3-jours-sans-voiture'],
+            })
+        (source/'articles.json').write_text(json.dumps(articles,ensure_ascii=False))
+        result,cls.out=build(cls.workdir,True,MENTIONS,source_root=source)
+        if result.returncode!=0:raise AssertionError(result.stderr)
+
+    def article_parts(self,key):
+        page=read(self.out,'/portugal/test-image-'+key+'/')
+        head=page.split('</head>',1)[0]
+        cover=re.search(r'<img class="article-cover".*?<p class="photo-credit">.*?</p>',page).group(0)
+        schema=json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>',page).group(1))
+        image=next(item for item in schema if item.get('@type')=='Article')['image']
+        return page,head,cover,image
+
+    def test_known_destinations_keep_their_exact_photos_and_credits(self):
+        for key in ('lisbonne','porto','sintra'):
+            with self.subTest(destination=key):
+                _,head,cover,image=self.article_parts(key)
+                self.assertIn('src="/assets/'+key+'.jpg"',cover)
+                self.assertIn('Photo :',cover)
+                self.assertIn('Wikimedia Commons',cover)
+                self.assertEqual(image['url'],ORIGIN+'/assets/'+key+'.jpg')
+                self.assertEqual(image['encodingFormat'],'image/jpeg')
+                self.assertIn('property="og:image:type" content="image/jpeg"',head)
+
+    def test_guimaraes_uses_original_png_for_cover_cards_and_social_metadata(self):
+        page,head,cover,image=self.article_parts('guimaraes')
+        caption='Guimarães sans voiture — illustration typographique'
+        credit='Illustration typographique originale — Voyage Sans Détour'
+        self.assertIn('src="/assets/guimaraes-cover.png"',cover)
+        self.assertIn('width="1600" height="900"',cover)
+        self.assertIn(caption,cover)
+        self.assertIn(credit,cover)
+        self.assertEqual((image['width'],image['height']),(1600,900))
+        self.assertEqual(image['url'],ORIGIN+'/assets/guimaraes-cover.png')
+        self.assertEqual(image['encodingFormat'],'image/png')
+        self.assertEqual(image['caption'],caption)
+        self.assertEqual(image['creditText'],credit)
+        self.assertEqual(image['creator'],{'@type':'Organization','name':'Voyage Sans Détour'})
+        self.assertNotIn('license',image)
+        self.assertIn('property="og:image:type" content="image/png"',head)
+        self.assertIn('name="twitter:card" content="summary_large_image"',head)
+        for prefix in ('property="og:image"','name="twitter:image"'):
+            self.assertIn(prefix+' content="'+image['url']+'"',head)
+        card=re.search(r'<a class="card" href="/portugal/test-image-guimaraes/".*?</a>',read(self.out,'/portugal/')).group(0)
+        self.assertIn('src="/assets/guimaraes-cover.png"',card)
+        self.assertIn(caption,card)
+        self.assertIn(credit,read(self.out,'/credits/'))
+        self.assertEqual((self.out/'assets/guimaraes-cover.png').read_bytes(),(ROOT/'dist/assets/guimaraes-cover.png').read_bytes())
+
+    def test_unknown_destination_uses_brand_instead_of_a_lisbon_photo(self):
+        _,head,cover,image=self.article_parts('inconnue')
+        self.assertIn('src="/assets/brand-voyagesansdetour.png"',cover)
+        self.assertEqual(image['url'],ORIGIN+'/assets/brand-voyagesansdetour.png')
+        self.assertEqual(image['encodingFormat'],'image/png')
+        self.assertEqual(image['caption'],'Identité visuelle de Voyage Sans Détour')
+        self.assertNotIn('license',image)
+        self.assertIn('property="og:image:type" content="image/png"',head)
+        self.assertIn('name="twitter:card" content="summary"',head)
+        self.assertIn('name="twitter:image" content="'+image['url']+'"',head)
+        card=re.search(r'<a class="card" href="/portugal/test-image-inconnue/".*?</a>',read(self.out,'/portugal/')).group(0)
+        self.assertIn('src="/assets/brand-voyagesansdetour.png"',card)
+
+    def test_no_photo_is_attributed_to_guimaraes_or_unknown_destination(self):
+        for key in ('guimaraes','inconnue'):
+            with self.subTest(destination=key):
+                page,head,cover,image=self.article_parts(key)
+                for section in (head,cover,json.dumps(image)):
+                    self.assertNotIn('/assets/lisbonne.jpg',section)
+                    self.assertNotIn('Photo :',section)
+                    self.assertNotIn('Wikimedia',section)
+                # A separately labelled related Lisbon guide may retain its photo.
+                self.assertIn('src="/assets/lisbonne.jpg"',page.split('Pour la suite du voyage.',1)[1])
 
 class PreviewBuildTest(TempDirTest):
     def test_preview_is_not_indexable_and_keeps_demo_page(self):

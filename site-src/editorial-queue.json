@@ -123,6 +123,186 @@
         "approvedAt": "2026-09-27T09:53:17Z",
         "sha256": "cb4352c731b0c9dc7fa74497cb56894f76d4a04d6aa61e494b59389480427f05"
       }
+    },
+    {
+      "id": "guimaraes-journee-2026-10-25",
+      "article": {
+        "slug": "guimaraes-une-journee-sans-voiture",
+        "title": "Guimarães en une journée sans voiture : du centre historique au château",
+        "shortTitle": "Une journée à Guimarães",
+        "destination": "Guimarães",
+        "category": "Itinéraires",
+        "description": "Rejoindre Guimarães en train, explorer les places et choisir ses visites : un itinéraire d’une journée sans voiture, avec les accès à vérifier.",
+        "readMinutes": 6,
+        "summary": "Guimarães se prête à une journée consacrée au centre historique et à la colline du château. Depuis Porto, cherchez la ligne urbaine CP de Guimarães et prévoyez ensuite la marche depuis la gare. Le parcours proposé relie Toural, Oliveira, la rua de Santa Maria et les monuments du haut de la ville, avec Couros en option. Choisissez une visite intérieure principale et gardez une marge pour le retour.",
+        "sourcesCheckedOn": "2026-09-27",
+        "sections": [
+          {
+            "id": "choisir-guimaraes",
+            "title": "Pour quelle journée choisir Guimarães ?",
+            "paragraphs": [
+              "Choisissez Guimarães si vous aimez découvrir une ville à travers ses places, ses rues anciennes et quelques monuments, sans multiplier les déplacements. Le centre historique et la zone du Couros sont inscrits ensemble au patrimoine mondial de l’UNESCO. Couros conserve notamment les traces du travail du cuir : c’est une autre lecture de la ville que celle du seul château.",
+              "Nous proposons de réserver une journée à cette ville et de laisser Braga ou la Penha pour une autre sortie. Ce choix de rythme est éditorial : il permet de s’arrêter pour déjeuner et de modifier une visite sans transformer le retour en course. L’itinéraire est documenté à partir des sources indiquées, et n’est pas présenté comme un voyage effectué sur place."
+            ]
+          },
+          {
+            "id": "venir-en-train",
+            "title": "Depuis Porto : chercher le bon train et préparer le retour",
+            "paragraphs": [
+              "La fiche officielle de la ligne urbaine CP relie Porto São Bento à Guimarães en passant par Porto Campanhã. Dans la recherche d’horaires, utilisez ces noms portugais et vérifiez votre gare de départ réelle. Si vous arrivez d’une autre ville, préparez la correspondance complète au lieu d’ajouter au dernier moment cette excursion à un trajet longue distance.",
+              "Consultez les départs applicables à votre date : la fiche distingue les jours de circulation. Choisissez aussi le retour avant de partir et gardez une seconde possibilité lorsque les horaires le permettent. Un tableau d’horaires décrit un service prévu ; vérifiez les avis de circulation CP avant le voyage.",
+              "Pour un billet urbain occasionnel, CP prévoit notamment l’achat aux guichets et distributeurs. Validez le titre avant le départ ; sa page dédiée précise une validation au plus tôt dix minutes avant l’heure prévue du train. Conservez le reçu. Demandez un titre couvrant exactement votre trajet : le simple fait de posséder déjà une carte de transport de Porto ne prouve pas qu’elle couvre Guimarães."
+            ]
+          },
+          {
+            "id": "arrivee-gare",
+            "title": "De la gare au centre : ne commencez pas le programme sur le quai",
+            "paragraphs": [
+              "CP situe la gare à environ vingt minutes à pied du centre. C’est un ordre de grandeur donné par l’opérateur, pas un temps porte-à-porte garanti. Ajoutez cette approche à l’aller et au retour lorsque vous choisissez vos trains. Enregistrez la gare et votre première étape sur un plan accessible hors ligne.",
+              "Pour une sortie depuis le même hébergement, partez avec un petit sac de journée si vous pouvez y laisser le reste de vos affaires. Si vous changez de logement, confirmez votre solution pour les bagages avant de compter sur une promenade dès l’arrivée. Ce guide ne garantit ni consigne disponible ni parcours intégralement accessible."
+            ]
+          },
+          {
+            "id": "programme",
+            "title": "Un parcours simple, avec une seule visite prioritaire",
+            "paragraphs": [
+              "Le tableau donne un ordre de visite, pas des horaires de réservation. Adaptez-le à votre arrivée, à la météo et aux ouvertures. Pour une première découverte, choisissez à l’avance le monument dont vous souhaitez voir l’intérieur ; les autres étapes peuvent rester une promenade extérieure."
+            ],
+            "table": {
+              "headers": [
+                "Moment",
+                "Parcours proposé",
+                "Choix à faire"
+              ],
+              "rows": [
+                [
+                  "Arrivée",
+                  "Gare → Largo do Toural → Largo da Oliveira",
+                  "Rejoindre le centre, puis faire une première pause."
+                ],
+                [
+                  "Fin de matinée",
+                  "Oliveira et Praça de São Tiago → rua de Santa Maria",
+                  "Monter progressivement vers les monuments du haut de la ville."
+                ],
+                [
+                  "Milieu de journée",
+                  "Paço dos Duques, église São Miguel et château",
+                  "Visiter l’intérieur choisi, selon les accès du jour."
+                ],
+                [
+                  "Après-midi",
+                  "Retour vers le centre ; Couros en option",
+                  "Garder du temps pour déjeuner et retrouver la gare."
+                ]
+              ]
+            }
+          },
+          {
+            "id": "places-santa-maria",
+            "title": "Oliveira et Santa Maria : regarder la ville entre deux monuments",
+            "paragraphs": [
+              "Au Largo da Oliveira, repérez l’église Nossa Senhora da Oliveira et le Padrão do Salado. La Praça de São Tiago constitue une étape voisine ; la présentation officielle de Turismo de Portugal relie ces places à la rua de Santa Maria puis à la partie haute de la ville. Gardez les noms portugais dans votre plan pour éviter de chercher plusieurs traductions d’un même lieu.",
+              "L’office de tourisme municipal décrit la rua de Santa Maria comme une rue piétonne d’origine médiévale, qui reliait la ville du château à celle du monastère. Prenez le temps de regarder l’ancien couvent de Santa Clara, aujourd’hui occupé par la mairie, et la Casa do Arco. Il n’est pas nécessaire de transformer chaque façade en visite intérieure pour apprécier cette étape.",
+              "Placez la pause déjeuner en fonction de votre visite réservée, s’il y en a une. Consultez la carte et les prix affichés avant de vous installer. Aucun restaurant n’est ici présenté comme testé ou comme une adresse incontournable."
+            ]
+          },
+          {
+            "id": "chateau-palais",
+            "title": "Château ou Paço dos Duques : choisir avec les accès réels",
+            "paragraphs": [
+              "Le Paço dos Duques de Bragança, l’église São Miguel et le château forment le groupe de monuments du haut de la ville. Les voir dans le même secteur ne signifie pas que leurs intérieurs demandent tous le même billet ou offrent les mêmes accès. Commencez par décider ce que vous souhaitez visiter, puis lisez la billetterie officielle.",
+              "Point vérifié le 27 septembre 2026 : la page pratique du Paço annonce des travaux, des espaces muséologiques indisponibles et un ascenseur pouvant être temporairement hors service. Elle indique aussi la fermeture du donjon du château. Une actualité distincte annonce la réouverture du chemin de ronde tout en maintenant le donjon fermé. Ne confondez donc pas l’accès au château avec l’accès à toutes ses parties.",
+              "Les billets sont proposés au Paço et en ligne depuis son site officiel. Avant l’achat, vérifiez les espaces effectivement visitables, les horaires, la dernière admission, les fermetures exceptionnelles et les tarifs applicables. Si l’ascenseur ou un parcours sans marches est indispensable, demandez une confirmation précise. En cas d’accès limité, raccourcissez cette étape et conservez la promenade dans le centre."
+            ]
+          },
+          {
+            "id": "couros-ou-retour",
+            "title": "Couros, ou simplement le temps de profiter du centre",
+            "paragraphs": [
+              "Si votre retour laisse suffisamment de temps, ajoutez une promenade dans la zone du Couros. Son intérêt tient au patrimoine lié aux anciennes tanneries et à la façon dont le travail a façonné ce quartier, documentés par l’UNESCO. Ce prolongement est facultatif : il ne faut pas le traiter comme une entrée de musée à réserver, ni supposer que tous les bâtiments se visitent.",
+              "S’il pleut ou si vous souhaitez marcher moins, gardez votre visite intérieure choisie et réduisez le nombre de rues parcourues. La répartition de la journée doit rester souple. Avant votre dernière pause, regardez le temps nécessaire pour rejoindre la gare et prévoyez une marge pour retrouver le quai ; ne basez pas le retour sur une arrivée à la dernière minute."
+            ]
+          },
+          {
+            "id": "budget-reservations",
+            "title": "Préparer le budget sans empiler les réservations",
+            "paragraphs": [
+              "Additionnez quatre postes : trajet aller-retour, titre ou support éventuel, repas et entrée du monument retenu. Ajoutez une réserve adaptée à vos besoins si vous prévoyez un autre moyen de rejoindre la gare. Aucun total universel n’est donné : il dépend de votre point de départ, de vos réductions et des visites ouvertes au moment du séjour.",
+              "Comparez un billet simple à un billet combiné uniquement après avoir choisi les lieux que vous aurez réellement le temps de visiter. La promenade dans les rues et places peut rester l’essentiel de la journée. Pour une excursion depuis Porto, il n’est pas nécessaire de réserver une nuit à Guimarães ; dormir sur place est un choix de séjour distinct, pas une condition de ce parcours."
+            ],
+            "bullets": [
+              "Avant le départ : vérifier horaires aller-retour, jour de circulation et éventuels avis CP.",
+              "Avant de payer une visite : relire la page officielle des travaux, des accès et des tarifs.",
+              "Dans le sac : informations hors ligne, eau et vêtements adaptés aux prévisions du jour.",
+              "Au retour : intégrer la marche jusqu’à la gare et la validation du billet dans la marge prévue."
+            ]
+          }
+        ],
+        "faq": [
+          {
+            "question": "Peut-on découvrir Guimarães sans louer de voiture ?",
+            "answer": "Oui, ce parcours repose sur une arrivée en train puis la visite du centre à pied. CP situe la gare à environ vingt minutes de marche du centre. Cette estimation ne garantit pas l’accessibilité de l’ensemble du parcours : vérifiez les besoins de transport et les accès qui vous concernent."
+          },
+          {
+            "question": "Faut-il visiter Guimarães et Braga le même jour ?",
+            "answer": "Ce guide propose de consacrer la journée à Guimarães. Réunir deux villes ajoute des transferts et réduit le temps disponible sur place. Si vous souhaitez les combiner, vérifiez d’abord les liaisons correspondant à votre date et réduisez nettement le nombre de visites."
+          },
+          {
+            "question": "Le billet du château donne-t-il accès au donjon ?",
+            "answer": "Ne le supposez pas : lors du contrôle du 27 septembre 2026, le site officiel indiquait le donjon fermé. Consultez l’état des accès avant d’acheter. La réouverture annoncée du chemin de ronde ne vaut pas réouverture du donjon."
+          },
+          {
+            "question": "Faut-il réserver plusieurs visites pour remplir la journée ?",
+            "answer": "Non. L’itinéraire associe places, rue de Santa Maria et extérieurs des monuments à une visite intérieure prioritaire. Couros reste une option selon le temps disponible. Choisissez votre programme avant de comparer les billets combinés."
+          }
+        ],
+        "sources": [
+          {
+            "label": "CP — ligne urbaine de Guimarães : horaires et jours de circulation (PDF)",
+            "url": "https://www.cp.pt/info/documents/d/cp/comboios-urbanos-porto-guimaraes"
+          },
+          {
+            "label": "CP — Guimarães et accès depuis la gare",
+            "url": "https://www.cp.pt/info/en/w/guimaraes-cradle-portugal"
+          },
+          {
+            "label": "CP — billets occasionnels des trains urbains de Porto",
+            "url": "https://www.cp.pt/info/en/w/occasional-journeys"
+          },
+          {
+            "label": "Turismo de Portugal — découverte de Guimarães",
+            "url": "https://www.visitportugal.com/en/content/guimaraes"
+          },
+          {
+            "label": "Turismo de Guimarães — rua de Santa Maria",
+            "url": "https://www.visitguimaraes.travel/descobrir/lugares-imperdiveis/geo_artigo/rua-de-santa-maria"
+          },
+          {
+            "label": "Paço dos Duques — horaires, tarifs et restrictions d’accès",
+            "url": "https://pacodosduques.gov.pt/planear-visita/bilhetica-horarios/"
+          },
+          {
+            "label": "Paço dos Duques — réouverture du chemin de ronde et donjon fermé",
+            "url": "https://pacodosduques.gov.pt/reabertura-do-adarve/"
+          },
+          {
+            "label": "UNESCO — centre historique de Guimarães et zone du Couros",
+            "url": "https://whc.unesco.org/fr/list/1031/"
+          }
+        ],
+        "related": [
+          "porto-3-jours-sans-voiture",
+          "lisbonne-porto-train",
+          "aeroport-porto-centre-ville"
+        ]
+      },
+      "releaseAt": "2026-10-25T08:00:00Z",
+      "validUntil": "2026-10-26T23:00:00Z",
+      "approval": {
+        "approvedAt": "2026-09-27T17:37:13Z",
+        "sha256": "ec10ff29f8172dba1ccb8dc87a622407cc5f5455eb0530d60c5d60f74cac4bd0"
+      }
     }
   ],
   "promotions": []
