@@ -4,19 +4,24 @@ ROOT=pathlib.Path(__file__).parent
 ORIGIN='https://voyagesansdetour.fr'
 # Sensible à la casse : « quelques jours ailleurs » reste une expression courante, pas l'ancien nom.
 OLD_NAMES=re.compile(r'Jours Ailleurs|JOURS AILLEURS|lesjoursailleurs|les-jours-ailleurs|chatgpt\.site')
-TEXT_SUFFIXES={'.html','.xml','.txt','.css','.js','.vtt'}
+TEXT_SUFFIXES={'.html','.xml','.txt','.css','.js','.mjs','.vtt'}
 LINK=re.compile(r'(?:href|src)="(/[^"#?]*)')
 MENTIONS={
     'editeur':{'nom':'Camille Exemple & Fils','statut':'SAS au capital de 1 000 €','immatriculation':'RCS Toulouse 123 456 789','adresse':'1 rue de l’Exemple, 31000 Toulouse','telephone':'05 00 00 00 00','email':'contact@voyagesansdetour.fr','directeur_publication':'Camille Exemple'},
     'hebergeur':{'nom':'GitHub, Inc.','adresse':'88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis','telephone':'+1 000 000 0000','site':'https://github.com','confidentialite':'https://docs.github.com/fr/site-policy/privacy-policies/github-general-privacy-statement'},
 }
 
-def build(workdir,public,mentions,out=None):
+def build(workdir,public,mentions,out=None,analytics=None):
     mentions_file=workdir/'mentions.json'
     if mentions is not None:mentions_file.write_text(json.dumps(mentions,ensure_ascii=False))
     out=out or workdir/('public' if public else 'dist')
     if not public and not out.exists():shutil.copytree(ROOT/'dist',out)
     env=dict(os.environ,SITE_OUT=str(out),SITE_ORIGIN=ORIGIN,SITE_MENTIONS=str(mentions_file),LJA_PUBLIC='1' if public else '0')
+    env.pop('SITE_ANALYTICS',None)
+    if analytics is not None:
+        analytics_file=workdir/'analytics-test.json'
+        analytics_file.write_text(json.dumps(analytics))
+        env['SITE_ANALYTICS']=str(analytics_file)
     result=subprocess.run([sys.executable,str(ROOT/'generate.py')],env=env,capture_output=True,text=True)
     return result,out
 
@@ -183,6 +188,35 @@ class PreviewBuildTest(TempDirTest):
         result,out=build(self.workdir,False,None)
         self.assertEqual(result.returncode,0,result.stderr)
         self.assertIn('avant le lancement public',read(out,'/mentions-legales/'))
+
+class AnalyticsBuildTest(TempDirTest):
+    def settings(self,verified):
+        return {'measurement_id':'G-9EB7Q36YYM','enabled':True,
+                'provider_settings_verified':verified,'provider_settings_verified_at':'2026-09-27' if verified else None}
+
+    def test_provider_settings_are_required_and_preview_stays_untracked(self):
+        for public,verified in ((True,False),(False,True)):
+            result,out=build(self.workdir,public,MENTIONS,analytics=self.settings(verified))
+            self.assertEqual(result.returncode,0,result.stderr)
+            self.assertNotIn('data-vsd-analytics',read(out,'/'))
+
+    def test_active_public_pages_only_load_local_consent_code(self):
+        result,out=build(self.workdir,True,MENTIONS,analytics=self.settings(True))
+        self.assertEqual(result.returncode,0,result.stderr)
+        for page in out.rglob('index.html'):
+            body=page.read_text()
+            self.assertIn('src="/analytics.mjs" data-vsd-analytics data-enabled="true"',body)
+            self.assertIn('data-audience-refuse>Tout refuser</button>',body)
+            self.assertIn('data-audience-accept>Accepter la mesure d’audience</button>',body)
+            self.assertIn('data-audience-settings',body)
+            self.assertNotRegex(body,r'<(?:script|link)[^>]+(?:src|href)="https://(?:www\.)?(?:google|googletagmanager)')
+            self.assertNotRegex(body,r'rel="(?:preconnect|dns-prefetch|prefetch)"')
+        self.assertNotIn('data-vsd-analytics',(out/'404.html').read_text())
+        self.assertTrue((out/'analytics.mjs').is_file())
+        privacy=read(out,'/confidentialite/')
+        self.assertIn('180 jours',privacy)
+        self.assertIn('retirer votre accord',privacy)
+        self.assertNotIn('n’utilise aucun cookie',privacy)
 
 if __name__=='__main__':
     unittest.main()

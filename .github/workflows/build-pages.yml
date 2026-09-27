@@ -34,6 +34,8 @@ jobs:
           python-version: '3.12'
       - name: Validate site
         run: python -m unittest -q test_site
+      - name: Validate analytics consent without external calls
+        run: node --test test_analytics.mjs
       - name: Build public artifact
         env:
           LJA_PUBLIC: '1'
