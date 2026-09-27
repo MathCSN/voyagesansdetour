@@ -4,6 +4,7 @@ on:
   schedule:
     - cron: '13,43 * * * *'
     - cron: '23 6,7,8 * * *'
+    - cron: '53 8 * * 1'
   workflow_dispatch:
     inputs:
       kind:
@@ -11,7 +12,7 @@ on:
         required: true
         default: health
         type: choice
-        options: [health, metrics, publications]
+        options: [health, metrics, publications, stock]
 permissions: {}
 concurrency:
   group: vsd-cloud-control
@@ -21,7 +22,14 @@ jobs:
     if: github.repository == 'MathCSN/voyagesansdetour' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     timeout-minutes: 3
+    permissions:
+      contents: read
     steps:
+      - name: Read the approved media batch for stock imports only
+        if: inputs.kind == 'stock' || github.event.schedule == '53 8 * * 1'
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - name: Invoke signed private server task once
         env:
           VSD_CLOUD_ORIGIN: https://voyage-sans-detour-admin.cousinmathis31.chatgpt.site
@@ -29,12 +37,13 @@ jobs:
           VSD_CLOUD_KEY: ${{ secrets.VSD_CLOUD_KEY }}
           VSD_SITES_DISPATCH_TOKEN: ${{ secrets.VSD_SITES_DISPATCH_TOKEN }}
           # Route by the triggering cron, including when GitHub delays execution.
-          VSD_TICK_KIND: ${{ inputs.kind || (github.event.schedule == '23 6,7,8 * * *' && 'metrics' || 'publications') }}
+          VSD_TICK_KIND: ${{ inputs.kind || (github.event.schedule == '53 8 * * 1' && 'stock' || github.event.schedule == '23 6,7,8 * * *' && 'metrics' || 'publications') }}
         shell: bash
         run: |
           node --input-type=module <<'NODE'
           // Intended for the standard GitHub-hosted runner. Never print credentials or raw responses.
           import { createHash, createHmac, randomUUID } from 'node:crypto';
+          import { readFile, lstat } from 'node:fs/promises';
           
           try {
             if (Date.now() > Date.parse('2027-09-14T23:59:59+02:00')) {
@@ -48,8 +57,19 @@ jobs:
             const kind = process.env.VSD_TICK_KIND || 'health';
             if (origin !== 'https://voyage-sans-detour-admin.cousinmathis31.chatgpt.site' ||
                 id !== 'appgprj_6ab8ae0785988191a26f73b4a4e6c687' || !/^[A-Za-z0-9_-]{43}$/.test(key ?? '') ||
-                !dispatcher || !['health','metrics','publications'].includes(kind)) throw Error('configuration');
-            const path = '/internal/tick', body = JSON.stringify({kind}), sent = String(Date.now()), nonce = randomUUID();
+                !dispatcher || !['health','metrics','publications','stock'].includes(kind)) throw Error('configuration');
+            const wireKind=kind==='stock'?'publications':kind;
+            let payload={kind:wireKind};
+            if(kind==='stock') {
+              const batchFile='.github/vsd-production/reviewed-social/current-instagram.json';
+              const stat=await lstat(batchFile);
+              if(!stat.isFile() || stat.isSymbolicLink() || stat.size>131072)throw Error('invalid_batch');
+              const batch=JSON.parse(await readFile(batchFile,'utf8'));
+              if(batch.schemaVersion!==1 || batch.items?.length!==1 || batch.items[0]?.payload?.channel!=='instagram')throw Error('invalid_batch');
+              payload={kind:wireKind,action:'import_stock',batch};
+            }
+            const path = '/internal/tick', body = JSON.stringify(payload), sent = String(Date.now()), nonce = randomUUID();
+            if(Buffer.byteLength(body)>133120)throw Error('invalid_batch');
             const digest = createHash('sha256').update(body).digest('hex');
             const canonical = ['vsd-cloud-v1',id,origin,'POST',path,sent,nonce,digest].join('\n');
             const signature = createHmac('sha256',Buffer.from(key,'base64url')).update(canonical).digest('hex');
@@ -62,8 +82,9 @@ jobs:
             const data=JSON.parse(text);
             // A finished metrics tick confirms execution, not the presence or success of every provider report.
             const allowed={health:['healthy'],metrics:['disabled','finished'],
+              stock:['stock_imported','stock_existing','busy'],
               publications:['disabled','idle','busy_or_recent','dispatched','reconciled','recovered']}[kind];
-            if(!allowed || data.kind!==kind || !allowed.includes(data.status))throw Error('task_attention_required');
+            if(!allowed || data.kind!==wireKind || !allowed.includes(data.status))throw Error('task_attention_required');
             console.log('Cloud receipt: '+kind+' / '+data.status+'.');
           } catch {
             console.error('Cloud task not confirmed. Check the private service; no automatic retry was made.');

@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 1,
+  "batchId": "instagram-porto-aeroport-2026-10-11-v1",
+  "items": [
+    {
+      "contentId": "vsd-production:instagram:porto-aeroport-trois-reflexes-2026-09:ig96-v1",
+      "deduplicationKey": "vsd-production:instagram:porto-aeroport-trois-reflexes-2026-09:ig96-v1",
+      "title": "Porto : 3 réflexes avant de quitter l’aéroport",
+      "dueAt": "2026-10-11T16:00:00Z",
+      "payload": {
+        "schemaVersion": 1,
+        "channel": "instagram",
+        "kind": "reel",
+        "text": "🧳 Vous arrivez à Porto ? Gardez ces 3 réflexes avant de quitter l’aéroport.\n\n📍 Préparez le trajet jusqu’à votre adresse.\n🎫 Une carte Andante Azul par personne qui voyage en même temps.\n✅ Validez au départ et à chaque changement de ligne ou de transport.\n\n🌙 Arrivée tardive ? Vérifiez aussi la dernière correspondance et gardez un plan B.\n\nLe guide et ses sources : https://voyagesansdetour.fr/portugal/aeroport-porto-centre-ville/\nSources contrôlées le 2026-09-27. Consultez les horaires et alertes pour votre date.\n\nTexte et montage assistés par IA. Propositions documentées, sans récit de trajet vécu. Aucun personnage virtuel ni voix de synthèse dans cette vidéo.\n\nMusique : « Almost Bliss » — Kevin MacLeod.\nhttps://incompetech.com/music/royalty-free/index.html?isrc=USUAN1900015\nLicence CC BY 4.0 : https://creativecommons.org/licenses/by/4.0/\nModifications : extrait, niveau ajusté, fondus d’entrée et de sortie, synchronisation au montage. Aucune approbation de l’auteur n’est revendiquée.\n\n#VoyageSansDetour #Porto #Portugal #VoyageSansVoiture\n",
+        "aiGenerated": false,
+        "assets": [
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/porto-aeroport-trois-reflexes-2026-09/reel.mp4",
+            "sha256": "88f0a5f97d4db07aca87c706b47d92b56122269f376d8a2f6a58c8b6f59a1990",
+            "mimeType": "video/mp4"
+          }
+        ]
+      },
+      "review": {
+        "schemaVersion": 1,
+        "contentId": "vsd-production:instagram:porto-aeroport-trois-reflexes-2026-09:ig96-v1",
+        "approved": true,
+        "reviewedAt": "2026-09-27T18:33:06.081Z",
+        "validUntil": "2026-10-12T00:00:00Z",
+        "payloadRevision": "c6da2d76c4385afc33819388239ee49591c650de813742233091929d1a0b2909",
+        "checks": {
+          "editorialApproved": true,
+          "rightsApproved": true,
+          "creditsPreserved": true,
+          "sources": {
+            "status": "verified",
+            "observedAt": "2026-09-27T18:25:17.615Z",
+            "validUntil": "2026-10-12T00:00:00Z"
+          },
+          "requiresPaidCall": false,
+          "syntheticPerson": false,
+          "disclosurePreserved": true,
+          "providerSyntheticSettingVerified": false,
+          "formatRequirementsVerified": true
+        },
+        "media": {
+          "url": "https://voyagesansdetour.fr/social-media/production/porto-aeroport-trois-reflexes-2026-09/reel.mp4",
+          "sha256": "88f0a5f97d4db07aca87c706b47d92b56122269f376d8a2f6a58c8b6f59a1990",
+          "mimeType": "video/mp4",
+          "required": true,
+          "status": "verified",
+          "observedAt": "2026-09-27T18:32:32.262Z",
+          "validUntil": "2026-10-12T00:00:00Z"
+        },
+        "destination": {
+          "url": "https://voyagesansdetour.fr/portugal/aeroport-porto-centre-ville/",
+          "status": "verified",
+          "observedAt": "2026-09-27T18:32:32.262Z",
+          "validUntil": "2026-10-12T00:00:00Z"
+        },
+        "monetization": {
+          "containsAffiliateLinks": false,
+          "partnerApproved": false,
+          "linksVerified": false,
+          "disclosurePreserved": false
+        },
+        "formatCapability": {
+          "status": "verified",
+          "observedAt": "2026-09-27T18:25:17.615Z",
+          "validUntil": "2026-10-12T00:00:00Z",
+          "automaticPublishing": true,
+          "verificationMethod": "official_documentation",
+          "sourceUrls": [
+            "https://support.buffer.com/en-us/articles/sharing-videos-through-buffer-LOe2p2rnAI",
+            "https://developers.buffer.com/types/InstagramPostMetadataInput.html",
+            "https://developers.buffer.com/guides/posts-and-scheduling.html"
+          ]
+        },
+        "evidence": {
+          "status": "reviewed_candidate_public_bytes_verified_not_imported",
+          "sourceCloudRun": "https://github.com/MathCSN/voyagesansdetour/actions/runs/36338869302",
+          "sourceCloudArtifactCommit": "916a71170ea65cc8534f32948053e7dfa89daace",
+          "sourceCloudVideoSha256": "2b923d341aa548c109720c765dc1fda992a0d38c137b748a811e064f2a9595b4",
+          "finalMediaProducedInCloud": false,
+          "derivativeMethod": "Local AAC 96 kb/s conversion only; original H.264 packets unchanged.",
+          "deliveryVideoPacketSha256": "71f24b6bdcfdf7f2ab3d63a2a7b0c6f9db7f2742b34c7072ded476c93f94ddec",
+          "audioBitrateBps": 97085,
+          "bytes": 908712,
+          "width": 1080,
+          "height": 1920,
+          "fps": 30,
+          "durationSeconds": 28.01,
+          "captionSha256": "9004be199e157cae94fc4ac25cff04d97701abc7b99202c36b3c510d8ae44b4d",
+          "captionCharacters": 1056,
+          "syntheticMediaRationale": "Original text/vector composition and licensed recording; no synthetic person, simulated scene or synthetic voice. AI assistance disclosed visibly and in caption.",
+          "rights": "Original graphics; DM Sans / Playfair Display OFL notices; Almost Bliss by Kevin MacLeod, CC BY 4.0, attribution and modifications retained in caption and public credits.",
+          "sourceCheckedOn": "2026-09-27",
+          "sourceReviewExpiry": "2026-10-27T00:00:00Z",
+          "sourceUrls": [
+            "https://www.metrodoporto.pt/",
+            "https://www.metrodoporto.pt/pages/337",
+            "https://andante.pt/perguntas-frequentes/"
+          ],
+          "schedule": {
+            "precedingItem": "vsd-social-pilot-2-weeks-v1:instagram:reel-02-lisbonne-3-jours",
+            "precedingDueAt": "2026-10-04T16:00:00Z",
+            "plannedGapHours": 168,
+            "note": "Existing scheduler must still apply actual 168-hour cadence, provider availability and review expiry. An intended slot is not a Buffer reservation."
+          },
+          "independentReview": {
+            "reviewedAt": "2026-09-27T18:23:19.330727Z",
+            "mediaSha256": "88f0a5f97d4db07aca87c706b47d92b56122269f376d8a2f6a58c8b6f59a1990",
+            "captionSha256": "9004be199e157cae94fc4ac25cff04d97701abc7b99202c36b3c510d8ae44b4d"
+          },
+          "publicHosting": {
+            "observedAt": "2026-09-27T18:32:32.262Z",
+            "sha256": "88f0a5f97d4db07aca87c706b47d92b56122269f376d8a2f6a58c8b6f59a1990",
+            "bytes": 908712,
+            "destinationSha256": "7af2a04b57c683ac1594320ae9aee8a88757e8aeab3d1f6964b44de0f3431104"
+          }
+        }
+      }
+    }
+  ]
+}
