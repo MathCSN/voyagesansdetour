@@ -1,5 +1,129 @@
 {
   "schemaVersion": 1,
-  "drafts": [],
+  "drafts": [
+    {
+      "id": "portugal-bagages-2026-10-11",
+      "article": {
+        "slug": "portugal-sans-voiture-bagages",
+        "title": "Portugal sans voiture : préparer un bagage facile à transporter",
+        "shortTitle": "Voyager avec ses bagages",
+        "destination": "Portugal",
+        "category": "Conseils pratiques",
+        "description": "Sac ou valise, rangement dans le train, consigne et départ matinal : préparer ses bagages pour voyager entre Lisbonne et Porto sans voiture.",
+        "readMinutes": 6,
+        "summary": "Pour un séjour sans voiture, choisissez un bagage que vous pouvez déplacer sans aide et organisez-le pour garder billets et affaires du trajet accessibles. Préparez aussi les moments sans chambre : arrivée avant l’accueil, excursion et journée du départ. Ces conseils concernent surtout Lisbonne, Porto et les trajets ferroviaires entre les deux villes.",
+        "sourcesCheckedOn": "2026-09-27",
+        "sections": [
+          {
+            "id": "choisir-bagage",
+            "title": "Sac ou valise : faites le test une fois le bagage rempli",
+            "paragraphs": [
+              "Le bon choix dépend de votre façon de porter, du logement et des changements de transport. Une valise à roulettes peut convenir si vous limitez la marche avec vos affaires. Un sac laisse les mains plus libres, mais fait porter toute la charge au corps. Aucun format ne dispense de préparer l’arrivée.",
+              "Avant de partir, remplissez le bagage et reproduisez quelques gestes : le soulever, passer une porte, sortir votre billet et marcher avec votre manteau. Si chaque opération demande de poser plusieurs sacs, regroupez les affaires. Ne forcez pas pour réussir ce test : réduisez la charge ou organisez une aide adaptée à vos besoins.",
+              "Gardez si possible un peu de place disponible au départ. Un sac fermé sans effort est plus simple à rouvrir en cours de route qu’un bagage rempli au maximum. Un petit sac de journée pliable évite aussi d’emporter toutes vos affaires à chaque promenade."
+            ]
+          },
+          {
+            "id": "verifier-parcours",
+            "title": "Regardez le dernier trajet jusqu’à la porte du logement",
+            "paragraphs": [
+              "Avant de réserver, examinez le parcours entre l’arrêt d’arrivée et l’entrée réelle de l’hébergement. Demandez s’il existe des marches, à quel étage se trouve la chambre et si l’ascenseur dessert cet étage. Une mention « proche du métro » ne répond pas à ces questions. Notre guide des quartiers de Lisbonne aide à choisir une base ; complétez-le avec les indications précises de l’hébergement.",
+              "Le métro de Lisbonne publie un plan d’accessibilité. À Porto, l’exploitant décrit des quais au niveau des véhicules et des accès par ascenseur aux quais souterrains. Ces informations de conception ne garantissent pas le fonctionnement d’un équipement le jour du voyage : si votre trajet en dépend, demandez confirmation à l’exploitant et prévoyez une solution de remplacement.",
+              "Comparez deux parcours en comptant les manipulations, pas seulement les minutes : changements de ligne, sorties de station et marche finale. Un itinéraire avec moins de correspondances peut mériter un détour. Pour une arrivée à Porto, utilisez le guide aéroport–centre-ville pour préparer cette première étape."
+            ]
+          },
+          {
+            "id": "ranger-affaires",
+            "title": "Rangez pour le trajet, puis pour le séjour",
+            "paragraphs": [
+              "Commencez par les affaires dont vous aurez besoin entre le départ et la chambre. Elles doivent rester accessibles sans étaler le contenu de la valise sur un quai. Le reste peut être rangé par usage : vêtements, toilette et affaires de nuit. Des pochettes déjà disponibles chez vous suffisent ; ce système ne nécessite aucun équipement particulier."
+            ],
+            "bullets": [
+              "À portée de main : titre de transport, pièce d’identité, adresse exacte et instructions d’arrivée. Gardez une copie hors ligne des informations utiles, sans supposer qu’elle remplace le billet demandé par l’opérateur.",
+              "Pour le trajet : eau, chargeur, petite collation et vêtement facile à ajouter ou retirer. Séparez les affaires humides du linge propre.",
+              "Pour marcher : privilégiez les chaussures que vous connaissez déjà. Choisissez des vêtements qui se combinent et ajustez la sélection à la météo annoncée avant le départ.",
+              "Pour la chambre : placez les affaires du premier soir ensemble. Vous éviterez de vider tout le bagage si vous arrivez tard."
+            ]
+          },
+          {
+            "id": "train-metro",
+            "title": "Dans le train et le métro, gardez le passage libre",
+            "paragraphs": [
+              "Pour les services nationaux concernés, CP prévoit un bagage à main gratuit, compatible avec l’espace de rangement autorisé, sans gêner les autres voyageurs. Les petits effets personnels sont traités séparément ; des bagages supplémentaires peuvent entraîner un supplément en Alfa Pendular et Intercidades. Consultez la règle officielle avant d’ajouter une grosse valise : ne transposez pas au train les conditions de votre billet d’avion.",
+              "Rangez votre bagage dans l’espace prévu sans bloquer une porte ou une allée, et gardez vos affaires utiles avec vous. CP laisse la responsabilité des bagages à leur propriétaire. Dans le métro de Lisbonne, l’exploitant demande notamment de retirer son sac du dos et de libérer les passages. Préparez votre descente sans encombrer les portes trop tôt.",
+              "Le guide Lisbonne–Porto en train complète ces conseils pour le choix des gares. Évitez d’organiser une visite chargée de bagages pendant une correspondance : choisissez d’abord un dépôt confirmé ou gardez ce moment pour le transfert."
+            ]
+          },
+          {
+            "id": "sans-chambre",
+            "title": "Préparez les heures où vous n’avez pas de chambre",
+            "paragraphs": [
+              "L’arrivée matinale et le départ en soirée demandent une solution distincte de la réservation du logement. Demandez si l’hébergement accepte de garder vos affaires avant l’entrée ou après la sortie, à quelles conditions et jusqu’à quelle heure. Conservez sa réponse ; ce service n’est pas automatique.",
+              "CP recense des consignes automatiques dans certaines gares, dont Lisboa Oriente, Porto Campanhã et Porto São Bento. Leur accès dépend des heures d’ouverture de la gare. Cette liste ne prouve ni qu’un casier sera libre ni qu’il conviendra à votre bagage. Consultez les conditions du service et gardez une autre option avant de bâtir votre journée autour d’une consigne.",
+              "Pour une excursion depuis une même base, laissez le bagage principal au logement lorsque cela a été convenu. À Sintra, partez avec les seules affaires de la journée. Les itinéraires de Lisbonne et Porto se prêtent aussi à cette organisation : déposez d’abord vos affaires, puis commencez la promenade."
+            ]
+          },
+          {
+            "id": "veille-depart",
+            "title": "La veille du départ, préparez ce qui évite de refaire le sac",
+            "paragraphs": [
+              "Sortez la tenue du lendemain, préparez le titre de transport et rassemblez les objets en charge. Vérifiez le nom exact de la gare ou de l’arrêt, le service prévu et la façon de quitter l’hébergement. Si vous déposez une clé ou rendez un badge, faites-le après avoir récupéré toutes vos affaires.",
+              "Gardez un emplacement accessible pour la trousse utilisée le matin. Avant de fermer, regardez les prises, la salle de bain et les rangements. Prévoyez votre départ en intégrant la récupération éventuelle des bagages : l’heure de sortie du logement et celle du transport ne sont pas les seules étapes."
+            ]
+          }
+        ],
+        "faq": [
+          {
+            "question": "Une valise à roulettes convient-elle pour Lisbonne et Porto ?",
+            "answer": "Oui, si vous pouvez la manipuler et avez préparé le trajet jusqu’au logement. Regardez les marches, les accès aux stations et la marche finale avant de choisir le format. Un sac à dos n’est pas automatiquement plus confortable."
+          },
+          {
+            "question": "Peut-on compter sur une consigne dans toutes les gares ?",
+            "answer": "Non. Consultez la liste officielle et les conditions du lieu retenu. Prévoyez une alternative : la présence d’une consigne ne garantit pas une place disponible au moment de votre arrivée."
+          },
+          {
+            "question": "Faut-il acheter un bagage spécial pour voyager sans voiture ?",
+            "answer": "Commencez par tester celui que vous possédez, rempli comme au départ. Réduire le contenu et les changements de transport peut suffire. Vérifiez ensuite les règles de chaque transporteur utilisé, notamment si le voyage comprend aussi un vol."
+          }
+        ],
+        "sources": [
+          {
+            "label": "CP — conditions de transport des bagages",
+            "url": "https://www.cp.pt/info/en/w/luggage"
+          },
+          {
+            "label": "Métro de Lisbonne — bagages et circulation à bord",
+            "url": "https://www.metrolisboa.pt/en/better-manners-better-rides/"
+          },
+          {
+            "label": "Métro de Lisbonne — plans du réseau et d’accessibilité",
+            "url": "https://www.metrolisboa.pt/en/travel/diagrams-and-maps/"
+          },
+          {
+            "label": "Metro do Porto — accessibilité des stations et véhicules",
+            "url": "https://www.metrodoporto.pt/pages/316"
+          },
+          {
+            "label": "CP — consignes dans les gares",
+            "url": "https://www.cp.pt/info/en/w/left-luggage"
+          }
+        ],
+        "related": [
+          "lisbonne-porto-train",
+          "ou-dormir-lisbonne-quartiers",
+          "aeroport-porto-centre-ville",
+          "lisbonne-3-jours-sans-voiture",
+          "porto-3-jours-sans-voiture",
+          "sintra-depuis-lisbonne"
+        ]
+      },
+      "releaseAt": "2026-10-11T07:00:00Z",
+      "validUntil": "2026-11-11T00:00:00+01:00",
+      "approval": {
+        "approvedAt": "2026-09-27T09:53:17Z",
+        "sha256": "cb4352c731b0c9dc7fa74497cb56894f76d4a04d6aa61e494b59389480427f05"
+      }
+    }
+  ],
   "promotions": []
 }
