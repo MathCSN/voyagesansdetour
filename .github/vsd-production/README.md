@@ -15,7 +15,7 @@ python3 production.py --validate
 python3 production.py
 ```
 
-Python 3.12 est choisi pour le cloud ; le moteur fonctionne aussi avec Python 3.9 local. Pillow est fixé à 11.3.0. FFmpeg et FFprobe doivent être disponibles dans le PATH, avec libx264 et AAC. Le workflow utilise les binaires du runner Ubuntu 24.04 et consigne leur version réelle ; il ne prétend pas figer l’image GitHub. Le rendu local de qualification conserve ses versions propres dans `receipt.json`.
+Python 3.12 est choisi pour le cloud ; le moteur fonctionne aussi avec Python 3.9 local. Pillow est fixé à 11.3.0. FFmpeg et FFprobe doivent être disponibles dans le PATH, avec libx264 et AAC. Le premier essai cloud a montré leur absence sur le runner Ubuntu 24.04 : le workflow installe donc conditionnellement le paquet gratuit `ffmpeg` depuis les dépôts Ubuntu. Il consigne la version réellement utilisée, sans prétendre figer l’image GitHub ou cette version du système. Aucun service de génération payant n’est utilisé. Le rendu local de qualification conserve ses versions propres dans `receipt.json`.
 
 Le résultat est écrit dans `output/<identifiant>/` : `reel.mp4`, six scènes JPEG, affiche, planche, légende complète, licences et reçu. Une relance identique vérifie les empreintes puis reste inactive. Le remplacement d’un scénario sous un identifiant déjà produit ou l’altération d’un rendu provoque un arrêt. Le dossier temporaire est déplacé seulement après encodage et décodage complet réussis. Les résultats terminés ne sont jamais écrasés.
 

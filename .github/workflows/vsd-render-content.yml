@@ -45,13 +45,17 @@ jobs:
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: '3.12'
-      - name: Confirm the free standard runner prerequisites
+      - name: Prepare the free standard runner prerequisites
         if: steps.period.outputs.active == 'true'
         run: |
           set -euo pipefail
+          if ! command -v ffmpeg >/dev/null || ! command -v ffprobe >/dev/null; then
+            sudo apt-get update -qq
+            sudo apt-get install --yes --no-install-recommends ffmpeg
+          fi
           command -v ffmpeg
           command -v ffprobe
-          ffmpeg -version | head -n 1
+          ffmpeg -version
           python -m pip install --disable-pip-version-check -r requirements.txt
       - name: Validate production guards
         if: steps.period.outputs.active == 'true'
