@@ -1,8 +1,8 @@
-# Cloud execution pilot: health only, no editorial generation or social publication.
+# Signed cloud control: reviewed social stock only. No content generation or paid calls.
 name: Voyage Sans Detour cloud control
 on:
   schedule:
-    - cron: '17 */6 * * *'
+    - cron: '13,43 * * * *'
   workflow_dispatch:
     inputs:
       kind:
@@ -27,7 +27,7 @@ jobs:
           VSD_SITE_ID: appgprj_6ab8ae0785988191a26f73b4a4e6c687
           VSD_CLOUD_KEY: ${{ secrets.VSD_CLOUD_KEY }}
           VSD_SITES_DISPATCH_TOKEN: ${{ secrets.VSD_SITES_DISPATCH_TOKEN }}
-          VSD_TICK_KIND: ${{ inputs.kind || 'health' }}
+          VSD_TICK_KIND: ${{ inputs.kind || 'publications' }}
         shell: bash
         run: |
           node --input-type=module <<'NODE'
