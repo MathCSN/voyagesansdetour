@@ -31,6 +31,37 @@
           "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
         }
       ]
+    },
+    {
+      "contentId": "lisbonne-quartiers-sans-voiture-2026-10",
+      "approved": true,
+      "files": [
+        {
+          "name": "reel.mp4",
+          "sha256": "d69033c03bddf65497c9d6a5d4ce1139f76a47aaa5eb3c26148c436a9af4f2b4",
+          "bytes": 870027
+        },
+        {
+          "name": "poster.jpg",
+          "sha256": "f25e83e3851f578db97729642138033a2c447e453c73b8fa762c1c9c2a74d569",
+          "bytes": 201557
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "c571dce7a61a6aa368d41cdd5212830e4514625beac10894d9398fe68e89f799",
+          "bytes": 1388
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
     }
   ]
 }
