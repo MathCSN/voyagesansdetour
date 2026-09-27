@@ -144,7 +144,7 @@ class EditorialQueueTest(unittest.TestCase):
     def test_live_generator_excludes_future_and_keeps_existing_pages_identical(self):
         # Copy only source and permitted assets, never the existing generated site.
         self.draft(release_at='2099-10-15T10:00:00Z', valid_until='2099-10-27T23:59:59Z')
-        for name in ('generate.py', 'editorial_queue.py', 'stay22.py', 'stay22.json', 'mentions.json',
+        for name in ('generate.py', 'public_media.py', 'public-media.json', 'editorial_queue.py', 'stay22.py', 'stay22.json', 'mentions.json',
                      'analytics.json', 'pinterest-rss.json', 'image-sources.json'):
             shutil.copyfile(ROOT / name, self.root / name)
         (self.root / 'dist').mkdir()

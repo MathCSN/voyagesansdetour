@@ -203,7 +203,7 @@ class DestinationImageBuildTest(unittest.TestCase):
         cls.addClassCleanup(shutil.rmtree,cls.workdir,True)
         source=cls.workdir/'source'
         source.mkdir()
-        for name in ('generate.py','editorial_queue.py','articles.json','image-sources.json',
+        for name in ('generate.py','public_media.py','public-media.json','editorial_queue.py','articles.json','image-sources.json',
                      'stay22.py','stay22.json','pinterest-rss.json','analytics.json'):
             shutil.copyfile(ROOT/name,source/name)
         # Only disposable copies receive synthetic articles; the live catalogue and
