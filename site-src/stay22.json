@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "enabled": false,
+  "hosting_verified": false,
+  "links_verified": true,
+  "aid": "voyagesansdetourfr",
+  "endpoint": "https://www.stay22.com/allez/booking",
+  "lang": "fr",
+  "currency": "EUR",
+  "roam": false,
+  "destinations": {
+    "lisbonne": {"url": "https://www.booking.com/city/pt/lisbon.fr.html", "campaign": "vsdlisbonne"},
+    "porto": {"url": "https://www.booking.com/city/pt/porto.fr.html", "campaign": "vsdporto"}
+  }
+}

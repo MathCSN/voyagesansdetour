@@ -33,7 +33,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Validate site
-        run: python -m unittest -q test_site
+        run: python -m unittest -q test_site test_stay22
       - name: Validate analytics consent without external calls
         run: node --test test_analytics.mjs
       - name: Build public artifact
