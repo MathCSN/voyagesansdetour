@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "contentId": "lisbonne-quartiers-sans-voiture-2026-10",
+  "contentAndFormatApproved": true,
+  "publicMediaApproved": true,
+  "publicationApproved": true,
+  "reviewedAt": "2026-09-27T19:50:07.974684Z",
+  "validUntil": "2026-10-19T00:00:00Z",
+  "receiptSha256": "f69fd0606d97fb19c0bd620bd1c4ccf80bf8cbd5c0cc9b0fb4c210a20fa80662",
+  "mediaSha256": "d69033c03bddf65497c9d6a5d4ce1139f76a47aaa5eb3c26148c436a9af4f2b4",
+  "captionSha256": "6c8104321352055548bd452bd383905dd356cdf66a391e28dd9776bedcaac9e0",
+  "scenarioSha256": "0d505aad0cca255334a99908ab737329f4b5d0d4f2d1e47f254262e2c9748194",
+  "cloudProofSha256": "06bafd33701cb3061cc859b66843423a48eb49c03f79882fbe0910161238026e",
+  "checks": {
+    "editorialApproved": true,
+    "rightsApproved": true,
+    "creditsPreserved": true,
+    "disclosurePreserved": true,
+    "formatRequirementsVerified": true,
+    "requiresPaidCall": false
+  },
+  "sources": {
+    "status": "verified",
+    "observedAt": "2026-09-27T19:37:24.598307Z",
+    "validUntil": "2026-10-19T00:00:00Z"
+  },
+  "formatCapability": {
+    "status": "verified",
+    "observedAt": "2026-09-27T19:49:08Z",
+    "validUntil": "2026-10-19T00:00:00Z",
+    "automaticPublishing": true,
+    "verificationMethod": "official_documentation",
+    "sourceUrls": [
+      "https://support.buffer.com/en-us/articles/sharing-videos-through-buffer-LOe2p2rnAI",
+      "https://developers.buffer.com/types/InstagramPostMetadataInput.html",
+      "https://developers.buffer.com/guides/posts-and-scheduling.html"
+    ]
+  },
+  "publication": {
+    "batchId": "instagram-lisbonne-quartiers-2026-10-18-v1",
+    "dueAt": "2026-10-18T16:00:00Z",
+    "title": "Lisbonne : choisir son quartier sans voiture"
+  }
+}

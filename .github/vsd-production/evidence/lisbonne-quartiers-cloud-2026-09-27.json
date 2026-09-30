@@ -1,0 +1,164 @@
+{
+  "schemaVersion": 1,
+  "repository": "MathCSN/voyagesansdetour",
+  "verifiedAt": "2026-09-27T19:46:34.496809Z",
+  "run": {
+    "id": 36345441302,
+    "name": "Voyage Sans Detour reviewed media production",
+    "event": "workflow_dispatch",
+    "status": "completed",
+    "conclusion": "success",
+    "head_branch": "main",
+    "head_sha": "ae9b229748e3eaca04342f784dd6704c78a28873",
+    "html_url": "https://github.com/MathCSN/voyagesansdetour/actions/runs/36345441302",
+    "created_at": "2026-09-27T19:44:14Z",
+    "updated_at": "2026-09-27T19:45:12Z"
+  },
+  "artifactCommit": {
+    "sha": "9eb967376842e625e453144cbe5edb3e9a351806",
+    "parentSha": "ae9b229748e3eaca04342f784dd6704c78a28873",
+    "message": "Produce a reviewed media artifact with its receipt"
+  },
+  "artifactPath": ".github/vsd-production/output/lisbonne-quartiers-sans-voiture-2026-10/",
+  "receiptSha256": "f69fd0606d97fb19c0bd620bd1c4ccf80bf8cbd5c0cc9b0fb4c210a20fa80662",
+  "allFileHashesVerified": true,
+  "fileCountIncludingReceipt": 16,
+  "cloudReceipt": {
+    "schemaVersion": 1,
+    "contentId": "lisbonne-quartiers-sans-voiture-2026-10",
+    "status": "rendered_not_published",
+    "fingerprint": "8596f80f77c99c94e901627695b4a4bb190029c37b3c88cb03cd8c87e786a94e",
+    "createdAt": "2026-09-27T19:44:54.396416Z",
+    "renderFinishedAt": "2026-09-27T19:45:05.912700Z",
+    "rendererContractVersion": 2,
+    "rendererSha256": "cbdd917f87d303383e89b054192ba03922957b7cfcb0619b9b514ff1711e1a13",
+    "reviewValidUntil": "2026-10-19T00:00:00Z",
+    "sourceCheckedOn": "2026-09-27",
+    "targetUrl": "https://voyagesansdetour.fr/portugal/ou-dormir-lisbonne-quartiers/",
+    "format": "music_text",
+    "presenter": "none",
+    "voice": null,
+    "sourceUrls": [
+      "https://www.visitlisboa.com/en/places/alfama",
+      "https://www.visitlisboa.com/en/places/baixa-chiado"
+    ],
+    "video": {
+      "width": 1080,
+      "height": 1920,
+      "fps": 30,
+      "durationSeconds": 28.0,
+      "videoCodec": "h264",
+      "pixelFormat": "yuv420p",
+      "videoBitrateBps": 141964,
+      "audioCodec": "aac",
+      "audioSampleRate": 48000,
+      "audioBitrateBps": 97326,
+      "fullDecodePassed": true,
+      "loudness": {
+        "integratedLufs": -18.2,
+        "truePeakDbfs": -5.4
+      }
+    },
+    "files": [
+      {
+        "file": "apercu.jpg",
+        "sha256": "ae13433588e2cf8c853e41a02192ddb2698424798c7b0792887323c3f2bfed50",
+        "bytes": 247035
+      },
+      {
+        "file": "credits.txt",
+        "sha256": "c571dce7a61a6aa368d41cdd5212830e4514625beac10894d9398fe68e89f799",
+        "bytes": 1388
+      },
+      {
+        "file": "dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+        "bytes": 4482
+      },
+      {
+        "file": "encode.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      {
+        "file": "legende.txt",
+        "sha256": "6c8104321352055548bd452bd383905dd356cdf66a391e28dd9776bedcaac9e0",
+        "bytes": 1191
+      },
+      {
+        "file": "playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+        "bytes": 4449
+      },
+      {
+        "file": "poster.jpg",
+        "sha256": "f25e83e3851f578db97729642138033a2c447e453c73b8fa762c1c9c2a74d569",
+        "bytes": 201557
+      },
+      {
+        "file": "reel.mp4",
+        "sha256": "d69033c03bddf65497c9d6a5d4ce1139f76a47aaa5eb3c26148c436a9af4f2b4",
+        "bytes": 870027
+      },
+      {
+        "file": "scenario.json",
+        "sha256": "0d505aad0cca255334a99908ab737329f4b5d0d4f2d1e47f254262e2c9748194",
+        "bytes": 8348
+      },
+      {
+        "file": "scene-01.jpg",
+        "sha256": "e7b3adf97f7526d9b6d900eb007e25ce8b62c4ebdec8e34a0f0ace68092805bd",
+        "bytes": 171824
+      },
+      {
+        "file": "scene-02.jpg",
+        "sha256": "22c4e8372647420cce17e95a0a463fb76d84017ae575b37107854e9b55f3adae",
+        "bytes": 157930
+      },
+      {
+        "file": "scene-03.jpg",
+        "sha256": "a213d0cf664afb40cb9a8b8bf9bc60d8b2ace7ac04e47d6374d0a193d8eaad0c",
+        "bytes": 163488
+      },
+      {
+        "file": "scene-04.jpg",
+        "sha256": "07d35306e06b8b9a49946a64831947288f615881c8900ccd2e5676e07eae2349",
+        "bytes": 169089
+      },
+      {
+        "file": "scene-05.jpg",
+        "sha256": "d20a6f5e4880fb1a3f4a11bb8cb9be7efbdd0bee930ac1e40a3d7e40953739d4",
+        "bytes": 168039
+      },
+      {
+        "file": "scene-06.jpg",
+        "sha256": "ecf1058c28f78ff7e382d76494fda491f92e3c495179403e162d3ef8c1c516aa",
+        "bytes": 163359
+      }
+    ],
+    "runtime": {
+      "wallSeconds": 11.497,
+      "encoderThreads": 2,
+      "pillowVersion": "11.3.0",
+      "ffmpegVersion": "ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers"
+    },
+    "publication": {
+      "uploaded": false,
+      "scheduled": false,
+      "published": false,
+      "readyForAutomaticImport": false
+    },
+    "cost": {
+      "newPaidService": false,
+      "providerCalls": 0,
+      "monetarySpendEur": 0
+    },
+    "limitations": [
+      "No source refresh or editorial generation is performed by this job.",
+      "A rendered MP4 is not a final social payload review or publication.",
+      "Bit-identical encoding across different FFmpeg/Pillow builds is not promised; immutable inputs and exact output hashes are recorded."
+    ]
+  },
+  "finalMediaProducedInCloud": true,
+  "localTranscode": false
+}

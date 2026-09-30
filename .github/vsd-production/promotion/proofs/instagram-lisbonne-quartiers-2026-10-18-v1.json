@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "source": "bounded_live_http_get",
+  "observedAt": "2026-09-27T19:55:23.516385Z",
+  "files": [
+    {
+      "url": "https://voyagesansdetour.fr/social-media/production/lisbonne-quartiers-sans-voiture-2026-10/reel.mp4",
+      "finalUrl": "https://voyagesansdetour.fr/social-media/production/lisbonne-quartiers-sans-voiture-2026-10/reel.mp4",
+      "httpStatus": 200,
+      "mimeType": "video/mp4",
+      "bytes": 870027,
+      "sha256": "d69033c03bddf65497c9d6a5d4ce1139f76a47aaa5eb3c26148c436a9af4f2b4"
+    },
+    {
+      "url": "https://voyagesansdetour.fr/social-media/production/lisbonne-quartiers-sans-voiture-2026-10/poster.jpg",
+      "finalUrl": "https://voyagesansdetour.fr/social-media/production/lisbonne-quartiers-sans-voiture-2026-10/poster.jpg",
+      "httpStatus": 200,
+      "mimeType": "image/jpeg",
+      "bytes": 201557,
+      "sha256": "f25e83e3851f578db97729642138033a2c447e453c73b8fa762c1c9c2a74d569"
+    },
+    {
+      "url": "https://voyagesansdetour.fr/social-media/production/lisbonne-quartiers-sans-voiture-2026-10/credits.txt",
+      "finalUrl": "https://voyagesansdetour.fr/social-media/production/lisbonne-quartiers-sans-voiture-2026-10/credits.txt",
+      "httpStatus": 200,
+      "mimeType": "text/plain",
+      "bytes": 1388,
+      "sha256": "c571dce7a61a6aa368d41cdd5212830e4514625beac10894d9398fe68e89f799"
+    },
+    {
+      "url": "https://voyagesansdetour.fr/social-media/production/lisbonne-quartiers-sans-voiture-2026-10/dmsans-OFL.txt",
+      "finalUrl": "https://voyagesansdetour.fr/social-media/production/lisbonne-quartiers-sans-voiture-2026-10/dmsans-OFL.txt",
+      "httpStatus": 200,
+      "mimeType": "text/plain",
+      "bytes": 4482,
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+    },
+    {
+      "url": "https://voyagesansdetour.fr/social-media/production/lisbonne-quartiers-sans-voiture-2026-10/playfairdisplay-OFL.txt",
+      "finalUrl": "https://voyagesansdetour.fr/social-media/production/lisbonne-quartiers-sans-voiture-2026-10/playfairdisplay-OFL.txt",
+      "httpStatus": 200,
+      "mimeType": "text/plain",
+      "bytes": 4449,
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+    }
+  ],
+  "destination": {
+    "url": "https://voyagesansdetour.fr/portugal/ou-dormir-lisbonne-quartiers/",
+    "finalUrl": "https://voyagesansdetour.fr/portugal/ou-dormir-lisbonne-quartiers/",
+    "httpStatus": 200,
+    "mimeType": "text/html",
+    "bytes": 20799,
+    "sha256": "76d3d1e18fa6a4a9afd86956440c81b8fe8e157c3c8245ae51658e65c6dcdfdd",
+    "canonicalUrl": "https://voyagesansdetour.fr/portugal/ou-dormir-lisbonne-quartiers/"
+  }
+}

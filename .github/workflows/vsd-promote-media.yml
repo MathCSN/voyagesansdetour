@@ -1,0 +1,313 @@
+# Promote one independently reviewed cloud render. The existing editorial
+# workflow owns article releases; this workflow never calls editorial_queue.promote.
+name: Voyage Sans Detour reviewed media promotion
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '23 6 * * 1,3,5'
+
+permissions: {}
+concurrency:
+  # Shared with build-pages.yml so two Pages deployments cannot overlap.
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  stage:
+    # Public standard runners only. No private-repository paid fallback.
+    if: github.repository == 'MathCSN/voyagesansdetour' && github.ref == 'refs/heads/main' && github.event.repository.private == false && (github.event_name == 'workflow_dispatch' || vars.VSD_FREE_PROMOTION_SCHEDULE == 'true')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    outputs:
+      promotion_status: ${{ steps.commit.outputs.promotion_status || steps.prepare.outputs.status }}
+      requires_deployment: ${{ steps.commit.outputs.requires_deployment }}
+      content_id: ${{ steps.commit.outputs.content_id }}
+      batch_id: ${{ steps.commit.outputs.batch_id }}
+      guide_url: ${{ steps.commit.outputs.guide_url }}
+      source_sha: ${{ steps.commit.outputs.source_sha }}
+      site_tree: ${{ steps.commit.outputs.site_tree }}
+    steps:
+      - name: End the authorised follow-up before checkout
+        id: period
+        run: |
+          python3 - <<'PY'
+          import datetime as dt, os
+          end = dt.datetime(2027, 9, 14, 21, 59, 59, tzinfo=dt.timezone.utc)
+          active = dt.datetime.now(dt.timezone.utc) <= end
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+              output.write('active=' + str(active).lower() + '\n')
+          PY
+      - name: Checkout immutable approvals and cloud receipts
+        if: steps.period.outputs.active == 'true'
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Node.js 22
+        if: steps.period.outputs.active == 'true'
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '22'
+      - name: Validate and stage at most one due reviewed media bundle
+        if: steps.period.outputs.active == 'true'
+        id: prepare
+        run: |
+          set -euo pipefail
+          node .github/vsd-production/promotion-control.mjs stage --repository-root "$GITHUB_WORKSPACE" > "$RUNNER_TEMP/vsd-stage-report.json"
+          node --input-type=module <<'NODE'
+          import { readFileSync, appendFileSync } from 'node:fs';
+          const report = JSON.parse(readFileSync(process.env.RUNNER_TEMP + '/vsd-stage-report.json', 'utf8'));
+          if (!['idle', 'already_finalized', 'stage_ready', 'finalization_ready'].includes(report.status)) throw Error('stage_status_invalid');
+          appendFileSync(process.env.GITHUB_OUTPUT, 'status=' + report.status + '\n');
+          NODE
+      - name: Commit only the allowlisted staged files by non-force fast-forward
+        if: steps.prepare.outputs.status == 'stage_ready' || steps.prepare.outputs.status == 'finalization_ready'
+        id: commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          node .github/vsd-production/promotion-git.mjs commit \
+            --mode stage --repository-root "$GITHUB_WORKSPACE" \
+            --report "$RUNNER_TEMP/vsd-stage-report.json"
+
+  build:
+    needs: stage
+    if: needs.stage.outputs.requires_deployment == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    permissions:
+      contents: read
+    outputs:
+      context_sha256: ${{ steps.context.outputs.context_sha256 }}
+      site_tree: ${{ steps.context.outputs.site_tree }}
+    steps:
+      - name: Checkout the exact staged public-source commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ needs.stage.outputs.source_sha }}
+          persist-credentials: false
+      - name: Python 3.12
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.12'
+      - name: Node.js 22
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '22'
+      - name: Validate site, media catalogue and analytics consent
+        working-directory: site-src
+        run: |
+          set -euo pipefail
+          python -m unittest -q test_site test_stay22 test_editorial_queue test_public_media
+          node --test test_analytics.mjs
+      - name: Build the public site without releasing an article
+        working-directory: site-src
+        env:
+          LJA_PUBLIC: '1'
+          SITE_ORIGIN: https://voyagesansdetour.fr
+        run: python generate.py
+      - name: Freeze the exact site tree and built guide hash
+        id: context
+        run: |
+          set -euo pipefail
+          node .github/vsd-production/promotion-git.mjs build-context \
+            --repository-root "$GITHUB_WORKSPACE" \
+            --content-id "${{ needs.stage.outputs.content_id }}" \
+            --batch-id "${{ needs.stage.outputs.batch_id }}" \
+            --guide-url "${{ needs.stage.outputs.guide_url }}" \
+            --output "$RUNNER_TEMP/vsd-media-build-context.json"
+          test "${{ needs.stage.outputs.site_tree }}" = "$(git rev-parse HEAD:site-src)"
+      - name: Refuse a changed public source before packaging
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node .github/vsd-production/promotion-git.mjs guard --site-tree "${{ steps.context.outputs.site_tree }}"
+      - name: Transfer the immutable build context to the deployment job
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: vsd-media-build-context
+          path: ${{ runner.temp }}/vsd-media-build-context.json
+          if-no-files-found: error
+          retention-days: 1
+      - name: Upload the tested public artifact
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: site-src/public
+          retention-days: 1
+          include-hidden-files: true
+
+  deploy:
+    needs: [stage, build]
+    if: needs.build.result == 'success' && needs.stage.outputs.requires_deployment == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout exactly the staged public source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ needs.stage.outputs.source_sha }}
+          persist-credentials: false
+      - name: Python 3.12
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.12'
+      - name: Node.js 22
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '22'
+      - name: Restore the frozen context from the successful build
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: vsd-media-build-context
+          path: ${{ runner.temp }}/vsd-media-context
+      - name: Recheck review window immediately before publication
+        env:
+          CONTENT_ID: ${{ needs.stage.outputs.content_id }}
+        run: |
+          set -euo pipefail
+          node .github/vsd-production/promotion-control.mjs stage \
+            --repository-root "$GITHUB_WORKSPACE" --content-id "$CONTENT_ID" > "$RUNNER_TEMP/vsd-window-report.json"
+          node --input-type=module <<'NODE'
+          import { readFileSync } from 'node:fs';
+          const report = JSON.parse(readFileSync(process.env.RUNNER_TEMP + '/vsd-window-report.json', 'utf8'));
+          if (report.status !== 'stage_ready' || report.contentId !== process.env.CONTENT_ID || report.changedPaths.length !== 0) throw Error('review_window_or_staged_bytes_changed');
+          NODE
+      - name: Rebuild and verify the same guide from the same public tree
+        working-directory: site-src
+        env:
+          LJA_PUBLIC: '1'
+          SITE_ORIGIN: https://voyagesansdetour.fr
+        run: python generate.py
+      - name: Verify build context and unchanged public source
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          node .github/vsd-production/promotion-git.mjs verify-context \
+            --repository-root "$GITHUB_WORKSPACE" \
+            --context "$RUNNER_TEMP/vsd-media-context/vsd-media-build-context.json" \
+            --sha256 "${{ needs.build.outputs.context_sha256 }}"
+          node .github/vsd-production/promotion-git.mjs guard --site-tree "${{ needs.build.outputs.site_tree }}"
+      - name: Deploy the tested public artifact
+        id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
+      - name: Wait briefly for the exact public attribution file
+        env:
+          CONTENT_ID: ${{ needs.stage.outputs.content_id }}
+        run: |
+          set -euo pipefail
+          path="social-media/production/$CONTENT_ID/credits.txt"
+          expected="$(sha256sum "site-src/public/$path" | cut -d' ' -f1)"
+          for attempt in 1 2 3 4 5 6; do
+            if curl --fail --silent --show-error --max-time 10 \
+                 "https://voyagesansdetour.fr/$path" --output "$RUNNER_TEMP/vsd-public-credits.txt"; then
+              observed="$(sha256sum "$RUNNER_TEMP/vsd-public-credits.txt" | cut -d' ' -f1)"
+              if [ "$observed" = "$expected" ]; then exit 0; fi
+            fi
+            sleep 5
+          done
+          echo 'Public attribution bytes were not confirmed.' >&2
+          exit 1
+
+  finalize:
+    needs: [stage, deploy]
+    if: ${{ !cancelled() && needs.stage.result == 'success' && (needs.stage.outputs.promotion_status == 'finalization_ready' || needs.deploy.result == 'success') }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    permissions:
+      contents: write
+    outputs:
+      promotion_status: ${{ steps.commit.outputs.promotion_status }}
+      source_sha: ${{ steps.commit.outputs.source_sha }}
+    steps:
+      - name: Checkout the current source after deployment or an interrupted index append
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+          persist-credentials: false
+      - name: Python 3.12
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.12'
+      - name: Node.js 22
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '22'
+      - name: Require the same public source tree
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node .github/vsd-production/promotion-git.mjs guard --site-tree "${{ needs.stage.outputs.site_tree }}"
+      - name: Rebuild the public files used by the bounded HTTP proof
+        working-directory: site-src
+        env:
+          LJA_PUBLIC: '1'
+          SITE_ORIGIN: https://voyagesansdetour.fr
+        run: python generate.py
+      - name: Collect live HTTP bytes and freeze the reviewed stock lot
+        id: prepare
+        env:
+          CONTENT_ID: ${{ needs.stage.outputs.content_id }}
+        run: |
+          set -euo pipefail
+          node .github/vsd-production/promotion-control.mjs finalize \
+            --repository-root "$GITHUB_WORKSPACE" --content-id "$CONTENT_ID" > "$RUNNER_TEMP/vsd-finalize-report.json"
+      - name: Commit only the verified proof and append-only stock index
+        id: commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          node .github/vsd-production/promotion-git.mjs commit \
+            --mode finalize --repository-root "$GITHUB_WORKSPACE" \
+            --report "$RUNNER_TEMP/vsd-finalize-report.json"
+
+  stock:
+    needs: [stage, finalize]
+    # A lost import acknowledgement is reconciled on the next scheduled run,
+    # even when the public media and immutable reviewed batch already exist.
+    if: ${{ always() && needs.stage.result == 'success' && ((needs.finalize.result == 'success' && needs.finalize.outputs.promotion_status == 'finalized') || needs.stage.outputs.promotion_status == 'idle' || needs.stage.outputs.promotion_status == 'already_finalized') }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout the exact verified stock-index commit or current stock for recovery
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ needs.finalize.outputs.source_sha || 'main' }}
+          persist-credentials: false
+      - name: Node.js 22
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '22'
+      - name: Verify public source has not changed before signed stock control
+        env:
+          GH_TOKEN: ${{ github.token }}
+          STAGE_SITE_TREE: ${{ needs.stage.outputs.site_tree }}
+        run: |
+          set -euo pipefail
+          tree="$STAGE_SITE_TREE"
+          if [ -z "$tree" ]; then tree="$(git rev-parse HEAD:site-src)"; fi
+          node .github/vsd-production/promotion-git.mjs guard --site-tree "$tree"
+      - name: Import at most one absent lot through signed private control and check its receipt
+        env:
+          VSD_CLOUD_KEY: ${{ secrets.VSD_CLOUD_KEY }}
+          VSD_SITES_DISPATCH_TOKEN: ${{ secrets.VSD_SITES_DISPATCH_TOKEN }}
+          VSD_STOCK_READ_ONLY: 'false'
+        run: |
+          set -euo pipefail
+          # The workflow event SHA predates the two non-force commits above.
+          # The controller's audit SHA must identify this exact checkout.
+          export GITHUB_SHA="$(git rev-parse HEAD)"
+          expected="${{ needs.finalize.outputs.source_sha }}"
+          if [ -n "$expected" ]; then test "$GITHUB_SHA" = "$expected"; fi
+          node .github/vsd-production/stock-control.mjs

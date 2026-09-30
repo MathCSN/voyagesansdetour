@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "items": [
+    {
+      "contentId": "lisbonne-quartiers-sans-voiture-2026-10",
+      "renderDirectory": "output/lisbonne-quartiers-sans-voiture-2026-10",
+      "receiptSha256": "f69fd0606d97fb19c0bd620bd1c4ccf80bf8cbd5c0cc9b0fb4c210a20fa80662",
+      "review": {
+        "file": "reviews/lisbonne-quartiers-media-review-2026-09-27.json",
+        "sha256": "3125f4855c7cfb83685d59d6dee71f96b0abad4ea48b46a76d42480a6265bc02"
+      },
+      "cloudProof": {
+        "file": "evidence/lisbonne-quartiers-cloud-2026-09-27.json",
+        "sha256": "06bafd33701cb3061cc859b66843423a48eb49c03f79882fbe0910161238026e"
+      }
+    }
+  ]
+}
