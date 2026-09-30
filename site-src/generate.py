@@ -219,20 +219,25 @@ def article_rss_date(article):
 (OUT/'robots.txt').write_text(('User-agent: *\nAllow: /\n\nUser-agent: OAI-SearchBot\nAllow: /\n\n' if PUBLIC else '# Preversion privee : indexation desactivee avant lancement public.\nUser-agent: *\nDisallow: /\n\n')+'Sitemap: '+ORIGIN+'/sitemap.xml\n')
 (OUT/'feed.xml').write_text('<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>'+e(BRAND)+'</title><link>'+ORIGIN+'</link><description>Le Portugal sans voiture</description><language>fr</language>'+''.join(f'<item><title>{e(a["title"])}</title><link>{ORIGIN+uri(a)}</link><guid>{ORIGIN+uri(a)}</guid><description>{e(a["description"])}</description><pubDate>{article_rss_date(a)}</pubDate></item>' for a in articles)+'</channel></rss>')
 if PUBLIC:
-    # Pilote distinct du flux éditorial : un seul Pin validé, sans date inventée.
+    # Flux distinct du flux éditorial : deux Pins revus vers le même tableau Lisbonne, sans date inventée.
     config=json.loads((ROOT/'pinterest-rss.json').read_text())
     pins=config['items']
-    if config.get('schema_version')!=1 or len(pins)>1:
-        sys.exit('Flux Pinterest pilote refusé : un seul élément est autorisé.')
+    allowed_pins={
+        'pin-01-lisbonne-3-jours':('/portugal/lisbonne-3-jours-sans-voiture/',
+                                    '/social-media/lancement-2026-09/pin-01-lisbonne-3-jours.jpg'),
+        'pin-03-ou-dormir-lisbonne':('/portugal/ou-dormir-lisbonne-quartiers/',
+                                    '/social-media/lancement-2026-09/pin-03-ou-dormir-lisbonne.jpg'),
+    }
+    if config.get('schema_version')!=1 or not isinstance(pins,list) or [p.get('id') for p in pins]!=list(allowed_pins):
+        sys.exit('Flux Pinterest refusé : les deux éléments revus sont requis dans leur ordre exact.')
     media_ns='http://search.yahoo.com/mrss/'
     ET.register_namespace('media',media_ns)
     rss=ET.Element('rss',{'version':'2.0'})
     channel=ET.SubElement(rss,'channel')
-    for tag,text in (('title',BRAND+' — Lisbonne'),('link',ORIGIN+'/'),('description','Un premier guide de Lisbonne à enregistrer.'),('language','fr')):
+    for tag,text in (('title',BRAND+' — Lisbonne'),('link',ORIGIN+'/'),('description','Guides de Lisbonne sans voiture à enregistrer.'),('language','fr')):
         ET.SubElement(channel,tag).text=text
     for pin in pins:
-        if pin.get('enabled') is not True:continue
-        if pin['id']!='pin-01-lisbonne-3-jours' or pin['link_path']!='/portugal/lisbonne-3-jours-sans-voiture/' or pin['image_path']!='/social-media/lancement-2026-09/pin-01-lisbonne-3-jours.jpg':
+        if pin.get('enabled') is not True or (pin.get('link_path'),pin.get('image_path'))!=allowed_pins[pin['id']]:
             sys.exit('Flux Pinterest pilote refusé : identifiant, destination ou image non validé.')
         if not 1<=len(pin['title'])<=100 or not 1<=len(pin['description'])<=500:
             sys.exit('Flux Pinterest pilote refusé : longueur du titre ou de la description.')
