@@ -21,7 +21,7 @@ jobs:
   invoke:
     if: github.repository == 'MathCSN/voyagesansdetour' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
-    timeout-minutes: 3
+    timeout-minutes: 4
     permissions:
       contents: read
     steps:
@@ -37,7 +37,7 @@ jobs:
           VSD_SITES_DISPATCH_TOKEN: ${{ secrets.VSD_SITES_DISPATCH_TOKEN }}
           VSD_STOCK_READ_ONLY: ${{ inputs.kind == 'stock_status' && 'true' || 'false' }}
         run: node .github/vsd-production/stock-control.mjs
-      - name: Invoke signed private server task once
+      - name: Invoke signed private server task (three bounded metrics passes)
         if: inputs.kind != 'stock' && inputs.kind != 'stock_status' && github.event.schedule != '53 8 * * 1'
         env:
           VSD_CLOUD_ORIGIN: https://voyage-sans-detour-admin.cousinmathis31.chatgpt.site
@@ -66,23 +66,35 @@ jobs:
                 id !== 'appgprj_6ab8ae0785988191a26f73b4a4e6c687' || !/^[A-Za-z0-9_-]{43}$/.test(key ?? '') ||
                 !dispatcher || !['health','metrics','publications'].includes(kind)) throw Error('configuration');
             const wireKind=kind,payload={kind};
-            const path = '/internal/tick', body = JSON.stringify(payload), sent = String(Date.now()), nonce = randomUUID();
+            const path = '/internal/tick', body = JSON.stringify(payload);
             if(Buffer.byteLength(body)>133120)throw Error('invalid_batch');
             const digest = createHash('sha256').update(body).digest('hex');
-            const canonical = ['vsd-cloud-v1',id,origin,'POST',path,sent,nonce,digest].join('\n');
-            const signature = createHmac('sha256',Buffer.from(key,'base64url')).update(canonical).digest('hex');
-            // Exactly one attempt. A timeout may follow a completed task; never replay blindly.
-            const response = await fetch(origin + path, {method:'POST',redirect:'error',signal:AbortSignal.timeout(60000),
-              headers:{'Content-Type':'application/json','OAI-Sites-Authorization':'Bearer '+dispatcher,
-                'X-VSD-Sent-At':sent,'X-VSD-Nonce':nonce,'X-VSD-Signature':signature},body});
-            if(response.status!==200 || !response.headers.get('content-type')?.includes('application/json'))throw Error('unavailable');
-            const text=await response.text();if(text.length>1024)throw Error('invalid_response');
-            const data=JSON.parse(text);
-            // A finished metrics tick confirms execution, not the presence or success of every provider report.
-            const allowed={health:['healthy'],metrics:['disabled','finished'],
-              publications:['disabled','idle','busy_or_recent','dispatched','reconciled','recovered']}[kind];
-            if(!allowed || data.kind!==wireKind || !allowed.includes(data.status))throw Error('task_attention_required');
-            console.log('Cloud receipt: '+kind+' / '+data.status+'.');
+            const keyBytes = Buffer.from(key,'base64url');
+            const passes = kind === 'metrics' ? 3 : 1;
+            let lastSentAt = 0;
+            for(let pass = 0; pass < passes; pass++) {
+              // Never start a pass after the authorized follow-up period.
+              if(Date.now() > Date.parse('2027-09-14T23:59:59+02:00'))break;
+              // The server requires an increasing timestamp per task kind, even within one millisecond.
+              const sentAt = Math.max(Date.now(),lastSentAt+1);
+              lastSentAt = sentAt;
+              const sent = String(sentAt), nonce = randomUUID();
+              const canonical = ['vsd-cloud-v1',id,origin,'POST',path,sent,nonce,digest].join('\n');
+              const signature = createHmac('sha256',keyBytes).update(canonical).digest('hex');
+              // One attempt per pass. An uncertain outcome stops the job; never replay that request.
+              const response = await fetch(origin + path, {method:'POST',redirect:'error',signal:AbortSignal.timeout(60000),
+                headers:{'Content-Type':'application/json','OAI-Sites-Authorization':'Bearer '+dispatcher,
+                  'X-VSD-Sent-At':sent,'X-VSD-Nonce':nonce,'X-VSD-Signature':signature},body});
+              if(response.status!==200 || !response.headers.get('content-type')?.includes('application/json'))throw Error('unavailable');
+              const text=await response.text();if(text.length>1024)throw Error('invalid_response');
+              const data=JSON.parse(text);
+              // A finished metrics tick confirms execution, not the presence or success of every provider report.
+              const allowed={health:['healthy'],metrics:['disabled','finished'],
+                publications:['disabled','idle','busy_or_recent','dispatched','reconciled','recovered']}[kind];
+              if(!allowed || data.kind!==wireKind || !allowed.includes(data.status))throw Error('task_attention_required');
+              console.log('Cloud receipt: '+kind+' / '+data.status+'.');
+              if(kind==='metrics' && data.status==='disabled')break;
+            }
           } catch {
             console.error('Cloud task not confirmed. Check the private service; no automatic retry was made.');
             process.exitCode=1;
