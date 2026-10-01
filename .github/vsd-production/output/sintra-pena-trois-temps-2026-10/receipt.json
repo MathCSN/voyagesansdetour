@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "contentId": "sintra-pena-trois-temps-2026-10",
+  "status": "rendered_not_published",
+  "fingerprint": "abb786fb144324e1cfaee3c7a1d2ee8d1f10012775ae0b21ef353b7c78be3b0c",
+  "createdAt": "2026-10-01T01:02:57.738199Z",
+  "renderFinishedAt": "2026-10-01T01:03:07.768926Z",
+  "rendererContractVersion": 2,
+  "rendererSha256": "cbdd917f87d303383e89b054192ba03922957b7cfcb0619b9b514ff1711e1a13",
+  "reviewValidUntil": "2026-10-26T00:00:00Z",
+  "sourceCheckedOn": "2026-09-30",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/sintra-depuis-lisbonne/",
+  "format": "music_text",
+  "presenter": "none",
+  "voice": null,
+  "sourceUrls": [
+    "https://www.parquesdesintra.pt/en/plan-your-visit/how-to-get-there/",
+    "https://www.parquesdesintra.pt/en/plan-your-visit/tickets-palace-of-pena/"
+  ],
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "durationSeconds": 28.0,
+    "videoCodec": "h264",
+    "pixelFormat": "yuv420p",
+    "videoBitrateBps": 156216,
+    "audioCodec": "aac",
+    "audioSampleRate": 48000,
+    "audioBitrateBps": 96100,
+    "fullDecodePassed": true,
+    "loudness": {
+      "integratedLufs": -17.4,
+      "truePeakDbfs": -4.0
+    }
+  },
+  "files": [
+    {
+      "file": "apercu.jpg",
+      "sha256": "9fd0aca1eaef0af35be077a475aaa5911739ee2c0bd07a6b519d18f88ac9a363",
+      "bytes": 248240
+    },
+    {
+      "file": "credits.txt",
+      "sha256": "cc68042b077ef1e5143e68037efb00f3f5f3cde4976e13030003f400dab78196",
+      "bytes": 1478
+    },
+    {
+      "file": "dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "file": "encode.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "legende.txt",
+      "sha256": "ae602280a7bab798a57f800e99b8e2b55bbeae16103d141144259a968a61c3c6",
+      "bytes": 1281
+    },
+    {
+      "file": "playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    },
+    {
+      "file": "poster.jpg",
+      "sha256": "de333405b497a4e9c5895a3d24317da188899667c7a8aac60644690b75ed4960",
+      "bytes": 229711
+    },
+    {
+      "file": "reel.mp4",
+      "sha256": "c73db7c4d9635f8e5b77f21c09983124d21021eaafd86d6eb294ca407ee0fb1d",
+      "bytes": 915613
+    },
+    {
+      "file": "scenario.json",
+      "sha256": "9f5accb54258ed9f3e0227c38b46a1517635ae999e4b9e0d8aa5fdbe71f399c2",
+      "bytes": 9018
+    },
+    {
+      "file": "scene-01.jpg",
+      "sha256": "0b455342bb1c4d40c742a205172dce3ac41c284a31d4f8a62f45166dfc5d9a55",
+      "bytes": 195605
+    },
+    {
+      "file": "scene-02.jpg",
+      "sha256": "f63794a2fdff3020d1ebaee5fad3c94f7a7c11c8524a3b5540a1a27eb4bbd06d",
+      "bytes": 156445
+    },
+    {
+      "file": "scene-03.jpg",
+      "sha256": "ca897f293afd6310d05cb5a9559fdae87951be04791da72152fd6ecd335c0054",
+      "bytes": 161734
+    },
+    {
+      "file": "scene-04.jpg",
+      "sha256": "ed91552fd6335aa3ffecdc90c7b338f9b847475a35b9b584ea309b67388756ac",
+      "bytes": 150071
+    },
+    {
+      "file": "scene-05.jpg",
+      "sha256": "69f09d4e0713897d65aa14e4f2ee9a7a91646c29dcfea31db18bf2f690af77ae",
+      "bytes": 175426
+    },
+    {
+      "file": "scene-06.jpg",
+      "sha256": "e39ab23d1e1155c5d1dfbd11b7e7997cda503aa068e3ff020aad05a883294a9d",
+      "bytes": 164941
+    }
+  ],
+  "runtime": {
+    "wallSeconds": 10.014,
+    "encoderThreads": 2,
+    "pillowVersion": "11.3.0",
+    "ffmpegVersion": "ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers"
+  },
+  "publication": {
+    "uploaded": false,
+    "scheduled": false,
+    "published": false,
+    "readyForAutomaticImport": false
+  },
+  "cost": {
+    "newPaidService": false,
+    "providerCalls": 0,
+    "monetarySpendEur": 0
+  },
+  "limitations": [
+    "No source refresh or editorial generation is performed by this job.",
+    "A rendered MP4 is not a final social payload review or publication.",
+    "Bit-identical encoding across different FFmpeg/Pillow builds is not promised; immutable inputs and exact output hashes are recorded."
+  ]
+}
