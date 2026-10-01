@@ -69,7 +69,11 @@ def prepare_public_dir():
         target=OUT/'social-media'/name
         target.parent.mkdir(parents=True,exist_ok=True)
         shutil.copy2(social/name,target)
-    if PUBLIC:(OUT/'CNAME').write_text(urlparse(ORIGIN).hostname+'\n')
+    if PUBLIC:
+        (OUT/'CNAME').write_text(urlparse(ORIGIN).hostname+'\n')
+        # Déclaration du compte éditeur vérifié ; aucun script ou espace publicitaire n'est activé ici.
+        if ORIGIN=='https://voyagesansdetour.fr':
+            (OUT/'ads.txt').write_text('google.com, pub-7879144993741676, DIRECT, f08c47fec0942fa0\n')
     (OUT/'.nojekyll').write_text('')
 try:articles=editorial_queue.published_articles(ROOT)
 except (OSError,ValueError,TypeError,KeyError) as error:sys.exit(str(error))
