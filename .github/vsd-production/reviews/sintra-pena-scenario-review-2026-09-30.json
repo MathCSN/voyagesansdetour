@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "reviewer": "independent_scenario_reviewer",
+  "independentFromPreparationAuthor": true,
+  "reviewedAt": "2026-09-30T16:24:52Z",
+  "decision": "approved_for_render_only",
+  "scope": "The exact candidate scenario, its evidence, planned six scenes and generated caption. This is an editorial and rights review before rendering, not approval of an MP4 or publication.",
+  "contentId": "sintra-pena-trois-temps-2026-10",
+  "scenario": {
+    "file": "production-root/scenarios/sintra-pena-trois-temps.json",
+    "sha256": "b9364b75d1275c1d029a43553ad0c7091b1581b4cd76dd8e182556548baeed63",
+    "unchangedDuringReview": true,
+    "diskStatus": "pending_independent_review",
+    "rendererRefusesDiskStatus": true,
+    "validationOfInMemoryCopyWithReviewedStatus": "passed",
+    "durationSeconds": 28,
+    "sceneCount": 6
+  },
+  "verifiedFileSha256": {
+    "production-root/sources/sintra-pena-2026-09-30/article-excerpts.json": "abbc4010844342618cf1ea65d831bbdb4c974a3726124b089ad50b88bb9179a0",
+    "production-root/sources/sintra-pena-2026-09-30/source-review.md": "6a81cb3f912e4383c530f7ce51af2ffa1ed18ab072efd3c879f1e3c437cb4b25",
+    "production-root/sources/sintra-pena-2026-09-30/publication-evidence.json": "ef268f1020fe418f7d75b41176c1d9ed43ebe40535aa73b0e8918a8e55c25020",
+    "production-root/evidence/ascending-the-vale-provenance.json": "962e2b5bfd53fcadf57ab2d68fb5b845f58ff829c2c39d2d58888770fe70b7db",
+    "production-root/assets/ascending-the-vale.mp3": "a0ab3aae9a942d797c381df8d914dfef453e7e455c1c6333d1916d59ba005353",
+    "production-root/assets/dmsans-regular.ttf": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9",
+    "production-root/assets/dmsans-bold.ttf": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211",
+    "production-root/assets/playfair.ttf": "adefc53e7b3d483f1fa5e85edd82b7689ca79db25a1f6786bd7949cdcfeec601",
+    "production-root/assets/dmsans-OFL.txt": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+    "production-root/assets/playfairdisplay-OFL.txt": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+    "preview-scenes.jpg": "58e568a15a815ee0e961046418165dbff4222cc3c338b6bbe3e371e8c90294a0"
+  },
+  "facts": {
+    "approved": true,
+    "independentOfficialChecks": [
+      {
+        "claim": "The CP Sintra line can be approached from Rossio, Oriente or Entrecampos; the Pena connection from Sintra station is bus 434.",
+        "url": "https://www.parquesdesintra.pt/en/plan-your-visit/how-to-get-there/"
+      },
+      {
+        "claim": "CP also describes the Rossio to Sintra train and bus 434 to Pena.",
+        "url": "https://www.cp.pt/info/w/discover-sintra"
+      },
+      {
+        "claim": "The booked time is for entry to the palace interior, not the park gate; allow about 30 minutes from park entrance to palace interior entrance; no late-arrival tolerance is stated.",
+        "url": "https://www.parquesdesintra.pt/en/plan-your-visit/tickets-palace-of-pena/"
+      }
+    ],
+    "planningAdviceSeparatedFromOperatorRules": true,
+    "specificTrainOrBusSchedulePromised": false,
+    "guide": {
+      "url": "https://voyagesansdetour.fr/portugal/sintra-depuis-lisbonne/",
+      "independentHttpsGetStatus": 200,
+      "canonicalMatches": true,
+      "bytes": 19494,
+      "sha256": "ddc5cc9c02af558402a2dc16ef46698e6fc05354d43ecf66646520708a5ccaf0",
+      "matchesPreparedPublicationEvidence": true,
+      "wholeGuideSourcesDateStillShownAs": "2026-09-14",
+      "scenarioScopedSourcesCheckedOn": "2026-09-30"
+    }
+  },
+  "rights": {
+    "commercialUseSupported": true,
+    "music": {
+      "title": "Ascending the Vale",
+      "author": "Kevin MacLeod",
+      "isrc": "USUAN1600064",
+      "officialCatalog": "https://incompetech.com/music/royalty-free/pieces.json",
+      "officialLicensing": "https://incompetech.com/agent-section/",
+      "officialCreditGuidance": "https://incompetech.com/music/royalty-free/faq.html",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "officialMp3IndependentlyDownloadedAndMatched": true,
+      "officialMp3Bytes": 7926743,
+      "officialMp3Sha256": "a0ab3aae9a942d797c381df8d914dfef453e7e455c1c6333d1916d59ba005353",
+      "generatedCaptionHasAuthorTitleSourceLicenseAndChangeNotice": true
+    },
+    "fontsHaveOfl11Notices": true,
+    "previewUsesOriginalTypographicGraphicsOnly": true,
+    "thirdPartyPhotographsOrPeoplePresent": false
+  },
+  "editorial": {
+    "allSixPreviewScenesInspected": true,
+    "previewReadableWithoutObservedClipping": true,
+    "captionCharacters": 1225,
+    "captionSha256": "ae602280a7bab798a57f800e99b8e2b55bbeae16103d141144259a968a61c3c6",
+    "generatedCaptionKeepsAiDisclosure": true,
+    "noClaimOfLivedTravel": true,
+    "distinctFromExistingPortoAirportAndLisbonNeighbourhoodScenarios": true,
+    "sharedProductionTemplate": true,
+    "notes": "The advice about one priority site and a flexible return is presented as editorial advice. The 30-minute scene identifies the park gate and palace interior separately."
+  },
+  "timing": {
+    "intendedPublicationAt": "2026-10-25T17:00:00Z",
+    "intendedPublicationEuropeParis": "2026-10-25T18:00:00+01:00",
+    "reviewValidUntil": "2026-10-26T00:00:00Z",
+    "locallyDocumentedPriorSundaySlots": [
+      "2026-10-04T16:00:00Z",
+      "2026-10-11T16:00:00Z",
+      "2026-10-18T16:00:00Z"
+    ],
+    "localReviewedSocialIndexHasNoSintraItem": true,
+    "externalCalendarOrSocialAccountCollisionChecked": false
+  },
+  "conditionsBeforeDelivery": [
+    "Promote a reviewed copy of this new scenario identity through the controlled catalogue; keep historical identities unchanged.",
+    "Review the exact rendered MP4, caption and file hashes independently before any promotion or import.",
+    "Verify public guide and media via HTTPS GET, then separately verify cloud finalization, private stock import, schedule receipt and actual publication.",
+    "Recheck live transport information and the social calendar before dispatch; do not extend the fixed review expiry to make this candidate eligible."
+  ],
+  "mediaRendered": false,
+  "publicMediaApproved": false,
+  "socialPublicationApproved": false,
+  "socialPublicationVerified": false
+}

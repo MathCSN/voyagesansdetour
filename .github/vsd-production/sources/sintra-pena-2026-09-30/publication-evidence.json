@@ -1,0 +1,13 @@
+{
+  "checkedAt": "2026-09-30T16:16:12.843056Z",
+  "scope": "Public guide bytes compared, read only; the public guide's original source date is unchanged.",
+  "url": "https://voyagesansdetour.fr/portugal/sintra-depuis-lisbonne/",
+  "finalUrl": "https://voyagesansdetour.fr/portugal/sintra-depuis-lisbonne/",
+  "httpStatus": 200,
+  "canonicalMatches": true,
+  "htmlSha256": "ddc5cc9c02af558402a2dc16ef46698e6fc05354d43ecf66646520708a5ccaf0",
+  "bytes": 19494,
+  "matchesLocalBuild": true,
+  "localBuildSha256": "ddc5cc9c02af558402a2dc16ef46698e6fc05354d43ecf66646520708a5ccaf0",
+  "localBuild": "Current public page from the existing site-src checkout, compared byte-for-byte with the live HTTPS response."
+}

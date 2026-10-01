@@ -1,0 +1,34 @@
+{
+  "title": "Ascending the Vale",
+  "composer": "Kevin MacLeod",
+  "copyrightHolder": "Kevin MacLeod",
+  "isrc": "USUAN1600064",
+  "catalogDuration": "00:04:08",
+  "instruments": "Harp, Choir, Flute, Percussion, Anyafil Horn",
+  "bpm": 90,
+  "sourceTrackPage": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1600064",
+  "sourceCatalog": "https://incompetech.com/music/royalty-free/pieces.json",
+  "officialCatalogLicense": "https://incompetech.com/agent-section/",
+  "officialLicenseOptions": "https://incompetech.com/music/royalty-free/licenses/",
+  "officialCreditFAQ": "https://incompetech.com/music/royalty-free/faq.html",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "costEur": 0,
+  "commercialUseAllowed": true,
+  "adaptationAllowed": true,
+  "requiredAttribution": true,
+  "download": {
+    "requestedUrl": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Ascending%20the%20Vale.mp3",
+    "responseUrl": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Ascending%20the%20Vale.mp3",
+    "httpStatus": 200,
+    "bytes": 7926743,
+    "sha256": "a0ab3aae9a942d797c381df8d914dfef453e7e455c1c6333d1916d59ba005353",
+    "retrievedAt": "2026-09-30T16:16:12.843056Z"
+  },
+  "published": false,
+  "notes": [
+    "The official catalogue identifies this recording by title and ISRC.",
+    "The composer's official licensing pages offer CC BY 4.0 with visible attribution. CC BY 4.0 allows commercial reuse and adaptation with attribution, license link and change notice.",
+    "The music is credited by the production renderer in every caption; no affiliation or endorsement is claimed."
+  ]
+}

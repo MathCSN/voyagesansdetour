@@ -1,0 +1,63 @@
+{
+  "slug": "sintra-depuis-lisbonne",
+  "title": "Sintra depuis Lisbonne : organiser une journée sans voiture",
+  "sourcesCheckedOn": "2026-09-30",
+  "snapshotKind": "selected_public_guide_excerpts_rechecked_for_this_scenario",
+  "publicGuideSourcesDateUnchanged": "2026-09-14",
+  "scope": "Only train access, bus 434, Pena's booked palace entry and park-to-palace margin, plus explicitly editorial one-site/return planning were rechecked. The complete public guide was not updated.",
+  "sections": [
+    {
+      "id": "choisir",
+      "title": "Commencez par choisir ce que vous voulez voir",
+      "paragraphs": [
+        "Notre proposition éditoriale est simple : un monument principal, du temps pour son environnement, puis le centre historique."
+      ]
+    },
+    {
+      "id": "train",
+      "title": "Prendre le train jusqu’à Sintra",
+      "paragraphs": [
+        "Parques de Sintra indique des départs possibles depuis Rossio, Oriente et Entrecampos sur la ligne de Sintra de CP.",
+        "Choisissez la gare qui convient à votre hébergement, puis vérifiez le départ exact."
+      ]
+    },
+    {
+      "id": "pena",
+      "title": "Pena : le détail qui change toute la journée",
+      "paragraphs": [
+        "La desserte officielle mentionne le bus 434 depuis la gare de Sintra ou le parking de Lourel vers Pena.",
+        "Pour l’intérieur du palais, la réservation comporte une date et une heure précises.",
+        "Parques de Sintra annonce environ trente minutes entre l’entrée du parc et celle du parcours intérieur.",
+        "Le gestionnaire indique également qu’un retard ne donne pas accès au palais"
+      ]
+    },
+    {
+      "id": "programme",
+      "title": "Notre proposition de journée",
+      "paragraphs": [
+        "Si Pena est votre priorité, faites-en le centre du programme."
+      ]
+    },
+    {
+      "id": "retour",
+      "title": "Laissez de la place pour le retour",
+      "paragraphs": [
+        "Pour rentrer, repérez plusieurs trains possibles et évitez de construire votre soirée autour d’une correspondance serrée."
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "Parques de Sintra — accès aux monuments",
+      "url": "https://www.parquesdesintra.pt/en/plan-your-visit/how-to-get-there/"
+    },
+    {
+      "label": "Parques de Sintra — règles des billets de Pena",
+      "url": "https://www.parquesdesintra.pt/en/plan-your-visit/tickets-palace-of-pena/"
+    },
+    {
+      "label": "CP — informations avant le voyage et validation",
+      "url": "https://www.cp.pt/info/en/useful-information-travel"
+    }
+  ]
+}

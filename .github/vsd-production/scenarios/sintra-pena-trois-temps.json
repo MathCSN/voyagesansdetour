@@ -1,0 +1,257 @@
+{
+  "schemaVersion": 1,
+  "id": "sintra-pena-trois-temps-2026-10",
+  "title": "Sintra : trois temps avant le palais de Pena",
+  "format": "music_text",
+  "presenter": "none",
+  "theme": "cobalt",
+  "aiAssisted": true,
+  "destination": "Sintra",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/sintra-depuis-lisbonne/",
+  "caption": "🚆 Sintra sans voiture : l’heure indiquée sur le billet du palais de Pena concerne l’entrée dans le palais, pas celle du parc.\n\n① Choisissez votre départ en train vers Sintra.\n② Comptez aussi le trajet entre la gare et le parc.\n③ Gardez une marge dans le parc avant l’heure de visite du palais.\n\n🏰 Un site prioritaire, puis le reste selon votre rythme : c’est notre proposition pour éviter une journée chronométrée. Vérifiez les horaires et accès à votre date.\n\n🔖 Gardez ce mémo pour préparer votre excursion.",
+  "review": {
+    "status": "reviewed_for_render",
+    "checkedAt": "2026-09-30T16:24:52Z",
+    "validUntil": "2026-10-26T00:00:00Z",
+    "intendedPublicationAt": "2026-10-25T17:00:00Z",
+    "method": "Independent scenario review approved the exact draft for rendering only on 30 September 2026; see independent-review.json. Exact rendered media and publication still require separate reviews."
+  },
+  "source": {
+    "checkedOn": "2026-09-30",
+    "article": {
+      "file": "sources/sintra-pena-2026-09-30/article-excerpts.json",
+      "sha256": "abbc4010844342618cf1ea65d831bbdb4c974a3726124b089ad50b88bb9179a0"
+    },
+    "researchEvidence": {
+      "file": "sources/sintra-pena-2026-09-30/source-review.md",
+      "sha256": "6a81cb3f912e4383c530f7ce51af2ffa1ed18ab072efd3c879f1e3c437cb4b25"
+    },
+    "publicationEvidence": {
+      "file": "sources/sintra-pena-2026-09-30/publication-evidence.json",
+      "sha256": "ef268f1020fe418f7d75b41176c1d9ed43ebe40535aa73b0e8918a8e55c25020"
+    }
+  },
+  "assets": {
+    "regular": {
+      "file": "assets/dmsans-regular.ttf",
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      }
+    },
+    "bold": {
+      "file": "assets/dmsans-bold.ttf",
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      }
+    },
+    "serif": {
+      "file": "assets/playfair.ttf",
+      "sha256": "adefc53e7b3d483f1fa5e85edd82b7689ca79db25a1f6786bd7949cdcfeec601",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+      }
+    },
+    "music": {
+      "file": "assets/ascending-the-vale.mp3",
+      "sha256": "a0ab3aae9a942d797c381df8d914dfef453e7e455c1c6333d1916d59ba005353",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "commercialUseAllowed": true,
+      "title": "Ascending the Vale",
+      "author": "Kevin MacLeod",
+      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1600064",
+      "provenance": {
+        "file": "evidence/ascending-the-vale-provenance.json",
+        "sha256": "962e2b5bfd53fcadf57ab2d68fb5b845f58ff829c2c39d2d58888770fe70b7db"
+      }
+    }
+  },
+  "scenes": [
+    {
+      "layout": "intro",
+      "seconds": 4,
+      "label": "UNE JOURNÉE, TROIS TEMPS",
+      "title": [
+        "Sintra sans voiture",
+        "ne se résume pas",
+        "au billet."
+      ],
+      "body": [
+        "Train, montée, entrée au palais :",
+        "gardez une marge pour chacun."
+      ],
+      "note": "Un mémo de préparation, pas un horaire garanti.",
+      "graphicLabels": [
+        "TRAIN",
+        "PARC",
+        "PALAIS"
+      ],
+      "evidence": [
+        {
+          "sectionId": "train",
+          "url": "https://www.parquesdesintra.pt/en/plan-your-visit/how-to-get-there/",
+          "supportingText": "Parques de Sintra indique des départs possibles depuis Rossio, Oriente et Entrecampos sur la ligne de Sintra de CP."
+        },
+        {
+          "sectionId": "pena",
+          "url": "https://www.parquesdesintra.pt/en/plan-your-visit/tickets-palace-of-pena/",
+          "supportingText": "Pour l’intérieur du palais, la réservation comporte une date et une heure précises."
+        }
+      ]
+    },
+    {
+      "layout": "checklist",
+      "seconds": 5,
+      "label": "1 · REJOINDRE SINTRA",
+      "title": [
+        "Choisissez",
+        "votre gare de départ."
+      ],
+      "body": [
+        "Rossio, Oriente ou Entrecampos :",
+        "vérifiez le train pour votre date."
+      ],
+      "note": "Les départs et perturbations restent à contrôler.",
+      "graphicLabels": [
+        "GARE",
+        "DÉPART",
+        "TRAIN"
+      ],
+      "evidence": [
+        {
+          "sectionId": "train",
+          "url": "https://www.parquesdesintra.pt/en/plan-your-visit/how-to-get-there/",
+          "supportingText": "Parques de Sintra indique des départs possibles depuis Rossio, Oriente et Entrecampos sur la ligne de Sintra de CP."
+        }
+      ]
+    },
+    {
+      "layout": "checklist",
+      "seconds": 5,
+      "label": "2 · MONTER VERS PENA",
+      "title": [
+        "La gare n'est pas",
+        "la porte du parc."
+      ],
+      "body": [
+        "Le bus 434 dessert Pena",
+        "depuis la gare de Sintra."
+      ],
+      "note": "Vérifiez aussi la desserte locale du jour.",
+      "graphicLabels": [
+        "SINTRA",
+        "BUS 434",
+        "PARC"
+      ],
+      "evidence": [
+        {
+          "sectionId": "pena",
+          "url": "https://www.parquesdesintra.pt/en/plan-your-visit/how-to-get-there/",
+          "supportingText": "La desserte officielle mentionne le bus 434 depuis la gare de Sintra ou le parking de Lourel vers Pena."
+        }
+      ]
+    },
+    {
+      "layout": "checklist",
+      "seconds": 5,
+      "label": "3 · LIRE LE CRÉNEAU",
+      "title": [
+        "L'heure du billet",
+        "est celle du palais."
+      ],
+      "body": [
+        "Elle ne marque pas l'arrivée",
+        "à l'entrée du parc."
+      ],
+      "note": "Lisez les conditions du billet officiel.",
+      "graphicLabels": [
+        "BILLET",
+        "PARC",
+        "PALAIS"
+      ],
+      "evidence": [
+        {
+          "sectionId": "pena",
+          "url": "https://www.parquesdesintra.pt/en/plan-your-visit/tickets-palace-of-pena/",
+          "supportingText": "Pour l’intérieur du palais, la réservation comporte une date et une heure précises."
+        }
+      ]
+    },
+    {
+      "layout": "checklist",
+      "seconds": 5,
+      "label": "UNE MARGE DANS LE PARC",
+      "title": [
+        "Prévoyez environ",
+        "30 minutes de plus."
+      ],
+      "body": [
+        "Du portail du parc jusqu'au palais :",
+        "un retard peut fermer l'accès."
+      ],
+      "note": "La marge s'ajoute au trajet depuis la gare.",
+      "graphicLabels": [
+        "ENTRÉE",
+        "PARCOURS",
+        "CRÉNEAU"
+      ],
+      "evidence": [
+        {
+          "sectionId": "pena",
+          "url": "https://www.parquesdesintra.pt/en/plan-your-visit/tickets-palace-of-pena/",
+          "supportingText": "Parques de Sintra annonce environ trente minutes entre l’entrée du parc et celle du parcours intérieur."
+        },
+        {
+          "sectionId": "pena",
+          "url": "https://www.parquesdesintra.pt/en/plan-your-visit/tickets-palace-of-pena/",
+          "supportingText": "Le gestionnaire indique également qu’un retard ne donne pas accès au palais"
+        }
+      ]
+    },
+    {
+      "layout": "outro",
+      "seconds": 4,
+      "label": "UNE JOURNÉE PLUS SOUPLE",
+      "title": [
+        "Un site prioritaire.",
+        "Le reste, au choix."
+      ],
+      "body": [
+        "Le guide détaille le trajet",
+        "et les options de retour."
+      ],
+      "note": "Sans récit de voyage vécu · lien en bio.",
+      "graphicLabels": [
+        "PENA",
+        "PAUSE",
+        "RETOUR"
+      ],
+      "evidence": [
+        {
+          "sectionId": "choisir",
+          "url": "https://www.parquesdesintra.pt/en/plan-your-visit/how-to-get-there/",
+          "supportingText": "Notre proposition éditoriale est simple : un monument principal, du temps pour son environnement, puis le centre historique."
+        },
+        {
+          "sectionId": "retour",
+          "url": "https://www.parquesdesintra.pt/en/plan-your-visit/how-to-get-there/",
+          "supportingText": "Pour rentrer, repérez plusieurs trains possibles et évitez de construire votre soirée autour d’une correspondance serrée."
+        }
+      ]
+    }
+  ],
+  "hashtags": [
+    "#VoyageSansDetour",
+    "#Sintra",
+    "#Portugal",
+    "#VoyageSansVoiture"
+  ]
+}

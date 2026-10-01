@@ -12,6 +12,12 @@
       "notBefore": "2026-09-27T19:41:03.725607Z",
       "file": "scenarios/lisbonne-quartiers-sans-voiture.json",
       "sha256": "0d505aad0cca255334a99908ab737329f4b5d0d4f2d1e47f254262e2c9748194"
+    },
+    {
+      "contentId": "sintra-pena-trois-temps-2026-10",
+      "notBefore": "2026-09-30T16:24:52Z",
+      "file": "scenarios/sintra-pena-trois-temps.json",
+      "sha256": "9f5accb54258ed9f3e0227c38b46a1517635ae999e4b9e0d8aa5fdbe71f399c2"
     }
   ]
 }
