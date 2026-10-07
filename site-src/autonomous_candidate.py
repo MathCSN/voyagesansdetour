@@ -53,7 +53,7 @@ def iso(value: dt.datetime) -> str:
     return value.astimezone(UTC).isoformat(timespec="seconds").replace("+00:00", "Z")
 
 
-def next_release(now: dt.datetime, articles, state) -> dt.datetime:
+def next_release(now: dt.datetime, articles, state, candidates=()) -> dt.datetime:
     dates = [now]
     for article in articles:
         for key in ("publishedOn", "updatedOn"):
@@ -65,6 +65,10 @@ def next_release(now: dt.datetime, articles, state) -> dt.datetime:
                     pass
     for entry in state.get("drafts", []) + state.get("promotions", []):
         dates.append(queue.instant(entry["releaseAt"]))
+    for candidate in candidates:
+        value = candidate.get("releaseAt")
+        if value:
+            dates.append(queue.instant(value))
     candidate = max(dates) + CADENCE
     # Keep the queue predictable: 08:00 UTC is 10:00 Paris in summer and
     # 09:00 Paris in winter, without guessing a local DST offset in JSON.
@@ -156,7 +160,7 @@ def generate(root=ROOT, now=None):
     known_slugs = {item.get("article", {}).get("slug") for item in candidates}
     known_slugs |= {item.get("slug") for item in articles}
     base = articles[len(candidates) % len(articles)]
-    release = next_release(now, articles, state)
+    release = next_release(now, articles, state, candidates)
     release_date = release.date().isoformat()
     article = make_article(base, release_date, now.astimezone(dt.timezone.utc).date().isoformat())
     if article["slug"] in known_slugs:
