@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "id": "auto-mise-a-jour-ou-dormir-lisbonne-quartiers-2027-01-17",
+  "releaseAt": "2027-01-17T08:00:00Z",
+  "validUntil": "2027-02-16T08:00:00Z",
+  "article": {
+    "slug": "mise-a-jour-ou-dormir-lisbonne-quartiers-2027-01-17",
+    "title": "Mise à jour : Où dormir à Lisbonne ?, les vérifications avant le départ",
+    "shortTitle": "Mise à jour Où dormir à Lisbonne ?",
+    "destination": "Lisbonne",
+    "category": "Mises à jour",
+    "description": "Fiche de contrôle liée à Où dormir à Lisbonne ? : sources officielles, accès, horaires et vérifications avant de réserver.",
+    "readMinutes": 3,
+    "summary": "Une fiche de contrôle pour relire « Où dormir à Lisbonne ? », retrouver les sources officielles et vérifier les informations variables avant de réserver.",
+    "sections": [
+      {
+        "id": "point-de-depart",
+        "title": "Relire le guide avant de choisir",
+        "paragraphs": [
+          "Cette mise à jour reprend le guide « Où dormir à Lisbonne sans voiture : choisir son quartier » et sa liste de sources. Elle ne raconte pas un séjour vécu et ne présente aucun hébergement comme testé.",
+          "Le contenu de référence a été relu le 2026-10-07. Les horaires, accès, tarifs et conditions peuvent évoluer : ouvrez les pages officielles le jour de votre décision."
+        ]
+      },
+      {
+        "id": "controles",
+        "title": "Les contrôles à refaire pour vos dates",
+        "paragraphs": [
+          "Commencez par l’adresse exacte, la gare ou l’arrêt réellement utilisé et le trajet final avec les bagages. Une distance courte sur une carte ne décrit ni les pentes, ni les escaliers, ni l’entrée d’un bâtiment.",
+          "Contrôlez ensuite les horaires, les réservations, les conditions d’accès et le prix complet auprès de l’exploitant concerné. Si une information n’est pas confirmée pour vos dates, gardez-la comme inconnue et adaptez le programme."
+        ],
+        "bullets": [
+          "Date et heure du déplacement, avec la dernière correspondance utile.",
+          "Accès réel depuis la rue jusqu’à l’entrée du lieu ou du logement.",
+          "Conditions et montant affichés par l’opérateur au moment de réserver.",
+          "Plan B si un service, une visite ou un accès change."
+        ]
+      },
+      {
+        "id": "sources-officielles",
+        "title": "Utiliser les sources plutôt qu’une promesse",
+        "paragraphs": [
+          "Les liens ci-dessous servent à vérifier les faits qui changent. Ils ne constituent pas une recommandation commerciale et ne remplacent pas les conditions publiées par l’opérateur.",
+          "Le guide reste une proposition éditoriale documentée. Adaptez le parcours à vos dates, à votre budget et à vos besoins d’accès ; aucune expérience personnelle n’est revendiquée."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Cette mise à jour raconte-t-elle un voyage réalisé par l’équipe ?",
+        "answer": "Non. Il s’agit d’une fiche éditoriale documentée et aucune adresse n’est présentée comme testée personnellement."
+      },
+      {
+        "question": "Pourquoi vérifier les sources le jour du départ ?",
+        "answer": "Les horaires, accès, réservations, prix et conditions peuvent changer après la rédaction ; les pages officielles restent la référence pour vos dates."
+      },
+      {
+        "question": "Que faire si une information n’est plus confirmée ?",
+        "answer": "La laisser comme inconnue, choisir une solution vérifiable ou reporter la décision plutôt que d’inventer un détail."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Visit Lisboa — Baixa",
+        "url": "https://www.visitlisboa.com/en/places/baixa-chiado"
+      },
+      {
+        "label": "Visit Lisboa — Chiado",
+        "url": "https://www.visitlisboa.com/en/places/chiado-41699ec3-eda7-414e-a9c1-e985f2f0efb7"
+      },
+      {
+        "label": "Visit Lisboa — Alfama et ses pentes",
+        "url": "https://www.visitlisboa.com/en/places/alfama"
+      },
+      {
+        "label": "Visit Lisboa — Bairro Alto",
+        "url": "https://www.visitlisboa.com/en/places/bairro-alto"
+      },
+      {
+        "label": "Visit Lisboa — Cais do Sodré",
+        "url": "https://www.visitlisboa.com/en/places/cais-do-sodre"
+      },
+      {
+        "label": "Visit Portugal — quartiers et gare du Rossio",
+        "url": "https://www.visitportugal.com/en/destinos/lisboa/73775"
+      },
+      {
+        "label": "Métro de Lisbonne — réseau",
+        "url": "https://www.metrolisboa.pt/en/discovering-lisboa-by-metro/"
+      }
+    ],
+    "related": [
+      "ou-dormir-lisbonne-quartiers"
+    ],
+    "sourcesCheckedOn": "2026-10-07"
+  },
+  "sources": [
+    {
+      "url": "https://www.visitlisboa.com/en/places/baixa-chiado",
+      "sha256": "d75b91dee8e748f20be4b74caaff27fce10bfe54a782f2aa10d64cd7c0ced884",
+      "requiredText": [
+        "Baixa Visit Lisboa"
+      ]
+    },
+    {
+      "url": "https://www.visitlisboa.com/en/places/chiado-41699ec3-eda7-414e-a9c1-e985f2f0efb7",
+      "sha256": "987f5fbb57705c59d4ad87518eedc15562f442bd76567af4d6795e2d19581507",
+      "requiredText": [
+        "Chiado Visit Lisboa"
+      ]
+    },
+    {
+      "url": "https://www.visitlisboa.com/en/places/alfama",
+      "sha256": "a9cf5b95516a06ceff0f56c82f17376a36b1e784898a607cece74df343a33b14",
+      "requiredText": [
+        "Alfama Visit Lisboa"
+      ]
+    },
+    {
+      "url": "https://www.visitlisboa.com/en/places/bairro-alto",
+      "sha256": "7e300bcda0592d8385f23b954bffca325b9e39dad236b26056d79f9450e78cc9",
+      "requiredText": [
+        "Bairro Alto Visit"
+      ]
+    },
+    {
+      "url": "https://www.visitlisboa.com/en/places/cais-do-sodre",
+      "sha256": "0fe5dc61083737d962d631c1563957e56d7b6a9f586a66eb2d74ae1b8726e288",
+      "requiredText": [
+        "Cais Sodré Visit"
+      ]
+    },
+    {
+      "url": "https://www.visitportugal.com/en/destinos/lisboa/73775",
+      "sha256": "b1b9da75f3ef6dcddabb410fd0b8efeccb6aa4e41602debeef065964527cb40c",
+      "requiredText": [
+        "Making sure you're"
+      ]
+    },
+    {
+      "url": "https://www.metrolisboa.pt/en/discovering-lisboa-by-metro/",
+      "sha256": "ff3f685fe987ee18b25778b8bcaf9d733c5afaab7714a56bb66d06e1ed8dd072",
+      "requiredText": [
+        "Discovering Lisboa Metro"
+      ]
+    }
+  ],
+  "review": {
+    "publicationApproved": false,
+    "fabricatedExperience": false,
+    "commercialClaims": false,
+    "method": "deterministic-source-recheck-v1"
+  }
+}
