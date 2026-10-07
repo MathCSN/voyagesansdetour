@@ -239,7 +239,9 @@ async function describeStockBatch(batch) {
   check3(exact(source, ["schemaVersion", "batchId", "items"]) && source.schemaVersion === 1 && batchIdentity(source.batchId) && Array.isArray(source.items) && source.items.length === 1);
   const item = source.items[0], payload = item?.payload, review = item?.review;
   check3(exact(item, ["contentId", "deduplicationKey", "title", "dueAt", "payload", "review"]) && identity(item.contentId) && identity(item.deduplicationKey) && identity(item.title) && timestamp(item.dueAt));
-  check3(payload?.schemaVersion === 1 && payload.channel === "instagram" && payload.kind === "reel" && Array.isArray(payload.assets) && payload.assets.length === 1 && payload.assets[0]?.mimeType === "video/mp4");
+  const instagramReel = payload?.schemaVersion === 1 && payload.channel === "instagram" && payload.kind === "reel" && Array.isArray(payload.assets) && payload.assets.length === 1 && payload.assets[0]?.mimeType === "video/mp4";
+  const facebookPhotos = payload?.schemaVersion === 1 && payload.channel === "facebook" && payload.kind === "photos" && payload.aiGenerated === false && Array.isArray(payload.assets) && payload.assets.length >= 2 && payload.assets.length <= 10 && payload.assets.every((asset) => ["image/jpeg", "image/png", "image/webp"].includes(asset?.mimeType));
+  check3(instagramReel || facebookPhotos);
   check3(review?.schemaVersion === 1 && review.contentId === item.contentId && review.approved === true && hash(review.payloadRevision) && review.payloadRevision === await bufferPayloadRevision(payload) && review.checks?.requiresPaidCall === false);
   return validateStockDescriptors([{
     batchId: source.batchId,
@@ -412,7 +414,8 @@ function absentEligibility(batch, at) {
   check4(reviewedAt < expiry, "invalid_review_dates");
   if (reviewedAt > at) return { eligible: false, reason: "future_review" };
   if (expiry <= Math.max(at, dueAt)) return { eligible: false, reason: "review_expired_or_slot_uncovered" };
-  const records = [review.checks?.sources, review.media, review.destination, review.formatCapability];
+  const mediaRecords = batch.items[0].payload.channel === "facebook" ? review.media?.items : [review.media];
+  const records = [review.checks?.sources, ...(Array.isArray(mediaRecords) ? mediaRecords : []), review.destination, review.formatCapability];
   for (const record of records) {
     check4(plain2(record) && record.status === "verified", "unverified_absent_batch");
     const observed = instant(record.observedAt), validUntil = instant(record.validUntil);
