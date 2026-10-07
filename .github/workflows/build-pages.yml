@@ -55,9 +55,9 @@ jobs:
         run: |
           python - <<'PY'
           import datetime as dt, os
-          import json
           from pathlib import Path
           import editorial_queue as q
+          from cloud_source_changes import push_file_requires_build
           now = dt.datetime.now(dt.timezone.utc)
           scheduled = os.environ['EVENT_NAME'] == 'schedule'
           active = now <= q.instant('2027-09-14T23:59:59+02:00')
@@ -65,33 +65,17 @@ jobs:
           _, queue = q.load(now=now)
           pending = any(p['receipt'] is None for p in queue['promotions'])
           intake_changed = os.environ.get('INTAKE_CHANGED') == 'true'
-          # A generator-only push changes editorial-candidates/ and must not
-          # trigger a redundant Pages deployment. Source or queue changes
-          # still build immediately; schedules keep their normal due check.
-          source_changed = False
-          if os.environ['EVENT_NAME'] == 'push':
-              try:
-                  with Path(os.environ['GITHUB_EVENT_PATH']).open(encoding='utf-8') as event_file:
-                      event = json.load(event_file)
-                  files = []
-                  for commit in event.get('commits', []):
-                      files.extend(commit.get('added', []))
-                      files.extend(commit.get('modified', []))
-                      files.extend(commit.get('removed', []))
-                  source_changed = any(
-                      path.startswith('site-src/') and
-                      not path.startswith('site-src/editorial-candidates/')
-                      for path in files
-                  )
-              except (OSError, ValueError, TypeError):
-                  source_changed = True
+          # Skip candidate-only pushes only when a complete file list proves
+          # this. Actions may omit per-commit paths; missing data builds.
+          source_changed = os.environ['EVENT_NAME'] == 'push' and push_file_requires_build(
+              os.environ.get('GITHUB_EVENT_PATH'))
           publish = active and (changed or pending or intake_changed or source_changed)
           with Path(os.environ['GITHUB_OUTPUT']).open('a') as f:
               f.write('publish=' + str(publish).lower() + '\n')
           PY
       - name: Validate site
         if: steps.release.outputs.publish == 'true' || steps.generator.outputs.changed == 'true' || steps.intake.outputs.changed == 'true'
-        run: python -m unittest -q test_site test_stay22 test_editorial_queue test_public_media test_autonomous_editorial test_autonomous_candidate
+        run: python -m unittest -q test_site test_stay22 test_editorial_queue test_public_media test_autonomous_editorial test_autonomous_candidate test_cloud_source_changes
       - name: Validate analytics consent without external calls
         if: steps.release.outputs.publish == 'true'
         run: node --test test_analytics.mjs
