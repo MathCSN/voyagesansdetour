@@ -164,13 +164,32 @@ def generate(root=ROOT, now=None):
         return {"status": "capacity", "changed": False, "pending": pending}
     known_slugs = {item.get("article", {}).get("slug") for item in candidates}
     known_slugs |= {item.get("slug") for item in articles}
-    base = articles[len(candidates) % len(articles)]
     release = next_release(now, articles, state, candidates)
     release_date = release.date().isoformat()
-    article = make_article(base, release_date, now.astimezone(dt.timezone.utc).date().isoformat())
-    if article["slug"] in known_slugs:
-        return {"status": "already_present", "changed": False, "id": f"auto-{article['slug']}"}
-    sources = source_manifest(article)
+    checked_on = now.astimezone(dt.timezone.utc).date().isoformat()
+    article = None
+    sources = None
+    last_source_error = None
+    start = len(candidates) % len(articles)
+    # Some older guides include a PDF source. Keep the generator live by
+    # trying the next published guide when a candidate cannot be source-bound;
+    # network failures still escape and fail closed.
+    for offset in range(len(articles)):
+        base = articles[(start + offset) % len(articles)]
+        candidate_article = make_article(base, release_date, checked_on)
+        if candidate_article["slug"] in known_slugs:
+            continue
+        try:
+            candidate_sources = source_manifest(candidate_article)
+        except ValueError as error:
+            last_source_error = error
+            continue
+        article, sources = candidate_article, candidate_sources
+        break
+    if article is None or sources is None:
+        if last_source_error:
+            raise last_source_error
+        return {"status": "already_present", "changed": False}
     candidate = {
         "schemaVersion": 1, "id": f"auto-{article['slug']}",
         "releaseAt": iso(release), "validUntil": iso(release + dt.timedelta(days=30)),
