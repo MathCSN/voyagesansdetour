@@ -20,7 +20,7 @@ jobs:
   build:
     if: github.repository == 'MathCSN/voyagesansdetour' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
-    timeout-minutes: 5
+    timeout-minutes: 8
     permissions:
       contents: write
     outputs:
@@ -40,6 +40,10 @@ jobs:
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: '3.12'
+      - name: Generate one bounded source-bound candidate
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        id: generator
+        run: python autonomous_candidate.py --report "$RUNNER_TEMP/editorial-candidate-generation.json"
       - name: Admit near-date candidates after exact source revalidation
         id: intake
         run: python autonomous_editorial.py --report "$RUNNER_TEMP/editorial-revalidation.json"
@@ -66,7 +70,7 @@ jobs:
           PY
       - name: Validate site
         if: steps.release.outputs.publish == 'true'
-        run: python -m unittest -q test_site test_stay22 test_editorial_queue test_public_media test_autonomous_editorial
+        run: python -m unittest -q test_site test_stay22 test_editorial_queue test_public_media test_autonomous_editorial test_autonomous_candidate
       - name: Validate analytics consent without external calls
         if: steps.release.outputs.publish == 'true'
         run: node --test test_analytics.mjs
@@ -81,14 +85,14 @@ jobs:
         id: manifest
         run: python editorial_queue.py manifest --github-output "$GITHUB_OUTPUT"
       - name: Persist promotion before deployment
-        if: steps.release.outputs.publish == 'true'
+        if: steps.release.outputs.publish == 'true' || steps.generator.outputs.changed == 'true' || steps.intake.outputs.changed == 'true'
         id: persist
         run: |
           set -euo pipefail
-          git add -- articles.json editorial-queue.json
+          git add -- articles.json editorial-queue.json editorial-candidates
           if [ -d editorial-revalidation ]; then git add -- editorial-revalidation; fi
           if ! git diff --cached --quiet; then
-            git -c user.name='Voyage Sans Détour' -c user.email='contact@voyagesansdetour.fr' commit -m 'Promote a reviewed editorial release'
+            git -c user.name='Voyage Sans Détour' -c user.email='contact@voyagesansdetour.fr' commit -m 'Maintain the autonomous editorial queue'
             git push origin HEAD:main
           fi
           echo "source_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
