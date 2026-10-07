@@ -27,6 +27,15 @@
       "itemIds": [
         "vsd-production:facebook:lisbonne-3-jours-sans-voiture-2026-09:fb02-v1"
       ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/facebook-porto-photos-2026-10-12-v1.json",
+      "fileSha256": "9e9add72036159cd9633152d7dc2b7f24254d12759bd275b021d7af0e99f4000",
+      "batchId": "facebook-porto-photos-2026-10-12-v1",
+      "batchSha256": "482248b70e48aea84d5bee5913b72e310f643a9ccf67b78b56249ce3c2406692",
+      "itemIds": [
+        "vsd-production:facebook:porto-3-jours-sans-voiture-2026-10:fb03-v1"
+      ]
     }
   ]
 }

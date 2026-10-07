@@ -1,0 +1,179 @@
+{
+  "schemaVersion": 1,
+  "batchId": "facebook-porto-photos-2026-10-12-v1",
+  "items": [
+    {
+      "contentId": "vsd-production:facebook:porto-3-jours-sans-voiture-2026-10:fb03-v1",
+      "deduplicationKey": "vsd-production:facebook:porto-3-jours-sans-voiture-2026-10:fb03-v1",
+      "title": "Porto en 3 jours : du Douro à l’Atlantique",
+      "dueAt": "2026-10-12T16:00:00Z",
+      "payload": {
+        "schemaVersion": 1,
+        "channel": "facebook",
+        "kind": "photos",
+        "text": "🇵🇹 Porto en 3 jours, du Douro à l’Atlantique, sans voiture\n\nUn secteur par journée, avec de la place pour souffler ☕\n\n📍 Jour 1 — São Bento, la Sé et Ribeira\n🌉 Jour 2 — Gaia et les deux rives du Douro\n🌊 Jour 3 — Foz ou Matosinhos, selon vos envies et la météo\n\nFaites défiler les 6 visuels et gardez ce parcours sous la main 🗺️\nLe guide complet 👉 https://voyagesansdetour.fr/portugal/porto-3-jours-sans-voiture/\n\nProposition éditoriale documentée, pas un récit de voyage vécu. Ouvertures, accès et transports à recontrôler avant le départ.\nTextes et visuels originaux : Voyage Sans Détour, préparés avec l’aide de l’IA. Sources officielles citées dans le guide.\n\n#Porto #Portugal #VoyageSansVoiture #VoyageSansDetour",
+        "aiGenerated": false,
+        "assets": [
+          {
+            "url": "https://voyagesansdetour.fr/social-media/carrousels-2026-09/porto-01-couverture.jpg",
+            "sha256": "d37658ec9fa07ebddfaea99f68f98c9c32014bf579bbe008297c733a205396a4",
+            "mimeType": "image/jpeg",
+            "altText": "Proposition d’itinéraire de trois journées complètes à Porto, sans voiture. Schéma éditorial, pas une carte."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/carrousels-2026-09/porto-02-jour-1.jpg",
+            "sha256": "cef2ac005e8f8075f1d8f3fdc49f75f8be11094431438f46a26e35f5a96c4c47",
+            "mimeType": "image/jpeg",
+            "altText": "Le centre, jusqu’à Ribeira. Commencer en haut, puis descendre vers le Douro. Une visite intérieure selon vos envies. Gardez de l’énergie pour la remontée. Évitez les allers-retours entre les niveaux."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/carrousels-2026-09/porto-03-jour-2.jpg",
+            "sha256": "99d1f753b5aeb5a10a82a6fa821ac1bc7ec5f29167dc317fdab516c275dc3b7a",
+            "mimeType": "image/jpeg",
+            "altText": "Gaia, l’autre rive. Changer de point de vue sur Porto et le Douro. Le panorama suffit : la visite reste facultative. Préparez le chemin du retour, avec ses marches et différences de niveau."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/carrousels-2026-09/porto-04-jour-3.jpg",
+            "sha256": "c4a4b84c072fc1195cb71965dcc34a23bc6ec6699cfdcc9bb540885c8c482779",
+            "mimeType": "image/jpeg",
+            "altText": "Une journée côté Atlantique. Choisir un secteur du littoral. Garder la météo en tête. Une promenade au bord de l’océan, puis un déjeuner. En cas de mauvais temps, remplacez le littoral par une visite intérieure."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/carrousels-2026-09/porto-05-bons-reflexes.jpg",
+            "sha256": "8b21c109a8d646fc69a3ae836aab0d5573d276caa5747af242a6883cef6537f5",
+            "mimeType": "image/jpeg",
+            "altText": "Ménagez les remontées. Les quais sont en contrebas : prévoyez aussi le trajet du retour. Choisissez un secteur côtier. Foz ou Matosinhos : gardez cette journée flexible selon la météo. Préparez le dernier trajet. La station d’arrivée ne remplace pas le chemin jusqu’au logement."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/carrousels-2026-09/porto-06-guide-complet.jpg",
+            "sha256": "ede6d2b40bdde8cd92cbb87728974e5b5ee025f548749c48540cdfdd99ee2604",
+            "mimeType": "image/jpeg",
+            "altText": "Récapitulatif de trois journées à Porto. Guide complet sur voyagesansdetour.fr, rubrique Portugal. Itinéraire documenté à adapter à ses dates."
+          }
+        ]
+      },
+      "review": {
+        "schemaVersion": 1,
+        "contentId": "vsd-production:facebook:porto-3-jours-sans-voiture-2026-10:fb03-v1",
+        "approved": true,
+        "reviewedAt": "2026-10-07T02:14:45Z",
+        "validUntil": "2026-10-13T00:00:00Z",
+        "payloadRevision": "171f98e94ef506c474ba321fe4e3791f1709a204b7db37d45ee90ec6a40b228b",
+        "checks": {
+          "editorialApproved": true,
+          "rightsApproved": true,
+          "creditsPreserved": true,
+          "sources": {
+            "status": "verified",
+            "observedAt": "2026-10-07T02:14:45Z",
+            "validUntil": "2026-10-13T00:00:00Z"
+          },
+          "requiresPaidCall": false,
+          "syntheticPerson": false,
+          "disclosurePreserved": false,
+          "providerSyntheticSettingVerified": false,
+          "formatRequirementsVerified": true
+        },
+        "media": {
+          "required": true,
+          "url": null,
+          "sha256": null,
+          "items": [
+            {
+              "url": "https://voyagesansdetour.fr/social-media/carrousels-2026-09/porto-01-couverture.jpg",
+              "sha256": "d37658ec9fa07ebddfaea99f68f98c9c32014bf579bbe008297c733a205396a4",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-07T02:14:45Z",
+              "validUntil": "2026-10-13T00:00:00Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/carrousels-2026-09/porto-02-jour-1.jpg",
+              "sha256": "cef2ac005e8f8075f1d8f3fdc49f75f8be11094431438f46a26e35f5a96c4c47",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-07T02:14:45Z",
+              "validUntil": "2026-10-13T00:00:00Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/carrousels-2026-09/porto-03-jour-2.jpg",
+              "sha256": "99d1f753b5aeb5a10a82a6fa821ac1bc7ec5f29167dc317fdab516c275dc3b7a",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-07T02:14:45Z",
+              "validUntil": "2026-10-13T00:00:00Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/carrousels-2026-09/porto-04-jour-3.jpg",
+              "sha256": "c4a4b84c072fc1195cb71965dcc34a23bc6ec6699cfdcc9bb540885c8c482779",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-07T02:14:45Z",
+              "validUntil": "2026-10-13T00:00:00Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/carrousels-2026-09/porto-05-bons-reflexes.jpg",
+              "sha256": "8b21c109a8d646fc69a3ae836aab0d5573d276caa5747af242a6883cef6537f5",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-07T02:14:45Z",
+              "validUntil": "2026-10-13T00:00:00Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/carrousels-2026-09/porto-06-guide-complet.jpg",
+              "sha256": "ede6d2b40bdde8cd92cbb87728974e5b5ee025f548749c48540cdfdd99ee2604",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-07T02:14:45Z",
+              "validUntil": "2026-10-13T00:00:00Z"
+            }
+          ]
+        },
+        "destination": {
+          "url": "https://voyagesansdetour.fr/portugal/porto-3-jours-sans-voiture/",
+          "status": "verified",
+          "observedAt": "2026-10-07T02:14:45Z",
+          "validUntil": "2026-10-13T00:00:00Z"
+        },
+        "monetization": {
+          "containsAffiliateLinks": false,
+          "partnerApproved": false,
+          "linksVerified": false,
+          "disclosurePreserved": false
+        },
+        "formatCapability": {
+          "status": "verified",
+          "observedAt": "2026-10-07T02:14:45Z",
+          "validUntil": "2026-10-13T00:00:00Z",
+          "automaticPublishing": true,
+          "verificationMethod": "official_documentation",
+          "sourceUrls": [
+            "https://support.buffer.com/en-us/articles/using-facebook-with-buffer-jY1AM9fz2G",
+            "https://developers.buffer.com/types/FacebookPostMetadataInput.html",
+            "https://developers.buffer.com/guides/posts-and-scheduling.html"
+          ]
+        },
+        "evidence": {
+          "mediaProof": "livrables/reseaux/facebook-porto-2026-10-06/qualification.json",
+          "officialSources": [
+            "https://visitporto.travel/en-GB/districts/historic",
+            "https://visitporto.travel/en-GB/districts/atlantic",
+            "https://visitporto.travel/en-GB/accessible-porto"
+          ],
+          "sourceClaims": "Visit Porto confirms São Bento, Sé, Ribeira, Luís I bridge and Gaia in historic district; Foz and Matosinhos Sul in Atlantic district. Itinerary and flexible pacing are editorial advice; no prices, operating hours or timetable claims.",
+          "rights": "Original vector/text cards, no photos, logos, music or synthetic people; DM Sans and Playfair Display OFL notices in site media credits.",
+          "dedupeRead": "Buffer My organization Facebook Page Voyagesansdetour: one sent Lisbonne multi-photo post; no Porto photo post, 2026-10-07.",
+          "captionDisclosure": "The caption says source-based editorial proposal, not lived travel, and credits IA-assisted original visual preparation.",
+          "status": "reviewed_public_bytes_rechecked_not_imported",
+          "recheckedAt": "2026-10-07T02:14:45Z",
+          "schedule": {
+            "plannedGapHours": 168,
+            "precedingItem": "vsd-production:facebook:lisbonne-3-jours-sans-voiture-2026-09:fb02-v1",
+            "precedingDueAt": "2026-09-27T14:30:00Z",
+            "note": "Intended slot only; stock controller must reconcile receipts before any import."
+          }
+        }
+      }
+    }
+  ]
+}
