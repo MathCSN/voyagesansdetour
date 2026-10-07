@@ -40,10 +40,14 @@ jobs:
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: '3.12'
+      - name: Admit near-date candidates after exact source revalidation
+        id: intake
+        run: python autonomous_editorial.py --report "$RUNNER_TEMP/editorial-revalidation.json"
       - name: Release one reviewed article when due
         id: release
         env:
           EVENT_NAME: ${{ github.event_name }}
+          INTAKE_CHANGED: ${{ steps.intake.outputs.changed }}
         run: |
           python - <<'PY'
           import datetime as dt, os
@@ -55,13 +59,14 @@ jobs:
           changed = q.promote(now=now) if active else False
           _, queue = q.load(now=now)
           pending = any(p['receipt'] is None for p in queue['promotions'])
-          publish = not scheduled or (active and (changed or pending))
+          intake_changed = os.environ.get('INTAKE_CHANGED') == 'true'
+          publish = not scheduled or (active and (changed or pending or intake_changed))
           with Path(os.environ['GITHUB_OUTPUT']).open('a') as f:
               f.write('publish=' + str(publish).lower() + '\n')
           PY
       - name: Validate site
         if: steps.release.outputs.publish == 'true'
-        run: python -m unittest -q test_site test_stay22 test_editorial_queue test_public_media
+        run: python -m unittest -q test_site test_stay22 test_editorial_queue test_public_media test_autonomous_editorial
       - name: Validate analytics consent without external calls
         if: steps.release.outputs.publish == 'true'
         run: node --test test_analytics.mjs
@@ -81,6 +86,7 @@ jobs:
         run: |
           set -euo pipefail
           git add -- articles.json editorial-queue.json
+          if [ -d editorial-revalidation ]; then git add -- editorial-revalidation; fi
           if ! git diff --cached --quiet; then
             git -c user.name='Voyage Sans Détour' -c user.email='contact@voyagesansdetour.fr' commit -m 'Promote a reviewed editorial release'
             git push origin HEAD:main
