@@ -1,0 +1,180 @@
+{
+  "schemaVersion": 1,
+  "batchId": "facebook-lisbonne-photos-2026-10-11-v1",
+  "items": [
+    {
+      "contentId": "vsd-production:facebook:lisbonne-3-jours-sans-voiture-2026-09:fb01-v1",
+      "deduplicationKey": "vsd-production:facebook:lisbonne-3-jours-sans-voiture-2026-09:fb01-v1",
+      "title": "Lisbonne en 3 jours : un secteur par jour",
+      "dueAt": "2026-10-11T16:00:00Z",
+      "payload": {
+        "schemaVersion": 1,
+        "channel": "facebook",
+        "kind": "photos",
+        "text": "🇵🇹 Lisbonne en 3 jours, sans courir partout\n\nUn secteur par jour, et du temps pour les pauses ☕\n\n📍 Jour 1 : Baixa, le Tage et Chiado\n📍 Jour 2 : Alfama et ses points de vue\n📍 Jour 3 : Belém, avec une visite prioritaire et du temps au bord du fleuve\n\nEnregistrez les 6 visuels pour préparer votre séjour 🗺️\nLe guide complet 👉 https://voyagesansdetour.fr/portugal/lisbonne-3-jours-sans-voiture/\n\nProposition éditoriale documentée, pas un récit de voyage vécu. Ouvertures, accès et transports à recontrôler avant le départ.\nTextes et visuels originaux : Voyage Sans Détour. Sources officielles citées dans le guide.\n\n#Lisbonne #Portugal #VoyageSansVoiture #VoyageSansDetour",
+        "aiGenerated": false,
+        "assets": [
+          {
+            "url": "https://voyagesansdetour.fr/social-media/carrousels-2026-09/lisbonne-01-couverture.jpg",
+            "sha256": "13890387b61769d4efe03a989373ade0b3b2119e3813691bf02fd52a7fecc23b",
+            "mimeType": "image/jpeg",
+            "altText": "Proposition d’itinéraire de trois journées complètes à Lisbonne, sans voiture. Schéma éditorial, pas une carte."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/carrousels-2026-09/lisbonne-02-jour-1.jpg",
+            "sha256": "2948d7fc5d5414918c3b0a34c14349a858fa3773f39ec374a6dfe73d7ebe812f",
+            "mimeType": "image/jpeg",
+            "altText": "Baixa, le Tage & Chiado. Prendre ses repères, puis remonter tranquillement vers Chiado. Puis, les rues et les cafés de Chiado. Choisissez une visite intérieure. Gardez le reste de la journée souple."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/carrousels-2026-09/lisbonne-03-jour-2.jpg",
+            "sha256": "315b2f77fb0af3a3001e9e22e62164715432b89db66de9e3686ddf311cf1e3ea",
+            "mimeType": "image/jpeg",
+            "altText": "Alfama, sans se presser. Des ruelles aux belvédères, une boucle à adapter à son énergie. Le château reste un choix, pas une obligation. Pensez aux pentes, pas seulement aux distances sur la carte."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/carrousels-2026-09/lisbonne-04-jour-3.jpg",
+            "sha256": "9cab86c68b509f87b11405432ec0b2fa3ac4c7acd25ac2b97408cb84fc2da7c3",
+            "mimeType": "image/jpeg",
+            "altText": "Belém, au bord du Tage. Une visite prioritaire, puis du temps près du fleuve. Un parcours de quartier, à votre rythme. Vérifiez ouvertures et réservations avant de choisir une visite intérieure."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/carrousels-2026-09/lisbonne-05-bons-reflexes.jpg",
+            "sha256": "d07c866da141d483bc5bf056d0f21bb9978cd814a0313a6892ac2ac010bf5f18",
+            "mimeType": "image/jpeg",
+            "altText": "Gardez Sintra à part. Une journée supplémentaire, ou une journée de Lisbonne à remplacer. Anticipez les montées. Adaptez la boucle à votre énergie et aux accès dont vous avez besoin. Vérifiez avant de réserver. Ouvertures, accès et perturbations : consultez les exploitants."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/carrousels-2026-09/lisbonne-06-guide-complet.jpg",
+            "sha256": "98a588d1af19a5029efca3bf6fe9c10aabc0af3879640d8ffc1b4609888d3a84",
+            "mimeType": "image/jpeg",
+            "altText": "Récapitulatif de trois journées à Lisbonne. Guide complet sur voyagesansdetour.fr, rubrique Portugal. Itinéraire documenté à adapter à ses dates."
+          }
+        ]
+      },
+      "review": {
+        "schemaVersion": 1,
+        "contentId": "vsd-production:facebook:lisbonne-3-jours-sans-voiture-2026-09:fb01-v1",
+        "approved": true,
+        "reviewedAt": "2026-10-07T01:33:10Z",
+        "validUntil": "2026-10-12T00:00:00Z",
+        "payloadRevision": "b0d20bd368a7b36f229b81c5466e7135a11d2ef10f421e921ad717a7f65180e3",
+        "checks": {
+          "editorialApproved": true,
+          "rightsApproved": true,
+          "creditsPreserved": true,
+          "sources": {
+            "status": "verified",
+            "observedAt": "2026-10-07T01:33:10Z",
+            "validUntil": "2026-10-12T00:00:00Z"
+          },
+          "requiresPaidCall": false,
+          "syntheticPerson": false,
+          "disclosurePreserved": false,
+          "providerSyntheticSettingVerified": false,
+          "formatRequirementsVerified": true
+        },
+        "media": {
+          "required": true,
+          "url": null,
+          "sha256": null,
+          "items": [
+            {
+              "url": "https://voyagesansdetour.fr/social-media/carrousels-2026-09/lisbonne-01-couverture.jpg",
+              "sha256": "13890387b61769d4efe03a989373ade0b3b2119e3813691bf02fd52a7fecc23b",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-07T01:33:10Z",
+              "validUntil": "2026-10-12T00:00:00Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/carrousels-2026-09/lisbonne-02-jour-1.jpg",
+              "sha256": "2948d7fc5d5414918c3b0a34c14349a858fa3773f39ec374a6dfe73d7ebe812f",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-07T01:33:10Z",
+              "validUntil": "2026-10-12T00:00:00Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/carrousels-2026-09/lisbonne-03-jour-2.jpg",
+              "sha256": "315b2f77fb0af3a3001e9e22e62164715432b89db66de9e3686ddf311cf1e3ea",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-07T01:33:10Z",
+              "validUntil": "2026-10-12T00:00:00Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/carrousels-2026-09/lisbonne-04-jour-3.jpg",
+              "sha256": "9cab86c68b509f87b11405432ec0b2fa3ac4c7acd25ac2b97408cb84fc2da7c3",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-07T01:33:10Z",
+              "validUntil": "2026-10-12T00:00:00Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/carrousels-2026-09/lisbonne-05-bons-reflexes.jpg",
+              "sha256": "d07c866da141d483bc5bf056d0f21bb9978cd814a0313a6892ac2ac010bf5f18",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-07T01:33:10Z",
+              "validUntil": "2026-10-12T00:00:00Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/carrousels-2026-09/lisbonne-06-guide-complet.jpg",
+              "sha256": "98a588d1af19a5029efca3bf6fe9c10aabc0af3879640d8ffc1b4609888d3a84",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-07T01:33:10Z",
+              "validUntil": "2026-10-12T00:00:00Z"
+            }
+          ]
+        },
+        "destination": {
+          "url": "https://voyagesansdetour.fr/portugal/lisbonne-3-jours-sans-voiture/",
+          "status": "verified",
+          "observedAt": "2026-10-07T01:33:10Z",
+          "validUntil": "2026-10-12T00:00:00Z"
+        },
+        "monetization": {
+          "containsAffiliateLinks": false,
+          "partnerApproved": false,
+          "linksVerified": false,
+          "disclosurePreserved": false
+        },
+        "formatCapability": {
+          "status": "verified",
+          "observedAt": "2026-09-27T14:30:29.408049Z",
+          "validUntil": "2026-10-12T00:00:00Z",
+          "automaticPublishing": true,
+          "verificationMethod": "official_documentation",
+          "sourceUrls": [
+            "https://support.buffer.com/en-us/articles/using-facebook-with-buffer-jY1AM9fz2G",
+            "https://developers.buffer.com/types/FacebookPostMetadataInput.html",
+            "https://developers.buffer.com/guides/posts-and-scheduling.html"
+          ]
+        },
+        "evidence": {
+          "status": "reviewed_candidate_public_bytes_rechecked_not_imported",
+          "recheckedAt": "2026-10-07T01:33:10Z",
+          "mediaSha256s": [
+            "13890387b61769d4efe03a989373ade0b3b2119e3813691bf02fd52a7fecc23b",
+            "2948d7fc5d5414918c3b0a34c14349a858fa3773f39ec374a6dfe73d7ebe812f",
+            "315b2f77fb0af3a3001e9e22e62164715432b89db66de9e3686ddf311cf1e3ea",
+            "9cab86c68b509f87b11405432ec0b2fa3ac4c7acd25ac2b97408cb84fc2da7c3",
+            "d07c866da141d483bc5bf056d0f21bb9978cd814a0313a6892ac2ac010bf5f18",
+            "98a588d1af19a5029efca3bf6fe9c10aabc0af3879640d8ffc1b4609888d3a84"
+          ],
+          "destination": "https://voyagesansdetour.fr/portugal/lisbonne-3-jours-sans-voiture/",
+          "sourceUrls": [
+            "https://www.visitlisboa.com/en/regions/lisboa-centro",
+            "https://www.visitlisboa.com/en/places/alfama",
+            "https://www.visitlisboa.com/en/places/jeronimos-monastery"
+          ],
+          "sourceClaims": "Neighbourhood grouping and slopes verified; no prices/timetables/opening claims.",
+          "rights": "Original vector/text, no photographs or synthetic people; OFL fonts bundled.",
+          "disclosure": "No lived-trip claim; proposal documented from cited sources."
+        }
+      }
+    }
+  ]
+}
