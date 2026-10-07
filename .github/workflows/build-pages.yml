@@ -55,7 +55,7 @@ jobs:
         run: |
           python - <<'PY'
           import datetime as dt, os
-          import subprocess
+          import json
           from pathlib import Path
           import editorial_queue as q
           now = dt.datetime.now(dt.timezone.utc)
@@ -71,15 +71,19 @@ jobs:
           source_changed = False
           if os.environ['EVENT_NAME'] == 'push':
               try:
-                  files = subprocess.check_output(
-                      ['git', 'diff', '--name-only', 'HEAD^', 'HEAD'], text=True
-                  ).splitlines()
+                  with Path(os.environ['GITHUB_EVENT_PATH']).open(encoding='utf-8') as event_file:
+                      event = json.load(event_file)
+                  files = []
+                  for commit in event.get('commits', []):
+                      files.extend(commit.get('added', []))
+                      files.extend(commit.get('modified', []))
+                      files.extend(commit.get('removed', []))
                   source_changed = any(
                       path.startswith('site-src/') and
                       not path.startswith('site-src/editorial-candidates/')
                       for path in files
                   )
-              except (OSError, subprocess.CalledProcessError):
+              except (OSError, ValueError, TypeError):
                   source_changed = True
           publish = active and (changed or pending or intake_changed or source_changed)
           with Path(os.environ['GITHUB_OUTPUT']).open('a') as f:
