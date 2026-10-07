@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "id": "auto-mise-a-jour-porto-3-jours-sans-voiture-2026-12-06",
+  "releaseAt": "2026-12-06T08:00:00Z",
+  "validUntil": "2027-01-05T08:00:00Z",
+  "article": {
+    "slug": "mise-a-jour-porto-3-jours-sans-voiture-2026-12-06",
+    "title": "Mise à jour : Porto en 3 jours, les vérifications avant le départ",
+    "shortTitle": "Mise à jour Porto en 3 jours",
+    "destination": "Porto",
+    "category": "Mises à jour",
+    "description": "Fiche de contrôle liée à Porto en 3 jours : sources officielles, accès, horaires et vérifications avant de réserver.",
+    "readMinutes": 3,
+    "summary": "Une fiche de contrôle pour relire « Porto en 3 jours », retrouver les sources officielles et vérifier les informations variables avant de réserver.",
+    "sections": [
+      {
+        "id": "point-de-depart",
+        "title": "Relire le guide avant de choisir",
+        "paragraphs": [
+          "Cette mise à jour reprend le guide « Porto en 3 jours : du Douro à l’océan, sans voiture » et sa liste de sources. Elle ne raconte pas un séjour vécu et ne présente aucun hébergement comme testé.",
+          "Le contenu de référence a été relu le 2026-10-07. Les horaires, accès, tarifs et conditions peuvent évoluer : ouvrez les pages officielles le jour de votre décision."
+        ]
+      },
+      {
+        "id": "controles",
+        "title": "Les contrôles à refaire pour vos dates",
+        "paragraphs": [
+          "Commencez par l’adresse exacte, la gare ou l’arrêt réellement utilisé et le trajet final avec les bagages. Une distance courte sur une carte ne décrit ni les pentes, ni les escaliers, ni l’entrée d’un bâtiment.",
+          "Contrôlez ensuite les horaires, les réservations, les conditions d’accès et le prix complet auprès de l’exploitant concerné. Si une information n’est pas confirmée pour vos dates, gardez-la comme inconnue et adaptez le programme."
+        ],
+        "bullets": [
+          "Date et heure du déplacement, avec la dernière correspondance utile.",
+          "Accès réel depuis la rue jusqu’à l’entrée du lieu ou du logement.",
+          "Conditions et montant affichés par l’opérateur au moment de réserver.",
+          "Plan B si un service, une visite ou un accès change."
+        ]
+      },
+      {
+        "id": "sources-officielles",
+        "title": "Utiliser les sources plutôt qu’une promesse",
+        "paragraphs": [
+          "Les liens ci-dessous servent à vérifier les faits qui changent. Ils ne constituent pas une recommandation commerciale et ne remplacent pas les conditions publiées par l’opérateur.",
+          "Le guide reste une proposition éditoriale documentée. Adaptez le parcours à vos dates, à votre budget et à vos besoins d’accès ; aucune expérience personnelle n’est revendiquée."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Cette mise à jour raconte-t-elle un voyage réalisé par l’équipe ?",
+        "answer": "Non. Il s’agit d’une fiche éditoriale documentée et aucune adresse n’est présentée comme testée personnellement."
+      },
+      {
+        "question": "Pourquoi vérifier les sources le jour du départ ?",
+        "answer": "Les horaires, accès, réservations, prix et conditions peuvent changer après la rédaction ; les pages officielles restent la référence pour vos dates."
+      },
+      {
+        "question": "Que faire si une information n’est plus confirmée ?",
+        "answer": "La laisser comme inconnue, choisir une solution vérifiable ou reporter la décision plutôt que d’inventer un détail."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Visit Porto — quartier historique",
+        "url": "https://visitporto.travel/en-GB/districts/historic"
+      },
+      {
+        "label": "Visit Porto — quartier Atlantique",
+        "url": "https://visitporto.travel/en-GB/districts/atlantic"
+      },
+      {
+        "label": "Visit Porto — rues commerçantes",
+        "url": "https://visitporto.travel/en-GB/attraction/shopping"
+      },
+      {
+        "label": "Visit Porto — accessibilité",
+        "url": "https://visitporto.travel/en-GB/accessible-porto"
+      },
+      {
+        "label": "Aéroport de Porto — transports publics",
+        "url": "https://www.portoairport.pt/en/opo/access-parking/getting-to-and-from-the-airport/public-transportation"
+      },
+      {
+        "label": "Andante — validation des titres",
+        "url": "https://andante.pt/en/purchase/silver-andante/"
+      },
+      {
+        "label": "STCP — lignes de bus",
+        "url": "https://stcp.pt/pt/linhas"
+      }
+    ],
+    "related": [
+      "porto-3-jours-sans-voiture"
+    ],
+    "sourcesCheckedOn": "2026-10-07"
+  },
+  "sources": [
+    {
+      "url": "https://visitporto.travel/en-GB/districts/historic",
+      "sha256": "6394843df64d81d847810955b5d64c16fbcbb7d2f00ee9c03f2642ab2311602d",
+      "requiredText": [
+        "Historic District Visit"
+      ]
+    },
+    {
+      "url": "https://visitporto.travel/en-GB/districts/atlantic",
+      "sha256": "a660f73cae2c0c21c3d83eb3dbe312b92cbe4e1861f770f6f3b8f5661d69e1c9",
+      "requiredText": [
+        "Atlantic District Visit"
+      ]
+    },
+    {
+      "url": "https://visitporto.travel/en-GB/attraction/shopping",
+      "sha256": "04522967320d678c39684d4524600362896bac0cd3f9f14395f7a30aed37b372",
+      "requiredText": [
+        "Shopping Visit Porto"
+      ]
+    },
+    {
+      "url": "https://visitporto.travel/en-GB/accessible-porto",
+      "sha256": "8dc9a547bf0f72b938bde7fc05693f4191fcb914d58569f3295d9d6b44fe24c6",
+      "requiredText": [
+        "Accessible Porto Visit"
+      ]
+    },
+    {
+      "url": "https://www.portoairport.pt/en/opo/access-parking/getting-to-and-from-the-airport/public-transportation",
+      "sha256": "b0fec9312215cc2a4ccb2e8cb3f9f2baa02e121e4421e43ca26ccc5e06623ef0",
+      "requiredText": [
+        "Public Transportation Porto"
+      ]
+    },
+    {
+      "url": "https://andante.pt/en/purchase/silver-andante/",
+      "sha256": "3b0a44260b4029b1d294ab996417b23f6f3bd38dda9efd30cd739d25c6a2df03",
+      "requiredText": [
+        "Silver Andante Andante"
+      ]
+    },
+    {
+      "url": "https://stcp.pt/pt/linhas",
+      "sha256": "fe5295a6f407465574939e99c497a2b2b5600f2b44962e4a14218e4cee038215",
+      "requiredText": [
+        "Linhas STCP Saltar"
+      ]
+    }
+  ],
+  "review": {
+    "publicationApproved": false,
+    "fabricatedExperience": false,
+    "commercialClaims": false,
+    "method": "deterministic-source-recheck-v1"
+  }
+}
