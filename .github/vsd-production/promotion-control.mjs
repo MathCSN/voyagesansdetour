@@ -1081,7 +1081,9 @@ async function describeStockBatch(batch) {
   check5(exact2(source, ["schemaVersion", "batchId", "items"]) && source.schemaVersion === 1 && batchIdentity(source.batchId) && Array.isArray(source.items) && source.items.length === 1);
   const item = source.items[0], payload = item?.payload, review = item?.review;
   check5(exact2(item, ["contentId", "deduplicationKey", "title", "dueAt", "payload", "review"]) && identity(item.contentId) && identity(item.deduplicationKey) && identity(item.title) && timestamp(item.dueAt));
-  check5(payload?.schemaVersion === 1 && payload.channel === "instagram" && payload.kind === "reel" && Array.isArray(payload.assets) && payload.assets.length === 1 && payload.assets[0]?.mimeType === "video/mp4");
+  const instagramReel = payload?.schemaVersion === 1 && payload.channel === "instagram" && payload.kind === "reel" && Array.isArray(payload.assets) && payload.assets.length === 1 && payload.assets[0]?.mimeType === "video/mp4";
+  const facebookPhotos = payload?.schemaVersion === 1 && payload.channel === "facebook" && payload.kind === "photos" && payload.aiGenerated === false && Array.isArray(payload.assets) && payload.assets.length >= 2 && payload.assets.length <= 10 && payload.assets.every((asset) => ["image/jpeg", "image/png", "image/webp"].includes(asset?.mimeType));
+  check5(instagramReel || facebookPhotos);
   check5(review?.schemaVersion === 1 && review.contentId === item.contentId && review.approved === true && hash(review.payloadRevision) && review.payloadRevision === await bufferPayloadRevision(payload) && review.checks?.requiresPaidCall === false);
   return validateStockDescriptors([{
     batchId: source.batchId,
