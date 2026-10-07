@@ -81,6 +81,20 @@ class AutonomousCandidateTests(unittest.TestCase):
         dates = [json.loads(path.read_text(encoding="utf-8"))["releaseAt"] for path in files]
         self.assertEqual(dates, ["2026-10-21T08:00:00Z", "2026-11-04T08:00:00Z"])
 
+    def test_admitted_candidate_does_not_consume_capacity_twice(self):
+        state = {"schemaVersion": 1, "drafts": [{"id": "admitted-0", "releaseAt": "2026-12-01T08:00:00Z"}], "promotions": []}
+        (self.root / "editorial-queue.json").write_text(json.dumps(state), encoding="utf-8")
+        for n in range(6):
+            candidate = {"id": f"pending-{n}", "article": {"slug": f"already-{n}"}, "review": {"publicationApproved": False}}
+            (self.root / "editorial-candidates" / f"candidate-{n}.json").write_text(json.dumps(candidate), encoding="utf-8")
+        admitted = {"id": "admitted-0", "article": {"slug": "already-admitted"}, "review": {"publicationApproved": False}}
+        (self.root / "editorial-candidates" / "admitted.json").write_text(json.dumps(admitted), encoding="utf-8")
+        with patch.object(generator.intake, "source_fingerprint", return_value={
+            "sha256": "a" * 64, "text": "Official source Lisbonne"
+        }):
+            result = generator.generate(self.root, generator.dt.datetime(2026, 10, 7, tzinfo=generator.UTC))
+        self.assertEqual(result["status"], "generated")
+
 
 if __name__ == "__main__":
     unittest.main()
