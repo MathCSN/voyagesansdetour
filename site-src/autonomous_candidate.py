@@ -5,7 +5,7 @@ This is a no-cost, deterministic fallback for the cloud editorial queue.  It
 does not invent a destination, a hotel, a price or a lived experience.  It
 reuses a published guide's already reviewed source set, fetches each source
 once to bind the current visible-text hash, and writes a clearly labelled
-verification update.  The normal intake still revalidates the source bytes
+verification checklist. The normal intake still revalidates the source bytes
 near the release date before any article can be published.
 
 The generator is intentionally bounded: one candidate per scheduled run,
@@ -26,7 +26,7 @@ import editorial_queue as queue
 
 ROOT = Path(__file__).resolve().parent
 UTC = dt.timezone.utc
-HARD_STOP = dt.datetime(2027, 9, 14, 21, 59, 59, tzinfo=UTC)
+HARD_STOP = intake.HARD_STOP
 MAX_PENDING = 8
 CADENCE = dt.timedelta(days=14)
 SLUG = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*\Z")
@@ -95,6 +95,9 @@ def source_manifest(article):
     return manifest
 
 
+checklist_subject = intake.checklist_subject
+
+
 def make_article(base, release_date, checked_on):
     base_title = base["shortTitle"]
     slug = f"mise-a-jour-{base['slug']}-{release_date}"
@@ -105,7 +108,8 @@ def make_article(base, release_date, checked_on):
     source_lines = [
         f"Cette mise à jour reprend le guide « {base['title']} » et sa liste de sources. "
         "Elle ne raconte pas un séjour vécu et ne présente aucun hébergement comme testé.",
-        f"Le contenu de référence a été relu le {checked_on}. Les horaires, accès, tarifs et "
+        f"Les pages de référence ont été récupérées par un contrôle automatique le {checked_on}. "
+        "Ce contrôle technique ne constitue pas une nouvelle vérification de chaque conseil. Les horaires, accès, tarifs et "
         "conditions peuvent évoluer : ouvrez les pages officielles le jour de votre décision.",
     ]
     sections = [
@@ -155,27 +159,41 @@ def generate(root=ROOT, now=None):
     candidates_dir.mkdir(exist_ok=True)
     candidates = [read_json(path) for path in sorted(candidates_dir.glob("*.json"))]
     known_ids = {item.get("id") for item in state.get("drafts", []) + state.get("promotions", [])}
-    pending = len(state.get("drafts", [])) + sum(
+    # Missed admission windows remain immutable audit records but no longer
+    # occupy a future slot. Admitted drafts remain eligible until their expiry.
+    eligible_candidates = [item for item in candidates
+                          if queue.instant(item['releaseAt']) >= now and
+                          queue.instant(item['validUntil']) > now]
+    pending = sum(queue.instant(item['validUntil']) > now for item in state.get('drafts', [])) + sum(
         1 for item in candidates
         if item.get("review", {}).get("publicationApproved") is False
         and item.get("id") not in known_ids
+        and item in eligible_candidates
     )
     if pending >= MAX_PENDING:
         return {"status": "capacity", "changed": False, "pending": pending}
     known_slugs = {item.get("article", {}).get("slug") for item in candidates}
     known_slugs |= {item.get("slug") for item in articles}
-    release = next_release(now, articles, state, candidates)
+    release = next_release(now, articles, state, eligible_candidates)
+    if release >= HARD_STOP:
+        return {'status': 'period_complete', 'changed': False, 'nextReleaseAt': iso(release)}
     release_date = release.date().isoformat()
     checked_on = now.astimezone(dt.timezone.utc).date().isoformat()
     article = None
     sources = None
     last_source_error = None
+    covered_subjects = {subject for item in articles +
+                        [item['article'] for item in state.get('drafts', [])] +
+                        [item['article'] for item in eligible_candidates]
+                        if (subject := checklist_subject(item)) is not None}
     start = len(candidates) % len(articles)
     # Some older guides include a PDF source. Keep the generator live by
     # trying the next published guide when a candidate cannot be source-bound;
     # network failures still escape and fail closed.
     for offset in range(len(articles)):
         base = articles[(start + offset) % len(articles)]
+        if checklist_subject(base) is not None or base['slug'] in covered_subjects:
+            continue
         candidate_article = make_article(base, release_date, checked_on)
         if candidate_article["slug"] in known_slugs:
             continue
@@ -189,10 +207,10 @@ def generate(root=ROOT, now=None):
     if article is None or sources is None:
         if last_source_error:
             raise last_source_error
-        return {"status": "already_present", "changed": False}
+        return {"status": "subjects_covered", "changed": False}
     candidate = {
         "schemaVersion": 1, "id": f"auto-{article['slug']}",
-        "releaseAt": iso(release), "validUntil": iso(release + dt.timedelta(days=30)),
+        "releaseAt": iso(release), "validUntil": iso(min(release + dt.timedelta(days=30), HARD_STOP)),
         "article": article, "sources": sources,
         "review": {"publicationApproved": False, "fabricatedExperience": False, "commercialClaims": False,
                     "method": "deterministic-source-recheck-v1"},

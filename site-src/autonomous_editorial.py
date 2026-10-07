@@ -21,6 +21,7 @@ import editorial_queue as queue
 
 ROOT = Path(__file__).resolve().parent
 UTC = dt.timezone.utc
+HARD_STOP = dt.datetime(2027, 9, 14, 21, 59, 59, tzinfo=UTC)
 LOOKAHEAD = dt.timedelta(hours=72)
 MAX_SOURCE_BYTES = 4 * 1024 * 1024
 HASH = re.compile(r'^[0-9a-f]{64}$')
@@ -96,15 +97,20 @@ def source_fingerprint(url, opener=None):
 
 def revalidate_source(entry, fetcher=source_fingerprint):
     observed = fetcher(entry['url'])
-    expected = entry['sha256']
-    if observed['sha256'] == expected:
-        return 'hash'
-    anchors = entry.get('requiredText', [])
-    folded = observed['text'].casefold()
-    require(isinstance(anchors, list) and anchors and
-            all(isinstance(anchor, str) and anchor.strip() and anchor.casefold() in folded for anchor in anchors),
-            'Source visible text modifiée ou repères absents.')
-    return 'anchors'
+    # Historical requiredText fields remain readable, but a matching heading
+    # cannot prove that the facts elsewhere on the page are unchanged.
+    require(observed['sha256'] == entry['sha256'],
+            'Texte visible de la source modifié : nouvelle revue nécessaire.')
+    return 'hash'
+
+
+def checklist_subject(article):
+    """Stable source guide, not the date-bearing slug of a repeated checklist."""
+    if article.get('category') == 'Mises à jour' and article.get('slug', '').startswith('mise-a-jour-'):
+        related = article.get('related', [])
+        require(len(related) == 1 and queue.SLUG.fullmatch(related[0]), 'Checklist source guide missing')
+        return related[0]
+    return None
 
 
 def validate_candidate(candidate, published_slugs):
@@ -116,6 +122,7 @@ def validate_candidate(candidate, published_slugs):
     release = queue.instant(candidate['releaseAt'])
     expiry = queue.instant(candidate['validUntil'])
     require(release < expiry, 'Fenêtre de candidat invalide.')
+    require(release < HARD_STOP and expiry <= HARD_STOP, 'Fenêtre hors période autorisée.')
     article = candidate['article']
     queue.validate_article(article, published_slugs)
     require(candidate['review'].get('publicationApproved') is False,
@@ -156,16 +163,22 @@ def approval_for(candidate, approved_at):
 
 def intake(root=ROOT, now=None, fetcher=source_fingerprint, output=None):
     now = now_utc(now)
+    if now >= HARD_STOP:
+        return {'schemaVersion': 1, 'status': 'period_complete', 'changed': False,
+                'observedAt': now.isoformat().replace('+00:00', 'Z'), 'candidates': []}
     articles, state = queue.load(root, now)
     published_slugs = {article['slug'] for article in articles}
     known_ids = {draft['id'] for draft in state['drafts']} | {entry['id'] for entry in state['promotions']}
     known_slugs = published_slugs | {draft['article']['slug'] for draft in state['drafts']}
+    known_subjects = {subject for article in articles + [draft['article'] for draft in state['drafts']]
+                      if (subject := checklist_subject(article)) is not None}
     changed = False
     report = []
     candidates_dir = root / 'editorial-candidates'
     for path in sorted(candidates_dir.glob('*.json')):
-        candidate = read_json(path)
+        candidate = None
         try:
+            candidate = read_json(path)
             release, expiry = validate_candidate(candidate, published_slugs)
             if candidate['id'] in known_ids or candidate['article']['slug'] in known_slugs:
                 report.append({'id': candidate['id'], 'status': 'already_known'})
@@ -175,6 +188,10 @@ def intake(root=ROOT, now=None, fetcher=source_fingerprint, output=None):
                 continue
             if release > now + LOOKAHEAD:
                 report.append({'id': candidate['id'], 'status': 'outside_window'})
+                continue
+            subject = checklist_subject(candidate['article'])
+            if subject is not None and subject in known_subjects:
+                report.append({'id': candidate['id'], 'status': 'duplicate_subject', 'subject': subject})
                 continue
             observed = []
             blocked = None
@@ -196,9 +213,10 @@ def intake(root=ROOT, now=None, fetcher=source_fingerprint, output=None):
                 report.append({'id': candidate['id'], 'status': 'blocked', 'reason': blocked})
                 continue
             draft = approval_for(candidate, now)
-            # Validate the full queue before writing a single byte.
-            state['drafts'].append(draft)
-            queue.validate(articles, state, now)
+            # A rejected candidate must not remain in memory and leak into a
+            # later successful candidate's queue write.
+            proposed_state = dict(state, drafts=[*state['drafts'], draft])
+            queue.validate(articles, proposed_state, now)
             proof_dir = root / 'editorial-revalidation'
             proof_dir.mkdir(parents=True, exist_ok=True)
             proof_path = proof_dir / f"{candidate['id']}.json"
@@ -207,15 +225,19 @@ def intake(root=ROOT, now=None, fetcher=source_fingerprint, output=None):
                 require(proof_path.read_text(encoding='utf-8') == proof_text, 'Preuve de revalidation immuable contradictoire.')
             else:
                 proof_path.write_text(proof_text, encoding='utf-8')
+            state = proposed_state
             known_ids.add(candidate['id'])
             known_slugs.add(candidate['article']['slug'])
+            if subject is not None:
+                known_subjects.add(subject)
             changed = True
             report.append({'id': candidate['id'], 'status': 'admitted',
                            'releaseAt': candidate['releaseAt'], 'validUntil': candidate['validUntil'],
                            'sourceCount': len(observed), 'sourceMatches': sorted({item['match'] for item in observed}),
                            'approvedAt': draft['approval']['approvedAt']})
         except Exception as error:
-            report.append({'id': candidate.get('id', path.name), 'status': 'invalid_candidate',
+            candidate_id = candidate.get('id', path.name) if isinstance(candidate, dict) else path.name
+            report.append({'id': candidate_id, 'status': 'invalid_candidate',
                            'reason': type(error).__name__})
     if changed:
         temporary = root / 'editorial-queue.json.tmp'
