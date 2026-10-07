@@ -95,6 +95,22 @@ class AutonomousCandidateTests(unittest.TestCase):
             result = generator.generate(self.root, generator.dt.datetime(2026, 10, 7, tzinfo=generator.UTC))
         self.assertEqual(result["status"], "generated")
 
+    def test_skips_a_published_guide_with_a_non_html_source(self):
+        second = copy.deepcopy(base_article())
+        second["slug"] = "porto-verification"
+        second["title"] = "Porto à vérifier"
+        second["shortTitle"] = "Porto à vérifier"
+        second["destination"] = "Porto"
+        second["sources"] = [{"label": "Source officielle", "url": "https://example.com/porto"}]
+        (self.root / "articles.json").write_text(json.dumps([base_article(), second]), encoding="utf-8")
+        with patch.object(generator.intake, "source_fingerprint", side_effect=[
+            ValueError("La source ne renvoie pas du HTML."),
+            {"sha256": "a" * 64, "text": "Official source Porto"},
+        ]):
+            result = generator.generate(self.root, generator.dt.datetime(2026, 10, 7, tzinfo=generator.UTC))
+        self.assertEqual(result["status"], "generated")
+        self.assertIn("porto-verification", result["id"])
+
 
 if __name__ == "__main__":
     unittest.main()
