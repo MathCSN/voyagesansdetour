@@ -18,6 +18,15 @@
       "itemIds": [
         "vsd-production:instagram:lisbonne-quartiers-sans-voiture-2026-10:cloud-v2"
       ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/facebook-lisbonne-photos-2026-10-11-v1.json",
+      "fileSha256": "fabd2e8aa822f083741c97208d3a321749fa967d2901c96bef96c9ea1391748a",
+      "batchId": "facebook-lisbonne-photos-2026-10-11-v1",
+      "batchSha256": "7e0c8d64d243d2910c1f87322e58943760af7edce0742ebc4a84f6b449132dbd",
+      "itemIds": [
+        "vsd-production:facebook:lisbonne-3-jours-sans-voiture-2026-09:fb01-v1"
+      ]
     }
   ]
 }
