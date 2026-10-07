@@ -68,6 +68,19 @@ class AutonomousCandidateTests(unittest.TestCase):
                 generator.generate(self.root, generator.dt.datetime(2026, 10, 7, tzinfo=generator.UTC))
         self.assertEqual(list((self.root / "editorial-candidates").glob("*.json")), [])
 
+    def test_existing_candidate_advances_the_next_release(self):
+        with patch.object(generator.intake, "source_fingerprint", return_value={
+            "sha256": "a" * 64, "text": "Official source Lisbonne"
+        }):
+            first = generator.generate(self.root, generator.dt.datetime(2026, 10, 7, tzinfo=generator.UTC))
+            second = generator.generate(self.root, generator.dt.datetime(2026, 10, 8, tzinfo=generator.UTC))
+        self.assertEqual(first["status"], "generated")
+        self.assertEqual(second["status"], "generated")
+        files = sorted((self.root / "editorial-candidates").glob("*.json"))
+        self.assertEqual(len(files), 2)
+        dates = [json.loads(path.read_text(encoding="utf-8"))["releaseAt"] for path in files]
+        self.assertEqual(dates, ["2026-10-21T08:00:00Z", "2026-11-04T08:00:00Z"])
+
 
 if __name__ == "__main__":
     unittest.main()
