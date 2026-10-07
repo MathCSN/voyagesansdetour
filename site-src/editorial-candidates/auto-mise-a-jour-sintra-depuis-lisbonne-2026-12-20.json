@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "id": "auto-mise-a-jour-sintra-depuis-lisbonne-2026-12-20",
+  "releaseAt": "2026-12-20T08:00:00Z",
+  "validUntil": "2027-01-19T08:00:00Z",
+  "article": {
+    "slug": "mise-a-jour-sintra-depuis-lisbonne-2026-12-20",
+    "title": "Mise à jour : Une journée à Sintra, les vérifications avant le départ",
+    "shortTitle": "Mise à jour Une journée à Sintra",
+    "destination": "Sintra",
+    "category": "Mises à jour",
+    "description": "Fiche de contrôle liée à Une journée à Sintra : sources officielles, accès, horaires et vérifications avant de réserver.",
+    "readMinutes": 3,
+    "summary": "Une fiche de contrôle pour relire « Une journée à Sintra », retrouver les sources officielles et vérifier les informations variables avant de réserver.",
+    "sections": [
+      {
+        "id": "point-de-depart",
+        "title": "Relire le guide avant de choisir",
+        "paragraphs": [
+          "Cette mise à jour reprend le guide « Sintra depuis Lisbonne : organiser une journée sans voiture » et sa liste de sources. Elle ne raconte pas un séjour vécu et ne présente aucun hébergement comme testé.",
+          "Le contenu de référence a été relu le 2026-10-07. Les horaires, accès, tarifs et conditions peuvent évoluer : ouvrez les pages officielles le jour de votre décision."
+        ]
+      },
+      {
+        "id": "controles",
+        "title": "Les contrôles à refaire pour vos dates",
+        "paragraphs": [
+          "Commencez par l’adresse exacte, la gare ou l’arrêt réellement utilisé et le trajet final avec les bagages. Une distance courte sur une carte ne décrit ni les pentes, ni les escaliers, ni l’entrée d’un bâtiment.",
+          "Contrôlez ensuite les horaires, les réservations, les conditions d’accès et le prix complet auprès de l’exploitant concerné. Si une information n’est pas confirmée pour vos dates, gardez-la comme inconnue et adaptez le programme."
+        ],
+        "bullets": [
+          "Date et heure du déplacement, avec la dernière correspondance utile.",
+          "Accès réel depuis la rue jusqu’à l’entrée du lieu ou du logement.",
+          "Conditions et montant affichés par l’opérateur au moment de réserver.",
+          "Plan B si un service, une visite ou un accès change."
+        ]
+      },
+      {
+        "id": "sources-officielles",
+        "title": "Utiliser les sources plutôt qu’une promesse",
+        "paragraphs": [
+          "Les liens ci-dessous servent à vérifier les faits qui changent. Ils ne constituent pas une recommandation commerciale et ne remplacent pas les conditions publiées par l’opérateur.",
+          "Le guide reste une proposition éditoriale documentée. Adaptez le parcours à vos dates, à votre budget et à vos besoins d’accès ; aucune expérience personnelle n’est revendiquée."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Cette mise à jour raconte-t-elle un voyage réalisé par l’équipe ?",
+        "answer": "Non. Il s’agit d’une fiche éditoriale documentée et aucune adresse n’est présentée comme testée personnellement."
+      },
+      {
+        "question": "Pourquoi vérifier les sources le jour du départ ?",
+        "answer": "Les horaires, accès, réservations, prix et conditions peuvent changer après la rédaction ; les pages officielles restent la référence pour vos dates."
+      },
+      {
+        "question": "Que faire si une information n’est plus confirmée ?",
+        "answer": "La laisser comme inconnue, choisir une solution vérifiable ou reporter la décision plutôt que d’inventer un détail."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Parques de Sintra — accès aux monuments",
+        "url": "https://www.parquesdesintra.pt/en/plan-your-visit/how-to-get-there/"
+      },
+      {
+        "label": "Parques de Sintra — règles des billets de Pena",
+        "url": "https://www.parquesdesintra.pt/en/plan-your-visit/tickets-palace-of-pena/"
+      },
+      {
+        "label": "Parques de Sintra — avis et restrictions",
+        "url": "https://www.parquesdesintra.pt/en/notices/"
+      },
+      {
+        "label": "CP — informations avant le voyage et validation",
+        "url": "https://www.cp.pt/info/en/useful-information-travel"
+      }
+    ],
+    "related": [
+      "sintra-depuis-lisbonne"
+    ],
+    "sourcesCheckedOn": "2026-10-07"
+  },
+  "sources": [
+    {
+      "url": "https://www.parquesdesintra.pt/en/plan-your-visit/how-to-get-there/",
+      "sha256": "a7f95520bd23eb5369d051c29026f9800cfb6f1512902bb6465f02808f774d1b",
+      "requiredText": [
+        "How Get There"
+      ]
+    },
+    {
+      "url": "https://www.parquesdesintra.pt/en/plan-your-visit/tickets-palace-of-pena/",
+      "sha256": "d905472fdaa987fb97fe93923d466941208c79601ded8e5c6c96af6b1269d6d5",
+      "requiredText": [
+        "Buy tickets Park"
+      ]
+    },
+    {
+      "url": "https://www.parquesdesintra.pt/en/notices/",
+      "sha256": "eb455683e76154f1a2c660169069c5d94575da2347c041c5cd1d6ec27d4b854a",
+      "requiredText": [
+        "Notices Learn More"
+      ]
+    },
+    {
+      "url": "https://www.cp.pt/info/en/useful-information-travel",
+      "sha256": "2a3f9d4eb6ee3f9e4dc2d64033ab4d641792c0e0b2bbc1465d9bdb6b837b0cec",
+      "requiredText": [
+        "Useful Information Travel"
+      ]
+    }
+  ],
+  "review": {
+    "publicationApproved": false,
+    "fabricatedExperience": false,
+    "commercialClaims": false,
+    "method": "deterministic-source-recheck-v1"
+  }
+}
