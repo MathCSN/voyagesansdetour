@@ -4,6 +4,12 @@ name: Voyage Sans Detour reviewed media promotion
 
 on:
   workflow_dispatch:
+    inputs:
+      stock_read_only:
+        description: Read the private stock receipt without importing
+        required: false
+        default: false
+        type: boolean
   schedule:
     - cron: '23 6 * * 1,3,5'
 
@@ -302,7 +308,7 @@ jobs:
         env:
           VSD_CLOUD_KEY: ${{ secrets.VSD_CLOUD_KEY }}
           VSD_SITES_DISPATCH_TOKEN: ${{ secrets.VSD_SITES_DISPATCH_TOKEN }}
-          VSD_STOCK_READ_ONLY: 'false'
+          VSD_STOCK_READ_ONLY: ${{ github.event_name == 'workflow_dispatch' && inputs.stock_read_only || 'false' }}
         run: |
           set -euo pipefail
           # The workflow event SHA predates the two non-force commits above.
