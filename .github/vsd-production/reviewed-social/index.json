@@ -20,12 +20,12 @@
       ]
     },
     {
-      "path": ".github/vsd-production/reviewed-social/facebook-lisbonne-photos-2026-10-11-v1.json",
-      "fileSha256": "fabd2e8aa822f083741c97208d3a321749fa967d2901c96bef96c9ea1391748a",
-      "batchId": "facebook-lisbonne-photos-2026-10-11-v1",
-      "batchSha256": "7e0c8d64d243d2910c1f87322e58943760af7edce0742ebc4a84f6b449132dbd",
+      "path": ".github/vsd-production/reviewed-social/facebook-lisbonne-photos-2026-10-18-v1.json",
+      "fileSha256": "461f0da972c566aae3fb26ac061774763123abeafdcc310dd17ec6dbc1594af1",
+      "batchId": "facebook-lisbonne-photos-2026-10-18-v1",
+      "batchSha256": "ba5643be43bafd60ecf9e6989668b7710b32f228b11977bcc1d24105e17b155f",
       "itemIds": [
-        "vsd-production:facebook:lisbonne-3-jours-sans-voiture-2026-09:fb01-v1"
+        "vsd-production:facebook:lisbonne-3-jours-sans-voiture-2026-09:fb02-v1"
       ]
     }
   ]
