@@ -591,10 +591,13 @@ async function runStockControl({ repositoryRoot, transport, now = () => (/* @__P
   if (selection.status !== "stock_selected") return { ...common, status: selection.status, ...selection.reason ? { reason: selection.reason } : {} };
   const { batch, ...identity2 } = selection.selected;
   if (readOnly) return { ...common, status: "stock_available", selected: identity2 };
-  let acknowledgement = "unconfirmed";
+  let acknowledgement = "unconfirmed", importReason;
   try {
     const reply = await transport({ kind: "publications", action: "import_stock", batch });
-    if (reply && Object.keys(reply).sort().join(",") === "kind,status" && reply.kind === "publications" && ["stock_imported", "stock_existing", "busy", "disabled", "refused"].includes(reply.status)) acknowledgement = reply.status;
+    if (reply && reply.kind === "publications" && ["kind,status", "kind,reason,status"].includes(Object.keys(reply).sort().join(",")) && ["stock_imported", "stock_existing", "busy", "disabled", "refused"].includes(reply.status) && (reply.reason === undefined || /^[a-z_]{1,64}$/.test(reply.reason))) {
+      acknowledgement = reply.status;
+      importReason = reply.reason;
+    }
   } catch {
   }
   const entry = snapshot.index.items.find((item) => item.path === identity2.path);
@@ -608,7 +611,8 @@ async function runStockControl({ repositoryRoot, transport, now = () => (/* @__P
     importAttempted: true,
     acknowledgement,
     confirmationStatus: confirmation.status,
-    confirmationRevision: confirmation.revision ?? null
+    confirmationRevision: confirmation.revision ?? null,
+    ...(importReason ? { importReason } : {})
   };
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve2(process.argv[1])).href) {
