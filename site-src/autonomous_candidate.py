@@ -154,7 +154,12 @@ def generate(root=ROOT, now=None):
     candidates_dir = root / "editorial-candidates"
     candidates_dir.mkdir(exist_ok=True)
     candidates = [read_json(path) for path in sorted(candidates_dir.glob("*.json"))]
-    pending = len(state.get("drafts", [])) + sum(1 for item in candidates if item.get("review", {}).get("publicationApproved") is False)
+    known_ids = {item.get("id") for item in state.get("drafts", []) + state.get("promotions", [])}
+    pending = len(state.get("drafts", [])) + sum(
+        1 for item in candidates
+        if item.get("review", {}).get("publicationApproved") is False
+        and item.get("id") not in known_ids
+    )
     if pending >= MAX_PENDING:
         return {"status": "capacity", "changed": False, "pending": pending}
     known_slugs = {item.get("article", {}).get("slug") for item in candidates}
