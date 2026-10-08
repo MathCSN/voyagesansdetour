@@ -1,0 +1,175 @@
+{
+  "schemaVersion": 1,
+  "id": "auto-mise-a-jour-aeroport-porto-centre-ville-2027-01-31",
+  "releaseAt": "2027-01-31T08:00:00Z",
+  "validUntil": "2027-03-02T08:00:00Z",
+  "article": {
+    "slug": "mise-a-jour-aeroport-porto-centre-ville-2027-01-31",
+    "title": "Mise à jour : De l’aéroport au centre de Porto, les vérifications avant le départ",
+    "shortTitle": "Mise à jour De l’aéroport au centre de Porto",
+    "destination": "Porto",
+    "category": "Mises à jour",
+    "description": "Fiche de contrôle liée à De l’aéroport au centre de Porto : sources officielles, accès, horaires et vérifications avant de réserver.",
+    "readMinutes": 3,
+    "summary": "Une fiche de contrôle pour relire « De l’aéroport au centre de Porto », retrouver les sources officielles et vérifier les informations variables avant de réserver.",
+    "sections": [
+      {
+        "id": "point-de-depart",
+        "title": "Relire le guide avant de choisir",
+        "paragraphs": [
+          "Cette mise à jour reprend le guide « Aéroport de Porto au centre-ville : métro, correspondances et choix de l’arrivée » et sa liste de sources. Elle ne raconte pas un séjour vécu et ne présente aucun hébergement comme testé.",
+          "Les pages de référence ont été récupérées par un contrôle automatique le 2026-10-08. Ce contrôle technique ne constitue pas une nouvelle vérification de chaque conseil. Les horaires, accès, tarifs et conditions peuvent évoluer : ouvrez les pages officielles le jour de votre décision."
+        ]
+      },
+      {
+        "id": "controles",
+        "title": "Les contrôles à refaire pour vos dates",
+        "paragraphs": [
+          "Commencez par l’adresse exacte, la gare ou l’arrêt réellement utilisé et le trajet final avec les bagages. Une distance courte sur une carte ne décrit ni les pentes, ni les escaliers, ni l’entrée d’un bâtiment.",
+          "Contrôlez ensuite les horaires, les réservations, les conditions d’accès et le prix complet auprès de l’exploitant concerné. Si une information n’est pas confirmée pour vos dates, gardez-la comme inconnue et adaptez le programme."
+        ],
+        "bullets": [
+          "Date et heure du déplacement, avec la dernière correspondance utile.",
+          "Accès réel depuis la rue jusqu’à l’entrée du lieu ou du logement.",
+          "Conditions et montant affichés par l’opérateur au moment de réserver.",
+          "Plan B si un service, une visite ou un accès change."
+        ]
+      },
+      {
+        "id": "sources-officielles",
+        "title": "Utiliser les sources plutôt qu’une promesse",
+        "paragraphs": [
+          "Les liens ci-dessous servent à vérifier les faits qui changent. Ils ne constituent pas une recommandation commerciale et ne remplacent pas les conditions publiées par l’opérateur.",
+          "Le guide reste une proposition éditoriale documentée. Adaptez le parcours à vos dates, à votre budget et à vos besoins d’accès ; aucune expérience personnelle n’est revendiquée."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Cette mise à jour raconte-t-elle un voyage réalisé par l’équipe ?",
+        "answer": "Non. Il s’agit d’une fiche éditoriale documentée et aucune adresse n’est présentée comme testée personnellement."
+      },
+      {
+        "question": "Pourquoi vérifier les sources le jour du départ ?",
+        "answer": "Les horaires, accès, réservations, prix et conditions peuvent changer après la rédaction ; les pages officielles restent la référence pour vos dates."
+      },
+      {
+        "question": "Que faire si une information n’est plus confirmée ?",
+        "answer": "La laisser comme inconnue, choisir une solution vérifiable ou reporter la décision plutôt que d’inventer un détail."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Metro do Porto — planificateur et état des lignes",
+        "url": "https://www.metrodoporto.pt/"
+      },
+      {
+        "label": "Metro do Porto — plans et horaires en vigueur",
+        "url": "https://www.metrodoporto.pt/pages/337"
+      },
+      {
+        "label": "ANA — transports depuis et vers l’aéroport de Porto",
+        "url": "https://www.portoairport.pt/en/opo/access-parking/getting-to-and-from-the-airport/public-transportation"
+      },
+      {
+        "label": "Andante — titres, validation et paiement sans contact",
+        "url": "https://andante.pt/comprar-a/"
+      },
+      {
+        "label": "Andante — cartes individuelles, zones et correspondances",
+        "url": "https://andante.pt/perguntas-frequentes/"
+      },
+      {
+        "label": "Metro do Porto — accessibilité des stations",
+        "url": "https://www.metrodoporto.pt/pages/316"
+      },
+      {
+        "label": "ANA — assistance MyWay à l’aéroport de Porto",
+        "url": "https://www.portoairport.pt/en/opo/services-shopping/essential-services/reduced-mobility"
+      },
+      {
+        "label": "STCP — liaisons aéroport de jour et de nuit",
+        "url": "https://stcp.pt/pt/ligacao-ao-aeroporto"
+      },
+      {
+        "label": "CP — conditions des billets achetés en ligne",
+        "url": "https://www.cp.pt/info/en/online-ticket-office-terms"
+      }
+    ],
+    "related": [
+      "aeroport-porto-centre-ville"
+    ],
+    "sourcesCheckedOn": "2026-10-08"
+  },
+  "sources": [
+    {
+      "url": "https://www.metrodoporto.pt/",
+      "sha256": "11ddb076175e98aec38e51a41c188d554a76f3d6054bc858c9a4d5df7ef13db4",
+      "requiredText": [
+        "Metro Porto Vida"
+      ]
+    },
+    {
+      "url": "https://www.metrodoporto.pt/pages/337",
+      "sha256": "69d65fac8765babd245b9f3ad9317e9aca37aca7fcd056481ac521ff65e1fd85",
+      "requiredText": [
+        "Metro Porto Mapas"
+      ]
+    },
+    {
+      "url": "https://www.portoairport.pt/en/opo/access-parking/getting-to-and-from-the-airport/public-transportation",
+      "sha256": "b0fec9312215cc2a4ccb2e8cb3f9f2baa02e121e4421e43ca26ccc5e06623ef0",
+      "requiredText": [
+        "Public Transportation Porto"
+      ]
+    },
+    {
+      "url": "https://andante.pt/comprar-a/",
+      "sha256": "8c9edc4e110fe99c5852b5afe595e9d32f43377179279b18ec09ea0b6e7c5db0",
+      "requiredText": [
+        "Comprar-a Andante Transportes"
+      ]
+    },
+    {
+      "url": "https://andante.pt/perguntas-frequentes/",
+      "sha256": "ee5ce048ffcddc9e0893a37c24bd5b8367f2ff3cd0f1f1e7e6783f040d93182b",
+      "requiredText": [
+        "Perguntas Frequentes Andante"
+      ]
+    },
+    {
+      "url": "https://www.metrodoporto.pt/pages/316",
+      "sha256": "f44abf1333e81a691c107c0846b225b445083f54b92c5a8fa7dbfa1178860fc9",
+      "requiredText": [
+        "Metro Porto Acessibilidade"
+      ]
+    },
+    {
+      "url": "https://www.portoairport.pt/en/opo/services-shopping/essential-services/reduced-mobility",
+      "sha256": "524bb9926c2e2239d9107bfa8897ae45cb31183f139169dbbe3c84d4d63b0ec2",
+      "requiredText": [
+        "Reduced mobility Porto"
+      ]
+    },
+    {
+      "url": "https://stcp.pt/pt/ligacao-ao-aeroporto",
+      "sha256": "8ceab22490a226a229bb348cdd7608cbdf498ddcfe057c438eae1aa3ce92dd40",
+      "requiredText": [
+        "Ligação Aeroporto Porto"
+      ]
+    },
+    {
+      "url": "https://www.cp.pt/info/en/online-ticket-office-terms",
+      "sha256": "f2001c54880a9c46ce7e2ac2b82f7e75d5e5b88f0349786183951f7fcc67eae2",
+      "requiredText": [
+        "Online Ticket Office"
+      ]
+    }
+  ],
+  "review": {
+    "publicationApproved": false,
+    "fabricatedExperience": false,
+    "commercialClaims": false,
+    "method": "deterministic-source-recheck-v1"
+  }
+}
