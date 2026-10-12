@@ -1,0 +1,40 @@
+name: Prepare one VSD Reel from a deployed guide
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ['Build and deploy Voyage Sans Détour']
+    types: [completed]
+permissions: {}
+concurrency:
+  group: vsd-reel-intake
+  cancel-in-progress: false
+jobs:
+  intake:
+    if: github.repository == 'MathCSN/voyagesansdetour' && github.ref == 'refs/heads/main' && github.event.repository.private == false && github.run_attempt == 1 && (github.event_name != 'workflow_run' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main' && github.event.workflow_run.head_repository.full_name == 'MathCSN/voyagesansdetour'))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    permissions:
+      contents: write
+      actions: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: main
+      - name: Prepare only exact excerpts from a current deployed guide
+        working-directory: .github/vsd-production
+        run: |
+          python3 -m unittest -q test_reel_intake
+          python3 reel_intake.py
+      - name: Preserve new storyboard without changing existing identities
+        id: persist
+        run: |
+          git add -- .github/vsd-production/reel-drafts
+          if git diff --cached --quiet; then exit 0; fi
+          git -c user.name='VSD guide intake' -c user.email='actions@users.noreply.github.com' commit -m 'Prepare one immutable source-bound Reel storyboard'
+          git push origin HEAD:main
+          echo "created=true" >> "$GITHUB_OUTPUT"
+      - name: Start bounded renderer only for a newly committed storyboard
+        if: steps.persist.outputs.created == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run vsd-voice-production.yml --repo MathCSN/voyagesansdetour --ref main

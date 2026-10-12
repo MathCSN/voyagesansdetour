@@ -215,8 +215,8 @@
         "id": "choisir",
         "title": "Commencez par choisir ce que vous voulez voir",
         "paragraphs": [
-          "Sintra se prête à une excursion, à condition de ne pas la transformer en collection de palais. Notre proposition éditoriale est simple : un monument principal, du temps pour son environnement, puis le centre historique. Un second site devient une option seulement si vos horaires, votre énergie et les transports le permettent.",
-          "Informations vérifiées le 14 septembre 2026 sur les pages de Parques de Sintra et de CP. Le programme ci-dessous n’est pas un récit de visite personnelle. Les créneaux, ouvertures et conditions locales restent à contrôler à votre date, particulièrement avant un billet à heure fixe."
+          "Choisissez un monument principal, puis gardez du temps pour son parc et le centre historique. Un second site reste une option, selon les horaires, les transports et votre énergie.",
+          "Informations vérifiées le 12 octobre 2026 sur les pages de Parques de Sintra et de CP. Le programme ci-dessous n’est pas un récit de visite personnelle. Les créneaux, ouvertures et conditions locales restent à contrôler à votre date, particulièrement avant un billet à heure fixe."
         ]
       },
       {
@@ -224,7 +224,7 @@
         "title": "Prendre le train jusqu’à Sintra",
         "paragraphs": [
           "Parques de Sintra indique des départs possibles depuis Rossio, Oriente et Entrecampos sur la ligne de Sintra de CP. Choisissez la gare qui convient à votre hébergement, puis vérifiez le départ exact. Ne vous fiez pas seulement au nom de la ligne : regardez la destination du train et l’heure d’arrivée avant de monter.",
-          "Sur les trains urbains, CP demande de valider les titres avant l’embarquement. Prévoyez le temps d’acheter ou charger votre titre à l’aller et gardez-le pour le retour. La durée du train ne représente qu’une partie de l’excursion : l’attente à la gare, le trajet local et la marche dans les sites comptent aussi."
+          "Validez votre titre avant de monter dans le train. Prévoyez du temps pour l’achat du billet, le trajet local et la marche dans les sites. Le temps passé dans le train ne représente qu’une partie de l’excursion."
         ]
       },
       {
@@ -305,7 +305,8 @@
       "lisbonne-3-jours-sans-voiture",
       "ou-dormir-lisbonne-quartiers",
       "lisbonne-ou-porto"
-    ]
+    ],
+    "sourcesCheckedOn": "2026-10-12"
   },
   {
     "slug": "lisbonne-ou-porto",
