@@ -172,6 +172,37 @@
           "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
         }
       ]
+    },
+    {
+      "contentId": "reel-article-porto-3-jours-sans-voiture-voice",
+      "approved": true,
+      "files": [
+        {
+          "name": "reel.mp4",
+          "bytes": 970947,
+          "sha256": "99af4f5dd1767a2e1cbc4a8ff6bba4f2d5487938a529581770d5154d75adc3ce"
+        },
+        {
+          "name": "poster.jpg",
+          "bytes": 118067,
+          "sha256": "9c0d4a0a9cac64073d283b30c2c9f108e77ab7e0988d8a0aeec452eb9de6a108"
+        },
+        {
+          "name": "credits.txt",
+          "bytes": 2252,
+          "sha256": "6fa9d5e8bf6633d3829c34d6184d5bb437dc270a8150d76e6337739c3d371a23"
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "bytes": 4482,
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "bytes": 4449,
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+        }
+      ]
     }
   ]
 }

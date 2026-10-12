@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "contentId": "reel-article-porto-3-jours-sans-voiture",
+  "status": "selected_for_promotion_qualification",
+  "selectedAt": "2026-10-12T07:58:35.360165+00:00",
+  "validUntil": "2026-11-11T00:00:00+00:00",
+  "voice": "fr_FR-siwis-medium",
+  "mediaSha256": "99af4f5dd1767a2e1cbc4a8ff6bba4f2d5487938a529581770d5154d75adc3ce",
+  "stockSha256": "aea528431d8dc2d1dfd45bba64aec4a62ba28dc68847fb51a0cb0b4fb3bd9f35",
+  "transcriptionSha256": "1884dc40bf338a3866cf9be21f65faaebedbe525c8294a120796adebe0d9ef0e",
+  "reviewMethod": "Source-bound text; independent medium ASR of full final mix without source prompt; all eight scene images inspected; measured encoding and loudness checks",
+  "humanListeningPerformed": false,
+  "publicationApproved": false,
+  "publicationAttempted": false,
+  "acceptedTranscriptionDifferences": [
+    {
+      "expected": "3",
+      "transcribed": "trois",
+      "reason": "Same French number, numeral versus written word"
+    }
+  ],
+  "otherVoiceStatus": "held_substantive_ASR_ambiguities",
+  "remaining": [
+    "public_media_deployment_and_hash_verification",
+    "cloud_stock_admission",
+    "native_publication_receipt"
+  ]
+}

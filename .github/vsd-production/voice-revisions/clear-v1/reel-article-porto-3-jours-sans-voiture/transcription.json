@@ -1,0 +1,247 @@
+{
+  "schemaVersion": 1,
+  "id": "reel-article-porto-3-jours-sans-voiture",
+  "checkedAt": "2026-10-12T07:57:33.054935+00:00",
+  "validUntil": "2026-11-11T00:00:00+00:00",
+  "status": "machine_transcription_requires_editorial_review",
+  "stockSha256": "aea528431d8dc2d1dfd45bba64aec4a62ba28dc68847fb51a0cb0b4fb3bd9f35",
+  "model": "Systran/faster-whisper-medium",
+  "modelRevision": "08e178d48790749d25932bbc082711ddcfdfbc4f",
+  "language": "fr",
+  "sourceTextPromptProvided": false,
+  "compute": "local_cpu_int8",
+  "paidInferenceCalls": 0,
+  "publicationApproved": false,
+  "publicationAttempted": false,
+  "humanListeningPerformed": false,
+  "expectedText": "Porto en 3 jours : du Douro à l’océan, sans voiture À Porto, regroupez les visites par secteur pour limiter les montées. Évitez de descendre au fleuve puis de remonter plusieurs fois. Une seule visite avec billet par jour laisse de la place aux pauses et aux imprévus. Avant de réserver une visite de cave, comparez sa langue, sa durée et ce qui est inclus. La dégustation reste facultative. Pour profiter des deux rives, une promenade sur les quais peut suffire ; gardez de l’énergie pour le retour. Retrouvez le guide et ses sources sur Voyage Sans Détour.",
+  "voices": [
+    {
+      "voice": "fr_FR-siwis-medium",
+      "mediaSha256": "99af4f5dd1767a2e1cbc4a8ff6bba4f2d5487938a529581770d5154d75adc3ce",
+      "segments": [
+        {
+          "start": 0.0,
+          "end": 4.0,
+          "text": " Porto en trois jours, du Douro à l'océan, sans voiture.",
+          "averageLogProbability": -0.12515838413822408,
+          "noSpeechProbability": 0.009380144998431206
+        },
+        {
+          "start": 4.0,
+          "end": 8.0,
+          "text": " À Porto, regroupez les visites par secteur pour limiter les montées.",
+          "averageLogProbability": -0.12515838413822408,
+          "noSpeechProbability": 0.009380144998431206
+        },
+        {
+          "start": 8.0,
+          "end": 11.0,
+          "text": " Évitez de descendre au fleuve puis de remonter plusieurs fois.",
+          "averageLogProbability": -0.12515838413822408,
+          "noSpeechProbability": 0.009380144998431206
+        },
+        {
+          "start": 11.0,
+          "end": 16.0,
+          "text": " Une seule visite avec billet par jour laisse de la place aux pauses et aux imprévus.",
+          "averageLogProbability": -0.12515838413822408,
+          "noSpeechProbability": 0.009380144998431206
+        },
+        {
+          "start": 16.0,
+          "end": 22.0,
+          "text": " Avant de réserver une visite de cave, comparez sa langue, sa durée et ce qui est inclus.",
+          "averageLogProbability": -0.12515838413822408,
+          "noSpeechProbability": 0.009380144998431206
+        },
+        {
+          "start": 22.0,
+          "end": 24.0,
+          "text": " La dégustation reste facultative.",
+          "averageLogProbability": -0.12515838413822408,
+          "noSpeechProbability": 0.009380144998431206
+        },
+        {
+          "start": 24.0,
+          "end": 28.0,
+          "text": " Pour profiter des deux rives, une promenade sur les quais peut suffire.",
+          "averageLogProbability": -0.12515838413822408,
+          "noSpeechProbability": 0.009380144998431206
+        },
+        {
+          "start": 28.0,
+          "end": 30.0,
+          "text": " Gardez de l'énergie pour le retour.",
+          "averageLogProbability": -0.2117248733838399,
+          "noSpeechProbability": 0.0965411514043808
+        },
+        {
+          "start": 30.0,
+          "end": 34.0,
+          "text": " Retrouvez le guide et ses sources sur voyage sans détour.",
+          "averageLogProbability": -0.2117248733838399,
+          "noSpeechProbability": 0.0965411514043808
+        }
+      ],
+      "transcript": "Porto en trois jours, du Douro à l'océan, sans voiture. À Porto, regroupez les visites par secteur pour limiter les montées. Évitez de descendre au fleuve puis de remonter plusieurs fois. Une seule visite avec billet par jour laisse de la place aux pauses et aux imprévus. Avant de réserver une visite de cave, comparez sa langue, sa durée et ce qui est inclus. La dégustation reste facultative. Pour profiter des deux rives, une promenade sur les quais peut suffire. Gardez de l'énergie pour le retour. Retrouvez le guide et ses sources sur voyage sans détour.",
+      "comparison": {
+        "exactNormalizedMatch": false,
+        "expectedWords": 98,
+        "transcribedWords": 98,
+        "differences": [
+          {
+            "kind": "replace",
+            "expected": [
+              "3"
+            ],
+            "transcribed": [
+              "trois"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "voice": "fr_FR-upmc-medium",
+      "mediaSha256": "8e6cf7cbcc4834de4b495d9b1b1a05792a418e4063e79f7dd2b033fe52fbfefc",
+      "segments": [
+        {
+          "start": 0.0,
+          "end": 5.0200000000000005,
+          "text": " Portons en trois jours du Drô à l'océan, sans voiture, à Porto, regroupez les visites",
+          "averageLogProbability": -0.1684723102216479,
+          "noSpeechProbability": 0.02245117537677288
+        },
+        {
+          "start": 5.0200000000000005,
+          "end": 7.2,
+          "text": " par secteur pour imiter les montées.",
+          "averageLogProbability": -0.1684723102216479,
+          "noSpeechProbability": 0.02245117537677288
+        },
+        {
+          "start": 7.2,
+          "end": 10.4,
+          "text": " Evitez de descendre au fleuve puis de remonter plusieurs fois.",
+          "averageLogProbability": -0.1684723102216479,
+          "noSpeechProbability": 0.02245117537677288
+        },
+        {
+          "start": 10.4,
+          "end": 14.92,
+          "text": " Une seule visite avec billet par jour laisse de la place aux pauses et aux imprévus.",
+          "averageLogProbability": -0.1684723102216479,
+          "noSpeechProbability": 0.02245117537677288
+        },
+        {
+          "start": 14.92,
+          "end": 19.56,
+          "text": " Avant de réserver une visite de cave, comparez sa langue, sa durée et ce qui",
+          "averageLogProbability": -0.1684723102216479,
+          "noSpeechProbability": 0.02245117537677288
+        },
+        {
+          "start": 19.56,
+          "end": 20.56,
+          "text": " est inclus.",
+          "averageLogProbability": -0.1684723102216479,
+          "noSpeechProbability": 0.02245117537677288
+        },
+        {
+          "start": 20.56,
+          "end": 22.56,
+          "text": " La dégustation reste facultative.",
+          "averageLogProbability": -0.1684723102216479,
+          "noSpeechProbability": 0.02245117537677288
+        },
+        {
+          "start": 22.56,
+          "end": 26.76,
+          "text": " Pour profiter des deux rives, une promenade sur les quais peut suffire de garder de",
+          "averageLogProbability": -0.1684723102216479,
+          "noSpeechProbability": 0.02245117537677288
+        },
+        {
+          "start": 26.76,
+          "end": 27.76,
+          "text": " l'énergie pour le retour.",
+          "averageLogProbability": -0.1684723102216479,
+          "noSpeechProbability": 0.02245117537677288
+        },
+        {
+          "start": 27.76,
+          "end": 31.76,
+          "text": " Retrouvez le guide et ses sources sur voyage sans détour.",
+          "averageLogProbability": -0.26518087420198655,
+          "noSpeechProbability": 0.06855712085962296
+        }
+      ],
+      "transcript": "Portons en trois jours du Drô à l'océan, sans voiture, à Porto, regroupez les visites par secteur pour imiter les montées. Evitez de descendre au fleuve puis de remonter plusieurs fois. Une seule visite avec billet par jour laisse de la place aux pauses et aux imprévus. Avant de réserver une visite de cave, comparez sa langue, sa durée et ce qui est inclus. La dégustation reste facultative. Pour profiter des deux rives, une promenade sur les quais peut suffire de garder de l'énergie pour le retour. Retrouvez le guide et ses sources sur voyage sans détour.",
+      "comparison": {
+        "exactNormalizedMatch": false,
+        "expectedWords": 98,
+        "transcribedWords": 99,
+        "differences": [
+          {
+            "kind": "replace",
+            "expected": [
+              "porto"
+            ],
+            "transcribed": [
+              "portons"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "3"
+            ],
+            "transcribed": [
+              "trois"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "douro"
+            ],
+            "transcribed": [
+              "drô"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "limiter"
+            ],
+            "transcribed": [
+              "imiter"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "évitez"
+            ],
+            "transcribed": [
+              "evitez"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "gardez"
+            ],
+            "transcribed": [
+              "de",
+              "garder"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "limitation": "ASR differences may come from recognition or synthesis. This does not establish naturalness, pronunciation quality or editorial approval.",
+  "diagnosticPurpose": "Independent higher-capacity transcription of the same final mixes; no source prompt; no publication approval."
+}
