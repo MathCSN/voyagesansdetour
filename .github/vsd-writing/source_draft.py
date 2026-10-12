@@ -80,19 +80,26 @@ def check_review(review, draft):
     require(not review['supported'] or not review['issues'],'review_contradictory')
     return review
 
-def call(messages, max_tokens, token):
+def call(messages, max_tokens, token, *, model=MODEL):
+    require(model in {MODEL, "@cf/qwen/qwen3-30b-a3b-fp8"}, "unqualified_model")
     payload = json.dumps({'messages': messages, 'max_tokens': max_tokens,
                           'temperature': 0.1, 'stream': False,
                           'response_format': {'type':'json_object'}}).encode()
     require(len(payload) <= 50000, 'prompt_too_large')
-    req=urllib.request.Request(ENDPOINT,data=payload,method='POST',headers={
+    endpoint=f'https://api.cloudflare.com/client/v4/accounts/{ACCOUNT}/ai/run/{model}'
+    req=urllib.request.Request(endpoint,data=payload,method='POST',headers={
         'Authorization':'Bearer '+token,'Content-Type':'application/json'})
     with urllib.request.build_opener(NoRedirect()).open(req,timeout=90) as r:
         raw=r.read(100001)
     require(len(raw)<=100000,'response_too_large')
     data=json.loads(raw)
     require(data.get('success') is True,'provider_unsuccessful')
-    text=data.get('result',{}).get('response')
+    provider_result=data.get('result',{})
+    text=provider_result.get('response')
+    if text is None and isinstance(provider_result.get('choices'),list) and len(provider_result['choices'])==1:
+        choice=provider_result['choices'][0]
+        require(choice.get('finish_reason')=='stop','incomplete_model_response')
+        text=choice.get('message',{}).get('content')
     require(isinstance(text,(str,dict)),'response_invalid')
     require(token not in json.dumps(text),'secret_in_output')
     result=json.loads(text) if isinstance(text,str) else text
