@@ -57,6 +57,7 @@ jobs:
           import datetime as dt, os
           from pathlib import Path
           import editorial_queue as q
+          import editorial_update as updates
           from cloud_source_changes import push_file_requires_build
           now = dt.datetime.now(dt.timezone.utc)
           scheduled = os.environ['EVENT_NAME'] == 'schedule'
@@ -64,12 +65,13 @@ jobs:
           changed = q.promote(now=now) if active else False
           _, queue = q.load(now=now)
           pending = any(p['receipt'] is None for p in queue['promotions'])
+          pending_updates = bool(updates.check_pending_file(now=now, revalidate=True))
           intake_changed = os.environ.get('INTAKE_CHANGED') == 'true'
           # Skip candidate-only pushes only when a complete file list proves
           # this. Actions may omit per-commit paths; missing data builds.
           source_changed = os.environ['EVENT_NAME'] == 'push' and push_file_requires_build(
               os.environ.get('GITHUB_EVENT_PATH'))
-          publish = active and (changed or pending or intake_changed or source_changed)
+          publish = active and (changed or pending or pending_updates or intake_changed or source_changed)
           with Path(os.environ['GITHUB_OUTPUT']).open('a') as f:
               f.write('publish=' + str(publish).lower() + '\n')
           PY
@@ -150,6 +152,7 @@ jobs:
           set -euo pipefail
           test "$(git ls-remote origin refs/heads/main | cut -f1)" = "$(git rev-parse HEAD)"
           python editorial_queue.py check-window --manifest-json "$RELEASE_MANIFEST"
+          python editorial_update.py check
       - name: Deploy tested artifact
         id: deployment
         uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
@@ -167,7 +170,8 @@ jobs:
         run: |
           set -euo pipefail
           python editorial_queue.py confirm --manifest-json "$RELEASE_MANIFEST"
-          git add -- editorial-queue.json
+          python editorial_update.py confirm
+          git add -- editorial-queue.json editorial-updates.json
           if ! git diff --cached --quiet; then
             git -c user.name='Voyage Sans Détour' -c user.email='contact@voyagesansdetour.fr' commit -m 'Record verified editorial release receipts'
             git push origin HEAD:main

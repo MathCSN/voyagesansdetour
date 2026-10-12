@@ -68,6 +68,7 @@ def apply_file(patch_path,root=ROOT,now=None):
     q.require(not any(p['receipt'] is None for p in queue['promotions']),'Unconfirmed article promotion blocks update')
     ledger_path=root/'editorial-updates.json'
     ledger=q.read_json(ledger_path) if ledger_path.exists() else {'schemaVersion':1,'updates':[]}
+    q.require(not any(e['receipt'] is None for e in ledger['updates']), 'Unconfirmed update blocks a new application')
     patch=q.read_json(patch_path)
     articles,ledger,changed=apply_update(articles,ledger,patch,now)
     if changed:
@@ -106,3 +107,49 @@ def confirm_file(patch_path,root=ROOT,fetcher=q.fetch_public,now=None):
     result=record_receipt(articles,ledger,patch,body,now)
     q.write_json(root/'editorial-updates.json',result)
     return next(e['receipt'] for e in result['updates'] if e['id']==patch['id'])
+
+
+def pending_patches(articles, ledger, read_patch, now, margin=0):
+    """Validate durable unconfirmed additions before any cloud deployment."""
+    q.require(ledger.get('schemaVersion') == 1 and isinstance(ledger.get('updates'), list), 'Invalid update ledger')
+    ids=[e['id'] for e in ledger['updates']]
+    q.require(len(ids)==len(set(ids)), 'Duplicate update history')
+    result=[]
+    for entry in ledger['updates']:
+        if entry['receipt'] is not None:
+            continue
+        q.require(isinstance(entry['id'],str) and q.SLUG.fullmatch(entry['id']), 'Invalid pending update identity')
+        patch=read_patch(entry['id'])
+        q.require(patch['id']==entry['id'] and patch['slug']==entry['slug'], 'Pending update identity conflict')
+        q.require(patch['approvalSha256']==approval_hash(patch)==entry['approvalSha256'], 'Pending update approval conflict')
+        q.require(q.instant(patch['reviewedAt'])<=q.instant(entry['appliedAt'])<=now and now+dt.timedelta(seconds=margin)<q.instant(patch['validUntil'])<=HARD_STOP, 'Pending update expired or future')
+        matches=[a for a in articles if a['slug']==entry['slug']]
+        q.require(len(matches)==1 and q.digest(matches[0])==entry['afterSha256'], 'Pending update article changed')
+        result.append(patch)
+    return result
+
+
+def check_pending_file(root=ROOT, now=None, margin=900, revalidate=False):
+    now=now or dt.datetime.now(dt.timezone.utc)
+    articles,_=q.load(root,now)
+    ledger_path=root/'editorial-updates.json'
+    ledger=q.read_json(ledger_path) if ledger_path.exists() else {'schemaVersion':1,'updates':[]}
+    patches=pending_patches(articles,ledger,lambda identity:q.read_json(root/'editorial-update-patches'/(identity+'.json')),now,margin)
+    if revalidate:
+        for patch in patches:
+            for source in patch['sources']:
+                observed=source_fingerprint(source['url'])
+                q.require(source_digest(source['url'],observed['text'])==source['sha256'], 'Pending update source changed')
+    return patches
+
+
+if __name__=='__main__':
+    import argparse
+    parser=argparse.ArgumentParser()
+    parser.add_argument('action',choices=['check','confirm'])
+    args=parser.parse_args()
+    patches=check_pending_file(margin=900 if args.action=='check' else 0,revalidate=args.action=='check')
+    if args.action=='confirm':
+        for patch in patches:
+            confirm_file(ROOT/'editorial-update-patches'/(patch['id']+'.json'))
+    print(json.dumps({'action':args.action,'pendingUpdateCount':len(patches)}))

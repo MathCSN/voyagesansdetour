@@ -56,3 +56,29 @@ class ReceiptTests(UpdateTests):
         articles,ledger,_=self.apply();articles[0]['updatedOn']='2026-10-13'
         with self.assertRaisesRegex(ValueError,'changed before update confirmation'):
             u.record_receipt(articles,ledger,self.patch,b'',self.now)
+
+
+class PendingUpdateTests(UpdateTests):
+    def test_pending_update_is_recoverable_without_reapplication(self):
+        articles,ledger,_=self.apply()
+        self.assertEqual(u.pending_patches(articles,ledger,lambda _:self.patch,self.now),[self.patch])
+
+    def test_expired_pending_update_blocks_deployment(self):
+        articles,ledger,_=self.apply()
+        with self.assertRaisesRegex(ValueError,'expired'):
+            u.pending_patches(articles,ledger,lambda _:self.patch,self.now+dt.timedelta(days=1))
+
+    def test_changed_pending_article_blocks_deployment(self):
+        articles,ledger,_=self.apply();articles[0]['sections'][0]['paragraphs'].append('Other edit')
+        with self.assertRaisesRegex(ValueError,'article changed'):
+            u.pending_patches(articles,ledger,lambda _:self.patch,self.now)
+
+    def test_confirmed_history_does_not_need_old_approval(self):
+        articles,ledger,_=self.apply();ledger['updates'][0]['receipt']={'verified':True}
+        def fail(_):raise AssertionError('confirmed history must not be reopened')
+        self.assertEqual(u.pending_patches(articles,ledger,fail,self.now+dt.timedelta(days=10)),[])
+
+    def test_pending_patch_tampering_blocks_deployment(self):
+        articles,ledger,_=self.apply();self.patch['paragraph']+=' Altered'
+        with self.assertRaisesRegex(ValueError,'approval conflict'):
+            u.pending_patches(articles,ledger,lambda _:self.patch,self.now)
