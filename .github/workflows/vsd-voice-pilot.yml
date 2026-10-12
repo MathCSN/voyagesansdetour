@@ -5,7 +5,7 @@ on:
       content:
         description: Render fixed samples or an immutable source-bound voice revision
         type: choice
-        options: [samples, bagages, bagages-flow, train-flow, porto-clear]
+        options: [samples, bagages, bagages-flow, train-flow, porto-clear, selection-check]
         default: samples
 permissions: {}
 concurrency:
@@ -48,6 +48,19 @@ jobs:
         working-directory: .github/vsd-production/voice
         run: |
           python -m unittest -q test_pilot test_compose test_storyboard test_stock
+      - name: Qualify read-only automatic voice eligibility in the rendering environment
+        if: steps.period.outputs.active == 'true' && inputs.content == 'selection-check'
+        working-directory: .github/vsd-production/voice
+        run: |
+          python -m unittest -q test_auto_select
+          python auto_select.py --candidate ../voice-revisions/clear-v1/reel-article-porto-3-jours-sans-voiture --report ../voice-reviews/revisions/clear-v1/reel-article-porto-3-jours-sans-voiture.json --output "$RUNNER_TEMP/voice-selection-proof.json"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: steps.period.outputs.active == 'true' && inputs.content == 'selection-check'
+        with:
+          name: voice-selection-proof
+          path: ${{ runner.temp }}/voice-selection-proof.json
+          if-no-files-found: error
+          retention-days: 30
       - name: Render the fixed voice samples
         if: steps.period.outputs.active == 'true' && inputs.content == 'samples'
         working-directory: .github/vsd-production/voice
