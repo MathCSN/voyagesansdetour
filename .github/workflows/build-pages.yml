@@ -45,7 +45,7 @@ jobs:
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: '3.12'
-      - name: Generate one bounded source-bound candidate
+      - name: Record retirement of generic maintenance checklists
         if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
         id: generator
         run: python autonomous_candidate.py --report "$RUNNER_TEMP/editorial-candidate-generation.json"

@@ -2,6 +2,7 @@ import copy
 import json
 import tempfile
 import unittest
+import sys
 from pathlib import Path
 from unittest.mock import patch
 
@@ -37,6 +38,22 @@ class AutonomousCandidateTests(unittest.TestCase):
 
     def tearDown(self):
         self.temp.cleanup()
+
+    def test_cloud_cli_retires_generator_without_reading_or_fetching(self):
+        report=self.root/'retirement.json'
+        before={p.name:p.read_bytes() for p in self.root.iterdir() if p.is_file()}
+        with patch.object(sys,'argv',['autonomous_candidate.py','--root',str(self.root),'--report',str(report)]), \
+                patch.object(generator,'now_utc',return_value=generator.dt.datetime(2026,10,12,tzinfo=generator.UTC)), \
+                patch.object(generator,'generate',side_effect=AssertionError('legacy generation')), \
+                patch.object(generator,'read_json',side_effect=AssertionError('catalogue read')), \
+                patch.object(generator.intake,'source_fingerprint',side_effect=AssertionError('network')):
+            generator.main()
+        result=json.loads(report.read_text())
+        self.assertEqual(result['status'],'retired_maintenance_generator')
+        self.assertFalse(result['changed'])
+        self.assertEqual(result['sourceFetches'],0)
+        self.assertEqual(list((self.root/'editorial-candidates').iterdir()),[])
+        for name,data in before.items():self.assertEqual((self.root/name).read_bytes(),data)
 
     def test_generates_one_source_bound_candidate(self):
         with patch.object(generator.intake, "source_fingerprint", return_value={

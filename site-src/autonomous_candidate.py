@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Create one conservative editorial candidate from an existing guide.
+"""Historical checklist generator, retired from automatic execution.
+
+The CLI now emits a no-op retirement report. The historical functions and
+immutable candidate files remain available for audit, but their generic
+checklists cannot qualify as newly researched content. Real additions use
+the separately grounded writing/admission pipeline.
 
 This is a no-cost, deterministic fallback for the cloud editorial queue.  It
 does not invent a destination, a hotel, a price or a lived experience.  It
@@ -8,7 +13,7 @@ once to bind the current visible-text hash, and writes a clearly labelled
 verification checklist. The normal intake still revalidates the source bytes
 near the release date before any article can be published.
 
-The generator is intentionally bounded: one candidate per scheduled run,
+The historical generator was bounded: one candidate per scheduled run,
 eight unadmitted candidates maximum, and no paid API or language-model call.
 If a source is unavailable, it fails closed and leaves the queue untouched.
 """
@@ -229,10 +234,14 @@ def main():
     parser.add_argument("--root", type=Path, default=ROOT)
     parser.add_argument("--report", type=Path)
     args = parser.parse_args()
-    try:
-        result = generate(args.root)
-    except (OSError, ValueError, KeyError, TypeError) as error:
-        result = {"status": "blocked", "changed": False, "reason": type(error).__name__}
+    # Intake has rejected deterministic-source-recheck-v1 as maintenance-only
+    # since its quality gate was hardened. Continuing to manufacture these
+    # records wastes source requests and is not autonomous editorial creation.
+    # Preserve the report interface without reading the catalogue or fetching.
+    result = {"status": "retired_maintenance_generator" if now_utc() <= HARD_STOP else "period_ended",
+              "changed": False, "sourceFetches": 0, "createdCandidates": 0,
+              "reason": "source_recheck_is_not_original_editorial_review",
+              "replacementWorkflow": "vsd-writing-discovery.yml"}
     if args.report:
         args.report.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(result, ensure_ascii=False))
