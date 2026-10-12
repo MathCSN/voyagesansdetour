@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "status": "public_bytes_verified",
+  "contentId": "reel-article-portugal-sans-voiture-bagages",
+  "selectionSha256": "5f18ad049c931c35a9f9a856836678522039e5a6505d3bd8dc569394bed21812",
+  "checkedAt": "2026-10-12T08:29:46.931047+00:00",
+  "validUntil": "2026-10-27T00:00:00+00:00",
+  "files": [
+    {
+      "url": "https://voyagesansdetour.fr/social-media/production/reel-article-portugal-sans-voiture-bagages-voice/reel.mp4",
+      "sha256": "29c77ef158d807bd686672e0a0d45e96476e179de8520c24f9ce384e03f610d4",
+      "bytes": 775276
+    },
+    {
+      "url": "https://voyagesansdetour.fr/social-media/production/reel-article-portugal-sans-voiture-bagages-voice/poster.jpg",
+      "sha256": "fb806bb880b6462eb0f7e437eda0ae86925ae24e6b1f065fcbbaad65c1e98697",
+      "bytes": 137061
+    },
+    {
+      "url": "https://voyagesansdetour.fr/social-media/production/reel-article-portugal-sans-voiture-bagages-voice/credits.txt",
+      "sha256": "6fa9d5e8bf6633d3829c34d6184d5bb437dc270a8150d76e6337739c3d371a23",
+      "bytes": 2252
+    },
+    {
+      "url": "https://voyagesansdetour.fr/social-media/production/reel-article-portugal-sans-voiture-bagages-voice/dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "url": "https://voyagesansdetour.fr/social-media/production/reel-article-portugal-sans-voiture-bagages-voice/playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    }
+  ],
+  "socialPublicationAttempted": false
+}
