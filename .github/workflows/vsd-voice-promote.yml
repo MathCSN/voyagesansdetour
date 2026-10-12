@@ -52,15 +52,20 @@ jobs:
           node --test .github/vsd-production/voice-admission.test.mjs
           node .github/vsd-production/voice-admission.mjs
       - name: Persist staged files and immutable public receipts
+        id: persist
         if: steps.period.outputs.active == 'true'
         run: |
           git add -- .github/vsd-production/reviewed-social site-src/public-media.json site-src/social-media/production .github/vsd-production/voice-stock .github/vsd-production/voice-revisions
-          if git diff --cached --quiet; then exit 0; fi
-          git -c user.name='VSD voice promotion' -c user.email='actions@users.noreply.github.com' commit -m 'Stage selected voice media or preserve public receipt'
-          git push origin HEAD:main
+          if ! git diff --cached --quiet; then
+            git -c user.name='VSD voice promotion' -c user.email='actions@users.noreply.github.com' commit -m 'Stage selected voice media or preserve public receipt'
+            git push origin HEAD:main
+          fi
+          echo "source_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
       - name: Reconcile cloud stock before importing one absent reviewed lot
         if: steps.period.outputs.active == 'true' && steps.media.outputs.needs_deployment != 'true'
         env:
+          VSD_STOCK_READ_ONLY: 'false'
+          GITHUB_SHA: ${{ steps.persist.outputs.source_sha }}
           VSD_CLOUD_KEY: ${{ secrets.VSD_CLOUD_KEY }}
           VSD_SITES_DISPATCH_TOKEN: ${{ secrets.VSD_SITES_DISPATCH_TOKEN }}
         run: node .github/vsd-production/stock-control.mjs
