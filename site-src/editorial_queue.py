@@ -185,7 +185,39 @@ def published_articles(root=ROOT, now=None):
     return articles
 
 
-def promote(root=ROOT, now=None):
+def recheck_generated_guide(root, draft, now, fetcher=None):
+    if not draft['id'].startswith('generated-'):
+        return
+    # Import lazily: the source reader also uses this queue's primitives.
+    if fetcher is None:
+        from autonomous_editorial import source_fingerprint
+        fetcher = source_fingerprint
+    folder = root / 'editorial-guide-evidence'
+    require(not folder.is_symlink(), 'Generated guide evidence directory is a symlink.')
+    proof = read_json(folder / (draft['id'] + '.json'))
+    require(proof.get('schemaVersion') == 1 and proof.get('draftSha256') == digest(draft),
+            'Generated guide and admission evidence differ.')
+    proposal, verification = proof['proposal'], proof['verification']
+    require(verification['status'] == 'evidence_revalidated_not_admitted' and
+            verification['proposalSha256'] == digest(proposal) and
+            verification['articleSha256'] == digest(draft['article']) and
+            digest(proposal['article']) == digest(draft['article']), 'Generated guide evidence changed.')
+    verified = instant(verification['verifiedAt'])
+    require(verified <= instant(draft['approval']['approvedAt']) <= now and
+            now < verified + dt.timedelta(hours=48), 'Generated guide verification expired.')
+    sources = verification['sources']
+    require(isinstance(sources, list) and 2 <= len(sources) <= 3 and
+            len({s['url'] for s in sources}) == len(sources) and
+            {s['url'] for s in sources} == {s['url'] for s in draft['article']['sources']},
+            'Generated guide source coverage differs.')
+    for source in sources:
+        require(isinstance(source['sha256'], str) and HASH.fullmatch(source['sha256']),
+                'Generated guide source fingerprint is invalid.')
+        require(fetcher(source['url'])['sha256'] == source['sha256'],
+                'Generated guide source changed before publication.')
+
+
+def promote(root=ROOT, now=None, source_fetcher=None):
     now = now or dt.datetime.now(UTC)
     articles, queue = load(root, now)
     check_pending(queue, now, 900)
@@ -200,6 +232,7 @@ def promote(root=ROOT, now=None):
     if not due or any(p['receipt'] is None for p in queue['promotions']) or now < latest + dt.timedelta(hours=336):
         return False
     draft = due[0]
+    recheck_generated_guide(root, draft, now, source_fetcher)
     article = dict(draft['article'], publishedOn=today(now), updatedOn=today(now))
     entry = dict(id=draft['id'], slug=article['slug'], approvalSha256=draft['approval']['sha256'],
                  articleSha256=digest(article), releaseAt=draft['releaseAt'], validUntil=draft['validUntil'],

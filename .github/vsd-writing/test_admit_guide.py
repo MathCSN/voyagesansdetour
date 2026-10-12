@@ -51,3 +51,27 @@ class CalendarTests(unittest.TestCase):
         with self.assertRaises(ValueError):self.run_admit()
         self.assertEqual(file.read_text(),'{}')
         self.assertEqual(json.loads((self.root/'editorial-queue.json').read_text()),self.queue)
+
+    def test_admitted_guide_promotes_only_after_fresh_source_match(self):
+        self.run_admit()
+        self.fetch.reset_mock()
+        self.assertTrue(a.q.promote(self.root,self.now,source_fetcher=self.fetch))
+        self.assertEqual(self.fetch.call_count,2)
+        state=json.loads((self.root/'editorial-queue.json').read_text())
+        self.assertEqual(len(state['promotions']),1)
+        self.assertIsNone(state['promotions'][0]['receipt'])
+        self.assertFalse(a.q.promote(self.root,self.now,source_fetcher=self.fetch))
+    def test_changed_source_at_release_keeps_both_files_unchanged(self):
+        self.run_admit()
+        before={name:(self.root/name).read_bytes() for name in ('articles.json','editorial-queue.json')}
+        self.fetch.return_value={'sha256':'b'*64,'text':'Changed'}
+        with self.assertRaisesRegex(ValueError,'changed before publication'):
+            a.q.promote(self.root,self.now,source_fetcher=self.fetch)
+        for name,raw in before.items():self.assertEqual((self.root/name).read_bytes(),raw)
+    def test_tampered_admission_evidence_blocks_before_fetch(self):
+        self.run_admit();self.fetch.reset_mock()
+        file=next((self.root/'editorial-guide-evidence').glob('*.json'))
+        proof=json.loads(file.read_text());proof['proposal']['article']['title']='Modified'
+        file.write_text(json.dumps(proof))
+        with self.assertRaises(ValueError):a.q.promote(self.root,self.now,source_fetcher=self.fetch)
+        self.fetch.assert_not_called()
