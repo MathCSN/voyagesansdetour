@@ -36,17 +36,23 @@ jobs:
           python-version: '3.12'
       - name: Install local speech recognition
         if: steps.period.outputs.active == 'true'
-        run: python -m pip install --disable-pip-version-check faster-whisper==1.2.1 huggingface-hub==1.8.0 ctranslate2==4.8.2 av==15.1.0
+        run: python -m pip install --disable-pip-version-check faster-whisper==1.2.1 huggingface-hub==1.8.0 ctranslate2==4.8.2 av==15.1.0 Pillow==11.3.0
       - name: Test and inspect at most one immutable stock item
         if: steps.period.outputs.active == 'true'
         working-directory: .github/vsd-production/voice
         run: |
           python -m unittest -q test_transcribe_review
           python transcribe_review.py --next --stock ../voice-stock --revisions ../voice-revisions --output ../voice-reviews
-      - name: Preserve report without approving or publishing media
+      - name: Select at most one unambiguous source-bound voice without publication
+        if: steps.period.outputs.active == 'true'
+        working-directory: .github/vsd-production/voice
+        run: |
+          python -m unittest -q test_auto_select test_select_catalogue
+          python select_catalogue.py --root ..
+      - name: Preserve reports and immutable selections without publication
         if: steps.period.outputs.active == 'true'
         run: |
-          git add -- .github/vsd-production/voice-reviews
+          git add -- .github/vsd-production/voice-reviews .github/vsd-production/voice-stock .github/vsd-production/voice-revisions
           if git diff --cached --quiet; then exit 0; fi
           git config user.name 'VSD media checks'
           git config user.email 'actions@users.noreply.github.com'
