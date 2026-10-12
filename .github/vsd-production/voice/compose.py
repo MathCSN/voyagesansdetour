@@ -185,7 +185,7 @@ def compose(audio_dir, output, now, sentences=SENTENCES, headings=HEADINGS, badg
                            'files':[{'file':str(p.relative_to(result)),'sha256':sha(p.read_bytes())} for p in sorted(folder.iterdir()) if p.is_file()]})
         proof={'schemaVersion':1,'status':'voice_video_pilots_not_published','generatedAt':now.isoformat(),
                'audioReceiptSha256':sha((audio_dir/'receipt.json').read_bytes()),'rendererSha256':sha(Path(__file__).read_bytes()),
-               'subtitleAlignment':'sentence boundaries measured in audio samples, not word alignment',
+               'subtitleAlignment':'narration segment boundaries measured in audio samples, not word alignment',
                'videos':videos,'publicationAttempted':False,'listeningReviewComplete':False,
                'automaticProductionIntegration':False}
         (result/'receipt.json').write_text(json.dumps(proof,ensure_ascii=False,indent=2)+'\n')
