@@ -58,3 +58,13 @@ class SourceCoverageTests(unittest.TestCase):
     def test_negative_pass_rejected(self):
         from discover_facts import source_window
         with self.assertRaisesRegex(ValueError,'invalid_source_pass'):source_window({},-1)
+
+class SourceContextTests(unittest.TestCase):
+    def test_context_is_derived_from_selected_source_not_model(self):
+        from discover_facts import attach_context
+        fact={'id':'c1','source':0,'quote':'Time limit - 24 hours'}
+        source={'url':'https://www.cp.pt/info/en/w/left-luggage','label':'CP — consignes','text':'Automatic lockers. Time limit - 24 hours. Station hours apply.'}
+        result=attach_context([fact],[source])[0]
+        self.assertEqual(result['sourceContext']['url'],source['url'])
+        self.assertIn('Station hours apply.',result['sourceContext']['excerpt'])
+        self.assertNotIn('sourceContext',fact)
