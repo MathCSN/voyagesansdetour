@@ -43,6 +43,8 @@ var DEFAULT_POLICY = Object.freeze({
   retryMaxSeconds: 86400,
   maxDispatchPerTick: 3,
   paidCallsAllowed: false,
+  // Explicit opt-in. Only reviewed Buffer social jobs may use this lead time.
+  scheduleAheadSeconds: 0,
   cadence: Object.freeze({
     pinterest: Object.freeze({ limit: 2, windowHours: 168 }),
     instagram: Object.freeze({ limit: 1, windowHours: 168 }),
@@ -71,14 +73,15 @@ var GuardError = class extends Error {
 // exploitation/cloud-publications/buffer-transport.mjs
 var HASH = /^[a-f0-9]{64}$/;
 var TYPES = { instagram: ["business"], facebook: ["page"], tiktok: ["profile", "account", "business"] };
-var POST_FIELDS = "id channelId status schedulingType sentAt externalLink";
+var POST_FIELDS = "id channelId status schedulingType dueAt sentAt externalLink";
 var CREATE = `mutation BufferPublish($input: CreatePostInput!) { createPost(input: $input) {
   __typename ... on PostActionSuccess { post { ${POST_FIELDS} } } ... on MutationError { message }
 } }`;
 var POST_QUERY = `query BufferReceipt($input: PostInput!) { post(input: $input) { ${POST_FIELDS} } }`;
-var POSTS_QUERY = `query BufferLostPhotoReceipt($input: PostsInput!) { posts(first: 20, input: $input) {
+var POSTS_QUERY = `query BufferLostReceipt($input: PostsInput!) { posts(first: 20, input: $input) {
   edges { node { ${POST_FIELDS} createdAt text assets { type mimeType source }
-    metadata { __typename ... on FacebookPostMetadata { type } }
+    metadata { __typename ... on FacebookPostMetadata { type }
+      ... on InstagramPostMetadata { type isAiGenerated shouldShareToFeed } }
   } } pageInfo { hasNextPage }
 } }`;
 var LOOKUP_WINDOW_MS = 15 * 60 * 1e3;
@@ -425,7 +428,10 @@ async function finalizePromotionBundle(inputs, publicProofBytes, { now = (/* @__
 }
 function mergePublicMediaCatalogue(catalogue, entry) {
   const validEntry = (item) => {
-    check2(exact(item, ["contentId", "approved", "files"]) && /^[a-z0-9][a-z0-9-]{0,99}$/.test(item.contentId) && item.approved === true && Array.isArray(item.files) && item.files.length >= 3 && item.files.length <= 5 && item.files.every((f) => PUBLIC_NAMES.includes(f.name)) && new Set(item.files.map((f) => f.name)).size === item.files.length && ["reel.mp4", "poster.jpg", "credits.txt"].every((name) => item.files.some((f) => f.name === name)), "public catalogue entry");
+    const photos = item.kind === "photos";
+    const required = photos ? [...Array.from({ length: 6 }, (_, i) => `scene-0${i + 1}.jpg`), "credits.txt", "dmsans-OFL.txt", "playfairdisplay-OFL.txt"] : ["reel.mp4", "poster.jpg", "credits.txt"];
+    const allowed = photos ? required : PUBLIC_NAMES;
+    check2((exact(item, ["contentId", "approved", "files"]) || exact(item, ["contentId", "approved", "files", "kind"])) && (item.kind === void 0 || item.kind === "video" || photos) && /^[a-z0-9][a-z0-9-]{0,99}$/.test(item.contentId) && item.approved === true && Array.isArray(item.files) && (photos ? item.files.length === 9 : item.files.length >= 3 && item.files.length <= 5) && item.files.every((f) => allowed.includes(f.name)) && new Set(item.files.map((f) => f.name)).size === item.files.length && required.every((name) => item.files.some((f) => f.name === name)), "public catalogue entry");
     for (const f of item.files) check2(exact(f, ["name", "sha256", "bytes"]) && HASH2.test(f.sha256) && Number.isSafeInteger(f.bytes) && f.bytes > 0 && f.bytes <= FILE_LIMIT, "public catalogue file");
   };
   check2(exact(catalogue, ["schemaVersion", "items"]) && catalogue.schemaVersion === 1 && Array.isArray(catalogue.items) && catalogue.items.length <= 104, "public catalogue schema");
@@ -1081,9 +1087,9 @@ async function describeStockBatch(batch) {
   check5(exact2(source, ["schemaVersion", "batchId", "items"]) && source.schemaVersion === 1 && batchIdentity(source.batchId) && Array.isArray(source.items) && source.items.length === 1);
   const item = source.items[0], payload = item?.payload, review = item?.review;
   check5(exact2(item, ["contentId", "deduplicationKey", "title", "dueAt", "payload", "review"]) && identity(item.contentId) && identity(item.deduplicationKey) && identity(item.title) && timestamp(item.dueAt));
-  const instagramReel = payload?.schemaVersion === 1 && payload.channel === "instagram" && payload.kind === "reel" && Array.isArray(payload.assets) && payload.assets.length === 1 && payload.assets[0]?.mimeType === "video/mp4";
-  const facebookPhotos = payload?.schemaVersion === 1 && payload.channel === "facebook" && payload.kind === "photos" && payload.aiGenerated === false && Array.isArray(payload.assets) && payload.assets.length >= 2 && payload.assets.length <= 10 && payload.assets.every((asset) => ["image/jpeg", "image/png", "image/webp"].includes(asset?.mimeType));
-  check5(instagramReel || facebookPhotos);
+  const instagramReel = payload?.channel === "instagram" && payload.kind === "reel";
+  const facebookPhotos = payload?.channel === "facebook" && payload.kind === "photos";
+  check5(payload?.schemaVersion === 1 && (instagramReel || facebookPhotos) && Array.isArray(payload.assets) && (instagramReel ? payload.assets.length === 1 && payload.assets[0]?.mimeType === "video/mp4" : payload.assets.length >= 2 && payload.assets.length <= 10 && payload.aiGenerated === false && payload.assets.every((asset) => ["image/jpeg", "image/png", "image/webp"].includes(asset?.mimeType))));
   check5(review?.schemaVersion === 1 && review.contentId === item.contentId && review.approved === true && hash(review.payloadRevision) && review.payloadRevision === await bufferPayloadRevision(payload) && review.checks?.requiresPaidCall === false);
   return validateStockDescriptors([{
     batchId: source.batchId,
@@ -1150,9 +1156,15 @@ function boundedJson(bytes2, limit) {
   check6(Buffer.isBuffer(bytes2) && bytes2.length > 0 && bytes2.length <= limit, "file_size");
   return jsonCopy(JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes2)));
 }
+function instant(value) {
+  check6(typeof value === "string" && /^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{1,6})?Z$/.test(value), "invalid_timestamp");
+  const result = Date.parse(value);
+  check6(Number.isSafeInteger(result) && result > 0 && new Date(result).toISOString().slice(0, 19) === value.slice(0, 19), "invalid_timestamp");
+  return result;
+}
 function indexSnapshot(value) {
   const index = jsonCopy(value);
-  check6(Buffer.byteLength(JSON.stringify(index)) <= STOCK_SELECTION_LIMITS.maxIndexBytes && exact3(index, ["schemaVersion", "items"]) && index.schemaVersion === 1 && Array.isArray(index.items) && index.items.length <= STOCK_SELECTION_LIMITS.maxBatches, "invalid_index");
+  check6(Buffer.byteLength(JSON.stringify(index)) <= STOCK_SELECTION_LIMITS.maxIndexBytes && exact3(index, Object.hasOwn(index, "retirements") ? ["schemaVersion", "items", "retirements"] : ["schemaVersion", "items"]) && index.schemaVersion === 1 && Array.isArray(index.items) && index.items.length <= STOCK_SELECTION_LIMITS.maxBatches, "invalid_index");
   const paths = /* @__PURE__ */ new Set(), batches = /* @__PURE__ */ new Set(), itemIds = /* @__PURE__ */ new Set();
   for (const entry of index.items) {
     check6(exact3(entry, ["path", "fileSha256", "batchId", "batchSha256", "itemIds"]) && typeof entry.batchId === "string" && BATCH_ID.test(entry.batchId) && !/^current(?:[._-]|$)/.test(entry.batchId) && entry.batchId !== "index" && entry.path === PREFIX + entry.batchId + ".json" && typeof entry.fileSha256 === "string" && HASH5.test(entry.fileSha256) && typeof entry.batchSha256 === "string" && HASH5.test(entry.batchSha256), "invalid_index_entry");
@@ -1161,6 +1173,17 @@ function indexSnapshot(value) {
     paths.add(entry.path);
     batches.add(entry.batchId);
     entry.itemIds.forEach((id) => itemIds.add(id));
+  }
+  const retired = /* @__PURE__ */ new Set();
+  if (Object.hasOwn(index, "retirements")) {
+    check6(Array.isArray(index.retirements) && index.retirements.length <= index.items.length, "invalid_retirements");
+    for (const record of index.retirements) {
+      check6(exact3(record, ["batchId", "batchSha256", "fileSha256", "itemIds", "retiredAt", "reason", "evidenceUrl", "existingPublicationUrl"]), "invalid_retirement");
+      const entry = index.items.find((item) => item.batchId === record.batchId);
+      check6(entry && !retired.has(record.batchId) && record.batchSha256 === entry.batchSha256 && record.fileSha256 === entry.fileSha256 && same(record.itemIds, entry.itemIds) && record.reason === "duplicate_media_on_channel" && /^https:\/\/github\.com\/MathCSN\/voyagesansdetour\/actions\/runs\/[1-9]\d*$/.test(record.evidenceUrl) && /^https:\/\/www\.facebook\.com\/[1-9]\d*\/posts\/[1-9]\d*$/.test(record.existingPublicationUrl), "invalid_retirement");
+      instant(record.retiredAt);
+      retired.add(record.batchId);
+    }
   }
   return index;
 }
@@ -1219,7 +1242,7 @@ async function snapshotBatches(input) {
     check6(sha3(bytes2) === entry.fileSha256, "file_hash_mismatch");
     const batch = boundedJson(bytes2, STOCK_SELECTION_LIMITS.maxBatchBytes), descriptor = await describeStockBatch(batch);
     check6(descriptor.batchId === entry.batchId && descriptor.batchSha256 === entry.batchSha256 && same(descriptor.itemIds, entry.itemIds), "batch_descriptor_mismatch");
-    snapshots.push({ entry, batch, descriptor });
+    snapshots.push({ entry, batch, descriptor, retirement: index.retirements?.find((record) => record.batchId === entry.batchId) ?? null });
   }
   return snapshots;
 }
