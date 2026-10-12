@@ -16,9 +16,11 @@ import wave
 
 HERE = Path(__file__).resolve().parent
 STOP = dt.datetime(2027, 9, 14, 21, 59, 59, tzinfo=dt.timezone.utc)
-TEXT = ('Vous préparez un voyage au Portugal ? Retrouvez nos guides et leurs sources '
-        'sur Voyage Sans Détour. Enregistrez vos idées pour les comparer tranquillement. '
-        'Cette narration utilise une voix de synthèse.')
+SENTENCES = ('Vous préparez un voyage au Portugal ?',
+             'Retrouvez nos guides et leurs sources sur Voyage Sans Détour.',
+             'Enregistrez vos idées pour les comparer tranquillement.',
+             'Cette narration utilise une voix de synthèse.')
+TEXT = ' '.join(SENTENCES)
 
 
 def sha(raw):
@@ -43,7 +45,7 @@ def download(entry, directory):
     return path
 
 
-def inspect_wav(path):
+def inspect_wav(path, minimum_duration=3):
     if path.stat().st_size > 4_000_000:
         raise ValueError('wav_too_large')
     with wave.open(str(path), 'rb') as wav:
@@ -54,7 +56,7 @@ def inspect_wav(path):
         samples = array.array('h', wav.readframes(wav.getnframes()))
     if sys.byteorder != 'little':
         samples.byteswap()
-    if not samples or not 3 <= duration <= 45:
+    if not samples or not minimum_duration <= duration <= 45:
         raise ValueError('audio_duration_outside_bounds')
     rms = math.sqrt(sum(x*x for x in samples) / len(samples))
     clipped = sum(abs(x) >= 32760 for x in samples) / len(samples)
@@ -90,16 +92,34 @@ def run(output, now):
             for entry in voice['files']:
                 download(entry, model_dir)
             wav = result/(voice['id']+'.wav')
-            subprocess.run([sys.executable, '-m', 'piper', '-m', str(model_dir/(voice['id']+'.onnx')),
-                            '-c', str(model_dir/(voice['id']+'.onnx.json')), '-s', str(voice['speaker']),
-                            '-f', str(wav), '--length-scale', '1.0', '--sentence-silence', '0.2'],
-                           input=TEXT, text=True, check=True, timeout=120,
-                           env={**os.environ, 'OMP_NUM_THREADS': '2'})
+            segments = []
+            frames = 0
+            with wave.open(str(wav), 'wb') as joined:
+                joined.setparams((1, 2, 22050, 0, 'NONE', 'not compressed'))
+                for index, sentence in enumerate(SENTENCES):
+                    chunk = model_dir/(str(index)+'.wav')
+                    subprocess.run([sys.executable, '-m', 'piper', '-m', str(model_dir/(voice['id']+'.onnx')),
+                                    '-c', str(model_dir/(voice['id']+'.onnx.json')), '-s', str(voice['speaker']),
+                                    '-f', str(chunk), '--length-scale', '1.0'],
+                                   input=sentence, text=True, check=True, timeout=120,
+                                   env={**os.environ, 'OMP_NUM_THREADS': '2'})
+                    inspect_wav(chunk, minimum_duration=0.1)
+                    with wave.open(str(chunk), 'rb') as source:
+                        count = source.getnframes()
+                        joined.writeframes(source.readframes(count))
+                    segments.append({'text': sentence, 'startSample': frames,
+                                     'endSample': frames+count, 'sampleRate': 22050})
+                    frames += count
+                    if index < len(SENTENCES)-1:
+                        silence = 4410
+                        joined.writeframes(bytes(silence*2))
+                        frames += silence
             samples.append({'voice': voice['id'], 'speaker': voice['speaker'],
-                            'datasetLicense': voice['datasetLicense'], **inspect_wav(wav)})
+                            'datasetLicense': voice['datasetLicense'], 'segments': segments,
+                            **inspect_wav(wav)})
             (result/(voice['id']+'-MODEL_CARD.txt')).write_bytes((model_dir/'MODEL_CARD').read_bytes())
         (result/'CREDITS.md').write_bytes((HERE/'CREDITS.md').read_bytes())
-        receipt = {'schemaVersion': 1, 'status': 'audio_samples_not_published',
+        receipt = {'schemaVersion': 2, 'status': 'audio_samples_not_published',
                    'generatedAt': now.isoformat(), 'generated': len(samples),
                    'textSha256': sha(TEXT.encode()), 'modelsManifestSha256': sha((HERE/'models.json').read_bytes()),
                    'piperVersion': config['piperVersion'],

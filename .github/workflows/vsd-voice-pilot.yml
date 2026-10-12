@@ -29,19 +29,32 @@ jobs:
         if: steps.period.outputs.active == 'true'
         with:
           python-version: '3.12'
-      - name: Install the free local CPU synthesizer
+      - name: Install the free CPU synthesizer and video renderer
         if: steps.period.outputs.active == 'true'
-        run: python -m pip install --disable-pip-version-check piper-tts==1.8.0
+        run: |
+          python -m pip install --disable-pip-version-check piper-tts==1.8.0 Pillow==11.3.0
+          if ! command -v ffmpeg >/dev/null || ! command -v ffprobe >/dev/null; then
+            sudo apt-get update -qq
+            sudo apt-get install --yes --no-install-recommends ffmpeg
+          fi
       - name: Test bounds and produce exactly two samples
         if: steps.period.outputs.active == 'true'
         working-directory: .github/vsd-production/voice
         run: |
-          python -m unittest -q test_pilot
+          python -m unittest -q test_pilot test_compose
           python pilot.py --output "$RUNNER_TEMP/vsd-french-voices"
+          python compose.py --audio "$RUNNER_TEMP/vsd-french-voices" --output "$RUNNER_TEMP/vsd-voice-videos"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: steps.period.outputs.active == 'true'
         with:
           name: vsd-french-voice-samples
           path: ${{ runner.temp }}/vsd-french-voices
+          if-no-files-found: error
+          retention-days: 7
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: steps.period.outputs.active == 'true'
+        with:
+          name: vsd-voice-video-pilots
+          path: ${{ runner.temp }}/vsd-voice-videos
           if-no-files-found: error
           retention-days: 7
