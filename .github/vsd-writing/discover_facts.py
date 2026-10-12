@@ -8,6 +8,8 @@ import re
 import urllib.parse
 import urllib.request
 from source_draft import call, require, HARD_STOP, source_fingerprint
+from probe import ACCOUNT
+from quota_policy import hold as quota_hold
 from entailment import assess
 from update_draft import create_update
 from editorial_update import source_digest
@@ -111,6 +113,13 @@ def main():
             'callsAttempted':0,'maxCalls':5,'maxOutputTokensTotal':6400,'status':'not_started'}
     try:
         require(now<HARD_STOP,'authorization_period_ended')
+        budget=quota_hold(now,ACCOUNT)
+        if budget:
+            report.update(budget)
+            report['sourceFetches']=0
+            (out/'discovery-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
+            print(json.dumps({'status':report['status'],'callsAttempted':0,'resumeAt':report['resumeAt']}))
+            return 0
         token=os.environ.get('CLOUDFLARE_WORKERS_AI_TOKEN','');require(bool(token),'missing_secret')
         articles=json.loads((ROOT/'articles.json').read_text())
         article=select_guide(articles,now,os.environ.get("GUIDE_SLUG",""));report['guideSlug']=article['slug']

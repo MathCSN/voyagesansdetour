@@ -17,12 +17,17 @@ class NoRedirect(urllib.request.HTTPRedirectHandler):
         return None
 
 def run():
+    from quota_policy import hold as quota_hold
     now = dt.datetime.now(dt.timezone.utc)
     report = {'observedAt': now.isoformat(), 'model': MODEL, 'accountId': ACCOUNT,
               'publicationAttempted': False, 'maxOutputTokens': 256, 'maxCalls': 1,
               'status': 'not_called'}
     if now > HARD_STOP:
         report['status'] = 'authorization_period_ended'
+        return report
+    budget=quota_hold(now,ACCOUNT)
+    if budget:
+        report.update(budget)
         return report
     token = os.environ.get('CLOUDFLARE_WORKERS_AI_TOKEN', '')
     if not token:

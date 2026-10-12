@@ -10,6 +10,7 @@ import urllib.request
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'site-src'))
 from autonomous_editorial import source_fingerprint
 from probe import ACCOUNT, MODEL, ENDPOINT, HARD_STOP, NoRedirect
+from quota_policy import hold as quota_hold
 
 SOURCES = [
  'https://www.parquesdesintra.pt/en/plan-your-visit/how-to-get-there/',
@@ -81,6 +82,9 @@ def check_review(review, draft):
     return review
 
 def call(messages, max_tokens, token, *, model=MODEL):
+    now=dt.datetime.now(dt.timezone.utc)
+    require(now<HARD_STOP,'authorization_period_ended')
+    require(quota_hold(now,ACCOUNT) is None,'free_quota_hold')
     require(model in {MODEL, "@cf/qwen/qwen3-30b-a3b-fp8"}, "unqualified_model")
     payload = json.dumps({'messages': messages, 'max_tokens': max_tokens,
                           'temperature': 0.1, 'stream': False,

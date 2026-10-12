@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "holds": [
+    {
+      "accountId": "6f1926fc39a2e010e9cb86d0e195c28c",
+      "observedAt": "2026-10-12T05:44:20.778Z",
+      "resumeAt": "2026-10-13T00:00:00Z",
+      "usageDisplay": "9.56k/10k",
+      "source": "Authenticated Cloudflare Workers AI usage dashboard",
+      "sourceUrl": "https://dash.cloudflare.com/6f1926fc39a2e010e9cb86d0e195c28c/ai/workers-ai/usage",
+      "roundedDisplay": true
+    }
+  ]
+}
