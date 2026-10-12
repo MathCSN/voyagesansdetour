@@ -111,8 +111,8 @@
         "id": "preparer",
         "title": "Trois journées avec une vraie respiration",
         "paragraphs": [
-          "Voici une proposition éditoriale, pensée pour un premier séjour et vérifiée côté informations pratiques le 14 septembre 2026. Elle suppose trois journées complètes. Si vous disposez seulement de deux jours et de quelques heures, gardez le centre et Gaia, puis utilisez le temps restant pour une promenade libre près de votre logement.",
-          "Le centre historique regroupe beaucoup de lieux d’intérêt, mais une courte distance sur le plan peut cacher une montée. Évitez de descendre au fleuve puis de remonter plusieurs fois dans la même demi-journée. Emportez peu d’affaires et choisissez une seule visite avec billet par journée : vous conserverez des possibilités si le temps ou l’énergie changent."
+          "Voici une proposition éditoriale, pensée pour un premier séjour et vérifiée côté informations pratiques le 12 octobre 2026. Elle suppose trois journées complètes. Si vous disposez seulement de deux jours et de quelques heures, gardez le centre et Gaia, puis utilisez le temps restant pour une promenade libre près de votre logement.",
+          "À Porto, regroupez les visites par secteur pour limiter les montées. Évitez de descendre au fleuve puis de remonter plusieurs fois. Une seule visite avec billet par jour laisse de la place aux pauses et aux imprévus."
         ]
       },
       {
@@ -128,7 +128,7 @@
         "title": "Jour 2 — Gaia et les deux rives du Douro",
         "paragraphs": [
           "Traversez vers Vila Nova de Gaia pour regarder Porto depuis l’autre rive. Le pont Luís I et les caves de vin de Porto figurent dans le quartier historique présenté par l’office de tourisme. Nous proposons d’en faire une journée distincte afin de profiter des quais, puis de choisir éventuellement une visite de cave.",
-          "Réservez seulement après avoir comparé la langue de la visite, sa durée et le contenu de la formule. Une dégustation reste facultative : le panorama et la marche sur les quais suffisent à construire une demi-journée. Prévoyez le retour avant d’être fatigué et vérifiez le chemin choisi, notamment les escaliers et les différences de niveau autour du pont."
+          "Avant de réserver une visite de cave, comparez sa langue, sa durée et ce qui est inclus. La dégustation reste facultative. Pour profiter des deux rives, une promenade sur les quais peut suffire ; gardez de l’énergie pour le retour."
         ]
       },
       {
@@ -187,7 +187,7 @@
       },
       {
         "label": "Andante — validation des titres",
-        "url": "https://andante.pt/en/purchase/silver-andante/"
+        "url": "https://andante.pt/en/validation/"
       },
       {
         "label": "STCP — lignes de bus",
@@ -198,7 +198,8 @@
       "lisbonne-ou-porto",
       "lisbonne-porto-train",
       "lisbonne-3-jours-sans-voiture"
-    ]
+    ],
+    "sourcesCheckedOn": "2026-10-12"
   },
   {
     "slug": "sintra-depuis-lisbonne",
