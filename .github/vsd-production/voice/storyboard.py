@@ -13,7 +13,7 @@ sys.path.insert(0, str(pilot.HERE.parent))
 from reel_intake import PublicArticle, fetch_public, normalized, digest, ORIGIN
 
 
-def prepare(folder, now, fetcher=fetch_public):
+def prepare(folder, now, fetcher=fetch_public, sentence_flow=False):
     folder=Path(folder)
     if folder.is_symlink():raise ValueError('storyboard_symlink')
     for name in ('storyboard.json','receipt.json'):
@@ -49,6 +49,12 @@ def prepare(folder, now, fetcher=fetch_public):
     badge_labels=['LE GUIDE BAGAGES','VOYAGER LÉGER','CONSIGNES EN GARE','POUR ALLER PLUS LOIN']
     for index,part in enumerate(parts):
         for sentence in re.split(r'(?<=[.!?])\s+',part):
+            if sentence_flow:
+                # Let Piper pronounce a complete sentence with its full context.
+                # The renderer still rejects captions exceeding its three-line box.
+                if len(sentence)>200:raise ValueError('sentence_too_long')
+                chunks.append(sentence);headings.append(labels[index]);badges.append(badge_labels[index])
+                continue
             words=re.findall(r'\S+(?:[ \u00a0\u202f]+[?!:;](?=\s|$))?',sentence)
             # Balance chunks so a final fragment such as “24 heures” is not
             # isolated on its own card. Keep every word in its original order.
@@ -66,12 +72,12 @@ def prepare(folder, now, fetcher=fetch_public):
     return draft,chunks,headings,badges,pilot.sha(raw),pilot.sha(public)
 
 
-def run(folder, output, now):
+def run(folder, output, now, sentence_flow=False):
     if now.tzinfo is None:raise ValueError('timezone_required')
     if now>=pilot.STOP:return {'status':'period_ended','generated':0}
     output=Path(output)
     if output.exists() or output.is_symlink():raise ValueError('existing_output_preserved')
-    draft,sentences,headings,badges,story_hash,public_hash=prepare(folder,now)
+    draft,sentences,headings,badges,story_hash,public_hash=prepare(folder,now,sentence_flow=sentence_flow)
     # This first layout is qualified for the bagage storyboard only. Other
     # topics need their own truthful scene headings, not these bagage labels.
     if draft['id']!='reel-article-portugal-sans-voiture-bagages':raise ValueError('layout_topic_not_qualified')
@@ -85,6 +91,7 @@ def run(folder, output, now):
         proof={'schemaVersion':1,'status':'storyboard_media_requires_review','id':draft['id'],'storyboardSha256':story_hash,
                'publicHtmlSha256':public_hash,'startedAt':now.isoformat(),'finishedAt':finished.isoformat(),
                'validUntil':draft['source']['validUntil'],'targetUrl':draft['targetUrl'],
+               'narrationSegmentation':'complete_sentences' if sentence_flow else 'caption_chunks',
                'paidInferenceCalls':0,'publicationAttempted':False,'listeningReviewComplete':False,
                'files':[{'file':str(p.relative_to(result)),'sha256':pilot.sha(p.read_bytes())} for p in sorted(result.rglob('*')) if p.is_file()]}
         (result/'receipt.json').write_text(json.dumps(proof,ensure_ascii=False,indent=2)+'\n')
@@ -93,6 +100,6 @@ def run(folder, output, now):
     return proof
 
 if __name__=='__main__':
-    parser=argparse.ArgumentParser();parser.add_argument('--storyboard',type=Path,required=True);parser.add_argument('--output',type=Path,required=True)
-    args=parser.parse_args();result=run(args.storyboard,args.output,dt.datetime.now(dt.timezone.utc))
+    parser=argparse.ArgumentParser();parser.add_argument('--storyboard',type=Path,required=True);parser.add_argument('--output',type=Path,required=True);parser.add_argument('--sentence-flow',action='store_true')
+    args=parser.parse_args();result=run(args.storyboard,args.output,dt.datetime.now(dt.timezone.utc),sentence_flow=args.sentence_flow)
     print(json.dumps({k:v for k,v in result.items() if k!='files'},ensure_ascii=False))

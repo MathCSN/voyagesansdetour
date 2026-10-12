@@ -35,4 +35,19 @@ class StoryboardTests(unittest.TestCase):
         self.assertEqual(len(chunks),len(headings));self.assertEqual(len(chunks),len(badges))
         self.assertEqual(' '.join(chunks),' '.join([draft['narration']['hook']]+[e['text'] for e in draft['narration']['excerpts']]+[draft['narration']['closing']]))
 
+    def test_sentence_flow_preserves_full_source_sentences_and_readable_captions(self):
+        from html import escape
+        from PIL import Image,ImageDraw,ImageFont
+        draft=json.loads((FOLDER/'storyboard.json').read_text())
+        narration=draft['narration']
+        html='<link rel="canonical" href="'+draft['targetUrl']+'">'+''.join('<p>'+escape(e['text'])+'</p>' for e in narration['excerpts'])
+        _,sentences,headings,badges,_,_=storyboard.prepare(FOLDER,NOW,lambda u:html.encode(),sentence_flow=True)
+        self.assertEqual(len(sentences),6)
+        self.assertIn('Un petit sac de journée pliable évite aussi d’emporter toutes vos affaires à chaque promenade.',sentences)
+        self.assertEqual(' '.join(sentences),' '.join([narration['hook']]+[e['text'] for e in narration['excerpts']]+[narration['closing']]))
+        font=ImageFont.truetype(str(storyboard.pilot.HERE.parent/'assets/dmsans-bold.ttf'),45)
+        draw=ImageDraw.Draw(Image.new('RGB',(1080,1920)))
+        for sentence in sentences:self.assertLessEqual(len(storyboard.compose.wrap(draw,sentence,font,820)),3)
+        self.assertEqual(len(headings),6);self.assertEqual(len(badges),6)
+
 if __name__=='__main__':unittest.main()

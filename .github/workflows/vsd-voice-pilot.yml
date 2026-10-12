@@ -5,7 +5,7 @@ on:
       content:
         description: Render fixed samples or the source-bound bagage storyboard
         type: choice
-        options: [samples, bagages]
+        options: [samples, bagages, bagages-flow]
         default: samples
 permissions: {}
 concurrency:
@@ -58,6 +58,10 @@ jobs:
         if: steps.period.outputs.active == 'true' && inputs.content == 'bagages'
         working-directory: .github/vsd-production/voice
         run: python storyboard.py --storyboard ../reel-drafts/reel-article-portugal-sans-voiture-bagages --output "$RUNNER_TEMP/vsd-storyboard-media"
+      - name: Render complete sentences without mid-phrase pauses
+        if: steps.period.outputs.active == 'true' && inputs.content == 'bagages-flow'
+        working-directory: .github/vsd-production/voice
+        run: python storyboard.py --sentence-flow --storyboard ../reel-drafts/reel-article-portugal-sans-voiture-bagages --output "$RUNNER_TEMP/vsd-storyboard-media"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: steps.period.outputs.active == 'true' && inputs.content == 'samples'
         with:
@@ -73,7 +77,7 @@ jobs:
           if-no-files-found: error
           retention-days: 7
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        if: steps.period.outputs.active == 'true' && inputs.content == 'bagages'
+        if: steps.period.outputs.active == 'true' && (inputs.content == 'bagages' || inputs.content == 'bagages-flow')
         with:
           name: vsd-storyboard-media
           path: ${{ runner.temp }}/vsd-storyboard-media
