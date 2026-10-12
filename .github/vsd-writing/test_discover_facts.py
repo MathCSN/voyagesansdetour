@@ -15,3 +15,20 @@ class DiscoveryTests(unittest.TestCase):
     def test_known_information_is_not_an_update(self):
         decision={'id':'c1','supported':True,'newInformation':False,'useful':True,'reason':'Déjà présent dans le guide'}
         self.assertEqual(validate_review({'decisions':[decision]},[{'id':'c1'}]),set())
+
+class FactQuarantineTests(unittest.TestCase):
+    def fact(self,identity,source):
+        return {'id':identity,'fact':'Le fait est explicitement documenté.','source':source,'quote':'A sufficiently long exact quotation.','usefulness':'Choisir une gare de départ.'}
+    def test_invalid_source_never_enters_retained_facts(self):
+        from discover_facts import partition_facts
+        good,bad=partition_facts({'facts':[self.fact('c1',0),self.fact('c2',6)]},[{'text':'A sufficiently long exact quotation.'}])
+        self.assertEqual([x['id'] for x in good],['c1'])
+        self.assertEqual(bad,[{'index':1,'id':'c2','reason':'source_index'}])
+    def test_all_bad_returns_empty_not_approval(self):
+        from discover_facts import partition_facts
+        good,bad=partition_facts({'facts':[self.fact('c1',6)]},[])
+        self.assertEqual(good,[]);self.assertEqual(len(bad),1)
+    def test_duplicates_fail_whole_packet(self):
+        from discover_facts import partition_facts
+        with self.assertRaisesRegex(ValueError,'duplicate_fact_identity'):
+            partition_facts({'facts':[self.fact('c1',0),self.fact('c1',6)]},[{'text':'A sufficiently long exact quotation.'}])
