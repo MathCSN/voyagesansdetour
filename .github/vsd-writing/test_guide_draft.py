@@ -60,3 +60,25 @@ class GuideTests(unittest.TestCase):
         self.assertEqual(len(facts),8);self.assertEqual(rejected,[])
         with self.assertRaisesRegex(ValueError,'fact_count'):
             partition_facts(g.bind_selected_quotes(chosen,catalog),sources)
+
+    def test_short_body_gets_one_bounded_repair_then_review(self):
+        short=copy.deepcopy(self.value)
+        for section in short['sections']:
+            section['paragraphs']=['Une description factuelle assez courte pour déclencher le contrôle du corps du guide.']
+        answers=iter([(short,{}),(self.value,{}),({'supported':True,'issues':[],'checkedClaimIds':['c1','c2','c3','c4']},{})])
+        calls=[]
+        def invoke(*args):calls.append(args);return next(answers)
+        result=g.create_guide(self.topic,self.facts,[],self.now,'',invoke)
+        self.assertEqual(len(calls),3)
+        self.assertEqual(result['status'],'guide_ready_for_pilot_review')
+        self.assertFalse(result['publicationApproved'])
+
+    def test_failed_length_repair_is_not_retried(self):
+        short=copy.deepcopy(self.value)
+        for section in short['sections']:
+            section['paragraphs']=['Une description factuelle assez courte pour déclencher le contrôle du corps du guide.']
+        calls=[]
+        def invoke(*args):calls.append(args);return short,{}
+        with self.assertRaisesRegex(ValueError,'guide_too_short'):
+            g.create_guide(self.topic,self.facts,[],self.now,'',invoke)
+        self.assertEqual(len(calls),2)
