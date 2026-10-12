@@ -35,6 +35,16 @@ class IntakeTests(unittest.TestCase):
         self.assertEqual(self.run_intake(fetch)['created'],0)
         self.assertEqual(before,(folder/'storyboard.json').read_bytes())
         self.assertFalse(json.loads(before)['publicationApproved'])
+    def test_reserved_video_explains_noop_without_fetch_or_new_identity(self):
+        (self.root/'reel-reservations.json').write_text(json.dumps({'schemaVersion':1,'reservedSlugs':[self.article['slug']]}))
+        result=self.run_intake(Mock(side_effect=AssertionError('reserved content fetch')))
+        self.assertEqual(result['status'],'no_eligible_new_article')
+        self.assertEqual(result['skipped'],[{'slug':self.article['slug'],'reason':'reserved_existing_video'}])
+        self.assertFalse(self.output.exists())
+    def test_existing_draft_explains_noop(self):
+        self.run_intake()
+        result=self.run_intake(Mock(side_effect=AssertionError('existing content fetch')))
+        self.assertEqual(result['skipped'],[{'slug':self.article['slug'],'reason':'existing_storyboard'}])
     def test_changed_article_does_not_reset_prior_identity(self):
         self.run_intake();self.article['title']='Un nouveau titre';self.save()
         self.assertEqual(self.run_intake(Mock(side_effect=AssertionError('fetch')))['created'],0)

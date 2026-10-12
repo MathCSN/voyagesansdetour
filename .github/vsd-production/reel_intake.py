@@ -76,6 +76,7 @@ def run(root=HERE,output=None,now=None,fetcher=fetch_public):
     config=json.loads((root/'reel-reservations.json').read_text())
     if config.get('schemaVersion')!=1:raise ValueError('reservation_schema')
     reserved=set(config['reservedSlugs'])
+    existing_drafts=set()
     if output.exists():
         for folder in output.iterdir():
             if folder.is_symlink() or not folder.is_dir():raise ValueError('invalid_draft_folder')
@@ -85,13 +86,15 @@ def run(root=HERE,output=None,now=None,fetcher=fetch_public):
             if hashlib.sha256(storyboard.read_bytes()).hexdigest()!=meta['storyboardSha256']:raise ValueError('storyboard_changed')
             draft=json.loads(storyboard.read_text())
             if draft['id']!=folder.name or draft['publicationApproved'] is not False:raise ValueError('draft_identity_or_state')
-            reserved.add(draft['source']['slug'])
+            existing_drafts.add(draft['source']['slug'])
     articles=json.loads((root.parents[1]/'site-src/articles.json').read_text())
     if len({a['slug'] for a in articles})!=len(articles):raise ValueError('duplicate_article')
-    held=[]
+    held=[];skipped=[]
     for article in sorted(articles,key=lambda a:(a.get('publishedOn',''),a['slug']),reverse=True):
         slug=article['slug']
-        if slug in reserved:continue
+        if slug in reserved or slug in existing_drafts:
+            skipped.append({'slug':slug,'reason':'existing_storyboard' if slug in existing_drafts else 'reserved_existing_video'})
+            continue
         if not re.fullmatch(r'[a-z0-9]+(?:-[a-z0-9]+)*',slug):raise ValueError('article_identity')
         if not article.get('sourcesCheckedOn'):
             held.append({'slug':slug,'reason':'source_review_date_missing'});continue
@@ -127,8 +130,8 @@ def run(root=HERE,output=None,now=None,fetcher=fetch_public):
             (staged/'receipt.json').write_text(json.dumps({'schemaVersion':1,'storyboardSha256':hashlib.sha256(content).hexdigest(),
                                                          'status':'draft_not_rendered','publicationAttempted':False},indent=2)+'\n')
             staged.rename(output/identity)
-        return {'status':'storyboard_created_not_rendered','created':1,'id':identity,'publicationAttempted':False,'held':held}
-    return {'status':'no_eligible_new_article','created':0,'publicationAttempted':False,'held':held}
+        return {'status':'storyboard_created_not_rendered','created':1,'id':identity,'publicationAttempted':False,'held':held,'skipped':skipped}
+    return {'status':'no_eligible_new_article','created':0,'publicationAttempted':False,'held':held,'skipped':skipped}
 
 
 if __name__=='__main__':
