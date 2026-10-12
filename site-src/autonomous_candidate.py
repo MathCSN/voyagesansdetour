@@ -242,6 +242,9 @@ def main():
               "changed": False, "sourceFetches": 0, "createdCandidates": 0,
               "reason": "source_recheck_is_not_original_editorial_review",
               "replacementWorkflow": "vsd-writing-discovery.yml"}
+    if result['status'] == 'period_ended':
+        print(json.dumps(result, ensure_ascii=False))
+        return
     if args.report:
         args.report.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(result, ensure_ascii=False))

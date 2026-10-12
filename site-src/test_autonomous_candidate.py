@@ -55,6 +55,13 @@ class AutonomousCandidateTests(unittest.TestCase):
         self.assertEqual(list((self.root/'editorial-candidates').iterdir()),[])
         for name,data in before.items():self.assertEqual((self.root/name).read_bytes(),data)
 
+    def test_retired_cli_does_not_write_after_authorised_period(self):
+        with patch.object(sys,'argv',['autonomous_candidate.py','--report',str(self.root/'late.json')]), \
+                patch.object(generator,'now_utc',return_value=generator.HARD_STOP+generator.dt.timedelta(seconds=1)), \
+                patch.object(Path,'write_text',side_effect=AssertionError('write after cutoff')):
+            generator.main()
+        self.assertFalse((self.root/'late.json').exists())
+
     def test_generates_one_source_bound_candidate(self):
         with patch.object(generator.intake, "source_fingerprint", return_value={
             "sha256": "a" * 64, "text": "Official source Lisbonne"
