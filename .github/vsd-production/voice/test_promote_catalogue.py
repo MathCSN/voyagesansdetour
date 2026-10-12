@@ -18,6 +18,7 @@ def stage(c,s,n):return promote_selected.stage(c,s,n,source)
 class PromotionTests(unittest.TestCase):
     def fixture(self,tmp):
         root=Path(tmp)/'production';root.mkdir();candidate=root/'voice-stock'/CANDIDATE.name;shutil.copytree(CANDIDATE,candidate)
+        (candidate/'public-media-proof.json').unlink(missing_ok=True)
         site=Path(tmp)/'site';site.mkdir();(site/'public-media.json').write_text('{"schemaVersion":1,"items":[]}')
         return root,site,candidate
     def test_stage_then_public_confirmation_then_skip(self):
