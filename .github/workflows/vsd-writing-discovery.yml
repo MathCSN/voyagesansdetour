@@ -1,6 +1,12 @@
 name: Discover source-grounded VSD updates
 on:
   workflow_dispatch:
+    inputs:
+      guide:
+        description: Existing guide slug for a bounded qualification; empty uses weekly rotation
+        required: false
+        default: ""
+        type: string
 permissions: {}
 concurrency:
   group: vsd-workers-ai-writing
@@ -21,6 +27,7 @@ jobs:
       - name: Discover and review novel facts
         env:
           CLOUDFLARE_WORKERS_AI_TOKEN: ${{ secrets.CLOUDFLARE_WORKERS_AI_TOKEN }}
+          GUIDE_SLUG: ${{ inputs.guide }}
           REPORT_DIR: ${{ runner.temp }}/vsd-source-draft
         run: python3 .github/vsd-writing/discover_facts.py
       - name: Preserve pilot evidence only

@@ -29,7 +29,11 @@ def eligible_urls(article):
             result.append(u)
     return result[:3]
 
-def select_guide(articles, now):
+def select_guide(articles, now, requested=""):
+    if requested:
+        matches=[a for a in articles if a.get("slug")==requested and len(eligible_urls(a))>=2 and a.get("category")!="Mises à jour"]
+        require(len(matches)==1,"unknown_or_ineligible_guide")
+        return matches[0]
     candidates=[a for a in articles if len(eligible_urls(a))>=2 and a.get('category')!='Mises à jour']
     require(bool(candidates),'no_eligible_guide')
     candidates.sort(key=lambda a:a['slug'])
@@ -87,7 +91,7 @@ def main():
         require(now<HARD_STOP,'authorization_period_ended')
         token=os.environ.get('CLOUDFLARE_WORKERS_AI_TOKEN','');require(bool(token),'missing_secret')
         articles=json.loads((ROOT/'articles.json').read_text())
-        article=select_guide(articles,now);report['guideSlug']=article['slug']
+        article=select_guide(articles,now,os.environ.get("GUIDE_SLUG",""));report['guideSlug']=article['slug']
         existing=json.dumps(article,ensure_ascii=False)
         require(len(existing.encode())<18000,'existing_guide_too_large')
         report['existingArticleSha256']=hashlib.sha256(existing.encode()).hexdigest()

@@ -32,3 +32,15 @@ class FactQuarantineTests(unittest.TestCase):
         from discover_facts import partition_facts
         with self.assertRaisesRegex(ValueError,'duplicate_fact_identity'):
             partition_facts({'facts':[self.fact('c1',0),self.fact('c1',6)]},[{'text':'A sufficiently long exact quotation.'}])
+
+class GuideSelectionTests(unittest.TestCase):
+    def test_unknown_override_cannot_supply_arbitrary_source(self):
+        import datetime as dt
+        from discover_facts import select_guide
+        with self.assertRaisesRegex(ValueError,'unknown_or_ineligible_guide'):
+            select_guide([],dt.datetime.now(dt.timezone.utc),'https://evil.example')
+    def test_override_selects_existing_article_only(self):
+        import datetime as dt
+        from discover_facts import select_guide
+        article={'slug':'bagages','sources':[{'url':'https://www.cp.pt/info/en/w/luggage'},{'url':'https://www.metrolisboa.pt/en/better-manners-better-rides/'}]}
+        self.assertIs(select_guide([article],dt.datetime.now(dt.timezone.utc),'bagages'),article)
