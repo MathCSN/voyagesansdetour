@@ -1,6 +1,12 @@
 name: Qualify two free VSD French voices
 on:
   workflow_dispatch:
+    inputs:
+      content:
+        description: Render fixed samples or the source-bound bagage storyboard
+        type: choice
+        options: [samples, bagages]
+        default: samples
 permissions: {}
 concurrency:
   group: vsd-voice-pilot
@@ -37,24 +43,39 @@ jobs:
             sudo apt-get update -qq
             sudo apt-get install --yes --no-install-recommends ffmpeg
           fi
-      - name: Test bounds and produce exactly two samples
+      - name: Test voice, timing and source integrity
         if: steps.period.outputs.active == 'true'
         working-directory: .github/vsd-production/voice
         run: |
-          python -m unittest -q test_pilot test_compose
+          python -m unittest -q test_pilot test_compose test_storyboard
+      - name: Render the fixed voice samples
+        if: steps.period.outputs.active == 'true' && inputs.content == 'samples'
+        working-directory: .github/vsd-production/voice
+        run: |
           python pilot.py --output "$RUNNER_TEMP/vsd-french-voices"
           python compose.py --audio "$RUNNER_TEMP/vsd-french-voices" --output "$RUNNER_TEMP/vsd-voice-videos"
+      - name: Render the source-bound bagage storyboard
+        if: steps.period.outputs.active == 'true' && inputs.content == 'bagages'
+        working-directory: .github/vsd-production/voice
+        run: python storyboard.py --storyboard ../reel-drafts/reel-article-portugal-sans-voiture-bagages --output "$RUNNER_TEMP/vsd-storyboard-media"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        if: steps.period.outputs.active == 'true'
+        if: steps.period.outputs.active == 'true' && inputs.content == 'samples'
         with:
           name: vsd-french-voice-samples
           path: ${{ runner.temp }}/vsd-french-voices
           if-no-files-found: error
           retention-days: 7
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        if: steps.period.outputs.active == 'true'
+        if: steps.period.outputs.active == 'true' && inputs.content == 'samples'
         with:
           name: vsd-voice-video-pilots
           path: ${{ runner.temp }}/vsd-voice-videos
           if-no-files-found: error
           retention-days: 7
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: steps.period.outputs.active == 'true' && inputs.content == 'bagages'
+        with:
+          name: vsd-storyboard-media
+          path: ${{ runner.temp }}/vsd-storyboard-media
+          if-no-files-found: error
+          retention-days: 30

@@ -22,12 +22,12 @@ HEADINGS = [('Et si on', 'préparait la suite ?'), ('Des guides.', 'Des sources.
 BADGES = ['PORTUGAL', 'VOYAGE SANS DÉTOUR', 'VOTRE CARNET', 'LE BLOG VOYAGE']
 
 
-def validate_timing(sample):
+def validate_timing(sample, sentences=SENTENCES):
     segments = sample.get('segments', [])
-    if len(segments) != len(SENTENCES):
+    if len(segments) != len(sentences):
         raise ValueError('missing_sentence_timing')
     previous = 0
-    for index, (segment, text) in enumerate(zip(segments, SENTENCES)):
+    for index, (segment, text) in enumerate(zip(segments, sentences)):
         start, end = segment['startSample'], segment['endSample']
         if (type(start) is not int or type(end) is not int or segment['sampleRate'] != 22050
                 or start < previous or end <= start or segment['text'] != text
@@ -74,7 +74,7 @@ def wrap(draw, text, font, width):
     return lines
 
 
-def scene(index, voice_index, fonts, subtitle):
+def scene(index, voice_index, fonts, subtitle, headings=HEADINGS, badges=BADGES):
     dark = (index+voice_index) % 2 == 1
     paper, ink, blue, lime = '#F7F4EC', '#142A43', '#234CDD', '#E6EE77'
     bg, fg = (ink, paper) if dark else (paper, ink)
@@ -83,8 +83,8 @@ def scene(index, voice_index, fonts, subtitle):
     line(draw, 'VOYAGE SANS DÉTOUR', (86, 175), fonts['small'], fg)
     draw.line((86, 249, 994, 249), fill=fg, width=2)
     draw.rounded_rectangle((86, 328, 994, 398), 35, fill=lime)
-    line(draw, BADGES[index], (115, 344), fonts['small'], ink)
-    for n, title in enumerate(HEADINGS[index]):
+    line(draw, badges[index], (115, 344), fonts['small'], ink)
+    for n, title in enumerate(headings[index]):
         line(draw, title, (84, 465+n*123), fonts['title'], fg)
     # Abstract itinerary: a graphic metaphor, not a map or a journey claim.
     draw.line((190, 905, 530, 1025, 860, 875), fill=lime if dark else blue, width=9)
@@ -100,16 +100,18 @@ def scene(index, voice_index, fonts, subtitle):
     return image
 
 
-def compose(audio_dir, output, now):
+def compose(audio_dir, output, now, sentences=SENTENCES, headings=HEADINGS, badges=BADGES):
     if now.tzinfo is None:
         raise ValueError('timezone_required')
     if now >= STOP:
         return {'status':'period_ended', 'generated':0}
+    if not len(sentences) == len(headings) == len(badges) or not 1 <= len(sentences) <= 24:
+        raise ValueError("scene_count_mismatch")
     audio_dir, output = Path(audio_dir), Path(output)
     if output.exists() or output.is_symlink():
         raise ValueError('existing_output_preserved')
     receipt = load_json(audio_dir/'receipt.json')
-    if receipt.get('schemaVersion') != 2 or receipt['textSha256'] != sha(TEXT.encode()) or len(receipt['samples']) != 2:
+    if receipt.get('schemaVersion') != 2 or receipt['textSha256'] != sha(" ".join(sentences).encode()) or len(receipt['samples']) != 2:
         raise ValueError('unqualified_audio_receipt')
     if receipt['modelsManifestSha256'] != sha((HERE/'models.json').read_bytes()):
         raise ValueError('voice_manifest_changed')
@@ -124,7 +126,7 @@ def compose(audio_dir, output, now):
         result.mkdir()
         videos=[]
         for voice_index, sample in enumerate(receipt['samples']):
-            segments=validate_timing(sample)
+            segments=validate_timing(sample, sentences)
             wav=verified_file(audio_dir, {'file':sample['voice']+'.wav','sha256':sample['sha256']})
             measured=inspect_wav(wav)
             if measured['durationSeconds'] != sample['durationSeconds']:
@@ -143,9 +145,9 @@ def compose(audio_dir, output, now):
             fonts={name:ImageFont.truetype(str(ROOT/assets[key]['file']),size) for name,key,size in
                    [('title','serif',85),('caption','bold',45),('small','bold',29),('tiny','regular',23)]}
             folder=result/sample['voice'];folder.mkdir()
-            bases=[scene(i,voice_index,fonts,s['text']) for i,s in enumerate(segments)]
+            bases=[scene(i,voice_index,fonts,s['text'],headings,badges) for i,s in enumerate(segments)]
             for i,base in enumerate(bases):base.save(folder/f'scene-{i+1}.jpg',quality=92)
-            sheet=Image.new('RGB',(720,1280),'white')
+            sheet=Image.new('RGB',(720,640*math.ceil(len(bases)/2)),'white')
             for i,base in enumerate(bases):sheet.paste(base.resize((360,640)),((i%2)*360,(i//2)*640))
             sheet.save(folder/'apercu.jpg',quality=92)
             subtitles='\n\n'.join(f"{i+1}\n{timecode(s['startSample'])} --> {timecode(s['endSample'])}\n{s['text']}" for i,s in enumerate(segments))+'\n'

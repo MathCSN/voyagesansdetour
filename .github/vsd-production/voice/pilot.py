@@ -66,11 +66,14 @@ def inspect_wav(path, minimum_duration=3):
             'rms': rms, 'clippedFraction': clipped, 'sha256': sha(path.read_bytes())}
 
 
-def run(output, now):
+def run(output, now, sentences=SENTENCES):
     if now.tzinfo is None:
         raise ValueError('timezone_required')
     if now >= STOP:
         return {'status': 'period_ended', 'generated': 0}
+    if not isinstance(sentences, (tuple, list)) or not 1 <= len(sentences) <= 24 or any(not isinstance(t, str) or not t.strip() or len(t) > 200 for t in sentences) or len(" ".join(sentences)) > 1500:
+        raise ValueError("narration_bounds")
+    text = " ".join(sentences)
     output = Path(output)
     if output.exists() or output.is_symlink():
         raise ValueError('existing_output_preserved')
@@ -84,7 +87,7 @@ def run(output, now):
         temp = Path(temp)
         result = temp/'result'
         result.mkdir()
-        (result/'narration.txt').write_text(TEXT+'\n')
+        (result/'narration.txt').write_text(text+'\n')
         samples = []
         for voice in config['voices']:
             model_dir = temp/voice['id']
@@ -96,7 +99,7 @@ def run(output, now):
             frames = 0
             with wave.open(str(wav), 'wb') as joined:
                 joined.setparams((1, 2, 22050, 0, 'NONE', 'not compressed'))
-                for index, sentence in enumerate(SENTENCES):
+                for index, sentence in enumerate(sentences):
                     chunk = model_dir/(str(index)+'.wav')
                     subprocess.run([sys.executable, '-m', 'piper', '-m', str(model_dir/(voice['id']+'.onnx')),
                                     '-c', str(model_dir/(voice['id']+'.onnx.json')), '-s', str(voice['speaker']),
@@ -110,7 +113,7 @@ def run(output, now):
                     segments.append({'text': sentence, 'startSample': frames,
                                      'endSample': frames+count, 'sampleRate': 22050})
                     frames += count
-                    if index < len(SENTENCES)-1:
+                    if index < len(sentences)-1:
                         silence = 4410
                         joined.writeframes(bytes(silence*2))
                         frames += silence
@@ -121,7 +124,7 @@ def run(output, now):
         (result/'CREDITS.md').write_bytes((HERE/'CREDITS.md').read_bytes())
         receipt = {'schemaVersion': 2, 'status': 'audio_samples_not_published',
                    'generatedAt': now.isoformat(), 'generated': len(samples),
-                   'textSha256': sha(TEXT.encode()), 'modelsManifestSha256': sha((HERE/'models.json').read_bytes()),
+                   'textSha256': sha(text.encode()), 'modelsManifestSha256': sha((HERE/'models.json').read_bytes()),
                    'piperVersion': config['piperVersion'],
                    'onnxRuntimeVersion': importlib.metadata.version('onnxruntime'),
                    'modelsRevision': config['revision'], 'samples': samples,
