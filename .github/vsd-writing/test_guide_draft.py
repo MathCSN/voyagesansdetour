@@ -68,7 +68,7 @@ class GuideTests(unittest.TestCase):
         answers=iter([(short,{}),(self.value,{}),({'supported':True,'issues':[],'checkedClaimIds':['c1','c2','c3','c4']},{})])
         calls=[]
         def invoke(*args):calls.append(args);return next(answers)
-        result=g.create_guide(self.topic,self.facts,[],self.now,'',invoke)
+        result=g.create_guide(self.topic,self.facts,[],self.now,'',invoke,block_reviewer=lambda *args:({'supported':True},{}))
         self.assertEqual(len(calls),3)
         self.assertEqual(result['status'],'guide_ready_for_pilot_review')
         self.assertFalse(result['publicationApproved'])
@@ -82,3 +82,11 @@ class GuideTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'guide_too_short'):
             g.create_guide(self.topic,self.facts,[],self.now,'',invoke)
         self.assertEqual(len(calls),2)
+
+    def test_global_approval_cannot_override_failed_block_review(self):
+        answers=iter([(self.value,{}),({'supported':True,'issues':[],'checkedClaimIds':['c1','c2','c3','c4']},{})])
+        result=g.create_guide(self.topic,self.facts,[],self.now,'',lambda *args:next(answers),block_reviewer=lambda *args:({'supported':False,'issues':[{'id':'description','issue':'Unsupported claim'}]},{}))
+        self.assertTrue(result['review']['supported'])
+        self.assertFalse(result['blockReview']['supported'])
+        self.assertEqual(result['status'],'guide_held_by_review')
+        self.assertFalse(result['publicationApproved'])
