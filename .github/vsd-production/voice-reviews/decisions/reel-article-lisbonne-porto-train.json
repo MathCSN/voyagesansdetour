@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "contentId": "reel-article-lisbonne-porto-train",
+  "status": "held_pronunciation_unresolved",
+  "checkedAt": "2026-10-12T07:21:46.453630+00:00",
+  "transcriptionSha256": "8477ce855c2c1b948c8e5c19283ab5ea3f0e91fcbf9131326a82675be567973a",
+  "stockSha256": "546692757ec4c8acb55e2f0668cf13918c8a8a96be99d2bf6a94257d2a3ef8d4",
+  "publicationApproved": false,
+  "publicationAttempted": false,
+  "humanListeningPerformed": false,
+  "cloudRun": 38217153395,
+  "blockedVoices": [
+    "fr_FR-siwis-medium",
+    "fr_FR-upmc-medium"
+  ],
+  "criticalTerms": [
+    "Santa Apolónia",
+    "Oriente",
+    "Campanhã",
+    "Alfa Pendular",
+    "Intercidades"
+  ],
+  "reason": "Both independent ASR outputs contain ambiguous place/train names and other substitutions. Recognition alone cannot establish whether synthesis or ASR caused them. No differences are accepted for promotion.",
+  "next": "Qualify pronunciation or another source-bound narration revision; preserve current media and report. No automatic approval from ASR similarity."
+}
