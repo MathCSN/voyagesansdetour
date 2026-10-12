@@ -1,0 +1,50 @@
+name: Preserve completed VSD voiced renders
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: Completed production run to reconcile
+        required: true
+        type: string
+  workflow_run:
+    workflows: ['Render one new VSD voiced storyboard']
+    types: [completed]
+permissions: {}
+concurrency:
+  group: vsd-voice-adoption
+  cancel-in-progress: false
+jobs:
+  adopt:
+    if: github.repository == 'MathCSN/voyagesansdetour' && github.event.repository.private == false && github.run_attempt == 1 && (github.event_name == 'workflow_dispatch' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main' && github.event.workflow_run.head_repository.full_name == 'MathCSN/voyagesansdetour'))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: write
+      actions: read
+    steps:
+      # Execute only the trusted default-branch code; artifacts are data only.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: main
+      - name: Verify adoption boundaries
+        working-directory: .github/vsd-production/voice
+        run: python3 -m unittest -q test_adopt_run
+      - name: Reconcile one completed production run
+        working-directory: .github/vsd-production/voice
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VSD_COMPLETED_RUN: ${{ github.event.workflow_run.id || inputs.run_id }}
+        run: python3 adopt_run.py --run-id "$VSD_COMPLETED_RUN" --report "$RUNNER_TEMP/voice-adoption.json"
+      - name: Persist validated media without approving publication
+        run: |
+          git add -- .github/vsd-production/voice-stock
+          if git diff --cached --quiet; then exit 0; fi
+          git -c user.name='VSD media preservation' -c user.email='actions@users.noreply.github.com' commit -m 'Preserve completed voiced media with cloud provenance'
+          git push origin HEAD:main
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: voice-adoption
+          path: ${{ runner.temp }}/voice-adoption.json
+          if-no-files-found: warn
+          retention-days: 30
