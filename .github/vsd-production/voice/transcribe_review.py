@@ -12,6 +12,24 @@ import stock
 MODEL='Systran/faster-whisper-small'
 REVISION='536b0662742c02347bc0e980a01041f333bce120'
 VOICES=('fr_FR-siwis-medium','fr_FR-upmc-medium')
+MEDIUM_MODEL='Systran/faster-whisper-medium'
+MEDIUM_REVISION='08e178d48790749d25932bbc082711ddcfdfbc4f'
+
+
+def model_for_receipt(receipt):
+    profile=receipt.get('synthesisProfile','original')
+    if profile=='original':return MODEL,REVISION
+    if profile=='clear-v1':return MEDIUM_MODEL,MEDIUM_REVISION
+    raise ValueError('unqualified_synthesis_profile')
+
+
+def recorded_model(folder,record):
+    path=folder/'media/receipt.json'
+    if path.is_symlink():raise ValueError('symlink')
+    raw=path.read_bytes()
+    matches=[r for r in record['files'] if r['file']=='receipt.json']
+    if len(matches)!=1 or matches[0]['sha256']!=stock.sha(raw):raise ValueError('receipt_changed')
+    return model_for_receipt(json.loads(raw))
 
 
 def words(text):
@@ -46,9 +64,10 @@ def review_next(root, output, now, transcriber=None):
         report=output/(folder.name+'.json')
         if report.is_symlink():raise ValueError('symlink')
         if report.exists():
+            expected_model,expected_revision=recorded_model(folder,record)
             old=json.loads(report.read_text())
             if (old['id']!=folder.name or old['stockSha256']!=stock.sha(manifest.read_bytes())
-                    or old['modelRevision']!=REVISION or old['publicationApproved'] is not False):raise ValueError('review_conflict')
+                    or old['modelRevision']!=expected_revision or old['model']!=expected_model or old['publicationApproved'] is not False):raise ValueError('review_conflict')
             continue
         if now>=dt.datetime.fromisoformat(record['validUntil']):continue
         return review(folder,report,now,transcriber)
@@ -90,10 +109,11 @@ def review(folder,output,now,transcriber=None):
     filenames={r['file'] for r in files}
     for voice in VOICES:
         if f'videos/{voice}/reel.mp4' not in filenames:raise ValueError('missing_final_mix')
+    model_name,model_revision=model_for_receipt(receipt)
     if transcriber is None:
         from huggingface_hub import snapshot_download
         from faster_whisper import WhisperModel
-        model_path=snapshot_download(MODEL,revision=REVISION,token=False,
+        model_path=snapshot_download(model_name,revision=model_revision,token=False,
             allow_patterns=['config.json','model.bin','tokenizer.json','vocabulary.*'],max_workers=2)
         model=WhisperModel(model_path,device='cpu',compute_type='int8',cpu_threads=2,num_workers=1,local_files_only=True)
         def transcriber(path):
@@ -110,7 +130,7 @@ def review(folder,output,now,transcriber=None):
                         'transcript':transcript,'comparison':compare(expected,transcript)})
     result={'schemaVersion':1,'id':identity,'checkedAt':now.isoformat(),'validUntil':receipt['validUntil'],
             'status':'machine_transcription_requires_editorial_review','stockSha256':stock.sha((folder/'stock.json').read_bytes()),
-            'model':MODEL,'modelRevision':REVISION,'language':'fr','sourceTextPromptProvided':False,
+            'model':model_name,'modelRevision':model_revision,'language':'fr','sourceTextPromptProvided':False,
             'compute':'local_cpu_int8','paidInferenceCalls':0,'publicationApproved':False,'publicationAttempted':False,
             'humanListeningPerformed':False,'expectedText':expected,'voices':reports,
             'limitation':'ASR differences may come from recognition or synthesis. This does not establish naturalness, pronunciation quality or editorial approval.'}

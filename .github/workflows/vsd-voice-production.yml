@@ -53,7 +53,7 @@ jobs:
           from pathlib import Path
           import storyboard
           plan=json.loads((Path(os.environ['RUNNER_TEMP'])/'voice-plan.json').read_text())
-          storyboard.run(Path('../reel-drafts')/plan['selected'],Path(os.environ['RUNNER_TEMP'])/'vsd-storyboard-media',dt.datetime.now(dt.timezone.utc),sentence_flow=True)
+          storyboard.run(Path('../reel-drafts')/plan['selected'],Path(os.environ['RUNNER_TEMP'])/'vsd-storyboard-media',dt.datetime.now(dt.timezone.utc),sentence_flow=True,synthesis_profile='clear-v1')
           PY
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: steps.selection.outputs.selected == 'true'

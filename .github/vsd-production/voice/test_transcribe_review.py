@@ -22,6 +22,21 @@ class ReviewTests(unittest.TestCase):
         self.assertTrue(review.compare('Un départ !','un départ.')['exactNormalizedMatch'])
         self.assertFalse(review.compare('Le guide','')['exactNormalizedMatch'])
 
+    def test_profile_selects_pinned_model_and_rejects_unknown(self):
+        self.assertEqual(review.model_for_receipt({}),(review.MODEL,review.REVISION))
+        self.assertEqual(review.model_for_receipt({'synthesisProfile':'clear-v1'}),(review.MEDIUM_MODEL,review.MEDIUM_REVISION))
+        with self.assertRaisesRegex(ValueError,'unqualified_synthesis_profile'):
+            review.model_for_receipt({'synthesisProfile':'untrusted'})
+
+    def test_recorded_profile_cannot_change_behind_stock_hash(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            folder=Path(tmp)/'stock';shutil.copytree(FOLDER,folder)
+            record=json.loads((folder/'stock.json').read_text())
+            receipt=folder/'media/receipt.json'
+            data=json.loads(receipt.read_text());data['synthesisProfile']='clear-v1';receipt.write_text(json.dumps(data))
+            with self.assertRaisesRegex(ValueError,'receipt_changed'):
+                review.recorded_model(folder,record)
+
     def test_expiry_before_transcription(self):
         with tempfile.TemporaryDirectory() as tmp:
             with self.assertRaisesRegex(ValueError,'expired_or_future_render'):
