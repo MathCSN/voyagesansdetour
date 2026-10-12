@@ -39,3 +39,14 @@ class GuideTests(unittest.TestCase):
         result=g.create_guide(self.topic,self.facts,[],self.now,'',lambda *args:next(answers))
         self.assertEqual(result['status'],'guide_held_by_review')
         self.assertFalse(result['publicationApproved'])
+
+    def test_quote_identity_binds_source_and_exact_words(self):
+        sources=[{'text':'First source sentence has useful details.'},{'text':'Second source sentence describes the collection.'}]
+        catalog=g.quote_catalog(sources)
+        result=g.bind_selected_quotes({'facts':[{'quoteId':'q2','fact':'La collection est décrite dans la source.','usefulness':'Décrire une visite documentée.'}]},catalog)
+        self.assertEqual(result['facts'][0]['source'],1)
+        self.assertEqual(result['facts'][0]['quote'],sources[1]['text'])
+
+    def test_invented_quote_identity_is_rejected(self):
+        with self.assertRaisesRegex(ValueError,'unknown_or_duplicate_quote'):
+            g.bind_selected_quotes({'facts':[{'quoteId':'q999','fact':'Inventé','usefulness':'Inventé'}]},[])
