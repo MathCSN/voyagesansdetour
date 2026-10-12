@@ -1,5 +1,6 @@
 import datetime as dt
 import json
+import shutil
 from pathlib import Path
 import tempfile
 import unittest
@@ -49,18 +50,20 @@ class ReviewTests(unittest.TestCase):
 
     def test_selector_skips_immutable_review_and_stops_on_conflict(self):
         with tempfile.TemporaryDirectory() as tmp:
-            out=Path(tmp)
+            root=Path(tmp)/'stock';root.mkdir();shutil.copytree(FOLDER,root/FOLDER.name)
+            out=Path(tmp)/'reports'
             report=out/(FOLDER.name+'.json')
             review.review(FOLDER,report,NOW,lambda p:[{'text':'Exemple','start':0,'end':1}])
-            result=review.review_next(FOLDER.parent,out,NOW,lambda p:self.fail('duplicate inference'))
+            result=review.review_next(root,out,NOW,lambda p:self.fail('duplicate inference'))
             self.assertEqual(result['status'],'no_unreviewed_valid_stock')
             old=json.loads(report.read_text());old['stockSha256']='0'*64;report.write_text(json.dumps(old))
             with self.assertRaisesRegex(ValueError,'review_conflict'):
-                review.review_next(FOLDER.parent,out,NOW,lambda p:self.fail('inference'))
+                review.review_next(root,out,NOW,lambda p:self.fail('inference'))
 
     def test_selector_skips_expired_stock_without_inference(self):
         with tempfile.TemporaryDirectory() as tmp:
-            result=review.review_next(FOLDER.parent,tmp,dt.datetime(2026,10,28,tzinfo=dt.timezone.utc),lambda p:self.fail('inference'))
+            root=Path(tmp)/'stock';root.mkdir();shutil.copytree(FOLDER,root/FOLDER.name)
+            result=review.review_next(root,Path(tmp)/'reports',dt.datetime(2026,10,28,tzinfo=dt.timezone.utc),lambda p:self.fail('inference'))
             self.assertEqual(result['status'],'no_unreviewed_valid_stock')
 
 class CatalogueTests(unittest.TestCase):
