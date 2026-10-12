@@ -1,6 +1,9 @@
 name: Check VSD voice intelligibility locally
 on:
   workflow_dispatch:
+  workflow_run:
+    workflows: ['Preserve completed VSD voiced renders']
+    types: [completed]
   schedule:
     - cron: '47 7 * * 1'
 permissions: {}
@@ -9,7 +12,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   review:
-    if: github.repository == 'MathCSN/voyagesansdetour' && github.ref == 'refs/heads/main' && github.event.repository.private == false && github.run_attempt == 1
+    if: github.repository == 'MathCSN/voyagesansdetour' && github.ref == 'refs/heads/main' && github.event.repository.private == false && github.run_attempt == 1 && (github.event_name != 'workflow_run' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main' && github.event.workflow_run.head_repository.full_name == 'MathCSN/voyagesansdetour'))
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:
@@ -25,6 +28,8 @@ jobs:
           PY
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         if: steps.period.outputs.active == 'true'
+        with:
+          ref: main
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
         if: steps.period.outputs.active == 'true'
         with:
