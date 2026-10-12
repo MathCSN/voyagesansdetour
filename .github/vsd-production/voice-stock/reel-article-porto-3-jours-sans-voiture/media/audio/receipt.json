@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 2,
+  "status": "audio_samples_not_published",
+  "generatedAt": "2026-10-12T07:39:52.779452+00:00",
+  "generated": 2,
+  "textSha256": "a4c1b789ae4a7d08d1af2fcfdc40e3a52533df74ffb7895c38c9d6f8becb2643",
+  "modelsManifestSha256": "299bf846a56348724ad2d547dac5925277d775dccffa71ea5d8e6f26916a34c1",
+  "piperVersion": "1.8.0",
+  "onnxRuntimeVersion": "1.31.0",
+  "modelsRevision": "c10ece1aade47bb51c153c893d14e5bf8e5b7117",
+  "samples": [
+    {
+      "voice": "fr_FR-siwis-medium",
+      "speaker": 0,
+      "datasetLicense": "CC-BY-4.0",
+      "segments": [
+        {
+          "text": "Porto en 3 jours : du Douro \u00e0 l\u2019oc\u00e9an, sans voiture",
+          "startSample": 0,
+          "endSample": 85504,
+          "sampleRate": 22050
+        },
+        {
+          "text": "\u00c0 Porto, regroupez les visites par secteur pour limiter les mont\u00e9es.",
+          "startSample": 89914,
+          "endSample": 170554,
+          "sampleRate": 22050
+        },
+        {
+          "text": "\u00c9vitez de descendre au fleuve puis de remonter plusieurs fois.",
+          "startSample": 174964,
+          "endSample": 242036,
+          "sampleRate": 22050
+        },
+        {
+          "text": "Une seule visite avec billet par jour laisse de la place aux pauses et aux impr\u00e9vus.",
+          "startSample": 246446,
+          "endSample": 347310,
+          "sampleRate": 22050
+        },
+        {
+          "text": "Avant de r\u00e9server une visite de cave, comparez sa langue, sa dur\u00e9e et ce qui est inclus.",
+          "startSample": 351720,
+          "endSample": 463592,
+          "sampleRate": 22050
+        },
+        {
+          "text": "La d\u00e9gustation reste facultative.",
+          "startSample": 468002,
+          "endSample": 518690,
+          "sampleRate": 22050
+        },
+        {
+          "text": "Pour profiter des deux rives, une promenade sur les quais peut suffire ; gardez de l\u2019\u00e9nergie pour le retour.",
+          "startSample": 523100,
+          "endSample": 647004,
+          "sampleRate": 22050
+        },
+        {
+          "text": "Retrouvez le guide et ses sources sur Voyage Sans D\u00e9tour.",
+          "startSample": 651414,
+          "endSample": 735382,
+          "sampleRate": 22050
+        }
+      ],
+      "durationSeconds": 33.35065759637188,
+      "sampleRate": 22050,
+      "channels": 1,
+      "rms": 4911.009529872699,
+      "clippedFraction": 1.2238537250027876e-05,
+      "sha256": "445c69543414a9133734b4e836a19878b9292ec556b3424da1f873038a0a7243"
+    },
+    {
+      "voice": "fr_FR-upmc-medium",
+      "speaker": 1,
+      "datasetLicense": "CC-BY-SA-4.0",
+      "segments": [
+        {
+          "text": "Porto en 3 jours : du Douro \u00e0 l\u2019oc\u00e9an, sans voiture",
+          "startSample": 0,
+          "endSample": 66560,
+          "sampleRate": 22050
+        },
+        {
+          "text": "\u00c0 Porto, regroupez les visites par secteur pour limiter les mont\u00e9es.",
+          "startSample": 70970,
+          "endSample": 162362,
+          "sampleRate": 22050
+        },
+        {
+          "text": "\u00c9vitez de descendre au fleuve puis de remonter plusieurs fois.",
+          "startSample": 166772,
+          "endSample": 232564,
+          "sampleRate": 22050
+        },
+        {
+          "text": "Une seule visite avec billet par jour laisse de la place aux pauses et aux impr\u00e9vus.",
+          "startSample": 236974,
+          "endSample": 331694,
+          "sampleRate": 22050
+        },
+        {
+          "text": "Avant de r\u00e9server une visite de cave, comparez sa langue, sa dur\u00e9e et ce qui est inclus.",
+          "startSample": 336104,
+          "endSample": 448744,
+          "sampleRate": 22050
+        },
+        {
+          "text": "La d\u00e9gustation reste facultative.",
+          "startSample": 453154,
+          "endSample": 502818,
+          "sampleRate": 22050
+        },
+        {
+          "text": "Pour profiter des deux rives, une promenade sur les quais peut suffire ; gardez de l\u2019\u00e9nergie pour le retour.",
+          "startSample": 507228,
+          "endSample": 619100,
+          "sampleRate": 22050
+        },
+        {
+          "text": "Retrouvez le guide et ses sources sur Voyage Sans D\u00e9tour.",
+          "startSample": 623510,
+          "endSample": 700310,
+          "sampleRate": 22050
+        }
+      ],
+      "durationSeconds": 31.760090702947846,
+      "sampleRate": 22050,
+      "channels": 1,
+      "rms": 4226.169745772976,
+      "clippedFraction": 1.142351244448887e-05,
+      "sha256": "796ce2df20dbdfa343a6f3fb81be978533baa532cb71cc87129eae0ac6e5f046"
+    }
+  ],
+  "paidInferenceCalls": 0,
+  "publicationAttempted": false,
+  "listeningReviewComplete": false,
+  "automaticReelIntegration": false
+}

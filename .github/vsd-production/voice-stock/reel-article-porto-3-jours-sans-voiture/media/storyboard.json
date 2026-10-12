@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "id": "reel-article-porto-3-jours-sans-voiture",
+  "status": "storyboard_requires_media_review",
+  "publicationApproved": false,
+  "createdAt": "2026-10-12T07:32:55.580842+00:00",
+  "title": "Porto en 3 jours : du Douro à l’océan, sans voiture",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/porto-3-jours-sans-voiture/",
+  "source": {
+    "slug": "porto-3-jours-sans-voiture",
+    "articleSha256": "65a239e378bd06d1663dca8b3b96551bee489b8d51f399fc77cbf01b49c85a14",
+    "publicHtmlSha256": "3d3cdab18375c257f6afc91f2d58ada232325f3defa3938bbf1a1be834070763",
+    "publicCheckedAt": "2026-10-12T07:32:55.580842+00:00",
+    "sourcesCheckedOn": "2026-10-12",
+    "validUntil": "2026-11-11T00:00:00+00:00",
+    "officialSources": [
+      {
+        "label": "Visit Porto — quartier historique",
+        "url": "https://visitporto.travel/en-GB/districts/historic"
+      },
+      {
+        "label": "Visit Porto — quartier Atlantique",
+        "url": "https://visitporto.travel/en-GB/districts/atlantic"
+      },
+      {
+        "label": "Visit Porto — rues commerçantes",
+        "url": "https://visitporto.travel/en-GB/attraction/shopping"
+      },
+      {
+        "label": "Visit Porto — accessibilité",
+        "url": "https://visitporto.travel/en-GB/accessible-porto"
+      },
+      {
+        "label": "Aéroport de Porto — transports publics",
+        "url": "https://www.portoairport.pt/en/opo/access-parking/getting-to-and-from-the-airport/public-transportation"
+      },
+      {
+        "label": "Andante — validation des titres",
+        "url": "https://andante.pt/en/validation/"
+      },
+      {
+        "label": "STCP — lignes de bus",
+        "url": "https://stcp.pt/pt/linhas"
+      }
+    ],
+    "proofScope": "Exact excerpts in a public guide; no new official-source audit"
+  },
+  "narration": {
+    "hook": "Porto en 3 jours : du Douro à l’océan, sans voiture",
+    "excerpts": [
+      {
+        "sectionId": "preparer",
+        "paragraphIndex": 1,
+        "text": "À Porto, regroupez les visites par secteur pour limiter les montées. Évitez de descendre au fleuve puis de remonter plusieurs fois. Une seule visite avec billet par jour laisse de la place aux pauses et aux imprévus."
+      },
+      {
+        "sectionId": "jour-2",
+        "paragraphIndex": 1,
+        "text": "Avant de réserver une visite de cave, comparez sa langue, sa durée et ce qui est inclus. La dégustation reste facultative. Pour profiter des deux rives, une promenade sur les quais peut suffire ; gardez de l’énergie pour le retour."
+      }
+    ],
+    "closing": "Retrouvez le guide et ses sources sur Voyage Sans Détour."
+  },
+  "paidInferenceCalls": 0,
+  "limitations": [
+    "Narration timing, rendered layout, voice choice and publication payload remain unqualified.",
+    "A storyboard is not a rendered, imported, scheduled or published Reel."
+  ]
+}
