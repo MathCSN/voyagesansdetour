@@ -1,0 +1,10 @@
+{
+  "id": "reel-article-porto-3-jours-sans-voiture",
+  "status": "held_speech_ambiguities",
+  "publicationApproved": false,
+  "publicationAttempted": false,
+  "humanListeningPerformed": false,
+  "reason": "Higher-capacity transcription resolves several initial errors but fleuve and limiter remain ambiguous; no semantic substitutions accepted.",
+  "primaryReport": "reel-article-porto-3-jours-sans-voiture.json",
+  "secondaryReport": "diagnostics/reel-article-porto-3-jours-sans-voiture-medium.json"
+}
