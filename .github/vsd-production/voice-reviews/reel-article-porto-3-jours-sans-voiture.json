@@ -1,0 +1,379 @@
+{
+  "schemaVersion": 1,
+  "id": "reel-article-porto-3-jours-sans-voiture",
+  "checkedAt": "2026-10-12T07:42:56.077671+00:00",
+  "validUntil": "2026-11-11T00:00:00+00:00",
+  "status": "machine_transcription_requires_editorial_review",
+  "stockSha256": "3a8ad60c422d3b067bfdeff5d01de2cabbe8cf95183238351931f3d731b2adef",
+  "model": "Systran/faster-whisper-small",
+  "modelRevision": "536b0662742c02347bc0e980a01041f333bce120",
+  "language": "fr",
+  "sourceTextPromptProvided": false,
+  "compute": "local_cpu_int8",
+  "paidInferenceCalls": 0,
+  "publicationApproved": false,
+  "publicationAttempted": false,
+  "humanListeningPerformed": false,
+  "expectedText": "Porto en 3 jours : du Douro à l’océan, sans voiture À Porto, regroupez les visites par secteur pour limiter les montées. Évitez de descendre au fleuve puis de remonter plusieurs fois. Une seule visite avec billet par jour laisse de la place aux pauses et aux imprévus. Avant de réserver une visite de cave, comparez sa langue, sa durée et ce qui est inclus. La dégustation reste facultative. Pour profiter des deux rives, une promenade sur les quais peut suffire ; gardez de l’énergie pour le retour. Retrouvez le guide et ses sources sur Voyage Sans Détour.",
+  "voices": [
+    {
+      "voice": "fr_FR-siwis-medium",
+      "mediaSha256": "c67e7a5e0185fe66fe52f0646cb036b6570a314c616a084e9c8b5c501f9baa06",
+      "segments": [
+        {
+          "start": 0.0,
+          "end": 4.0,
+          "text": " Portaux en trois jours, du Dourou à l'océan, sans voiture.",
+          "averageLogProbability": -0.16233271954430117,
+          "noSpeechProbability": 0.10655727237462997
+        },
+        {
+          "start": 4.0,
+          "end": 8.0,
+          "text": " À Portaux, recroupez les visites par secteur pour limiter les montées.",
+          "averageLogProbability": -0.16233271954430117,
+          "noSpeechProbability": 0.10655727237462997
+        },
+        {
+          "start": 8.0,
+          "end": 11.0,
+          "text": " Évitez de descendre aux feuilles puis de remonter plusieurs fois.",
+          "averageLogProbability": -0.16233271954430117,
+          "noSpeechProbability": 0.10655727237462997
+        },
+        {
+          "start": 11.0,
+          "end": 16.0,
+          "text": " Une seule visite avec billets par jour laisse de la place aux pauses et aux imprévus.",
+          "averageLogProbability": -0.16233271954430117,
+          "noSpeechProbability": 0.10655727237462997
+        },
+        {
+          "start": 16.0,
+          "end": 21.0,
+          "text": " Avant de réserver une visite de cave, comparez sa langue, sa durée et ce qui est inclus.",
+          "averageLogProbability": -0.16233271954430117,
+          "noSpeechProbability": 0.10655727237462997
+        },
+        {
+          "start": 21.0,
+          "end": 24.0,
+          "text": " La dégustation reste facultative.",
+          "averageLogProbability": -0.16233271954430117,
+          "noSpeechProbability": 0.10655727237462997
+        },
+        {
+          "start": 24.0,
+          "end": 28.0,
+          "text": " Pour profiter des deux rives, une promenade sur les quais peut suffire.",
+          "averageLogProbability": -0.16233271954430117,
+          "noSpeechProbability": 0.10655727237462997
+        },
+        {
+          "start": 28.0,
+          "end": 33.2,
+          "text": " l'énergie pour le retour. Retrouvez le guide et ses sources sur voyage sans détour.",
+          "averageLogProbability": -0.20729089736938477,
+          "noSpeechProbability": 0.15155307948589325
+        }
+      ],
+      "transcript": "Portaux en trois jours, du Dourou à l'océan, sans voiture. À Portaux, recroupez les visites par secteur pour limiter les montées. Évitez de descendre aux feuilles puis de remonter plusieurs fois. Une seule visite avec billets par jour laisse de la place aux pauses et aux imprévus. Avant de réserver une visite de cave, comparez sa langue, sa durée et ce qui est inclus. La dégustation reste facultative. Pour profiter des deux rives, une promenade sur les quais peut suffire. l'énergie pour le retour. Retrouvez le guide et ses sources sur voyage sans détour.",
+      "comparison": {
+        "exactNormalizedMatch": false,
+        "expectedWords": 98,
+        "transcribedWords": 96,
+        "differences": [
+          {
+            "kind": "replace",
+            "expected": [
+              "porto"
+            ],
+            "transcribed": [
+              "portaux"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "3"
+            ],
+            "transcribed": [
+              "trois"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "douro"
+            ],
+            "transcribed": [
+              "dourou"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "porto",
+              "regroupez"
+            ],
+            "transcribed": [
+              "portaux",
+              "recroupez"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "au",
+              "fleuve"
+            ],
+            "transcribed": [
+              "aux",
+              "feuilles"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "billet"
+            ],
+            "transcribed": [
+              "billets"
+            ]
+          },
+          {
+            "kind": "delete",
+            "expected": [
+              "gardez",
+              "de"
+            ],
+            "transcribed": []
+          }
+        ]
+      }
+    },
+    {
+      "voice": "fr_FR-upmc-medium",
+      "mediaSha256": "5289b8967687fec596c08408aa51f2a3704b16d39dc8090ab9be8f5b8cad575f",
+      "segments": [
+        {
+          "start": 0.0,
+          "end": 2.24,
+          "text": " Portant en trois jours du droit à l'océan,",
+          "averageLogProbability": -0.17935530069034275,
+          "noSpeechProbability": 0.03587966784834862
+        },
+        {
+          "start": 2.24,
+          "end": 4.12,
+          "text": " sans voiture, à Porto,",
+          "averageLogProbability": -0.17935530069034275,
+          "noSpeechProbability": 0.03587966784834862
+        },
+        {
+          "start": 4.12,
+          "end": 7.5600000000000005,
+          "text": " regrouper les visites par secteur pour imiter les montées,",
+          "averageLogProbability": -0.17935530069034275,
+          "noSpeechProbability": 0.03587966784834862
+        },
+        {
+          "start": 7.5600000000000005,
+          "end": 10.76,
+          "text": " éviter de descendre au fleuve puis de remonter plusieurs fois.",
+          "averageLogProbability": -0.17935530069034275,
+          "noSpeechProbability": 0.03587966784834862
+        },
+        {
+          "start": 10.76,
+          "end": 12.48,
+          "text": " Une seule visite avec billets par jour",
+          "averageLogProbability": -0.17935530069034275,
+          "noSpeechProbability": 0.03587966784834862
+        },
+        {
+          "start": 12.48,
+          "end": 15.24,
+          "text": " laisse de la place aux pauses et aux imprévues.",
+          "averageLogProbability": -0.17935530069034275,
+          "noSpeechProbability": 0.03587966784834862
+        },
+        {
+          "start": 15.24,
+          "end": 17.44,
+          "text": " Avant de réserver une visite de cave,",
+          "averageLogProbability": -0.17935530069034275,
+          "noSpeechProbability": 0.03587966784834862
+        },
+        {
+          "start": 17.44,
+          "end": 18.6,
+          "text": " comparer sa langue,",
+          "averageLogProbability": -0.17935530069034275,
+          "noSpeechProbability": 0.03587966784834862
+        },
+        {
+          "start": 18.6,
+          "end": 20.56,
+          "text": " sa durée et ce qui est inclus.",
+          "averageLogProbability": -0.17935530069034275,
+          "noSpeechProbability": 0.03587966784834862
+        },
+        {
+          "start": 20.56,
+          "end": 23.0,
+          "text": " La dégustation reste facultative.",
+          "averageLogProbability": -0.17935530069034275,
+          "noSpeechProbability": 0.03587966784834862
+        },
+        {
+          "start": 23.0,
+          "end": 24.64,
+          "text": " Pour profiter des deux rives,",
+          "averageLogProbability": -0.17935530069034275,
+          "noSpeechProbability": 0.03587966784834862
+        },
+        {
+          "start": 24.64,
+          "end": 26.32,
+          "text": " une promenade sur les qui peuvent suffire",
+          "averageLogProbability": -0.17935530069034275,
+          "noSpeechProbability": 0.03587966784834862
+        },
+        {
+          "start": 26.32,
+          "end": 28.28,
+          "text": " garder de l'énergie pour le retour.",
+          "averageLogProbability": -0.17935530069034275,
+          "noSpeechProbability": 0.03587966784834862
+        },
+        {
+          "start": 28.28,
+          "end": 31.560000000000002,
+          "text": " retrouver le guide et ses sources sur voyage sans détour.",
+          "averageLogProbability": -0.3836732228597005,
+          "noSpeechProbability": 0.008882839232683182
+        }
+      ],
+      "transcript": "Portant en trois jours du droit à l'océan, sans voiture, à Porto, regrouper les visites par secteur pour imiter les montées, éviter de descendre au fleuve puis de remonter plusieurs fois. Une seule visite avec billets par jour laisse de la place aux pauses et aux imprévues. Avant de réserver une visite de cave, comparer sa langue, sa durée et ce qui est inclus. La dégustation reste facultative. Pour profiter des deux rives, une promenade sur les qui peuvent suffire garder de l'énergie pour le retour. retrouver le guide et ses sources sur voyage sans détour.",
+      "comparison": {
+        "exactNormalizedMatch": false,
+        "expectedWords": 98,
+        "transcribedWords": 98,
+        "differences": [
+          {
+            "kind": "replace",
+            "expected": [
+              "porto"
+            ],
+            "transcribed": [
+              "portant"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "3"
+            ],
+            "transcribed": [
+              "trois"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "douro"
+            ],
+            "transcribed": [
+              "droit"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "regroupez"
+            ],
+            "transcribed": [
+              "regrouper"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "limiter"
+            ],
+            "transcribed": [
+              "imiter"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "évitez"
+            ],
+            "transcribed": [
+              "éviter"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "billet"
+            ],
+            "transcribed": [
+              "billets"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "imprévus"
+            ],
+            "transcribed": [
+              "imprévues"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "comparez"
+            ],
+            "transcribed": [
+              "comparer"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "quais",
+              "peut"
+            ],
+            "transcribed": [
+              "qui",
+              "peuvent"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "gardez"
+            ],
+            "transcribed": [
+              "garder"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "retrouvez"
+            ],
+            "transcribed": [
+              "retrouver"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "limitation": "ASR differences may come from recognition or synthesis. This does not establish naturalness, pronunciation quality or editorial approval."
+}
