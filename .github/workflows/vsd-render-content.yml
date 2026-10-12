@@ -60,7 +60,7 @@ jobs:
           python -m pip install --disable-pip-version-check -r requirements.txt
       - name: Validate production guards
         if: steps.period.outputs.active == 'true'
-        run: python -m unittest -q test_production test_pin_intake test_pin_promotion
+        run: python -m unittest -q test_production test_pin_intake test_pin_promotion test_reel_intake
       - name: Produce at most one eligible clip
         if: steps.period.outputs.active == 'true'
         run: |
@@ -94,6 +94,19 @@ jobs:
       - name: Prepare at most one new article Pin draft
         if: steps.period.outputs.active == 'true'
         run: python pin_intake.py
+      - name: Prepare one unpublished Reel storyboard from exact public excerpts
+        if: steps.period.outputs.active == 'true'
+        run: |
+          set -euo pipefail
+          python reel_intake.py | tee "$RUNNER_TEMP/vsd-reel-intake.json"
+      - name: Preserve Reel storyboard intake decision
+        if: steps.period.outputs.active == 'true'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: reel-storyboard-intake
+          path: ${{ runner.temp }}/vsd-reel-intake.json
+          retention-days: 30
+          if-no-files-found: error
       - name: Admit one qualified Pin to its connected RSS feed
         if: steps.period.outputs.active == 'true'
         run: |
@@ -116,6 +129,7 @@ jobs:
           set -euo pipefail
           # Only this job's completed artifact directory is staged. Temporary
           # files/lock files are excluded by the dedicated output .gitignore.
+          if [ -d reel-drafts ]; then git add -- reel-drafts; fi
           git add -- output pin-drafts pin-admissions.json ../../site-src/pinterest-additions.json ../../site-src/public-media.json ../../site-src/social-media/production
           if ! git diff --cached --quiet; then
             git -c user.name='Voyage Sans Détour' -c user.email='contact@voyagesansdetour.fr' commit -m 'Produce a reviewed media artifact with its receipt'

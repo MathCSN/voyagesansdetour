@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "reservedSlugs": [
+    "lisbonne-ou-porto",
+    "lisbonne-3-jours-sans-voiture",
+    "aeroport-porto-centre-ville",
+    "ou-dormir-lisbonne-quartiers",
+    "sintra-depuis-lisbonne"
+  ],
+  "reason": "Existing launch Reels and reviewed video catalogue; preserve identities and avoid repackaging them as fresh stock."
+}
