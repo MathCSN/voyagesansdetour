@@ -9,6 +9,10 @@ on:
       - '.github/workflows/build-pages.yml'
   workflow_dispatch:
     inputs:
+      publish_reviewed_media:
+        description: Deploy source-bound selected voice media after automated staging
+        type: boolean
+        default: false
       publish_pin_feed:
         description: Deploy the existing reviewed Pin feed after an automated admission
         type: boolean
@@ -56,6 +60,7 @@ jobs:
         id: release
         env:
           EVENT_NAME: ${{ github.event_name }}
+          REVIEWED_MEDIA_REQUESTED: ${{ inputs.publish_reviewed_media }}
           PIN_FEED_REQUESTED: ${{ inputs.publish_pin_feed }}
           INTAKE_CHANGED: ${{ steps.intake.outputs.changed }}
         run: |
@@ -81,7 +86,8 @@ jobs:
           feed_status = compare(Path('.')) if active else {'needsDeployment': False, 'status': 'period_ended'}
           print('Pin feed reconciliation:', feed_status)
           pin_requested = os.environ['EVENT_NAME'] == 'workflow_dispatch' and os.environ.get('PIN_FEED_REQUESTED') == 'true'
-          publish = active and (changed or pending or pending_updates or intake_changed or source_changed or pin_requested or feed_status['needsDeployment'])
+          media_requested = os.environ['EVENT_NAME'] == 'workflow_dispatch' and os.environ.get('REVIEWED_MEDIA_REQUESTED') == 'true'
+          publish = active and (media_requested or changed or pending or pending_updates or intake_changed or source_changed or pin_requested or feed_status['needsDeployment'])
           with Path(os.environ['GITHUB_OUTPUT']).open('a') as f:
               f.write('publish=' + str(publish).lower() + '\n')
           PY

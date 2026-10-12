@@ -1,0 +1,70 @@
+name: Promote selected VSD voice media
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ['Check VSD voice intelligibility locally', 'Build and deploy Voyage Sans Détour']
+    types: [completed]
+  schedule:
+    - cron: '37 6 * * 2'
+permissions: {}
+concurrency:
+  group: vsd-voice-promotion
+  cancel-in-progress: false
+jobs:
+  promote:
+    if: github.repository == 'MathCSN/voyagesansdetour' && github.ref == 'refs/heads/main' && github.event.repository.private == false && github.run_attempt == 1 && (github.event_name != 'workflow_run' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main' && github.event.workflow_run.head_repository.full_name == 'MathCSN/voyagesansdetour'))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: write
+      actions: write
+    steps:
+      - name: Check authorised period
+        id: period
+        run: |
+          python3 - <<'PY'
+          import datetime as dt,os
+          active=dt.datetime.now(dt.timezone.utc)<dt.datetime(2027,9,14,21,59,59,tzinfo=dt.timezone.utc)
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f:f.write('active='+str(active).lower()+'\n')
+          PY
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        if: steps.period.outputs.active == 'true'
+        with:
+          ref: main
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        if: steps.period.outputs.active == 'true'
+        with:
+          python-version: '3.12'
+      - name: Install only image layout dependency
+        if: steps.period.outputs.active == 'true'
+        run: python -m pip install --disable-pip-version-check Pillow==11.3.0
+      - name: Stage or verify at most one selected media bundle
+        id: media
+        if: steps.period.outputs.active == 'true'
+        working-directory: .github/vsd-production/voice
+        run: |
+          python -m unittest -q test_promote_selected test_promote_catalogue
+          python promote_catalogue.py --root .. --site ../../../site-src --github-output "$GITHUB_OUTPUT"
+      - name: Persist staged files and immutable public receipts
+        if: steps.period.outputs.active == 'true'
+        run: |
+          git add -- site-src/public-media.json site-src/social-media/production .github/vsd-production/voice-stock .github/vsd-production/voice-revisions
+          if git diff --cached --quiet; then exit 0; fi
+          git -c user.name='VSD voice promotion' -c user.email='actions@users.noreply.github.com' commit -m 'Stage selected voice media or preserve public receipt'
+          git push origin HEAD:main
+      - name: Dispatch existing deployment only when no build is active
+        if: steps.media.outputs.needs_deployment == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE_WORKFLOW: ${{ github.event.workflow_run.name }}
+        run: |
+          gh run list --repo MathCSN/voyagesansdetour --workflow build-pages.yml --branch main --limit 50 --json status,databaseId > "$RUNNER_TEMP/build-runs.json"
+          python - <<'PY'
+          import json,os,subprocess
+          from pathlib import Path
+          runs=json.loads((Path(os.environ['RUNNER_TEMP'])/'build-runs.json').read_text())
+          active=[r for r in runs if r['status']!='completed']
+          if active:print('Deployment already active; await its completion:',[r['databaseId'] for r in active])
+          elif os.environ.get('SOURCE_WORKFLOW')=='Build and deploy Voyage Sans Détour':raise SystemExit('Deployment completed but public media still missing; no automatic redispatch')
+          else:subprocess.run(['gh','workflow','run','build-pages.yml','--repo','MathCSN/voyagesansdetour','--ref','main','-f','publish_reviewed_media=true'],check=True)
+          PY
