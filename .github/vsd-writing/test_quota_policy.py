@@ -44,6 +44,8 @@ class QuotaTests(unittest.TestCase):
             report=json.loads((Path(folder)/'discovery-report.json').read_text())
             self.assertEqual(report['callsAttempted'],0)
             self.assertEqual(report['sourceFetches'],0)
+            self.assertEqual(report['observedAt'],NOW.isoformat(timespec='seconds'))
+            self.assertEqual(report['quotaObservedAt'],budget['quotaObservedAt'])
             self.assertFalse(report['publicationAttempted'])
 
 if __name__=='__main__':unittest.main()

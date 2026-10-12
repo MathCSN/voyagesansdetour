@@ -33,5 +33,5 @@ def hold(now, account, path=OBSERVATIONS):
         return None
     latest=max(active,key=lambda item:item['observedAt'])
     return {'status':'free_quota_hold','resumeAt':latest['resumeAt'],
-            'observedAt':latest['observedAt'],'usageDisplay':latest['usageDisplay'],
+            'quotaObservedAt':latest['observedAt'],'usageDisplay':latest['usageDisplay'],
             'reason':'preserve_free_quota_until_daily_reset','liveQuotaMeter':False}
