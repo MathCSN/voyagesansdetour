@@ -1,0 +1,31 @@
+name: Qualify VSD Workers AI connection
+on:
+  workflow_dispatch:
+permissions: {}
+concurrency:
+  group: vsd-workers-ai-writing
+  cancel-in-progress: false
+jobs:
+  probe:
+    if: github.repository == 'MathCSN/voyagesansdetour' && github.ref == 'refs/heads/main' && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: One bounded call on verified Workers Free account
+        env:
+          CLOUDFLARE_WORKERS_AI_TOKEN: ${{ secrets.CLOUDFLARE_WORKERS_AI_TOKEN }}
+          REPORT_PATH: ${{ runner.temp }}/workers-ai-probe.json
+        run: python3 .github/vsd-writing/probe.py
+      - name: Preserve non-secret result
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: workers-ai-probe
+          path: ${{ runner.temp }}/workers-ai-probe.json
+          retention-days: 7
+          if-no-files-found: error
