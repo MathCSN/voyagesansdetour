@@ -101,6 +101,17 @@ jobs:
             git push origin HEAD:main
           fi
           echo "source_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      - name: Preserve editorial decisions for diagnosis
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: editorial-decisions-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/editorial-candidate-generation.json
+            ${{ runner.temp }}/editorial-revalidation.json
+          if-no-files-found: ignore
+          retention-days: 7
+          include-hidden-files: false
       - name: Upload website only
         if: steps.release.outputs.publish == 'true'
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
