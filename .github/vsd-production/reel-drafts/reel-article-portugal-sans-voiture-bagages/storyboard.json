@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "id": "reel-article-portugal-sans-voiture-bagages",
+  "status": "storyboard_requires_media_review",
+  "publicationApproved": false,
+  "createdAt": "2026-10-12T05:59:12.118647+00:00",
+  "title": "Portugal sans voiture : préparer un bagage facile à transporter",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/portugal-sans-voiture-bagages/",
+  "source": {
+    "slug": "portugal-sans-voiture-bagages",
+    "articleSha256": "ad9e6852f384292202a4e4c223c7173aa0c588cf63bd03ae417e9e8aa132ea98",
+    "publicHtmlSha256": "49ae24b08b3b79e2ec941bd20faecd75eb8feee1b2b3d49cb18d5a607f58718e",
+    "publicCheckedAt": "2026-10-12T05:59:12.118647+00:00",
+    "sourcesCheckedOn": "2026-09-27",
+    "validUntil": "2026-10-27T00:00:00+00:00",
+    "officialSources": [
+      {
+        "label": "CP — conditions de transport des bagages",
+        "url": "https://www.cp.pt/info/en/w/luggage"
+      },
+      {
+        "label": "Métro de Lisbonne — bagages et circulation à bord",
+        "url": "https://www.metrolisboa.pt/en/better-manners-better-rides/"
+      },
+      {
+        "label": "Métro de Lisbonne — plans du réseau et d’accessibilité",
+        "url": "https://www.metrolisboa.pt/en/travel/diagrams-and-maps/"
+      },
+      {
+        "label": "Metro do Porto — accessibilité des stations et véhicules",
+        "url": "https://www.metrodoporto.pt/pages/316"
+      },
+      {
+        "label": "CP — consignes dans les gares",
+        "url": "https://www.cp.pt/info/en/w/left-luggage"
+      }
+    ],
+    "proofScope": "Exact excerpts in a public guide; no new official-source audit"
+  },
+  "narration": {
+    "hook": "Portugal sans voiture : préparer un bagage facile à transporter",
+    "excerpts": [
+      {
+        "sectionId": "choisir-bagage",
+        "paragraphIndex": 2,
+        "text": "Gardez si possible un peu de place disponible au départ. Un sac fermé sans effort est plus simple à rouvrir en cours de route qu’un bagage rempli au maximum. Un petit sac de journée pliable évite aussi d’emporter toutes vos affaires à chaque promenade."
+      },
+      {
+        "sectionId": "sans-chambre",
+        "paragraphIndex": 2,
+        "text": "Pour les consignes présentées par CP, la durée de dépôt est limitée à 24 heures."
+      }
+    ],
+    "closing": "Retrouvez le guide et ses sources sur Voyage Sans Détour."
+  },
+  "paidInferenceCalls": 0,
+  "limitations": [
+    "Narration timing, rendered layout, voice choice and publication payload remain unqualified.",
+    "A storyboard is not a rendered, imported, scheduled or published Reel."
+  ]
+}

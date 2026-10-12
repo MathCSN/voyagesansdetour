@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-lisbonne-porto-train",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Lisbonne–Porto en train : choisir les gares et réserver simplement",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/lisbonne-porto-train/",
+  "articleSha256": "ccceae4af8e9fd9ab25ddd345cfd3884e9fd2bf597aaa1dbdb2813d061642d6b",
+  "imageSha256": "a0e11897ab526ec578fd5481761c9689ea50f366a20be71398660ed3c7c27157",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 1,
+  "rendererSha256": "641a36318537adadc23dc74987ad45436fa0422c4298c9e7af598a4958888d4a",
+  "originalComposition": true,
+  "externalPhotographs": false,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ]
+}
