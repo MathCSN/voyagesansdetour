@@ -125,4 +125,4 @@ jobs:
         if: env.VSD_PIN_FEED_CHANGED == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh workflow run build-pages.yml --ref main --repo MathCSN/voyagesansdetour
+        run: gh workflow run build-pages.yml --ref main --repo MathCSN/voyagesansdetour -f publish_pin_feed=true
