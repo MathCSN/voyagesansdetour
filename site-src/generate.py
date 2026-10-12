@@ -262,4 +262,7 @@ if PUBLIC:
     target.parent.mkdir(parents=True,exist_ok=True)
     ET.indent(rss)
     ET.ElementTree(rss).write(target,encoding='utf-8',xml_declaration=True)
+if PUBLIC and (ROOT/'pinterest-additions.json').exists():
+    import pinterest_feeds
+    pinterest_feeds.build(ROOT,OUT,ORIGIN)
 print(f'Generated {len(pages)+1} pages, {len(articles)} articles; public={PUBLIC}; out={OUT}')

@@ -114,6 +114,33 @@
           "sha256": "e39ab23d1e1155c5d1dfbd11b7e7997cda503aa068e3ff020aad05a883294a9d"
         }
       ]
+    },
+    {
+      "contentId": "pin-portugal-sans-voiture-bagages",
+      "kind": "pin",
+      "approved": true,
+      "files": [
+        {
+          "name": "pin.jpg",
+          "bytes": 160853,
+          "sha256": "693ca9be9f5c2fb0686dc110cbcbeb6e5c58a32dca50bff3ac991e8e0bf27a58"
+        },
+        {
+          "name": "credits.txt",
+          "bytes": 155,
+          "sha256": "d6fce7266fb87e370908d35908b84c3c4cfcea2f154f82ee933ed0e89413f957"
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "bytes": 4482,
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "bytes": 4449,
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+        }
+      ]
     }
   ]
 }

@@ -102,6 +102,18 @@ class PublicBuildTest(unittest.TestCase):
         for name in expected:
             self.assertEqual((folder/name).read_bytes(),(ROOT/'social-media'/'lancement-2026-09'/name).read_bytes())
 
+    def test_preparation_feed_contains_reviewed_baggage_pin(self):
+        rss=ET.parse(self.out/'pinterest/preparer-portugal.xml').getroot()
+        items=rss.findall('channel/item')
+        self.assertEqual(len(items),1)
+        pin=items[0]
+        self.assertEqual(pin.findtext('guid'),'urn:vsd:pinterest:pin-portugal-sans-voiture-bagages')
+        self.assertEqual(pin.findtext('link'),ORIGIN+'/portugal/portugal-sans-voiture-bagages/')
+        self.assertIn('assistée par IA',pin.findtext('description'))
+        media=pin.find('{http://search.yahoo.com/mrss/}content')
+        self.assertEqual((media.get('width'),media.get('height')),('1000','1500'))
+        self.assertTrue((self.out/media.get('url').removeprefix(ORIGIN+'/')).is_file())
+
     def test_pinterest_rss_preserves_published_pins_and_adds_reviewed_sintra(self):
         rss=ET.parse(self.out/'pinterest/lisbonne.xml').getroot()
         self.assertEqual(rss.tag,'rss')

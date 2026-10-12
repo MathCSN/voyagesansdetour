@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "feeds": [
+    {
+      "file": "preparer-portugal.xml",
+      "title": "Voyage Sans Détour — Préparer son voyage au Portugal",
+      "items": [
+        {
+          "id": "pin-portugal-sans-voiture-bagages",
+          "title": "Portugal sans voiture : préparer un bagage facile à transporter",
+          "description": "🧳 Sac ou valise, trajet jusqu’au logement et heures sans chambre : retrouvez nos conseils pour préparer vos bagages au Portugal. 📌 Enregistrez le guide pour votre départ. Composition originale Voyage Sans Détour, assistée par IA. Crédits : https://voyagesansdetour.fr/social-media/production/pin-portugal-sans-voiture-bagages/credits.txt",
+          "linkPath": "/portugal/portugal-sans-voiture-bagages/",
+          "mediaId": "pin-portugal-sans-voiture-bagages",
+          "width": 1000,
+          "height": 1500
+        }
+      ]
+    }
+  ]
+}

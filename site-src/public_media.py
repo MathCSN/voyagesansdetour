@@ -7,6 +7,8 @@ import re
 PHOTO_NAMES = {f'scene-{i:02}.jpg' for i in range(1, 7)}
 PHOTO_REQUIRED = PHOTO_NAMES | {'credits.txt', 'dmsans-OFL.txt', 'playfairdisplay-OFL.txt'}
 
+PIN_REQUIRED = {'pin.jpg', 'credits.txt', 'dmsans-OFL.txt', 'playfairdisplay-OFL.txt'}
+
 NAMES = {'reel.mp4', 'poster.jpg', 'credits.txt', 'dmsans-OFL.txt', 'playfairdisplay-OFL.txt'}
 
 
@@ -26,9 +28,9 @@ def approved_files(root):
         if not isinstance(item, dict) or set(item) not in ({'contentId', 'approved', 'files'}, {'contentId', 'approved', 'files', 'kind'}):
             raise ValueError('Invalid media item')
         kind = item.get('kind', 'video')
-        if kind not in ('video', 'photos'):
+        if kind not in ('video', 'photos', 'pin'):
             raise ValueError('Unsupported media kind')
-        allowed_names = PHOTO_REQUIRED if kind == 'photos' else NAMES
+        allowed_names = PIN_REQUIRED if kind == 'pin' else PHOTO_REQUIRED if kind == 'photos' else NAMES
         identity = item['contentId']
         if not isinstance(identity, str) or not re.fullmatch(r'[a-z0-9][a-z0-9-]{0,99}', identity) or identity in seen or item['approved'] is not True:
             raise ValueError('Unapproved or duplicate media identity')
@@ -54,6 +56,8 @@ def approved_files(root):
             if hashlib.sha256(path.read_bytes()).hexdigest() != entry['sha256']:
                 raise ValueError('Media hash mismatch: ' + str(relative))
             result.append(str(relative))
+        if kind == 'pin' and set(names) != PIN_REQUIRED:
+            raise ValueError('Pin and complete credits required')
         if kind == 'photos' and set(names) != PHOTO_REQUIRED:
             raise ValueError('Six photos and complete credits required')
         if kind == 'video' and not {'reel.mp4', 'poster.jpg', 'credits.txt'}.issubset(names):
