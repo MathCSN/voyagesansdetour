@@ -1,0 +1,11 @@
+{
+  "status": "one_recovery_authorized",
+  "id": "reel-article-porto-3-jours-sans-voiture",
+  "previousRunId": "38218374949",
+  "storyboardSha256": "42debf3b4427c5c4c381b5e1fa7fb3bca5fb76fb60a5a68da4f5126b630b118b",
+  "rendererSha256": "5869a2ad7d8cc5664970df6b952bb3c52268d48611bd3ba06187c59fa64a23a8",
+  "checkedAt": "2026-10-12T07:38:55.753616+00:00",
+  "priorRunConclusion": "failure",
+  "mediaArtifactAbsent": true,
+  "reason": "Subtitle layout corrected and regression-tested; preserve original attempt, source identity and expiry."
+}

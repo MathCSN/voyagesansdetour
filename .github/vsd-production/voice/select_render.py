@@ -9,6 +9,10 @@ import re
 STOP=dt.datetime(2027,9,14,21,59,59,tzinfo=dt.timezone.utc)
 
 def sha(raw):return hashlib.sha256(raw).hexdigest()
+def renderer_hash(root):
+    folder=Path(root)/'voice'
+    return sha((folder/'storyboard.py').read_bytes()+b'\0'+(folder/'compose.py').read_bytes())
+
 def read(path):
     if path.is_symlink():raise ValueError('symlink')
     return json.loads(path.read_text())
@@ -38,7 +42,7 @@ def select(root,now):
         if path.suffix!='.json':raise ValueError('attempt_path')
         attempt=read(path)
         if path.stem!=attempt['id'] or attempt['status']!='reserved_before_render':raise ValueError('attempt_identity')
-        attempts[path.stem]=attempt['storyboardSha256']
+        attempts[path.stem]=attempt
     held=[]
     for folder in children(root/'reel-drafts',64):
         if folder.is_symlink() or not folder.is_dir() or not re.fullmatch(r'reel-article-[a-z0-9-]+',folder.name):raise ValueError('draft_path')
@@ -49,13 +53,26 @@ def select(root,now):
         if identity in known:
             if known[identity]!={digest}:raise ValueError('existing_stock_source_conflict')
             held.append({'id':identity,'reason':'already_rendered'});continue
+        previous=None
         if identity in attempts:
-            if attempts[identity]!=digest:raise ValueError('existing_attempt_source_conflict')
-            held.append({'id':identity,'reason':'attempt_requires_reconciliation'});continue
+            attempt=attempts[identity]
+            if attempt['storyboardSha256']!=digest:raise ValueError('existing_attempt_source_conflict')
+            grant_path=root/'voice-recoveries'/(identity+'.json')
+            if (root/'voice-recoveries').is_symlink() or grant_path.is_symlink():raise ValueError('symlink')
+            if not grant_path.exists() or attempt.get('previousAttempts'):
+                held.append({'id':identity,'reason':'attempt_requires_reconciliation'});continue
+            grant=read(grant_path)
+            if (grant.get('status')!='one_recovery_authorized' or grant.get('id')!=identity
+                or grant.get('previousRunId')!=attempt['runId'] or grant.get('storyboardSha256')!=digest
+                or grant.get('rendererSha256')!=renderer_hash(root)
+                or grant.get('priorRunConclusion')!='failure' or grant.get('mediaArtifactAbsent') is not True):raise ValueError('recovery_conflict')
+            previous=attempt['runId']
         expiry=dt.datetime.fromisoformat(draft['source']['validUntil'].replace('Z','+00:00'))
         if expiry.tzinfo is None:raise ValueError('timezone_required')
         if now>=expiry:held.append({'id':identity,'reason':'expired'});continue
-        return {'status':'selected','selected':identity,'storyboardSha256':digest,'validUntil':draft['source']['validUntil'],'held':held}
+        result={'status':'selected','selected':identity,'storyboardSha256':digest,'validUntil':draft['source']['validUntil'],'held':held}
+        if previous:result['previousRunId']=previous
+        return result
     return {'status':'no_new_storyboard','selected':None,'held':held}
 
 def reserve(root,plan,run,now):
@@ -66,7 +83,18 @@ def reserve(root,plan,run,now):
     if directory.is_symlink():raise ValueError('symlink')
     directory.mkdir(exist_ok=True)
     record={'id':plan['selected'],'status':'reserved_before_render','storyboardSha256':plan['storyboardSha256'],'validUntil':plan['validUntil'],'reservedAt':now.isoformat(),'runId':run,'publicationApproved':False}
-    with (directory/(record['id']+'.json')).open('x') as f:json.dump(record,f,indent=2);f.write('\n')
+    target=directory/(record['id']+'.json')
+    if plan.get('previousRunId'):
+        old=read(target)
+        if old['runId']==run:raise ValueError('same_run_retry')
+        record['previousAttempts']=[old]
+        record['recoveryAuthorization']=read(Path(root)/'voice-recoveries'/(record['id']+'.json'))
+        import tempfile
+        with tempfile.NamedTemporaryFile(mode='w',dir=directory,delete=False) as f:
+            json.dump(record,f,indent=2);f.write('\n');temporary=Path(f.name)
+        temporary.replace(target)
+    else:
+        with target.open('x') as f:json.dump(record,f,indent=2);f.write('\n')
     return record
 
 if __name__=='__main__':
