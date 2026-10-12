@@ -37,5 +37,19 @@
         "vsd-production:facebook:porto-3-jours-sans-voiture-2026-10:fb03-v1"
       ]
     }
+  ],
+  "retirements": [
+    {
+      "batchId": "facebook-lisbonne-photos-2026-10-18-v1",
+      "batchSha256": "ba5643be43bafd60ecf9e6989668b7710b32f228b11977bcc1d24105e17b155f",
+      "fileSha256": "461f0da972c566aae3fb26ac061774763123abeafdcc310dd17ec6dbc1594af1",
+      "itemIds": [
+        "vsd-production:facebook:lisbonne-3-jours-sans-voiture-2026-09:fb02-v1"
+      ],
+      "retiredAt": "2026-10-12T02:09:56.259277Z",
+      "reason": "duplicate_media_on_channel",
+      "evidenceUrl": "https://github.com/MathCSN/voyagesansdetour/actions/runs/37560934633",
+      "existingPublicationUrl": "https://www.facebook.com/122098398897493108/posts/122098397373493108"
+    }
   ]
 }

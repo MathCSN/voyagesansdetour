@@ -33,6 +33,8 @@ var DEFAULT_POLICY = Object.freeze({
   retryMaxSeconds: 86400,
   maxDispatchPerTick: 3,
   paidCallsAllowed: false,
+  // Explicit opt-in. Only reviewed Buffer social jobs may use this lead time.
+  scheduleAheadSeconds: 0,
   cadence: Object.freeze({
     pinterest: Object.freeze({ limit: 2, windowHours: 168 }),
     instagram: Object.freeze({ limit: 1, windowHours: 168 }),
@@ -73,14 +75,15 @@ var encoder = new TextEncoder();
 // exploitation/cloud-publications/buffer-transport.mjs
 var HASH = /^[a-f0-9]{64}$/;
 var TYPES = { instagram: ["business"], facebook: ["page"], tiktok: ["profile", "account", "business"] };
-var POST_FIELDS = "id channelId status schedulingType sentAt externalLink";
+var POST_FIELDS = "id channelId status schedulingType dueAt sentAt externalLink";
 var CREATE = `mutation BufferPublish($input: CreatePostInput!) { createPost(input: $input) {
   __typename ... on PostActionSuccess { post { ${POST_FIELDS} } } ... on MutationError { message }
 } }`;
 var POST_QUERY = `query BufferReceipt($input: PostInput!) { post(input: $input) { ${POST_FIELDS} } }`;
-var POSTS_QUERY = `query BufferLostPhotoReceipt($input: PostsInput!) { posts(first: 20, input: $input) {
+var POSTS_QUERY = `query BufferLostReceipt($input: PostsInput!) { posts(first: 20, input: $input) {
   edges { node { ${POST_FIELDS} createdAt text assets { type mimeType source }
-    metadata { __typename ... on FacebookPostMetadata { type } }
+    metadata { __typename ... on FacebookPostMetadata { type }
+      ... on InstagramPostMetadata { type isAiGenerated shouldShareToFeed } }
   } } pageInfo { hasNextPage }
 } }`;
 var LOOKUP_WINDOW_MS = 15 * 60 * 1e3;
@@ -239,9 +242,9 @@ async function describeStockBatch(batch) {
   check3(exact(source, ["schemaVersion", "batchId", "items"]) && source.schemaVersion === 1 && batchIdentity(source.batchId) && Array.isArray(source.items) && source.items.length === 1);
   const item = source.items[0], payload = item?.payload, review = item?.review;
   check3(exact(item, ["contentId", "deduplicationKey", "title", "dueAt", "payload", "review"]) && identity(item.contentId) && identity(item.deduplicationKey) && identity(item.title) && timestamp(item.dueAt));
-  const instagramReel = payload?.schemaVersion === 1 && payload.channel === "instagram" && payload.kind === "reel" && Array.isArray(payload.assets) && payload.assets.length === 1 && payload.assets[0]?.mimeType === "video/mp4";
-  const facebookPhotos = payload?.schemaVersion === 1 && payload.channel === "facebook" && payload.kind === "photos" && payload.aiGenerated === false && Array.isArray(payload.assets) && payload.assets.length >= 2 && payload.assets.length <= 10 && payload.assets.every((asset) => ["image/jpeg", "image/png", "image/webp"].includes(asset?.mimeType));
-  check3(instagramReel || facebookPhotos);
+  const instagramReel = payload?.channel === "instagram" && payload.kind === "reel";
+  const facebookPhotos = payload?.channel === "facebook" && payload.kind === "photos";
+  check3(payload?.schemaVersion === 1 && (instagramReel || facebookPhotos) && Array.isArray(payload.assets) && (instagramReel ? payload.assets.length === 1 && payload.assets[0]?.mimeType === "video/mp4" : payload.assets.length >= 2 && payload.assets.length <= 10 && payload.aiGenerated === false && payload.assets.every((asset) => ["image/jpeg", "image/png", "image/webp"].includes(asset?.mimeType))));
   check3(review?.schemaVersion === 1 && review.contentId === item.contentId && review.approved === true && hash(review.payloadRevision) && review.payloadRevision === await bufferPayloadRevision(payload) && review.checks?.requiresPaidCall === false);
   return validateStockDescriptors([{
     batchId: source.batchId,
@@ -316,7 +319,7 @@ function instant(value) {
 }
 function indexSnapshot(value) {
   const index = jsonCopy(value);
-  check4(Buffer.byteLength(JSON.stringify(index)) <= STOCK_SELECTION_LIMITS.maxIndexBytes && exact2(index, ["schemaVersion", "items"]) && index.schemaVersion === 1 && Array.isArray(index.items) && index.items.length <= STOCK_SELECTION_LIMITS.maxBatches, "invalid_index");
+  check4(Buffer.byteLength(JSON.stringify(index)) <= STOCK_SELECTION_LIMITS.maxIndexBytes && exact2(index, Object.hasOwn(index, "retirements") ? ["schemaVersion", "items", "retirements"] : ["schemaVersion", "items"]) && index.schemaVersion === 1 && Array.isArray(index.items) && index.items.length <= STOCK_SELECTION_LIMITS.maxBatches, "invalid_index");
   const paths = /* @__PURE__ */ new Set(), batches = /* @__PURE__ */ new Set(), itemIds = /* @__PURE__ */ new Set();
   for (const entry of index.items) {
     check4(exact2(entry, ["path", "fileSha256", "batchId", "batchSha256", "itemIds"]) && typeof entry.batchId === "string" && BATCH_ID.test(entry.batchId) && !/^current(?:[._-]|$)/.test(entry.batchId) && entry.batchId !== "index" && entry.path === PREFIX + entry.batchId + ".json" && typeof entry.fileSha256 === "string" && HASH3.test(entry.fileSha256) && typeof entry.batchSha256 === "string" && HASH3.test(entry.batchSha256), "invalid_index_entry");
@@ -325,6 +328,17 @@ function indexSnapshot(value) {
     paths.add(entry.path);
     batches.add(entry.batchId);
     entry.itemIds.forEach((id) => itemIds.add(id));
+  }
+  const retired = /* @__PURE__ */ new Set();
+  if (Object.hasOwn(index, "retirements")) {
+    check4(Array.isArray(index.retirements) && index.retirements.length <= index.items.length, "invalid_retirements");
+    for (const record of index.retirements) {
+      check4(exact2(record, ["batchId", "batchSha256", "fileSha256", "itemIds", "retiredAt", "reason", "evidenceUrl", "existingPublicationUrl"]), "invalid_retirement");
+      const entry = index.items.find((item) => item.batchId === record.batchId);
+      check4(entry && !retired.has(record.batchId) && record.batchSha256 === entry.batchSha256 && record.fileSha256 === entry.fileSha256 && same(record.itemIds, entry.itemIds) && record.reason === "duplicate_media_on_channel" && /^https:\/\/github\.com\/MathCSN\/voyagesansdetour\/actions\/runs\/[1-9]\d*$/.test(record.evidenceUrl) && /^https:\/\/www\.facebook\.com\/[1-9]\d*\/posts\/[1-9]\d*$/.test(record.existingPublicationUrl), "invalid_retirement");
+      instant(record.retiredAt);
+      retired.add(record.batchId);
+    }
   }
   return index;
 }
@@ -383,7 +397,7 @@ async function snapshotBatches(input) {
     check4(sha(bytes2) === entry.fileSha256, "file_hash_mismatch");
     const batch = boundedJson(bytes2, STOCK_SELECTION_LIMITS.maxBatchBytes), descriptor = await describeStockBatch(batch);
     check4(descriptor.batchId === entry.batchId && descriptor.batchSha256 === entry.batchSha256 && same(descriptor.itemIds, entry.itemIds), "batch_descriptor_mismatch");
-    snapshots.push({ entry, batch, descriptor });
+    snapshots.push({ entry, batch, descriptor, retirement: index.retirements?.find((record) => record.batchId === entry.batchId) ?? null });
   }
   return snapshots;
 }
@@ -414,8 +428,8 @@ function absentEligibility(batch, at) {
   check4(reviewedAt < expiry, "invalid_review_dates");
   if (reviewedAt > at) return { eligible: false, reason: "future_review" };
   if (expiry <= Math.max(at, dueAt)) return { eligible: false, reason: "review_expired_or_slot_uncovered" };
-  const mediaRecords = batch.items[0].payload.channel === "facebook" ? review.media?.items : [review.media];
-  const records = [review.checks?.sources, ...(Array.isArray(mediaRecords) ? mediaRecords : []), review.destination, review.formatCapability];
+  const mediaRecords = item.payload.channel === "facebook" ? review.media?.items : [review.media];
+  const records = [review.checks?.sources, ...Array.isArray(mediaRecords) ? mediaRecords : [], review.destination, review.formatCapability];
   for (const record of records) {
     check4(plain2(record) && record.status === "verified", "unverified_absent_batch");
     const observed = instant(record.observedAt), validUntil = instant(record.validUntil);
@@ -431,6 +445,7 @@ async function selectStockBatch(input, { transport, now = () => (/* @__PURE__ */
     check4(typeof transport === "function" && typeof now === "function", "invalid_options");
     started = instant(now());
     snapshots = await snapshotBatches(input);
+    for (const snapshot of snapshots) if (snapshot.retirement) check4(instant(snapshot.retirement.retiredAt) <= started, "future_retirement");
   } catch (error) {
     throw safeError(error);
   }
@@ -472,13 +487,17 @@ async function selectStockBatch(input, { transport, now = () => (/* @__PURE__ */
   } catch {
     return { schemaVersion: 1, status: "attention_required", reason: "status_expired_during_selection", pagesChecked };
   }
-  const importedBatchIds = [], expiredAbsentBatches = [], candidates = [];
+  const importedBatchIds = [], retiredBatchIds = [], expiredAbsentBatches = [], candidates = [];
   for (const snapshot of snapshots) {
     if (states.get(snapshot.entry.batchId) === "imported") {
       importedBatchIds.push(snapshot.entry.batchId);
       continue;
     }
     if (states.get(snapshot.entry.batchId) !== "absent") return { schemaVersion: 1, status: "attention_required", reason: "missing_stock_state", pagesChecked };
+    if (snapshot.retirement) {
+      retiredBatchIds.push(snapshot.entry.batchId);
+      continue;
+    }
     try {
       const eligibility = absentEligibility(snapshot.batch, at);
       if (eligibility.eligible) candidates.push({ ...snapshot, dueAt: eligibility.dueAt });
@@ -487,8 +506,9 @@ async function selectStockBatch(input, { transport, now = () => (/* @__PURE__ */
       return { schemaVersion: 1, status: "attention_required", reason: "invalid_absent_review", pagesChecked, batchId: snapshot.entry.batchId };
     }
   }
-  const base = { schemaVersion: 1, checkedAt, revision, pagesChecked, importedBatchIds, expiredAbsentBatches };
+  const base = { schemaVersion: 1, checkedAt, revision, pagesChecked, importedBatchIds, retiredBatchIds, expiredAbsentBatches };
   if (importedBatchIds.length === snapshots.length) return { ...base, status: "all_imported", selected: null };
+  if (importedBatchIds.length + retiredBatchIds.length === snapshots.length) return { ...base, status: "stock_settled", selected: null };
   if (!candidates.length) return { ...base, status: "no_eligible_stock", selected: null };
   candidates.sort((a, b) => a.dueAt - b.dueAt || (a.entry.batchId < b.entry.batchId ? -1 : a.entry.batchId > b.entry.batchId ? 1 : 0));
   const chosen = candidates[0];
@@ -583,6 +603,7 @@ async function runStockControl({ repositoryRoot, transport, now = () => (/* @__P
     selectionStatus: selection.status,
     pagesChecked: selection.pagesChecked,
     importedBatchIds: selection.importedBatchIds ?? [],
+    retiredBatchIds: selection.retiredBatchIds ?? [],
     expiredAbsentBatches: selection.expiredAbsentBatches ?? [],
     revision: selection.revision ?? null,
     readOnly,
@@ -594,7 +615,7 @@ async function runStockControl({ repositoryRoot, transport, now = () => (/* @__P
   let acknowledgement = "unconfirmed", importReason;
   try {
     const reply = await transport({ kind: "publications", action: "import_stock", batch });
-    if (reply && reply.kind === "publications" && ["kind,status", "kind,reason,status"].includes(Object.keys(reply).sort().join(",")) && ["stock_imported", "stock_existing", "busy", "disabled", "refused"].includes(reply.status) && (reply.reason === undefined || /^[a-z_]{1,64}$/.test(reply.reason))) {
+    if (reply && reply.kind === "publications" && ["kind,status", "kind,reason,status"].includes(Object.keys(reply).sort().join(",")) && ["stock_imported", "stock_existing", "busy", "disabled", "refused"].includes(reply.status) && (reply.reason === void 0 || /^[a-z_]{1,64}$/.test(reply.reason))) {
       acknowledgement = reply.status;
       importReason = reply.reason;
     }
@@ -612,7 +633,7 @@ async function runStockControl({ repositoryRoot, transport, now = () => (/* @__P
     acknowledgement,
     confirmationStatus: confirmation.status,
     confirmationRevision: confirmation.revision ?? null,
-    ...(importReason ? { importReason } : {})
+    ...importReason ? { importReason } : {}
   };
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve2(process.argv[1])).href) {
@@ -629,7 +650,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve2(process.argv[1
     await writeFile("stock-control-result.json", JSON.stringify(evidence, null, 2) + "\n", { flag: "wx" });
     console.log("Cloud receipt: stock / " + report.status + ".");
     console.log(JSON.stringify(evidence));
-    if (!["all_imported", "stock_confirmed", "stock_available"].includes(report.status)) process.exitCode = 1;
+    if (!["all_imported", "stock_settled", "stock_confirmed", "stock_available"].includes(report.status)) process.exitCode = 1;
   } catch {
     console.error("Cloud stock not confirmed. No automatic import retry was made.");
     process.exitCode = 1;

@@ -30,6 +30,9 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+      - name: Verify stock exclusions without network or credentials
+        if: inputs.kind == 'stock' || inputs.kind == 'stock_status' || github.event.schedule == '53 8 * * 1'
+        run: node --test .github/vsd-production/stock-control.test.mjs
       - name: Reconcile reviewed stock receipts before any import
         if: inputs.kind == 'stock' || inputs.kind == 'stock_status' || github.event.schedule == '53 8 * * 1'
         env:
