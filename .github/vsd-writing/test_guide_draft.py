@@ -50,3 +50,13 @@ class GuideTests(unittest.TestCase):
     def test_invented_quote_identity_is_rejected(self):
         with self.assertRaisesRegex(ValueError,'unknown_or_duplicate_quote'):
             g.bind_selected_quotes({'facts':[{'quoteId':'q999','fact':'Inventé','usefulness':'Inventé'}]},[])
+
+    def test_extended_fact_budget_keeps_all_exact_citations(self):
+        from discover_facts import partition_facts
+        sources=[{'text':' '.join('Sentence number '+str(i)+' contains a distinct verified fact.' for i in range(8))}]
+        catalog=g.quote_catalog(sources)
+        chosen={'facts':[{'quoteId':row['quoteId'],'fact':'Un fait documenté distinct.','usefulness':'Aide à préparer une visite.'} for row in catalog]}
+        facts,rejected=partition_facts(g.bind_selected_quotes(chosen,catalog),sources,max_facts=8)
+        self.assertEqual(len(facts),8);self.assertEqual(rejected,[])
+        with self.assertRaisesRegex(ValueError,'fact_count'):
+            partition_facts(g.bind_selected_quotes(chosen,catalog),sources)

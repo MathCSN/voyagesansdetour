@@ -50,13 +50,14 @@ def source_window(article, pass_number):
     start=(pass_number%windows)*3
     return urls[start:start+3]
 
-def validate_facts(result,sources):
+def validate_facts(result,sources,max_facts=5):
+    require(type(max_facts) is int and 1<=max_facts<=8,'fact_budget')
     require(isinstance(result,dict) and set(result)=={'facts'},'facts_schema')
-    facts=result['facts'];require(isinstance(facts,list) and len(facts)<=5,'fact_count')
+    facts=result['facts'];require(isinstance(facts,list) and len(facts)<=max_facts,'fact_count')
     ids=set()
     for f in facts:
         require(isinstance(f,dict) and set(f)=={'id','fact','source','quote','usefulness'},'fact_schema')
-        require(isinstance(f['id'],str) and re.fullmatch(r'c[1-5]',f['id']) and f['id'] not in ids,'fact_id')
+        require(isinstance(f['id'],str) and re.fullmatch(r'c[1-'+str(max_facts)+']',f['id']) and f['id'] not in ids,'fact_id')
         ids.add(f['id'])
         require(type(f['source']) is int and 0<=f['source']<len(sources),'source_index')
         require(isinstance(f['fact'],str) and 15<=len(f['fact'])<=450,'fact_text')
@@ -64,9 +65,10 @@ def validate_facts(result,sources):
         require(isinstance(f['quote'],str) and 15<=len(f['quote'])<=350 and f['quote'] in sources[f['source']]['text'],'quote_not_in_source')
     return facts
 
-def partition_facts(result,sources):
+def partition_facts(result,sources,max_facts=5):
+    require(type(max_facts) is int and 1<=max_facts<=8,'fact_budget')
     require(isinstance(result,dict) and set(result)=={'facts'},'facts_schema')
-    rows=result['facts'];require(isinstance(rows,list) and len(rows)<=5,'fact_count')
+    rows=result['facts'];require(isinstance(rows,list) and len(rows)<=max_facts,'fact_count')
     seen=set();valid=[];rejected=[]
     for index,fact in enumerate(rows):
         identity=fact.get('id') if isinstance(fact,dict) else None
@@ -74,7 +76,7 @@ def partition_facts(result,sources):
             require(identity not in seen,'duplicate_fact_identity')
             seen.add(identity)
         try:
-            valid.extend(validate_facts({'facts':[fact]},sources))
+            valid.extend(validate_facts({'facts':[fact]},sources,max_facts))
         except ValueError as error:
             rejected.append({'index':index,'id':identity if isinstance(identity,str) else None,'reason':str(error)})
     return valid,rejected
