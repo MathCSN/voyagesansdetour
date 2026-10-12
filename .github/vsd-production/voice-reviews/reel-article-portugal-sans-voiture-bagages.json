@@ -1,0 +1,238 @@
+{
+  "schemaVersion": 1,
+  "id": "reel-article-portugal-sans-voiture-bagages",
+  "checkedAt": "2026-10-12T06:41:24.873282+00:00",
+  "validUntil": "2026-10-27T00:00:00+00:00",
+  "status": "machine_transcription_requires_editorial_review",
+  "stockSha256": "2b5b85a6150213d2f9cf08ccb5398251b94ec14bdda7883b7b1ccf15942f7f0e",
+  "model": "Systran/faster-whisper-small",
+  "modelRevision": "536b0662742c02347bc0e980a01041f333bce120",
+  "language": "fr",
+  "sourceTextPromptProvided": false,
+  "compute": "local_cpu_int8",
+  "paidInferenceCalls": 0,
+  "publicationApproved": false,
+  "publicationAttempted": false,
+  "humanListeningPerformed": false,
+  "expectedText": "Portugal sans voiture : préparer un bagage facile à transporter Gardez si possible un peu de place disponible au départ. Un sac fermé sans effort est plus simple à rouvrir en cours de route qu’un bagage rempli au maximum. Un petit sac de journée pliable évite aussi d’emporter toutes vos affaires à chaque promenade. Pour les consignes présentées par CP, la durée de dépôt est limitée à 24 heures. Retrouvez le guide et ses sources sur Voyage Sans Détour.",
+  "voices": [
+    {
+      "voice": "fr_FR-siwis-medium",
+      "mediaSha256": "db4d52fd93710f1fc385a7b4ae04b2d9a264a7ca9b09228fce744fd8a5f98d29",
+      "segments": [
+        {
+          "start": 0.0,
+          "end": 4.4,
+          "text": " Portugal, sans voiture, préparé à un bagage facile à transporter.",
+          "averageLogProbability": -0.19592795801162718,
+          "noSpeechProbability": 0.21661749482154846
+        },
+        {
+          "start": 4.4,
+          "end": 8.120000000000001,
+          "text": " Garder si possible un peu de place disponible au départ.",
+          "averageLogProbability": -0.19592795801162718,
+          "noSpeechProbability": 0.21661749482154846
+        },
+        {
+          "start": 8.120000000000001,
+          "end": 11.6,
+          "text": " Un sac fermé sans effort est plus simple à rouvrir.",
+          "averageLogProbability": -0.19592795801162718,
+          "noSpeechProbability": 0.21661749482154846
+        },
+        {
+          "start": 11.6,
+          "end": 15.120000000000001,
+          "text": " En cours de route, qu'un bagage rempli au maximum.",
+          "averageLogProbability": -0.19592795801162718,
+          "noSpeechProbability": 0.21661749482154846
+        },
+        {
+          "start": 15.120000000000001,
+          "end": 18.04,
+          "text": " Un petit sac de journée pliable évite aussi.",
+          "averageLogProbability": -0.19592795801162718,
+          "noSpeechProbability": 0.21661749482154846
+        },
+        {
+          "start": 18.04,
+          "end": 20.92,
+          "text": " D'emporter toutes vos affaires à chaque promenade.",
+          "averageLogProbability": -0.19592795801162718,
+          "noSpeechProbability": 0.21661749482154846
+        },
+        {
+          "start": 20.92,
+          "end": 23.8,
+          "text": " Pour les consignes présentées par CP, là.",
+          "averageLogProbability": -0.19592795801162718,
+          "noSpeechProbability": 0.21661749482154846
+        },
+        {
+          "start": 23.8,
+          "end": 26.72,
+          "text": " Durée de dépôt est limitée à 24 heures.",
+          "averageLogProbability": -0.19592795801162718,
+          "noSpeechProbability": 0.21661749482154846
+        },
+        {
+          "start": 26.72,
+          "end": 30.72,
+          "text": " Retrouvez le guide et ses sources sur voyage sans détour.",
+          "averageLogProbability": -0.2673676709334056,
+          "noSpeechProbability": 0.030998526141047478
+        }
+      ],
+      "transcript": "Portugal, sans voiture, préparé à un bagage facile à transporter. Garder si possible un peu de place disponible au départ. Un sac fermé sans effort est plus simple à rouvrir. En cours de route, qu'un bagage rempli au maximum. Un petit sac de journée pliable évite aussi. D'emporter toutes vos affaires à chaque promenade. Pour les consignes présentées par CP, là. Durée de dépôt est limitée à 24 heures. Retrouvez le guide et ses sources sur voyage sans détour.",
+      "comparison": {
+        "exactNormalizedMatch": false,
+        "expectedWords": 80,
+        "transcribedWords": 81,
+        "differences": [
+          {
+            "kind": "replace",
+            "expected": [
+              "préparer"
+            ],
+            "transcribed": [
+              "préparé",
+              "à"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "gardez"
+            ],
+            "transcribed": [
+              "garder"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "la"
+            ],
+            "transcribed": [
+              "là"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "voice": "fr_FR-upmc-medium",
+      "mediaSha256": "fe3674a3133ae28b945b3a5351c21982fc97d436b6ba6fac162a2dca87cd5273",
+      "segments": [
+        {
+          "start": 0.0,
+          "end": 5.8,
+          "text": " portugale sans voiture, préparer un bagage facile à transporter, garder si possible un",
+          "averageLogProbability": -0.22481923898061115,
+          "noSpeechProbability": 0.0395236611366272
+        },
+        {
+          "start": 5.8,
+          "end": 7.5600000000000005,
+          "text": " peu de place disponible au départ.",
+          "averageLogProbability": -0.22481923898061115,
+          "noSpeechProbability": 0.0395236611366272
+        },
+        {
+          "start": 7.5600000000000005,
+          "end": 12.24,
+          "text": " Un sac fermé sans effort est plus simple à rouvrir, en cours de route qu'un bagage",
+          "averageLogProbability": -0.22481923898061115,
+          "noSpeechProbability": 0.0395236611366272
+        },
+        {
+          "start": 12.24,
+          "end": 13.4,
+          "text": " rempli au maximum.",
+          "averageLogProbability": -0.22481923898061115,
+          "noSpeechProbability": 0.0395236611366272
+        },
+        {
+          "start": 13.4,
+          "end": 17.8,
+          "text": " Un petit sac de journée priable et vitraux aussi, d'emporter toutes vos affaires à",
+          "averageLogProbability": -0.22481923898061115,
+          "noSpeechProbability": 0.0395236611366272
+        },
+        {
+          "start": 17.8,
+          "end": 18.8,
+          "text": " chaque promenade.",
+          "averageLogProbability": -0.22481923898061115,
+          "noSpeechProbability": 0.0395236611366272
+        },
+        {
+          "start": 18.8,
+          "end": 24.560000000000002,
+          "text": " Pour les consignes présentées par CP, la durée de dépôt est limitée à 24h,",
+          "averageLogProbability": -0.22481923898061115,
+          "noSpeechProbability": 0.0395236611366272
+        },
+        {
+          "start": 24.560000000000002,
+          "end": 27.64,
+          "text": " retrouver le guide et ses sources sur voyage sans détour.",
+          "averageLogProbability": -0.22481923898061115,
+          "noSpeechProbability": 0.0395236611366272
+        }
+      ],
+      "transcript": "portugale sans voiture, préparer un bagage facile à transporter, garder si possible un peu de place disponible au départ. Un sac fermé sans effort est plus simple à rouvrir, en cours de route qu'un bagage rempli au maximum. Un petit sac de journée priable et vitraux aussi, d'emporter toutes vos affaires à chaque promenade. Pour les consignes présentées par CP, la durée de dépôt est limitée à 24h, retrouver le guide et ses sources sur voyage sans détour.",
+      "comparison": {
+        "exactNormalizedMatch": false,
+        "expectedWords": 80,
+        "transcribedWords": 80,
+        "differences": [
+          {
+            "kind": "replace",
+            "expected": [
+              "portugal"
+            ],
+            "transcribed": [
+              "portugale"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "gardez"
+            ],
+            "transcribed": [
+              "garder"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "pliable",
+              "évite"
+            ],
+            "transcribed": [
+              "priable",
+              "et",
+              "vitraux"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "24",
+              "heures",
+              "retrouvez"
+            ],
+            "transcribed": [
+              "24h",
+              "retrouver"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "limitation": "ASR differences may come from recognition or synthesis. This does not establish naturalness, pronunciation quality or editorial approval."
+}
