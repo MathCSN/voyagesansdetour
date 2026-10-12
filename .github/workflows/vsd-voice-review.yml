@@ -1,0 +1,49 @@
+name: Check VSD voice intelligibility locally
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '47 7 * * 1'
+permissions: {}
+concurrency:
+  group: vsd-voice-review
+  cancel-in-progress: false
+jobs:
+  review:
+    if: github.repository == 'MathCSN/voyagesansdetour' && github.ref == 'refs/heads/main' && github.event.repository.private == false && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - name: Check authorised period
+        id: period
+        run: |
+          python3 - <<'PY'
+          import datetime as dt,os
+          active=dt.datetime.now(dt.timezone.utc)<dt.datetime(2027,9,14,21,59,59,tzinfo=dt.timezone.utc)
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f:f.write('active='+str(active).lower()+'\n')
+          PY
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        if: steps.period.outputs.active == 'true'
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        if: steps.period.outputs.active == 'true'
+        with:
+          python-version: '3.12'
+      - name: Install local speech recognition
+        if: steps.period.outputs.active == 'true'
+        run: python -m pip install --disable-pip-version-check faster-whisper==1.2.1 huggingface-hub==1.8.0 ctranslate2==4.8.2
+      - name: Test and inspect at most one immutable stock item
+        if: steps.period.outputs.active == 'true'
+        working-directory: .github/vsd-production/voice
+        run: |
+          python -m unittest -q test_transcribe_review
+          python transcribe_review.py --next --stock ../voice-stock --output ../voice-reviews
+      - name: Preserve report without approving or publishing media
+        if: steps.period.outputs.active == 'true'
+        run: |
+          git add -- .github/vsd-production/voice-reviews
+          if git diff --cached --quiet; then exit 0; fi
+          git config user.name 'VSD media checks'
+          git config user.email 'actions@users.noreply.github.com'
+          git commit -m 'Record independent voice transcription review'
+          git push origin HEAD:main
