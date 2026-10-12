@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "revision": "c10ece1aade47bb51c153c893d14e5bf8e5b7117",
+  "piperVersion": "1.8.0",
+  "voices": [
+    {
+      "id": "fr_FR-siwis-medium",
+      "speaker": 0,
+      "datasetLicense": "CC-BY-4.0",
+      "modelCardUrl": "https://huggingface.co/rhasspy/piper-voices/resolve/c10ece1aade47bb51c153c893d14e5bf8e5b7117/fr/fr_FR/siwis/medium/MODEL_CARD",
+      "files": [
+        {
+          "name": "fr_FR-siwis-medium.onnx",
+          "url": "https://huggingface.co/rhasspy/piper-voices/resolve/c10ece1aade47bb51c153c893d14e5bf8e5b7117/fr/fr_FR/siwis/medium/fr_FR-siwis-medium.onnx",
+          "sha256": "641d1ab097da2b81128c076810edb052b385decc8be3381814802a64a73baf99",
+          "bytes": 63201294
+        },
+        {
+          "name": "fr_FR-siwis-medium.onnx.json",
+          "url": "https://huggingface.co/rhasspy/piper-voices/resolve/c10ece1aade47bb51c153c893d14e5bf8e5b7117/fr/fr_FR/siwis/medium/fr_FR-siwis-medium.onnx.json",
+          "sha256": "39479916c2db192b5ac9764daddd0c744d83e023ad890c6976c0633ae4df8959",
+          "bytes": 4875
+        },
+        {
+          "name": "MODEL_CARD",
+          "url": "https://huggingface.co/rhasspy/piper-voices/resolve/c10ece1aade47bb51c153c893d14e5bf8e5b7117/fr/fr_FR/siwis/medium/MODEL_CARD",
+          "sha256": "bd8b8d079d4d3d2c4cc20345889bbcd586d72f021a132f93357a763eb5232cce",
+          "bytes": 284
+        }
+      ]
+    },
+    {
+      "id": "fr_FR-upmc-medium",
+      "speaker": 1,
+      "datasetLicense": "CC-BY-SA-4.0",
+      "modelCardUrl": "https://huggingface.co/rhasspy/piper-voices/resolve/c10ece1aade47bb51c153c893d14e5bf8e5b7117/fr/fr_FR/upmc/medium/MODEL_CARD",
+      "files": [
+        {
+          "name": "fr_FR-upmc-medium.onnx",
+          "url": "https://huggingface.co/rhasspy/piper-voices/resolve/c10ece1aade47bb51c153c893d14e5bf8e5b7117/fr/fr_FR/upmc/medium/fr_FR-upmc-medium.onnx",
+          "sha256": "9abb3800c199148897a9ed64e100d224f3de83579f100044174ad19418f1786f",
+          "bytes": 76733615
+        },
+        {
+          "name": "fr_FR-upmc-medium.onnx.json",
+          "url": "https://huggingface.co/rhasspy/piper-voices/resolve/c10ece1aade47bb51c153c893d14e5bf8e5b7117/fr/fr_FR/upmc/medium/fr_FR-upmc-medium.onnx.json",
+          "sha256": "e8636ec15dfd5d72db37a02cb5320a20f2b8d339f2a0e4337da64c58a33a5868",
+          "bytes": 4996
+        },
+        {
+          "name": "MODEL_CARD",
+          "url": "https://huggingface.co/rhasspy/piper-voices/resolve/c10ece1aade47bb51c153c893d14e5bf8e5b7117/fr/fr_FR/upmc/medium/MODEL_CARD",
+          "sha256": "cf1ac7309e0e04bb159b7e6ae80bc8f66bfce9bdfb3e62ae93a6f57e210ab98a",
+          "bytes": 316
+        }
+      ]
+    }
+  ]
+}

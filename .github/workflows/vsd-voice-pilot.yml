@@ -1,0 +1,47 @@
+name: Qualify two free VSD French voices
+on:
+  workflow_dispatch:
+permissions: {}
+concurrency:
+  group: vsd-voice-pilot
+  cancel-in-progress: false
+jobs:
+  samples:
+    if: github.repository == 'MathCSN/voyagesansdetour' && github.ref == 'refs/heads/main' && github.event.repository.private == false && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    permissions:
+      contents: read
+    steps:
+      - name: Respect the authorised period before dependencies
+        id: period
+        run: |
+          python3 - <<'PY'
+          import datetime as dt,os
+          active=dt.datetime.now(dt.timezone.utc)<dt.datetime(2027,9,14,21,59,59,tzinfo=dt.timezone.utc)
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f:f.write('active='+str(active).lower()+'\n')
+          PY
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        if: steps.period.outputs.active == 'true'
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        if: steps.period.outputs.active == 'true'
+        with:
+          python-version: '3.12'
+      - name: Install the free local CPU synthesizer
+        if: steps.period.outputs.active == 'true'
+        run: python -m pip install --disable-pip-version-check piper-tts==1.8.0
+      - name: Test bounds and produce exactly two samples
+        if: steps.period.outputs.active == 'true'
+        working-directory: .github/vsd-production/voice
+        run: |
+          python -m unittest -q test_pilot
+          python pilot.py --output "$RUNNER_TEMP/vsd-french-voices"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: steps.period.outputs.active == 'true'
+        with:
+          name: vsd-french-voice-samples
+          path: ${{ runner.temp }}/vsd-french-voices
+          if-no-files-found: error
+          retention-days: 7
