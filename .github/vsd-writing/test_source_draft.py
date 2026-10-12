@@ -37,3 +37,22 @@ class LedgerTests(unittest.TestCase):
         result=bind_facts(sources)
         result[0]['fact']='injected'
         self.assertNotEqual(FACTS[0]['fact'],'injected')
+
+class QualityGateTests(unittest.TestCase):
+    def test_generic_conclusion_repeating_all_facts_is_rejected(self):
+        from source_draft import validate_coverage
+        draft={'claims':[{'id':'c1'},{'id':'c2'}], 'sections':[
+            {'claims':['c1']},{'claims':['c2']},{'claims':['c1','c2']}]}
+        with self.assertRaisesRegex(ValueError,'section_without_new_fact'):validate_coverage(draft)
+    def test_omitted_fact_rejected(self):
+        from source_draft import validate_coverage
+        with self.assertRaisesRegex(ValueError,'unused_ledger_fact'):
+            validate_coverage({'claims':[{'id':'c1'},{'id':'c2'}],'sections':[{'claims':['c1']}]})
+    def test_review_with_unexamined_claim_rejected(self):
+        from source_draft import check_review
+        with self.assertRaisesRegex(ValueError,'review_coverage'):
+            check_review({'supported':True,'issues':[],'checkedClaimIds':['c1']},{'claims':[{'id':'c1'},{'id':'c2'}]})
+    def test_contradictory_review_rejected(self):
+        from source_draft import check_review
+        with self.assertRaisesRegex(ValueError,'review_contradictory'):
+            check_review({'supported':True,'issues':['unsupported'],'checkedClaimIds':['c1']},{'claims':[{'id':'c1'}]})

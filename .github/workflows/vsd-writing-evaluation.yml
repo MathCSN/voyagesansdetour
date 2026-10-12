@@ -1,0 +1,33 @@
+name: Evaluate VSD editorial critic
+on:
+  workflow_dispatch:
+permissions: {}
+concurrency:
+  group: vsd-workers-ai-writing
+  cancel-in-progress: false
+jobs:
+  draft:
+    if: github.repository == 'MathCSN/voyagesansdetour' && github.ref == 'refs/heads/main' && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Validate grounding checks without inference
+        run: python3 -m unittest discover -s .github/vsd-writing -p 'test_*.py'
+      - name: Evaluate known editorial faults
+        env:
+          CLOUDFLARE_WORKERS_AI_TOKEN: ${{ secrets.CLOUDFLARE_WORKERS_AI_TOKEN }}
+          REPORT_DIR: ${{ runner.temp }}/vsd-source-draft
+        run: python3 .github/vsd-writing/review_evaluation.py
+      - name: Preserve pilot evidence only
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: editorial-critic-evaluation
+          path: ${{ runner.temp }}/vsd-source-draft/*.json
+          retention-days: 7
+          if-no-files-found: error
