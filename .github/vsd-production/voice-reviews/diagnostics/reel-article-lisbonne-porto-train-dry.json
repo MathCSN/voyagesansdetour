@@ -1,0 +1,240 @@
+{
+  "id": "reel-article-lisbonne-porto-train",
+  "checkedAt": "2026-10-12T07:22:53.413856+00:00",
+  "model": "Systran/faster-whisper-small",
+  "modelRevision": "536b0662742c02347bc0e980a01041f333bce120",
+  "stockSha256": "546692757ec4c8acb55e2f0668cf13918c8a8a96be99d2bf6a94257d2a3ef8d4",
+  "input": "dry_narration_before_music",
+  "sourceTextPromptProvided": false,
+  "voices": [
+    {
+      "voice": "fr_FR-siwis-medium",
+      "audioSha256": "5a9140f0cd804c1854fbb26a2c3c17fcdb4dba1ad47fde0e76787c4e45c10ce5",
+      "transcript": "Lisbonne Porto en train. Choisir les gares est réservé simplement. À Lisbonne, comparez Santa Apollonia et Oriente selon votre hébergement. Les trains longs de distance vers Porto desservent Campana. Vérifiez les gares exactes sur le départ choisi avant de réserver. Comparez Alpha pendulare et intersi date pour votre date. Trévoyez environ trois heures de train selon le service, puis les transfert jusqu'au logement. La durée affichée lors de la réservation reste votre référence. Retrouvez le guide et ses sources sur voyage sont détour.",
+      "comparison": {
+        "exactNormalizedMatch": false,
+        "expectedWords": 82,
+        "transcribedWords": 84,
+        "differences": [
+          {
+            "kind": "replace",
+            "expected": [
+              "et",
+              "réserver"
+            ],
+            "transcribed": [
+              "est",
+              "réservé"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "apolónia"
+            ],
+            "transcribed": [
+              "apollonia"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "longue"
+            ],
+            "transcribed": [
+              "longs",
+              "de"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "campanhã"
+            ],
+            "transcribed": [
+              "campana"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "alfa",
+              "pendular"
+            ],
+            "transcribed": [
+              "alpha",
+              "pendulare"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "intercidades"
+            ],
+            "transcribed": [
+              "intersi",
+              "date"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "prévoyez"
+            ],
+            "transcribed": [
+              "trévoyez"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "transferts"
+            ],
+            "transcribed": [
+              "transfert"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "aux",
+              "logements"
+            ],
+            "transcribed": [
+              "au",
+              "logement"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "sans"
+            ],
+            "transcribed": [
+              "sont"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "voice": "fr_FR-upmc-medium",
+      "audioSha256": "0135736f3fb41f1caad56fdcd3944ae8959c2ad24cc1576dbf6d4a4d56cf8748",
+      "transcript": "Lisbonne Porto en train, choisir les gares, et réserver simplement. À Lisbonne, comparé sans ta Apollonia et orientant selon votre hébergement. Les trains longues d'istance vers Porto des Serves Campanins. Véifiez les gares exactes sur le départ choisi avant de réserver. Comparer Alpha Point du Lart et Intercidade pour votre date. Prévoyez environ trois heures de train selon le service, puis les transfert jusqu'au logement. La durée affichée lors de la réservation reste votre référence. Retrouvez le guide et ses sources survoyables sans détour.",
+      "comparison": {
+        "exactNormalizedMatch": false,
+        "expectedWords": 82,
+        "transcribedWords": 86,
+        "differences": [
+          {
+            "kind": "replace",
+            "expected": [
+              "comparez",
+              "santa",
+              "apolónia"
+            ],
+            "transcribed": [
+              "comparé",
+              "sans",
+              "ta",
+              "apollonia"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "oriente"
+            ],
+            "transcribed": [
+              "orientant"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "longue",
+              "distance"
+            ],
+            "transcribed": [
+              "longues",
+              "d",
+              "istance"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "desservent",
+              "campanhã",
+              "vérifiez"
+            ],
+            "transcribed": [
+              "des",
+              "serves",
+              "campanins",
+              "véifiez"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "comparez",
+              "alfa",
+              "pendular"
+            ],
+            "transcribed": [
+              "comparer",
+              "alpha",
+              "point",
+              "du",
+              "lart"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "intercidades"
+            ],
+            "transcribed": [
+              "intercidade"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "transferts"
+            ],
+            "transcribed": [
+              "transfert"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "aux",
+              "logements"
+            ],
+            "transcribed": [
+              "au",
+              "logement"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "sur",
+              "voyage"
+            ],
+            "transcribed": [
+              "survoyables"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "paidInferenceCalls": 0,
+  "publicationApproved": false,
+  "limitation": "ASR alone does not prove pronunciation correctness or distinguish synthesis from recognition error.",
+  "conclusion": "Place/train-name discrepancies persist in dry narration. Music is not the sole explanation; synthesis versus recognition remains unresolved."
+}
