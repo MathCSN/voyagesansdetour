@@ -62,6 +62,58 @@
           "bytes": 4449
         }
       ]
+    },
+    {
+      "contentId": "sintra-facebook-2026-10",
+      "kind": "photos",
+      "approved": true,
+      "files": [
+        {
+          "name": "credits.txt",
+          "bytes": 488,
+          "sha256": "40dddae9674a254a3630b882d8ee964981d213b8394a8bf5f23178885422e4b8"
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "bytes": 4482,
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "bytes": 4449,
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+        },
+        {
+          "name": "scene-01.jpg",
+          "bytes": 195605,
+          "sha256": "0b455342bb1c4d40c742a205172dce3ac41c284a31d4f8a62f45166dfc5d9a55"
+        },
+        {
+          "name": "scene-02.jpg",
+          "bytes": 156445,
+          "sha256": "f63794a2fdff3020d1ebaee5fad3c94f7a7c11c8524a3b5540a1a27eb4bbd06d"
+        },
+        {
+          "name": "scene-03.jpg",
+          "bytes": 161734,
+          "sha256": "ca897f293afd6310d05cb5a9559fdae87951be04791da72152fd6ecd335c0054"
+        },
+        {
+          "name": "scene-04.jpg",
+          "bytes": 150071,
+          "sha256": "ed91552fd6335aa3ffecdc90c7b338f9b847475a35b9b584ea309b67388756ac"
+        },
+        {
+          "name": "scene-05.jpg",
+          "bytes": 175426,
+          "sha256": "69f09d4e0713897d65aa14e4f2ee9a7a91646c29dcfea31db18bf2f690af77ae"
+        },
+        {
+          "name": "scene-06.jpg",
+          "bytes": 164941,
+          "sha256": "e39ab23d1e1155c5d1dfbd11b7e7997cda503aa068e3ff020aad05a883294a9d"
+        }
+      ]
     }
   ]
 }

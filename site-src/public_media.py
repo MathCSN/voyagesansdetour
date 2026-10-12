@@ -4,6 +4,9 @@ import json
 from pathlib import Path
 import re
 
+PHOTO_NAMES = {f'scene-{i:02}.jpg' for i in range(1, 7)}
+PHOTO_REQUIRED = PHOTO_NAMES | {'credits.txt', 'dmsans-OFL.txt', 'playfairdisplay-OFL.txt'}
+
 NAMES = {'reel.mp4', 'poster.jpg', 'credits.txt', 'dmsans-OFL.txt', 'playfairdisplay-OFL.txt'}
 
 
@@ -20,21 +23,25 @@ def approved_files(root):
         raise ValueError('Invalid media inventory size')
     result, seen = [], set()
     for item in items:
-        if not isinstance(item, dict) or set(item) != {'contentId', 'approved', 'files'}:
+        if not isinstance(item, dict) or set(item) not in ({'contentId', 'approved', 'files'}, {'contentId', 'approved', 'files', 'kind'}):
             raise ValueError('Invalid media item')
+        kind = item.get('kind', 'video')
+        if kind not in ('video', 'photos'):
+            raise ValueError('Unsupported media kind')
+        allowed_names = PHOTO_REQUIRED if kind == 'photos' else NAMES
         identity = item['contentId']
         if not isinstance(identity, str) or not re.fullmatch(r'[a-z0-9][a-z0-9-]{0,99}', identity) or identity in seen or item['approved'] is not True:
             raise ValueError('Unapproved or duplicate media identity')
         seen.add(identity)
         files = item['files']
-        if not isinstance(files, list) or not 3 <= len(files) <= 5:
+        if not isinstance(files, list) or not (len(files) == 9 if kind == 'photos' else 3 <= len(files) <= 5):
             raise ValueError('Incomplete approved media')
         names = []
         for entry in files:
             if not isinstance(entry, dict) or set(entry) != {'name', 'sha256', 'bytes'}:
                 raise ValueError('Invalid media file record')
             name = entry['name']
-            if not isinstance(name, str) or name not in NAMES or name in names:
+            if not isinstance(name, str) or name not in allowed_names or name in names:
                 raise ValueError('Media filename outside allowlist')
             names.append(name)
             if type(entry['bytes']) is not int or not 0 < entry['bytes'] <= 50_000_000 or not isinstance(entry['sha256'], str) or not re.fullmatch(r'[a-f0-9]{64}', entry['sha256']):
@@ -47,6 +54,8 @@ def approved_files(root):
             if hashlib.sha256(path.read_bytes()).hexdigest() != entry['sha256']:
                 raise ValueError('Media hash mismatch: ' + str(relative))
             result.append(str(relative))
-        if not {'reel.mp4', 'poster.jpg', 'credits.txt'}.issubset(names):
+        if kind == 'photos' and set(names) != PHOTO_REQUIRED:
+            raise ValueError('Six photos and complete credits required')
+        if kind == 'video' and not {'reel.mp4', 'poster.jpg', 'credits.txt'}.issubset(names):
             raise ValueError('Approved video, poster and credits required')
     return tuple(result)

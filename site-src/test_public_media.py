@@ -57,6 +57,28 @@ class ApprovedMediaTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'credits required'):
             approved_files(self.root)
 
+    def test_photo_set_requires_exact_images_licenses_and_excludes_video(self):
+        self.item['kind'] = 'photos'
+        self.item['files'] = []
+        names = [f'scene-{i:02}.jpg' for i in range(1, 7)] + ['credits.txt', 'dmsans-OFL.txt', 'playfairdisplay-OFL.txt']
+        for name in names:
+            data = ('fixture ' + name).encode()
+            (self.folder / name).write_bytes(data)
+            self.item['files'].append({'name': name, 'bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()})
+        self.save()
+        self.assertEqual(len(approved_files(self.root)), 9)
+        self.assertNotIn('production/test-clip/reel.mp4', approved_files(self.root))
+        original = self.item['files'][0]['name']
+        self.item['files'][0]['name'] = 'reel.mp4'
+        self.save()
+        with self.assertRaises(ValueError):
+            approved_files(self.root)
+        self.item['files'][0]['name'] = original
+        self.item['files'].pop()
+        self.save()
+        with self.assertRaises(ValueError):
+            approved_files(self.root)
+
     def test_symlinked_media_and_parent_are_rejected(self):
         self.save()
         target = self.folder / 'reel.mp4'
