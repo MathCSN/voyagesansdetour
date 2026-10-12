@@ -10,6 +10,8 @@ from source_draft import call,require,HARD_STOP,source_fingerprint,check_review,
 from discover_facts import partition_facts,attach_context,SameHostRedirect
 from entailment import assess
 from guide_review import assess_article
+from quota_policy import hold as quota_hold
+from probe import ACCOUNT
 import editorial_queue as q
 
 ROOT=Path(__file__).resolve().parents[2]/'site-src'
@@ -122,6 +124,13 @@ def main():
     report={'observedAt':q.iso(now),'status':'not_started','callsAttempted':0,'maxCalls':13,'maxOutputTokensTotal':19000,'publicationAttempted':False}
     try:
         require(now<HARD_STOP,'authorization_period_ended')
+        budget=quota_hold(now,ACCOUNT)
+        if budget:
+            report.update(budget)
+            report['sourceFetches']=0
+            (out/'guide-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
+            print(json.dumps({'status':report['status'],'callsAttempted':0,'resumeAt':report['resumeAt']}))
+            return 0
         token=os.environ.get('CLOUDFLARE_WORKERS_AI_TOKEN','');require(bool(token),'missing_secret')
         articles,queue=q.load(ROOT,now)
         known=articles+[x['article'] for x in queue['drafts']]

@@ -1,6 +1,10 @@
 import copy
 import datetime as dt
 import unittest
+import tempfile
+import json
+from pathlib import Path
+from unittest.mock import patch
 import guide_draft as g
 import editorial_queue as q
 
@@ -10,6 +14,15 @@ class GuideTests(unittest.TestCase):
         self.topic={'slug':'aveiro-art-nouveau','destination':'Aveiro','question':'Que voir ?','sources':[{'label':'Musée','url':'https://museusdeaveiro.cm-aveiro.pt/museu-arte-nova/o-museu'},{'label':'Exposition','url':'https://museusdeaveiro.cm-aveiro.pt/museu-arte-nova/exposicao-permanente'}]}
         self.facts=[{'id':'c'+str(i),'fact':'Fait documenté '+str(i)} for i in range(1,5)]
         self.value={'title':'Le musée Art nouveau à Aveiro','shortTitle':'Art nouveau','description':'Préparer la visite du musée.','summary':'Comprendre la collection présentée par le musée.','sections':[{'id':'partie-'+str(i),'title':'Partie '+str(i),'paragraphs':['Ce paragraphe de test représente une description documentée de la collection du musée. Il sert uniquement à exercer la validation du format éditorial et de ses références, dans une donnée synthétique sans publication ni appel à une source distante.'],'claims':['c'+str(i)]} for i in range(1,5)],'faq':[{'question':'Que voir ?','answer':'La collection du musée.','claims':['c1']}]}
+    def test_quota_hold_stops_before_credentials_sources_or_inference(self):
+        hold={'status':'free_quota_hold','resumeAt':'2026-10-13T00:00:00Z'}
+        with tempfile.TemporaryDirectory() as tmp, patch.dict(g.os.environ,{'REPORT_DIR':tmp},clear=True), patch.object(g,'quota_hold',return_value=hold), patch.object(g.q,'load',side_effect=AssertionError('site read during hold')), patch.object(g,'source_fingerprint',side_effect=AssertionError('source fetch during hold')), patch.object(g,'call',side_effect=AssertionError('inference during hold')):
+            self.assertEqual(g.main(),0)
+            report=json.loads((Path(tmp)/'guide-report.json').read_text())
+            self.assertEqual(report['status'],'free_quota_hold')
+            self.assertEqual(report['callsAttempted'],0)
+            self.assertEqual(report['sourceFetches'],0)
+            self.assertFalse(report['publicationAttempted'])
     def test_valid_output_is_site_compatible(self):
         original=copy.deepcopy(self.value)
         article,citations=g.validate_article_output(self.value,self.topic,self.facts,[],self.now)
