@@ -56,8 +56,9 @@ def call(messages, max_tokens, token):
     data=json.loads(raw)
     require(data.get('success') is True,'provider_unsuccessful')
     text=data.get('result',{}).get('response')
-    require(isinstance(text,str) and token not in text,'response_invalid')
-    result=json.loads(text)
+    require(isinstance(text,(str,dict)),'response_invalid')
+    require(token not in json.dumps(text),'secret_in_output')
+    result=json.loads(text) if isinstance(text,str) else text
     usage=data['result'].get('usage',{})
     safe_usage={k:v for k,v in usage.items() if k in ('prompt_tokens','completion_tokens','total_tokens') and type(v) is int and v>=0}
     return result,safe_usage
