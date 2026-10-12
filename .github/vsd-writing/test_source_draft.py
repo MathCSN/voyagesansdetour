@@ -25,3 +25,15 @@ class GroundingTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'claim_id'):validate(self.draft,self.sources)
 
 if __name__=='__main__': unittest.main()
+
+class LedgerTests(unittest.TestCase):
+    def test_changed_fact_stops_before_inference(self):
+        from source_draft import bind_facts
+        with self.assertRaisesRegex(ValueError,'reviewed_fact_changed'):
+            bind_facts([{'text':'different page'}, {'text':'different page'}])
+    def test_ledger_is_copied_not_rewritten_by_output(self):
+        from source_draft import bind_facts, FACTS
+        sources=[{'text':' '.join(f['quote'] for f in FACTS if f['source']==i)} for i in range(2)]
+        result=bind_facts(sources)
+        result[0]['fact']='injected'
+        self.assertNotEqual(FACTS[0]['fact'],'injected')
