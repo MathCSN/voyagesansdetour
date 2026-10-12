@@ -1,0 +1,89 @@
+{
+  "createdAt": "2026-10-12T07:52:31.483569+00:00",
+  "settings": {
+    "lengthScale": 1.08,
+    "noiseScale": 0.333,
+    "noiseWScale": 0.4
+  },
+  "samples": [
+    {
+      "voice": "fr_FR-siwis-medium",
+      "text": "À Porto, regroupez les visites par secteur pour limiter les montées.",
+      "file": "fr_FR-siwis-medium/sample-0.wav",
+      "durationSeconds": 3.912562358276644,
+      "sampleRate": 22050,
+      "channels": 1,
+      "rms": 5307.850824614062,
+      "clippedFraction": 1.1591246290801187e-05,
+      "sha256": "0ddac07e38fd01ca53761300e011039f26ee5c5816508e8e758b1c068068ab1e",
+      "transcription": "À Porto, regroupez les visites par secteur pour limiter les montées."
+    },
+    {
+      "voice": "fr_FR-siwis-medium",
+      "text": "Évitez de descendre au fleuve puis de remonter plusieurs fois.",
+      "file": "fr_FR-siwis-medium/sample-1.wav",
+      "durationSeconds": 3.2275736961451247,
+      "sampleRate": 22050,
+      "channels": 1,
+      "rms": 4992.1117195051065,
+      "clippedFraction": 1.4051258992805756e-05,
+      "sha256": "aebeefd124512d374791473cf615037ab7bc71b392b3f8e2ddb725f96de2dbe0",
+      "transcription": "Évitez de descendre au fleuve puis de remonter plusieurs fois."
+    },
+    {
+      "voice": "fr_FR-siwis-medium",
+      "text": "Avant de réserver une visite de cave, comparez sa langue, sa durée et ce qui est inclus.",
+      "file": "fr_FR-siwis-medium/sample-2.wav",
+      "durationSeconds": 5.317369614512471,
+      "sampleRate": 22050,
+      "channels": 1,
+      "rms": 4680.155774828229,
+      "clippedFraction": 8.528930131004366e-06,
+      "sha256": "406aff6ad05458a0dce40c511fd84e5116259766efa66c355be6f3630dd163d8",
+      "transcription": "Avant de réserver une visite de cave, comparez sa langue, sa durée et ce qui est inclus."
+    },
+    {
+      "voice": "fr_FR-upmc-medium",
+      "text": "À Porto, regroupez les visites par secteur pour limiter les montées.",
+      "file": "fr_FR-upmc-medium/sample-0.wav",
+      "durationSeconds": 4.237641723356009,
+      "sampleRate": 22050,
+      "channels": 1,
+      "rms": 4041.617510113027,
+      "clippedFraction": 1.0702054794520548e-05,
+      "sha256": "fa57e682b86f22d65265879f606b30b274d75668cc4aaf1cfaebd026b775c0ed",
+      "transcription": "À Porto, regroupez les visites par secteur pour limiter les montées."
+    },
+    {
+      "voice": "fr_FR-upmc-medium",
+      "text": "Évitez de descendre au fleuve puis de remonter plusieurs fois.",
+      "file": "fr_FR-upmc-medium/sample-1.wav",
+      "durationSeconds": 3.0998639455782313,
+      "sampleRate": 22050,
+      "channels": 1,
+      "rms": 4155.484094764609,
+      "clippedFraction": 1.4630149812734083e-05,
+      "sha256": "bc4fb4da5a9a8213888da6501a32eb72b6ec8fd24d0cba10c3dd23ae27be8b39",
+      "transcription": "évitez de descendre au fleuve puis de remonter plusieurs fois."
+    },
+    {
+      "voice": "fr_FR-upmc-medium",
+      "text": "Avant de réserver une visite de cave, comparez sa langue, sa durée et ce qui est inclus.",
+      "file": "fr_FR-upmc-medium/sample-2.wav",
+      "durationSeconds": 4.911020408163266,
+      "sampleRate": 22050,
+      "channels": 1,
+      "rms": 4371.631164191324,
+      "clippedFraction": 9.234633569739952e-06,
+      "sha256": "abcd947fd0971c208f8e0887197cfd6fe39bf65891b75d72944e3ddf40dcbda0",
+      "transcription": "Avant de réserver une visite de CAR, comparer sa langue, sa durée et ce qui est inclus."
+    }
+  ],
+  "publicationAttempted": false,
+  "paidInferenceCalls": 0,
+  "model": "Systran/faster-whisper-medium",
+  "modelRevision": "08e178d48790749d25932bbc082711ddcfdfbc4f",
+  "reviewedAt": "2026-10-12T07:53:25.995850+00:00",
+  "humanListening": false,
+  "publicationApproved": false
+}

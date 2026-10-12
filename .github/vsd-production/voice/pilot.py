@@ -66,13 +66,26 @@ def inspect_wav(path, minimum_duration=3):
             'rms': rms, 'clippedFraction': clipped, 'sha256': sha(path.read_bytes())}
 
 
-def run(output, now, sentences=SENTENCES):
+SYNTHESIS_PROFILES = {
+    'original': ['--length-scale', '1.0'],
+    'clear-v1': ['--length-scale', '1.08', '--noise-scale', '0.333', '--noise-w-scale', '0.4'],
+}
+
+
+def synthesis_args(profile):
+    if profile not in SYNTHESIS_PROFILES:
+        raise ValueError('unqualified_synthesis_profile')
+    return list(SYNTHESIS_PROFILES[profile])
+
+
+def run(output, now, sentences=SENTENCES, synthesis_profile='original'):
     if now.tzinfo is None:
         raise ValueError('timezone_required')
     if now >= STOP:
         return {'status': 'period_ended', 'generated': 0}
     if not isinstance(sentences, (tuple, list)) or not 1 <= len(sentences) <= 24 or any(not isinstance(t, str) or not t.strip() or len(t) > 200 for t in sentences) or len(" ".join(sentences)) > 1500:
         raise ValueError("narration_bounds")
+    synth_args = synthesis_args(synthesis_profile)
     text = " ".join(sentences)
     output = Path(output)
     if output.exists() or output.is_symlink():
@@ -103,7 +116,7 @@ def run(output, now, sentences=SENTENCES):
                     chunk = model_dir/(str(index)+'.wav')
                     subprocess.run([sys.executable, '-m', 'piper', '-m', str(model_dir/(voice['id']+'.onnx')),
                                     '-c', str(model_dir/(voice['id']+'.onnx.json')), '-s', str(voice['speaker']),
-                                    '-f', str(chunk), '--length-scale', '1.0'],
+                                    '-f', str(chunk), *synth_args],
                                    input=sentence, text=True, check=True, timeout=120,
                                    env={**os.environ, 'OMP_NUM_THREADS': '2'})
                     inspect_wav(chunk, minimum_duration=0.1)
@@ -126,6 +139,7 @@ def run(output, now, sentences=SENTENCES):
                    'generatedAt': now.isoformat(), 'generated': len(samples),
                    'textSha256': sha(text.encode()), 'modelsManifestSha256': sha((HERE/'models.json').read_bytes()),
                    'piperVersion': config['piperVersion'],
+                   'synthesisProfile': synthesis_profile, 'synthesisArguments': synth_args,
                    'onnxRuntimeVersion': importlib.metadata.version('onnxruntime'),
                    'modelsRevision': config['revision'], 'samples': samples,
                    'paidInferenceCalls': 0, 'publicationAttempted': False,

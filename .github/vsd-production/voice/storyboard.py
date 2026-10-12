@@ -81,9 +81,10 @@ def prepare(folder, now, fetcher=fetch_public, sentence_flow=False):
     return draft,chunks,headings,badges,pilot.sha(raw),pilot.sha(public)
 
 
-def run(folder, output, now, sentence_flow=False):
+def run(folder, output, now, sentence_flow=False, synthesis_profile='original'):
     if now.tzinfo is None:raise ValueError('timezone_required')
     if now>=pilot.STOP:return {'status':'period_ended','generated':0}
+    pilot.synthesis_args(synthesis_profile)
     output=Path(output)
     if output.exists() or output.is_symlink():raise ValueError('existing_output_preserved')
     draft,sentences,headings,badges,story_hash,public_hash=prepare(folder,now,sentence_flow=sentence_flow)
@@ -96,13 +97,14 @@ def run(folder, output, now, sentence_flow=False):
     output.parent.mkdir(parents=True,exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='.storyboard-media-',dir=output.parent) as tmp:
         result=Path(tmp)/'result';result.mkdir()
-        pilot.run(result/'audio',now,sentences)
+        pilot.run(result/'audio',now,sentences,synthesis_profile=synthesis_profile)
         compose.compose(result/'audio',result/'videos',now,sentences,headings,badges)
         finished=dt.datetime.now(dt.timezone.utc)
         if finished>=dt.datetime.fromisoformat(draft['source']['validUntil']) or finished>=pilot.STOP:raise ValueError('expired_during_render')
         proof={'schemaVersion':1,'status':'storyboard_media_requires_review','id':draft['id'],'storyboardSha256':story_hash,
                'publicHtmlSha256':public_hash,'startedAt':now.isoformat(),'finishedAt':finished.isoformat(),
                'validUntil':draft['source']['validUntil'],'targetUrl':draft['targetUrl'],
+               'synthesisProfile':synthesis_profile,
                'narrationSegmentation':'complete_sentences' if sentence_flow else 'caption_chunks',
                'headingMode':'bagages_original' if draft['id']=='reel-article-portugal-sans-voiture-bagages' else 'exact_article_titles',
                'paidInferenceCalls':0,'publicationAttempted':False,'listeningReviewComplete':False,
@@ -114,5 +116,6 @@ def run(folder, output, now, sentence_flow=False):
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser();parser.add_argument('--storyboard',type=Path,required=True);parser.add_argument('--output',type=Path,required=True);parser.add_argument('--sentence-flow',action='store_true')
-    args=parser.parse_args();result=run(args.storyboard,args.output,dt.datetime.now(dt.timezone.utc),sentence_flow=args.sentence_flow)
+    parser.add_argument('--synthesis-profile',choices=sorted(pilot.SYNTHESIS_PROFILES),default='original')
+    args=parser.parse_args();result=run(args.storyboard,args.output,dt.datetime.now(dt.timezone.utc),sentence_flow=args.sentence_flow,synthesis_profile=args.synthesis_profile)
     print(json.dumps({k:v for k,v in result.items() if k!='files'},ensure_ascii=False))

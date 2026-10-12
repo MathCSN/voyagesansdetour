@@ -17,6 +17,11 @@ class Guards(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'existing_output'):
                 pilot.run(Path(folder), dt.datetime(2026,10,12,tzinfo=dt.timezone.utc))
 
+    def test_unknown_profile_rejected_before_download(self):
+        with tempfile.TemporaryDirectory() as folder, patch('pilot.download',side_effect=AssertionError('network')):
+            with self.assertRaisesRegex(ValueError,'unqualified_synthesis_profile'):
+                pilot.run(Path(folder)/'new',dt.datetime(2026,10,12,tzinfo=dt.timezone.utc),synthesis_profile='arbitrary')
+
     def test_silence_is_rejected(self):
         with tempfile.TemporaryDirectory() as folder:
             path = Path(folder)/'empty.wav'

@@ -3,9 +3,9 @@ on:
   workflow_dispatch:
     inputs:
       content:
-        description: Render fixed samples or the source-bound bagage storyboard
+        description: Render fixed samples or an immutable source-bound voice revision
         type: choice
-        options: [samples, bagages, bagages-flow, train-flow]
+        options: [samples, bagages, bagages-flow, train-flow, porto-clear]
         default: samples
 permissions: {}
 concurrency:
@@ -66,6 +66,10 @@ jobs:
         if: steps.period.outputs.active == 'true' && inputs.content == 'train-flow'
         working-directory: .github/vsd-production/voice
         run: python storyboard.py --sentence-flow --storyboard ../reel-drafts/reel-article-lisbonne-porto-train --output "$RUNNER_TEMP/vsd-storyboard-media"
+      - name: Qualify clearer Porto synthesis without replacing existing stock
+        if: steps.period.outputs.active == 'true' && inputs.content == 'porto-clear'
+        working-directory: .github/vsd-production/voice
+        run: python storyboard.py --sentence-flow --synthesis-profile clear-v1 --storyboard ../reel-drafts/reel-article-porto-3-jours-sans-voiture --output "$RUNNER_TEMP/vsd-storyboard-media"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: steps.period.outputs.active == 'true' && inputs.content == 'samples'
         with:
@@ -81,7 +85,7 @@ jobs:
           if-no-files-found: error
           retention-days: 7
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        if: steps.period.outputs.active == 'true' && (inputs.content == 'bagages' || inputs.content == 'bagages-flow' || inputs.content == 'train-flow')
+        if: steps.period.outputs.active == 'true' && (inputs.content == 'bagages' || inputs.content == 'bagages-flow' || inputs.content == 'train-flow' || inputs.content == 'porto-clear')
         with:
           name: vsd-storyboard-media
           path: ${{ runner.temp }}/vsd-storyboard-media
