@@ -484,7 +484,13 @@ def run(root=HERE, output=None, *, now=None, validate_only=False):
                 ensure(utcnow() < instant(scenario["review"]["validUntil"]) and utcnow() <= HARD_STOP, "Review expired during rendering")
                 staged.rename(destination)
             return {"status": "rendered_not_published", "contentId": scenario["id"], "produced": 1, "output": str(destination), "videoSha256": next(f["sha256"] for f in receipt["files"] if f["file"] == "reel.mp4"), "wallSeconds": receipt["runtime"]["wallSeconds"]}
-        return {"status": "idle", "produced": 0, "completed": completed, "skipped": skipped, "legacyArtifacts": legacy}
+        future = [item for item in skipped if item["reason"] == "not_due"]
+        expired = [item for item in skipped if item["reason"] == "review_expired"]
+        return {"status": "idle", "produced": 0, "completed": completed, "skipped": skipped, "legacyArtifacts": legacy,
+                "productionReadiness": {"status": "waiting_for_due_scenario" if future else "no_new_renderable_scenario",
+                                        "futureScenarios": len(future), "expiredScenarios": len(expired),
+                                        "renderedArtifacts": len(completed), "catalogueSize": len(entries),
+                                        "publicationStockVerified": False}}
 
 
 def main():

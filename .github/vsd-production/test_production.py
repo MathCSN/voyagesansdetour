@@ -68,12 +68,15 @@ class ProductionGuards(unittest.TestCase):
             result = p.run(self.root, self.output, now=p.instant("2026-10-28T00:00:00Z"))
         render.assert_not_called()
         self.assertEqual(result["skipped"][0]["reason"], "review_expired")
+        self.assertEqual(result["productionReadiness"]["status"], "no_new_renderable_scenario")
+        self.assertFalse(result["productionReadiness"]["publicationStockVerified"])
 
     def test_future_content_does_not_invoke_renderer(self):
         with mock.patch.object(p, "render") as render:
             result = p.run(self.root, self.output, now=self.now - dt.timedelta(days=1))
         render.assert_not_called()
         self.assertEqual(result["skipped"][0]["reason"], "not_due")
+        self.assertEqual(result["productionReadiness"]["status"], "waiting_for_due_scenario")
 
     def test_hard_stop_never_generates(self):
         with mock.patch.object(p, "render") as render:

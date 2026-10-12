@@ -62,7 +62,34 @@ jobs:
         run: python -m unittest -q test_production
       - name: Produce at most one eligible clip
         if: steps.period.outputs.active == 'true'
-        run: python production.py
+        run: |
+          set -euo pipefail
+          python production.py | tee "$RUNNER_TEMP/vsd-production-result.json"
+      - name: Report catalogue readiness separately from render success
+        if: steps.period.outputs.active == 'true'
+        run: |
+          python - <<'PYTHON'
+          import json,os
+          from pathlib import Path
+          result=json.loads((Path(os.environ['RUNNER_TEMP'])/'vsd-production-result.json').read_text())
+          readiness=result.get('productionReadiness',{})
+          lines=['## Production des vidéos',f"Nouveaux rendus : {result['produced']}."]
+          if readiness:
+              lines.append(f"Catalogue : {readiness['catalogueSize']} scénarios ; {readiness['renderedArtifacts']} déjà rendus ; {readiness['futureScenarios']} à venir ; {readiness['expiredScenarios']} expirés.")
+              if readiness['status']=='no_new_renderable_scenario':
+                  lines.append('**Catalogue épuisé : aucun nouveau scénario admissible. La création éditoriale reste à alimenter.**')
+                  print('::warning title=Catalogue vidéo épuisé::Aucun nouveau scénario admissible ; ce succès technique ne prouve pas un renouvellement du stock.')
+          lines.append('Les rendus ne prouvent ni une réservation Buffer, ni une publication, ni un stock publiable.')
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as output:output.write('\n\n'.join(lines)+'\n')
+          PYTHON
+      - name: Preserve production readiness evidence
+        if: steps.period.outputs.active == 'true'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: production-readiness
+          path: ${{ runner.temp }}/vsd-production-result.json
+          retention-days: 30
+          if-no-files-found: error
       - name: Persist finished media and receipts atomically
         if: steps.period.outputs.active == 'true'
         run: |
