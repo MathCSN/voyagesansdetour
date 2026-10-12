@@ -23,8 +23,10 @@ def approval_hash(patch):
     return q.digest({k:v for k,v in patch.items() if k!='approvalSha256'})
 
 def apply_update(articles, ledger, patch, now, fetcher=source_fingerprint):
-    q.require(isinstance(patch,dict) and set(patch)=={'schemaVersion','id','slug','baseArticleSha256','sectionId','afterParagraphSha256','paragraph','sources','reviewedAt','validUntil','reviewMethod','approvalSha256'},'Invalid update patch')
-    q.require(patch['schemaVersion']==1 and q.SLUG.fullmatch(patch['id']) and q.SLUG.fullmatch(patch['slug']),'Invalid update identity')
+    import editorial_model_review as model_review
+    model_method=isinstance(patch,dict) and patch.get('reviewMethod')==model_review.METHOD
+    q.require(isinstance(patch,dict) and set(patch)-({'reviewEvidence'} if model_method else set())=={'schemaVersion','id','slug','baseArticleSha256','sectionId','afterParagraphSha256','paragraph','sources','reviewedAt','validUntil','reviewMethod','approvalSha256'},'Invalid update patch')
+    q.require(patch['schemaVersion']==(2 if model_method else 1) and q.SLUG.fullmatch(patch['id']) and q.SLUG.fullmatch(patch['slug']),'Invalid update identity')
     q.require(patch['approvalSha256']==approval_hash(patch),'Update changed after review')
     q.require(isinstance(ledger,dict) and set(ledger)=={'schemaVersion','updates'} and ledger['schemaVersion']==1 and isinstance(ledger['updates'],list),'Invalid update ledger')
     ids=[e['id'] for e in ledger['updates']]
@@ -35,7 +37,8 @@ def apply_update(articles, ledger, patch, now, fetcher=source_fingerprint):
         return articles,ledger,False
     q.require(q.instant(patch['reviewedAt'])<=now<q.instant(patch['validUntil'])<=HARD_STOP,'Update review expired or future')
     q.require(q.instant(patch['validUntil'])-q.instant(patch['reviewedAt'])<=dt.timedelta(days=3),'Update review window too long')
-    q.require(patch['reviewMethod']=='agent-source-review-v1','Unqualified update review method')
+    q.require(model_method or patch['reviewMethod']=='agent-source-review-v1','Unqualified update review method')
+    reviewed_facts=model_review.validate(patch) if model_method else []
     matches=[a for a in articles if a['slug']==patch['slug']]
     q.require(len(matches)==1 and q.digest(matches[0])==patch['baseArticleSha256'],'Base article changed')
     article=matches[0]
@@ -43,12 +46,15 @@ def apply_update(articles, ledger, patch, now, fetcher=source_fingerprint):
     q.require(not any(patch['paragraph'] in s.get('paragraphs',[]) for s in article['sections']),'Update text already exists without receipt')
     source_urls={s['url'] for s in article['sources']}
     q.require(isinstance(patch['sources'],list) and patch['sources'],'Update source missing')
-    seen=set()
+    seen=set();source_texts={}
     for source in patch['sources']:
         q.require(set(source)=={'url','sha256','normalization'} and source['normalization']=='visible-text-cp-node-v1' and source['url'] in source_urls and source['url'] not in seen and q.HASH.fullmatch(source['sha256']),'Invalid update source')
         seen.add(source['url'])
         observed=fetcher(source['url'])
+        source_texts[source['url']]=observed['text'][:7000]
         q.require(source_digest(source['url'],observed['text'])==source['sha256'],'Update source changed since review')
+    if model_method:
+        model_review.check_quotes(reviewed_facts,source_texts,article)
     result=copy.deepcopy(articles);updated=next(a for a in result if a['slug']==patch['slug'])
     sections=[s for s in updated['sections'] if s['id']==patch['sectionId']]
     q.require(len(sections)==1,'Update target section missing')

@@ -17,13 +17,14 @@ jobs:
   draft:
     if: github.repository == 'MathCSN/voyagesansdetour' && github.ref == 'refs/heads/main' && github.run_attempt == 1
     runs-on: ubuntu-24.04
-    timeout-minutes: 6
+    timeout-minutes: 12
     permissions:
-      contents: read
+      contents: write
+      actions: write
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
-          persist-credentials: false
+          persist-credentials: true
       - name: Validate grounding checks without inference
         run: python3 -m unittest discover -s .github/vsd-writing -p 'test_*.py'
       - name: Discover and review novel facts
@@ -32,6 +33,28 @@ jobs:
           GUIDE_SLUG: ${{ inputs.guide }}
           REPORT_DIR: ${{ runner.temp }}/vsd-source-draft
         run: python3 .github/vsd-writing/discover_facts.py
+      - name: Admit one grounded update when the editorial calendar allows it
+        id: admission
+        env:
+          REPORT_DIR: ${{ runner.temp }}/vsd-source-draft
+        run: python3 .github/vsd-writing/admit_update.py
+      - name: Validate admitted public source
+        if: steps.admission.outputs.changed == 'true'
+        working-directory: site-src
+        run: python3 -m unittest -q test_site test_stay22 test_editorial_queue test_public_media test_autonomous_editorial test_autonomous_candidate test_cloud_source_changes test_editorial_update
+      - name: Persist update and request verified deployment
+        if: steps.admission.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git add -- site-src/articles.json site-src/editorial-updates.json site-src/editorial-update-patches
+          git -c user.name='Voyage Sans Détour' -c user.email='contact@voyagesansdetour.fr' commit -m 'Admit a source-grounded editorial update'
+          # A concurrent edit rejects the push; never force or rebase an approval.
+          git push origin HEAD:main
+          # GITHUB_TOKEN pushes do not trigger push workflows. The existing
+          # daily deploy also reconciles pending updates if dispatch fails.
+          gh workflow run build-pages.yml --ref main
       - name: Preserve research and draft evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
