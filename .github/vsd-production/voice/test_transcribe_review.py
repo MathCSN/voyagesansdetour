@@ -63,4 +63,34 @@ class ReviewTests(unittest.TestCase):
             result=review.review_next(FOLDER.parent,tmp,dt.datetime(2026,10,28,tzinfo=dt.timezone.utc),lambda p:self.fail('inference'))
             self.assertEqual(result['status'],'no_unreviewed_valid_stock')
 
+class CatalogueTests(unittest.TestCase):
+    def test_global_limit_and_separate_revision_report_paths(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);families=root/'families';families.mkdir()
+            for name in ['complete-sentences','second']:(families/name).mkdir()
+            empty={'status':'no_unreviewed_valid_stock'};made={'status':'machine_transcription_requires_editorial_review'}
+            with patch.object(review,'review_next',side_effect=[empty,made]) as select:
+                self.assertEqual(review.review_catalogue(root/'original',families,root/'reports',NOW),made)
+                self.assertEqual(select.call_count,2)
+                self.assertEqual(select.call_args.args[1],root/'reports/revisions/complete-sentences')
+            with patch.object(review,'review_next',return_value=made) as select:
+                review.review_catalogue(root/'original',families,root/'reports',NOW)
+                self.assertEqual(select.call_count,1)
+
+    def test_conflict_is_not_skipped_and_stop_precedes_io(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            with patch.object(review,'review_next',side_effect=ValueError('review_conflict')) as select:
+                with self.assertRaisesRegex(ValueError,'review_conflict'):
+                    review.review_catalogue(tmp,Path(tmp)/'absent',tmp,NOW)
+                self.assertEqual(select.call_count,1)
+            with patch.object(review,'review_next',side_effect=AssertionError('io')):
+                self.assertEqual(review.review_catalogue('/absent','/absent','/absent',review.stock.STOP)['status'],'period_ended')
+
+    def test_revision_symlinks_are_rejected_before_inference(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);(root/'escape').symlink_to(root,target_is_directory=True)
+            with patch.object(review,'review_next',side_effect=AssertionError('io')):
+                with self.assertRaisesRegex(ValueError,'revision_path'):
+                    review.review_catalogue(root,root,root/'out',NOW)
+
 if __name__=='__main__':unittest.main()

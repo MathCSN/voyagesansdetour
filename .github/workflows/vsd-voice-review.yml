@@ -37,7 +37,7 @@ jobs:
         working-directory: .github/vsd-production/voice
         run: |
           python -m unittest -q test_transcribe_review
-          python transcribe_review.py --next --stock ../voice-stock --output ../voice-reviews
+          python transcribe_review.py --next --stock ../voice-stock --revisions ../voice-revisions --output ../voice-reviews
       - name: Preserve report without approving or publishing media
         if: steps.period.outputs.active == 'true'
         run: |

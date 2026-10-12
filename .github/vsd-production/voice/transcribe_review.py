@@ -55,6 +55,25 @@ def review_next(root, output, now, transcriber=None):
     return {'status':'no_unreviewed_valid_stock','publicationApproved':False}
 
 
+def review_catalogue(root, revisions, output, now, transcriber=None):
+    """Inspect at most one item across originals and immutable revision families."""
+    if now.tzinfo is None:raise ValueError('timezone_required')
+    if now>=stock.STOP:return {'status':'period_ended','publicationApproved':False}
+    revisions,output=Path(revisions),Path(output)
+    if revisions.is_symlink() or output.is_symlink() or (output/'revisions').is_symlink():raise ValueError('symlink')
+    families=sorted(revisions.iterdir()) if revisions.exists() else []
+    if len(families)>16:raise ValueError('revision_bound')
+    for family in families:
+        if family.is_symlink() or not family.is_dir() or not re.fullmatch(r'[a-z][a-z0-9-]{0,63}',family.name):raise ValueError('revision_path')
+    # Keep original report paths intact; revision families have separate reports
+    # even when their storyboard identity is unchanged.
+    sources=[(Path(root),output)]+[(f,output/'revisions'/f.name) for f in families]
+    for source,destination in sources:
+        result=review_next(source,destination,now,transcriber)
+        if result['status']!='no_unreviewed_valid_stock':return result
+    return {'status':'no_unreviewed_valid_stock','publicationApproved':False}
+
+
 def review(folder,output,now,transcriber=None):
     if now.tzinfo is None:raise ValueError('timezone_required')
     if now>=stock.STOP:return {'status':'period_ended','publicationApproved':False}
@@ -100,7 +119,9 @@ def review(folder,output,now,transcriber=None):
     return result
 
 if __name__=='__main__':
-    parser=argparse.ArgumentParser();parser.add_argument('--stock',type=Path,required=True);parser.add_argument('--output',type=Path,required=True);parser.add_argument('--next',action='store_true')
-    args=parser.parse_args();result=(review_next if args.next else review)(args.stock,args.output,dt.datetime.now(dt.timezone.utc))
+    parser=argparse.ArgumentParser();parser.add_argument('--stock',type=Path,required=True);parser.add_argument('--output',type=Path,required=True);parser.add_argument('--next',action='store_true');parser.add_argument('--revisions',type=Path)
+    args=parser.parse_args();now=dt.datetime.now(dt.timezone.utc)
+    if args.revisions and not args.next:parser.error('--revisions requires --next')
+    result=review_catalogue(args.stock,args.revisions,args.output,now) if args.revisions else (review_next if args.next else review)(args.stock,args.output,now)
     print(json.dumps({'status':result['status'],'publicationApproved':False,'voices':[
         {'voice':v['voice'],'comparison':v['comparison']} for v in result.get('voices',[])]},ensure_ascii=False))
