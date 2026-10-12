@@ -71,6 +71,16 @@ def normalized_hash(data):
     return hashlib.sha256(text.encode('utf-8')).hexdigest()
 
 
+def ensure_source_document(text):
+    # Some hosts answer HTTP 200 with an interstitial, not the requested page.
+    # Do not hash/admit that response as stable editorial evidence.
+    opening=text[:1800].casefold()
+    blocked=("making sure you're not a bot!" in opening or
+             'anubis could not load its javascript' in opening or
+             ('verify you are human' in opening and ('cloudflare' in opening or 'security verification' in opening)))
+    require(not blocked, 'Source inaccessible : écran de vérification anti-robot.')
+
+
 def source_fingerprint(url, opener=None):
     parsed = urllib.parse.urlsplit(url)
     require(parsed.scheme == 'https' and parsed.hostname and not parsed.username and not parsed.password,
@@ -92,6 +102,7 @@ def source_fingerprint(url, opener=None):
     parser.feed(data.decode('utf-8', errors='replace'))
     text = re.sub(r'\s+', ' ', ' '.join(parser.parts)).strip()
     require(text, 'Source HTML sans texte visible.')
+    ensure_source_document(text)
     return {'sha256': hashlib.sha256(text.encode('utf-8')).hexdigest(), 'text': text}
 
 

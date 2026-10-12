@@ -1,0 +1,12 @@
+[
+  {
+    "slug": "aveiro-musee-art-nouveau",
+    "destination": "Aveiro",
+    "question": "Que peut-on voir au musée Art nouveau d’Aveiro et comment préparer cette visite ? Ne pas inventer de prix, durée, accessibilité ou horaires.",
+    "sources": [
+      {"label": "Musées municipaux d’Aveiro — le musée Art nouveau", "url": "https://museusdeaveiro.cm-aveiro.pt/museu-arte-nova/o-museu"},
+      {"label": "Musées municipaux d’Aveiro — exposition permanente", "url": "https://museusdeaveiro.cm-aveiro.pt/museu-arte-nova/exposicao-permanente"},
+      {"label": "Musées municipaux d’Aveiro — actualités et fermetures", "url": "https://museusdeaveiro.cm-aveiro.pt/"}
+    ]
+  }
+]

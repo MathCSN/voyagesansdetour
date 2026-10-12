@@ -334,3 +334,19 @@ class AutonomousEditorialTests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+class SourceDocumentTests(unittest.TestCase):
+    def test_http_200_challenge_is_not_source_evidence(self):
+        from io import BytesIO
+        class Response(BytesIO):
+            status=200
+            headers={'content-type':'text/html'}
+        class Opener:
+            def open(self,*args,**kwargs):
+                return Response(b"<html>Making sure you're not a bot! Anubis could not load its JavaScript.</html>")
+        with self.assertRaisesRegex(ValueError,'anti-robot'):
+            intake.source_fingerprint('https://official.example/guide',Opener())
+
+    def test_real_editorial_text_remains_eligible(self):
+        intake.ensure_source_document('The museum collection includes works inspired by nature. Open Tuesday to Sunday.')
