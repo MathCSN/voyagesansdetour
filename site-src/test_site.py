@@ -152,7 +152,11 @@ class PublicBuildTest(unittest.TestCase):
         ns={'s':'http://www.sitemaps.org/schemas/sitemap/0.9'}
         dates={node.findtext('s:loc',namespaces=ns):node.findtext('s:lastmod',namespaces=ns) for node in sitemap.findall('s:url',ns)}
         self.assertEqual(dates[ORIGIN+route],'2026-09-27')
-        self.assertEqual(dates[ORIGIN+'/portugal/'],'2026-09-27')
+        # The category date advances with the catalogue, while the existing
+        # guides above and below retain their own publication/review dates.
+        catalogue=json.loads((ROOT/'articles.json').read_text())
+        latest_update=max(a.get('updatedOn','2026-09-14') for a in catalogue)
+        self.assertEqual(dates[ORIGIN+'/portugal/'],latest_update)
         self.assertEqual(dates[ORIGIN+'/portugal/porto-3-jours-sans-voiture/'],'2026-09-14')
         items=ET.parse(self.out/'feed.xml').findall('channel/item')
         rss={node.findtext('link'):node.findtext('pubDate') for node in items}

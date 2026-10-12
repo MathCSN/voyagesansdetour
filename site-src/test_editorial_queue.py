@@ -16,12 +16,27 @@ ROOT = Path(__file__).resolve().parent
 NOW = release.instant('2026-10-15T10:00:00Z')
 
 
+def published_fixture():
+    # Unit-test history must not advance whenever the real cloud catalogue grows.
+    return {
+        'slug': 'fixture-published-guide', 'title': 'Guide de test déjà publié',
+        'shortTitle': 'Guide de test', 'destination': 'Portugal',
+        'category': 'Conseils pratiques', 'description': 'Catalogue de test isolé.',
+        'readMinutes': 1, 'summary': 'Contenu fictif réservé aux tests locaux.',
+        'sections': [{'id': 'preparer', 'title': 'Préparer',
+                      'paragraphs': ['Un exemple fixe pour tester les sorties.']}],
+        'faq': [], 'sources': [{'label': 'Source de test', 'url': 'https://example.com/source'}],
+        'related': [], 'sourcesCheckedOn': '2026-09-14',
+        'publishedOn': '2026-09-14', 'updatedOn': '2026-09-14',
+    }
+
+
 class EditorialQueueTest(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory(prefix='vsd-editorial-')
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
-        self.articles = json.loads((ROOT / 'articles.json').read_text())
+        self.articles = [published_fixture()]
         self.queue = {'schemaVersion': 1, 'drafts': [], 'promotions': []}
         self.save()
 
@@ -134,6 +149,14 @@ class EditorialQueueTest(unittest.TestCase):
         self.assertFalse(release.promote(self.root, NOW + dt.timedelta(days=1)))
         self.assertEqual(len(release.load(self.root, NOW)[1]['drafts']), 1)
 
+    def test_recent_publication_still_blocks_next_release(self):
+        self.articles[0].update(publishedOn='2026-10-11', updatedOn='2026-10-11')
+        self.draft()
+        before = (self.root / 'articles.json').read_bytes()
+        self.assertFalse(release.promote(self.root, NOW))
+        self.assertEqual((self.root / 'articles.json').read_bytes(), before)
+        self.assertEqual(len(release.load(self.root, NOW)[1]['drafts']), 1)
+
     def test_missing_approval_unknown_fields_and_published_slug_fail_closed(self):
         draft = self.draft()
         for mutate in (lambda d: d.update(extra=True), lambda d: d['approval'].pop('sha256'),
@@ -143,6 +166,8 @@ class EditorialQueueTest(unittest.TestCase):
 
     def test_live_generator_excludes_future_and_keeps_existing_pages_identical(self):
         # Copy only source and permitted assets, never the existing generated site.
+        # This integration test deliberately retains the real catalogue and links.
+        self.articles = json.loads((ROOT / 'articles.json').read_text())
         self.draft(release_at='2099-10-15T10:00:00Z', valid_until='2099-10-27T23:59:59Z')
         for name in ('generate.py', 'public_media.py', 'public-media.json', 'editorial_queue.py', 'stay22.py', 'stay22.json', 'mentions.json',
                      'analytics.json', 'pinterest-rss.json', 'image-sources.json'):
