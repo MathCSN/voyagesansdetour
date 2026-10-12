@@ -1,6 +1,11 @@
 name: Evaluate VSD full-guide review
 on:
   workflow_dispatch:
+    inputs:
+      proposal_run:
+        description: Existing successful guide pilot to review without regenerating it
+        type: string
+        default: "38203259983"
 permissions: {}
 concurrency:
   group: vsd-workers-ai-writing
@@ -12,16 +17,33 @@ jobs:
     timeout-minutes: 6
     permissions:
       contents: read
+      actions: read
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           persist-credentials: false
       - name: Validate grounding checks without inference
         run: python3 -m unittest discover -s .github/vsd-writing -p 'test_*.py'
+      - name: Read the existing guide artifact from the expected workflow
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PROPOSAL_RUN: ${{ inputs.proposal_run }}
+        run: |
+          python3 - <<'PY'
+          import json,os,re,subprocess
+          run=os.environ['PROPOSAL_RUN']
+          assert re.fullmatch(r'[0-9]{1,20}',run)
+          repo='MathCSN/voyagesansdetour'
+          metadata=json.loads(subprocess.check_output(['gh','api',f'repos/{repo}/actions/runs/{run}']))
+          workflow=json.loads(subprocess.check_output(['gh','api',f'repos/{repo}/actions/workflows/vsd-writing-guide.yml']))
+          assert metadata['workflow_id']==workflow['id'] and metadata['conclusion']=='success' and metadata['head_branch']=='main'
+          subprocess.run(['gh','run','download',run,'--name','new-guide-proposal','--dir',os.environ['RUNNER_TEMP']+'/prior-guide'],check=True)
+          PY
       - name: Evaluate known editorial faults
         env:
           CLOUDFLARE_WORKERS_AI_TOKEN: ${{ secrets.CLOUDFLARE_WORKERS_AI_TOKEN }}
           REPORT_DIR: ${{ runner.temp }}/vsd-source-draft
+          PROPOSAL_DIR: ${{ runner.temp }}/prior-guide
         run: python3 .github/vsd-writing/guide_review_evaluation.py
       - name: Preserve pilot evidence only
         if: always()

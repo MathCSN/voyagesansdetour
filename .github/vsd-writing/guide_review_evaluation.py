@@ -5,7 +5,8 @@ import os
 from pathlib import Path
 from functools import partial
 from source_draft import call,HARD_STOP,MODEL,require
-from guide_review import assess_blocks
+from guide_review import assess_blocks,assess_article
+import editorial_queue as q
 
 # Synthetic minimal evidence, not new travel claims or publication material.
 FACTS=[
@@ -30,17 +31,28 @@ CASES=[
 
 def main():
     now=dt.datetime.now(dt.timezone.utc);out=Path(os.environ['REPORT_DIR']);out.mkdir(parents=True,exist_ok=True)
-    report={'observedAt':now.isoformat(),'status':'not_started','callsAttempted':0,'maxCalls':2,'maxOutputTokensTotal':5200,'publicationAttempted':False,'models':[]}
+    report={'observedAt':now.isoformat(),'status':'not_started','callsAttempted':0,'maxCalls':4,'maxOutputTokensTotal':10400,'publicationAttempted':False,'models':[]}
     try:
         require(now<HARD_STOP,'authorization_period_ended')
         token=os.environ.get('CLOUDFLARE_WORKERS_AI_TOKEN','');require(bool(token),'missing_secret')
-        blocks=[{'id':i,'text':text,'evidence':[ref]} for i,text,ref,_ in CASES]
+        # Opaque IDs and mixed ordering prevent expected answers leaking
+        # through labels such as good/bad or alternating case positions.
+        mixed=[CASES[i] for i in (7,2,9,4,0,6,3,8,1,5)]
+        identity={case[0]:'unit-'+str(i+1) for i,case in enumerate(mixed)}
+        blocks=[{'id':identity[i],'text':text,'evidence':[ref]} for i,text,ref,_ in mixed]
+        proposal_path=Path(os.environ['PROPOSAL_DIR'])/'guide-proposal.json' if os.environ.get('PROPOSAL_DIR') else None
+        proposal=q.read_json(proposal_path) if proposal_path else None
         for model in (MODEL,'@cf/qwen/qwen3-30b-a3b-fp8'):
             report['callsAttempted']+=1
             result,usage=assess_blocks(blocks,FACTS,token,partial(call,model=model))
             observed={c['id']:c['supported'] for c in result['checks']}
-            failures=[i for i,_,_,expected in CASES if observed[i]!=expected]
+            failures=[i for i,_,_,expected in CASES if observed[identity[i]]!=expected]
             report['models'].append({'model':model,'passed':10-len(failures),'total':10,'failures':failures,'review':result,'usage':usage})
+            if proposal is not None:
+                report['callsAttempted']+=1
+                full,full_usage=assess_article(proposal['article'],proposal['citations'],proposal['facts'],token,partial(call,model=model))
+                report['models'][-1]['fullGuideReview']=full
+                report['models'][-1]['fullGuideUsage']=full_usage
         report['status']='evaluated'
     except Exception as error:report.update(status='held_no_retry',errorType=type(error).__name__)
     (out/'guide-review-evaluation.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
