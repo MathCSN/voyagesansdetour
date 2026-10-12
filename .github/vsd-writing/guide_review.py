@@ -71,4 +71,5 @@ def assess_article(article,citations,facts,token,invoke=call):
     blocks=public_blocks(article,citations,facts)
     result,usage=assess_blocks(blocks,facts,token,invoke)
     result['articleSha256']=digest(article)
+    result['factsSha256']=digest(facts)
     return result,usage

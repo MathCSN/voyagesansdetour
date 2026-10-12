@@ -7,6 +7,7 @@ from pathlib import Path
 import urllib.request
 from source_draft import call,require,HARD_STOP,MODEL,source_fingerprint
 from guide_draft import ROOT
+from guide_admission import persist_qualification
 from guide_review import public_blocks,validate_checks,assess_article
 from discover_facts import SameHostRedirect
 from update_draft import digest
@@ -107,7 +108,9 @@ def main():
         matching=[m for m in evaluation['models'] if m['model']==MODEL]
         require(len(matching)==1 and matching[0]['passed']==matching[0]['total'],'revision_review_unqualified')
         review=matching[0]['fullGuideReview']
-        articles,_=q.load(ROOT,now)
+        articles,queue=q.load(ROOT,now)
+        known=articles+[item['article'] for item in queue['drafts']]
+        known += [q.read_json(path)['article'] for path in (ROOT/'editorial-candidates').glob('*.json')]
         def invoke(*args,**kwargs):
             report['callsAttempted']+=1;require(report['callsAttempted']<=16,'revision_call_budget')
             return call(*args,**kwargs)
@@ -120,8 +123,9 @@ def main():
             except Exception as error:
                 item.update(status='unavailable',errorType=type(error).__name__)
                 raise
-        result=revise(proposal,review,token,articles,now,invoke,fetcher,out)
+        result=revise(proposal,review,token,known,now,invoke,fetcher,out)
         (out/'guide-revised-proposal.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+        report['admissionStatus']=persist_qualification(result,known,now,out,fetcher)
         report['status']=result['status']
     except Exception as error:
         report.update(status='held_no_retry',errorType=type(error).__name__)

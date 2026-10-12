@@ -12,6 +12,7 @@ from entailment import assess
 from guide_review import assess_article
 from quota_policy import hold as quota_hold
 from probe import ACCOUNT
+from guide_admission import persist_qualification
 import editorial_queue as q
 
 ROOT=Path(__file__).resolve().parents[2]/'site-src'
@@ -168,6 +169,8 @@ def main():
             proposal=create_guide(topic,facts,known,now,token,invoke,output=out,writer_invoke=writer_invoke)
             proposal['sourceManifest']=[{k:s[k] for k in ('url','sha256')} for s in sources]
             (out/'guide-proposal.json').write_text(json.dumps(proposal,ensure_ascii=False,indent=2)+'\n')
+            report['admissionStatus']=persist_qualification(proposal,known,now,out,
+                lambda url:source_fingerprint(url,opener=urllib.request.build_opener(SameHostRedirect())))
             report['status']=proposal['status']
     except Exception as error:
         report.update(status='held_no_retry',errorType=type(error).__name__)
