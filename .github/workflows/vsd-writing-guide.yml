@@ -17,11 +17,12 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 12
     permissions:
-      contents: read
+      contents: write
+      actions: write
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
-          persist-credentials: false
+          persist-credentials: true
       - name: Validate editorial grounding without inference
         run: python3 -m unittest discover -s .github/vsd-writing -p 'test_*.py'
       - name: Research and draft one new guide
@@ -30,6 +31,22 @@ jobs:
           REPORT_DIR: ${{ runner.temp }}/vsd-new-guide
           GUIDE_WRITER_MODEL: ${{ inputs.writer }}
         run: python3 .github/vsd-writing/guide_draft.py
+      - name: Admit one qualified new guide when the calendar allows it
+        id: admission
+        env:
+          REPORT_DIR: ${{ runner.temp }}/vsd-new-guide
+        run: python3 .github/vsd-writing/admit_guide.py
+      - name: Validate queued guide and persist its evidence
+        if: steps.admission.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python3 -m unittest discover -s site-src -p 'test_editorial_queue.py'
+          git add -- site-src/editorial-queue.json site-src/editorial-guide-evidence
+          git -c user.name='Voyage Sans Détour' -c user.email='contact@voyagesansdetour.fr' commit -m 'Admit a source-verified new guide with review evidence'
+          git push origin HEAD:main
+          gh workflow run build-pages.yml --ref main
       - name: Preserve qualification artifacts
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
