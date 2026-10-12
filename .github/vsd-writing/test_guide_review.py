@@ -25,3 +25,14 @@ class GuideReviewTests(unittest.TestCase):
         blocks=public_blocks(article,{'a':['f1'],'faq-0':['f1']},[{'id':'f1'}])
         self.assertEqual(len(blocks),9)
         self.assertEqual({b['text'] for b in blocks},{'T','S','D','R','A','P','Q','?','!'})
+
+    def test_batched_review_preserves_complete_coverage(self):
+        import json
+        blocks=[{'id':'p'+str(i),'text':'A paragraph','evidence':['f1']} for i in range(11)]
+        sizes=[]
+        def invoke(messages,*args):
+            packet=json.loads(messages[1]['content']);sizes.append(len(packet['blocks']))
+            return {'checks':[{'id':b['id'],'supported':True,'issues':[]} for b in packet['blocks']]},{}
+        result,usage=assess_blocks(blocks,[{'id':'f1','quote':'Evidence'}],'',invoke)
+        self.assertEqual(sizes,[5,5,1]);self.assertEqual(usage['calls'],3)
+        self.assertEqual(len(result['checks']),11)

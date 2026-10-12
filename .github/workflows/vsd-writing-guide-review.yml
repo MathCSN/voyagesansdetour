@@ -14,7 +14,7 @@ jobs:
   draft:
     if: github.repository == 'MathCSN/voyagesansdetour' && github.ref == 'refs/heads/main' && github.run_attempt == 1
     runs-on: ubuntu-24.04
-    timeout-minutes: 6
+    timeout-minutes: 12
     permissions:
       contents: read
       actions: read

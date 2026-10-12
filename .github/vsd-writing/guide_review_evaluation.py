@@ -31,7 +31,7 @@ CASES=[
 
 def main():
     now=dt.datetime.now(dt.timezone.utc);out=Path(os.environ['REPORT_DIR']);out.mkdir(parents=True,exist_ok=True)
-    report={'observedAt':now.isoformat(),'status':'not_started','callsAttempted':0,'maxCalls':4,'maxOutputTokensTotal':10400,'publicationAttempted':False,'models':[]}
+    report={'observedAt':now.isoformat(),'status':'not_started','callsAttempted':0,'maxCalls':10,'maxOutputTokensTotal':11000,'publicationAttempted':False,'models':[]}
     try:
         require(now<HARD_STOP,'authorization_period_ended')
         token=os.environ.get('CLOUDFLARE_WORKERS_AI_TOKEN','');require(bool(token),'missing_secret')
@@ -42,15 +42,17 @@ def main():
         blocks=[{'id':identity[i],'text':text,'evidence':[ref]} for i,text,ref,_ in mixed]
         proposal_path=Path(os.environ['PROPOSAL_DIR'])/'guide-proposal.json' if os.environ.get('PROPOSAL_DIR') else None
         proposal=q.read_json(proposal_path) if proposal_path else None
-        for model in (MODEL,'@cf/qwen/qwen3-30b-a3b-fp8'):
-            report['callsAttempted']+=1
-            result,usage=assess_blocks(blocks,FACTS,token,partial(call,model=model))
+        for model in (MODEL,):
+            def counted(*args):
+                report['callsAttempted']+=1
+                require(report['callsAttempted']<=10,'review_call_budget')
+                return call(*args,model=model)
+            result,usage=assess_blocks(blocks,FACTS,token,counted)
             observed={c['id']:c['supported'] for c in result['checks']}
             failures=[i for i,_,_,expected in CASES if observed[identity[i]]!=expected]
             report['models'].append({'model':model,'passed':10-len(failures),'total':10,'failures':failures,'review':result,'usage':usage})
             if proposal is not None:
-                report['callsAttempted']+=1
-                full,full_usage=assess_article(proposal['article'],proposal['citations'],proposal['facts'],token,partial(call,model=model))
+                full,full_usage=assess_article(proposal['article'],proposal['citations'],proposal['facts'],token,counted)
                 report['models'][-1]['fullGuideReview']=full
                 report['models'][-1]['fullGuideUsage']=full_usage
         report['status']='evaluated'
