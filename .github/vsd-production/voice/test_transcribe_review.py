@@ -28,6 +28,19 @@ class ReviewTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'unqualified_synthesis_profile'):
             review.model_for_receipt({'synthesisProfile':'untrusted'})
 
+    def test_clear_stock_report_keeps_its_model_and_is_not_repeated(self):
+        source=FOLDER.parent.parent/'voice-revisions/clear-v1/reel-article-porto-3-jours-sans-voiture'
+        now=dt.datetime(2026,10,12,9,tzinfo=dt.timezone.utc)
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp)/'stock';root.mkdir();shutil.copytree(source,root/source.name)
+            out=Path(tmp)/'reports';report=out/(source.name+'.json')
+            result=review.review(root/source.name,report,now,lambda p:[{'text':'Porto','start':0,'end':1}])
+            self.assertEqual(result['modelRevision'],review.MEDIUM_REVISION)
+            self.assertEqual(review.review_next(root,out,now,lambda p:self.fail('duplicate inference'))['status'],'no_unreviewed_valid_stock')
+            result['modelRevision']=review.REVISION;report.write_text(json.dumps(result))
+            with self.assertRaisesRegex(ValueError,'review_conflict'):
+                review.review_next(root,out,now,lambda p:self.fail('wrong model accepted'))
+
     def test_recorded_profile_cannot_change_behind_stock_hash(self):
         with tempfile.TemporaryDirectory() as tmp:
             folder=Path(tmp)/'stock';shutil.copytree(FOLDER,folder)
