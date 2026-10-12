@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "batchId": "instagram-porto-voix-2026-11-01-v1",
+  "items": [
+    {
+      "contentId": "vsd-production:instagram:porto-3-jours-sans-voiture:voice-v1",
+      "deduplicationKey": "vsd-production:instagram:porto-3-jours-sans-voiture:voice-v1",
+      "title": "Porto en trois jours : garder du temps pour flâner",
+      "dueAt": "2026-11-01T17:00:00Z",
+      "payload": {
+        "schemaVersion": 1,
+        "channel": "instagram",
+        "kind": "reel",
+        "text": "🇵🇹 Porto en trois jours, sans courir partout !\n\nRegroupez vos visites par quartier, évitez les allers-retours dans les montées et gardez du temps pour les quais du Douro 🚶\n\n📌 Enregistrez ces repères pour préparer votre itinéraire.\nLe guide et ses sources sont accessibles depuis le lien en bio :\nhttps://voyagesansdetour.fr/portugal/porto-3-jours-sans-voiture/\n\nConseils documentés, sans récit de voyage vécu. Voix de synthèse et montage assisté par IA ; aucun personnage réel représenté.\n\n🎵 « Almost Bliss » — Kevin MacLeod\nhttps://incompetech.com/music/royalty-free/index.html?isrc=USUAN1900015\nCC BY 4.0 : https://creativecommons.org/licenses/by/4.0/\nExtrait, fondus, niveau réduit sous la voix et synchronisation. Aucune approbation de l’auteur revendiquée.\n\nVoix Piper / SIWIS ; attributions et notices :\nhttps://voyagesansdetour.fr/social-media/production/reel-article-porto-3-jours-sans-voiture-voice/credits.txt\nVidéo et narration : Voyage Sans Détour, CC BY-SA 4.0 : https://creativecommons.org/licenses/by-sa/4.0/\n\n#Porto #Portugal #VoyageSansVoiture #VoyageSansDetour",
+        "aiGenerated": true,
+        "assets": [
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/reel-article-porto-3-jours-sans-voiture-voice/reel.mp4",
+            "mimeType": "video/mp4",
+            "sha256": "99af4f5dd1767a2e1cbc4a8ff6bba4f2d5487938a529581770d5154d75adc3ce"
+          }
+        ]
+      },
+      "review": {
+        "schemaVersion": 1,
+        "contentId": "vsd-production:instagram:porto-3-jours-sans-voiture:voice-v1",
+        "approved": true,
+        "reviewedAt": "2026-10-12T08:01:12.322Z",
+        "validUntil": "2026-11-11T00:00:00+00:00",
+        "payloadRevision": "312a7b7c2ff384c7d042086fcacb1dc5da88e563b2630ad2f1c92aa7093a9722",
+        "checks": {
+          "editorialApproved": true,
+          "rightsApproved": true,
+          "creditsPreserved": true,
+          "disclosurePreserved": true,
+          "formatRequirementsVerified": true,
+          "requiresPaidCall": false,
+          "sources": {
+            "status": "verified",
+            "observedAt": "2026-10-12T08:01:12.322Z",
+            "validUntil": "2026-11-11T00:00:00+00:00"
+          },
+          "syntheticPerson": false,
+          "providerSyntheticSettingVerified": true
+        },
+        "media": {
+          "url": "https://voyagesansdetour.fr/social-media/production/reel-article-porto-3-jours-sans-voiture-voice/reel.mp4",
+          "mimeType": "video/mp4",
+          "sha256": "99af4f5dd1767a2e1cbc4a8ff6bba4f2d5487938a529581770d5154d75adc3ce",
+          "required": true,
+          "status": "verified",
+          "observedAt": "2026-10-12T08:00:27.266645+00:00",
+          "validUntil": "2026-11-11T00:00:00+00:00"
+        },
+        "destination": {
+          "url": "https://voyagesansdetour.fr/portugal/porto-3-jours-sans-voiture/",
+          "status": "verified",
+          "observedAt": "2026-10-12T08:01:12.322Z",
+          "validUntil": "2026-11-11T00:00:00+00:00"
+        },
+        "monetization": {
+          "containsAffiliateLinks": false,
+          "partnerApproved": false,
+          "linksVerified": false,
+          "disclosurePreserved": false
+        },
+        "formatCapability": {
+          "status": "verified",
+          "observedAt": "2026-10-12T08:01:12.322Z",
+          "validUntil": "2026-11-11T00:00:00+00:00",
+          "automaticPublishing": true,
+          "verificationMethod": "official_documentation",
+          "sourceUrls": [
+            "https://support.buffer.com/en-us/articles/sharing-videos-through-buffer-LOe2p2rnAI",
+            "https://developers.buffer.com/types/InstagramPostMetadataInput.html"
+          ]
+        },
+        "evidence": {
+          "status": "reviewed_public_bytes_verified_not_imported",
+          "voice": "fr_FR-siwis-medium",
+          "syntheticVoice": true,
+          "humanListeningPerformed": false,
+          "reviewMethod": "Source-bound text; independent medium ASR of full final mix without source prompt; all eight scene images inspected; measured encoding and loudness checks",
+          "acceptedTranscriptionDifferences": [
+            {
+              "expected": "3",
+              "transcribed": "trois",
+              "reason": "Same French number, numeral versus written word"
+            }
+          ],
+          "sourceCloudRun": "https://github.com/MathCSN/voyagesansdetour/actions/runs/38220392330",
+          "publicDeploymentRun": 38220864257,
+          "sourceCheckedOn": "2026-10-12",
+          "selectionSha256": "5ec5ed9ba7c98b34eec33766c06f44f1b09afd3187fce6f27010140bc0c52a66",
+          "transcriptionSha256": "1884dc40bf338a3866cf9be21f65faaebedbe525c8294a120796adebe0d9ef0e",
+          "creditsUrl": "https://voyagesansdetour.fr/social-media/production/reel-article-porto-3-jours-sans-voiture-voice/credits.txt",
+          "mediaSha256": "99af4f5dd1767a2e1cbc4a8ff6bba4f2d5487938a529581770d5154d75adc3ce",
+          "publicProofSha256": "a5c5280b57ad44b5ae3ad66d32eb79831768c1b9f4146b72c0578c6bf1b610cd"
+        }
+      }
+    }
+  ]
+}

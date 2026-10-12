@@ -54,6 +54,15 @@
       "itemIds": [
         "vsd-production:instagram:portugal-sans-voiture-bagages:voice-v1"
       ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/instagram-porto-voix-2026-11-01-v1.json",
+      "fileSha256": "d7df15bc6d7d02a3d08e0c3aa2e388476c64b27ff548b7473d059451ae3215b1",
+      "batchId": "instagram-porto-voix-2026-11-01-v1",
+      "batchSha256": "c3fc71bec9c674c49e9f5c2fab29b1374333cada421d1dc81bbc029ba59e57ea",
+      "itemIds": [
+        "vsd-production:instagram:porto-3-jours-sans-voiture:voice-v1"
+      ]
     }
   ],
   "retirements": [
