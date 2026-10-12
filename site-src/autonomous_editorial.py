@@ -81,7 +81,8 @@ def ensure_source_document(text):
     require(not blocked, 'Source inaccessible : écran de vérification anti-robot.')
 
 
-def source_fingerprint(url, opener=None):
+def source_fingerprint(url, opener=None, timeout=15):
+    require(type(timeout) in (int,float) and 0<timeout<=60, "Délai de source invalide.")
     parsed = urllib.parse.urlsplit(url)
     require(parsed.scheme == 'https' and parsed.hostname and not parsed.username and not parsed.password,
             'Source HTTPS invalide.')
@@ -91,7 +92,7 @@ def source_fingerprint(url, opener=None):
         'Cache-Control': 'no-cache',
         'User-Agent': 'VoyageSansDetour-editorial-recheck/1',
     })
-    with opener.open(request, timeout=15) as response:
+    with opener.open(request, timeout=timeout) as response:
         require(response.status == 200, f'Source non disponible ({response.status}).')
         content_type = (response.headers.get('content-type') or '').lower()
         require('text/html' in content_type or 'application/xhtml+xml' in content_type,

@@ -25,3 +25,13 @@ class RevisionTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'stale_review'):self.apply([{'id':'description','text':'Correction'}])
     def test_metadata_cannot_be_deleted(self):
         with self.assertRaisesRegex(ValueError,'revision_text'):self.apply([{'id':'description','text':None}])
+
+    def test_source_change_blocks_before_inference(self):
+        import datetime as dt
+        from guide_revision import revise
+        self.article['sources']=[{'url':'https://official.example/page','label':'Official'}]
+        self.review['articleSha256']=digest(self.article)
+        proposal={'article':self.article,'facts':self.facts,'citations':self.citations,'sourceManifest':[{'url':'https://official.example/page','sha256':'expected'}]}
+        def fail(*args,**kwargs):raise AssertionError('Inference must not run')
+        with self.assertRaisesRegex(ValueError,'source_changed'):
+            revise(proposal,self.review,'',[],dt.datetime(2026,10,12,tzinfo=dt.timezone.utc),fail,lambda url:{'sha256':'changed'})

@@ -89,7 +89,15 @@ def main():
         def invoke(*args,**kwargs):
             report['callsAttempted']+=1;require(report['callsAttempted']<=9,'revision_call_budget')
             return call(*args,**kwargs)
-        fetcher=lambda url:source_fingerprint(url,opener=urllib.request.build_opener(SameHostRedirect()))
+        def fetcher(url):
+            item={'url':url,'status':'checking'};report.setdefault('sources',[]).append(item)
+            try:
+                observed=source_fingerprint(url,opener=urllib.request.build_opener(SameHostRedirect()),timeout=30)
+                item.update(status='fetched',sha256=observed['sha256'])
+                return observed
+            except Exception as error:
+                item.update(status='unavailable',errorType=type(error).__name__)
+                raise
         result=revise(proposal,review,token,articles,now,invoke,fetcher,out)
         (out/'guide-revised-proposal.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
         report['status']=result['status']
