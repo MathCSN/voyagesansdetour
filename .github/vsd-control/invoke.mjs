@@ -20,9 +20,11 @@ async function boundedBody(response) {
 export async function invoke({env=process.env,fetcher=fetch,clock=Date.now,nonce=randomUUID,log=console.log}={}) {
   if(clock()>=STOP)return {status:'period_ended',requests:0};
   const origin=env.VSD_CLOUD_ORIGIN,id=env.VSD_SITE_ID,key=env.VSD_CLOUD_KEY,dispatcher=env.VSD_SITES_DISPATCH_TOKEN;
-  const kind=env.VSD_TICK_KIND||'health';
+  const task=env.VSD_TICK_KIND||'health';
+  const archival=task==='reconcile_windsor',kind=archival?'publications':task;
+  const statuses=archival?['archival_reconciled','archival_existing','disabled','period_ended']:allowed[kind];
   if(origin!==ORIGIN||id!==ID||!/^[A-Za-z0-9_-]{43}$/.test(key??'')||!dispatcher||!Object.hasOwn(allowed,kind))throw new ControlError('configuration');
-  const path='/internal/tick',body=JSON.stringify({kind}),digest=createHash('sha256').update(body).digest('hex');
+  const path='/internal/tick',body=JSON.stringify(archival?{kind,action:'reconcile_windsor_refusal'}:{kind}),digest=createHash('sha256').update(body).digest('hex');
   let lastSentAt=0,requests=0;
   for(let pass=0;pass<(kind==='metrics'?3:1);pass++){
     if(clock()>=STOP)return {status:'period_ended',requests};
@@ -36,7 +38,7 @@ export async function invoke({env=process.env,fetcher=fetch,clock=Date.now,nonce
     if(response.status!==200){await response.body?.cancel();throw new ControlError('http_non_success',response.status);}
     if(!response.headers.get('content-type')?.includes('application/json')){await response.body?.cancel();throw new ControlError('response_content_type');}
     const data=await boundedBody(response);
-    if(!data||data.kind!==kind||!allowed[kind].includes(data.status))throw new ControlError('task_attention_required');
+    if(!data||data.kind!==kind||!statuses.includes(data.status))throw new ControlError('task_attention_required');
     log('Cloud receipt: '+kind+' / '+data.status+'.');
     if(kind==='metrics'&&data.status==='disabled')break;
   }
