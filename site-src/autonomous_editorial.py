@@ -183,6 +183,13 @@ def intake(root=ROOT, now=None, fetcher=source_fingerprint, output=None):
             if candidate['id'] in known_ids or candidate['article']['slug'] in known_slugs:
                 report.append({'id': candidate['id'], 'status': 'already_known'})
                 continue
+            # Fetching unchanged source pages does not turn a generic checklist
+            # into a newly researched guide. Keep these maintenance candidates
+            # in the audit report, never in the public article queue.
+            if candidate.get('review', {}).get('method') == 'deterministic-source-recheck-v1':
+                report.append({'id': candidate['id'], 'status': 'maintenance_only',
+                               'reason': 'source_recheck_is_not_original_editorial_review'})
+                continue
             if release < now:
                 report.append({'id': candidate['id'], 'status': 'expired_before_admission'})
                 continue

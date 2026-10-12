@@ -52,6 +52,19 @@ class AutonomousEditorialTests(unittest.TestCase):
                                     category='Mises à jour', related=[subject])
         return candidate
 
+    def test_generic_generated_checklist_never_becomes_a_public_guide(self):
+        candidate = self.checklist('2027-01-17')
+        candidate['review']['method'] = 'deterministic-source-recheck-v1'
+        path = self.root / 'editorial-candidates/generic.json'
+        path.write_text(json.dumps(candidate))
+        before = (self.root / 'editorial-queue.json').read_bytes()
+        with patch.object(intake, 'revalidate_source', side_effect=AssertionError('No source fetch for non-editorial content')):
+            result = intake.intake(self.root, dt.datetime(2027, 1, 16, tzinfo=dt.timezone.utc))
+        self.assertFalse(result['changed'])
+        self.assertEqual(result['candidates'][0]['status'], 'maintenance_only')
+        self.assertEqual((self.root / 'editorial-queue.json').read_bytes(), before)
+        self.assertTrue(path.is_file())
+
     def test_admits_only_when_every_source_hash_matches(self):
         (self.root / 'editorial-candidates/candidate.json').write_text(json.dumps(self.candidate()))
         now = dt.datetime(2026, 10, 7, 8, tzinfo=dt.timezone.utc)
