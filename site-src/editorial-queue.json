@@ -192,7 +192,11 @@
       "validUntil": "2026-11-11T00:00:00+01:00",
       "approvedAt": "2026-09-27T09:53:17Z",
       "promotedAt": "2026-10-12T01:38:50Z",
-      "receipt": null
+      "receipt": {
+        "verifiedAt": "2026-10-12T01:39:16Z",
+        "url": "https://voyagesansdetour.fr/portugal/portugal-sans-voiture-bagages/",
+        "htmlSha256": "99aff604b3e5786d1c1082cef40094fc9d4c648562902bee8515ee17ade114bf"
+      }
     }
   ]
 }
