@@ -9,6 +9,7 @@ import urllib.parse
 import urllib.request
 from source_draft import call, require, HARD_STOP, source_fingerprint
 from entailment import assess
+from update_draft import create_update
 
 ROOT=Path(__file__).resolve().parents[2]/'site-src'
 ALLOWED_HOSTS={'www.visitlisboa.com','visitporto.travel','www.parquesdesintra.pt',
@@ -81,7 +82,7 @@ def main():
     out=Path(os.environ['REPORT_DIR']);out.mkdir(parents=True,exist_ok=True)
     now=dt.datetime.now(dt.timezone.utc)
     report={'observedAt':now.isoformat(),'publicationApproved':False,'publicationAttempted':False,
-            'callsAttempted':0,'maxCalls':3,'maxOutputTokensTotal':3800,'status':'not_started'}
+            'callsAttempted':0,'maxCalls':5,'maxOutputTokensTotal':6400,'status':'not_started'}
     try:
         require(now<HARD_STOP,'authorization_period_ended')
         token=os.environ.get('CLOUDFLARE_WORKERS_AI_TOKEN','');require(bool(token),'missing_secret')
@@ -125,6 +126,16 @@ def main():
             (out/'eligible-facts.json').write_text(json.dumps([f for f in facts if f['id'] in accepted],ensure_ascii=False,indent=2)+'\n')
             report['eligibleFactCount']=len(accepted)
             report['status']='facts_ready_for_pilot_review' if accepted else 'no_supported_novel_update'
+            if accepted:
+                eligible=[f for f in facts if f['id'] in accepted]
+                # Count attempts at the call boundary, including uncertain failures.
+                def counted_invoke(*args):
+                    report['callsAttempted']+=1
+                    return call(*args)
+                proposal=create_update(article,eligible,token,invoke=counted_invoke)
+                proposal['sourceManifest']=report['sources']
+                (out/'update-proposal.json').write_text(json.dumps(proposal,ensure_ascii=False,indent=2)+'\n')
+                report['status']=proposal['status']
         report['limitation']='Discovery within existing official sources, not unrestricted destination research; model critique is not infallible.'
     except Exception as error:
         report.update(status='held_no_retry',errorType=type(error).__name__)
