@@ -35,3 +35,24 @@ class RevisionTests(unittest.TestCase):
         def fail(*args,**kwargs):raise AssertionError('Inference must not run')
         with self.assertRaisesRegex(ValueError,'source_changed'):
             revise(proposal,self.review,'',[],dt.datetime(2026,10,12,tzinfo=dt.timezone.utc),fail,lambda url:{'sha256':'changed'})
+
+class IsolatedEvidenceTests(unittest.TestCase):
+    def test_other_blocks_evidence_and_feedback_are_not_exposed(self):
+        from guide_revision import revision_packets
+        blocks=[{'id':'a','text':'A','evidence':['f1']},{'id':'b','text':'B','evidence':['f2']}]
+        facts=[{'id':'f1','quote':'first source'},{'id':'f2','quote':'second source'}]
+        review={'issues':[{'id':'a','issue':'first issue'},{'id':'b','issue':'second issue'}]}
+        packets=revision_packets(blocks,facts,review)
+        self.assertEqual(len(packets),2)
+        for packet,block,fact in zip(packets,blocks,facts):
+            self.assertEqual([x['id'] for x in packet['evidence']],[fact['id']])
+            self.assertEqual([x['id'] for x in packet['issues']],[block['id']])
+            self.assertEqual(len(packet['failedBlocks']),1)
+    def test_missing_referenced_evidence_blocks_revision(self):
+        from guide_revision import revision_packets
+        with self.assertRaisesRegex(ValueError,'missing_evidence'):
+            revision_packets([{'id':'a','evidence':['absent']}],[],{'issues':[{'id':'a'}]})
+    def test_excessive_revision_is_held_before_model_calls(self):
+        from guide_revision import revision_packets
+        with self.assertRaisesRegex(ValueError,'block_budget'):
+            revision_packets([],[],{'issues':[{'id':str(i)} for i in range(9)]})
