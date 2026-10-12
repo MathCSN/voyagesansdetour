@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-portugal-sans-voiture-bagages",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Portugal sans voiture : préparer un bagage facile à transporter",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/portugal-sans-voiture-bagages/",
+  "articleSha256": "ad9e6852f384292202a4e4c223c7173aa0c588cf63bd03ae417e9e8aa132ea98",
+  "imageSha256": "693ca9be9f5c2fb0686dc110cbcbeb6e5c58a32dca50bff3ac991e8e0bf27a58",
+  "width": 1000,
+  "height": 1500,
+  "originalComposition": true,
+  "externalPhotographs": false,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ]
+}
