@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "bagages-cp-consignes-24h-2026-10-12",
+  "slug": "portugal-sans-voiture-bagages",
+  "baseArticleSha256": "c1654c93d2e19829d3eb5e807cdebfbc4949d705fc0d216ac1e28936284ef9e7",
+  "sectionId": "sans-chambre",
+  "afterParagraphSha256": "e0c3486045034297f85a245865a6eac53b8657cb76bd959bc5ce31c2136bab2f",
+  "paragraph": "Pour les consignes présentées par CP, la durée de dépôt est limitée à 24 heures.",
+  "sources": [
+    {
+      "url": "https://www.cp.pt/info/en/w/left-luggage",
+      "sha256": "50e4f3e1b8520982d31581eb8a6187ef282b79e867fc0cfa926984b3585a4984",
+      "normalization": "visible-text-cp-node-v1"
+    }
+  ],
+  "reviewedAt": "2026-10-12T03:48:29Z",
+  "validUntil": "2026-10-12T05:48:29Z",
+  "reviewMethod": "agent-source-review-v1",
+  "approvalSha256": "c7ab3f0c44763285fb2bcc7477a16d3afdaf71d065ab8de8bc7d2928b96b97ed"
+}
