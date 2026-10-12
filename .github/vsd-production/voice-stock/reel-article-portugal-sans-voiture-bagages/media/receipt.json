@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 1,
+  "status": "storyboard_media_requires_review",
+  "id": "reel-article-portugal-sans-voiture-bagages",
+  "storyboardSha256": "869b2ec543e9fe358b8b1a1e31ba1ad392957ec61be39b23f3d31f09bdaa0cd1",
+  "publicHtmlSha256": "49ae24b08b3b79e2ec941bd20faecd75eb8feee1b2b3d49cb18d5a607f58718e",
+  "startedAt": "2026-10-12T06:03:42.209496+00:00",
+  "finishedAt": "2026-10-12T06:04:47.906190+00:00",
+  "validUntil": "2026-10-27T00:00:00+00:00",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/portugal-sans-voiture-bagages/",
+  "paidInferenceCalls": 0,
+  "publicationAttempted": false,
+  "listeningReviewComplete": false,
+  "files": [
+    {
+      "file": "audio/CREDITS.md",
+      "sha256": "734c64a6f3ddbce4d1d25e49ae91ca9fb37f3b33f971e83ce03ed00eb855a517"
+    },
+    {
+      "file": "audio/fr_FR-siwis-medium-MODEL_CARD.txt",
+      "sha256": "bd8b8d079d4d3d2c4cc20345889bbcd586d72f021a132f93357a763eb5232cce"
+    },
+    {
+      "file": "audio/fr_FR-siwis-medium.wav",
+      "sha256": "932fc6d16c7229586fa455c1a74020a2dac5016626e3075a12c37c8cfc189d1e"
+    },
+    {
+      "file": "audio/fr_FR-upmc-medium-MODEL_CARD.txt",
+      "sha256": "cf1ac7309e0e04bb159b7e6ae80bc8f66bfce9bdfb3e62ae93a6f57e210ab98a"
+    },
+    {
+      "file": "audio/fr_FR-upmc-medium.wav",
+      "sha256": "6df131e968854f9f354e10690136c1716d8c178ee7f6ef8bccf3b5b608617460"
+    },
+    {
+      "file": "audio/narration.txt",
+      "sha256": "3171b84964abf2c59ce6cb80a3cf3eea5a0db2054aa2293bab0be014117c3aab"
+    },
+    {
+      "file": "audio/receipt.json",
+      "sha256": "040ae838c9722e7e457600a270365dd5a2d8b67a08b0f180e63c0d023f32a721"
+    },
+    {
+      "file": "videos/fr_FR-siwis-medium/apercu.jpg",
+      "sha256": "053dd5bb8c59e2ccc3d48bedd7bd546fb8cdb9b8707da46e843955820fde1c9f"
+    },
+    {
+      "file": "videos/fr_FR-siwis-medium/credits.md",
+      "sha256": "6fa9d5e8bf6633d3829c34d6184d5bb437dc270a8150d76e6337739c3d371a23"
+    },
+    {
+      "file": "videos/fr_FR-siwis-medium/dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+    },
+    {
+      "file": "videos/fr_FR-siwis-medium/encode.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "videos/fr_FR-siwis-medium/playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+    },
+    {
+      "file": "videos/fr_FR-siwis-medium/reel.mp4",
+      "sha256": "db4d52fd93710f1fc385a7b4ae04b2d9a264a7ca9b09228fce744fd8a5f98d29"
+    },
+    {
+      "file": "videos/fr_FR-siwis-medium/scene-1.jpg",
+      "sha256": "fb806bb880b6462eb0f7e437eda0ae86925ae24e6b1f065fcbbaad65c1e98697"
+    },
+    {
+      "file": "videos/fr_FR-siwis-medium/scene-2.jpg",
+      "sha256": "557332062dfecf1dca6d61fbcd9a3b93740544e40ef9b0ce669a1ac07c2b976e"
+    },
+    {
+      "file": "videos/fr_FR-siwis-medium/scene-3.jpg",
+      "sha256": "6aeba9ae276568862334ce287ee93514e6d5f1d7d4394b430013b67db1bff9ad"
+    },
+    {
+      "file": "videos/fr_FR-siwis-medium/scene-4.jpg",
+      "sha256": "a7cf4cd139564ed539a5c35033e38516bfac54c21e65c401d11a5d7788d308ea"
+    },
+    {
+      "file": "videos/fr_FR-siwis-medium/scene-5.jpg",
+      "sha256": "98e7946c73d380e09281e2dc1b1988422fa15b1654048120a9f7088ba75a3c5f"
+    },
+    {
+      "file": "videos/fr_FR-siwis-medium/scene-6.jpg",
+      "sha256": "37370c17953cefde0606d4eade88c5b8f2719e22d1d4442c4aba15a145d74d01"
+    },
+    {
+      "file": "videos/fr_FR-siwis-medium/scene-7.jpg",
+      "sha256": "e5f18370ed0651b9f57e222f9aa6b851182c99c51af7295b1cc748e880dbba80"
+    },
+    {
+      "file": "videos/fr_FR-siwis-medium/scene-8.jpg",
+      "sha256": "4368a07ef1aaa609ca6c2baf0a7b6c4d65bdf9940d94c138840fa395ce5597fe"
+    },
+    {
+      "file": "videos/fr_FR-siwis-medium/scene-9.jpg",
+      "sha256": "36d448e81ff05c9e19fcbe833a1fe9fdd67d224767f410130e76d3d51f1b2d76"
+    },
+    {
+      "file": "videos/fr_FR-siwis-medium/sous-titres.srt",
+      "sha256": "6c2b50d2eda80ad6675d0e3a9eae0d1602f3c64eedbbc285f3a9650b2a6ef824"
+    },
+    {
+      "file": "videos/fr_FR-upmc-medium/apercu.jpg",
+      "sha256": "7466eb364c4ea9efa8e41f942917335da99e98039d61b706b43f5971fe74a10c"
+    },
+    {
+      "file": "videos/fr_FR-upmc-medium/credits.md",
+      "sha256": "2c918890f10a5cbab4c34c7d2cf388246868e59bfc42f822b394342bf41b71d5"
+    },
+    {
+      "file": "videos/fr_FR-upmc-medium/dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+    },
+    {
+      "file": "videos/fr_FR-upmc-medium/encode.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "videos/fr_FR-upmc-medium/playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+    },
+    {
+      "file": "videos/fr_FR-upmc-medium/reel.mp4",
+      "sha256": "fe3674a3133ae28b945b3a5351c21982fc97d436b6ba6fac162a2dca87cd5273"
+    },
+    {
+      "file": "videos/fr_FR-upmc-medium/scene-1.jpg",
+      "sha256": "af21f8a2715f3ed4e76c4b7c69ba4f92c722824ef7a0b8be5fcb677157e66496"
+    },
+    {
+      "file": "videos/fr_FR-upmc-medium/scene-2.jpg",
+      "sha256": "f0cf0abed51c874139da1e13007f4644dacd7e13b5d2a86b4f41e4e7be1134b7"
+    },
+    {
+      "file": "videos/fr_FR-upmc-medium/scene-3.jpg",
+      "sha256": "74be6182806e5e0e99b3cb320cd1847277ab548efd75a2a125eda367155f5f97"
+    },
+    {
+      "file": "videos/fr_FR-upmc-medium/scene-4.jpg",
+      "sha256": "b20b3d7e59880b868891a96eda4beb3da9600c74b7516c5f6997d97a6a82d453"
+    },
+    {
+      "file": "videos/fr_FR-upmc-medium/scene-5.jpg",
+      "sha256": "87af85f4da66001e700556031d981bb03feb1ce86548ada38fe7ff027e5c9941"
+    },
+    {
+      "file": "videos/fr_FR-upmc-medium/scene-6.jpg",
+      "sha256": "f2122ee17bda480b7cc132dacff1328195ecf66de02fdfca4b707496ed49ec87"
+    },
+    {
+      "file": "videos/fr_FR-upmc-medium/scene-7.jpg",
+      "sha256": "722ce5d90684ecbb6757302050ce0c23fdfd6cced9df45bc55e03aa82f83c2db"
+    },
+    {
+      "file": "videos/fr_FR-upmc-medium/scene-8.jpg",
+      "sha256": "e70f024460f3e714f545014f525eb9dc3ea32ac1f6c18d8155d9f31964981c07"
+    },
+    {
+      "file": "videos/fr_FR-upmc-medium/scene-9.jpg",
+      "sha256": "441596f6530f124168859de8cacac108554d5c5278d6fe443c0573f53c7edfbf"
+    },
+    {
+      "file": "videos/fr_FR-upmc-medium/sous-titres.srt",
+      "sha256": "30afed4c7878a6ff42d9edd148a295e2f2a815ed4cfd59bb55613a919ff8dcb9"
+    },
+    {
+      "file": "videos/receipt.json",
+      "sha256": "43e6e79efed1c8056bd2c87ca9f048e2d623867a4d123d5dd9924468e9dfc572"
+    }
+  ]
+}

@@ -47,7 +47,7 @@ jobs:
         if: steps.period.outputs.active == 'true'
         working-directory: .github/vsd-production/voice
         run: |
-          python -m unittest -q test_pilot test_compose test_storyboard
+          python -m unittest -q test_pilot test_compose test_storyboard test_stock
       - name: Render the fixed voice samples
         if: steps.period.outputs.active == 'true' && inputs.content == 'samples'
         working-directory: .github/vsd-production/voice

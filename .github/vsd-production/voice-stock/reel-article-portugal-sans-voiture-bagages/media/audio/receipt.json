@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 2,
+  "status": "audio_samples_not_published",
+  "generatedAt": "2026-10-12T06:03:42.209496+00:00",
+  "generated": 2,
+  "textSha256": "c1ef90698db9c48bf7c4f20253c4bfd0411be26ff460fc96cf24426c5a987428",
+  "modelsManifestSha256": "299bf846a56348724ad2d547dac5925277d775dccffa71ea5d8e6f26916a34c1",
+  "piperVersion": "1.8.0",
+  "onnxRuntimeVersion": "1.31.0",
+  "modelsRevision": "c10ece1aade47bb51c153c893d14e5bf8e5b7117",
+  "samples": [
+    {
+      "voice": "fr_FR-siwis-medium",
+      "speaker": 0,
+      "datasetLicense": "CC-BY-4.0",
+      "segments": [
+        {
+          "text": "Portugal sans voiture : pr\u00e9parer un bagage facile \u00e0 transporter",
+          "startSample": 0,
+          "endSample": 92928,
+          "sampleRate": 22050
+        },
+        {
+          "text": "Gardez si possible un peu de place disponible au d\u00e9part.",
+          "startSample": 97338,
+          "endSample": 172858,
+          "sampleRate": 22050
+        },
+        {
+          "text": "Un sac ferm\u00e9 sans effort est plus simple \u00e0 rouvrir",
+          "startSample": 177268,
+          "endSample": 249204,
+          "sampleRate": 22050
+        },
+        {
+          "text": "en cours de route qu\u2019un bagage rempli au maximum.",
+          "startSample": 253614,
+          "endSample": 326574,
+          "sampleRate": 22050
+        },
+        {
+          "text": "Un petit sac de journ\u00e9e pliable \u00e9vite aussi",
+          "startSample": 330984,
+          "endSample": 391912,
+          "sampleRate": 22050
+        },
+        {
+          "text": "d\u2019emporter toutes vos affaires \u00e0 chaque promenade.",
+          "startSample": 396322,
+          "endSample": 457762,
+          "sampleRate": 22050
+        },
+        {
+          "text": "Pour les consignes pr\u00e9sent\u00e9es par CP, la",
+          "startSample": 462172,
+          "endSample": 518748,
+          "sampleRate": 22050
+        },
+        {
+          "text": "dur\u00e9e de d\u00e9p\u00f4t est limit\u00e9e \u00e0 24 heures.",
+          "startSample": 523158,
+          "endSample": 584342,
+          "sampleRate": 22050
+        },
+        {
+          "text": "Retrouvez le guide et ses sources sur Voyage Sans D\u00e9tour.",
+          "startSample": 588752,
+          "endSample": 673488,
+          "sampleRate": 22050
+        }
+      ],
+      "durationSeconds": 30.543673469387755,
+      "sampleRate": 22050,
+      "channels": 1,
+      "rms": 5625.658180853457,
+      "clippedFraction": 1.3363267051528757e-05,
+      "sha256": "932fc6d16c7229586fa455c1a74020a2dac5016626e3075a12c37c8cfc189d1e"
+    },
+    {
+      "voice": "fr_FR-upmc-medium",
+      "speaker": 1,
+      "datasetLicense": "CC-BY-SA-4.0",
+      "segments": [
+        {
+          "text": "Portugal sans voiture : pr\u00e9parer un bagage facile \u00e0 transporter",
+          "startSample": 0,
+          "endSample": 96768,
+          "sampleRate": 22050
+        },
+        {
+          "text": "Gardez si possible un peu de place disponible au d\u00e9part.",
+          "startSample": 101178,
+          "endSample": 169530,
+          "sampleRate": 22050
+        },
+        {
+          "text": "Un sac ferm\u00e9 sans effort est plus simple \u00e0 rouvrir",
+          "startSample": 173940,
+          "endSample": 232820,
+          "sampleRate": 22050
+        },
+        {
+          "text": "en cours de route qu\u2019un bagage rempli au maximum.",
+          "startSample": 237230,
+          "endSample": 297390,
+          "sampleRate": 22050
+        },
+        {
+          "text": "Un petit sac de journ\u00e9e pliable \u00e9vite aussi",
+          "startSample": 301800,
+          "endSample": 354280,
+          "sampleRate": 22050
+        },
+        {
+          "text": "d\u2019emporter toutes vos affaires \u00e0 chaque promenade.",
+          "startSample": 358690,
+          "endSample": 415266,
+          "sampleRate": 22050
+        },
+        {
+          "text": "Pour les consignes pr\u00e9sent\u00e9es par CP, la",
+          "startSample": 419676,
+          "endSample": 472156,
+          "sampleRate": 22050
+        },
+        {
+          "text": "dur\u00e9e de d\u00e9p\u00f4t est limit\u00e9e \u00e0 24 heures.",
+          "startSample": 476566,
+          "endSample": 533398,
+          "sampleRate": 22050
+        },
+        {
+          "text": "Retrouvez le guide et ses sources sur Voyage Sans D\u00e9tour.",
+          "startSample": 537808,
+          "endSample": 612816,
+          "sampleRate": 22050
+        }
+      ],
+      "durationSeconds": 27.792108843537417,
+      "sampleRate": 22050,
+      "channels": 1,
+      "rms": 4424.0510239183905,
+      "clippedFraction": 1.46863006187828e-05,
+      "sha256": "6df131e968854f9f354e10690136c1716d8c178ee7f6ef8bccf3b5b608617460"
+    }
+  ],
+  "paidInferenceCalls": 0,
+  "publicationAttempted": false,
+  "listeningReviewComplete": false,
+  "automaticReelIntegration": false
+}
