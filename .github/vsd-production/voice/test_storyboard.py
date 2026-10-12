@@ -67,4 +67,22 @@ class StoryboardTests(unittest.TestCase):
             self.assertEqual(storyboard.compose.scene(i,0,fonts,sentence,headings,badges).size,(1080,1920))
         self.assertEqual(' '.join(sentences),' '.join([draft['narration']['hook']]+[e['text'] for e in draft['narration']['excerpts']]+[draft['narration']['closing']]))
 
+    def test_porto_full_sentences_fit_without_text_changes(self):
+        from html import escape
+        from PIL import Image,ImageDraw,ImageFont
+        folder=FOLDER.parent/'reel-article-porto-3-jours-sans-voiture'
+        draft=json.loads((folder/'storyboard.json').read_text())
+        html='<link rel="canonical" href="'+draft['targetUrl']+'">'+''.join('<p>'+escape(e['text'])+'</p>' for e in draft['narration']['excerpts'])
+        _,sentences,_,_,_,_=storyboard.prepare(folder,NOW,lambda u:html.encode(),sentence_flow=True)
+        draw=ImageDraw.Draw(Image.new('RGB',(1080,1920)))
+        font=ImageFont.truetype(str(storyboard.pilot.HERE.parent/'assets/dmsans-bold.ttf'),45)
+        sizes=[]
+        for text in sentences:
+            selected,lines=storyboard.compose.caption_layout(draw,text,font)
+            self.assertGreaterEqual(selected.size,38);self.assertLessEqual(len(lines),3)
+            self.assertEqual(' '.join(lines),text);sizes.append(selected.size)
+        self.assertTrue(any(size<45 for size in sizes))
+        with self.assertRaisesRegex(ValueError,'subtitle_line_overflow'):
+            storyboard.compose.caption_layout(draw,'Une phrase beaucoup trop longue. '*30,font)
+
 if __name__=='__main__':unittest.main()

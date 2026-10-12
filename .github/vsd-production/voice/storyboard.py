@@ -87,6 +87,12 @@ def run(folder, output, now, sentence_flow=False):
     output=Path(output)
     if output.exists() or output.is_symlink():raise ValueError('existing_output_preserved')
     draft,sentences,headings,badges,story_hash,public_hash=prepare(folder,now,sentence_flow=sentence_flow)
+    # Exercise the actual scene layout before downloading voices or synthesizing.
+    from PIL import ImageFont
+    assets=pilot.HERE.parent/'assets'
+    fonts={name:ImageFont.truetype(str(assets/file),size) for name,file,size in
+           [('title','playfair.ttf',85),('caption','dmsans-bold.ttf',45),('small','dmsans-bold.ttf',29),('tiny','dmsans-regular.ttf',23)]}
+    for i,sentence in enumerate(sentences):compose.scene(i,0,fonts,sentence,headings,badges)
     output.parent.mkdir(parents=True,exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='.storyboard-media-',dir=output.parent) as tmp:
         result=Path(tmp)/'result';result.mkdir()

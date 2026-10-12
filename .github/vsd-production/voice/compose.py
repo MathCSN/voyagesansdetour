@@ -74,6 +74,16 @@ def wrap(draw, text, font, width):
     return lines
 
 
+def caption_layout(draw,text,font):
+    # Preserve whole sentences; bounded resizing keeps the subtitle legible.
+    for size in (45,42,40,38):
+        candidate=font if font.size==size else font.font_variant(size=size)
+        try:return candidate,wrap(draw,text,candidate,820)
+        except ValueError as error:
+            if str(error)!='subtitle_line_overflow':raise
+    raise ValueError('subtitle_line_overflow')
+
+
 def scene(index, voice_index, fonts, subtitle, headings=HEADINGS, badges=BADGES):
     dark = (index+voice_index) % 2 == 1
     paper, ink, blue, lime = '#F7F4EC', '#142A43', '#234CDD', '#E6EE77'
@@ -93,8 +103,9 @@ def scene(index, voice_index, fonts, subtitle, headings=HEADINGS, badges=BADGES)
         draw.text((x-10,y-21), str(n+1), font=fonts['small'], fill=ink if dark else paper)
     draw.rounded_rectangle((86, 1225, 994, 1535), 32, fill=paper if dark else ink)
     if subtitle:
-        for n, value in enumerate(wrap(draw, subtitle, fonts['caption'], 820)):
-            line(draw, value, (125, 1265+n*68), fonts['caption'], ink if dark else paper, 820)
+        caption_font,caption_lines=caption_layout(draw,subtitle,fonts['caption'])
+        for n, value in enumerate(caption_lines):
+            line(draw, value, (125, 1265+n*68), caption_font, ink if dark else paper, 820)
     line(draw, 'VOIX DE SYNTHÈSE · MONTAGE ASSISTÉ PAR IA', (86, 1600), fonts['tiny'], fg)
     line(draw, 'voyagesansdetour.fr', (86, 1660), fonts['small'], fg)
     return image
