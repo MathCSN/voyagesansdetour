@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 2,
+  "status": "audio_samples_not_published",
+  "generatedAt": "2026-10-12T07:16:21.639789+00:00",
+  "generated": 2,
+  "textSha256": "35e723e7373db9cf81b84e5ce93b70d02281f3032fb06d746523026d1219a1dd",
+  "modelsManifestSha256": "299bf846a56348724ad2d547dac5925277d775dccffa71ea5d8e6f26916a34c1",
+  "piperVersion": "1.8.0",
+  "onnxRuntimeVersion": "1.31.0",
+  "modelsRevision": "c10ece1aade47bb51c153c893d14e5bf8e5b7117",
+  "samples": [
+    {
+      "voice": "fr_FR-siwis-medium",
+      "speaker": 0,
+      "datasetLicense": "CC-BY-4.0",
+      "segments": [
+        {
+          "text": "Lisbonne\u2013Porto en train : choisir les gares et r\u00e9server simplement",
+          "startSample": 0,
+          "endSample": 96768,
+          "sampleRate": 22050
+        },
+        {
+          "text": "\u00c0 Lisbonne, comparez Santa Apol\u00f3nia et Oriente selon votre h\u00e9bergement.",
+          "startSample": 101178,
+          "endSample": 203066,
+          "sampleRate": 22050
+        },
+        {
+          "text": "Les trains longue distance vers Porto desservent Campanh\u00e3.",
+          "startSample": 207476,
+          "endSample": 281972,
+          "sampleRate": 22050
+        },
+        {
+          "text": "V\u00e9rifiez les gares exactes sur le d\u00e9part choisi avant de r\u00e9server.",
+          "startSample": 286382,
+          "endSample": 368558,
+          "sampleRate": 22050
+        },
+        {
+          "text": "Comparez Alfa Pendular et Intercidades pour votre date.",
+          "startSample": 372968,
+          "endSample": 457448,
+          "sampleRate": 22050
+        },
+        {
+          "text": "Pr\u00e9voyez environ trois heures de train selon le service, puis les transferts jusqu\u2019aux logements.",
+          "startSample": 461858,
+          "endSample": 580130,
+          "sampleRate": 22050
+        },
+        {
+          "text": "La dur\u00e9e affich\u00e9e lors de la r\u00e9servation reste votre r\u00e9f\u00e9rence.",
+          "startSample": 584540,
+          "endSample": 671580,
+          "sampleRate": 22050
+        },
+        {
+          "text": "Retrouvez le guide et ses sources sur Voyage Sans D\u00e9tour.",
+          "startSample": 675990,
+          "endSample": 756630,
+          "sampleRate": 22050
+        }
+      ],
+      "durationSeconds": 34.31428571428572,
+      "sampleRate": 22050,
+      "channels": 1,
+      "rms": 5284.948696341809,
+      "clippedFraction": 1.0573199582358617e-05,
+      "sha256": "5a9140f0cd804c1854fbb26a2c3c17fcdb4dba1ad47fde0e76787c4e45c10ce5"
+    },
+    {
+      "voice": "fr_FR-upmc-medium",
+      "speaker": 1,
+      "datasetLicense": "CC-BY-SA-4.0",
+      "segments": [
+        {
+          "text": "Lisbonne\u2013Porto en train : choisir les gares et r\u00e9server simplement",
+          "startSample": 0,
+          "endSample": 90368,
+          "sampleRate": 22050
+        },
+        {
+          "text": "\u00c0 Lisbonne, comparez Santa Apol\u00f3nia et Oriente selon votre h\u00e9bergement.",
+          "startSample": 94778,
+          "endSample": 186426,
+          "sampleRate": 22050
+        },
+        {
+          "text": "Les trains longue distance vers Porto desservent Campanh\u00e3.",
+          "startSample": 190836,
+          "endSample": 257908,
+          "sampleRate": 22050
+        },
+        {
+          "text": "V\u00e9rifiez les gares exactes sur le d\u00e9part choisi avant de r\u00e9server.",
+          "startSample": 262318,
+          "endSample": 340142,
+          "sampleRate": 22050
+        },
+        {
+          "text": "Comparez Alfa Pendular et Intercidades pour votre date.",
+          "startSample": 344552,
+          "endSample": 415720,
+          "sampleRate": 22050
+        },
+        {
+          "text": "Pr\u00e9voyez environ trois heures de train selon le service, puis les transferts jusqu\u2019aux logements.",
+          "startSample": 420130,
+          "endSample": 520738,
+          "sampleRate": 22050
+        },
+        {
+          "text": "La dur\u00e9e affich\u00e9e lors de la r\u00e9servation reste votre r\u00e9f\u00e9rence.",
+          "startSample": 525148,
+          "endSample": 605020,
+          "sampleRate": 22050
+        },
+        {
+          "text": "Retrouvez le guide et ses sources sur Voyage Sans D\u00e9tour.",
+          "startSample": 609430,
+          "endSample": 684950,
+          "sampleRate": 22050
+        }
+      ],
+      "durationSeconds": 31.063492063492063,
+      "sampleRate": 22050,
+      "channels": 1,
+      "rms": 4273.758095353017,
+      "clippedFraction": 1.167968464851449e-05,
+      "sha256": "0135736f3fb41f1caad56fdcd3944ae8959c2ad24cc1576dbf6d4a4d56cf8748"
+    }
+  ],
+  "paidInferenceCalls": 0,
+  "publicationAttempted": false,
+  "listeningReviewComplete": false,
+  "automaticReelIntegration": false
+}

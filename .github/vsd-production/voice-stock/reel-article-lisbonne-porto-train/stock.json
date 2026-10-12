@@ -1,0 +1,231 @@
+{
+  "schemaVersion": 1,
+  "id": "reel-article-lisbonne-porto-train",
+  "status": "rendered_requires_review",
+  "preservedAt": "2026-10-12T07:18:14.314290+00:00",
+  "validUntil": "2026-11-11T00:00:00+00:00",
+  "publicationApproved": false,
+  "publicationAttempted": false,
+  "cloud": {
+    "repository": "MathCSN/voyagesansdetour",
+    "artifactName": "vsd-storyboard-media",
+    "run": {
+      "conclusion": "success",
+      "databaseId": 38216764691,
+      "headBranch": "main",
+      "headSha": "8b2db942212d5f4e2d53cb108e1b0c6c45c2d27a",
+      "status": "completed",
+      "url": "https://github.com/MathCSN/voyagesansdetour/actions/runs/38216764691"
+    },
+    "receiptSha256": "050b0560698150bc558204c51041dd745fcd57ff9cd26ba381ff8fed360fa9d8"
+  },
+  "files": [
+    {
+      "file": "audio/CREDITS.md",
+      "bytes": 1881,
+      "sha256": "734c64a6f3ddbce4d1d25e49ae91ca9fb37f3b33f971e83ce03ed00eb855a517"
+    },
+    {
+      "file": "audio/fr_FR-siwis-medium-MODEL_CARD.txt",
+      "bytes": 284,
+      "sha256": "bd8b8d079d4d3d2c4cc20345889bbcd586d72f021a132f93357a763eb5232cce"
+    },
+    {
+      "file": "audio/fr_FR-siwis-medium.wav",
+      "bytes": 1513304,
+      "sha256": "5a9140f0cd804c1854fbb26a2c3c17fcdb4dba1ad47fde0e76787c4e45c10ce5"
+    },
+    {
+      "file": "audio/fr_FR-upmc-medium-MODEL_CARD.txt",
+      "bytes": 316,
+      "sha256": "cf1ac7309e0e04bb159b7e6ae80bc8f66bfce9bdfb3e62ae93a6f57e210ab98a"
+    },
+    {
+      "file": "audio/fr_FR-upmc-medium.wav",
+      "bytes": 1369944,
+      "sha256": "0135736f3fb41f1caad56fdcd3944ae8959c2ad24cc1576dbf6d4a4d56cf8748"
+    },
+    {
+      "file": "audio/narration.txt",
+      "bytes": 560,
+      "sha256": "1a7f490d6e70eab2fc1fd705b5843e65045461999128fdfdb3f97683f47f00cd"
+    },
+    {
+      "file": "audio/receipt.json",
+      "bytes": 4793,
+      "sha256": "eb62ab13a1c07ecebec2491b7f2c4810811d31ccb9c111f338979182a7ff5cd7"
+    },
+    {
+      "file": "receipt.json",
+      "bytes": 6383,
+      "sha256": "050b0560698150bc558204c51041dd745fcd57ff9cd26ba381ff8fed360fa9d8"
+    },
+    {
+      "file": "storyboard.json",
+      "bytes": 2646,
+      "sha256": "af81dd006239841c136e94d2d0654327b9ddf11c0372ce768f45111ab96e159b"
+    },
+    {
+      "file": "videos/fr_FR-siwis-medium/apercu.jpg",
+      "bytes": 262592,
+      "sha256": "de4f37d6fe4c1262949d02ac20b1be87043a3625f5d34315ecea42a2072767e7"
+    },
+    {
+      "file": "videos/fr_FR-siwis-medium/credits.md",
+      "bytes": 2252,
+      "sha256": "6fa9d5e8bf6633d3829c34d6184d5bb437dc270a8150d76e6337739c3d371a23"
+    },
+    {
+      "file": "videos/fr_FR-siwis-medium/dmsans-OFL.txt",
+      "bytes": 4482,
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+    },
+    {
+      "file": "videos/fr_FR-siwis-medium/encode.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "videos/fr_FR-siwis-medium/playfairdisplay-OFL.txt",
+      "bytes": 4449,
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+    },
+    {
+      "file": "videos/fr_FR-siwis-medium/reel.mp4",
+      "bytes": 962691,
+      "sha256": "d85efea707db2921ae661d0e819787e4bbfd4170c8d98d1228e935f1b59b0ab3"
+    },
+    {
+      "file": "videos/fr_FR-siwis-medium/scene-1.jpg",
+      "bytes": 133650,
+      "sha256": "341ec5668905b4f89497ba50846461fd3afb8f75e4077e162561fa3e12670134"
+    },
+    {
+      "file": "videos/fr_FR-siwis-medium/scene-2.jpg",
+      "bytes": 156759,
+      "sha256": "66152d034c5b2ac8fb8993d15d4cd682df4e76a3634ca1dc81f6646508d6221a"
+    },
+    {
+      "file": "videos/fr_FR-siwis-medium/scene-3.jpg",
+      "bytes": 148000,
+      "sha256": "3c18ca6c7d5e7a3f2d370d49deb51ec0e377fae3188cfa34e739b27062e38b9d"
+    },
+    {
+      "file": "videos/fr_FR-siwis-medium/scene-4.jpg",
+      "bytes": 152261,
+      "sha256": "2ff05ad889828b356966fe254d68e3f2575a2ba494e23301f92a4fae4fbd7cfe"
+    },
+    {
+      "file": "videos/fr_FR-siwis-medium/scene-5.jpg",
+      "bytes": 139861,
+      "sha256": "856e9931b4f88a7f8beeaed2cfdbfa09c17c9587e749d82b25285bf01c38ed59"
+    },
+    {
+      "file": "videos/fr_FR-siwis-medium/scene-6.jpg",
+      "bytes": 158427,
+      "sha256": "26c790fb43e0c0deee3ec461a83314c30a4f7c2f69e69c4b846f7e1d9e26e3d8"
+    },
+    {
+      "file": "videos/fr_FR-siwis-medium/scene-7.jpg",
+      "bytes": 141466,
+      "sha256": "2eb49f4806c6cdabd11a29f6513308d169e86d45a9ffa3a72981d7208d79fcba"
+    },
+    {
+      "file": "videos/fr_FR-siwis-medium/scene-8.jpg",
+      "bytes": 136961,
+      "sha256": "a1d6bbac7fa25e233385346940acb340f709eb9463ccd1628523d4291fb0019d"
+    },
+    {
+      "file": "videos/fr_FR-siwis-medium/sous-titres.srt",
+      "bytes": 823,
+      "sha256": "391c4a85fc5eb17a902a025fa282766b982b4e04f8b83acb91d24b9023b59515"
+    },
+    {
+      "file": "videos/fr_FR-upmc-medium/apercu.jpg",
+      "bytes": 262689,
+      "sha256": "5d47a620ebe6ebe65a2ef4a3c66fff1b3fdb9d3553edbcce733dce632a490fc6"
+    },
+    {
+      "file": "videos/fr_FR-upmc-medium/credits.md",
+      "bytes": 2258,
+      "sha256": "2c918890f10a5cbab4c34c7d2cf388246868e59bfc42f822b394342bf41b71d5"
+    },
+    {
+      "file": "videos/fr_FR-upmc-medium/dmsans-OFL.txt",
+      "bytes": 4482,
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+    },
+    {
+      "file": "videos/fr_FR-upmc-medium/encode.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "videos/fr_FR-upmc-medium/playfairdisplay-OFL.txt",
+      "bytes": 4449,
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+    },
+    {
+      "file": "videos/fr_FR-upmc-medium/reel.mp4",
+      "bytes": 912575,
+      "sha256": "da060f15d23aa25464878dc9e9c04c1620a27e12ddd54213bd96ff58f4553d7d"
+    },
+    {
+      "file": "videos/fr_FR-upmc-medium/scene-1.jpg",
+      "bytes": 135646,
+      "sha256": "42e50b113de3039eeed6867d58b5a46c144c3ab55195f877281c23ca03021ff9"
+    },
+    {
+      "file": "videos/fr_FR-upmc-medium/scene-2.jpg",
+      "bytes": 154740,
+      "sha256": "05fefd02a8f871440a228a83d219fcde2c804786da9c050f60a128fd12040b92"
+    },
+    {
+      "file": "videos/fr_FR-upmc-medium/scene-3.jpg",
+      "bytes": 150098,
+      "sha256": "ec5f70f37495249569cf8d3fde739b4195b1e883cdbc86a4ba8f1aedd63b4695"
+    },
+    {
+      "file": "videos/fr_FR-upmc-medium/scene-4.jpg",
+      "bytes": 150231,
+      "sha256": "8cee22bd399968bafcfe15c6c217706c866e9024e18b1ee945913c9999738940"
+    },
+    {
+      "file": "videos/fr_FR-upmc-medium/scene-5.jpg",
+      "bytes": 141808,
+      "sha256": "69fd9a9d487917b28de40ad0dbc9b9556afaa3cf294fd881c3d31a2d9b2433dc"
+    },
+    {
+      "file": "videos/fr_FR-upmc-medium/scene-6.jpg",
+      "bytes": 156475,
+      "sha256": "bf9921f1fce41dec467fd374ad33c95ddcb30b54c51de87c35d3e22828fd25d5"
+    },
+    {
+      "file": "videos/fr_FR-upmc-medium/scene-7.jpg",
+      "bytes": 143426,
+      "sha256": "ee573687110a4cf3b7868ab1e12331aa5c89135ff54ce653540468856a924887"
+    },
+    {
+      "file": "videos/fr_FR-upmc-medium/scene-8.jpg",
+      "bytes": 134958,
+      "sha256": "09d093ac528fdcdd0e5ca7ad75f1faf25e8a639b0dc9a983ed184d4079e86524"
+    },
+    {
+      "file": "videos/fr_FR-upmc-medium/sous-titres.srt",
+      "bytes": 823,
+      "sha256": "ec3a377fc034d77341f32d00743d9accded858e40013aa255d9c5f5bcbbfc77e"
+    },
+    {
+      "file": "videos/receipt.json",
+      "bytes": 6495,
+      "sha256": "2ef819eebdd5dfcd6133ba4f01bde11eec6e8ba4728217b3ef35a4b470f51bfa"
+    }
+  ],
+  "remaining": [
+    "listening_review",
+    "voice_selection",
+    "format_and_rights_review",
+    "public_media_promotion",
+    "publication_admission"
+  ]
+}

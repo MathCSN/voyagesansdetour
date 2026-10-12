@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "id": "reel-article-lisbonne-porto-train",
+  "status": "storyboard_requires_media_review",
+  "publicationApproved": false,
+  "createdAt": "2026-10-12T07:13:59.276835+00:00",
+  "title": "Lisbonne–Porto en train : choisir les gares et réserver simplement",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/lisbonne-porto-train/",
+  "source": {
+    "slug": "lisbonne-porto-train",
+    "articleSha256": "ae3c87692f76abd21374ae799c0868efb535098a59c4929d41787066da6cc900",
+    "publicHtmlSha256": "e17943ddbfded0df647c1236ebde48848f56620df6e15346bcb85371c5cc3aa7",
+    "publicCheckedAt": "2026-10-12T07:13:59.276835+00:00",
+    "sourcesCheckedOn": "2026-10-12",
+    "validUntil": "2026-11-11T00:00:00+00:00",
+    "officialSources": [
+      {
+        "label": "CP — horaires officiels Lisbonne–Nord",
+        "url": "https://www.cp.pt/info/documents/d/cp/comboios-alfa-pendular-intercidades-lisboa-norte-sul"
+      },
+      {
+        "label": "CP — achat et choix du siège",
+        "url": "https://www.cp.pt/info/en/w/online-ticket-office"
+      },
+      {
+        "label": "CP — conditions de vente en ligne et correspondances",
+        "url": "https://cp.pt/info/en/online-ticket-office-terms"
+      },
+      {
+        "label": "CP — billets promotionnels",
+        "url": "https://www.cp.pt/info/en/w/promo-ticket"
+      },
+      {
+        "label": "CP — conditions de transport des bagages",
+        "url": "https://www.cp.pt/info/en/w/luggage"
+      }
+    ],
+    "proofScope": "Exact excerpts in a public guide; no new official-source audit"
+  },
+  "narration": {
+    "hook": "Lisbonne–Porto en train : choisir les gares et réserver simplement",
+    "excerpts": [
+      {
+        "sectionId": "gares",
+        "paragraphIndex": 0,
+        "text": "À Lisbonne, comparez Santa Apolónia et Oriente selon votre hébergement. Les trains longue distance vers Porto desservent Campanhã. Vérifiez les gares exactes sur le départ choisi avant de réserver."
+      },
+      {
+        "sectionId": "train",
+        "paragraphIndex": 0,
+        "text": "Comparez Alfa Pendular et Intercidades pour votre date. Prévoyez environ trois heures de train selon le service, puis les transferts jusqu’aux logements. La durée affichée lors de la réservation reste votre référence."
+      }
+    ],
+    "closing": "Retrouvez le guide et ses sources sur Voyage Sans Détour."
+  },
+  "paidInferenceCalls": 0,
+  "limitations": [
+    "Narration timing, rendered layout, voice choice and publication payload remain unqualified.",
+    "A storyboard is not a rendered, imported, scheduled or published Reel."
+  ]
+}
