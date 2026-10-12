@@ -1,0 +1,191 @@
+{
+  "schemaVersion": 1,
+  "id": "reel-article-portugal-sans-voiture-bagages",
+  "checkedAt": "2026-10-12T07:09:33.388362+00:00",
+  "validUntil": "2026-10-27T00:00:00+00:00",
+  "status": "machine_transcription_requires_editorial_review",
+  "stockSha256": "064401bb31eca390abf95d86a171cf43e01b24cb7ff833cfeec5a5919ec6ac74",
+  "model": "Systran/faster-whisper-small",
+  "modelRevision": "536b0662742c02347bc0e980a01041f333bce120",
+  "language": "fr",
+  "sourceTextPromptProvided": false,
+  "compute": "local_cpu_int8",
+  "paidInferenceCalls": 0,
+  "publicationApproved": false,
+  "publicationAttempted": false,
+  "humanListeningPerformed": false,
+  "expectedText": "Portugal sans voiture : préparer un bagage facile à transporter Gardez si possible un peu de place disponible au départ. Un sac fermé sans effort est plus simple à rouvrir en cours de route qu’un bagage rempli au maximum. Un petit sac de journée pliable évite aussi d’emporter toutes vos affaires à chaque promenade. Pour les consignes présentées par CP, la durée de dépôt est limitée à 24 heures. Retrouvez le guide et ses sources sur Voyage Sans Détour.",
+  "voices": [
+    {
+      "voice": "fr_FR-siwis-medium",
+      "mediaSha256": "29c77ef158d807bd686672e0a0d45e96476e179de8520c24f9ce384e03f610d4",
+      "segments": [
+        {
+          "start": 0.0,
+          "end": 4.6000000000000005,
+          "text": " Portugal, sans voiture. Préparer un bagage facile à transporter.",
+          "averageLogProbability": -0.16155359295733046,
+          "noSpeechProbability": 0.14136385917663574
+        },
+        {
+          "start": 4.6000000000000005,
+          "end": 8.28,
+          "text": " Garder si possible un peu de place disponible au départ.",
+          "averageLogProbability": -0.16155359295733046,
+          "noSpeechProbability": 0.14136385917663574
+        },
+        {
+          "start": 8.28,
+          "end": 14.6,
+          "text": " Un sac fermé sans effort est plus simple à rouvrir en cours de route qu'un bagage rempli au maximum.",
+          "averageLogProbability": -0.16155359295733046,
+          "noSpeechProbability": 0.14136385917663574
+        },
+        {
+          "start": 14.6,
+          "end": 20.04,
+          "text": " Un petit sac de journée pliable évite aussi d'emporter toutes vos affaires à chaque promenade.",
+          "averageLogProbability": -0.16155359295733046,
+          "noSpeechProbability": 0.14136385917663574
+        },
+        {
+          "start": 20.04,
+          "end": 25.16,
+          "text": " Pour les consignes présentées par CP, la durée de dépôt est limitée à 24 heures.",
+          "averageLogProbability": -0.16155359295733046,
+          "noSpeechProbability": 0.14136385917663574
+        },
+        {
+          "start": 25.16,
+          "end": 29.2,
+          "text": " Retrouvez le guide et ses sources sur voyage sans détour.",
+          "averageLogProbability": -0.16155359295733046,
+          "noSpeechProbability": 0.14136385917663574
+        }
+      ],
+      "transcript": "Portugal, sans voiture. Préparer un bagage facile à transporter. Garder si possible un peu de place disponible au départ. Un sac fermé sans effort est plus simple à rouvrir en cours de route qu'un bagage rempli au maximum. Un petit sac de journée pliable évite aussi d'emporter toutes vos affaires à chaque promenade. Pour les consignes présentées par CP, la durée de dépôt est limitée à 24 heures. Retrouvez le guide et ses sources sur voyage sans détour.",
+      "comparison": {
+        "exactNormalizedMatch": false,
+        "expectedWords": 80,
+        "transcribedWords": 80,
+        "differences": [
+          {
+            "kind": "replace",
+            "expected": [
+              "gardez"
+            ],
+            "transcribed": [
+              "garder"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "voice": "fr_FR-upmc-medium",
+      "mediaSha256": "c1e1b45bff20d99e4a1935ad7a6012d4de5cdbe34b59de743a66b2fdd5735b32",
+      "segments": [
+        {
+          "start": 0.0,
+          "end": 5.64,
+          "text": " portugale sans voiture, préparer un bagage facile à transporter, garder si possible",
+          "averageLogProbability": -0.18786985620738952,
+          "noSpeechProbability": 0.00852666050195694
+        },
+        {
+          "start": 5.64,
+          "end": 10.4,
+          "text": " un peu de place disponible au départ, un sac fermé sans effort et plus simple à rouvrir",
+          "averageLogProbability": -0.18786985620738952,
+          "noSpeechProbability": 0.00852666050195694
+        },
+        {
+          "start": 10.4,
+          "end": 14.92,
+          "text": " en cours de route qu'un bagage rempli au maximum, un petit sac de journée pliable",
+          "averageLogProbability": -0.18786985620738952,
+          "noSpeechProbability": 0.00852666050195694
+        },
+        {
+          "start": 14.92,
+          "end": 19.12,
+          "text": " et vite aussi d'emporter toutes vos affaires à chaque promenade, pour les consignes présentées",
+          "averageLogProbability": -0.18786985620738952,
+          "noSpeechProbability": 0.00852666050195694
+        },
+        {
+          "start": 19.12,
+          "end": 24.400000000000002,
+          "text": " par CP, la durée de dépôt est limitée à 24h, retrouver le guide et ses sources",
+          "averageLogProbability": -0.18786985620738952,
+          "noSpeechProbability": 0.00852666050195694
+        },
+        {
+          "start": 24.400000000000002,
+          "end": 25.6,
+          "text": " sur voyage sans détour.",
+          "averageLogProbability": -0.18786985620738952,
+          "noSpeechProbability": 0.00852666050195694
+        }
+      ],
+      "transcript": "portugale sans voiture, préparer un bagage facile à transporter, garder si possible un peu de place disponible au départ, un sac fermé sans effort et plus simple à rouvrir en cours de route qu'un bagage rempli au maximum, un petit sac de journée pliable et vite aussi d'emporter toutes vos affaires à chaque promenade, pour les consignes présentées par CP, la durée de dépôt est limitée à 24h, retrouver le guide et ses sources sur voyage sans détour.",
+      "comparison": {
+        "exactNormalizedMatch": false,
+        "expectedWords": 80,
+        "transcribedWords": 80,
+        "differences": [
+          {
+            "kind": "replace",
+            "expected": [
+              "portugal"
+            ],
+            "transcribed": [
+              "portugale"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "gardez"
+            ],
+            "transcribed": [
+              "garder"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "est"
+            ],
+            "transcribed": [
+              "et"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "évite"
+            ],
+            "transcribed": [
+              "et",
+              "vite"
+            ]
+          },
+          {
+            "kind": "replace",
+            "expected": [
+              "24",
+              "heures",
+              "retrouvez"
+            ],
+            "transcribed": [
+              "24h",
+              "retrouver"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "limitation": "ASR differences may come from recognition or synthesis. This does not establish naturalness, pronunciation quality or editorial approval."
+}
