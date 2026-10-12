@@ -18,6 +18,15 @@ CASES=[
   'quote':'The time indicated on your ticket corresponds to the time of entry in the Palace and not to the time of entry in the Park.','expected':True},
  {'id':'train','fact':'La ligne CP Lisbonne–Sintra part notamment de Rossio, Oriente et Entrecampos.',
   'quote':'Lisbon > Sintra: Train (CP) – Sintra Line (Departure stations: Oriente; Rossio; Entrecampos)','expected':True},
+ {'id':'frequency','fact':'Les trains pour Sintra partent de Rossio toutes les quinze minutes.',
+  'quote':'Lisbon > Sintra: Train (CP) – Sintra Line (Departure stations: Oriente; Rossio; Entrecampos)','expected':False},
+ {'id':'included','fact':'Un billet pour le parc inclut automatiquement l’entrée au palais.',
+  'quote':'The time indicated on your ticket corresponds to the time of entry in the Palace and not to the time of entry in the Park.','expected':False},
+ {'id':'exact_duration','fact':'Le trajet de l’entrée du parc au palais dure toujours exactement trente minutes.',
+  'quote':'the journey from the entrance to the park to the entrance of the palace interior route takes about 30 minutes','expected':False},
+ {'id':'approx_duration','fact':'L’exploitant indique un trajet d’environ trente minutes de l’entrée du parc à l’entrée du parcours intérieur du palais.',
+  'quote':'the journey from the entrance to the park to the entrance of the palace interior route takes about 30 minutes','expected':True},
+
 ]
 
 def main():
@@ -34,7 +43,7 @@ def main():
         report['status']='evaluation_passed' if all(c['passed'] for c in report['cases']) else 'evaluation_failed'
     except Exception as error:
         report.update(status='evaluation_incomplete',errorType=type(error).__name__)
-    report['limitation']='Five regression cases; not unrestricted publication approval.'
+    report['limitation']='Nine cases including four additional generalization controls; not unrestricted publication approval.'
     (out/'entailment-evaluation.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
     print(json.dumps({'status':report['status']}))
     return 0 if report['status']=='evaluation_passed' else 1
