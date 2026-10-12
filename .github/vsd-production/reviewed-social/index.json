@@ -36,6 +36,15 @@
       "itemIds": [
         "vsd-production:facebook:porto-3-jours-sans-voiture-2026-10:fb03-v1"
       ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/facebook-sintra-trois-temps-2026-10-25-v1.json",
+      "fileSha256": "4422d0b003c638b0e303dda4c8b342589eaa5e1719f7fa8ac521c7e0dd2f771c",
+      "batchId": "facebook-sintra-trois-temps-2026-10-25-v1",
+      "batchSha256": "249fa6642cd4fd68849ae7bb3acba5fc9c92f53b6b844d70cedbd33be1840201",
+      "itemIds": [
+        "vsd-production:facebook:sintra-trois-temps-2026-10:photos-v1"
+      ]
     }
   ],
   "retirements": [

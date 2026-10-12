@@ -1,0 +1,170 @@
+{
+  "schemaVersion": 1,
+  "batchId": "facebook-sintra-trois-temps-2026-10-25-v1",
+  "items": [
+    {
+      "contentId": "vsd-production:facebook:sintra-trois-temps-2026-10:photos-v1",
+      "deduplicationKey": "vsd-production:facebook:sintra-trois-temps-2026-10:photos-v1",
+      "title": "Sintra sans voiture : trois temps avant Pena",
+      "dueAt": "2026-10-25T16:00:00Z",
+      "payload": {
+        "schemaVersion": 1,
+        "channel": "facebook",
+        "kind": "photos",
+        "text": "🏰 Sintra sans voiture : gardez du temps entre le train et le palais !\n\n🚆 Choisissez votre gare de départ : Rossio, Oriente ou Entrecampos.\n🚌 À Sintra, prévoyez aussi la montée vers Pena ; le bus 434 dessert le site.\n🎟️ L’heure du billet correspond à l’entrée dans le palais, pas dans le parc.\n🚶 Comptez environ 30 minutes entre l’entrée du parc et celle du palais. Cette marge s’ajoute au trajet depuis la gare.\n\nNotre conseil : un site prioritaire, puis le reste selon votre rythme 🌿 Vérifiez les transports et les conditions d’accès à votre date.\n\n🔖 Enregistrez ce mémo pour préparer votre journée.\nLe guide et ses sources 👇\nhttps://voyagesansdetour.fr/portugal/sintra-depuis-lisbonne/\n\nCréation assistée par IA, sans récit de voyage vécu. Informations contrôlées le 12 octobre 2026 auprès de Parques de Sintra.",
+        "aiGenerated": false,
+        "assets": [
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/sintra-facebook-2026-10/scene-01.jpg",
+            "sha256": "0b455342bb1c4d40c742a205172dce3ac41c284a31d4f8a62f45166dfc5d9a55",
+            "mimeType": "image/jpeg",
+            "altText": "Sintra sans voiture : prévoir le train, la montée et l’entrée au palais."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/sintra-facebook-2026-10/scene-02.jpg",
+            "sha256": "f63794a2fdff3020d1ebaee5fad3c94f7a7c11c8524a3b5540a1a27eb4bbd06d",
+            "mimeType": "image/jpeg",
+            "altText": "Choisir sa gare de départ : Rossio, Oriente ou Entrecampos ; vérifier le train pour sa date."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/sintra-facebook-2026-10/scene-03.jpg",
+            "sha256": "ca897f293afd6310d05cb5a9559fdae87951be04791da72152fd6ecd335c0054",
+            "mimeType": "image/jpeg",
+            "altText": "La gare est distincte du parc. Le bus 434 dessert Pena depuis Sintra ; vérifier le service du jour."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/sintra-facebook-2026-10/scene-04.jpg",
+            "sha256": "ed91552fd6335aa3ffecdc90c7b338f9b847475a35b9b584ea309b67388756ac",
+            "mimeType": "image/jpeg",
+            "altText": "L’heure du billet correspond à l’entrée au palais, pas à l’arrivée au parc."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/sintra-facebook-2026-10/scene-05.jpg",
+            "sha256": "69f09d4e0713897d65aa14e4f2ee9a7a91646c29dcfea31db18bf2f690af77ae",
+            "mimeType": "image/jpeg",
+            "altText": "Prévoir environ 30 minutes entre l’entrée du parc et celle du palais, en plus du trajet depuis la gare."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/sintra-facebook-2026-10/scene-06.jpg",
+            "sha256": "e39ab23d1e1155c5d1dfbd11b7e7997cda503aa068e3ff020aad05a883294a9d",
+            "mimeType": "image/jpeg",
+            "altText": "Choisir un site prioritaire puis adapter le reste de la journée. Guide sur voyagesansdetour.fr."
+          }
+        ]
+      },
+      "review": {
+        "schemaVersion": 1,
+        "contentId": "vsd-production:facebook:sintra-trois-temps-2026-10:photos-v1",
+        "approved": true,
+        "reviewedAt": "2026-10-12T02:22:30.953Z",
+        "validUntil": "2026-10-26T00:00:00Z",
+        "payloadRevision": "56fb0a490534eaa1d1bc348e81f7d8805661da319a040720e3a07c6bbd5d01db",
+        "checks": {
+          "editorialApproved": true,
+          "rightsApproved": true,
+          "creditsPreserved": true,
+          "sources": {
+            "status": "verified",
+            "observedAt": "2026-10-12T02:22:30.953Z",
+            "validUntil": "2026-10-26T00:00:00Z"
+          },
+          "requiresPaidCall": false,
+          "syntheticPerson": false,
+          "disclosurePreserved": false,
+          "providerSyntheticSettingVerified": false,
+          "formatRequirementsVerified": true
+        },
+        "media": {
+          "required": true,
+          "url": null,
+          "sha256": null,
+          "items": [
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/sintra-facebook-2026-10/scene-01.jpg",
+              "sha256": "0b455342bb1c4d40c742a205172dce3ac41c284a31d4f8a62f45166dfc5d9a55",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-12T02:22:30.953Z",
+              "validUntil": "2026-10-26T00:00:00Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/sintra-facebook-2026-10/scene-02.jpg",
+              "sha256": "f63794a2fdff3020d1ebaee5fad3c94f7a7c11c8524a3b5540a1a27eb4bbd06d",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-12T02:22:30.953Z",
+              "validUntil": "2026-10-26T00:00:00Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/sintra-facebook-2026-10/scene-03.jpg",
+              "sha256": "ca897f293afd6310d05cb5a9559fdae87951be04791da72152fd6ecd335c0054",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-12T02:22:30.953Z",
+              "validUntil": "2026-10-26T00:00:00Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/sintra-facebook-2026-10/scene-04.jpg",
+              "sha256": "ed91552fd6335aa3ffecdc90c7b338f9b847475a35b9b584ea309b67388756ac",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-12T02:22:30.953Z",
+              "validUntil": "2026-10-26T00:00:00Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/sintra-facebook-2026-10/scene-05.jpg",
+              "sha256": "69f09d4e0713897d65aa14e4f2ee9a7a91646c29dcfea31db18bf2f690af77ae",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-12T02:22:30.953Z",
+              "validUntil": "2026-10-26T00:00:00Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/sintra-facebook-2026-10/scene-06.jpg",
+              "sha256": "e39ab23d1e1155c5d1dfbd11b7e7997cda503aa068e3ff020aad05a883294a9d",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-12T02:22:30.953Z",
+              "validUntil": "2026-10-26T00:00:00Z"
+            }
+          ]
+        },
+        "destination": {
+          "url": "https://voyagesansdetour.fr/portugal/sintra-depuis-lisbonne/",
+          "status": "verified",
+          "observedAt": "2026-10-12T02:22:30.953Z",
+          "validUntil": "2026-10-26T00:00:00Z"
+        },
+        "monetization": {
+          "containsAffiliateLinks": false,
+          "partnerApproved": false,
+          "linksVerified": false,
+          "disclosurePreserved": false
+        },
+        "formatCapability": {
+          "status": "verified",
+          "observedAt": "2026-10-12T02:22:30.953Z",
+          "validUntil": "2026-10-26T00:00:00Z",
+          "automaticPublishing": true,
+          "verificationMethod": "official_documentation",
+          "sourceUrls": [
+            "https://support.buffer.com/en-us/articles/using-facebook-with-buffer-jY1AM9fz2G",
+            "https://developers.buffer.com/types/FacebookPostMetadataInput.html",
+            "https://developers.buffer.com/guides/posts-and-scheduling.html"
+          ]
+        },
+        "evidence": {
+          "mediaProof": "livrables/reseaux/sintra-facebook-2026-10-25/public-assets-proof.json",
+          "officialSources": [
+            "https://www.parquesdesintra.pt/en/plan-your-visit/how-to-get-there/",
+            "https://www.parquesdesintra.pt/en/plan-your-visit/tickets-palace-of-pena/"
+          ],
+          "sourceClaims": "Rossio/Oriente/Entrecampos train departures; 434 bus to Pena; palace admission timed separately from park entry; approximately 30 minutes from park entrance to palace",
+          "rights": "Original typographic graphics; no synthetic person, music or third party photography. OFL font licenses publicly hosted with credits.",
+          "dedupeRead": "Buffer VSD Facebook read 2026-10-12: one sent Lisbonne post, no Sintra or scheduled post; hasNextPage false. Cloud Porto due October 12 and retired Lisbonne October 18 preserved.",
+          "captionDisclosure": "AI-assisted editorial preparation, no lived travel claim. Direct blog link."
+        }
+      }
+    }
+  ]
+}
