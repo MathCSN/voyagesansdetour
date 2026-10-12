@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "status": "voice_video_pilots_not_published",
+  "generatedAt": "2026-10-12T06:45:13.943920+00:00",
+  "audioReceiptSha256": "13d1b7414ff7b527a2d1e15bd763e1246db4da42ca47b2f41f79430a081c7467",
+  "rendererSha256": "952f28da3212934b1a0267e1dc8b727765d5e705fe7ef397473f65624b13e30c",
+  "subtitleAlignment": "narration segment boundaries measured in audio samples, not word alignment",
+  "videos": [
+    {
+      "voice": "fr_FR-siwis-medium",
+      "music": "Almost Bliss",
+      "specification": {
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "durationSeconds": 29.333333,
+        "videoCodec": "h264",
+        "pixelFormat": "yuv420p",
+        "videoBitrateBps": 104783,
+        "audioCodec": "aac",
+        "audioSampleRate": 48000,
+        "audioBitrateBps": 97507,
+        "fullDecodePassed": true,
+        "loudness": {
+          "integratedLufs": -17.9,
+          "truePeakDbfs": -4.5
+        }
+      },
+      "files": [
+        {
+          "file": "fr_FR-siwis-medium/apercu.jpg",
+          "sha256": "abbcc5ed38961b5de03837e0b67ce48e2aef6ce57dcc91a9aa8ee472d3cf0ad1"
+        },
+        {
+          "file": "fr_FR-siwis-medium/credits.md",
+          "sha256": "6fa9d5e8bf6633d3829c34d6184d5bb437dc270a8150d76e6337739c3d371a23"
+        },
+        {
+          "file": "fr_FR-siwis-medium/dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+        },
+        {
+          "file": "fr_FR-siwis-medium/encode.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "fr_FR-siwis-medium/playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+        },
+        {
+          "file": "fr_FR-siwis-medium/reel.mp4",
+          "sha256": "29c77ef158d807bd686672e0a0d45e96476e179de8520c24f9ce384e03f610d4"
+        },
+        {
+          "file": "fr_FR-siwis-medium/scene-1.jpg",
+          "sha256": "fb806bb880b6462eb0f7e437eda0ae86925ae24e6b1f065fcbbaad65c1e98697"
+        },
+        {
+          "file": "fr_FR-siwis-medium/scene-2.jpg",
+          "sha256": "557332062dfecf1dca6d61fbcd9a3b93740544e40ef9b0ce669a1ac07c2b976e"
+        },
+        {
+          "file": "fr_FR-siwis-medium/scene-3.jpg",
+          "sha256": "ff6dd35f2c4cf56b3955e74bd6858f77a9d17b9644595c54f096c38b1aaa354f"
+        },
+        {
+          "file": "fr_FR-siwis-medium/scene-4.jpg",
+          "sha256": "00d8006b4f8ceacd1343f09ddd708fe73ccefac6c1d76559fd458384edbf4898"
+        },
+        {
+          "file": "fr_FR-siwis-medium/scene-5.jpg",
+          "sha256": "942290fd3479ebce82b9a35f9c781f6a7af83320d8bb86bd416e2c73334a940f"
+        },
+        {
+          "file": "fr_FR-siwis-medium/scene-6.jpg",
+          "sha256": "441596f6530f124168859de8cacac108554d5c5278d6fe443c0573f53c7edfbf"
+        },
+        {
+          "file": "fr_FR-siwis-medium/sous-titres.srt",
+          "sha256": "e82fcb8443e8d054c7854a3585a486566f558f9a8416564580593076871ab82d"
+        }
+      ]
+    },
+    {
+      "voice": "fr_FR-upmc-medium",
+      "music": "Ascending the Vale",
+      "specification": {
+        "width": 1080,
+        "height": 1920,
+        "fps": 30,
+        "durationSeconds": 26.266667,
+        "videoCodec": "h264",
+        "pixelFormat": "yuv420p",
+        "videoBitrateBps": 115005,
+        "audioCodec": "aac",
+        "audioSampleRate": 48000,
+        "audioBitrateBps": 98188,
+        "fullDecodePassed": true,
+        "loudness": {
+          "integratedLufs": -18.0,
+          "truePeakDbfs": -2.7
+        }
+      },
+      "files": [
+        {
+          "file": "fr_FR-upmc-medium/apercu.jpg",
+          "sha256": "e6e8a0410ef55f4f438c3816cc985b631c4ad23252740a293962a74eaff54a47"
+        },
+        {
+          "file": "fr_FR-upmc-medium/credits.md",
+          "sha256": "2c918890f10a5cbab4c34c7d2cf388246868e59bfc42f822b394342bf41b71d5"
+        },
+        {
+          "file": "fr_FR-upmc-medium/dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+        },
+        {
+          "file": "fr_FR-upmc-medium/encode.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "file": "fr_FR-upmc-medium/playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+        },
+        {
+          "file": "fr_FR-upmc-medium/reel.mp4",
+          "sha256": "c1e1b45bff20d99e4a1935ad7a6012d4de5cdbe34b59de743a66b2fdd5735b32"
+        },
+        {
+          "file": "fr_FR-upmc-medium/scene-1.jpg",
+          "sha256": "af21f8a2715f3ed4e76c4b7c69ba4f92c722824ef7a0b8be5fcb677157e66496"
+        },
+        {
+          "file": "fr_FR-upmc-medium/scene-2.jpg",
+          "sha256": "f0cf0abed51c874139da1e13007f4644dacd7e13b5d2a86b4f41e4e7be1134b7"
+        },
+        {
+          "file": "fr_FR-upmc-medium/scene-3.jpg",
+          "sha256": "dcac1d0955afadf1ed7451d5857aa7616d7b2946b5966040deef8054aefd6785"
+        },
+        {
+          "file": "fr_FR-upmc-medium/scene-4.jpg",
+          "sha256": "dba95db87229021b80b05cb66fe836b438d937ff87cb404a107101a62b163ffc"
+        },
+        {
+          "file": "fr_FR-upmc-medium/scene-5.jpg",
+          "sha256": "77a94dfa19cce9a67367b80c5d144350a9b841e74b6241489869912f493386cc"
+        },
+        {
+          "file": "fr_FR-upmc-medium/scene-6.jpg",
+          "sha256": "36d448e81ff05c9e19fcbe833a1fe9fdd67d224767f410130e76d3d51f1b2d76"
+        },
+        {
+          "file": "fr_FR-upmc-medium/sous-titres.srt",
+          "sha256": "d620ab7db0011d2368daa81cee13f10137c329f981e4702ddb8ee78b05ad3eb7"
+        }
+      ]
+    }
+  ],
+  "publicationAttempted": false,
+  "listeningReviewComplete": false,
+  "automaticProductionIntegration": false
+}

@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 2,
+  "status": "audio_samples_not_published",
+  "generatedAt": "2026-10-12T06:45:13.943920+00:00",
+  "generated": 2,
+  "textSha256": "c1ef90698db9c48bf7c4f20253c4bfd0411be26ff460fc96cf24426c5a987428",
+  "modelsManifestSha256": "299bf846a56348724ad2d547dac5925277d775dccffa71ea5d8e6f26916a34c1",
+  "piperVersion": "1.8.0",
+  "onnxRuntimeVersion": "1.31.0",
+  "modelsRevision": "c10ece1aade47bb51c153c893d14e5bf8e5b7117",
+  "samples": [
+    {
+      "voice": "fr_FR-siwis-medium",
+      "speaker": 0,
+      "datasetLicense": "CC-BY-4.0",
+      "segments": [
+        {
+          "text": "Portugal sans voiture : pr\u00e9parer un bagage facile \u00e0 transporter",
+          "startSample": 0,
+          "endSample": 93184,
+          "sampleRate": 22050
+        },
+        {
+          "text": "Gardez si possible un peu de place disponible au d\u00e9part.",
+          "startSample": 97594,
+          "endSample": 176698,
+          "sampleRate": 22050
+        },
+        {
+          "text": "Un sac ferm\u00e9 sans effort est plus simple \u00e0 rouvrir en cours de route qu\u2019un bagage rempli au maximum.",
+          "startSample": 181108,
+          "endSample": 313460,
+          "sampleRate": 22050
+        },
+        {
+          "text": "Un petit sac de journ\u00e9e pliable \u00e9vite aussi d\u2019emporter toutes vos affaires \u00e0 chaque promenade.",
+          "startSample": 317870,
+          "endSample": 436142,
+          "sampleRate": 22050
+        },
+        {
+          "text": "Pour les consignes pr\u00e9sent\u00e9es par CP, la dur\u00e9e de d\u00e9p\u00f4t est limit\u00e9e \u00e0 24 heures.",
+          "startSample": 440552,
+          "endSample": 546280,
+          "sampleRate": 22050
+        },
+        {
+          "text": "Retrouvez le guide et ses sources sur Voyage Sans D\u00e9tour.",
+          "startSample": 550690,
+          "endSample": 635170,
+          "sampleRate": 22050
+        }
+      ],
+      "durationSeconds": 28.805895691609976,
+      "sampleRate": 22050,
+      "channels": 1,
+      "rms": 5647.5780568374485,
+      "clippedFraction": 9.446289969614433e-06,
+      "sha256": "83536ee0332e68f70930e75ae9ab5fe22d9dd2e60914d870c04d58be8766900c"
+    },
+    {
+      "voice": "fr_FR-upmc-medium",
+      "speaker": 1,
+      "datasetLicense": "CC-BY-SA-4.0",
+      "segments": [
+        {
+          "text": "Portugal sans voiture : pr\u00e9parer un bagage facile \u00e0 transporter",
+          "startSample": 0,
+          "endSample": 92160,
+          "sampleRate": 22050
+        },
+        {
+          "text": "Gardez si possible un peu de place disponible au d\u00e9part.",
+          "startSample": 96570,
+          "endSample": 166714,
+          "sampleRate": 22050
+        },
+        {
+          "text": "Un sac ferm\u00e9 sans effort est plus simple \u00e0 rouvrir en cours de route qu\u2019un bagage rempli au maximum.",
+          "startSample": 171124,
+          "endSample": 289396,
+          "sampleRate": 22050
+        },
+        {
+          "text": "Un petit sac de journ\u00e9e pliable \u00e9vite aussi d\u2019emporter toutes vos affaires \u00e0 chaque promenade.",
+          "startSample": 293806,
+          "endSample": 391086,
+          "sampleRate": 22050
+        },
+        {
+          "text": "Pour les consignes pr\u00e9sent\u00e9es par CP, la dur\u00e9e de d\u00e9p\u00f4t est limit\u00e9e \u00e0 24 heures.",
+          "startSample": 395496,
+          "endSample": 489960,
+          "sampleRate": 22050
+        },
+        {
+          "text": "Retrouvez le guide et ses sources sur Voyage Sans D\u00e9tour.",
+          "startSample": 494370,
+          "endSample": 567842,
+          "sampleRate": 22050
+        }
+      ],
+      "durationSeconds": 25.752471655328797,
+      "sampleRate": 22050,
+      "channels": 1,
+      "rms": 4217.18030494942,
+      "clippedFraction": 1.0566319504369173e-05,
+      "sha256": "f3f5fd094c0c2f0df53c5345993c7fa37f2d8a4f198f2d0270bcaf296893a73f"
+    }
+  ],
+  "paidInferenceCalls": 0,
+  "publicationAttempted": false,
+  "listeningReviewComplete": false,
+  "automaticReelIntegration": false
+}

@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "contentId": "reel-article-portugal-sans-voiture-bagages",
+  "status": "selected_for_promotion_qualification",
+  "selectedAt": "2026-10-12T06:47:44.231881+00:00",
+  "validUntil": "2026-10-27T00:00:00+00:00",
+  "voice": "fr_FR-siwis-medium",
+  "mediaSha256": "29c77ef158d807bd686672e0a0d45e96476e179de8520c24f9ce384e03f610d4",
+  "stockSha256": "064401bb31eca390abf95d86a171cf43e01b24cb7ff833cfeec5a5919ec6ac74",
+  "transcriptionSha256": "14e92528598382578cafed330039ffdd6c8c9b7e3c0af52deb628d0307f9b8fe",
+  "reviewMethod": "Source-bound text, independent ASR semantic comparison, visual inspection and measured media specifications",
+  "humanListeningPerformed": false,
+  "publicationApproved": false,
+  "publicationAttempted": false,
+  "acceptedTranscriptionDifferences": [
+    {
+      "expected": "Gardez",
+      "transcribed": "Garder",
+      "reason": "French homophones; spoken meaning unchanged in this sentence"
+    },
+    {
+      "expected": "24 heures",
+      "transcribed": "24h",
+      "reason": "Equivalent number and time unit"
+    }
+  ],
+  "otherVoiceStatus": "held_asr_ambiguity_evite_et_vide",
+  "remaining": [
+    "Voice-specific public media promotion contract",
+    "Credits and disclosure in public caption and media hosting",
+    "Cloud stock admission and native publication receipt"
+  ]
+}
