@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "status": "public_bytes_verified",
+  "contentId": "reel-article-porto-3-jours-sans-voiture",
+  "selectionSha256": "5ec5ed9ba7c98b34eec33766c06f44f1b09afd3187fce6f27010140bc0c52a66",
+  "checkedAt": "2026-10-12T08:22:02.881944+00:00",
+  "validUntil": "2026-11-11T00:00:00+00:00",
+  "files": [
+    {
+      "url": "https://voyagesansdetour.fr/social-media/production/reel-article-porto-3-jours-sans-voiture-voice/reel.mp4",
+      "sha256": "99af4f5dd1767a2e1cbc4a8ff6bba4f2d5487938a529581770d5154d75adc3ce",
+      "bytes": 970947
+    },
+    {
+      "url": "https://voyagesansdetour.fr/social-media/production/reel-article-porto-3-jours-sans-voiture-voice/poster.jpg",
+      "sha256": "9c0d4a0a9cac64073d283b30c2c9f108e77ab7e0988d8a0aeec452eb9de6a108",
+      "bytes": 118067
+    },
+    {
+      "url": "https://voyagesansdetour.fr/social-media/production/reel-article-porto-3-jours-sans-voiture-voice/credits.txt",
+      "sha256": "6fa9d5e8bf6633d3829c34d6184d5bb437dc270a8150d76e6337739c3d371a23",
+      "bytes": 2252
+    },
+    {
+      "url": "https://voyagesansdetour.fr/social-media/production/reel-article-porto-3-jours-sans-voiture-voice/dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "url": "https://voyagesansdetour.fr/social-media/production/reel-article-porto-3-jours-sans-voiture-voice/playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    }
+  ],
+  "socialPublicationAttempted": false
+}
