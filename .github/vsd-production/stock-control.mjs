@@ -10,6 +10,18 @@ import { lstat, open, realpath } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { join, parse, relative, resolve, sep } from "node:path";
 
+// exploitation/cloud-publications/archival-rejection-contract.mjs
+var ARCHIVAL_REJECTION = Object.freeze({
+  jobId: "vsd-social-launch-2026-09:facebook:aeroport-porto-centre-ville",
+  provider: "windsor_mcp_facebook_organic",
+  channelId: "1331092223422242",
+  payloadRevision: "0109a97268ea7f6c478e9c7832f6fecb96fd7145a3aa674a7c6869adb1486c20",
+  responseSha256: "db0b86fcf4ead4d67989d78104a6ee7ff1329dc744e035dd4f85b742df7cd659",
+  originalCallAt: "2026-09-27T10:09:43.257Z",
+  originalResponseAt: "2026-09-27T10:09:44.452Z",
+  targetUrl: "https://voyagesansdetour.fr/portugal/aeroport-porto-centre-ville/"
+});
+
 // exploitation/cloud-publications/scheduler.mjs
 var CHANNEL_FORMATS = Object.freeze({
   pinterest: Object.freeze(["pin"]),
@@ -312,7 +324,7 @@ function boundedJson(bytes2, limit) {
   return jsonCopy(JSON.parse(new TextDecoder("utf-8", { fatal: true }).decode(bytes2)));
 }
 function instant(value) {
-  check4(typeof value === "string" && /^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{1,6})?Z$/.test(value), "invalid_timestamp");
+  check4(typeof value === "string" && /^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{1,6})?(?:Z|\+00:00)$/.test(value), "invalid_timestamp");
   const result = Date.parse(value);
   check4(Number.isSafeInteger(result) && result > 0 && new Date(result).toISOString().slice(0, 19) === value.slice(0, 19), "invalid_timestamp");
   return result;
