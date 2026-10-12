@@ -45,13 +45,25 @@ jobs:
         run: |
           python -m unittest -q test_promote_selected test_promote_catalogue
           python promote_catalogue.py --root .. --site ../../../site-src --github-output "$GITHUB_OUTPUT"
+      - name: Prepare at most one new source-bound Instagram lot
+        if: steps.period.outputs.active == 'true' && steps.media.outputs.needs_deployment != 'true'
+        run: |
+          python -m unittest discover -s .github/vsd-production/voice -p test_social_draft.py -q
+          node --test .github/vsd-production/voice-admission.test.mjs
+          node .github/vsd-production/voice-admission.mjs
       - name: Persist staged files and immutable public receipts
         if: steps.period.outputs.active == 'true'
         run: |
-          git add -- site-src/public-media.json site-src/social-media/production .github/vsd-production/voice-stock .github/vsd-production/voice-revisions
+          git add -- .github/vsd-production/reviewed-social site-src/public-media.json site-src/social-media/production .github/vsd-production/voice-stock .github/vsd-production/voice-revisions
           if git diff --cached --quiet; then exit 0; fi
           git -c user.name='VSD voice promotion' -c user.email='actions@users.noreply.github.com' commit -m 'Stage selected voice media or preserve public receipt'
           git push origin HEAD:main
+      - name: Reconcile cloud stock before importing one absent reviewed lot
+        if: steps.period.outputs.active == 'true' && steps.media.outputs.needs_deployment != 'true'
+        env:
+          VSD_CLOUD_KEY: ${{ secrets.VSD_CLOUD_KEY }}
+          VSD_SITES_DISPATCH_TOKEN: ${{ secrets.VSD_SITES_DISPATCH_TOKEN }}
+        run: node .github/vsd-production/stock-control.mjs
       - name: Dispatch existing deployment only when no build is active
         if: steps.media.outputs.needs_deployment == 'true'
         env:
