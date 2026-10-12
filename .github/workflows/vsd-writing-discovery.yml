@@ -1,5 +1,7 @@
 name: Discover source-grounded VSD updates
 on:
+  schedule:
+    - cron: "37 9 * * *"
   workflow_dispatch:
     inputs:
       guide:
@@ -30,7 +32,7 @@ jobs:
           GUIDE_SLUG: ${{ inputs.guide }}
           REPORT_DIR: ${{ runner.temp }}/vsd-source-draft
         run: python3 .github/vsd-writing/discover_facts.py
-      - name: Preserve pilot evidence only
+      - name: Preserve research and draft evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
