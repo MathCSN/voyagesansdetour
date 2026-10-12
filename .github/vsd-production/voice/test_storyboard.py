@@ -50,4 +50,21 @@ class StoryboardTests(unittest.TestCase):
         for sentence in sentences:self.assertLessEqual(len(storyboard.compose.wrap(draw,sentence,font,820)),3)
         self.assertEqual(len(headings),6);self.assertEqual(len(badges),6)
 
+    def test_new_topic_uses_exact_source_headings_and_fits_real_scene(self):
+        from html import escape
+        from PIL import ImageFont
+        folder=FOLDER.parent/'reel-article-lisbonne-porto-train'
+        draft=json.loads((folder/'storyboard.json').read_text())
+        html='<link rel="canonical" href="'+draft['targetUrl']+'">'+''.join('<p>'+escape(e['text'])+'</p>' for e in draft['narration']['excerpts'])
+        _,sentences,headings,badges,_,_=storyboard.prepare(folder,NOW,lambda u:html.encode(),sentence_flow=True)
+        self.assertEqual(' '.join(headings[0]),'Lisbonne–Porto en train')
+        self.assertIn('Alfa Pendular ou Intercidades ?', [' '.join(h) for h in headings])
+        self.assertFalse(any('BAGAGES' in b for b in badges))
+        assets=storyboard.pilot.HERE.parent/'assets'
+        fonts={n:ImageFont.truetype(str(assets/file),size) for n,file,size in [('title','playfair.ttf',85),('caption','dmsans-bold.ttf',45),('small','dmsans-bold.ttf',29),('tiny','dmsans-regular.ttf',23)]}
+        for i,sentence in enumerate(sentences):
+            self.assertLessEqual(len(headings[i]),3)
+            self.assertEqual(storyboard.compose.scene(i,0,fonts,sentence,headings,badges).size,(1080,1920))
+        self.assertEqual(' '.join(sentences),' '.join([draft['narration']['hook']]+[e['text'] for e in draft['narration']['excerpts']]+[draft['narration']['closing']]))
+
 if __name__=='__main__':unittest.main()

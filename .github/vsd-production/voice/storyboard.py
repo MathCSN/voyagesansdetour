@@ -47,6 +47,15 @@ def prepare(folder, now, fetcher=fetch_public, sentence_flow=False):
     parts=[narration['hook']]+[e['text'] for e in narration['excerpts']]+[narration['closing']]
     labels=[('Préparez', 'votre départ.'),('Dans le sac,','de la place.'),('Avant de poser','vos bagages.'),('Le guide', 'et ses sources.')]
     badge_labels=['LE GUIDE BAGAGES','VOYAGER LÉGER','CONSIGNES EN GARE','POUR ALLER PLUS LOIN']
+    if draft['id']!='reel-article-portugal-sans-voiture-bagages':
+        # Topic headings are exact article text, covered by articleSha256.
+        # Use the renderer's real font metrics rather than truncating a claim.
+        from PIL import Image, ImageDraw, ImageFont
+        draw=ImageDraw.Draw(Image.new('RGB',(1080,1920)))
+        font=ImageFont.truetype(str(pilot.HERE.parent/'assets/playfair.ttf'),85)
+        titles=[article.get('shortTitle',article['title'])]+[next(s['title'] for s in article['sections'] if s['id']==e['sectionId']) for e in narration['excerpts']]+['Le guide et ses sources']
+        labels=[tuple(compose.wrap(draw,title,font,880)) for title in titles]
+        badge_labels=['LE GUIDE','REPÈRE 1','REPÈRE 2','POUR ALLER PLUS LOIN']
     for index,part in enumerate(parts):
         for sentence in re.split(r'(?<=[.!?])\s+',part):
             if sentence_flow:
@@ -78,9 +87,6 @@ def run(folder, output, now, sentence_flow=False):
     output=Path(output)
     if output.exists() or output.is_symlink():raise ValueError('existing_output_preserved')
     draft,sentences,headings,badges,story_hash,public_hash=prepare(folder,now,sentence_flow=sentence_flow)
-    # This first layout is qualified for the bagage storyboard only. Other
-    # topics need their own truthful scene headings, not these bagage labels.
-    if draft['id']!='reel-article-portugal-sans-voiture-bagages':raise ValueError('layout_topic_not_qualified')
     output.parent.mkdir(parents=True,exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='.storyboard-media-',dir=output.parent) as tmp:
         result=Path(tmp)/'result';result.mkdir()
@@ -92,6 +98,7 @@ def run(folder, output, now, sentence_flow=False):
                'publicHtmlSha256':public_hash,'startedAt':now.isoformat(),'finishedAt':finished.isoformat(),
                'validUntil':draft['source']['validUntil'],'targetUrl':draft['targetUrl'],
                'narrationSegmentation':'complete_sentences' if sentence_flow else 'caption_chunks',
+               'headingMode':'bagages_original' if draft['id']=='reel-article-portugal-sans-voiture-bagages' else 'exact_article_titles',
                'paidInferenceCalls':0,'publicationAttempted':False,'listeningReviewComplete':False,
                'files':[{'file':str(p.relative_to(result)),'sha256':pilot.sha(p.read_bytes())} for p in sorted(result.rglob('*')) if p.is_file()]}
         (result/'receipt.json').write_text(json.dumps(proof,ensure_ascii=False,indent=2)+'\n')
