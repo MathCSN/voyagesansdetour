@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       guide:
-        description: Existing guide slug for a bounded qualification; empty uses weekly rotation
+        description: Existing guide slug for a bounded qualification; empty uses daily guide rotation
         required: false
         default: ""
         type: string

@@ -44,3 +44,17 @@ class GuideSelectionTests(unittest.TestCase):
         from discover_facts import select_guide
         article={'slug':'bagages','sources':[{'url':'https://www.cp.pt/info/en/w/luggage'},{'url':'https://www.metrolisboa.pt/en/better-manners-better-rides/'}]}
         self.assertIs(select_guide([article],dt.datetime.now(dt.timezone.utc),'bagages'),article)
+
+class SourceCoverageTests(unittest.TestCase):
+    def test_every_source_is_visited_with_three_page_bound(self):
+        from discover_facts import source_window
+        for n in range(1,11):
+            urls=[f'https://www.cp.pt/info/en/w/test-{i}' for i in range(n)]
+            article={'sources':[{'url':u} for u in urls]}
+            windows=[source_window(article,p) for p in range((n+2)//3)]
+            self.assertTrue(all(1<=len(w)<=3 for w in windows))
+            self.assertEqual([u for w in windows for u in w],urls)
+            self.assertEqual(source_window(article,len(windows)),windows[0])
+    def test_negative_pass_rejected(self):
+        from discover_facts import source_window
+        with self.assertRaisesRegex(ValueError,'invalid_source_pass'):source_window({},-1)

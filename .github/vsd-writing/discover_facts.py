@@ -27,7 +27,7 @@ def eligible_urls(article):
         u=s.get('url','');p=urllib.parse.urlsplit(u)
         if p.scheme=='https' and p.hostname in ALLOWED_HOSTS and not p.username and not p.password and not p.query and not p.fragment and not p.path.lower().endswith('.pdf') and '/documents/' not in p.path and u not in result:
             result.append(u)
-    return result[:3]
+    return result
 
 def select_guide(articles, now, requested=""):
     if requested:
@@ -37,9 +37,17 @@ def select_guide(articles, now, requested=""):
     candidates=[a for a in articles if len(eligible_urls(a))>=2 and a.get('category')!='Mises à jour']
     require(bool(candidates),'no_eligible_guide')
     candidates.sort(key=lambda a:a['slug'])
-    # Weekly rotation. Pure selection: repeated qualification does not mutate a queue.
-    week=(now.date()-dt.date(2026,9,14)).days//7
-    return candidates[week%len(candidates)]
+    # Daily guide rotation; source windows advance after each full guide cycle.
+    day=(now.date()-dt.date(2026,9,14)).days
+    return candidates[day%len(candidates)]
+
+def source_window(article, pass_number):
+    require(type(pass_number) is int and pass_number>=0,'invalid_source_pass')
+    urls=eligible_urls(article)
+    require(bool(urls),'no_eligible_sources')
+    windows=(len(urls)+2)//3
+    start=(pass_number%windows)*3
+    return urls[start:start+3]
 
 def validate_facts(result,sources):
     require(isinstance(result,dict) and set(result)=={'facts'},'facts_schema')
@@ -96,7 +104,11 @@ def main():
         require(len(existing.encode())<18000,'existing_guide_too_large')
         report['existingArticleSha256']=hashlib.sha256(existing.encode()).hexdigest()
         sources=[]
-        for url in eligible_urls(article):
+        eligible_count=sum(len(eligible_urls(a))>=2 and a.get('category')!='Mises à jour' for a in articles)
+        source_pass=max(0,(now.date()-dt.date(2026,9,14)).days)//eligible_count
+        report['sourceWindowPass']=source_pass
+        report['eligibleSourceCount']=len(eligible_urls(article))
+        for url in source_window(article,source_pass):
             observed=source_fingerprint(url,opener=urllib.request.build_opener(SameHostRedirect()))
             sources.append({'url':url,'sha256':observed['sha256'],'text':observed['text'][:7000]})
         report['sources']=[{k:s[k] for k in ('url','sha256')} for s in sources]
