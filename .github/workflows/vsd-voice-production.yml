@@ -1,0 +1,71 @@
+name: Render one new VSD voiced storyboard
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 6 * * 2'
+permissions: {}
+concurrency:
+  group: vsd-voice-production
+  cancel-in-progress: false
+jobs:
+  render:
+    if: github.repository == 'MathCSN/voyagesansdetour' && github.ref == 'refs/heads/main' && github.event.repository.private == false && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Select without installing media dependencies
+        id: selection
+        working-directory: .github/vsd-production/voice
+        run: |
+          python3 -m unittest -q test_select_render
+          python3 select_render.py --plan "$RUNNER_TEMP/voice-plan.json" --github-output "$GITHUB_OUTPUT"
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+        if: steps.selection.outputs.selected == 'true'
+        with:
+          python-version: '3.12'
+      - name: Install free CPU renderer only for new work
+        if: steps.selection.outputs.selected == 'true'
+        run: |
+          python -m pip install --disable-pip-version-check piper-tts==1.8.0 Pillow==11.3.0
+          if ! command -v ffmpeg >/dev/null || ! command -v ffprobe >/dev/null; then
+            sudo apt-get update -qq
+            sudo apt-get install --yes --no-install-recommends ffmpeg
+          fi
+      - name: Persist attempt before rendering to prevent repeat work
+        if: steps.selection.outputs.selected == 'true'
+        working-directory: .github/vsd-production/voice
+        env:
+          VSD_RUN_ID: ${{ github.run_id }}
+        run: |
+          python select_render.py --plan "$RUNNER_TEMP/voice-plan.json" --reserve-run "$VSD_RUN_ID"
+          git add -- ../voice-attempts
+          git -c user.name='VSD media production' -c user.email='actions@users.noreply.github.com' commit -m 'Reserve one new voiced storyboard before rendering'
+          git push origin HEAD:main
+      - name: Render one source-bound complete-sentence candidate
+        if: steps.selection.outputs.selected == 'true'
+        working-directory: .github/vsd-production/voice
+        run: |
+          python - <<'PY'
+          import datetime as dt,json,os
+          from pathlib import Path
+          import storyboard
+          plan=json.loads((Path(os.environ['RUNNER_TEMP'])/'voice-plan.json').read_text())
+          storyboard.run(Path('../reel-drafts')/plan['selected'],Path(os.environ['RUNNER_TEMP'])/'vsd-storyboard-media',dt.datetime.now(dt.timezone.utc),sentence_flow=True)
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: steps.selection.outputs.selected == 'true'
+        with:
+          name: vsd-storyboard-media
+          path: ${{ runner.temp }}/vsd-storyboard-media
+          if-no-files-found: error
+          retention-days: 30
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: voice-selection
+          path: ${{ runner.temp }}/voice-plan.json
+          if-no-files-found: warn
+          retention-days: 30
