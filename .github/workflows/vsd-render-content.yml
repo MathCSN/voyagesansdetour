@@ -20,6 +20,7 @@ jobs:
     timeout-minutes: 10
     permissions:
       contents: write
+      actions: write
     defaults:
       run:
         working-directory: .github/vsd-production
@@ -59,7 +60,7 @@ jobs:
           python -m pip install --disable-pip-version-check -r requirements.txt
       - name: Validate production guards
         if: steps.period.outputs.active == 'true'
-        run: python -m unittest -q test_production test_pin_intake
+        run: python -m unittest -q test_production test_pin_intake test_pin_promotion
       - name: Produce at most one eligible clip
         if: steps.period.outputs.active == 'true'
         run: |
@@ -93,14 +94,35 @@ jobs:
       - name: Prepare at most one new article Pin draft
         if: steps.period.outputs.active == 'true'
         run: python pin_intake.py
+      - name: Admit one qualified Pin to its connected RSS feed
+        if: steps.period.outputs.active == 'true'
+        run: |
+          set -euo pipefail
+          python pin_promotion.py | tee "$RUNNER_TEMP/vsd-pin-admission.json"
+          if ! git diff --quiet -- ../../site-src/pinterest-additions.json; then
+            echo 'VSD_PIN_FEED_CHANGED=true' >> "$GITHUB_ENV"
+          fi
+      - name: Preserve Pin admission decision
+        if: steps.period.outputs.active == 'true'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: pin-admission
+          path: ${{ runner.temp }}/vsd-pin-admission.json
+          retention-days: 30
+          if-no-files-found: error
       - name: Persist finished media and receipts atomically
         if: steps.period.outputs.active == 'true'
         run: |
           set -euo pipefail
           # Only this job's completed artifact directory is staged. Temporary
           # files/lock files are excluded by the dedicated output .gitignore.
-          git add -- output pin-drafts
+          git add -- output pin-drafts pin-admissions.json ../../site-src/pinterest-additions.json ../../site-src/public-media.json ../../site-src/social-media/production
           if ! git diff --cached --quiet; then
             git -c user.name='Voyage Sans Détour' -c user.email='contact@voyagesansdetour.fr' commit -m 'Produce a reviewed media artifact with its receipt'
             git push origin HEAD:main
           fi
+      - name: Deploy the admitted feed through the existing checked build
+        if: env.VSD_PIN_FEED_CHANGED == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run build-pages.yml --ref main --repo MathCSN/voyagesansdetour

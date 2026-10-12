@@ -50,7 +50,7 @@ def render(article,output):
     manifest={'schemaVersion':1,'id':'pin-'+slug,'status':'draft_requires_review','publicationApproved':False,
               'title':title,'targetUrl':'https://voyagesansdetour.fr/portugal/'+slug+'/',
               'articleSha256':hashlib.sha256(raw).hexdigest(),'imageSha256':hashlib.sha256((target/'pin.jpg').read_bytes()).hexdigest(),
-              'width':1000,'height':1500,'originalComposition':True,'externalPhotographs':False,
+              'width':1000,'height':1500,'templateVersion':1,'rendererSha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),'originalComposition':True,'externalPhotographs':False,
               'limitations':['Draft only; target publication, board, caption, duplicate registry and rendered layout require review.']}
     (target/'draft.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n')
     for name in ('dmsans-OFL.txt','playfairdisplay-OFL.txt'):
