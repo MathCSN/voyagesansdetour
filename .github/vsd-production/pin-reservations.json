@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "reservedSlugs": [
+    "lisbonne-3-jours-sans-voiture",
+    "porto-3-jours-sans-voiture",
+    "ou-dormir-lisbonne-quartiers",
+    "lisbonne-ou-porto",
+    "sintra-depuis-lisbonne"
+  ],
+  "reason": "Existing launch drafts and native RSS items; reserved does not imply publication."
+}
