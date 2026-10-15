@@ -12,6 +12,7 @@ from guide_review import public_blocks,validate_checks,assess_article
 from discover_facts import SameHostRedirect
 from update_draft import digest
 import editorial_queue as q
+import entailment
 
 
 def apply_corrections(article,citations,facts,review,corrections):
@@ -66,13 +67,39 @@ def revision_packets(blocks,facts,review):
     return packets
 
 
+def revalidate_changed_sources(proposal, documents, token, invoke, output=None):
+    facts=copy.deepcopy(proposal['facts'])
+    for fact in facts:
+        require(isinstance(fact.get('sourceContext'),dict) and fact['sourceContext'].get('url') in documents,'revision_source_changed')
+        url=fact['sourceContext']['url']
+        text=documents.get(url,{}).get('text','')
+        quote=fact.get('quote','')
+        require(quote and text.count(quote)==1,'revision_source_changed')
+        start=text.index(quote)
+        fact['sourceContext']['excerpt']=text[max(0,start-400):start+len(quote)+400]
+    payload=[{k:f[k] for k in ('id','fact','quote','sourceContext')} for f in facts]
+    decision,usage=invoke([{'role':'system','content':entailment.INSTRUCTION},
+                           {'role':'user','content':json.dumps(payload,ensure_ascii=False)}],1200,token)
+    accepted=entailment.validate_checks(decision,facts)
+    manifest=[{'url':s['url'],'sha256':documents[s['url']]['sha256']} for s in proposal['sourceManifest']]
+    evidence={'originalSourceManifest':proposal['sourceManifest'],'currentSourceManifest':manifest,
+              'originalFactsSha256':digest(proposal['facts']),'currentFactsSha256':digest(facts),
+              'decision':decision,'usage':usage,'publicationApproved':False}
+    if output is not None:
+        (output/'guide-source-revalidation.json').write_text(json.dumps(evidence,ensure_ascii=False,indent=2)+'\n')
+    require(accepted=={f['id'] for f in facts},'revision_refreshed_facts_held')
+    return facts,manifest
+
+
 def revise(proposal,review,token,known,now,invoke=call,fetcher=source_fingerprint,output=None):
     article=proposal['article'];facts=proposal['facts'];citations=proposal['citations']
     require(now<HARD_STOP,'authorization_period_ended')
     require(review['articleSha256']==digest(article),'revision_stale_review')
     require({s['url'] for s in proposal['sourceManifest']}=={s['url'] for s in article['sources']},'revision_source_coverage')
-    for source in proposal['sourceManifest']:
-        require(fetcher(source['url'])['sha256']==source['sha256'],'revision_source_changed')
+    documents={source['url']:fetcher(source['url']) for source in proposal['sourceManifest']}
+    manifest=proposal['sourceManifest']
+    if any(documents[source['url']]['sha256']!=source['sha256'] for source in manifest):
+        facts,manifest=revalidate_changed_sources(proposal,documents,token,invoke,output)
     blocks=public_blocks(article,citations,facts)
     require(review['blocksSha256']==digest(blocks),'revision_stale_review')
     validate_checks({'checks':review['checks']},blocks)
@@ -92,7 +119,7 @@ def revise(proposal,review,token,known,now,invoke=call,fetcher=source_fingerprin
     if output is not None:(output/'guide-revised-article.json').write_text(json.dumps(revised,ensure_ascii=False,indent=2)+'\n')
     assessment,review_usage=assess_article(revised,citations,facts,token,invoke)
     return {'schemaVersion':1,'status':'revised_guide_ready_for_pilot_review' if assessment['supported'] else 'revised_guide_held',
-            'article':revised,'facts':facts,'citations':citations,'sourceManifest':proposal['sourceManifest'],
+            'article':revised,'facts':facts,'citations':citations,'sourceManifest':manifest,
             'originalArticleSha256':digest(article),'corrections':changes,'blockReview':assessment,
             'publicationApproved':False,'usage':{'revision':usage,'review':review_usage}}
 
