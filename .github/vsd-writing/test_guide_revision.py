@@ -59,3 +59,35 @@ class IsolatedEvidenceTests(unittest.TestCase):
         from guide_revision import revision_packets
         with self.assertRaisesRegex(ValueError,'block_budget'):
             revision_packets([],[],{'issues':[{'id':str(i)} for i in range(9)]})
+
+class BoundedFormatRepairTests(unittest.TestCase):
+    def setUp(self):
+        self.packet={'failedBlocks':[{'id':'description','maximumCharacters':180,'evidence':['f1']}], 'evidence':[{'id':'f1','text':'Museum fact'}]}
+    def run_case(self,texts,allow=True):
+        from guide_revision import correct_block
+        calls=[]
+        def invoke(messages,*args,**kwargs):
+            calls.append(copy.deepcopy(messages))
+            return {'changes':[{'id':'description','text':texts[len(calls)-1]}]},{}
+        return correct_block(self.packet,'Instructions','',invoke,allow),calls
+    def test_overlong_response_is_repaired_without_changing_evidence(self):
+        (change,attempts),calls=self.run_case(['x'*245,'Une description courte et documentée.'])
+        self.assertEqual(len(calls),2)
+        self.assertEqual(calls[0][:2],calls[1][:2])
+        self.assertEqual(len(attempts),2)
+        self.assertEqual(change['text'],'Une description courte et documentée.')
+        self.assertIn('245',calls[1][-1]['content'])
+    def test_valid_response_needs_no_extra_call(self):
+        (_,attempts),calls=self.run_case(['Description documentée'])
+        self.assertEqual(len(calls),1)
+    def test_second_invalid_response_holds(self):
+        with self.assertRaisesRegex(ValueError,'revision_block_length'):
+            self.run_case(['x'*245,'x'*181])
+    def test_exhausted_shared_repair_budget_holds_immediately(self):
+        with self.assertRaisesRegex(ValueError,'revision_block_length'):
+            self.run_case(['x'*245],False)
+    def test_repair_cannot_change_another_block(self):
+        from guide_revision import correct_block
+        outputs=iter([{'id':'description','text':'x'*245},{'id':'title','text':'Short'}])
+        with self.assertRaisesRegex(ValueError,'revision_cross_block_change'):
+            correct_block(self.packet,'Instructions','',lambda *a,**k:({'changes':[next(outputs)]},{}))
