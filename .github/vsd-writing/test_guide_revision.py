@@ -91,3 +91,25 @@ class BoundedFormatRepairTests(unittest.TestCase):
         outputs=iter([{'id':'description','text':'x'*245},{'id':'title','text':'Short'}])
         with self.assertRaisesRegex(ValueError,'revision_cross_block_change'):
             correct_block(self.packet,'Instructions','',lambda *a,**k:({'changes':[next(outputs)]},{}))
+
+class ResumeRevisionTests(unittest.TestCase):
+    setUp=RevisionTests.setUp
+    def proposal(self):
+        self.review['factsSha256']=digest(self.facts)
+        return {'status':'revised_guide_held','publicationApproved':False,'article':self.article,'facts':self.facts,'citations':self.citations,'blockReview':self.review,'revisionDepth':1}
+    def test_resume_uses_current_bound_review(self):
+        from guide_revision import resume_revision
+        p=self.proposal();actual,review,depth=resume_revision(p)
+        self.assertIs(actual,p);self.assertIs(review,self.review);self.assertEqual(depth,1)
+    def test_changed_facts_are_rejected(self):
+        from guide_revision import resume_revision
+        p=self.proposal();p['facts'][0]['quote']='Different'
+        with self.assertRaisesRegex(ValueError,'resume_binding'):resume_revision(p)
+    def test_depth_limit_prevents_unbounded_chain(self):
+        from guide_revision import resume_revision
+        p=self.proposal();p['revisionDepth']=3
+        with self.assertRaisesRegex(ValueError,'depth_budget'):resume_revision(p)
+    def test_ready_proposal_is_not_rewritten(self):
+        from guide_revision import resume_revision
+        p=self.proposal();p['status']='revised_guide_ready_for_pilot_review'
+        with self.assertRaisesRegex(ValueError,'resume_status'):resume_revision(p)

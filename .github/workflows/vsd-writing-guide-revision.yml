@@ -2,6 +2,10 @@ name: Revise a held VSD guide once
 on:
   workflow_dispatch:
     inputs:
+      revision_run:
+        description: Optional successful held revision to continue (maximum three generations)
+        type: string
+        default: ""
       proposal_run:
         description: Existing successful guide pilot to review without regenerating it
         type: string
@@ -33,18 +37,22 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           PROPOSAL_RUN: ${{ inputs.proposal_run }}
           REVIEW_RUN: ${{ inputs.review_run }}
+          REVISION_RUN: ${{ inputs.revision_run }}
         run: |
           python3 - <<'PY'
           import json,os,re,subprocess
           repo='MathCSN/voyagesansdetour'
-          for variable,workflow_name,artifact,folder in (
+          artifacts=[
               ('PROPOSAL_RUN','vsd-writing-guide.yml','new-guide-proposal','prior-guide'),
-              ('REVIEW_RUN','vsd-writing-guide-review.yml','guide-review-evaluation','prior-review')):
+              ('REVIEW_RUN','vsd-writing-guide-review.yml','guide-review-evaluation','prior-review')]
+          if os.environ.get('REVISION_RUN'):
+              artifacts.append(('REVISION_RUN','vsd-writing-guide-revision.yml','guide-revision','prior-revision'))
+          for variable,workflow_name,artifact,folder in artifacts:
               run=os.environ[variable]
               assert re.fullmatch(r'[0-9]{1,20}',run)
               metadata=json.loads(subprocess.check_output(['gh','api',f'repos/{repo}/actions/runs/{run}']))
               workflow=json.loads(subprocess.check_output(['gh','api',f'repos/{repo}/actions/workflows/{workflow_name}']))
-              assert metadata['workflow_id']==workflow['id'] and metadata['conclusion']=='success' and metadata['head_branch']=='main'
+              assert metadata['workflow_id']==workflow['id'] and metadata['conclusion']=='success' and metadata['head_branch']=='main' and metadata['run_attempt']==1
               subprocess.run(['gh','run','download',run,'--name',artifact,'--dir',os.environ['RUNNER_TEMP']+'/'+folder],check=True)
           PY
       - name: Revise held blocks and recheck the full text
@@ -53,6 +61,8 @@ jobs:
           REPORT_DIR: ${{ runner.temp }}/vsd-source-draft
           PROPOSAL_DIR: ${{ runner.temp }}/prior-guide
           REVIEW_DIR: ${{ runner.temp }}/prior-review
+          REVISION_DIR: ${{ inputs.revision_run != '' && format('{0}/prior-revision', runner.temp) || '' }}
+          PARENT_REVISION_RUN: ${{ inputs.revision_run }}
         run: python3 .github/vsd-writing/guide_revision.py
       - name: Admit one qualified new guide when the calendar allows it
         id: admission

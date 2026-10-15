@@ -148,6 +148,20 @@ def revise(proposal,review,token,known,now,invoke=call,fetcher=source_fingerprin
             'publicationApproved':False,'usage':{'revision':usage,'review':review_usage}}
 
 
+def resume_revision(proposal):
+    """Accept only a held, content-bound result; never turn a hold into approval."""
+    require(proposal.get('status')=='revised_guide_held' and proposal.get('publicationApproved') is False,'revision_resume_status')
+    depth=proposal.get('revisionDepth',1)
+    require(type(depth) is int and 1<=depth<3,'revision_depth_budget')
+    review=proposal.get('blockReview',{})
+    blocks=public_blocks(proposal['article'],proposal['citations'],proposal['facts'])
+    require(review.get('articleSha256')==digest(proposal['article']) and review.get('blocksSha256')==digest(blocks)
+            and review.get('factsSha256')==digest(proposal['facts']),'revision_resume_binding')
+    validate_checks({'checks':review['checks']},blocks)
+    require(review.get('supported') is False and review.get('issues'),'revision_resume_not_held')
+    return proposal,review,depth
+
+
 def main():
     out=Path(os.environ['REPORT_DIR']);out.mkdir(parents=True,exist_ok=True)
     now=dt.datetime.now(q.UTC).replace(microsecond=0)
@@ -158,7 +172,10 @@ def main():
         evaluation=q.read_json(Path(os.environ['REVIEW_DIR'])/'guide-review-evaluation.json')
         matching=[m for m in evaluation['models'] if m['model']==MODEL]
         require(len(matching)==1 and matching[0]['passed']==matching[0]['total'],'revision_review_unqualified')
-        review=matching[0]['fullGuideReview']
+        review=matching[0]['fullGuideReview'];depth=0
+        resume_path=os.environ.get('REVISION_DIR')
+        if resume_path:
+            proposal,review,depth=resume_revision(q.read_json(Path(resume_path)/'guide-revised-proposal.json'))
         articles,queue=q.load(ROOT,now)
         known=articles+[item['article'] for item in queue['drafts']]
         known += [q.read_json(path)['article'] for path in (ROOT/'editorial-candidates').glob('*.json')]
@@ -179,6 +196,9 @@ def main():
                 item.update(status='unavailable',errorType=type(error).__name__)
                 raise
         result=revise(proposal,review,token,known,now,invoke,fetcher,out)
+        result['revisionDepth']=depth+1
+        result['parentProposalSha256']=digest(proposal)
+        result['parentRevisionRun']=os.environ.get('PARENT_REVISION_RUN') or None
         (out/'guide-revised-proposal.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
         report['admissionStatus']=persist_qualification(result,known,now,out,fetcher)
         report['status']=result['status']
