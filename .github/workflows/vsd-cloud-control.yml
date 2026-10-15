@@ -21,7 +21,7 @@ jobs:
   invoke:
     if: github.repository == 'MathCSN/voyagesansdetour' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
-    timeout-minutes: 4
+    timeout-minutes: 8
     permissions:
       contents: read
     steps:
@@ -39,7 +39,7 @@ jobs:
           VSD_SITES_DISPATCH_TOKEN: ${{ secrets.VSD_SITES_DISPATCH_TOKEN }}
           VSD_STOCK_READ_ONLY: ${{ inputs.kind == 'stock_status' && 'true' || 'false' }}
         run: node .github/vsd-production/stock-control.mjs
-      - name: Invoke signed private server task (three bounded metrics passes)
+      - name: Invoke signed private server task (six bounded metrics passes)
         if: inputs.kind != 'stock' && inputs.kind != 'stock_status' && github.event.schedule != '53 8 * * 1'
         env:
           VSD_CLOUD_ORIGIN: https://voyage-sans-detour-admin.cousinmathis31.chatgpt.site

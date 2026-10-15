@@ -26,7 +26,7 @@ export async function invoke({env=process.env,fetcher=fetch,clock=Date.now,nonce
   if(origin!==ORIGIN||id!==ID||!/^[A-Za-z0-9_-]{43}$/.test(key??'')||!dispatcher||!Object.hasOwn(allowed,kind))throw new ControlError('configuration');
   const path='/internal/tick',body=JSON.stringify(archival?{kind,action:'reconcile_windsor_refusal'}:{kind}),digest=createHash('sha256').update(body).digest('hex');
   let lastSentAt=0,requests=0;
-  for(let pass=0;pass<(kind==='metrics'?3:1);pass++){
+  for(let pass=0;pass<(kind==='metrics'?6:1);pass++){
     if(clock()>=STOP)return {status:'period_ended',requests};
     const sentAt=Math.max(clock(),lastSentAt+1);lastSentAt=sentAt;
     const sent=String(sentAt),requestNonce=nonce();
