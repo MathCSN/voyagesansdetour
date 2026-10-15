@@ -4,7 +4,7 @@ This gate does not approve, enqueue, render, or publish content.
 """
 import datetime as dt
 import re
-from guide_review import public_blocks, validate_checks
+from guide_review import public_blocks, validate_checks, validate_metadata
 from source_draft import require, HARD_STOP, source_fingerprint
 from update_draft import digest
 import editorial_queue as q
@@ -15,6 +15,7 @@ def qualify(proposal, known, now, fetcher=source_fingerprint):
     require(proposal.get('status') in {'guide_ready_for_pilot_review','revised_guide_ready_for_pilot_review'}
             and proposal.get('publicationApproved') is False, 'guide_admission_held')
     article=proposal['article'];facts=proposal['facts'];review=proposal['blockReview']
+    validate_metadata(article)
     require(article['slug'] not in {a['slug'] for a in known}, 'guide_admission_duplicate')
     q.validate_article(article,{a['slug'] for a in known})
     checked=dt.date.fromisoformat(article['sourcesCheckedOn'])

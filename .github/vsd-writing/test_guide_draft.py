@@ -23,6 +23,10 @@ class GuideTests(unittest.TestCase):
             self.assertEqual(report['callsAttempted'],0)
             self.assertEqual(report['sourceFetches'],0)
             self.assertFalse(report['publicationAttempted'])
+    def test_overlong_metadata_is_rejected_before_editorial_review(self):
+        self.value['description']='x'*181
+        with self.assertRaisesRegex(ValueError,'metadata_length'):
+            g.validate_article_output(self.value,self.topic,self.facts,[],self.now)
     def test_valid_output_is_site_compatible(self):
         original=copy.deepcopy(self.value)
         article,citations=g.validate_article_output(self.value,self.topic,self.facts,[],self.now)

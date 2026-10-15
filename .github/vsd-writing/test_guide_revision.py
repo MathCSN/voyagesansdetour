@@ -23,6 +23,9 @@ class RevisionTests(unittest.TestCase):
     def test_stale_review_does_not_apply(self):
         self.article['title']='Changed'
         with self.assertRaisesRegex(ValueError,'stale_review'):self.apply([{'id':'description','text':'Correction'}])
+    def test_revision_cannot_expand_metadata_into_an_article(self):
+        with self.assertRaisesRegex(ValueError,'metadata_length'):
+            self.apply([{'id':'description','text':'x'*181}])
     def test_metadata_cannot_be_deleted(self):
         with self.assertRaisesRegex(ValueError,'revision_text'):self.apply([{'id':'description','text':None}])
 
