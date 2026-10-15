@@ -148,6 +148,22 @@ def revise(proposal,review,token,known,now,invoke=call,fetcher=source_fingerprin
             'publicationApproved':False,'usage':{'revision':usage,'review':review_usage}}
 
 
+def add_editorial_holds(proposal,review,hold):
+    require(hold.get('origin')=='editorial_review','revision_editorial_origin')
+    require(hold.get('articleSha256')==digest(proposal['article']) and hold.get('factsSha256')==digest(proposal['facts']),'revision_editorial_binding')
+    result=copy.deepcopy(review)
+    rows={row['id']:row for row in result['checks']}
+    require(isinstance(hold.get('issues'),list) and bool(hold['issues']),'revision_editorial_issues')
+    for issue in hold['issues']:
+        require(isinstance(issue,dict) and set(issue)=={'id','issue'} and issue['id'] in rows and isinstance(issue['issue'],str) and bool(issue['issue'].strip()),'revision_editorial_issue')
+        rows[issue['id']]['supported']=False
+        rows[issue['id']]['issues'].append('editorial_review: '+issue['issue'])
+        result['issues'].append(dict(issue,issue='editorial_review: '+issue['issue']))
+    result['supported']=False
+    validate_checks({'checks':result['checks']},public_blocks(proposal['article'],proposal['citations'],proposal['facts']))
+    return result
+
+
 def resume_revision(proposal):
     """Accept only a held, content-bound result; never turn a hold into approval."""
     require(proposal.get('status')=='revised_guide_held' and proposal.get('publicationApproved') is False,'revision_resume_status')
@@ -176,6 +192,11 @@ def main():
         resume_path=os.environ.get('REVISION_DIR')
         if resume_path:
             proposal,review,depth=resume_revision(q.read_json(Path(resume_path)/'guide-revised-proposal.json'))
+        hold_path=Path(__file__).parent/'editorial-holds'/(digest(proposal['article'])+'.json')
+        if hold_path.exists():
+            hold=q.read_json(hold_path)
+            review=add_editorial_holds(proposal,review,hold)
+            (out/'guide-editorial-hold-applied.json').write_text(json.dumps(hold,ensure_ascii=False,indent=2)+'\n')
         articles,queue=q.load(ROOT,now)
         known=articles+[item['article'] for item in queue['drafts']]
         known += [q.read_json(path)['article'] for path in (ROOT/'editorial-candidates').glob('*.json')]

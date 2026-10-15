@@ -1,0 +1,12 @@
+{
+  "articleSha256": "84fa0c7601d2b31eeff2e4e7a96ff54bb1a51c74b66ad51a55b0c6bc7bbfcfb6",
+  "factsSha256": "e1a080061c3c23cf4b2c26e354c04aec7007a3c53003b610b6fe671a99dd7e7e",
+  "origin": "editorial_review",
+  "sourceRun": 38802079622,
+  "issues": [
+    {
+      "id": "section-c1-p1",
+      "issue": "La formulation abrite une collection dans les rues confond le bâtiment qui abrite le musée et la collection urbaine évoquée séparément par la source. Supprimer cette formulation ambiguë, sans inventer une localisation des objets."
+    }
+  ]
+}

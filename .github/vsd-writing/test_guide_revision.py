@@ -113,3 +113,22 @@ class ResumeRevisionTests(unittest.TestCase):
         from guide_revision import resume_revision
         p=self.proposal();p['status']='revised_guide_ready_for_pilot_review'
         with self.assertRaisesRegex(ValueError,'resume_status'):resume_revision(p)
+
+class EditorialHoldTests(unittest.TestCase):
+    setUp=RevisionTests.setUp
+    def test_additive_hold_preserves_original_and_existing_rejection(self):
+        from guide_revision import add_editorial_holds
+        proposal={'article':self.article,'facts':self.facts,'citations':self.citations}
+        before=copy.deepcopy(self.review)
+        hold={'origin':'editorial_review','articleSha256':digest(self.article),'factsSha256':digest(self.facts),'issues':[{'id':'title','issue':'Ambiguous wording'}]}
+        updated=add_editorial_holds(proposal,self.review,hold)
+        self.assertEqual(self.review,before)
+        self.assertFalse(updated['supported'])
+        self.assertEqual({x['id'] for x in updated['issues']},{'description','title'})
+        hold['factsSha256']='stale'
+        with self.assertRaisesRegex(ValueError,'editorial_binding'):add_editorial_holds(proposal,self.review,hold)
+    def test_hold_cannot_invent_a_block(self):
+        from guide_revision import add_editorial_holds
+        proposal={'article':self.article,'facts':self.facts,'citations':self.citations}
+        hold={'origin':'editorial_review','articleSha256':digest(self.article),'factsSha256':digest(self.facts),'issues':[{'id':'missing','issue':'No'}]}
+        with self.assertRaisesRegex(ValueError,'editorial_issue'):add_editorial_holds(proposal,self.review,hold)
