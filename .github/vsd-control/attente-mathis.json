@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-10-24",
+  "items": [
+    {
+      "title": "Compte Instagram @voyagesansdetour (sans .fr)",
+      "url": "https://www.instagram.com/voyagesansdetour/",
+      "action": "Ce compte vide n'est pas celui du blog (le blog publie sur @voyagesansdetour.fr). Vérifier à qui il appartient ; s'il est à vous, mettre dans sa bio un lien vers @voyagesansdetour.fr ou le supprimer."
+    },
+    {
+      "title": "Épingle Sintra en double (12/10)",
+      "url": "https://fr.pinterest.com/pin/1138918193312718124/",
+      "action": "Pinterest a importé deux fois la même épingle à 2 secondes d'écart. Supprimer l'une des deux depuis le profil (facultatif)."
+    },
+    {
+      "title": "Tableaux Pinterest Espagne et Italie",
+      "url": "https://fr.pinterest.com/voyagesansdetour/",
+      "action": "Les épingles des guides Espagne et Italie sont prêtes mais attendent un tableau. Créer les tableaux « Espagne sans voiture » et « Italie sans voiture », puis brancher leur flux RSS (Paramètres > Importer du contenu) une fois les flux ajoutés au site ; il faudra alors les déclarer dans COUNTRY_FEEDS (pin_promotion.py)."
+    },
+    {
+      "title": "Google AdSense : problèmes à résoudre (mail du 19/10)",
+      "url": "https://www.google.com/adsense/",
+      "action": "AdSense indique des problèmes à corriger sur le site avant de pouvoir diffuser des annonces. Ouvrir AdSense > Sites pour voir lesquels (sans effet sur la publication des posts)."
+    },
+    {
+      "title": "Carrousels Instagram (facultatif)",
+      "url": "https://github.com/MathCSN/voyagesansdetour/blob/main/docs/chaine-autonome.md#le-trajet-dun-post",
+      "action": "Le serveur n'accepte que des reels sur Instagram. Pour publier aussi des carrousels, faire modifier et redéployer le panneau privé par une session Codex (projet BLOG), puis ajouter « carousel » aux formats Instagram autorisés."
+    },
+    {
+      "title": "Panneau privé de publication",
+      "url": "https://voyage-sans-detour-admin.cousinmathis31.chatgpt.site",
+      "action": "Si Buffer se déconnecte d'Instagram ou de Facebook, le reconnecter dans Buffer (publish.buffer.com > Channels) puis vérifier ici que les publications repartent."
+    }
+  ]
+}

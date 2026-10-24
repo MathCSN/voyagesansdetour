@@ -648,6 +648,10 @@ async function runStockControl({ repositoryRoot, transport, now = () => (/* @__P
     ...importReason ? { importReason } : {}
   };
 }
+// Nothing importable (only expired or future lots) is normal: the weekly report alerts on an empty queue.
+function isSettledStockStatus(status) {
+  return ["all_imported", "stock_settled", "stock_confirmed", "stock_available", "no_eligible_stock"].includes(status);
+}
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve2(process.argv[1])).href) {
   try {
     if (Date.now() > END) {
@@ -662,7 +666,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve2(process.argv[1
     await writeFile("stock-control-result.json", JSON.stringify(evidence, null, 2) + "\n", { flag: "wx" });
     console.log("Cloud receipt: stock / " + report.status + ".");
     console.log(JSON.stringify(evidence));
-    if (!["all_imported", "stock_settled", "stock_confirmed", "stock_available"].includes(report.status)) process.exitCode = 1;
+    if (!isSettledStockStatus(report.status)) process.exitCode = 1;
   } catch {
     console.error("Cloud stock not confirmed. No automatic import retry was made.");
     process.exitCode = 1;
@@ -670,5 +674,6 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve2(process.argv[1
 }
 export {
   createStockTransport,
+  isSettledStockStatus,
   runStockControl
 };

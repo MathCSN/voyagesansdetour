@@ -3,9 +3,17 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
+import re
 from PIL import Image,ImageDraw,ImageFont
 
 HERE=Path(__file__).resolve().parent
+ORIGIN='https://voyagesansdetour.fr'
+
+def article_path(article):
+    # Same rule as the site: guides live under their country, Portugal by default.
+    country=article.get('country','portugal')
+    if not isinstance(country,str) or not re.fullmatch(r'[a-z]+(?:-[a-z]+)*',country):raise ValueError('invalid_country')
+    return '/'+country+'/'+article['slug']+'/'
 
 def wrap(draw,text,font,width):
     lines=[];line=''
@@ -23,6 +31,7 @@ def render(article,output):
     if not isinstance(slug,str) or not slug or any(c not in 'abcdefghijklmnopqrstuvwxyz0123456789-' for c in slug):raise ValueError('invalid_slug')
     title=article['title']
     if not isinstance(title,str) or not 1<=len(title)<=200:raise ValueError('invalid_title')
+    target_url=ORIGIN+article_path(article)
     target=Path(output)/('pin-'+slug)
     if target.exists():raise ValueError('existing_draft_preserved')
     image=Image.new('RGB',(1000,1500),'#F7F4EC');draw=ImageDraw.Draw(image)
@@ -48,7 +57,7 @@ def render(article,output):
     image.save(target/'pin.jpg',quality=94)
     raw=json.dumps(article,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()
     manifest={'schemaVersion':1,'id':'pin-'+slug,'status':'draft_requires_review','publicationApproved':False,
-              'title':title,'targetUrl':'https://voyagesansdetour.fr/portugal/'+slug+'/',
+              'title':title,'targetUrl':target_url,
               'articleSha256':hashlib.sha256(raw).hexdigest(),'imageSha256':hashlib.sha256((target/'pin.jpg').read_bytes()).hexdigest(),
               'width':1000,'height':1500,'templateVersion':1,'rendererSha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),'originalComposition':True,'externalPhotographs':False,
               'limitations':['Draft only; target publication, board, caption, duplicate registry and rendered layout require review.']}

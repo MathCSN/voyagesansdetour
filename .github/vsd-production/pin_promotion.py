@@ -7,17 +7,17 @@ from pathlib import Path
 import shutil
 import urllib.request
 from PIL import Image
-from pin_intake import STOP
-from pin_draft import HERE
+from pin_intake import STOP,digest,renderer_sha256
+from pin_draft import HERE,ORIGIN,article_path
 
 FILES=('pin.jpg','credits.txt','dmsans-OFL.txt','playfairdisplay-OFL.txt')
-ORIGIN='https://voyagesansdetour.fr'
+# Only the Portugal preparation board has a connected RSS feed; other countries wait for theirs.
+COUNTRY_FEEDS={'portugal':'preparer-portugal.xml'}
 
-def digest(value):return hashlib.sha256(json.dumps(value,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()
 def require(value,code):
     if not value:raise ValueError(code)
 
-def select(articles,drafts,known,last,now):
+def select(articles,drafts,known,last,now,skip=frozenset()):
     require(now.tzinfo is not None,'timezone_required')
     if now>=STOP:return None,'period_ended'
     if last and now<last+dt.timedelta(days=7):return None,'cadence_hold'
@@ -27,16 +27,15 @@ def select(articles,drafts,known,last,now):
         require(folder.is_dir() and not folder.is_symlink(),'invalid_draft_folder')
         require(not (folder/'draft.json').is_symlink(),'manifest_symlink')
         item=json.loads((folder/'draft.json').read_text());identity=item['id']
-        if identity in known:continue
+        if identity in known or identity in skip:continue
         slug=identity.removeprefix('pin-');article=by_slug.get(slug)
-        # Only this board has a connected RSS route for new typographic Pins.
-        if not article or article.get('destination')!='Portugal':continue
+        if not article or article.get('country','portugal') not in COUNTRY_FEEDS:continue
         require(folder.name==identity and identity=='pin-'+article['slug'],'draft_identity')
-        require(item['articleSha256']==digest(article),'article_changed')
+        # A guide refreshed or a template changed after the draft is redrawn by pin_intake; never promote the old one.
+        if item['articleSha256']!=digest(article) or item.get('rendererSha256')!=renderer_sha256() or item['targetUrl']!=ORIGIN+article_path(article):continue
         require(item['title']==article['title'] and 1<=len(item['title'])<=100,'title_changed_or_too_long')
-        require(item['targetUrl']==ORIGIN+'/portugal/'+slug+'/','target_changed')
         require(item['status']=='draft_requires_review' and item['publicationApproved'] is False,'draft_state')
-        require(item.get('templateVersion')==1 and item.get('rendererSha256')==hashlib.sha256((HERE/'pin_draft.py').read_bytes()).hexdigest(),'unqualified_renderer')
+        require(item.get('templateVersion')==1,'unqualified_renderer')
         require(item.get('originalComposition') is True and item.get('externalPhotographs') is False,'unqualified_assets')
         for name in FILES:require((folder/name).is_file() and not (folder/name).is_symlink(),'missing_or_symlink_file')
         require(hashlib.sha256((folder/'pin.jpg').read_bytes()).hexdigest()==item['imageSha256'],'image_changed')
@@ -63,15 +62,19 @@ def run(root=HERE.parents[1],now=None,fetcher=verify_target):
     known={i['id'] for f in config['feeds'] for i in f['items']}
     known.update(i['id'] for i in json.loads((site/'pinterest-rss.json').read_text())['items'])
     last=max((dt.datetime.fromisoformat(x['admittedAt'].replace('Z','+00:00')) for x in ledger['items']),default=None)
-    selected,status=select(json.loads((site/'articles.json').read_text()),production/'pin-drafts',known,last,now)
-    if not selected:return {'status':status,'changed':False,'publicationConfirmed':False}
-    folder,item,article=selected;identity=item['id']
+    articles=json.loads((site/'articles.json').read_text());held=[]
+    while True:
+        selected,status=select(articles,production/'pin-drafts',known,last,now,frozenset(h['id'] for h in held))
+        if not selected:return {'status':status,'changed':False,'publicationConfirmed':False,'held':held}
+        folder,item,article=selected;identity=item['id']
+        # An unreachable guide page holds this Pin only; the next draft can still go out.
+        try:public_hash=fetcher(item['targetUrl'],item['title']);break
+        except (OSError,ValueError):held.append({'id':identity,'reason':'public_target_unavailable'})
     require(not any(x['contentId']==identity for x in media['items']),'media_already_exists')
-    feed=[f for f in config['feeds'] if f['file']=='preparer-portugal.xml'];require(len(feed)==1,'connected_feed_missing')
-    route='/portugal/'+article['slug']+'/'
+    feed=[f for f in config['feeds'] if f['file']==COUNTRY_FEEDS[article.get('country','portugal')]];require(len(feed)==1,'connected_feed_missing')
+    route=article_path(article)
     require(not any(p['linkPath']==route for f in config['feeds'] for p in f['items']),'route_already_admitted')
     require(not any(p['link_path']==route for p in json.loads((site/'pinterest-rss.json').read_text())['items']),'route_already_in_legacy_feed')
-    public_hash=fetcher(item['targetUrl'],item['title'])
     destination=site/'social-media/production'/identity;require(not destination.exists(),'destination_exists')
     files=[{'name':name,'bytes':(folder/name).stat().st_size,'sha256':hashlib.sha256((folder/name).read_bytes()).hexdigest()} for name in FILES]
     description='📌 Retrouvez le guide et ses sources pour préparer votre voyage au Portugal. Composition typographique originale Voyage Sans Détour, assistée par IA. Crédits : '+ORIGIN+'/social-media/production/'+identity+'/credits.txt'
@@ -82,6 +85,6 @@ def run(root=HERE.parents[1],now=None,fetcher=verify_target):
     destination.mkdir(parents=True)
     for name in FILES:shutil.copyfile(folder/name,destination/name)
     for path,value in [(site/'pinterest-additions.json',config),(site/'public-media.json',media),(ledger_path,ledger)]:path.write_text(json.dumps(value,ensure_ascii=False,indent=2)+'\n')
-    return {'status':'admitted_to_feed_not_published','changed':True,'id':identity,'publicationConfirmed':False}
+    return {'status':'admitted_to_feed_not_published','changed':True,'id':identity,'publicationConfirmed':False,'held':held}
 
 if __name__=='__main__':print(json.dumps(run()))
