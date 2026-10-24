@@ -26,6 +26,16 @@
       "title": "Panneau privé de publication",
       "url": "https://voyage-sans-detour-admin.cousinmathis31.chatgpt.site",
       "action": "Si Buffer se déconnecte d'Instagram ou de Facebook, le reconnecter dans Buffer (publish.buffer.com > Channels) puis vérifier ici que les publications repartent."
+    },
+    {
+      "title": "Tableau Pinterest « Inspirations voyage » (pilotage, dans le navigateur)",
+      "url": "https://fr.pinterest.com/voyagesansdetour/",
+      "action": "Créer le tableau « Inspirations voyage, partout dans le monde » puis le brancher sur le flux RSS https://voyagesansdetour.fr/pinterest/inspirations-voyage.xml (Paramètres > Import groupé > Connecter un flux RSS). Tout guide d'un pays sans tableau dédié y part, une épingle par semaine. Pour un pays qui mérite son propre tableau : créer le tableau, le brancher sur preparer-<pays>.xml et ajouter le flux avec \"countries\": [\"<pays>\"] dans site-src/pinterest-additions.json."
+    },
+    {
+      "title": "Bios Instagram, Pinterest et Facebook « blog voyage, monde entier »",
+      "url": "https://github.com/MathCSN/voyagesansdetour/blob/main/docs/bios-reseaux.md",
+      "action": "Coller la bio retenue dans Instagram (@voyagesansdetour.fr > Modifier le profil), Pinterest (Paramètres > Modifier le profil) et, si souhaité, Facebook (intro de la page). Longueurs déjà vérifiées."
     }
   ]
 }

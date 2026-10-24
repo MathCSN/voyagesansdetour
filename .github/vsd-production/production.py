@@ -44,6 +44,8 @@ SCENE_COUNT = {"reel": (5, 8), "carousel": (5, 8)}
 REEL_SECONDS = (15, 45)
 SCENE_SECONDS = (2.5, 6)
 CAPTION_LINES = (3, 5)
+# auto_social.py adds about three posts a week until HARD_STOP.
+CATALOGUE_MAX = 400
 INSTAGRAM_CAPTION_MAX = 2200
 MUSIC_FADE_OUT = 1.5
 REEL_BUTTON = {"instagram": "Le guide complet → lien en bio", "facebook": "Le guide complet → voyagesansdetour.fr"}
@@ -467,7 +469,7 @@ def exclusive(output):
 
 def catalogue_entries(root):
     catalogue = load_json(safe_path(root, "catalogue.json"))
-    ensure(catalogue.get("schemaVersion") == SCHEMA and isinstance(catalogue.get("items"), list) and len(catalogue["items"]) <= 100, "Invalid catalogue")
+    ensure(catalogue.get("schemaVersion") == SCHEMA and isinstance(catalogue.get("items"), list) and len(catalogue["items"]) <= CATALOGUE_MAX, "Invalid catalogue")
     entries, identifiers, filenames = [], set(), set()
     for entry in catalogue["items"]:
         ensure(ID.fullmatch(entry.get("contentId", "")) and entry["contentId"] not in identifiers, "Duplicate/invalid catalogue identity")

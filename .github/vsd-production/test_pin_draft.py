@@ -3,7 +3,7 @@ from pathlib import Path
 import tempfile
 import unittest
 from PIL import Image
-from pin_draft import render
+from pin_draft import render,place_label
 
 PHOTO={'id':'grenade-alhambra','file':'photos/grenade-alhambra.jpg','source_page':'https://commons.wikimedia.org/wiki/File:Alhambra.jpg',
        'author':'Jane Doe','license':'CC BY-SA 4.0','license_url':'https://creativecommons.org/licenses/by-sa/4.0/',
@@ -34,5 +34,12 @@ class PinDraftTests(unittest.TestCase):
     def test_cover_with_a_non_free_license_is_refused(self):
         (self.site/'image-sources.json').write_text(json.dumps({'photos':[dict(PHOTO,license='All rights reserved')]}))
         with self.assertRaisesRegex(ValueError,'photo_license'):render(GUIDE,self.output,site=self.site)
+
+    def test_label_names_the_country_and_place_never_a_fixed_angle(self):
+        (self.site/'destinations.json').write_text(json.dumps({'countries':{'japon':{'name':'Japon','in':'au Japon'}}}))
+        self.assertEqual(place_label({'country':'japon','destination':'Kyoto'},self.site),'JAPON · KYOTO')
+        self.assertEqual(place_label({'country':'espagne','destination':'Andalousie'},self.site),'ESPAGNE · ANDALOUSIE')
+        self.assertEqual(place_label({'destination':'Portugal'},self.site),'PORTUGAL')
+        self.assertNotIn('VOITURE',place_label(GUIDE,self.site))
 
 if __name__=='__main__':unittest.main()
