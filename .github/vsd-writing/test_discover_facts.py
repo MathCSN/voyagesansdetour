@@ -1,6 +1,13 @@
 import unittest
 from discover_facts import eligible_urls,validate_facts,validate_review
 class DiscoveryTests(unittest.TestCase):
+    def test_every_published_guide_can_receive_automatic_updates(self):
+        import json
+        from pathlib import Path
+        articles=json.loads((Path(__file__).resolve().parents[2]/'site-src/articles.json').read_text())
+        for article in articles:
+            with self.subTest(guide=article['slug']):
+                self.assertGreaterEqual(len(eligible_urls(article)),2)
     def test_only_reviewed_hosts_and_html_candidates(self):
         a={'sources':[{'url':u} for u in ['https://evil.example/a','https://www.cp.pt/a.pdf','https://www.cp.pt/info/en/w/luggage','https://user:password@www.cp.pt/','http://www.cp.pt/']]}
         self.assertEqual(eligible_urls(a),['https://www.cp.pt/info/en/w/luggage'])

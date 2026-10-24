@@ -318,6 +318,15 @@ class DestinationImageBuildTest(unittest.TestCase):
         self.assertIn(image['caption'],read(self.out,'/credits/'))
         self.assertTrue((self.out/'assets/photos/guimaraes-chateau-800.jpg').is_file())
 
+    def test_every_cover_and_section_photo_id_exists_in_the_catalogue(self):
+        ids={p['id'] for p in json.loads((ROOT/'image-sources.json').read_text())['photos']}
+        topics=json.loads((ROOT.parent/'.github/vsd-writing/guide-topics.json').read_text())
+        for item in json.loads((ROOT/'articles.json').read_text())+topics:
+            refs=[item.get('cover')]+[s.get('image') for s in item.get('sections',[])]
+            for ref in filter(None,refs):
+                with self.subTest(guide=item['slug'],photo=ref):
+                    self.assertIn(ref,ids)
+
     def test_every_photo_in_the_catalogue_has_a_verified_free_licence_and_both_sizes(self):
         sources=json.loads((ROOT/'image-sources.json').read_text())['photos']
         free=re.compile(r'^(CC BY(-SA)? [0-9.]+|CC0)$')

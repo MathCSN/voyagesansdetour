@@ -22,7 +22,11 @@ ALLOWED_HOSTS={'www.visitlisboa.com','visitporto.travel','www.parquesdesintra.pt
                'www.alhambra-patronato.es','www.trenitalia.com','www.parconazionale5terre.it',
                'stcp.pt','ttsl.pt','castelodesaojorge.pt','gaiacablecar.com','www.sandeman.com',
                'www.taylor.pt','www.torredosclerigos.pt','livrarialello.pt','www.regaleira.pt',
-               'alcazarsevilla.org','www.catedraldesevilla.es','www.mezquita-catedraldecordoba.es'}
+               'alcazarsevilla.org','www.catedraldesevilla.es','www.mezquita-catedraldecordoba.es',
+               'cp.pt','www.ilhadeserta.com','fototeca.cm-lagos.pt','www.magnificodouro.pt',
+               'www.quintadobomfim.com','museudodouro.pt','www.visitguimaraes.travel','pacodosduques.gov.pt',
+               'www.visitportugal.com','www.italotreno.com','www.travelmar.it','sitasudtrasporti.it',
+               'www.fondazioneravello.com','pompeiisites.org','www.italia.it','www.navigazionegolfodeipoeti.it'}
 
 class SameHostRedirect(urllib.request.HTTPRedirectHandler):
     def redirect_request(self,req,fp,code,msg,headers,newurl):

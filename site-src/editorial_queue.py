@@ -113,7 +113,7 @@ def validate_article(article, published_slugs):
         require(isinstance(section, dict) and {'id', 'title', 'paragraphs'} <= set(section) <=
                 {'id', 'title', 'paragraphs', 'bullets', 'table', 'image', 'tip'}, 'Section invalide.')
         require(isinstance(section.get('image', 'x'), str) and SLUG.fullmatch(section.get('image', 'x')) and
-                isinstance(section.get('tip', 'x'), str) and section.get('tip', 'x'), 'Photo ou astuce invalide.')
+                isinstance(section.get('tip', 'x'), str) and 0 < len(section.get('tip', 'x')) <= 3000, 'Photo ou astuce invalide.')
         require(isinstance(section['id'], str) and SLUG.fullmatch(section['id']) and section['id'] not in ids,
                 'Identifiant de section invalide ou dupliqué.')
         ids.add(section['id'])
