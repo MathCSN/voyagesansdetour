@@ -146,7 +146,12 @@ jobs:
           set -euo pipefail
           # Only this job's completed artifact directory is staged. Temporary
           # files/lock files are excluded by the dedicated output .gitignore.
-          git add -- output reviewed-social pin-drafts pin-admissions.json scenarios catalogue.json auto assets/photos/auto ../../site-src/pinterest-additions.json ../../site-src/public-media.json ../../site-src/social-media/production
+          # Folders such as auto/ only exist once a post has been generated: stage what exists.
+          paths=()
+          for path in output reviewed-social pin-drafts pin-admissions.json scenarios catalogue.json auto assets/photos/auto ../../site-src/pinterest-additions.json ../../site-src/public-media.json ../../site-src/social-media/production; do
+            if [ -e "$path" ]; then paths+=("$path"); fi
+          done
+          git add -- "${paths[@]}"
           if ! git diff --cached --quiet; then
             git -c user.name='Voyage Sans Détour' -c user.email='contact@voyagesansdetour.fr' commit -m 'Produce reviewed posts from published guides, with their receipts'
             # Another workflow may have pushed meanwhile: replay this commit on top instead of losing the renders.
