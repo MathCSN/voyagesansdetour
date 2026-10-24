@@ -12,6 +12,16 @@ ce dossier est la maison du code et des contenus.
 Le projet doit être **fini et 100 % autonome** : guides, posts et vidéos produits et publiés
 sans intervention, avec des contenus qui **donnent envie de partir et de cliquer**.
 
+## Positionnement (décision de Mathis, 24/10/2026)
+
+**Blog voyage généraliste, partout dans le monde**, plus seulement le Portugal ou l'Europe du Sud,
+et plus seulement « sans voiture ». On écrit **ce qui marche le mieux** : les sujets se choisissent
+selon la demande réelle (recherches Google et Pinterest, saisonnalité, faible concurrence), pas
+selon un angle imposé. Itinéraires, quand partir, budget, où dormir, road trips, que voir, conseils
+pratiques : tout est permis. « Sans voiture » reste une rubrique parmi d'autres. Les guides déjà
+publiés restent en ligne. Le nom « Voyage Sans Détour » se lit désormais comme « des guides directs,
+sans blabla ».
+
 ## Ce qui ne doit plus jamais sortir (diagnostic des posts actuels)
 
 Les reels et carrousels publiés jusqu'ici sont vides :
