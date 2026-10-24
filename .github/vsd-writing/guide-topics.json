@@ -49,7 +49,7 @@
         "must": [
           "shinkansen"
         ],
-        "alt": "Un shinkansen file devant le mont Fuji."
+        "alt": "Le mont Fuji vu depuis le quai de la gare shinkansen de Shin-Fuji."
       },
       {
         "id": "japon-kyoto-kiyomizu",
@@ -57,7 +57,7 @@
         "must": [
           "kiyomizu"
         ],
-        "alt": "Le temple Kiyomizu-dera et sa terrasse de bois au-dessus de Kyoto."
+        "alt": "Des promeneuses en kimono devant la porte nord du Kiyomizu-dera, à Kyoto."
       },
       {
         "id": "japon-hiroshima-miyajima",
@@ -147,7 +147,7 @@
         "must": [
           "train"
         ],
-        "alt": "Un train de nuit de la compagnie ferroviaire thaïlandaise."
+        "alt": "L’intérieur d’une voiture-couchettes de deuxième classe, banquettes en position jour."
       }
     ],
     "keywords": [
@@ -213,7 +213,7 @@
         "must": [
           "brooklyn bridge"
         ],
-        "alt": "Le pont de Brooklyn et les gratte-ciel de Manhattan."
+        "alt": "Les gratte-ciel de Lower Manhattan vus sous le pont de Brooklyn."
       }
     ],
     "keywords": [
@@ -271,7 +271,7 @@
           "hanoi",
           "train"
         ],
-        "alt": "Un train traverse une rue étroite de Hanoï."
+        "alt": "Une rue de Hanoï longée par la voie ferrée."
       },
       {
         "id": "vietnam-hue-citadelle",
@@ -356,7 +356,7 @@
         "must": [
           "monteverde"
         ],
-        "alt": "Un pont suspendu dans la forêt de nuages de Monteverde."
+        "alt": "La végétation dense de la forêt de nuages de Monteverde."
       }
     ],
     "keywords": [
@@ -553,7 +553,7 @@
         "must": [
           "jemaa"
         ],
-        "alt": "La place Jemaa el-Fna à la tombée de la nuit."
+        "alt": "La place Jemaa el-Fna, au cœur de la médina de Marrakech."
       },
       {
         "id": "marrakech-majorelle",
@@ -632,7 +632,7 @@
         "must": [
           "shibuya"
         ],
-        "alt": "Le carrefour de Shibuya, à Tokyo, à la nuit tombée."
+        "alt": "Le carrefour de Shibuya, à Tokyo."
       },
       {
         "id": "japon-osaka-dotonbori",
@@ -911,7 +911,7 @@
         "must": [
           "shinjuku"
         ],
-        "alt": "Les rues illuminées de Shinjuku, à Tokyo."
+        "alt": "Les rues et enseignes de Shinjuku, à Tokyo."
       },
       {
         "id": "tokyo-asakusa-sensoji",
@@ -1068,7 +1068,7 @@
         "must": [
           "felucca"
         ],
-        "alt": "Une felouque sur le Nil à Assouan."
+        "alt": "Une felouque sur le Nil, à Assouan."
       }
     ],
     "keywords": [
@@ -1195,7 +1195,7 @@
         "must": [
           "times square"
         ],
-        "alt": "Times Square illuminé la nuit."
+        "alt": "Times Square et ses écrans géants, à Manhattan."
       },
       {
         "id": "new-york-brooklyn-dumbo",
@@ -1415,7 +1415,7 @@
         "must": [
           "aurora"
         ],
-        "alt": "Une aurore boréale au-dessus de la forêt de Laponie."
+        "alt": "Une aurore boréale au-dessus du mont Saana, en Laponie finlandaise."
       },
       {
         "id": "laponie-husky",
@@ -1423,7 +1423,7 @@
         "must": [
           "dog"
         ],
-        "alt": "Un attelage de huskies dans la neige de Laponie."
+        "alt": "Des huskies attelés dans la neige de Laponie."
       }
     ],
     "keywords": [
@@ -1634,7 +1634,7 @@
         "must": [
           "kinkaku"
         ],
-        "alt": "Le pavillon d’Or du Kinkaku-ji reflété dans son étang."
+        "alt": "Le pavillon d’Or du Kinkaku-ji, à Kyoto."
       },
       {
         "id": "kyoto-gion",
@@ -2266,7 +2266,7 @@
         "must": [
           "abra"
         ],
-        "alt": "Une abra traverse la crique de Dubaï."
+        "alt": "Une abra, le bateau-taxi de la crique de Dubaï."
       },
       {
         "id": "dubai-desert",
@@ -2623,7 +2623,7 @@
         "must": [
           "grand baie"
         ],
-        "alt": "Les bateaux au mouillage dans le lagon de Grand Baie."
+        "alt": "Le lagon de Grand Baie, au nord de l’île Maurice."
       }
     ],
     "keywords": [
@@ -2675,7 +2675,7 @@
         "must": [
           "balloon"
         ],
-        "alt": "Les montgolfières au-dessus de Göreme au lever du soleil."
+        "alt": "Des montgolfières au-dessus des vallées de Cappadoce."
       },
       {
         "id": "cappadoce-cheminees",
@@ -4622,7 +4622,7 @@
         "must": [
           "taj mahal"
         ],
-        "alt": "Le Taj Mahal, à Agra, au petit matin."
+        "alt": "Le Taj Mahal, à Agra."
       },
       {
         "id": "inde-jaipur-hawa-mahal",
@@ -4707,7 +4707,7 @@
         "must": [
           "sossusvlei"
         ],
-        "alt": "Les dunes de Sossusvlei au lever du jour."
+        "alt": "Les dunes rouges de Sossusvlei, dans le désert du Namib."
       }
     ],
     "keywords": [
@@ -4803,7 +4803,7 @@
         "must": [
           "angkor wat"
         ],
-        "alt": "Angkor Wat au lever du soleil, reflété dans le bassin."
+        "alt": "Le temple d’Angkor Wat, près de Siem Reap."
       },
       {
         "id": "angkor-ta-prohm",
@@ -4921,7 +4921,7 @@
         "must": [
           "machu picchu"
         ],
-        "alt": "Le Machu Picchu et le Huayna Picchu dans la brume."
+        "alt": "La citadelle du Machu Picchu et le Huayna Picchu."
       },
       {
         "id": "machu-picchu-cuzco",
@@ -5038,7 +5038,7 @@
         "must": [
           "uluru"
         ],
-        "alt": "Uluru au coucher du soleil."
+        "alt": "Uluru, le monolithe rouge du centre de l’Australie."
       },
       {
         "id": "australie-sydney-opera",

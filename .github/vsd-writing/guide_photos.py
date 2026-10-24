@@ -173,6 +173,6 @@ def install(selection,run_dir,site_root,needed=()):
         ids.add(record['id'])
     updated=dict(catalogue,photos=catalogue['photos']+selection['records'])
     temporary=sources_path.with_name(sources_path.name+'.tmp')
-    temporary.write_text(json.dumps(updated,ensure_ascii=False,indent=1)+'\n')
+    temporary.write_text(json.dumps(updated,ensure_ascii=False,indent=2)+'\n')
     temporary.replace(sources_path)
     return [r['id'] for r in selection['records']]
