@@ -107,3 +107,24 @@ class GuideTests(unittest.TestCase):
         self.assertFalse(result['blockReview']['supported'])
         self.assertEqual(result['status'],'guide_held_by_review')
         self.assertFalse(result['publicationApproved'])
+
+    def test_open_topics_rotate_so_a_held_topic_never_blocks_the_calendar(self):
+        second=dict(self.topic,slug='aveiro-canaux')
+        picked={g.select_topic([self.topic,second],[],self.now+dt.timedelta(days=day))['slug'] for day in range(0,12)}
+        self.assertEqual(picked,{self.topic['slug'],second['slug']})
+        self.assertEqual(g.select_topic([self.topic,second],[{'slug':self.topic['slug']}],self.now)['slug'],'aveiro-canaux')
+
+    def test_topic_country_and_cover_reach_the_site_article(self):
+        self.topic.update(country='portugal',cover='lisbonne-tram-28',category='Itinéraires')
+        article,_=g.validate_article_output(self.value,self.topic,self.facts,[],self.now)
+        self.assertEqual((article['country'],article['cover'],article['category']),('portugal','lisbonne-tram-28','Itinéraires'))
+        q.validate_article(article,set())
+
+    def test_unknown_topic_country_is_rejected(self):
+        self.topic['country']='atlantide'
+        with self.assertRaisesRegex(ValueError,'guide_topic_country'):g.select_topic([self.topic],[])
+
+    def test_catalogue_topics_use_official_hosts_only(self):
+        topics=json.loads(g.TOPICS.read_text())
+        self.assertGreaterEqual(len(topics),8)
+        self.assertIsNotNone(g.select_topic(topics,[]))

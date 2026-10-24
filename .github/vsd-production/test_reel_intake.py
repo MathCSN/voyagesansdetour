@@ -54,10 +54,27 @@ class IntakeTests(unittest.TestCase):
             self.assertEqual(self.run_intake(Mock(side_effect=AssertionError('fetch')))['created'],0)
         self.assertFalse(self.output.exists())
     def test_unpublished_excerpt_or_wrong_canonical_cannot_create_draft(self):
-        for page in [b'<link rel="canonical" href="https://other.example/"><p>other</p>',
-                     b'<link rel="canonical" href="https://voyagesansdetour.fr/portugal/bagages-portugal/"><p>changed</p>']:
-            with self.assertRaises(ValueError):self.run_intake(lambda url:page)
+        for page,reason in [(b'<link rel="canonical" href="https://other.example/"><p>other</p>','public_canonical_mismatch'),
+                            (b'<link rel="canonical" href="https://voyagesansdetour.fr/portugal/bagages-portugal/"><p>changed</p>','excerpt_not_public')]:
+            result=self.run_intake(lambda url:page)
+            self.assertEqual((result['created'],result['held']),(0,[{'slug':self.article['slug'],'reason':reason}]))
         self.assertFalse(self.output.exists())
+    def test_guide_outside_portugal_uses_its_country_path(self):
+        self.article.update(slug='madrid-3-jours',country='espagne');self.save()
+        urls=[];result=self.run_intake(lambda url:(urls.append(url),self.fetch(url))[1])
+        self.assertEqual(urls,['https://voyagesansdetour.fr/espagne/madrid-3-jours/'])
+        self.assertEqual(result['created'],1)
+        draft=json.loads((self.output/result['id']/'storyboard.json').read_text())
+        self.assertEqual(draft['targetUrl'],'https://voyagesansdetour.fr/espagne/madrid-3-jours/')
+    def test_unavailable_page_is_held_without_stopping_other_guides(self):
+        def fetch(url):
+            if '/italie/' in url:raise OSError('HTTP Error 404')
+            return self.fetch(url)
+        rome=copy.deepcopy(self.article);rome.update(slug='rome-3-jours',country='italie',publishedOn='2026-10-11')
+        (self.site/'articles.json').write_text(json.dumps([rome,self.article],ensure_ascii=False))
+        result=self.run_intake(fetch)
+        self.assertEqual(result['created'],1)
+        self.assertEqual(result['held'],[{'slug':'rome-3-jours','reason':'public_page_unavailable'}])
     def test_corruption_is_not_repaired_by_overwriting(self):
         result=self.run_intake();(self.output/result['id']/'storyboard.json').write_text('{}')
         with self.assertRaisesRegex(ValueError,'storyboard_changed'):self.run_intake()

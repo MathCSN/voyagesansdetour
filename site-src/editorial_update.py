@@ -85,7 +85,6 @@ def apply_file(patch_path,root=ROOT,now=None):
 
 def record_receipt(articles,ledger,patch,body,now):
     """Confirm this addition's visible paragraph, not an unrelated full-build hash."""
-    import html
     q.require(patch['approvalSha256']==approval_hash(patch),'Update changed after review')
     matches=[e for e in ledger['updates'] if e['id']==patch['id']]
     q.require(len(matches)==1 and matches[0]['approvalSha256']==patch['approvalSha256'],'Applied update missing')
@@ -93,12 +92,12 @@ def record_receipt(articles,ledger,patch,body,now):
     article=next(a for a in articles if a['slug']==patch['slug'])
     q.require(q.digest(article)==entry['afterSha256'],'Article changed before update confirmation')
     q.require(q.instant(entry['appliedAt'])<=now<q.instant(patch['validUntil']),'Update confirmation outside review window')
-    expected='<p>'+html.escape(patch['paragraph'])+'</p>'
+    expected='<p>'+q.html_text(patch['paragraph'])+'</p>'
     q.require(body.decode('utf-8').count(expected)==1,'Published update paragraph missing or duplicated')
     result=copy.deepcopy(ledger)
     target=next(e for e in result['updates'] if e['id']==patch['id'])
     if target['receipt'] is None:
-        target['receipt']={'verifiedAt':q.iso(now),'url':q.ORIGIN+'/portugal/'+patch['slug']+'/',
+        target['receipt']={'verifiedAt':q.iso(now),'url':q.ORIGIN+q.article_path(article),
             'htmlSha256':hashlib.sha256(body).hexdigest(),'paragraphSha256':q.digest(patch['paragraph']),
             'verification':'exact-paragraph-presence-v1'}
     return result
@@ -109,7 +108,7 @@ def confirm_file(patch_path,root=ROOT,fetcher=q.fetch_public,now=None):
     q.require(q.SLUG.fullmatch(patch['slug']),'Invalid update slug')
     articles,_=q.load(root,now)
     ledger=q.read_json(root/'editorial-updates.json')
-    body=fetcher(q.ORIGIN+'/portugal/'+patch['slug']+'/')
+    body=fetcher(q.ORIGIN+q.article_path(next(a for a in articles if a['slug']==patch['slug'])))
     result=record_receipt(articles,ledger,patch,body,now)
     q.write_json(root/'editorial-updates.json',result)
     return next(e['receipt'] for e in result['updates'] if e['id']==patch['id'])

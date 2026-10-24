@@ -11,6 +11,8 @@ import re
 import tempfile
 import urllib.request
 
+from pin_draft import article_path
+
 HERE=Path(__file__).resolve().parent
 STOP=dt.datetime(2027,9,14,21,59,59,tzinfo=dt.timezone.utc)
 ORIGIN='https://voyagesansdetour.fr'
@@ -105,12 +107,19 @@ def run(root=HERE,output=None,now=None,fetcher=fetch_public):
         selected=excerpts(article)
         if len(selected)!=2:
             held.append({'slug':slug,'reason':'insufficient_short_exact_excerpts'});continue
-        url=ORIGIN+'/portugal/'+slug+'/'
-        raw=fetcher(url)
-        if not isinstance(raw,bytes) or len(raw)>2_000_000:raise ValueError('public_html_invalid')
-        page=PublicArticle();page.feed(raw.decode('utf-8'))
-        if page.canonicals!=[url]:raise ValueError('public_canonical_mismatch')
-        if not all(normalized(item['text']) in page.paragraphs for item in selected):raise ValueError('excerpt_not_public')
+        url=ORIGIN+article_path(article)
+        # A guide not yet deployed (or moved) is held; it never stops the other guides.
+        try:
+            raw=fetcher(url)
+        except (OSError,ValueError):
+            held.append({'slug':slug,'reason':'public_page_unavailable'});continue
+        if not isinstance(raw,bytes) or len(raw)>2_000_000:
+            held.append({'slug':slug,'reason':'public_html_invalid'});continue
+        page=PublicArticle();page.feed(raw.decode('utf-8','replace'))
+        if page.canonicals!=[url]:
+            held.append({'slug':slug,'reason':'public_canonical_mismatch'});continue
+        if not all(normalized(item['text']) in page.paragraphs for item in selected):
+            held.append({'slug':slug,'reason':'excerpt_not_public'});continue
         identity='reel-article-'+slug
         draft={'schemaVersion':1,'id':identity,'status':'storyboard_requires_media_review','publicationApproved':False,
                'createdAt':now.isoformat(),'title':article['title'],'targetUrl':url,

@@ -19,7 +19,7 @@ def build(root,out,origin):
             identity=pin['id'];route=pin['linkPath'];media='production/'+pin['mediaId']+'/pin.jpg'
             if not re.fullmatch(r'pin-[a-z0-9-]+',identity) or identity in seen or route in routes:raise ValueError('Duplicate or invalid Pin')
             seen.add(identity);routes.add(route)
-            if not re.fullmatch(r'/portugal/[a-z0-9-]+/',route) or not (out/route.strip('/')/'index.html').is_file():raise ValueError('Pin target missing')
+            if not re.fullmatch(r'/(?:portugal|espagne|italie)/[a-z0-9-]+/',route) or not (out/route.strip('/')/'index.html').is_file():raise ValueError('Pin target missing')
             if media not in approved or not (out/'social-media'/media).is_file():raise ValueError('Unapproved Pin media')
             if not 1<=len(pin['title'])<=100 or not 1<=len(pin['description'])<=500:raise ValueError('Pin text length')
             if (pin['width'],pin['height'])!=(1000,1500):raise ValueError('Unqualified Pin dimensions')
