@@ -2,7 +2,8 @@
 
 Blog de voyage sans voiture (voyagesansdetour.fr), site statique publié par GitHub Pages
 depuis `site-src/public` uniquement. Dépôt : `MathCSN/voyagesansdetour`.
-Réseaux : Instagram et Facebook via Buffer, Pinterest (fr.pinterest.com/voyagesansdetour).
+Réseaux : Instagram (**@voyagesansdetour.fr** ; @voyagesansdetour est un autre compte, vide)
+et Facebook via Buffer, Pinterest (fr.pinterest.com/voyagesansdetour).
 Pilotage : la holding (`~/holding-des-agents/bureau/blog`, Colette) lance des routines ;
 ce dossier est la maison du code et des contenus.
 
