@@ -169,7 +169,7 @@ class EditorialQueueTest(unittest.TestCase):
         # This integration test deliberately retains the real catalogue and links.
         self.articles = json.loads((ROOT / 'articles.json').read_text())
         self.draft(release_at='2099-10-15T10:00:00Z', valid_until='2099-10-27T23:59:59Z')
-        for name in ('generate.py', 'public_media.py', 'public-media.json', 'editorial_queue.py', 'stay22.py', 'stay22.json', 'affiliates.py', 'affiliates.json', 'mentions.json',
+        for name in ('generate.py', 'public_media.py', 'public-media.json', 'editorial_queue.py', 'destinations.py', 'destinations.json', 'stay22.py', 'stay22.json', 'affiliates.py', 'affiliates.json', 'mentions.json',
                      'analytics.json', 'pinterest-rss.json', 'image-sources.json'):
             shutil.copyfile(ROOT / name, self.root / name)
         (self.root / 'dist').mkdir()
@@ -203,9 +203,19 @@ class EditorialQueueTest(unittest.TestCase):
         article['sections'] = [dict(article['sections'][0], image='cinque-train', tip='Partir tôt.')]
         release.validate_article(article, {'fixture-published-guide'})
         self.assertEqual(release.article_path(article), '/italie/fixture-new-guide/')
-        for broken in ({'country': 'atlantide'}, {'keyFacts': [{'value': ''}]}, {'cover': '../x'}):
-            with self.subTest(field=list(broken)[0]), self.assertRaises(ValueError):
+        for broken in ({'country': 'Atlantide'}, {'country': 'guides'}, {'country': 'asie'},
+                       {'continent': 'Asie du Sud'}, {'keyFacts': [{'value': ''}]}, {'cover': '../x'}):
+            with self.subTest(field=broken), self.assertRaises(ValueError):
                 release.validate_article(dict(article, **broken), {'fixture-published-guide'})
+
+    def test_any_new_country_and_continent_are_accepted_for_the_world_blog(self):
+        article = dict(self.draft()['article'], country='japon', continent='asie')
+        release.validate_article(article, {'fixture-published-guide'})
+        self.assertEqual(release.article_path(article), '/japon/fixture-new-guide/')
+        # A country missing from destinations.json still passes: the site gives it a fallback page.
+        release.validate_article(dict(article, country='atlantide'), {'fixture-published-guide'})
+        self.assertIn('japon', release.COUNTRIES)
+        self.assertGreaterEqual(len(release.COUNTRIES), 80)
 
     def test_public_text_keeps_prices_on_one_line_for_pages_and_update_receipts(self):
         self.assertEqual(release.html_text('Ticket à 1,90 € & −65 %'), 'Ticket à 1,90\u00a0€ &amp; −65\u00a0%')

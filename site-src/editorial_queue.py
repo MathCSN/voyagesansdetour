@@ -13,6 +13,8 @@ import urllib.parse
 import urllib.request
 from zoneinfo import ZoneInfo
 
+import destinations
+
 ROOT = Path(__file__).resolve().parent
 ORIGIN = 'https://voyagesansdetour.fr'
 PARIS = ZoneInfo('Europe/Paris')
@@ -22,9 +24,11 @@ HASH = re.compile(r'[0-9a-f]{64}\Z')
 INSTANT = re.compile(r'\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?(?:Z|[+-]\d{2}:\d{2})\Z')
 ARTICLE_KEYS = {'slug', 'title', 'shortTitle', 'destination', 'category', 'description',
                 'readMinutes', 'summary', 'sections', 'faq', 'sources', 'related', 'sourcesCheckedOn'}
-# Optional enrichments: destination country (URL prefix), cover photo id and dated key figures.
-OPTIONAL_ARTICLE_KEYS = {'country', 'cover', 'keyFacts'}
-COUNTRIES = ('portugal', 'espagne', 'italie')
+# Optional enrichments: destination country (URL prefix), continent, cover photo id and dated key figures.
+OPTIONAL_ARTICLE_KEYS = {'country', 'continent', 'cover', 'keyFacts'}
+PLACES = destinations.load()
+# Countries with a curated name and preposition; valid_country() also admits new ones.
+COUNTRIES = tuple(PLACES['countries'])
 # One new guide per week at most: the calendar keeps the site alive without flooding it.
 RELEASE_INTERVAL = dt.timedelta(days=7)
 DRAFT_KEYS = {'id', 'article', 'releaseAt', 'validUntil', 'approval'}
@@ -81,6 +85,10 @@ def html_text(value, quote=True):
     return html.escape(value, quote).replace(' €', '\u00a0€').replace(' %', '\u00a0%')
 
 
+def valid_country(value):
+    return destinations.valid_country(value, PLACES)
+
+
 def article_path(article):
     return '/' + article.get('country', 'portugal') + '/' + article['slug'] + '/'
 
@@ -94,7 +102,8 @@ def approval_hash(draft):
 def validate_article(article, published_slugs):
     require(isinstance(article, dict) and ARTICLE_KEYS <= set(article) <= ARTICLE_KEYS | OPTIONAL_ARTICLE_KEYS,
             'Champs du brouillon invalides.')
-    require(article.get('country', 'portugal') in COUNTRIES, 'Pays du brouillon invalide.')
+    require(valid_country(article.get('country', 'portugal')), 'Pays du brouillon invalide.')
+    require(isinstance(article.get('continent', 'x'), str) and SLUG.fullmatch(article.get('continent', 'x')), 'Continent invalide.')
     require(isinstance(article.get('cover', 'x'), str) and SLUG.fullmatch(article.get('cover', 'x')), 'Photo de couverture invalide.')
     facts = article.get('keyFacts', [])
     require(isinstance(facts, list) and len(facts) <= 8 and
