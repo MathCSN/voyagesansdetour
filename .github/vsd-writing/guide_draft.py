@@ -8,6 +8,7 @@ import json
 import os
 import re
 from pathlib import Path
+import urllib.error
 import urllib.parse
 import urllib.request
 from source_draft import call,require,HARD_STOP,source_fingerprint,check_review,REVIEW_INSTRUCTION
@@ -36,6 +37,8 @@ NEURON_RATES={MODEL:(26668,204805),QWEN:(4625,30475)}
 # update discovery fit in the free allocation.
 NEURON_BUDGET=4800
 MAX_CALLS=40
+# Broken setup, not an editorial hold: these fail the workflow so the weekly report flags them.
+SETUP_ERRORS={'missing_secret','authorization_period_ended','guide_writer_model'}
 FIGURE=re.compile(r'\d|€|\$|£|¥|฿|₫')
 # Community wikis are read for climate, geography and routes, never for a price: a wiki
 # price has no reliable date, and the site promises prices checked on a given day.
@@ -305,7 +308,11 @@ def main():
     except Exception as error:
         report.update(status='held_no_retry',errorType=type(error).__name__)
         if isinstance(error,ValueError) and str(error).replace('_','').isalnum() and len(str(error))<60:report['reason']=str(error)
+        # A refused fact, a missing photo or an unreachable source holds this guide only: the
+        # next run tries again or another topic. A broken setup or an unexpected error fails.
+        editorial=isinstance(error,(ValueError,urllib.error.URLError))
+        report['setupFailure']=not editorial or str(error) in SETUP_ERRORS or str(error).startswith('guide_topic')
     (out/'guide-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
-    print(json.dumps({'status':report['status'],'callsAttempted':report['callsAttempted'],'neuronsUsed':report.get('neuronsUsed',0)}))
-    return 1 if report['status']=='held_no_retry' else 0
+    print(json.dumps({'status':report['status'],'reason':report.get('reason'),'callsAttempted':report['callsAttempted'],'neuronsUsed':report.get('neuronsUsed',0)}))
+    return 1 if report.get('setupFailure') else 0
 if __name__=='__main__':raise SystemExit(main())

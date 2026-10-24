@@ -47,9 +47,15 @@ class GuideTests(unittest.TestCase):
             self.assertEqual((report['status'],report['callsAttempted']),('calendar_full',0))
     def test_missing_photos_hold_the_guide_before_any_source_or_inference(self):
         with tempfile.TemporaryDirectory() as tmp, patch.dict(g.os.environ,{'REPORT_DIR':tmp,'CLOUDFLARE_WORKERS_AI_TOKEN':'x'},clear=True), patch.object(g,'quota_hold',return_value=None), patch.object(g,'guide_release_at',return_value=self.now), patch.object(g.guide_photos,'prepare',side_effect=ValueError('guide_photos_insufficient')), patch.object(g,'source_fingerprint',side_effect=AssertionError('source fetch')), patch.object(g,'call',side_effect=AssertionError('inference')):
-            self.assertEqual(g.main(),1)
+            self.assertEqual(g.main(),0)
             report=json.loads((Path(tmp)/'guide-report.json').read_text())
-            self.assertEqual((report['reason'],report['callsAttempted']),('guide_photos_insufficient',0))
+            self.assertEqual((report['status'],report['reason'],report['callsAttempted']),('held_no_retry','guide_photos_insufficient',0))
+            self.assertFalse(report['setupFailure'])
+    def test_broken_setup_or_unexpected_error_fails_the_workflow(self):
+        for error in (ValueError('missing_secret'),KeyError('sections'),ValueError('guide_topic_schema')):
+            with tempfile.TemporaryDirectory() as tmp, patch.dict(g.os.environ,{'REPORT_DIR':tmp},clear=True), patch.object(g,'quota_hold',return_value=None), patch.object(g,'guide_release_at',return_value=self.now), patch.object(g.guide_photos,'prepare',side_effect=error):
+                self.assertEqual(g.main(),1,error)
+                self.assertTrue(json.loads((Path(tmp)/'guide-report.json').read_text())['setupFailure'])
     def test_overlong_metadata_is_rejected_before_editorial_review(self):
         self.value['description']='x'*181
         with self.assertRaisesRegex(ValueError,'metadata_length'):
