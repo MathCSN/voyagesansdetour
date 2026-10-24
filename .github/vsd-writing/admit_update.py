@@ -11,16 +11,38 @@ import editorial_model_review as review
 from autonomous_editorial import HARD_STOP, source_fingerprint
 
 
-def cadence_open(articles,queue,ledger,now):
-    if now>=HARD_STOP or any(x['receipt'] is None for x in queue['promotions']+ledger['updates']):
-        return False
+# A guide may be written up to this long before its release slot (its review stays valid 48 h).
+GUIDE_LOOKAHEAD=dt.timedelta(hours=30)
+
+
+def latest_release(articles,queue,ledger):
     past=[dt.datetime.combine(dt.date.fromisoformat(a.get('publishedOn','2026-09-14')),dt.time(),q.PARIS).astimezone(q.UTC) for a in articles]
     past += [q.instant(x['promotedAt']) for x in queue['promotions']]
     past += [q.instant(x['appliedAt']) for x in ledger['updates']]
-    if past and now<max(past)+q.RELEASE_INTERVAL:return False
+    return max(past) if past else None
+
+
+def cadence_open(articles,queue,ledger,now):
+    if now>=HARD_STOP or any(x['receipt'] is None for x in queue['promotions']+ledger['updates']):
+        return False
+    latest=latest_release(articles,queue,ledger)
+    if latest and now.astimezone(q.PARIS).date()<q.release_day(latest):return False
     # Already reserved guides keep their calendar priority.
     if any(q.instant(x['releaseAt'])<=now+q.RELEASE_INTERVAL for x in queue['drafts']):return False
     return True
+
+
+def guide_release_at(articles,queue,ledger,now):
+    """Next release instant for one new guide, or None when the calendar is full.
+
+    One reserved guide at a time; it may be written the day before its slot so that a
+    held attempt still leaves a full day to retry without missing the slot."""
+    if now>=HARD_STOP or queue['drafts'] or any(x['receipt'] is None for x in queue['promotions']+ledger['updates']):
+        return None
+    latest=latest_release(articles,queue,ledger)
+    slot=dt.datetime.combine(q.release_day(latest),dt.time(),q.PARIS).astimezone(q.UTC) if latest else now
+    release=max(now,slot)
+    return release if release<=now+GUIDE_LOOKAHEAD and release<HARD_STOP else None
 
 
 def prepare(proposal,entailment,novelty,observed_at,article,now,fetcher=source_fingerprint):

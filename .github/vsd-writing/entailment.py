@@ -17,9 +17,10 @@ def validate_checks(result, facts):
     require(ids=={f['id'] for f in facts},'entailment_coverage')
     return accepted
 
-def assess(facts,token):
+def assess(facts,token,invoke=call):
     payload=[dict({k:f[k] for k in ('id','fact','quote')},sourceContext=f.get('sourceContext',{})) for f in facts]
-    result,usage=call([{'role':'system','content':INSTRUCTION},
-                       {'role':'user','content':json.dumps(payload,ensure_ascii=False)}],1200,token)
+    # About 120 output tokens per checked fact; a full guide checks up to 12 facts.
+    result,usage=invoke([{'role':'system','content':INSTRUCTION},
+                         {'role':'user','content':json.dumps(payload,ensure_ascii=False)}],max(1200,150*len(facts)),token)
     accepted=validate_checks(result,facts)
     return result,usage,accepted

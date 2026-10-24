@@ -63,13 +63,13 @@ def source_window(article, pass_number):
     return urls[start:start+3]
 
 def validate_facts(result,sources,max_facts=5):
-    require(type(max_facts) is int and 1<=max_facts<=8,'fact_budget')
+    require(type(max_facts) is int and 1<=max_facts<=12,'fact_budget')
     require(isinstance(result,dict) and set(result)=={'facts'},'facts_schema')
     facts=result['facts'];require(isinstance(facts,list) and len(facts)<=max_facts,'fact_count')
     ids=set()
     for f in facts:
         require(isinstance(f,dict) and set(f)=={'id','fact','source','quote','usefulness'},'fact_schema')
-        require(isinstance(f['id'],str) and re.fullmatch(r'c[1-'+str(max_facts)+']',f['id']) and f['id'] not in ids,'fact_id')
+        require(isinstance(f['id'],str) and re.fullmatch(r'c[1-9][0-9]?',f['id']) and int(f['id'][1:])<=max_facts and f['id'] not in ids,'fact_id')
         ids.add(f['id'])
         require(type(f['source']) is int and 0<=f['source']<len(sources),'source_index')
         require(isinstance(f['fact'],str) and 15<=len(f['fact'])<=450,'fact_text')
@@ -78,7 +78,7 @@ def validate_facts(result,sources,max_facts=5):
     return facts
 
 def partition_facts(result,sources,max_facts=5):
-    require(type(max_facts) is int and 1<=max_facts<=8,'fact_budget')
+    require(type(max_facts) is int and 1<=max_facts<=12,'fact_budget')
     require(isinstance(result,dict) and set(result)=={'facts'},'facts_schema')
     rows=result['facts'];require(isinstance(rows,list) and len(rows)<=max_facts,'fact_count')
     seen=set();valid=[];rejected=[]

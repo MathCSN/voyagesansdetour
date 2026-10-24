@@ -31,10 +31,22 @@ class CalendarTests(unittest.TestCase):
         self.assertFalse(self.run_admit()['changed'])
         self.assertEqual(self.articles,json.loads((self.root/'articles.json').read_text()))
     def test_recent_publication_prevents_source_fetch_and_mutation(self):
-        self.articles[0]['publishedOn']='2026-10-11';self.save()
+        self.articles[0]['publishedOn']='2026-10-12';self.save()
         self.assertEqual(self.run_admit()['status'],'cadence_or_pending_hold')
         self.fetch.assert_not_called()
         self.assertEqual(json.loads((self.root/'editorial-queue.json').read_text()),self.queue)
+    def test_guide_written_the_day_before_waits_for_its_two_day_slot(self):
+        self.articles[0]['publishedOn']='2026-10-11';self.save()
+        result=self.run_admit()
+        self.assertTrue(result['changed'])
+        self.assertEqual(result['releaseAt'],'2026-10-12T22:00:00Z')
+        self.assertFalse(a.q.promote(self.root,self.now,source_fetcher=self.fetch))
+        self.assertTrue(a.q.promote(self.root,a.q.instant('2026-10-13T05:41:00Z'),source_fetcher=self.fetch))
+    def test_second_guide_waits_until_the_reserved_one_is_published(self):
+        self.assertTrue(self.run_admit()['changed'])
+        other=copy.deepcopy(self.proposal);other['article']['slug']='autre-guide'
+        (self.out/'guide-proposal.json').write_text(json.dumps(other))
+        self.assertEqual(self.run_admit()['status'],'cadence_or_pending_hold')
     def test_changed_source_does_not_enqueue(self):
         self.fetch.return_value={'sha256':'b'*64,'text':'Changed'}
         with self.assertRaises(ValueError):self.run_admit()

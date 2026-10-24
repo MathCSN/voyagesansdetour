@@ -6,7 +6,7 @@ from update_draft import digest
 
 class RevisionTests(unittest.TestCase):
     def setUp(self):
-        paragraph=' '.join(['Une phrase de test documentée pour préserver un corps éditorial complet.']*8)
+        paragraph=' '.join(['Une phrase de test documentée pour préserver un corps éditorial complet.']*16)
         self.article={'title':'Titre','shortTitle':'Titre court','description':'Unique description','summary':'Résumé','sections':[{'id':'a','title':'A','paragraphs':[paragraph,paragraph]}],'faq':[],'readMinutes':2}
         self.citations={'a':['f1']};self.facts=[{'id':'f1','quote':'Preuve'}]
         blocks=public_blocks(self.article,self.citations,self.facts)

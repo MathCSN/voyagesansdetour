@@ -25,8 +25,8 @@ ARTICLE_KEYS = {'slug', 'title', 'shortTitle', 'destination', 'category', 'descr
 # Optional enrichments: destination country (URL prefix), cover photo id and dated key figures.
 OPTIONAL_ARTICLE_KEYS = {'country', 'cover', 'keyFacts'}
 COUNTRIES = ('portugal', 'espagne', 'italie')
-# One new guide per week at most: the calendar keeps the site alive without flooding it.
-RELEASE_INTERVAL = dt.timedelta(days=7)
+# One new guide every two days at most (three or four a week): steady, never a flood.
+RELEASE_INTERVAL = dt.timedelta(days=2)
 DRAFT_KEYS = {'id', 'article', 'releaseAt', 'validUntil', 'approval'}
 PROMOTION_KEYS = {'id', 'slug', 'approvalSha256', 'articleSha256', 'releaseAt', 'validUntil',
                   'approvedAt', 'promotedAt', 'receipt'}
@@ -83,6 +83,11 @@ def html_text(value, quote=True):
 
 def article_path(article):
     return '/' + article.get('country', 'portugal') + '/' + article['slug'] + '/'
+
+
+def release_day(latest):
+    """First Paris calendar day open to the next release: a daily build never misses it by minutes."""
+    return latest.astimezone(PARIS).date() + RELEASE_INTERVAL
 
 
 def approval_hash(draft):
@@ -254,7 +259,7 @@ def promote(root=ROOT, now=None, source_fetcher=None):
                  for a in articles)
     if queue['promotions']:
         latest = max(latest, max(instant(p['promotedAt']) for p in queue['promotions']))
-    if not due or any(p['receipt'] is None for p in queue['promotions']) or now < latest + RELEASE_INTERVAL:
+    if not due or any(p['receipt'] is None for p in queue['promotions']) or now.astimezone(PARIS).date() < release_day(latest):
         return False
     draft = due[0]
     recheck_generated_guide(root, draft, now, source_fetcher)

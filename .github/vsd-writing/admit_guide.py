@@ -5,7 +5,8 @@ import json
 import os
 from pathlib import Path
 from guide_admission import qualify
-from admit_update import cadence_open
+from admit_update import guide_release_at
+import guide_photos
 from source_draft import HARD_STOP, source_fingerprint
 import editorial_queue as q
 
@@ -30,11 +31,15 @@ def run(out,root=ROOT,now=None,fetcher=source_fingerprint):
         return {'status':'already_admitted','changed':False,'id':identity}
     if any(a['slug']==slug for a in articles):return {'status':'already_published','changed':False,'id':identity}
     ledger=q.read_json(root/'editorial-updates.json')
-    if not cadence_open(articles,queue,ledger,now):return {'status':'cadence_or_pending_hold','changed':False}
+    release=guide_release_at(articles,queue,ledger,now)
+    if release is None:return {'status':'cadence_or_pending_hold','changed':False}
     known=articles+[d['article'] for d in queue['drafts']]
     known += [q.read_json(p)['article'] for p in (root/'editorial-candidates').glob('*.json')]
     evidence=qualify(proposal,known,now,fetcher)
-    draft={'id':identity,'article':proposal['article'],'releaseAt':q.iso(now),
+    photos=proposal.get('photos',{'ids':[],'records':[],'hashes':{}})
+    used={proposal['article'].get('cover')}|{s.get('image') for s in proposal['article']['sections']}
+    q.require(set(photos['ids'])>=used-{None},'Guide photos missing from proposal')
+    draft={'id':identity,'article':proposal['article'],'releaseAt':q.iso(release),
            'validUntil':q.iso(min(now+dt.timedelta(hours=48),HARD_STOP)),
            'approval':{'approvedAt':q.iso(now),'sha256':''}}
     draft['approval']['sha256']=q.approval_hash(draft)
@@ -43,14 +48,15 @@ def run(out,root=ROOT,now=None,fetcher=source_fingerprint):
     proof=root/'editorial-guide-evidence'/(identity+'.json')
     q.require(not proof.parent.is_symlink() and not proof.exists(),'Guide evidence already exists')
     proof.parent.mkdir(exist_ok=True)
-    # Evidence first, queue last. Interrupted writes leave an explicit hold,
-    # never a queued article without its bound proposal and review.
+    # Photos and credits first, evidence next, queue last. Interrupted writes leave an
+    # explicit hold, never a queued article without its photos, proposal and review.
+    installed=guide_photos.install(photos,out,root,needed=used-{None})
     with proof.open('x') as handle:
         json.dump({'schemaVersion':1,'proposal':proposal,'verification':evidence,
                    'draftSha256':q.digest(draft)},handle,ensure_ascii=False,indent=2)
         handle.write('\n')
     q.write_json(root/'editorial-queue.json',updated)
-    return {'status':'admitted_not_published','changed':True,'id':identity}
+    return {'status':'admitted_not_published','changed':True,'id':identity,'releaseAt':draft['releaseAt'],'photosInstalled':installed}
 
 
 if __name__=='__main__':
