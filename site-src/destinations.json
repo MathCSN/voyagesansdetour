@@ -1,0 +1,940 @@
+{
+  "schemaVersion": 1,
+  "note": "Référentiel des destinations. Un guide dont le pays manque ici reste publié avec un nom déduit de son identifiant.",
+  "continents": [
+    {
+      "id": "europe",
+      "name": "Europe",
+      "preposition": "en Europe"
+    },
+    {
+      "id": "afrique",
+      "name": "Afrique",
+      "preposition": "en Afrique"
+    },
+    {
+      "id": "moyen-orient",
+      "name": "Moyen-Orient",
+      "preposition": "au Moyen-Orient"
+    },
+    {
+      "id": "asie",
+      "name": "Asie",
+      "preposition": "en Asie"
+    },
+    {
+      "id": "amerique-du-nord",
+      "name": "Amérique du Nord",
+      "preposition": "en Amérique du Nord"
+    },
+    {
+      "id": "amerique-centrale-caraibes",
+      "name": "Amérique centrale et Caraïbes",
+      "preposition": "en Amérique centrale et dans les Caraïbes",
+      "short": "Amérique centrale"
+    },
+    {
+      "id": "amerique-du-sud",
+      "name": "Amérique du Sud",
+      "preposition": "en Amérique du Sud"
+    },
+    {
+      "id": "oceanie",
+      "name": "Océanie",
+      "preposition": "en Océanie"
+    }
+  ],
+  "countries": [
+    {
+      "id": "france",
+      "name": "France",
+      "preposition": "en France",
+      "continent": "europe",
+      "iso": "FR",
+      "flag": "🇫🇷"
+    },
+    {
+      "id": "espagne",
+      "name": "Espagne",
+      "preposition": "en Espagne",
+      "continent": "europe",
+      "iso": "ES",
+      "flag": "🇪🇸",
+      "intro": "Séville, Cordoue et Grenade reliées par des trains rapides : l’Andalousie d’un patio à l’autre, avec les durées, les prix et les réservations qui comptent."
+    },
+    {
+      "id": "italie",
+      "name": "Italie",
+      "preposition": "en Italie",
+      "continent": "europe",
+      "iso": "IT",
+      "flag": "🇮🇹",
+      "intro": "La côte amalfitaine en ferry, les Cinque Terre en train : les plus beaux rivages d’Italie, avec les billets, les horaires et les pièges à éviter."
+    },
+    {
+      "id": "portugal",
+      "name": "Portugal",
+      "preposition": "au Portugal",
+      "continent": "europe",
+      "iso": "PT",
+      "flag": "🇵🇹",
+      "intro": "Lisbonne, Porto, Sintra, l’Algarve et le Douro : des trams qui grimpent, des trains qui longent l’océan et le fleuve, et des prix relevés pour préparer chaque journée."
+    },
+    {
+      "id": "grece",
+      "name": "Grèce",
+      "preposition": "en Grèce",
+      "continent": "europe",
+      "iso": "GR",
+      "flag": "🇬🇷"
+    },
+    {
+      "id": "croatie",
+      "name": "Croatie",
+      "preposition": "en Croatie",
+      "continent": "europe",
+      "iso": "HR",
+      "flag": "🇭🇷"
+    },
+    {
+      "id": "royaume-uni",
+      "name": "Royaume-Uni",
+      "preposition": "au Royaume-Uni",
+      "continent": "europe",
+      "iso": "GB",
+      "flag": "🇬🇧"
+    },
+    {
+      "id": "irlande",
+      "name": "Irlande",
+      "preposition": "en Irlande",
+      "continent": "europe",
+      "iso": "IE",
+      "flag": "🇮🇪"
+    },
+    {
+      "id": "allemagne",
+      "name": "Allemagne",
+      "preposition": "en Allemagne",
+      "continent": "europe",
+      "iso": "DE",
+      "flag": "🇩🇪"
+    },
+    {
+      "id": "belgique",
+      "name": "Belgique",
+      "preposition": "en Belgique",
+      "continent": "europe",
+      "iso": "BE",
+      "flag": "🇧🇪"
+    },
+    {
+      "id": "pays-bas",
+      "name": "Pays-Bas",
+      "preposition": "aux Pays-Bas",
+      "continent": "europe",
+      "iso": "NL",
+      "flag": "🇳🇱"
+    },
+    {
+      "id": "luxembourg",
+      "name": "Luxembourg",
+      "preposition": "au Luxembourg",
+      "continent": "europe",
+      "iso": "LU",
+      "flag": "🇱🇺"
+    },
+    {
+      "id": "suisse",
+      "name": "Suisse",
+      "preposition": "en Suisse",
+      "continent": "europe",
+      "iso": "CH",
+      "flag": "🇨🇭"
+    },
+    {
+      "id": "autriche",
+      "name": "Autriche",
+      "preposition": "en Autriche",
+      "continent": "europe",
+      "iso": "AT",
+      "flag": "🇦🇹"
+    },
+    {
+      "id": "islande",
+      "name": "Islande",
+      "preposition": "en Islande",
+      "continent": "europe",
+      "iso": "IS",
+      "flag": "🇮🇸"
+    },
+    {
+      "id": "norvege",
+      "name": "Norvège",
+      "preposition": "en Norvège",
+      "continent": "europe",
+      "iso": "NO",
+      "flag": "🇳🇴"
+    },
+    {
+      "id": "suede",
+      "name": "Suède",
+      "preposition": "en Suède",
+      "continent": "europe",
+      "iso": "SE",
+      "flag": "🇸🇪"
+    },
+    {
+      "id": "finlande",
+      "name": "Finlande",
+      "preposition": "en Finlande",
+      "continent": "europe",
+      "iso": "FI",
+      "flag": "🇫🇮"
+    },
+    {
+      "id": "danemark",
+      "name": "Danemark",
+      "preposition": "au Danemark",
+      "continent": "europe",
+      "iso": "DK",
+      "flag": "🇩🇰"
+    },
+    {
+      "id": "pologne",
+      "name": "Pologne",
+      "preposition": "en Pologne",
+      "continent": "europe",
+      "iso": "PL",
+      "flag": "🇵🇱"
+    },
+    {
+      "id": "republique-tcheque",
+      "name": "République tchèque",
+      "preposition": "en République tchèque",
+      "continent": "europe",
+      "iso": "CZ",
+      "flag": "🇨🇿"
+    },
+    {
+      "id": "slovaquie",
+      "name": "Slovaquie",
+      "preposition": "en Slovaquie",
+      "continent": "europe",
+      "iso": "SK",
+      "flag": "🇸🇰"
+    },
+    {
+      "id": "hongrie",
+      "name": "Hongrie",
+      "preposition": "en Hongrie",
+      "continent": "europe",
+      "iso": "HU",
+      "flag": "🇭🇺"
+    },
+    {
+      "id": "slovenie",
+      "name": "Slovénie",
+      "preposition": "en Slovénie",
+      "continent": "europe",
+      "iso": "SI",
+      "flag": "🇸🇮"
+    },
+    {
+      "id": "montenegro",
+      "name": "Monténégro",
+      "preposition": "au Monténégro",
+      "continent": "europe",
+      "iso": "ME",
+      "flag": "🇲🇪"
+    },
+    {
+      "id": "albanie",
+      "name": "Albanie",
+      "preposition": "en Albanie",
+      "continent": "europe",
+      "iso": "AL",
+      "flag": "🇦🇱"
+    },
+    {
+      "id": "serbie",
+      "name": "Serbie",
+      "preposition": "en Serbie",
+      "continent": "europe",
+      "iso": "RS",
+      "flag": "🇷🇸"
+    },
+    {
+      "id": "bosnie-herzegovine",
+      "name": "Bosnie-Herzégovine",
+      "preposition": "en Bosnie-Herzégovine",
+      "continent": "europe",
+      "iso": "BA",
+      "flag": "🇧🇦"
+    },
+    {
+      "id": "macedoine-du-nord",
+      "name": "Macédoine du Nord",
+      "preposition": "en Macédoine du Nord",
+      "continent": "europe",
+      "iso": "MK",
+      "flag": "🇲🇰"
+    },
+    {
+      "id": "roumanie",
+      "name": "Roumanie",
+      "preposition": "en Roumanie",
+      "continent": "europe",
+      "iso": "RO",
+      "flag": "🇷🇴"
+    },
+    {
+      "id": "bulgarie",
+      "name": "Bulgarie",
+      "preposition": "en Bulgarie",
+      "continent": "europe",
+      "iso": "BG",
+      "flag": "🇧🇬"
+    },
+    {
+      "id": "estonie",
+      "name": "Estonie",
+      "preposition": "en Estonie",
+      "continent": "europe",
+      "iso": "EE",
+      "flag": "🇪🇪"
+    },
+    {
+      "id": "lettonie",
+      "name": "Lettonie",
+      "preposition": "en Lettonie",
+      "continent": "europe",
+      "iso": "LV",
+      "flag": "🇱🇻"
+    },
+    {
+      "id": "lituanie",
+      "name": "Lituanie",
+      "preposition": "en Lituanie",
+      "continent": "europe",
+      "iso": "LT",
+      "flag": "🇱🇹"
+    },
+    {
+      "id": "malte",
+      "name": "Malte",
+      "preposition": "à Malte",
+      "continent": "europe",
+      "iso": "MT",
+      "flag": "🇲🇹"
+    },
+    {
+      "id": "chypre",
+      "name": "Chypre",
+      "preposition": "à Chypre",
+      "continent": "europe",
+      "iso": "CY",
+      "flag": "🇨🇾"
+    },
+    {
+      "id": "monaco",
+      "name": "Monaco",
+      "preposition": "à Monaco",
+      "continent": "europe",
+      "iso": "MC",
+      "flag": "🇲🇨"
+    },
+    {
+      "id": "andorre",
+      "name": "Andorre",
+      "preposition": "en Andorre",
+      "continent": "europe",
+      "iso": "AD",
+      "flag": "🇦🇩"
+    },
+    {
+      "id": "turquie",
+      "name": "Turquie",
+      "preposition": "en Turquie",
+      "continent": "europe",
+      "iso": "TR",
+      "flag": "🇹🇷"
+    },
+    {
+      "id": "maroc",
+      "name": "Maroc",
+      "preposition": "au Maroc",
+      "continent": "afrique",
+      "iso": "MA",
+      "flag": "🇲🇦"
+    },
+    {
+      "id": "tunisie",
+      "name": "Tunisie",
+      "preposition": "en Tunisie",
+      "continent": "afrique",
+      "iso": "TN",
+      "flag": "🇹🇳"
+    },
+    {
+      "id": "algerie",
+      "name": "Algérie",
+      "preposition": "en Algérie",
+      "continent": "afrique",
+      "iso": "DZ",
+      "flag": "🇩🇿"
+    },
+    {
+      "id": "egypte",
+      "name": "Égypte",
+      "preposition": "en Égypte",
+      "continent": "afrique",
+      "iso": "EG",
+      "flag": "🇪🇬"
+    },
+    {
+      "id": "senegal",
+      "name": "Sénégal",
+      "preposition": "au Sénégal",
+      "continent": "afrique",
+      "iso": "SN",
+      "flag": "🇸🇳"
+    },
+    {
+      "id": "cap-vert",
+      "name": "Cap-Vert",
+      "preposition": "au Cap-Vert",
+      "continent": "afrique",
+      "iso": "CV",
+      "flag": "🇨🇻"
+    },
+    {
+      "id": "cote-d-ivoire",
+      "name": "Côte d’Ivoire",
+      "preposition": "en Côte d’Ivoire",
+      "continent": "afrique",
+      "iso": "CI",
+      "flag": "🇨🇮"
+    },
+    {
+      "id": "afrique-du-sud",
+      "name": "Afrique du Sud",
+      "preposition": "en Afrique du Sud",
+      "continent": "afrique",
+      "iso": "ZA",
+      "flag": "🇿🇦"
+    },
+    {
+      "id": "namibie",
+      "name": "Namibie",
+      "preposition": "en Namibie",
+      "continent": "afrique",
+      "iso": "NA",
+      "flag": "🇳🇦"
+    },
+    {
+      "id": "botswana",
+      "name": "Botswana",
+      "preposition": "au Botswana",
+      "continent": "afrique",
+      "iso": "BW",
+      "flag": "🇧🇼"
+    },
+    {
+      "id": "kenya",
+      "name": "Kenya",
+      "preposition": "au Kenya",
+      "continent": "afrique",
+      "iso": "KE",
+      "flag": "🇰🇪"
+    },
+    {
+      "id": "tanzanie",
+      "name": "Tanzanie",
+      "preposition": "en Tanzanie",
+      "continent": "afrique",
+      "iso": "TZ",
+      "flag": "🇹🇿"
+    },
+    {
+      "id": "rwanda",
+      "name": "Rwanda",
+      "preposition": "au Rwanda",
+      "continent": "afrique",
+      "iso": "RW",
+      "flag": "🇷🇼"
+    },
+    {
+      "id": "madagascar",
+      "name": "Madagascar",
+      "preposition": "à Madagascar",
+      "continent": "afrique",
+      "iso": "MG",
+      "flag": "🇲🇬"
+    },
+    {
+      "id": "maurice",
+      "name": "Île Maurice",
+      "preposition": "à l’île Maurice",
+      "continent": "afrique",
+      "iso": "MU",
+      "flag": "🇲🇺"
+    },
+    {
+      "id": "seychelles",
+      "name": "Seychelles",
+      "preposition": "aux Seychelles",
+      "continent": "afrique",
+      "iso": "SC",
+      "flag": "🇸🇨"
+    },
+    {
+      "id": "reunion",
+      "name": "La Réunion",
+      "preposition": "à La Réunion",
+      "continent": "afrique",
+      "iso": "RE",
+      "flag": "🇷🇪"
+    },
+    {
+      "id": "mayotte",
+      "name": "Mayotte",
+      "preposition": "à Mayotte",
+      "continent": "afrique",
+      "iso": "YT",
+      "flag": "🇾🇹"
+    },
+    {
+      "id": "emirats-arabes-unis",
+      "name": "Émirats arabes unis",
+      "preposition": "aux Émirats arabes unis",
+      "continent": "moyen-orient",
+      "iso": "AE",
+      "flag": "🇦🇪"
+    },
+    {
+      "id": "oman",
+      "name": "Oman",
+      "preposition": "à Oman",
+      "continent": "moyen-orient",
+      "iso": "OM",
+      "flag": "🇴🇲"
+    },
+    {
+      "id": "jordanie",
+      "name": "Jordanie",
+      "preposition": "en Jordanie",
+      "continent": "moyen-orient",
+      "iso": "JO",
+      "flag": "🇯🇴"
+    },
+    {
+      "id": "qatar",
+      "name": "Qatar",
+      "preposition": "au Qatar",
+      "continent": "moyen-orient",
+      "iso": "QA",
+      "flag": "🇶🇦"
+    },
+    {
+      "id": "arabie-saoudite",
+      "name": "Arabie saoudite",
+      "preposition": "en Arabie saoudite",
+      "continent": "moyen-orient",
+      "iso": "SA",
+      "flag": "🇸🇦"
+    },
+    {
+      "id": "israel",
+      "name": "Israël",
+      "preposition": "en Israël",
+      "continent": "moyen-orient",
+      "iso": "IL",
+      "flag": "🇮🇱"
+    },
+    {
+      "id": "liban",
+      "name": "Liban",
+      "preposition": "au Liban",
+      "continent": "moyen-orient",
+      "iso": "LB",
+      "flag": "🇱🇧"
+    },
+    {
+      "id": "japon",
+      "name": "Japon",
+      "preposition": "au Japon",
+      "continent": "asie",
+      "iso": "JP",
+      "flag": "🇯🇵"
+    },
+    {
+      "id": "thailande",
+      "name": "Thaïlande",
+      "preposition": "en Thaïlande",
+      "continent": "asie",
+      "iso": "TH",
+      "flag": "🇹🇭"
+    },
+    {
+      "id": "vietnam",
+      "name": "Vietnam",
+      "preposition": "au Vietnam",
+      "continent": "asie",
+      "iso": "VN",
+      "flag": "🇻🇳"
+    },
+    {
+      "id": "cambodge",
+      "name": "Cambodge",
+      "preposition": "au Cambodge",
+      "continent": "asie",
+      "iso": "KH",
+      "flag": "🇰🇭"
+    },
+    {
+      "id": "laos",
+      "name": "Laos",
+      "preposition": "au Laos",
+      "continent": "asie",
+      "iso": "LA",
+      "flag": "🇱🇦"
+    },
+    {
+      "id": "indonesie",
+      "name": "Indonésie",
+      "preposition": "en Indonésie",
+      "continent": "asie",
+      "iso": "ID",
+      "flag": "🇮🇩"
+    },
+    {
+      "id": "malaisie",
+      "name": "Malaisie",
+      "preposition": "en Malaisie",
+      "continent": "asie",
+      "iso": "MY",
+      "flag": "🇲🇾"
+    },
+    {
+      "id": "singapour",
+      "name": "Singapour",
+      "preposition": "à Singapour",
+      "continent": "asie",
+      "iso": "SG",
+      "flag": "🇸🇬"
+    },
+    {
+      "id": "philippines",
+      "name": "Philippines",
+      "preposition": "aux Philippines",
+      "continent": "asie",
+      "iso": "PH",
+      "flag": "🇵🇭"
+    },
+    {
+      "id": "inde",
+      "name": "Inde",
+      "preposition": "en Inde",
+      "continent": "asie",
+      "iso": "IN",
+      "flag": "🇮🇳"
+    },
+    {
+      "id": "sri-lanka",
+      "name": "Sri Lanka",
+      "preposition": "au Sri Lanka",
+      "continent": "asie",
+      "iso": "LK",
+      "flag": "🇱🇰"
+    },
+    {
+      "id": "nepal",
+      "name": "Népal",
+      "preposition": "au Népal",
+      "continent": "asie",
+      "iso": "NP",
+      "flag": "🇳🇵"
+    },
+    {
+      "id": "maldives",
+      "name": "Maldives",
+      "preposition": "aux Maldives",
+      "continent": "asie",
+      "iso": "MV",
+      "flag": "🇲🇻"
+    },
+    {
+      "id": "chine",
+      "name": "Chine",
+      "preposition": "en Chine",
+      "continent": "asie",
+      "iso": "CN",
+      "flag": "🇨🇳"
+    },
+    {
+      "id": "hong-kong",
+      "name": "Hong Kong",
+      "preposition": "à Hong Kong",
+      "continent": "asie",
+      "iso": "HK",
+      "flag": "🇭🇰"
+    },
+    {
+      "id": "taiwan",
+      "name": "Taïwan",
+      "preposition": "à Taïwan",
+      "continent": "asie",
+      "iso": "TW",
+      "flag": "🇹🇼"
+    },
+    {
+      "id": "coree-du-sud",
+      "name": "Corée du Sud",
+      "preposition": "en Corée du Sud",
+      "continent": "asie",
+      "iso": "KR",
+      "flag": "🇰🇷"
+    },
+    {
+      "id": "mongolie",
+      "name": "Mongolie",
+      "preposition": "en Mongolie",
+      "continent": "asie",
+      "iso": "MN",
+      "flag": "🇲🇳"
+    },
+    {
+      "id": "ouzbekistan",
+      "name": "Ouzbékistan",
+      "preposition": "en Ouzbékistan",
+      "continent": "asie",
+      "iso": "UZ",
+      "flag": "🇺🇿"
+    },
+    {
+      "id": "georgie",
+      "name": "Géorgie",
+      "preposition": "en Géorgie",
+      "continent": "asie",
+      "iso": "GE",
+      "flag": "🇬🇪"
+    },
+    {
+      "id": "etats-unis",
+      "name": "États-Unis",
+      "preposition": "aux États-Unis",
+      "continent": "amerique-du-nord",
+      "iso": "US",
+      "flag": "🇺🇸"
+    },
+    {
+      "id": "canada",
+      "name": "Canada",
+      "preposition": "au Canada",
+      "continent": "amerique-du-nord",
+      "iso": "CA",
+      "flag": "🇨🇦"
+    },
+    {
+      "id": "mexique",
+      "name": "Mexique",
+      "preposition": "au Mexique",
+      "continent": "amerique-du-nord",
+      "iso": "MX",
+      "flag": "🇲🇽"
+    },
+    {
+      "id": "saint-pierre-et-miquelon",
+      "name": "Saint-Pierre-et-Miquelon",
+      "preposition": "à Saint-Pierre-et-Miquelon",
+      "continent": "amerique-du-nord",
+      "iso": "PM",
+      "flag": "🇵🇲"
+    },
+    {
+      "id": "cuba",
+      "name": "Cuba",
+      "preposition": "à Cuba",
+      "continent": "amerique-centrale-caraibes",
+      "iso": "CU",
+      "flag": "🇨🇺"
+    },
+    {
+      "id": "republique-dominicaine",
+      "name": "République dominicaine",
+      "preposition": "en République dominicaine",
+      "continent": "amerique-centrale-caraibes",
+      "iso": "DO",
+      "flag": "🇩🇴"
+    },
+    {
+      "id": "jamaique",
+      "name": "Jamaïque",
+      "preposition": "en Jamaïque",
+      "continent": "amerique-centrale-caraibes",
+      "iso": "JM",
+      "flag": "🇯🇲"
+    },
+    {
+      "id": "martinique",
+      "name": "Martinique",
+      "preposition": "en Martinique",
+      "continent": "amerique-centrale-caraibes",
+      "iso": "MQ",
+      "flag": "🇲🇶"
+    },
+    {
+      "id": "guadeloupe",
+      "name": "Guadeloupe",
+      "preposition": "en Guadeloupe",
+      "continent": "amerique-centrale-caraibes",
+      "iso": "GP",
+      "flag": "🇬🇵"
+    },
+    {
+      "id": "saint-barthelemy",
+      "name": "Saint-Barthélemy",
+      "preposition": "à Saint-Barthélemy",
+      "continent": "amerique-centrale-caraibes",
+      "iso": "BL",
+      "flag": "🇧🇱"
+    },
+    {
+      "id": "costa-rica",
+      "name": "Costa Rica",
+      "preposition": "au Costa Rica",
+      "continent": "amerique-centrale-caraibes",
+      "iso": "CR",
+      "flag": "🇨🇷"
+    },
+    {
+      "id": "guatemala",
+      "name": "Guatemala",
+      "preposition": "au Guatemala",
+      "continent": "amerique-centrale-caraibes",
+      "iso": "GT",
+      "flag": "🇬🇹"
+    },
+    {
+      "id": "belize",
+      "name": "Belize",
+      "preposition": "au Belize",
+      "continent": "amerique-centrale-caraibes",
+      "iso": "BZ",
+      "flag": "🇧🇿"
+    },
+    {
+      "id": "panama",
+      "name": "Panama",
+      "preposition": "au Panama",
+      "continent": "amerique-centrale-caraibes",
+      "iso": "PA",
+      "flag": "🇵🇦"
+    },
+    {
+      "id": "perou",
+      "name": "Pérou",
+      "preposition": "au Pérou",
+      "continent": "amerique-du-sud",
+      "iso": "PE",
+      "flag": "🇵🇪"
+    },
+    {
+      "id": "bresil",
+      "name": "Brésil",
+      "preposition": "au Brésil",
+      "continent": "amerique-du-sud",
+      "iso": "BR",
+      "flag": "🇧🇷"
+    },
+    {
+      "id": "argentine",
+      "name": "Argentine",
+      "preposition": "en Argentine",
+      "continent": "amerique-du-sud",
+      "iso": "AR",
+      "flag": "🇦🇷"
+    },
+    {
+      "id": "chili",
+      "name": "Chili",
+      "preposition": "au Chili",
+      "continent": "amerique-du-sud",
+      "iso": "CL",
+      "flag": "🇨🇱"
+    },
+    {
+      "id": "colombie",
+      "name": "Colombie",
+      "preposition": "en Colombie",
+      "continent": "amerique-du-sud",
+      "iso": "CO",
+      "flag": "🇨🇴"
+    },
+    {
+      "id": "equateur",
+      "name": "Équateur",
+      "preposition": "en Équateur",
+      "continent": "amerique-du-sud",
+      "iso": "EC",
+      "flag": "🇪🇨"
+    },
+    {
+      "id": "bolivie",
+      "name": "Bolivie",
+      "preposition": "en Bolivie",
+      "continent": "amerique-du-sud",
+      "iso": "BO",
+      "flag": "🇧🇴"
+    },
+    {
+      "id": "guyane",
+      "name": "Guyane",
+      "preposition": "en Guyane",
+      "continent": "amerique-du-sud",
+      "iso": "GF",
+      "flag": "🇬🇫"
+    },
+    {
+      "id": "australie",
+      "name": "Australie",
+      "preposition": "en Australie",
+      "continent": "oceanie",
+      "iso": "AU",
+      "flag": "🇦🇺"
+    },
+    {
+      "id": "nouvelle-zelande",
+      "name": "Nouvelle-Zélande",
+      "preposition": "en Nouvelle-Zélande",
+      "continent": "oceanie",
+      "iso": "NZ",
+      "flag": "🇳🇿"
+    },
+    {
+      "id": "polynesie-francaise",
+      "name": "Polynésie française",
+      "preposition": "en Polynésie française",
+      "continent": "oceanie",
+      "iso": "PF",
+      "flag": "🇵🇫"
+    },
+    {
+      "id": "nouvelle-caledonie",
+      "name": "Nouvelle-Calédonie",
+      "preposition": "en Nouvelle-Calédonie",
+      "continent": "oceanie",
+      "iso": "NC",
+      "flag": "🇳🇨"
+    },
+    {
+      "id": "fidji",
+      "name": "Fidji",
+      "preposition": "aux Fidji",
+      "continent": "oceanie",
+      "iso": "FJ",
+      "flag": "🇫🇯"
+    }
+  ]
+}
