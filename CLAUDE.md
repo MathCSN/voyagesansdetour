@@ -2,7 +2,8 @@
 
 Blog de voyage sans voiture (voyagesansdetour.fr), site statique publié par GitHub Pages
 depuis `site-src/public` uniquement. Dépôt : `MathCSN/voyagesansdetour`.
-Réseaux : Instagram et Facebook via Buffer, Pinterest (fr.pinterest.com/voyagesansdetour).
+Réseaux : Instagram (**@voyagesansdetour.fr** ; @voyagesansdetour est un autre compte, vide)
+et Facebook via Buffer, Pinterest (fr.pinterest.com/voyagesansdetour).
 Pilotage : la holding (`~/holding-des-agents/bureau/blog`, Colette) lance des routines ;
 ce dossier est la maison du code et des contenus.
 
@@ -53,5 +54,6 @@ et suit la mise en ligne. Relais Claude/Codex : `agent-relay --project <ce dossi
 
 - Sources citées et datées ; une info sans source vérifiée ne sort pas.
 - Pas de publicité personnalisée sans consentement ; pas de collecte d'e-mails.
-- Contact : contact@voyagesansdetour.fr (boîte Outlook).
+- Contact : contact@voyagesansdetour.fr (messagerie IONOS, webmail déjà connecté dans le
+  navigateur intégré ; lecture seule, ne rien envoyer sans accord de Mathis).
 - Aucun secret dans le dépôt (il est public).

@@ -1,11 +1,8 @@
 name: Promote selected VSD voice media
+# Ancien format (voix de synthèse sur aplats) retiré le 24/10/2026 : plus de déclenchement automatique,
+# sinon chaque déploiement du site remettrait ses médias en ligne et ses lots en file.
 on:
   workflow_dispatch:
-  workflow_run:
-    workflows: ['Check VSD voice intelligibility locally', 'Build and deploy Voyage Sans Détour']
-    types: [completed]
-  schedule:
-    - cron: '37 6 * * 2'
 permissions: {}
 concurrency:
   group: vsd-voice-promotion

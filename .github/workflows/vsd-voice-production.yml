@@ -1,8 +1,7 @@
 name: Render one new VSD voiced storyboard
+# Ancien format (voix de synthèse) retiré le 24/10/2026 : plus de rendu hebdomadaire automatique.
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '17 6 * * 2'
 permissions: {}
 concurrency:
   group: vsd-voice-production
