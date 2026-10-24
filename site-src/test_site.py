@@ -104,10 +104,9 @@ class PublicBuildTest(unittest.TestCase):
 
     def test_preparation_feed_contains_reviewed_baggage_pin(self):
         rss=ET.parse(self.out/'pinterest/preparer-portugal.xml').getroot()
-        items=rss.findall('channel/item')
-        self.assertEqual(len(items),1)
-        pin=items[0]
-        self.assertEqual(pin.findtext('guid'),'urn:vsd:pinterest:pin-portugal-sans-voiture-bagages')
+        # New Pins join this feed every week: the reviewed baggage Pin must stay, not stay alone.
+        items={item.findtext('guid'):item for item in rss.findall('channel/item')}
+        pin=items['urn:vsd:pinterest:pin-portugal-sans-voiture-bagages']
         self.assertEqual(pin.findtext('link'),ORIGIN+'/portugal/portugal-sans-voiture-bagages/')
         self.assertIn('assistée par IA',pin.findtext('description'))
         media=pin.find('{http://search.yahoo.com/mrss/}content')
