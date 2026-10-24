@@ -1,48 +1,3290 @@
 [
   {
-    "slug": "aveiro-musee-art-nouveau",
-    "destination": "Aveiro",
-    "question": "Que peut-on voir au musée Art nouveau d’Aveiro et comment préparer cette visite ? Ne pas inventer de prix, durée, accessibilité ou horaires.",
+    "slug": "japon-itineraire-2-semaines",
+    "destination": "Japon",
+    "country": "japon",
+    "continent": "asie",
+    "type": "itineraire",
+    "question": "Quel itinéraire de deux semaines au Japon en train, de Tokyo à Kyoto, Nara, Osaka et Hiroshima, avec les durées de trajet et le prix du Japan Rail Pass ?",
+    "travelMonths": [
+      3,
+      4,
+      5,
+      10,
+      11
+    ],
+    "priority": 92,
+    "demand": {
+      "googleSuggest": 100,
+      "googleTrends": 100,
+      "reach": 60,
+      "measuredOn": "2026-10-24"
+    },
     "sources": [
       {
-        "label": "Musées municipaux d’Aveiro — le musée Art nouveau",
-        "url": "https://museusdeaveiro.cm-aveiro.pt/museu-arte-nova/o-museu"
+        "label": "Japan Rail Pass — Le pass officiel",
+        "url": "https://japanrailpass.net/fr/about_jrp.html"
       },
       {
-        "label": "Musées municipaux d’Aveiro — exposition permanente",
-        "url": "https://museusdeaveiro.cm-aveiro.pt/museu-arte-nova/exposicao-permanente"
+        "label": "Seat61 — Voyager en train au Japon",
+        "url": "https://www.seat61.com/Japan.htm"
       },
       {
-        "label": "Musées municipaux d’Aveiro — actualités et fermetures",
-        "url": "https://museusdeaveiro.cm-aveiro.pt/"
+        "label": "Wikivoyage — Japon",
+        "url": "https://fr.wikivoyage.org/wiki/Japon"
       }
+    ],
+    "photos": [
+      {
+        "id": "japon-fuji-chureito",
+        "query": "Chureito pagoda Fuji",
+        "must": [
+          "chureito"
+        ],
+        "alt": "La pagode de Chureito et le mont Fuji au-dessus de Fujiyoshida."
+      },
+      {
+        "id": "japon-shinkansen",
+        "query": "Shinkansen Fuji",
+        "must": [
+          "shinkansen"
+        ],
+        "alt": "Le mont Fuji vu depuis le quai de la gare shinkansen de Shin-Fuji."
+      },
+      {
+        "id": "japon-kyoto-kiyomizu",
+        "query": "Kiyomizu-dera Kyoto",
+        "must": [
+          "kiyomizu"
+        ],
+        "alt": "Des promeneuses en kimono devant la porte nord du Kiyomizu-dera, à Kyoto."
+      },
+      {
+        "id": "japon-hiroshima-miyajima",
+        "query": "Itsukushima torii Miyajima",
+        "must": [
+          "itsukushima"
+        ],
+        "alt": "Le grand torii flottant d’Itsukushima, sur l’île de Miyajima."
+      }
+    ],
+    "keywords": [
+      "jours",
+      "shinkansen",
+      "pass",
+      "kyoto",
+      "osaka",
+      "hiroshima",
+      "nara",
+      "tokyo",
+      "heures",
+      "minutes"
+    ]
+  },
+  {
+    "slug": "thailande-itineraire-2-semaines",
+    "destination": "Thaïlande",
+    "country": "thailande",
+    "continent": "asie",
+    "type": "itineraire",
+    "question": "Quel itinéraire de deux semaines en Thaïlande, de Bangkok à Chiang Mai puis aux îles du Sud, avec les trains, bus et ferries et leurs durées ?",
+    "travelMonths": [
+      11,
+      12,
+      1,
+      2,
+      3
+    ],
+    "priority": 89,
+    "demand": {
+      "googleSuggest": 100,
+      "googleTrends": 89,
+      "reach": 60,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Seat61 — Voyager en train en Thaïlande",
+        "url": "https://www.seat61.com/Thailand.htm"
+      },
+      {
+        "label": "Wikivoyage — Thaïlande",
+        "url": "https://fr.wikivoyage.org/wiki/Tha%C3%AFlande"
+      },
+      {
+        "label": "Wikivoyage — Chiang Mai",
+        "url": "https://fr.wikivoyage.org/wiki/Chiang_Mai"
+      }
+    ],
+    "photos": [
+      {
+        "id": "thailande-wat-arun",
+        "query": "Wat Arun Bangkok",
+        "must": [
+          "arun"
+        ],
+        "alt": "Le temple Wat Arun au bord du fleuve Chao Phraya, à Bangkok."
+      },
+      {
+        "id": "thailande-chiang-mai-doi-suthep",
+        "query": "Doi Suthep temple",
+        "must": [
+          "suthep"
+        ],
+        "alt": "Le temple doré du Doi Suthep, au-dessus de Chiang Mai."
+      },
+      {
+        "id": "thailande-phi-phi",
+        "query": "Phi Phi island beach",
+        "must": [
+          "phi phi"
+        ],
+        "alt": "Les falaises et l’eau turquoise des îles Phi Phi."
+      },
+      {
+        "id": "thailande-train-nuit",
+        "query": "Thailand sleeper train",
+        "must": [
+          "train"
+        ],
+        "alt": "L’intérieur d’une voiture-couchettes de deuxième classe, banquettes en position jour."
+      }
+    ],
+    "keywords": [
+      "bangkok",
+      "chiang mai",
+      "train",
+      "heures",
+      "ferry",
+      "krabi",
+      "phuket",
+      "samui",
+      "nuit"
+    ]
+  },
+  {
+    "slug": "new-york-noel",
+    "destination": "New York",
+    "country": "etats-unis",
+    "continent": "amerique-du-nord",
+    "type": "que-faire",
+    "question": "Que faire à New York à Noël : sapin du Rockefeller Center, vitrines, patinoires, marchés et prix des transports ?",
+    "travelMonths": [
+      11,
+      12
+    ],
+    "priority": 78,
+    "demand": {
+      "googleSuggest": 70,
+      "googleTrends": 85,
+      "reach": 85,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "NYC Tourism — Site officiel",
+        "url": "https://www.nyctourism.com/"
+      },
+      {
+        "label": "Wikivoyage — New York",
+        "url": "https://fr.wikivoyage.org/wiki/New_York"
+      }
+    ],
+    "photos": [
+      {
+        "id": "new-york-rockefeller-noel",
+        "query": "Rockefeller Center Christmas tree",
+        "must": [
+          "rockefeller"
+        ],
+        "alt": "Le sapin du Rockefeller Center illuminé."
+      },
+      {
+        "id": "new-york-central-park-hiver",
+        "query": "Central Park winter snow",
+        "must": [
+          "central park"
+        ],
+        "alt": "Central Park sous la neige."
+      },
+      {
+        "id": "new-york-skyline",
+        "query": "Manhattan skyline Brooklyn Bridge",
+        "must": [
+          "brooklyn bridge"
+        ],
+        "alt": "Les gratte-ciel de Lower Manhattan vus sous le pont de Brooklyn."
+      }
+    ],
+    "keywords": [
+      "décembre",
+      "noël",
+      "rockefeller",
+      "patinoire",
+      "métro",
+      "$",
+      "dollars",
+      "heures"
+    ]
+  },
+  {
+    "slug": "vietnam-itineraire-15-jours",
+    "destination": "Vietnam",
+    "country": "vietnam",
+    "continent": "asie",
+    "type": "itineraire",
+    "question": "Quel itinéraire de 15 jours au Vietnam du nord au sud, de Hanoï à Hô-Chi-Minh-Ville, avec les trains de la Réunification et leurs durées ?",
+    "travelMonths": [
+      2,
+      3,
+      4,
+      10,
+      11,
+      12
+    ],
+    "priority": 76,
+    "demand": {
+      "googleSuggest": 100,
+      "googleTrends": 48,
+      "reach": 60,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Seat61 — Voyager en train au Vietnam",
+        "url": "https://www.seat61.com/Vietnam.htm"
+      },
+      {
+        "label": "Wikivoyage — Hanoï",
+        "url": "https://fr.wikivoyage.org/wiki/Hano%C3%AF"
+      },
+      {
+        "label": "Wikivoyage — Hô-Chi-Minh-Ville",
+        "url": "https://fr.wikivoyage.org/wiki/H%C3%B4-Chi-Minh-Ville"
+      }
+    ],
+    "photos": [
+      {
+        "id": "vietnam-train-hanoi",
+        "query": "Hanoi train street",
+        "must": [
+          "hanoi",
+          "train"
+        ],
+        "alt": "Une rue de Hanoï longée par la voie ferrée."
+      },
+      {
+        "id": "vietnam-hue-citadelle",
+        "query": "Hue imperial city",
+        "must": [
+          "hue"
+        ],
+        "alt": "La cité impériale de Huế."
+      },
+      {
+        "id": "vietnam-ninh-binh",
+        "query": "Trang An Ninh Binh",
+        "must": [
+          "trang an"
+        ],
+        "alt": "Les barques de Tràng An entre les pitons de Ninh Bình."
+      }
+    ],
+    "keywords": [
+      "heures",
+      "train",
+      "hanoi",
+      "hue",
+      "da nang",
+      "hoi an",
+      "saigon",
+      "nuit",
+      "réunification"
+    ]
+  },
+  {
+    "slug": "costa-rica-itineraire-2-semaines",
+    "destination": "Costa Rica",
+    "country": "costa-rica",
+    "continent": "amerique-centrale-caraibes",
+    "type": "itineraire",
+    "question": "Quel itinéraire de deux semaines au Costa Rica entre volcan Arenal, Monteverde, Manuel Antonio et Caraïbes, avec les durées de route ?",
+    "travelMonths": [
+      12,
+      1,
+      2,
+      3,
+      4
+    ],
+    "priority": 72,
+    "demand": {
+      "googleSuggest": 100,
+      "googleTrends": 34,
+      "reach": 60,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Instituto Costarricense de Turismo",
+        "url": "https://www.ict.go.cr/"
+      },
+      {
+        "label": "Wikivoyage — Costa Rica",
+        "url": "https://fr.wikivoyage.org/wiki/Costa_Rica"
+      }
+    ],
+    "photos": [
+      {
+        "id": "costa-rica-arenal",
+        "query": "Arenal volcano",
+        "must": [
+          "arenal"
+        ],
+        "alt": "Le volcan Arenal au-dessus de la forêt."
+      },
+      {
+        "id": "costa-rica-manuel-antonio",
+        "query": "Manuel Antonio beach",
+        "must": [
+          "manuel antonio"
+        ],
+        "alt": "Une plage du parc national Manuel Antonio."
+      },
+      {
+        "id": "costa-rica-monteverde",
+        "query": "Monteverde cloud forest bridge",
+        "must": [
+          "monteverde"
+        ],
+        "alt": "La végétation dense de la forêt de nuages de Monteverde."
+      }
+    ],
+    "keywords": [
+      "heures",
+      "km",
+      "arenal",
+      "monteverde",
+      "manuel antonio",
+      "parc",
+      "saison",
+      "bus"
+    ]
+  },
+  {
+    "slug": "vietnam-quand-partir",
+    "destination": "Vietnam",
+    "country": "vietnam",
+    "continent": "asie",
+    "type": "quand-partir",
+    "question": "Quand partir au Vietnam : quel mois pour le Nord, le Centre et le Sud, avec les températures, les pluies et les typhons ?",
+    "travelMonths": [
+      2,
+      3,
+      4,
+      10,
+      11,
+      12
+    ],
+    "priority": 69,
+    "demand": {
+      "googleSuggest": 96,
+      "googleTrends": 48,
+      "reach": 35,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Wikipedia — Climate of Vietnam",
+        "url": "https://en.wikipedia.org/wiki/Climate_of_Vietnam"
+      },
+      {
+        "label": "Wikivoyage — Viêt Nam",
+        "url": "https://fr.wikivoyage.org/wiki/Vi%C3%AAt_Nam"
+      },
+      {
+        "label": "Wikipédia — Géographie du Viêt Nam",
+        "url": "https://fr.wikipedia.org/wiki/G%C3%A9ographie_du_Vi%C3%AAt_Nam"
+      }
+    ],
+    "photos": [
+      {
+        "id": "vietnam-halong",
+        "query": "Ha Long Bay junk",
+        "must": [
+          "ha long"
+        ],
+        "alt": "Les pitons calcaires de la baie d’Ha Long."
+      },
+      {
+        "id": "vietnam-hoi-an",
+        "query": "Hoi An lanterns",
+        "must": [
+          "hoi an"
+        ],
+        "alt": "Les lanternes de la vieille ville de Hội An."
+      },
+      {
+        "id": "vietnam-rizieres-sapa",
+        "query": "Sapa rice terraces",
+        "must": [
+          "sa"
+        ],
+        "alt": "Les rizières en terrasses autour de Sa Pa, dans le Nord."
+      }
+    ],
+    "keywords": [
+      "°c",
+      "mm",
+      "pluie",
+      "saison",
+      "typhon",
+      "hanoi",
+      "hué",
+      "saigon",
+      "ho chi minh",
+      "mousson"
+    ]
+  },
+  {
+    "slug": "londres-noel-marches",
+    "destination": "Londres",
+    "country": "royaume-uni",
+    "continent": "europe",
+    "type": "que-faire",
+    "question": "Que faire à Londres en décembre : illuminations, marchés de Noël, patinoires et prix des transports ?",
+    "travelMonths": [
+      11,
+      12
+    ],
+    "priority": 68,
+    "demand": {
+      "googleSuggest": 67,
+      "googleTrends": 70,
+      "reach": 70,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "TfL — Tarifs métro et train",
+        "url": "https://tfl.gov.uk/fares/find-fares/tube-and-rail-fares"
+      },
+      {
+        "label": "Wikivoyage — Londres",
+        "url": "https://fr.wikivoyage.org/wiki/Londres"
+      }
+    ],
+    "photos": [
+      {
+        "id": "londres-tower-bridge",
+        "query": "Tower Bridge London",
+        "must": [
+          "tower bridge"
+        ],
+        "alt": "Tower Bridge au-dessus de la Tamise."
+      },
+      {
+        "id": "londres-big-ben",
+        "query": "Elizabeth Tower Westminster",
+        "must": [
+          "westminster"
+        ],
+        "alt": "Westminster et la tour Elizabeth au bord de la Tamise."
+      },
+      {
+        "id": "londres-covent-garden",
+        "query": "Covent Garden market",
+        "must": [
+          "covent garden"
+        ],
+        "alt": "La halle de Covent Garden."
+      }
+    ],
+    "keywords": [
+      "£",
+      "tube",
+      "zone",
+      "oyster",
+      "décembre",
+      "noël",
+      "minutes",
+      "contactless"
+    ]
+  },
+  {
+    "slug": "marrakech-3-jours",
+    "destination": "Marrakech",
+    "country": "maroc",
+    "continent": "afrique",
+    "type": "itineraire",
+    "question": "Que faire à Marrakech en trois jours : médina, souks, jardins Majorelle, palais et excursion, avec les prix d’entrée ?",
+    "travelMonths": [
+      3,
+      4,
+      5,
+      10,
+      11,
+      12
+    ],
+    "priority": 64,
+    "demand": {
+      "googleSuggest": 34,
+      "googleTrends": 100,
+      "reach": 85,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Jardin Majorelle — Site officiel",
+        "url": "https://www.jardinmajorelle.com/fr/"
+      },
+      {
+        "label": "Wikivoyage — Marrakech",
+        "url": "https://fr.wikivoyage.org/wiki/Marrakech"
+      },
+      {
+        "label": "Seat61 — Voyager en train au Maroc",
+        "url": "https://www.seat61.com/Morocco.htm"
+      }
+    ],
+    "photos": [
+      {
+        "id": "marrakech-jemaa-el-fna",
+        "query": "Jemaa el-Fnaa",
+        "must": [
+          "jemaa"
+        ],
+        "alt": "La place Jemaa el-Fna, au cœur de la médina de Marrakech."
+      },
+      {
+        "id": "marrakech-majorelle",
+        "query": "Jardin Majorelle",
+        "must": [
+          "majorelle"
+        ],
+        "alt": "La villa bleue du jardin Majorelle."
+      },
+      {
+        "id": "marrakech-bahia",
+        "query": "Bahia Palace Marrakech",
+        "must": [
+          "bahia"
+        ],
+        "alt": "Les zelliges et plafonds peints du palais de la Bahia."
+      }
+    ],
+    "keywords": [
+      "majorelle",
+      "médina",
+      "souk",
+      "dirhams",
+      "dh",
+      "jemaa",
+      "palais",
+      "heures"
+    ]
+  },
+  {
+    "slug": "japon-budget-2-semaines",
+    "destination": "Japon",
+    "country": "japon",
+    "continent": "asie",
+    "type": "budget",
+    "question": "Quel budget prévoir pour deux semaines au Japon : Japan Rail Pass, logement, repas, transports urbains et visites ?",
+    "travelMonths": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "priority": 62,
+    "demand": {
+      "googleSuggest": 41,
+      "googleTrends": 100,
+      "reach": 60,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Japan Rail Pass — Le pass officiel",
+        "url": "https://japanrailpass.net/fr/about_jrp.html"
+      },
+      {
+        "label": "Seat61 — Voyager en train au Japon",
+        "url": "https://www.seat61.com/Japan.htm"
+      },
+      {
+        "label": "Fushimi Inari Taisha — Site officiel",
+        "url": "https://inari.jp/en/"
+      }
+    ],
+    "photos": [
+      {
+        "id": "japon-tokyo-shibuya",
+        "query": "Shibuya crossing night",
+        "must": [
+          "shibuya"
+        ],
+        "alt": "Le carrefour de Shibuya, à Tokyo."
+      },
+      {
+        "id": "japon-osaka-dotonbori",
+        "query": "Dotonbori Osaka",
+        "must": [
+          "dotonbori"
+        ],
+        "alt": "Les enseignes lumineuses du canal de Dotonbori, à Osaka."
+      },
+      {
+        "id": "japon-nara-cerfs",
+        "query": "Nara Park deer",
+        "must": [
+          "nara",
+          "deer"
+        ],
+        "alt": "Des cerfs en liberté dans le parc de Nara."
+      }
+    ],
+    "keywords": [
+      "yen",
+      "pass",
+      "prix",
+      "tarif",
+      "jours",
+      "nuit"
+    ]
+  },
+  {
+    "slug": "yucatan-itineraire-10-jours",
+    "destination": "Yucatán",
+    "country": "mexique",
+    "continent": "amerique-du-nord",
+    "type": "itineraire",
+    "question": "Quel itinéraire de 10 jours au Yucatán, de Cancún à Mérida, Chichén Itzá, Valladolid, Tulum et les cenotes, avec le Tren Maya ?",
+    "travelMonths": [
+      11,
+      12,
+      1,
+      2,
+      3,
+      4
+    ],
+    "priority": 61,
+    "demand": {
+      "googleSuggest": 49,
+      "googleTrends": 64,
+      "reach": 85,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Tren Maya — Site officiel",
+        "url": "https://www.trenmaya.gob.mx/"
+      },
+      {
+        "label": "Wikivoyage — Péninsule du Yucatán",
+        "url": "https://fr.wikivoyage.org/wiki/P%C3%A9ninsule_du_Yucat%C3%A1n"
+      },
+      {
+        "label": "Wikivoyage — Cancún",
+        "url": "https://fr.wikivoyage.org/wiki/Canc%C3%BAn"
+      }
+    ],
+    "photos": [
+      {
+        "id": "yucatan-chichen-itza",
+        "query": "Chichen Itza El Castillo",
+        "must": [
+          "chichen"
+        ],
+        "alt": "La pyramide d’El Castillo, à Chichén Itzá."
+      },
+      {
+        "id": "yucatan-cenote",
+        "query": "Cenote Ik Kil",
+        "must": [
+          "cenote"
+        ],
+        "alt": "Un cenote entouré de lianes, dans le Yucatán."
+      },
+      {
+        "id": "yucatan-tulum",
+        "query": "Tulum ruins sea",
+        "must": [
+          "tulum"
+        ],
+        "alt": "Les ruines de Tulum au-dessus de la mer des Caraïbes."
+      }
+    ],
+    "keywords": [
+      "tren maya",
+      "heures",
+      "mérida",
+      "valladolid",
+      "tulum",
+      "cenote",
+      "chichén",
+      "pesos"
+    ]
+  },
+  {
+    "slug": "reunion-itineraire-10-jours",
+    "destination": "La Réunion",
+    "country": "reunion",
+    "continent": "afrique",
+    "type": "itineraire",
+    "question": "Quel itinéraire de 10 jours à La Réunion entre cirques, volcan et lagon, avec les temps de route et les randonnées phares ?",
+    "travelMonths": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "priority": 60,
+    "demand": {
+      "googleSuggest": 63,
+      "googleTrends": 55,
+      "reach": 60,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Wikivoyage — La Réunion",
+        "url": "https://fr.wikivoyage.org/wiki/La_R%C3%A9union"
+      },
+      {
+        "label": "Wikipedia — Réunion",
+        "url": "https://en.wikipedia.org/wiki/R%C3%A9union"
+      }
+    ],
+    "photos": [
+      {
+        "id": "reunion-piton-fournaise",
+        "query": "Piton de la Fournaise",
+        "must": [
+          "fournaise"
+        ],
+        "alt": "Le cratère du Piton de la Fournaise."
+      },
+      {
+        "id": "reunion-mafate",
+        "query": "Cirque de Mafate",
+        "must": [
+          "mafate"
+        ],
+        "alt": "Les remparts du cirque de Mafate."
+      },
+      {
+        "id": "reunion-cilaos",
+        "query": "Cilaos Reunion",
+        "must": [
+          "cilaos"
+        ],
+        "alt": "Le cirque de Cilaos et ses sommets."
+      }
+    ],
+    "keywords": [
+      "cirque",
+      "volcan",
+      "heures",
+      "km",
+      "randonnée",
+      "cilaos",
+      "mafate",
+      "salazie"
+    ]
+  },
+  {
+    "slug": "thailande-quand-partir",
+    "destination": "Thaïlande",
+    "country": "thailande",
+    "continent": "asie",
+    "type": "quand-partir",
+    "question": "Quand partir en Thaïlande : mois par mois, quelle région choisir entre Bangkok, le Nord, la mer d’Andaman et le golfe de Thaïlande ?",
+    "travelMonths": [
+      11,
+      12,
+      1,
+      2,
+      3
+    ],
+    "priority": 60,
+    "demand": {
+      "googleSuggest": 53,
+      "googleTrends": 89,
+      "reach": 35,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Wikipedia — Climate of Thailand",
+        "url": "https://en.wikipedia.org/wiki/Climate_of_Thailand"
+      },
+      {
+        "label": "Wikivoyage — Thaïlande",
+        "url": "https://fr.wikivoyage.org/wiki/Tha%C3%AFlande"
+      }
+    ],
+    "photos": [
+      {
+        "id": "thailande-railay",
+        "query": "Railay beach Krabi",
+        "must": [
+          "railay"
+        ],
+        "alt": "La plage de Railay et ses falaises calcaires, près de Krabi."
+      },
+      {
+        "id": "thailande-koh-samui",
+        "query": "Koh Samui beach",
+        "must": [
+          "samui"
+        ],
+        "alt": "Une plage bordée de cocotiers à Koh Samui."
+      },
+      {
+        "id": "thailande-bangkok-grand-palais",
+        "query": "Grand Palace Bangkok",
+        "must": [
+          "grand palace"
+        ],
+        "alt": "Les toits dorés du Grand Palais de Bangkok."
+      }
+    ],
+    "keywords": [
+      "mousson",
+      "saison",
+      "pluie",
+      "°c",
+      "novembre",
+      "avril",
+      "andaman",
+      "golfe",
+      "mm"
+    ]
+  },
+  {
+    "slug": "tokyo-ou-dormir-quartiers",
+    "destination": "Tokyo",
+    "country": "japon",
+    "continent": "asie",
+    "type": "ou-dormir",
+    "question": "Dans quel quartier dormir à Tokyo pour un premier voyage : Shinjuku, Shibuya, Asakusa, Ginza ou Ueno, et à combien de minutes des lieux phares ?",
+    "travelMonths": [
+      3,
+      4,
+      5,
+      10,
+      11
+    ],
+    "priority": 59,
+    "demand": {
+      "googleSuggest": 24,
+      "googleTrends": 100,
+      "reach": 85,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Wikivoyage — Tokyo",
+        "url": "https://fr.wikivoyage.org/wiki/Tokyo"
+      },
+      {
+        "label": "Seat61 — Voyager en train au Japon",
+        "url": "https://www.seat61.com/Japan.htm"
+      }
+    ],
+    "photos": [
+      {
+        "id": "tokyo-shinjuku-nuit",
+        "query": "Shinjuku Kabukicho night",
+        "must": [
+          "shinjuku"
+        ],
+        "alt": "Les rues et enseignes de Shinjuku, à Tokyo."
+      },
+      {
+        "id": "tokyo-asakusa-sensoji",
+        "query": "Senso-ji Asakusa",
+        "must": [
+          "senso"
+        ],
+        "alt": "La porte Kaminarimon du temple Senso-ji, à Asakusa."
+      },
+      {
+        "id": "tokyo-ginza",
+        "query": "Ginza Tokyo street",
+        "must": [
+          "ginza"
+        ],
+        "alt": "Les grands magasins de Ginza, à Tokyo."
+      }
+    ],
+    "keywords": [
+      "shinjuku",
+      "shibuya",
+      "asakusa",
+      "ginza",
+      "ueno",
+      "ligne",
+      "minutes",
+      "quartier"
+    ]
+  },
+  {
+    "slug": "crete-itineraire-10-jours",
+    "destination": "Crète",
+    "country": "grece",
+    "continent": "europe",
+    "type": "itineraire",
+    "question": "Quel itinéraire de 10 jours en Crète, de La Canée à Héraklion, avec Balos, Elafonissi, les gorges de Samaria et Knossos ?",
+    "travelMonths": [
+      5,
+      6,
+      9,
+      10
+    ],
+    "priority": 58,
+    "demand": {
+      "googleSuggest": 22,
+      "googleTrends": 100,
+      "reach": 85,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Wikivoyage — Crète",
+        "url": "https://fr.wikivoyage.org/wiki/Cr%C3%A8te"
+      },
+      {
+        "label": "Wikivoyage — Grèce",
+        "url": "https://fr.wikivoyage.org/wiki/Gr%C3%A8ce"
+      }
+    ],
+    "photos": [
+      {
+        "id": "crete-balos",
+        "query": "Balos lagoon Crete",
+        "must": [
+          "balos"
+        ],
+        "alt": "Le lagon turquoise de Balos, à l’ouest de la Crète."
+      },
+      {
+        "id": "crete-elafonissi",
+        "query": "Elafonissi beach",
+        "must": [
+          "elafonis"
+        ],
+        "alt": "Le sable rose d’Elafonissi."
+      },
+      {
+        "id": "crete-chania-port",
+        "query": "Chania old harbour",
+        "must": [
+          "chania"
+        ],
+        "alt": "Le vieux port vénitien de La Canée."
+      }
+    ],
+    "keywords": [
+      "km",
+      "heures",
+      "la canée",
+      "héraklion",
+      "samaria",
+      "knossos",
+      "bus",
+      "plage"
+    ]
+  },
+  {
+    "slug": "egypte-croisiere-nil-louxor",
+    "destination": "Égypte",
+    "country": "egypte",
+    "continent": "afrique",
+    "type": "itineraire",
+    "question": "Comment organiser Le Caire, Louxor et Assouan en une semaine, en train de nuit ou en croisière sur le Nil, avec les prix des sites ?",
+    "travelMonths": [
+      10,
+      11,
+      12,
+      1,
+      2,
+      3,
+      4
+    ],
+    "priority": 58,
+    "demand": {
+      "googleSuggest": 32,
+      "googleTrends": 100,
+      "reach": 60,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Seat61 — Voyager en train en Égypte",
+        "url": "https://www.seat61.com/Egypt.htm"
+      },
+      {
+        "label": "Wikivoyage — Louxor",
+        "url": "https://fr.wikivoyage.org/wiki/Louxor"
+      },
+      {
+        "label": "Wikivoyage — Le Caire",
+        "url": "https://fr.wikivoyage.org/wiki/Le_Caire"
+      }
+    ],
+    "photos": [
+      {
+        "id": "egypte-gizeh",
+        "query": "Giza pyramids",
+        "must": [
+          "giza"
+        ],
+        "alt": "Les pyramides de Gizeh au bord du désert."
+      },
+      {
+        "id": "egypte-karnak",
+        "query": "Karnak hypostyle hall",
+        "must": [
+          "karnak"
+        ],
+        "alt": "Les colonnes de la salle hypostyle de Karnak, à Louxor."
+      },
+      {
+        "id": "egypte-felouque-assouan",
+        "query": "Felucca Aswan Nile",
+        "must": [
+          "felucca"
+        ],
+        "alt": "Une felouque sur le Nil, à Assouan."
+      }
+    ],
+    "keywords": [
+      "louxor",
+      "assouan",
+      "train",
+      "nuit",
+      "heures",
+      "karnak",
+      "vallée",
+      "croisière"
+    ]
+  },
+  {
+    "slug": "maroc-itineraire-10-jours",
+    "destination": "Maroc",
+    "country": "maroc",
+    "continent": "afrique",
+    "type": "itineraire",
+    "question": "Quel itinéraire de 10 jours au Maroc entre Marrakech, Fès, Chefchaouen et le désert, en train et en car ?",
+    "travelMonths": [
+      3,
+      4,
+      5,
+      10,
+      11
+    ],
+    "priority": 58,
+    "demand": {
+      "googleSuggest": 33,
+      "googleTrends": 100,
+      "reach": 60,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Seat61 — Voyager en train au Maroc",
+        "url": "https://www.seat61.com/Morocco.htm"
+      },
+      {
+        "label": "Wikivoyage — Maroc",
+        "url": "https://fr.wikivoyage.org/wiki/Maroc"
+      }
+    ],
+    "photos": [
+      {
+        "id": "maroc-chefchaouen",
+        "query": "Chefchaouen blue street",
+        "must": [
+          "chefchaouen"
+        ],
+        "alt": "Une ruelle bleue de Chefchaouen."
+      },
+      {
+        "id": "maroc-fes-tanneries",
+        "query": "Chouara tannery Fes",
+        "must": [
+          "tanner"
+        ],
+        "alt": "Les cuves colorées de la tannerie Chouara, à Fès."
+      },
+      {
+        "id": "maroc-merzouga",
+        "query": "Merzouga dunes",
+        "must": [
+          "merzouga"
+        ],
+        "alt": "Les dunes de l’erg Chebbi, près de Merzouga."
+      }
+    ],
+    "keywords": [
+      "train",
+      "heures",
+      "fès",
+      "chefchaouen",
+      "merzouga",
+      "casablanca",
+      "ctm",
+      "al boraq"
+    ]
+  },
+  {
+    "slug": "new-york-ou-dormir",
+    "destination": "New York",
+    "country": "etats-unis",
+    "continent": "amerique-du-nord",
+    "type": "ou-dormir",
+    "question": "Dans quel quartier dormir à New York : Midtown, Lower Manhattan, Upper West Side, Brooklyn ou Long Island City, et à combien de métro des sites ?",
+    "travelMonths": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "priority": 58,
+    "demand": {
+      "googleSuggest": 42,
+      "googleTrends": 85,
+      "reach": 60,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Wikivoyage — New York",
+        "url": "https://fr.wikivoyage.org/wiki/New_York"
+      },
+      {
+        "label": "Seat61 — Voyager en train aux États-Unis",
+        "url": "https://www.seat61.com/USA.htm"
+      }
+    ],
+    "photos": [
+      {
+        "id": "new-york-times-square",
+        "query": "Times Square night",
+        "must": [
+          "times square"
+        ],
+        "alt": "Times Square et ses écrans géants, à Manhattan."
+      },
+      {
+        "id": "new-york-brooklyn-dumbo",
+        "query": "DUMBO Brooklyn Manhattan Bridge",
+        "must": [
+          "dumbo"
+        ],
+        "alt": "Le Manhattan Bridge vu depuis DUMBO, à Brooklyn."
+      },
+      {
+        "id": "new-york-upper-west-side",
+        "query": "Upper West Side brownstones",
+        "must": [
+          "upper west side"
+        ],
+        "alt": "Des immeubles de l’Upper West Side."
+      }
+    ],
+    "keywords": [
+      "manhattan",
+      "brooklyn",
+      "midtown",
+      "métro",
+      "ligne",
+      "minutes",
+      "quartier",
+      "queens"
+    ]
+  },
+  {
+    "slug": "sri-lanka-itineraire-2-semaines",
+    "destination": "Sri Lanka",
+    "country": "sri-lanka",
+    "continent": "asie",
+    "type": "itineraire",
+    "question": "Quel itinéraire de deux semaines au Sri Lanka, de Colombo à Kandy, Ella et la côte sud, avec le train des hautes terres et ses durées ?",
+    "travelMonths": [
+      12,
+      1,
+      2,
+      3,
+      4
+    ],
+    "priority": 58,
+    "demand": {
+      "googleSuggest": 75,
+      "googleTrends": 27,
+      "reach": 60,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Seat61 — Voyager en train au Sri Lanka",
+        "url": "https://www.seat61.com/SriLanka.htm"
+      },
+      {
+        "label": "Sri Lanka Tourism — Météo",
+        "url": "https://www.srilanka.travel/weather"
+      },
+      {
+        "label": "Wikivoyage — Sri Lanka",
+        "url": "https://fr.wikivoyage.org/wiki/Sri_Lanka"
+      }
+    ],
+    "photos": [
+      {
+        "id": "sri-lanka-pont-ella",
+        "query": "Nine Arch Bridge Ella",
+        "must": [
+          "nine arch"
+        ],
+        "alt": "Un train sur le pont aux neuf arches, près d’Ella."
+      },
+      {
+        "id": "sri-lanka-sigiriya",
+        "query": "Sigiriya rock",
+        "must": [
+          "sigiriya"
+        ],
+        "alt": "Le rocher du Lion de Sigiriya au-dessus de la jungle."
+      },
+      {
+        "id": "sri-lanka-galle",
+        "query": "Galle fort lighthouse",
+        "must": [
+          "galle"
+        ],
+        "alt": "Le phare et les remparts du fort de Galle."
+      }
+    ],
+    "keywords": [
+      "kandy",
+      "ella",
+      "colombo",
+      "train",
+      "heures",
+      "galle",
+      "sigiriya",
+      "mousson"
+    ]
+  },
+  {
+    "slug": "guadeloupe-itineraire-10-jours",
+    "destination": "Guadeloupe",
+    "country": "guadeloupe",
+    "continent": "amerique-centrale-caraibes",
+    "type": "itineraire",
+    "question": "Quel itinéraire de 10 jours en Guadeloupe entre Grande-Terre, Basse-Terre, la Soufrière et les Saintes ?",
+    "travelMonths": [
+      12,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "priority": 55,
+    "demand": {
+      "googleSuggest": 46,
+      "googleTrends": 67,
+      "reach": 60,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Wikivoyage — Guadeloupe",
+        "url": "https://fr.wikivoyage.org/wiki/Guadeloupe"
+      },
+      {
+        "label": "Wikivoyage — Guadeloupe (en)",
+        "url": "https://en.wikivoyage.org/wiki/Guadeloupe"
+      },
+      {
+        "label": "Wikipedia — Guadeloupe",
+        "url": "https://en.wikipedia.org/wiki/Guadeloupe"
+      }
+    ],
+    "photos": [
+      {
+        "id": "guadeloupe-saintes",
+        "query": "Terre-de-Haut Les Saintes",
+        "must": [
+          "saintes"
+        ],
+        "alt": "La baie des Saintes vue depuis les hauteurs."
+      },
+      {
+        "id": "guadeloupe-chateaux",
+        "query": "Pointe des Chateaux",
+        "must": [
+          "châteaux"
+        ],
+        "alt": "La pointe des Châteaux, à l’extrémité est de Grande-Terre."
+      },
+      {
+        "id": "guadeloupe-carbet",
+        "query": "Chutes du Carbet",
+        "must": [
+          "carbet"
+        ],
+        "alt": "Les chutes du Carbet dans la forêt de Basse-Terre."
+      }
+    ],
+    "keywords": [
+      "basse-terre",
+      "grande-terre",
+      "soufrière",
+      "saintes",
+      "km",
+      "minutes",
+      "plage",
+      "heures"
+    ]
+  },
+  {
+    "slug": "laponie-budget-rovaniemi",
+    "destination": "Laponie",
+    "country": "finlande",
+    "continent": "europe",
+    "type": "budget",
+    "question": "Combien coûte un voyage en Laponie finlandaise : train de nuit jusqu’à Rovaniemi, village du Père Noël, aurores boréales et activités ?",
+    "travelMonths": [
+      12,
+      1,
+      2,
+      3
+    ],
+    "priority": 55,
+    "demand": {
+      "googleSuggest": 42,
+      "googleTrends": 58,
+      "reach": 85,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "VR — Santa Claus Express",
+        "url": "https://www.vr.fi/en/santa-claus-express"
+      },
+      {
+        "label": "Santa Claus Village — Meet Santa Claus",
+        "url": "https://santaclausvillage.info/experiences/santa-claus/"
+      },
+      {
+        "label": "Wikivoyage — Rovaniemi",
+        "url": "https://fr.wikivoyage.org/wiki/Rovaniemi"
+      }
+    ],
+    "photos": [
+      {
+        "id": "laponie-rovaniemi-village",
+        "query": "Santa Claus Village Rovaniemi",
+        "must": [
+          "santa claus village"
+        ],
+        "alt": "Le village du Père Noël sous la neige, à Rovaniemi."
+      },
+      {
+        "id": "laponie-aurore",
+        "query": "Aurora borealis Lapland Finland",
+        "must": [
+          "aurora"
+        ],
+        "alt": "Une aurore boréale au-dessus du mont Saana, en Laponie finlandaise."
+      },
+      {
+        "id": "laponie-husky",
+        "query": "sled dogs Finland Lapland",
+        "must": [
+          "dog"
+        ],
+        "alt": "Des huskies attelés dans la neige de Laponie."
+      }
+    ],
+    "keywords": [
+      "€",
+      "euros",
+      "prix",
+      "train",
+      "nuit",
+      "rovaniemi",
+      "heures",
+      "huskies"
+    ]
+  },
+  {
+    "slug": "bali-quand-partir",
+    "destination": "Bali",
+    "country": "indonesie",
+    "continent": "asie",
+    "type": "quand-partir",
+    "question": "Quand partir à Bali : saison sèche ou saison des pluies, mois par mois, et quelles zones de l’île choisir ?",
+    "travelMonths": [
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "priority": 54,
+    "demand": {
+      "googleSuggest": 32,
+      "googleTrends": 86,
+      "reach": 60,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Wikivoyage — Bali",
+        "url": "https://fr.wikivoyage.org/wiki/Bali"
+      },
+      {
+        "label": "Seat61 — Voyager en Indonésie",
+        "url": "https://www.seat61.com/Indonesia.htm"
+      }
+    ],
+    "photos": [
+      {
+        "id": "bali-rizieres-tegallalang",
+        "query": "Tegallalang rice terraces",
+        "must": [
+          "tegallalang"
+        ],
+        "alt": "Les rizières en terrasses de Tegallalang, près d’Ubud."
+      },
+      {
+        "id": "bali-uluwatu",
+        "query": "Uluwatu temple cliff",
+        "must": [
+          "uluwatu"
+        ],
+        "alt": "Le temple d’Uluwatu au bord des falaises du sud de Bali."
+      },
+      {
+        "id": "bali-ulun-danu",
+        "query": "Ulun Danu Bratan",
+        "must": [
+          "ulun danu"
+        ],
+        "alt": "Le temple Ulun Danu Beratan sur son lac."
+      }
+    ],
+    "keywords": [
+      "saison",
+      "pluie",
+      "sèche",
+      "°c",
+      "avril",
+      "octobre",
+      "ubud",
+      "mousson"
+    ]
+  },
+  {
+    "slug": "bangkok-ou-dormir-quartiers",
+    "destination": "Bangkok",
+    "country": "thailande",
+    "continent": "asie",
+    "type": "ou-dormir",
+    "question": "Où dormir à Bangkok : quels quartiers choisir près du BTS, du MRT et des bateaux du fleuve, pour quel voyageur ?",
+    "travelMonths": [
+      11,
+      12,
+      1,
+      2,
+      3
+    ],
+    "priority": 54,
+    "demand": {
+      "googleSuggest": 21,
+      "googleTrends": 89,
+      "reach": 85,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Wikivoyage — Bangkok",
+        "url": "https://fr.wikivoyage.org/wiki/Bangkok"
+      },
+      {
+        "label": "Seat61 — Voyager en train en Thaïlande",
+        "url": "https://www.seat61.com/Thailand.htm"
+      }
+    ],
+    "photos": [
+      {
+        "id": "bangkok-chao-phraya",
+        "query": "Chao Phraya river boat Bangkok",
+        "must": [
+          "chao phraya"
+        ],
+        "alt": "Un bateau sur le fleuve Chao Phraya, à Bangkok."
+      },
+      {
+        "id": "bangkok-bts",
+        "query": "BTS Skytrain Bangkok",
+        "must": [
+          "skytrain"
+        ],
+        "alt": "Le métro aérien BTS au-dessus d’une avenue de Bangkok."
+      },
+      {
+        "id": "bangkok-wat-pho",
+        "query": "Wat Pho reclining Buddha",
+        "must": [
+          "wat pho"
+        ],
+        "alt": "Le Bouddha couché du temple Wat Pho, à Bangkok."
+      }
+    ],
+    "keywords": [
+      "sukhumvit",
+      "silom",
+      "khao san",
+      "riverside",
+      "bts",
+      "mrt",
+      "quartier",
+      "minutes"
+    ]
+  },
+  {
+    "slug": "kyoto-3-jours",
+    "destination": "Kyoto",
+    "country": "japon",
+    "continent": "asie",
+    "type": "itineraire",
+    "question": "Que voir à Kyoto en trois jours, quartier par quartier, avec les bus et trains à prendre et les heures pour éviter la foule ?",
+    "travelMonths": [
+      3,
+      4,
+      10,
+      11
+    ],
+    "priority": 53,
+    "demand": {
+      "googleSuggest": 12,
+      "googleTrends": 100,
+      "reach": 85,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Wikivoyage — Kyoto",
+        "url": "https://fr.wikivoyage.org/wiki/Kyoto"
+      },
+      {
+        "label": "Fushimi Inari Taisha — Site officiel",
+        "url": "https://inari.jp/en/"
+      },
+      {
+        "label": "Kyoto City Official Travel Guide",
+        "url": "https://kyoto.travel/en/"
+      }
+    ],
+    "photos": [
+      {
+        "id": "kyoto-fushimi-inari",
+        "query": "Fushimi Inari torii",
+        "must": [
+          "fushimi",
+          "inari"
+        ],
+        "alt": "Les torii vermillon du sanctuaire Fushimi Inari, à Kyoto."
+      },
+      {
+        "id": "kyoto-arashiyama-bambous",
+        "query": "Arashiyama bamboo grove",
+        "must": [
+          "arashiyama",
+          "bamboo"
+        ],
+        "alt": "La bambouseraie d’Arashiyama, à l’ouest de Kyoto."
+      },
+      {
+        "id": "kyoto-kinkakuji",
+        "query": "Kinkaku-ji",
+        "must": [
+          "kinkaku"
+        ],
+        "alt": "Le pavillon d’Or du Kinkaku-ji, à Kyoto."
+      },
+      {
+        "id": "kyoto-gion",
+        "query": "Gion Hanamikoji",
+        "must": [
+          "gion"
+        ],
+        "alt": "Les maisons de bois de Gion, le quartier des geishas de Kyoto."
+      }
+    ],
+    "keywords": [
+      "bus",
+      "gion",
+      "arashiyama",
+      "fushimi",
+      "higashiyama",
+      "minutes",
+      "heures",
+      "gare"
+    ]
+  },
+  {
+    "slug": "norvege-fjords-train",
+    "destination": "Norvège",
+    "country": "norvege",
+    "continent": "europe",
+    "type": "itineraire",
+    "question": "Comment voir les fjords de Norvège en train et en bateau, d’Oslo à Bergen par Flåm, avec les durées et les prix ?",
+    "travelMonths": [
+      6,
+      7,
+      8
+    ],
+    "priority": 52,
+    "demand": {
+      "googleSuggest": 56,
+      "googleTrends": 33,
+      "reach": 70,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Seat61 — Voyager en train en Norvège",
+        "url": "https://www.seat61.com/Norway.htm"
+      },
+      {
+        "label": "Wikivoyage — Norvège",
+        "url": "https://fr.wikivoyage.org/wiki/Norv%C3%A8ge"
+      }
+    ],
+    "photos": [
+      {
+        "id": "norvege-flam",
+        "query": "Flam railway",
+        "must": [
+          "flåm"
+        ],
+        "alt": "Le train de Flåm dans sa vallée."
+      },
+      {
+        "id": "norvege-geiranger",
+        "query": "Geirangerfjord",
+        "must": [
+          "geiranger"
+        ],
+        "alt": "Le fjord de Geiranger entre ses falaises."
+      },
+      {
+        "id": "norvege-bergen-bryggen",
+        "query": "Bryggen Bergen",
+        "must": [
+          "bryggen"
+        ],
+        "alt": "Les maisons de bois colorées de Bryggen, à Bergen."
+      }
+    ],
+    "keywords": [
+      "train",
+      "heures",
+      "flåm",
+      "bergen",
+      "oslo",
+      "myrdal",
+      "fjord",
+      "nok"
+    ]
+  },
+  {
+    "slug": "mexique-quand-partir",
+    "destination": "Mexique",
+    "country": "mexique",
+    "continent": "amerique-du-nord",
+    "type": "quand-partir",
+    "question": "Quand partir au Mexique : saison sèche, saison des pluies, ouragans et sargasses selon les régions et les mois ?",
+    "travelMonths": [
+      11,
+      12,
+      1,
+      2,
+      3,
+      4
+    ],
+    "priority": 50,
+    "demand": {
+      "googleSuggest": 48,
+      "googleTrends": 64,
+      "reach": 35,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Wikivoyage — Mexique",
+        "url": "https://fr.wikivoyage.org/wiki/Mexique"
+      },
+      {
+        "label": "Wikipedia — Climate of Mexico",
+        "url": "https://en.wikipedia.org/wiki/Climate_of_Mexico"
+      }
+    ],
+    "photos": [
+      {
+        "id": "mexique-oaxaca",
+        "query": "Oaxaca Santo Domingo",
+        "must": [
+          "oaxaca"
+        ],
+        "alt": "L’église Santo Domingo, à Oaxaca."
+      },
+      {
+        "id": "mexique-mexico-zocalo",
+        "query": "Zocalo Mexico City",
+        "must": [
+          "zócalo"
+        ],
+        "alt": "Le Zócalo et la cathédrale de Mexico."
+      },
+      {
+        "id": "mexique-isla-mujeres",
+        "query": "Isla Mujeres beach",
+        "must": [
+          "isla mujeres"
+        ],
+        "alt": "L’eau turquoise d’Isla Mujeres."
+      }
+    ],
+    "keywords": [
+      "saison",
+      "pluie",
+      "°c",
+      "ouragan",
+      "novembre",
+      "avril",
+      "sargasses",
+      "mois"
+    ]
+  },
+  {
+    "slug": "zanzibar-quand-partir",
+    "destination": "Zanzibar",
+    "country": "tanzanie",
+    "continent": "afrique",
+    "type": "quand-partir",
+    "question": "Quand partir à Zanzibar : grandes et petites pluies, températures, mer et meilleures plages selon les mois ?",
+    "travelMonths": [
+      6,
+      7,
+      8,
+      9,
+      10,
+      12,
+      1,
+      2
+    ],
+    "priority": 50,
+    "demand": {
+      "googleSuggest": 46,
+      "googleTrends": 35,
+      "reach": 85,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Wikivoyage — Zanzibar",
+        "url": "https://fr.wikivoyage.org/wiki/Zanzibar"
+      },
+      {
+        "label": "Wikipedia — Zanzibar City",
+        "url": "https://en.wikipedia.org/wiki/Zanzibar_City"
+      },
+      {
+        "label": "Seat61 — Voyager en Tanzanie",
+        "url": "https://www.seat61.com/Tanzania.htm"
+      }
+    ],
+    "photos": [
+      {
+        "id": "zanzibar-stone-town",
+        "query": "Stone Town Zanzibar",
+        "must": [
+          "stone town"
+        ],
+        "alt": "Les ruelles et portes sculptées de Stone Town."
+      },
+      {
+        "id": "zanzibar-nungwi",
+        "query": "Nungwi beach Zanzibar",
+        "must": [
+          "nungwi"
+        ],
+        "alt": "Le sable blanc de la plage de Nungwi, au nord de Zanzibar."
+      },
+      {
+        "id": "zanzibar-paje",
+        "query": "Paje beach Zanzibar",
+        "must": [
+          "paje"
+        ],
+        "alt": "Le lagon turquoise de Paje, sur la côte est de Zanzibar."
+      }
+    ],
+    "keywords": [
+      "pluie",
+      "saison",
+      "mm",
+      "°c",
+      "masika",
+      "vuli",
+      "stone town",
+      "mois"
+    ]
+  },
+  {
+    "slug": "istanbul-3-jours",
+    "destination": "Istanbul",
+    "country": "turquie",
+    "continent": "europe",
+    "type": "itineraire",
+    "question": "Que voir à Istanbul en trois jours, Sainte-Sophie, Topkapı, Bosphore et Kadıköy, avec l’Istanbulkart et les prix ?",
+    "travelMonths": [
+      4,
+      5,
+      9,
+      10,
+      11
+    ],
+    "priority": 48,
+    "demand": {
+      "googleSuggest": 20,
+      "googleTrends": 70,
+      "reach": 85,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Wikivoyage — Istanbul",
+        "url": "https://fr.wikivoyage.org/wiki/Istanbul"
+      },
+      {
+        "label": "Seat61 — Voyager en train en Turquie",
+        "url": "https://www.seat61.com/Turkey.htm"
+      }
+    ],
+    "photos": [
+      {
+        "id": "istanbul-sainte-sophie",
+        "query": "Hagia Sophia",
+        "must": [
+          "hagia sophia"
+        ],
+        "alt": "Sainte-Sophie et ses minarets, à Istanbul."
+      },
+      {
+        "id": "istanbul-bosphore",
+        "query": "Bosphorus ferry Istanbul",
+        "must": [
+          "bosphorus"
+        ],
+        "alt": "Un ferry sur le Bosphore."
+      },
+      {
+        "id": "istanbul-mosquee-bleue",
+        "query": "Blue Mosque interior",
+        "must": [
+          "blue mosque"
+        ],
+        "alt": "Les coupoles de la mosquée Bleue."
+      }
+    ],
+    "keywords": [
+      "istanbulkart",
+      "ferry",
+      "tram",
+      "topkapı",
+      "sainte-sophie",
+      "livres",
+      "heures",
+      "kadıköy"
+    ]
+  },
+  {
+    "slug": "quebec-hiver",
+    "destination": "Québec",
+    "country": "canada",
+    "continent": "amerique-du-nord",
+    "type": "que-faire",
+    "question": "Que faire au Québec en hiver : Carnaval de Québec, Vieux-Québec, Montréal, chiens de traîneau et températures ?",
+    "travelMonths": [
+      12,
+      1,
+      2
+    ],
+    "priority": 47,
+    "demand": {
+      "googleSuggest": 58,
+      "googleTrends": 13,
+      "reach": 70,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Bonjour Québec — Site officiel",
+        "url": "https://www.bonjourquebec.com/fr"
+      },
+      {
+        "label": "Wikivoyage — Québec",
+        "url": "https://fr.wikivoyage.org/wiki/Qu%C3%A9bec_(ville)"
+      },
+      {
+        "label": "Wikivoyage — Montréal",
+        "url": "https://fr.wikivoyage.org/wiki/Montr%C3%A9al"
+      }
+    ],
+    "photos": [
+      {
+        "id": "quebec-chateau-frontenac-hiver",
+        "query": "Chateau Frontenac winter",
+        "must": [
+          "frontenac"
+        ],
+        "alt": "Le château Frontenac dominant le Vieux-Québec."
+      },
+      {
+        "id": "quebec-montmorency",
+        "query": "Montmorency Falls winter",
+        "must": [
+          "montmorency"
+        ],
+        "alt": "La chute Montmorency près de Québec."
+      },
+      {
+        "id": "quebec-montreal-vieux-port",
+        "query": "Old Port Montreal",
+        "must": [
+          "montreal"
+        ],
+        "alt": "Le Vieux-Port de Montréal."
+      }
+    ],
+    "keywords": [
+      "carnaval",
+      "hiver",
+      "°c",
+      "janvier",
+      "février",
+      "traîneau",
+      "heures",
+      "km"
+    ]
+  },
+  {
+    "slug": "coree-du-sud-itineraire-10-jours",
+    "destination": "Corée du Sud",
+    "country": "coree-du-sud",
+    "continent": "asie",
+    "type": "itineraire",
+    "question": "Quel itinéraire de 10 jours en Corée du Sud, de Séoul à Gyeongju et Busan en KTX, avec les durées et les prix ?",
+    "travelMonths": [
+      4,
+      5,
+      9,
+      10,
+      11
+    ],
+    "priority": 46,
+    "demand": {
+      "googleSuggest": 61,
+      "googleTrends": 4,
+      "reach": 70,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Seat61 — Voyager en train en Corée du Sud",
+        "url": "https://www.seat61.com/Korea.htm"
+      },
+      {
+        "label": "Wikivoyage — Séoul",
+        "url": "https://fr.wikivoyage.org/wiki/S%C3%A9oul"
+      },
+      {
+        "label": "Wikivoyage — Corée du Sud",
+        "url": "https://fr.wikivoyage.org/wiki/Cor%C3%A9e_du_Sud"
+      }
+    ],
+    "photos": [
+      {
+        "id": "coree-gyeongbokgung",
+        "query": "Gyeongbokgung palace",
+        "must": [
+          "gyeongbokgung"
+        ],
+        "alt": "Le palais Gyeongbokgung, au cœur de Séoul."
+      },
+      {
+        "id": "coree-busan-gamcheon",
+        "query": "Gamcheon culture village",
+        "must": [
+          "gamcheon"
+        ],
+        "alt": "Les maisons colorées du village culturel de Gamcheon, à Busan."
+      },
+      {
+        "id": "coree-bukchon",
+        "query": "Bukchon hanok village",
+        "must": [
+          "bukchon"
+        ],
+        "alt": "Les maisons traditionnelles du village de Bukchon, à Séoul."
+      }
+    ],
+    "keywords": [
+      "ktx",
+      "séoul",
+      "busan",
+      "gyeongju",
+      "heures",
+      "minutes",
+      "won",
+      "jours"
+    ]
+  },
+  {
+    "slug": "rocheuses-canadiennes-road-trip",
+    "destination": "Rocheuses canadiennes",
+    "country": "canada",
+    "continent": "amerique-du-nord",
+    "type": "road-trip",
+    "question": "Quel road trip dans les Rocheuses canadiennes, de Calgary à Banff, Lake Louise et Jasper par la promenade des Glaciers, avec les droits d’entrée ?",
+    "travelMonths": [
+      6,
+      7,
+      8,
+      9
+    ],
+    "priority": 45,
+    "demand": {
+      "googleSuggest": 10,
+      "googleTrends": 78,
+      "reach": 85,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Parcs Canada — Banff, droits d’entrée",
+        "url": "https://parks.canada.ca/pn-np/ab/banff/visit/tarifs-fees"
+      },
+      {
+        "label": "Wikivoyage — Banff",
+        "url": "https://fr.wikivoyage.org/wiki/Banff"
+      },
+      {
+        "label": "Seat61 — Voyager en train au Canada",
+        "url": "https://www.seat61.com/Canada.htm"
+      }
+    ],
+    "photos": [
+      {
+        "id": "rocheuses-moraine",
+        "query": "Moraine Lake",
+        "must": [
+          "moraine"
+        ],
+        "alt": "Le lac Moraine et la vallée des Dix-Pics."
+      },
+      {
+        "id": "rocheuses-lake-louise",
+        "query": "Lake Louise Banff",
+        "must": [
+          "lake louise"
+        ],
+        "alt": "Le lac Louise au pied du glacier Victoria."
+      },
+      {
+        "id": "rocheuses-peyto",
+        "query": "Peyto Lake",
+        "must": [
+          "peyto"
+        ],
+        "alt": "Le lac Peyto le long de la promenade des Glaciers."
+      }
+    ],
+    "keywords": [
+      "$",
+      "km",
+      "heures",
+      "banff",
+      "jasper",
+      "lake louise",
+      "promenade",
+      "parc"
+    ]
+  },
+  {
+    "slug": "cyclades-ferry-itineraire",
+    "destination": "Cyclades",
+    "country": "grece",
+    "continent": "europe",
+    "type": "transport",
+    "question": "Comment voyager en ferry dans les Cyclades depuis Athènes : ports, compagnies, durées et itinéraire Santorin, Naxos, Paros, Milos ?",
+    "travelMonths": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "priority": 44,
+    "demand": {
+      "googleSuggest": 0,
+      "googleTrends": 100,
+      "reach": 70,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Seat61 — Voyager en train et ferry en Grèce",
+        "url": "https://www.seat61.com/Greece.htm"
+      },
+      {
+        "label": "Wikivoyage — Cyclades",
+        "url": "https://fr.wikivoyage.org/wiki/Cyclades"
+      },
+      {
+        "label": "Wikivoyage — Santorin",
+        "url": "https://fr.wikivoyage.org/wiki/Santorin"
+      }
+    ],
+    "photos": [
+      {
+        "id": "cyclades-santorin-oia",
+        "query": "Oia Santorini",
+        "must": [
+          "oia"
+        ],
+        "alt": "Les maisons blanches et dômes bleus d’Oia, à Santorin."
+      },
+      {
+        "id": "cyclades-naxos-portara",
+        "query": "Portara Naxos",
+        "must": [
+          "portara"
+        ],
+        "alt": "La Portara, porte de marbre face au port de Naxos."
+      },
+      {
+        "id": "cyclades-milos-sarakiniko",
+        "query": "Sarakiniko Milos",
+        "must": [
+          "sarakiniko"
+        ],
+        "alt": "Les roches blanches de Sarakiniko, à Milos."
+      }
+    ],
+    "keywords": [
+      "ferry",
+      "heures",
+      "pirée",
+      "rafina",
+      "santorin",
+      "naxos",
+      "paros",
+      "milos"
+    ]
+  },
+  {
+    "slug": "dubai-que-faire-4-jours",
+    "destination": "Dubaï",
+    "country": "emirats-arabes-unis",
+    "continent": "moyen-orient",
+    "type": "que-faire",
+    "question": "Que faire à Dubaï en quatre jours, entre Burj Khalifa, souks, désert et plages, avec le métro et les prix ?",
+    "travelMonths": [
+      11,
+      12,
+      1,
+      2,
+      3
+    ],
+    "priority": 44,
+    "demand": {
+      "googleSuggest": 0,
+      "googleTrends": 100,
+      "reach": 70,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Wikivoyage — Dubaï",
+        "url": "https://fr.wikivoyage.org/wiki/Duba%C3%AF"
+      },
+      {
+        "label": "RTA — Tarifs des transports publics",
+        "url": "https://www.rta.ae/wps/portal/rta/ae/public-transport/fares"
+      }
+    ],
+    "photos": [
+      {
+        "id": "dubai-burj-khalifa",
+        "query": "Burj Khalifa skyline",
+        "must": [
+          "burj khalifa"
+        ],
+        "alt": "La Burj Khalifa domine les tours de Dubaï."
+      },
+      {
+        "id": "dubai-creek-abra",
+        "query": "Dubai Creek abra",
+        "must": [
+          "abra"
+        ],
+        "alt": "Une abra, le bateau-taxi de la crique de Dubaï."
+      },
+      {
+        "id": "dubai-desert",
+        "query": "Dubai desert dunes",
+        "must": [
+          "desert"
+        ],
+        "alt": "Les dunes du désert aux portes de Dubaï."
+      }
+    ],
+    "keywords": [
+      "métro",
+      "burj",
+      "souk",
+      "creek",
+      "désert",
+      "dirhams",
+      "minutes",
+      "nol"
+    ]
+  },
+  {
+    "slug": "martinique-quand-partir",
+    "destination": "Martinique",
+    "country": "martinique",
+    "continent": "amerique-centrale-caraibes",
+    "type": "quand-partir",
+    "question": "Quand partir en Martinique : carême et hivernage, cyclones, températures et meilleurs mois pour les plages et la randonnée ?",
+    "travelMonths": [
+      12,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "priority": 44,
+    "demand": {
+      "googleSuggest": 37,
+      "googleTrends": 62,
+      "reach": 35,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Martinique — Site officiel du tourisme",
+        "url": "https://www.martinique.org/"
+      },
+      {
+        "label": "Wikivoyage — Martinique",
+        "url": "https://fr.wikivoyage.org/wiki/Martinique"
+      }
+    ],
+    "photos": [
+      {
+        "id": "martinique-salines",
+        "query": "Grande Anse des Salines",
+        "must": [
+          "salines"
+        ],
+        "alt": "La plage des Salines bordée de cocotiers."
+      },
+      {
+        "id": "martinique-pelee",
+        "query": "Montagne Pelee",
+        "must": [
+          "pelée"
+        ],
+        "alt": "La montagne Pelée au-dessus de Saint-Pierre."
+      },
+      {
+        "id": "martinique-diamant",
+        "query": "Rocher du Diamant",
+        "must": [
+          "diamant"
+        ],
+        "alt": "Le rocher du Diamant au large de la côte sud."
+      }
+    ],
+    "keywords": [
+      "carême",
+      "hivernage",
+      "cyclone",
+      "saison",
+      "°c",
+      "pluie",
+      "décembre",
+      "juin"
+    ]
+  },
+  {
+    "slug": "vienne-marches-de-noel",
+    "destination": "Vienne",
+    "country": "autriche",
+    "continent": "europe",
+    "type": "que-faire",
+    "question": "Quels marchés de Noël voir à Vienne, avec leurs dates, et comment s’y déplacer avec les tickets Wiener Linien ?",
+    "travelMonths": [
+      11,
+      12
+    ],
+    "priority": 44,
+    "demand": {
+      "googleSuggest": 43,
+      "googleTrends": 17,
+      "reach": 85,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Wikivoyage — Vienna",
+        "url": "https://en.wikivoyage.org/wiki/Vienna"
+      },
+      {
+        "label": "Wikivoyage — Vienne",
+        "url": "https://fr.wikivoyage.org/wiki/Vienne_(Autriche)"
+      },
+      {
+        "label": "Seat61 — Voyager en train en Autriche",
+        "url": "https://www.seat61.com/Austria.htm"
+      }
+    ],
+    "photos": [
+      {
+        "id": "vienne-rathaus-noel",
+        "query": "Vienna Christmas market Rathaus",
+        "must": [
+          "christmas"
+        ],
+        "alt": "Le marché de Noël devant l’hôtel de ville de Vienne."
+      },
+      {
+        "id": "vienne-schonbrunn",
+        "query": "Schönbrunn Palace",
+        "must": [
+          "schönbrunn"
+        ],
+        "alt": "Le château de Schönbrunn et ses jardins."
+      },
+      {
+        "id": "vienne-stephansdom",
+        "query": "Stephansdom Vienna",
+        "must": [
+          "stephansdom"
+        ],
+        "alt": "La cathédrale Saint-Étienne et son toit de tuiles colorées."
+      }
+    ],
+    "keywords": [
+      "€",
+      "ticket",
+      "noël",
+      "marché",
+      "décembre",
+      "u-bahn",
+      "heures",
+      "jours"
+    ]
+  },
+  {
+    "slug": "seychelles-quand-partir",
+    "destination": "Seychelles",
+    "country": "seychelles",
+    "continent": "afrique",
+    "type": "quand-partir",
+    "question": "Quand partir aux Seychelles : alizés, mousson, mer calme et meilleures plages selon les mois ?",
+    "travelMonths": [
+      4,
+      5,
+      10,
+      11
+    ],
+    "priority": 43,
+    "demand": {
+      "googleSuggest": 41,
+      "googleTrends": 36,
+      "reach": 60,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Wikivoyage — Seychelles",
+        "url": "https://fr.wikivoyage.org/wiki/Seychelles"
+      },
+      {
+        "label": "Wikipedia — Seychelles",
+        "url": "https://en.wikipedia.org/wiki/Seychelles"
+      }
+    ],
+    "photos": [
+      {
+        "id": "seychelles-anse-source-argent",
+        "query": "Anse Source d Argent",
+        "must": [
+          "source d"
+        ],
+        "alt": "Les rochers de granit de l’Anse Source d’Argent, à La Digue."
+      },
+      {
+        "id": "seychelles-praslin",
+        "query": "Anse Lazio Praslin",
+        "must": [
+          "lazio"
+        ],
+        "alt": "L’Anse Lazio, sur l’île de Praslin."
+      },
+      {
+        "id": "seychelles-mahe",
+        "query": "Mahe Seychelles beach",
+        "must": [
+          "mah"
+        ],
+        "alt": "Une plage de Mahé et ses collines couvertes de forêt."
+      }
+    ],
+    "keywords": [
+      "alizé",
+      "mousson",
+      "°c",
+      "avril",
+      "octobre",
+      "saison",
+      "vent",
+      "pluie"
+    ]
+  },
+  {
+    "slug": "cap-vert-quand-partir",
+    "destination": "Cap-Vert",
+    "country": "cap-vert",
+    "continent": "afrique",
+    "type": "quand-partir",
+    "question": "Quand partir au Cap-Vert : températures, alizés, saison des pluies et quelles îles choisir selon les mois ?",
+    "travelMonths": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "priority": 42,
+    "demand": {
+      "googleSuggest": 32,
+      "googleTrends": 46,
+      "reach": 60,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Wikivoyage — Cap-Vert",
+        "url": "https://fr.wikivoyage.org/wiki/Cap-Vert"
+      },
+      {
+        "label": "Wikipedia — Cape Verde",
+        "url": "https://en.wikipedia.org/wiki/Cape_Verde"
+      }
+    ],
+    "photos": [
+      {
+        "id": "cap-vert-santo-antao",
+        "query": "Santo Antao valley",
+        "must": [
+          "santo"
+        ],
+        "alt": "Les vallées verdoyantes de Santo Antão."
+      },
+      {
+        "id": "cap-vert-sal-santa-maria",
+        "query": "Santa Maria Sal beach",
+        "must": [
+          "santa maria"
+        ],
+        "alt": "La plage de Santa Maria, sur l’île de Sal."
+      },
+      {
+        "id": "cap-vert-mindelo",
+        "query": "Mindelo Sao Vicente",
+        "must": [
+          "mindelo"
+        ],
+        "alt": "La baie de Mindelo, sur l’île de São Vicente."
+      }
+    ],
+    "keywords": [
+      "°c",
+      "pluie",
+      "vent",
+      "alizé",
+      "saison",
+      "sal",
+      "boa vista",
+      "santo antão"
+    ]
+  },
+  {
+    "slug": "ile-maurice-quand-partir",
+    "destination": "Île Maurice",
+    "country": "maurice",
+    "continent": "afrique",
+    "type": "quand-partir",
+    "question": "Quand partir à l’île Maurice : été austral, hiver, cyclones, températures de l’air et de la mer selon les mois et les côtes ?",
+    "travelMonths": [
+      4,
+      5,
+      9,
+      10,
+      11,
+      12
+    ],
+    "priority": 42,
+    "demand": {
+      "googleSuggest": 34,
+      "googleTrends": 60,
+      "reach": 35,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Mauritius Meteorological Services — Climat",
+        "url": "https://metservice.intnet.mu/climate-services/climate-of-mauritius.php"
+      },
+      {
+        "label": "Wikivoyage — Île Maurice",
+        "url": "https://fr.wikivoyage.org/wiki/%C3%8Ele_Maurice"
+      }
+    ],
+    "photos": [
+      {
+        "id": "maurice-morne",
+        "query": "Le Morne Brabant",
+        "must": [
+          "morne"
+        ],
+        "alt": "Le Morne Brabant au-dessus du lagon, au sud-ouest de l’île Maurice."
+      },
+      {
+        "id": "maurice-chamarel",
+        "query": "Chamarel seven coloured earth",
+        "must": [
+          "chamarel"
+        ],
+        "alt": "La terre des Sept Couleurs de Chamarel."
+      },
+      {
+        "id": "maurice-grand-baie",
+        "query": "Grand Baie Mauritius",
+        "must": [
+          "grand baie"
+        ],
+        "alt": "Le lagon de Grand Baie, au nord de l’île Maurice."
+      }
+    ],
+    "keywords": [
+      "°c",
+      "mm",
+      "cyclone",
+      "été",
+      "hiver",
+      "saison",
+      "côte",
+      "mois"
+    ]
+  },
+  {
+    "slug": "cappadoce-montgolfiere",
+    "destination": "Cappadoce",
+    "country": "turquie",
+    "continent": "europe",
+    "type": "que-faire",
+    "question": "Que faire en Cappadoce : vol en montgolfière, vallées, Göreme et villes souterraines, avec les prix et la meilleure saison ?",
+    "travelMonths": [
+      4,
+      5,
+      6,
+      9,
+      10
+    ],
+    "priority": 41,
+    "demand": {
+      "googleSuggest": 6,
+      "googleTrends": 70,
+      "reach": 85,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Wikivoyage — Cappadoce",
+        "url": "https://fr.wikivoyage.org/wiki/Cappadoce"
+      },
+      {
+        "label": "Seat61 — Voyager en train en Turquie",
+        "url": "https://www.seat61.com/Turkey.htm"
+      }
+    ],
+    "photos": [
+      {
+        "id": "cappadoce-ballons",
+        "query": "Cappadocia balloons Goreme",
+        "must": [
+          "balloon"
+        ],
+        "alt": "Des montgolfières au-dessus des vallées de Cappadoce."
+      },
+      {
+        "id": "cappadoce-cheminees",
+        "query": "Fairy chimneys Cappadocia",
+        "must": [
+          "fairy chimney"
+        ],
+        "alt": "Les cheminées de fée de Cappadoce."
+      },
+      {
+        "id": "cappadoce-uchisar",
+        "query": "Uchisar castle",
+        "must": [
+          "uçhisar"
+        ],
+        "alt": "Le piton rocheux d’Uçhisar."
+      }
+    ],
+    "keywords": [
+      "montgolfière",
+      "göreme",
+      "vallée",
+      "heures",
+      "kayseri",
+      "nevşehir",
+      "bus",
+      "lever"
+    ]
+  },
+  {
+    "slug": "malaisie-itineraire-2-semaines",
+    "destination": "Malaisie",
+    "country": "malaisie",
+    "continent": "asie",
+    "type": "itineraire",
+    "question": "Quel itinéraire de deux semaines en Malaisie, de Kuala Lumpur à Penang, aux Cameron Highlands et à Malacca, avec les trains et bus ?",
+    "travelMonths": [
+      12,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "priority": 41,
+    "demand": {
+      "googleSuggest": 42,
+      "googleTrends": 19,
+      "reach": 70,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Seat61 — Voyager en train en Malaisie",
+        "url": "https://www.seat61.com/Malaysia.htm"
+      },
+      {
+        "label": "Wikivoyage — Malaisie",
+        "url": "https://fr.wikivoyage.org/wiki/Malaisie"
+      }
+    ],
+    "photos": [
+      {
+        "id": "malaisie-petronas",
+        "query": "Petronas Towers",
+        "must": [
+          "petronas"
+        ],
+        "alt": "Les tours Petronas au-dessus de Kuala Lumpur."
+      },
+      {
+        "id": "malaisie-penang-george-town",
+        "query": "George Town Penang street",
+        "must": [
+          "george town"
+        ],
+        "alt": "Une rue de George Town, à Penang."
+      },
+      {
+        "id": "malaisie-cameron-highlands",
+        "query": "Cameron Highlands tea plantation",
+        "must": [
+          "cameron"
+        ],
+        "alt": "Les plantations de thé des Cameron Highlands."
+      }
+    ],
+    "keywords": [
+      "kuala lumpur",
+      "penang",
+      "cameron",
+      "malacca",
+      "heures",
+      "train",
+      "ets",
+      "bus"
+    ]
+  },
+  {
+    "slug": "croatie-itineraire-10-jours",
+    "destination": "Croatie",
+    "country": "croatie",
+    "continent": "europe",
+    "type": "itineraire",
+    "question": "Quel itinéraire de 10 jours en Croatie, de Zagreb aux lacs de Plitvice, Split, Hvar et Dubrovnik, en bus et ferry ?",
+    "travelMonths": [
+      5,
+      6,
+      9,
+      10
+    ],
+    "priority": 40,
+    "demand": {
+      "googleSuggest": 18,
+      "googleTrends": 64,
+      "reach": 60,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Jadrolinija — Ferries croates",
+        "url": "https://www.jadrolinija.hr/en"
+      },
+      {
+        "label": "Seat61 — Voyager en Croatie",
+        "url": "https://www.seat61.com/Croatia.htm"
+      },
+      {
+        "label": "Wikivoyage — Croatie",
+        "url": "https://fr.wikivoyage.org/wiki/Croatie"
+      }
+    ],
+    "photos": [
+      {
+        "id": "croatie-plitvice",
+        "query": "Plitvice Lakes waterfall",
+        "must": [
+          "plitvice"
+        ],
+        "alt": "Les cascades et passerelles des lacs de Plitvice."
+      },
+      {
+        "id": "croatie-dubrovnik-remparts",
+        "query": "Dubrovnik walls old town",
+        "must": [
+          "dubrovnik"
+        ],
+        "alt": "Les remparts et toits orange de Dubrovnik."
+      },
+      {
+        "id": "croatie-hvar",
+        "query": "Hvar town harbour",
+        "must": [
+          "hvar"
+        ],
+        "alt": "Le port de Hvar et la forteresse au-dessus."
+      }
+    ],
+    "keywords": [
+      "ferry",
+      "bus",
+      "heures",
+      "plitvice",
+      "split",
+      "hvar",
+      "dubrovnik",
+      "zagreb"
+    ]
+  },
+  {
+    "slug": "islande-aurores-boreales",
+    "destination": "Islande",
+    "country": "islande",
+    "continent": "europe",
+    "type": "quand-partir",
+    "question": "Quand et où voir des aurores boréales en Islande : mois, heures, prévisions et lieux loin des lumières ?",
+    "travelMonths": [
+      9,
+      10,
+      11,
+      12,
+      1,
+      2,
+      3
+    ],
+    "priority": 40,
+    "demand": {
+      "googleSuggest": 25,
+      "googleTrends": 46,
+      "reach": 70,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Veðurstofa Íslands — Prévisions d’aurores",
+        "url": "https://en.vedur.is/weather/forecasts/aurora/"
+      },
+      {
+        "label": "Wikivoyage — Islande",
+        "url": "https://fr.wikivoyage.org/wiki/Islande"
+      },
+      {
+        "label": "Seat61 — Voyager en Islande",
+        "url": "https://www.seat61.com/Iceland.htm"
+      }
+    ],
+    "photos": [
+      {
+        "id": "islande-aurore-thingvellir",
+        "query": "Aurora borealis Iceland",
+        "must": [
+          "aurora"
+        ],
+        "alt": "Une aurore boréale dans le ciel islandais."
+      },
+      {
+        "id": "islande-reykjavik-hallgrimskirkja",
+        "query": "Hallgrimskirkja Reykjavik",
+        "must": [
+          "hallgr"
+        ],
+        "alt": "L’église Hallgrímskirkja au-dessus de Reykjavik."
+      },
+      {
+        "id": "islande-blue-lagoon",
+        "query": "Blue Lagoon Iceland",
+        "must": [
+          "blue lagoon"
+        ],
+        "alt": "Les eaux laiteuses du Blue Lagoon."
+      }
+    ],
+    "keywords": [
+      "aurore",
+      "nuit",
+      "septembre",
+      "mars",
+      "heures",
+      "prévision",
+      "ciel",
+      "kp"
+    ]
+  },
+  {
+    "slug": "afrique-du-sud-itineraire-2-semaines",
+    "destination": "Afrique du Sud",
+    "country": "afrique-du-sud",
+    "continent": "afrique",
+    "type": "itineraire",
+    "question": "Quel itinéraire de deux semaines en Afrique du Sud, du Cap à la route des Jardins et au parc Kruger ?",
+    "travelMonths": [
+      10,
+      11,
+      12,
+      1,
+      2,
+      3,
+      4
+    ],
+    "priority": 39,
+    "demand": {
+      "googleSuggest": 43,
+      "googleTrends": 19,
+      "reach": 60,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Wikivoyage — Afrique du Sud",
+        "url": "https://fr.wikivoyage.org/wiki/Afrique_du_Sud"
+      },
+      {
+        "label": "Wikivoyage — Le Cap",
+        "url": "https://fr.wikivoyage.org/wiki/Le_Cap"
+      }
+    ],
+    "photos": [
+      {
+        "id": "afrique-du-sud-table",
+        "query": "Table Mountain Cape Town",
+        "must": [
+          "table mountain"
+        ],
+        "alt": "La montagne de la Table au-dessus du Cap."
+      },
+      {
+        "id": "afrique-du-sud-kruger",
+        "query": "Kruger National Park",
+        "must": [
+          "kruger"
+        ],
+        "alt": "Des animaux dans le parc national Kruger."
+      },
+      {
+        "id": "afrique-du-sud-boulders",
+        "query": "Boulders Beach penguins",
+        "must": [
+          "boulders"
+        ],
+        "alt": "Les manchots de Boulders Beach, près du Cap."
+      }
+    ],
+    "keywords": [
+      "cap",
+      "kruger",
+      "route",
+      "km",
+      "heures",
+      "jours",
+      "garden route",
+      "parc"
     ]
   },
   {
     "slug": "lisbonne-miradouros",
     "destination": "Lisbonne",
+    "country": "portugal",
+    "continent": "europe",
+    "type": "que-faire",
     "question": "Quels miradouros de Lisbonne choisir, que voit-on depuis chacun et comment y monter ? Donne en priorité les prix, horaires, jours de fermeture, durées, numéros de ligne et noms exacts présents dans les sources ; n’invente rien.",
+    "travelMonths": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "priority": 39,
+    "demand": {
+      "googleSuggest": 25,
+      "googleTrends": 31,
+      "reach": 85,
+      "measuredOn": "2026-10-24"
+    },
     "sources": [
       {
-        "label": "Visit Lisboa — Miradouro da Senhora do Monte",
-        "url": "https://www.visitlisboa.com/pt-pt/locais/miradouro-da-senhora-do-monte"
+        "label": "Wikivoyage — Lisbonne",
+        "url": "https://fr.wikivoyage.org/wiki/Lisbonne"
       },
       {
-        "label": "Visit Lisboa — Miradouro de Santa Luzia",
-        "url": "https://www.visitlisboa.com/pt-pt/locais/miradouro-de-santa-luzia"
-      },
-      {
-        "label": "Visit Lisboa — Miradouro de Santa Catarina",
-        "url": "https://www.visitlisboa.com/pt-pt/locais/miradouro-de-santa-catarina"
+        "label": "Wikivoyage — Lisbon",
+        "url": "https://en.wikivoyage.org/wiki/Lisbon"
       }
     ],
-    "category": "Visites",
-    "cover": "lisbonne-miradouro"
+    "photos": [
+      {
+        "id": "lisbonne-miradouro"
+      },
+      {
+        "id": "lisbonne-alfama-toits"
+      },
+      {
+        "id": "lisbonne-alfama-tram"
+      }
+    ],
+    "category": "Visites"
+  },
+  {
+    "slug": "malte-que-faire",
+    "destination": "Malte",
+    "country": "malte",
+    "continent": "europe",
+    "type": "que-faire",
+    "question": "Que faire à Malte en une semaine : La Valette, Mdina, Gozo et le Blue Lagoon, avec les bus et ferries et leurs prix ?",
+    "travelMonths": [
+      4,
+      5,
+      6,
+      9,
+      10
+    ],
+    "priority": 38,
+    "demand": {
+      "googleSuggest": 8,
+      "googleTrends": 58,
+      "reach": 85,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Malta Public Transport — Tarifs",
+        "url": "https://www.publictransport.com.mt/en/fares"
+      },
+      {
+        "label": "Visit Malta — Site officiel",
+        "url": "https://www.visitmalta.com/fr/"
+      },
+      {
+        "label": "Wikivoyage — Malte",
+        "url": "https://fr.wikivoyage.org/wiki/Malte"
+      }
+    ],
+    "photos": [
+      {
+        "id": "malte-la-valette",
+        "query": "Valletta Grand Harbour",
+        "must": [
+          "valletta"
+        ],
+        "alt": "La Valette et le Grand Port."
+      },
+      {
+        "id": "malte-mdina",
+        "query": "Mdina gate",
+        "must": [
+          "mdina"
+        ],
+        "alt": "La porte principale de Mdina, la ville silencieuse."
+      },
+      {
+        "id": "malte-blue-lagoon",
+        "query": "Blue Lagoon Comino",
+        "must": [
+          "comino"
+        ],
+        "alt": "Les eaux turquoise du Blue Lagoon, à Comino."
+      }
+    ],
+    "keywords": [
+      "bus",
+      "€",
+      "ferry",
+      "gozo",
+      "comino",
+      "mdina",
+      "minutes",
+      "tallinja"
+    ]
+  },
+  {
+    "slug": "philippines-quand-partir",
+    "destination": "Philippines",
+    "country": "philippines",
+    "continent": "asie",
+    "type": "quand-partir",
+    "question": "Quand partir aux Philippines : saison sèche, typhons et meilleures îles selon les mois ?",
+    "travelMonths": [
+      12,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "priority": 38,
+    "demand": {
+      "googleSuggest": 40,
+      "googleTrends": 20,
+      "reach": 60,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Wikivoyage — Philippines",
+        "url": "https://fr.wikivoyage.org/wiki/Philippines"
+      },
+      {
+        "label": "Seat61 — Voyager aux Philippines",
+        "url": "https://www.seat61.com/Philippines.htm"
+      }
+    ],
+    "photos": [
+      {
+        "id": "philippines-el-nido",
+        "query": "El Nido Palawan lagoon",
+        "must": [
+          "el nido"
+        ],
+        "alt": "Les lagons et falaises d’El Nido, à Palawan."
+      },
+      {
+        "id": "philippines-chocolate-hills",
+        "query": "Chocolate Hills Bohol",
+        "must": [
+          "chocolate hills"
+        ],
+        "alt": "Les collines de chocolat de Bohol."
+      },
+      {
+        "id": "philippines-banaue",
+        "query": "Banaue rice terraces",
+        "must": [
+          "banaue"
+        ],
+        "alt": "Les rizières en terrasses de Banaue."
+      }
+    ],
+    "keywords": [
+      "saison",
+      "typhon",
+      "pluie",
+      "sèche",
+      "palawan",
+      "cebu",
+      "bohol",
+      "°c"
+    ]
+  },
+  {
+    "slug": "colombie-itineraire-2-semaines",
+    "destination": "Colombie",
+    "country": "colombie",
+    "continent": "amerique-du-sud",
+    "type": "itineraire",
+    "question": "Quel itinéraire de deux semaines en Colombie, de Bogotá à Medellín, la région du café et Carthagène ?",
+    "travelMonths": [
+      12,
+      1,
+      2,
+      3,
+      7,
+      8
+    ],
+    "priority": 37,
+    "demand": {
+      "googleSuggest": 37,
+      "googleTrends": 15,
+      "reach": 70,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Wikivoyage — Colombie",
+        "url": "https://fr.wikivoyage.org/wiki/Colombie"
+      },
+      {
+        "label": "Wikipedia — Coffee Cultural Landscape of Colombia",
+        "url": "https://en.wikipedia.org/wiki/Coffee_Cultural_Landscape_of_Colombia"
+      }
+    ],
+    "photos": [
+      {
+        "id": "colombie-carthagene",
+        "query": "Cartagena old town colombia",
+        "must": [
+          "cartagena"
+        ],
+        "alt": "Les balcons colorés de la vieille ville de Carthagène."
+      },
+      {
+        "id": "colombie-cocora",
+        "query": "Cocora valley wax palms",
+        "must": [
+          "cocora"
+        ],
+        "alt": "Les palmiers à cire de la vallée de Cocora."
+      },
+      {
+        "id": "colombie-guatape",
+        "query": "Guatape rock",
+        "must": [
+          "guatap"
+        ],
+        "alt": "Le rocher d’El Peñol au-dessus du lac de Guatapé."
+      }
+    ],
+    "keywords": [
+      "bogotá",
+      "medellín",
+      "carthagène",
+      "salento",
+      "heures",
+      "vol",
+      "bus",
+      "jours"
+    ]
   },
   {
     "slug": "porto-belvederes-gratuits",
     "destination": "Porto",
+    "country": "portugal",
+    "continent": "europe",
+    "type": "que-faire",
     "question": "Depuis quels belvédères gratuits voir Porto et le Douro, et que voit-on de chacun ? Donne en priorité les prix, horaires, jours de fermeture, durées, numéros de ligne et noms exacts présents dans les sources ; n’invente rien.",
+    "travelMonths": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "priority": 36,
+    "demand": {
+      "googleSuggest": 17,
+      "googleTrends": 34,
+      "reach": 85,
+      "measuredOn": "2026-10-24"
+    },
     "sources": [
       {
         "label": "Visit Porto — Mosteiro da Serra do Pilar",
@@ -57,34 +3299,818 @@
         "url": "https://visitporto.travel/pt-PT/poi/5cd04b4ef979e00001fe47d6"
       }
     ],
-    "category": "Visites",
-    "cover": "porto-ponte-luis"
-  },
-  {
-    "slug": "porto-foz-tram-1",
-    "destination": "Porto",
-    "question": "Comment rejoindre la Foz et l’océan en tram historique depuis le centre de Porto, et que voir au bout de la ligne ? Donne en priorité les prix, horaires, jours de fermeture, durées, numéros de ligne et noms exacts présents dans les sources ; n’invente rien.",
-    "sources": [
+    "photos": [
       {
-        "label": "STCP — Trams historiques",
-        "url": "https://stcp.pt/pt/porto-tram-city-tour"
+        "id": "porto-ponte-luis"
       },
       {
-        "label": "Visit Porto — Farolim de Felgueiras",
-        "url": "https://visitporto.travel/pt-PT/poi/5cd04b51f979e000019b65b2"
+        "id": "porto-nuit"
       },
       {
-        "label": "Visit Porto — Molhe do Douro",
-        "url": "https://visitporto.travel/pt-PT/poi/5cd04b53f979e00001354b43"
+        "id": "porto-vue-clerigos"
       }
     ],
-    "category": "Excursions",
-    "cover": "porto-tram-historique"
+    "category": "Visites"
+  },
+  {
+    "slug": "amsterdam-3-jours",
+    "destination": "Amsterdam",
+    "country": "pays-bas",
+    "continent": "europe",
+    "type": "itineraire",
+    "question": "Que voir à Amsterdam en trois jours, canaux, musées et quartiers, avec les tickets de tram GVB et les prix des musées ?",
+    "travelMonths": [
+      4,
+      5,
+      9,
+      12
+    ],
+    "priority": 35,
+    "demand": {
+      "googleSuggest": 25,
+      "googleTrends": 29,
+      "reach": 70,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "I amsterdam — Site officiel",
+        "url": "https://www.iamsterdam.com/en"
+      },
+      {
+        "label": "Wikivoyage — Amsterdam",
+        "url": "https://fr.wikivoyage.org/wiki/Amsterdam"
+      },
+      {
+        "label": "Seat61 — Voyager en train aux Pays-Bas",
+        "url": "https://www.seat61.com/Netherlands.htm"
+      }
+    ],
+    "photos": [
+      {
+        "id": "amsterdam-canaux",
+        "query": "Amsterdam canal houses",
+        "must": [
+          "canal"
+        ],
+        "alt": "Les maisons à pignons le long d’un canal d’Amsterdam."
+      },
+      {
+        "id": "amsterdam-rijksmuseum",
+        "query": "Rijksmuseum",
+        "must": [
+          "rijksmuseum"
+        ],
+        "alt": "Le Rijksmuseum et son passage voûté."
+      },
+      {
+        "id": "amsterdam-jordaan",
+        "query": "Jordaan Amsterdam",
+        "must": [
+          "jordaan"
+        ],
+        "alt": "Une rue du Jordaan, à Amsterdam."
+      }
+    ],
+    "keywords": [
+      "tram",
+      "gvb",
+      "musée",
+      "canaux",
+      "heures",
+      "jours",
+      "gare",
+      "schiphol"
+    ]
+  },
+  {
+    "slug": "polynesie-budget",
+    "destination": "Polynésie française",
+    "country": "polynesie-francaise",
+    "continent": "oceanie",
+    "type": "budget",
+    "question": "Combien coûte un voyage en Polynésie française : vols inter-îles, pensions de famille, ferries Tahiti–Moorea et activités ?",
+    "travelMonths": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "priority": 34,
+    "demand": {
+      "googleSuggest": 32,
+      "googleTrends": 12,
+      "reach": 70,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Wikivoyage — Tahiti",
+        "url": "https://fr.wikivoyage.org/wiki/Tahiti"
+      },
+      {
+        "label": "Wikipedia — Moorea",
+        "url": "https://en.wikipedia.org/wiki/Moorea"
+      }
+    ],
+    "photos": [
+      {
+        "id": "polynesie-bora-bora",
+        "query": "Bora Bora lagoon Otemanu",
+        "must": [
+          "bora"
+        ],
+        "alt": "Le lagon de Bora-Bora et le mont Otemanu."
+      },
+      {
+        "id": "polynesie-moorea",
+        "query": "Moorea Opunohu bay",
+        "must": [
+          "moorea"
+        ],
+        "alt": "La baie d’Opunohu, à Moorea."
+      },
+      {
+        "id": "polynesie-tahiti-teahupoo",
+        "query": "Tahiti mountains",
+        "must": [
+          "tahiti"
+        ],
+        "alt": "Les montagnes verdoyantes de Tahiti."
+      }
+    ],
+    "keywords": [
+      "pension",
+      "ferry",
+      "moorea",
+      "vol",
+      "nuit",
+      "jours",
+      "papeete",
+      "minutes"
+    ]
+  },
+  {
+    "slug": "republique-dominicaine-quand-partir",
+    "destination": "République dominicaine",
+    "country": "republique-dominicaine",
+    "continent": "amerique-centrale-caraibes",
+    "type": "quand-partir",
+    "question": "Quand partir en République dominicaine : saison sèche, ouragans, baleines de Samaná et meilleures plages selon les mois ?",
+    "travelMonths": [
+      12,
+      1,
+      2,
+      3,
+      4
+    ],
+    "priority": 33,
+    "demand": {
+      "googleSuggest": 42,
+      "googleTrends": 0,
+      "reach": 60,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Wikivoyage — République dominicaine",
+        "url": "https://fr.wikivoyage.org/wiki/R%C3%A9publique_dominicaine"
+      },
+      {
+        "label": "Wikipedia — Dominican Republic",
+        "url": "https://en.wikipedia.org/wiki/Dominican_Republic"
+      }
+    ],
+    "photos": [
+      {
+        "id": "dominicaine-saona",
+        "query": "Isla Saona beach",
+        "must": [
+          "saona"
+        ],
+        "alt": "Une plage de sable blanc de l’île Saona."
+      },
+      {
+        "id": "dominicaine-samana",
+        "query": "Samana humpback whale",
+        "must": [
+          "samaná"
+        ],
+        "alt": "Une baleine à bosse dans la baie de Samaná."
+      },
+      {
+        "id": "dominicaine-zona-colonial",
+        "query": "Zona Colonial Santo Domingo",
+        "must": [
+          "zona colonial"
+        ],
+        "alt": "La zone coloniale de Saint-Domingue."
+      }
+    ],
+    "keywords": [
+      "saison",
+      "ouragan",
+      "baleine",
+      "janvier",
+      "mars",
+      "°c",
+      "pluie",
+      "samaná"
+    ]
+  },
+  {
+    "slug": "albanie-road-trip",
+    "destination": "Albanie",
+    "country": "albanie",
+    "continent": "europe",
+    "type": "road-trip",
+    "question": "Quel road trip d’une à deux semaines en Albanie, de Tirana à la riviera, Berat et Gjirokastër ?",
+    "travelMonths": [
+      5,
+      6,
+      9,
+      10
+    ],
+    "priority": 32,
+    "demand": {
+      "googleSuggest": 8,
+      "googleTrends": 37,
+      "reach": 85,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Wikivoyage — Albanie",
+        "url": "https://fr.wikivoyage.org/wiki/Albanie"
+      },
+      {
+        "label": "Wikipedia — Albanian Riviera",
+        "url": "https://en.wikipedia.org/wiki/Albanian_Riviera"
+      }
+    ],
+    "photos": [
+      {
+        "id": "albanie-ksamil",
+        "query": "Ksamil beach",
+        "must": [
+          "ksamil"
+        ],
+        "alt": "L’eau turquoise des îlots de Ksamil."
+      },
+      {
+        "id": "albanie-berat",
+        "query": "Berat windows",
+        "must": [
+          "berat"
+        ],
+        "alt": "Les maisons aux mille fenêtres de Berat."
+      },
+      {
+        "id": "albanie-gjirokaster",
+        "query": "Gjirokaster old town",
+        "must": [
+          "gjirokast"
+        ],
+        "alt": "Les toits de pierre de Gjirokastër."
+      }
+    ],
+    "keywords": [
+      "km",
+      "heures",
+      "bus",
+      "tirana",
+      "berat",
+      "saranda",
+      "ksamil",
+      "route"
+    ]
+  },
+  {
+    "slug": "kenya-safari-budget",
+    "destination": "Kenya",
+    "country": "kenya",
+    "continent": "afrique",
+    "type": "budget",
+    "question": "Quel budget pour un safari au Kenya : droits d’entrée du Masai Mara et des parcs, transport et saisons de la migration ?",
+    "travelMonths": [
+      1,
+      2,
+      7,
+      8,
+      9,
+      10
+    ],
+    "priority": 32,
+    "demand": {
+      "googleSuggest": 26,
+      "googleTrends": 16,
+      "reach": 70,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Wikivoyage — Kenya",
+        "url": "https://fr.wikivoyage.org/wiki/Kenya"
+      },
+      {
+        "label": "Wikipedia — Maasai Mara",
+        "url": "https://en.wikipedia.org/wiki/Maasai_Mara"
+      }
+    ],
+    "photos": [
+      {
+        "id": "kenya-masai-mara",
+        "query": "Masai Mara wildebeest",
+        "must": [
+          "mara"
+        ],
+        "alt": "Des gnous dans la réserve du Masai Mara."
+      },
+      {
+        "id": "kenya-amboseli",
+        "query": "Amboseli Kilimanjaro elephants",
+        "must": [
+          "amboseli"
+        ],
+        "alt": "Des éléphants d’Amboseli au pied du Kilimandjaro."
+      },
+      {
+        "id": "kenya-nairobi",
+        "query": "Nairobi National Park giraffe",
+        "must": [
+          "nairobi"
+        ],
+        "alt": "Une girafe dans le parc national de Nairobi."
+      }
+    ],
+    "keywords": [
+      "parc",
+      "mara",
+      "migration",
+      "jours",
+      "safari",
+      "entrée",
+      "juillet",
+      "octobre"
+    ]
+  },
+  {
+    "slug": "ecosse-road-trip-highlands",
+    "destination": "Écosse",
+    "country": "royaume-uni",
+    "continent": "europe",
+    "type": "road-trip",
+    "question": "Quel road trip en Écosse dans les Highlands et sur l’île de Skye, avec la North Coast 500, les distances et les étapes ?",
+    "travelMonths": [
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "priority": 31,
+    "demand": {
+      "googleSuggest": 13,
+      "googleTrends": 35,
+      "reach": 70,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "North Coast 500 — Site officiel",
+        "url": "https://www.northcoast500.com/"
+      },
+      {
+        "label": "VisitScotland — Site officiel",
+        "url": "https://www.visitscotland.com/"
+      },
+      {
+        "label": "Wikivoyage — Écosse",
+        "url": "https://fr.wikivoyage.org/wiki/%C3%89cosse"
+      }
+    ],
+    "photos": [
+      {
+        "id": "ecosse-eilean-donan",
+        "query": "Eilean Donan castle",
+        "must": [
+          "eilean donan"
+        ],
+        "alt": "Le château d’Eilean Donan sur son îlot."
+      },
+      {
+        "id": "ecosse-skye-old-man-storr",
+        "query": "Old Man of Storr Skye",
+        "must": [
+          "storr"
+        ],
+        "alt": "Le Old Man of Storr, sur l’île de Skye."
+      },
+      {
+        "id": "ecosse-glencoe",
+        "query": "Glencoe valley",
+        "must": [
+          "glencoe"
+        ],
+        "alt": "La vallée de Glencoe dans les Highlands."
+      }
+    ],
+    "keywords": [
+      "miles",
+      "km",
+      "route",
+      "skye",
+      "inverness",
+      "heures",
+      "nc500",
+      "jours"
+    ]
+  },
+  {
+    "slug": "prague-3-jours",
+    "destination": "Prague",
+    "country": "republique-tcheque",
+    "continent": "europe",
+    "type": "itineraire",
+    "question": "Que voir à Prague en trois jours, du château à la vieille ville, avec les tickets de tram et métro et les prix des visites ?",
+    "travelMonths": [
+      4,
+      5,
+      9,
+      10,
+      12
+    ],
+    "priority": 31,
+    "demand": {
+      "googleSuggest": 25,
+      "googleTrends": 16,
+      "reach": 70,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Prague City Tourism — Site officiel",
+        "url": "https://prague.eu/en/"
+      },
+      {
+        "label": "Wikivoyage — Prague",
+        "url": "https://fr.wikivoyage.org/wiki/Prague"
+      }
+    ],
+    "photos": [
+      {
+        "id": "prague-pont-charles",
+        "query": "Charles Bridge Prague",
+        "must": [
+          "charles bridge"
+        ],
+        "alt": "Le pont Charles et ses statues au-dessus de la Vltava."
+      },
+      {
+        "id": "prague-horloge",
+        "query": "Prague astronomical clock",
+        "must": [
+          "astronomical clock"
+        ],
+        "alt": "L’horloge astronomique de la place de la Vieille-Ville."
+      },
+      {
+        "id": "prague-chateau",
+        "query": "Prague Castle view",
+        "must": [
+          "prague castle"
+        ],
+        "alt": "Le château de Prague et la cathédrale Saint-Guy."
+      }
+    ],
+    "keywords": [
+      "tram",
+      "métro",
+      "ticket",
+      "couronnes",
+      "czk",
+      "château",
+      "minutes",
+      "heures"
+    ]
+  },
+  {
+    "slug": "budapest-3-jours",
+    "destination": "Budapest",
+    "country": "hongrie",
+    "continent": "europe",
+    "type": "itineraire",
+    "question": "Que faire à Budapest en trois jours, entre bains thermaux, Parlement et quartier juif, avec les tickets BKK et les prix ?",
+    "travelMonths": [
+      4,
+      5,
+      9,
+      10,
+      12
+    ],
+    "priority": 30,
+    "demand": {
+      "googleSuggest": 25,
+      "googleTrends": 12,
+      "reach": 70,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "BKK — Tickets et pass",
+        "url": "https://bkk.hu/en/tickets-and-passes/prices/"
+      },
+      {
+        "label": "Wikivoyage — Budapest",
+        "url": "https://fr.wikivoyage.org/wiki/Budapest"
+      },
+      {
+        "label": "Seat61 — Voyager en train en Hongrie",
+        "url": "https://www.seat61.com/Hungary.htm"
+      }
+    ],
+    "photos": [
+      {
+        "id": "budapest-parlement",
+        "query": "Hungarian Parliament Danube",
+        "must": [
+          "parliament"
+        ],
+        "alt": "Le Parlement hongrois au bord du Danube."
+      },
+      {
+        "id": "budapest-szechenyi",
+        "query": "Szechenyi bath",
+        "must": [
+          "széchenyi"
+        ],
+        "alt": "Les bassins extérieurs des bains Széchenyi."
+      },
+      {
+        "id": "budapest-bastion",
+        "query": "Fisherman Bastion",
+        "must": [
+          "bastion"
+        ],
+        "alt": "Les tours blanches du bastion des Pêcheurs."
+      }
+    ],
+    "keywords": [
+      "forints",
+      "huf",
+      "ticket",
+      "bains",
+      "tram",
+      "métro",
+      "heures",
+      "jours"
+    ]
+  },
+  {
+    "slug": "irlande-road-trip-10-jours",
+    "destination": "Irlande",
+    "country": "irlande",
+    "continent": "europe",
+    "type": "road-trip",
+    "question": "Quel road trip de 10 jours en Irlande, de Dublin au Connemara, aux falaises de Moher et à l’anneau du Kerry ?",
+    "travelMonths": [
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "priority": 30,
+    "demand": {
+      "googleSuggest": 8,
+      "googleTrends": 41,
+      "reach": 70,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Ireland.com — Site officiel",
+        "url": "https://www.ireland.com/fr-fr/"
+      },
+      {
+        "label": "Seat61 — Voyager en train en Irlande",
+        "url": "https://www.seat61.com/Ireland.htm"
+      },
+      {
+        "label": "Wikivoyage — Irlande",
+        "url": "https://fr.wikivoyage.org/wiki/Irlande"
+      }
+    ],
+    "photos": [
+      {
+        "id": "irlande-moher",
+        "query": "Cliffs of Moher",
+        "must": [
+          "moher"
+        ],
+        "alt": "Les falaises de Moher au-dessus de l’Atlantique."
+      },
+      {
+        "id": "irlande-connemara",
+        "query": "Connemara landscape",
+        "must": [
+          "connemara"
+        ],
+        "alt": "Les lacs et collines du Connemara."
+      },
+      {
+        "id": "irlande-kerry",
+        "query": "Ring of Kerry",
+        "must": [
+          "kerry"
+        ],
+        "alt": "La côte de l’anneau du Kerry."
+      }
+    ],
+    "keywords": [
+      "km",
+      "route",
+      "heures",
+      "dublin",
+      "galway",
+      "kerry",
+      "moher",
+      "jours"
+    ]
+  },
+  {
+    "slug": "islande-road-trip-10-jours",
+    "destination": "Islande",
+    "country": "islande",
+    "continent": "europe",
+    "type": "road-trip",
+    "question": "Quel road trip de 10 jours en Islande par la route n°1, avec les distances, l’état des routes et les étapes incontournables ?",
+    "travelMonths": [
+      6,
+      7,
+      8,
+      9
+    ],
+    "priority": 29,
+    "demand": {
+      "googleSuggest": 7,
+      "googleTrends": 46,
+      "reach": 60,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Visit Iceland — Site officiel",
+        "url": "https://www.visiticeland.com/"
+      },
+      {
+        "label": "Safetravel — Conseils officiels",
+        "url": "https://safetravel.is/"
+      },
+      {
+        "label": "Wikivoyage — Islande",
+        "url": "https://fr.wikivoyage.org/wiki/Islande"
+      }
+    ],
+    "photos": [
+      {
+        "id": "islande-skogafoss",
+        "query": "Skogafoss waterfall",
+        "must": [
+          "skógafoss"
+        ],
+        "alt": "La cascade de Skógafoss sur la côte sud de l’Islande."
+      },
+      {
+        "id": "islande-jokulsarlon",
+        "query": "Jokulsarlon glacier lagoon",
+        "must": [
+          "jökulsárlón"
+        ],
+        "alt": "Les icebergs du lagon glaciaire de Jökulsárlón."
+      },
+      {
+        "id": "islande-kirkjufell",
+        "query": "Kirkjufell mountain",
+        "must": [
+          "kirkjufell"
+        ],
+        "alt": "Le mont Kirkjufell et sa cascade, sur la péninsule de Snæfellsnes."
+      }
+    ],
+    "keywords": [
+      "km",
+      "route",
+      "heures",
+      "f-road",
+      "ring road",
+      "cascade",
+      "glacier",
+      "jours"
+    ]
+  },
+  {
+    "slug": "ouest-americain-road-trip",
+    "destination": "Ouest américain",
+    "country": "etats-unis",
+    "continent": "amerique-du-nord",
+    "type": "road-trip",
+    "question": "Quel road trip de deux à trois semaines dans l’Ouest américain, de Los Angeles à Las Vegas, au Grand Canyon et à San Francisco, avec les distances et les droits d’entrée ?",
+    "travelMonths": [
+      4,
+      5,
+      6,
+      9,
+      10
+    ],
+    "priority": 27,
+    "demand": {
+      "googleSuggest": 20,
+      "googleTrends": 0,
+      "reach": 85,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "National Park Service — Grand Canyon, tarifs",
+        "url": "https://www.nps.gov/grca/planyourvisit/fees.htm"
+      },
+      {
+        "label": "Wikivoyage — Grand Canyon",
+        "url": "https://fr.wikivoyage.org/wiki/Grand_Canyon"
+      },
+      {
+        "label": "Wikivoyage — Ouest américain",
+        "url": "https://fr.wikivoyage.org/wiki/Ouest_am%C3%A9ricain"
+      }
+    ],
+    "photos": [
+      {
+        "id": "ouest-grand-canyon",
+        "query": "Grand Canyon South Rim",
+        "must": [
+          "grand canyon"
+        ],
+        "alt": "Le Grand Canyon depuis la rive sud."
+      },
+      {
+        "id": "ouest-monument-valley",
+        "query": "Monument Valley",
+        "must": [
+          "monument valley"
+        ],
+        "alt": "Les buttes de Monument Valley."
+      },
+      {
+        "id": "ouest-golden-gate",
+        "query": "Golden Gate Bridge",
+        "must": [
+          "golden gate"
+        ],
+        "alt": "Le Golden Gate Bridge à San Francisco."
+      }
+    ],
+    "keywords": [
+      "$",
+      "miles",
+      "km",
+      "heures",
+      "pass",
+      "parc",
+      "grand canyon",
+      "route"
+    ]
   },
   {
     "slug": "porto-caves-gaia-telepherique",
     "destination": "Porto",
+    "country": "portugal",
+    "continent": "europe",
+    "type": "visite",
     "question": "Comment visiter les caves de porto de Vila Nova de Gaia avec le téléphérique, et combien coûtent les visites ? Donne en priorité les prix, horaires, jours de fermeture, durées, numéros de ligne et noms exacts présents dans les sources ; n’invente rien.",
+    "travelMonths": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "priority": 27,
+    "demand": {
+      "googleSuggest": 0,
+      "googleTrends": 34,
+      "reach": 85,
+      "measuredOn": "2026-10-24"
+    },
     "sources": [
       {
         "label": "Gaia Cable Car — Prix et horaires",
@@ -99,13 +4125,47 @@
         "url": "https://www.taylor.pt/en/visit-taylors/port-cellars"
       }
     ],
-    "category": "Visites",
-    "cover": "porto-caves-gaia"
+    "photos": [
+      {
+        "id": "porto-caves-gaia"
+      },
+      {
+        "id": "porto-nuit"
+      },
+      {
+        "id": "porto-rabelo"
+      }
+    ],
+    "category": "Visites"
   },
   {
     "slug": "porto-clerigos-lello",
     "destination": "Porto",
+    "country": "portugal",
+    "continent": "europe",
+    "type": "visite",
     "question": "Comment visiter la tour des Clérigos et la Livraria Lello sans mauvaise surprise ? Donne en priorité les prix, horaires, jours de fermeture, durées, numéros de ligne et noms exacts présents dans les sources ; n’invente rien.",
+    "travelMonths": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "priority": 27,
+    "demand": {
+      "googleSuggest": 0,
+      "googleTrends": 34,
+      "reach": 85,
+      "measuredOn": "2026-10-24"
+    },
     "sources": [
       {
         "label": "Torre dos Clérigos — Billetterie",
@@ -116,13 +4176,151 @@
         "url": "https://livrarialello.pt/en/faqs/"
       }
     ],
-    "category": "Visites",
-    "cover": "porto-vue-clerigos"
+    "photos": [
+      {
+        "id": "porto-vue-clerigos"
+      },
+      {
+        "id": "porto-sao-bento"
+      },
+      {
+        "id": "porto-nuit"
+      }
+    ],
+    "category": "Visites"
+  },
+  {
+    "slug": "porto-foz-tram-1",
+    "destination": "Porto",
+    "country": "portugal",
+    "continent": "europe",
+    "type": "excursion",
+    "question": "Comment rejoindre la Foz et l’océan en tram historique depuis le centre de Porto, et que voir au bout de la ligne ? Donne en priorité les prix, horaires, jours de fermeture, durées, numéros de ligne et noms exacts présents dans les sources ; n’invente rien.",
+    "travelMonths": [
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "priority": 27,
+    "demand": {
+      "googleSuggest": 0,
+      "googleTrends": 34,
+      "reach": 85,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "STCP — Trams historiques",
+        "url": "https://stcp.pt/pt/porto-tram-city-tour"
+      },
+      {
+        "label": "Visit Porto — Farolim de Felgueiras",
+        "url": "https://visitporto.travel/pt-PT/poi/5cd04b51f979e000019b65b2"
+      },
+      {
+        "label": "Visit Porto — Molhe do Douro",
+        "url": "https://visitporto.travel/pt-PT/poi/5cd04b53f979e00001354b43"
+      }
+    ],
+    "photos": [
+      {
+        "id": "porto-tram-historique"
+      },
+      {
+        "id": "porto-rabelo"
+      },
+      {
+        "id": "porto-ponte-luis"
+      }
+    ],
+    "category": "Excursions"
+  },
+  {
+    "slug": "belem-jeronimos-tram-15",
+    "destination": "Lisbonne",
+    "country": "portugal",
+    "continent": "europe",
+    "type": "visite",
+    "question": "Comment rejoindre Belém en tram 15E et visiter le monastère des Jerónimos ? Donne en priorité les prix, horaires, jours de fermeture, durées, numéros de ligne et noms exacts présents dans les sources ; n’invente rien.",
+    "travelMonths": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "priority": 26,
+    "demand": {
+      "googleSuggest": 0,
+      "googleTrends": 31,
+      "reach": 85,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Wikivoyage — Lisbon/Belém",
+        "url": "https://en.wikivoyage.org/wiki/Lisbon/Bel%C3%A9m"
+      },
+      {
+        "label": "Wikipedia — Jerónimos Monastery",
+        "url": "https://en.wikipedia.org/wiki/Jer%C3%B3nimos_Monastery"
+      },
+      {
+        "label": "Carris — Site officiel",
+        "url": "https://www.carris.pt/en/"
+      }
+    ],
+    "photos": [
+      {
+        "id": "lisbonne-jeronimos"
+      },
+      {
+        "id": "lisbonne-belem-tour"
+      },
+      {
+        "id": "lisbonne-tram-28"
+      }
+    ],
+    "category": "Visites"
   },
   {
     "slug": "lisbonne-chateau-sao-jorge",
     "destination": "Lisbonne",
+    "country": "portugal",
+    "continent": "europe",
+    "type": "visite",
     "question": "Comment visiter le château São Jorge de Lisbonne : prix, horaires et meilleur moment ? Donne en priorité les prix, horaires, jours de fermeture, durées, numéros de ligne et noms exacts présents dans les sources ; n’invente rien.",
+    "travelMonths": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "priority": 26,
+    "demand": {
+      "googleSuggest": 0,
+      "googleTrends": 31,
+      "reach": 85,
+      "measuredOn": "2026-10-24"
+    },
     "sources": [
       {
         "label": "Castelo de São Jorge — Billets",
@@ -133,13 +4331,47 @@
         "url": "https://castelodesaojorge.pt/en/plan-your-visit/schedules/"
       }
     ],
-    "category": "Visites",
-    "cover": "lisbonne-alfama-toits"
+    "photos": [
+      {
+        "id": "lisbonne-alfama-toits"
+      },
+      {
+        "id": "lisbonne-alfama-tram"
+      },
+      {
+        "id": "lisbonne-praca-comercio"
+      }
+    ],
+    "category": "Visites"
   },
   {
     "slug": "lisbonne-ferry-cacilhas",
     "destination": "Lisbonne",
+    "country": "portugal",
+    "continent": "europe",
+    "type": "transport",
     "question": "Comment traverser le Tage en ferry de Cais do Sodré à Cacilhas : prix, durée et horaires ? Donne en priorité les prix, horaires, jours de fermeture, durées, numéros de ligne et noms exacts présents dans les sources ; n’invente rien.",
+    "travelMonths": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "priority": 26,
+    "demand": {
+      "googleSuggest": 0,
+      "googleTrends": 31,
+      "reach": 85,
+      "measuredOn": "2026-10-24"
+    },
     "sources": [
       {
         "label": "TTSL — Tarifs",
@@ -150,30 +4382,47 @@
         "url": "https://ttsl.pt/passageiros/horarios-de-ligacoes-fluviais/ligacao-cacilhas-cais-do-sodre/"
       }
     ],
-    "category": "Transports",
-    "cover": "lisbonne-cacilhas-ferry"
-  },
-  {
-    "slug": "belem-jeronimos-tram-15",
-    "destination": "Lisbonne",
-    "question": "Comment rejoindre Belém en tram 15E et visiter le monastère des Jerónimos ? Donne en priorité les prix, horaires, jours de fermeture, durées, numéros de ligne et noms exacts présents dans les sources ; n’invente rien.",
-    "sources": [
+    "photos": [
       {
-        "label": "Visit Lisboa — Monastère des Jerónimos",
-        "url": "https://www.visitlisboa.com/pt-pt/locais/mosteiro-dos-jeronimos"
+        "id": "lisbonne-cacilhas-ferry"
       },
       {
-        "label": "Visit Lisboa — Tram 15",
-        "url": "https://www.visitlisboa.com/pt-pt/locais/electrico-15"
+        "id": "lisbonne-praca-comercio"
+      },
+      {
+        "id": "lisbonne-miradouro"
       }
     ],
-    "category": "Visites",
-    "cover": "lisbonne-jeronimos"
+    "category": "Transports"
   },
   {
     "slug": "sintra-quinta-da-regaleira",
     "destination": "Sintra",
+    "country": "portugal",
+    "continent": "europe",
+    "type": "visite",
     "question": "Comment visiter la Quinta da Regaleira et son puits initiatique : prix 2026, créneaux et horaires ? Donne en priorité les prix, horaires, jours de fermeture, durées, numéros de ligne et noms exacts présents dans les sources ; n’invente rien.",
+    "travelMonths": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "priority": 26,
+    "demand": {
+      "googleSuggest": 0,
+      "googleTrends": 31,
+      "reach": 85,
+      "measuredOn": "2026-10-24"
+    },
     "sources": [
       {
         "label": "Quinta da Regaleira — Visites",
@@ -184,13 +4433,319 @@
         "url": "https://www.regaleira.pt/en/destaques/2025-entrance-fees-2026/"
       }
     ],
-    "category": "Visites",
-    "cover": "sintra-regaleira"
+    "photos": [
+      {
+        "id": "sintra-regaleira"
+      },
+      {
+        "id": "sintra-mouros"
+      },
+      {
+        "id": "sintra-palais-national"
+      }
+    ],
+    "category": "Visites"
+  },
+  {
+    "slug": "cuba-itineraire-2-semaines",
+    "destination": "Cuba",
+    "country": "cuba",
+    "continent": "amerique-centrale-caraibes",
+    "type": "itineraire",
+    "question": "Quel itinéraire de deux semaines à Cuba, de La Havane à Viñales, Trinidad et Cienfuegos, et comment s’y déplacer ?",
+    "travelMonths": [
+      11,
+      12,
+      1,
+      2,
+      3,
+      4
+    ],
+    "priority": 25,
+    "demand": {
+      "googleSuggest": 0,
+      "googleTrends": 36,
+      "reach": 70,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Wikivoyage — Cuba",
+        "url": "https://fr.wikivoyage.org/wiki/Cuba"
+      },
+      {
+        "label": "Wikipedia — Trinidad, Cuba",
+        "url": "https://en.wikipedia.org/wiki/Trinidad,_Cuba"
+      }
+    ],
+    "photos": [
+      {
+        "id": "cuba-havane",
+        "query": "Havana classic car Capitolio",
+        "must": [
+          "havana"
+        ],
+        "alt": "Une voiture ancienne devant le Capitole de La Havane."
+      },
+      {
+        "id": "cuba-vinales",
+        "query": "Vinales valley",
+        "must": [
+          "viñales"
+        ],
+        "alt": "Les mogotes de la vallée de Viñales."
+      },
+      {
+        "id": "cuba-trinidad",
+        "query": "Trinidad Cuba street",
+        "must": [
+          "trinidad"
+        ],
+        "alt": "Une rue pavée de Trinidad."
+      }
+    ],
+    "keywords": [
+      "havane",
+      "viñales",
+      "trinidad",
+      "viazul",
+      "heures",
+      "bus",
+      "cienfuegos",
+      "jours"
+    ]
+  },
+  {
+    "slug": "petra-visite-jordan-pass",
+    "destination": "Pétra",
+    "country": "jordanie",
+    "continent": "moyen-orient",
+    "type": "visite",
+    "question": "Comment visiter Pétra : prix d’entrée, Jordan Pass, horaires, Petra by Night et les sentiers du Monastère et du Haut-Lieu ?",
+    "travelMonths": [
+      3,
+      4,
+      5,
+      10,
+      11
+    ],
+    "priority": 25,
+    "demand": {
+      "googleSuggest": 0,
+      "googleTrends": 27,
+      "reach": 85,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Visit Petra — Site officiel",
+        "url": "https://www.visitpetra.jo/"
+      },
+      {
+        "label": "Jordan Pass — Prix",
+        "url": "https://www.jordanpass.jo/Contents/Prices.aspx"
+      },
+      {
+        "label": "Wikivoyage — Pétra",
+        "url": "https://fr.wikivoyage.org/wiki/P%C3%A9tra"
+      }
+    ],
+    "photos": [
+      {
+        "id": "petra-tresor",
+        "query": "Al-Khazneh Petra",
+        "must": [
+          "khazneh"
+        ],
+        "alt": "La façade du Trésor, Al-Khazneh, au bout du Siq de Pétra."
+      },
+      {
+        "id": "petra-monastere",
+        "query": "Ad Deir Monastery Petra",
+        "must": [
+          "deir"
+        ],
+        "alt": "Le Monastère Ad Deir, en haut de ses 800 marches."
+      },
+      {
+        "id": "petra-siq",
+        "query": "Siq Petra canyon",
+        "must": [
+          "siq"
+        ],
+        "alt": "Les parois roses du Siq, le canyon d’accès à Pétra."
+      }
+    ],
+    "keywords": [
+      "jd",
+      "jordan pass",
+      "jours",
+      "heures",
+      "siq",
+      "monastère",
+      "nuit",
+      "entrée"
+    ]
+  },
+  {
+    "slug": "rajasthan-itineraire-10-jours",
+    "destination": "Rajasthan",
+    "country": "inde",
+    "continent": "asie",
+    "type": "itineraire",
+    "question": "Quel itinéraire de 10 jours au Rajasthan, de Delhi à Jaipur, Jodhpur, Udaipur et Agra, en train ?",
+    "travelMonths": [
+      10,
+      11,
+      12,
+      1,
+      2,
+      3
+    ],
+    "priority": 24,
+    "demand": {
+      "googleSuggest": 3,
+      "googleTrends": 27,
+      "reach": 70,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Seat61 — Voyager en train en Inde",
+        "url": "https://www.seat61.com/India.htm"
+      },
+      {
+        "label": "Wikivoyage — Rajasthan",
+        "url": "https://fr.wikivoyage.org/wiki/Rajasthan"
+      }
+    ],
+    "photos": [
+      {
+        "id": "inde-taj-mahal",
+        "query": "Taj Mahal",
+        "must": [
+          "taj mahal"
+        ],
+        "alt": "Le Taj Mahal, à Agra."
+      },
+      {
+        "id": "inde-jaipur-hawa-mahal",
+        "query": "Hawa Mahal Jaipur",
+        "must": [
+          "hawa mahal"
+        ],
+        "alt": "La façade rose du Hawa Mahal, à Jaipur."
+      },
+      {
+        "id": "inde-udaipur-lac",
+        "query": "Udaipur Lake Pichola",
+        "must": [
+          "pichola"
+        ],
+        "alt": "Le lac Pichola et les palais d’Udaipur."
+      }
+    ],
+    "keywords": [
+      "jaipur",
+      "jodhpur",
+      "udaipur",
+      "agra",
+      "delhi",
+      "train",
+      "heures",
+      "jours"
+    ]
+  },
+  {
+    "slug": "namibie-road-trip",
+    "destination": "Namibie",
+    "country": "namibie",
+    "continent": "afrique",
+    "type": "road-trip",
+    "question": "Quel road trip en Namibie, de Windhoek au désert du Namib, à Swakopmund et à Etosha, avec les distances et les pistes ?",
+    "travelMonths": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "priority": 23,
+    "demand": {
+      "googleSuggest": 3,
+      "googleTrends": 14,
+      "reach": 85,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Wikivoyage — Namibie",
+        "url": "https://fr.wikivoyage.org/wiki/Namibie"
+      },
+      {
+        "label": "Wikipedia — Etosha National Park",
+        "url": "https://en.wikipedia.org/wiki/Etosha_National_Park"
+      }
+    ],
+    "photos": [
+      {
+        "id": "namibie-deadvlei",
+        "query": "Deadvlei",
+        "must": [
+          "deadvlei"
+        ],
+        "alt": "Les arbres morts de Deadvlei devant les dunes rouges."
+      },
+      {
+        "id": "namibie-etosha",
+        "query": "Etosha National Park",
+        "must": [
+          "etosha"
+        ],
+        "alt": "Un point d’eau du parc national d’Etosha."
+      },
+      {
+        "id": "namibie-sossusvlei",
+        "query": "Sossusvlei dune",
+        "must": [
+          "sossusvlei"
+        ],
+        "alt": "Les dunes rouges de Sossusvlei, dans le désert du Namib."
+      }
+    ],
+    "keywords": [
+      "km",
+      "piste",
+      "heures",
+      "etosha",
+      "sossusvlei",
+      "swakopmund",
+      "windhoek",
+      "route"
+    ]
   },
   {
     "slug": "alhambra-reserver-billets",
     "destination": "Andalousie",
+    "country": "espagne",
+    "continent": "europe",
+    "type": "visite",
     "question": "Comment réserver et visiter l’Alhambra de Grenade : prix, créneaux, pièces d’identité et visites de nuit ? Donne en priorité les prix, horaires, jours de fermeture, durées, numéros de ligne et noms exacts présents dans les sources ; n’invente rien.",
+    "travelMonths": [
+      3,
+      4,
+      5,
+      10,
+      11
+    ],
+    "priority": 22,
+    "demand": {
+      "googleSuggest": 0,
+      "googleTrends": 16,
+      "reach": 85,
+      "measuredOn": "2026-10-24"
+    },
     "sources": [
       {
         "label": "Patronato de la Alhambra — Horaires et tarifs",
@@ -201,32 +4756,108 @@
         "url": "https://www.alhambra-patronato.es/visitar/preguntas-frecuentes"
       }
     ],
-    "category": "Visites",
-    "cover": "grenade-myrtes",
-    "country": "espagne"
-  },
-  {
-    "slug": "seville-alcazar-cathedrale",
-    "destination": "Andalousie",
-    "question": "Comment visiter le Real Alcázar et la cathédrale de Séville : prix, horaires et gratuités ? Donne en priorité les prix, horaires, jours de fermeture, durées, numéros de ligne et noms exacts présents dans les sources ; n’invente rien.",
-    "sources": [
+    "photos": [
       {
-        "label": "Real Alcázar de Séville — Préparer la visite",
-        "url": "https://alcazarsevilla.org/prepara-la-visita/"
+        "id": "grenade-myrtes"
       },
       {
-        "label": "Cathédrale de Séville — Horaires et tarifs",
-        "url": "https://www.catedraldesevilla.es/visita-cultural/horarios-y-tarifas/"
+        "id": "grenade-alhambra"
+      },
+      {
+        "id": "grenade-albaicin"
       }
     ],
-    "category": "Visites",
-    "cover": "seville-alcazar",
-    "country": "espagne"
+    "category": "Visites"
+  },
+  {
+    "slug": "angkor-visite-temples",
+    "destination": "Angkor",
+    "country": "cambodge",
+    "continent": "asie",
+    "type": "visite",
+    "question": "Comment visiter les temples d’Angkor : prix des pass d’un, trois et sept jours, horaires, lever du soleil et circuits ?",
+    "travelMonths": [
+      11,
+      12,
+      1,
+      2,
+      3
+    ],
+    "priority": 22,
+    "demand": {
+      "googleSuggest": 0,
+      "googleTrends": 17,
+      "reach": 85,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Wikivoyage — Angkor",
+        "url": "https://fr.wikivoyage.org/wiki/Angkor"
+      },
+      {
+        "label": "Seat61 — Voyager au Cambodge",
+        "url": "https://www.seat61.com/Cambodia.htm"
+      }
+    ],
+    "photos": [
+      {
+        "id": "angkor-wat-aube",
+        "query": "Angkor Wat sunrise",
+        "must": [
+          "angkor wat"
+        ],
+        "alt": "Le temple d’Angkor Wat, près de Siem Reap."
+      },
+      {
+        "id": "angkor-ta-prohm",
+        "query": "Ta Prohm roots",
+        "must": [
+          "ta prohm"
+        ],
+        "alt": "Les racines de fromager sur les murs du Ta Prohm."
+      },
+      {
+        "id": "angkor-bayon",
+        "query": "Bayon faces",
+        "must": [
+          "bayon"
+        ],
+        "alt": "Les visages de pierre du temple Bayon, à Angkor Thom."
+      }
+    ],
+    "keywords": [
+      "pass",
+      "jour",
+      "jours",
+      "siem reap",
+      "angkor wat",
+      "bayon",
+      "heures",
+      "lever"
+    ]
   },
   {
     "slug": "cordoue-mezquita-visite",
     "destination": "Andalousie",
+    "country": "espagne",
+    "continent": "europe",
+    "type": "visite",
     "question": "Comment visiter la Mezquita-cathédrale de Cordoue : prix, entrée gratuite du matin, clocher et visite de nuit ? Donne en priorité les prix, horaires, jours de fermeture, durées, numéros de ligne et noms exacts présents dans les sources ; n’invente rien.",
+    "travelMonths": [
+      3,
+      4,
+      5,
+      10,
+      11
+    ],
+    "priority": 22,
+    "demand": {
+      "googleSuggest": 0,
+      "googleTrends": 16,
+      "reach": 85,
+      "measuredOn": "2026-10-24"
+    },
     "sources": [
       {
         "label": "Mezquita-Catedral — Billets de la Mezquita",
@@ -237,8 +4868,337 @@
         "url": "https://www.mezquita-catedraldecordoba.es/organiza-la-visita/entradas-y-horarios/"
       }
     ],
-    "category": "Visites",
-    "cover": "cordoue-mezquita-pont",
-    "country": "espagne"
+    "photos": [
+      {
+        "id": "cordoue-mezquita-pont"
+      },
+      {
+        "id": "cordoue-mezquita-arcs"
+      },
+      {
+        "id": "seville-alcazar"
+      }
+    ],
+    "category": "Visites"
+  },
+  {
+    "slug": "machu-picchu-billets-train",
+    "destination": "Machu Picchu",
+    "country": "perou",
+    "continent": "amerique-du-sud",
+    "type": "visite",
+    "question": "Comment visiter le Machu Picchu : circuits et billets, trains PeruRail depuis Cuzco et Ollantaytambo, bus d’Aguas Calientes et prix ?",
+    "travelMonths": [
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "priority": 22,
+    "demand": {
+      "googleSuggest": 0,
+      "googleTrends": 18,
+      "reach": 85,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "PeruRail — Site officiel",
+        "url": "https://www.perurail.com/"
+      },
+      {
+        "label": "Wikivoyage — Machu Picchu",
+        "url": "https://fr.wikivoyage.org/wiki/Machu_Picchu"
+      },
+      {
+        "label": "Seat61 — Voyager en train au Pérou",
+        "url": "https://www.seat61.com/Peru.htm"
+      }
+    ],
+    "photos": [
+      {
+        "id": "machu-picchu-vue",
+        "query": "Machu Picchu Huayna Picchu",
+        "must": [
+          "machu picchu"
+        ],
+        "alt": "La citadelle du Machu Picchu et le Huayna Picchu."
+      },
+      {
+        "id": "machu-picchu-cuzco",
+        "query": "Cusco Plaza de Armas",
+        "must": [
+          "cusco"
+        ],
+        "alt": "La Plaza de Armas de Cuzco."
+      },
+      {
+        "id": "machu-picchu-vallee-sacree",
+        "query": "Ollantaytambo ruins",
+        "must": [
+          "ollantaytambo"
+        ],
+        "alt": "Les terrasses incas d’Ollantaytambo, dans la Vallée sacrée."
+      }
+    ],
+    "keywords": [
+      "train",
+      "ollantaytambo",
+      "aguas calientes",
+      "cuzco",
+      "heures",
+      "billets",
+      "circuit",
+      "bus"
+    ]
+  },
+  {
+    "slug": "seville-alcazar-cathedrale",
+    "destination": "Andalousie",
+    "country": "espagne",
+    "continent": "europe",
+    "type": "visite",
+    "question": "Comment visiter le Real Alcázar et la cathédrale de Séville : prix, horaires et gratuités ? Donne en priorité les prix, horaires, jours de fermeture, durées, numéros de ligne et noms exacts présents dans les sources ; n’invente rien.",
+    "travelMonths": [
+      3,
+      4,
+      5,
+      10,
+      11
+    ],
+    "priority": 22,
+    "demand": {
+      "googleSuggest": 0,
+      "googleTrends": 16,
+      "reach": 85,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Real Alcázar de Séville — Préparer la visite",
+        "url": "https://alcazarsevilla.org/prepara-la-visita/"
+      },
+      {
+        "label": "Cathédrale de Séville — Horaires et tarifs",
+        "url": "https://www.catedraldesevilla.es/visita-cultural/horarios-y-tarifas/"
+      }
+    ],
+    "photos": [
+      {
+        "id": "seville-alcazar"
+      },
+      {
+        "id": "seville-plaza-espana"
+      },
+      {
+        "id": "cordoue-mezquita-pont"
+      }
+    ],
+    "category": "Visites"
+  },
+  {
+    "slug": "australie-itineraire-3-semaines",
+    "destination": "Australie",
+    "country": "australie",
+    "continent": "oceanie",
+    "type": "itineraire",
+    "question": "Quel itinéraire de trois semaines en Australie, de Sydney à Melbourne, l’Outback et la Grande Barrière de corail ?",
+    "travelMonths": [
+      9,
+      10,
+      11,
+      3,
+      4,
+      5
+    ],
+    "priority": 21,
+    "demand": {
+      "googleSuggest": 5,
+      "googleTrends": 21,
+      "reach": 60,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Australia.com — Site officiel",
+        "url": "https://www.australia.com/fr-fr"
+      },
+      {
+        "label": "Seat61 — Voyager en train en Australie",
+        "url": "https://www.seat61.com/Australia.htm"
+      },
+      {
+        "label": "Wikivoyage — Australie",
+        "url": "https://fr.wikivoyage.org/wiki/Australie"
+      }
+    ],
+    "photos": [
+      {
+        "id": "australie-uluru",
+        "query": "Uluru sunset",
+        "must": [
+          "uluru"
+        ],
+        "alt": "Uluru, le monolithe rouge du centre de l’Australie."
+      },
+      {
+        "id": "australie-sydney-opera",
+        "query": "Sydney Opera House Harbour Bridge",
+        "must": [
+          "opera house"
+        ],
+        "alt": "L’opéra de Sydney et le Harbour Bridge."
+      },
+      {
+        "id": "australie-great-ocean-road",
+        "query": "Twelve Apostles Great Ocean Road",
+        "must": [
+          "twelve apostles"
+        ],
+        "alt": "Les Douze Apôtres le long de la Great Ocean Road."
+      }
+    ],
+    "keywords": [
+      "heures",
+      "km",
+      "vol",
+      "train",
+      "sydney",
+      "melbourne",
+      "cairns",
+      "uluru"
+    ]
+  },
+  {
+    "slug": "nouvelle-zelande-road-trip-3-semaines",
+    "destination": "Nouvelle-Zélande",
+    "country": "nouvelle-zelande",
+    "continent": "oceanie",
+    "type": "road-trip",
+    "question": "Quel road trip de trois semaines en Nouvelle-Zélande sur l’île du Nord et l’île du Sud, avec les distances, le ferry et les Great Walks ?",
+    "travelMonths": [
+      12,
+      1,
+      2,
+      3
+    ],
+    "priority": 19,
+    "demand": {
+      "googleSuggest": 6,
+      "googleTrends": 7,
+      "reach": 70,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Department of Conservation — Great Walks",
+        "url": "https://www.doc.govt.nz/parks-and-recreation/things-to-do/walking-and-tramping/great-walks/"
+      },
+      {
+        "label": "Wikivoyage — Nouvelle-Zélande",
+        "url": "https://fr.wikivoyage.org/wiki/Nouvelle-Z%C3%A9lande"
+      }
+    ],
+    "photos": [
+      {
+        "id": "nz-milford-sound",
+        "query": "Milford Sound Mitre Peak",
+        "must": [
+          "milford"
+        ],
+        "alt": "Le Mitre Peak au-dessus du fjord de Milford Sound."
+      },
+      {
+        "id": "nz-tongariro",
+        "query": "Tongariro Emerald Lakes",
+        "must": [
+          "tongariro"
+        ],
+        "alt": "Les lacs d’émeraude de la traversée du Tongariro."
+      },
+      {
+        "id": "nz-lake-tekapo",
+        "query": "Lake Tekapo church",
+        "must": [
+          "tekapo"
+        ],
+        "alt": "L’église du Bon Pasteur au bord du lac Tekapo."
+      }
+    ],
+    "keywords": [
+      "km",
+      "heures",
+      "ferry",
+      "great walk",
+      "queenstown",
+      "auckland",
+      "wellington",
+      "route"
+    ]
+  },
+  {
+    "slug": "aveiro-musee-art-nouveau",
+    "destination": "Aveiro",
+    "country": "portugal",
+    "continent": "europe",
+    "type": "visite",
+    "question": "Que peut-on voir au musée Art nouveau d’Aveiro et comment préparer cette visite ? Donne en priorité les prix, horaires, jours de fermeture et noms exacts présents dans les sources ; n’invente rien.",
+    "travelMonths": [
+      4,
+      5,
+      6,
+      9,
+      10
+    ],
+    "priority": 17,
+    "demand": {
+      "googleSuggest": 0,
+      "googleTrends": 0,
+      "reach": 85,
+      "measuredOn": "2026-10-24"
+    },
+    "sources": [
+      {
+        "label": "Musées municipaux d’Aveiro — le musée Art nouveau",
+        "url": "https://museusdeaveiro.cm-aveiro.pt/museu-arte-nova/o-museu"
+      },
+      {
+        "label": "Musées municipaux d’Aveiro — exposition permanente",
+        "url": "https://museusdeaveiro.cm-aveiro.pt/museu-arte-nova/exposicao-permanente"
+      },
+      {
+        "label": "Musées municipaux d’Aveiro — actualités et fermetures",
+        "url": "https://museusdeaveiro.cm-aveiro.pt/"
+      }
+    ],
+    "photos": [
+      {
+        "id": "aveiro-moliceiros",
+        "query": "Aveiro moliceiro canal",
+        "must": [
+          "moliceiro"
+        ],
+        "alt": "Des bateaux moliceiros colorés sur le canal central d’Aveiro."
+      },
+      {
+        "id": "aveiro-art-nouveau",
+        "query": "Museu Arte Nova Aveiro",
+        "must": [
+          "arte nova"
+        ],
+        "alt": "La façade du musée Art nouveau d’Aveiro."
+      },
+      {
+        "id": "aveiro-gare",
+        "query": "Aveiro old railway station azulejos",
+        "must": [
+          "aveiro"
+        ],
+        "alt": "Les azulejos de l’ancienne gare d’Aveiro."
+      }
+    ]
   }
 ]

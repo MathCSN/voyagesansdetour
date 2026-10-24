@@ -6,7 +6,7 @@ from update_draft import digest
 
 class RevisionTests(unittest.TestCase):
     def setUp(self):
-        paragraph=' '.join(['Une phrase de test documentée pour préserver un corps éditorial complet.']*8)
+        paragraph=' '.join(['Une phrase de test documentée pour préserver un corps éditorial complet.']*16)
         self.article={'title':'Titre','shortTitle':'Titre court','description':'Unique description','summary':'Résumé','sections':[{'id':'a','title':'A','paragraphs':[paragraph,paragraph]}],'faq':[],'readMinutes':2}
         self.citations={'a':['f1']};self.facts=[{'id':'f1','quote':'Preuve'}]
         blocks=public_blocks(self.article,self.citations,self.facts)
@@ -132,3 +132,13 @@ class EditorialHoldTests(unittest.TestCase):
         proposal={'article':self.article,'facts':self.facts,'citations':self.citations}
         hold={'origin':'editorial_review','articleSha256':digest(self.article),'factsSha256':digest(self.facts),'issues':[{'id':'missing','issue':'No'}]}
         with self.assertRaisesRegex(ValueError,'editorial_issue'):add_editorial_holds(proposal,self.review,hold)
+
+
+class KeyFactCitationTests(unittest.TestCase):
+    def test_kept_figure_keeps_its_own_evidence_after_a_removal(self):
+        from guide_revision import kept_key_fact_citations
+        article={'keyFacts':[{'value':'1'},{'value':'2'},{'value':'3'}]}
+        citations={'a':['f1'],'keyfact-0':['f1'],'keyfact-1':['f2'],'keyfact-2':['f3']}
+        result=kept_key_fact_citations(citations,article,{'changes':[{'id':'keyfact-0','text':None}]})
+        self.assertEqual(result,{'a':['f1'],'keyfact-0':['f2'],'keyfact-1':['f3']})
+        self.assertEqual(kept_key_fact_citations(citations,article,{'changes':[]}),citations)

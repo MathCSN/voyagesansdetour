@@ -18,17 +18,35 @@
       "path": null,
       "place": "Andalousie"
     },
+    "arenal|costa-rica": {
+      "checkedOn": "2026-10-24",
+      "country": "Costa Rica",
+      "path": null,
+      "place": "Arenal"
+    },
     "atlantique|portugal": {
       "checkedOn": "2026-10-24",
       "country": "Portugal",
       "path": null,
       "place": "Atlantique"
     },
+    "bangkok|thailande": {
+      "checkedOn": "2026-10-24",
+      "country": "Thaïlande",
+      "path": "bangkok-l169",
+      "place": "Bangkok"
+    },
     "belem|portugal": {
       "checkedOn": "2026-10-24",
       "country": "Portugal",
       "path": null,
       "place": "Belém"
+    },
+    "chiang-mai|thailande": {
+      "checkedOn": "2026-10-24",
+      "country": "Thaïlande",
+      "path": "chiang-mai-l271",
+      "place": "Chiang Mai"
     },
     "cinque-terre|italie": {
       "checkedOn": "2026-10-24",
@@ -41,6 +59,12 @@
       "country": "Espagne",
       "path": "cordoue-l1689",
       "place": "Cordoue"
+    },
+    "costa-rica|costa-rica": {
+      "checkedOn": "2026-10-24",
+      "country": "Costa Rica",
+      "path": null,
+      "place": "Costa Rica"
     },
     "cote-amalfitaine|italie": {
       "checkedOn": "2026-10-24",
@@ -84,11 +108,29 @@
       "path": "guimaraes-l4960",
       "place": "Guimarães"
     },
+    "japon|japon": {
+      "checkedOn": "2026-10-24",
+      "country": "Japon",
+      "path": null,
+      "place": "Japon"
+    },
+    "kyoto|japon": {
+      "checkedOn": "2026-10-24",
+      "country": "Japon",
+      "path": "kyoto-l96826",
+      "place": "Kyoto"
+    },
     "lagos|portugal": {
       "checkedOn": "2026-10-24",
       "country": "Portugal",
       "path": "lagos-portugal-l2896",
       "place": "Lagos"
+    },
+    "laponie|finlande": {
+      "checkedOn": "2026-10-24",
+      "country": "Finlande",
+      "path": null,
+      "place": "Laponie"
     },
     "lisbonne|portugal": {
       "checkedOn": "2026-10-24",
@@ -96,11 +138,47 @@
       "path": "lisbonne-l42",
       "place": "Lisbonne"
     },
+    "londres|royaume-uni": {
+      "checkedOn": "2026-10-24",
+      "country": "Royaume-Uni",
+      "path": "londres-l57",
+      "place": "Londres"
+    },
     "luis|portugal": {
       "checkedOn": "2026-10-24",
       "country": "Portugal",
       "path": null,
       "place": "Luís"
+    },
+    "manuel-antonio|costa-rica": {
+      "checkedOn": "2026-10-24",
+      "country": "Costa Rica",
+      "path": "manuel-antonio-l142888",
+      "place": "Manuel Antonio"
+    },
+    "monteverde|costa-rica": {
+      "checkedOn": "2026-10-24",
+      "country": "Costa Rica",
+      "path": "monteverde-l2135",
+      "place": "Monteverde"
+    },
+    "nara|japon": {
+      "checkedOn": "2026-10-24",
+      "country": "Japon",
+      "path": "nara-l1707",
+      "place": "Nara"
+    },
+    "new-york|etats-unis": {
+      "checkedOn": "2026-10-24",
+      "country": "États-Unis",
+      "path": "new-york-l59",
+      "place": "New York"
+    },
+    "noel|etats-unis": {
+      "checkedOn": "2026-10-24",
+      "country": "États-Unis",
+      "path": null,
+      "place": "Noël"
     },
     "pena|portugal": {
       "checkedOn": "2026-10-24",
@@ -132,6 +210,18 @@
       "path": null,
       "place": "Promo"
     },
+    "rockefeller-center|etats-unis": {
+      "checkedOn": "2026-10-24",
+      "country": "États-Unis",
+      "path": null,
+      "place": "Rockefeller Center"
+    },
+    "rovaniemi|finlande": {
+      "checkedOn": "2026-10-24",
+      "country": "Finlande",
+      "path": "rovaniemi-l2653",
+      "place": "Rovaniemi"
+    },
     "salerne|italie": {
       "checkedOn": "2026-10-24",
       "country": "Italie",
@@ -156,11 +246,29 @@
       "path": "tavira-l1239",
       "place": "Tavira"
     },
+    "thailande|thailande": {
+      "checkedOn": "2026-10-24",
+      "country": "Thaïlande",
+      "path": null,
+      "place": "Thaïlande"
+    },
+    "tokyo|japon": {
+      "checkedOn": "2026-10-24",
+      "country": "Japon",
+      "path": "tokyo-l193",
+      "place": "Tokyo"
+    },
     "via|italie": {
       "checkedOn": "2026-10-24",
       "country": "Italie",
       "path": null,
       "place": "Via"
+    },
+    "winter-wonderland|royaume-uni": {
+      "checkedOn": "2026-10-24",
+      "country": "Royaume-Uni",
+      "path": null,
+      "place": "Winter Wonderland"
     }
   },
   "schemaVersion": 1

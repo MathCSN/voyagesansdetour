@@ -150,7 +150,7 @@ class EditorialQueueTest(unittest.TestCase):
         self.assertEqual(len(release.load(self.root, NOW)[1]['drafts']), 1)
 
     def test_recent_publication_still_blocks_next_release(self):
-        self.articles[0].update(publishedOn='2026-10-11', updatedOn='2026-10-11')
+        self.articles[0].update(publishedOn='2026-10-14', updatedOn='2026-10-14')
         self.draft()
         before = (self.root / 'articles.json').read_bytes()
         self.assertFalse(release.promote(self.root, NOW))

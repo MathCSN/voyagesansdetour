@@ -2672,5 +2672,1083 @@
     "sourcesCheckedOn": "2026-10-24",
     "publishedOn": "2026-10-24",
     "updatedOn": "2026-10-24"
+  },
+  {
+    "slug": "japon-itineraire-2-semaines",
+    "title": "Japon en 2 semaines : l’itinéraire en train de Tokyo à Kyoto, Nara et Hiroshima (prix 2026)",
+    "shortTitle": "Le Japon en 2 semaines",
+    "destination": "Japon",
+    "country": "japon",
+    "continent": "asie",
+    "category": "Itinéraires",
+    "cover": "japon-fuji-chureito",
+    "description": "Tokyo, Kyoto, Nara, Hiroshima et Miyajima en 14 jours : shinkansen à 13 960 ¥, JR Pass ou billets à l’unité, entrées des temples relevées en octobre 2026.",
+    "readMinutes": 7,
+    "summary": "Quatre nuits à Tokyo, quatre à Kyoto avec Nara en excursion, deux à Hiroshima pour Miyajima, puis retour à Tokyo. Le Nozomi relie Tokyo à Kyoto en 2 h 18 (13 960 ¥, environ 80 €) et Kyoto à Hiroshima en 1 h 36. Sur ce parcours, les billets à l’unité (44 620 ¥) coûtent moins que le Japan Rail Pass 7 jours (50 000 ¥). Visez fin mars–début avril pour les cerisiers, ou fin novembre pour les érables rouges.",
+    "keyFacts": [
+      {
+        "value": "2 h 18",
+        "label": "Tokyo → Kyoto en Nozomi, 13 960 ¥ (≈ 80 €), un train toutes les 15 à 30 minutes"
+      },
+      {
+        "value": "44 620 ¥",
+        "label": "Tokyo–Kyoto–Hiroshima–Tokyo en billets à l’unité, moins que le JR Pass 7 jours (50 000 ¥)"
+      },
+      {
+        "value": "500 ¥",
+        "label": "le pavillon d’Or du Kinkaku-ji, ouvert tous les jours de 9 h à 17 h"
+      },
+      {
+        "value": "800 ¥",
+        "label": "le Grand Bouddha du Tōdai-ji, à Nara, à 45 minutes de Kyoto par le train JR"
+      },
+      {
+        "value": "200 ¥",
+        "label": "le musée du Mémorial pour la paix d’Hiroshima (≈ 1,15 €)"
+      },
+      {
+        "value": "100 ¥",
+        "label": "la taxe des visiteurs de Miyajima, en plus du ferry JR"
+      }
+    ],
+    "sections": [
+      {
+        "id": "trains",
+        "title": "Le parcours en train, et pourquoi le JR Pass ne vaut pas toujours le coup",
+        "image": "japon-shinkansen",
+        "paragraphs": [
+          "Le fil rouge du voyage, c’est la ligne Tokaido-Sanyo : les shinkansen Nozomi relient Tokyo à Kyoto en 2 h 18 et Kyoto à Hiroshima en 1 h 36, avec un départ toutes les 15 à 30 minutes. Le retour Hiroshima–Tokyo prend 4 h 01. Les Hikari, un peu plus lents, mettent 2 h 38 entre Tokyo et Kyoto.",
+          "Le Japan Rail Pass ordinaire coûte 50 000 ¥ pour 7 jours, 80 000 ¥ pour 14 jours et 100 000 ¥ pour 21 jours s’il est acheté sur le site officiel (53 000, 84 000 et 105 000 ¥ en agence à l’étranger). Or les trois grands trajets de cet itinéraire, achetés à l’unité, reviennent à 44 620 ¥, soit environ 254 € au taux du 23 octobre 2026. Avec le pass, il faut en plus un billet spécial pour monter dans un Nozomi : 4 960 ¥ entre Tokyo et Kyoto.",
+          "Le pass se rentabilise si vous multipliez les excursions en train, ou sur un aller-retour plus lointain comme Tokyo–Nagasaki. Il couvre aussi le Narita Express depuis l’aéroport, la ligne circulaire Yamanote à Tokyo et le ferry JR de Miyajima. Il ne couvre pas le métro de Tokyo, exploité par d’autres compagnies."
+        ],
+        "table": {
+          "headers": [
+            "Trajet",
+            "Durée (Nozomi)",
+            "Billet à l’unité"
+          ],
+          "rows": [
+            [
+              "Tokyo → Kyoto",
+              "2 h 18",
+              "13 960 ¥"
+            ],
+            [
+              "Kyoto → Hiroshima",
+              "1 h 36",
+              "11 420 ¥"
+            ],
+            [
+              "Hiroshima → Tokyo",
+              "4 h 01",
+              "19 240 ¥"
+            ],
+            [
+              "Kyoto → Nara (JR Miyakoji, rapide)",
+              "45 min",
+              "720 ¥"
+            ]
+          ]
+        },
+        "tip": "Évitez la Golden Week (fin avril–début mai), Obon (mi-août) et le Nouvel An (29 décembre–3 janvier) : les places réservées partent des semaines à l’avance et les voitures non réservées sont bondées."
+      },
+      {
+        "id": "tokyo",
+        "title": "Jours 1 à 4 — Tokyo, de l’aéroport à la ligne Yamanote",
+        "paragraphs": [
+          "Depuis Narita, le Narita Express rejoint la gare de Tokyo sans arrêt ; toutes ses places sont réservées et il part des quais souterrains de la ligne Sōbu, numérotés 1 à 4, à ne pas confondre avec les quais 1 à 4 de surface. Le Keisei Skyliner est l’autre option, jusqu’à Ueno.",
+          "Dans la ville, la ligne JR Yamanote, signalée en vert, tourne en boucle toutes les quelques minutes et relie la gare de Tokyo à Ueno, Shinjuku et Shibuya. Les shinkansen vers Kyoto et Hiroshima partent des quais 14 à 19 de la gare de Tokyo : repérez-les la veille du départ.",
+          "Gardez une journée pour Asakusa et le temple Senso-ji, une soirée pour les néons de Shinjuku et le carrefour de Shibuya, et une matinée pour les jardins autour d’Ueno, tous sur la boucle Yamanote ou à quelques stations."
+        ],
+        "tip": "Échangez votre bon de JR Pass dès l’arrivée : les guichets des gares de Narita, Haneda, Tokyo, Ueno et Shinjuku le font."
+      },
+      {
+        "id": "kyoto",
+        "title": "Jours 5 à 8 — Kyoto, et Nara en excursion",
+        "image": "japon-kyoto-kiyomizu",
+        "paragraphs": [
+          "Commencez par le sanctuaire Fushimi Inari et ses milliers de torii vermillon : la gare JR d’Inari est juste à côté, à 2 stations et 5 minutes de la gare de Kyoto. Le lendemain, montez au Kinkaku-ji, le pavillon d’Or : 500 ¥, ouvert tous les jours de 9 h à 17 h, avec les bus 12, 59, 205 ou M1 jusqu’à l’arrêt Kinkakuji-michi.",
+          "Entre la rivière Kamo et les collines de Higashiyama, le quartier de Gion et le chemin de la Philosophie se font à pied, de temple en temple. À l’ouest, Arashiyama se rejoint par la ligne JR Sagano depuis la gare de Kyoto.",
+          "Pour Nara, les trains rapides JR Miyakoji partent toutes les 30 minutes et arrivent en 45 minutes, pour 720 ¥ ou gratuitement avec le JR Pass ; le Kintetsu Limited Express est plus rapide, 35 minutes pour 1 280 ¥. Sur place, le Grand Bouddha du Tōdai-ji se visite pour 800 ¥, de 8 h à 17 h de novembre à mars et de 7 h 30 à 17 h 30 d’avril à octobre ; le billet couplé avec le musée coûte 1 200 ¥."
+        ],
+        "tip": "Arrivez au Fushimi Inari tôt le matin : plus vous montez, plus les allées de torii se vident."
+      },
+      {
+        "id": "hiroshima",
+        "title": "Jours 9 et 10 — Hiroshima et l’île de Miyajima",
+        "image": "japon-hiroshima-miyajima",
+        "paragraphs": [
+          "Le musée du Mémorial pour la paix coûte 200 ¥ pour un adulte et ferme les 30 et 31 décembre. Le musée conseille de venir tôt le matin ou en soirée, et d’acheter son billet en ligne : la file pour un billet du jour peut être longue.",
+          "Le tram relie la gare d’Hiroshima à Kamiyacho en 12 minutes pour 240 ¥, par les lignes 1, 2 ou 6 ; le château est à dix minutes de là, et le parc de la Paix à un quart d’heure à pied du château.",
+          "Pour Miyajima, le ferry JR depuis Miyajimaguchi est couvert par le JR Pass, mais pas la taxe des visiteurs de 100 ¥. Le sanctuaire d’Itsukushima, célèbre pour son grand torii posé sur l’eau, coûte 300 ¥ (500 ¥ avec la salle du trésor) ; il ouvre dès 6 h 30 et ferme à 17 h en décembre, à 17 h 30 en janvier, en février et de mi-octobre à fin novembre, à 18 h de mars à mi-octobre."
+        ]
+      },
+      {
+        "id": "saison",
+        "title": "Quand partir : cerisiers de mars ou érables de novembre",
+        "paragraphs": [
+          "À Tokyo, Kyoto et Osaka, les cerisiers fleurissent d’ordinaire fin mars ou début avril, avec une semaine de décalage possible d’une année à l’autre. La pleine floraison arrive environ une semaine après les premières fleurs, et une semaine plus tard les pétales tombent : réservez vos nuits à Kyoto à ce moment-là, la ville est alors la plus demandée.",
+          "En automne, le rougissement des feuilles descend depuis Hokkaido à partir de mi-septembre et atteint les basses altitudes du centre du Japon vers fin novembre ; à Tokyo et à Kyoto, certains arbres restent colorés jusqu’en décembre. C’est la saison idéale pour les jardins de temples."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Le JR Pass est-il rentable pour deux semaines au Japon ?",
+        "answer": "Pas sur le parcours Tokyo–Kyoto–Hiroshima–Tokyo : les billets à l’unité coûtent 44 620 ¥, contre 50 000 ¥ pour le pass 7 jours et 80 000 ¥ pour le pass 14 jours. Il le devient si vous ajoutez plusieurs excursions en train."
+      },
+      {
+        "question": "Combien de temps faut-il entre Tokyo et Kyoto en train ?",
+        "answer": "2 h 18 en Nozomi et 2 h 38 en Hikari, avec un train toutes les 15 à 30 minutes. Le billet Nozomi en place réservée coûte 13 960 ¥."
+      },
+      {
+        "question": "Le métro de Tokyo est-il inclus dans le JR Pass ?",
+        "answer": "Non : le pass couvre les lignes JR, dont la boucle Yamanote et le Narita Express, mais pas le métro de Tokyo."
+      },
+      {
+        "question": "Quand voir les cerisiers à Kyoto ?",
+        "answer": "D’ordinaire fin mars ou début avril. La pleine floraison arrive une semaine après les premières fleurs et dure environ une semaine."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Japan Rail Pass — Types et prix (site officiel)",
+        "url": "https://japanrailpass.net/fr/purchase/price/"
+      },
+      {
+        "label": "Seat61 — Train travel in Japan (mise à jour du 2 septembre 2026)",
+        "url": "https://www.seat61.com/Japan.htm"
+      },
+      {
+        "label": "japan-guide.com — Japan Rail Pass",
+        "url": "https://www.japan-guide.com/e/e2361.html"
+      },
+      {
+        "label": "japan-guide.com — Getting to Nara",
+        "url": "https://www.japan-guide.com/e/e4107.html"
+      },
+      {
+        "label": "Fushimi Inari Taisha — Accès",
+        "url": "https://inari.jp/en/access/"
+      },
+      {
+        "label": "Kinkaku-ji (Shokoku-ji) — Accès et tarifs",
+        "url": "https://www.shokoku-ji.jp/en/kinkakuji/access/"
+      },
+      {
+        "label": "Tōdai-ji — Horaires et tarifs",
+        "url": "https://www.todaiji.or.jp/en/information/haikan/"
+      },
+      {
+        "label": "Musée du Mémorial pour la paix d’Hiroshima",
+        "url": "https://hpmmuseum.jp/?lang=eng"
+      },
+      {
+        "label": "japan-guide.com — Hiroshima Castle et tram",
+        "url": "https://www.japan-guide.com/e/e3402.html"
+      },
+      {
+        "label": "japan-guide.com — Itsukushima Shrine",
+        "url": "https://www.japan-guide.com/e/e3450.html"
+      },
+      {
+        "label": "japan-guide.com — Cherry blossom season",
+        "url": "https://www.japan-guide.com/e/e2011_when.html"
+      },
+      {
+        "label": "japan-guide.com — Autumn colors",
+        "url": "https://www.japan-guide.com/e/e2014.html"
+      },
+      {
+        "label": "Wikivoyage — Kyoto",
+        "url": "https://fr.wikivoyage.org/wiki/Kyoto"
+      },
+      {
+        "label": "Banque centrale européenne — Taux de référence du 23 octobre 2026",
+        "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"
+      }
+    ],
+    "related": [],
+    "sourcesCheckedOn": "2026-10-24",
+    "publishedOn": "2026-10-24",
+    "updatedOn": "2026-10-24"
+  },
+  {
+    "related": [],
+    "sourcesCheckedOn": "2026-10-24",
+    "publishedOn": "2026-10-24",
+    "updatedOn": "2026-10-24",
+    "slug": "thailande-itineraire-2-semaines",
+    "title": "Thaïlande en 2 semaines : Bangkok, Chiang Mai en train de nuit et la mer d’Andaman (prix 2026)",
+    "shortTitle": "La Thaïlande en 2 semaines",
+    "destination": "Thaïlande",
+    "country": "thailande",
+    "continent": "asie",
+    "category": "Itinéraires",
+    "cover": "thailande-phi-phi",
+    "description": "Bangkok, Chiang Mai, Krabi et Phi Phi en 14 jours : couchette de train dès 938 bahts, Grand Palais à 500 bahts, saison sèche de mi-octobre à mi-février.",
+    "readMinutes": 7,
+    "summary": "Trois nuits à Bangkok, le train de nuit jusqu’à Chiang Mai (trois nuits), puis la mer d’Andaman : Krabi, Railay et les îles Phi Phi. Le train 9 part à 18 h 40 et arrive à 7 h 15 ; la couchette climatisée de 2e classe coûte 938 ou 1 038 bahts selon la grille publiée par Seat61. La saison sèche et fraîche va de mi-octobre à mi-février, mais le Sud reste très arrosé en octobre et en novembre : gardez les plages pour décembre à février.",
+    "keyFacts": [
+      {
+        "value": "12 h 35",
+        "label": "Bangkok → Chiang Mai par le train de nuit n° 9, départ 18 h 40, arrivée 7 h 15"
+      },
+      {
+        "value": "938 ฿",
+        "label": "la couchette haute climatisée de 2e classe Bangkok–Chiang Mai (≈ 25 €, grille 2023)"
+      },
+      {
+        "value": "500 ฿",
+        "label": "le Grand Palais de Bangkok et le Wat Phra Kaew, de 8 h 30 à 16 h 30 (≈ 13 €)"
+      },
+      {
+        "value": "26 min",
+        "label": "de l’aéroport de Suvarnabhumi à Phaya Thai en Airport Rail Link, 45 bahts"
+      },
+      {
+        "value": "1 h 30 à 2 h",
+        "label": "le ferry de Krabi ou de Phuket jusqu’aux îles Phi Phi"
+      },
+      {
+        "value": "29 °C",
+        "label": "la maximale moyenne de décembre à Chiang Mai, 17 °C la nuit, 14 mm de pluie"
+      }
+    ],
+    "sections": [
+      {
+        "id": "bangkok",
+        "title": "Jours 1 à 3 — Bangkok, du Grand Palais au fleuve",
+        "image": "thailande-wat-arun",
+        "paragraphs": [
+          "À l’arrivée à Suvarnabhumi, l’Airport Rail Link part toutes les 15 minutes environ, de 6 h à minuit : 22 minutes et 35 bahts jusqu’à Makkasan, 26 minutes et 45 bahts jusqu’à Phaya Thai, où l’on change pour le métro aérien BTS.",
+          "Le premier matin, entrez au Grand Palais dès l’ouverture : 500 bahts, de 8 h 30 à 16 h 30, billets vendus jusqu’à 15 h 30, avec l’accès au Wat Phra Kaew, le temple bouddhiste le plus sacré du pays. Comptez une matinée entière. Le métro s’arrête à Sanam Chai, tout près du Grand Palais et du Wat Pho, et les bateaux express du fleuve Chao Phraya desservent le Grand Palais au ponton de Tha Chang.",
+          "De l’autre côté du fleuve, sur la rive de Thonburi, le Wat Arun se rejoint en bac. Le week-end, le marché de Chatuchak aligne plus de 8 000 stands, au nord de la ville, accessible par le métro et le BTS."
+        ],
+        "tip": "Faites le Grand Palais à 8 h 30, puis le Wat Pho et le Wat Arun dans l’après-midi : le palais ferme ses guichets à 15 h 30."
+      },
+      {
+        "id": "train-de-nuit",
+        "title": "Le train de nuit pour Chiang Mai",
+        "image": "thailande-train-nuit",
+        "paragraphs": [
+          "Depuis le 19 janvier 2023, tous les trains grandes lignes partent de la nouvelle gare Krung Thep Aphiwat, au nord de Bangkok. Le meilleur choix est le train 9 : départ 18 h 40, arrivée à Chiang Mai à 7 h 15, avec des voitures-couchettes récentes de fabrication chinoise et une voiture-restaurant. Le train 13, à 20 h 05, arrive à 8 h 45 et traverse en plein jour les plus beaux paysages avant Chiang Mai.",
+          "Dans le train 9, la couchette climatisée de 2e classe coûte 938 bahts en haut et 1 038 bahts en bas ; la cabine de 1re classe coûte 1 446 bahts en haut et 1 646 bahts en bas, ou 2 446 bahts pour une personne seule. Ce sont les tarifs de la grille 2023 publiée par Seat61, dont la page a été mise à jour le 1er octobre 2026. Pour voyager de jour, l’autorail climatisé n° 7 part à 7 h 30 et arrive à 17 h 50."
+        ],
+        "table": {
+          "headers": [
+            "Train",
+            "Départ de Bangkok",
+            "Arrivée à Chiang Mai"
+          ],
+          "rows": [
+            [
+              "N° 7 (autorail de jour)",
+              "7 h 30",
+              "17 h 50"
+            ],
+            [
+              "N° 9 (couchettes récentes)",
+              "18 h 40",
+              "7 h 15"
+            ],
+            [
+              "N° 13 (couchettes)",
+              "20 h 05",
+              "8 h 45"
+            ],
+            [
+              "N° 51 (couchettes)",
+              "22 h 30",
+              "11 h 40"
+            ]
+          ]
+        }
+      },
+      {
+        "id": "chiang-mai",
+        "title": "Jours 4 à 6 — Chiang Mai, ses temples et le Doi Suthep",
+        "image": "thailande-chiang-mai-doi-suthep",
+        "paragraphs": [
+          "La vieille ville tient dans un carré de douves et de remparts d’environ 6,5 km de tour : on la parcourt à pied, de temple en temple. Le dimanche, de 17 h à 23 h, le marché de la rue Ratchadamnoen s’étire de la porte Tha Phae jusqu’au Wat Phra Singh.",
+          "Le Wat Phrathat Doi Suthep domine la ville depuis la montagne, à 13 km : un escalier de plus de 200 marches bordé de nagas mène au temple et à sa vue sur Chiang Mai, et une remontée mécanique évite la montée. Plus loin, dans la même province, le Doi Inthanon est le plus haut sommet du pays, avec 2 565 m.",
+          "En décembre, Chiang Mai affiche 29 °C l’après-midi et 17 °C la nuit, avec 14 mm de pluie sur le mois ; en août, il en tombe 223 mm. Les matins frais du Nord rendent la saison de mi-octobre à mi-février très agréable."
+        ]
+      },
+      {
+        "id": "andaman",
+        "title": "Jours 7 à 13 — Krabi, Railay et les îles Phi Phi",
+        "paragraphs": [
+          "Pour rejoindre la mer d’Andaman sans avion, reprenez l’autorail de jour n° 8 (Chiang Mai 7 h 30, Bangkok 17 h 40), puis le train de nuit n° 85 à 19 h 50, qui arrive à Surat Thani à 6 h 23 ; la couchette climatisée de 2e classe coûte 804 bahts. Les minibus Phantip partent ensuite de leur agence de Surat Thani à 9 h, 10 h 30, 12 h, 13 h 30, 15 h et 16 h 30, et arrivent à Krabi 3 heures plus tard. Plus court : Nok Air relie chaque jour Bangkok Don Mueang à Krabi.",
+          "Railay ne se rejoint qu’en bateau, la presqu’île étant fermée par la montagne : les bateaux à longue queue mettent 10 minutes depuis Ao Nang et 30 minutes depuis Krabi. La plage de Phra Nang est à 20 minutes d’Ao Nang par la mer.",
+          "Les ferries pour Phi Phi partent de Krabi et de Phuket et mettent 1 h 30 à 2 h ; depuis Phuket, le bateau rapide fait le trajet en une heure. À Maya Bay, la plage du film La Plage, arrivez avant 8 h : dès 9 h, les bateaux rapides des excursions organisées débarquent."
+        ],
+        "tip": "Dormez une nuit sur Phi Phi plutôt que d’y aller à la journée : vous êtes à Maya Bay avant les bateaux de 9 h."
+      },
+      {
+        "id": "saison",
+        "title": "Quand partir : le bon mois selon la région",
+        "paragraphs": [
+          "La Thaïlande a trois saisons. La saison fraîche et sèche, portée par la mousson du nord-est, va de mi-octobre à mi-février sur la plus grande partie du pays. La saison chaude suit, de mi-février à mi-mai. La mousson du sud-ouest amène ensuite la saison des pluies, de mi-mai à mi-octobre ; à Bangkok, septembre est le mois le plus arrosé, avec environ 336 mm.",
+          "Le Sud fait exception : il reçoit de fortes pluies en octobre et en novembre, au début de la saison sèche du reste du pays, et la côte d’Andaman cumule environ 4 000 mm de pluie par an. Pour un voyage de deux semaines qui finit à la plage, les meilleures dates vont de décembre à février."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Combien coûte le train de nuit Bangkok–Chiang Mai ?",
+        "answer": "Dans le train 9, 938 bahts la couchette haute et 1 038 bahts la couchette basse climatisées de 2e classe, 1 446 à 1 646 bahts en 1re classe, selon la grille 2023 publiée par Seat61."
+      },
+      {
+        "question": "Faut-il remplir un formulaire avant d’entrer en Thaïlande ?",
+        "answer": "Oui : depuis le 1er mai 2025, la carte d’arrivée numérique TDAC se remplit en ligne au moins 3 jours avant l’arrivée, sur tdac.immigration.go.th."
+      },
+      {
+        "question": "Quelle est la meilleure période pour deux semaines en Thaïlande ?",
+        "answer": "De mi-octobre à mi-février pour le Nord et Bangkok ; de décembre à février si vous finissez par les plages, car le Sud reste très pluvieux en octobre et en novembre."
+      },
+      {
+        "question": "Comment aller de l’aéroport au centre de Bangkok ?",
+        "answer": "L’Airport Rail Link relie Suvarnabhumi à Phaya Thai en 26 minutes pour 45 bahts, toutes les 15 minutes environ de 6 h à minuit."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Seat61 — Train travel in Thailand (mise à jour du 1er octobre 2026)",
+        "url": "https://www.seat61.com/Thailand.htm"
+      },
+      {
+        "label": "The Grand Palace — Horaires et tarifs (site officiel)",
+        "url": "https://www.royalgrandpalace.th/en/home"
+      },
+      {
+        "label": "Wikipedia — Geography and climate of Thailand",
+        "url": "https://en.wikipedia.org/wiki/Climate_of_Thailand"
+      },
+      {
+        "label": "Wikivoyage — Bangkok",
+        "url": "https://en.wikivoyage.org/wiki/Bangkok"
+      },
+      {
+        "label": "Wikivoyage — Chiang Mai (climat et vieille ville)",
+        "url": "https://en.wikivoyage.org/wiki/Chiang_Mai"
+      },
+      {
+        "label": "Wikivoyage — Railay",
+        "url": "https://en.wikivoyage.org/wiki/Railay"
+      },
+      {
+        "label": "Wikivoyage — Ko Phi Phi",
+        "url": "https://en.wikivoyage.org/wiki/Ko_Phi_Phi"
+      },
+      {
+        "label": "Banque centrale européenne — Taux de référence du 23 octobre 2026",
+        "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"
+      }
+    ]
+  },
+  {
+    "related": [],
+    "sourcesCheckedOn": "2026-10-24",
+    "publishedOn": "2026-10-24",
+    "updatedOn": "2026-10-24",
+    "slug": "new-york-noel",
+    "title": "New York à Noël 2026 : le sapin du Rockefeller Center le 2 décembre, patinoires et boutiques de Noël",
+    "shortTitle": "New York à Noël",
+    "destination": "New York",
+    "country": "etats-unis",
+    "continent": "amerique-du-nord",
+    "category": "Que faire",
+    "cover": "new-york-rockefeller-noel",
+    "description": "Les dates de Noël 2026 à New York : sapin allumé le 2 décembre, Winter Village gratuit à Bryant Park jusqu’au 28 février, métro à 3 $ et 7 °C l’après-midi.",
+    "readMinutes": 4,
+    "summary": "Le sapin du Rockefeller Center arrive le 7 novembre et s’illumine le mercredi 2 décembre 2026. À Bryant Park, le Winter Village ouvre le 28 octobre avec la seule patinoire gratuite de la ville (jusqu’au 28 février 2027) et plus de 180 boutiques de Noël jusqu’au 3 janvier. Le métro coûte 3 $ le trajet, et décembre affiche en moyenne 7 °C l’après-midi et 1 °C la nuit.",
+    "keyFacts": [
+      {
+        "value": "2 déc. 2026",
+        "label": "l’allumage du sapin du Rockefeller Center, arrivé le 7 novembre"
+      },
+      {
+        "value": "0 $",
+        "label": "la patinoire de Bryant Park, la seule à entrée gratuite de New York, jusqu’au 28 février 2027"
+      },
+      {
+        "value": "180",
+        "label": "exposants et plus au marché de Noël de Bryant Park, du 28 octobre au 3 janvier"
+      },
+      {
+        "value": "3 $",
+        "label": "le trajet en métro ou en bus local (≈ 2,70 €), 7,25 $ en bus express"
+      },
+      {
+        "value": "6,9 °C",
+        "label": "la maximale moyenne de décembre à Central Park, 1,1 °C la nuit"
+      }
+    ],
+    "sections": [
+      {
+        "id": "calendrier",
+        "title": "Le calendrier des fêtes 2026",
+        "paragraphs": [
+          "Les fêtes commencent tôt à New York. La patinoire du Rockefeller Center ouvre dès le 10 octobre, et le Winter Village de Bryant Park le 28 octobre, pour sa 25e saison. Le sapin, un épicéa de Norvège, arrive au Rockefeller Center le samedi 7 novembre ; les équipes de décoration le préparent ensuite pendant plusieurs semaines, jusqu’à l’allumage du mercredi 2 décembre."
+        ],
+        "table": {
+          "headers": [
+            "Date",
+            "Événement"
+          ],
+          "rows": [
+            [
+              "10 octobre",
+              "Ouverture de la patinoire du Rockefeller Center"
+            ],
+            [
+              "28 octobre",
+              "Ouverture du Winter Village de Bryant Park et de ses boutiques"
+            ],
+            [
+              "7 novembre",
+              "Arrivée du sapin au Rockefeller Center"
+            ],
+            [
+              "2 décembre",
+              "Allumage du sapin"
+            ],
+            [
+              "3 janvier 2027",
+              "Fermeture des boutiques de Bryant Park"
+            ],
+            [
+              "28 février 2027",
+              "Fermeture de la patinoire de Bryant Park"
+            ]
+          ]
+        }
+      },
+      {
+        "id": "sapin",
+        "title": "Le sapin du Rockefeller Center",
+        "paragraphs": [
+          "Au sommet, l’étoile Swarovski pèse environ 900 livres, soit un peu plus de 400 kg, et compte près de 3 millions de cristaux. La cérémonie du 2 décembre attire la foule, mais il n’est pas nécessaire d’y assister : le sapin reste illuminé après le 2 décembre, avec des horaires de visite annoncés plus tard dans la saison.",
+          "Au pied du sapin, la patinoire du Rockefeller Center est ouverte depuis le 10 octobre : à partir de décembre, on patine avec le sapin illuminé en toile de fond."
+        ],
+        "tip": "Venez voir le sapin un soir de semaine après le 2 décembre : il brille autant que le soir de la cérémonie, sans la foule des grands soirs."
+      },
+      {
+        "id": "bryant-park",
+        "title": "Patiner gratuitement à Bryant Park",
+        "paragraphs": [
+          "Le Winter Village de Bryant Park ouvre du 28 octobre 2026 au 28 février 2027. Sa patinoire reste la seule de la ville à entrée gratuite ; seules les expériences premium se réservent avec un billet.",
+          "Autour de la glace, les Holiday Shops d’Urbanspace réunissent plus de 180 exposants du 28 octobre au 3 janvier : bougies artisanales, gourmandises et cadeaux de dernière minute, pour un après-midi de flânerie au chaud entre deux tours de patinoire."
+        ]
+      },
+      {
+        "id": "rockettes",
+        "title": "Le Christmas Spectacular des Rockettes au Radio City Music Hall",
+        "image": "new-york-skyline",
+        "paragraphs": [
+          "Le spectacle de Noël des Rockettes revient au Radio City Music Hall du 4 novembre 2026 au 4 janvier 2027, avec 230 représentations : un record depuis sa création, en 1933. Pour cette édition, une scène inédite rejoint la revue, qui compte désormais dix numéros des Rockettes.",
+          "Les billets sont en vente sur le site officiel des Rockettes. Avec 230 dates sur deux mois, il y a des représentations en semaine comme le week-end, de quoi caler le spectacle entre deux visites."
+        ],
+        "tip": "Le Radio City Music Hall fait partie du Rockefeller Center : enchaînez le spectacle et le sapin dans la même soirée."
+      },
+      {
+        "id": "pratique",
+        "title": "Se déplacer et affronter le froid",
+        "image": "new-york-central-park-hiver",
+        "paragraphs": [
+          "Le trajet en métro ou en bus local coûte 3 $ pour la plupart des voyageurs, soit environ 2,70 € au taux du 23 octobre 2026, et 7,25 $ en bus express.",
+          "Décembre est frais mais rarement glacial : selon les normales 1991-2020 du service météorologique américain, Central Park affiche en moyenne 44,4 °F l’après-midi (6,9 °C) et 33,9 °F la nuit (1,1 °C). Bonnet et gants suffisent en journée ; gardez une couche de plus pour patiner le soir."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Quand le sapin du Rockefeller Center est-il allumé en 2026 ?",
+        "answer": "Le mercredi 2 décembre 2026. Le sapin arrive le samedi 7 novembre et reste illuminé après la cérémonie."
+      },
+      {
+        "question": "La patinoire de Bryant Park est-elle gratuite ?",
+        "answer": "Oui, l’entrée est gratuite du 28 octobre 2026 au 28 février 2027 ; seules les expériences premium sont payantes."
+      },
+      {
+        "question": "Combien coûte le métro à New York ?",
+        "answer": "3 $ le trajet en métro ou en bus local, 7,25 $ en bus express."
+      },
+      {
+        "question": "Quel temps fait-il à New York en décembre ?",
+        "answer": "En moyenne 6,9 °C l’après-midi et 1,1 °C la nuit à Central Park, selon les normales 1991-2020."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Time Out New York — 2026 Rockefeller Center tree lighting (29 septembre 2026)",
+        "url": "https://www.timeout.com/newyork/news/the-2026-rockefeller-center-christmas-tree-lighting-has-officially-been-announced-and-its-happening-earlier-than-you-think-092926"
+      },
+      {
+        "label": "Time Out New York — Bryant Park Winter Village 2026",
+        "url": "https://www.timeout.com/newyork/news/nycs-most-famous-winter-village-is-making-its-festive-return-next-month-with-free-skating-and-180-vendors-091926"
+      },
+      {
+        "label": "Radio City Rockettes — The Christmas Spectacular 2026",
+        "url": "https://www.rockettes.com/blog/the-christmas-spectacular-just-got-even-more-spectacular/"
+      },
+      {
+        "label": "MTA — Fares",
+        "url": "https://www.mta.info/fares"
+      },
+      {
+        "label": "National Weather Service — Central Park, normales des maximales quotidiennes",
+        "url": "https://www.weather.gov/media/okx/Climate/CentralPark/DailyMaxTNormals.pdf"
+      },
+      {
+        "label": "National Weather Service — Central Park, normales des minimales quotidiennes",
+        "url": "https://www.weather.gov/media/okx/Climate/CentralPark/DailyMinTNormals.pdf"
+      },
+      {
+        "label": "Banque centrale européenne — Taux de référence du 23 octobre 2026",
+        "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"
+      }
+    ]
+  },
+  {
+    "related": [],
+    "sourcesCheckedOn": "2026-10-24",
+    "publishedOn": "2026-10-24",
+    "updatedOn": "2026-10-24",
+    "slug": "londres-noel-marches",
+    "title": "Londres en décembre 2026 : Winter Wonderland, patinoires et métro plafonné à 8,90 £",
+    "shortTitle": "Londres en décembre",
+    "destination": "Londres",
+    "country": "royaume-uni",
+    "continent": "europe",
+    "category": "Que faire",
+    "cover": "londres-tower-bridge",
+    "description": "Les dates de l’hiver 2026 à Londres : Winter Wonderland du 19 novembre au 3 janvier, Somerset House dès 15 £, métro plafonné à 8,90 £ par jour, pas de métro le 25.",
+    "readMinutes": 5,
+    "summary": "Hyde Park Winter Wonderland ouvre du 19 novembre 2026 au 3 janvier 2027, tous les jours sauf le 25 décembre, avec une entrée à 1 £ du lundi au jeudi en novembre aux heures creuses. La patinoire de Somerset House tourne du 11 novembre au 10 janvier, de 15 à 28,50 £. En sans contact, le métro ne coûte jamais plus de 8,90 £ par jour en zones 1-2. Le jour de Noël, la plupart des transports publics s’arrêtent.",
+    "keyFacts": [
+      {
+        "value": "8,90 £",
+        "label": "le plafond quotidien du métro en zones 1-2 en sans contact, 2026 (≈ 10,60 €)"
+      },
+      {
+        "value": "44,70 £",
+        "label": "le plafond du lundi au dimanche en zones 1-2"
+      },
+      {
+        "value": "1 £",
+        "label": "l’entrée de Winter Wonderland du lundi au jeudi en novembre, aux heures creuses"
+      },
+      {
+        "value": "19 nov.",
+        "label": "l’ouverture de Hyde Park Winter Wonderland, jusqu’au 3 janvier 2027"
+      },
+      {
+        "value": "15 à 28,50 £",
+        "label": "une séance de patin adulte à Somerset House, du 11 novembre au 10 janvier"
+      },
+      {
+        "value": "25 déc.",
+        "label": "aucun service sur la plupart des transports publics le jour de Noël"
+      }
+    ],
+    "sections": [
+      {
+        "id": "calendrier",
+        "title": "Le calendrier de l’hiver 2026",
+        "image": "londres-covent-garden",
+        "paragraphs": [
+          "Londres s’illumine dès la mi-novembre : la patinoire de Somerset House ouvre le 11 novembre, Hyde Park Winter Wonderland le 19. Le 25 décembre tombe un vendredi en 2026 : ce jour-là, Winter Wonderland ferme et la plupart des transports publics ne circulent pas."
+        ],
+        "table": {
+          "headers": [
+            "Rendez-vous",
+            "Dates 2026-2027",
+            "Prix"
+          ],
+          "rows": [
+            [
+              "Skate at Somerset House",
+              "11 novembre – 10 janvier",
+              "15 à 28,50 £ (enfant 11 £)"
+            ],
+            [
+              "Hyde Park Winter Wonderland",
+              "19 novembre – 3 janvier, sauf le 25 décembre",
+              "dès 1 £ en semaine en novembre"
+            ],
+            [
+              "Métro et bus en sans contact",
+              "toute la saison",
+              "plafond de 8,90 £ par jour en zones 1-2"
+            ]
+          ]
+        }
+      },
+      {
+        "id": "winter-wonderland",
+        "title": "Hyde Park Winter Wonderland : 150 attractions dans le parc",
+        "paragraphs": [
+          "Du 19 novembre 2026 au 3 janvier 2027, Winter Wonderland s’installe dans Hyde Park avec plus de 150 attractions, manèges et spectacles. Il ouvre tous les jours sauf le jour de Noël, avec des horaires d’ouverture qui varient selon les jours.",
+          "L’entrée la moins chère coûte 1 £ : un demi-million de billets à ce prix sont proposés en heures creuses, du lundi au jeudi pendant tout le mois de novembre, sans frais de réservation. Autre astuce : en dépensant 25 £ en ligne en manèges, attractions ou repas, l’entrée devient gratuite, une économie allant jusqu’à 9,50 £ par personne. Réserver en ligne à l’avance fait aussi gagner jusqu’à 25 %."
+        ],
+        "tip": "Venez un lundi, un mardi, un mercredi ou un jeudi de novembre et choisissez les créneaux verts « best value » : l’entrée coûte 1 £."
+      },
+      {
+        "id": "somerset-house",
+        "title": "Patiner à Somerset House",
+        "paragraphs": [
+          "Chaque hiver, une patinoire s’installe dans la cour de Somerset House, l’Edmond J. Safra Fountain Court : c’est l’une des plus photogéniques de Londres. En 2026, elle ouvre du 11 novembre au 10 janvier. Les billets adultes coûtent de 15 à 28,50 £ selon le créneau, heures creuses ou de pointe, et 11 £ pour les enfants.",
+          "Les soirées Skate Lates reviennent cette année, avec des DJ aux platines pour patiner en musique."
+        ]
+      },
+      {
+        "id": "eurostar",
+        "title": "Venir de Paris en Eurostar",
+        "paragraphs": [
+          "L’Eurostar relie Paris Gare du Nord à Londres St Pancras toutes les une à deux heures, sept jours sur sept, toute l’année sauf le jour de Noël. Le trajet direct le plus rapide prend 2 h 15. À Paris, le terminal Eurostar se trouve à l’étage de la gare du Nord : on monte par l’escalator face au quai 17, puis on longe la galerie jusqu’aux portiques d’enregistrement. À l’arrivée à Londres, il n’y a plus de formalités : on descend du train et on sort.",
+          "Pour un week-end de décembre, la classe Standard suffit largement : sièges inclinables, tablette et liseuse individuelle, pour un trajet d’un peu plus de deux heures."
+        ],
+        "tip": "Aucun Eurostar ne circule le 25 décembre : arrivez au plus tard le 24, ou repartez le 26."
+      },
+      {
+        "id": "transports",
+        "title": "Se déplacer : les plafonds 2026 et le piège du 25 décembre",
+        "image": "londres-big-ben",
+        "paragraphs": [
+          "Inutile d’acheter un forfait : en payant avec une carte sans contact ou une Oyster, le métro, le DLR, l’Elizabeth line et l’Overground cessent de facturer une fois le plafond atteint. En zones 1-2, il est de 8,90 £ par jour et de 44,70 £ du lundi au dimanche ; en zones 1-6, de 16,30 £ par jour. La Day Travelcard papier coûte 16,60 £ : plus cher que le plafond. Les tarifs de pointe s’appliquent en semaine de 6 h 30 à 9 h 30 et de 16 h à 19 h, et le Heathrow Express n’entre pas dans les plafonds.",
+          "Comme chaque année, la plupart des transports publics ne circulent pas le jour de Noël : seuls les taxis et VTC, les vélos Santander Cycles, les trottinettes de location et la gare routière de Victoria fonctionnent. En 2025, une partie du réseau était aussi fermée le lendemain, dont l’Elizabeth line, et les services s’arrêtaient plus tôt le 24 décembre."
+        ],
+        "tip": "Le 25 décembre, réservez un taxi ou prévoyez une journée à pied : Londres est alors presque sans métro."
+      }
+    ],
+    "faq": [
+      {
+        "question": "Winter Wonderland est-il gratuit ?",
+        "answer": "L’entrée coûte dès 1 £ du lundi au jeudi en novembre aux heures creuses, et devient gratuite si vous dépensez 25 £ en ligne en manèges, attractions ou repas."
+      },
+      {
+        "question": "Le métro de Londres circule-t-il le jour de Noël ?",
+        "answer": "Non : la plupart des transports publics ne circulent pas le 25 décembre ; taxis, Santander Cycles et la gare routière de Victoria fonctionnent."
+      },
+      {
+        "question": "Combien coûte une journée de métro à Londres ?",
+        "answer": "En sans contact ou avec une Oyster, au plus 8,90 £ par jour en zones 1-2 et 16,30 £ en zones 1-6, tarifs 2026."
+      },
+      {
+        "question": "Quand ouvre la patinoire de Somerset House ?",
+        "answer": "Du 11 novembre 2026 au 10 janvier 2027, de 15 à 28,50 £ pour un adulte et 11 £ pour un enfant."
+      }
+    ],
+    "sources": [
+      {
+        "label": "TfL — Tube and rail fares (2026)",
+        "url": "https://tfl.gov.uk/fares/find-fares/tube-and-rail-fares"
+      },
+      {
+        "label": "TfL — Adult rate prices 2026 (PDF)",
+        "url": "https://content.tfl.gov.uk/adult-fares.pdf"
+      },
+      {
+        "label": "TfL — Transports à Noël et au Nouvel An 2025",
+        "url": "https://tfl-newsroom.prgloo.com/news/majority-of-tfl-services-running-over-christmas-and-new-year-to-help-customers-make-the-most-of-london-this-festive-season"
+      },
+      {
+        "label": "Hyde Park Winter Wonderland — Site officiel",
+        "url": "https://hydeparkwinterwonderland.com/"
+      },
+      {
+        "label": "Time Out London — Skate at Somerset House 2026 (18 septembre 2026)",
+        "url": "https://www.timeout.com/london/news/state-at-somerset-house-2026-tickets-dates-prices-091826"
+      },
+      {
+        "label": "Seat61 — London to Paris by Eurostar 2026",
+        "url": "https://www.seat61.com/London-to-Paris-by-train.htm"
+      },
+      {
+        "label": "Banque centrale européenne — Taux de référence du 23 octobre 2026",
+        "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"
+      }
+    ]
+  },
+  {
+    "related": [],
+    "sourcesCheckedOn": "2026-10-24",
+    "publishedOn": "2026-10-24",
+    "updatedOn": "2026-10-24",
+    "slug": "laponie-budget-rovaniemi",
+    "title": "Combien coûte un voyage en Laponie ? Le budget de Rovaniemi 2026-2027, poste par poste",
+    "shortTitle": "Laponie : le budget",
+    "destination": "Laponie",
+    "country": "finlande",
+    "continent": "europe",
+    "category": "Budget",
+    "cover": "laponie-rovaniemi-village",
+    "description": "Train de nuit dès 59 € la cabine, Père Noël gratuit, renne dès 30 €, huskies dès 63 €, SantaPark dès 42 € : les prix 2026-2027 de Rovaniemi, relevés le 24 octobre.",
+    "readMinutes": 6,
+    "summary": "À Rovaniemi, l’essentiel est gratuit : rencontrer le Père Noël dans son bureau et franchir le cercle polaire, au village situé à 8 km du centre. Ce qui fait le budget, ce sont les activités : 30 à 60 € une balade en traîneau à renne, dès 63 € une courte balade en huskies, 196 à 249 € un safari où l’on conduit son attelage. Le train de nuit depuis Helsinki coûte à partir de 59 € pour la cabine entière.",
+    "keyFacts": [
+      {
+        "value": "59 €",
+        "label": "la cabine privative du train de nuit Helsinki–Rovaniemi, prix pour la cabine entière"
+      },
+      {
+        "value": "0 €",
+        "label": "rencontrer le Père Noël dans son bureau, tous les jours de l’année"
+      },
+      {
+        "value": "30 à 60 €",
+        "label": "une balade en traîneau à renne de 400 ou 800 m au village du Père Noël"
+      },
+      {
+        "value": "63 €",
+        "label": "la courte balade en huskies au village, du 30 novembre au 4 avril"
+      },
+      {
+        "value": "42 €",
+        "label": "l’entrée adulte de SantaPark, ouvert du 31 octobre au 23 janvier"
+      },
+      {
+        "value": "−6 °C",
+        "label": "la maximale moyenne de décembre à Rovaniemi, −13 °C la nuit"
+      }
+    ],
+    "sections": [
+      {
+        "id": "venir",
+        "title": "Venir : le train de nuit dès 59 € la cabine",
+        "paragraphs": [
+          "Le train de nuit relie Helsinki ou Turku à Rovaniemi en voitures à deux étages, avec voiture-restaurant et wifi. Chez VR, la cabine privative coûte à partir de 59 € et la cabine avec douche à partir de 74 € : le prix vaut pour la cabine entière, pas par personne. Les nuits les plus chargées de l’hiver, jusqu’à cinq trains de nuit quittent Helsinki, dont trois pour Rovaniemi ; les billets sont en vente jusqu’à l’automne 2027. Une place pour la voiture coûte à partir de 49 €.",
+          "En avion, Finnair relie Helsinki à Rovaniemi tous les jours, toute l’année, et l’aéroport n’est qu’à 3 km du village du Père Noël. Le village est lui-même à 8 km au nord du centre-ville : la ligne de bus n° 8 fait le trajet toute l’année, et des navettes privées relient l’aéroport, le centre et le village de novembre à mars."
+        ],
+        "tip": "À deux, la cabine à 59 € revient à 29,50 € par personne, et elle vous épargne une nuit d’hôtel."
+      },
+      {
+        "id": "gratuit",
+        "title": "Ce qui est gratuit au village du Père Noël",
+        "paragraphs": [
+          "On rencontre le Père Noël tous les jours de l’année dans son bureau, le Santa Claus Office, où l’entrée est gratuite depuis plus de trente ans ; il reçoit aussi, gratuitement, dans sa Christmas House rouge. Avant Noël, la Christmas House ouvre de 9 h à 20 h du 23 novembre au 23 décembre, puis de 8 h à 22 h les 24 et 25 décembre.",
+          "Le cercle polaire traverse la place centrale du village, où une ligne le matérialise : on le franchit à pied, en sautant ou en faisant la roue. La poste principale du Père Noël, ses cartes et ses timbres complètent la visite."
+        ]
+      },
+      {
+        "id": "activites",
+        "title": "Le prix des activités, de 30 à 249 €",
+        "image": "laponie-husky",
+        "paragraphs": [
+          "Les rennes du village proposent deux parcours : 400 m en 5 à 7 minutes pour 30 € (40 € du 1er décembre au 10 janvier), ou 800 m dans la forêt en 10 à 12 minutes pour 50 € (60 € en haute saison). Ces billets s’achètent uniquement sur place, à l’enclos.",
+          "Chez Bearhill Husky, la courte balade au village commence à 63 € à partir du 30 novembre. Pour conduire soi-même son traîneau, le circuit familial de 2 h 30, avec 45 minutes de conduite sur 6 à 10 km, coûte 196 € par adulte, 201 € du 30 novembre au 10 janvier ; le programme de 3 heures, avec 1 h 30 de conduite sur 12 à 18 km, démarre à 249 €. Les vêtements grand froid sont fournis.",
+          "SantaPark, le parc de Noël souterrain, ouvre du 31 octobre 2026 au 23 janvier 2027 à partir de 42 € par adulte et 37 € par enfant de 3 à 12 ans, frais de réservation en plus. En ville, le musée Arktikum coûte 22 € et ouvre tous les jours de 10 h à 18 h de décembre à février."
+        ],
+        "table": {
+          "headers": [
+            "Activité",
+            "Prix adulte",
+            "Période"
+          ],
+          "rows": [
+            [
+              "Traîneau à renne, 400 m",
+              "30 € (40 € du 1/12 au 10/01)",
+              "21 septembre – 30 avril"
+            ],
+            [
+              "Traîneau à renne, 800 m",
+              "50 € (60 € du 1/12 au 10/01)",
+              "1er novembre – 30 avril"
+            ],
+            [
+              "Balade en huskies au village",
+              "dès 63 €",
+              "30 novembre – 4 avril"
+            ],
+            [
+              "Huskies, 45 min de conduite",
+              "196 € (201 € du 30/11 au 10/01)",
+              "30 novembre – 4 avril"
+            ],
+            [
+              "Huskies, 1 h 30 de conduite",
+              "dès 249 €",
+              "30 novembre – 4 avril"
+            ],
+            [
+              "SantaPark",
+              "dès 42 €",
+              "31 octobre – 23 janvier"
+            ],
+            [
+              "Musée Arktikum",
+              "22 €",
+              "toute l’année"
+            ]
+          ]
+        }
+      },
+      {
+        "id": "aurores",
+        "title": "Aurores boréales, lumière et grand froid",
+        "image": "laponie-aurore",
+        "paragraphs": [
+          "Rovaniemi n’a pas de nuit polaire, mais le soleil y monte à peine au-dessus de l’horizon en hiver : décembre compte en moyenne un peu moins de six minutes d’ensoleillement par jour. Pour les aurores boréales, l’automne et la fin de l’hiver sont les meilleures périodes.",
+          "Selon les normales 1991-2020, Rovaniemi affiche −6 °C l’après-midi et −13 °C la nuit en décembre, −8 °C et −15 °C en janvier. La neige couvre le sol environ 183 jours par an."
+        ]
+      },
+      {
+        "id": "exemple",
+        "title": "Exemple de budget pour deux, en haute saison",
+        "paragraphs": [
+          "Pour un couple en décembre, hors logement et repas : le train de nuit aller-retour en cabine (2 × 59 €, soit 118 €), le traîneau à renne de 800 m (2 × 60 €, soit 120 €), le safari en huskies avec 45 minutes de conduite (2 × 201 €, soit 402 €), SantaPark (2 × 42 €, soit 84 €) et l’Arktikum (2 × 22 €, soit 44 €) font 768 €. La rencontre avec le Père Noël et le passage du cercle polaire ne coûtent rien.",
+          "Pour alléger la note, remplacez le safari par la balade en huskies au village (63 € par personne) et le renne de 800 m par celui de 400 m (40 € en décembre) : la même liste tombe alors à 452 € pour deux. Voyager en novembre ou après le 10 janvier fait aussi baisser les prix des rennes et des huskies."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Combien coûte une rencontre avec le Père Noël à Rovaniemi ?",
+        "answer": "Rien : l’entrée du Santa Claus Office et de la Christmas House est gratuite, tous les jours de l’année."
+      },
+      {
+        "question": "Combien coûte le train de nuit Helsinki–Rovaniemi ?",
+        "answer": "À partir de 59 € pour une cabine privative entière, et à partir de 74 € pour une cabine avec douche, chez VR."
+      },
+      {
+        "question": "Combien coûte une balade en traîneau à chiens ?",
+        "answer": "Dès 63 € pour une courte balade au village du Père Noël, 196 à 201 € pour 45 minutes de conduite et dès 249 € pour 1 h 30, chez Bearhill Husky."
+      },
+      {
+        "question": "Quel froid fait-il à Rovaniemi en décembre ?",
+        "answer": "En moyenne −6 °C l’après-midi et −13 °C la nuit, selon les normales 1991-2020."
+      }
+    ],
+    "sources": [
+      {
+        "label": "VR — Night trains (prix des cabines)",
+        "url": "https://www.vr.fi/en/night-trains"
+      },
+      {
+        "label": "VR — Santa Claus Express",
+        "url": "https://www.vr.fi/en/santa-claus-express"
+      },
+      {
+        "label": "Santa Claus Village — Meet Santa Claus",
+        "url": "https://santaclausvillage.info/experiences/santa-claus/"
+      },
+      {
+        "label": "Santa Claus Village — Opening hours and dates 2026-2027",
+        "url": "https://santaclausvillage.info/info-and-tips/opening-hours-and-dates/"
+      },
+      {
+        "label": "Santa Claus Village — Getting here",
+        "url": "https://santaclausvillage.info/info-and-tips/getting-here-and-moving-around/"
+      },
+      {
+        "label": "Santa Claus Reindeer — Reindeer Path, 400 m",
+        "url": "https://www.santaclausreindeer.fi/experience/reindeer-path-a-400-meter-reindeer-sleigh-ride-with-santas-reindeer/"
+      },
+      {
+        "label": "Santa Claus Reindeer — Forest Path, 800 m",
+        "url": "https://www.santaclausreindeer.fi/experience/forest-path-an-800-meter-reindeer-sleigh-ride-adventure-in-santas-forest-rovaniemi/"
+      },
+      {
+        "label": "Bearhill Husky — Winter tours 2026-2027",
+        "url": "https://bearhillhusky.com/winter-tours/"
+      },
+      {
+        "label": "Bearhill Husky — The Happy Trail Tour",
+        "url": "https://bearhillhusky.com/winter-tours/the-happy-trail-tour/"
+      },
+      {
+        "label": "SantaPark — Opening times and ticket prices",
+        "url": "https://santapark.fi/experience-santapark/plan-your-visit/opening-times-ticket-prices/"
+      },
+      {
+        "label": "Arktikum — Opening hours",
+        "url": "https://arktikum.fi/en/visit/opening-hours"
+      },
+      {
+        "label": "Wikipedia — Rovaniemi (climat, données FMI 1991-2020)",
+        "url": "https://en.wikipedia.org/wiki/Rovaniemi"
+      },
+      {
+        "label": "Wikivoyage — Rovaniemi",
+        "url": "https://fr.wikivoyage.org/wiki/Rovaniemi"
+      }
+    ]
+  },
+  {
+    "related": [],
+    "sourcesCheckedOn": "2026-10-24",
+    "publishedOn": "2026-10-24",
+    "updatedOn": "2026-10-24",
+    "slug": "costa-rica-itineraire-2-semaines",
+    "title": "Costa Rica en 2 semaines : Manuel Antonio, Monteverde, Arenal et la côte caraïbe (itinéraire 2026)",
+    "shortTitle": "Le Costa Rica en 2 semaines",
+    "destination": "Costa Rica",
+    "country": "costa-rica",
+    "continent": "amerique-centrale-caraibes",
+    "category": "Itinéraires",
+    "cover": "costa-rica-arenal",
+    "description": "Une boucle de 14 jours depuis San José : routes de 3 à 4 heures, Manuel Antonio à 18,08 $ et fermé le mardi, forêt de nuages, volcan Arenal et côte caraïbe.",
+    "readMinutes": 7,
+    "summary": "Trois nuits à Manuel Antonio, deux à Monteverde, trois à La Fortuna au pied du volcan Arenal, puis quatre sur la côte caraïbe sud, autour de Cahuita. Entre les trois premières étapes, aucune route ne dépasse quatre heures. Réservez Manuel Antonio en ligne : 18,08 $ par adulte, fermé le mardi, ouvert de 7 h à 16 h. Partez pendant la saison sèche, de décembre à avril.",
+    "keyFacts": [
+      {
+        "value": "18,08 $",
+        "label": "l’entrée de Manuel Antonio (16 $ + TVA), en ligne uniquement, fermé le mardi (≈ 16 €)"
+      },
+      {
+        "value": "7 h – 16 h",
+        "label": "les horaires de Manuel Antonio du mercredi au lundi ; les plages ferment à 15 h"
+      },
+      {
+        "value": "160 km",
+        "label": "de San José à Manuel Antonio, 3 à 4 heures de route"
+      },
+      {
+        "value": "190 km",
+        "label": "de Manuel Antonio à Monteverde, 3 h 30 à 4 h, goudronnés par la route 606"
+      },
+      {
+        "value": "115 km",
+        "label": "de Monteverde à La Fortuna, environ 3 heures de lacets et de ponts à une voie"
+      },
+      {
+        "value": "15 $",
+        "label": "l’entrée du volcan Poás, à réserver en ligne, dernière entrée à 14 h"
+      }
+    ],
+    "sections": [
+      {
+        "id": "parcours",
+        "title": "Le parcours : une boucle depuis San José",
+        "paragraphs": [
+          "La boucle part de l’aéroport de San José et y revient, ce qui évite les frais d’abandon d’une voiture de location. Manuel Antonio, Monteverde puis La Fortuna forment le trio classique d’un premier voyage : plages et animaux, forêt de nuages et ponts suspendus, puis volcan et sources chaudes. Les quatre derniers jours filent vers la côte caraïbe sud et sa culture afro-caribéenne.",
+          "La voiture reste la solution la plus souple, mais des navettes partagées relient chaque étape. En bus, les lignes partent de terminaux différents à San José : le Terminal 7-10 pour La Fortuna et Monteverde, Tracopa pour Quepos et Manuel Antonio, Mepe pour Limón et Cahuita. Sur la route, les péages des routes 1 et 27 se paient par carte, en colones ou en dollars, et les ponts à une seule voie sont fréquents : un sens a la priorité, l’autre attend."
+        ],
+        "table": {
+          "headers": [
+            "Étape",
+            "Nuits",
+            "Route depuis l’étape précédente"
+          ],
+          "rows": [
+            [
+              "Manuel Antonio",
+              "3",
+              "160 km, 3 à 4 h depuis San José"
+            ],
+            [
+              "Monteverde",
+              "2",
+              "190 km, 3 h 30 à 4 h"
+            ],
+            [
+              "La Fortuna (Arenal)",
+              "3",
+              "115 km, environ 3 h"
+            ],
+            [
+              "Cahuita (côte caraïbe sud)",
+              "4",
+              "via San José, bus Mepe"
+            ]
+          ]
+        },
+        "tip": "Ne soyez pas trop serré : sur ces routes, un trajet annoncé de trois heures peut en prendre cinq derrière les camions et les bus."
+      },
+      {
+        "id": "manuel-antonio",
+        "title": "Jours 1 à 3 — Manuel Antonio, les singes et la plage",
+        "image": "costa-rica-manuel-antonio",
+        "paragraphs": [
+          "Le parc national Manuel Antonio est le plus fréquenté du pays, et ses règles sont strictes : 18,08 $ par adulte (16 $ plus la TVA), 5,65 $ pour les enfants de 2 à 12 ans, gratuit avant 2 ans. Les billets se vendent uniquement en ligne, sur le portail officiel des parcs (SINAC), et pas à l’entrée. Le parc ouvre du mercredi au lundi de 7 h à 16 h, les plages ferment à 15 h, et il est fermé le mardi.",
+          "Entrez à 7 h : les animaux sont les plus actifs pendant les deux premières heures, et c’est le moment le plus frais. Paresseux, capucins à face blanche, singes-écureuils et iguanes se repèrent bien mieux avec un guide équipé d’une longue-vue : sans lui, ils restent souvent invisibles dans le feuillage. Les billets s’épuisent en haute saison, parfois des semaines à l’avance : réservez dès que vos dates sont fixées."
+        ],
+        "tip": "Gardez le mardi pour la plage ou le kayak : c’est le jour de fermeture du parc."
+      },
+      {
+        "id": "monteverde",
+        "title": "Jours 4 et 5 — Monteverde, la forêt de nuages",
+        "image": "costa-rica-monteverde",
+        "paragraphs": [
+          "La route de Manuel Antonio à Monteverde, 190 km, se fait en 3 h 30 à 4 h et reste goudronnée si l’on prend la route 606 pour monter. Il fait nettement plus frais en altitude : prévoyez une couche chaude.",
+          "Monteverde se découvre par la canopée : à Selvatura, huit ponts suspendus de 52 à 171 m de long font passer à hauteur des cimes, en une heure à une heure et demie. Le lendemain matin, une marche guidée dans une réserve privée comme Curi Cancha donne les meilleures chances d’apercevoir le quetzal resplendissant. Les amateurs de tyrolienne trouvent ici la plus longue du pays, chez 100% Aventura."
+        ]
+      },
+      {
+        "id": "arenal",
+        "title": "Jours 6 à 8 — La Fortuna et le volcan Arenal",
+        "paragraphs": [
+          "De Monteverde à La Fortuna, il n’y a que 115 km, mais comptez environ 3 heures : la route, par les routes 606, 145 puis 142, enchaîne les virages et les ponts à une voie.",
+          "L’Arenal, le cône de carte postale qui domine La Fortuna, n’est plus entré en éruption depuis 2010. Dans le parc national, l’entrée étrangère tourne autour de 15 $ ; on y marche sur les anciennes coulées de lave et dans la forêt, avec le sommet en vue si les nuages se lèvent, ce qui arrive plus souvent le matin. Le reste du séjour se partage entre les ponts suspendus de Místico, la cascade de La Fortuna et les sources chaudes au coucher du soleil.",
+          "En rentrant vers San José, le volcan Poás vaut le détour : à 1 h 30 de la capitale, c’est le cratère actif le plus facile d’accès d’Amérique centrale. Entrée 15 $ pour un adulte étranger, ouvert de 8 h à 16 h avec une dernière entrée à 14 h, sur réservation en ligne uniquement."
+        ]
+      },
+      {
+        "id": "caraibes",
+        "title": "Jours 9 à 13 — La côte caraïbe, de Cahuita à Tortuguero",
+        "paragraphs": [
+          "Sur la côte caraïbe sud, le parc national de Cahuita reste l’exception : à l’entrée de Kelly Creek, on laisse un don, de 5 à 10 $ par personne selon les guides, au lieu d’un billet fixe. Son sentier côtier, plat, longe un récif de corail : c’est l’une des plus belles marches faciles du pays.",
+          "Plus au nord, Tortuguero ne s’atteint qu’en bateau ou en petit avion. L’entrée coûte 17 $ plus les taxes pour un adulte non-résident, en ligne uniquement, et la visite se fait surtout en bateau sur les canaux. Les tortues vertes y pondent de juillet à octobre, hors de la saison sèche de cet itinéraire."
+        ]
+      },
+      {
+        "id": "saison",
+        "title": "Quand partir",
+        "paragraphs": [
+          "La saison sèche, que les Costaricains appellent l’été, va de décembre à avril : c’est la meilleure période pour les plages, les routes et la vue sur l’Arenal. La saison des pluies, l’« hiver », va de mai à novembre ; à Manuel Antonio, septembre et octobre sont les mois les plus arrosés, avec des averses l’après-midi. Mai, juin et novembre offrent un compromis, avec moins de monde."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Combien coûte l’entrée de Manuel Antonio et quand est-il fermé ?",
+        "answer": "18,08 $ par adulte (16 $ plus la TVA) et 5,65 $ par enfant de 2 à 12 ans, en ligne uniquement. Le parc est fermé le mardi et ouvert de 7 h à 16 h les autres jours."
+      },
+      {
+        "question": "Peut-on faire cet itinéraire sans voiture ?",
+        "answer": "Oui : des navettes partagées relient chaque étape, et des bus partent de San José, du Terminal 7-10 pour La Fortuna et Monteverde, de Tracopa pour Manuel Antonio et de Mepe pour Cahuita."
+      },
+      {
+        "question": "Quelle est la meilleure saison pour le Costa Rica ?",
+        "answer": "La saison sèche, de décembre à avril. Septembre et octobre sont les mois les plus pluvieux à Manuel Antonio."
+      },
+      {
+        "question": "Faut-il réserver les parcs nationaux à l’avance ?",
+        "answer": "Oui pour Manuel Antonio, Poás et Tortuguero : les billets se vendent uniquement en ligne, et il n’y a pas de vente à l’entrée."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Earthtrekkers — Manuel Antonio National Park (mise à jour du 5 octobre 2026)",
+        "url": "https://www.earthtrekkers.com/manuel-antonio-national-park/"
+      },
+      {
+        "label": "Earthtrekkers — Costa Rica itinerary (mise à jour du 11 mai 2026)",
+        "url": "https://www.earthtrekkers.com/costa-rica-itinerary/"
+      },
+      {
+        "label": "Earthtrekkers — First trip to Costa Rica (mise à jour du 5 mai 2026)",
+        "url": "https://www.earthtrekkers.com/costa-rica-tips/"
+      },
+      {
+        "label": "The Rio Times — Costa Rica national parks guide 2026 (19 août 2026)",
+        "url": "https://www.riotimesonline.com/costa-rica-national-parks-guide-2026/"
+      },
+      {
+        "label": "Wikivoyage — Costa Rica (bus et climat)",
+        "url": "https://fr.wikivoyage.org/wiki/Costa_Rica"
+      },
+      {
+        "label": "Wikivoyage — Costa Rica (routes et saisons)",
+        "url": "https://en.wikivoyage.org/wiki/Costa_Rica"
+      },
+      {
+        "label": "Banque centrale européenne — Taux de référence du 23 octobre 2026",
+        "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"
+      }
+    ]
   }
 ]

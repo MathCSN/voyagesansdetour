@@ -31,10 +31,22 @@ class CalendarTests(unittest.TestCase):
         self.assertFalse(self.run_admit()['changed'])
         self.assertEqual(self.articles,json.loads((self.root/'articles.json').read_text()))
     def test_recent_publication_prevents_source_fetch_and_mutation(self):
-        self.articles[0]['publishedOn']='2026-10-11';self.save()
+        self.articles[0]['publishedOn']='2026-10-12';self.save()
         self.assertEqual(self.run_admit()['status'],'cadence_or_pending_hold')
         self.fetch.assert_not_called()
         self.assertEqual(json.loads((self.root/'editorial-queue.json').read_text()),self.queue)
+    def test_guide_written_the_day_before_waits_for_its_two_day_slot(self):
+        self.articles[0]['publishedOn']='2026-10-11';self.save()
+        result=self.run_admit()
+        self.assertTrue(result['changed'])
+        self.assertEqual(result['releaseAt'],'2026-10-12T22:00:00Z')
+        self.assertFalse(a.q.promote(self.root,self.now,source_fetcher=self.fetch))
+        self.assertTrue(a.q.promote(self.root,a.q.instant('2026-10-13T05:41:00Z'),source_fetcher=self.fetch))
+    def test_second_guide_waits_until_the_reserved_one_is_published(self):
+        self.assertTrue(self.run_admit()['changed'])
+        other=copy.deepcopy(self.proposal);other['article']['slug']='autre-guide'
+        (self.out/'guide-proposal.json').write_text(json.dumps(other))
+        self.assertEqual(self.run_admit()['status'],'cadence_or_pending_hold')
     def test_changed_source_does_not_enqueue(self):
         self.fetch.return_value={'sha256':'b'*64,'text':'Changed'}
         with self.assertRaises(ValueError):self.run_admit()
@@ -61,13 +73,26 @@ class CalendarTests(unittest.TestCase):
         self.assertEqual(len(state['promotions']),1)
         self.assertIsNone(state['promotions'][0]['receipt'])
         self.assertFalse(a.q.promote(self.root,self.now,source_fetcher=self.fetch))
-    def test_changed_source_at_release_keeps_both_files_unchanged(self):
+    def test_changed_source_at_release_withdraws_the_guide_without_publishing(self):
         self.run_admit()
-        before={name:(self.root/name).read_bytes() for name in ('articles.json','editorial-queue.json')}
+        articles=(self.root/'articles.json').read_bytes()
         self.fetch.return_value={'sha256':'b'*64,'text':'Changed'}
-        with self.assertRaisesRegex(ValueError,'changed before publication'):
-            a.q.promote(self.root,self.now,source_fetcher=self.fetch)
-        for name,raw in before.items():self.assertEqual((self.root/name).read_bytes(),raw)
+        self.assertTrue(a.q.promote(self.root,self.now,source_fetcher=self.fetch))
+        self.assertEqual((self.root/'articles.json').read_bytes(),articles)
+        state=json.loads((self.root/'editorial-queue.json').read_text())
+        self.assertEqual((state['drafts'],state['promotions']),([],[]))
+    def test_expired_generated_guide_is_withdrawn_and_can_be_written_again(self):
+        self.run_admit()
+        later=self.now+a.dt.timedelta(hours=48)
+        self.fetch.reset_mock()
+        self.assertTrue(a.q.promote(self.root,later,source_fetcher=self.fetch))
+        self.fetch.assert_not_called()
+        self.assertEqual(json.loads((self.root/'editorial-queue.json').read_text())['drafts'],[])
+        result=a.run(self.out,self.root,self.now,self.fetch)
+        self.assertTrue(result['changed'])
+        names=sorted(p.name for p in (self.root/'editorial-guide-evidence').iterdir())
+        self.assertEqual(len(names),2)
+        self.assertTrue(any('.withdrawn-' in n for n in names))
     def test_tampered_admission_evidence_blocks_before_fetch(self):
         self.run_admit();self.fetch.reset_mock()
         file=next((self.root/'editorial-guide-evidence').glob('*.json'))

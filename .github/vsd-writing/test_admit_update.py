@@ -46,7 +46,7 @@ class AdmissionTests(unittest.TestCase):
         self.article['publishedOn']='2026-12-09'
         self.assertFalse(a.cadence_open([self.article],self.queue,self.ledger,self.now))
     def test_reserved_guide_takes_priority(self):
-        self.queue['drafts']=[{'releaseAt':'2026-12-15T08:00:00Z'}]
+        self.queue['drafts']=[{'releaseAt':'2026-12-11T08:00:00Z'}]
         self.assertFalse(a.cadence_open([self.article],self.queue,self.ledger,self.now))
     def test_weekly_cadence_reopens_after_seven_days(self):
         self.article['publishedOn']='2026-12-02'
