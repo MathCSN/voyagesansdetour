@@ -155,29 +155,52 @@ class PublicBuildTest(unittest.TestCase):
                 self.assertIn('/sintra-facebook-2026-10/credits.txt',description)
         self.assertEqual(len(ET.parse(self.out/'feed.xml').findall('channel/item')),len(json.loads((ROOT/'articles.json').read_text())))
 
-    def test_new_guide_uses_its_review_and_publication_dates(self):
+    def test_guides_keep_their_publication_date_and_show_their_review_date(self):
         route='/portugal/aeroport-porto-centre-ville/'
+        catalogue=json.loads((ROOT/'articles.json').read_text())
+        guide=next(a for a in catalogue if a['slug']=='aeroport-porto-centre-ville')
         article=read(self.out,route)
+        # The original publication date survives an enrichment; the review date follows it.
         self.assertIn('Publié le 27 septembre 2026',article)
-        self.assertIn('Sources consultées le 27 septembre 2026',article)
+        self.assertEqual(guide['publishedOn'],'2026-09-27')
         schemas=json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>',article).group(1))
         schema=next(item for item in schemas if item.get('@type')=='Article')
         self.assertEqual(schema['datePublished'],'2026-09-27')
-        self.assertEqual(schema['dateModified'],'2026-09-27')
+        self.assertEqual(schema['dateModified'],guide['updatedOn'])
         sitemap=ET.parse(self.out/'sitemap.xml')
         ns={'s':'http://www.sitemaps.org/schemas/sitemap/0.9'}
         dates={node.findtext('s:loc',namespaces=ns):node.findtext('s:lastmod',namespaces=ns) for node in sitemap.findall('s:url',ns)}
-        self.assertEqual(dates[ORIGIN+route],'2026-09-27')
-        # The category date advances with the catalogue, while the existing
-        # guides above and below retain their own publication/review dates.
-        catalogue=json.loads((ROOT/'articles.json').read_text())
-        latest_update=max(a.get('updatedOn','2026-09-14') for a in catalogue)
-        self.assertEqual(dates[ORIGIN+'/portugal/'],latest_update)
-        self.assertEqual(dates[ORIGIN+'/portugal/porto-3-jours-sans-voiture/'],'2026-09-14')
+        for item in catalogue:
+            path='/'+item.get('country','portugal')+'/'+item['slug']+'/'
+            self.assertEqual(dates[ORIGIN+path],item.get('updatedOn','2026-09-14'))
+        for country in {item.get('country','portugal') for item in catalogue}:
+            latest=max(a.get('updatedOn','2026-09-14') for a in catalogue if a.get('country','portugal')==country)
+            self.assertEqual(dates[ORIGIN+'/'+country+'/'],latest)
         items=ET.parse(self.out/'feed.xml').findall('channel/item')
         rss={node.findtext('link'):node.findtext('pubDate') for node in items}
         self.assertEqual(rss[ORIGIN+route],'Sun, 27 Sep 2026 00:00:00 +0000')
         self.assertEqual(rss[ORIGIN+'/portugal/porto-3-jours-sans-voiture/'],'Mon, 14 Sep 2026 12:00:00 +0200')
+
+    def test_new_destinations_get_country_hubs_breadcrumbs_and_faq_schema(self):
+        page=read(self.out,'/italie/cinque-terre-sans-voiture/')
+        self.assertIn('<a href="/italie/">Italie</a>',page)
+        schemas=json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>',page).group(1))
+        types={item.get('@type') for item in schemas}
+        self.assertTrue({'Article','BreadcrumbList','FAQPage'}<=types)
+        crumbs=next(item for item in schemas if item.get('@type')=='BreadcrumbList')['itemListElement']
+        self.assertEqual(crumbs[1]['item'],ORIGIN+'/italie/')
+        for hub in ('/portugal/','/espagne/','/italie/'):
+            self.assertIn('class="grid" id="guide-grid"',read(self.out,hub))
+        self.assertIn('class="key-facts"',page)
+        self.assertIn('class="inline-photo"',page)
+
+    def test_home_shows_destinations_latest_guides_and_dated_figures(self):
+        home=read(self.out,'/')
+        self.assertIn('id="destinations"',home)
+        for name in ('Algarve','Douro','Andalousie','Côte amalfitaine','Cinque Terre'):
+            self.assertIn('<strong>'+name+'</strong>',home)
+        self.assertIn('class="facts"',home)
+        self.assertNotIn('Le Portugal, à votre rythme',home)
 
     def test_every_internal_link_resolves(self):
         broken=set()
@@ -214,7 +237,7 @@ class PublicBuildTest(unittest.TestCase):
     def test_legal_notice_shows_escaped_editor_and_host(self):
         page=read(self.out,'/mentions-legales/')
         self.assertIn('Camille Exemple &amp; Fils',page)
-        self.assertIn('SAS au capital de 1 000 €<br>RCS Toulouse 123 456 789',page)
+        self.assertIn('SAS au capital de 1 000\u00a0€<br>RCS Toulouse 123 456 789',page)
         self.assertIn('Directeur de la publication',page)
         self.assertIn('GitHub, Inc.',page)
         self.assertIn('+1 000 000 0000',page)
@@ -275,30 +298,37 @@ class DestinationImageBuildTest(unittest.TestCase):
                 self.assertEqual(image['encodingFormat'],'image/jpeg')
                 self.assertIn('property="og:image:type" content="image/jpeg"',head)
 
-    def test_guimaraes_uses_original_png_for_cover_cards_and_social_metadata(self):
+    def test_guimaraes_uses_a_real_licensed_photo_for_cover_cards_and_social_metadata(self):
+        # Charte 2026-10 : plus d'aplat typographique, une vraie photo du lieu sous licence libre.
         page,head,cover,image=self.article_parts('guimaraes')
-        caption='Guimarães sans voiture — illustration typographique'
-        credit='Illustration typographique originale — Voyage Sans Détour'
-        self.assertIn('src="/assets/guimaraes-cover.png"',cover)
-        self.assertIn('width="1600" height="900"',cover)
-        self.assertIn(caption,cover)
-        self.assertIn(credit,cover)
-        self.assertEqual((image['width'],image['height']),(1600,900))
-        self.assertEqual(image['url'],ORIGIN+'/assets/guimaraes-cover.png')
-        self.assertEqual(image['encodingFormat'],'image/png')
-        self.assertEqual(image['caption'],caption)
-        self.assertEqual(image['creditText'],credit)
-        self.assertEqual(image['creator'],{'@type':'Organization','name':'Voyage Sans Détour'})
-        self.assertNotIn('license',image)
-        self.assertIn('property="og:image:type" content="image/png"',head)
+        self.assertIn('src="/assets/photos/guimaraes-chateau.jpg"',cover)
+        self.assertIn('srcset="/assets/photos/guimaraes-chateau-800.jpg 800w',cover)
+        self.assertIn('Photo :',cover)
+        self.assertIn('Wikimedia Commons',cover)
+        self.assertEqual(image['url'],ORIGIN+'/assets/photos/guimaraes-chateau.jpg')
+        self.assertEqual(image['encodingFormat'],'image/jpeg')
+        self.assertTrue(image['license'].startswith('https://creativecommons.org/'))
+        self.assertEqual(image['creator']['@type'],'Person')
+        self.assertIn('property="og:image:type" content="image/jpeg"',head)
         self.assertIn('name="twitter:card" content="summary_large_image"',head)
         for prefix in ('property="og:image"','name="twitter:image"'):
             self.assertIn(prefix+' content="'+image['url']+'"',head)
         card=re.search(r'<a class="card" href="/portugal/test-image-guimaraes/".*?</a>',read(self.out,'/portugal/')).group(0)
-        self.assertIn('src="/assets/guimaraes-cover.png"',card)
-        self.assertIn(caption,card)
-        self.assertIn(credit,read(self.out,'/credits/'))
-        self.assertEqual((self.out/'assets/guimaraes-cover.png').read_bytes(),(ROOT/'dist/assets/guimaraes-cover.png').read_bytes())
+        self.assertIn('src="/assets/photos/guimaraes-chateau.jpg"',card)
+        self.assertIn(image['caption'],read(self.out,'/credits/'))
+        self.assertTrue((self.out/'assets/photos/guimaraes-chateau-800.jpg').is_file())
+
+    def test_every_photo_in_the_catalogue_has_a_verified_free_licence_and_both_sizes(self):
+        sources=json.loads((ROOT/'image-sources.json').read_text())['photos']
+        free=re.compile(r'^(CC BY(-SA)? [0-9.]+|CC0)$')
+        for photo in sources:
+            with self.subTest(photo=photo['id']):
+                self.assertRegex(photo['license'],free)
+                self.assertTrue(photo['source_page'].startswith('https://commons.wikimedia.org/wiki/File:'))
+                self.assertTrue(photo['author'] and photo['alt_fr'])
+                if 'file' in photo:
+                    self.assertTrue((self.out/'assets'/photo['file']).is_file())
+                    self.assertTrue((self.out/'assets'/photo['file'].replace('.jpg','-800.jpg')).is_file())
 
     def test_unknown_destination_uses_brand_instead_of_a_lisbon_photo(self):
         _,head,cover,image=self.article_parts('inconnue')
@@ -313,8 +343,8 @@ class DestinationImageBuildTest(unittest.TestCase):
         card=re.search(r'<a class="card" href="/portugal/test-image-inconnue/".*?</a>',read(self.out,'/portugal/')).group(0)
         self.assertIn('src="/assets/brand-voyagesansdetour.png"',card)
 
-    def test_no_photo_is_attributed_to_guimaraes_or_unknown_destination(self):
-        for key in ('guimaraes','inconnue'):
+    def test_no_photo_is_attributed_to_an_unknown_destination(self):
+        for key in ('inconnue',):
             with self.subTest(destination=key):
                 page,head,cover,image=self.article_parts(key)
                 for section in (head,cover,json.dumps(image)):

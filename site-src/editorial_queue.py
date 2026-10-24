@@ -3,6 +3,7 @@
 import argparse
 import datetime as dt
 import hashlib
+import html
 import json
 import os
 from pathlib import Path
@@ -21,6 +22,11 @@ HASH = re.compile(r'[0-9a-f]{64}\Z')
 INSTANT = re.compile(r'\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?(?:Z|[+-]\d{2}:\d{2})\Z')
 ARTICLE_KEYS = {'slug', 'title', 'shortTitle', 'destination', 'category', 'description',
                 'readMinutes', 'summary', 'sections', 'faq', 'sources', 'related', 'sourcesCheckedOn'}
+# Optional enrichments: destination country (URL prefix), cover photo id and dated key figures.
+OPTIONAL_ARTICLE_KEYS = {'country', 'cover', 'keyFacts'}
+COUNTRIES = ('portugal', 'espagne', 'italie')
+# One new guide per week at most: the calendar keeps the site alive without flooding it.
+RELEASE_INTERVAL = dt.timedelta(days=7)
 DRAFT_KEYS = {'id', 'article', 'releaseAt', 'validUntil', 'approval'}
 PROMOTION_KEYS = {'id', 'slug', 'approvalSha256', 'articleSha256', 'releaseAt', 'validUntil',
                   'approvedAt', 'promotedAt', 'receipt'}
@@ -70,6 +76,15 @@ def write_json(path, data):
     temporary.replace(path)
 
 
+def html_text(value, quote=True):
+    """Escape public text; a price or percentage never breaks before its sign."""
+    return html.escape(value, quote).replace(' €', '\u00a0€').replace(' %', '\u00a0%')
+
+
+def article_path(article):
+    return '/' + article.get('country', 'portugal') + '/' + article['slug'] + '/'
+
+
 def approval_hash(draft):
     """The approval covers the content AND its release window/approval instant."""
     return digest({key: draft[key] for key in ('id', 'article', 'releaseAt', 'validUntil')} |
@@ -77,7 +92,15 @@ def approval_hash(draft):
 
 
 def validate_article(article, published_slugs):
-    require(isinstance(article, dict) and set(article) == ARTICLE_KEYS, 'Champs du brouillon invalides.')
+    require(isinstance(article, dict) and ARTICLE_KEYS <= set(article) <= ARTICLE_KEYS | OPTIONAL_ARTICLE_KEYS,
+            'Champs du brouillon invalides.')
+    require(article.get('country', 'portugal') in COUNTRIES, 'Pays du brouillon invalide.')
+    require(isinstance(article.get('cover', 'x'), str) and SLUG.fullmatch(article.get('cover', 'x')), 'Photo de couverture invalide.')
+    facts = article.get('keyFacts', [])
+    require(isinstance(facts, list) and len(facts) <= 8 and
+            all(isinstance(f, dict) and set(f) == {'label', 'value'} and
+                all(isinstance(v, str) and 0 < len(v) <= 160 for v in f.values()) for f in facts),
+            'Chiffres clés invalides.')
     require(isinstance(article['slug'], str) and SLUG.fullmatch(article['slug']), 'Slug invalide.')
     for key in ('title', 'shortTitle', 'destination', 'category', 'description', 'summary'):
         require(isinstance(article[key], str) and 0 < len(article[key]) <= 3000, 'Texte du brouillon invalide.')
@@ -88,7 +111,9 @@ def validate_article(article, published_slugs):
     ids = set()
     for section in article['sections']:
         require(isinstance(section, dict) and {'id', 'title', 'paragraphs'} <= set(section) <=
-                {'id', 'title', 'paragraphs', 'bullets', 'table'}, 'Section invalide.')
+                {'id', 'title', 'paragraphs', 'bullets', 'table', 'image', 'tip'}, 'Section invalide.')
+        require(isinstance(section.get('image', 'x'), str) and SLUG.fullmatch(section.get('image', 'x')) and
+                isinstance(section.get('tip', 'x'), str) and section.get('tip', 'x'), 'Photo ou astuce invalide.')
         require(isinstance(section['id'], str) and SLUG.fullmatch(section['id']) and section['id'] not in ids,
                 'Identifiant de section invalide ou dupliqué.')
         ids.add(section['id'])
@@ -155,7 +180,7 @@ def validate(articles, queue, now):
         else:
             receipt = entry['receipt']
             require(isinstance(receipt, dict) and set(receipt) == {'verifiedAt', 'url', 'htmlSha256'} and
-                    receipt['url'] == ORIGIN + '/portugal/' + entry['slug'] + '/' and
+                    receipt['url'] == ORIGIN + article_path(next(a for a in articles if a['slug'] == entry['slug'])) and
                     isinstance(receipt['htmlSha256'], str) and HASH.fullmatch(receipt['htmlSha256']), 'Preuve de sortie invalide.')
             require(promoted <= instant(receipt['verifiedAt']) < expiry and instant(receipt['verifiedAt']) <= now,
                     'Preuve de sortie hors fenêtre contrôlée.')
@@ -229,7 +254,7 @@ def promote(root=ROOT, now=None, source_fetcher=None):
                  for a in articles)
     if queue['promotions']:
         latest = max(latest, max(instant(p['promotedAt']) for p in queue['promotions']))
-    if not due or any(p['receipt'] is None for p in queue['promotions']) or now < latest + dt.timedelta(hours=336):
+    if not due or any(p['receipt'] is None for p in queue['promotions']) or now < latest + RELEASE_INTERVAL:
         return False
     draft = due[0]
     recheck_generated_guide(root, draft, now, source_fetcher)
@@ -251,7 +276,8 @@ def manifest(root, output, now):
     for entry in queue['promotions']:
         if entry['receipt'] is not None:
             continue
-        path = output / 'portugal' / entry['slug'] / 'index.html'
+        article = next(a for a in articles if a['slug'] == entry['slug'])
+        path = output / article_path(article).strip('/') / 'index.html'
         require(path.is_file() and not path.is_symlink(), 'Page promue absente du build.')
         entries.append({'id': entry['id'], 'articleSha256': entry['articleSha256'],
                         'htmlSha256': hashlib.sha256(path.read_bytes()).hexdigest()})
@@ -292,11 +318,11 @@ def fetch_public(url):
 def confirm(root, expected, now=None, fetcher=fetch_public):
     fixed_clock = now is not None
     now = now or dt.datetime.now(UTC)
-    _, queue = check_manifest(root, expected, now, 0)
+    articles, queue = check_manifest(root, expected, now, 0)
     by_id = {p['id']: p for p in queue['promotions']}
     for item in expected['entries']:
         entry = by_id[item['id']]
-        url = ORIGIN + '/portugal/' + entry['slug'] + '/'
+        url = ORIGIN + article_path(next(a for a in articles if a['slug'] == entry['slug']))
         require(hashlib.sha256(fetcher(url)).hexdigest() == item['htmlSha256'], 'HTML public différent du build : aucune confirmation.')
         checked = now if fixed_clock else dt.datetime.now(UTC)
         require(checked < instant(entry['validUntil']), 'Contrôle expiré avant preuve publique.')
