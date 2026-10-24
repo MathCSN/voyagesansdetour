@@ -138,3 +138,39 @@ html,body{overflow-x:hidden}
 .credit-grid{grid-template-columns:1fr}
 .article-title h1{font-size:2.3rem;overflow-wrap:anywhere}
 }
+
+/* Blog monde 2026-10 : menu par continent, pages pays et continents, rubriques. */
+.header{height:auto;min-height:116px}
+.nav{flex-wrap:wrap;justify-content:flex-end;gap:10px 26px}
+.footer-links{flex-wrap:wrap;justify-content:flex-end}
+.breadcrumb+.country-hero{margin-top:0}
+.country-hero.no-photo{background:linear-gradient(135deg,var(--blue) 0%,#0d182b 100%)}
+.country-hero.no-photo:after{display:none}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border:1px solid #c3cad5;border-radius:25px;font-size:14px;background:white}
+.chip small{color:var(--muted);font-size:12px}
+.chip:hover{border-color:var(--blue)}
+.continents{margin-top:44px;border-top:1px solid var(--line)}
+.continent-row{display:grid;grid-template-columns:240px 1fr;gap:20px;align-items:center;padding:18px 0;border-bottom:1px solid var(--line)}
+.continent-name{font-family:var(--serif);font-size:26px;letter-spacing:-.03em}
+.continent-name span{font-family:var(--sans);font-size:15px;color:var(--blue)}
+.continent-block{border-top:1px solid var(--line);padding:40px 0}
+.continent-block h2 a:hover{color:var(--blue)}
+.destination p{font-size:15px;color:var(--muted);margin:6px 0 0;line-height:1.5}
+.destinations-compact{grid-template-columns:repeat(4,minmax(0,1fr))}
+.destinations-compact .destination strong{font-size:24px}
+@media(max-width:1000px){.destinations-compact{grid-template-columns:repeat(3,minmax(0,1fr))}.continent-row{grid-template-columns:180px 1fr}}
+@media(max-width:700px){.header{min-height:0}
+.nav{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;width:100%;padding-bottom:6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.nav::-webkit-scrollbar{display:none}
+.nav a{white-space:nowrap;flex:none}
+.hero-full .hero-photo{object-position:center}
+.footer-links{justify-content:flex-start}
+.continent-row{grid-template-columns:1fr;gap:10px}
+.continent-name{font-size:22px}
+.chip{font-size:13px;padding:8px 13px}
+.destinations-compact{grid-template-columns:repeat(2,minmax(0,1fr))}
+.destinations-compact .destination strong{font-size:20px}
+.destination p{font-size:14px}
+}
+@media(max-width:1000px){#destinations .destinations .destination:nth-child(n+9){display:none}}

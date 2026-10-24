@@ -188,7 +188,7 @@ class PublicBuildTest(unittest.TestCase):
         types={item.get('@type') for item in schemas}
         self.assertTrue({'Article','BreadcrumbList','FAQPage'}<=types)
         crumbs=next(item for item in schemas if item.get('@type')=='BreadcrumbList')['itemListElement']
-        self.assertEqual(crumbs[1]['item'],ORIGIN+'/italie/')
+        self.assertEqual([c['item'] for c in crumbs[:3]],[ORIGIN+'/',ORIGIN+'/europe/',ORIGIN+'/italie/'])
         for hub in ('/portugal/','/espagne/','/italie/'):
             self.assertIn('class="grid" id="guide-grid"',read(self.out,hub))
         self.assertIn('class="key-facts"',page)
@@ -201,6 +201,58 @@ class PublicBuildTest(unittest.TestCase):
             self.assertIn('<strong>'+name+'</strong>',home)
         self.assertIn('class="facts"',home)
         self.assertNotIn('Le Portugal, à votre rythme',home)
+
+    def test_home_and_menu_speak_to_a_world_travel_blog(self):
+        home=read(self.out,'/')
+        nav=re.search(r'<nav class="nav".*?</nav>',home).group(0)
+        self.assertIn('<a href="/europe/">Europe</a>',nav)
+        self.assertIn('<a href="/destinations/">Destinations</a>',nav)
+        self.assertNotIn('/portugal/',nav)
+        for retired in ('Prenez le train','Zéro volant','0 VOITURE','EN TRAIN, EN FERRY'):
+            self.assertNotIn(retired,home)
+        self.assertIn('Destinations à la une.',home)
+        self.assertIn('id="rubriques"',home)
+        self.assertIn('href="/guides/itineraires/"',home)
+        self.assertIn('class="chip" href="/portugal/"',home)
+        about=read(self.out,'/a-propos/')
+        self.assertIn('partout dans le monde',about)
+        self.assertNotIn('Nos dossiers couvrent le Portugal',about)
+        self.assertNotIn('sans voiture',(self.out/'feed.xml').read_text().split('<item>',1)[0])
+
+    def test_hubs_exist_for_countries_continents_rubriques_and_all_guides(self):
+        catalogue=json.loads((ROOT/'articles.json').read_text())
+        for route in ('/destinations/','/guides/','/europe/','/guides/itineraires/','/guides/ou-dormir/'):
+            with self.subTest(route=route):
+                self.assertIn('<nav class="breadcrumb"',read(self.out,route))
+        self.assertEqual(read(self.out,'/guides/').count('<a class="card"'),len(catalogue))
+        europe=read(self.out,'/europe/')
+        for country in ('/portugal/','/espagne/','/italie/'):
+            self.assertIn(f'class="destination" href="{country}"',europe)
+        portugal=read(self.out,'/portugal/')
+        self.assertIn('<h1>Voyager au Portugal.</h1>',portugal)
+        self.assertIn('<a href="/europe/">Europe</a> / Portugal</nav>',portugal)
+        locations=set(re.findall(r'<loc>([^<]+)</loc>',(self.out/'sitemap.xml').read_text()))
+        for route in ('/destinations/','/guides/','/europe/','/guides/itineraires/'):
+            self.assertIn(ORIGIN+route,locations)
+
+    def test_no_ai_generated_image_is_published(self):
+        # Règle de Mathis : uniquement de vraies photos (catalogue sous licence libre) et le logo.
+        self.assertFalse((self.out/'assets'/'alma.jpg').exists())
+        allowed={'/assets/'+p['file'] for p in json.loads((ROOT/'image-sources.json').read_text())['photos'] if 'file' in p}
+        allowed|={'/assets/'+p['file'].replace('.jpg','-800.jpg') for p in json.loads((ROOT/'image-sources.json').read_text())['photos'] if 'file' in p}
+        allowed|={'/assets/lisbonne.jpg','/assets/porto.jpg','/assets/sintra.jpg','/assets/brand-voyagesansdetour.png'}
+        for page in self.out.rglob('*.html'):
+            body=page.read_text()
+            self.assertNotIn('image_gen',body)
+            self.assertNotIn('Alma',body)
+            for src in re.findall(r'<img [^>]*src="(/assets/[^"]+)"',body):
+                self.assertIn(src,allowed,f'{page.relative_to(self.out)} : {src}')
+
+    def test_existing_guide_urls_are_unchanged(self):
+        for item in json.loads((ROOT/'articles.json').read_text()):
+            route='/'+item.get('country','portugal')+'/'+item['slug']+'/'
+            with self.subTest(route=route):
+                self.assertTrue((self.out/route.strip('/')/'index.html').is_file())
 
     def test_every_internal_link_resolves(self):
         broken=set()
@@ -248,35 +300,40 @@ class PublicBuildTest(unittest.TestCase):
         self.assertIn('hébergé par GitHub, Inc.',page)
         self.assertIn('mailto:contact@voyagesansdetour.fr',page)
 
+def synthetic_guide(slug,destination,**fields):
+    return dict({'slug':slug,'title':'Guide de '+destination,'shortTitle':destination,
+                 'destination':destination,'category':'Test','description':'Vérification de la couverture.',
+                 'readMinutes':1,'summary':'Article temporaire de contrôle.',
+                 'sections':[{'id':'controle','title':'Contrôle','paragraphs':['Texte de test.']}],
+                 'faq':[],'sources':[{'label':'Source de contrôle','url':'https://www.visitportugal.com/'}],
+                 'related':['lisbonne-3-jours-sans-voiture']},**fields)
+
+def source_copy(workdir,extra_articles):
+    # Only disposable copies receive synthetic articles; the live catalogue and
+    # its reviewed release queue are never edited by these regression tests.
+    source=workdir/'source'
+    source.mkdir()
+    for name in ('generate.py','public_media.py','public-media.json','editorial_queue.py','destinations.py','destinations.json','articles.json','image-sources.json',
+                 'stay22.py','stay22.json','pinterest-rss.json','analytics.json'):
+        shutil.copyfile(ROOT/name,source/name)
+    shutil.copytree(ROOT/'dist',source/'dist')
+    shutil.copytree(ROOT/'social-media',source/'social-media')
+    (source/'editorial-queue.json').write_text(json.dumps({'schemaVersion':1,'drafts':[],'promotions':[]}))
+    articles=json.loads((source/'articles.json').read_text())+extra_articles
+    (source/'articles.json').write_text(json.dumps(articles,ensure_ascii=False))
+    return source
+
 class DestinationImageBuildTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.workdir=pathlib.Path(tempfile.mkdtemp(prefix='vsd-destination-images-'))
         cls.addClassCleanup(shutil.rmtree,cls.workdir,True)
-        source=cls.workdir/'source'
-        source.mkdir()
-        for name in ('generate.py','public_media.py','public-media.json','editorial_queue.py','articles.json','image-sources.json',
-                     'stay22.py','stay22.json','pinterest-rss.json','analytics.json'):
-            shutil.copyfile(ROOT/name,source/name)
-        # Only disposable copies receive synthetic articles; the live catalogue and
-        # its reviewed release queue are never edited by these regression tests.
-        shutil.copytree(ROOT/'dist',source/'dist')
-        shutil.copytree(ROOT/'social-media',source/'social-media')
-        (source/'editorial-queue.json').write_text(json.dumps({'schemaVersion':1,'drafts':[],'promotions':[]}))
-        articles=json.loads((source/'articles.json').read_text())
+        articles=[]
         cls.destinations={'lisbonne':'Lisbonne','porto':'Porto','sintra':'Sintra',
                           'guimaraes':'Guimarães','inconnue':'Destination inconnue'}
         for key,destination in cls.destinations.items():
-            articles.append({
-                'slug':'test-image-'+key,'title':'Guide de '+destination,'shortTitle':destination,
-                'destination':destination,'category':'Test','description':'Vérification de la couverture.',
-                'readMinutes':1,'summary':'Article temporaire de contrôle.',
-                'sections':[{'id':'controle','title':'Contrôle','paragraphs':['Texte de test.']}],
-                'faq':[],'sources':[{'label':'Source de contrôle','url':'https://www.visitportugal.com/'}],
-                'related':['lisbonne-3-jours-sans-voiture'],
-            })
-        (source/'articles.json').write_text(json.dumps(articles,ensure_ascii=False))
-        result,cls.out=build(cls.workdir,True,MENTIONS,source_root=source)
+            articles.append(synthetic_guide('test-image-'+key,destination))
+        result,cls.out=build(cls.workdir,True,MENTIONS,source_root=source_copy(cls.workdir,articles))
         if result.returncode!=0:raise AssertionError(result.stderr)
 
     def article_parts(self,key):
@@ -362,6 +419,110 @@ class DestinationImageBuildTest(unittest.TestCase):
                     self.assertNotIn('Wikimedia',section)
                 # A separately labelled related Lisbon guide may retain its photo.
                 self.assertIn('src="/assets/lisbonne.jpg"',page.split('Pour la suite du voyage.',1)[1])
+
+class DestinationCatalogueTest(unittest.TestCase):
+    def test_catalogue_covers_the_most_visited_countries_with_prepositions_and_flags(self):
+        import destinations
+        catalogue=destinations.load()
+        countries=catalogue['countries']
+        self.assertGreaterEqual(len(countries),80)
+        for slug in ('france','portugal','espagne','italie','japon','etats-unis','thailande','maroc','grece'):
+            self.assertIn(slug,countries)
+        self.assertEqual(countries['japon']['preposition'],'au Japon')
+        self.assertEqual(countries['etats-unis']['preposition'],'aux États-Unis')
+        self.assertEqual(countries['italie']['preposition'],'en Italie')
+        self.assertEqual(countries['japon']['flag'],'🇯🇵')
+        self.assertTrue(set(countries).isdisjoint(destinations.reserved(catalogue)))
+
+    def test_unknown_country_gets_a_readable_fallback_and_reserved_paths_are_refused(self):
+        import destinations
+        catalogue=destinations.load()
+        info=destinations.country_info('sri-lanka-du-sud',catalogue,'asie')
+        self.assertEqual((info['name'],info['preposition'],info['continent'],info['known']),('Sri Lanka du Sud','en Sri Lanka du Sud','asie',False))
+        self.assertIsNone(destinations.country_info('atlantide',catalogue,'continent-perdu')['continent'])
+        # The catalogue's continent wins over a guide's own value.
+        self.assertEqual(destinations.country_info('japon',catalogue,'europe')['continent'],'asie')
+        for value in ('guides','europe','Japon','',None,'../x'):
+            self.assertFalse(destinations.valid_country(value,catalogue),value)
+
+class WorldBuildTest(unittest.TestCase):
+    """A fake, unpublished Japan guide and countries absent from the catalogue get their pages."""
+    @classmethod
+    def setUpClass(cls):
+        cls.workdir=pathlib.Path(tempfile.mkdtemp(prefix='vsd-world-'))
+        cls.addClassCleanup(shutil.rmtree,cls.workdir,True)
+        guides=[synthetic_guide('test-kyoto-automne','Kyoto',country='japon',category='Quand partir',publishedOn='2026-10-25',updatedOn='2026-10-26',
+                                keyFacts=[{'value':'15 nov.','label':'pic des érables à Kyoto'}]),
+                synthetic_guide('test-atlantide','Atlantide',country='atlantide',category='Budget'),
+                synthetic_guide('test-zanzibar','Stone Town',country='zanzibar',continent='afrique')]
+        result,cls.out=build(cls.workdir,True,MENTIONS,source_root=source_copy(cls.workdir,guides))
+        if result.returncode!=0:raise AssertionError(result.stderr)
+
+    def test_new_country_gets_country_and_continent_pages_and_menu_entry(self):
+        japan=read(self.out,'/japon/')
+        self.assertIn('<h1>Voyager au Japon.</h1>',japan)
+        self.assertIn('<a href="/">Accueil</a> / <a href="/asie/">Asie</a> / Japon</nav>',japan)
+        self.assertIn('href="/japon/test-kyoto-automne/"',japan)
+        asia=read(self.out,'/asie/')
+        self.assertIn('<h1>Voyager en Asie.</h1>',asia)
+        self.assertIn('class="destination" href="/japon/"',asia)
+        home=read(self.out,'/')
+        self.assertIn('<a href="/asie/">Asie</a>',re.search(r'<nav class="nav".*?</nav>',home).group(0))
+        self.assertIn('class="chip" href="/japon/"',home)
+        self.assertIn('href="/guides/quand-partir/"',home)
+        self.assertIn('href="/japon/test-kyoto-automne/"',read(self.out,'/guides/quand-partir/'))
+
+    def test_new_guide_breadcrumb_schema_sitemap_and_feed(self):
+        page=read(self.out,'/japon/test-kyoto-automne/')
+        self.assertIn('<a href="/asie/">Asie</a> / <a href="/japon/">Japon</a> / Kyoto</nav>',page)
+        schemas=json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>',page).group(1))
+        crumbs=next(item for item in schemas if item.get('@type')=='BreadcrumbList')['itemListElement']
+        self.assertEqual([c['name'] for c in crumbs],['Accueil','Asie','Japon','Kyoto'])
+        article=next(item for item in schemas if item.get('@type')=='Article')
+        self.assertEqual(article['contentLocation']['containedInPlace']['name'],'Japon')
+        ns={'s':'http://www.sitemaps.org/schemas/sitemap/0.9'}
+        dates={n.findtext('s:loc',namespaces=ns):n.findtext('s:lastmod',namespaces=ns) for n in ET.parse(self.out/'sitemap.xml').findall('s:url',ns)}
+        for route in ('/japon/test-kyoto-automne/','/japon/','/asie/','/guides/quand-partir/'):
+            self.assertEqual(dates[ORIGIN+route],'2026-10-26',route)
+        self.assertIn(ORIGIN+'/japon/test-kyoto-automne/',[n.findtext('link') for n in ET.parse(self.out/'feed.xml').findall('channel/item')])
+
+    def test_country_missing_from_the_catalogue_never_breaks_the_build(self):
+        page=read(self.out,'/atlantide/test-atlantide/')
+        self.assertIn('<a href="/">Accueil</a> / <a href="/atlantide/">Atlantide</a> / Atlantide</nav>',page)
+        hub=read(self.out,'/atlantide/')
+        self.assertIn('<h1>Voyager en Atlantide.</h1>',hub)
+        self.assertIn('country-hero no-photo',hub)
+        destinations=read(self.out,'/destinations/')
+        self.assertIn('Autres destinations',destinations)
+        self.assertIn('class="destination" href="/atlantide/"',destinations)
+        # A guide's own continent places a country the catalogue does not know yet.
+        self.assertIn('class="destination" href="/zanzibar/"',read(self.out,'/afrique/'))
+        self.assertIn('<a href="/afrique/">Afrique</a> / Zanzibar</nav>',read(self.out,'/zanzibar/'))
+
+    def test_every_internal_link_resolves_with_new_countries(self):
+        broken=set()
+        for page in self.out.rglob('*.html'):
+            for url in LINK.findall(page.read_text()):
+                target=self.out/url.lstrip('/')
+                if url.endswith('/'):target=target/'index.html'
+                if not url.startswith('//') and not target.is_file():broken.add(f'{page.relative_to(self.out)} -> {url}')
+        self.assertEqual(sorted(broken),[])
+
+class ReservedCountryTest(TempDirTest):
+    def test_a_country_cannot_take_a_fixed_page_or_continent_path(self):
+        for slug in ('guides','asie'):
+            with self.subTest(country=slug):
+                workdir=self.workdir/slug
+                workdir.mkdir()
+                result,_=build(workdir,True,MENTIONS,source_root=source_copy(workdir,[synthetic_guide('test-collision','Collision',country=slug)]))
+                self.assertNotEqual(result.returncode,0)
+                self.assertIn('réservé',result.stderr)
+
+    def test_generator_no_longer_hardcodes_the_former_three_countries(self):
+        source=(ROOT/'generate.py').read_text()
+        self.assertNotRegex(source,r"['\"](espagne|italie)['\"]")
+        self.assertNotIn('COUNTRY_PAGES',source)
+        self.assertNotIn('DESTINATION_IMAGES',source)
 
 class PreviewBuildTest(TempDirTest):
     def test_preview_is_not_indexable_and_keeps_demo_page(self):
