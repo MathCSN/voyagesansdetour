@@ -40,6 +40,10 @@ Les reels et carrousels publiés jusqu'ici sont vides :
 
 1. **De vraies images du lieu** à chaque scène : photos libres (Wikimedia Commons, Unsplash,
    Pexels, avec licence vérifiée) ou photos de Mathis. Pas d'aplat sans image.
+   **Jamais d'image générée par IA** (règle de Mathis) : uniquement de vraies photos prises par
+   un photographe. Exclure tout fichier rangé dans une catégorie Commons « AI-generated » ou
+   portant un modèle ou une mention IA (Midjourney, DALL·E, Stable Diffusion…), et refuser une
+   photo dont l'origine n'est pas clairement photographique.
 2. **Une accroche** dans la première scène, qui promet quelque chose de précis
    (« Lisbonne sans voiture : 5 erreurs qui coûtent 40 € »).
 3. **Du concret dense** : prix et durées réels avec la date de vérification
