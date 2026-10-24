@@ -12,12 +12,29 @@ Depuis le 24/10/2026, le moteur ne produit plus qu’un seul format, celui de la
 
 Le moteur refuse l’ancien format (aplats, schéma « 1-2-3 », voix de synthèse), une photo ou un titre répété dans un même post, une scène sans fait sourcé, un extrait absent de son instantané, une licence non libre et les formules creuses de l’ancienne ligne (« sans récit vécu », « si possible »…).
 
+## Posts automatiques (depuis le 24/10/2026)
+
+Chaque guide publié, de n'importe quel pays, produit seul ses posts. Chaque jour, `vsd-render-content.yml` lance `auto_social.py`, qui garde **au moins trois semaines de posts en file** sur chaque réseau :
+
+- **Créneaux** : Instagram le mercredi à 17 h UTC, un reel par semaine ; Facebook le jeudi et le dimanche, à 3 jours d'écart au moins. Un créneau se place après le dernier post en file (scénarios et lots relus) et au plus 29 jours après la date du jour, car un relevé de source vaut 30 jours.
+- **Choix du guide** : d'abord les guides jamais publiés sur aucun réseau (le plus récent d'abord), puis ceux jamais publiés sur ce réseau, puis la reprise d'un guide au bout de 6 semaines, avec d'autres chiffres en tête. Un guide dont les sources ont plus de 45 jours attend sa mise à jour.
+- **Faits** : la page publiée du guide est relevée (`auto/<id>/guide.txt`, première ligne = URL). Chaque scène montre un chiffre du bloc « L'essentiel en chiffres », cité mot pour mot avec son libellé ; l'accroche cite la première phrase de « La réponse en bref ». Un chiffre absent de la page en ligne n'est jamais utilisé.
+- **Photos** : celles du guide (`site-src/image-sources.json`, auteur relu du site), puis les autres photos du site pour le même lieu, puis au besoin des « Featured pictures » de Wikimedia Commons dont le titre nomme le lieu. Licences libres seulement, **jamais d'image générée par IA** (catégorie, modèle ou mention refusés), crédit court sans adresse e-mail. Les fichiers vont dans `assets/photos/auto/`, les fiches dans `auto/<id>/photos.json`.
+- **Texte** : accroche = titre du guide ; une info par scène, jamais deux fois la même photo ni le même titre ; 3 à 5 lignes de légende ; 5 hashtags au plus, choisis par lieu, pays et type de guide (`destinations.py`, qui lit `site-src/destinations.json` avec un repli) ; une seule ligne de crédits.
+- **Garde-fous** : le scénario est figé avec ses propres entrées (`auto/<id>/`), puis passé aux contrôles de `production.py` (sources, licences, empreintes, mise en page) **avant** d'entrer au catalogue. Un refus est noté dans le résumé du workflow, le guide suivant est essayé. Rien d'existant n'est réécrit : un fichier déjà présent bloque l'écriture.
+
+Le même workflow rend ensuite jusqu'à six posts, les met en file (`social_stock.py`) et relance le site. Il signale par un avertissement une file de moins de trois semaines.
+
+Pinterest suit le même principe : `pin_intake.py` dessine l'épingle de chaque nouveau guide, `pin_promotion.py` l'ajoute au flux de son tableau, une par semaine et par tableau. Les tableaux sont déclarés dans `site-src/pinterest-additions.json` (`countries`) ; un pays sans tableau part dans `inspirations-voyage.xml`.
+
 ## Fichiers
 
 | Fichier | Rôle |
 |---|---|
 | `production.py` | Valide un scénario (schéma 2), rend le reel ou le carrousel, écrit le reçu. Au plus un rendu par exécution. |
 | `social_render.py` | Dessin : photo plein cadre avec lent mouvement de caméra, dégradé, texte, fondus. |
+| `auto_social.py` | Fabrique les scénarios des prochains créneaux libres à partir des guides publiés, les fige et les valide avant de les mettre au catalogue. |
+| `destinations.py` | Noms, prépositions et hashtags des pays, lus dans `site-src/destinations.json` avec un repli. |
 | `photo_intake.py` | Ajoute une photo Wikimedia Commons au catalogue `assets/photos/catalogue.json` (licence vérifiée, auteur, empreinte). |
 | `seal_scenarios.py` | Remplit les empreintes d’un scénario et reconstruit `catalogue.json`. |
 | `social_stock.py` | Publie les fichiers rendus dans `site-src/social-media/production/`, les déclare dans `site-src/public-media.json`, écrit le lot relu et son entrée d’index. `--verify-public` contrôle les octets en ligne après déploiement. |

@@ -9,22 +9,38 @@ import urllib.request
 from PIL import Image
 from pin_intake import STOP,digest,renderer_sha256
 from pin_draft import FREE_LICENSES,HERE,ORIGIN,article_path
+import destinations
 
 FILES=('pin.jpg','credits.txt','dmsans-OFL.txt','playfairdisplay-OFL.txt')
-# Each country with a Pinterest board fed by RSS; a country without a board waits for one.
-COUNTRY_FEEDS={'portugal':'preparer-portugal.xml','espagne':'preparer-espagne.xml','italie':'preparer-italie.xml'}
-COUNTRY_NAMES={'portugal':'au Portugal','espagne':'en Espagne','italie':'en Italie'}
+# Boards are declared in site-src/pinterest-additions.json: each feed lists its "countries";
+# a feed listing "*" takes every country without a board of its own (inspirations-voyage.xml).
+# A feed without the field serves the country in its name (preparer-<country>.xml).
+COMMON='*'
+DEFAULT_FEEDS=({'file':'preparer-portugal.xml'},{'file':'preparer-espagne.xml'},{'file':'preparer-italie.xml'},
+               {'file':'inspirations-voyage.xml','countries':[COMMON]})
 CADENCE=dt.timedelta(days=7)
 
 def require(value,code):
     if not value:raise ValueError(code)
 
-def on_hold(last,country,now):
+def feed_countries(feed):
+    countries=feed.get('countries')
+    if countries is None:countries=[feed['file'].removeprefix('preparer-').removesuffix('.xml')]
+    return countries
+
+def feed_for(country,feeds):
+    """The board's RSS file for a country: its own, else the common one, else None (the Pin waits)."""
+    own=[f['file'] for f in feeds if country in feed_countries(f)]
+    if own:return own[0]
+    common=[f['file'] for f in feeds if COMMON in feed_countries(f)]
+    return common[0] if common else None
+
+def on_hold(last,board,now):
     # One Pin per board per week; a single date (older callers) applies to every board.
-    previous=last.get(country) if isinstance(last,dict) else last
+    previous=last.get(board) if isinstance(last,dict) else last
     return bool(previous) and now<previous+CADENCE
 
-def select(articles,drafts,known,last,now,skip=frozenset()):
+def select(articles,drafts,known,last,now,skip=frozenset(),feeds=DEFAULT_FEEDS):
     require(now.tzinfo is not None,'timezone_required')
     if now>=STOP:return None,'period_ended'
     by_slug={a['slug']:a for a in articles}
@@ -36,8 +52,9 @@ def select(articles,drafts,known,last,now,skip=frozenset()):
         item=json.loads((folder/'draft.json').read_text());identity=item['id']
         if identity in known or identity in skip:continue
         slug=identity.removeprefix('pin-');article=by_slug.get(slug)
-        if not article or article.get('country','portugal') not in COUNTRY_FEEDS:continue
-        if on_hold(last,article.get('country','portugal'),now):waiting=True;continue
+        board=feed_for(article.get('country','portugal'),feeds) if article else None
+        if not board:continue
+        if on_hold(last,board,now):waiting=True;continue
         require(folder.name==identity and identity=='pin-'+article['slug'],'draft_identity')
         # A guide refreshed or a template changed after the draft is redrawn by pin_intake; never promote the old one.
         if item['articleSha256']!=digest(article) or item.get('rendererSha256')!=renderer_sha256() or item['targetUrl']!=ORIGIN+article_path(article):continue
@@ -72,19 +89,19 @@ def run(root=HERE.parents[1],now=None,fetcher=verify_target):
     known={i['id'] for f in config['feeds'] for i in f['items']}
     known.update(i['id'] for i in json.loads((site/'pinterest-rss.json').read_text())['items'])
     articles=json.loads((site/'articles.json').read_text());held=[]
-    country_of={'pin-'+a['slug']:a.get('country','portugal') for a in articles};last={}
+    feeds=config['feeds'];country_of={'pin-'+a['slug']:a.get('country','portugal') for a in articles};last={}
     for entry in ledger['items']:
-        country=country_of.get(entry['id'],'portugal');admitted=dt.datetime.fromisoformat(entry['admittedAt'].replace('Z','+00:00'))
-        if country not in last or admitted>last[country]:last[country]=admitted
+        board=feed_for(country_of.get(entry['id'],'portugal'),feeds);admitted=dt.datetime.fromisoformat(entry['admittedAt'].replace('Z','+00:00'))
+        if board and (board not in last or admitted>last[board]):last[board]=admitted
     while True:
-        selected,status=select(articles,production/'pin-drafts',known,last,now,frozenset(h['id'] for h in held))
+        selected,status=select(articles,production/'pin-drafts',known,last,now,frozenset(h['id'] for h in held),feeds)
         if not selected:return {'status':status,'changed':False,'publicationConfirmed':False,'held':held}
         folder,item,article=selected;identity=item['id']
         # An unreachable guide page holds this Pin only; the next draft can still go out.
         try:public_hash=fetcher(item['targetUrl'],item['title']);break
         except (OSError,ValueError):held.append({'id':identity,'reason':'public_target_unavailable'})
     require(not any(x['contentId']==identity for x in media['items']),'media_already_exists')
-    feed=[f for f in config['feeds'] if f['file']==COUNTRY_FEEDS[article.get('country','portugal')]];require(len(feed)==1,'connected_feed_missing')
+    feed=[f for f in feeds if f['file']==feed_for(article.get('country','portugal'),feeds)];require(len(feed)==1,'connected_feed_missing')
     route=article_path(article)
     require(not any(p['linkPath']==route for f in config['feeds'] for p in f['items']),'route_already_admitted')
     require(not any(p['link_path']==route for p in json.loads((site/'pinterest-rss.json').read_text())['items']),'route_already_in_legacy_feed')
@@ -92,7 +109,8 @@ def run(root=HERE.parents[1],now=None,fetcher=verify_target):
     files=[{'name':name,'bytes':(folder/name).stat().st_size,'sha256':hashlib.sha256((folder/name).read_bytes()).hexdigest()} for name in FILES]
     photo=item.get('photo') if item.get('externalPhotographs') else None
     origin_note='Photo : '+photo['author']+' — '+photo['license']+'.' if photo else 'Composition typographique originale Voyage Sans Détour, assistée par IA.'
-    description='📌 Retrouvez le guide et ses sources pour préparer votre voyage '+COUNTRY_NAMES[article.get('country','portugal')]+'. '+origin_note+' Crédits : '+ORIGIN+'/social-media/production/'+identity+'/credits.txt'
+    trip=destinations.preposition(destinations.country_slug(article),destinations.load(site))
+    description='📌 Retrouvez le guide et ses sources pour préparer votre voyage '+trip+'. '+origin_note+' Crédits : '+ORIGIN+'/social-media/production/'+identity+'/credits.txt'
     require(len(description)<=500,'caption_too_long')
     feed[0]['items'].append({'id':identity,'title':item['title'],'description':description,'linkPath':route,'mediaId':identity,'width':1000,'height':1500})
     media['items'].append({'contentId':identity,'kind':'pin','approved':True,'files':files})

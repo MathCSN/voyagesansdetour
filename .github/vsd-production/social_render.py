@@ -10,6 +10,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from functools import lru_cache
 import math
+import re
 
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
@@ -73,7 +74,8 @@ def text_width(draw: ImageDraw.ImageDraw, line: str, face: ImageFont.FreeTypeFon
 
 
 def wrap(draw: ImageDraw.ImageDraw, text: str, face: ImageFont.FreeTypeFont, width: int) -> list[str]:
-    words, lines, current = text.split(), [], ""
+    # Ordinary spaces only: a non-breaking space keeps "1 h 37" or "9 €" on one line.
+    words, lines, current = [w for w in re.split(r"[ \t\n]+", text) if w], [], ""
     for word in words:
         candidate = (current + " " + word).strip()
         if current and text_width(draw, candidate, face) > width:

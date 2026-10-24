@@ -5,6 +5,8 @@ import json
 from pathlib import Path
 import re
 from PIL import Image,ImageDraw,ImageFont
+import destinations
+from photo_intake import ai_record
 
 HERE=Path(__file__).resolve().parent
 ORIGIN='https://voyagesansdetour.fr'
@@ -28,7 +30,6 @@ def wrap(draw,text,font,width):
 
 SITE=HERE.parents[1]/'site-src'
 FREE_LICENSES=('CC BY 2.0','CC BY 3.0','CC BY 4.0','CC BY-SA 2.0','CC BY-SA 3.0','CC BY-SA 4.0','CC0','CC0 1.0','Public domain')
-COUNTRY_LABELS={'portugal':'PORTUGAL','espagne':'ESPAGNE','italie':'ITALIE'}
 
 def font(name,size):return ImageFont.truetype(str(HERE/'assets'/name),size)
 
@@ -40,6 +41,8 @@ def cover_photo(article,site):
     if len(entries)!=1:raise ValueError('photo_missing_from_catalogue')
     photo=entries[0]
     if photo.get('license') not in FREE_LICENSES or not photo.get('author') or not photo.get('source_page'):raise ValueError('photo_license')
+    # Real photographs only (CLAUDE.md): never a cover whose record names an AI generator or category.
+    if ai_record(photo):raise ValueError('photo_ai_generated')
     path=Path(site)/'dist/assets'/photo['file']
     if not path.is_file():raise ValueError('photo_file_missing')
     return photo,path
@@ -54,7 +57,14 @@ def fit(draw,text,sizes,width,height,gap):
         if len(lines)*(size+gap)<=height:return heading,size,lines
     raise ValueError('title_overflow')
 
-def draw_photo_pin(article,photo,path):
+def place_label(article,site=SITE):
+    # 'ITALIE · CINQUE TERRE': the country from destinations.json, then the destination when it differs.
+    country=destinations.name(destinations.country_slug(article),destinations.load(site))
+    place=(article.get('destination') or '').strip()
+    label=country if not place or place.lower()==country.lower() else country+' · '+place
+    return label.upper() if len(label)<=34 else country.upper()
+
+def draw_photo_pin(article,photo,path,site=SITE):
     with Image.open(path) as source:
         source=source.convert('RGB');scale=max(1000/source.width,1500/source.height)
         resized=source.resize((round(source.width*scale),round(source.height*scale)),Image.LANCZOS)
@@ -65,7 +75,7 @@ def draw_photo_pin(article,photo,path):
     for y in range(1500):shade.putpixel((0,y),0 if y<450 else min(235,int((y-450)/1050*300)))
     image=Image.composite(Image.new('RGB',(1000,1500),'#0E1B2B'),image,shade.resize((1000,1500)))
     draw=ImageDraw.Draw(image);small=font('dmsans-bold.ttf',26)
-    label=COUNTRY_LABELS.get(article.get('country','portugal'),'VOYAGE')+' · SANS VOITURE'
+    label=place_label(article,site)
     draw.rounded_rectangle((70,70,110+draw.textbbox((0,0),label,font=small)[2],126),radius=28,fill='#F5D547')
     draw.text((90,82),label,font=small,fill='#142A43')
     heading,size,lines=fit(draw,article.get('shortTitle') or article['title'],(96,88,80,72,64),860,420,16)
@@ -116,7 +126,7 @@ def render(article,output,site=SITE):
     target=Path(output)/('pin-'+slug)
     if target.exists():raise ValueError('existing_draft_preserved')
     found=cover_photo(article,site);photo=found[0] if found else None
-    image=draw_photo_pin(article,*found) if found else draw_typographic_pin(article)
+    image=draw_photo_pin(article,*found,site=site) if found else draw_typographic_pin(article)
     target.mkdir(parents=True)
     image.save(target/'pin.jpg',quality=92)
     raw=json.dumps(article,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()

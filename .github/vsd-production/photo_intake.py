@@ -45,14 +45,56 @@ LICENCES = {
 }
 
 
+# Never an AI-generated image (Mathis's rule, CLAUDE.md): a category, template or mention is enough to refuse.
+AI_MARKERS = re.compile(r"ai[- ]generated|generated (?:by|with) (?:an )?(?:ai|artificial intelligence)|artificial intelligence|"
+                        r"midjourney|dall[·.\- ]?e|stable diffusion|text-to-image|image generator|adobe firefly|"
+                        r"\bai[- ]art\b|\bgenai\b|neural network generated", re.IGNORECASE)
+
+
 class Refused(ValueError):
     pass
+
+
+def ai_generated(title: str, meta: dict) -> bool:
+    fields = [title] + [plain_text(meta.get(key, {}).get("value", "")) for key in
+                        ("Categories", "ImageDescription", "Credit", "Artist", "Attribution", "ObjectName")]
+    return any(AI_MARKERS.search(field or "") for field in fields)
+
+
+# Every text field a photo record may carry, in the social catalogue or the site's image-sources.json.
+RECORD_FIELDS = ("commonsTitle", "sourcePage", "source_page", "author", "commonsCredit", "categories", "description",
+                 "alt", "alt_fr", "credit_fr", "file", "id")
+
+
+def ai_record(record: dict) -> bool:
+    """A catalogued photo whose record names an AI generator or an AI-generated category."""
+    return any(isinstance(record.get(key), str) and AI_MARKERS.search(record[key].replace("_", " ")) for key in RECORD_FIELDS)
 
 
 def plain_text(value: str) -> str:
     """Commons returns HTML for authors; keep only readable text."""
     text = html.unescape(re.sub(r"<[^>]+>", " ", value or ""))
     return " ".join(text.split())
+
+
+def credited_author(meta: dict, uploader: str | None = None) -> str:
+    """A short public credit: never an e-mail address or a paragraph of usage requests."""
+    for key in ("Attribution", "Artist"):
+        raw = plain_text(meta.get(key, {}).get("value", ""))
+        # "This Photo was taken by Jane Doe . Feel free to use…": keep the name only.
+        word = r"(?:[A-ZÀ-Ý]\.|[A-ZÀ-Ý][\w’'-]+)"  # an initial keeps its period, a full word does not
+        named = re.search(r"\b(?i:taken|photographed|shot|made|created)\s+(?i:by)\s+(" + word + r"(?:\s" + word + r"){0,5})", raw)
+        value = named.group(1) if named else raw
+        value = re.sub(r"\S+@\S+|https?://\S+", "", value)
+        value = re.split(r"\.?\s*(?:Licen[cs]e|GFDL|CC[- ]BY)\b", value, maxsplit=1, flags=re.IGNORECASE)[0]
+        value = re.sub(r"^(?:I,\s*|(?:Photo(?:graph)?(?:ed)?|Taken|Picture)\s+by\s+)", "", " ".join(value.split()), flags=re.IGNORECASE)
+        value = value.strip(" .,;:-")
+        if 2 <= len(value) <= 80:
+            return value
+    # Commons' "Own work": the uploader is the author.
+    if uploader and "own work" in plain_text(meta.get("Credit", {}).get("value", "")).lower():
+        return uploader
+    return "Auteur inconnu"
 
 
 def licence_record(meta: dict) -> tuple[str, str]:
@@ -70,13 +112,15 @@ def fetch_json(params: dict) -> dict:
 
 def commons_info(title: str) -> dict:
     data = fetch_json({"action": "query", "titles": title, "prop": "imageinfo",
-                       "iiprop": "url|size|extmetadata|mime|sha1", "iiurlwidth": STORED_LONG_SIDE_MAX})
+                       "iiprop": "url|size|extmetadata|mime|sha1|user", "iiurlwidth": STORED_LONG_SIDE_MAX})
     pages = list(data.get("query", {}).get("pages", {}).values())
     if len(pages) != 1 or "imageinfo" not in pages[0]:
         raise Refused("Commons file not found: " + title)
     info = pages[0]["imageinfo"][0]
     if info.get("mime") != "image/jpeg" or min(info["width"], info["height"]) < MIN_SIDE:
         raise Refused("Photo too small or not a JPEG: " + title)
+    if ai_generated(title, info.get("extmetadata", {})):
+        raise Refused("AI-generated or not clearly photographic: " + title)
     return info
 
 
@@ -102,41 +146,53 @@ def load_catalogue() -> dict:
     return json.loads(CATALOGUE.read_text())
 
 
-def add_photo(catalogue: dict, photo_id: str, title: str, now: dt.datetime) -> dict:
+def photo_record(photo_id: str, title: str, now: dt.datetime, folder: Path = PHOTOS, prefix: str = "assets/photos/") -> dict:
+    """Download one Commons photo into folder and return its catalogue record (licence, author, fingerprint)."""
     if not PHOTO_ID.fullmatch(photo_id):
         raise Refused("Invalid photo id: " + photo_id)
-    if photo_id in catalogue["photos"]:
-        raise Refused("Photo id already catalogued: " + photo_id)
     info = commons_info(title)
     meta = info.get("extmetadata", {})
     licence, licence_url = licence_record(meta)
     # "Artist" sometimes names the monument's architect; "Attribution" is the
     # credit requested by the uploader. "Credit" is kept for human review.
-    author = (plain_text(meta.get("Attribution", {}).get("value", ""))
-              or plain_text(meta.get("Artist", {}).get("value", "")) or "Auteur inconnu")
+    author = credited_author(meta, info.get("user"))
     credit = plain_text(meta.get("Credit", {}).get("value", ""))
     image = download(info.get("thumburl") or info["url"])
     size = stored_size(*image.size)
     if size != image.size:
         image = image.resize(size, Image.Resampling.LANCZOS)
-    path = PHOTOS / (photo_id + ".jpg")
+    folder.mkdir(parents=True, exist_ok=True)
+    path = folder / (photo_id + ".jpg")
     image.save(path, quality=JPEG_QUALITY, optimize=True, progressive=True)
     raw = path.read_bytes()
-    record = {
-        "file": "assets/photos/" + path.name,
+    return {
+        "file": prefix + path.name,
         "sha256": hashlib.sha256(raw).hexdigest(),
         "width": size[0], "height": size[1],
         "commonsTitle": title,
         "sourcePage": info["descriptionurl"],
         "author": author[:200],
         "commonsCredit": credit[:200],
+        # Kept so the engine can re-check the "never AI" rule at render time.
+        "categories": plain_text(meta.get("Categories", {}).get("value", ""))[:1000],
         "licence": licence, "licenceUrl": licence_url,
         "originalSize": [info["width"], info["height"]],
         "commonsSha1": info.get("sha1"),
         "retrievedAt": now.isoformat().replace("+00:00", "Z"),
         "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux.",
     }
-    return {**catalogue, "photos": {**catalogue["photos"], photo_id: record}}
+
+
+def add_photo(catalogue: dict, photo_id: str, title: str, now: dt.datetime) -> dict:
+    if photo_id in catalogue["photos"]:
+        raise Refused("Photo id already catalogued: " + photo_id)
+    return {**catalogue, "photos": {**catalogue["photos"], photo_id: photo_record(photo_id, title, now)}}
+
+
+def commons_search(query: str, limit: int = 20) -> list[str]:
+    """File titles matching a Commons search (namespace File), best first."""
+    data = fetch_json({"action": "query", "list": "search", "srnamespace": 6, "srsearch": query, "srlimit": limit})
+    return [hit["title"] for hit in data.get("query", {}).get("search", []) if isinstance(hit.get("title"), str)]
 
 
 def main() -> None:
