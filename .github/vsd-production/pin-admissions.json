@@ -34,6 +34,15 @@
       "publicHtmlSha256": "2026955d3f416c6877a36f8edb7ea6df39ee0531f5e53c6f20bb75eb16fe4450",
       "method": "exact_published_title_typographic_template_v1",
       "publicationConfirmed": false
+    },
+    {
+      "id": "pin-japon-itineraire-2-semaines",
+      "admittedAt": "2026-10-24T16:08:20.175454+00:00",
+      "articleSha256": "b9e28d6fa1b19b287e8b29873654b3c8f148ceb0af6778427abf8f97e6343816",
+      "imageSha256": "7a9828e45da0c66f500250d4ebd0566dd9c221834a556fd6f28c504aa72e82a3",
+      "publicHtmlSha256": "8374c8793e4451425ecde8f6e9a6471dcdd70f84e7d65e621a56d67e2d43cd0e",
+      "method": "exact_published_title_typographic_template_v1",
+      "publicationConfirmed": false
     }
   ]
 }

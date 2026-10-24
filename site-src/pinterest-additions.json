@@ -70,7 +70,17 @@
       "countries": [
         "*"
       ],
-      "items": []
+      "items": [
+        {
+          "id": "pin-japon-itineraire-2-semaines",
+          "title": "Japon en 2 semaines : l’itinéraire en train de Tokyo à Kyoto, Nara et Hiroshima (prix 2026)",
+          "description": "📌 Retrouvez le guide et ses sources pour préparer votre voyage au Japon. Photo : Stjepko Krehula — CC BY 4.0. Crédits : https://voyagesansdetour.fr/social-media/production/pin-japon-itineraire-2-semaines/credits.txt",
+          "linkPath": "/japon/japon-itineraire-2-semaines/",
+          "mediaId": "pin-japon-itineraire-2-semaines",
+          "width": 1000,
+          "height": 1500
+        }
+      ]
     }
   ]
 }

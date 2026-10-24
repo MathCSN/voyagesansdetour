@@ -606,6 +606,33 @@
           "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
         }
       ]
+    },
+    {
+      "contentId": "pin-japon-itineraire-2-semaines",
+      "kind": "pin",
+      "approved": true,
+      "files": [
+        {
+          "name": "pin.jpg",
+          "bytes": 293642,
+          "sha256": "7a9828e45da0c66f500250d4ebd0566dd9c221834a556fd6f28c504aa72e82a3"
+        },
+        {
+          "name": "credits.txt",
+          "bytes": 339,
+          "sha256": "e43def75f3b693e72771f0847bd13376174f6ab0c4ed0ce422244cd35521881c"
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "bytes": 4482,
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "bytes": 4449,
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-japon-itineraire-2-semaines",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Japon en 2 semaines : l’itinéraire en train de Tokyo à Kyoto, Nara et Hiroshima (prix 2026)",
+  "targetUrl": "https://voyagesansdetour.fr/japon/japon-itineraire-2-semaines/",
+  "articleSha256": "b9e28d6fa1b19b287e8b29873654b3c8f148ceb0af6778427abf8f97e6343816",
+  "imageSha256": "7a9828e45da0c66f500250d4ebd0566dd9c221834a556fd6f28c504aa72e82a3",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "9bce53ef6aec367007587753f135465dbe9bab90b780d903f876dbd2eb8ddb4e",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "japon-fuji-chureito",
+    "author": "Stjepko Krehula",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Chureito_Pagoda_and_Mount_Fuji_2023-03-07.jpg",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0"
+  }
+}
