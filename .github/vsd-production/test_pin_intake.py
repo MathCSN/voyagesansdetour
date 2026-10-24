@@ -55,6 +55,22 @@ class PinIntakeTests(unittest.TestCase):
             result=intake([{'slug':'guide','title':'Nouveau titre'}],[],folder,dt.datetime(2026,10,19,tzinfo=dt.timezone.utc),admitted=['pin-guide'])
             self.assertEqual(result['status'],'no_new_article')
             self.assertEqual(json.loads((Path(folder)/'pin-guide/draft.json').read_text())['title'],'Ancien titre')
+    def test_guide_outside_portugal_gets_its_country_path(self):
+        with tempfile.TemporaryDirectory() as folder:
+            now=dt.datetime(2026,10,24,tzinfo=dt.timezone.utc)
+            article={'slug':'cinque-terre','title':'Cinque Terre sans voiture','country':'italie','publishedOn':'2026-10-24'}
+            self.assertEqual(intake([article],[],folder,now)['id'],'pin-cinque-terre')
+            self.assertEqual(json.loads((Path(folder)/'pin-cinque-terre/draft.json').read_text())['targetUrl'],'https://voyagesansdetour.fr/italie/cinque-terre/')
+            self.assertEqual(intake([article],[],folder,now)['status'],'no_new_article')
+    def test_unrenderable_new_guide_is_held_and_the_next_one_drafted(self):
+        with tempfile.TemporaryDirectory() as folder:
+            now=dt.datetime(2026,10,24,tzinfo=dt.timezone.utc)
+            articles=[{'slug':'casse','title':'X','country':'Pas un pays','publishedOn':'2026-10-24'},{'slug':'bon','title':'Un bon guide','publishedOn':'2026-10-23'}]
+            result=intake(articles,[],folder,now)
+            self.assertEqual(result['id'],'pin-bon');self.assertEqual(result['held'],[{'id':'pin-casse','reason':'invalid_country'}])
+    def test_invalid_country_is_refused(self):
+        with tempfile.TemporaryDirectory() as folder, self.assertRaisesRegex(ValueError,'invalid_country'):
+            render({'slug':'x','title':'X','country':'../etc'},folder)
     def test_end_of_authorization_does_not_render(self):
         def fail(*args):raise AssertionError('render called')
         self.assertEqual(intake([],[],Path('unused'),STOP,fail)['status'],'period_ended')

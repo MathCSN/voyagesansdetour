@@ -45,6 +45,10 @@ guide publié ──► rendu (production.py, reel_intake.py)
 `pin_promotion.py` en admet **un par semaine** dans `site-src/pinterest-additions.json`,
 puis le site est redéployé et Pinterest importe le flux RSS tout seul.
 Un brouillon devenu périmé (guide mis à jour ou gabarit changé) est redessiné, il ne bloque plus la chaîne.
+Le lien de l'épingle suit le pays du guide (`/portugal/`, `/espagne/`, `/italie/`). Seul le tableau
+« Préparer son voyage au Portugal » a un flux branché (`COUNTRY_FEEDS` dans `pin_promotion.py`) :
+les épingles Espagne et Italie attendent leur tableau. Un guide dont la page est indisponible ou
+qui ne se dessine pas est mis en attente (`held`) sans bloquer les suivants.
 
 ## Le trajet d'un guide
 

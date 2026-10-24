@@ -25,7 +25,7 @@ def intake(articles,reserved,output,now,renderer=render,admitted=()):
             manifest=json.loads((folder/'draft.json').read_text())
             if manifest['status']!='draft_requires_review' or manifest['publicationApproved'] is not False:raise ValueError('unexpected_draft_state')
             slug=manifest['id'].removeprefix('pin-')
-            if folder.name!='pin-'+slug or manifest['targetUrl']!='https://voyagesansdetour.fr/portugal/'+slug+'/':raise ValueError('draft_identity')
+            if folder.name!='pin-'+slug or not manifest['targetUrl'].startswith('https://voyagesansdetour.fr/') or not manifest['targetUrl'].endswith('/'+slug+'/'):raise ValueError('draft_identity')
             if (folder/'pin.jpg').is_symlink() or hashlib.sha256((folder/'pin.jpg').read_bytes()).hexdigest()!=manifest['imageSha256']:raise ValueError('draft_image_changed')
             known.add(slug)
             # A guide refreshed or a template changed after the draft would block promotion forever: redraw it.
@@ -40,12 +40,15 @@ def intake(articles,reserved,output,now,renderer=render,admitted=()):
             backup.rename(folder);continue
         shutil.rmtree(backup)
         return {'status':'draft_refreshed_not_published','created':1,'id':target.name,'publicationAttempted':False}
+    held=[]
     for article in sorted(articles,key=lambda a:(a.get('publishedOn',''),a['slug']),reverse=True):
         if article['slug'] in known:continue
         # The public catalogue is the input; a queue/candidate is never selected.
-        target=renderer(article,output)
-        return {'status':'draft_created_not_published','created':1,'id':target.name,'publicationAttempted':False}
-    return {'status':'no_new_article','created':0,'publicationAttempted':False}
+        # A guide that cannot be drawn is held; it must not stop the drafts behind it.
+        try:target=renderer(article,output)
+        except ValueError as error:held.append({'id':'pin-'+article['slug'],'reason':str(error)});continue
+        return {'status':'draft_created_not_published','created':1,'id':target.name,'publicationAttempted':False,'held':held}
+    return {'status':'no_new_article','created':0,'publicationAttempted':False,'held':held}
 
 if __name__=='__main__':
     articles=json.loads((HERE.parents[1]/'site-src/articles.json').read_text())
