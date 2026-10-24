@@ -107,7 +107,7 @@ jobs:
         working-directory: site-src
         run: |
           set -euo pipefail
-          python -m unittest -q test_site test_stay22 test_editorial_queue test_public_media
+          python -m unittest -q test_site test_stay22 test_affiliates test_editorial_queue test_public_media
           node --test test_analytics.mjs
       - name: Build the public site without releasing an article
         working-directory: site-src

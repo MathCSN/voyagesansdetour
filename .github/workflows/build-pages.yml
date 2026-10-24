@@ -93,7 +93,7 @@ jobs:
           PY
       - name: Validate site
         if: steps.release.outputs.publish == 'true' || steps.generator.outputs.changed == 'true' || steps.intake.outputs.changed == 'true'
-        run: python -m unittest -q test_site test_stay22 test_editorial_queue test_public_media test_autonomous_editorial test_autonomous_candidate test_cloud_source_changes test_editorial_update test_pin_feed_status
+        run: python -m unittest -q test_site test_stay22 test_affiliates test_editorial_queue test_public_media test_autonomous_editorial test_autonomous_candidate test_cloud_source_changes test_editorial_update test_pin_feed_status
       - name: Validate analytics consent without external calls
         if: steps.release.outputs.publish == 'true'
         run: node --test test_analytics.mjs
