@@ -4,9 +4,241 @@
     "destination": "Aveiro",
     "question": "Que peut-on voir au musée Art nouveau d’Aveiro et comment préparer cette visite ? Ne pas inventer de prix, durée, accessibilité ou horaires.",
     "sources": [
-      {"label": "Musées municipaux d’Aveiro — le musée Art nouveau", "url": "https://museusdeaveiro.cm-aveiro.pt/museu-arte-nova/o-museu"},
-      {"label": "Musées municipaux d’Aveiro — exposition permanente", "url": "https://museusdeaveiro.cm-aveiro.pt/museu-arte-nova/exposicao-permanente"},
-      {"label": "Musées municipaux d’Aveiro — actualités et fermetures", "url": "https://museusdeaveiro.cm-aveiro.pt/"}
+      {
+        "label": "Musées municipaux d’Aveiro — le musée Art nouveau",
+        "url": "https://museusdeaveiro.cm-aveiro.pt/museu-arte-nova/o-museu"
+      },
+      {
+        "label": "Musées municipaux d’Aveiro — exposition permanente",
+        "url": "https://museusdeaveiro.cm-aveiro.pt/museu-arte-nova/exposicao-permanente"
+      },
+      {
+        "label": "Musées municipaux d’Aveiro — actualités et fermetures",
+        "url": "https://museusdeaveiro.cm-aveiro.pt/"
+      }
     ]
+  },
+  {
+    "slug": "lisbonne-miradouros",
+    "destination": "Lisbonne",
+    "question": "Quels miradouros de Lisbonne choisir, que voit-on depuis chacun et comment y monter ? Donne en priorité les prix, horaires, jours de fermeture, durées, numéros de ligne et noms exacts présents dans les sources ; n’invente rien.",
+    "sources": [
+      {
+        "label": "Visit Lisboa — Miradouro da Senhora do Monte",
+        "url": "https://www.visitlisboa.com/pt-pt/locais/miradouro-da-senhora-do-monte"
+      },
+      {
+        "label": "Visit Lisboa — Miradouro de Santa Luzia",
+        "url": "https://www.visitlisboa.com/pt-pt/locais/miradouro-de-santa-luzia"
+      },
+      {
+        "label": "Visit Lisboa — Miradouro de Santa Catarina",
+        "url": "https://www.visitlisboa.com/pt-pt/locais/miradouro-de-santa-catarina"
+      }
+    ],
+    "category": "Visites",
+    "cover": "lisbonne-miradouro"
+  },
+  {
+    "slug": "porto-belvederes-gratuits",
+    "destination": "Porto",
+    "question": "Depuis quels belvédères gratuits voir Porto et le Douro, et que voit-on de chacun ? Donne en priorité les prix, horaires, jours de fermeture, durées, numéros de ligne et noms exacts présents dans les sources ; n’invente rien.",
+    "sources": [
+      {
+        "label": "Visit Porto — Mosteiro da Serra do Pilar",
+        "url": "https://visitporto.travel/pt-PT/poi/5cd04b4ff979e00001f6f74c"
+      },
+      {
+        "label": "Visit Porto — Miradouro da Vitória",
+        "url": "https://visitporto.travel/pt-PT/poi/5cd04b4df979e000019f80d5"
+      },
+      {
+        "label": "Visit Porto — Passeio das Virtudes",
+        "url": "https://visitporto.travel/pt-PT/poi/5cd04b4ef979e00001fe47d6"
+      }
+    ],
+    "category": "Visites",
+    "cover": "porto-ponte-luis"
+  },
+  {
+    "slug": "porto-foz-tram-1",
+    "destination": "Porto",
+    "question": "Comment rejoindre la Foz et l’océan en tram historique depuis le centre de Porto, et que voir au bout de la ligne ? Donne en priorité les prix, horaires, jours de fermeture, durées, numéros de ligne et noms exacts présents dans les sources ; n’invente rien.",
+    "sources": [
+      {
+        "label": "STCP — Trams historiques",
+        "url": "https://stcp.pt/pt/porto-tram-city-tour"
+      },
+      {
+        "label": "Visit Porto — Farolim de Felgueiras",
+        "url": "https://visitporto.travel/pt-PT/poi/5cd04b51f979e000019b65b2"
+      },
+      {
+        "label": "Visit Porto — Molhe do Douro",
+        "url": "https://visitporto.travel/pt-PT/poi/5cd04b53f979e00001354b43"
+      }
+    ],
+    "category": "Excursions",
+    "cover": "porto-tram-historique"
+  },
+  {
+    "slug": "porto-caves-gaia-telepherique",
+    "destination": "Porto",
+    "question": "Comment visiter les caves de porto de Vila Nova de Gaia avec le téléphérique, et combien coûtent les visites ? Donne en priorité les prix, horaires, jours de fermeture, durées, numéros de ligne et noms exacts présents dans les sources ; n’invente rien.",
+    "sources": [
+      {
+        "label": "Gaia Cable Car — Prix et horaires",
+        "url": "https://gaiacablecar.com/pt/precos-horarios/"
+      },
+      {
+        "label": "Sandeman — Visite des caves",
+        "url": "https://www.sandeman.com/port-wine/visit/cellars-porto/"
+      },
+      {
+        "label": "Taylor’s — Caves de porto",
+        "url": "https://www.taylor.pt/en/visit-taylors/port-cellars"
+      }
+    ],
+    "category": "Visites",
+    "cover": "porto-caves-gaia"
+  },
+  {
+    "slug": "porto-clerigos-lello",
+    "destination": "Porto",
+    "question": "Comment visiter la tour des Clérigos et la Livraria Lello sans mauvaise surprise ? Donne en priorité les prix, horaires, jours de fermeture, durées, numéros de ligne et noms exacts présents dans les sources ; n’invente rien.",
+    "sources": [
+      {
+        "label": "Torre dos Clérigos — Billetterie",
+        "url": "https://www.torredosclerigos.pt/bilheteira/"
+      },
+      {
+        "label": "Livraria Lello — Questions fréquentes",
+        "url": "https://livrarialello.pt/en/faqs/"
+      }
+    ],
+    "category": "Visites",
+    "cover": "porto-vue-clerigos"
+  },
+  {
+    "slug": "lisbonne-chateau-sao-jorge",
+    "destination": "Lisbonne",
+    "question": "Comment visiter le château São Jorge de Lisbonne : prix, horaires et meilleur moment ? Donne en priorité les prix, horaires, jours de fermeture, durées, numéros de ligne et noms exacts présents dans les sources ; n’invente rien.",
+    "sources": [
+      {
+        "label": "Castelo de São Jorge — Billets",
+        "url": "https://castelodesaojorge.pt/en/plan-your-visit/choose-your-ticket/"
+      },
+      {
+        "label": "Castelo de São Jorge — Horaires",
+        "url": "https://castelodesaojorge.pt/en/plan-your-visit/schedules/"
+      }
+    ],
+    "category": "Visites",
+    "cover": "lisbonne-alfama-toits"
+  },
+  {
+    "slug": "lisbonne-ferry-cacilhas",
+    "destination": "Lisbonne",
+    "question": "Comment traverser le Tage en ferry de Cais do Sodré à Cacilhas : prix, durée et horaires ? Donne en priorité les prix, horaires, jours de fermeture, durées, numéros de ligne et noms exacts présents dans les sources ; n’invente rien.",
+    "sources": [
+      {
+        "label": "TTSL — Tarifs",
+        "url": "https://ttsl.pt/passageiros/tarifario/"
+      },
+      {
+        "label": "TTSL — Ligne Cacilhas–Cais do Sodré",
+        "url": "https://ttsl.pt/passageiros/horarios-de-ligacoes-fluviais/ligacao-cacilhas-cais-do-sodre/"
+      }
+    ],
+    "category": "Transports",
+    "cover": "lisbonne-cacilhas-ferry"
+  },
+  {
+    "slug": "belem-jeronimos-tram-15",
+    "destination": "Lisbonne",
+    "question": "Comment rejoindre Belém en tram 15E et visiter le monastère des Jerónimos ? Donne en priorité les prix, horaires, jours de fermeture, durées, numéros de ligne et noms exacts présents dans les sources ; n’invente rien.",
+    "sources": [
+      {
+        "label": "Visit Lisboa — Monastère des Jerónimos",
+        "url": "https://www.visitlisboa.com/pt-pt/locais/mosteiro-dos-jeronimos"
+      },
+      {
+        "label": "Visit Lisboa — Tram 15",
+        "url": "https://www.visitlisboa.com/pt-pt/locais/electrico-15"
+      }
+    ],
+    "category": "Visites",
+    "cover": "lisbonne-jeronimos"
+  },
+  {
+    "slug": "sintra-quinta-da-regaleira",
+    "destination": "Sintra",
+    "question": "Comment visiter la Quinta da Regaleira et son puits initiatique : prix 2026, créneaux et horaires ? Donne en priorité les prix, horaires, jours de fermeture, durées, numéros de ligne et noms exacts présents dans les sources ; n’invente rien.",
+    "sources": [
+      {
+        "label": "Quinta da Regaleira — Visites",
+        "url": "https://www.regaleira.pt/en/visitas"
+      },
+      {
+        "label": "Quinta da Regaleira — Tarifs",
+        "url": "https://www.regaleira.pt/en/destaques/2025-entrance-fees-2026/"
+      }
+    ],
+    "category": "Visites",
+    "cover": "sintra-regaleira"
+  },
+  {
+    "slug": "alhambra-reserver-billets",
+    "destination": "Andalousie",
+    "question": "Comment réserver et visiter l’Alhambra de Grenade : prix, créneaux, pièces d’identité et visites de nuit ? Donne en priorité les prix, horaires, jours de fermeture, durées, numéros de ligne et noms exacts présents dans les sources ; n’invente rien.",
+    "sources": [
+      {
+        "label": "Patronato de la Alhambra — Horaires et tarifs",
+        "url": "https://www.alhambra-patronato.es/visitar/horarios-y-tarifas"
+      },
+      {
+        "label": "Patronato de la Alhambra — Questions fréquentes",
+        "url": "https://www.alhambra-patronato.es/visitar/preguntas-frecuentes"
+      }
+    ],
+    "category": "Visites",
+    "cover": "grenade-myrtes",
+    "country": "espagne"
+  },
+  {
+    "slug": "seville-alcazar-cathedrale",
+    "destination": "Andalousie",
+    "question": "Comment visiter le Real Alcázar et la cathédrale de Séville : prix, horaires et gratuités ? Donne en priorité les prix, horaires, jours de fermeture, durées, numéros de ligne et noms exacts présents dans les sources ; n’invente rien.",
+    "sources": [
+      {
+        "label": "Real Alcázar de Séville — Préparer la visite",
+        "url": "https://alcazarsevilla.org/prepara-la-visita/"
+      },
+      {
+        "label": "Cathédrale de Séville — Horaires et tarifs",
+        "url": "https://www.catedraldesevilla.es/visita-cultural/horarios-y-tarifas/"
+      }
+    ],
+    "category": "Visites",
+    "cover": "seville-alcazar",
+    "country": "espagne"
+  },
+  {
+    "slug": "cordoue-mezquita-visite",
+    "destination": "Andalousie",
+    "question": "Comment visiter la Mezquita-cathédrale de Cordoue : prix, entrée gratuite du matin, clocher et visite de nuit ? Donne en priorité les prix, horaires, jours de fermeture, durées, numéros de ligne et noms exacts présents dans les sources ; n’invente rien.",
+    "sources": [
+      {
+        "label": "Mezquita-Catedral — Billets de la Mezquita",
+        "url": "https://www.mezquita-catedraldecordoba.es/organiza-la-visita/entradas-y-horarios/mezquita-catedral/"
+      },
+      {
+        "label": "Mezquita-Catedral — Billets et horaires",
+        "url": "https://www.mezquita-catedraldecordoba.es/organiza-la-visita/entradas-y-horarios/"
+      }
+    ],
+    "category": "Visites",
+    "cover": "cordoue-mezquita-pont",
+    "country": "espagne"
   }
 ]

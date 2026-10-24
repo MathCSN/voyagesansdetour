@@ -190,6 +190,26 @@ class EditorialQueueTest(unittest.TestCase):
         after = {str(p.relative_to(out)): hashlib.sha256(p.read_bytes()).hexdigest() for p in out.rglob('*') if p.is_file()}
         self.assertEqual(before, after)
 
+    def test_weekly_cadence_releases_a_due_guide_seven_days_after_the_last_one(self):
+        self.articles[0]['publishedOn'] = self.articles[0]['updatedOn'] = '2026-10-08'
+        self.save(); self.draft()
+        self.assertFalse(release.promote(self.root, release.instant('2026-10-14T21:00:00Z')))
+        self.assertTrue(release.promote(self.root, NOW))
+
+    def test_enriched_draft_with_country_cover_and_key_facts_is_valid(self):
+        draft = self.draft()
+        article = dict(draft['article'], country='italie', cover='cinque-manarola',
+                       keyFacts=[{'value': '22 €', 'label': 'la carte d’une journée'}])
+        article['sections'] = [dict(article['sections'][0], image='cinque-train', tip='Partir tôt.')]
+        release.validate_article(article, {'fixture-published-guide'})
+        self.assertEqual(release.article_path(article), '/italie/fixture-new-guide/')
+        for broken in ({'country': 'atlantide'}, {'keyFacts': [{'value': ''}]}, {'cover': '../x'}):
+            with self.subTest(field=list(broken)[0]), self.assertRaises(ValueError):
+                release.validate_article(dict(article, **broken), {'fixture-published-guide'})
+
+    def test_public_text_keeps_prices_on_one_line_for_pages_and_update_receipts(self):
+        self.assertEqual(release.html_text('Ticket à 1,90 € & −65 %'), 'Ticket à 1,90\u00a0€ &amp; −65\u00a0%')
+
 
 if __name__ == '__main__':
     unittest.main()

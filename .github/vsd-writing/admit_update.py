@@ -17,9 +17,9 @@ def cadence_open(articles,queue,ledger,now):
     past=[dt.datetime.combine(dt.date.fromisoformat(a.get('publishedOn','2026-09-14')),dt.time(),q.PARIS).astimezone(q.UTC) for a in articles]
     past += [q.instant(x['promotedAt']) for x in queue['promotions']]
     past += [q.instant(x['appliedAt']) for x in ledger['updates']]
-    if past and now<max(past)+dt.timedelta(days=14):return False
+    if past and now<max(past)+q.RELEASE_INTERVAL:return False
     # Already reserved guides keep their calendar priority.
-    if any(q.instant(x['releaseAt'])<=now+dt.timedelta(days=14) for x in queue['drafts']):return False
+    if any(q.instant(x['releaseAt'])<=now+q.RELEASE_INTERVAL for x in queue['drafts']):return False
     return True
 
 
