@@ -53,5 +53,6 @@ et suit la mise en ligne. Relais Claude/Codex : `agent-relay --project <ce dossi
 
 - Sources citées et datées ; une info sans source vérifiée ne sort pas.
 - Pas de publicité personnalisée sans consentement ; pas de collecte d'e-mails.
-- Contact : contact@voyagesansdetour.fr (boîte Outlook).
+- Contact : contact@voyagesansdetour.fr (messagerie IONOS, webmail déjà connecté dans le
+  navigateur intégré ; lecture seule, ne rien envoyer sans accord de Mathis).
 - Aucun secret dans le dépôt (il est public).
