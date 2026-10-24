@@ -4,6 +4,9 @@
     {
       "file": "preparer-portugal.xml",
       "title": "Voyage Sans Détour — Préparer son voyage au Portugal",
+      "countries": [
+        "portugal"
+      ],
       "items": [
         {
           "id": "pin-portugal-sans-voiture-bagages",
@@ -19,6 +22,9 @@
     {
       "file": "preparer-espagne.xml",
       "title": "Voyage Sans Détour — Préparer son voyage en Espagne",
+      "countries": [
+        "espagne"
+      ],
       "items": [
         {
           "id": "pin-andalousie-train-seville-cordoue-grenade",
@@ -34,6 +40,9 @@
     {
       "file": "preparer-italie.xml",
       "title": "Voyage Sans Détour — Préparer son voyage en Italie",
+      "countries": [
+        "italie"
+      ],
       "items": [
         {
           "id": "pin-cinque-terre-sans-voiture",
@@ -45,6 +54,14 @@
           "height": 1500
         }
       ]
+    },
+    {
+      "file": "inspirations-voyage.xml",
+      "title": "Voyage Sans Détour — Inspirations voyage, partout dans le monde",
+      "countries": [
+        "*"
+      ],
+      "items": []
     }
   ]
 }
