@@ -36,33 +36,6 @@
       "itemIds": [
         "vsd-production:facebook:porto-3-jours-sans-voiture-2026-10:fb03-v1"
       ]
-    },
-    {
-      "path": ".github/vsd-production/reviewed-social/facebook-sintra-trois-temps-2026-10-25-v1.json",
-      "fileSha256": "4422d0b003c638b0e303dda4c8b342589eaa5e1719f7fa8ac521c7e0dd2f771c",
-      "batchId": "facebook-sintra-trois-temps-2026-10-25-v1",
-      "batchSha256": "249fa6642cd4fd68849ae7bb3acba5fc9c92f53b6b844d70cedbd33be1840201",
-      "itemIds": [
-        "vsd-production:facebook:sintra-trois-temps-2026-10:photos-v1"
-      ]
-    },
-    {
-      "path": ".github/vsd-production/reviewed-social/instagram-bagages-voix-2026-10-25-v1.json",
-      "fileSha256": "6029b5d2a85910cb9b3b15ee8e867aae6387d2cf20112a4e635b594cdb7c3f79",
-      "batchId": "instagram-bagages-voix-2026-10-25-v1",
-      "batchSha256": "d74208cfebf3e50bf569f7a566f9c58669b38ac9b2714b2e4c53b9a7d878eae6",
-      "itemIds": [
-        "vsd-production:instagram:portugal-sans-voiture-bagages:voice-v1"
-      ]
-    },
-    {
-      "path": ".github/vsd-production/reviewed-social/instagram-porto-voix-2026-11-01-v1.json",
-      "fileSha256": "d7df15bc6d7d02a3d08e0c3aa2e388476c64b27ff548b7473d059451ae3215b1",
-      "batchId": "instagram-porto-voix-2026-11-01-v1",
-      "batchSha256": "c3fc71bec9c674c49e9f5c2fab29b1374333cada421d1dc81bbc029ba59e57ea",
-      "itemIds": [
-        "vsd-production:instagram:porto-3-jours-sans-voiture:voice-v1"
-      ]
     }
   ],
   "retirements": [
