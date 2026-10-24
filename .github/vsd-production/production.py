@@ -26,7 +26,7 @@ from urllib.parse import urlsplit
 from PIL import __version__ as pillow_version
 
 import social_render as draw
-from photo_intake import LICENCES
+from photo_intake import LICENCES, ai_record
 
 HERE = Path(__file__).resolve().parent
 W, H = draw.REEL_SIZE
@@ -186,6 +186,8 @@ def load_photos(scenario, root):
 def check_photo(photos, photo_id, root):
     record = photos.get(photo_id)
     ensure(isinstance(record, dict), "Unknown photo: " + str(photo_id))
+    # Real photographs only (CLAUDE.md): an AI category or generator named anywhere in the record is refused.
+    ensure(not ai_record(record), "AI-generated image refused: " + photo_id)
     ensure(record.get("licence") in LICENCES and record.get("licenceUrl") == LICENCES[record["licence"]], "Photo licence not accepted: " + photo_id)
     ensure(text(record.get("author"), 200) and https(record.get("sourcePage")).hostname == "commons.wikimedia.org", "Photo attribution missing: " + photo_id)
     verified_file(root, record)

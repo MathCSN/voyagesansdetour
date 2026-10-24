@@ -35,6 +35,13 @@ class PinDraftTests(unittest.TestCase):
         (self.site/'image-sources.json').write_text(json.dumps({'photos':[dict(PHOTO,license='All rights reserved')]}))
         with self.assertRaisesRegex(ValueError,'photo_license'):render(GUIDE,self.output,site=self.site)
 
+    def test_ai_generated_cover_is_never_drawn(self):
+        for field, value in (("source_page", "https://commons.wikimedia.org/wiki/File:Alhambra_Stable_Diffusion.jpg"),
+                             ("categories", "AI-generated images"), ("credit_fr", "Image Midjourney.")):
+            with self.subTest(field=field):
+                (self.site/'image-sources.json').write_text(json.dumps({'photos':[dict(PHOTO,**{field:value})]}))
+                with self.assertRaisesRegex(ValueError,'photo_ai_generated'):render(GUIDE,self.output,site=self.site)
+
     def test_label_names_the_country_and_place_never_a_fixed_angle(self):
         (self.site/'destinations.json').write_text(json.dumps({'countries':{'japon':{'name':'Japon','in':'au Japon'}}}))
         self.assertEqual(place_label({'country':'japon','destination':'Kyoto'},self.site),'JAPON · KYOTO')

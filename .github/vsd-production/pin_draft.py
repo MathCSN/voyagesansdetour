@@ -6,6 +6,7 @@ from pathlib import Path
 import re
 from PIL import Image,ImageDraw,ImageFont
 import destinations
+from photo_intake import ai_record
 
 HERE=Path(__file__).resolve().parent
 ORIGIN='https://voyagesansdetour.fr'
@@ -40,6 +41,8 @@ def cover_photo(article,site):
     if len(entries)!=1:raise ValueError('photo_missing_from_catalogue')
     photo=entries[0]
     if photo.get('license') not in FREE_LICENSES or not photo.get('author') or not photo.get('source_page'):raise ValueError('photo_license')
+    # Real photographs only (CLAUDE.md): never a cover whose record names an AI generator or category.
+    if ai_record(photo):raise ValueError('photo_ai_generated')
     path=Path(site)/'dist/assets'/photo['file']
     if not path.is_file():raise ValueError('photo_file_missing')
     return photo,path

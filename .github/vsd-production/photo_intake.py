@@ -61,6 +61,16 @@ def ai_generated(title: str, meta: dict) -> bool:
     return any(AI_MARKERS.search(field or "") for field in fields)
 
 
+# Every text field a photo record may carry, in the social catalogue or the site's image-sources.json.
+RECORD_FIELDS = ("commonsTitle", "sourcePage", "source_page", "author", "commonsCredit", "categories", "description",
+                 "alt", "alt_fr", "credit_fr", "file", "id")
+
+
+def ai_record(record: dict) -> bool:
+    """A catalogued photo whose record names an AI generator or an AI-generated category."""
+    return any(isinstance(record.get(key), str) and AI_MARKERS.search(record[key].replace("_", " ")) for key in RECORD_FIELDS)
+
+
 def plain_text(value: str) -> str:
     """Commons returns HTML for authors; keep only readable text."""
     text = html.unescape(re.sub(r"<[^>]+>", " ", value or ""))
@@ -163,6 +173,8 @@ def photo_record(photo_id: str, title: str, now: dt.datetime, folder: Path = PHO
         "sourcePage": info["descriptionurl"],
         "author": author[:200],
         "commonsCredit": credit[:200],
+        # Kept so the engine can re-check the "never AI" rule at render time.
+        "categories": plain_text(meta.get("Categories", {}).get("value", ""))[:1000],
         "licence": licence, "licenceUrl": licence_url,
         "originalSize": [info["width"], info["height"]],
         "commonsSha1": info.get("sha1"),

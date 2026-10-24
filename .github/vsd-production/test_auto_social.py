@@ -275,6 +275,14 @@ class DestinationTests(unittest.TestCase):
         (self.site / "destinations.json").write_text(json.dumps([{"slug": "japon", "name": "Japon", "preposition": "au"}]))
         self.assertEqual(destinations.preposition("japon", destinations.load(self.site)), "au Japon")
 
+    def test_site_monde_format_is_read_as_is(self):
+        (self.site / "destinations.json").write_text(json.dumps({"schemaVersion": 1,
+            "continents": [{"id": "asie", "name": "Asie", "preposition": "en Asie"}],
+            "countries": [{"id": "japon", "name": "Japon", "preposition": "au Japon", "continent": "asie", "iso": "JP", "flag": "🇯🇵"}]}, ensure_ascii=False))
+        table = destinations.load(self.site)
+        self.assertEqual((destinations.name("japon", table), destinations.preposition("japon", table)), ("Japon", "au Japon"))
+        self.assertEqual(destinations.preposition("perou", table), "au Perou")  # absent country: fallback
+
     def test_hashtags_are_five_at_most_without_duplicates(self):
         tags = destinations.hashtags({"destination": "Portugal", "category": "Préparer"}, {})
         self.assertEqual(tags, ["#Portugal", "#VoyagePortugal", "#ConseilsVoyage", "#VoyageSansDetour"])
