@@ -26,7 +26,7 @@ from urllib.parse import urlsplit
 from PIL import __version__ as pillow_version
 
 import social_render as draw
-from photo_intake import LICENCES
+from photo_intake import LICENCES, ai_record
 
 HERE = Path(__file__).resolve().parent
 W, H = draw.REEL_SIZE
@@ -44,6 +44,8 @@ SCENE_COUNT = {"reel": (5, 8), "carousel": (5, 8)}
 REEL_SECONDS = (15, 45)
 SCENE_SECONDS = (2.5, 6)
 CAPTION_LINES = (3, 5)
+# auto_social.py adds about three posts a week until HARD_STOP.
+CATALOGUE_MAX = 400
 INSTAGRAM_CAPTION_MAX = 2200
 MUSIC_FADE_OUT = 1.5
 REEL_BUTTON = {"instagram": "Le guide complet → lien en bio", "facebook": "Le guide complet → voyagesansdetour.fr"}
@@ -184,6 +186,8 @@ def load_photos(scenario, root):
 def check_photo(photos, photo_id, root):
     record = photos.get(photo_id)
     ensure(isinstance(record, dict), "Unknown photo: " + str(photo_id))
+    # Real photographs only (CLAUDE.md): an AI category or generator named anywhere in the record is refused.
+    ensure(not ai_record(record), "AI-generated image refused: " + photo_id)
     ensure(record.get("licence") in LICENCES and record.get("licenceUrl") == LICENCES[record["licence"]], "Photo licence not accepted: " + photo_id)
     ensure(text(record.get("author"), 200) and https(record.get("sourcePage")).hostname == "commons.wikimedia.org", "Photo attribution missing: " + photo_id)
     verified_file(root, record)
@@ -467,7 +471,7 @@ def exclusive(output):
 
 def catalogue_entries(root):
     catalogue = load_json(safe_path(root, "catalogue.json"))
-    ensure(catalogue.get("schemaVersion") == SCHEMA and isinstance(catalogue.get("items"), list) and len(catalogue["items"]) <= 100, "Invalid catalogue")
+    ensure(catalogue.get("schemaVersion") == SCHEMA and isinstance(catalogue.get("items"), list) and len(catalogue["items"]) <= CATALOGUE_MAX, "Invalid catalogue")
     entries, identifiers, filenames = [], set(), set()
     for entry in catalogue["items"]:
         ensure(ID.fullmatch(entry.get("contentId", "")) and entry["contentId"] not in identifiers, "Duplicate/invalid catalogue identity")

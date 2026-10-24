@@ -3,17 +3,24 @@
   "id": "pin-aeroport-porto-centre-ville",
   "status": "draft_requires_review",
   "publicationApproved": false,
-  "title": "Aéroport de Porto au centre-ville : métro, correspondances et choix de l’arrivée",
+  "title": "Aéroport de Porto au centre-ville : métro E en 30 minutes pour 2,30 €",
   "targetUrl": "https://voyagesansdetour.fr/portugal/aeroport-porto-centre-ville/",
-  "articleSha256": "a686dfb1cebce3ca0c39b27198420c7c7fa780c08d1fa609ed895cbbf6c0f23c",
-  "imageSha256": "dac56fc42c322e7988c87168be7b9fbe8a6ab223a36c2aacbb8908856f083b3c",
+  "articleSha256": "e08583bf7b30d0b86011180f0517fb3147b342b14a07575208b4358edbe9ea06",
+  "imageSha256": "bee809999f160fb687770acd3127e64cd8434a4ac2bea96d1a85979a0d72f3a7",
   "width": 1000,
   "height": 1500,
-  "templateVersion": 1,
-  "rendererSha256": "641a36318537adadc23dc74987ad45436fa0422c4298c9e7af598a4958888d4a",
+  "templateVersion": 2,
+  "rendererSha256": "9bce53ef6aec367007587753f135465dbe9bab90b780d903f876dbd2eb8ddb4e",
   "originalComposition": true,
-  "externalPhotographs": false,
+  "externalPhotographs": true,
   "limitations": [
     "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
-  ]
+  ],
+  "photo": {
+    "id": "porto-metro-aeroport",
+    "author": "Thomas Dahlstrøm Nielsen",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Aeroporto_metro_station_(Porto)_-_3.jpg",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+  }
 }

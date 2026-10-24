@@ -26,6 +26,21 @@
       "title": "Panneau privé de publication",
       "url": "https://voyage-sans-detour-admin.cousinmathis31.chatgpt.site",
       "action": "Si Buffer se déconnecte d'Instagram ou de Facebook, le reconnecter dans Buffer (publish.buffer.com > Channels) puis vérifier ici que les publications repartent."
+    },
+    {
+      "title": "Stay22 : confirmer le compte pour activer les liens hébergement et activités",
+      "url": "https://hub.stay22.com/en/auth/signin",
+      "action": "Les liens sont prêts dans tous les guides mais restent éteints tant que le compte n'est pas confirmé. 1) Se connecter au Hub Stay22 (créer le compte sur https://hub.stay22.com/en/auth/signup s'il n'existe pas). 2) Vérifier que l'identifiant affilié (AID, dans le profil ou le générateur de liens) est exactement « voyagesansdetourfr » ; sinon, envoyer le bon AID. 3) Déclarer le site https://voyagesansdetour.fr dans le Hub (liste des sites ou générateur de script : choisir ce domaine), sans installer de script : le blog utilise des liens simples. 4) Renseigner les informations de paiement. 5) Répondre « Stay22 OK » à la session de pilotage : elle passera hosting_verified et enabled à true dans site-src/stay22.json. Les clics seront alors suivis guide par guide (campagnes vsd_<guide>) dans le Hub. Ne jamais envoyer de mot de passe ni de clé d'API."
+    },
+    {
+      "title": "Tableau Pinterest « Inspirations voyage » (pilotage, dans le navigateur)",
+      "url": "https://fr.pinterest.com/voyagesansdetour/",
+      "action": "Créer le tableau « Inspirations voyage, partout dans le monde » puis le brancher sur le flux RSS https://voyagesansdetour.fr/pinterest/inspirations-voyage.xml (Paramètres > Import groupé > Connecter un flux RSS). Tout guide d'un pays sans tableau dédié y part, une épingle par semaine. Pour un pays qui mérite son propre tableau : créer le tableau, le brancher sur preparer-<pays>.xml et ajouter le flux avec \"countries\": [\"<pays>\"] dans site-src/pinterest-additions.json."
+    },
+    {
+      "title": "Bios Instagram, Pinterest et Facebook « blog voyage, monde entier »",
+      "url": "https://github.com/MathCSN/voyagesansdetour/blob/main/docs/bios-reseaux.md",
+      "action": "Coller la bio retenue dans Instagram (@voyagesansdetour.fr > Modifier le profil), Pinterest (Paramètres > Modifier le profil) et, si souhaité, Facebook (intro de la page). Longueurs déjà vérifiées."
     }
   ]
 }

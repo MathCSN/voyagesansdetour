@@ -175,6 +175,24 @@ class ProductionGuards(unittest.TestCase):
         with self.assertRaisesRegex(p.Invalid, "licence not accepted"):
             p.validate_scenario(self.scenario, self.root, self.now)
 
+    def test_ai_generated_photo_is_refused_by_the_engine(self):
+        relative = self.scenario["photos"]["file"]
+        photo_id = self.scenario["scenes"][0]["photo"]
+        for field, value in (("categories", "AI-generated images of Portugal|Lisbon"),
+                             ("commonsTitle", "File:Lisbon tram, made with Midjourney.jpg"),
+                             ("commonsCredit", "Created with DALL·E 3")):
+            with self.subTest(field=field):
+                catalogue = p.load_json(self.root / relative)
+                original = dict(catalogue["photos"][photo_id])
+                catalogue["photos"][photo_id][field] = value
+                p.write_json(self.root / relative, catalogue)
+                self.reseal(self.scenario, relative)
+                with self.assertRaisesRegex(p.Invalid, "AI-generated image refused"):
+                    p.validate_scenario(self.scenario, self.root, self.now)
+                catalogue["photos"][photo_id] = original
+                p.write_json(self.root / relative, catalogue)
+                self.reseal(self.scenario, relative)
+
     def test_altered_photo_bytes_stop(self):
         photo_id = self.scenario["scenes"][0]["photo"]
         path = self.root / "assets/photos" / (photo_id + ".jpg")

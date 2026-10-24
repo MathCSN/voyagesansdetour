@@ -104,10 +104,9 @@ class PublicBuildTest(unittest.TestCase):
 
     def test_preparation_feed_contains_reviewed_baggage_pin(self):
         rss=ET.parse(self.out/'pinterest/preparer-portugal.xml').getroot()
-        items=rss.findall('channel/item')
-        self.assertEqual(len(items),1)
-        pin=items[0]
-        self.assertEqual(pin.findtext('guid'),'urn:vsd:pinterest:pin-portugal-sans-voiture-bagages')
+        # New Pins join this feed every week: the reviewed baggage Pin must stay, not stay alone.
+        items={item.findtext('guid'):item for item in rss.findall('channel/item')}
+        pin=items['urn:vsd:pinterest:pin-portugal-sans-voiture-bagages']
         self.assertEqual(pin.findtext('link'),ORIGIN+'/portugal/portugal-sans-voiture-bagages/')
         self.assertIn('assistée par IA',pin.findtext('description'))
         media=pin.find('{http://search.yahoo.com/mrss/}content')
@@ -314,7 +313,7 @@ def source_copy(workdir,extra_articles):
     source=workdir/'source'
     source.mkdir()
     for name in ('generate.py','public_media.py','public-media.json','editorial_queue.py','destinations.py','destinations.json','articles.json','image-sources.json',
-                 'stay22.py','stay22.json','pinterest-rss.json','analytics.json'):
+                 'stay22.py','stay22.json','affiliates.py','affiliates.json','gyg_locations.py','getyourguide-locations.json','pinterest-rss.json','analytics.json'):
         shutil.copyfile(ROOT/name,source/name)
     shutil.copytree(ROOT/'dist',source/'dist')
     shutil.copytree(ROOT/'social-media',source/'social-media')

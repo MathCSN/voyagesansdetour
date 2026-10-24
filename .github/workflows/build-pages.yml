@@ -91,9 +91,15 @@ jobs:
           with Path(os.environ['GITHUB_OUTPUT']).open('a') as f:
               f.write('publish=' + str(publish).lower() + '\n')
           PY
+      # Before the site tests: a guide just released brings new places the cache test checks.
+      - name: Resolve GetYourGuide destination pages for new guides
+        if: steps.release.outputs.publish == 'true' || steps.generator.outputs.changed == 'true' || steps.intake.outputs.changed == 'true'
+        continue-on-error: true
+        timeout-minutes: 5
+        run: python gyg_locations.py --update
       - name: Validate site
         if: steps.release.outputs.publish == 'true' || steps.generator.outputs.changed == 'true' || steps.intake.outputs.changed == 'true'
-        run: python -m unittest -q test_site test_stay22 test_editorial_queue test_public_media test_autonomous_editorial test_autonomous_candidate test_cloud_source_changes test_editorial_update test_pin_feed_status
+        run: python -m unittest -q test_site test_stay22 test_affiliates test_gyg_locations test_editorial_queue test_public_media test_autonomous_editorial test_autonomous_candidate test_cloud_source_changes test_editorial_update test_pin_feed_status
       - name: Validate analytics consent without external calls
         if: steps.release.outputs.publish == 'true'
         run: node --test test_analytics.mjs
@@ -112,7 +118,7 @@ jobs:
         id: persist
         run: |
           set -euo pipefail
-          git add -- articles.json editorial-queue.json editorial-candidates
+          git add -- articles.json editorial-queue.json editorial-candidates getyourguide-locations.json
           if [ -d editorial-revalidation ]; then git add -- editorial-revalidation; fi
           if ! git diff --cached --quiet; then
             git -c user.name='Voyage Sans Détour' -c user.email='contact@voyagesansdetour.fr' commit -m 'Maintain the autonomous editorial queue'

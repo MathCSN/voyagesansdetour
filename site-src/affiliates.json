@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "max_links_per_guide": 3,
+  "partners": [
+    {
+      "key": "stay22_hotels",
+      "name": "Stay22 (Booking.com, Expedia, Hotels.com…)",
+      "category": "hotels",
+      "engine": "stay22",
+      "provider": "roam",
+      "enabled": true,
+      "id": "",
+      "template": "",
+      "domains": ["www.stay22.com"],
+      "signup": "https://hub.stay22.com/en/auth/signup",
+      "commission": "Part de la commission du site de réservation, à partir de 30 % selon la FAQ Stay22."
+    },
+    {
+      "key": "getyourguide",
+      "name": "GetYourGuide",
+      "category": "activites",
+      "engine": "template",
+      "enabled": true,
+      "id": "HKEWKYM",
+      "template": "https://www.getyourguide.com/fr-fr/{location_path}/?partner_id={id}&cmp={campaign}",
+      "domains": ["www.getyourguide.com"],
+      "signup": "https://partner.getyourguide.com/",
+      "commission": "Environ 8 % du prix de l’activité (5 à 8 % selon les sources), cookie de 30 jours."
+    },
+    {
+      "key": "civitatis",
+      "name": "Civitatis",
+      "category": "activites",
+      "engine": "template",
+      "enabled": false,
+      "id": "",
+      "template": "https://www.civitatis.com/fr/{place_slug}/?aid={id}&cmp={campaign}",
+      "domains": ["www.civitatis.com"],
+      "signup": "https://www.civitatis.com/fr/affilies/",
+      "commission": "Jusqu’à 10 % par vente, 1 € par participant de plus de 12 ans sur les free tours."
+    },
+    {
+      "key": "stay22_activities",
+      "name": "GetYourGuide via Stay22",
+      "category": "activites",
+      "engine": "stay22",
+      "provider": "getyourguide",
+      "enabled": false,
+      "id": "",
+      "template": "",
+      "domains": ["www.stay22.com"],
+      "signup": "https://hub.stay22.com/en/auth/signup",
+      "commission": "Part de la commission GetYourGuide reversée par Stay22. Désactivé : la redirection passe par la recherche GetYourGuide, qui peut afficher la mauvaise ville."
+    },
+    {
+      "key": "trainline",
+      "name": "Trainline",
+      "category": "transport",
+      "engine": "template",
+      "enabled": false,
+      "id": "",
+      "template": "https://prf.hn/click/camref:{id}/pubref:{campaign}/destination:https%3A%2F%2Fwww.thetrainline.com%2Ffr",
+      "domains": ["prf.hn"],
+      "signup": "https://www.thetrainline.com/about-us/partnerships/affiliates",
+      "commission": "Variable, fixée dans Partnerize à l’inscription ; cookie de 30 jours."
+    },
+    {
+      "key": "omio",
+      "name": "Omio",
+      "category": "transport",
+      "engine": "template",
+      "enabled": false,
+      "id": "",
+      "template": "",
+      "domains": ["www.omio.fr", "omio.sjv.io", "prf.hn"],
+      "signup": "https://www.omio.co.uk/affiliate",
+      "commission": "2 à 8 % par vente selon les réseaux (Impact, Travelpayouts), cookie de 30 jours."
+    },
+    {
+      "key": "heymondo",
+      "name": "Heymondo",
+      "category": "assurance",
+      "engine": "template",
+      "enabled": false,
+      "id": "",
+      "template": "",
+      "domains": ["heymondo.fr", "heymondo.com"],
+      "signup": "https://heymondo.fr/programme-affiliation/",
+      "commission": "Non publiée (communiquée à l’inscription) ; attribution 30 jours après le dernier clic."
+    },
+    {
+      "key": "chapka",
+      "name": "Chapka",
+      "category": "assurance",
+      "engine": "template",
+      "enabled": false,
+      "id": "",
+      "template": "",
+      "domains": ["www.chapkadirect.fr", "www.chapka.fr"],
+      "signup": "https://www.chapkadirect.fr/",
+      "commission": "Non publiée ; liens suivis fournis par Chapka après inscription."
+    }
+  ]
+}

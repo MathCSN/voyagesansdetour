@@ -1,10 +1,11 @@
-# Render already-reviewed scenarios only. No provider API, paid generator or social send.
+# Daily: turn published guides into posts (auto_social.py), render them with the
+# guarded engine, queue them in reviewed-social/. No provider API, paid generator or social send.
 name: Voyage Sans Detour reviewed media production
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: '17 5 * * 1'
+    - cron: '17 5 * * *'
 
 permissions: {}
 concurrency:
@@ -17,7 +18,7 @@ jobs:
     # The weekly schedule stays off until a qualified manual run is inspected.
     if: github.repository == 'MathCSN/voyagesansdetour' && github.ref == 'refs/heads/main' && github.event.repository.private == false && (github.event_name == 'workflow_dispatch' || vars.VSD_FREE_RENDER_SCHEDULE == 'true')
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 40
     permissions:
       contents: write
       actions: write
@@ -60,12 +61,33 @@ jobs:
           python -m pip install --disable-pip-version-check -r requirements.txt
       - name: Validate production guards
         if: steps.period.outputs.active == 'true'
-        run: python -m unittest -q test_production test_pin_draft test_pin_intake test_pin_promotion
-      - name: Produce at most one eligible clip
+        run: python -m unittest -q test_production test_auto_social test_pin_draft test_pin_intake test_pin_promotion
+      - name: Plan posts from published guides so the queue covers three weeks
         if: steps.period.outputs.active == 'true'
         run: |
           set -euo pipefail
-          python production.py | tee "$RUNNER_TEMP/vsd-production-result.json"
+          python auto_social.py | tee "$RUNNER_TEMP/vsd-auto-social.json"
+          python - <<'PYTHON'
+          import json,os
+          from pathlib import Path
+          result=json.loads((Path(os.environ['RUNNER_TEMP'])/'vsd-auto-social.json').read_text())
+          lines=['## Posts automatiques',f"Nouveaux posts : {len(result.get('created',[]))}."]
+          lines+=[f"- {c['channel']} {c['publishAt'][:10]} : {c['guide']}" for c in result.get('created',[])]
+          covered=', '.join(k+' '+(v or 'vide')[:10] for k,v in result.get('coveredUntil',{}).items())
+          lines+=[f"File couverte jusqu'au : {covered}."]
+          lines+=[f"- tenu : {h.get('slug')} ({h.get('channel','tous')}) : {h['reason']}" for h in result.get('held',[])]
+          if result.get('status')=='queue_short':
+              print('::warning title=File de posts courte::Moins de trois semaines de posts pour '+', '.join(result['shortChannels'])+' : aucun guide admissible (voir le résumé).')
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as output:output.write('\n'.join(lines)+'\n\n')
+          PYTHON
+      - name: Render every due post, at most six per run
+        if: steps.period.outputs.active == 'true'
+        run: |
+          set -euo pipefail
+          for attempt in 1 2 3 4 5 6; do
+            python production.py | tee "$RUNNER_TEMP/vsd-production-result.json"
+            if ! grep -q '"produced": 1' "$RUNNER_TEMP/vsd-production-result.json"; then break; fi
+          done
       - name: Report catalogue readiness separately from render success
         if: steps.period.outputs.active == 'true'
         run: |
@@ -124,9 +146,16 @@ jobs:
           set -euo pipefail
           # Only this job's completed artifact directory is staged. Temporary
           # files/lock files are excluded by the dedicated output .gitignore.
-          git add -- output reviewed-social pin-drafts pin-admissions.json ../../site-src/pinterest-additions.json ../../site-src/public-media.json ../../site-src/social-media/production
+          # Folders such as auto/ only exist once a post has been generated: stage what exists.
+          paths=()
+          for path in output reviewed-social pin-drafts pin-admissions.json scenarios catalogue.json auto assets/photos/auto ../../site-src/pinterest-additions.json ../../site-src/public-media.json ../../site-src/social-media/production; do
+            if [ -e "$path" ]; then paths+=("$path"); fi
+          done
+          git add -- "${paths[@]}"
           if ! git diff --cached --quiet; then
-            git -c user.name='Voyage Sans Détour' -c user.email='contact@voyagesansdetour.fr' commit -m 'Produce a reviewed media artifact with its receipt'
+            git -c user.name='Voyage Sans Détour' -c user.email='contact@voyagesansdetour.fr' commit -m 'Produce reviewed posts from published guides, with their receipts'
+            # Another workflow may have pushed meanwhile: replay this commit on top instead of losing the renders.
+            git -c user.name='Voyage Sans Détour' -c user.email='contact@voyagesansdetour.fr' pull --rebase origin main
             git push origin HEAD:main
           fi
       - name: Deploy the admitted feed through the existing checked build
