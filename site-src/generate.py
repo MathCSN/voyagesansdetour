@@ -38,8 +38,6 @@ CAROUSEL_FILES=tuple('carrousels-2026-09/'+city+'-'+name+'.jpg'
     'carrousels-2026-09/'+name for name in ('credits.txt','dmsans-OFL.txt','playfairdisplay-OFL.txt'))
 SOCIAL_FILES+=CAROUSEL_FILES
 SOCIAL_FILES+=approved_files(ROOT)
-# Le Pin Sintra déjà publié garde son image ; le lot Facebook de l'ancien format est retiré du site.
-SOCIAL_FILES+=tuple('production/sintra-facebook-2026-10/'+name for name in ('scene-01.jpg','credits.txt'))
 # Les reels de démonstration portent l'ancien nom et une voix sans droits commerciaux : jamais publiés.
 SHOW_SHORTS=not PUBLIC and not AFFILIATE_PREVIEW
 REQUIRED_MENTIONS={'editeur':('nom','adresse','telephone','email','directeur_publication'),'hebergeur':('nom','adresse','telephone','site','confidentialite')}

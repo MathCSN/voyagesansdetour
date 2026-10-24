@@ -64,6 +64,58 @@
       ]
     },
     {
+      "contentId": "sintra-facebook-2026-10",
+      "kind": "photos",
+      "approved": true,
+      "files": [
+        {
+          "name": "credits.txt",
+          "bytes": 488,
+          "sha256": "40dddae9674a254a3630b882d8ee964981d213b8394a8bf5f23178885422e4b8"
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "bytes": 4482,
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "bytes": 4449,
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+        },
+        {
+          "name": "scene-01.jpg",
+          "bytes": 195605,
+          "sha256": "0b455342bb1c4d40c742a205172dce3ac41c284a31d4f8a62f45166dfc5d9a55"
+        },
+        {
+          "name": "scene-02.jpg",
+          "bytes": 156445,
+          "sha256": "f63794a2fdff3020d1ebaee5fad3c94f7a7c11c8524a3b5540a1a27eb4bbd06d"
+        },
+        {
+          "name": "scene-03.jpg",
+          "bytes": 161734,
+          "sha256": "ca897f293afd6310d05cb5a9559fdae87951be04791da72152fd6ecd335c0054"
+        },
+        {
+          "name": "scene-04.jpg",
+          "bytes": 150071,
+          "sha256": "ed91552fd6335aa3ffecdc90c7b338f9b847475a35b9b584ea309b67388756ac"
+        },
+        {
+          "name": "scene-05.jpg",
+          "bytes": 175426,
+          "sha256": "69f09d4e0713897d65aa14e4f2ee9a7a91646c29dcfea31db18bf2f690af77ae"
+        },
+        {
+          "name": "scene-06.jpg",
+          "bytes": 164941,
+          "sha256": "e39ab23d1e1155c5d1dfbd11b7e7997cda503aa068e3ff020aad05a883294a9d"
+        }
+      ]
+    },
+    {
       "contentId": "pin-portugal-sans-voiture-bagages",
       "kind": "pin",
       "approved": true,
@@ -77,6 +129,68 @@
           "name": "credits.txt",
           "bytes": 155,
           "sha256": "d6fce7266fb87e370908d35908b84c3c4cfcea2f154f82ee933ed0e89413f957"
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "bytes": 4482,
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "bytes": 4449,
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+        }
+      ]
+    },
+    {
+      "contentId": "reel-article-portugal-sans-voiture-bagages-voice",
+      "approved": true,
+      "files": [
+        {
+          "name": "reel.mp4",
+          "bytes": 775276,
+          "sha256": "29c77ef158d807bd686672e0a0d45e96476e179de8520c24f9ce384e03f610d4"
+        },
+        {
+          "name": "poster.jpg",
+          "bytes": 137061,
+          "sha256": "fb806bb880b6462eb0f7e437eda0ae86925ae24e6b1f065fcbbaad65c1e98697"
+        },
+        {
+          "name": "credits.txt",
+          "bytes": 2252,
+          "sha256": "6fa9d5e8bf6633d3829c34d6184d5bb437dc270a8150d76e6337739c3d371a23"
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "bytes": 4482,
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "bytes": 4449,
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+        }
+      ]
+    },
+    {
+      "contentId": "reel-article-porto-3-jours-sans-voiture-voice",
+      "approved": true,
+      "files": [
+        {
+          "name": "reel.mp4",
+          "bytes": 970947,
+          "sha256": "99af4f5dd1767a2e1cbc4a8ff6bba4f2d5487938a529581770d5154d75adc3ce"
+        },
+        {
+          "name": "poster.jpg",
+          "bytes": 118067,
+          "sha256": "9c0d4a0a9cac64073d283b30c2c9f108e77ab7e0988d8a0aeec452eb9de6a108"
+        },
+        {
+          "name": "credits.txt",
+          "bytes": 2252,
+          "sha256": "6fa9d5e8bf6633d3829c34d6184d5bb437dc270a8150d76e6337739c3d371a23"
         },
         {
           "name": "dmsans-OFL.txt",
