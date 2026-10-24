@@ -22,7 +22,9 @@ ENGINES = ('stay22', 'template')
 REL = 'sponsored nofollow noopener'
 MAX_LINKS = 3
 MAX_HOTEL_PLACES = 2
-PLACEHOLDERS = {'id', 'campaign', 'query', 'place_slug'}
+PLACEHOLDERS = {'id', 'campaign', 'query', 'place_slug', 'location_path'}
+# Page de lieu GetYourGuide (« lisbonne-l42 ») lue dans getyourguide-locations.json.
+LOCATION_PATTERN = re.compile(r'[a-z0-9]+(?:-[a-z0-9]+)*-l[0-9]+')
 ID_PATTERN = re.compile(r'[A-Za-z0-9._~-]{1,80}')
 PARTNER_KEYS = {'key', 'name', 'category', 'engine', 'enabled', 'id', 'template', 'domains', 'signup', 'commission'}
 CONFIG_KEYS = {'schema_version', 'max_links_per_guide', 'partners'}
@@ -63,6 +65,7 @@ class Place:
     address: str
     lat: float | None = None
     lng: float | None = None
+    key: str = ''
 
 
 @dataclass(frozen=True)
@@ -122,7 +125,7 @@ def validate_template(partner: dict) -> None:
     fields = template_fields(partner['template'])
     if 'id' not in fields or not fields <= PLACEHOLDERS:
         raise ValueError(f'Partenaire {partner["key"]} : le gabarit doit contenir {{id}} et seulement {sorted(PLACEHOLDERS)}.')
-    sample = partner['template'].format(id='x', campaign='x', query='x', place_slug='x')
+    sample = partner['template'].format(id='x', campaign='x', query='x', place_slug='x', location_path='x-l1')
     parsed = urlparse(sample)
     if parsed.scheme != 'https' or parsed.netloc not in partner['domains']:
         raise ValueError(f'Partenaire {partner["key"]} : gabarit hors https ou hors domaines autorisés.')
@@ -175,6 +178,10 @@ def country_of(article: dict, countries: dict) -> tuple:
     return name, article.get('continent') or entry.get('continent')
 
 
+def place_key(name: str, article: dict) -> str:
+    return slugify(name) + '|' + article.get('country', 'portugal')
+
+
 def places_for(article: dict, catalogue: list, country_name: str) -> tuple:
     destination = str(article['destination'])
     names = [destination]
@@ -186,8 +193,22 @@ def places_for(article: dict, catalogue: list, country_name: str) -> tuple:
         names = [d for _, d in found][:MAX_HOTEL_PLACES] or names
     geo = article.get('geo') if isinstance(article.get('geo'), dict) else {}
     return tuple(Place(name, name if normalize(name) == normalize(country_name) else f'{name}, {country_name}',
-                       geo.get('lat') if name == destination else None, geo.get('lng') if name == destination else None)
+                       geo.get('lat') if name == destination else None, geo.get('lng') if name == destination else None,
+                       place_key(name, article))
                  for name in names)
+
+
+# Noms propres d'un titre (« Séville », « Pinhão ») : premier mot, sigles et noms élidés exclus.
+TITLE_NAME = re.compile(r"(?<![\w’'])([A-ZÀ-Ý][a-zà-ÿ]{2,}(?:[- ][A-ZÀ-Ý][a-zà-ÿ]+)*)")
+MAX_TITLE_PLACES = 3
+
+
+def title_places(article: dict, country_name: str) -> tuple:
+    """Villes citées dans le titre, en repli quand la destination (une région) n'a pas de page fiable."""
+    taken = {normalize(article['destination']), normalize(country_name)}
+    names = [m.group(1) for m in TITLE_NAME.finditer(article.get('title', '')) if m.start() > 0]
+    names = [n for n in dict.fromkeys(names) if normalize(n) not in taken][:MAX_TITLE_PLACES]
+    return tuple(Place(n, f'{n}, {country_name}', key=place_key(n, article)) for n in names)
 
 
 def wants(category: str, article: dict, texts: list, continent: str | None) -> bool:
@@ -226,7 +247,7 @@ def anchor_for(category: str, sections: list, texts: list, guide_category: str =
 
 class Site:
     def __init__(self, config: dict, stay22_config: dict, *, public: bool, origin: str, preview: bool = False,
-                 countries: dict | None = None):
+                 countries: dict | None = None, locations: dict | None = None):
         self.config = validate_config(config)
         self.stay22 = stay22.validate_config(stay22_config)
         if preview and public:
@@ -234,12 +255,15 @@ class Site:
         self.preview = preview
         self.live = public and origin == stay22.ORIGIN
         self.countries = countries or {}
+        self.locations = locations or {}
 
     @classmethod
     def load(cls, root, *, public: bool, origin: str, preview: bool = False, stay22_path=None, path=None) -> 'Site':
+        import gyg_locations  # le résolveur importe ce module : import local pour éviter la boucle
         root = Path(root)
         return cls(load_config(path or root / 'affiliates.json'), stay22.load_config(stay22_path or root / 'stay22.json'),
-                   public=public, origin=origin, preview=preview, countries=load_countries(root / 'destinations.json'))
+                   public=public, origin=origin, preview=preview, countries=load_countries(root / 'destinations.json'),
+                   locations=gyg_locations.paths(root / gyg_locations.CACHE_NAME))
 
     def is_partner_active(self, partner: dict) -> bool:
         ready = partner['engine'] == 'stay22' or bool(partner['id'] and partner['template'])
@@ -252,15 +276,22 @@ class Site:
     def active_partners(self) -> tuple:
         return tuple(p for p in self.config['partners'] if self.is_partner_active(p))
 
-    def partner_for(self, category: str) -> dict | None:
-        return next((p for p in self.active_partners() if p['category'] == category), None)
+    def partners_for(self, category: str) -> tuple:
+        return tuple(p for p in self.active_partners() if p['category'] == category)
 
-    def url(self, partner: dict, place: Place, campaign: str) -> str:
+    def url(self, partner: dict, place: Place, campaign: str) -> str | None:
+        """Lien du partenaire pour ce lieu, ou None s'il n'a pas de page fiable pour ce lieu."""
         if partner['engine'] == 'stay22':
             return stay22.allez_url(self.stay22, partner['provider'], campaign=campaign, address=place.address,
                                     lat=place.lat, lng=place.lng)
+        location = ''
+        if 'location_path' in template_fields(partner['template']):
+            location = self.locations.get(place.key) or ''
+            if not LOCATION_PATTERN.fullmatch(location):
+                return None
         url = partner['template'].format(id=quote(partner['id'], safe=''), campaign=quote(campaign, safe=''),
-                                         query=quote(place.name, safe=''), place_slug=slugify(place.name))
+                                         query=quote(place.name, safe=''), place_slug=slugify(place.name),
+                                         location_path=location)
         if urlparse(url).netloc not in partner['domains']:
             raise ValueError(f'Partenaire {partner["key"]} : lien hors domaines autorisés.')
         return url
@@ -270,18 +301,30 @@ class Site:
         texts = [section_text(s) for s in sections]
         country_name, continent = country_of(article, self.countries)
         places = places_for(article, catalogue, country_name)
+        fallback = title_places(article, country_name)
         campaign = stay22.campaign_for(self.stay22, article['slug'])
         budget, boxes = self.config['max_links_per_guide'], []
         for category in CATEGORIES:
-            partner = self.partner_for(category)
-            if not budget or partner is None or not wants(category, article, texts, continent):
+            if not budget or not wants(category, article, texts, continent):
                 continue
-            chosen = places[:min(budget, MAX_HOTEL_PLACES)] if category == 'hotels' else places[:1]
-            label = COPY[category][3]
-            links = tuple(Link(self.url(partner, p, campaign), label.format(place=p.name)) for p in chosen)
-            boxes.append(Box(category, anchor_for(category, sections, texts, article.get('category', '')), chosen, links))
-            budget -= len(links)
+            candidates = places + fallback if category == 'activites' else places
+            box = self.box_for(category, candidates, campaign, budget, anchor_for(category, sections, texts, article.get('category', '')))
+            if box:
+                boxes.append(box)
+                budget -= len(box.links)
         return tuple(boxes)
+
+    def box_for(self, category: str, places: tuple, campaign: str, budget: int, anchor: int) -> Box | None:
+        """Premier partenaire actif de la catégorie qui a un lien fiable pour au moins un lieu."""
+        limit = min(budget, MAX_HOTEL_PLACES) if category == 'hotels' else 1
+        for partner in self.partners_for(category):
+            pairs = [(p, self.url(partner, p, campaign)) for p in places]
+            pairs = [(p, url) for p, url in pairs if url][:limit]
+            if pairs:
+                label = COPY[category][3]
+                return Box(category, anchor, tuple(p for p, _ in pairs),
+                           tuple(Link(url, label.format(place=p.name)) for p, url in pairs))
+        return None
 
     def render(self, box: Box) -> str:
         kicker, title, text, _ = COPY[box.category]

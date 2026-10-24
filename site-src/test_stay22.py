@@ -131,7 +131,8 @@ class Stay22Test(unittest.TestCase):
                 self.assertLessEqual(len(links), 3)
                 for attrs in links:
                     query = parse_qs(urlparse(attrs['href']).query)
-                    self.assertTrue(attrs['href'].startswith('https://www.getyourguide.com/fr-fr/s/?'))
+                    self.assertRegex(attrs['href'], r'^https://www\.getyourguide\.com/fr-fr/[a-z0-9-]+-l[0-9]+/\?')
+                    self.assertNotIn('/s/', attrs['href'])
                     self.assertEqual((query['partner_id'], query['cmp']), (['HKEWKYM'], [stay22.campaign_for(self.config, slug)]))
                     self.assertEqual(set(attrs['rel'].split()), {'sponsored', 'nofollow', 'noopener'})
                 self.assertEqual(source.count(affiliates.DISCLOSURE), source.count('class="partner-box'))

@@ -313,7 +313,7 @@ def source_copy(workdir,extra_articles):
     source=workdir/'source'
     source.mkdir()
     for name in ('generate.py','public_media.py','public-media.json','editorial_queue.py','destinations.py','destinations.json','articles.json','image-sources.json',
-                 'stay22.py','stay22.json','affiliates.py','affiliates.json','pinterest-rss.json','analytics.json'):
+                 'stay22.py','stay22.json','affiliates.py','affiliates.json','gyg_locations.py','getyourguide-locations.json','pinterest-rss.json','analytics.json'):
         shutil.copyfile(ROOT/name,source/name)
     shutil.copytree(ROOT/'dist',source/'dist')
     shutil.copytree(ROOT/'social-media',source/'social-media')
