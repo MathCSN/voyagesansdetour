@@ -34,6 +34,17 @@ Chaque guide, existant ou futur, de n'importe quel pays, reçoit ses liens au mo
 Les pages `/transparence/` et `/confidentialite/` changent toutes seules selon les
 partenaires actifs.
 
+## Partenaires actifs
+
+- **GetYourGuide** (identifiant `HKEWKYM`, activé le 24/10/2026) : lien simple vers la
+  recherche `https://www.getyourguide.com/fr-fr/s/?q=<lieu>&partner_id=HKEWKYM&cmp=vsd_<guide>`,
+  le format que construit la barre de recherche du site lui-même. Pas de widget ni de script
+  « Integration Analyzer » : ils chargeraient un script tiers soumis au consentement RGPD et
+  ralentiraient les pages. Le bloc apparaît dans les guides qui parlent de visites, musées,
+  monuments ou excursions (8 guides sur 14 au 24/10). À vérifier une fois dans un navigateur
+  ordinaire : dans le navigateur intégré de Claude, la recherche GetYourGuide renvoyait des
+  résultats sans rapport, y compris depuis sa propre barre de recherche.
+
 ## Stay22 : pourquoi c'est inactif et comment l'activer
 
 Stay22 (« Allez ») transforme un lien en réservation suivie : `https://www.stay22.com/allez/roam`
@@ -65,7 +76,7 @@ Une fois confirmée, une session passe `hosting_verified` et `enabled` à `true`
    - `id` : l'identifiant affilié (lettres, chiffres, `.`, `_`, `~`, `-`). Ce n'est pas un
      secret, il apparaît dans les liens. **Jamais** de mot de passe ni de clé d'API ici : le
      dépôt est public.
-   - `template` : le gabarit de lien, déjà rempli pour GetYourGuide, Civitatis et Trainline.
+   - `template` : le gabarit de lien, déjà rempli pour Civitatis et Trainline.
      Pour Omio, Heymondo et Chapka, copier le lien de suivi fourni par l'espace partenaire et
      remplacer l'identifiant par `{id}`. Repères possibles : `{campaign}` (campagne du guide),
      `{query}` (nom du lieu, encodé), `{place_slug}` (nom du lieu en minuscules avec tirets).

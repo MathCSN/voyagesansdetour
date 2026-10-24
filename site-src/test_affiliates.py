@@ -56,6 +56,14 @@ def active_site(config=None, **gates):
                            public=True, origin=stay22.ORIGIN)
 
 
+def stay22_only():
+    config = affiliates.load_config(ROOT / 'affiliates.json')
+    for partner in config['partners']:
+        if partner['engine'] == 'template':
+            partner['enabled'] = False
+    return affiliates.validate_config(config)
+
+
 def woven(site, art, catalogue=CATALOGUE):
     return site.weave(art, ['<section id="s%d">x</section>' % i for i in range(len(art['sections']))], catalogue)
 
@@ -80,13 +88,24 @@ class ConfigTest(unittest.TestCase):
         self.assertLessEqual(self.config['max_links_per_guide'], 3)
         for partner in self.config['partners']:
             self.assertTrue(partner['signup'].startswith('https://'), partner['key'])
-            if partner['engine'] == 'template':
-                self.assertEqual(partner['id'], '', 'aucun identifiant fictif dans le dépôt')
+            if partner['engine'] == 'template' and partner['id']:
+                self.assertRegex(partner['id'], affiliates.ID_PATTERN)
+        gyg = next(p for p in self.config['partners'] if p['key'] == 'getyourguide')
+        self.assertEqual((gyg['enabled'], gyg['id']), (True, 'HKEWKYM'))
 
     def test_partner_without_id_stays_inactive_and_breaks_nothing(self):
         site = active_site(with_template_partners(self.config, id=''))
         self.assertEqual({p['key'] for p in site.active_partners()} & {'getyourguide', 'trainline', 'heymondo'}, set())
         self.assertIn('partner-cta', woven(site, CITY))
+
+    def test_getyourguide_link_carries_partner_id_and_guide_campaign(self):
+        site = active_site(enabled=False, hosting_verified=False)
+        found = links(woven(site, CITY))
+        self.assertEqual(len(found), 1)
+        url = urlparse(found[0]['href'])
+        self.assertEqual(url.netloc + url.path, 'www.getyourguide.com/fr-fr/s/')
+        self.assertEqual(parse_qs(url.query), {'q': ['Lisbonne'], 'partner_id': ['HKEWKYM'], 'cmp': ['vsd_lisbonne_3_jours']})
+        self.assertNotIn('partner-hotels', woven(site, CITY))
 
     def test_partner_with_id_but_disabled_flag_stays_inactive(self):
         config = copy.deepcopy(self.config)
@@ -115,7 +134,7 @@ class ConfigTest(unittest.TestCase):
 
 class SelectionTest(unittest.TestCase):
     def test_city_guide_gets_disclosed_hotel_and_activity_links_with_guide_campaign(self):
-        html = woven(active_site(), CITY)
+        html = woven(active_site(stay22_only()), CITY)
         found = links(html)
         self.assertTrue(1 <= len(found) <= 3)
         urls = [urlparse(a['href']) for a in found]
@@ -185,7 +204,7 @@ class SelectionTest(unittest.TestCase):
         self.assertIn('pubref:vsd_lisbonne_porto_train', trainline_url)
 
     def test_no_link_and_no_disclosure_when_everything_is_inactive(self):
-        html = woven(active_site(enabled=False, hosting_verified=False), CITY)
+        html = woven(active_site(stay22_only(), enabled=False, hosting_verified=False), CITY)
         self.assertEqual(links(html), [])
         self.assertNotIn(affiliates.DISCLOSURE, html)
         self.assertEqual(html, ''.join('<section id="s%d">x</section>' % i for i in range(4)))
@@ -212,7 +231,7 @@ class SelectionTest(unittest.TestCase):
         self.assertIn(affiliates.DISCLOSURE, text)
         self.assertIn('Stay22', text)
         self.assertIn('sponsored', text)
-        self.assertIn('Aucun programme d’affiliation ni publicité n’est activé', active_site(enabled=False).transparency())
+        self.assertIn('Aucun programme d’affiliation ni publicité n’est activé', active_site(stay22_only(), enabled=False).transparency())
 
 
 if __name__ == '__main__':

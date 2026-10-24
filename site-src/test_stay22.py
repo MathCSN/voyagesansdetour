@@ -33,10 +33,18 @@ class Stay22Test(unittest.TestCase):
         cls.real_config = stay22.load_config(ROOT / 'stay22.json')
         cls.config = copy.deepcopy(cls.real_config)
         cls.config.update(enabled=False, hosting_verified=False, links_verified=False)
+        # Ces contrôles portent sur Stay22 seul : les partenaires à gabarit sont éteints.
+        partners = affiliates.load_config(ROOT / 'affiliates.json')
+        for partner in partners['partners']:
+            if partner['engine'] == 'template':
+                partner['enabled'] = False
+        cls.stay22_only = cls.work / 'affiliates-stay22-only.json'
+        cls.stay22_only.write_text(json.dumps(partners))
         cls.inactive = cls.render(cls.config, 'inactive')
         cls.active_config = {**cls.config, 'enabled': True, 'hosting_verified': True, 'links_verified': True}
         cls.active = cls.render(cls.active_config, 'active')
         cls.guides = {a['slug']: a for a in editorial_queue.published_articles(ROOT)}
+        cls.real_partners = cls.render(cls.config, 'real-partners', extra_env={'SITE_AFFILIATES': str(ROOT / 'affiliates.json')})
 
     @classmethod
     def tearDownClass(cls):
@@ -48,7 +56,8 @@ class Stay22Test(unittest.TestCase):
         config_path.write_text(json.dumps(config))
         out = cls.work / name
         env = dict(os.environ, LJA_PUBLIC='1', SITE_ORIGIN=stay22.ORIGIN, SITE_OUT=str(out), SITE_STAY22=str(config_path))
-        env.pop('SITE_MENTIONS', None); env.pop('SITE_ANALYTICS', None); env.pop('SITE_AFFILIATES', None)
+        env.pop('SITE_MENTIONS', None); env.pop('SITE_ANALYTICS', None)
+        env['SITE_AFFILIATES'] = str(cls.stay22_only)
         env.update(extra_env or {})
         result = subprocess.run([sys.executable, str(ROOT / 'generate.py'), *args], env=env, capture_output=True, text=True)
         if result.returncode:
@@ -112,6 +121,23 @@ class Stay22Test(unittest.TestCase):
                 article = source[source.index('<article class="article-body">'):source.index('id="questions"')]
                 self.assertEqual(article.count('class="partner-box'), source.count('class="partner-box'))
                 self.assertIn('Les liens partenaires de ce guide sont signalés', source)
+
+    def test_real_partner_config_without_stay22_links_activities_to_getyourguide(self):
+        boxes = 0
+        for slug, source in self.guide_pages(self.real_partners):
+            with self.subTest(slug=slug):
+                self.assertNotIn('stay22.com', source)
+                links = [a for t, a in Tags(source).tags if t == 'a' and 'partner-cta' in a.get('class', '')]
+                self.assertLessEqual(len(links), 3)
+                for attrs in links:
+                    query = parse_qs(urlparse(attrs['href']).query)
+                    self.assertTrue(attrs['href'].startswith('https://www.getyourguide.com/fr-fr/s/?'))
+                    self.assertEqual((query['partner_id'], query['cmp']), (['HKEWKYM'], [stay22.campaign_for(self.config, slug)]))
+                    self.assertEqual(set(attrs['rel'].split()), {'sponsored', 'nofollow', 'noopener'})
+                self.assertEqual(source.count(affiliates.DISCLOSURE), source.count('class="partner-box'))
+                boxes += source.count('class="partner-box')
+        self.assertGreater(boxes, 0)
+        self.assertIn('GetYourGuide', (self.real_partners / 'transparence/index.html').read_text())
 
     def test_where_to_sleep_guide_puts_the_hotel_box_in_its_neighbourhood_sections(self):
         source = dict(self.guide_pages(self.active))['ou-dormir-lisbonne-quartiers']
