@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 1,
+  "contentId": "fb-sintra-budget-2026-11",
+  "status": "rendered_not_published",
+  "fingerprint": "ccf0b63ca9a3b7a3b084e570a544c586042c759a9ef8b91fea59fe63346066cb",
+  "createdAt": "2026-10-24T06:54:07.963510Z",
+  "renderFinishedAt": "2026-10-24T06:54:08.961370Z",
+  "rendererContractVersion": 3,
+  "rendererSha256": "505838d3ca801ba10c22e987a3de9f2d6e4fd30946321cefccf89ac0f7dc8ed6",
+  "drawingSha256": "70d6df722c9393bfef74e3fbc2418b315d46d91be857613120a1bd48f4a8526d",
+  "kind": "carousel",
+  "channel": "facebook",
+  "publishAt": "2026-11-01T17:00:00Z",
+  "reviewValidUntil": "2026-11-23T00:00:00Z",
+  "sourceCheckedOn": "2026-10-24",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/sintra-depuis-lisbonne/",
+  "voice": null,
+  "presenter": null,
+  "sourceUrls": [
+    "https://bilheteira.parquesdesintra.pt/info/parque-e-palacio-da-pena-visita-essencial/1198/en",
+    "https://www.parquesdesintra.pt/en/plan-your-visit/how-to-get-there/",
+    "https://www.parquesdesintra.pt/en/plan-your-visit/opening-times-and-prices/",
+    "https://www.parquesdesintra.pt/en/plan-your-visit/tickets-palace-of-pena/"
+  ],
+  "photos": {
+    "sintra-pena-panorama": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Chabe01",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Palais_national_Pena_Sintra_111.jpg"
+    },
+    "sintra-pena-tour-jaune": {
+      "licence": "CC BY 4.0",
+      "author": "Jakub Hałun",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Pena_Palace,_Sintra,_Portugal,_20250606_1037_0005.jpg"
+    },
+    "sintra-pena-terrasse": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Diego Delso",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Palacio_Nacional_da_Pena,_Sintra,_Portugal,_2019-05-25,_DD_129.jpg"
+    },
+    "sintra-mouros-vue": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Diego Delso",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Castelo_dos_Mouros,_Sintra,_Portugal,_2019-05-25,_DD_82.jpg"
+    },
+    "sintra-vila-place": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Diego Delso",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Palacio_Nacional,_Sintra,_Portugal,_2019-05-25,_DD_09.jpg"
+    },
+    "sintra-pena-colline": {
+      "licence": "CC BY 4.0",
+      "author": "Jakub Hałun",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Pal%C3%A1cio_Nacional_da_Pena,_Sintra,_Portugal,_20250606_1159_0132.jpg"
+    }
+  },
+  "video": null,
+  "files": [
+    {
+      "file": "apercu.jpg",
+      "sha256": "e18e66a79c7ea5a0531e6b6e5f941e3d82cef364059ffc45975b0cbcb8532eeb",
+      "bytes": 204610
+    },
+    {
+      "file": "credits.txt",
+      "sha256": "49b562bd10b73ef954d85b54c0d348bd60c301be14dae3bbf3f689970e4f1051",
+      "bytes": 3184
+    },
+    {
+      "file": "dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "file": "legende.txt",
+      "sha256": "9b98d6a2e990c3ba10d5742efebf1c77a7e9a27b5a6eb0db71aa66835a8710b2",
+      "bytes": 681
+    },
+    {
+      "file": "playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    },
+    {
+      "file": "scenario.json",
+      "sha256": "ba773e328f688ec902958f33553fbc0fad652cd7ef99869c21d5b7d3b46abf25",
+      "bytes": 6728
+    },
+    {
+      "file": "scene-01.jpg",
+      "sha256": "326193ea6dd6f6bcca06bcef41a6dece0ac83eae5c11b74f6ad1f69dde6dc460",
+      "bytes": 257629
+    },
+    {
+      "file": "scene-02.jpg",
+      "sha256": "69c482c0cfc21a6e6045d0f6f8160929ece33945e5ec241d44f75ab231cab71c",
+      "bytes": 321152
+    },
+    {
+      "file": "scene-03.jpg",
+      "sha256": "553f55f5c0719c65d7bc3aa5a62375d59c5837ab4a2a5193c5a11bd587128bd3",
+      "bytes": 312368
+    },
+    {
+      "file": "scene-04.jpg",
+      "sha256": "0e265a2e27af8ad5d466f27270da9c67acf59f3ca4729383990bbc68dd0eaf0d",
+      "bytes": 418930
+    },
+    {
+      "file": "scene-05.jpg",
+      "sha256": "4912fd170799f0ebe382a7dcc40a8b5cc73cf4990057d3ffdc5b8717cda998e6",
+      "bytes": 364197
+    },
+    {
+      "file": "scene-06.jpg",
+      "sha256": "baf8e4204bfd2e388d43e51f78a053fa345623343171b0fad871453e6786e191",
+      "bytes": 367387
+    }
+  ],
+  "runtime": {
+    "wallSeconds": 0.971,
+    "encoderThreads": 2,
+    "pillowVersion": "11.3.0",
+    "ffmpegVersion": null
+  },
+  "publication": {
+    "uploaded": false,
+    "scheduled": false,
+    "published": false,
+    "readyForAutomaticImport": false
+  },
+  "cost": {
+    "newPaidService": false,
+    "providerCalls": 0,
+    "monetarySpendEur": 0
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "contentId": "fb-porto-3-jours-2026-11",
+  "status": "rendered_not_published",
+  "fingerprint": "190ad8bfd5a5c5347c185228d0183f8302fbe46ac44e46016e1a477bfb3c4a0e",
+  "createdAt": "2026-10-24T06:54:07.014874Z",
+  "renderFinishedAt": "2026-10-24T06:54:07.832552Z",
+  "rendererContractVersion": 3,
+  "rendererSha256": "505838d3ca801ba10c22e987a3de9f2d6e4fd30946321cefccf89ac0f7dc8ed6",
+  "drawingSha256": "70d6df722c9393bfef74e3fbc2418b315d46d91be857613120a1bd48f4a8526d",
+  "kind": "carousel",
+  "channel": "facebook",
+  "publishAt": "2026-11-06T17:00:00Z",
+  "reviewValidUntil": "2026-11-23T00:00:00Z",
+  "sourceCheckedOn": "2026-10-24",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/porto-3-jours-sans-voiture/",
+  "voice": null,
+  "presenter": null,
+  "sourceUrls": [
+    "https://voyagesansdetour.fr/portugal/porto-3-jours-sans-voiture/"
+  ],
+  "photos": {
+    "porto-luis-panorama-nuit": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Diego Delso",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Puente_de_Don_Luis_I,_Oporto,_Portugal,_2019-06-02,_DD_29-31_HDR.jpg"
+    },
+    "porto-sao-bento-azulejos": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Palickap",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Porto,_S%C3%A3o_Bento_station,_azulejos_(2).jpg"
+    },
+    "porto-gaia-rabelos-vue": {
+      "licence": "CC BY-SA 3.0",
+      "author": "Diego Delso",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Rabelos_en_el_r%C3%ADo_Duero,_Vila_Nova_de_Gaia,_Portugal,_2012-05-09,_DD_14.JPG"
+    },
+    "porto-gaia-chai-tonneaux": {
+      "licence": "CC BY 2.0",
+      "author": "Ray in Manila",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Taylor%E2%80%99s_Port_Wine_Cellar,_Vila_Nova_de_Gaia,_Oporto_(48730636822).jpg"
+    },
+    "porto-matosinhos-surf": {
+      "licence": "CC BY 2.0",
+      "author": "Bex Walton from London, England",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Surfer_on_Matosinhos_beach_(51707546625).jpg"
+    },
+    "porto-luis-nuit": {
+      "licence": "CC BY-SA 4.0",
+      "author": "T meltzer",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Ponte_de_D._Lu%C3%ADs_2.jpg"
+    }
+  },
+  "video": null,
+  "files": [
+    {
+      "file": "apercu.jpg",
+      "sha256": "1429aa3a1ea88a337d926cf61a4902de3c3e09fdab8e5040ee34a1185c10816b",
+      "bytes": 186770
+    },
+    {
+      "file": "credits.txt",
+      "sha256": "0e4797be6a50e7ab64e14dd524bdeb4c86a0f038f8bf159a290687aa41bf7038",
+      "bytes": 2717
+    },
+    {
+      "file": "dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "file": "legende.txt",
+      "sha256": "afd7e1c9e3678fb4ca0722d2f12c390ca9183598a5bcad5adf7657bd6dfcddfe",
+      "bytes": 628
+    },
+    {
+      "file": "playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    },
+    {
+      "file": "scenario.json",
+      "sha256": "2d76cf4eeb20e4a302bdd78d83ed731078b0cd1dfb0396397c89c745ff5af999",
+      "bytes": 6026
+    },
+    {
+      "file": "scene-01.jpg",
+      "sha256": "44182f0e29f3f36036e5cf084301ec7f0fa0e70701057e6b5e4becd1f483d33e",
+      "bytes": 269142
+    },
+    {
+      "file": "scene-02.jpg",
+      "sha256": "cd1cd0fe4cb822d8b6dd6eb0e823e6d85ec30c37a16ac3343a5a473b09487aa3",
+      "bytes": 335438
+    },
+    {
+      "file": "scene-03.jpg",
+      "sha256": "255ac4f23f70bde54dd2656757dca9cf4f4dcdf1ba7859d9f805cc0075f00f7f",
+      "bytes": 337794
+    },
+    {
+      "file": "scene-04.jpg",
+      "sha256": "2b1767a0bc0844200ad46bcd41ff3570d3b84e45779c04843605b8bd461314d6",
+      "bytes": 227569
+    },
+    {
+      "file": "scene-05.jpg",
+      "sha256": "424a67f7d9def88ba1801b6ed97320f07cff55cff7a290803e1f21b4557221b6",
+      "bytes": 263771
+    },
+    {
+      "file": "scene-06.jpg",
+      "sha256": "c5899c99e841d736a361cd99507ce4497ba1a236f63569b016792879adbee0a4",
+      "bytes": 316403
+    }
+  ],
+  "runtime": {
+    "wallSeconds": 0.791,
+    "encoderThreads": 2,
+    "pillowVersion": "11.3.0",
+    "ffmpegVersion": null
+  },
+  "publication": {
+    "uploaded": false,
+    "scheduled": false,
+    "published": false,
+    "readyForAutomaticImport": false
+  },
+  "cost": {
+    "newPaidService": false,
+    "providerCalls": 0,
+    "monetarySpendEur": 0
+  }
+}

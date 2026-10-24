@@ -1,0 +1,191 @@
+{
+  "schemaVersion": 2,
+  "id": "fb-lisbonne-ou-dormir-2026-11",
+  "kind": "carousel",
+  "channel": "facebook",
+  "destination": "Lisbonne",
+  "title": "Où dormir à Lisbonne sans voiture",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/ou-dormir-lisbonne-quartiers/",
+  "publishAt": "2026-11-12T17:00:00Z",
+  "review": {
+    "status": "reviewed_for_render",
+    "checkedAt": "2026-10-24T06:45:00Z",
+    "validUntil": "2026-11-23T00:00:00Z",
+    "method": "Faits relus mot pour mot dans les instantanés datés du 24/10/2026 (sources/social-2026-10-24) ; photos sous licence libre consignées dans assets/photos/catalogue.json."
+  },
+  "sources": {
+    "file": "sources/social-2026-10-24/sources.json",
+    "sha256": "ab7c358a9fcfa0a14abc58fe398ac7816ad7fece07101de071565bb938118878"
+  },
+  "photos": {
+    "file": "assets/photos/catalogue.json",
+    "sha256": "a66ad22b12c71b7e545179ac6a8e3f3a4412808b8eb854734e79105402792268"
+  },
+  "caption": {
+    "hook": "🏘️ Où dormir à Lisbonne sans voiture ? 5 quartiers, 5 façons de vivre la ville.",
+    "lines": [
+      "🏛️ Baixa / Rossio : la base centrale, avec le train pour Sintra au Rossio.",
+      "☕ Chiado : cafés, boutiques et sorties à pied.",
+      "🌅 Alfama : ruelles et belvédères, mais ça grimpe.",
+      "🍸 Bairro Alto et Cais do Sodré : les soirées, avec métro, train et bateau."
+    ],
+    "cta": "👉 Le comparatif complet et les 4 questions à poser avant de payer :",
+    "hashtags": [
+      "#Lisbonne",
+      "#Portugal",
+      "#VoyageSansVoiture",
+      "#VoyageSansDetour"
+    ]
+  },
+  "scenes": [
+    {
+      "photo": "lisbonne-alfama-toits",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Lisbonne · où dormir",
+      "headline": [
+        "Où dormir",
+        "à *Lisbonne* ?"
+      ],
+      "detail": "5 quartiers, 5 styles de séjour. Faites glisser →",
+      "facts": [
+        {
+          "source": "guide-ou-dormir-lisbonne-quartiers",
+          "excerpt": "Pour un premier séjour sans voiture, commencez vos recherches autour de Baixa et du Rossio"
+        }
+      ],
+      "tag": "Notre guide Lisbonne · 2026",
+      "alt": "Les toits orange d’Alfama et le Tage, à Lisbonne."
+    },
+    {
+      "photo": "lisbonne-rua-augusta-arc",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Baixa / Rossio",
+      "headline": [
+        "La base",
+        "*centrale*"
+      ],
+      "detail": "Places, Rua Augusta… et le train de Sintra au Rossio.",
+      "facts": [
+        {
+          "source": "guide-ou-dormir-lisbonne-quartiers",
+          "excerpt": "la gare de Rossio sert également de point de départ pour Sintra"
+        }
+      ],
+      "tag": "Notre guide Lisbonne · 2026",
+      "alt": "La Rua Augusta vue à travers l’arc de la Praça do Comércio."
+    },
+    {
+      "photo": "lisbonne-chiado-tram",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Chiado",
+      "headline": [
+        "Cafés, boutiques,",
+        "*tout à pied*"
+      ],
+      "detail": "Pour sortir le soir sans reprendre les transports.",
+      "facts": [
+        {
+          "source": "guide-ou-dormir-lisbonne-quartiers",
+          "excerpt": "Visit Lisboa décrit Chiado par ses commerces, ateliers et cafés."
+        }
+      ],
+      "tag": "Notre guide Lisbonne · 2026",
+      "alt": "Un tram jaune sur une place du Chiado."
+    },
+    {
+      "photo": "lisbonne-largo-portas-do-sol",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Alfama",
+      "headline": [
+        "Ruelles et",
+        "*belvédères*"
+      ],
+      "detail": "Superbe, mais pentu : regardez le trajet avec vos valises.",
+      "facts": [
+        {
+          "source": "guide-ou-dormir-lisbonne-quartiers",
+          "excerpt": "L’office de tourisme souligne explicitement ses pavés et ses fortes pentes."
+        }
+      ],
+      "tag": "Notre guide Lisbonne · 2026",
+      "alt": "Le Largo das Portas do Sol, à Alfama, au soleil du matin."
+    },
+    {
+      "photo": "lisbonne-cais-quai",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Cais do Sodré",
+      "headline": [
+        "Métro, train",
+        "et *bateau*"
+      ],
+      "detail": "Avec Bairro Alto, le quartier des soirées.",
+      "facts": [
+        {
+          "source": "guide-ou-dormir-lisbonne-quartiers",
+          "excerpt": "Cais do Sodré associe également des lieux de sortie à un pôle de transport, avec métro, train et bateau."
+        }
+      ],
+      "tag": "Notre guide Lisbonne · 2026",
+      "alt": "Une cycliste allongée au bord du Tage, sur les quais de Lisbonne."
+    },
+    {
+      "photo": "lisbonne-arc-tram-vert",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Le guide complet",
+      "headline": [
+        "Le comparatif",
+        "complet"
+      ],
+      "detail": "Et les 4 questions à poser avant de réserver.",
+      "alt": "Un tram passe devant l’arc de la Rua Augusta, sur la Praça do Comércio.",
+      "cta": true
+    }
+  ],
+  "assets": {
+    "regular": {
+      "file": "assets/dmsans-regular.ttf",
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      }
+    },
+    "bold": {
+      "file": "assets/dmsans-bold.ttf",
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      }
+    },
+    "serif": {
+      "file": "assets/playfair.ttf",
+      "sha256": "adefc53e7b3d483f1fa5e85edd82b7689ca79db25a1f6786bd7949cdcfeec601",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+      }
+    }
+  }
+}

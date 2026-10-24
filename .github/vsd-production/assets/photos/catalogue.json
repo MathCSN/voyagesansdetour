@@ -1,0 +1,1033 @@
+{
+  "schemaVersion": 1,
+  "photos": {
+    "lisbonne-alfama-panorama": {
+      "file": "assets/photos/lisbonne-alfama-panorama.jpg",
+      "sha256": "283132e1b80656243fc7c65f8f716980d00d6a7b000cc81c4704eb7337c3adb7",
+      "width": 2397,
+      "height": 1600,
+      "commonsTitle": "File:View from Miradouro de Santa Luzia, Lisbon, 20250603 2016 9045.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:View_from_Miradouro_de_Santa_Luzia,_Lisbon,_20250603_2016_9045.jpg",
+      "author": "Jakub Hałun",
+      "licence": "CC BY 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "originalSize": [
+        4900,
+        3270
+      ],
+      "commonsSha1": "208c2cfcd0a4e77824599c1d2441c4a202000fab",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "lisbonne-alfama-tage": {
+      "file": "assets/photos/lisbonne-alfama-tage.jpg",
+      "sha256": "d93a09063cd64870b4ab3816bb9c0067de53b6401b59c3eca1b2a5b02dae4fde",
+      "width": 1600,
+      "height": 2400,
+      "commonsTitle": "File:Lissabon - Santa Luzia - Igreja de Santo Estevao.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Lissabon_-_Santa_Luzia_-_Igreja_de_Santo_Estevao.jpg",
+      "author": "Ingo Mehling",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        4000,
+        6000
+      ],
+      "commonsSha1": "ea697d946192abb68f42b6adfad719eff7a5a154",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "lisbonne-alfama-toits": {
+      "file": "assets/photos/lisbonne-alfama-toits.jpg",
+      "sha256": "c7e55fd860ee1aca0b894d7dcab4d6533dbc1a1f8c2fddc1d0f826b9c600c9c0",
+      "width": 2400,
+      "height": 1600,
+      "commonsTitle": "File:Lissabon - Santa Luzia - Alfama - 3.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Lissabon_-_Santa_Luzia_-_Alfama_-_3.jpg",
+      "author": "Ingo Mehling",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        6000,
+        4000
+      ],
+      "commonsSha1": "6c42ae196bdb9cc860e6345c09c9a1f6068d92a3",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "lisbonne-arc-rua-augusta-tram": {
+      "file": "assets/photos/lisbonne-arc-rua-augusta-tram.jpg",
+      "sha256": "02e767d9684d1074ad3c14df25456b3d80e5b66dd8e08a6aaf50b86ebeac4795",
+      "width": 2036,
+      "height": 1600,
+      "commonsTitle": "File:Lissabon - Arco da Victoria - 0.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Lissabon_-_Arco_da_Victoria_-_0.jpg",
+      "author": "Ingo Mehling",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        4761,
+        3742
+      ],
+      "commonsSha1": "ee58126921aa7dd2972be3ab509f67c18758b60f",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "lisbonne-arc-tram-vert": {
+      "file": "assets/photos/lisbonne-arc-tram-vert.jpg",
+      "sha256": "65bd03f553167e4aad60dc2e6421c4f988110b25bf73cdbaa766b130d8dddd85",
+      "width": 1600,
+      "height": 2681,
+      "commonsTitle": "File:Lisbon Praça do Comércio BW 2018-10-03 13-29-10.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Lisbon_Pra%C3%A7a_do_Com%C3%A9rcio_BW_2018-10-03_13-29-10.jpg",
+      "author": "Berthold Werner",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        3564,
+        5972
+      ],
+      "commonsSha1": "a0e02671c8e978c07c627ca846e552ce7c4cf858",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "lisbonne-baixa-chateau": {
+      "file": "assets/photos/lisbonne-baixa-chateau.jpg",
+      "sha256": "d2ba3e757853f5fff053d931a11d412b39a09cd58861b3b4507cb49b54b94826",
+      "width": 2396,
+      "height": 1600,
+      "commonsTitle": "File:View of Castelo de São Jorge from Elevador de Santa Justa, Lisbon, 20250604 1532 9306.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:View_of_Castelo_de_S%C3%A3o_Jorge_from_Elevador_de_Santa_Justa,_Lisbon,_20250604_1532_9306.jpg",
+      "author": "Jakub Hałun",
+      "licence": "CC BY 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "originalSize": [
+        6016,
+        4017
+      ],
+      "commonsSha1": "80fa9909e1190e19b6e4556d78419a3664a5b4f3",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "lisbonne-cais-quai": {
+      "file": "assets/photos/lisbonne-cais-quai.jpg",
+      "sha256": "3f95b318768d4ecee07f0d2a8c8af98befcc44cf373d9260fe24c0640d75130a",
+      "width": 2169,
+      "height": 1600,
+      "commonsTitle": "File:Woman reading a book next to an upside down bicycle, Cais do Sodré, Lisbon, Portugal julesvernex2.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Woman_reading_a_book_next_to_an_upside_down_bicycle,_Cais_do_Sodr%C3%A9,_Lisbon,_Portugal_julesvernex2.jpg",
+      "author": "Jules Verne Times Two",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        4426,
+        3264
+      ],
+      "commonsSha1": "021137399e25382b27dbef257cfcb50d757c0e0e",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "lisbonne-chiado-tram": {
+      "file": "assets/photos/lisbonne-chiado-tram.jpg",
+      "sha256": "5a586ab03545ade5dd25f05a0748a0f95646b13fecce3a045e05bcc218f38b60",
+      "width": 1600,
+      "height": 2133,
+      "commonsTitle": "File:Bairroaltotram.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Bairroaltotram.jpg",
+      "author": "Camila fpp",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        3000,
+        4000
+      ],
+      "commonsSha1": "c3ad8a9b92ea7da7c925bb0c41f4919d7481a87f",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "lisbonne-jeronimos-cloitre": {
+      "file": "assets/photos/lisbonne-jeronimos-cloitre.jpg",
+      "sha256": "46d0c8a75a66ea0d271e9845d15e60a077df4fdec4e0fcb8f54f9c52eed97b0a",
+      "width": 1600,
+      "height": 2413,
+      "commonsTitle": "File:Cloister of the Jerónimos Monastery in Belém, Lisbon, 20250604 1309 9185.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Cloister_of_the_Jer%C3%B3nimos_Monastery_in_Bel%C3%A9m,_Lisbon,_20250604_1309_9185.jpg",
+      "author": "Jakub Hałun",
+      "licence": "CC BY 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "originalSize": [
+        4016,
+        6056
+      ],
+      "commonsSha1": "4d221907d64115b806ee02c22039fe1f2e4e6a75",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "lisbonne-jeronimos-facade": {
+      "file": "assets/photos/lisbonne-jeronimos-facade.jpg",
+      "sha256": "15e1503fb69084cf05f6033bd8623b249ca4d9cd756a0917a1a41fffac3db2f7",
+      "width": 1600,
+      "height": 2400,
+      "commonsTitle": "File:Jerónimos Monastery in Belém - Lisbon - Portugal - 03.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Jer%C3%B3nimos_Monastery_in_Bel%C3%A9m_-_Lisbon_-_Portugal_-_03.jpg",
+      "author": "NorbertNagel",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        4128,
+        6192
+      ],
+      "commonsSha1": "940594d44846bd2917b072311871e0dcb10c8e87",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "lisbonne-jeronimos-file": {
+      "file": "assets/photos/lisbonne-jeronimos-file.jpg",
+      "sha256": "45cbc7db88fb3b7e271742cdcc3ace913f7f9ab69b6db7befc26d74ceb4405f1",
+      "width": 2880,
+      "height": 1528,
+      "commonsTitle": "File:Jerónimos Monastery in Belém, Lisbon, 20250604 1340 9252.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Jer%C3%B3nimos_Monastery_in_Bel%C3%A9m,_Lisbon,_20250604_1340_9252.jpg",
+      "author": "Jakub Hałun",
+      "licence": "CC BY 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "originalSize": [
+        5536,
+        2936
+      ],
+      "commonsSha1": "3ee8672a9df1dc840d23310c352ba4a12fd55618",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "lisbonne-jeronimos-ombres": {
+      "file": "assets/photos/lisbonne-jeronimos-ombres.jpg",
+      "sha256": "7fe49e06a05caef468d0ceb26a2f3b74fbd2f0d2b003d013535482d4e63f1220",
+      "width": 1600,
+      "height": 2400,
+      "commonsTitle": "File:Cloisters, Mosteiro dos Jerónimos, Lisbon, Portugal julesvernex2-8.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Cloisters,_Mosteiro_dos_Jer%C3%B3nimos,_Lisbon,_Portugal_julesvernex2-8.jpg",
+      "author": "Jules Verne Times Two",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        5301,
+        7952
+      ],
+      "commonsSha1": "d63d6f0840d679394f71846e2ea0be60eecc0264",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "lisbonne-largo-portas-do-sol": {
+      "file": "assets/photos/lisbonne-largo-portas-do-sol.jpg",
+      "sha256": "17e9844144b33211c928e332fd6fc2cc014577c5897717a2482c79e61b7d4edb",
+      "width": 2667,
+      "height": 1600,
+      "commonsTitle": "File:Lisboa - Alfama (53860761742).jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Lisboa_-_Alfama_(53860761742).jpg",
+      "author": "Jorge Franganillo",
+      "licence": "CC BY 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "originalSize": [
+        5915,
+        3549
+      ],
+      "commonsSha1": "d37ee177d77ed985209f71781ec429dd62308c40",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "lisbonne-portas-do-sol": {
+      "file": "assets/photos/lisbonne-portas-do-sol.jpg",
+      "sha256": "85ae8fa3920e9202e78b110ffe735d6b5d327008640143f5b74573a84c912d6b",
+      "width": 2133,
+      "height": 1600,
+      "commonsTitle": "File:Miradouro de Santa Luzia View over Alfama, Lisbon (54733651122).jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Miradouro_de_Santa_Luzia_View_over_Alfama,_Lisbon_(54733651122).jpg",
+      "author": "Dale Cruse - 10M views from San Francisco, CA, USA",
+      "licence": "CC BY 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "originalSize": [
+        11656,
+        8742
+      ],
+      "commonsSha1": "d6cf86f6e986a007930d4b9dc8753cc855953b8d",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "lisbonne-rua-augusta-arc": {
+      "file": "assets/photos/lisbonne-rua-augusta-arc.jpg",
+      "sha256": "f0913e8f97c31b43f7356b29549f7b5d056181c2f999d5b936bc5d4b46ff46fc",
+      "width": 1600,
+      "height": 2645,
+      "commonsTitle": "File:Empty Arco da Rua Augusta during the COVID-19 lockdown, Lisbon, Portugal julesvernex2.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Empty_Arco_da_Rua_Augusta_during_the_COVID-19_lockdown,_Lisbon,_Portugal_julesvernex2.jpg",
+      "author": "Jules Verne Times Two",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        3892,
+        6434
+      ],
+      "commonsSha1": "0845c64f5caa80f1dfb2f588b63bacd893edb0aa",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "lisbonne-santa-justa": {
+      "file": "assets/photos/lisbonne-santa-justa.jpg",
+      "sha256": "c08dd02582c424c3cea1269d5147e15c86349708a748d47d64ee02edc1011c7e",
+      "width": 1021,
+      "height": 2880,
+      "commonsTitle": "File:Elevador de Santa Justa, Lisboa, Portugal, 2022-07-24, DD 06.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Elevador_de_Santa_Justa,_Lisboa,_Portugal,_2022-07-24,_DD_06.jpg",
+      "author": "Diego Delso",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        1878,
+        5297
+      ],
+      "commonsSha1": "5ae6ecb44ee022af7896726eb7bf784232420509",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "lisbonne-santa-justa-passerelle": {
+      "file": "assets/photos/lisbonne-santa-justa-passerelle.jpg",
+      "sha256": "d0c1f69b8c7a3b15b0e60c737ebb411f9ec4b830d0fabcd42947b782d554fef5",
+      "width": 2133,
+      "height": 1600,
+      "commonsTitle": "File:Elevador de Santa Justa, Lisboa 07.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Elevador_de_Santa_Justa,_Lisboa_07.jpg",
+      "author": "Simon Burchell",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        3264,
+        2448
+      ],
+      "commonsSha1": "9f94a87dd8af26f57f61dc8620661b6d2f9c09f8",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "lisbonne-tour-belem-doree": {
+      "file": "assets/photos/lisbonne-tour-belem-doree.jpg",
+      "sha256": "a51d9f330c051be797cbd8d401bb38802362a8ae0e45d97fc52dce731723f659",
+      "width": 1600,
+      "height": 1740,
+      "commonsTitle": "File:Torre de Belém at sunrise, Lisbon, Portugal julesvernex2.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Torre_de_Bel%C3%A9m_at_sunrise,_Lisbon,_Portugal_julesvernex2.jpg",
+      "author": "Jules Verne Times Two",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        4964,
+        5399
+      ],
+      "commonsSha1": "380ab6b13dbdb281ac71506187a04eb763fc3f10",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "lisbonne-tour-belem-passerelle": {
+      "file": "assets/photos/lisbonne-tour-belem-passerelle.jpg",
+      "sha256": "b9a962417ec64ec69b3044f36eb286f3e4e0d84d7dab3455501f3f164515334a",
+      "width": 2318,
+      "height": 1600,
+      "commonsTitle": "File:Torre de Belém 2014.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Torre_de_Bel%C3%A9m_2014.jpg",
+      "author": "Felix König",
+      "licence": "CC BY 3.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "originalSize": [
+        3000,
+        2071
+      ],
+      "commonsSha1": "1d99aa305ca63e2606fd9b68fa9947638116bd8c",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "lisbonne-tour-belem-portrait": {
+      "file": "assets/photos/lisbonne-tour-belem-portrait.jpg",
+      "sha256": "7d9f65b81d52aef3bea30e0794a383be097e220c31459d406ca0cbb0acaf5676",
+      "width": 1511,
+      "height": 2880,
+      "commonsTitle": "File:Torre de Belém por Rodrigo Tetsuo Argenton (6).jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Torre_de_Bel%C3%A9m_por_Rodrigo_Tetsuo_Argenton_(6).jpg",
+      "author": "Rodrigo Tetsuo Argenton",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        3147,
+        5999
+      ],
+      "commonsSha1": "0ad6af6889ba6aea0b6d6855ff9093b409a2a1ce",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux.",
+      "commonsCredit": "Rodrigo Tetsuo Argenton",
+      "authorNote": "Le champ Artist de Commons nomme l’architecte de la tour (Francisco de Arruda) ; le photographe figure dans le champ Credit."
+    },
+    "lisbonne-tram28-estrela": {
+      "file": "assets/photos/lisbonne-tram28-estrela.jpg",
+      "sha256": "a9f91c0fc08dc8d784a0fb0f23394780c848325e5b35ae737690e27c7c585f35",
+      "width": 1641,
+      "height": 1600,
+      "commonsTitle": "File:Linie 28 - Flickr - Michael Bliefert.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Linie_28_-_Flickr_-_Michael_Bliefert.jpg",
+      "author": "Michael Bliefert from Rotenburg/W, Deutschland",
+      "licence": "CC BY 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "originalSize": [
+        4102,
+        4000
+      ],
+      "commonsSha1": "a943837efae6042bb2318d29e096b08f1addb72d",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "lisbonne-tram28-graca": {
+      "file": "assets/photos/lisbonne-tram28-graca.jpg",
+      "sha256": "eac1431fd466a8515de66d2b9e8bf062d91678eb293cb082cf7b56b185216d61",
+      "width": 2416,
+      "height": 1600,
+      "commonsTitle": "File:No 28 Tram (45684287331).jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:No_28_Tram_(45684287331).jpg",
+      "author": "Neil",
+      "licence": "CC BY 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "originalSize": [
+        4928,
+        3264
+      ],
+      "commonsSha1": "cb6a1911ff4b2f9e915947698b8f6295a8d8c924",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "lisbonne-tram28-rue": {
+      "file": "assets/photos/lisbonne-tram28-rue.jpg",
+      "sha256": "3bbd629e7b78cc6233c85ae7011d19203f61c72385cb112a378e6779bf0d6d3c",
+      "width": 2400,
+      "height": 1600,
+      "commonsTitle": "File:Tram 28 (34791358090).jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tram_28_(34791358090).jpg",
+      "author": "Shadowgate from Novara, ITALY",
+      "licence": "CC BY 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "originalSize": [
+        4272,
+        2848
+      ],
+      "commonsSha1": "f38a38c41298bf38dd98d87ad696b178b6469be1",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "lisbonne-tram28-se": {
+      "file": "assets/photos/lisbonne-tram28-se.jpg",
+      "sha256": "f497500e5f5604c7b2b52230404528d54bb3ec193ad3d57e00a92a368bc6066c",
+      "width": 1600,
+      "height": 2133,
+      "commonsTitle": "File:Tranvía 28 de Lisboa.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tranv%C3%ADa_28_de_Lisboa.jpg",
+      "author": "Padaguan",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        3024,
+        4032
+      ],
+      "commonsSha1": "1fe23268f57d46a899198ed51c833f2899082221",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "porto-douro-vue": {
+      "file": "assets/photos/porto-douro-vue.jpg",
+      "sha256": "91058090cb4e2f68661f56bf004ea23123f84b6dca4623ba93dc6d138cd96aa3",
+      "width": 2400,
+      "height": 1600,
+      "commonsTitle": "File:A vibrant panorama of Porto, Portugal, showcasing the Douro River, historic Ribeira district, and the Dom Luís I Bridge. (55247151390).jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:A_vibrant_panorama_of_Porto,_Portugal,_showcasing_the_Douro_River,_historic_Ribeira_district,_and_the_Dom_Lu%C3%ADs_I_Bridge._(55247151390).jpg",
+      "author": "Michael Gaylard from Horsham, UK",
+      "licence": "CC BY 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "originalSize": [
+        6048,
+        4032
+      ],
+      "commonsSha1": "abaf985b64fdcb9eb374d21b517c624cd26b5f8a",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "porto-gaia-chai-tonneaux": {
+      "file": "assets/photos/porto-gaia-chai-tonneaux.jpg",
+      "sha256": "1799c813497855679f90eeaee9869c94205d5b7cd81c4ef4df6f29eb46afa457",
+      "width": 2518,
+      "height": 1600,
+      "commonsTitle": "File:Taylor’s Port Wine Cellar, Vila Nova de Gaia, Oporto (48730636822).jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Taylor%E2%80%99s_Port_Wine_Cellar,_Vila_Nova_de_Gaia,_Oporto_(48730636822).jpg",
+      "author": "Ray in Manila",
+      "licence": "CC BY 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "originalSize": [
+        5076,
+        3226
+      ],
+      "commonsSha1": "f89dbac3454aece793fa655ec07289dee7cce887",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "porto-gaia-rabelos-vue": {
+      "file": "assets/photos/porto-gaia-rabelos-vue.jpg",
+      "sha256": "570d048851cc2960295aaed12219ed37623260598673dc7ff4dfb3027db413f4",
+      "width": 2880,
+      "height": 1506,
+      "commonsTitle": "File:Rabelos en el río Duero, Vila Nova de Gaia, Portugal, 2012-05-09, DD 14.JPG",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Rabelos_en_el_r%C3%ADo_Duero,_Vila_Nova_de_Gaia,_Portugal,_2012-05-09,_DD_14.JPG",
+      "author": "Diego Delso",
+      "licence": "CC BY-SA 3.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "originalSize": [
+        4890,
+        2557
+      ],
+      "commonsSha1": "a10b2e9e6475786e722b4ed1e2f5318e8710671c",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "porto-luis-arche": {
+      "file": "assets/photos/porto-luis-arche.jpg",
+      "sha256": "c0cb3b7c255115a9536ea9b4ca17f1406e6811b9874bc4e1841b9e3481af7b61",
+      "width": 1600,
+      "height": 2400,
+      "commonsTitle": "File:Porto-Ponte Dom Luis I-14-2011-gje.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Porto-Ponte_Dom_Luis_I-14-2011-gje.jpg",
+      "author": "Gerd Eichmann",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        3456,
+        5184
+      ],
+      "commonsSha1": "a578f3fcc956b61a019452fa25074ca40d3364d7",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "porto-luis-metro": {
+      "file": "assets/photos/porto-luis-metro.jpg",
+      "sha256": "fcc3d5b4e71c73c7f2fa6aa4b1ac116d4831dfda954d8a7bbb3136f5d9f35da6",
+      "width": 2133,
+      "height": 1600,
+      "commonsTitle": "File:Porto - Ponte Dom Luís I (8238600477).jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Porto_-_Ponte_Dom_Lu%C3%ADs_I_(8238600477).jpg",
+      "author": "IngolfBLN",
+      "licence": "CC BY-SA 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "originalSize": [
+        3000,
+        2250
+      ],
+      "commonsSha1": "9dc2fed5d0559cc3c8764d6d4505d7b0794b28d2",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "porto-luis-nuit": {
+      "file": "assets/photos/porto-luis-nuit.jpg",
+      "sha256": "100ef067aedd5335564b4f12e78768b13000d39eb344511221761183d84ceab7",
+      "width": 2397,
+      "height": 1600,
+      "commonsTitle": "File:Ponte de D. Luís 2.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Ponte_de_D._Lu%C3%ADs_2.jpg",
+      "author": "T meltzer",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        6471,
+        4319
+      ],
+      "commonsSha1": "c94c27c2f11d059c84c3554c7704bbedec028917",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "porto-luis-panorama-nuit": {
+      "file": "assets/photos/porto-luis-panorama-nuit.jpg",
+      "sha256": "98246405a3cdaa318ca6cecb71269f9e80332be1150120ebeffcaf02763bff71",
+      "width": 2880,
+      "height": 1436,
+      "commonsTitle": "File:Puente de Don Luis I, Oporto, Portugal, 2019-06-02, DD 29-31 HDR.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Puente_de_Don_Luis_I,_Oporto,_Portugal,_2019-06-02,_DD_29-31_HDR.jpg",
+      "author": "Diego Delso",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        7741,
+        3859
+      ],
+      "commonsSha1": "1ce37a0186506df6d1ed662d4d8a4b954a8712ad",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "porto-luis-tablier": {
+      "file": "assets/photos/porto-luis-tablier.jpg",
+      "sha256": "b19d62d5397c4467dc15140e242c491ad757233cbb66dc6209f3596d252b309f",
+      "width": 2400,
+      "height": 1600,
+      "commonsTitle": "File:Porto-Ponte Dom Luis I-02-2011-gje.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Porto-Ponte_Dom_Luis_I-02-2011-gje.jpg",
+      "author": "Gerd Eichmann",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        5184,
+        3456
+      ],
+      "commonsSha1": "bb90031b895dee323c2eb85fe79b3eaba6371348",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "porto-matosinhos-coucher": {
+      "file": "assets/photos/porto-matosinhos-coucher.jpg",
+      "sha256": "d3c345ea043d48ec3fd3898b456fa0baa17d885c37e78495af5e3994684008c1",
+      "width": 2133,
+      "height": 1600,
+      "commonsTitle": "File:Porto e Matosinhos 2007-10-26 006 (1777425421).jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Porto_e_Matosinhos_2007-10-26_006_(1777425421).jpg",
+      "author": "Hugo Cadavez from Maia, Portugal",
+      "licence": "CC BY 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "originalSize": [
+        3072,
+        2304
+      ],
+      "commonsSha1": "60655ac3c8074bae9deb1b463bc42a9f68af9cd8",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "porto-matosinhos-surf": {
+      "file": "assets/photos/porto-matosinhos-surf.jpg",
+      "sha256": "118d3fff88c5445679393e8827ddccecb81879e65d4faf3b8ad79c41cd58102e",
+      "width": 2133,
+      "height": 1600,
+      "commonsTitle": "File:Surfer on Matosinhos beach (51707546625).jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Surfer_on_Matosinhos_beach_(51707546625).jpg",
+      "author": "Bex Walton from London, England",
+      "licence": "CC BY 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "originalSize": [
+        5184,
+        3888
+      ],
+      "commonsSha1": "d7c21a9bb10d433a28383830febc9c1dd846575f",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "porto-rabelos-couleurs": {
+      "file": "assets/photos/porto-rabelos-couleurs.jpg",
+      "sha256": "f22908d0a7af43aad7d21a8412e8c0c7b5947a50cfaa0f610c036389ac7df004",
+      "width": 2400,
+      "height": 1600,
+      "commonsTitle": "File:Douro River, Porto, Portugal (53974792064).jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Douro_River,_Porto,_Portugal_(53974792064).jpg",
+      "author": "flowcomm",
+      "licence": "CC BY 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "originalSize": [
+        5086,
+        3391
+      ],
+      "commonsSha1": "5520c1d67dfa69a95fdbe46d8e833b2a928b0fbe",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "porto-ribeira-facades": {
+      "file": "assets/photos/porto-ribeira-facades.jpg",
+      "sha256": "82b2b6144e0167d25535900c7abde8af7bf70433407fdb8097a7b10a39df9292",
+      "width": 2400,
+      "height": 1600,
+      "commonsTitle": "File:Porto (112) (52436579744).jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Porto_(112)_(52436579744).jpg",
+      "author": "Birte Fritsch",
+      "licence": "CC BY 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "originalSize": [
+        6000,
+        4000
+      ],
+      "commonsSha1": "684d47b40c8be4e4949b0437feb7db7cc27b37d7",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "porto-ribeira-rabelo-dore": {
+      "file": "assets/photos/porto-ribeira-rabelo-dore.jpg",
+      "sha256": "de829b42cb906d5962bbd7ec2e6308ea10e8db6b6671a2045efab98e0f721fb4",
+      "width": 2142,
+      "height": 1600,
+      "commonsTitle": "File:\"Rabelos\" (5481361071).jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:%22Rabelos%22_(5481361071).jpg",
+      "author": "elvum",
+      "licence": "CC BY 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "originalSize": [
+        2592,
+        1936
+      ],
+      "commonsSha1": "5d49a8c26d8278a2833f55b0418b86b85653154b",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "porto-ribeira-rabelos": {
+      "file": "assets/photos/porto-ribeira-rabelos.jpg",
+      "sha256": "becc2f739fe7746ca55975df1d92071d6c1b911db6a1839aad51dfe8433bec49",
+      "width": 2397,
+      "height": 1600,
+      "commonsTitle": "File:Rabelo boats and Ribeira seen from Cais de Gaia, 20250605 1623 9879.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Rabelo_boats_and_Ribeira_seen_from_Cais_de_Gaia,_20250605_1623_9879.jpg",
+      "author": "Jakub Hałun",
+      "licence": "CC BY 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "originalSize": [
+        5920,
+        3951
+      ],
+      "commonsSha1": "6b439f65617918ec95c17725205e994b2c3c2f14",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "porto-sao-bento-azulejos": {
+      "file": "assets/photos/porto-sao-bento-azulejos.jpg",
+      "sha256": "b59e75314a72d57d52b0915ea72c90dbb42f03ff0c16d389f5b0b718466f35bd",
+      "width": 1600,
+      "height": 2133,
+      "commonsTitle": "File:Porto, São Bento station, azulejos (2).jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Porto,_S%C3%A3o_Bento_station,_azulejos_(2).jpg",
+      "author": "Palickap",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        2976,
+        3968
+      ],
+      "commonsSha1": "7c8f2462994bc0c83ff93b47fcab873feeb0bf2c",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "porto-sao-bento-departs": {
+      "file": "assets/photos/porto-sao-bento-departs.jpg",
+      "sha256": "7d1fb96f9174beb0f69dc0587fca6067279d1682f7212a667db563eab5108463",
+      "width": 2133,
+      "height": 1600,
+      "commonsTitle": "File:Azulejos (Estação de São Bento) (14004154641).jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Azulejos_(Esta%C3%A7%C3%A3o_de_S%C3%A3o_Bento)_(14004154641).jpg",
+      "author": "jad99 from Graz, Austria",
+      "licence": "CC BY-SA 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "originalSize": [
+        4000,
+        3000
+      ],
+      "commonsSha1": "5a985e3a77f1db675869d16c559490302c242b88",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "porto-sao-bento-hall": {
+      "file": "assets/photos/porto-sao-bento-hall.jpg",
+      "sha256": "f48034b895fc35e4cb39ee60b866ecd50d005b08789486f83886d195059a8b91",
+      "width": 2133,
+      "height": 1600,
+      "commonsTitle": "File:Azulejos (Estação de São Bento) (14027333363).jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Azulejos_(Esta%C3%A7%C3%A3o_de_S%C3%A3o_Bento)_(14027333363).jpg",
+      "author": "jad99 from Graz, Austria",
+      "licence": "CC BY-SA 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "originalSize": [
+        4000,
+        3000
+      ],
+      "commonsSha1": "946cdc08c05886c6114e1e0773e89a48e164102a",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "sintra-mouros-remparts": {
+      "file": "assets/photos/sintra-mouros-remparts.jpg",
+      "sha256": "54fb13dcd3adfd2e8e337b09e7d4c0ec05fa4fb6e130b642c13bdd08791ea107",
+      "width": 1600,
+      "height": 2396,
+      "commonsTitle": "File:Castelo dos Mouros in Sintra, Portugal, 20250606 1210 0158.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Castelo_dos_Mouros_in_Sintra,_Portugal,_20250606_1210_0158.jpg",
+      "author": "Jakub Hałun",
+      "licence": "CC BY 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "originalSize": [
+        3707,
+        5552
+      ],
+      "commonsSha1": "1903524d60e10de2e4fb9961b58a6be57819eced",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "sintra-mouros-vue": {
+      "file": "assets/photos/sintra-mouros-vue.jpg",
+      "sha256": "e68353bb26905c294d1f375b3ece30ad95dff7b79803144cd5a0a3669bfa26a0",
+      "width": 2334,
+      "height": 1600,
+      "commonsTitle": "File:Castelo dos Mouros, Sintra, Portugal, 2019-05-25, DD 82.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Castelo_dos_Mouros,_Sintra,_Portugal,_2019-05-25,_DD_82.jpg",
+      "author": "Diego Delso",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        3498,
+        2398
+      ],
+      "commonsSha1": "a1616e5c7ee9412d95f03eb417309d309cf90449",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "sintra-pena-chemin-ronde": {
+      "file": "assets/photos/sintra-pena-chemin-ronde.jpg",
+      "sha256": "c19384cea2d85677be5709581fce8f339a009ede6785c10e99c0bf45d608f94d",
+      "width": 2530,
+      "height": 1600,
+      "commonsTitle": "File:Palacio Nacional da Pena, Sintra, Portugal, 2019-05-25, DD 127.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Palacio_Nacional_da_Pena,_Sintra,_Portugal,_2019-05-25,_DD_127.jpg",
+      "author": "Diego Delso",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        3740,
+        2365
+      ],
+      "commonsSha1": "55d81d02ade020764c94e42b963b42348f368e62",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "sintra-pena-colline": {
+      "file": "assets/photos/sintra-pena-colline.jpg",
+      "sha256": "82164e30c61258762f79b3096a2aef9c79d01ee9ada334f0af4726786f995c8b",
+      "width": 2412,
+      "height": 1600,
+      "commonsTitle": "File:Palácio Nacional da Pena, Sintra, Portugal, 20250606 1159 0132.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Pal%C3%A1cio_Nacional_da_Pena,_Sintra,_Portugal,_20250606_1159_0132.jpg",
+      "author": "Jakub Hałun",
+      "licence": "CC BY 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "originalSize": [
+        5110,
+        3389
+      ],
+      "commonsSha1": "65cd828e2c7f061f01e082c3627195ffefc3936d",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "sintra-pena-couleurs": {
+      "file": "assets/photos/sintra-pena-couleurs.jpg",
+      "sha256": "4fbab99aa613c64bd31681a5a1d66d155e6bab44f09def6a7ec637efe7fa7fb8",
+      "width": 2287,
+      "height": 1600,
+      "commonsTitle": "File:Palacio Nacional da Pena, Sintra, Portugal, 2019-05-25, DD 128.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Palacio_Nacional_da_Pena,_Sintra,_Portugal,_2019-05-25,_DD_128.jpg",
+      "author": "Diego Delso",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        3272,
+        2289
+      ],
+      "commonsSha1": "8701dff46204de9f08a764a24788f7cc66575858",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "sintra-pena-panorama": {
+      "file": "assets/photos/sintra-pena-panorama.jpg",
+      "sha256": "56541194bdddcc6fdf1361c885bc65783810a9d6e4e677cba755a60a8eb7d7b8",
+      "width": 2052,
+      "height": 1600,
+      "commonsTitle": "File:Palais national Pena Sintra 111.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Palais_national_Pena_Sintra_111.jpg",
+      "author": "Chabe01",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        6620,
+        5161
+      ],
+      "commonsSha1": "6bd4c65c5716fba9133d3a01bb16b92f5c9e8080",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "sintra-pena-terrasse": {
+      "file": "assets/photos/sintra-pena-terrasse.jpg",
+      "sha256": "995a67218a0f6c8c0c9ea51e558280afc666b62b7f299306fb0c14f73c69dad8",
+      "width": 1985,
+      "height": 1600,
+      "commonsTitle": "File:Palacio Nacional da Pena, Sintra, Portugal, 2019-05-25, DD 129.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Palacio_Nacional_da_Pena,_Sintra,_Portugal,_2019-05-25,_DD_129.jpg",
+      "author": "Diego Delso",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        3408,
+        2747
+      ],
+      "commonsSha1": "548071529a7ed733ef6c43510ddae5e15ac6b5bd",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "sintra-pena-tour-horloge": {
+      "file": "assets/photos/sintra-pena-tour-horloge.jpg",
+      "sha256": "4061c998c9a2fd128a7488b95363f19f771a6b35068680c050de6d967e71d5ae",
+      "width": 1600,
+      "height": 2400,
+      "commonsTitle": "File:Palais national Pena Sintra 37.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Palais_national_Pena_Sintra_37.jpg",
+      "author": "Chabe01",
+      "licence": "CC BY-SA 3.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "originalSize": [
+        3456,
+        5184
+      ],
+      "commonsSha1": "ffbbf03d85481ce4d9b2488a8c60880d13caf037",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "sintra-pena-tour-jaune": {
+      "file": "assets/photos/sintra-pena-tour-jaune.jpg",
+      "sha256": "ef9d072931b7e866d7a1dee316d735933a8207e696e5a75faa03be1566821396",
+      "width": 1600,
+      "height": 2635,
+      "commonsTitle": "File:Pena Palace, Sintra, Portugal, 20250606 1037 0005.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Pena_Palace,_Sintra,_Portugal,_20250606_1037_0005.jpg",
+      "author": "Jakub Hałun",
+      "licence": "CC BY 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "originalSize": [
+        3343,
+        5506
+      ],
+      "commonsSha1": "8ab36554dba8c2a2615557fdbb1a372f55f720d3",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "sintra-vila-palais-national": {
+      "file": "assets/photos/sintra-vila-palais-national.jpg",
+      "sha256": "8aceb627e5707e95fbc375fa57dcc8182dab658a97f211463014b9c8048a101e",
+      "width": 2396,
+      "height": 1600,
+      "commonsTitle": "File:Palácio Nacional de Sintra from Castelo dos Mouros, 20250606 1153 0088.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Pal%C3%A1cio_Nacional_de_Sintra_from_Castelo_dos_Mouros,_20250606_1153_0088.jpg",
+      "author": "Jakub Hałun",
+      "licence": "CC BY 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "originalSize": [
+        4696,
+        3135
+      ],
+      "commonsSha1": "f65db13f4675054e77b3612faafe483e08614b7d",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "sintra-vila-place": {
+      "file": "assets/photos/sintra-vila-place.jpg",
+      "sha256": "f6c595a5d06e62826ab8bae3506779ce2eeda48b54fce28758a47d6014e04f98",
+      "width": 2880,
+      "height": 1510,
+      "commonsTitle": "File:Palacio Nacional, Sintra, Portugal, 2019-05-25, DD 09.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Palacio_Nacional,_Sintra,_Portugal,_2019-05-25,_DD_09.jpg",
+      "author": "Diego Delso",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        3310,
+        1736
+      ],
+      "commonsSha1": "d1ace8b1e98ef455d7e0fd9183be06fc5a179bdb",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "train-alfa-220": {
+      "file": "assets/photos/train-alfa-220.jpg",
+      "sha256": "456dcc13b391297754b1eeefb52f1eac241585e50082356e06f553f960c6551b",
+      "width": 1600,
+      "height": 2133,
+      "commonsTitle": "File:ألفا بندلار 220 ك س.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:%D8%A3%D9%84%D9%81%D8%A7_%D8%A8%D9%86%D8%AF%D9%84%D8%A7%D8%B1_220_%D9%83_%D8%B3.jpg",
+      "author": "Sambasoccer27",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        2448,
+        3264
+      ],
+      "commonsSha1": "ff24a2f60f707e1af172ed2f6464d0e225b9c552",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "train-alfa-aqueduc": {
+      "file": "assets/photos/train-alfa-aqueduc.jpg",
+      "sha256": "81b64b10cdbe0bfb5233928986d099146426ebaa1a9e4dc19fb3cb005c1dde8f",
+      "width": 2844,
+      "height": 1600,
+      "commonsTitle": "File:CP AlfaPendular storming through Campolide railway station (47548338771).jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:CP_AlfaPendular_storming_through_Campolide_railway_station_(47548338771).jpg",
+      "author": "Nicky Boogaard from Hardinxveld-Giessendam, Netherlands",
+      "licence": "CC BY 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "originalSize": [
+        5472,
+        3078
+      ],
+      "commonsSha1": "1d24131608658363ad2b47d0478a4bfd366771e6",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "train-alfa-interieur": {
+      "file": "assets/photos/train-alfa-interieur.jpg",
+      "sha256": "93a215dcdf8c7ee820e512ba1b6225ccf63e19bccb8175cbb4c39273d8aeca04",
+      "width": 1600,
+      "height": 2133,
+      "commonsTitle": "File:Alfa Pendular new interior 1st class.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Alfa_Pendular_new_interior_1st_class.jpg",
+      "author": "Aleksi Kinnunen",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        3024,
+        4032
+      ],
+      "commonsSha1": "8c70e4b0164b19c6235b2dce48855066bee4b839",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "train-alfa-oriente": {
+      "file": "assets/photos/train-alfa-oriente.jpg",
+      "sha256": "12f10500b64f649eb83849611b018aeb6168ec64a094d06c53a91c08739799a0",
+      "width": 2844,
+      "height": 1600,
+      "commonsTitle": "File:Alfa-Pendular im Gare Oriente.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Alfa-Pendular_im_Gare_Oriente.jpg",
+      "author": "Bunks",
+      "licence": "CC0",
+      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "originalSize": [
+        3264,
+        1836
+      ],
+      "commonsSha1": "82c3f032b10915f3b9b76c1eb2e650331dc4d1bb",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "train-alfa-viaduc": {
+      "file": "assets/photos/train-alfa-viaduc.jpg",
+      "sha256": "1d18492471c29af8bf1fec2f6f372292a89baa4f038e9c6da23b4260a4b3a41a",
+      "width": 2405,
+      "height": 1600,
+      "commonsTitle": "File:Porto Ponte Sao Jao CP Alfa Pendular 4002 (52045521395).jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Porto_Ponte_Sao_Jao_CP_Alfa_Pendular_4002_(52045521395).jpg",
+      "author": "Rob Dammers",
+      "licence": "CC BY 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "originalSize": [
+        5956,
+        3963
+      ],
+      "commonsSha1": "358f1a36e99d6a935928d44bc0a1e25b95be5741",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    }
+  }
+}

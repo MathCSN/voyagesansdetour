@@ -1,0 +1,204 @@
+{
+  "schemaVersion": 2,
+  "id": "fb-sintra-budget-2026-11",
+  "kind": "carousel",
+  "channel": "facebook",
+  "destination": "Sintra",
+  "title": "Sintra : le vrai prix d’une journée",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/sintra-depuis-lisbonne/",
+  "publishAt": "2026-11-01T17:00:00Z",
+  "review": {
+    "status": "reviewed_for_render",
+    "checkedAt": "2026-10-24T06:45:00Z",
+    "validUntil": "2026-11-23T00:00:00Z",
+    "method": "Faits relus mot pour mot dans les instantanés datés du 24/10/2026 (sources/social-2026-10-24) ; photos sous licence libre consignées dans assets/photos/catalogue.json."
+  },
+  "sources": {
+    "file": "sources/social-2026-10-24/sources.json",
+    "sha256": "ab7c358a9fcfa0a14abc58fe398ac7816ad7fece07101de071565bb938118878"
+  },
+  "photos": {
+    "file": "assets/photos/catalogue.json",
+    "sha256": "a66ad22b12c71b7e545179ac6a8e3f3a4412808b8eb854734e79105402792268"
+  },
+  "caption": {
+    "hook": "🏰 Sintra depuis Lisbonne : le vrai prix d’une journée, billet par billet.",
+    "lines": [
+      "🎟️ Palais de Pena, visite essentielle : 20 € (le Full Tour : 45 €).",
+      "🌿 Parc de Pena seul : 12 €. Château des Maures : 12 €.",
+      "⏱️ 30 min entre l’entrée du parc et le palais : partez tôt, aucun retard n’est toléré.",
+      "🚶 Le palais national est à 10-15 min à pied de la gare."
+    ],
+    "cta": "👉 Le guide pour organiser la journée :",
+    "hashtags": [
+      "#Sintra",
+      "#Portugal",
+      "#VoyageSansVoiture",
+      "#VoyageSansDetour"
+    ]
+  },
+  "scenes": [
+    {
+      "photo": "sintra-pena-panorama",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Sintra · budget",
+      "headline": [
+        "Sintra :",
+        "le *vrai prix*",
+        "d’une journée"
+      ],
+      "detail": "Tarifs officiels relevés le 24/10/2026. Faites glisser →",
+      "facts": [
+        {
+          "source": "parques-sintra-precos",
+          "excerpt": "Prices - Essential visit Ticket for adults (18 - 64 years) 20 €"
+        }
+      ],
+      "tag": "Tarifs Parques de Sintra · relevés le 24/10/2026",
+      "alt": "Le palais de Pena, rouge et jaune, au sommet de la colline boisée de Sintra."
+    },
+    {
+      "photo": "sintra-pena-tour-jaune",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Palais de Pena",
+      "headline": [
+        "*20 €* la visite",
+        "essentielle"
+      ],
+      "detail": "Palais neuf, tout le parc, le chalet et les terrasses. Full Tour : 45 €.",
+      "facts": [
+        {
+          "source": "parques-sintra-pena-essencial",
+          "excerpt": "Free exploration of the Park of Pena, including the Chalet of the Countess of Edla"
+        },
+        {
+          "source": "parques-sintra-precos",
+          "excerpt": "Prices - Full Tour Ticket for adults (18 - 64 years) 45 €"
+        }
+      ],
+      "tag": "Tarifs Parques de Sintra · relevés le 24/10/2026",
+      "alt": "La tour jaune du palais de Pena sous un ciel bleu."
+    },
+    {
+      "photo": "sintra-pena-terrasse",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "À savoir",
+      "headline": [
+        "*30 min*",
+        "du parc au palais"
+      ],
+      "detail": "L’heure du billet est celle du palais. Aucun retard toléré.",
+      "facts": [
+        {
+          "source": "parques-sintra-pena-regras",
+          "excerpt": "it takes around 30 minutes to travel between these two points"
+        },
+        {
+          "source": "parques-sintra-pena-regras",
+          "excerpt": "There is no delay tolerance."
+        }
+      ],
+      "tag": "Règles Parques de Sintra · 24/10/2026",
+      "alt": "Visiteurs sur la terrasse du palais de Pena, face à la plaine."
+    },
+    {
+      "photo": "sintra-mouros-vue",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Château des Maures",
+      "headline": [
+        "*12 €*",
+        "et ses remparts"
+      ],
+      "detail": "Le parc de Pena seul coûte aussi 12 €.",
+      "facts": [
+        {
+          "source": "parques-sintra-precos",
+          "excerpt": "Moorish Castle Opening times Castle (open - close) 09:30AM - 06:00PM Last ticket and last admission 05:30PM Ticket office closed from 12 pm to 1 pm. Automatic ticket vending machines available Price Ticket for adults (18 - 64 years) 12€"
+        },
+        {
+          "source": "parques-sintra-precos",
+          "excerpt": "Prices - Visit to the park Ticket for adults (18 - 64 years) 12 €"
+        }
+      ],
+      "tag": "Tarifs Parques de Sintra · relevés le 24/10/2026",
+      "alt": "Les remparts du château des Maures sur la crête, au-dessus de Sintra."
+    },
+    {
+      "photo": "sintra-vila-place",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Palais national",
+      "headline": [
+        "*10-15 min*",
+        "à pied de la gare"
+      ],
+      "detail": "Le plus simple d’accès, au cœur du centre historique.",
+      "facts": [
+        {
+          "source": "parques-sintra-acessos",
+          "excerpt": "Sintra train station – National Palace of Sintra (10-15 minutes)"
+        }
+      ],
+      "tag": "Parques de Sintra · relevé le 24/10/2026",
+      "alt": "La place du centre historique de Sintra devant le palais national."
+    },
+    {
+      "photo": "sintra-pena-colline",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Le guide complet",
+      "headline": [
+        "Sintra",
+        "sans voiture"
+      ],
+      "detail": "Train depuis Lisbonne, bus 434, billets : le plan complet.",
+      "alt": "Le palais de Pena dominant la forêt de Sintra.",
+      "cta": true
+    }
+  ],
+  "assets": {
+    "regular": {
+      "file": "assets/dmsans-regular.ttf",
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      }
+    },
+    "bold": {
+      "file": "assets/dmsans-bold.ttf",
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      }
+    },
+    "serif": {
+      "file": "assets/playfair.ttf",
+      "sha256": "adefc53e7b3d483f1fa5e85edd82b7689ca79db25a1f6786bd7949cdcfeec601",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+      }
+    }
+  }
+}

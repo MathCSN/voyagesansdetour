@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "contentId": "fb-lisbonne-ou-dormir-2026-11",
+  "status": "rendered_not_published",
+  "fingerprint": "65b63b7a337002364638bbfc4f6a1adac65b2e89a07c7cc433576d56722a9694",
+  "createdAt": "2026-10-24T07:14:33.332539Z",
+  "renderFinishedAt": "2026-10-24T07:14:34.270301Z",
+  "rendererContractVersion": 3,
+  "rendererSha256": "cd8d087c507adccc7b05e9a020b3f02222416122b02cc840fcfc8787b7e243af",
+  "drawingSha256": "70d6df722c9393bfef74e3fbc2418b315d46d91be857613120a1bd48f4a8526d",
+  "kind": "carousel",
+  "channel": "facebook",
+  "publishAt": "2026-11-12T17:00:00Z",
+  "reviewValidUntil": "2026-11-23T00:00:00Z",
+  "sourceCheckedOn": "2026-10-24",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/ou-dormir-lisbonne-quartiers/",
+  "voice": null,
+  "presenter": null,
+  "sourceUrls": [
+    "https://voyagesansdetour.fr/portugal/ou-dormir-lisbonne-quartiers/"
+  ],
+  "photos": {
+    "lisbonne-alfama-toits": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Ingo Mehling",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Lissabon_-_Santa_Luzia_-_Alfama_-_3.jpg"
+    },
+    "lisbonne-rua-augusta-arc": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Jules Verne Times Two",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Empty_Arco_da_Rua_Augusta_during_the_COVID-19_lockdown,_Lisbon,_Portugal_julesvernex2.jpg"
+    },
+    "lisbonne-chiado-tram": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Camila fpp",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Bairroaltotram.jpg"
+    },
+    "lisbonne-largo-portas-do-sol": {
+      "licence": "CC BY 2.0",
+      "author": "Jorge Franganillo",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Lisboa_-_Alfama_(53860761742).jpg"
+    },
+    "lisbonne-cais-quai": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Jules Verne Times Two",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Woman_reading_a_book_next_to_an_upside_down_bicycle,_Cais_do_Sodr%C3%A9,_Lisbon,_Portugal_julesvernex2.jpg"
+    },
+    "lisbonne-arc-tram-vert": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Berthold Werner",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Lisbon_Pra%C3%A7a_do_Com%C3%A9rcio_BW_2018-10-03_13-29-10.jpg"
+    }
+  },
+  "video": null,
+  "files": [
+    {
+      "file": "apercu.jpg",
+      "sha256": "fd5334783dd8401c1f45dd915966792240dbfe2706cc04b2fa021442c0756675",
+      "bytes": 202988
+    },
+    {
+      "file": "credits.txt",
+      "sha256": "1c8320ef2626a69e1cdcc3f3299db0af5095af53583f9411ae156d2101d8acf7",
+      "bytes": 2756
+    },
+    {
+      "file": "dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "file": "legende.txt",
+      "sha256": "cdcf3fe7322872f08563c25007bf8e829d197eef4c4fc99e500d962a252b9b9f",
+      "bytes": 699
+    },
+    {
+      "file": "playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    },
+    {
+      "file": "scenario.json",
+      "sha256": "75074fdf5ec8f30a6abda3a220f18dfc940b7df84696a39c5bcd9a55b02a2df3",
+      "bytes": 6080
+    },
+    {
+      "file": "scene-01.jpg",
+      "sha256": "4ecebc29ed874691f5f9f42a84a572afbb2a03fc1fc9bda2b47d5f0b21f04432",
+      "bytes": 266380
+    },
+    {
+      "file": "scene-02.jpg",
+      "sha256": "60f835b6b1295bb0e4d944ae72cc956683178945473185b80d515fc6b6ded4cf",
+      "bytes": 308162
+    },
+    {
+      "file": "scene-03.jpg",
+      "sha256": "07b7107a76c2924d4aa1fcb592d0d62ddfe4aa29482124f688979800386cff35",
+      "bytes": 367645
+    },
+    {
+      "file": "scene-04.jpg",
+      "sha256": "bc98028ad89b5167374edcdcc4ae8ce37c902c02061a70614f12c5c602d8469a",
+      "bytes": 440039
+    },
+    {
+      "file": "scene-05.jpg",
+      "sha256": "65613db4b3a2018658fdfb0220897e85a9556b284a1c48c10c689cc73954ec09",
+      "bytes": 301574
+    },
+    {
+      "file": "scene-06.jpg",
+      "sha256": "b2341b6a4727cf87eeb9b7886ff228c0a1ea5f9ed2e13b5286be328fd396742b",
+      "bytes": 321104
+    }
+  ],
+  "runtime": {
+    "wallSeconds": 0.876,
+    "encoderThreads": 2,
+    "pillowVersion": "11.3.0",
+    "ffmpegVersion": null
+  },
+  "publication": {
+    "uploaded": false,
+    "scheduled": false,
+    "published": false,
+    "readyForAutomaticImport": false
+  },
+  "cost": {
+    "newPaidService": false,
+    "providerCalls": 0,
+    "monetarySpendEur": 0
+  }
+}

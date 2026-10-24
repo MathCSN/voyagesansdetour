@@ -1,0 +1,177 @@
+{
+  "schemaVersion": 1,
+  "contentId": "ig-sintra-pena-billets-2026-11",
+  "status": "rendered_not_published",
+  "fingerprint": "dddeb1ef2df1a9d4d0cf23685f501f1dee3bb8bbbd0ca22e771999d2502393d3",
+  "createdAt": "2026-10-24T06:55:35.648328Z",
+  "renderFinishedAt": "2026-10-24T06:56:08.395194Z",
+  "rendererContractVersion": 3,
+  "rendererSha256": "505838d3ca801ba10c22e987a3de9f2d6e4fd30946321cefccf89ac0f7dc8ed6",
+  "drawingSha256": "70d6df722c9393bfef74e3fbc2418b315d46d91be857613120a1bd48f4a8526d",
+  "kind": "reel",
+  "channel": "instagram",
+  "publishAt": "2026-11-04T17:00:00Z",
+  "reviewValidUntil": "2026-11-23T00:00:00Z",
+  "sourceCheckedOn": "2026-10-24",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/sintra-depuis-lisbonne/",
+  "voice": null,
+  "presenter": null,
+  "sourceUrls": [
+    "https://bilheteira.parquesdesintra.pt/info/parque-e-palacio-da-pena-visita-essencial/1198/en",
+    "https://www.parquesdesintra.pt/en/plan-your-visit/opening-times-and-prices/",
+    "https://www.parquesdesintra.pt/en/plan-your-visit/tickets-palace-of-pena/"
+  ],
+  "photos": {
+    "sintra-pena-tour-horloge": {
+      "licence": "CC BY-SA 3.0",
+      "author": "Chabe01",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Palais_national_Pena_Sintra_37.jpg"
+    },
+    "sintra-pena-tour-jaune": {
+      "licence": "CC BY 4.0",
+      "author": "Jakub Hałun",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Pena_Palace,_Sintra,_Portugal,_20250606_1037_0005.jpg"
+    },
+    "sintra-pena-terrasse": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Diego Delso",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Palacio_Nacional_da_Pena,_Sintra,_Portugal,_2019-05-25,_DD_129.jpg"
+    },
+    "sintra-pena-chemin-ronde": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Diego Delso",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Palacio_Nacional_da_Pena,_Sintra,_Portugal,_2019-05-25,_DD_127.jpg"
+    },
+    "sintra-pena-colline": {
+      "licence": "CC BY 4.0",
+      "author": "Jakub Hałun",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Pal%C3%A1cio_Nacional_da_Pena,_Sintra,_Portugal,_20250606_1159_0132.jpg"
+    },
+    "sintra-mouros-remparts": {
+      "licence": "CC BY 4.0",
+      "author": "Jakub Hałun",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Castelo_dos_Mouros_in_Sintra,_Portugal,_20250606_1210_0158.jpg"
+    },
+    "sintra-vila-palais-national": {
+      "licence": "CC BY 4.0",
+      "author": "Jakub Hałun",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Pal%C3%A1cio_Nacional_de_Sintra_from_Castelo_dos_Mouros,_20250606_1153_0088.jpg"
+    }
+  },
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "durationSeconds": 27.5,
+    "videoCodec": "h264",
+    "pixelFormat": "yuv420p",
+    "videoBitrateBps": 4105273,
+    "audioCodec": "aac",
+    "audioSampleRate": 48000,
+    "audioBitrateBps": 96392,
+    "fullDecodePassed": true,
+    "loudness": {
+      "integratedLufs": -16.0,
+      "truePeakDbfs": -1.6
+    }
+  },
+  "files": [
+    {
+      "file": "apercu.jpg",
+      "sha256": "d903a60cef63ba5a7756cd0d1bde7b1045a5ce7e572e618643d9272138f4d05e",
+      "bytes": 324057
+    },
+    {
+      "file": "credits.txt",
+      "sha256": "6b7712fa046f67cb8777513a20a268975471a858d7f8ca8509db946de94005fc",
+      "bytes": 3805
+    },
+    {
+      "file": "dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "file": "encode.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "legende.txt",
+      "sha256": "eac8cdcccadf786df8d4ca5f77625f4edb9b36a353d6d778b3a3d23b7b33a04c",
+      "bytes": 809
+    },
+    {
+      "file": "playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    },
+    {
+      "file": "poster.jpg",
+      "sha256": "31b7e21c3db32dc7c4f9a7d6bc490a50b609358e87531d3178f64f2bd434198e",
+      "bytes": 356370
+    },
+    {
+      "file": "reel.mp4",
+      "sha256": "abfc34bd452a0fa1aef7cf9e7bf23aa28bcb43577ae94ce16e7f01992eafae67",
+      "bytes": 14475121
+    },
+    {
+      "file": "scenario.json",
+      "sha256": "86723d140d107e72799e8dd1a6b65faa24494e0c3c70d8f882f862e211b90d45",
+      "bytes": 7958
+    },
+    {
+      "file": "scene-01.jpg",
+      "sha256": "6429612cf65aa444e924861eac1f4c3ddc0b5f6050499c8fd0ae2018f35322ba",
+      "bytes": 321487
+    },
+    {
+      "file": "scene-02.jpg",
+      "sha256": "2bbee0b1c954805f7c70e3743cb12a0270fcc5d37cef5709be26eae8b58f08bd",
+      "bytes": 426870
+    },
+    {
+      "file": "scene-03.jpg",
+      "sha256": "81a367549d0bb50aa2a57371e65182192e590a898072f7c7cf27bee11b52bfcf",
+      "bytes": 434219
+    },
+    {
+      "file": "scene-04.jpg",
+      "sha256": "0eb2f41a9754bbd1ecdfe8821bbc0d037c44444397b53a6377f2de14c0dee3a5",
+      "bytes": 487839
+    },
+    {
+      "file": "scene-05.jpg",
+      "sha256": "02f3cc6ecbd116a3b58df75f8582195c6b2d7b6e4069e53c76e26b6c5f5d9cea",
+      "bytes": 540339
+    },
+    {
+      "file": "scene-06.jpg",
+      "sha256": "e66b951daa06d7eba12ca10717fcc0435b6d21fca1cb58caab8fbaa9fffb7e73",
+      "bytes": 527114
+    },
+    {
+      "file": "scene-07.jpg",
+      "sha256": "d374bdc04237c47f33036957bd9226676a2c13b0bb26100073dc4310d5f251c3",
+      "bytes": 660321
+    }
+  ],
+  "runtime": {
+    "wallSeconds": 32.643,
+    "encoderThreads": 2,
+    "pillowVersion": "11.3.0",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers"
+  },
+  "publication": {
+    "uploaded": false,
+    "scheduled": false,
+    "published": false,
+    "readyForAutomaticImport": false
+  },
+  "cost": {
+    "newPaidService": false,
+    "providerCalls": 0,
+    "monetarySpendEur": 0
+  }
+}

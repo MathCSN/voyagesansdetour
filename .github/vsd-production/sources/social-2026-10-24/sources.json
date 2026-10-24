@@ -1,0 +1,187 @@
+{
+  "schemaVersion": 1,
+  "checkedOn": "2026-10-24",
+  "method": "Pages officielles relevées le 24/10/2026 ; texte visible conservé tel quel, première ligne = URL. Les extraits cités par les scénarios doivent figurer mot pour mot dans ces instantanés.",
+  "sources": {
+    "carris-tarifas-2026": {
+      "url": "https://www.carris.pt/media/hlndnvcp/a4_tarifario_vertical_site.pdf",
+      "publisher": "Carris",
+      "title": "Tarifas Carris em vigor a partir de 1 de janeiro de 2026 (PDF officiel)",
+      "retrievedAt": "2026-10-24T06:13:48Z",
+      "snapshot": {
+        "file": "sources/social-2026-10-24/carris-tarifas-2026.txt",
+        "sha256": "40b80e04f3fdf4cf7d465665ebdc5d6c40a6e21b3b568756b0a5dce1969ca49c"
+      }
+    },
+    "metro-lisboa-tarifas-2026": {
+      "url": "https://www.metrolisboa.pt/wp-content/uploads/2025/12/Tarifas_site_2026_PT.pdf",
+      "publisher": "Metropolitano de Lisboa",
+      "title": "Tarifas em vigor a partir do dia 1 de janeiro 2026 (PDF officiel)",
+      "retrievedAt": "2026-10-24T06:12:42Z",
+      "snapshot": {
+        "file": "sources/social-2026-10-24/metro-lisboa-tarifas-2026.txt",
+        "sha256": "c25f528515013d431091dc766933ae1f214930f8115d9e89855f1494840c517b"
+      }
+    },
+    "parques-sintra-precos": {
+      "url": "https://www.parquesdesintra.pt/en/plan-your-visit/opening-times-and-prices/",
+      "publisher": "Parques de Sintra",
+      "title": "Opening times and prices",
+      "retrievedAt": "2026-10-24T06:12:07Z",
+      "snapshot": {
+        "file": "sources/social-2026-10-24/parques-sintra-precos.txt",
+        "sha256": "3afd52a8cdc029ef159b90da4989ddf08fb0e8bf7bd63abde815ec69f4b28c24"
+      }
+    },
+    "parques-sintra-acessos": {
+      "url": "https://www.parquesdesintra.pt/en/plan-your-visit/how-to-get-there/",
+      "publisher": "Parques de Sintra",
+      "title": "How to get there",
+      "retrievedAt": "2026-10-24T06:12:08Z",
+      "snapshot": {
+        "file": "sources/social-2026-10-24/parques-sintra-acessos.txt",
+        "sha256": "07ca90b895d38cdce9bbae922d9c4d4db0ac3c093c23131bf9d9513bccabc68c"
+      }
+    },
+    "parques-sintra-pena-regras": {
+      "url": "https://www.parquesdesintra.pt/en/plan-your-visit/tickets-palace-of-pena/",
+      "publisher": "Parques de Sintra",
+      "title": "Tickets for the Palace of Pena",
+      "retrievedAt": "2026-10-24T06:28:58Z",
+      "snapshot": {
+        "file": "sources/social-2026-10-24/parques-sintra-pena-regras.txt",
+        "sha256": "adbb107a5770fb4b7dd48d51e5d087e5106db168e27ec5eda306ece80fb4329a"
+      }
+    },
+    "parques-sintra-pena-essencial": {
+      "url": "https://bilheteira.parquesdesintra.pt/info/parque-e-palacio-da-pena-visita-essencial/1198/en",
+      "publisher": "Parques de Sintra",
+      "title": "Park and National Palace of Pena: Essential Visit (billetterie officielle)",
+      "retrievedAt": "2026-10-24T06:28:56Z",
+      "snapshot": {
+        "file": "sources/social-2026-10-24/parques-sintra-pena-essencial.txt",
+        "sha256": "0ff25b605574cf44775fa35d27beac585b128116299ebfff38e48748f26c38ba"
+      }
+    },
+    "cp-bilhete-promo": {
+      "url": "https://www.cp.pt/info/en/w/promo-ticket",
+      "publisher": "CP — Comboios de Portugal",
+      "title": "Promo ticket",
+      "retrievedAt": "2026-10-24T06:15:05Z",
+      "snapshot": {
+        "file": "sources/social-2026-10-24/cp-bilhete-promo.txt",
+        "sha256": "1703c49ce0f8bda064592c17b25247ce53626987f4ed967bd6094c455d797917"
+      }
+    },
+    "cp-bilheteira-online": {
+      "url": "https://www.cp.pt/info/en/w/online-ticket-office",
+      "publisher": "CP — Comboios de Portugal",
+      "title": "Online ticket office",
+      "retrievedAt": "2026-10-24T06:15:06Z",
+      "snapshot": {
+        "file": "sources/social-2026-10-24/cp-bilheteira-online.txt",
+        "sha256": "37f393acf74732846d9b417675bffe54f02548bf97ace2ec2f3bcd88be52298f"
+      }
+    },
+    "cp-horarios-lisboa-norte": {
+      "url": "https://www.cp.pt/info/documents/d/cp/comboios-alfa-pendular-intercidades-lisboa-norte",
+      "publisher": "CP — Comboios de Portugal",
+      "title": "Horários Alfa Pendular | Intercidades Lisboa > Norte (PDF officiel)",
+      "retrievedAt": "2026-10-24T06:16:30Z",
+      "snapshot": {
+        "file": "sources/social-2026-10-24/cp-horarios-lisboa-norte.txt",
+        "sha256": "037a0605bb8533eab37451d5cbb453ccb73bb693b33171f420537d97cc4f28e8"
+      }
+    },
+    "jeronimos-horario": {
+      "url": "https://www.mosteirojeronimos.gov.pt/",
+      "publisher": "Mosteiro dos Jerónimos",
+      "title": "Site officiel du monastère",
+      "retrievedAt": "2026-10-24T06:16:46Z",
+      "snapshot": {
+        "file": "sources/social-2026-10-24/jeronimos-horario.txt",
+        "sha256": "257dc52dee73b35e6fd66e5979425f9a1321958dcfc1b600ad22695fc7ba7047"
+      }
+    },
+    "visitlisboa-jeronimos": {
+      "url": "https://www.visitlisboa.com/en/places/jeronimos-monastery",
+      "publisher": "Visit Lisboa",
+      "title": "Jerónimos Monastery",
+      "retrievedAt": "2026-10-24T06:16:47Z",
+      "snapshot": {
+        "file": "sources/social-2026-10-24/visitlisboa-jeronimos.txt",
+        "sha256": "9ffbb2f53d87f7fb1d00f4198a99f43843adf950e747e6d769c18b0fb943e53d"
+      }
+    },
+    "guide-lisbonne-3-jours-sans-voiture": {
+      "url": "https://voyagesansdetour.fr/portugal/lisbonne-3-jours-sans-voiture/",
+      "publisher": "Voyage Sans Détour",
+      "title": "Guide publié (sources officielles citées et datées dans le guide)",
+      "retrievedAt": "2026-10-24T06:36:26Z",
+      "snapshot": {
+        "file": "sources/social-2026-10-24/guide-lisbonne-3-jours-sans-voiture.txt",
+        "sha256": "a21476f13f1f530f7397a736307da80efd51d0774ae3b33acc94bf5a6638de3e"
+      }
+    },
+    "guide-porto-3-jours-sans-voiture": {
+      "url": "https://voyagesansdetour.fr/portugal/porto-3-jours-sans-voiture/",
+      "publisher": "Voyage Sans Détour",
+      "title": "Guide publié (sources officielles citées et datées dans le guide)",
+      "retrievedAt": "2026-10-24T06:36:26Z",
+      "snapshot": {
+        "file": "sources/social-2026-10-24/guide-porto-3-jours-sans-voiture.txt",
+        "sha256": "5644f2a151723f44cf5c5ab8c4ddf8381277e83ba46129f4e0a21b495e80b24c"
+      }
+    },
+    "guide-sintra-depuis-lisbonne": {
+      "url": "https://voyagesansdetour.fr/portugal/sintra-depuis-lisbonne/",
+      "publisher": "Voyage Sans Détour",
+      "title": "Guide publié (sources officielles citées et datées dans le guide)",
+      "retrievedAt": "2026-10-24T06:36:27Z",
+      "snapshot": {
+        "file": "sources/social-2026-10-24/guide-sintra-depuis-lisbonne.txt",
+        "sha256": "0735eb0c8291e1f83699e9569e09a3facdf364391827aab2ccd6aacc86e6db2d"
+      }
+    },
+    "guide-lisbonne-porto-train": {
+      "url": "https://voyagesansdetour.fr/portugal/lisbonne-porto-train/",
+      "publisher": "Voyage Sans Détour",
+      "title": "Guide publié (sources officielles citées et datées dans le guide)",
+      "retrievedAt": "2026-10-24T06:36:27Z",
+      "snapshot": {
+        "file": "sources/social-2026-10-24/guide-lisbonne-porto-train.txt",
+        "sha256": "2a154374d1e74d927483fa6da7945918958f49a0700f436b37a9f9f46697a422"
+      }
+    },
+    "guide-ou-dormir-lisbonne-quartiers": {
+      "url": "https://voyagesansdetour.fr/portugal/ou-dormir-lisbonne-quartiers/",
+      "publisher": "Voyage Sans Détour",
+      "title": "Guide publié (sources officielles citées et datées dans le guide)",
+      "retrievedAt": "2026-10-24T06:36:27Z",
+      "snapshot": {
+        "file": "sources/social-2026-10-24/guide-ou-dormir-lisbonne-quartiers.txt",
+        "sha256": "f267693d22baacd793ec29958450c340584d5efdd84ee144b3daf80686c36556"
+      }
+    },
+    "guide-lisbonne-ou-porto": {
+      "url": "https://voyagesansdetour.fr/portugal/lisbonne-ou-porto/",
+      "publisher": "Voyage Sans Détour",
+      "title": "Guide publié (sources officielles citées et datées dans le guide)",
+      "retrievedAt": "2026-10-24T06:36:27Z",
+      "snapshot": {
+        "file": "sources/social-2026-10-24/guide-lisbonne-ou-porto.txt",
+        "sha256": "a5d7883cb7bedd76f34526064bac5ed19b7abae70addb5a0ef8819a399786096"
+      }
+    },
+    "guide-aeroport-porto-centre-ville": {
+      "url": "https://voyagesansdetour.fr/portugal/aeroport-porto-centre-ville/",
+      "publisher": "Voyage Sans Détour",
+      "title": "Guide publié (sources officielles citées et datées dans le guide)",
+      "retrievedAt": "2026-10-24T06:36:28Z",
+      "snapshot": {
+        "file": "sources/social-2026-10-24/guide-aeroport-porto-centre-ville.txt",
+        "sha256": "17fd2e6a980f841f00b0af9cb869dd9daba0d932f6816b9328ae073eb79e674e"
+      }
+    }
+  }
+}

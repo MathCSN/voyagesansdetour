@@ -1,0 +1,178 @@
+{
+  "schemaVersion": 1,
+  "contentId": "ig-lisbonne-porto-train-2026-11",
+  "status": "rendered_not_published",
+  "fingerprint": "16966b1660ede9a895985302e559a246e156840c76200033b5e1b3878d8faa47",
+  "createdAt": "2026-10-24T06:54:09.103370Z",
+  "renderFinishedAt": "2026-10-24T06:54:39.367377Z",
+  "rendererContractVersion": 3,
+  "rendererSha256": "505838d3ca801ba10c22e987a3de9f2d6e4fd30946321cefccf89ac0f7dc8ed6",
+  "drawingSha256": "70d6df722c9393bfef74e3fbc2418b315d46d91be857613120a1bd48f4a8526d",
+  "kind": "reel",
+  "channel": "instagram",
+  "publishAt": "2026-11-18T17:00:00Z",
+  "reviewValidUntil": "2026-11-23T00:00:00Z",
+  "sourceCheckedOn": "2026-10-24",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/lisbonne-porto-train/",
+  "voice": null,
+  "presenter": null,
+  "sourceUrls": [
+    "https://voyagesansdetour.fr/portugal/lisbonne-porto-train/",
+    "https://www.cp.pt/info/documents/d/cp/comboios-alfa-pendular-intercidades-lisboa-norte",
+    "https://www.cp.pt/info/en/w/online-ticket-office",
+    "https://www.cp.pt/info/en/w/promo-ticket"
+  ],
+  "photos": {
+    "train-alfa-viaduc": {
+      "licence": "CC BY 2.0",
+      "author": "Rob Dammers",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Porto_Ponte_Sao_Jao_CP_Alfa_Pendular_4002_(52045521395).jpg"
+    },
+    "train-alfa-220": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Sambasoccer27",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:%D8%A3%D9%84%D9%81%D8%A7_%D8%A8%D9%86%D8%AF%D9%84%D8%A7%D8%B1_220_%D9%83_%D8%B3.jpg"
+    },
+    "train-alfa-oriente": {
+      "licence": "CC0",
+      "author": "Bunks",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Alfa-Pendular_im_Gare_Oriente.jpg"
+    },
+    "train-alfa-interieur": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Aleksi Kinnunen",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Alfa_Pendular_new_interior_1st_class.jpg"
+    },
+    "train-alfa-aqueduc": {
+      "licence": "CC BY 2.0",
+      "author": "Nicky Boogaard from Hardinxveld-Giessendam, Netherlands",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:CP_AlfaPendular_storming_through_Campolide_railway_station_(47548338771).jpg"
+    },
+    "porto-sao-bento-departs": {
+      "licence": "CC BY-SA 2.0",
+      "author": "jad99 from Graz, Austria",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Azulejos_(Esta%C3%A7%C3%A3o_de_S%C3%A3o_Bento)_(14004154641).jpg"
+    },
+    "porto-ribeira-rabelos": {
+      "licence": "CC BY 4.0",
+      "author": "Jakub Hałun",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Rabelo_boats_and_Ribeira_seen_from_Cais_de_Gaia,_20250605_1623_9879.jpg"
+    }
+  },
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "durationSeconds": 28.0,
+    "videoCodec": "h264",
+    "pixelFormat": "yuv420p",
+    "videoBitrateBps": 2925505,
+    "audioCodec": "aac",
+    "audioSampleRate": 48000,
+    "audioBitrateBps": 96492,
+    "fullDecodePassed": true,
+    "loudness": {
+      "integratedLufs": -16.0,
+      "truePeakDbfs": -1.7
+    }
+  },
+  "files": [
+    {
+      "file": "apercu.jpg",
+      "sha256": "155d2260f2226d16c71309a4cb817ced855b60543d183f37768a186cc30fe165",
+      "bytes": 291265
+    },
+    {
+      "file": "credits.txt",
+      "sha256": "793b5a6e64ab023705c6b215f2e89263700ec5487ff8ad7b4d3d590532be3953",
+      "bytes": 3920
+    },
+    {
+      "file": "dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "file": "encode.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "legende.txt",
+      "sha256": "ce09ae4d443b04b9a59a52ca6df9f4cbcd9ec2caed0475addcea2e1fdba03f59",
+      "bytes": 760
+    },
+    {
+      "file": "playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    },
+    {
+      "file": "poster.jpg",
+      "sha256": "e670908512544064c89e33a7dc696308a9d9be6f343f0d3d6aa2b7b7b0c74b35",
+      "bytes": 637575
+    },
+    {
+      "file": "reel.mp4",
+      "sha256": "ce5377d99a3284e0afac36a881c22feff47f4f03325d8851ead3f285818911a0",
+      "bytes": 10609484
+    },
+    {
+      "file": "scenario.json",
+      "sha256": "dd8b372f53271d5690c609841e322900caa33c9ae891f75874c1e55b1825bfe1",
+      "bytes": 7387
+    },
+    {
+      "file": "scene-01.jpg",
+      "sha256": "cb17b55bf8acbd2e8e5fbf83f5c3b8246f4c57d53e989c34d8897ebb36ff52e4",
+      "bytes": 580705
+    },
+    {
+      "file": "scene-02.jpg",
+      "sha256": "567b98f1c558c59e049497bdae1df02b75645adf937ee6ba7ef01010120cd299",
+      "bytes": 251256
+    },
+    {
+      "file": "scene-03.jpg",
+      "sha256": "7618fb0eaa199d625aad5a4222e6ac37bd16f3760e01477a37052863aea64ba1",
+      "bytes": 348074
+    },
+    {
+      "file": "scene-04.jpg",
+      "sha256": "2f622099c2dcd371b6810545733bf7b8986bf11c02e5c83d6ea2d803da7480e1",
+      "bytes": 298482
+    },
+    {
+      "file": "scene-05.jpg",
+      "sha256": "cebd40efb5912f164b9738e61a6315640cbda9f75abc877623eda2a33cf591a8",
+      "bytes": 433411
+    },
+    {
+      "file": "scene-06.jpg",
+      "sha256": "fbe7ef19d50fbc0d7ceee33ad946d499d4b09aea409c3532192e677bc20136e0",
+      "bytes": 336374
+    },
+    {
+      "file": "scene-07.jpg",
+      "sha256": "7d5b81ffc35509a63a1013773aba0a050c927da61a712b7576922a4e6808af37",
+      "bytes": 420822
+    }
+  ],
+  "runtime": {
+    "wallSeconds": 30.221,
+    "encoderThreads": 2,
+    "pillowVersion": "11.3.0",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers"
+  },
+  "publication": {
+    "uploaded": false,
+    "scheduled": false,
+    "published": false,
+    "readyForAutomaticImport": false
+  },
+  "cost": {
+    "newPaidService": false,
+    "providerCalls": 0,
+    "monetarySpendEur": 0
+  }
+}

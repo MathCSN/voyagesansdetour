@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "contentId": "fb-lisbonne-3-jours-2026-10",
+  "status": "rendered_not_published",
+  "fingerprint": "a92233dd283ff025b6e086909fbac3667e8e8f47f9ec3a9f8d844052d517ebbf",
+  "createdAt": "2026-10-24T06:57:18.902750Z",
+  "renderFinishedAt": "2026-10-24T06:57:19.727589Z",
+  "rendererContractVersion": 3,
+  "rendererSha256": "505838d3ca801ba10c22e987a3de9f2d6e4fd30946321cefccf89ac0f7dc8ed6",
+  "drawingSha256": "70d6df722c9393bfef74e3fbc2418b315d46d91be857613120a1bd48f4a8526d",
+  "kind": "carousel",
+  "channel": "facebook",
+  "publishAt": "2026-10-29T17:00:00Z",
+  "reviewValidUntil": "2026-11-23T00:00:00Z",
+  "sourceCheckedOn": "2026-10-24",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/lisbonne-3-jours-sans-voiture/",
+  "voice": null,
+  "presenter": null,
+  "sourceUrls": [
+    "https://voyagesansdetour.fr/portugal/lisbonne-3-jours-sans-voiture/",
+    "https://www.mosteirojeronimos.gov.pt/"
+  ],
+  "photos": {
+    "lisbonne-alfama-tage": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Ingo Mehling",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Lissabon_-_Santa_Luzia_-_Igreja_de_Santo_Estevao.jpg"
+    },
+    "lisbonne-arc-rua-augusta-tram": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Ingo Mehling",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Lissabon_-_Arco_da_Victoria_-_0.jpg"
+    },
+    "lisbonne-alfama-toits": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Ingo Mehling",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Lissabon_-_Santa_Luzia_-_Alfama_-_3.jpg"
+    },
+    "lisbonne-tour-belem-doree": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Jules Verne Times Two",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Torre_de_Bel%C3%A9m_at_sunrise,_Lisbon,_Portugal_julesvernex2.jpg"
+    },
+    "lisbonne-jeronimos-cloitre": {
+      "licence": "CC BY 4.0",
+      "author": "Jakub Hałun",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Cloister_of_the_Jer%C3%B3nimos_Monastery_in_Bel%C3%A9m,_Lisbon,_20250604_1309_9185.jpg"
+    },
+    "lisbonne-tram28-rue": {
+      "licence": "CC BY 2.0",
+      "author": "Shadowgate from Novara, ITALY",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tram_28_(34791358090).jpg"
+    }
+  },
+  "video": null,
+  "files": [
+    {
+      "file": "apercu.jpg",
+      "sha256": "4d3a46f1bb0b99e08ecb820101eadb6a6cca89e92eec2ff5fa0f3e415ced683b",
+      "bytes": 189405
+    },
+    {
+      "file": "credits.txt",
+      "sha256": "8d4f39b8c800eecd67ee96476e4adf86aee00e7eaa71f1e3d3a2586bdd055a0e",
+      "bytes": 2785
+    },
+    {
+      "file": "dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "file": "legende.txt",
+      "sha256": "ccfbac85f8da9b512dad74f30227f00280da4c536a80724c9d7704875807c11e",
+      "bytes": 712
+    },
+    {
+      "file": "playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    },
+    {
+      "file": "scenario.json",
+      "sha256": "2532130bbefe0720b8c43084577c8cb1ddf5e9e88d07668c6732b3c5b1a1e4a7",
+      "bytes": 6315
+    },
+    {
+      "file": "scene-01.jpg",
+      "sha256": "fe0406acec28d75f42b4f8b4ed6b22a1c101f3819dd3857aa98246d8ebc8f405",
+      "bytes": 259477
+    },
+    {
+      "file": "scene-02.jpg",
+      "sha256": "de43246e982dbeb765025fe897cc50eb454a7c4c6ad51f3b6c8487ce6467896b",
+      "bytes": 274070
+    },
+    {
+      "file": "scene-03.jpg",
+      "sha256": "d511ae21d53c1f58073c68d62b53e2ec5d5b11c6a6629af0400beaf2e4828999",
+      "bytes": 267173
+    },
+    {
+      "file": "scene-04.jpg",
+      "sha256": "22ac4e97c9b7a44f8a1248b052dc75fd5af56398d115fbc29571030c4a0f2524",
+      "bytes": 234365
+    },
+    {
+      "file": "scene-05.jpg",
+      "sha256": "03da5b7377cbe28387e279171731c6c0d9518843ce5f2503123606dea85c5e73",
+      "bytes": 341169
+    },
+    {
+      "file": "scene-06.jpg",
+      "sha256": "b838e397392048867afc695e15a996003ad6222a10eeb6a70e8787ebf7d5ec56",
+      "bytes": 340969
+    }
+  ],
+  "runtime": {
+    "wallSeconds": 0.799,
+    "encoderThreads": 2,
+    "pillowVersion": "11.3.0",
+    "ffmpegVersion": null
+  },
+  "publication": {
+    "uploaded": false,
+    "scheduled": false,
+    "published": false,
+    "readyForAutomaticImport": false
+  },
+  "cost": {
+    "newPaidService": false,
+    "providerCalls": 0,
+    "monetarySpendEur": 0
+  }
+}

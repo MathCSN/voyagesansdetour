@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 1,
+  "batchId": "fb-belem-sans-voiture-2026-11-v1",
+  "items": [
+    {
+      "contentId": "vsd-production:facebook:fb-belem-sans-voiture-2026-11:photo-v1",
+      "deduplicationKey": "vsd-production:facebook:fb-belem-sans-voiture-2026-11:photo-v1",
+      "title": "Belém sans voiture",
+      "dueAt": "2026-11-20T17:00:00Z",
+      "payload": {
+        "schemaVersion": 1,
+        "channel": "facebook",
+        "kind": "photos",
+        "text": "⛵ Belém sans voiture : la demi-journée la plus photogénique de Lisbonne.\n\n🚋 Le tram 15E dessert Belém et le monastère des Jerónimos.\n⛪ Jerónimos : du mardi au dimanche, 9h30–17h30, fermé le lundi.\n🎫 Avec la Lisboa Card, réservez quand même un créneau.\n🏰 Tour de Belém : vérifiez l’accès intérieur avant tout billet groupé.\n\n👉 Belém et tout Lisbonne en 3 jours :\nhttps://voyagesansdetour.fr/portugal/lisbonne-3-jours-sans-voiture/\n\nPhotos libres (Wikimedia Commons) — crédits : https://voyagesansdetour.fr/social-media/production/fb-belem-sans-voiture-2026-11/credits.txt\n\n#Lisbonne #Belem #Portugal #VoyageSansVoiture #VoyageSansDetour\n",
+        "aiGenerated": false,
+        "assets": [
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-belem-sans-voiture-2026-11/scene-01.jpg",
+            "sha256": "5e88d74ad2d032d8c1012f29b592838115fcf9b759b5cb77b006861d29a4dbb8",
+            "mimeType": "image/jpeg",
+            "altText": "La tour de Belém et sa passerelle au bord du Tage."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-belem-sans-voiture-2026-11/scene-02.jpg",
+            "sha256": "a625e53b7b08dd31db5a106f454878a0399cf2250617262a5601529eff6d4dbf",
+            "mimeType": "image/jpeg",
+            "altText": "La façade sculptée du monastère des Jerónimos."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-belem-sans-voiture-2026-11/scene-03.jpg",
+            "sha256": "944edd0df85ea350318b6579ad8a41c4a8ab1e159264beed985bc7dd989650b8",
+            "mimeType": "image/jpeg",
+            "altText": "Ombres des arcades sur le sol du cloître des Jerónimos."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-belem-sans-voiture-2026-11/scene-04.jpg",
+            "sha256": "a3645c330f3eea83a25ddf73fc5bdef382e53e1ea13539480da43fea707da6cf",
+            "mimeType": "image/jpeg",
+            "altText": "La file des visiteurs devant le monastère des Jerónimos."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-belem-sans-voiture-2026-11/scene-05.jpg",
+            "sha256": "7d2bc2cdd50701d11f52a75078c4a8ad979b96e867095125fa451437196dbbdc",
+            "mimeType": "image/jpeg",
+            "altText": "La tour de Belém vue de face, ses balcons et ses tourelles."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-belem-sans-voiture-2026-11/scene-06.jpg",
+            "sha256": "bffbaa207c6292316ed178da49baa55ff2ee41f502f1d48c0672a34af4460bc2",
+            "mimeType": "image/jpeg",
+            "altText": "La tour de Belém dans la lumière dorée du soir."
+          }
+        ]
+      },
+      "review": {
+        "schemaVersion": 1,
+        "contentId": "vsd-production:facebook:fb-belem-sans-voiture-2026-11:photo-v1",
+        "approved": true,
+        "reviewedAt": "2026-10-24T06:57:45Z",
+        "validUntil": "2026-11-23T00:00:00Z",
+        "payloadRevision": "5c78ef2a75811ed6cec9d463dcf7c61dc94295bda99475df1bc01a65175ae089",
+        "checks": {
+          "editorialApproved": true,
+          "rightsApproved": true,
+          "creditsPreserved": true,
+          "disclosurePreserved": true,
+          "formatRequirementsVerified": true,
+          "requiresPaidCall": false,
+          "sources": {
+            "status": "verified",
+            "observedAt": "2026-10-24T06:45:00Z",
+            "validUntil": "2026-11-23T00:00:00Z"
+          },
+          "syntheticPerson": false,
+          "providerSyntheticSettingVerified": false
+        },
+        "media": {
+          "required": true,
+          "url": null,
+          "sha256": null,
+          "items": [
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-belem-sans-voiture-2026-11/scene-01.jpg",
+              "sha256": "5e88d74ad2d032d8c1012f29b592838115fcf9b759b5cb77b006861d29a4dbb8",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-24T06:57:45Z",
+              "validUntil": "2026-11-23T00:00:00Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-belem-sans-voiture-2026-11/scene-02.jpg",
+              "sha256": "a625e53b7b08dd31db5a106f454878a0399cf2250617262a5601529eff6d4dbf",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-24T06:57:45Z",
+              "validUntil": "2026-11-23T00:00:00Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-belem-sans-voiture-2026-11/scene-03.jpg",
+              "sha256": "944edd0df85ea350318b6579ad8a41c4a8ab1e159264beed985bc7dd989650b8",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-24T06:57:45Z",
+              "validUntil": "2026-11-23T00:00:00Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-belem-sans-voiture-2026-11/scene-04.jpg",
+              "sha256": "a3645c330f3eea83a25ddf73fc5bdef382e53e1ea13539480da43fea707da6cf",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-24T06:57:45Z",
+              "validUntil": "2026-11-23T00:00:00Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-belem-sans-voiture-2026-11/scene-05.jpg",
+              "sha256": "7d2bc2cdd50701d11f52a75078c4a8ad979b96e867095125fa451437196dbbdc",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-24T06:57:45Z",
+              "validUntil": "2026-11-23T00:00:00Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-belem-sans-voiture-2026-11/scene-06.jpg",
+              "sha256": "bffbaa207c6292316ed178da49baa55ff2ee41f502f1d48c0672a34af4460bc2",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-24T06:57:45Z",
+              "validUntil": "2026-11-23T00:00:00Z"
+            }
+          ]
+        },
+        "destination": {
+          "url": "https://voyagesansdetour.fr/portugal/lisbonne-3-jours-sans-voiture/",
+          "status": "verified",
+          "observedAt": "2026-10-24T06:57:45Z",
+          "validUntil": "2026-11-23T00:00:00Z"
+        },
+        "monetization": {
+          "containsAffiliateLinks": false,
+          "partnerApproved": false,
+          "linksVerified": false,
+          "disclosurePreserved": false
+        },
+        "formatCapability": {
+          "status": "verified",
+          "observedAt": "2026-10-24T06:57:45Z",
+          "validUntil": "2026-11-23T00:00:00Z",
+          "automaticPublishing": true,
+          "verificationMethod": "official_documentation",
+          "sourceUrls": [
+            "https://support.buffer.com/en-us/articles/using-facebook-with-buffer-jY1AM9fz2G",
+            "https://developers.buffer.com/types/FacebookPostMetadataInput.html",
+            "https://developers.buffer.com/guides/posts-and-scheduling.html"
+          ]
+        },
+        "evidence": {
+          "status": "rendered_local_bytes_verified_public_deploy_pending",
+          "format": "photo_carousel",
+          "rendererContractVersion": 3,
+          "receiptSha256": "c4d1596e761830be268abfb2e4d59ae8ae491d9ea2d028856cf67ef94c252ea3",
+          "scenarioFingerprint": "f24881aedbab8b180c8bf8fee0733d59973376b3cd709fd22a165e03cfc152e8",
+          "sourceCheckedOn": "2026-10-24",
+          "sourceUrls": [
+            "https://voyagesansdetour.fr/portugal/lisbonne-3-jours-sans-voiture/",
+            "https://www.mosteirojeronimos.gov.pt/",
+            "https://www.visitlisboa.com/en/places/jeronimos-monastery"
+          ],
+          "creditsUrl": "https://voyagesansdetour.fr/social-media/production/fb-belem-sans-voiture-2026-11/credits.txt",
+          "voice": null,
+          "music": null,
+          "note": "Les octets publics sont à contrôler après déploiement avec social_stock.py --verify-public. Un créneau prévu n'est pas une réservation Buffer."
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,167 @@
+{
+  "schemaVersion": 1,
+  "contentId": "ig-lisbonne-tram28-tarifs-2026-10",
+  "status": "rendered_not_published",
+  "fingerprint": "09931bf05bcc9aef27cd38c3bed35721960ff9dd8a167541ad87865e2538ad1c",
+  "createdAt": "2026-10-24T07:14:34.384103Z",
+  "renderFinishedAt": "2026-10-24T07:15:02.267701Z",
+  "rendererContractVersion": 3,
+  "rendererSha256": "cd8d087c507adccc7b05e9a020b3f02222416122b02cc840fcfc8787b7e243af",
+  "drawingSha256": "70d6df722c9393bfef74e3fbc2418b315d46d91be857613120a1bd48f4a8526d",
+  "kind": "reel",
+  "channel": "instagram",
+  "publishAt": "2026-10-28T17:00:00Z",
+  "reviewValidUntil": "2026-11-23T00:00:00Z",
+  "sourceCheckedOn": "2026-10-24",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/lisbonne-3-jours-sans-voiture/",
+  "voice": null,
+  "presenter": null,
+  "sourceUrls": [
+    "https://voyagesansdetour.fr/portugal/sintra-depuis-lisbonne/",
+    "https://www.carris.pt/media/hlndnvcp/a4_tarifario_vertical_site.pdf",
+    "https://www.metrolisboa.pt/wp-content/uploads/2025/12/Tarifas_site_2026_PT.pdf"
+  ],
+  "photos": {
+    "lisbonne-tram28-se": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Padaguan",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tranv%C3%ADa_28_de_Lisboa.jpg"
+    },
+    "lisbonne-chiado-tram": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Camila fpp",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Bairroaltotram.jpg"
+    },
+    "lisbonne-arc-rua-augusta-tram": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Ingo Mehling",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Lissabon_-_Arco_da_Victoria_-_0.jpg"
+    },
+    "lisbonne-cais-quai": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Jules Verne Times Two",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Woman_reading_a_book_next_to_an_upside_down_bicycle,_Cais_do_Sodr%C3%A9,_Lisbon,_Portugal_julesvernex2.jpg"
+    },
+    "lisbonne-tram28-graca": {
+      "licence": "CC BY 2.0",
+      "author": "Neil",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:No_28_Tram_(45684287331).jpg"
+    },
+    "lisbonne-alfama-tage": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Ingo Mehling",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Lissabon_-_Santa_Luzia_-_Igreja_de_Santo_Estevao.jpg"
+    }
+  },
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "durationSeconds": 24.0,
+    "videoCodec": "h264",
+    "pixelFormat": "yuv420p",
+    "videoBitrateBps": 3171198,
+    "audioCodec": "aac",
+    "audioSampleRate": 48000,
+    "audioBitrateBps": 96520,
+    "fullDecodePassed": true,
+    "loudness": {
+      "integratedLufs": -16.1,
+      "truePeakDbfs": -1.3
+    }
+  },
+  "files": [
+    {
+      "file": "apercu.jpg",
+      "sha256": "4bc1aca0f254268a4ea7676601aba5e61d2563cd151aeff7433ae0ba6b22f7e2",
+      "bytes": 266731
+    },
+    {
+      "file": "credits.txt",
+      "sha256": "38bcd0d958564a4505e8162f97ce13f62667591a78df91dc0faaaa8d4965690a",
+      "bytes": 3314
+    },
+    {
+      "file": "dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "file": "encode.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "legende.txt",
+      "sha256": "e88b60736e43b1f49102e488e77a09fe6508af05a1abed1c3ee2b81b44f4d5f0",
+      "bytes": 755
+    },
+    {
+      "file": "playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    },
+    {
+      "file": "poster.jpg",
+      "sha256": "f4fb2f6875fdc813a62683875632294026c352b10a23716ffbc80bac0348dff4",
+      "bytes": 491326
+    },
+    {
+      "file": "reel.mp4",
+      "sha256": "93f57bbe7521e1a1d7ed00de1f32b779b130acfca42c00fdaf8358873ac00885",
+      "bytes": 9831192
+    },
+    {
+      "file": "scenario.json",
+      "sha256": "f01684a93f619f24d7d98bd25802fa2e22a79f746a50ff749b7dd098702c0983",
+      "bytes": 7159
+    },
+    {
+      "file": "scene-01.jpg",
+      "sha256": "2f1bb9b43072c02942522ce7f5120837e8fb1e42e114c7240665fd487179c8b0",
+      "bytes": 446207
+    },
+    {
+      "file": "scene-02.jpg",
+      "sha256": "ae2e84959203e4d905a6b46d9179c0f03b32428897372133818a12decf530b3f",
+      "bytes": 503573
+    },
+    {
+      "file": "scene-03.jpg",
+      "sha256": "fc615997482808f84ecbbeef3bc406da0acffbdb07995545028f98af668e1e7e",
+      "bytes": 398615
+    },
+    {
+      "file": "scene-04.jpg",
+      "sha256": "aae02e4e86b10b37c75a14bce3e5b7f944f6c7d03bad63cfd0176f60cf44cbfd",
+      "bytes": 424825
+    },
+    {
+      "file": "scene-05.jpg",
+      "sha256": "32cf5c155d49894e96a48df47222d6676ab1a704a4bddabe7a6504a9ae787495",
+      "bytes": 418781
+    },
+    {
+      "file": "scene-06.jpg",
+      "sha256": "23af626f1610091c551bf0f34420592258455ffc9299369cf91ea8d762be33ba",
+      "bytes": 339879
+    }
+  ],
+  "runtime": {
+    "wallSeconds": 27.826,
+    "encoderThreads": 2,
+    "pillowVersion": "11.3.0",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers"
+  },
+  "publication": {
+    "uploaded": false,
+    "scheduled": false,
+    "published": false,
+    "readyForAutomaticImport": false
+  },
+  "cost": {
+    "newPaidService": false,
+    "providerCalls": 0,
+    "monetarySpendEur": 0
+  }
+}

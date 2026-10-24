@@ -1,0 +1,227 @@
+{
+  "schemaVersion": 2,
+  "id": "ig-lisbonne-tram28-tarifs-2026-10",
+  "kind": "reel",
+  "channel": "instagram",
+  "destination": "Lisbonne",
+  "title": "Lisbonne : payer le tram 28 au bon prix",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/lisbonne-3-jours-sans-voiture/",
+  "publishAt": "2026-10-28T17:00:00Z",
+  "review": {
+    "status": "reviewed_for_render",
+    "checkedAt": "2026-10-24T06:45:00Z",
+    "validUntil": "2026-11-23T00:00:00Z",
+    "method": "Faits relus mot pour mot dans les instantanés datés du 24/10/2026 (sources/social-2026-10-24) ; photos sous licence libre consignées dans assets/photos/catalogue.json."
+  },
+  "sources": {
+    "file": "sources/social-2026-10-24/sources.json",
+    "sha256": "ab7c358a9fcfa0a14abc58fe398ac7816ad7fece07101de071565bb938118878"
+  },
+  "photos": {
+    "file": "assets/photos/catalogue.json",
+    "sha256": "a66ad22b12c71b7e545179ac6a8e3f3a4412808b8eb854734e79105402792268"
+  },
+  "caption": {
+    "hook": "🚋 Tram 28 à Lisbonne : 3,30 € le trajet… ou 1,72 € si vous savez quoi acheter.",
+    "lines": [
+      "💳 Carte navegante à 0,50 €, rechargée en Zapping dès 3 € : 1,72 € le trajet Carris.",
+      "🎟️ 24 h de bus, trams et métro : 7,25 €. Version avec les trains CP : 11,40 €.",
+      "⛴️ 24 h avec en plus le bateau Transtejo pour Cacilhas : 10,35 €.",
+      "📅 Tarifs officiels Carris et Metro 2026, relevés le 24 octobre."
+    ],
+    "cta": "🗺️ Lisbonne en 3 jours sans voiture : le guide complet est en lien dans la bio.",
+    "hashtags": [
+      "#Lisbonne",
+      "#Lisboa",
+      "#Portugal",
+      "#VoyageSansVoiture",
+      "#VoyageSansDetour"
+    ]
+  },
+  "scenes": [
+    {
+      "photo": "lisbonne-tram28-se",
+      "focus": [
+        0.6,
+        0.55
+      ],
+      "kicker": "Lisbonne · tram 28",
+      "headline": [
+        "Tram 28 :",
+        "*3,30 €* le trajet ?"
+      ],
+      "detail": "Oui, si vous payez à bord. Voici comment payer moins.",
+      "facts": [
+        {
+          "source": "carris-tarifas-2026",
+          "excerpt": "Elétrico (1 viagem)"
+        },
+        {
+          "source": "carris-tarifas-2026",
+          "excerpt": "Tarifa de bordo Carris 2,30 3,30 4,30 6,20"
+        }
+      ],
+      "tag": "Tarifs Carris 2026 · relevés le 24/10/2026",
+      "seconds": 3.5
+    },
+    {
+      "photo": "lisbonne-chiado-tram",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Le bon réflexe",
+      "headline": [
+        "*1,72 €* le trajet",
+        "avec la carte"
+      ],
+      "detail": "Carte navegante à *0,50 €*, rechargée en Zapping dès 3 €.",
+      "facts": [
+        {
+          "source": "carris-tarifas-2026",
+          "excerpt": "Viagem na Carris (1 hora em toda a rede) 1,72"
+        },
+        {
+          "source": "carris-tarifas-2026",
+          "excerpt": "0,50Navegante ocasional"
+        },
+        {
+          "source": "carris-tarifas-2026",
+          "excerpt": "Carregamentos com os seguintes montantes: 3€, 5€"
+        }
+      ],
+      "tag": "Tarifs Carris 2026 · relevés le 24/10/2026",
+      "seconds": 4
+    },
+    {
+      "photo": "lisbonne-arc-rua-augusta-tram",
+      "focus": [
+        0.45,
+        0.5
+      ],
+      "kicker": "Une grosse journée ?",
+      "headline": [
+        "24 h illimitées :",
+        "*7,25 €*"
+      ],
+      "detail": "Bus, trams et métro pendant 24 h après la première validation.",
+      "facts": [
+        {
+          "source": "metro-lisboa-tarifas-2026",
+          "excerpt": "Carris/Metro 2 7,25"
+        },
+        {
+          "source": "metro-lisboa-tarifas-2026",
+          "excerpt": "Válido durante um período de 24h após a primeira validação."
+        }
+      ],
+      "tag": "Tarifs Metro Lisboa 2026 · relevés le 24/10/2026",
+      "seconds": 4
+    },
+    {
+      "photo": "lisbonne-cais-quai",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Cap sur l’autre rive",
+      "headline": [
+        "Le bateau inclus :",
+        "*10,35 €* les 24 h"
+      ],
+      "detail": "Carris, métro et ferry Transtejo pour Cacilhas, de l’autre côté du Tage.",
+      "facts": [
+        {
+          "source": "metro-lisboa-tarifas-2026",
+          "excerpt": "Carris/Metro/Transtejo (Cacilhas) 2 10,35"
+        }
+      ],
+      "tag": "Tarifs Metro Lisboa 2026 · relevés le 24/10/2026",
+      "seconds": 4
+    },
+    {
+      "photo": "lisbonne-tram28-graca",
+      "focus": [
+        0.55,
+        0.55
+      ],
+      "kicker": "Jour d’excursion",
+      "headline": [
+        "Trains CP inclus :",
+        "*11,40 €* les 24 h"
+      ],
+      "detail": "Le pass Carris + métro + CP, pratique le jour de Sintra.",
+      "facts": [
+        {
+          "source": "metro-lisboa-tarifas-2026",
+          "excerpt": "Carris/Metro/CP 2 11,40"
+        },
+        {
+          "source": "guide-sintra-depuis-lisbonne",
+          "excerpt": "Parques de Sintra indique des départs possibles depuis Rossio, Oriente et Entrecampos sur la ligne de Sintra de CP."
+        }
+      ],
+      "tag": "Tarifs Metro Lisboa 2026 · relevés le 24/10/2026",
+      "seconds": 4
+    },
+    {
+      "photo": "lisbonne-alfama-tage",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Le guide complet",
+      "headline": [
+        "Lisbonne en 3 jours,",
+        "sans voiture"
+      ],
+      "detail": "Un quartier par jour, les bons transports entre les deux.",
+      "seconds": 4.5,
+      "cta": true
+    }
+  ],
+  "musicStart": 8,
+  "assets": {
+    "regular": {
+      "file": "assets/dmsans-regular.ttf",
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      }
+    },
+    "bold": {
+      "file": "assets/dmsans-bold.ttf",
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      }
+    },
+    "serif": {
+      "file": "assets/playfair.ttf",
+      "sha256": "adefc53e7b3d483f1fa5e85edd82b7689ca79db25a1f6786bd7949cdcfeec601",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+      }
+    },
+    "music": {
+      "file": "assets/happy-alley.mp3",
+      "sha256": "f598c8ee624f1db9a2cd38886524a40baff4ce730dcf999c0763791268fa8265",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "commercialUseAllowed": true,
+      "title": "Happy Alley",
+      "author": "Kevin MacLeod",
+      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100482",
+      "provenance": {
+        "file": "evidence/happy-alley-provenance.json",
+        "sha256": "5a2ba8f3dba28b0a748b00089d3854db1fde92213429823746f6d01805f904ac"
+      }
+    }
+  }
+}

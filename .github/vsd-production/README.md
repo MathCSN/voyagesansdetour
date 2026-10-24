@@ -1,12 +1,48 @@
-# Production des médias Voyage Sans Détour
+# Production des posts Voyage Sans Détour
 
-Ce paquet fabrique un **nouveau MP4 à partir d’un scénario contrôlé**. Il fonctionne avec des fichiers portables, Pillow et FFmpeg, sans compte de génération, API, navigateur ou clé. Il ne recherche pas de nouvelles informations et ne publie rien sur les réseaux.
+Ce dossier fabrique les **reels Instagram** (MP4 1080 × 1920) et les **carrousels photo** (6 images 1080 × 1350, publiés sur Facebook) à partir de scénarios relus. Il ne publie rien : la file passe par `reviewed-social/` et le contrôleur de stock du cloud.
 
-Premier scénario : **Porto — trois réflexes avant de quitter l’aéroport**. Six scènes originales, 28 secondes, 1080 × 1920, 30 images/s, H.264 et AAC 48 kHz. Musique instrumentale, schémas animés, aucune voix ni Alma. Ce scénario est distinct des deux Reels Lisbonne déjà préparés.
+Depuis le 24/10/2026, le moteur ne produit plus qu’un seul format, celui de la charte de `CLAUDE.md` :
+
+- **une vraie photo du lieu en plein cadre à chaque scène**, sous licence libre (CC BY, CC BY-SA, CC0, domaine public), auteur et licence consignés ;
+- **une accroche** dès la première scène, visible dès la première image (vignette) ;
+- **une info concrète et différente par scène** (prix, durée, ligne, horaire), citée **mot pour mot** depuis un instantané daté d’une page officielle ou d’un guide publié ;
+- du texte lisible sur la photo (dégradé, voile sombre, chiffres en jaune), une musique entraînante sous CC BY 4.0, **aucune voix** ;
+- une légende courte : accroche, 3 à 5 lignes utiles, appel à l’action, **une seule ligne de crédits** qui renvoie au `credits.txt` complet du post.
+
+Le moteur refuse l’ancien format (aplats, schéma « 1-2-3 », voix de synthèse), une photo ou un titre répété dans un même post, une scène sans fait sourcé, un extrait absent de son instantané, une licence non libre et les formules creuses de l’ancienne ligne (« sans récit vécu », « si possible »…).
+
+## Fichiers
+
+| Fichier | Rôle |
+|---|---|
+| `production.py` | Valide un scénario (schéma 2), rend le reel ou le carrousel, écrit le reçu. Au plus un rendu par exécution. |
+| `social_render.py` | Dessin : photo plein cadre avec lent mouvement de caméra, dégradé, texte, fondus. |
+| `photo_intake.py` | Ajoute une photo Wikimedia Commons au catalogue `assets/photos/catalogue.json` (licence vérifiée, auteur, empreinte). |
+| `seal_scenarios.py` | Remplit les empreintes d’un scénario et reconstruit `catalogue.json`. |
+| `social_stock.py` | Publie les fichiers rendus dans `site-src/social-media/production/`, les déclare dans `site-src/public-media.json`, écrit le lot relu et son entrée d’index. `--verify-public` contrôle les octets en ligne après déploiement. |
+| `sources/<date>/` | Instantanés texte des pages officielles (1re ligne = URL) et registre `sources.json` daté. |
+
+## Ajouter un post
+
+1. Relever les pages officielles utiles dans un nouveau dossier `sources/social-AAAA-MM-JJ/` (texte visible, URL en première ligne) et son `sources.json`. Une source vaut 30 jours.
+2. Ajouter les photos : `python3 photo_intake.py <id> "File:Titre sur Commons.jpg"`. Vérifier l’auteur (le champ Commons « Artist » nomme parfois l’architecte du monument).
+3. Écrire `scenarios/<id>.json` (schéma 2 : `kind` reel ou carousel, `publishAt`, `caption`, `scenes` avec `photo`, `headline` — les chiffres entre `*astérisques*` passent en jaune —, `detail`, `tag`, `facts` [{`source`, `excerpt`}]). Laisser les `sha256` vides.
+4. `python3 seal_scenarios.py`, puis `python3 production.py --validate`, puis `python3 production.py` (une fois par post).
+5. Regarder `output/<id>/apercu.jpg` (planche contact) : chaque image doit donner envie.
+6. `python3 social_stock.py` : médias publics, lot relu et index. Après fusion et déploiement : `python3 social_stock.py --verify-public`.
+
+Le workflow `vsd-render-content.yml` enchaîne les étapes 4 et 6 dans GitHub Actions et relance la construction du site quand de nouveaux médias sont en file.
+
+## Rythme et limites
+
+- Le contrôleur importe **un lot par passage** (lundi via `vsd-cloud-control`, lundi, mercredi et vendredi via `vsd-promote-media`), par ordre d’échéance.
+- Le serveur limite par défaut Instagram à 1 post par 168 h ; les reels sont donc espacés d’une semaine.
+- Le stock n’accepte aujourd’hui que les reels Instagram et les lots photos Facebook (2 à 10 images). Les carrousels Instagram demandent une extension de `stock-control.mjs` / `promotion-control.mjs`.
+- L’inventaire du site publie exactement 6 images par carrousel (`site-src/public_media.py`).
+- Prix Andante (Porto) : la page officielle affiche encore les tarifs 2023 alors que la presse annonce une hausse en 2026 ; aucun prix Andante n’est cité tant qu’une source officielle à jour manque.
 
 ## Exécuter
-
-Depuis le dossier du paquet :
 
 ```sh
 python3 -m pip install -r requirements.txt
@@ -15,31 +51,4 @@ python3 production.py --validate
 python3 production.py
 ```
 
-Python 3.12 est choisi pour le cloud ; le moteur fonctionne aussi avec Python 3.9 local. Pillow est fixé à 11.3.0. FFmpeg et FFprobe doivent être disponibles dans le PATH, avec libx264 et AAC. Le premier essai cloud a montré leur absence sur le runner Ubuntu 24.04 : le workflow installe donc conditionnellement le paquet gratuit `ffmpeg` depuis les dépôts Ubuntu. Il consigne la version réellement utilisée, sans prétendre figer l’image GitHub ou cette version du système. Aucun service de génération payant n’est utilisé. Le rendu local de qualification conserve ses versions propres dans `receipt.json`.
-
-Le résultat est écrit dans `output/<identifiant>/` : `reel.mp4`, six scènes JPEG, affiche, planche, légende complète, licences et reçu. Une relance identique vérifie les empreintes puis reste inactive. Le remplacement d’un scénario sous un identifiant déjà produit ou l’altération d’un rendu provoque un arrêt. Le dossier temporaire est déplacé seulement après encodage et décodage complet réussis. Les résultats terminés ne sont jamais écrasés.
-
-## Les scénarios et leurs sources
-
-`catalogue.json` référence des scénarios par identité stable, date minimale et SHA-256. Chaque scénario porte les textes, scènes, durée, thème, URL cible, sources, extraits justificatifs, date de contrôle, échéance, fichiers de police et musique avec empreintes/licences. Le code ne contient aucun scénario Lisbonne ni appel de voix. Les formats actuels sont musique/texte et texte muet ; la génération ou la rotation de voix n’est pas installée dans ce moteur.
-
-Le premier scénario reprend le **guide Porto publié et contrôlé le 27 septembre 2026**, dont l’instantané et la preuve historique de publication sont inclus. La dérivation a été relue à partir de cet instantané ; le rendu n’effectue pas de nouvelle recherche. Les extraits de preuve doivent correspondre exactement au guide. Une réponse HTTP ancienne n’est pas présentée comme un contrôle actuel. La date limite est le **27 octobre 2026 à 00:00 UTC** ; le travail s’arrête après expiration. Aucun horaire, prix, accessibilité individuelle ou durée de transfert n’est garanti.
-
-La musique **Almost Bliss — Kevin MacLeod** provient du téléchargement officiel déjà vérifié sous CC BY 4.0. Le fichier source et sa preuve sont inclus. La légende générée garde le titre, l’auteur, les liens de source et de licence, ainsi que l’extrait, les fondus, l’ajustement du niveau et la synchronisation. DM Sans et Playfair Display sont accompagnées des avis SIL OFL 1.1. Les diagrammes sont des compositions originales de préparation, pas des plans d’opérateur.
-
-## Qualification GitHub Actions
-
-`cloud/vsd-render-content.yml` est un workflow prêt à installer, **pas la preuve d’une exécution distante**. Le paquet public place le moteur dans `.github/vsd-production/` et ce YAML dans `.github/workflows/`. Aucun rendu local n’est inclus dans le paquet d’installation : un premier lancement manuel doit réellement encoder la vidéo dans le cloud.
-
-Le workflow n’accepte que `MathCSN/voyagesansdetour`, la branche `main`, un dépôt public et le runner standard `ubuntu-24.04`. Il a un plafond de dix minutes, deux threads d’encodage, au plus un clip par lancement et aucun secret/provider externe. Les sorties terminées sont ajoutées dans `.github/vsd-production/output/` avec leur reçu, conservé entre les exécutions et protégé des exports du blog ; un refus de push reste un échec visible. Il ne remplace pas le pipeline du blog ni le registre D1.
-
-La cadence future est le lundi à 05:17 UTC mais reste inactive tant que la variable de dépôt `VSD_FREE_RENDER_SCHEDULE` n’est pas exactement `true`. L’activation vient après lecture du vrai premier reçu distant. Tous les déclenchements restent bornés au 14 septembre 2027. Un dépôt privé n’est pas utilisé comme repli payant. Les retards et limites GitHub restent applicables.
-
-## Ce qui reste à raccorder
-
-- Rechercher, rédiger et recontrôler régulièrement de nouveaux scénarios ; un scénario préparé ne remplit pas une année de stock.
-- Constater un premier succès réel GitHub puis qualifier la cadence et les ressources.
-- Héberger les MP4 à une URL admissible, contrôler le résultat et la légende, puis créer le lot signé pour le registre de publication. Le reçu est expressément `rendered_not_published`, avec `readyForAutomaticImport: false`.
-- Relier ce stock au moteur social sans renvoyer d’anciens contenus, avec les validations de chaque réseau et les plafonds gratuits existants.
-
-La sélection et les scènes sont déterministes. Des versions différentes de FFmpeg ou Pillow peuvent encoder des octets différents : chaque résultat possède donc sa propre empreinte et le logiciel réellement utilisé, sans promesse trompeuse de MP4 identique sur tous les systèmes.
+FFmpeg et FFprobe (libx264, AAC) doivent être dans le PATH. Les anciens rendus de `output/` (porto-aeroport, lisbonne-quartiers, sintra-pena) sont conservés comme historique et ne sont plus au catalogue.

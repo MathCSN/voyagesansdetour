@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "contentId": "fb-belem-sans-voiture-2026-11",
+  "status": "rendered_not_published",
+  "fingerprint": "f24881aedbab8b180c8bf8fee0733d59973376b3cd709fd22a165e03cfc152e8",
+  "createdAt": "2026-10-24T06:54:03.204383Z",
+  "renderFinishedAt": "2026-10-24T06:54:04.063063Z",
+  "rendererContractVersion": 3,
+  "rendererSha256": "505838d3ca801ba10c22e987a3de9f2d6e4fd30946321cefccf89ac0f7dc8ed6",
+  "drawingSha256": "70d6df722c9393bfef74e3fbc2418b315d46d91be857613120a1bd48f4a8526d",
+  "kind": "carousel",
+  "channel": "facebook",
+  "publishAt": "2026-11-20T17:00:00Z",
+  "reviewValidUntil": "2026-11-23T00:00:00Z",
+  "sourceCheckedOn": "2026-10-24",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/lisbonne-3-jours-sans-voiture/",
+  "voice": null,
+  "presenter": null,
+  "sourceUrls": [
+    "https://voyagesansdetour.fr/portugal/lisbonne-3-jours-sans-voiture/",
+    "https://www.mosteirojeronimos.gov.pt/",
+    "https://www.visitlisboa.com/en/places/jeronimos-monastery"
+  ],
+  "photos": {
+    "lisbonne-tour-belem-passerelle": {
+      "licence": "CC BY 3.0",
+      "author": "Felix König",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Torre_de_Bel%C3%A9m_2014.jpg"
+    },
+    "lisbonne-jeronimos-facade": {
+      "licence": "CC BY-SA 4.0",
+      "author": "NorbertNagel",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Jer%C3%B3nimos_Monastery_in_Bel%C3%A9m_-_Lisbon_-_Portugal_-_03.jpg"
+    },
+    "lisbonne-jeronimos-ombres": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Jules Verne Times Two",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Cloisters,_Mosteiro_dos_Jer%C3%B3nimos,_Lisbon,_Portugal_julesvernex2-8.jpg"
+    },
+    "lisbonne-jeronimos-file": {
+      "licence": "CC BY 4.0",
+      "author": "Jakub Hałun",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Jer%C3%B3nimos_Monastery_in_Bel%C3%A9m,_Lisbon,_20250604_1340_9252.jpg"
+    },
+    "lisbonne-tour-belem-portrait": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Rodrigo Tetsuo Argenton",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Torre_de_Bel%C3%A9m_por_Rodrigo_Tetsuo_Argenton_(6).jpg"
+    },
+    "lisbonne-tour-belem-doree": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Jules Verne Times Two",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Torre_de_Bel%C3%A9m_at_sunrise,_Lisbon,_Portugal_julesvernex2.jpg"
+    }
+  },
+  "video": null,
+  "files": [
+    {
+      "file": "apercu.jpg",
+      "sha256": "3e3e212cf35803af4b0364c74e23f44ba34097122d8e0ff983af7ca4185bb6c3",
+      "bytes": 189928
+    },
+    {
+      "file": "credits.txt",
+      "sha256": "38596de6b42e8861bd66c4b7b0c3eafc2a4c647d326a1829c74ab7faa9f958c7",
+      "bytes": 2995
+    },
+    {
+      "file": "dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "file": "legende.txt",
+      "sha256": "768271a080a40970df8e5bc4cf40dc4cb008bb7517101b4fbc865d917f6cb909",
+      "bytes": 676
+    },
+    {
+      "file": "playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    },
+    {
+      "file": "scenario.json",
+      "sha256": "e75fa7c93ea457aca0b8738fa73fa7f84f192e81801a744e151c044ce1d74243",
+      "bytes": 6369
+    },
+    {
+      "file": "scene-01.jpg",
+      "sha256": "5e88d74ad2d032d8c1012f29b592838115fcf9b759b5cb77b006861d29a4dbb8",
+      "bytes": 252650
+    },
+    {
+      "file": "scene-02.jpg",
+      "sha256": "a625e53b7b08dd31db5a106f454878a0399cf2250617262a5601529eff6d4dbf",
+      "bytes": 321488
+    },
+    {
+      "file": "scene-03.jpg",
+      "sha256": "944edd0df85ea350318b6579ad8a41c4a8ab1e159264beed985bc7dd989650b8",
+      "bytes": 299445
+    },
+    {
+      "file": "scene-04.jpg",
+      "sha256": "a3645c330f3eea83a25ddf73fc5bdef382e53e1ea13539480da43fea707da6cf",
+      "bytes": 382861
+    },
+    {
+      "file": "scene-05.jpg",
+      "sha256": "7d2bc2cdd50701d11f52a75078c4a8ad979b96e867095125fa451437196dbbdc",
+      "bytes": 279867
+    },
+    {
+      "file": "scene-06.jpg",
+      "sha256": "bffbaa207c6292316ed178da49baa55ff2ee41f502f1d48c0672a34af4460bc2",
+      "bytes": 243786
+    }
+  ],
+  "runtime": {
+    "wallSeconds": 0.844,
+    "encoderThreads": 2,
+    "pillowVersion": "11.3.0",
+    "ffmpegVersion": null
+  },
+  "publication": {
+    "uploaded": false,
+    "scheduled": false,
+    "published": false,
+    "readyForAutomaticImport": false
+  },
+  "cost": {
+    "newPaidService": false,
+    "providerCalls": 0,
+    "monetarySpendEur": 0
+  }
+}

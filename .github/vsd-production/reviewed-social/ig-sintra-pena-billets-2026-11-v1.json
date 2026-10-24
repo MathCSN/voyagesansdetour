@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "batchId": "ig-sintra-pena-billets-2026-11-v1",
+  "items": [
+    {
+      "contentId": "vsd-production:instagram:ig-sintra-pena-billets-2026-11:photo-v1",
+      "deduplicationKey": "vsd-production:instagram:ig-sintra-pena-billets-2026-11:photo-v1",
+      "title": "Sintra : choisir son billet pour Pena",
+      "dueAt": "2026-11-04T17:00:00Z",
+      "payload": {
+        "schemaVersion": 1,
+        "channel": "instagram",
+        "kind": "reel",
+        "text": "🏰 Palais de Pena : 20 € ou 45 € ? La différence change votre journée à Sintra.\n\n🎟️ Visite essentielle à 20 € : le Palais neuf, tout le parc, le chalet et les terrasses.\n🌿 Parc seul : 12 €. Navette du parc : 4,50 € l’aller-retour, toutes les 15 min.\n⏱️ 30 min entre l’entrée du parc et le palais : l’heure du billet est celle du palais, sans retard toléré.\n🚆 Train CP depuis Rossio, Oriente ou Entrecampos, puis bus 434 jusqu’à Pena.\n\n🔗 Sintra sans voiture, la journée complète : le guide est en lien dans la bio.\n\nPhotos libres (Wikimedia Commons) et musique de Kevin MacLeod (CC BY 4.0) — crédits : https://voyagesansdetour.fr/social-media/production/ig-sintra-pena-billets-2026-11/credits.txt\n\n#Sintra #Pena #Portugal #VoyageSansVoiture #VoyageSansDetour\n",
+        "aiGenerated": false,
+        "assets": [
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/ig-sintra-pena-billets-2026-11/reel.mp4",
+            "sha256": "abfc34bd452a0fa1aef7cf9e7bf23aa28bcb43577ae94ce16e7f01992eafae67",
+            "mimeType": "video/mp4"
+          }
+        ]
+      },
+      "review": {
+        "schemaVersion": 1,
+        "contentId": "vsd-production:instagram:ig-sintra-pena-billets-2026-11:photo-v1",
+        "approved": true,
+        "reviewedAt": "2026-10-24T06:57:45Z",
+        "validUntil": "2026-11-23T00:00:00Z",
+        "payloadRevision": "13f09751494f0fd1eeef4f716ccbaea403829ba9d241770030bc400993ba0dcc",
+        "checks": {
+          "editorialApproved": true,
+          "rightsApproved": true,
+          "creditsPreserved": true,
+          "disclosurePreserved": true,
+          "formatRequirementsVerified": true,
+          "requiresPaidCall": false,
+          "sources": {
+            "status": "verified",
+            "observedAt": "2026-10-24T06:45:00Z",
+            "validUntil": "2026-11-23T00:00:00Z"
+          },
+          "syntheticPerson": false,
+          "providerSyntheticSettingVerified": false
+        },
+        "media": {
+          "url": "https://voyagesansdetour.fr/social-media/production/ig-sintra-pena-billets-2026-11/reel.mp4",
+          "mimeType": "video/mp4",
+          "sha256": "abfc34bd452a0fa1aef7cf9e7bf23aa28bcb43577ae94ce16e7f01992eafae67",
+          "required": true,
+          "status": "verified",
+          "observedAt": "2026-10-24T06:57:45Z",
+          "validUntil": "2026-11-23T00:00:00Z"
+        },
+        "destination": {
+          "url": "https://voyagesansdetour.fr/portugal/sintra-depuis-lisbonne/",
+          "status": "verified",
+          "observedAt": "2026-10-24T06:57:45Z",
+          "validUntil": "2026-11-23T00:00:00Z"
+        },
+        "monetization": {
+          "containsAffiliateLinks": false,
+          "partnerApproved": false,
+          "linksVerified": false,
+          "disclosurePreserved": false
+        },
+        "formatCapability": {
+          "status": "verified",
+          "observedAt": "2026-10-24T06:57:45Z",
+          "validUntil": "2026-11-23T00:00:00Z",
+          "automaticPublishing": true,
+          "verificationMethod": "official_documentation",
+          "sourceUrls": [
+            "https://support.buffer.com/en-us/articles/sharing-videos-through-buffer-LOe2p2rnAI",
+            "https://developers.buffer.com/types/InstagramPostMetadataInput.html",
+            "https://developers.buffer.com/guides/posts-and-scheduling.html"
+          ]
+        },
+        "evidence": {
+          "status": "rendered_local_bytes_verified_public_deploy_pending",
+          "format": "photo_reel",
+          "rendererContractVersion": 3,
+          "receiptSha256": "8ca53946b2a62743790b41954a9e115515810f3305303bbb9c0dcf084f5bb545",
+          "scenarioFingerprint": "dddeb1ef2df1a9d4d0cf23685f501f1dee3bb8bbbd0ca22e771999d2502393d3",
+          "sourceCheckedOn": "2026-10-24",
+          "sourceUrls": [
+            "https://bilheteira.parquesdesintra.pt/info/parque-e-palacio-da-pena-visita-essencial/1198/en",
+            "https://www.parquesdesintra.pt/en/plan-your-visit/opening-times-and-prices/",
+            "https://www.parquesdesintra.pt/en/plan-your-visit/tickets-palace-of-pena/"
+          ],
+          "creditsUrl": "https://voyagesansdetour.fr/social-media/production/ig-sintra-pena-billets-2026-11/credits.txt",
+          "voice": null,
+          "music": "Carefree",
+          "note": "Les octets publics sont à contrôler après déploiement avec social_stock.py --verify-public. Un créneau prévu n'est pas une réservation Buffer."
+        }
+      }
+    }
+  ]
+}

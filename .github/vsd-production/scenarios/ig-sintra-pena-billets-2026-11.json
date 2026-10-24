@@ -1,0 +1,248 @@
+{
+  "schemaVersion": 2,
+  "id": "ig-sintra-pena-billets-2026-11",
+  "kind": "reel",
+  "channel": "instagram",
+  "destination": "Sintra",
+  "title": "Sintra : choisir son billet pour Pena",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/sintra-depuis-lisbonne/",
+  "publishAt": "2026-11-04T17:00:00Z",
+  "review": {
+    "status": "reviewed_for_render",
+    "checkedAt": "2026-10-24T06:45:00Z",
+    "validUntil": "2026-11-23T00:00:00Z",
+    "method": "Faits relus mot pour mot dans les instantanés datés du 24/10/2026 (sources/social-2026-10-24) ; photos sous licence libre consignées dans assets/photos/catalogue.json."
+  },
+  "sources": {
+    "file": "sources/social-2026-10-24/sources.json",
+    "sha256": "ab7c358a9fcfa0a14abc58fe398ac7816ad7fece07101de071565bb938118878"
+  },
+  "photos": {
+    "file": "assets/photos/catalogue.json",
+    "sha256": "a66ad22b12c71b7e545179ac6a8e3f3a4412808b8eb854734e79105402792268"
+  },
+  "caption": {
+    "hook": "🏰 Palais de Pena : 20 € ou 45 € ? La différence change votre journée à Sintra.",
+    "lines": [
+      "🎟️ Visite essentielle à 20 € : le Palais neuf, tout le parc, le chalet et les terrasses.",
+      "🌿 Parc seul : 12 €. Navette du parc : 4,50 € l’aller-retour, toutes les 15 min.",
+      "⏱️ 30 min entre l’entrée du parc et le palais : l’heure du billet est celle du palais, sans retard toléré.",
+      "🚆 Train CP depuis Rossio, Oriente ou Entrecampos, puis bus 434 jusqu’à Pena."
+    ],
+    "cta": "🔗 Sintra sans voiture, la journée complète : le guide est en lien dans la bio.",
+    "hashtags": [
+      "#Sintra",
+      "#Pena",
+      "#Portugal",
+      "#VoyageSansVoiture",
+      "#VoyageSansDetour"
+    ]
+  },
+  "scenes": [
+    {
+      "photo": "sintra-pena-tour-horloge",
+      "focus": [
+        0.5,
+        0.35
+      ],
+      "kicker": "Sintra · palais de Pena",
+      "headline": [
+        "Pena :",
+        "*20 €* ou *45 €* ?"
+      ],
+      "detail": "Deux billets officiels, deux journées très différentes.",
+      "facts": [
+        {
+          "source": "parques-sintra-precos",
+          "excerpt": "Prices - Full Tour Ticket for adults (18 - 64 years) 45 €"
+        },
+        {
+          "source": "parques-sintra-precos",
+          "excerpt": "Prices - Essential visit Ticket for adults (18 - 64 years) 20 €"
+        }
+      ],
+      "tag": "Tarifs Parques de Sintra · relevés le 24/10/2026",
+      "seconds": 3.5
+    },
+    {
+      "photo": "sintra-pena-tour-jaune",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Visite essentielle",
+      "headline": [
+        "*20 €* : palais,",
+        "parc et terrasses"
+      ],
+      "detail": "« Idéale pour une première visite », selon le site officiel.",
+      "facts": [
+        {
+          "source": "parques-sintra-pena-essencial",
+          "excerpt": "Ideal for a first visit"
+        },
+        {
+          "source": "parques-sintra-pena-essencial",
+          "excerpt": "Entrance to the National Palace of Pena (New Palace)"
+        },
+        {
+          "source": "parques-sintra-pena-essencial",
+          "excerpt": "Terraces with panoramic views"
+        }
+      ],
+      "tag": "Tarifs Parques de Sintra · relevés le 24/10/2026",
+      "seconds": 4
+    },
+    {
+      "photo": "sintra-pena-terrasse",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Le piège",
+      "headline": [
+        "Billet = heure",
+        "d’entrée au *palais*"
+      ],
+      "detail": "Pas celle du parc. Et aucun retard n’est toléré.",
+      "facts": [
+        {
+          "source": "parques-sintra-pena-regras",
+          "excerpt": "The date and time on your ticket correspond to"
+        },
+        {
+          "source": "parques-sintra-pena-regras",
+          "excerpt": "There is no delay tolerance."
+        }
+      ],
+      "tag": "Règles Parques de Sintra · relevées le 24/10/2026",
+      "seconds": 4
+    },
+    {
+      "photo": "sintra-pena-chemin-ronde",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Gardez de la marge",
+      "headline": [
+        "*30 min* du portail",
+        "jusqu’au palais"
+      ],
+      "detail": "Entrez dans le parc bien avant l’heure inscrite sur le billet.",
+      "facts": [
+        {
+          "source": "parques-sintra-pena-regras",
+          "excerpt": "it takes around 30 minutes to travel between these two points"
+        }
+      ],
+      "tag": "Parques de Sintra · relevé le 24/10/2026",
+      "seconds": 4
+    },
+    {
+      "photo": "sintra-pena-colline",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Pour monter",
+      "headline": [
+        "Navette du parc :",
+        "*4,50 €* aller-retour"
+      ],
+      "detail": "Un départ toutes les *15 min*, entre l’entrée et le palais.",
+      "facts": [
+        {
+          "source": "parques-sintra-precos",
+          "excerpt": "Transfer supplement round trip park entrance/palace (+ 6 years) 4.5 €"
+        },
+        {
+          "source": "parques-sintra-precos",
+          "excerpt": "Daily frequency: every 15 minutes"
+        }
+      ],
+      "tag": "Tarifs Parques de Sintra · relevés le 24/10/2026",
+      "seconds": 4
+    },
+    {
+      "photo": "sintra-mouros-remparts",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Juste en face",
+      "headline": [
+        "Château des Maures :",
+        "*12 €*"
+      ],
+      "detail": "Ses remparts courent sur la crête voisine de Pena.",
+      "facts": [
+        {
+          "source": "parques-sintra-precos",
+          "excerpt": "Moorish Castle Opening times Castle (open - close) 09:30AM - 06:00PM Last ticket and last admission 05:30PM Ticket office closed from 12 pm to 1 pm. Automatic ticket vending machines available Price Ticket for adults (18 - 64 years) 12€"
+        }
+      ],
+      "tag": "Tarifs Parques de Sintra · relevés le 24/10/2026",
+      "seconds": 4
+    },
+    {
+      "photo": "sintra-vila-palais-national",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Le guide complet",
+      "headline": [
+        "Sintra sans voiture",
+        "depuis Lisbonne"
+      ],
+      "detail": "Train, bus 434, billets : la journée prête à suivre.",
+      "seconds": 4,
+      "cta": true
+    }
+  ],
+  "musicStart": 1,
+  "assets": {
+    "regular": {
+      "file": "assets/dmsans-regular.ttf",
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      }
+    },
+    "bold": {
+      "file": "assets/dmsans-bold.ttf",
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      }
+    },
+    "serif": {
+      "file": "assets/playfair.ttf",
+      "sha256": "adefc53e7b3d483f1fa5e85edd82b7689ca79db25a1f6786bd7949cdcfeec601",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+      }
+    },
+    "music": {
+      "file": "assets/carefree.mp3",
+      "sha256": "8433b770a630d9b1594fd484442c677907ece899a4d149954cd2e74fd733e311",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "commercialUseAllowed": true,
+      "title": "Carefree",
+      "author": "Kevin MacLeod",
+      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1400037",
+      "provenance": {
+        "file": "evidence/carefree-provenance.json",
+        "sha256": "96c196c39133db1dbc3a478eba28a25ff8d74ef86633b06647e733f8f23234a6"
+      }
+    }
+  }
+}

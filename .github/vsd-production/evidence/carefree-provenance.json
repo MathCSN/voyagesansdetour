@@ -1,0 +1,34 @@
+{
+  "title": "Carefree",
+  "composer": "Kevin MacLeod",
+  "copyrightHolder": "Kevin MacLeod",
+  "isrc": "USUAN1400037",
+  "catalogDuration": "00:03:25",
+  "instruments": "Ukulele, Guitar, Marimba, Glockenspiel, Percussion",
+  "bpm": 96,
+  "feel": "Bouncy, Bright, Calming, Uplifting",
+  "sourceTrackPage": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1400037",
+  "sourceCatalog": "https://incompetech.com/music/royalty-free/pieces.json",
+  "officialCatalogLicense": "https://incompetech.com/agent-section/",
+  "officialLicenseOptions": "https://incompetech.com/music/royalty-free/licenses/",
+  "officialCreditFAQ": "https://incompetech.com/music/royalty-free/faq.html",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "costEur": 0,
+  "commercialUseAllowed": true,
+  "adaptationAllowed": true,
+  "requiredAttribution": true,
+  "download": {
+    "requestedUrl": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Carefree.mp3",
+    "responseUrl": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Carefree.mp3",
+    "httpStatus": 200,
+    "bytes": 6566713,
+    "sha256": "8433b770a630d9b1594fd484442c677907ece899a4d149954cd2e74fd733e311",
+    "retrievedAt": "2026-10-24T06:29:58Z"
+  },
+  "published": false,
+  "notes": [
+    "Morceau choisi pour un rythme enlevé (genre et ambiance du catalogue officiel).",
+    "CC BY 4.0 : réutilisation commerciale et adaptation autorisées avec attribution, lien de licence et mention des modifications ; attribution complète dans credits.txt de chaque post."
+  ]
+}
