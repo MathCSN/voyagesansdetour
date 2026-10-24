@@ -26,7 +26,14 @@ ALLOWED_HOSTS={'www.visitlisboa.com','visitporto.travel','www.parquesdesintra.pt
                'cp.pt','www.ilhadeserta.com','fototeca.cm-lagos.pt','www.magnificodouro.pt',
                'www.quintadobomfim.com','museudodouro.pt','www.visitguimaraes.travel','pacodosduques.gov.pt',
                'www.visitportugal.com','www.italotreno.com','www.travelmar.it','sitasudtrasporti.it',
-               'www.fondazioneravello.com','pompeiisites.org','www.italia.it','www.navigazionegolfodeipoeti.it'}
+               'www.fondazioneravello.com','pompeiisites.org','www.italia.it','www.navigazionegolfodeipoeti.it',
+               # Official and dated sources of the first world guides (24 October 2026).
+               'www.japan-guide.com','www.shokoku-ji.jp','www.todaiji.or.jp','www.royalgrandpalace.th',
+               'en.wikivoyage.org','www.earthtrekkers.com','www.riotimesonline.com','www.timeout.com',
+               'www.rockettes.com','hydeparkwinterwonderland.com','www.santaclausreindeer.fi',
+               'bearhillhusky.com','santapark.fi','arktikum.fi'}
+# Hosts reviewed with the topic plan: a guide written from a topic can be updated from the same sources.
+ALLOWED_HOSTS|={urllib.parse.urlsplit(s['url']).hostname for t in json.loads(Path(__file__).with_name('guide-topics.json').read_text()) for s in t['sources']}
 
 class SameHostRedirect(urllib.request.HTTPRedirectHandler):
     def redirect_request(self,req,fp,code,msg,headers,newurl):

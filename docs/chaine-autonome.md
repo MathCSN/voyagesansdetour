@@ -52,9 +52,13 @@ qui ne se dessine pas est mis en attente (`held`) sans bloquer les suivants.
 
 ## Le trajet d'un guide
 
-`vsd-writing-discovery.yml` (chaque jour) cherche des mises à jour sourcées ;
-les guides et mises à jour programmés vivent dans `site-src/editorial-queue.json` et
-`site-src/editorial-candidates/` ; `build-pages.yml` (chaque jour 07:41 UTC) publie ceux dont l'heure est venue.
+`vsd-writing-guide.yml` (chaque jour à 06:23 et 15:23 UTC) choisit le sujet le mieux classé du plan
+(`guide-topics.json`, voir `docs/strategie-sujets.md`), trouve ses photos libres sur Wikimedia Commons,
+lit ses sources, rédige, relit bloc par bloc et met le guide en file avec ses photos et ses preuves,
+au plus un guide tous les deux jours. `vsd-writing-discovery.yml` (chaque jour) cherche des mises à
+jour sourcées des guides publiés. Les guides et mises à jour programmés vivent dans
+`site-src/editorial-queue.json` et `site-src/editorial-candidates/` ; `build-pages.yml`
+(chaque jour 07:41 UTC) publie ceux dont l'heure est venue.
 
 ## Les workflows
 
@@ -69,8 +73,9 @@ les guides et mises à jour programmés vivent dans `site-src/editorial-queue.js
 | `vsd-writing-discovery.yml` | chaque jour 09:37 | Mises à jour sourcées des guides |
 | `vsd-weekly-report.yml` | chaque jour 09:07 (rapport le lundi) | Rapport hebdomadaire et alerte de file vide |
 
+`vsd-writing-guide` tourne seul deux fois par jour (rédaction des nouveaux guides).
 Lancés à la main seulement, pour qualifier un modèle : `vsd-writing-draft`, `-entailment`,
-`-evaluation`, `-guide`, `-guide-review`, `-guide-revision`, `-probe`. Ils ne tournent jamais seuls.
+`-evaluation`, `-guide-review`, `-guide-revision`, `-probe`. Ils ne tournent jamais seuls.
 `vsd-voice-pilot.yml` (qualification ponctuelle des voix, terminée le 12/10) a été supprimé.
 
 Secrets : `VSD_CLOUD_KEY`, `VSD_SITES_DISPATCH_TOKEN` (panneau privé), `CLOUDFLARE_WORKERS_AI_TOKEN`
