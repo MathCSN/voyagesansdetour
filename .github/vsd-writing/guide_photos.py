@@ -95,10 +95,24 @@ def candidate(page,spec,used):
     return {'source_page':source,'author':author,'license':licence,'license_url':url}
 
 
-def download(url,opener):
+class WikimediaRedirect(urllib.request.HTTPRedirectHandler):
+    """Follow redirects only to the Commons API and the Wikimedia image hosts."""
+    def redirect_request(self,req,fp,code,msg,headers,newurl):
+        target=urllib.parse.urlsplit(newurl)
+        require(target.scheme=='https' and target.hostname in IMAGE_HOSTS|{'commons.wikimedia.org'},'guide_photo_redirect_host')
+        return super().redirect_request(req,fp,code,msg,headers,newurl)
+
+
+def download(url,opener,pause=RETRY_PAUSE):
     parsed=urllib.parse.urlsplit(url)
     require(parsed.scheme=='https' and parsed.hostname in IMAGE_HOSTS,'guide_photo_host')
-    with opener.open(urllib.request.Request(url,headers={'User-Agent':USER_AGENT}),timeout=60) as response:
+    try:
+        response=opener.open(urllib.request.Request(url,headers={'User-Agent':USER_AGENT}),timeout=60)
+    except urllib.error.HTTPError as error:
+        if error.code!=429 or not pause:raise
+        time.sleep(pause)
+        return download(url,opener,pause=0)
+    with response:
         require(response.status==200,'guide_photo_download_status')
         data=response.read(MAX_IMAGE_BYTES+1)
     require(len(data)<=MAX_IMAGE_BYTES and data[:3]==b'\xff\xd8\xff','guide_photo_not_jpeg')
@@ -126,8 +140,12 @@ def fetch_photo(spec,out,used,opener,compress=recompress):
             found=candidate(page,spec,used)
             if not found:continue
             info=page['imageinfo'][0]
-            wide=compress(download(info['thumburl'],opener))
-            small=compress(download(small_url(page['title'],opener),opener))
+            try:
+                wide=compress(download(info['thumburl'],opener))
+                small=compress(download(small_url(page['title'],opener),opener))
+            except (ValueError,OSError):
+                # One broken thumbnail never costs the guide: try the next candidate.
+                continue
             folder=out/'photos';folder.mkdir(exist_ok=True)
             (folder/(spec['id']+'.jpg')).write_bytes(wide);(folder/(spec['id']+'-800.jpg')).write_bytes(small)
             record={'id':spec['id'],'file':'photos/'+spec['id']+'.jpg','width':info['thumbwidth'],'height':info['thumbheight'],
@@ -140,7 +158,7 @@ def fetch_photo(spec,out,used,opener,compress=recompress):
 
 def prepare(topic,catalogue,out,opener=None,compress=recompress):
     """Photo ids for cover and sections, plus the new credit records to install with the guide."""
-    opener=opener or urllib.request.build_opener()
+    opener=opener or urllib.request.build_opener(WikimediaRedirect())
     known={p['id'] for p in catalogue}
     used={p['source_page'] for p in catalogue}
     specs=[validate_spec(s) for s in topic.get('photos',[])]
@@ -175,7 +193,7 @@ def install(selection,run_dir,site_root,needed=()):
     target=site_root/'dist'/'assets'/'photos'
     require(target.is_dir() and not target.is_symlink(),'guide_photo_target')
     for record in selection['records']:
-        require(record['id'] not in ids,'guide_photo_exists')
+        require(isinstance(record.get('id'),str) and ID.fullmatch(record['id']) and record['id'] not in ids,'guide_photo_exists')
         for suffix,key in (('.jpg','sha256'),('-800.jpg','sha256Small')):
             source=run_dir/'photos'/(record['id']+suffix)
             require(source.is_file() and not source.is_symlink(),'guide_photo_file_missing')

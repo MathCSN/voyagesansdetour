@@ -70,6 +70,16 @@ def apply_corrections(article,citations,facts,review,corrections):
 
 
 
+def kept_key_fact_citations(citations,article,corrections):
+    """After a refused key figure is removed, each kept figure keeps its own evidence."""
+    removed={int(c['id'].split('-')[1]) for c in corrections['changes'] if c['id'].startswith('keyfact-') and c['text'] is None}
+    if not removed:return citations
+    kept=[i for i in range(len(article.get('keyFacts',[]))) if i not in removed]
+    result={k:v for k,v in citations.items() if not k.startswith('keyfact-')}
+    result.update({'keyfact-'+str(new):citations['keyfact-'+str(old)] for new,old in enumerate(kept)})
+    return result
+
+
 def revision_packets(blocks,facts,review):
     failed={item['id'] for item in review['issues']}
     require(1<=len(failed)<=8,'revision_block_budget')
@@ -156,6 +166,7 @@ def revise(proposal,review,token,known,now,invoke=call,fetcher=source_fingerprin
             (output/('guide-correction-'+packet['failedBlocks'][0]['id']+'.json')).write_text(json.dumps(attempts,ensure_ascii=False,indent=2)+'\n')
     if output is not None:(output/'guide-corrections.json').write_text(json.dumps(changes,ensure_ascii=False,indent=2)+'\n')
     revised=apply_corrections(article,citations,facts,review,changes)
+    citations=kept_key_fact_citations(citations,article,changes)
     revised['sourcesCheckedOn']=q.today(now)
     q.validate_article(revised,{a['slug'] for a in known})
     if output is not None:(output/'guide-revised-article.json').write_text(json.dumps(revised,ensure_ascii=False,indent=2)+'\n')

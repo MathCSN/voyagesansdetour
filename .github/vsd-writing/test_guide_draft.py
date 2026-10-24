@@ -198,3 +198,15 @@ class GuideTests(unittest.TestCase):
         self.assertEqual(quotes[:2],['The bus to Arashiyama takes 40 minutes.','The one-day bus pass costs 700 yen.'])
         self.assertNotIn('A ticket costs 230 yens.',quotes)
         self.assertEqual(quotes[-1],'Arashiyama has bamboo groves.')
+
+    def test_critic_request_stays_under_the_provider_limit_with_twelve_long_facts(self):
+        # Worst realistic case: 12 facts with 340-character quotes and a 1 600-word body (about 11 000 characters).
+        facts=[{'id':'c'+str(i),'fact':'Fait paraphrasé et détaillé numéro '+str(i)+' '+'x'*200,'quote':'q'*340,
+                'usefulness':'u'*120,'source':0,'sourceContext':{'url':'https://example.org/'+'p'*80,'label':'Source','excerpt':'e'*1140}} for i in range(1,13)]
+        article={'title':'t'*100,'shortTitle':'s'*60,'description':'d'*180,'summary':'r'*360,'keyFacts':[{'value':'230 ¥','label':'l'*120}]*6,
+                 'sections':[{'id':'s'+str(i),'title':'T'*80,'paragraphs':['p'*600]*3,'tip':'a'*300} for i in range(6)],
+                 'faq':[{'question':'Q'*150,'answer':'A'*400}]*4,'sources':[{'label':'S','url':'https://example.org/'}]*3}
+        known=[{'title':'Un guide déjà publié avec un titre assez long pour le test','slug':'x'}]*40
+        packet=json.dumps({'messages':[{'role':'system','content':'i'*2500},{'role':'user','content':json.dumps(g.critic_packet(article,{'s0':['c1']},facts,known),ensure_ascii=False)}],
+                           'max_tokens':1400}).encode()
+        self.assertLess(len(packet),45000)

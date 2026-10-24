@@ -136,3 +136,22 @@ class CompressionTests(unittest.TestCase):
         smaller=p.recompress(raw.getvalue())
         self.assertLess(len(smaller),len(raw.getvalue()))
         self.assertEqual(Image.open(io.BytesIO(smaller)).size,(320,200))
+
+
+class RobustnessTests(unittest.TestCase):
+    def test_a_broken_thumbnail_falls_back_to_the_next_candidate(self):
+        import tempfile
+        class Flaky(Opener):
+            def open(self,request,timeout):
+                if 'broken' in request.full_url:raise OSError('reset')
+                return super().open(request,timeout)
+        broken=page(title='File:Fushimi Inari broken.jpg');broken['imageinfo'][0]['thumburl']='https://upload.wikimedia.org/broken.jpg'
+        with tempfile.TemporaryDirectory() as tmp:
+            record,_=p.fetch_photo(SPEC,Path(tmp),set(),Flaky([broken,page()]),compress=lambda data:data)
+        self.assertEqual(record['source_page'],page()['imageinfo'][0]['descriptionurl'])
+    def test_redirect_outside_wikimedia_is_refused(self):
+        import urllib.request
+        handler=p.WikimediaRedirect()
+        request=urllib.request.Request('https://upload.wikimedia.org/x.jpg')
+        with self.assertRaisesRegex(ValueError,'redirect_host'):
+            handler.redirect_request(request,None,302,'Found',{},'https://evil.example/x.jpg')
