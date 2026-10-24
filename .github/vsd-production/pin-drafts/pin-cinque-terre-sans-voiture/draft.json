@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-cinque-terre-sans-voiture",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Les Cinque Terre sans voiture : train toutes les 20 minutes, Via dell’Amore et carte à 17,30 €",
+  "targetUrl": "https://voyagesansdetour.fr/italie/cinque-terre-sans-voiture/",
+  "articleSha256": "f9fc9ef33ba4065eda95c11bda1e37e17eb7e99be0129ce6a4009ab8743b936c",
+  "imageSha256": "00a2920556cfe38963812b24d03c1e507b42013ba732a519b328dfd434ee8dd5",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "1f4b9b212a89f0b2c43d759934686c2ca46ca5117be684b6aae809c04efcafca",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "cinque-manarola",
+    "author": "Timothy A. Gonsalves",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Manarola_NW_Cinque_Terre_Sep23_A7C_07233.jpg",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+  }
+}

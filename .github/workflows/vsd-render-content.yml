@@ -60,7 +60,7 @@ jobs:
           python -m pip install --disable-pip-version-check -r requirements.txt
       - name: Validate production guards
         if: steps.period.outputs.active == 'true'
-        run: python -m unittest -q test_production test_pin_intake test_pin_promotion
+        run: python -m unittest -q test_production test_pin_draft test_pin_intake test_pin_promotion
       - name: Produce at most one eligible clip
         if: steps.period.outputs.active == 'true'
         run: |

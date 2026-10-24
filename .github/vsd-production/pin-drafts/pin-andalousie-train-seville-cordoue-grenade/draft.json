@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-andalousie-train-seville-cordoue-grenade",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "L’Andalousie en train : Séville, Cordoue et Grenade sans voiture, en 5 jours",
+  "targetUrl": "https://voyagesansdetour.fr/espagne/andalousie-train-seville-cordoue-grenade/",
+  "articleSha256": "aeccd08d7e58bf87af71d92a603a055809039f94b4b4e11931ee8d13bd2d81ff",
+  "imageSha256": "bead16c9c71b4be530e8a3311b0373182565277250ea9aa2ae8364df4f891f16",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "1f4b9b212a89f0b2c43d759934686c2ca46ca5117be684b6aae809c04efcafca",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "grenade-alhambra",
+    "author": "Jebulon",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Dawn_Charles_V_Palace_Alhambra_Granada_Andalusia_Spain.jpg",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+  }
+}

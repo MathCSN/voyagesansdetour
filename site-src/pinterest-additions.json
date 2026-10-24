@@ -15,6 +15,36 @@
           "height": 1500
         }
       ]
+    },
+    {
+      "file": "preparer-espagne.xml",
+      "title": "Voyage Sans Détour — Préparer son voyage en Espagne",
+      "items": [
+        {
+          "id": "pin-andalousie-train-seville-cordoue-grenade",
+          "title": "L’Andalousie en train : Séville, Cordoue et Grenade sans voiture, en 5 jours",
+          "description": "📌 Retrouvez le guide et ses sources pour préparer votre voyage en Espagne. Photo : Jebulon — CC0. Crédits : https://voyagesansdetour.fr/social-media/production/pin-andalousie-train-seville-cordoue-grenade/credits.txt",
+          "linkPath": "/espagne/andalousie-train-seville-cordoue-grenade/",
+          "mediaId": "pin-andalousie-train-seville-cordoue-grenade",
+          "width": 1000,
+          "height": 1500
+        }
+      ]
+    },
+    {
+      "file": "preparer-italie.xml",
+      "title": "Voyage Sans Détour — Préparer son voyage en Italie",
+      "items": [
+        {
+          "id": "pin-cinque-terre-sans-voiture",
+          "title": "Les Cinque Terre sans voiture : train toutes les 20 minutes, Via dell’Amore et carte à 17,30 €",
+          "description": "📌 Retrouvez le guide et ses sources pour préparer votre voyage en Italie. Photo : Timothy A. Gonsalves — CC BY-SA 4.0. Crédits : https://voyagesansdetour.fr/social-media/production/pin-cinque-terre-sans-voiture/credits.txt",
+          "linkPath": "/italie/cinque-terre-sans-voiture/",
+          "mediaId": "pin-cinque-terre-sans-voiture",
+          "width": 1000,
+          "height": 1500
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-cote-amalfitaine-sans-voiture",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "La côte amalfitaine sans voiture : ferry de Salerne à 12 €, bus SITA et sentier des Dieux",
+  "targetUrl": "https://voyagesansdetour.fr/italie/cote-amalfitaine-sans-voiture/",
+  "articleSha256": "aedff7a6e662ff619eb894d156d9180d5aed0e6b2005e589e443018616b81fb3",
+  "imageSha256": "7baae3ead6001b394e40a6dbb6e183a432d9e8d971761cf7609bb8cde093436c",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "1f4b9b212a89f0b2c43d759934686c2ca46ca5117be684b6aae809c04efcafca",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "amalfi-positano",
+    "author": "Bernard Gagnon",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Positano_(Italy)_02.jpg",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/"
+  }
+}

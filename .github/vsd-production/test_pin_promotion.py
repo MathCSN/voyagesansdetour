@@ -38,13 +38,25 @@ class PinPromotionTests(unittest.TestCase):
     def test_draft_from_another_template_waits_for_redraw(self):
         p=self.folder/'draft.json';m=json.loads(p.read_text());m['rendererSha256']='0'*64;p.write_text(json.dumps(m))
         self.assertEqual(select([self.article],self.root,set(),None,NOW)[1],'no_eligible_new_draft')
-    def test_guide_outside_portugal_waits_for_a_connected_board(self):
-        spain={'slug':'andalousie','title':'Andalousie en train','country':'espagne'}
-        folder=render(spain,self.root)
-        self.assertEqual(json.loads((folder/'draft.json').read_text())['targetUrl'],'https://voyagesansdetour.fr/espagne/andalousie/')
-        chosen,status=select([spain,self.article],self.root,set(),None,NOW)
+    def test_guide_without_a_connected_board_waits(self):
+        france={'slug':'bretagne','title':'La Bretagne en train','country':'france'}
+        folder=render(france,self.root)
+        self.assertEqual(json.loads((folder/'draft.json').read_text())['targetUrl'],'https://voyagesansdetour.fr/france/bretagne/')
+        chosen,status=select([france,self.article],self.root,set(),None,NOW)
         self.assertEqual(status,'eligible');self.assertEqual(chosen[1]['id'],'pin-test-guide')
-        self.assertEqual(select([spain],self.root,{'pin-test-guide'},None,NOW)[1],'no_eligible_new_draft')
+        self.assertEqual(select([france],self.root,{'pin-test-guide'},None,NOW)[1],'no_eligible_new_draft')
+    def test_spain_and_italy_guides_reach_their_own_boards(self):
+        spain={'slug':'andalousie','title':'Andalousie en train','country':'espagne'}
+        render(spain,self.root)
+        chosen,status=select([spain],self.root,{'pin-test-guide'},None,NOW)
+        self.assertEqual(status,'eligible');self.assertEqual(chosen[1]['targetUrl'],'https://voyagesansdetour.fr/espagne/andalousie/')
+    def test_cadence_is_counted_per_board(self):
+        spain={'slug':'andalousie','title':'Andalousie en train','country':'espagne'}
+        render(spain,self.root)
+        recent={'portugal':NOW-dt.timedelta(days=1)}
+        chosen,status=select([self.article,spain],self.root,set(),recent,NOW)
+        self.assertEqual(status,'eligible');self.assertEqual(chosen[1]['id'],'pin-andalousie')
+        self.assertEqual(select([self.article],self.root,set(),recent,NOW)[1],'cadence_hold')
     def test_stop_date(self):
         self.assertEqual(select([self.article],self.root,set(),None,STOP)[1],'period_ended')
 
@@ -88,3 +100,31 @@ class PinAdmissionTests(unittest.TestCase):
                 return 'a'*64
             result=run(root,NOW,fetch)
             self.assertEqual(result['id'],'pin-test-guide');self.assertEqual(result['held'][0]['id'],'pin-autre-guide')
+    def test_spain_pin_joins_the_spain_feed_while_portugal_is_on_cadence(self):
+        from pin_promotion import run
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);production,site=self.fixture(root)
+            spain={'slug':'andalousie','title':'Andalousie en train','country':'espagne'}
+            render(spain,production/'pin-drafts')
+            (site/'articles.json').write_text(json.dumps([json.loads((site/'articles.json').read_text())[0],spain]))
+            config=json.loads((site/'pinterest-additions.json').read_text())
+            config['feeds'].append({'file':'preparer-espagne.xml','title':'Espagne','items':[]});(site/'pinterest-additions.json').write_text(json.dumps(config))
+            (production/'pin-admissions.json').write_text(json.dumps({'schemaVersion':1,'items':[{'id':'pin-test-guide','admittedAt':(NOW-dt.timedelta(days=1)).isoformat()}]}))
+            config=json.loads((site/'pinterest-additions.json').read_text());config['feeds'][0]['items'].append({'id':'pin-test-guide','linkPath':'/portugal/test-guide/'});(site/'pinterest-additions.json').write_text(json.dumps(config))
+            result=run(root,NOW,lambda url,title:'a'*64)
+            self.assertEqual(result['id'],'pin-andalousie')
+            feeds={f['file']:f for f in json.loads((site/'pinterest-additions.json').read_text())['feeds']}
+            pin=feeds['preparer-espagne.xml']['items'][0]
+            self.assertEqual(pin['linkPath'],'/espagne/andalousie/');self.assertIn('en Espagne',pin['description'])
+    def test_photo_pin_is_admitted_with_its_photo_credit(self):
+        from pin_promotion import run
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);production,site=self.fixture(root)
+            photo_guide={'slug':'grenade','title':'Grenade sans voiture','country':'portugal','cover':'grenade-alhambra'}
+            folder=render(photo_guide,production/'pin-drafts')
+            self.assertEqual(json.loads((folder/'draft.json').read_text())['templateVersion'],2)
+            (site/'articles.json').write_text(json.dumps([photo_guide]))
+            result=run(root,NOW,lambda url,title:'a'*64)
+            self.assertEqual(result['id'],'pin-grenade')
+            pin=json.loads((site/'pinterest-additions.json').read_text())['feeds'][0]['items'][0]
+            self.assertIn('Photo :',pin['description']);self.assertLessEqual(len(pin['description']),500)

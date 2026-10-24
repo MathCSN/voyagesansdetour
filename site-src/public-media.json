@@ -525,6 +525,60 @@
           "bytes": 4449
         }
       ]
+    },
+    {
+      "contentId": "pin-andalousie-train-seville-cordoue-grenade",
+      "kind": "pin",
+      "approved": true,
+      "files": [
+        {
+          "name": "pin.jpg",
+          "bytes": 377850,
+          "sha256": "bead16c9c71b4be530e8a3311b0373182565277250ea9aa2ae8364df4f891f16"
+        },
+        {
+          "name": "credits.txt",
+          "bytes": 345,
+          "sha256": "78911f890d82fa1f43cc906021601c46b7ee98c8ec2d509c04cc6c6350656432"
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "bytes": 4482,
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "bytes": 4449,
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+        }
+      ]
+    },
+    {
+      "contentId": "pin-cinque-terre-sans-voiture",
+      "kind": "pin",
+      "approved": true,
+      "files": [
+        {
+          "name": "pin.jpg",
+          "bytes": 329466,
+          "sha256": "00a2920556cfe38963812b24d03c1e507b42013ba732a519b328dfd434ee8dd5"
+        },
+        {
+          "name": "credits.txt",
+          "bytes": 350,
+          "sha256": "74e8cd4ec1d3e32f169857a251e733c54f977dbc4ff19685c3412c7995b86e8e"
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "bytes": 4482,
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "bytes": 4449,
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+        }
+      ]
     }
   ]
 }
