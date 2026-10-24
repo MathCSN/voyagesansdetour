@@ -73,13 +73,26 @@ class CalendarTests(unittest.TestCase):
         self.assertEqual(len(state['promotions']),1)
         self.assertIsNone(state['promotions'][0]['receipt'])
         self.assertFalse(a.q.promote(self.root,self.now,source_fetcher=self.fetch))
-    def test_changed_source_at_release_keeps_both_files_unchanged(self):
+    def test_changed_source_at_release_withdraws_the_guide_without_publishing(self):
         self.run_admit()
-        before={name:(self.root/name).read_bytes() for name in ('articles.json','editorial-queue.json')}
+        articles=(self.root/'articles.json').read_bytes()
         self.fetch.return_value={'sha256':'b'*64,'text':'Changed'}
-        with self.assertRaisesRegex(ValueError,'changed before publication'):
-            a.q.promote(self.root,self.now,source_fetcher=self.fetch)
-        for name,raw in before.items():self.assertEqual((self.root/name).read_bytes(),raw)
+        self.assertTrue(a.q.promote(self.root,self.now,source_fetcher=self.fetch))
+        self.assertEqual((self.root/'articles.json').read_bytes(),articles)
+        state=json.loads((self.root/'editorial-queue.json').read_text())
+        self.assertEqual((state['drafts'],state['promotions']),([],[]))
+    def test_expired_generated_guide_is_withdrawn_and_can_be_written_again(self):
+        self.run_admit()
+        later=self.now+a.dt.timedelta(hours=48)
+        self.fetch.reset_mock()
+        self.assertTrue(a.q.promote(self.root,later,source_fetcher=self.fetch))
+        self.fetch.assert_not_called()
+        self.assertEqual(json.loads((self.root/'editorial-queue.json').read_text())['drafts'],[])
+        result=a.run(self.out,self.root,self.now,self.fetch)
+        self.assertTrue(result['changed'])
+        names=sorted(p.name for p in (self.root/'editorial-guide-evidence').iterdir())
+        self.assertEqual(len(names),2)
+        self.assertTrue(any('.withdrawn-' in n for n in names))
     def test_tampered_admission_evidence_blocks_before_fetch(self):
         self.run_admit();self.fetch.reset_mock()
         file=next((self.root/'editorial-guide-evidence').glob('*.json'))

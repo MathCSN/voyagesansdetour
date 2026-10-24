@@ -13,6 +13,12 @@ import editorial_queue as q
 ROOT=Path(__file__).resolve().parents[2]/'site-src'
 
 
+def complete_evidence(path):
+    try:proof=q.read_json(path)
+    except ValueError:return False
+    return isinstance(proof,dict) and proof.get('schemaVersion')==1 and isinstance(proof.get('draftSha256'),str)
+
+
 def run(out,root=ROOT,now=None,fetcher=source_fingerprint):
     now=now or dt.datetime.now(q.UTC).replace(microsecond=0)
     if now>=HARD_STOP:return {'status':'period_ended','changed':False}
@@ -46,7 +52,15 @@ def run(out,root=ROOT,now=None,fetcher=source_fingerprint):
     updated=copy.deepcopy(queue);updated['drafts'].append(draft)
     q.validate(articles,updated,now)
     proof=root/'editorial-guide-evidence'/(identity+'.json')
-    q.require(not proof.parent.is_symlink() and not proof.exists(),'Guide evidence already exists')
+    q.require(not proof.parent.is_symlink(),'Guide evidence directory is a symlink')
+    if proof.exists() and not proof.is_symlink() and complete_evidence(proof):
+        # The release withdrew this topic (stale sources or expired review): keep its old
+        # evidence under another name and admit the newly written guide. An incomplete file
+        # (interrupted write) is never moved: it still blocks admission.
+        archived=proof.with_name(identity+'.withdrawn-'+q.today(now)+'.json')
+        q.require(not archived.exists(),'Guide evidence already archived today')
+        proof.rename(archived)
+    q.require(not proof.exists(),'Guide evidence already exists')
     proof.parent.mkdir(exist_ok=True)
     # Photos and credits first, evidence next, queue last. Interrupted writes leave an
     # explicit hold, never a queued article without its photos, proposal and review.

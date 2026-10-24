@@ -224,6 +224,10 @@ def published_articles(root=ROOT, now=None):
     return articles
 
 
+class StaleGeneratedGuide(ValueError):
+    """A generated guide whose review window or sources moved on: withdrawn, never published."""
+
+
 def recheck_generated_guide(root, draft, now, fetcher=None):
     if not draft['id'].startswith('generated-'):
         return
@@ -242,8 +246,9 @@ def recheck_generated_guide(root, draft, now, fetcher=None):
             verification['articleSha256'] == digest(draft['article']) and
             digest(proposal['article']) == digest(draft['article']), 'Generated guide evidence changed.')
     verified = instant(verification['verifiedAt'])
-    require(verified <= instant(draft['approval']['approvedAt']) <= now and
-            now < verified + dt.timedelta(hours=48), 'Generated guide verification expired.')
+    require(verified <= instant(draft['approval']['approvedAt']) <= now, 'Generated guide approval precedes its evidence.')
+    if now >= verified + dt.timedelta(hours=48):
+        raise StaleGeneratedGuide('Generated guide verification expired.')
     sources = verification['sources']
     require(isinstance(sources, list) and 2 <= len(sources) <= 3 and
             len({s['url'] for s in sources}) == len(sources) and
@@ -252,14 +257,31 @@ def recheck_generated_guide(root, draft, now, fetcher=None):
     for source in sources:
         require(isinstance(source['sha256'], str) and HASH.fullmatch(source['sha256']),
                 'Generated guide source fingerprint is invalid.')
-        require(fetcher(source['url'])['sha256'] == source['sha256'],
-                'Generated guide source changed before publication.')
+        if fetcher(source['url'])['sha256'] != source['sha256']:
+            raise StaleGeneratedGuide('Generated guide source changed before publication.')
+
+
+def withdraw_generated(root, articles, queue, drafts, now, reason):
+    """Remove stale generated guides from the calendar without publishing them.
+
+    Fail-closed for readers (nothing unverified goes online) without blocking every later
+    build: the writing chain can write the same topic again from fresh sources."""
+    updated = dict(queue, drafts=[d for d in queue['drafts'] if d not in drafts])
+    validate(articles, updated, now)
+    write_json(root / 'editorial-queue.json', updated)
+    for draft in drafts:
+        print(f"Generated guide withdrawn, not published: {draft['id']} ({reason})")
+    return True
 
 
 def promote(root=ROOT, now=None, source_fetcher=None):
     now = now or dt.datetime.now(UTC)
     articles, queue = load(root, now)
     check_pending(queue, now, 900)
+    expired = [d for d in queue['drafts'] if d['id'].startswith('generated-') and
+               now + dt.timedelta(seconds=900) >= instant(d['validUntil'])]
+    if expired:
+        return withdraw_generated(root, articles, queue, expired, now, 'approval window expired')
     due = sorted((d for d in queue['drafts'] if instant(d['releaseAt']) <= now), key=lambda d: (instant(d['releaseAt']), d['id']))
     # An expired approval is never silently extended or interpreted as a skip.
     for draft in due:
@@ -271,7 +293,10 @@ def promote(root=ROOT, now=None, source_fetcher=None):
     if not due or any(p['receipt'] is None for p in queue['promotions']) or now.astimezone(PARIS).date() < release_day(latest):
         return False
     draft = due[0]
-    recheck_generated_guide(root, draft, now, source_fetcher)
+    try:
+        recheck_generated_guide(root, draft, now, source_fetcher)
+    except StaleGeneratedGuide as error:
+        return withdraw_generated(root, articles, queue, [draft], now, str(error))
     article = dict(draft['article'], publishedOn=today(now), updatedOn=today(now))
     entry = dict(id=draft['id'], slug=article['slug'], approvalSha256=draft['approval']['sha256'],
                  articleSha256=digest(article), releaseAt=draft['releaseAt'], validUntil=draft['validUntil'],
