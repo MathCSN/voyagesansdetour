@@ -1321,12 +1321,16 @@
     },
     "sources": [
       {
-        "label": "Îles de Guadeloupe — Site officiel",
-        "url": "https://www.lesilesdeguadeloupe.com/"
-      },
-      {
         "label": "Wikivoyage — Guadeloupe",
         "url": "https://fr.wikivoyage.org/wiki/Guadeloupe"
+      },
+      {
+        "label": "Wikivoyage — Guadeloupe (en)",
+        "url": "https://en.wikivoyage.org/wiki/Guadeloupe"
+      },
+      {
+        "label": "Wikipedia — Guadeloupe",
+        "url": "https://en.wikipedia.org/wiki/Guadeloupe"
       }
     ],
     "photos": [
@@ -1392,8 +1396,8 @@
         "url": "https://www.vr.fi/en/santa-claus-express"
       },
       {
-        "label": "Santa Claus Village — Site officiel",
-        "url": "https://santaclausvillage.info/"
+        "label": "Santa Claus Village — Meet Santa Claus",
+        "url": "https://santaclausvillage.info/experiences/santa-claus/"
       },
       {
         "label": "Wikivoyage — Rovaniemi",
@@ -2377,8 +2381,8 @@
     },
     "sources": [
       {
-        "label": "Wiener Linien — Tickets",
-        "url": "https://www.wienerlinien.at/tickets"
+        "label": "Wikivoyage — Vienna",
+        "url": "https://en.wikivoyage.org/wiki/Vienna"
       },
       {
         "label": "Wikivoyage — Vienne",
@@ -3022,16 +3026,12 @@
     },
     "sources": [
       {
-        "label": "Visit Lisboa — Miradouro da Senhora do Monte",
-        "url": "https://www.visitlisboa.com/pt-pt/locais/miradouro-da-senhora-do-monte"
+        "label": "Wikivoyage — Lisbonne",
+        "url": "https://fr.wikivoyage.org/wiki/Lisbonne"
       },
       {
-        "label": "Visit Lisboa — Miradouro de Santa Luzia",
-        "url": "https://www.visitlisboa.com/pt-pt/locais/miradouro-de-santa-luzia"
-      },
-      {
-        "label": "Visit Lisboa — Miradouro de Santa Catarina",
-        "url": "https://www.visitlisboa.com/pt-pt/locais/miradouro-de-santa-catarina"
+        "label": "Wikivoyage — Lisbon",
+        "url": "https://en.wikivoyage.org/wiki/Lisbon"
       }
     ],
     "photos": [
@@ -4268,12 +4268,16 @@
     },
     "sources": [
       {
-        "label": "Visit Lisboa — Monastère des Jerónimos",
-        "url": "https://www.visitlisboa.com/pt-pt/locais/mosteiro-dos-jeronimos"
+        "label": "Wikivoyage — Lisbon/Belém",
+        "url": "https://en.wikivoyage.org/wiki/Lisbon/Bel%C3%A9m"
       },
       {
-        "label": "Visit Lisboa — Tram 15",
-        "url": "https://www.visitlisboa.com/pt-pt/locais/electrico-15"
+        "label": "Wikipedia — Jerónimos Monastery",
+        "url": "https://en.wikipedia.org/wiki/Jer%C3%B3nimos_Monastery"
+      },
+      {
+        "label": "Carris — Site officiel",
+        "url": "https://www.carris.pt/en/"
       }
     ],
     "photos": [

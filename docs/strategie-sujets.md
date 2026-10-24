@@ -78,7 +78,8 @@ en file ou en candidat n’est jamais réécrit.
 ## Les sources d’un sujet
 
 Chaque sujet a 2 ou 3 sources, toutes lues le 24/10/2026 avec le lecteur de la chaîne
-(178 adresses, toutes accessibles) :
+(179 adresses, toutes accessibles et **stables** : lues deux fois à 20 secondes d’écart, elles
+donnent la même empreinte ; sinon la chaîne ne pourrait jamais revalider le guide) :
 
 1. une page **officielle** quand elle répond (opérateur de transport, monument, office du
    tourisme, service météo) : c’est elle qui donne les prix ;
@@ -93,7 +94,8 @@ phrases qui parlent de lui avec un chiffre (prix, durée, température, numéro 
 
 Beaucoup de sites officiels bloquent les robots (Office du tourisme de Thaïlande, Dubaï, Maroc,
 Nouvelle-Zélande, Tahiti, MTA de New York, Rockefeller Center) : ils ne figurent pas dans le
-plan. Pour le Costa Rica, le site des parcs (SINAC) ne répond pas ; le guide écrit à la main
+plan. Huit pages dont le texte change à chaque chargement (Visit Lisboa, accueil du village
+du Père Noël, îles de Guadeloupe, Wiener Linien) ont été remplacées. Pour le Costa Rica, le site des parcs (SINAC) ne répond pas ; le guide écrit à la main
 cite deux sources datées de 2026 qui concordent (Earthtrekkers, The Rio Times).
 
 ## Les photos
