@@ -1,0 +1,237 @@
+{
+  "schemaVersion": 2,
+  "id": "ig-lisbonne-porto-train-2026-11",
+  "kind": "reel",
+  "channel": "instagram",
+  "destination": "Lisbonne–Porto",
+  "title": "Lisbonne–Porto en train au meilleur prix",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/lisbonne-porto-train/",
+  "publishAt": "2026-11-18T17:00:00Z",
+  "review": {
+    "status": "reviewed_for_render",
+    "checkedAt": "2026-10-24T06:45:00Z",
+    "validUntil": "2026-11-23T00:00:00Z",
+    "method": "Faits relus mot pour mot dans les instantanés datés du 24/10/2026 (sources/social-2026-10-24) ; photos sous licence libre consignées dans assets/photos/catalogue.json."
+  },
+  "sources": {
+    "file": "sources/social-2026-10-24/sources.json",
+    "sha256": "ab7c358a9fcfa0a14abc58fe398ac7816ad7fece07101de071565bb938118878"
+  },
+  "photos": {
+    "file": "assets/photos/catalogue.json",
+    "sha256": "a66ad22b12c71b7e545179ac6a8e3f3a4412808b8eb854734e79105402792268"
+  },
+  "caption": {
+    "hook": "🚄 Lisbonne → Porto en train dès 10,50 €. À condition de réserver au bon moment.",
+    "lines": [
+      "📆 Billets Promo CP : jusqu’à -65 % en réservant 8 jours ou plus avant.",
+      "🗓️ Vente ouverte 60 jours avant, et jusqu’à 15 min avant le départ.",
+      "📶 Wi-Fi gratuit dans tous les Alfa Pendular et Intercidades.",
+      "🔁 Billet Promo : échangeable, mais pas remboursable.",
+      "📍 Arrivée à Campanhã : São Bento est une autre gare, au centre."
+    ],
+    "cta": "🔗 Le guide Lisbonne–Porto en train est en lien dans la bio.",
+    "hashtags": [
+      "#Lisbonne",
+      "#Porto",
+      "#TrainPortugal",
+      "#VoyageSansVoiture",
+      "#VoyageSansDetour"
+    ]
+  },
+  "scenes": [
+    {
+      "photo": "train-alfa-viaduc",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Lisbonne → Porto",
+      "headline": [
+        "En train",
+        "dès *10,50 €*"
+      ],
+      "detail": "Prix de référence CP en Intercidades, 2de classe, au départ de Lisbonne.",
+      "facts": [
+        {
+          "source": "cp-bilhete-promo",
+          "excerpt": "Intercidades (From Lisbon) - 2nd Class"
+        },
+        {
+          "source": "cp-bilhete-promo",
+          "excerpt": "Porto - 10.50;"
+        }
+      ],
+      "tag": "CP · billet Promo · relevé le 24/10/2026",
+      "seconds": 3.5
+    },
+    {
+      "photo": "train-alfa-220",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Le secret",
+      "headline": [
+        "Jusqu’à *-65 %*",
+        "à 8 jours ou plus"
+      ],
+      "detail": "Billets Promo, dans la limite des places réservées à l’offre.",
+      "facts": [
+        {
+          "source": "cp-bilhete-promo",
+          "excerpt": "8 or more days in advance: Discount of up to 65%."
+        },
+        {
+          "source": "cp-bilhete-promo",
+          "excerpt": "Limited offer: The discount only applies to the special offer seats available on each train"
+        }
+      ],
+      "tag": "CP · relevé le 24/10/2026",
+      "seconds": 4
+    },
+    {
+      "photo": "train-alfa-oriente",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Quand réserver",
+      "headline": [
+        "Ventes ouvertes",
+        "*60 jours* avant"
+      ],
+      "detail": "Et jusqu’à 15 min avant le départ du train.",
+      "facts": [
+        {
+          "source": "cp-bilheteira-online",
+          "excerpt": "You can buy your ticket up to 60 days in advance and until 15 minutes before the train leaves your station."
+        }
+      ],
+      "tag": "CP · relevé le 24/10/2026",
+      "seconds": 4
+    },
+    {
+      "photo": "train-alfa-interieur",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "À bord",
+      "headline": [
+        "Wi-Fi *gratuit*",
+        "à bord"
+      ],
+      "detail": "Dans tous les Alfa Pendular et Intercidades.",
+      "facts": [
+        {
+          "source": "cp-horarios-lisboa-norte",
+          "excerpt": "Wi-Fi gratuito em todos os comboios Alfa Pendular e Intercidades"
+        }
+      ],
+      "tag": "Horaires CP · relevés le 24/10/2026",
+      "seconds": 4
+    },
+    {
+      "photo": "train-alfa-aqueduc",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "À l’arrivée",
+      "headline": [
+        "Porto : descendez",
+        "à *Campanhã*"
+      ],
+      "detail": "C’est là qu’arrivent les grandes lignes depuis Lisbonne.",
+      "facts": [
+        {
+          "source": "guide-lisbonne-porto-train",
+          "excerpt": "Les principales liaisons longue distance de cet axe desservent Campanhã."
+        }
+      ],
+      "tag": "Notre guide train · sources du 12/10/2026",
+      "seconds": 4
+    },
+    {
+      "photo": "porto-sao-bento-departs",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Billet malin",
+      "headline": [
+        "São Bento",
+        "*dans l’heure*"
+      ],
+      "detail": "Billet CP en ligne : la liaison urbaine vers São Bento est prévue.",
+      "facts": [
+        {
+          "source": "guide-lisbonne-porto-train",
+          "excerpt": "Les conditions de vente en ligne de CP prévoient, pour un billet depuis ou vers Campanhã, le trajet urbain de liaison avec São Bento dans une fenêtre d’une heure avant ou après le train principal"
+        }
+      ],
+      "tag": "Notre guide train · sources du 12/10/2026",
+      "seconds": 4
+    },
+    {
+      "photo": "porto-ribeira-rabelos",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Le guide complet",
+      "headline": [
+        "Lisbonne–Porto",
+        "en train"
+      ],
+      "detail": "Gares, billets, horaires : la méthode pas à pas.",
+      "seconds": 4.5,
+      "cta": true
+    }
+  ],
+  "musicStart": 1,
+  "assets": {
+    "regular": {
+      "file": "assets/dmsans-regular.ttf",
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      }
+    },
+    "bold": {
+      "file": "assets/dmsans-bold.ttf",
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      }
+    },
+    "serif": {
+      "file": "assets/playfair.ttf",
+      "sha256": "adefc53e7b3d483f1fa5e85edd82b7689ca79db25a1f6786bd7949cdcfeec601",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+      }
+    },
+    "music": {
+      "file": "assets/carefree.mp3",
+      "sha256": "8433b770a630d9b1594fd484442c677907ece899a4d149954cd2e74fd733e311",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "commercialUseAllowed": true,
+      "title": "Carefree",
+      "author": "Kevin MacLeod",
+      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1400037",
+      "provenance": {
+        "file": "evidence/carefree-provenance.json",
+        "sha256": "96c196c39133db1dbc3a478eba28a25ff8d74ef86633b06647e733f8f23234a6"
+      }
+    }
+  }
+}

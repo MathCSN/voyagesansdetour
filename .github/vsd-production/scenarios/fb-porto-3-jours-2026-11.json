@@ -1,0 +1,191 @@
+{
+  "schemaVersion": 2,
+  "id": "fb-porto-3-jours-2026-11",
+  "kind": "carousel",
+  "channel": "facebook",
+  "destination": "Porto",
+  "title": "Porto en 3 jours sans voiture",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/porto-3-jours-sans-voiture/",
+  "publishAt": "2026-11-06T17:00:00Z",
+  "review": {
+    "status": "reviewed_for_render",
+    "checkedAt": "2026-10-24T06:45:00Z",
+    "validUntil": "2026-11-23T00:00:00Z",
+    "method": "Faits relus mot pour mot dans les instantanés datés du 24/10/2026 (sources/social-2026-10-24) ; photos sous licence libre consignées dans assets/photos/catalogue.json."
+  },
+  "sources": {
+    "file": "sources/social-2026-10-24/sources.json",
+    "sha256": "ab7c358a9fcfa0a14abc58fe398ac7816ad7fece07101de071565bb938118878"
+  },
+  "photos": {
+    "file": "assets/photos/catalogue.json",
+    "sha256": "a66ad22b12c71b7e545179ac6a8e3f3a4412808b8eb854734e79105402792268"
+  },
+  "caption": {
+    "hook": "🌉 Porto en 3 jours, sans voiture : le Douro, Gaia et l’océan.",
+    "lines": [
+      "📍 Jour 1 — São Bento, la Sé et Ribeira, en descendant vers le fleuve.",
+      "🍷 Jour 2 — Gaia et ses caves, de l’autre côté du pont Luís I.",
+      "🌊 Jour 3 — Foz ou Matosinhos avec le bus 500.",
+      "🚇 Depuis l’aéroport : ligne E violette du métro."
+    ],
+    "cta": "👉 Le programme complet, jour par jour :",
+    "hashtags": [
+      "#Porto",
+      "#Portugal",
+      "#VoyageSansVoiture",
+      "#VoyageSansDetour"
+    ]
+  },
+  "scenes": [
+    {
+      "photo": "porto-luis-panorama-nuit",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Porto · 3 jours",
+      "headline": [
+        "Porto en 3 jours,",
+        "*sans voiture*"
+      ],
+      "detail": "Le centre, Gaia, l’Atlantique. Faites glisser →",
+      "facts": [
+        {
+          "source": "guide-porto-3-jours-sans-voiture",
+          "excerpt": "Une voiture n’est pas nécessaire pour ce programme"
+        }
+      ],
+      "tag": "Notre guide Porto · sources du 12/10/2026",
+      "alt": "Le pont Luís I et les quais de Porto illuminés à la tombée de la nuit."
+    },
+    {
+      "photo": "porto-sao-bento-azulejos",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Jour 1",
+      "headline": [
+        "São Bento,",
+        "la Sé, *Ribeira*"
+      ],
+      "detail": "Commencez en haut, finissez au bord du Douro.",
+      "facts": [
+        {
+          "source": "guide-porto-3-jours-sans-voiture",
+          "excerpt": "Commencez à São Bento, puis prenez la direction de la Sé avant de descendre vers Ribeira."
+        }
+      ],
+      "tag": "Notre guide Porto · sources du 12/10/2026",
+      "alt": "Les azulejos bleus du hall de la gare de São Bento, à Porto."
+    },
+    {
+      "photo": "porto-gaia-rabelos-vue",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Jour 2",
+      "headline": [
+        "*Gaia*,",
+        "l’autre rive"
+      ],
+      "detail": "Les quais et les caves, face à Porto.",
+      "facts": [
+        {
+          "source": "guide-porto-3-jours-sans-voiture",
+          "excerpt": "Traversez vers Vila Nova de Gaia pour regarder Porto depuis l’autre rive."
+        }
+      ],
+      "tag": "Notre guide Porto · sources du 12/10/2026",
+      "alt": "Bateaux rabelos sur le Douro devant les façades de Porto."
+    },
+    {
+      "photo": "porto-gaia-chai-tonneaux",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Dans les caves",
+      "headline": [
+        "Comparez avant",
+        "de *réserver*"
+      ],
+      "detail": "Langue, durée, dégustation : chaque visite est différente.",
+      "facts": [
+        {
+          "source": "guide-porto-3-jours-sans-voiture",
+          "excerpt": "Avant de réserver une visite de cave, comparez sa langue, sa durée et ce qui est inclus."
+        }
+      ],
+      "tag": "Notre guide Porto · sources du 12/10/2026",
+      "alt": "Rangées de grands fûts dans une cave de vin de Porto à Gaia."
+    },
+    {
+      "photo": "porto-matosinhos-surf",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Jour 3",
+      "headline": [
+        "Bus *500*",
+        "jusqu’à la mer"
+      ],
+      "detail": "De Praça da Liberdade à Matosinhos Mercado.",
+      "facts": [
+        {
+          "source": "guide-porto-3-jours-sans-voiture",
+          "excerpt": "La STCP répertorie la ligne 500 entre Praça da Liberdade et Matosinhos Mercado."
+        }
+      ],
+      "tag": "Notre guide Porto · sources du 12/10/2026",
+      "alt": "Un surfeur marche sur la plage de Matosinhos."
+    },
+    {
+      "photo": "porto-luis-nuit",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Le guide complet",
+      "headline": [
+        "Porto,",
+        "jour par jour"
+      ],
+      "detail": "Le guide complet, avec les transports et les sources.",
+      "alt": "Le pont Luís I éclairé la nuit au-dessus du Douro.",
+      "cta": true
+    }
+  ],
+  "assets": {
+    "regular": {
+      "file": "assets/dmsans-regular.ttf",
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      }
+    },
+    "bold": {
+      "file": "assets/dmsans-bold.ttf",
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      }
+    },
+    "serif": {
+      "file": "assets/playfair.ttf",
+      "sha256": "adefc53e7b3d483f1fa5e85edd82b7689ca79db25a1f6786bd7949cdcfeec601",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+      }
+    }
+  }
+}

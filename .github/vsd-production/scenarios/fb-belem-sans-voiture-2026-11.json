@@ -1,0 +1,199 @@
+{
+  "schemaVersion": 2,
+  "id": "fb-belem-sans-voiture-2026-11",
+  "kind": "carousel",
+  "channel": "facebook",
+  "destination": "Lisbonne",
+  "title": "Belém sans voiture",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/lisbonne-3-jours-sans-voiture/",
+  "publishAt": "2026-11-20T17:00:00Z",
+  "review": {
+    "status": "reviewed_for_render",
+    "checkedAt": "2026-10-24T06:45:00Z",
+    "validUntil": "2026-11-23T00:00:00Z",
+    "method": "Faits relus mot pour mot dans les instantanés datés du 24/10/2026 (sources/social-2026-10-24) ; photos sous licence libre consignées dans assets/photos/catalogue.json."
+  },
+  "sources": {
+    "file": "sources/social-2026-10-24/sources.json",
+    "sha256": "ab7c358a9fcfa0a14abc58fe398ac7816ad7fece07101de071565bb938118878"
+  },
+  "photos": {
+    "file": "assets/photos/catalogue.json",
+    "sha256": "a66ad22b12c71b7e545179ac6a8e3f3a4412808b8eb854734e79105402792268"
+  },
+  "caption": {
+    "hook": "⛵ Belém sans voiture : la demi-journée la plus photogénique de Lisbonne.",
+    "lines": [
+      "🚋 Le tram 15E dessert Belém et le monastère des Jerónimos.",
+      "⛪ Jerónimos : du mardi au dimanche, 9h30–17h30, fermé le lundi.",
+      "🎫 Avec la Lisboa Card, réservez quand même un créneau.",
+      "🏰 Tour de Belém : vérifiez l’accès intérieur avant tout billet groupé."
+    ],
+    "cta": "👉 Belém et tout Lisbonne en 3 jours :",
+    "hashtags": [
+      "#Lisbonne",
+      "#Belem",
+      "#Portugal",
+      "#VoyageSansVoiture",
+      "#VoyageSansDetour"
+    ]
+  },
+  "scenes": [
+    {
+      "photo": "lisbonne-tour-belem-passerelle",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Lisbonne · Belém",
+      "headline": [
+        "Belém,",
+        "*sans voiture*"
+      ],
+      "detail": "Le monastère, la tour, le Tage. Faites glisser →",
+      "facts": [
+        {
+          "source": "guide-lisbonne-3-jours-sans-voiture",
+          "excerpt": "Jour 3 — Belém, avec une réservation centrale"
+        }
+      ],
+      "tag": "Notre guide Lisbonne · 2026",
+      "alt": "La tour de Belém et sa passerelle au bord du Tage."
+    },
+    {
+      "photo": "lisbonne-jeronimos-facade",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Pour y aller",
+      "headline": [
+        "Le tram *15E*"
+      ],
+      "detail": "Il dessert Belém et le monastère : vérifiez les déviations le jour même.",
+      "facts": [
+        {
+          "source": "guide-lisbonne-3-jours-sans-voiture",
+          "excerpt": "La ligne 15E de Carris dessert notamment Belém et Mosteiro Jerónimos ; vérifiez son service et ses éventuelles déviations le jour même."
+        }
+      ],
+      "tag": "Notre guide Lisbonne · 2026",
+      "alt": "La façade sculptée du monastère des Jerónimos."
+    },
+    {
+      "photo": "lisbonne-jeronimos-ombres",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Jerónimos",
+      "headline": [
+        "*9h30–17h30*",
+        "du mardi au dimanche"
+      ],
+      "detail": "Fermé le lundi : placez Belém un autre jour.",
+      "facts": [
+        {
+          "source": "jeronimos-horario",
+          "excerpt": "Ter - Dom 9h30 – 17h30 Seg Encerrado"
+        },
+        {
+          "source": "guide-lisbonne-3-jours-sans-voiture",
+          "excerpt": "Placez Belém un autre jour si votre troisième journée tombe un lundi."
+        }
+      ],
+      "tag": "Site officiel du monastère · 24/10/2026",
+      "alt": "Ombres des arcades sur le sol du cloître des Jerónimos."
+    },
+    {
+      "photo": "lisbonne-jeronimos-file",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Lisboa Card",
+      "headline": [
+        "Réservez",
+        "un *créneau*"
+      ],
+      "detail": "Même avec la carte, la visite se réserve à une date et une heure.",
+      "facts": [
+        {
+          "source": "visitlisboa-jeronimos",
+          "excerpt": "Book a date and time"
+        },
+        {
+          "source": "visitlisboa-jeronimos",
+          "excerpt": "Once the booking is complete, a digital ticket for the visit will be issued"
+        }
+      ],
+      "tag": "Visit Lisboa · relevé le 24/10/2026",
+      "alt": "La file des visiteurs devant le monastère des Jerónimos."
+    },
+    {
+      "photo": "lisbonne-tour-belem-portrait",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Tour de Belém",
+      "headline": [
+        "Vérifiez l’accès",
+        "*intérieur*"
+      ],
+      "detail": "Avant d’acheter un billet pour plusieurs monuments.",
+      "facts": [
+        {
+          "source": "guide-lisbonne-3-jours-sans-voiture",
+          "excerpt": "La tour de Belém peut être un objectif de promenade, mais confirmez séparément ses conditions d’accès intérieur."
+        }
+      ],
+      "tag": "Notre guide Lisbonne · 2026",
+      "alt": "La tour de Belém vue de face, ses balcons et ses tourelles."
+    },
+    {
+      "photo": "lisbonne-tour-belem-doree",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Le guide complet",
+      "headline": [
+        "Lisbonne",
+        "en 3 jours"
+      ],
+      "detail": "Belém, Alfama, la Baixa : le programme complet.",
+      "alt": "La tour de Belém dans la lumière dorée du soir.",
+      "cta": true
+    }
+  ],
+  "assets": {
+    "regular": {
+      "file": "assets/dmsans-regular.ttf",
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      }
+    },
+    "bold": {
+      "file": "assets/dmsans-bold.ttf",
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      }
+    },
+    "serif": {
+      "file": "assets/playfair.ttf",
+      "sha256": "adefc53e7b3d483f1fa5e85edd82b7689ca79db25a1f6786bd7949cdcfeec601",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+      }
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "title": "Happy Alley",
+  "composer": "Kevin MacLeod",
+  "copyrightHolder": "Kevin MacLeod",
+  "isrc": "USUAN1100482",
+  "catalogDuration": "00:01:20",
+  "instruments": "Guitar, Bass, Drum Kit",
+  "bpm": 112,
+  "feel": "Bouncy, Bright, Grooving, Uplifting",
+  "sourceTrackPage": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100482",
+  "sourceCatalog": "https://incompetech.com/music/royalty-free/pieces.json",
+  "officialCatalogLicense": "https://incompetech.com/agent-section/",
+  "officialLicenseOptions": "https://incompetech.com/music/royalty-free/licenses/",
+  "officialCreditFAQ": "https://incompetech.com/music/royalty-free/faq.html",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "costEur": 0,
+  "commercialUseAllowed": true,
+  "adaptationAllowed": true,
+  "requiredAttribution": true,
+  "download": {
+    "requestedUrl": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Happy%20Alley.mp3",
+    "responseUrl": "https://incompetech.com/music/royalty-free/mp3-royaltyfree/Happy%20Alley.mp3",
+    "httpStatus": 200,
+    "bytes": 3316821,
+    "sha256": "f598c8ee624f1db9a2cd38886524a40baff4ce730dcf999c0763791268fa8265",
+    "retrievedAt": "2026-10-24T06:29:58Z"
+  },
+  "published": false,
+  "notes": [
+    "Morceau choisi pour un rythme enlevé (genre et ambiance du catalogue officiel).",
+    "CC BY 4.0 : réutilisation commerciale et adaptation autorisées avec attribution, lien de licence et mention des modifications ; attribution complète dans credits.txt de chaque post."
+  ]
+}

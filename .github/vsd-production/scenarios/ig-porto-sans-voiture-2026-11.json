@@ -1,0 +1,245 @@
+{
+  "schemaVersion": 2,
+  "id": "ig-porto-sans-voiture-2026-11",
+  "kind": "reel",
+  "channel": "instagram",
+  "destination": "Porto",
+  "title": "Porto sans voiture : 5 repères",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/porto-3-jours-sans-voiture/",
+  "publishAt": "2026-11-11T17:00:00Z",
+  "review": {
+    "status": "reviewed_for_render",
+    "checkedAt": "2026-10-24T06:45:00Z",
+    "validUntil": "2026-11-23T00:00:00Z",
+    "method": "Faits relus mot pour mot dans les instantanés datés du 24/10/2026 (sources/social-2026-10-24) ; photos sous licence libre consignées dans assets/photos/catalogue.json."
+  },
+  "sources": {
+    "file": "sources/social-2026-10-24/sources.json",
+    "sha256": "ab7c358a9fcfa0a14abc58fe398ac7816ad7fece07101de071565bb938118878"
+  },
+  "photos": {
+    "file": "assets/photos/catalogue.json",
+    "sha256": "a66ad22b12c71b7e545179ac6a8e3f3a4412808b8eb854734e79105402792268"
+  },
+  "caption": {
+    "hook": "🌉 Porto sans voiture : 5 repères pour tout faire en métro, en bus et à pied.",
+    "lines": [
+      "✈️ Ligne E violette du métro : de l’aéroport vers le centre et Trindade.",
+      "🚆 Le train de Lisbonne arrive à Campanhã. São Bento, c’est l’autre gare, au centre.",
+      "🍷 Gaia et ses caves : de l’autre côté du pont Luís I.",
+      "🌊 Bus 500 : de Praça da Liberdade à Matosinhos, au bord de l’océan.",
+      "🎫 Andante : une carte par personne, validée à chaque correspondance."
+    ],
+    "cta": "🔗 Porto en 3 jours sans voiture : le guide est en lien dans la bio.",
+    "hashtags": [
+      "#Porto",
+      "#Portugal",
+      "#Douro",
+      "#VoyageSansVoiture",
+      "#VoyageSansDetour"
+    ]
+  },
+  "scenes": [
+    {
+      "photo": "porto-ribeira-rabelo-dore",
+      "focus": [
+        0.55,
+        0.5
+      ],
+      "kicker": "Porto · 3 jours",
+      "headline": [
+        "Porto sans voiture,",
+        "c’est *facile*"
+      ],
+      "detail": "Métro, bus et marche : les 5 repères à connaître.",
+      "facts": [
+        {
+          "source": "guide-porto-3-jours-sans-voiture",
+          "excerpt": "Une voiture n’est pas nécessaire pour ce programme"
+        }
+      ],
+      "tag": "Notre guide Porto · sources du 12/10/2026",
+      "seconds": 3.5
+    },
+    {
+      "photo": "porto-luis-metro",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Depuis l’aéroport",
+      "headline": [
+        "Ligne *E* violette",
+        "jusqu’à Trindade"
+      ],
+      "detail": "Regardez le terminus affiché avant de monter.",
+      "facts": [
+        {
+          "source": "guide-aeroport-porto-centre-ville",
+          "excerpt": "La ligne E, violette, dessert l’aéroport."
+        },
+        {
+          "source": "guide-aeroport-porto-centre-ville",
+          "excerpt": "Trindade constitue un repère pour rejoindre le centre"
+        }
+      ],
+      "tag": "Notre guide aéroport · sources du 27/09/2026",
+      "seconds": 4
+    },
+    {
+      "photo": "porto-sao-bento-hall",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "En train",
+      "headline": [
+        "Campanhã n’est pas",
+        "*São Bento*"
+      ],
+      "detail": "Le train de Lisbonne arrive à Campanhã ; São Bento est au centre.",
+      "facts": [
+        {
+          "source": "guide-lisbonne-porto-train",
+          "excerpt": "Les trains longue distance vers Porto desservent Campanhã."
+        },
+        {
+          "source": "guide-lisbonne-porto-train",
+          "excerpt": "Campanhã et São Bento sont deux gares différentes."
+        }
+      ],
+      "tag": "Notre guide train · sources du 12/10/2026",
+      "seconds": 4
+    },
+    {
+      "photo": "porto-luis-tablier",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Jour 2",
+      "headline": [
+        "*Gaia* : les caves",
+        "de l’autre rive"
+      ],
+      "detail": "Traversez le pont Luís I et regardez Porto d’en face.",
+      "facts": [
+        {
+          "source": "guide-porto-3-jours-sans-voiture",
+          "excerpt": "Traversez vers Vila Nova de Gaia pour regarder Porto depuis l’autre rive."
+        },
+        {
+          "source": "guide-porto-3-jours-sans-voiture",
+          "excerpt": "Le pont Luís I et les caves de vin de Porto figurent dans le quartier historique"
+        }
+      ],
+      "tag": "Notre guide Porto · sources du 12/10/2026",
+      "seconds": 4
+    },
+    {
+      "photo": "porto-matosinhos-coucher",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Jour 3",
+      "headline": [
+        "Bus *500* :",
+        "cap sur l’océan"
+      ],
+      "detail": "De Praça da Liberdade jusqu’à Matosinhos Mercado.",
+      "facts": [
+        {
+          "source": "guide-porto-3-jours-sans-voiture",
+          "excerpt": "La STCP répertorie la ligne 500 entre Praça da Liberdade et Matosinhos Mercado."
+        }
+      ],
+      "tag": "Notre guide Porto · sources du 12/10/2026",
+      "seconds": 4
+    },
+    {
+      "photo": "porto-rabelos-couleurs",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Carte Andante",
+      "headline": [
+        "*1 carte*",
+        "par personne"
+      ],
+      "detail": "Validez au départ et à chaque correspondance.",
+      "facts": [
+        {
+          "source": "guide-aeroport-porto-centre-ville",
+          "excerpt": "Une carte Andante Azul ne peut servir qu’à une personne à la fois."
+        },
+        {
+          "source": "guide-aeroport-porto-centre-ville",
+          "excerpt": "Validez avant le départ et à chaque changement de ligne ou de transport."
+        }
+      ],
+      "tag": "Notre guide aéroport · sources du 27/09/2026",
+      "seconds": 4
+    },
+    {
+      "photo": "porto-douro-vue",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Le guide complet",
+      "headline": [
+        "Porto en 3 jours,",
+        "sans voiture"
+      ],
+      "detail": "Ribeira, Gaia, l’Atlantique : le programme jour par jour.",
+      "seconds": 4.5,
+      "cta": true
+    }
+  ],
+  "musicStart": 8,
+  "assets": {
+    "regular": {
+      "file": "assets/dmsans-regular.ttf",
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      }
+    },
+    "bold": {
+      "file": "assets/dmsans-bold.ttf",
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      }
+    },
+    "serif": {
+      "file": "assets/playfair.ttf",
+      "sha256": "adefc53e7b3d483f1fa5e85edd82b7689ca79db25a1f6786bd7949cdcfeec601",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+      }
+    },
+    "music": {
+      "file": "assets/happy-alley.mp3",
+      "sha256": "f598c8ee624f1db9a2cd38886524a40baff4ce730dcf999c0763791268fa8265",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "commercialUseAllowed": true,
+      "title": "Happy Alley",
+      "author": "Kevin MacLeod",
+      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100482",
+      "provenance": {
+        "file": "evidence/happy-alley-provenance.json",
+        "sha256": "5a2ba8f3dba28b0a748b00089d3854db1fde92213429823746f6d01805f904ac"
+      }
+    }
+  }
+}
