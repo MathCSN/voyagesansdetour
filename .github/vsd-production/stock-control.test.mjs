@@ -33,3 +33,9 @@ test('shipped controller preserves a conflicting remote state even for a retired
   const result=await runStockControl({repositoryRoot:root,transport:transport(true),now:()=>now});
   assert.equal(result.status,'attention_required');assert.equal(result.importAttempted,false);
 });
+
+test('nothing importable is a settled outcome, while uncertain or conflicting stock still fails the run',async()=>{
+  const {isSettledStockStatus}=await import('./stock-control.mjs');
+  for(const status of ['all_imported','stock_settled','stock_confirmed','stock_available','no_eligible_stock'])assert.equal(isSettledStockStatus(status),true,status);
+  for(const status of ['attention_required','import_uncertain','status_unavailable'])assert.equal(isSettledStockStatus(status),false,status);
+});

@@ -18,18 +18,26 @@ class PinPromotionTests(unittest.TestCase):
         self.assertEqual(select([self.article],self.root,set(),NOW-dt.timedelta(days=6),NOW)[1],'cadence_hold')
     def test_known_id_never_republished(self):
         self.assertEqual(select([self.article],self.root,{'pin-test-guide'},None,NOW)[1],'no_eligible_new_draft')
-    def test_changed_article_cannot_promote_old_draft(self):
+    def test_changed_article_skips_old_draft_without_blocking(self):
         self.article['title']='Titre changé'
-        with self.assertRaisesRegex(ValueError,'article_changed'):select([self.article],self.root,set(),None,NOW)
-    def test_unconnected_board_does_not_receive_pin(self):
-        self.article['destination']='Porto'
         self.assertEqual(select([self.article],self.root,set(),None,NOW)[1],'no_eligible_new_draft')
+    def test_stale_draft_does_not_block_next_fresh_draft(self):
+        other={'slug':'autre-guide','title':'Un autre guide du Portugal','destination':'Porto'}
+        render(other,self.root)
+        self.article['title']='Titre changé'
+        chosen,status=select([self.article,other],self.root,set(),None,NOW)
+        self.assertEqual(status,'eligible');self.assertEqual(chosen[1]['id'],'pin-autre-guide')
+    def test_city_guide_reaches_the_portugal_preparation_board(self):
+        city={'slug':'guide-porto','title':'Un guide pour Porto','destination':'Porto'}
+        render(city,self.root)
+        chosen,status=select([city],self.root,set(),None,NOW)
+        self.assertEqual(status,'eligible');self.assertEqual(chosen[1]['id'],'pin-guide-porto')
     def test_changed_image_is_rejected(self):
         (self.folder/'pin.jpg').write_bytes(b'wrong')
         with self.assertRaisesRegex(ValueError,'image_changed'):select([self.article],self.root,set(),None,NOW)
-    def test_unknown_renderer_is_rejected(self):
+    def test_draft_from_another_template_waits_for_redraw(self):
         p=self.folder/'draft.json';m=json.loads(p.read_text());m['rendererSha256']='0'*64;p.write_text(json.dumps(m))
-        with self.assertRaisesRegex(ValueError,'unqualified_renderer'):select([self.article],self.root,set(),None,NOW)
+        self.assertEqual(select([self.article],self.root,set(),None,NOW)[1],'no_eligible_new_draft')
     def test_stop_date(self):
         self.assertEqual(select([self.article],self.root,set(),None,STOP)[1],'period_ended')
 

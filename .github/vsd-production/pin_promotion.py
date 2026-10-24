@@ -7,13 +7,12 @@ from pathlib import Path
 import shutil
 import urllib.request
 from PIL import Image
-from pin_intake import STOP
+from pin_intake import STOP,digest,renderer_sha256
 from pin_draft import HERE
 
 FILES=('pin.jpg','credits.txt','dmsans-OFL.txt','playfairdisplay-OFL.txt')
 ORIGIN='https://voyagesansdetour.fr'
 
-def digest(value):return hashlib.sha256(json.dumps(value,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()
 def require(value,code):
     if not value:raise ValueError(code)
 
@@ -29,14 +28,15 @@ def select(articles,drafts,known,last,now):
         item=json.loads((folder/'draft.json').read_text());identity=item['id']
         if identity in known:continue
         slug=identity.removeprefix('pin-');article=by_slug.get(slug)
-        # Only this board has a connected RSS route for new typographic Pins.
-        if not article or article.get('destination')!='Portugal':continue
+        # Every guide is a Portugal guide; the connected board is « Préparer son voyage au Portugal ».
+        if not article:continue
         require(folder.name==identity and identity=='pin-'+article['slug'],'draft_identity')
-        require(item['articleSha256']==digest(article),'article_changed')
+        # A guide refreshed or a template changed after the draft is redrawn by pin_intake; never promote the old one.
+        if item['articleSha256']!=digest(article) or item.get('rendererSha256')!=renderer_sha256():continue
         require(item['title']==article['title'] and 1<=len(item['title'])<=100,'title_changed_or_too_long')
         require(item['targetUrl']==ORIGIN+'/portugal/'+slug+'/','target_changed')
         require(item['status']=='draft_requires_review' and item['publicationApproved'] is False,'draft_state')
-        require(item.get('templateVersion')==1 and item.get('rendererSha256')==hashlib.sha256((HERE/'pin_draft.py').read_bytes()).hexdigest(),'unqualified_renderer')
+        require(item.get('templateVersion')==1,'unqualified_renderer')
         require(item.get('originalComposition') is True and item.get('externalPhotographs') is False,'unqualified_assets')
         for name in FILES:require((folder/name).is_file() and not (folder/name).is_symlink(),'missing_or_symlink_file')
         require(hashlib.sha256((folder/'pin.jpg').read_bytes()).hexdigest()==item['imageSha256'],'image_changed')

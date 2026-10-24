@@ -1,0 +1,83 @@
+# Read-only monitoring: weekly report issue on Mondays, empty-queue alert issue checked daily.
+# No publication, no provider call besides the signed read-only stock status and the public Pinterest feed.
+name: Voyage Sans Detour weekly report
+on:
+  schedule:
+    - cron: '7 9 * * *'
+  workflow_dispatch:
+    inputs:
+      publish_report:
+        description: 'Open this week''s report issue now'
+        required: false
+        default: true
+        type: boolean
+permissions: {}
+concurrency:
+  group: vsd-weekly-report
+  cancel-in-progress: false
+jobs:
+  report:
+    if: github.repository == 'MathCSN/voyagesansdetour' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    permissions:
+      contents: read
+      actions: read
+      issues: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+      - name: Test the report
+        run: node --test .github/vsd-control/weekly-report.test.mjs
+      - name: Read the cloud stock receipt without importing
+        env:
+          VSD_CLOUD_KEY: ${{ secrets.VSD_CLOUD_KEY }}
+          VSD_SITES_DISPATCH_TOKEN: ${{ secrets.VSD_SITES_DISPATCH_TOKEN }}
+          VSD_STOCK_READ_ONLY: 'true'
+        # A missing receipt only makes the report say "état cloud inconnu".
+        run: node .github/vsd-production/stock-control.mjs > "$RUNNER_TEMP/stock.txt" || echo '::warning::Reçu de stock cloud illisible.'
+      - name: List this week's workflow runs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        # Cloud control is scheduled ~50 times a day: filter by date rather than by count.
+        run: gh run list --repo "$GITHUB_REPOSITORY" --created ">=$(date -u -d '8 days ago' +%F)" --limit 1500 --json workflowName,conclusion,createdAt,url > "$RUNNER_TEMP/runs.json"
+      - name: Write the report and alerts
+        env:
+          VSD_REPORT_OUT: ${{ runner.temp }}
+          VSD_REPORT_RUNS: ${{ runner.temp }}/runs.json
+          VSD_REPORT_STOCK_EVIDENCE: ${{ runner.temp }}/stock.txt
+        run: |
+          node .github/vsd-control/weekly-report.mjs
+          cat "$RUNNER_TEMP/vsd-report.md" >> "$GITHUB_STEP_SUMMARY"
+      - name: Open the weekly report issue on Mondays
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REQUESTED: ${{ github.event_name == 'workflow_dispatch' && (inputs.publish_report && 'yes' || 'no') || 'auto' }}
+        run: |
+          set -euo pipefail
+          if [ "$REQUESTED" = no ]; then exit 0; fi
+          if [ "$REQUESTED" = auto ] && [ "$(date -u +%u)" != 1 ]; then echo 'Pas lundi : pas de rapport.'; exit 0; fi
+          gh label create rapport-hebdo --repo "$GITHUB_REPOSITORY" --color 1D76DB --description 'Rapport hebdomadaire automatique' 2>/dev/null || true
+          for number in $(gh issue list --repo "$GITHUB_REPOSITORY" --label rapport-hebdo --state open --json number -q '.[].number'); do
+            gh issue close "$number" --repo "$GITHUB_REPOSITORY" --reason completed
+          done
+          gh issue create --repo "$GITHUB_REPOSITORY" --label rapport-hebdo --title "Rapport hebdo Voyage Sans Détour — $(date -u +%F)" --body-file "$RUNNER_TEMP/vsd-report.md"
+      - name: Raise or clear the empty-queue alert
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh label create alerte-file --repo "$GITHUB_REPOSITORY" --color D93F0B --description 'File de posts ou de guides bientôt vide' 2>/dev/null || true
+          open=$(gh issue list --repo "$GITHUB_REPOSITORY" --label alerte-file --state open --json number -q '.[0].number // empty')
+          count=$(node -e 'console.log(JSON.parse(require("fs").readFileSync(process.argv[1],"utf8")).length)' "$RUNNER_TEMP/vsd-alerts.json")
+          if [ "$count" = 0 ]; then
+            if [ -n "$open" ]; then gh issue close "$open" --repo "$GITHUB_REPOSITORY" --comment 'Plus aucune alerte : fermeture automatique.'; fi
+            exit 0
+          fi
+          node -e 'const a=JSON.parse(require("fs").readFileSync(process.argv[1],"utf8"));console.log("Alertes au "+new Date().toISOString().slice(0,10)+" :\n\n"+a.map(x=>"- "+x.message).join("\n")+"\n\nCette issue se ferme seule quand les files sont réalimentées. Rapport complet : "+process.env.GITHUB_SERVER_URL+"/"+process.env.GITHUB_REPOSITORY+"/actions/runs/"+process.env.GITHUB_RUN_ID)' "$RUNNER_TEMP/vsd-alerts.json" > "$RUNNER_TEMP/alert.md"
+          if [ -n "$open" ]; then gh issue edit "$open" --repo "$GITHUB_REPOSITORY" --body-file "$RUNNER_TEMP/alert.md"
+          else gh issue create --repo "$GITHUB_REPOSITORY" --label alerte-file --title '⚠️ File de publication bientôt vide' --body-file "$RUNNER_TEMP/alert.md"; fi
