@@ -182,6 +182,13 @@ class ProductionGuards(unittest.TestCase):
         with self.assertRaisesRegex(p.Invalid, "attribution"):
             p.validate_scenario(self.scenario, self.root, self.now)
 
+    def test_guides_outside_portugal_are_valid_targets(self):
+        self.scenario["targetUrl"] = "https://voyagesansdetour.fr/espagne/madrid-3-jours/"
+        p.validate_scenario(self.scenario, self.root, self.now)
+        self.scenario["targetUrl"] = "https://voyagesansdetour.fr/espagne/../madrid/"
+        with self.assertRaisesRegex(p.Invalid, "Unexpected target"):
+            p.validate_scenario(self.scenario, self.root, self.now)
+
     def test_instagram_cta_must_point_to_the_bio(self):
         self.scenario["caption"]["cta"] = "Le guide complet est sur le site."
         with self.assertRaisesRegex(p.Invalid, "link in bio"):

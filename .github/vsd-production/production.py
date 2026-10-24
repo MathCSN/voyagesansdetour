@@ -258,7 +258,7 @@ def validate_scenario(scenario, root, now):
     ensure(scenario.get("voice") is None and scenario.get("presenter") is None, "No synthetic voice or virtual presenter")
     text(scenario.get("title"), 150); text(scenario.get("destination"), 22)
     target = https(scenario.get("targetUrl"))
-    ensure(target.hostname == "voyagesansdetour.fr" and re.fullmatch(r"/portugal/[a-z0-9-]+/", target.path) and not target.query and not target.fragment, "Unexpected target")
+    ensure(target.hostname == "voyagesansdetour.fr" and re.fullmatch(r"/[a-z]+(?:-[a-z]+)*/[a-z0-9-]+/", target.path) and not target.query and not target.fragment, "Unexpected target")
     checked, expiry = check_review(scenario, now)
     snapshots = load_sources(scenario, root, checked, expiry)
     photos = load_photos(scenario, root)
