@@ -27,6 +27,11 @@ WIDE,SMALL=1600,800
 MIN_RATIO,MAX_RATIO=1.25,2.6
 MAX_IMAGE_BYTES=4*1024*1024
 MIN_PHOTOS=3
+# Never an AI-generated image (Mathis, 24/10/2026): any AI mark in a category, the description,
+# the credit or the author refuses the file, and a photo must carry its camera's EXIF data.
+AI_MARK=re.compile(r'\bai[- ]generated|generated (?:by|with|using) (?:an? )?(?:ai|artificial)|artificial intelligence|'
+                   r'midjourney|dall[·\-. ]?e|stable[- ]diffusion|text[- ]to[- ]image|generative ai|\bai[- ]art\b|'
+                   r'deepdream|firefly|imagen\b|flux\.1|ai image',re.I)
 # Commons thumbnails are barely compressed; the site's photos are progressive JPEG at this quality (measured on the existing set).
 JPEG_QUALITY=72
 # Wikimedia asks clients to slow down with HTTP 429: one pause, one retry, then the guide waits.
@@ -71,14 +76,29 @@ def get_json(params,opener,pause=RETRY_PAUSE):
 def search(spec,opener,quality=True):
     words=spec['query']+' filetype:bitmap filemime:image/jpeg filew:>'+str(WIDE-1)+(' incategory:Quality_images' if quality else '')
     data=get_json({'action':'query','generator':'search','gsrnamespace':'6','gsrsearch':words,'gsrlimit':'20',
-                   'prop':'imageinfo','iiprop':'url|size|mime|extmetadata','iiurlwidth':str(WIDE),
-                   'iiextmetadatafilter':'LicenseShortName|LicenseUrl|Artist|Attribution|ImageDescription'},opener)
+                   'prop':'imageinfo|categories','cllimit':'max','iiprop':'url|size|mime|extmetadata|commonmetadata','iiurlwidth':str(WIDE),
+                   'iiextmetadatafilter':'LicenseShortName|LicenseUrl|Artist|Attribution|ImageDescription|Credit|Categories'},opener)
     return sorted(data.get('query',{}).get('pages',[]),key=lambda page:page.get('index',99))
+
+
+def camera(info):
+    """Camera make or model from the file's EXIF data, empty when the file has none."""
+    exif={m.get('name'):m.get('value') for m in info.get('commonmetadata',[]) if isinstance(m,dict)}
+    return ' '.join(str(exif[k]) for k in ('Make','Model') if isinstance(exif.get(k),(str,int)) and str(exif[k]).strip())
+
+
+def real_photo(page):
+    """True only for a camera photograph with no sign of AI generation anywhere on the file page."""
+    info=(page.get('imageinfo') or [{}])[0];meta=info.get('extmetadata',{})
+    text=' '.join([page.get('title','')]+[c.get('title','') for c in page.get('categories',[]) if isinstance(c,dict)]+
+                  [plain(meta.get(k,{}).get('value'),2000) for k in ('Categories','ImageDescription','Credit','Artist','Attribution')])
+    return not AI_MARK.search(text) and bool(camera(info))
 
 
 def candidate(page,spec,used):
     """Credit fields of a Commons file the site may reuse, or None. Never guesses a licence or an author."""
     info=(page.get('imageinfo') or [{}])[0];meta=info.get('extmetadata',{})
+    if not real_photo(page):return None
     licence=plain(meta.get('LicenseShortName',{}).get('value'),40)
     # "Artist" sometimes names the monument's architect; "Attribution" is the uploader's requested credit.
     author=plain(meta.get('Attribution',{}).get('value'),120) or plain(meta.get('Artist',{}).get('value'),120)
