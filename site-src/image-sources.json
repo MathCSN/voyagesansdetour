@@ -905,6 +905,42 @@
       "license_url": "https://creativecommons.org/licenses/by-sa/2.0",
       "alt_fr": "Des huskies attelés dans la neige de Laponie.",
       "credit_fr": "Letizia Barbi / Wikimedia Commons — CC BY-SA 2.0."
+    },
+    {
+      "id": "vietnam-train-hanoi",
+      "file": "photos/vietnam-train-hanoi.jpg",
+      "width": 1600,
+      "height": 900,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Newone_-_Hanoi_train_street_with_coffee_01.jpg",
+      "author": "Newone",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "alt_fr": "Une rue de Hanoï longée par la voie ferrée.",
+      "credit_fr": "Newone / Wikimedia Commons — CC BY-SA 4.0."
+    },
+    {
+      "id": "vietnam-hue-citadelle",
+      "file": "photos/vietnam-hue-citadelle.jpg",
+      "width": 1600,
+      "height": 1056,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Gate_in_Imperial_City,_Hu%E1%BA%BF_(III).jpg",
+      "author": "Supanut Arunoprayote",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0",
+      "alt_fr": "La cité impériale de Huế.",
+      "credit_fr": "Supanut Arunoprayote / Wikimedia Commons — CC BY 4.0."
+    },
+    {
+      "id": "vietnam-ninh-binh",
+      "file": "photos/vietnam-ninh-binh.jpg",
+      "width": 1600,
+      "height": 1068,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Trang_An_Landscape_Complex,_Ninh_Binh_Province,_Vietnam,_20240202_1456_5313.jpg",
+      "author": "Jakub Hałun",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0",
+      "alt_fr": "Les barques de Tràng An entre les pitons de Ninh Bình.",
+      "credit_fr": "Jakub Hałun / Wikimedia Commons — CC BY 4.0."
     }
   ]
 }

@@ -3750,5 +3750,226 @@
         "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"
       }
     ]
+  },
+  {
+    "related": [],
+    "sourcesCheckedOn": "2026-10-24",
+    "publishedOn": "2026-10-24",
+    "updatedOn": "2026-10-24",
+    "slug": "vietnam-itineraire-15-jours",
+    "title": "Vietnam en 15 jours : de Hanoï à Hô-Chi-Minh-Ville en train, étape par étape (itinéraire 2026)",
+    "shortTitle": "Le Vietnam en 15 jours",
+    "destination": "Vietnam",
+    "country": "vietnam",
+    "continent": "asie",
+    "category": "Itinéraires",
+    "cover": "vietnam-ninh-binh",
+    "description": "15 jours du nord au sud : Hanoï, Ninh Bình, Hué, Hội An puis Saïgon, avec les horaires du train de nuit, les prix d’entrée en dongs et la bonne saison.",
+    "readMinutes": 7,
+    "summary": "Deux nuits à Hanoï, deux à Ninh Bình, un train de nuit à 10 h 24 jusqu’à Hué, trois nuits à Hội An, puis quatre à Saïgon. Le train de la Réunification relie Hanoï à Hô-Chi-Minh-Ville en 33 à 39 heures : on ne le prend pas d’un bloc, on le découpe. Pas de visa pour 45 jours quand on est français. Visez février à avril : le nord est doux, le centre sec et le sud ensoleillé.",
+    "keyFacts": [
+      {
+        "value": "45 jours",
+        "label": "de séjour sans visa pour les Français (e-visa à 25 $ au-delà, jusqu’à 90 jours)"
+      },
+      {
+        "value": "10 h 24",
+        "label": "de nuit entre Ninh Bình (SE3, 21 h 35) et Hué (arrivée 7 h 59)"
+      },
+      {
+        "value": "2 h 32",
+        "label": "de Hué à Đà Nẵng en train de jour (SE1, 9 h 40 → 12 h 12), porte d’entrée de Hội An à 35 km"
+      },
+      {
+        "value": "300 000 ₫",
+        "label": "la balade en barque de Tràng An à Ninh Bình, depuis janvier 2026 (≈ 10,70 €)"
+      },
+      {
+        "value": "200 000 ₫",
+        "label": "la cité impériale de Hué (≈ 7 €) ; les tombeaux coûtent 150 000 ₫ chacun"
+      },
+      {
+        "value": "120 000 ₫",
+        "label": "le billet de la vieille ville de Hội An, valable pour 5 sites sur 22 (≈ 4,30 €)"
+      }
+    ],
+    "sections": [
+      {
+        "id": "parcours",
+        "title": "Le parcours : un seul sens, du nord au sud",
+        "paragraphs": [
+          "Hanoï, Ninh Bình, Hué, Hội An, Saïgon : cinq étapes, un seul sens, et jamais plus d’une journée de transport à la fois. Le chemin de fer de la Réunification file le long de la côte sur environ 1 500 km, mais la ligne est à voie unique et lente : de Hanoï à Hô-Chi-Minh-Ville, comptez de 32 h 55 (SE1) à 38 h 50 (SE9). Personne n’a envie de faire ça d’une traite. On prend donc le train là où il est beau et utile, et l’avion pour le dernier saut.",
+          "Les prix de ce guide sont en dongs (₫). Pour convertir, comptez environ 28 000 ₫ pour 1 € : c’est une estimation calculée sur le cours de la BCE du 23 octobre 2026 (1,1193 $ pour 1 €) et sur l’équivalence de 25 000 ₫ pour 1 $ relevée par Seat61."
+        ],
+        "table": {
+          "headers": [
+            "Étape",
+            "Nuits",
+            "Comment y aller"
+          ],
+          "rows": [
+            [
+              "Hanoï",
+              "2",
+              "Arrivée par avion à Nội Bài, à 45 km du centre"
+            ],
+            [
+              "Ninh Bình",
+              "2",
+              "Train SE7 de Hanoï, 6 h 00 → 8 h 17 (2 h 17)"
+            ],
+            [
+              "Train de nuit",
+              "1",
+              "SE3 de Ninh Bình, 21 h 35 → Hué 7 h 59"
+            ],
+            [
+              "Hué",
+              "2",
+              "Sur place ; train SE1 vers Đà Nẵng à 9 h 40"
+            ],
+            [
+              "Hội An",
+              "3",
+              "Train jusqu’à Đà Nẵng, puis 35 km par la route"
+            ],
+            [
+              "Saïgon",
+              "4",
+              "Vol depuis Đà Nẵng ; train de 17 h 18 à 21 h 11 sinon"
+            ]
+          ]
+        },
+        "tip": "Le train SE3 quitte Hanoï à 19 h 20 et passe à Ninh Bình à 21 h 35. Montez-y à Ninh Bình : vous gagnez deux heures de wagon et vous ne dormez qu’une nuit dans le train."
+      },
+      {
+        "id": "hanoi",
+        "title": "Jours 1 et 2 — Hanoï, le vieux quartier et le temple de la Littérature",
+        "image": "vietnam-train-hanoi",
+        "paragraphs": [
+          "Posez vos valises dans le Vieux Quartier, les « 36 rues » coincées entre le lac Hoàn Kiếm et le fleuve : maisons étroites du XIXe siècle, une rue par métier, scooters partout. Le tour du lac Hoàn Kiếm est gratuit et se fait mieux tôt le matin, quand la ville fait son tai-chi.",
+          "Au temple de la Littérature (Văn Miếu), fondé en 1076, le billet est à 70 000 ₫ (≈ 2,50 €) ; il ouvre de 8 h à 17 h. Une bonne partie de l’intérêt de Hanoï est dans l’assiette : bols de phở et de bún chả se commandent dans la rue, sur un tabouret en plastique, pour une poignée de milliers de dongs.",
+          "Sur place, une règle d’or : fixez le prix du taxi avant de monter, et préférez une compagnie reconnue comme Mai Linh, en vérifiant que le taxi est bien un vrai Mai Linh, car les imitations sont courantes."
+        ]
+      },
+      {
+        "id": "ninh-binh",
+        "title": "Jours 3 à 5 — Ninh Bình, la baie d’Along terrestre",
+        "paragraphs": [
+          "Prenez le SE7 à 6 h 00 : vous êtes à Ninh Bình à 8 h 17, 115 km plus au sud, avant la chaleur. Autres départs possibles : SE5 à 8 h 55 (11 h 11), SE9 à 12 h 50 (15 h 08).",
+          "Le site de Tràng An est le grand spectacle : on y glisse en barque à rames entre des pitons calcaires, à travers des grottes basses. Le billet adulte coûte 300 000 ₫ (≈ 10,70 €) depuis le 1er janvier 2026, contre 250 000 ₫ avant : les vieux sites web affichent encore l’ancien prix. Une barque privée pour 4 ou 5 personnes se loue 1 250 000 ₫ (≈ 44,60 €), soit environ 9 à 11 € par personne.",
+          "Le soir du jour 5, direction la gare : le SE3 part de Ninh Bình à 21 h 35."
+        ]
+      },
+      {
+        "id": "hue",
+        "title": "Jours 6 et 7 — Hué, la cité impériale",
+        "image": "vietnam-hue-citadelle",
+        "paragraphs": [
+          "Le SE3 arrive à Hué à 7 h 59 : de quoi prendre le petit-déjeuner dans la ville avant l’ouverture des sites. La cité impériale est facturée 200 000 ₫ (≈ 7 €) pour un adulte, 40 000 ₫ pour les 7 à 12 ans, gratuite avant 7 ans. Les tombeaux de Minh Mạng, Khải Định et Tự Đức se paient à part, 150 000 ₫ chacun (≈ 5,40 €) ; un billet combiné existe, à acheter à la porte Ngọ Môn ou en ligne.",
+          "Réservez le deuxième jour aux tombeaux, à vélo ou en scooter-taxi : chacun a son caractère, de la grandeur de Minh Mạng à la mélancolie de Tự Đức."
+        ]
+      },
+      {
+        "id": "hoi-an",
+        "title": "Jours 8 à 10 — Hội An, les lanternes et la plage",
+        "paragraphs": [
+          "Le SE1 quitte Hué à 9 h 40 et arrive à Đà Nẵng à 12 h 12, 2 h 32 de voie ferrée, avec la côte en vue. Hội An est à 35 km au sud de Đà Nẵng : on y va en taxi ou en voiture avec chauffeur.",
+          "L’entrée de la vieille ville est un billet unique à 120 000 ₫ pour un adulte étranger (≈ 4,30 €) : il donne accès à 5 sites parmi les 22 sites patrimoniaux (maisons anciennes, pont japonais, salles de réunion). Les enfants de moins d’un mètre sont gratuits. Des sources locales signalent un nouveau droit de 20 000 ₫ par site depuis août 2026 : vérifiez-le au guichet.",
+          "Hội An se visite le soir, quand les lanternes s’allument, et tôt le matin, avant les groupes. Octobre et novembre sont les mois où la ville est le plus souvent inondée : on y vient plutôt de février à mai."
+        ]
+      },
+      {
+        "id": "saigon",
+        "title": "Jours 11 à 14 — Saïgon, le sud et ses marchés",
+        "paragraphs": [
+          "Pour aller de Đà Nẵng à Hô-Chi-Minh-Ville, le train met de 17 h 18 à 21 h 11, selon l’horaire : avec seulement 15 jours, on prend l’avion. Saïgon est la plus grande ville du pays, avec 14 millions d’habitants fin 2024.",
+          "Le centre est le 1er arrondissement : cathédrale Notre-Dame, Poste centrale, marché Bến Thành. Le musée des Vestiges de la guerre coûte 40 000 ₫ (≈ 1,40 €) pour un adulte, et Chợ Lớn, le quartier chinois, se parcourt à pied autour des temples.",
+          "Depuis l’aéroport Tân Sơn Nhất, à 7 km, un taxi met de 20 minutes à 1 heure selon le trafic : la fin d’après-midi est le pire moment. Fixez le prix avant de partir, ou utilisez une application de transport."
+        ]
+      },
+      {
+        "id": "train",
+        "title": "Le train de la Réunification : horaires et prix",
+        "paragraphs": [
+          "Les trains vers le sud sont numérotés impair : SE1 (Hanoï 20 h 50), SE3 (19 h 20), SE5 (8 h 55), SE7 (6 h 00), SE9 (12 h 50). De Hanoï à Hué, comptez de 12 h 39 à 14 h 24. Les trains vers le nord portent un numéro pair : SE2, SE4, SE6 et SE8.",
+          "Seat61 (mise à jour du 10 juin 2026) donne les ordres de prix suivants depuis Hanoï : environ 23 $ le siège mou jusqu’à Hué (≈ 20 €), 26 $ jusqu’à Đà Nẵng et 41 $ jusqu’à Saïgon (≈ 37 €). Les couchettes « touristes » d’opérateurs privés coûtent environ le double, de l’ordre de 75 $ de Hanoï à Hué (≈ 67 €).",
+          "Réservez sur dsvn.vn, le site officiel du chemin de fer, ou via un revendeur comme Baolau ou 12Go si votre carte est refusée. Les ventes ouvrent environ 60 jours avant le départ pour les longs trajets. Méfiez-vous des sites qui prétendent être le chemin de fer officiel : ce sont des agences."
+        ]
+      },
+      {
+        "id": "saison",
+        "title": "Quand partir",
+        "paragraphs": [
+          "Le Vietnam change de climat tous les 500 km, et c’est tout le problème. Février à avril est la meilleure fenêtre pour un itinéraire nord-sud : le centre est à sa période la plus sèche (février à mai), le sud est en pleine saison sèche (décembre à avril, février est le mois le plus sec) et le nord est doux au printemps. Évitez l’hiver à Hanoï : de décembre à mars, il y fait 15 à 18 °C dans le delta.",
+          "Octobre et novembre ? Le nord est parfait (21 à 28 °C), mais le centre est la zone la moins fiable : de septembre à novembre, de fortes pluies et des typhons frappent la côte, et Hội An est souvent inondée en octobre. Si vous partez à ces dates, gardez de la marge entre les étapes du centre.",
+          "Côté papiers, les Français entrent sans visa pour 45 jours (exemption en vigueur jusqu’au 14 mars 2028). Le passeport doit être valable au moins 6 mois après l’arrivée. Au-delà de 45 jours, l’e-visa coûte 25 $ pour un séjour de 90 jours maximum : demandez-le uniquement sur le site officiel evisa.gov.vn."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Peut-on faire le Vietnam en 15 jours du nord au sud ?",
+        "answer": "Oui : deux nuits à Hanoï, deux à Ninh Bình, une nuit dans le train SE3 (Ninh Bình 21 h 35, Hué 7 h 59), deux à Hué, trois à Hội An et quatre à Saïgon. Le dernier saut, de Đà Nẵng à Saïgon, se fait en avion."
+      },
+      {
+        "question": "Faut-il un visa pour le Vietnam quand on est français ?",
+        "answer": "Non pour 45 jours maximum. Au-delà, l’e-visa coûte 25 $ (90 jours maximum) et se demande sur evisa.gov.vn. Le passeport doit être valable 6 mois après l’arrivée."
+      },
+      {
+        "question": "Combien de temps dure le train de Hanoï à Hô-Chi-Minh-Ville ?",
+        "answer": "De 32 h 55 (SE1) à 38 h 50 (SE9) selon le train. De Hanoï à Hué, comptez de 12 h 39 à 14 h 24."
+      },
+      {
+        "question": "Combien coûtent les entrées de Hué et de Hội An ?",
+        "answer": "La cité impériale de Hué coûte 200 000 ₫, chaque tombeau 150 000 ₫, et le billet de Hội An 120 000 ₫ pour 5 sites parmi 22. Vérifiez au guichet : un nouveau droit local est annoncé pour Hội An."
+      },
+      {
+        "question": "Quelle est la meilleure période pour ce trajet ?",
+        "answer": "Février à avril : le centre est sec, le sud ensoleillé et le nord doux. Septembre à novembre est la période la moins fiable dans le centre."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Seat61 — Voyager en train au Vietnam (mise à jour du 10 juin 2026)",
+        "url": "https://www.seat61.com/Vietnam.htm"
+      },
+      {
+        "label": "Wikivoyage — Vietnam (climat, visa, distances)",
+        "url": "https://fr.wikivoyage.org/wiki/Vietnam"
+      },
+      {
+        "label": "Wikivoyage — Hanoï",
+        "url": "https://fr.wikivoyage.org/wiki/Hano%C3%AF"
+      },
+      {
+        "label": "Wikivoyage — Hô-Chi-Minh-Ville",
+        "url": "https://fr.wikivoyage.org/wiki/H%C3%B4-Chi-Minh-Ville"
+      },
+      {
+        "label": "Vietcetera — Vietnam visa and immigration master guide 2026",
+        "url": "https://vietcetera.com/en/vietnam-visa-immigration-master-guide-2026-comprehensive-legal-practical-framework"
+      },
+      {
+        "label": "Hue Top Tours — Hue entrance fees 2026",
+        "url": "https://huetoptours.com/hue-entrance-fees/"
+      },
+      {
+        "label": "Hoi An Locals — Hoi An entrance fee 2026",
+        "url": "https://hoianlocals.com/hoi-an-entrance-fee/"
+      },
+      {
+        "label": "Jungle Boss Tours — Trang An boat tour 2026",
+        "url": "https://junglebosstours.com/explorer/tourism-blog/trang-an-boat-tour"
+      },
+      {
+        "label": "Viet-Go — Temple of Literature Hanoi, ticket 70 000 VND",
+        "url": "https://viet-go.com/en/attractions/temple-of-literature-hanoi-guide"
+      },
+      {
+        "label": "Banque centrale européenne — Taux de référence du 23 octobre 2026",
+        "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"
+      }
+    ]
   }
 ]

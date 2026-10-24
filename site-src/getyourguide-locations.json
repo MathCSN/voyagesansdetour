@@ -42,6 +42,12 @@
       "path": null,
       "place": "Belém"
     },
+    "chi-minh-ville|vietnam": {
+      "checkedOn": "2026-10-24",
+      "country": "Vietnam",
+      "path": null,
+      "place": "Chi-Minh-Ville"
+    },
     "chiang-mai|thailande": {
       "checkedOn": "2026-10-24",
       "country": "Thaïlande",
@@ -107,6 +113,12 @@
       "country": "Portugal",
       "path": "guimaraes-l4960",
       "place": "Guimarães"
+    },
+    "hanoi|vietnam": {
+      "checkedOn": "2026-10-24",
+      "country": "Vietnam",
+      "path": "hanoi-l205",
+      "place": "Hanoï"
     },
     "japon|japon": {
       "checkedOn": "2026-10-24",
@@ -263,6 +275,12 @@
       "country": "Italie",
       "path": null,
       "place": "Via"
+    },
+    "vietnam|vietnam": {
+      "checkedOn": "2026-10-24",
+      "country": "Vietnam",
+      "path": null,
+      "place": "Vietnam"
     },
     "winter-wonderland|royaume-uni": {
       "checkedOn": "2026-10-24",
