@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
-  "enabled": false,
-  "hosting_verified": false,
+  "enabled": true,
+  "hosting_verified": true,
   "links_verified": true,
   "aid": "voyagesansdetourfr",
   "endpoint": "https://www.stay22.com/allez/",
