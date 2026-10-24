@@ -6,6 +6,7 @@ with the guide that uses them. Standard library only, like the rest of the writi
 """
 import hashlib
 import html
+import io
 import json
 import re
 import shutil
@@ -26,6 +27,8 @@ WIDE,SMALL=1600,800
 MIN_RATIO,MAX_RATIO=1.25,2.6
 MAX_IMAGE_BYTES=4*1024*1024
 MIN_PHOTOS=3
+# Commons thumbnails are barely compressed; the site's photos are progressive JPEG at this quality (measured on the existing set).
+JPEG_QUALITY=72
 # Wikimedia asks clients to slow down with HTTP 429: one pause, one retry, then the guide waits.
 RETRY_PAUSE=10
 ID=re.compile(r'[a-z0-9]+(?:-[a-z0-9]+)*\Z')
@@ -102,20 +105,29 @@ def download(url,opener):
     return data
 
 
+def recompress(data):
+    """Same pixels, smaller file: progressive JPEG without metadata (Pillow, installed by the workflow)."""
+    from PIL import Image
+    image=Image.open(io.BytesIO(data));image.load()
+    out=io.BytesIO()
+    image.convert('RGB').save(out,'JPEG',quality=JPEG_QUALITY,optimize=True,progressive=True)
+    return out.getvalue()
+
+
 def small_url(title,opener):
     pages=get_json({'action':'query','titles':title,'prop':'imageinfo','iiprop':'url','iiurlwidth':str(SMALL)},opener)['query']['pages']
     require(len(pages)==1 and pages[0].get('imageinfo'),'guide_photo_thumbnail')
     return pages[0]['imageinfo'][0]['thumburl']
 
 
-def fetch_photo(spec,out,used,opener):
+def fetch_photo(spec,out,used,opener,compress=recompress):
     for quality in (True,False):
         for page in search(spec,opener,quality):
             found=candidate(page,spec,used)
             if not found:continue
             info=page['imageinfo'][0]
-            wide=download(info['thumburl'],opener)
-            small=download(small_url(page['title'],opener),opener)
+            wide=compress(download(info['thumburl'],opener))
+            small=compress(download(small_url(page['title'],opener),opener))
             folder=out/'photos';folder.mkdir(exist_ok=True)
             (folder/(spec['id']+'.jpg')).write_bytes(wide);(folder/(spec['id']+'-800.jpg')).write_bytes(small)
             record={'id':spec['id'],'file':'photos/'+spec['id']+'.jpg','width':info['thumbwidth'],'height':info['thumbheight'],
@@ -126,7 +138,7 @@ def fetch_photo(spec,out,used,opener):
     return None,None
 
 
-def prepare(topic,catalogue,out,opener=None):
+def prepare(topic,catalogue,out,opener=None,compress=recompress):
     """Photo ids for cover and sections, plus the new credit records to install with the guide."""
     opener=opener or urllib.request.build_opener()
     known={p['id'] for p in catalogue}
@@ -138,7 +150,7 @@ def prepare(topic,catalogue,out,opener=None):
         if spec['id'] in known:
             ids.append(spec['id']);continue
         require('query' in spec,'guide_photo_unknown_id')
-        record,digest=fetch_photo(spec,out,used,opener)
+        record,digest=fetch_photo(spec,out,used,opener,compress)
         if record is None:continue
         used.add(record['source_page']);records.append(record);hashes[spec['id']]=digest;ids.append(spec['id'])
     require(len(ids)>=MIN_PHOTOS,'guide_photos_insufficient')

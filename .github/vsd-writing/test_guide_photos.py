@@ -58,7 +58,7 @@ class PrepareTests(unittest.TestCase):
         topic={'photos':[{'id':'porto-nuit'},{'id':'lisbonne-tram-28'},SPEC]}
         catalogue=[{'id':'porto-nuit','source_page':'a'},{'id':'lisbonne-tram-28','source_page':'b'}]
         opener=Opener([page(licence='CC BY-NC 4.0',title='File:Fushimi Inari NC.jpg'),page()])
-        result=p.prepare(topic,catalogue,self.out,opener)
+        result=p.prepare(topic,catalogue,self.out,opener,compress=lambda data:data)
         self.assertEqual(result['ids'],['porto-nuit','lisbonne-tram-28','kyoto-fushimi-inari'])
         record=result['records'][0]
         self.assertEqual(record['credit_fr'],'Ex Ample / Wikimedia Commons — CC BY-SA 4.0.')
@@ -68,7 +68,7 @@ class PrepareTests(unittest.TestCase):
     def test_too_few_photos_hold_the_guide(self):
         topic={'photos':[{'id':'porto-nuit'},SPEC,dict(SPEC,id='autre')]}
         with self.assertRaisesRegex(ValueError,'guide_photos_insufficient'):
-            p.prepare(topic,[{'id':'porto-nuit','source_page':'a'}],self.out,Opener([]))
+            p.prepare(topic,[{'id':'porto-nuit','source_page':'a'}],self.out,Opener([]),compress=lambda data:data)
     def test_unknown_id_without_search_words_is_refused(self):
         with self.assertRaisesRegex(ValueError,'unknown_id'):p.prepare({'photos':[{'id':'absente'}]},[],self.out,Opener([]))
     def test_download_outside_wikimedia_is_refused(self):
@@ -121,3 +121,18 @@ class RateLimitTests(unittest.TestCase):
         class AlwaysLimited(Opener):
             def open(self,request,timeout):raise urllib.error.HTTPError(request.full_url,429,'Too Many Requests',{},None)
         with patch.object(p.time,'sleep'),self.assertRaises(urllib.error.HTTPError):p.search(SPEC,AlwaysLimited([]))
+
+
+class CompressionTests(unittest.TestCase):
+    def test_recompression_keeps_size_and_drops_weight(self):
+        try:
+            from PIL import Image
+        except ImportError:
+            self.skipTest('Pillow is installed by the writing workflow')
+        import io,random
+        random.seed(1)
+        image=Image.frombytes('RGB',(320,200),bytes(random.getrandbits(8) for _ in range(320*200*3)))
+        raw=io.BytesIO();image.save(raw,'JPEG',quality=100)
+        smaller=p.recompress(raw.getvalue())
+        self.assertLess(len(smaller),len(raw.getvalue()))
+        self.assertEqual(Image.open(io.BytesIO(smaller)).size,(320,200))

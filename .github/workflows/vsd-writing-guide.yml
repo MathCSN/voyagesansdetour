@@ -30,6 +30,8 @@ jobs:
           persist-credentials: true
       - name: Validate editorial grounding without inference
         run: python3 -m unittest discover -s .github/vsd-writing -p 'test_*.py'
+      - name: Install the photo recompressor
+        run: python -m pip install --disable-pip-version-check Pillow==11.3.0
       - name: Find photos, research and draft one new guide
         env:
           CLOUDFLARE_WORKERS_AI_TOKEN: ${{ secrets.CLOUDFLARE_WORKERS_AI_TOKEN }}
