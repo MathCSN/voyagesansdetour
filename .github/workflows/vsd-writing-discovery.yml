@@ -41,7 +41,7 @@ jobs:
       - name: Validate admitted public source
         if: steps.admission.outputs.changed == 'true'
         working-directory: site-src
-        run: python3 -m unittest -q test_site test_stay22 test_affiliates test_editorial_queue test_public_media test_autonomous_editorial test_autonomous_candidate test_cloud_source_changes test_editorial_update
+        run: python3 -m unittest -q test_site test_stay22 test_affiliates test_gyg_locations test_editorial_queue test_public_media test_autonomous_editorial test_autonomous_candidate test_cloud_source_changes test_editorial_update
       - name: Persist update and request verified deployment
         if: steps.admission.outputs.changed == 'true'
         env:

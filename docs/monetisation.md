@@ -36,14 +36,32 @@ partenaires actifs.
 
 ## Partenaires actifs
 
-- **GetYourGuide** (identifiant `HKEWKYM`, activé le 24/10/2026) : lien simple vers la
-  recherche `https://www.getyourguide.com/fr-fr/s/?q=<lieu>&partner_id=HKEWKYM&cmp=vsd_<guide>`,
-  le format que construit la barre de recherche du site lui-même. Pas de widget ni de script
-  « Integration Analyzer » : ils chargeraient un script tiers soumis au consentement RGPD et
-  ralentiraient les pages. Le bloc apparaît dans les guides qui parlent de visites, musées,
-  monuments ou excursions (8 guides sur 14 au 24/10). À vérifier une fois dans un navigateur
-  ordinaire : dans le navigateur intégré de Claude, la recherche GetYourGuide renvoyait des
-  résultats sans rapport, y compris depuis sa propre barre de recherche.
+- **GetYourGuide** (identifiant `HKEWKYM`, activé le 24/10/2026) : lien simple vers la **page
+  de la destination**, `https://www.getyourguide.com/fr-fr/<lieu>-l<ID>/?partner_id=HKEWKYM&cmp=vsd_<guide>`.
+  Pas de lien de recherche : la recherche par mot-clé (`/s/?q=…`) affichait d'autres villes
+  (Uluru, Cappadoce) dans le navigateur intégré, et un lien vers la mauvaise ville serait pire
+  que pas de lien. Pas de widget ni de script « Integration Analyzer » non plus : ils
+  chargeraient un script tiers soumis au consentement RGPD.
+  - **Identifiants des lieux** : `site-src/gyg_locations.py` interroge le widget officiel
+    partenaire (`widget.getyourguide.com/default/activities.frame`, HTML public, sans clé d'API),
+    relève les pages de lieu de ses activités et ne garde que celle dont le nom correspond
+    exactement au lieu (`lisbonne-l42` pour Lisbonne, `lagos-portugal-l2896` pour Lagos,
+    Portugal ; jamais `porto-vecchio` pour Porto). Résultat mis en cache dans
+    `site-src/getyourguide-locations.json`, échecs compris (`path: null`, nouvel essai après
+    30 jours).
+  - **Région sans page** (Andalousie, Douro…) : on essaie les villes du titre du guide, dans
+    l'ordre (Séville, Cordoue, Grenade). Si aucune n'a de page fiable : pas de lien GetYourGuide
+    pour ce guide (cas des Cinque Terre au 24/10).
+  - **Nouveaux guides, nouveaux pays** : le workflow `build-pages.yml` lance
+    `python gyg_locations.py --update` avant chaque génération publique et enregistre le cache
+    avec la file éditoriale. Une panne du widget ne bloque pas la publication : le guide sort
+    sans lien GetYourGuide et la résolution est retentée au déploiement suivant. À la main :
+    `cd site-src && python3 gyg_locations.py --update`.
+  - **Vérification du 24/10/2026** : les 12 pages en cache répondent 200 dans un navigateur, en
+    gardant `partner_id` et `cmp`, et leur titre contient la ville (« Séville : les MEILLEURES
+    visites… »). Les pages de lieu renvoient 403 aux clients non navigateurs (curl, CI) : ce
+    contrôle de titre ne peut se faire que dans un navigateur.
+  - 8 guides sur 14 ont un bloc « Billets et visites » au 24/10.
 
 ## Stay22 : pourquoi c'est inactif et comment l'activer
 
@@ -86,7 +104,8 @@ Une fois confirmée, une session passe `hosting_verified` et `enabled` à `true`
 
 Un partenaire sans `id`, sans gabarit ou avec `enabled: false` reste inactif sans rien casser.
 Dans une catégorie, le premier partenaire actif de la liste gagne : GetYourGuide en direct
-passe devant Civitatis, qui passe devant GetYourGuide via Stay22 (le repli déjà prêt).
+passe devant Civitatis. « GetYourGuide via Stay22 » reste désactivé : sa redirection passe par la
+recherche GetYourGuide, qui peut afficher la mauvaise ville.
 
 ## Les programmes qui valent le coup pour un blog voyage français
 

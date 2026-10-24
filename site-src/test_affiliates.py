@@ -51,9 +51,13 @@ def stay22_config(**gates):
     return {**config, 'enabled': True, 'hosting_verified': True, 'links_verified': True, **gates}
 
 
-def active_site(config=None, **gates):
+# Pages de lieu GetYourGuide résolues une fois et mises en cache (getyourguide-locations.json).
+LOCATIONS = {'lisbonne|portugal': 'lisbonne-l42', 'porto|portugal': 'porto-l151'}
+
+
+def active_site(config=None, locations=LOCATIONS, **gates):
     return affiliates.Site(config or affiliates.load_config(ROOT / 'affiliates.json'), stay22_config(**gates),
-                           public=True, origin=stay22.ORIGIN)
+                           public=True, origin=stay22.ORIGIN, locations=locations)
 
 
 def stay22_only():
@@ -92,20 +96,51 @@ class ConfigTest(unittest.TestCase):
                 self.assertRegex(partner['id'], affiliates.ID_PATTERN)
         gyg = next(p for p in self.config['partners'] if p['key'] == 'getyourguide')
         self.assertEqual((gyg['enabled'], gyg['id']), (True, 'HKEWKYM'))
+        self.assertIn('{location_path}', gyg['template'])
+        searches = [p['key'] for p in self.config['partners'] if p['enabled'] and p.get('provider') == 'getyourguide']
+        self.assertEqual(searches, [], 'la recherche GetYourGuide via Stay22 peut afficher la mauvaise ville')
 
     def test_partner_without_id_stays_inactive_and_breaks_nothing(self):
         site = active_site(with_template_partners(self.config, id=''))
         self.assertEqual({p['key'] for p in site.active_partners()} & {'getyourguide', 'trainline', 'heymondo'}, set())
         self.assertIn('partner-cta', woven(site, CITY))
 
-    def test_getyourguide_link_carries_partner_id_and_guide_campaign(self):
+    def test_getyourguide_links_the_cached_destination_page_with_partner_id_and_campaign(self):
         site = active_site(enabled=False, hosting_verified=False)
         found = links(woven(site, CITY))
         self.assertEqual(len(found), 1)
         url = urlparse(found[0]['href'])
-        self.assertEqual(url.netloc + url.path, 'www.getyourguide.com/fr-fr/s/')
-        self.assertEqual(parse_qs(url.query), {'q': ['Lisbonne'], 'partner_id': ['HKEWKYM'], 'cmp': ['vsd_lisbonne_3_jours']})
+        self.assertEqual(url.scheme + '://' + url.netloc + url.path, 'https://www.getyourguide.com/fr-fr/lisbonne-l42/')
+        self.assertEqual(parse_qs(url.query), {'partner_id': ['HKEWKYM'], 'cmp': ['vsd_lisbonne_3_jours']})
         self.assertNotIn('partner-hotels', woven(site, CITY))
+
+    def test_no_getyourguide_link_at_all_without_a_reliable_destination_page(self):
+        for locations in ({}, {'lisbonne|portugal': None}, {'porto|portugal': 'porto-l151'}):
+            with self.subTest(locations=locations):
+                html = woven(active_site(locations=locations, enabled=False, hosting_verified=False), CITY)
+                self.assertEqual(links(html), [])
+                self.assertNotIn('getyourguide', html)
+                self.assertNotIn('partner-box', html)
+
+    def test_region_without_page_falls_back_to_the_first_city_of_the_title_that_has_one(self):
+        region = article('andalousie-train', 'Andalousie', [section('Jours 1 et 2 Séville', 'Visite guidée, musée, palais, entrée.')],
+                         country='espagne', title='L’Andalousie en train : Séville, Cordoue et Grenade')
+        self.assertEqual([p.name for p in affiliates.title_places(region, 'Espagne')], ['Séville', 'Cordoue', 'Grenade'])
+        site = active_site(locations={'cordoue|espagne': 'cordoue-l1', 'andalousie|espagne': None}, enabled=False)
+        found = links(woven(site, region, [region]))
+        self.assertEqual(urlparse(found[0]['href']).path, '/fr-fr/cordoue-l1/')
+        self.assertIn('Cordoue', found[0]['href'] and woven(site, region, [region]))
+        self.assertEqual(links(woven(active_site(locations={}, enabled=False), region, [region])), [])
+
+    def test_title_places_skip_first_word_acronyms_and_elided_names(self):
+        cinque = article('c', 'Cinque Terre', [], country='italie', title='Les Cinque Terre sans voiture : Via dell’Amore et SITA')
+        self.assertEqual([p.name for p in affiliates.title_places(cinque, 'Italie')], ['Via'])
+
+    def test_unsafe_cached_location_is_never_linked(self):
+        for bad in ('../x-l1', 'lisbonne', 'evil.test/x-l1'):
+            with self.subTest(path=bad):
+                html = woven(active_site(locations={'lisbonne|portugal': bad}, enabled=False), CITY)
+                self.assertEqual(links(html), [])
 
     def test_partner_with_id_but_disabled_flag_stays_inactive(self):
         config = copy.deepcopy(self.config)
@@ -144,7 +179,7 @@ class SelectionTest(unittest.TestCase):
         self.assertEqual(query['aid'], ['voyagesansdetourfr'])
         self.assertEqual(query['address'], ['Lisbonne, Portugal'])
         self.assertEqual(query['campaign'], ['vsd_lisbonne_3_jours'])
-        self.assertIn('/allez/getyourguide', [u.path for u in urls])
+        self.assertIn('/allez/roam', [u.path for u in urls])
         for attrs in found:
             self.assertEqual(set(attrs['rel'].split()), {'sponsored', 'nofollow', 'noopener'})
             self.assertEqual(attrs['target'], '_blank')

@@ -1,0 +1,167 @@
+{
+  "locations": {
+    "alfa-pendular|portugal": {
+      "checkedOn": "2026-10-24",
+      "country": "Portugal",
+      "path": null,
+      "place": "Alfa Pendular"
+    },
+    "algarve|portugal": {
+      "checkedOn": "2026-10-24",
+      "country": "Portugal",
+      "path": "algarve-l66",
+      "place": "Algarve"
+    },
+    "andalousie|espagne": {
+      "checkedOn": "2026-10-24",
+      "country": "Espagne",
+      "path": null,
+      "place": "Andalousie"
+    },
+    "atlantique|portugal": {
+      "checkedOn": "2026-10-24",
+      "country": "Portugal",
+      "path": null,
+      "place": "Atlantique"
+    },
+    "belem|portugal": {
+      "checkedOn": "2026-10-24",
+      "country": "Portugal",
+      "path": null,
+      "place": "Belém"
+    },
+    "cinque-terre|italie": {
+      "checkedOn": "2026-10-24",
+      "country": "Italie",
+      "path": null,
+      "place": "Cinque Terre"
+    },
+    "cordoue|espagne": {
+      "checkedOn": "2026-10-24",
+      "country": "Espagne",
+      "path": "cordoue-l1689",
+      "place": "Cordoue"
+    },
+    "cote-amalfitaine|italie": {
+      "checkedOn": "2026-10-24",
+      "country": "Italie",
+      "path": null,
+      "place": "Côte amalfitaine"
+    },
+    "dieux|italie": {
+      "checkedOn": "2026-10-24",
+      "country": "Italie",
+      "path": null,
+      "place": "Dieux"
+    },
+    "douro|portugal": {
+      "checkedOn": "2026-10-24",
+      "country": "Portugal",
+      "path": null,
+      "place": "Douro"
+    },
+    "faro|portugal": {
+      "checkedOn": "2026-10-24",
+      "country": "Portugal",
+      "path": "faro-l1238",
+      "place": "Faro"
+    },
+    "gaia|portugal": {
+      "checkedOn": "2026-10-24",
+      "country": "Portugal",
+      "path": null,
+      "place": "Gaia"
+    },
+    "grenade|espagne": {
+      "checkedOn": "2026-10-24",
+      "country": "Espagne",
+      "path": "grenade-l207",
+      "place": "Grenade"
+    },
+    "guimaraes|portugal": {
+      "checkedOn": "2026-10-24",
+      "country": "Portugal",
+      "path": "guimaraes-l4960",
+      "place": "Guimarães"
+    },
+    "lagos|portugal": {
+      "checkedOn": "2026-10-24",
+      "country": "Portugal",
+      "path": "lagos-portugal-l2896",
+      "place": "Lagos"
+    },
+    "lisbonne|portugal": {
+      "checkedOn": "2026-10-24",
+      "country": "Portugal",
+      "path": "lisbonne-l42",
+      "place": "Lisbonne"
+    },
+    "luis|portugal": {
+      "checkedOn": "2026-10-24",
+      "country": "Portugal",
+      "path": null,
+      "place": "Luís"
+    },
+    "pena|portugal": {
+      "checkedOn": "2026-10-24",
+      "country": "Portugal",
+      "path": null,
+      "place": "Pena"
+    },
+    "pinhao|portugal": {
+      "checkedOn": "2026-10-24",
+      "country": "Portugal",
+      "path": null,
+      "place": "Pinhão"
+    },
+    "porto|portugal": {
+      "checkedOn": "2026-10-24",
+      "country": "Portugal",
+      "path": "porto-l151",
+      "place": "Porto"
+    },
+    "portugal|portugal": {
+      "checkedOn": "2026-10-24",
+      "country": "Portugal",
+      "path": null,
+      "place": "Portugal"
+    },
+    "promo|portugal": {
+      "checkedOn": "2026-10-24",
+      "country": "Portugal",
+      "path": null,
+      "place": "Promo"
+    },
+    "salerne|italie": {
+      "checkedOn": "2026-10-24",
+      "country": "Italie",
+      "path": "salerne-l711",
+      "place": "Salerne"
+    },
+    "seville|espagne": {
+      "checkedOn": "2026-10-24",
+      "country": "Espagne",
+      "path": "seville-l48",
+      "place": "Séville"
+    },
+    "sintra|portugal": {
+      "checkedOn": "2026-10-24",
+      "country": "Portugal",
+      "path": "sintra-l99",
+      "place": "Sintra"
+    },
+    "tavira|portugal": {
+      "checkedOn": "2026-10-24",
+      "country": "Portugal",
+      "path": "tavira-l1239",
+      "place": "Tavira"
+    },
+    "via|italie": {
+      "checkedOn": "2026-10-24",
+      "country": "Italie",
+      "path": null,
+      "place": "Via"
+    }
+  },
+  "schemaVersion": 1
+}
