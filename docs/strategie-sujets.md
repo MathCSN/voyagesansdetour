@@ -291,6 +291,7 @@ marqués « publié » ont été écrits à la main le 24/10 ; la chaîne passe 
 - Les mesures donnent un **classement relatif**, pas des volumes de recherche : aucun outil
   payant (Ahrefs, Semrush) n’a servi.
 - La portée est une estimation à la main, pas une analyse des pages concurrentes.
-- Les sources peuvent changer entre la rédaction et la publication : la chaîne relit leur
-  empreinte et retient le guide si le texte a bougé ; Wikivoyage, très modifié, peut
-  retarder un guide d’un créneau.
+- Les sources peuvent changer entre la rédaction et la publication : la publication relit
+  leur empreinte ; si le texte a bougé (Wikivoyage est souvent modifié) ou si la relecture a
+  plus de 48 heures, le guide est retiré de la file sans être publié, le build continue, et
+  la chaîne peut réécrire le sujet à partir des sources du jour.
