@@ -235,6 +235,19 @@ class PublicBuildTest(unittest.TestCase):
         for route in ('/destinations/','/guides/','/europe/','/guides/itineraires/'):
             self.assertIn(ORIGIN+route,locations)
 
+    def test_no_ai_generated_image_is_published(self):
+        # Règle de Mathis : uniquement de vraies photos (catalogue sous licence libre) et le logo.
+        self.assertFalse((self.out/'assets'/'alma.jpg').exists())
+        allowed={'/assets/'+p['file'] for p in json.loads((ROOT/'image-sources.json').read_text())['photos'] if 'file' in p}
+        allowed|={'/assets/'+p['file'].replace('.jpg','-800.jpg') for p in json.loads((ROOT/'image-sources.json').read_text())['photos'] if 'file' in p}
+        allowed|={'/assets/lisbonne.jpg','/assets/porto.jpg','/assets/sintra.jpg','/assets/brand-voyagesansdetour.png'}
+        for page in self.out.rglob('*.html'):
+            body=page.read_text()
+            self.assertNotIn('image_gen',body)
+            self.assertNotIn('Alma',body)
+            for src in re.findall(r'<img [^>]*src="(/assets/[^"]+)"',body):
+                self.assertIn(src,allowed,f'{page.relative_to(self.out)} : {src}')
+
     def test_existing_guide_urls_are_unchanged(self):
         for item in json.loads((ROOT/'articles.json').read_text()):
             route='/'+item.get('country','portugal')+'/'+item['slug']+'/'
