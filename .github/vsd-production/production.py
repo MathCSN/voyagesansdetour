@@ -50,6 +50,9 @@ REEL_BUTTON = {"instagram": "Le guide complet → lien en bio", "facebook": "Le 
 # The charter forbids the defensive boilerplate that emptied the old posts.
 FORBIDDEN = ("sans récit", "voix de synthèse", "aucune approbation", "si possible",
              "ne suffit pas", "consultez les horaires et alertes", "aucun personnage virtuel")
+# Lisbon lifts and funiculars closed since the Glória accident (September 2025);
+# Carris lists Santa Justa as "Encerrado temporariamente" on 24/10/2026. Lift this when they reopen.
+CLOSED_SERVICES = re.compile(r"\b(santa justa|gl[oó]ria|bica|lavra)\b", re.IGNORECASE)
 
 
 class Invalid(ValueError):
@@ -132,6 +135,7 @@ def text(value, maximum=220):
            f"Invalid or too long text (max {maximum}): {str(value)[:90]!r}")
     ensure(not any(ord(c) < 32 or ord(c) == 127 for c in value), "Control character in text")
     ensure(not any(phrase in value.lower() for phrase in FORBIDDEN), "Boilerplate forbidden by the charter: " + value)
+    ensure(not CLOSED_SERVICES.search(value), "Closed service (Lisbon lifts and funiculars): " + value)
     return value
 
 

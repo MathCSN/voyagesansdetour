@@ -11,12 +11,12 @@
         "schemaVersion": 1,
         "channel": "instagram",
         "kind": "reel",
-        "text": "🚋 Tram 28 à Lisbonne : 3,30 € le trajet… ou 1,72 € si vous savez quoi acheter.\n\n💳 Carte navegante à 0,50 €, rechargée en Zapping dès 3 € : 1,72 € le trajet Carris.\n🎟️ 24 h de bus, trams et métro : 7,25 €. Version avec les trains CP : 11,40 €.\n🛗 Elevador de Santa Justa : 6,20 € pour deux trajets et le belvédère.\n📅 Tarifs officiels Carris et Metro 2026, relevés le 24 octobre.\n\n🗺️ Lisbonne en 3 jours sans voiture : le guide complet est en lien dans la bio.\n\nPhotos libres (Wikimedia Commons) et musique de Kevin MacLeod (CC BY 4.0) — crédits : https://voyagesansdetour.fr/social-media/production/ig-lisbonne-tram28-tarifs-2026-10/credits.txt\n\n#Lisbonne #Lisboa #Portugal #VoyageSansVoiture #VoyageSansDetour\n",
+        "text": "🚋 Tram 28 à Lisbonne : 3,30 € le trajet… ou 1,72 € si vous savez quoi acheter.\n\n💳 Carte navegante à 0,50 €, rechargée en Zapping dès 3 € : 1,72 € le trajet Carris.\n🎟️ 24 h de bus, trams et métro : 7,25 €. Version avec les trains CP : 11,40 €.\n⛴️ 24 h avec en plus le bateau Transtejo pour Cacilhas : 10,35 €.\n📅 Tarifs officiels Carris et Metro 2026, relevés le 24 octobre.\n\n🗺️ Lisbonne en 3 jours sans voiture : le guide complet est en lien dans la bio.\n\nPhotos libres (Wikimedia Commons) et musique de Kevin MacLeod (CC BY 4.0) — crédits : https://voyagesansdetour.fr/social-media/production/ig-lisbonne-tram28-tarifs-2026-10/credits.txt\n\n#Lisbonne #Lisboa #Portugal #VoyageSansVoiture #VoyageSansDetour\n",
         "aiGenerated": false,
         "assets": [
           {
             "url": "https://voyagesansdetour.fr/social-media/production/ig-lisbonne-tram28-tarifs-2026-10/reel.mp4",
-            "sha256": "b974f923533c9e4719ae47f3df265bd25eab6f623d1e28286998a5b14c9eb2a2",
+            "sha256": "93f57bbe7521e1a1d7ed00de1f32b779b130acfca42c00fdaf8358873ac00885",
             "mimeType": "video/mp4"
           }
         ]
@@ -25,9 +25,9 @@
         "schemaVersion": 1,
         "contentId": "vsd-production:instagram:ig-lisbonne-tram28-tarifs-2026-10:photo-v1",
         "approved": true,
-        "reviewedAt": "2026-10-24T06:57:45Z",
+        "reviewedAt": "2026-10-24T07:15:25Z",
         "validUntil": "2026-11-23T00:00:00Z",
-        "payloadRevision": "bbf410ae37ba670b1595be7dd1891b912a277ceed91c21714102e3b603f73b6b",
+        "payloadRevision": "bc8714b22100e1852cdd060211bbb010ff213149ee550e61b931717d2e08c166",
         "checks": {
           "editorialApproved": true,
           "rightsApproved": true,
@@ -46,16 +46,16 @@
         "media": {
           "url": "https://voyagesansdetour.fr/social-media/production/ig-lisbonne-tram28-tarifs-2026-10/reel.mp4",
           "mimeType": "video/mp4",
-          "sha256": "b974f923533c9e4719ae47f3df265bd25eab6f623d1e28286998a5b14c9eb2a2",
+          "sha256": "93f57bbe7521e1a1d7ed00de1f32b779b130acfca42c00fdaf8358873ac00885",
           "required": true,
           "status": "verified",
-          "observedAt": "2026-10-24T06:57:45Z",
+          "observedAt": "2026-10-24T07:15:25Z",
           "validUntil": "2026-11-23T00:00:00Z"
         },
         "destination": {
           "url": "https://voyagesansdetour.fr/portugal/lisbonne-3-jours-sans-voiture/",
           "status": "verified",
-          "observedAt": "2026-10-24T06:57:45Z",
+          "observedAt": "2026-10-24T07:15:25Z",
           "validUntil": "2026-11-23T00:00:00Z"
         },
         "monetization": {
@@ -66,7 +66,7 @@
         },
         "formatCapability": {
           "status": "verified",
-          "observedAt": "2026-10-24T06:57:45Z",
+          "observedAt": "2026-10-24T07:15:25Z",
           "validUntil": "2026-11-23T00:00:00Z",
           "automaticPublishing": true,
           "verificationMethod": "official_documentation",
@@ -80,8 +80,8 @@
           "status": "rendered_local_bytes_verified_public_deploy_pending",
           "format": "photo_reel",
           "rendererContractVersion": 3,
-          "receiptSha256": "2f137c73f82d0220ec622ccf6bbd20a78fef6bd2a619c27238c7ee3b55fd7353",
-          "scenarioFingerprint": "a4a5ac8826fc8d1627872f550068d62e8a9df81f57e5b9d6ba8d68e381bbf00d",
+          "receiptSha256": "3b36564336b02a577647ec2cf40d7b1ed66668b2128121350ad35bd9d78bcdbd",
+          "scenarioFingerprint": "09931bf05bcc9aef27cd38c3bed35721960ff9dd8a167541ad87865e2538ad1c",
           "sourceCheckedOn": "2026-10-24",
           "sourceUrls": [
             "https://voyagesansdetour.fr/portugal/sintra-depuis-lisbonne/",

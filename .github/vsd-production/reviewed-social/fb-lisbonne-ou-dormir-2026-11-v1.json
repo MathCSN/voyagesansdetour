@@ -46,9 +46,9 @@
           },
           {
             "url": "https://voyagesansdetour.fr/social-media/production/fb-lisbonne-ou-dormir-2026-11/scene-06.jpg",
-            "sha256": "9550af5112210ade6177f3cb249ce16cbcbadf19183cd604d1c80b3d364e6a86",
+            "sha256": "b2341b6a4727cf87eeb9b7886ff228c0a1ea5f9ed2e13b5286be328fd396742b",
             "mimeType": "image/jpeg",
-            "altText": "La passerelle de l’ascenseur de Santa Justa au-dessus des toits de la Baixa."
+            "altText": "Un tram passe devant l’arc de la Rua Augusta, sur la Praça do Comércio."
           }
         ]
       },
@@ -56,9 +56,9 @@
         "schemaVersion": 1,
         "contentId": "vsd-production:facebook:fb-lisbonne-ou-dormir-2026-11:photo-v1",
         "approved": true,
-        "reviewedAt": "2026-10-24T06:57:45Z",
+        "reviewedAt": "2026-10-24T07:15:25Z",
         "validUntil": "2026-11-23T00:00:00Z",
-        "payloadRevision": "bc487f29cc234e59227164aafd1808a2b235059aafeec669e59d16e598ce501e",
+        "payloadRevision": "58a6846d3d4ea7f7e530d726ec616d20aa09f3ae5d2b9d60c1a1580ddf3fa7a3",
         "checks": {
           "editorialApproved": true,
           "rightsApproved": true,
@@ -84,7 +84,7 @@
               "sha256": "4ecebc29ed874691f5f9f42a84a572afbb2a03fc1fc9bda2b47d5f0b21f04432",
               "mimeType": "image/jpeg",
               "status": "verified",
-              "observedAt": "2026-10-24T06:57:45Z",
+              "observedAt": "2026-10-24T07:15:25Z",
               "validUntil": "2026-11-23T00:00:00Z"
             },
             {
@@ -92,7 +92,7 @@
               "sha256": "60f835b6b1295bb0e4d944ae72cc956683178945473185b80d515fc6b6ded4cf",
               "mimeType": "image/jpeg",
               "status": "verified",
-              "observedAt": "2026-10-24T06:57:45Z",
+              "observedAt": "2026-10-24T07:15:25Z",
               "validUntil": "2026-11-23T00:00:00Z"
             },
             {
@@ -100,7 +100,7 @@
               "sha256": "07b7107a76c2924d4aa1fcb592d0d62ddfe4aa29482124f688979800386cff35",
               "mimeType": "image/jpeg",
               "status": "verified",
-              "observedAt": "2026-10-24T06:57:45Z",
+              "observedAt": "2026-10-24T07:15:25Z",
               "validUntil": "2026-11-23T00:00:00Z"
             },
             {
@@ -108,7 +108,7 @@
               "sha256": "bc98028ad89b5167374edcdcc4ae8ce37c902c02061a70614f12c5c602d8469a",
               "mimeType": "image/jpeg",
               "status": "verified",
-              "observedAt": "2026-10-24T06:57:45Z",
+              "observedAt": "2026-10-24T07:15:25Z",
               "validUntil": "2026-11-23T00:00:00Z"
             },
             {
@@ -116,15 +116,15 @@
               "sha256": "65613db4b3a2018658fdfb0220897e85a9556b284a1c48c10c689cc73954ec09",
               "mimeType": "image/jpeg",
               "status": "verified",
-              "observedAt": "2026-10-24T06:57:45Z",
+              "observedAt": "2026-10-24T07:15:25Z",
               "validUntil": "2026-11-23T00:00:00Z"
             },
             {
               "url": "https://voyagesansdetour.fr/social-media/production/fb-lisbonne-ou-dormir-2026-11/scene-06.jpg",
-              "sha256": "9550af5112210ade6177f3cb249ce16cbcbadf19183cd604d1c80b3d364e6a86",
+              "sha256": "b2341b6a4727cf87eeb9b7886ff228c0a1ea5f9ed2e13b5286be328fd396742b",
               "mimeType": "image/jpeg",
               "status": "verified",
-              "observedAt": "2026-10-24T06:57:45Z",
+              "observedAt": "2026-10-24T07:15:25Z",
               "validUntil": "2026-11-23T00:00:00Z"
             }
           ]
@@ -132,7 +132,7 @@
         "destination": {
           "url": "https://voyagesansdetour.fr/portugal/ou-dormir-lisbonne-quartiers/",
           "status": "verified",
-          "observedAt": "2026-10-24T06:57:45Z",
+          "observedAt": "2026-10-24T07:15:25Z",
           "validUntil": "2026-11-23T00:00:00Z"
         },
         "monetization": {
@@ -143,7 +143,7 @@
         },
         "formatCapability": {
           "status": "verified",
-          "observedAt": "2026-10-24T06:57:45Z",
+          "observedAt": "2026-10-24T07:15:25Z",
           "validUntil": "2026-11-23T00:00:00Z",
           "automaticPublishing": true,
           "verificationMethod": "official_documentation",
@@ -157,8 +157,8 @@
           "status": "rendered_local_bytes_verified_public_deploy_pending",
           "format": "photo_carousel",
           "rendererContractVersion": 3,
-          "receiptSha256": "4a6e4adcf2429d2c1a9acc28df59fe125b20692773021d5796838039af07d66d",
-          "scenarioFingerprint": "cc3a59d25175029966726a57d10aa79677e57c1e30420b18ccc9590278220580",
+          "receiptSha256": "a7b914589fbc6a17d3ba82e1ebb4111c0ab396afa69f42fdac5d12401c64db1d",
+          "scenarioFingerprint": "65b63b7a337002364638bbfc4f6a1adac65b2e89a07c7cc433576d56722a9694",
           "sourceCheckedOn": "2026-10-24",
           "sourceUrls": [
             "https://voyagesansdetour.fr/portugal/ou-dormir-lisbonne-quartiers/"

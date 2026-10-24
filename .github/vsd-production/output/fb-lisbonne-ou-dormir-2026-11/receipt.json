@@ -2,11 +2,11 @@
   "schemaVersion": 1,
   "contentId": "fb-lisbonne-ou-dormir-2026-11",
   "status": "rendered_not_published",
-  "fingerprint": "cc3a59d25175029966726a57d10aa79677e57c1e30420b18ccc9590278220580",
-  "createdAt": "2026-10-24T06:54:05.136692Z",
-  "renderFinishedAt": "2026-10-24T06:54:05.956622Z",
+  "fingerprint": "65b63b7a337002364638bbfc4f6a1adac65b2e89a07c7cc433576d56722a9694",
+  "createdAt": "2026-10-24T07:14:33.332539Z",
+  "renderFinishedAt": "2026-10-24T07:14:34.270301Z",
   "rendererContractVersion": 3,
-  "rendererSha256": "505838d3ca801ba10c22e987a3de9f2d6e4fd30946321cefccf89ac0f7dc8ed6",
+  "rendererSha256": "cd8d087c507adccc7b05e9a020b3f02222416122b02cc840fcfc8787b7e243af",
   "drawingSha256": "70d6df722c9393bfef74e3fbc2418b315d46d91be857613120a1bd48f4a8526d",
   "kind": "carousel",
   "channel": "facebook",
@@ -45,23 +45,23 @@
       "author": "Jules Verne Times Two",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Woman_reading_a_book_next_to_an_upside_down_bicycle,_Cais_do_Sodr%C3%A9,_Lisbon,_Portugal_julesvernex2.jpg"
     },
-    "lisbonne-santa-justa-passerelle": {
+    "lisbonne-arc-tram-vert": {
       "licence": "CC BY-SA 4.0",
-      "author": "Simon Burchell",
-      "sourcePage": "https://commons.wikimedia.org/wiki/File:Elevador_de_Santa_Justa,_Lisboa_07.jpg"
+      "author": "Berthold Werner",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Lisbon_Pra%C3%A7a_do_Com%C3%A9rcio_BW_2018-10-03_13-29-10.jpg"
     }
   },
   "video": null,
   "files": [
     {
       "file": "apercu.jpg",
-      "sha256": "b2a706d3f8e8ac91551e39665cd7457eca3f6d9e2238e65561820465afa3b786",
-      "bytes": 198784
+      "sha256": "fd5334783dd8401c1f45dd915966792240dbfe2706cc04b2fa021442c0756675",
+      "bytes": 202988
     },
     {
       "file": "credits.txt",
-      "sha256": "7cd80aae0ad580b5d8db067e6563fcb6b978c7c4e5680d2c41378d19362b3ceb",
-      "bytes": 2717
+      "sha256": "1c8320ef2626a69e1cdcc3f3299db0af5095af53583f9411ae156d2101d8acf7",
+      "bytes": 2756
     },
     {
       "file": "dmsans-OFL.txt",
@@ -80,8 +80,8 @@
     },
     {
       "file": "scenario.json",
-      "sha256": "49688ae22f49ec3be6586ae50f99a98398552c1170ab3f46349f8332c2d194c0",
-      "bytes": 6092
+      "sha256": "75074fdf5ec8f30a6abda3a220f18dfc940b7df84696a39c5bcd9a55b02a2df3",
+      "bytes": 6080
     },
     {
       "file": "scene-01.jpg",
@@ -110,12 +110,12 @@
     },
     {
       "file": "scene-06.jpg",
-      "sha256": "9550af5112210ade6177f3cb249ce16cbcbadf19183cd604d1c80b3d364e6a86",
-      "bytes": 270094
+      "sha256": "b2341b6a4727cf87eeb9b7886ff228c0a1ea5f9ed2e13b5286be328fd396742b",
+      "bytes": 321104
     }
   ],
   "runtime": {
-    "wallSeconds": 0.8,
+    "wallSeconds": 0.876,
     "encoderThreads": 2,
     "pillowVersion": "11.3.0",
     "ffmpegVersion": null

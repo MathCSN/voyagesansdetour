@@ -2,11 +2,11 @@
   "schemaVersion": 1,
   "contentId": "ig-lisbonne-tram28-tarifs-2026-10",
   "status": "rendered_not_published",
-  "fingerprint": "a4a5ac8826fc8d1627872f550068d62e8a9df81f57e5b9d6ba8d68e381bbf00d",
-  "createdAt": "2026-10-24T06:54:39.793154Z",
-  "renderFinishedAt": "2026-10-24T06:55:06.108312Z",
+  "fingerprint": "09931bf05bcc9aef27cd38c3bed35721960ff9dd8a167541ad87865e2538ad1c",
+  "createdAt": "2026-10-24T07:14:34.384103Z",
+  "renderFinishedAt": "2026-10-24T07:15:02.267701Z",
   "rendererContractVersion": 3,
-  "rendererSha256": "505838d3ca801ba10c22e987a3de9f2d6e4fd30946321cefccf89ac0f7dc8ed6",
+  "rendererSha256": "cd8d087c507adccc7b05e9a020b3f02222416122b02cc840fcfc8787b7e243af",
   "drawingSha256": "70d6df722c9393bfef74e3fbc2418b315d46d91be857613120a1bd48f4a8526d",
   "kind": "reel",
   "channel": "instagram",
@@ -37,10 +37,10 @@
       "author": "Ingo Mehling",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Lissabon_-_Arco_da_Victoria_-_0.jpg"
     },
-    "lisbonne-santa-justa": {
+    "lisbonne-cais-quai": {
       "licence": "CC BY-SA 4.0",
-      "author": "Diego Delso",
-      "sourcePage": "https://commons.wikimedia.org/wiki/File:Elevador_de_Santa_Justa,_Lisboa,_Portugal,_2022-07-24,_DD_06.jpg"
+      "author": "Jules Verne Times Two",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Woman_reading_a_book_next_to_an_upside_down_bicycle,_Cais_do_Sodr%C3%A9,_Lisbon,_Portugal_julesvernex2.jpg"
     },
     "lisbonne-tram28-graca": {
       "licence": "CC BY 2.0",
@@ -60,7 +60,7 @@
     "durationSeconds": 24.0,
     "videoCodec": "h264",
     "pixelFormat": "yuv420p",
-    "videoBitrateBps": 3050686,
+    "videoBitrateBps": 3171198,
     "audioCodec": "aac",
     "audioSampleRate": 48000,
     "audioBitrateBps": 96520,
@@ -73,13 +73,13 @@
   "files": [
     {
       "file": "apercu.jpg",
-      "sha256": "6a9ff346ce9076e5e424aa2221d28cff69bbc86c8e1c888b5dfe59c579b46030",
-      "bytes": 270115
+      "sha256": "4bc1aca0f254268a4ea7676601aba5e61d2563cd151aeff7433ae0ba6b22f7e2",
+      "bytes": 266731
     },
     {
       "file": "credits.txt",
-      "sha256": "3d376a5b64766c205bd6bb8404fd08fcfbff6fb5e8284bddc5cf984b43193aaa",
-      "bytes": 3224
+      "sha256": "38bcd0d958564a4505e8162f97ce13f62667591a78df91dc0faaaa8d4965690a",
+      "bytes": 3314
     },
     {
       "file": "dmsans-OFL.txt",
@@ -93,8 +93,8 @@
     },
     {
       "file": "legende.txt",
-      "sha256": "d24915ce36b2fee94dfa2e28af94dea72c6000535cea58886099b06ccb080294",
-      "bytes": 760
+      "sha256": "e88b60736e43b1f49102e488e77a09fe6508af05a1abed1c3ee2b81b44f4d5f0",
+      "bytes": 755
     },
     {
       "file": "playfairdisplay-OFL.txt",
@@ -108,13 +108,13 @@
     },
     {
       "file": "reel.mp4",
-      "sha256": "b974f923533c9e4719ae47f3df265bd25eab6f623d1e28286998a5b14c9eb2a2",
-      "bytes": 9469648
+      "sha256": "93f57bbe7521e1a1d7ed00de1f32b779b130acfca42c00fdaf8358873ac00885",
+      "bytes": 9831192
     },
     {
       "file": "scenario.json",
-      "sha256": "b7b4f017ba347811beacafa6a1362019aeb4573ff665b12f3abdc935358e0e30",
-      "bytes": 7271
+      "sha256": "f01684a93f619f24d7d98bd25802fa2e22a79f746a50ff749b7dd098702c0983",
+      "bytes": 7159
     },
     {
       "file": "scene-01.jpg",
@@ -133,8 +133,8 @@
     },
     {
       "file": "scene-04.jpg",
-      "sha256": "fd99cbf940791ec9d7a2ff391dbb2a4be9359ac5d8a763716794efd05629ab7f",
-      "bytes": 381659
+      "sha256": "aae02e4e86b10b37c75a14bce3e5b7f944f6c7d03bad63cfd0176f60cf44cbfd",
+      "bytes": 424825
     },
     {
       "file": "scene-05.jpg",
@@ -148,7 +148,7 @@
     }
   ],
   "runtime": {
-    "wallSeconds": 26.241,
+    "wallSeconds": 27.826,
     "encoderThreads": 2,
     "pillowVersion": "11.3.0",
     "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers"

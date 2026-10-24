@@ -11,7 +11,7 @@ import re
 import tempfile
 import urllib.request
 
-from pin_draft import article_path
+from paths import article_path
 
 HERE=Path(__file__).resolve().parent
 STOP=dt.datetime(2027,9,14,21,59,59,tzinfo=dt.timezone.utc)

@@ -78,6 +78,15 @@ class IntakeTests(unittest.TestCase):
     def test_corruption_is_not_repaired_by_overwriting(self):
         result=self.run_intake();(self.output/result['id']/'storyboard.json').write_text('{}')
         with self.assertRaisesRegex(ValueError,'storyboard_changed'):self.run_intake()
+    def test_guide_paths_need_no_pillow_and_match_pins(self):
+        import subprocess,sys
+        check='import sys;sys.modules["PIL"]=None;import reel_intake;print(reel_intake.article_path({"slug":"rome","country":"italie"}))'
+        out=subprocess.run([sys.executable,'-c',check],cwd=Path(reel.__file__).parent,capture_output=True,text=True,check=True).stdout
+        self.assertEqual(out.strip(),'/italie/rome/')
+        import pin_draft
+        for article in [{'slug':'porto'},{'slug':'madrid','country':'espagne'},{'slug':'x','country':'nord-portugal'}]:
+            self.assertEqual(reel.article_path(article),pin_draft.article_path(article))
+        with self.assertRaises(ValueError):reel.article_path({'slug':'x','country':'../etc'})
     def test_annual_stop_reads_and_fetches_nothing(self):
         self.assertEqual(reel.run(Path('/absent'),now=reel.STOP,fetcher=Mock(side_effect=AssertionError('fetch')))['created'],0)
 

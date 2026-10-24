@@ -56,15 +56,6 @@
       ]
     },
     {
-      "path": ".github/vsd-production/reviewed-social/fb-lisbonne-ou-dormir-2026-11-v1.json",
-      "fileSha256": "7f21101c10596f10ca6311b173021c1862da89639df989cad8f33cbaa582a4ab",
-      "batchId": "fb-lisbonne-ou-dormir-2026-11-v1",
-      "batchSha256": "030525d3a112ba0a0a7df87796b9c1a56a5354962153dfbe59aa82bba0ca4c7a",
-      "itemIds": [
-        "vsd-production:facebook:fb-lisbonne-ou-dormir-2026-11:photo-v1"
-      ]
-    },
-    {
       "path": ".github/vsd-production/reviewed-social/fb-lisbonne-ou-porto-2026-11-v1.json",
       "fileSha256": "0697965683aacba1a2608f4e3f043108f74b5735b35be16686af2e4ba7f1b1f9",
       "batchId": "fb-lisbonne-ou-porto-2026-11-v1",
@@ -101,15 +92,6 @@
       ]
     },
     {
-      "path": ".github/vsd-production/reviewed-social/ig-lisbonne-tram28-tarifs-2026-10-v1.json",
-      "fileSha256": "fa3b421b5bed80e192b88d2a1b6be3052bea81fc756c9390e1672c19184121a6",
-      "batchId": "ig-lisbonne-tram28-tarifs-2026-10-v1",
-      "batchSha256": "eeed397df012b8e12d7ef611020f404b109b1d2ef1c285e4fd2f17f2b176e35f",
-      "itemIds": [
-        "vsd-production:instagram:ig-lisbonne-tram28-tarifs-2026-10:photo-v1"
-      ]
-    },
-    {
       "path": ".github/vsd-production/reviewed-social/ig-porto-sans-voiture-2026-11-v1.json",
       "fileSha256": "ea0b3ca9eea8039e1fdae6186556763e0417a4058a268f61e82e15e8e01f8f82",
       "batchId": "ig-porto-sans-voiture-2026-11-v1",
@@ -125,6 +107,24 @@
       "batchSha256": "54434f2685baec770b380fd868dbb54a8500d448d5055b9235523e2a761cb4a7",
       "itemIds": [
         "vsd-production:instagram:ig-sintra-pena-billets-2026-11:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/fb-lisbonne-ou-dormir-2026-11-v1.json",
+      "fileSha256": "7770286cbf28c01511f00cd65d060e5b56d8b208190feee416e2a7a3b4d34609",
+      "batchId": "fb-lisbonne-ou-dormir-2026-11-v1",
+      "batchSha256": "ac58dea79373967e44de1ee17444fcf6e31742d07fc448ccb94a57566d587904",
+      "itemIds": [
+        "vsd-production:facebook:fb-lisbonne-ou-dormir-2026-11:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-lisbonne-tram28-tarifs-2026-10-v1.json",
+      "fileSha256": "5a747531b344d110be063d8733872c0272479abf6566f50faf6c9b4197113397",
+      "batchId": "ig-lisbonne-tram28-tarifs-2026-10-v1",
+      "batchSha256": "d68943b94b60af7e779ddba0873a5d49582564616f37840b19f8b29d2d09e610",
+      "itemIds": [
+        "vsd-production:instagram:ig-lisbonne-tram28-tarifs-2026-10:photo-v1"
       ]
     }
   ],

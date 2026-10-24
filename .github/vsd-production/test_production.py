@@ -127,6 +127,13 @@ class ProductionGuards(unittest.TestCase):
         with self.assertRaisesRegex(p.Invalid, "Boilerplate"):
             p.validate_scenario(self.scenario, self.root, self.now)
 
+    def test_closed_lisbon_lifts_are_refused(self):
+        for name in ("Elevador de Santa Justa", "Ascensor da Glória", "la Bica", "Lavra"):
+            scenario = copy.deepcopy(self.scenario)
+            scenario["scenes"][1]["detail"] = name + " : 6,20 €."
+            with self.assertRaisesRegex(p.Invalid, "Closed service"):
+                p.validate_scenario(scenario, self.root, self.now)
+
     def test_repeated_photo_is_refused(self):
         self.scenario["scenes"][1]["photo"] = self.scenario["scenes"][0]["photo"]
         with self.assertRaisesRegex(p.Invalid, "photo cannot be repeated"):

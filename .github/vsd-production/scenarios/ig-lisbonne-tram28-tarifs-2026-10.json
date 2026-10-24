@@ -26,7 +26,7 @@
     "lines": [
       "💳 Carte navegante à 0,50 €, rechargée en Zapping dès 3 € : 1,72 € le trajet Carris.",
       "🎟️ 24 h de bus, trams et métro : 7,25 €. Version avec les trains CP : 11,40 €.",
-      "🛗 Elevador de Santa Justa : 6,20 € pour deux trajets et le belvédère.",
+      "⛴️ 24 h avec en plus le bateau Transtejo pour Cacilhas : 10,35 €.",
       "📅 Tarifs officiels Carris et Metro 2026, relevés le 24 octobre."
     ],
     "cta": "🗺️ Lisbonne en 3 jours sans voiture : le guide complet est en lien dans la bio.",
@@ -119,28 +119,24 @@
       "seconds": 4
     },
     {
-      "photo": "lisbonne-santa-justa",
+      "photo": "lisbonne-cais-quai",
       "focus": [
         0.5,
         0.5
       ],
-      "kicker": "Elevador de Santa Justa",
+      "kicker": "Cap sur l’autre rive",
       "headline": [
-        "*6,20 €*",
-        "et la vue en prime"
+        "Le bateau inclus :",
+        "*10,35 €* les 24 h"
       ],
-      "detail": "Deux trajets et l’accès au belvédère, au-dessus de la Baixa.",
+      "detail": "Carris, métro et ferry Transtejo pour Cacilhas, de l’autre côté du Tage.",
       "facts": [
         {
-          "source": "carris-tarifas-2026",
-          "excerpt": "Sta. Justa (até 2 viagens + acesso ao Miradouro)"
-        },
-        {
-          "source": "carris-tarifas-2026",
-          "excerpt": "Tarifa de bordo Carris 2,30 3,30 4,30 6,20"
+          "source": "metro-lisboa-tarifas-2026",
+          "excerpt": "Carris/Metro/Transtejo (Cacilhas) 2 10,35"
         }
       ],
-      "tag": "Tarifs Carris 2026 · relevés le 24/10/2026",
+      "tag": "Tarifs Metro Lisboa 2026 · relevés le 24/10/2026",
       "seconds": 4
     },
     {

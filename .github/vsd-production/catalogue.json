@@ -17,7 +17,7 @@
       "contentId": "fb-lisbonne-ou-dormir-2026-11",
       "notBefore": "2026-10-24T06:45:00Z",
       "file": "scenarios/fb-lisbonne-ou-dormir-2026-11.json",
-      "sha256": "49688ae22f49ec3be6586ae50f99a98398552c1170ab3f46349f8332c2d194c0"
+      "sha256": "75074fdf5ec8f30a6abda3a220f18dfc940b7df84696a39c5bcd9a55b02a2df3"
     },
     {
       "contentId": "fb-lisbonne-ou-porto-2026-11",
@@ -47,7 +47,7 @@
       "contentId": "ig-lisbonne-tram28-tarifs-2026-10",
       "notBefore": "2026-10-24T06:45:00Z",
       "file": "scenarios/ig-lisbonne-tram28-tarifs-2026-10.json",
-      "sha256": "b7b4f017ba347811beacafa6a1362019aeb4573ff665b12f3abdc935358e0e30"
+      "sha256": "f01684a93f619f24d7d98bd25802fa2e22a79f746a50ff749b7dd098702c0983"
     },
     {
       "contentId": "ig-porto-sans-voiture-2026-11",
