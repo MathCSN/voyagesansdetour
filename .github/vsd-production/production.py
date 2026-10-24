@@ -134,7 +134,7 @@ def validate_scenario(scenario, root, now):
         if line:
             text(line, 300)
     target = https(scenario.get("targetUrl"))
-    ensure(target.hostname == "voyagesansdetour.fr" and target.path.startswith("/portugal/") and not target.query and not target.fragment, "Unexpected target")
+    ensure(target.hostname == "voyagesansdetour.fr" and re.fullmatch(r"/[a-z]+(?:-[a-z]+)*/[a-z0-9-]+/", target.path) and not target.query and not target.fragment, "Unexpected target")
     review = scenario.get("review", {})
     ensure(review.get("status") == "reviewed_for_render", "Unreviewed scenario")
     checked, expiry = instant(review.get("checkedAt")), instant(review.get("validUntil"))
@@ -148,7 +148,7 @@ def validate_scenario(scenario, root, now):
     ensure(checked.date() >= checked_on, "Scenario review predates source")
     ensure(expiry.date() <= checked_on + dt.timedelta(days=30), "Scenario expiry exceeds source review window")
     ensure(source.get("checkedOn") == str(checked_on), "Mismatched source date")
-    ensure(target.path == "/portugal/" + article.get("slug", "") + "/", "Article target mismatch")
+    ensure(target.path == "/" + article.get("country", "portugal") + "/" + article.get("slug", "") + "/", "Article target mismatch")
     notes_path = verified_file(root, source.get("researchEvidence", {}))
     ensure(notes_path.stat().st_size > 100, "Empty research evidence")
     proof = load_json(verified_file(root, source.get("publicationEvidence", {})))
