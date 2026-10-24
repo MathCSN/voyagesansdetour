@@ -25,6 +25,15 @@
       "publicHtmlSha256": "3281eb894d53c6a08d4f058416ad045a9b4930ba1ee11f3533496a50537bf636",
       "method": "exact_published_title_typographic_template_v1",
       "publicationConfirmed": false
+    },
+    {
+      "id": "pin-aeroport-porto-centre-ville",
+      "admittedAt": "2026-10-24T15:12:30.810816+00:00",
+      "articleSha256": "e08583bf7b30d0b86011180f0517fb3147b342b14a07575208b4358edbe9ea06",
+      "imageSha256": "bee809999f160fb687770acd3127e64cd8434a4ac2bea96d1a85979a0d72f3a7",
+      "publicHtmlSha256": "2026955d3f416c6877a36f8edb7ea6df39ee0531f5e53c6f20bb75eb16fe4450",
+      "method": "exact_published_title_typographic_template_v1",
+      "publicationConfirmed": false
     }
   ]
 }

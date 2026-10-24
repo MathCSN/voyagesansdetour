@@ -579,6 +579,33 @@
           "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
         }
       ]
+    },
+    {
+      "contentId": "pin-aeroport-porto-centre-ville",
+      "kind": "pin",
+      "approved": true,
+      "files": [
+        {
+          "name": "pin.jpg",
+          "bytes": 367284,
+          "sha256": "bee809999f160fb687770acd3127e64cd8434a4ac2bea96d1a85979a0d72f3a7"
+        },
+        {
+          "name": "credits.txt",
+          "bytes": 350,
+          "sha256": "7f0b229e116c547b73c5c830d3d6b51b8595d68b6556f412dd77a10d2bf0b145"
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "bytes": 4482,
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "bytes": 4449,
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+        }
+      ]
     }
   ]
 }

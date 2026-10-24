@@ -16,6 +16,15 @@
           "mediaId": "pin-portugal-sans-voiture-bagages",
           "width": 1000,
           "height": 1500
+        },
+        {
+          "id": "pin-aeroport-porto-centre-ville",
+          "title": "Aéroport de Porto au centre-ville : métro E en 30 minutes pour 2,30 €",
+          "description": "📌 Retrouvez le guide et ses sources pour préparer votre voyage au Portugal. Photo : Thomas Dahlstrøm Nielsen — CC BY-SA 4.0. Crédits : https://voyagesansdetour.fr/social-media/production/pin-aeroport-porto-centre-ville/credits.txt",
+          "linkPath": "/portugal/aeroport-porto-centre-ville/",
+          "mediaId": "pin-aeroport-porto-centre-ville",
+          "width": 1000,
+          "height": 1500
         }
       ]
     },
