@@ -1,0 +1,177 @@
+{
+  "schemaVersion": 1,
+  "contentId": "ig-porto-sans-voiture-2026-11",
+  "status": "rendered_not_published",
+  "fingerprint": "119b0a839632773bb591051c0cbd6fd37648122f60a3e921d1b17210621977eb",
+  "createdAt": "2026-10-24T06:55:06.301717Z",
+  "renderFinishedAt": "2026-10-24T06:55:35.098158Z",
+  "rendererContractVersion": 3,
+  "rendererSha256": "505838d3ca801ba10c22e987a3de9f2d6e4fd30946321cefccf89ac0f7dc8ed6",
+  "drawingSha256": "70d6df722c9393bfef74e3fbc2418b315d46d91be857613120a1bd48f4a8526d",
+  "kind": "reel",
+  "channel": "instagram",
+  "publishAt": "2026-11-11T17:00:00Z",
+  "reviewValidUntil": "2026-11-23T00:00:00Z",
+  "sourceCheckedOn": "2026-10-24",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/porto-3-jours-sans-voiture/",
+  "voice": null,
+  "presenter": null,
+  "sourceUrls": [
+    "https://voyagesansdetour.fr/portugal/aeroport-porto-centre-ville/",
+    "https://voyagesansdetour.fr/portugal/lisbonne-porto-train/",
+    "https://voyagesansdetour.fr/portugal/porto-3-jours-sans-voiture/"
+  ],
+  "photos": {
+    "porto-ribeira-rabelo-dore": {
+      "licence": "CC BY 2.0",
+      "author": "elvum",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:%22Rabelos%22_(5481361071).jpg"
+    },
+    "porto-luis-arche": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Gerd Eichmann",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Porto-Ponte_Dom_Luis_I-14-2011-gje.jpg"
+    },
+    "porto-sao-bento-hall": {
+      "licence": "CC BY-SA 2.0",
+      "author": "jad99 from Graz, Austria",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Azulejos_(Esta%C3%A7%C3%A3o_de_S%C3%A3o_Bento)_(14027333363).jpg"
+    },
+    "porto-luis-tablier": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Gerd Eichmann",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Porto-Ponte_Dom_Luis_I-02-2011-gje.jpg"
+    },
+    "porto-matosinhos-coucher": {
+      "licence": "CC BY 2.0",
+      "author": "Hugo Cadavez from Maia, Portugal",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Porto_e_Matosinhos_2007-10-26_006_(1777425421).jpg"
+    },
+    "porto-rabelos-couleurs": {
+      "licence": "CC BY 2.0",
+      "author": "flowcomm",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Douro_River,_Porto,_Portugal_(53974792064).jpg"
+    },
+    "porto-douro-vue": {
+      "licence": "CC BY 4.0",
+      "author": "Michael Gaylard from Horsham, UK",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:A_vibrant_panorama_of_Porto,_Portugal,_showcasing_the_Douro_River,_historic_Ribeira_district,_and_the_Dom_Lu%C3%ADs_I_Bridge._(55247151390).jpg"
+    }
+  },
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "durationSeconds": 28.0,
+    "videoCodec": "h264",
+    "pixelFormat": "yuv420p",
+    "videoBitrateBps": 2771825,
+    "audioCodec": "aac",
+    "audioSampleRate": 48000,
+    "audioBitrateBps": 96553,
+    "fullDecodePassed": true,
+    "loudness": {
+      "integratedLufs": -16.1,
+      "truePeakDbfs": -1.3
+    }
+  },
+  "files": [
+    {
+      "file": "apercu.jpg",
+      "sha256": "33ed18bec96a6c93705c916409c7781839c0c6cbc3b1136c683f7768d2315797",
+      "bytes": 299523
+    },
+    {
+      "file": "credits.txt",
+      "sha256": "639c73844ebd88c35aa3c121c62eaf9d601e546a789f7a87824580d31bccb02a",
+      "bytes": 3829
+    },
+    {
+      "file": "dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "file": "encode.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "legende.txt",
+      "sha256": "a5389bc421913e59da644f645e71ba13a239c6c459bd2b4a4fe55b0d59e65e23",
+      "bytes": 789
+    },
+    {
+      "file": "playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    },
+    {
+      "file": "poster.jpg",
+      "sha256": "e13a40e3629740b72a58016b16bc210394b7e617c4dcfb05187f877cbfead798",
+      "bytes": 480009
+    },
+    {
+      "file": "reel.mp4",
+      "sha256": "07a691389d2fa2f1e96dbe3b3d34988a18652e96bc39fbb6ed2bf01882f926c0",
+      "bytes": 10071787
+    },
+    {
+      "file": "scenario.json",
+      "sha256": "24836699a07830009ade5678dd1a078e09c15816d5c6a00f7bf984a8fd541915",
+      "bytes": 7746
+    },
+    {
+      "file": "scene-01.jpg",
+      "sha256": "e846692976a04d2abcfd1fac15746aa898ee7c5c5abce1cb2f631e689a8da9d2",
+      "bytes": 438653
+    },
+    {
+      "file": "scene-02.jpg",
+      "sha256": "14bb65fb40efa775e6dbf1bbd3ecc33bc9b85e69f7613776fa870744c790e676",
+      "bytes": 435006
+    },
+    {
+      "file": "scene-03.jpg",
+      "sha256": "f054d014b33f334526711404387861f58375d979a7093ae88649f1174b0be394",
+      "bytes": 331633
+    },
+    {
+      "file": "scene-04.jpg",
+      "sha256": "3950d30d730d418825e35ea57fd9560f673f9e8a590d6be137a46916f957bd8f",
+      "bytes": 503307
+    },
+    {
+      "file": "scene-05.jpg",
+      "sha256": "273f7fee4bdf71337e6107a7f2a6d5619093b02e54a330e38ebd94fb219697cf",
+      "bytes": 265798
+    },
+    {
+      "file": "scene-06.jpg",
+      "sha256": "7e1ecf1ea324a5a1c13ee23fc2e458c64583f88e675daea68e666bef228cb51f",
+      "bytes": 443320
+    },
+    {
+      "file": "scene-07.jpg",
+      "sha256": "c8b3cd30bb05aad9a7a1d688dcdaf7410855c243fe6e2f3ded8175a784bf6418",
+      "bytes": 406464
+    }
+  ],
+  "runtime": {
+    "wallSeconds": 28.721,
+    "encoderThreads": 2,
+    "pillowVersion": "11.3.0",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers"
+  },
+  "publication": {
+    "uploaded": false,
+    "scheduled": false,
+    "published": false,
+    "readyForAutomaticImport": false
+  },
+  "cost": {
+    "newPaidService": false,
+    "providerCalls": 0,
+    "monetarySpendEur": 0
+  }
+}

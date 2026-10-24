@@ -384,7 +384,7 @@ def encode_reel(scenario, root, destination, info, prepared):
                "-ss", str(start), "-i", str(root / scenario["assets"]["music"]["file"]), "-map", "0:v:0", "-map", "1:a:0",
                "-af", f"atrim=0:{duration},asetpts=PTS-STARTPTS,afade=t=in:d=0.3,afade=t=out:st={duration - MUSIC_FADE_OUT}:d={MUSIC_FADE_OUT},loudnorm=I=-16:TP=-1.5:LRA=9",
                "-c:a", "aac", "-b:a", "96k", "-ar", "48000",
-               "-t", str(duration), "-c:v", "libx264", "-threads", "2", "-preset", "veryfast", "-crf", "21",
+               "-t", str(duration), "-c:v", "libx264", "-threads", "2", "-preset", "medium", "-crf", "23",
                "-pix_fmt", "yuv420p", "-movflags", "+faststart", "-map_metadata", "-1", str(video)]
     with (destination / "encode.log").open("wb") as errors:
         process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.DEVNULL, stderr=errors)

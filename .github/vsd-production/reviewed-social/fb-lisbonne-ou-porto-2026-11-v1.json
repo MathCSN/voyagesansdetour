@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 1,
+  "batchId": "fb-lisbonne-ou-porto-2026-11-v1",
+  "items": [
+    {
+      "contentId": "vsd-production:facebook:fb-lisbonne-ou-porto-2026-11:photo-v1",
+      "deduplicationKey": "vsd-production:facebook:fb-lisbonne-ou-porto-2026-11:photo-v1",
+      "title": "Lisbonne ou Porto pour un premier voyage",
+      "dueAt": "2026-11-15T17:00:00Z",
+      "payload": {
+        "schemaVersion": 1,
+        "channel": "facebook",
+        "kind": "photos",
+        "text": "🤔 Lisbonne ou Porto pour un premier voyage au Portugal ? Tout dépend de ce que vous cherchez.\n\n🌉 Porto : 3 jours faciles à organiser, du centre à Gaia puis l’océan.\n🚋 Lisbonne : un quartier différent chaque jour, et Sintra en excursion.\n🚄 Les deux ? Comptez une semaine environ, avec le train CP entre les deux.\n✈️ Sans voiture dans les deux cas : le métro dessert les deux aéroports.\n\n👉 Notre comparatif complet :\nhttps://voyagesansdetour.fr/portugal/lisbonne-ou-porto/\n\nPhotos libres (Wikimedia Commons) — crédits : https://voyagesansdetour.fr/social-media/production/fb-lisbonne-ou-porto-2026-11/credits.txt\n\n#Lisbonne #Porto #Portugal #VoyageSansVoiture #VoyageSansDetour\n",
+        "aiGenerated": false,
+        "assets": [
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-lisbonne-ou-porto-2026-11/scene-01.jpg",
+            "sha256": "4c418d233c1ff94f498b0cd87439af0178e22c174562037a9fdc3ca0acfa3961",
+            "mimeType": "image/jpeg",
+            "altText": "Un tram jaune de la ligne 28 dans le quartier de Graça, à Lisbonne."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-lisbonne-ou-porto-2026-11/scene-02.jpg",
+            "sha256": "964b07cbffe24e1e5676ad5344692cccd6f41fb52aa30f4735dbc8728dae7bb7",
+            "mimeType": "image/jpeg",
+            "altText": "Les façades colorées de Ribeira au bord du Douro, à Porto."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-lisbonne-ou-porto-2026-11/scene-03.jpg",
+            "sha256": "5d5641fa9f18011594bbd558776d6ea644b2bdc55784074dbc8c5bbd75a1eb94",
+            "mimeType": "image/jpeg",
+            "altText": "La Baixa de Lisbonne et le château São Jorge sur sa colline."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-lisbonne-ou-porto-2026-11/scene-04.jpg",
+            "sha256": "30f174becd9440e904391ddc00a8db2f607d079537e683c06ad219d7249f00b2",
+            "mimeType": "image/jpeg",
+            "altText": "Les tours rouge et jaune du palais de Pena, à Sintra."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-lisbonne-ou-porto-2026-11/scene-05.jpg",
+            "sha256": "9bba6db679cb744fac1a1041a2fb25d079ce25a164e4ec69c2eb927930abedf4",
+            "mimeType": "image/jpeg",
+            "altText": "Un train Alfa Pendular passe sous l’aqueduc de Lisbonne."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-lisbonne-ou-porto-2026-11/scene-06.jpg",
+            "sha256": "9e4e1a3a6662a1e2c9c743ed291abf7d6cd0038cf505cf0bf1ff3f102b271910",
+            "mimeType": "image/jpeg",
+            "altText": "L’arche métallique du pont Luís I, à Porto."
+          }
+        ]
+      },
+      "review": {
+        "schemaVersion": 1,
+        "contentId": "vsd-production:facebook:fb-lisbonne-ou-porto-2026-11:photo-v1",
+        "approved": true,
+        "reviewedAt": "2026-10-24T06:57:45Z",
+        "validUntil": "2026-11-23T00:00:00Z",
+        "payloadRevision": "e335f64b213a78fe232ff3c7ad3f223bc0b341f27185e2bbf78c06aabb74ea59",
+        "checks": {
+          "editorialApproved": true,
+          "rightsApproved": true,
+          "creditsPreserved": true,
+          "disclosurePreserved": true,
+          "formatRequirementsVerified": true,
+          "requiresPaidCall": false,
+          "sources": {
+            "status": "verified",
+            "observedAt": "2026-10-24T06:45:00Z",
+            "validUntil": "2026-11-23T00:00:00Z"
+          },
+          "syntheticPerson": false,
+          "providerSyntheticSettingVerified": false
+        },
+        "media": {
+          "required": true,
+          "url": null,
+          "sha256": null,
+          "items": [
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-lisbonne-ou-porto-2026-11/scene-01.jpg",
+              "sha256": "4c418d233c1ff94f498b0cd87439af0178e22c174562037a9fdc3ca0acfa3961",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-24T06:57:45Z",
+              "validUntil": "2026-11-23T00:00:00Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-lisbonne-ou-porto-2026-11/scene-02.jpg",
+              "sha256": "964b07cbffe24e1e5676ad5344692cccd6f41fb52aa30f4735dbc8728dae7bb7",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-24T06:57:45Z",
+              "validUntil": "2026-11-23T00:00:00Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-lisbonne-ou-porto-2026-11/scene-03.jpg",
+              "sha256": "5d5641fa9f18011594bbd558776d6ea644b2bdc55784074dbc8c5bbd75a1eb94",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-24T06:57:45Z",
+              "validUntil": "2026-11-23T00:00:00Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-lisbonne-ou-porto-2026-11/scene-04.jpg",
+              "sha256": "30f174becd9440e904391ddc00a8db2f607d079537e683c06ad219d7249f00b2",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-24T06:57:45Z",
+              "validUntil": "2026-11-23T00:00:00Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-lisbonne-ou-porto-2026-11/scene-05.jpg",
+              "sha256": "9bba6db679cb744fac1a1041a2fb25d079ce25a164e4ec69c2eb927930abedf4",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-24T06:57:45Z",
+              "validUntil": "2026-11-23T00:00:00Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-lisbonne-ou-porto-2026-11/scene-06.jpg",
+              "sha256": "9e4e1a3a6662a1e2c9c743ed291abf7d6cd0038cf505cf0bf1ff3f102b271910",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-24T06:57:45Z",
+              "validUntil": "2026-11-23T00:00:00Z"
+            }
+          ]
+        },
+        "destination": {
+          "url": "https://voyagesansdetour.fr/portugal/lisbonne-ou-porto/",
+          "status": "verified",
+          "observedAt": "2026-10-24T06:57:45Z",
+          "validUntil": "2026-11-23T00:00:00Z"
+        },
+        "monetization": {
+          "containsAffiliateLinks": false,
+          "partnerApproved": false,
+          "linksVerified": false,
+          "disclosurePreserved": false
+        },
+        "formatCapability": {
+          "status": "verified",
+          "observedAt": "2026-10-24T06:57:45Z",
+          "validUntil": "2026-11-23T00:00:00Z",
+          "automaticPublishing": true,
+          "verificationMethod": "official_documentation",
+          "sourceUrls": [
+            "https://support.buffer.com/en-us/articles/using-facebook-with-buffer-jY1AM9fz2G",
+            "https://developers.buffer.com/types/FacebookPostMetadataInput.html",
+            "https://developers.buffer.com/guides/posts-and-scheduling.html"
+          ]
+        },
+        "evidence": {
+          "status": "rendered_local_bytes_verified_public_deploy_pending",
+          "format": "photo_carousel",
+          "rendererContractVersion": 3,
+          "receiptSha256": "2322e3e247e0fc442e5ac6be4c8c459d2a3e3b63de2eac651a0823543afcb103",
+          "scenarioFingerprint": "7d2e39c078372254ee57e406700b2aefce2c481a050ad62f24487dfbab1dfe9f",
+          "sourceCheckedOn": "2026-10-24",
+          "sourceUrls": [
+            "https://voyagesansdetour.fr/portugal/lisbonne-ou-porto/"
+          ],
+          "creditsUrl": "https://voyagesansdetour.fr/social-media/production/fb-lisbonne-ou-porto-2026-11/credits.txt",
+          "voice": null,
+          "music": null,
+          "note": "Les octets publics sont à contrôler après déploiement avec social_stock.py --verify-public. Un créneau prévu n'est pas une réservation Buffer."
+        }
+      }
+    }
+  ]
+}

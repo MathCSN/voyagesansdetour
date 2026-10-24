@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 1,
+  "batchId": "fb-lisbonne-ou-dormir-2026-11-v1",
+  "items": [
+    {
+      "contentId": "vsd-production:facebook:fb-lisbonne-ou-dormir-2026-11:photo-v1",
+      "deduplicationKey": "vsd-production:facebook:fb-lisbonne-ou-dormir-2026-11:photo-v1",
+      "title": "Où dormir à Lisbonne sans voiture",
+      "dueAt": "2026-11-12T17:00:00Z",
+      "payload": {
+        "schemaVersion": 1,
+        "channel": "facebook",
+        "kind": "photos",
+        "text": "🏘️ Où dormir à Lisbonne sans voiture ? 5 quartiers, 5 façons de vivre la ville.\n\n🏛️ Baixa / Rossio : la base centrale, avec le train pour Sintra au Rossio.\n☕ Chiado : cafés, boutiques et sorties à pied.\n🌅 Alfama : ruelles et belvédères, mais ça grimpe.\n🍸 Bairro Alto et Cais do Sodré : les soirées, avec métro, train et bateau.\n\n👉 Le comparatif complet et les 4 questions à poser avant de payer :\nhttps://voyagesansdetour.fr/portugal/ou-dormir-lisbonne-quartiers/\n\nPhotos libres (Wikimedia Commons) — crédits : https://voyagesansdetour.fr/social-media/production/fb-lisbonne-ou-dormir-2026-11/credits.txt\n\n#Lisbonne #Portugal #VoyageSansVoiture #VoyageSansDetour\n",
+        "aiGenerated": false,
+        "assets": [
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-lisbonne-ou-dormir-2026-11/scene-01.jpg",
+            "sha256": "4ecebc29ed874691f5f9f42a84a572afbb2a03fc1fc9bda2b47d5f0b21f04432",
+            "mimeType": "image/jpeg",
+            "altText": "Les toits orange d’Alfama et le Tage, à Lisbonne."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-lisbonne-ou-dormir-2026-11/scene-02.jpg",
+            "sha256": "60f835b6b1295bb0e4d944ae72cc956683178945473185b80d515fc6b6ded4cf",
+            "mimeType": "image/jpeg",
+            "altText": "La Rua Augusta vue à travers l’arc de la Praça do Comércio."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-lisbonne-ou-dormir-2026-11/scene-03.jpg",
+            "sha256": "07b7107a76c2924d4aa1fcb592d0d62ddfe4aa29482124f688979800386cff35",
+            "mimeType": "image/jpeg",
+            "altText": "Un tram jaune sur une place du Chiado."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-lisbonne-ou-dormir-2026-11/scene-04.jpg",
+            "sha256": "bc98028ad89b5167374edcdcc4ae8ce37c902c02061a70614f12c5c602d8469a",
+            "mimeType": "image/jpeg",
+            "altText": "Le Largo das Portas do Sol, à Alfama, au soleil du matin."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-lisbonne-ou-dormir-2026-11/scene-05.jpg",
+            "sha256": "65613db4b3a2018658fdfb0220897e85a9556b284a1c48c10c689cc73954ec09",
+            "mimeType": "image/jpeg",
+            "altText": "Une cycliste allongée au bord du Tage, sur les quais de Lisbonne."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-lisbonne-ou-dormir-2026-11/scene-06.jpg",
+            "sha256": "9550af5112210ade6177f3cb249ce16cbcbadf19183cd604d1c80b3d364e6a86",
+            "mimeType": "image/jpeg",
+            "altText": "La passerelle de l’ascenseur de Santa Justa au-dessus des toits de la Baixa."
+          }
+        ]
+      },
+      "review": {
+        "schemaVersion": 1,
+        "contentId": "vsd-production:facebook:fb-lisbonne-ou-dormir-2026-11:photo-v1",
+        "approved": true,
+        "reviewedAt": "2026-10-24T06:57:45Z",
+        "validUntil": "2026-11-23T00:00:00Z",
+        "payloadRevision": "bc487f29cc234e59227164aafd1808a2b235059aafeec669e59d16e598ce501e",
+        "checks": {
+          "editorialApproved": true,
+          "rightsApproved": true,
+          "creditsPreserved": true,
+          "disclosurePreserved": true,
+          "formatRequirementsVerified": true,
+          "requiresPaidCall": false,
+          "sources": {
+            "status": "verified",
+            "observedAt": "2026-10-24T06:45:00Z",
+            "validUntil": "2026-11-23T00:00:00Z"
+          },
+          "syntheticPerson": false,
+          "providerSyntheticSettingVerified": false
+        },
+        "media": {
+          "required": true,
+          "url": null,
+          "sha256": null,
+          "items": [
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-lisbonne-ou-dormir-2026-11/scene-01.jpg",
+              "sha256": "4ecebc29ed874691f5f9f42a84a572afbb2a03fc1fc9bda2b47d5f0b21f04432",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-24T06:57:45Z",
+              "validUntil": "2026-11-23T00:00:00Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-lisbonne-ou-dormir-2026-11/scene-02.jpg",
+              "sha256": "60f835b6b1295bb0e4d944ae72cc956683178945473185b80d515fc6b6ded4cf",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-24T06:57:45Z",
+              "validUntil": "2026-11-23T00:00:00Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-lisbonne-ou-dormir-2026-11/scene-03.jpg",
+              "sha256": "07b7107a76c2924d4aa1fcb592d0d62ddfe4aa29482124f688979800386cff35",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-24T06:57:45Z",
+              "validUntil": "2026-11-23T00:00:00Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-lisbonne-ou-dormir-2026-11/scene-04.jpg",
+              "sha256": "bc98028ad89b5167374edcdcc4ae8ce37c902c02061a70614f12c5c602d8469a",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-24T06:57:45Z",
+              "validUntil": "2026-11-23T00:00:00Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-lisbonne-ou-dormir-2026-11/scene-05.jpg",
+              "sha256": "65613db4b3a2018658fdfb0220897e85a9556b284a1c48c10c689cc73954ec09",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-24T06:57:45Z",
+              "validUntil": "2026-11-23T00:00:00Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-lisbonne-ou-dormir-2026-11/scene-06.jpg",
+              "sha256": "9550af5112210ade6177f3cb249ce16cbcbadf19183cd604d1c80b3d364e6a86",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-24T06:57:45Z",
+              "validUntil": "2026-11-23T00:00:00Z"
+            }
+          ]
+        },
+        "destination": {
+          "url": "https://voyagesansdetour.fr/portugal/ou-dormir-lisbonne-quartiers/",
+          "status": "verified",
+          "observedAt": "2026-10-24T06:57:45Z",
+          "validUntil": "2026-11-23T00:00:00Z"
+        },
+        "monetization": {
+          "containsAffiliateLinks": false,
+          "partnerApproved": false,
+          "linksVerified": false,
+          "disclosurePreserved": false
+        },
+        "formatCapability": {
+          "status": "verified",
+          "observedAt": "2026-10-24T06:57:45Z",
+          "validUntil": "2026-11-23T00:00:00Z",
+          "automaticPublishing": true,
+          "verificationMethod": "official_documentation",
+          "sourceUrls": [
+            "https://support.buffer.com/en-us/articles/using-facebook-with-buffer-jY1AM9fz2G",
+            "https://developers.buffer.com/types/FacebookPostMetadataInput.html",
+            "https://developers.buffer.com/guides/posts-and-scheduling.html"
+          ]
+        },
+        "evidence": {
+          "status": "rendered_local_bytes_verified_public_deploy_pending",
+          "format": "photo_carousel",
+          "rendererContractVersion": 3,
+          "receiptSha256": "4a6e4adcf2429d2c1a9acc28df59fe125b20692773021d5796838039af07d66d",
+          "scenarioFingerprint": "cc3a59d25175029966726a57d10aa79677e57c1e30420b18ccc9590278220580",
+          "sourceCheckedOn": "2026-10-24",
+          "sourceUrls": [
+            "https://voyagesansdetour.fr/portugal/ou-dormir-lisbonne-quartiers/"
+          ],
+          "creditsUrl": "https://voyagesansdetour.fr/social-media/production/fb-lisbonne-ou-dormir-2026-11/credits.txt",
+          "voice": null,
+          "music": null,
+          "note": "Les octets publics sont à contrôler après déploiement avec social_stock.py --verify-public. Un créneau prévu n'est pas une réservation Buffer."
+        }
+      }
+    }
+  ]
+}

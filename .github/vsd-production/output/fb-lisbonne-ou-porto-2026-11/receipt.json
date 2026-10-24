@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "contentId": "fb-lisbonne-ou-porto-2026-11",
+  "status": "rendered_not_published",
+  "fingerprint": "7d2e39c078372254ee57e406700b2aefce2c481a050ad62f24487dfbab1dfe9f",
+  "createdAt": "2026-10-24T06:54:06.072039Z",
+  "renderFinishedAt": "2026-10-24T06:54:06.898826Z",
+  "rendererContractVersion": 3,
+  "rendererSha256": "505838d3ca801ba10c22e987a3de9f2d6e4fd30946321cefccf89ac0f7dc8ed6",
+  "drawingSha256": "70d6df722c9393bfef74e3fbc2418b315d46d91be857613120a1bd48f4a8526d",
+  "kind": "carousel",
+  "channel": "facebook",
+  "publishAt": "2026-11-15T17:00:00Z",
+  "reviewValidUntil": "2026-11-23T00:00:00Z",
+  "sourceCheckedOn": "2026-10-24",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/lisbonne-ou-porto/",
+  "voice": null,
+  "presenter": null,
+  "sourceUrls": [
+    "https://voyagesansdetour.fr/portugal/lisbonne-ou-porto/"
+  ],
+  "photos": {
+    "lisbonne-tram28-graca": {
+      "licence": "CC BY 2.0",
+      "author": "Neil",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:No_28_Tram_(45684287331).jpg"
+    },
+    "porto-ribeira-facades": {
+      "licence": "CC BY 2.0",
+      "author": "Birte Fritsch",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Porto_(112)_(52436579744).jpg"
+    },
+    "lisbonne-baixa-chateau": {
+      "licence": "CC BY 4.0",
+      "author": "Jakub Hałun",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:View_of_Castelo_de_S%C3%A3o_Jorge_from_Elevador_de_Santa_Justa,_Lisbon,_20250604_1532_9306.jpg"
+    },
+    "sintra-pena-couleurs": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Diego Delso",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Palacio_Nacional_da_Pena,_Sintra,_Portugal,_2019-05-25,_DD_128.jpg"
+    },
+    "train-alfa-aqueduc": {
+      "licence": "CC BY 2.0",
+      "author": "Nicky Boogaard from Hardinxveld-Giessendam, Netherlands",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:CP_AlfaPendular_storming_through_Campolide_railway_station_(47548338771).jpg"
+    },
+    "porto-luis-arche": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Gerd Eichmann",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Porto-Ponte_Dom_Luis_I-14-2011-gje.jpg"
+    }
+  },
+  "video": null,
+  "files": [
+    {
+      "file": "apercu.jpg",
+      "sha256": "40e7e6ed245d1b03f8aa771269b7f2320192645c9474cdcb32b64c7d4608c376",
+      "bytes": 204143
+    },
+    {
+      "file": "credits.txt",
+      "sha256": "4ceabae883592260611086ea7e73e873cef84e1867e96a2c855a96c94b8255bb",
+      "bytes": 2711
+    },
+    {
+      "file": "dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "file": "legende.txt",
+      "sha256": "bc30bf9f5059a5102bd5358f6dad39f3c9d5f0668fea5cff02e226c3a0030279",
+      "bytes": 707
+    },
+    {
+      "file": "playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    },
+    {
+      "file": "scenario.json",
+      "sha256": "3c7a415492aa61ec5a2da82610204dc32ded5a45f16c379b1c1cb427d459a960",
+      "bytes": 5936
+    },
+    {
+      "file": "scene-01.jpg",
+      "sha256": "4c418d233c1ff94f498b0cd87439af0178e22c174562037a9fdc3ca0acfa3961",
+      "bytes": 324229
+    },
+    {
+      "file": "scene-02.jpg",
+      "sha256": "964b07cbffe24e1e5676ad5344692cccd6f41fb52aa30f4735dbc8728dae7bb7",
+      "bytes": 325618
+    },
+    {
+      "file": "scene-03.jpg",
+      "sha256": "5d5641fa9f18011594bbd558776d6ea644b2bdc55784074dbc8c5bbd75a1eb94",
+      "bytes": 396593
+    },
+    {
+      "file": "scene-04.jpg",
+      "sha256": "30f174becd9440e904391ddc00a8db2f607d079537e683c06ad219d7249f00b2",
+      "bytes": 234707
+    },
+    {
+      "file": "scene-05.jpg",
+      "sha256": "9bba6db679cb744fac1a1041a2fb25d079ce25a164e4ec69c2eb927930abedf4",
+      "bytes": 322998
+    },
+    {
+      "file": "scene-06.jpg",
+      "sha256": "9e4e1a3a6662a1e2c9c743ed291abf7d6cd0038cf505cf0bf1ff3f102b271910",
+      "bytes": 321375
+    }
+  ],
+  "runtime": {
+    "wallSeconds": 0.807,
+    "encoderThreads": 2,
+    "pillowVersion": "11.3.0",
+    "ffmpegVersion": null
+  },
+  "publication": {
+    "uploaded": false,
+    "scheduled": false,
+    "published": false,
+    "readyForAutomaticImport": false
+  },
+  "cost": {
+    "newPaidService": false,
+    "providerCalls": 0,
+    "monetarySpendEur": 0
+  }
+}

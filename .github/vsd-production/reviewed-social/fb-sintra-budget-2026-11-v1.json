@@ -1,0 +1,177 @@
+{
+  "schemaVersion": 1,
+  "batchId": "fb-sintra-budget-2026-11-v1",
+  "items": [
+    {
+      "contentId": "vsd-production:facebook:fb-sintra-budget-2026-11:photo-v1",
+      "deduplicationKey": "vsd-production:facebook:fb-sintra-budget-2026-11:photo-v1",
+      "title": "Sintra : le vrai prix d’une journée",
+      "dueAt": "2026-11-01T17:00:00Z",
+      "payload": {
+        "schemaVersion": 1,
+        "channel": "facebook",
+        "kind": "photos",
+        "text": "🏰 Sintra depuis Lisbonne : le vrai prix d’une journée, billet par billet.\n\n🎟️ Palais de Pena, visite essentielle : 20 € (le Full Tour : 45 €).\n🌿 Parc de Pena seul : 12 €. Château des Maures : 12 €.\n⏱️ 30 min entre l’entrée du parc et le palais : partez tôt, aucun retard n’est toléré.\n🚶 Le palais national est à 10-15 min à pied de la gare.\n\n👉 Le guide pour organiser la journée :\nhttps://voyagesansdetour.fr/portugal/sintra-depuis-lisbonne/\n\nPhotos libres (Wikimedia Commons) — crédits : https://voyagesansdetour.fr/social-media/production/fb-sintra-budget-2026-11/credits.txt\n\n#Sintra #Portugal #VoyageSansVoiture #VoyageSansDetour\n",
+        "aiGenerated": false,
+        "assets": [
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-sintra-budget-2026-11/scene-01.jpg",
+            "sha256": "326193ea6dd6f6bcca06bcef41a6dece0ac83eae5c11b74f6ad1f69dde6dc460",
+            "mimeType": "image/jpeg",
+            "altText": "Le palais de Pena, rouge et jaune, au sommet de la colline boisée de Sintra."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-sintra-budget-2026-11/scene-02.jpg",
+            "sha256": "69c482c0cfc21a6e6045d0f6f8160929ece33945e5ec241d44f75ab231cab71c",
+            "mimeType": "image/jpeg",
+            "altText": "La tour jaune du palais de Pena sous un ciel bleu."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-sintra-budget-2026-11/scene-03.jpg",
+            "sha256": "553f55f5c0719c65d7bc3aa5a62375d59c5837ab4a2a5193c5a11bd587128bd3",
+            "mimeType": "image/jpeg",
+            "altText": "Visiteurs sur la terrasse du palais de Pena, face à la plaine."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-sintra-budget-2026-11/scene-04.jpg",
+            "sha256": "0e265a2e27af8ad5d466f27270da9c67acf59f3ca4729383990bbc68dd0eaf0d",
+            "mimeType": "image/jpeg",
+            "altText": "Les remparts du château des Maures sur la crête, au-dessus de Sintra."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-sintra-budget-2026-11/scene-05.jpg",
+            "sha256": "4912fd170799f0ebe382a7dcc40a8b5cc73cf4990057d3ffdc5b8717cda998e6",
+            "mimeType": "image/jpeg",
+            "altText": "La place du centre historique de Sintra devant le palais national."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-sintra-budget-2026-11/scene-06.jpg",
+            "sha256": "baf8e4204bfd2e388d43e51f78a053fa345623343171b0fad871453e6786e191",
+            "mimeType": "image/jpeg",
+            "altText": "Le palais de Pena dominant la forêt de Sintra."
+          }
+        ]
+      },
+      "review": {
+        "schemaVersion": 1,
+        "contentId": "vsd-production:facebook:fb-sintra-budget-2026-11:photo-v1",
+        "approved": true,
+        "reviewedAt": "2026-10-24T06:57:45Z",
+        "validUntil": "2026-11-23T00:00:00Z",
+        "payloadRevision": "0913000f00aa02623fd29e6a9a2835dad70a90c3c6dc87e1b993c2c1338d2133",
+        "checks": {
+          "editorialApproved": true,
+          "rightsApproved": true,
+          "creditsPreserved": true,
+          "disclosurePreserved": true,
+          "formatRequirementsVerified": true,
+          "requiresPaidCall": false,
+          "sources": {
+            "status": "verified",
+            "observedAt": "2026-10-24T06:45:00Z",
+            "validUntil": "2026-11-23T00:00:00Z"
+          },
+          "syntheticPerson": false,
+          "providerSyntheticSettingVerified": false
+        },
+        "media": {
+          "required": true,
+          "url": null,
+          "sha256": null,
+          "items": [
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-sintra-budget-2026-11/scene-01.jpg",
+              "sha256": "326193ea6dd6f6bcca06bcef41a6dece0ac83eae5c11b74f6ad1f69dde6dc460",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-24T06:57:45Z",
+              "validUntil": "2026-11-23T00:00:00Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-sintra-budget-2026-11/scene-02.jpg",
+              "sha256": "69c482c0cfc21a6e6045d0f6f8160929ece33945e5ec241d44f75ab231cab71c",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-24T06:57:45Z",
+              "validUntil": "2026-11-23T00:00:00Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-sintra-budget-2026-11/scene-03.jpg",
+              "sha256": "553f55f5c0719c65d7bc3aa5a62375d59c5837ab4a2a5193c5a11bd587128bd3",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-24T06:57:45Z",
+              "validUntil": "2026-11-23T00:00:00Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-sintra-budget-2026-11/scene-04.jpg",
+              "sha256": "0e265a2e27af8ad5d466f27270da9c67acf59f3ca4729383990bbc68dd0eaf0d",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-24T06:57:45Z",
+              "validUntil": "2026-11-23T00:00:00Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-sintra-budget-2026-11/scene-05.jpg",
+              "sha256": "4912fd170799f0ebe382a7dcc40a8b5cc73cf4990057d3ffdc5b8717cda998e6",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-24T06:57:45Z",
+              "validUntil": "2026-11-23T00:00:00Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-sintra-budget-2026-11/scene-06.jpg",
+              "sha256": "baf8e4204bfd2e388d43e51f78a053fa345623343171b0fad871453e6786e191",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-10-24T06:57:45Z",
+              "validUntil": "2026-11-23T00:00:00Z"
+            }
+          ]
+        },
+        "destination": {
+          "url": "https://voyagesansdetour.fr/portugal/sintra-depuis-lisbonne/",
+          "status": "verified",
+          "observedAt": "2026-10-24T06:57:45Z",
+          "validUntil": "2026-11-23T00:00:00Z"
+        },
+        "monetization": {
+          "containsAffiliateLinks": false,
+          "partnerApproved": false,
+          "linksVerified": false,
+          "disclosurePreserved": false
+        },
+        "formatCapability": {
+          "status": "verified",
+          "observedAt": "2026-10-24T06:57:45Z",
+          "validUntil": "2026-11-23T00:00:00Z",
+          "automaticPublishing": true,
+          "verificationMethod": "official_documentation",
+          "sourceUrls": [
+            "https://support.buffer.com/en-us/articles/using-facebook-with-buffer-jY1AM9fz2G",
+            "https://developers.buffer.com/types/FacebookPostMetadataInput.html",
+            "https://developers.buffer.com/guides/posts-and-scheduling.html"
+          ]
+        },
+        "evidence": {
+          "status": "rendered_local_bytes_verified_public_deploy_pending",
+          "format": "photo_carousel",
+          "rendererContractVersion": 3,
+          "receiptSha256": "c49db7e82edbda6043f9772b705144083c994bbb757ed1f7cae948b33ff1f464",
+          "scenarioFingerprint": "ccf0b63ca9a3b7a3b084e570a544c586042c759a9ef8b91fea59fe63346066cb",
+          "sourceCheckedOn": "2026-10-24",
+          "sourceUrls": [
+            "https://bilheteira.parquesdesintra.pt/info/parque-e-palacio-da-pena-visita-essencial/1198/en",
+            "https://www.parquesdesintra.pt/en/plan-your-visit/how-to-get-there/",
+            "https://www.parquesdesintra.pt/en/plan-your-visit/opening-times-and-prices/",
+            "https://www.parquesdesintra.pt/en/plan-your-visit/tickets-palace-of-pena/"
+          ],
+          "creditsUrl": "https://voyagesansdetour.fr/social-media/production/fb-sintra-budget-2026-11/credits.txt",
+          "voice": null,
+          "music": null,
+          "note": "Les octets publics sont à contrôler après déploiement avec social_stock.py --verify-public. Un créneau prévu n'est pas une réservation Buffer."
+        }
+      }
+    }
+  ]
+}

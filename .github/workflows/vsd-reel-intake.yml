@@ -1,9 +1,8 @@
 name: Prepare one VSD Reel from a deployed guide
+# Ancien format retiré le 24/10/2026 : ce storyboard d'extraits alimentait les reels en voix de synthèse.
+# Plus de déclenchement après chaque déploiement ; les posts passent par production.py (photos).
 on:
   workflow_dispatch:
-  workflow_run:
-    workflows: ['Build and deploy Voyage Sans Détour']
-    types: [completed]
 permissions: {}
 concurrency:
   group: vsd-reel-intake

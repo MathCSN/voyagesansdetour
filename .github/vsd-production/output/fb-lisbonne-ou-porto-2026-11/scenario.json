@@ -1,0 +1,192 @@
+{
+  "schemaVersion": 2,
+  "id": "fb-lisbonne-ou-porto-2026-11",
+  "kind": "carousel",
+  "channel": "facebook",
+  "destination": "Lisbonne ou Porto",
+  "title": "Lisbonne ou Porto pour un premier voyage",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/lisbonne-ou-porto/",
+  "publishAt": "2026-11-15T17:00:00Z",
+  "review": {
+    "status": "reviewed_for_render",
+    "checkedAt": "2026-10-24T06:45:00Z",
+    "validUntil": "2026-11-23T00:00:00Z",
+    "method": "Faits relus mot pour mot dans les instantanés datés du 24/10/2026 (sources/social-2026-10-24) ; photos sous licence libre consignées dans assets/photos/catalogue.json."
+  },
+  "sources": {
+    "file": "sources/social-2026-10-24/sources.json",
+    "sha256": "ab7c358a9fcfa0a14abc58fe398ac7816ad7fece07101de071565bb938118878"
+  },
+  "photos": {
+    "file": "assets/photos/catalogue.json",
+    "sha256": "a66ad22b12c71b7e545179ac6a8e3f3a4412808b8eb854734e79105402792268"
+  },
+  "caption": {
+    "hook": "🤔 Lisbonne ou Porto pour un premier voyage au Portugal ? Tout dépend de ce que vous cherchez.",
+    "lines": [
+      "🌉 Porto : 3 jours faciles à organiser, du centre à Gaia puis l’océan.",
+      "🚋 Lisbonne : un quartier différent chaque jour, et Sintra en excursion.",
+      "🚄 Les deux ? Comptez une semaine environ, avec le train CP entre les deux.",
+      "✈️ Sans voiture dans les deux cas : le métro dessert les deux aéroports."
+    ],
+    "cta": "👉 Notre comparatif complet :",
+    "hashtags": [
+      "#Lisbonne",
+      "#Porto",
+      "#Portugal",
+      "#VoyageSansVoiture",
+      "#VoyageSansDetour"
+    ]
+  },
+  "scenes": [
+    {
+      "photo": "lisbonne-tram28-graca",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Le match",
+      "headline": [
+        "*Lisbonne*",
+        "ou *Porto* ?"
+      ],
+      "detail": "Ça dépend de ce que vous cherchez. Faites glisser →",
+      "facts": [
+        {
+          "source": "guide-lisbonne-ou-porto",
+          "excerpt": "Les deux se découvrent sans voiture."
+        }
+      ],
+      "tag": "Notre guide Lisbonne ou Porto · 2026",
+      "alt": "Un tram jaune de la ligne 28 dans le quartier de Graça, à Lisbonne."
+    },
+    {
+      "photo": "porto-ribeira-facades",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Choisissez Porto",
+      "headline": [
+        "3 jours *faciles*",
+        "à organiser"
+      ],
+      "detail": "Le centre historique, Gaia, puis l’Atlantique.",
+      "facts": [
+        {
+          "source": "guide-lisbonne-ou-porto",
+          "excerpt": "Porto : centre, Gaia, puis littoral"
+        }
+      ],
+      "tag": "Notre guide Lisbonne ou Porto · 2026",
+      "alt": "Les façades colorées de Ribeira au bord du Douro, à Porto."
+    },
+    {
+      "photo": "lisbonne-baixa-chateau",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Choisissez Lisbonne",
+      "headline": [
+        "Un quartier",
+        "*par jour*"
+      ],
+      "detail": "Baixa, Alfama, Belém : l’ambiance change à chaque fois.",
+      "facts": [
+        {
+          "source": "guide-lisbonne-ou-porto",
+          "excerpt": "Lisbonne : un secteur par journée"
+        }
+      ],
+      "tag": "Notre guide Lisbonne ou Porto · 2026",
+      "alt": "La Baixa de Lisbonne et le château São Jorge sur sa colline."
+    },
+    {
+      "photo": "sintra-pena-couleurs",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Bonus Lisbonne",
+      "headline": [
+        "*Sintra*",
+        "en excursion"
+      ],
+      "detail": "Une vraie journée, en train depuis Lisbonne.",
+      "facts": [
+        {
+          "source": "guide-lisbonne-ou-porto",
+          "excerpt": "Lisbonne avec une journée d’excursion"
+        }
+      ],
+      "tag": "Notre guide Lisbonne ou Porto · 2026",
+      "alt": "Les tours rouge et jaune du palais de Pena, à Sintra."
+    },
+    {
+      "photo": "train-alfa-aqueduc",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Les deux ?",
+      "headline": [
+        "Une semaine,",
+        "un *train*"
+      ],
+      "detail": "Changez d’hébergement et prenez le train CP entre les deux.",
+      "facts": [
+        {
+          "source": "guide-lisbonne-ou-porto",
+          "excerpt": "Pour un voyage d’une semaine environ, vous pouvez envisager les deux avec un trajet en train CP."
+        }
+      ],
+      "tag": "Notre guide Lisbonne ou Porto · 2026",
+      "alt": "Un train Alfa Pendular passe sous l’aqueduc de Lisbonne."
+    },
+    {
+      "photo": "porto-luis-arche",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Le guide complet",
+      "headline": [
+        "Lisbonne",
+        "ou Porto"
+      ],
+      "detail": "Le comparatif selon votre temps, vos envies et vos trajets.",
+      "alt": "L’arche métallique du pont Luís I, à Porto.",
+      "cta": true
+    }
+  ],
+  "assets": {
+    "regular": {
+      "file": "assets/dmsans-regular.ttf",
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      }
+    },
+    "bold": {
+      "file": "assets/dmsans-bold.ttf",
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      }
+    },
+    "serif": {
+      "file": "assets/playfair.ttf",
+      "sha256": "adefc53e7b3d483f1fa5e85edd82b7689ca79db25a1f6786bd7949cdcfeec601",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+      }
+    }
+  }
+}

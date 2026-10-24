@@ -36,6 +36,96 @@
       "itemIds": [
         "vsd-production:facebook:porto-3-jours-sans-voiture-2026-10:fb03-v1"
       ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/fb-belem-sans-voiture-2026-11-v1.json",
+      "fileSha256": "aef1b12a0f1d2baf5caccb8cc22129bfd3e5901cbbc999b9f0e4324462ad148c",
+      "batchId": "fb-belem-sans-voiture-2026-11-v1",
+      "batchSha256": "b32d1a864d80dd70c4a8cc4c404797e5e17e8378d66a06e9bb877572fe8d0934",
+      "itemIds": [
+        "vsd-production:facebook:fb-belem-sans-voiture-2026-11:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/fb-lisbonne-3-jours-2026-10-v1.json",
+      "fileSha256": "d6291308d012dbee9e8778ce4888f81c493fddefcb66e3e49ed7c79ac07b0647",
+      "batchId": "fb-lisbonne-3-jours-2026-10-v1",
+      "batchSha256": "3b96dfb43f553f58fd1a1be580e739e528cc362b2e4a8943874b04dd7c4f0a37",
+      "itemIds": [
+        "vsd-production:facebook:fb-lisbonne-3-jours-2026-10:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/fb-lisbonne-ou-dormir-2026-11-v1.json",
+      "fileSha256": "7f21101c10596f10ca6311b173021c1862da89639df989cad8f33cbaa582a4ab",
+      "batchId": "fb-lisbonne-ou-dormir-2026-11-v1",
+      "batchSha256": "030525d3a112ba0a0a7df87796b9c1a56a5354962153dfbe59aa82bba0ca4c7a",
+      "itemIds": [
+        "vsd-production:facebook:fb-lisbonne-ou-dormir-2026-11:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/fb-lisbonne-ou-porto-2026-11-v1.json",
+      "fileSha256": "0697965683aacba1a2608f4e3f043108f74b5735b35be16686af2e4ba7f1b1f9",
+      "batchId": "fb-lisbonne-ou-porto-2026-11-v1",
+      "batchSha256": "2c493b97fc697471a0184e76eb53630315c5ab4ce2238a1f99c67b8eee7a5c78",
+      "itemIds": [
+        "vsd-production:facebook:fb-lisbonne-ou-porto-2026-11:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/fb-porto-3-jours-2026-11-v1.json",
+      "fileSha256": "2e4398989388d09cc80fbae5520842bdf5915ef5620dfb8422354dc7413f7b7a",
+      "batchId": "fb-porto-3-jours-2026-11-v1",
+      "batchSha256": "b4a527e238709c9d64cc17f8ffd6cd822bb76443ae8e432650010975d36d83c7",
+      "itemIds": [
+        "vsd-production:facebook:fb-porto-3-jours-2026-11:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/fb-sintra-budget-2026-11-v1.json",
+      "fileSha256": "b59e31cbc69cde25c26bdfcea07fa7242e1cf98abc24daa4daef271052b322fa",
+      "batchId": "fb-sintra-budget-2026-11-v1",
+      "batchSha256": "044edc3692236618fdd3b76f272091b0fce93ff0d8bff5ecd7d4380976e52b26",
+      "itemIds": [
+        "vsd-production:facebook:fb-sintra-budget-2026-11:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-lisbonne-porto-train-2026-11-v1.json",
+      "fileSha256": "15cb76b12074398e820ae76eb29339af7f688641a33fb689c43ee00793242470",
+      "batchId": "ig-lisbonne-porto-train-2026-11-v1",
+      "batchSha256": "d473c88febf923b78a2be0214f9d78fee3e04662f188f941863c07578709d0e3",
+      "itemIds": [
+        "vsd-production:instagram:ig-lisbonne-porto-train-2026-11:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-lisbonne-tram28-tarifs-2026-10-v1.json",
+      "fileSha256": "fa3b421b5bed80e192b88d2a1b6be3052bea81fc756c9390e1672c19184121a6",
+      "batchId": "ig-lisbonne-tram28-tarifs-2026-10-v1",
+      "batchSha256": "eeed397df012b8e12d7ef611020f404b109b1d2ef1c285e4fd2f17f2b176e35f",
+      "itemIds": [
+        "vsd-production:instagram:ig-lisbonne-tram28-tarifs-2026-10:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-porto-sans-voiture-2026-11-v1.json",
+      "fileSha256": "ea0b3ca9eea8039e1fdae6186556763e0417a4058a268f61e82e15e8e01f8f82",
+      "batchId": "ig-porto-sans-voiture-2026-11-v1",
+      "batchSha256": "919c349f10597d1a8c0560062874a37eb1fa074143f0df619b7c1e39ab80feac",
+      "itemIds": [
+        "vsd-production:instagram:ig-porto-sans-voiture-2026-11:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-sintra-pena-billets-2026-11-v1.json",
+      "fileSha256": "175011f4fb6141ace7ca4e56729fc1d55135ea99b9c80910e27682c1afea70a9",
+      "batchId": "ig-sintra-pena-billets-2026-11-v1",
+      "batchSha256": "54434f2685baec770b380fd868dbb54a8500d448d5055b9235523e2a761cb4a7",
+      "itemIds": [
+        "vsd-production:instagram:ig-sintra-pena-billets-2026-11:photo-v1"
+      ]
     }
   ],
   "retirements": [

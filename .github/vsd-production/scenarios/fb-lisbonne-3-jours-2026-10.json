@@ -39,7 +39,7 @@
   },
   "scenes": [
     {
-      "photo": "lisbonne-portas-do-sol",
+      "photo": "lisbonne-alfama-tage",
       "focus": [
         0.5,
         0.5
@@ -57,7 +57,7 @@
         }
       ],
       "tag": "Notre guide Lisbonne · 2026",
-      "alt": "Les toits d’Alfama et le Tage depuis le belvédère de Santa Luzia, à Lisbonne."
+      "alt": "Les maisons d’Alfama descendant vers le Tage, à Lisbonne."
     },
     {
       "photo": "lisbonne-arc-rua-augusta-tram",
@@ -81,7 +81,7 @@
       "alt": "L’arc de la Rua Augusta sur la Praça do Comércio, avec un tram rouge."
     },
     {
-      "photo": "lisbonne-alfama-tage",
+      "photo": "lisbonne-alfama-toits",
       "focus": [
         0.5,
         0.5
@@ -103,7 +103,7 @@
         }
       ],
       "tag": "Notre guide Lisbonne · 2026",
-      "alt": "Les maisons blanches d’Alfama descendant vers le Tage."
+      "alt": "Les toits orange d’Alfama descendant vers le Tage."
     },
     {
       "photo": "lisbonne-tour-belem-doree",

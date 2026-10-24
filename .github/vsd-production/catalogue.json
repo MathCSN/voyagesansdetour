@@ -5,13 +5,13 @@
       "contentId": "fb-belem-sans-voiture-2026-11",
       "notBefore": "2026-10-24T06:45:00Z",
       "file": "scenarios/fb-belem-sans-voiture-2026-11.json",
-      "sha256": "d0a5492902de14b5b985e2b98a44c706d691304effe92816b6fb606b6389b0ab"
+      "sha256": "e75fa7c93ea457aca0b8738fa73fa7f84f192e81801a744e151c044ce1d74243"
     },
     {
       "contentId": "fb-lisbonne-3-jours-2026-10",
       "notBefore": "2026-10-24T06:45:00Z",
       "file": "scenarios/fb-lisbonne-3-jours-2026-10.json",
-      "sha256": "f35420558c568379dd8636fd7f7b9827f0f9191a01a01d3beaf4afd683779713"
+      "sha256": "2532130bbefe0720b8c43084577c8cb1ddf5e9e88d07668c6732b3c5b1a1e4a7"
     },
     {
       "contentId": "fb-lisbonne-ou-dormir-2026-11",
@@ -29,7 +29,7 @@
       "contentId": "fb-porto-3-jours-2026-11",
       "notBefore": "2026-10-24T06:45:00Z",
       "file": "scenarios/fb-porto-3-jours-2026-11.json",
-      "sha256": "744bed43289848c9dbe98182f0d7e3d7a9ae257b14bbe49aad9da26ed30a2ef9"
+      "sha256": "2d76cf4eeb20e4a302bdd78d83ed731078b0cd1dfb0396397c89c745ff5af999"
     },
     {
       "contentId": "fb-sintra-budget-2026-11",
@@ -47,19 +47,19 @@
       "contentId": "ig-lisbonne-tram28-tarifs-2026-10",
       "notBefore": "2026-10-24T06:45:00Z",
       "file": "scenarios/ig-lisbonne-tram28-tarifs-2026-10.json",
-      "sha256": "0efedb03863bca68207894f0787de924fe57f2584687451525c9719f02cb4562"
+      "sha256": "b7b4f017ba347811beacafa6a1362019aeb4573ff665b12f3abdc935358e0e30"
     },
     {
       "contentId": "ig-porto-sans-voiture-2026-11",
       "notBefore": "2026-10-24T06:45:00Z",
       "file": "scenarios/ig-porto-sans-voiture-2026-11.json",
-      "sha256": "8b1431a85369c7b279282a810facc35315c376e3bb3a518cd1409d361f5e224b"
+      "sha256": "24836699a07830009ade5678dd1a078e09c15816d5c6a00f7bf984a8fd541915"
     },
     {
       "contentId": "ig-sintra-pena-billets-2026-11",
       "notBefore": "2026-10-24T06:45:00Z",
       "file": "scenarios/ig-sintra-pena-billets-2026-11.json",
-      "sha256": "2b9d5b3f68836a3e56cb6aecb97a3a074d7f311800d7dd539c89b0a0725719bb"
+      "sha256": "86723d140d107e72799e8dd1a6b65faa24494e0c3c70d8f882f862e211b90d45"
     }
   ]
 }

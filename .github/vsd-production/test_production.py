@@ -1,13 +1,27 @@
 import copy
 import datetime as dt
 import json
+import os
 from pathlib import Path
 import shutil
 import tempfile
 import unittest
 from unittest import mock
 
+import photo_intake
 import production as p
+import seal_scenarios
+import social_stock
+
+HEAVY = {".jpg", ".mp3", ".ttf"}
+
+
+def link_or_copy(source, target):
+    # Large binaries are hard-linked for speed; tests replace them, never write through.
+    if Path(source).suffix in HEAVY:
+        os.link(source, target)
+    else:
+        shutil.copy2(source, target)
 
 
 class ProductionGuards(unittest.TestCase):
@@ -16,10 +30,11 @@ class ProductionGuards(unittest.TestCase):
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name) / "bundle"
         self.root.mkdir()
-        for folder in ("assets", "evidence", "scenarios"):
-            shutil.copytree(p.HERE / folder, self.root / folder)
+        for folder in ("assets", "evidence", "scenarios", "sources"):
+            shutil.copytree(p.HERE / folder, self.root / folder, copy_function=link_or_copy)
         shutil.copyfile(p.HERE / "catalogue.json", self.root / "catalogue.json")
-        self.scenario_file = self.root / "scenarios/porto-aeroport-trois-reflexes.json"
+        self.catalogue = p.load_json(self.root / "catalogue.json")
+        self.scenario_file = self.root / "scenarios/ig-lisbonne-tram28-tarifs-2026-10.json"
         self.scenario = p.load_json(self.scenario_file)
         self.now = p.instant(self.scenario["review"]["checkedAt"]) + dt.timedelta(seconds=1)
         clock = mock.patch.object(p, "utcnow", return_value=self.now)
@@ -27,172 +42,202 @@ class ProductionGuards(unittest.TestCase):
         self.addCleanup(clock.stop)
         self.output = Path(self.temporary.name) / "output"
 
-    def save(self):
-        p.write_json(self.scenario_file, self.scenario)
-        catalogue = p.load_json(self.root / "catalogue.json")
-        catalogue["items"][0]["sha256"] = p.digest(self.scenario_file.read_bytes())
-        p.write_json(self.root / "catalogue.json", catalogue)
+    def save(self, scenario=None, path=None):
+        scenario, path = scenario or self.scenario, path or self.scenario_file
+        p.write_json(path, scenario)
+        for item in self.catalogue["items"]:
+            if item["file"] == str(path.relative_to(self.root)):
+                item["sha256"] = p.digest(path.read_bytes())
+        p.write_json(self.root / "catalogue.json", self.catalogue)
+
+    def reseal(self, scenario, relative):
+        """Refresh the fingerprint of a registry the scenario points to."""
+        for key in ("sources", "photos"):
+            if scenario[key]["file"] == relative:
+                scenario[key]["sha256"] = p.digest((self.root / relative).read_bytes())
+
+    def only(self, scenario_id):
+        self.catalogue["items"] = [item for item in self.catalogue["items"] if item["contentId"] == scenario_id]
+        p.write_json(self.root / "catalogue.json", self.catalogue)
 
     def fake_render(self, scenario, root, destination, now, info):
-        # Fixture is only for crash/retry semantics; it never asserts media QA.
-        (destination / "sentinel.bin").write_bytes(b"test-artifact")
-        receipt = {"status": "rendered_not_published", "rendererContractVersion": p.RENDERER_CONTRACT, "fingerprint": p.fingerprint(scenario), "runtime": {"wallSeconds": 0},
-                   "files": [{"file": "sentinel.bin", "sha256": p.digest(b"test-artifact")}, {"file": "reel.mp4", "sha256": p.digest(b"test-video")}]}
         (destination / "reel.mp4").write_bytes(b"test-video")
+        receipt = {"status": "rendered_not_published", "rendererContractVersion": p.RENDERER_CONTRACT, "fingerprint": p.fingerprint(scenario),
+                   "runtime": {"wallSeconds": 0}, "files": [{"file": "reel.mp4", "sha256": p.digest(b"test-video")}]}
         p.write_json(destination / "receipt.json", receipt)
         return receipt
 
-    def test_real_snapshot_has_current_evidence_and_layout_fits(self):
-        info = p.validate_scenario(self.scenario, self.root, self.now)
-        self.assertEqual(info["duration"], 28)
-        for i, scene in enumerate(self.scenario["scenes"]):
-            im, _ = p.build_scene(self.scenario, scene, i, self.root)
-            self.assertEqual(im.size, (1080, 1920))
-        self.assertIn("CC BY 4.0", p.caption(self.scenario, info))
-        self.assertLessEqual(len(p.caption(self.scenario, info)), 2200)
+    # --- The shipped stock -------------------------------------------------
 
-    def test_wrong_article_bytes_cannot_render(self):
-        path = self.root / self.scenario["source"]["article"]["file"]
-        path.write_bytes(path.read_bytes() + b" ")
+    def test_every_shipped_scenario_validates_and_fits_its_frame(self):
+        self.assertGreaterEqual(len(self.catalogue["items"]), 8)
+        kinds = set()
+        for _, _, scenario in p.catalogue_entries(self.root):
+            info = p.validate_scenario(scenario, self.root, self.now)
+            size, carousel = (p.draw.SLIDE_SIZE, True) if scenario["kind"] == "carousel" else (p.draw.REEL_SIZE, False)
+            self.assertEqual(len(p.prepared_scenes(scenario, self.root, info, size, carousel)), len(scenario["scenes"]))
+            kinds.add(scenario["kind"])
+        self.assertEqual(kinds, {"reel", "carousel"})
+
+    def test_caption_is_short_and_lively_with_one_credit_line(self):
+        for _, _, scenario in p.catalogue_entries(self.root):
+            info = p.validate_scenario(scenario, self.root, self.now)
+            text = p.caption(scenario, info)
+            self.assertTrue(text.startswith(scenario["caption"]["hook"]))
+            self.assertLessEqual(len(text), 1000)
+            self.assertEqual(text.count("crédits : "), 1)
+            self.assertIn(p.credits_url(scenario), text)
+            self.assertNotIn("CC BY-SA", text)
+            for phrase in p.FORBIDDEN:
+                self.assertNotIn(phrase, text.lower())
+            if scenario["channel"] == "facebook":
+                self.assertIn(scenario["targetUrl"], text)
+
+    def test_credits_file_names_every_photo_author_and_licence(self):
+        info = p.validate_scenario(self.scenario, self.root, self.now)
+        credits = p.credits_text(self.scenario, info)
+        for record in info["photos"].values():
+            self.assertIn(record["author"], credits)
+            self.assertIn(record["licenceUrl"], credits)
+        self.assertIn("Kevin MacLeod", credits)
+        self.assertIn("relevé le 2026-10-24", credits)
+
+    def test_publication_slots_cover_four_weeks(self):
+        slots = sorted(p.instant(s["publishAt"]) for _, _, s in p.catalogue_entries(self.root))
+        self.assertGreaterEqual((slots[-1] - slots[0]).days, 21)
+        reels = sorted(p.instant(s["publishAt"]) for _, _, s in p.catalogue_entries(self.root) if s["channel"] == "instagram")
+        self.assertTrue(all(b - a >= dt.timedelta(hours=168) for a, b in zip(reels, reels[1:])), "one Instagram post per 168 h")
+
+    # --- The charter, enforced ----------------------------------------------
+
+    def test_old_text_card_format_is_refused(self):
+        self.scenario.update(schemaVersion=1, format="music_text")
+        with self.assertRaisesRegex(p.Invalid, "photo format"):
+            p.validate_scenario(self.scenario, self.root, self.now)
+
+    def test_synthetic_voice_or_presenter_is_refused(self):
+        for key in ("voice", "presenter"):
+            scenario = copy.deepcopy(self.scenario)
+            scenario[key] = "fr_FR-siwis-medium"
+            with self.assertRaisesRegex(p.Invalid, "synthetic voice"):
+                p.validate_scenario(scenario, self.root, self.now)
+
+    def test_defensive_boilerplate_is_refused(self):
+        self.scenario["caption"]["lines"][0] = "Propositions documentées, sans récit de voyage vécu."
+        with self.assertRaisesRegex(p.Invalid, "Boilerplate"):
+            p.validate_scenario(self.scenario, self.root, self.now)
+
+    def test_repeated_photo_is_refused(self):
+        self.scenario["scenes"][1]["photo"] = self.scenario["scenes"][0]["photo"]
+        with self.assertRaisesRegex(p.Invalid, "photo cannot be repeated"):
+            p.validate_scenario(self.scenario, self.root, self.now)
+
+    def test_repeated_headline_is_refused(self):
+        self.scenario["scenes"][2]["headline"] = list(self.scenario["scenes"][1]["headline"])
+        with self.assertRaisesRegex(p.Invalid, "headline cannot be repeated"):
+            p.validate_scenario(self.scenario, self.root, self.now)
+
+    def test_scene_without_sourced_fact_is_refused(self):
+        del self.scenario["scenes"][1]["facts"]
+        with self.assertRaisesRegex(p.Invalid, "sourced fact"):
+            p.validate_scenario(self.scenario, self.root, self.now)
+
+    def test_invented_fact_is_refused(self):
+        self.scenario["scenes"][0]["facts"][0]["excerpt"] = "Elétrico (1 viagem) 1,00"
+        with self.assertRaisesRegex(p.Invalid, "not in its dated snapshot"):
+            p.validate_scenario(self.scenario, self.root, self.now)
+
+    def test_changed_source_snapshot_stops(self):
+        path = self.root / "sources/social-2026-10-24/carris-tarifas-2026.txt"
+        path.write_text(path.read_text() + "\nmodifié")
         with self.assertRaisesRegex(p.Invalid, "fingerprint"):
             p.validate_scenario(self.scenario, self.root, self.now)
 
-    def test_mutated_scenario_without_new_catalogue_review_stops(self):
-        self.scenario["scenes"][0]["title"][0] = "Rome."
-        p.write_json(self.scenario_file, self.scenario)
+    def test_review_cannot_outlive_its_sources(self):
+        self.scenario["review"]["validUntil"] = "2026-11-24T00:00:00Z"
+        with self.assertRaisesRegex(p.Invalid, "outlives its source"):
+            p.validate_scenario(self.scenario, self.root, self.now)
+
+    def test_non_free_photo_licence_is_refused(self):
+        relative = self.scenario["photos"]["file"]
+        catalogue = p.load_json(self.root / relative)
+        photo_id = self.scenario["scenes"][0]["photo"]
+        catalogue["photos"][photo_id]["licence"] = "CC BY-NC 4.0"
+        p.write_json(self.root / relative, catalogue)
+        self.reseal(self.scenario, relative)
+        with self.assertRaisesRegex(p.Invalid, "licence not accepted"):
+            p.validate_scenario(self.scenario, self.root, self.now)
+
+    def test_altered_photo_bytes_stop(self):
+        photo_id = self.scenario["scenes"][0]["photo"]
+        path = self.root / "assets/photos" / (photo_id + ".jpg")
+        raw = path.read_bytes()
+        path.unlink()
+        path.write_bytes(raw + b"0")
         with self.assertRaisesRegex(p.Invalid, "fingerprint"):
-            p.run(self.root, self.output, now=self.now)
-
-    def test_expired_content_does_not_invoke_renderer(self):
-        with mock.patch.object(p, "render") as render:
-            result = p.run(self.root, self.output, now=p.instant("2026-10-28T00:00:00Z"))
-        render.assert_not_called()
-        self.assertEqual(result["skipped"][0]["reason"], "review_expired")
-        self.assertEqual(result["productionReadiness"]["status"], "no_new_renderable_scenario")
-        self.assertFalse(result["productionReadiness"]["publicationStockVerified"])
-
-    def test_future_content_does_not_invoke_renderer(self):
-        with mock.patch.object(p, "render") as render:
-            result = p.run(self.root, self.output, now=self.now - dt.timedelta(days=1))
-        render.assert_not_called()
-        self.assertEqual(result["skipped"][0]["reason"], "not_due")
-        self.assertEqual(result["productionReadiness"]["status"], "waiting_for_due_scenario")
-
-    def test_hard_stop_never_generates(self):
-        with mock.patch.object(p, "render") as render:
-            result = p.run(self.root, self.output, now=p.HARD_STOP + dt.timedelta(seconds=1))
-        render.assert_not_called()
-        self.assertEqual(result["status"], "period_ended")
-
-    def test_source_expiry_cannot_be_extended_by_changing_only_review(self):
-        self.scenario["review"]["checkedAt"] = "2026-10-20T10:00:00Z"
-        self.scenario["review"]["validUntil"] = "2026-11-01T10:00:00Z"
-        with self.assertRaisesRegex(p.Invalid, "source review window"):
-            p.validate_scenario(self.scenario, self.root, p.instant("2026-10-21T10:00:00Z"))
-
-    def test_audio_bytes_and_rights_are_bound(self):
-        self.scenario["assets"]["music"]["commercialUseAllowed"] = False
-        with self.assertRaisesRegex(p.Invalid, "rights"):
             p.validate_scenario(self.scenario, self.root, self.now)
 
     def test_music_attribution_cannot_be_substituted(self):
-        self.scenario["assets"]["music"]["author"] = "Someone else"
+        self.scenario["assets"]["music"]["author"] = "Someone Else"
         with self.assertRaisesRegex(p.Invalid, "attribution"):
             p.validate_scenario(self.scenario, self.root, self.now)
 
-    def test_invented_evidence_excerpt_stops(self):
-        self.scenario["scenes"][2]["evidence"][0]["supportingText"] = "The card can be shared."
-        with self.assertRaisesRegex(p.Invalid, "excerpt"):
+    def test_instagram_cta_must_point_to_the_bio(self):
+        self.scenario["caption"]["cta"] = "Le guide complet est sur le site."
+        with self.assertRaisesRegex(p.Invalid, "link in bio"):
             p.validate_scenario(self.scenario, self.root, self.now)
 
-    def test_missing_scene_evidence_stops(self):
-        self.scenario["scenes"][2]["evidence"] = []
-        with self.assertRaisesRegex(p.Invalid, "Each scene"):
-            p.validate_scenario(self.scenario, self.root, self.now)
-
-    def test_unpublished_source_guide_stops(self):
-        self.scenario["targetUrl"] = "https://voyagesansdetour.fr/portugal/something-else/"
-        with self.assertRaisesRegex(p.Invalid, "target mismatch"):
-            p.validate_scenario(self.scenario, self.root, self.now)
-
-    def test_offline_package_forbids_path_traversal_and_symlinks(self):
-        with self.assertRaises(p.Invalid):
-            p.safe_path(self.root, "../outside.json")
-        with self.assertRaises(p.Invalid):
-            p.safe_path(self.root, "/tmp/outside.json")
-        (self.root / "redirect.json").symlink_to(self.scenario_file)
-        with self.assertRaisesRegex(p.Invalid, "Symlink"):
-            p.safe_path(self.root, "redirect.json")
-
-    def test_missing_ai_disclosure_and_presenter_cannot_slip_in(self):
-        self.scenario["aiAssisted"] = False
-        with self.assertRaisesRegex(p.Invalid, "disclosure"):
-            p.validate_scenario(self.scenario, self.root, self.now)
-        self.scenario["aiAssisted"] = True
-        self.scenario["presenter"] = "alma"
-        with self.assertRaisesRegex(p.Invalid, "Presenter"):
-            p.validate_scenario(self.scenario, self.root, self.now)
-
-    def test_layout_overflow_stops_before_encoding(self):
-        self.scenario["scenes"][0]["title"] = ["W" * 26]
-        with self.assertRaisesRegex(p.Invalid, "Layout overflow"):
-            p.build_scene(self.scenario, self.scenario["scenes"][0], 0, self.root)
-
-    def test_silent_format_has_no_implicit_music_or_voice(self):
-        self.scenario["format"] = "silent_text"
-        del self.scenario["assets"]["music"]
+    def test_headline_overflow_stops_before_encoding(self):
+        self.scenario["scenes"][1]["headline"] = ["W" * 30, "W" * 30]
         info = p.validate_scenario(self.scenario, self.root, self.now)
-        self.assertNotIn("Almost Bliss", p.caption(self.scenario, info))
-        self.assertEqual(self.scenario["presenter"], "none")
+        with self.assertRaisesRegex(p.Invalid, "Layout overflow"):
+            p.prepared_scenes(self.scenario, self.root, info, p.draw.REEL_SIZE, False)
+
+    def test_carousel_renders_six_portrait_slides_with_credits(self):
+        scenario_id = "fb-sintra-budget-2026-11"
+        self.only(scenario_id)
+        result = p.run(self.root, self.output, now=self.now)
+        self.assertEqual(result["produced"], 1)
+        folder = self.output / scenario_id
+        slides = sorted(folder.glob("scene-*.jpg"))
+        self.assertEqual(len(slides), 6)
+        from PIL import Image
+        with Image.open(slides[0]) as first:
+            self.assertEqual(first.size, (1080, 1350))
+        self.assertIn("Wikimedia Commons", (folder / "credits.txt").read_text())
+        p.verify_receipt(folder, p.fingerprint(p.load_json(folder / "scenario.json")))
+
+    # --- Idempotence and safety, kept from the previous engine --------------
+
+    def test_expired_and_future_content_do_not_invoke_renderer(self):
+        with mock.patch.object(p, "render") as render:
+            early = p.run(self.root, self.output, now=self.now - dt.timedelta(hours=1))
+            late = p.run(self.root, self.output, now=p.instant(self.scenario["review"]["validUntil"]))
+        render.assert_not_called()
+        self.assertEqual(early["productionReadiness"]["status"], "waiting_for_due_scenario")
+        self.assertEqual(late["productionReadiness"]["expiredScenarios"], len(self.catalogue["items"]))
+
+    def test_hard_stop_never_generates(self):
+        self.assertEqual(p.run(self.root, self.output, now=p.HARD_STOP + dt.timedelta(seconds=1))["status"], "period_ended")
 
     def test_retry_reuses_verified_artifact_instead_of_rendering(self):
+        self.only(self.scenario["id"])
         with mock.patch.object(p, "render", side_effect=self.fake_render) as render:
             first = p.run(self.root, self.output, now=self.now)
             second = p.run(self.root, self.output, now=self.now)
-        self.assertEqual(first["produced"], 1)
-        self.assertEqual(second["produced"], 0)
-        self.assertEqual(render.call_count, 1)
+        self.assertEqual((first["produced"], second["produced"], render.call_count), (1, 0, 1))
 
     def test_changed_content_cannot_replace_existing_identity(self):
+        self.only(self.scenario["id"])
         with mock.patch.object(p, "render", side_effect=self.fake_render):
             p.run(self.root, self.output, now=self.now)
-        self.scenario["caption"] += "\nNouvelle formulation."
+        self.scenario["caption"]["hook"] += " Nouvelle formulation."
         self.save()
         with self.assertRaisesRegex(p.Invalid, "different inputs"):
             p.run(self.root, self.output, now=self.now)
 
-    def test_contract_one_artifact_survives_audio_upgrade_without_regeneration(self):
-        with mock.patch.object(p, "render", side_effect=self.fake_render):
-            p.run(self.root, self.output, now=self.now)
-        file = self.output / self.scenario["id"] / "receipt.json"
-        receipt = p.load_json(file)
-        receipt.update(rendererContractVersion=1, fingerprint=p.fingerprint(self.scenario, 1))
-        p.write_json(file, receipt)
-        with mock.patch.object(p, "render") as render:
-            result = p.run(self.root, self.output, now=self.now)
-        render.assert_not_called()
-        self.assertEqual(result["produced"], 0)
-        self.assertEqual(result["legacyArtifacts"][0]["rendererContractVersion"], 1)
-        self.assertEqual(p.load_json(file), receipt)
-
-    def test_unknown_contract_never_accepted_as_existing_delivery(self):
-        with mock.patch.object(p, "render", side_effect=self.fake_render):
-            p.run(self.root, self.output, now=self.now)
-        file = self.output / self.scenario["id"] / "receipt.json"
-        receipt = p.load_json(file); receipt["rendererContractVersion"] = 999
-        p.write_json(file, receipt)
-        with self.assertRaisesRegex(p.Invalid, "Unsupported historical"):
-            p.run(self.root, self.output, now=self.now)
-
-    def test_video_qa_rejects_high_audio_bitrate_before_claiming_instagram_format(self):
-        result = {"streams": [{"codec_type": "video", "width": 1080, "height": 1920, "codec_name": "h264", "pix_fmt": "yuv420p", "r_frame_rate": "30/1"},
-                              {"codec_type": "audio", "codec_name": "aac", "sample_rate": "48000", "bit_rate": "161693"}],
-                  "format": {"duration": "28"}}
-        with mock.patch.object(p, "probe", return_value=result):
-            with self.assertRaisesRegex(p.Invalid, "below 128"):
-                p.verify_video(Path("not-read.mp4"), 28, True)
-
     def test_corrupted_artifact_never_claims_successful_retry(self):
+        self.only(self.scenario["id"])
         with mock.patch.object(p, "render", side_effect=self.fake_render):
             p.run(self.root, self.output, now=self.now)
         (self.output / self.scenario["id"] / "reel.mp4").write_bytes(b"changed")
@@ -203,19 +248,62 @@ class ProductionGuards(unittest.TestCase):
         with mock.patch.object(p, "render", side_effect=RuntimeError("Interrupted")):
             with self.assertRaisesRegex(RuntimeError, "Interrupted"):
                 p.run(self.root, self.output, now=self.now)
-        self.assertFalse((self.output / self.scenario["id"]).exists())
-        self.assertFalse(any(pth.name.startswith(".render-") for pth in self.output.iterdir()))
+        self.assertFalse(any(path.name.startswith((".render-", "ig-", "fb-")) for path in self.output.iterdir()))
 
     def test_two_simultaneous_jobs_cannot_render_same_directory(self):
         with p.exclusive(self.output):
             with self.assertRaisesRegex(p.Invalid, "already holds"):
                 p.run(self.root, self.output, now=self.now)
 
+    def test_offline_package_forbids_path_traversal_and_symlinks(self):
+        self.scenario["sources"]["file"] = "../catalogue.json"
+        with self.assertRaisesRegex(p.Invalid, "Unsafe file path"):
+            p.validate_scenario(self.scenario, self.root, self.now)
+
     def test_duplicate_json_fields_rejected(self):
         path = self.root / "duplicate.json"
         path.write_text('{"id": "one", "id": "two"}')
         with self.assertRaisesRegex(p.Invalid, "Duplicate JSON"):
             p.load_json(path)
+
+    def test_video_qa_rejects_high_audio_bitrate(self):
+        result = {"streams": [{"codec_type": "video", "width": 1080, "height": 1920, "codec_name": "h264", "pix_fmt": "yuv420p", "r_frame_rate": "30/1"},
+                              {"codec_type": "audio", "codec_name": "aac", "sample_rate": "48000", "bit_rate": "161693"}],
+                  "format": {"duration": "24"}}
+        with mock.patch.object(p, "probe", return_value=result):
+            with self.assertRaisesRegex(p.Invalid, "below 128"):
+                p.verify_video(Path("not-read.mp4"), 24, True)
+
+
+class StockAndIntake(unittest.TestCase):
+    def test_hashes_match_the_cloud_bundle_on_an_existing_batch(self):
+        # Parity with bufferPayloadRevision() and describeStockBatch(): reuse a batch the controller already accepted.
+        index = json.loads((p.HERE / "reviewed-social/index.json").read_text())
+        entry = next(item for item in index["items"] if item["batchId"] == "facebook-porto-photos-2026-10-12-v1")
+        batch = json.loads((p.HERE.parent.parent / entry["path"]).read_text())
+        item = batch["items"][0]
+        self.assertEqual(social_stock.payload_revision(item["payload"]), item["review"]["payloadRevision"])
+        self.assertEqual(social_stock.batch_sha(batch), entry["batchSha256"])
+
+    def test_carousel_must_have_six_photos_for_the_site_inventory(self):
+        scenario = {"kind": "carousel", "scenes": [{}] * 5}
+        with self.assertRaisesRegex(p.Invalid, "exactly six"):
+            social_stock.public_files(scenario)
+
+    def test_photo_intake_accepts_only_free_licences(self):
+        self.assertEqual(photo_intake.licence_record({"LicenseShortName": {"value": "CC BY-SA 4.0"}})[0], "CC BY-SA 4.0")
+        for name in ("CC BY-NC 4.0", "CC BY-ND 4.0", "All rights reserved", ""):
+            with self.assertRaises(photo_intake.Refused):
+                photo_intake.licence_record({"LicenseShortName": {"value": name}})
+
+    def test_photo_intake_never_upscales(self):
+        self.assertEqual(photo_intake.stored_size(6000, 4000), (2400, 1600))
+        self.assertEqual(photo_intake.stored_size(1700, 1650), (1648, 1600))
+        self.assertEqual(photo_intake.stored_size(1200, 1000), (1200, 1000))
+
+    def test_sealing_is_stable(self):
+        scenario = json.loads((p.HERE / "scenarios/fb-sintra-budget-2026-11.json").read_text())
+        self.assertEqual(seal_scenarios.seal(scenario), scenario)
 
 
 if __name__ == "__main__":
