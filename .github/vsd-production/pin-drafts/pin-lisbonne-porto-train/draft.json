@@ -3,17 +3,24 @@
   "id": "pin-lisbonne-porto-train",
   "status": "draft_requires_review",
   "publicationApproved": false,
-  "title": "Lisbonne–Porto en train : choisir les gares et réserver simplement",
+  "title": "Lisbonne–Porto en train : 35,70 € en Alfa Pendular, jusqu’à −65 % en Promo",
   "targetUrl": "https://voyagesansdetour.fr/portugal/lisbonne-porto-train/",
-  "articleSha256": "ccceae4af8e9fd9ab25ddd345cfd3884e9fd2bf597aaa1dbdb2813d061642d6b",
-  "imageSha256": "a0e11897ab526ec578fd5481761c9689ea50f366a20be71398660ed3c7c27157",
+  "articleSha256": "f89e6e6dcb5ac46ac80e03e92e768b969b3abcfaf50ced10afd058136428dc3f",
+  "imageSha256": "704b2334bb1ff461409cdaef412c11ceec1ff00a3e8363eb7c1fe718a1bb6064",
   "width": 1000,
   "height": 1500,
-  "templateVersion": 1,
-  "rendererSha256": "641a36318537adadc23dc74987ad45436fa0422c4298c9e7af598a4958888d4a",
+  "templateVersion": 2,
+  "rendererSha256": "9bce53ef6aec367007587753f135465dbe9bab90b780d903f876dbd2eb8ddb4e",
   "originalComposition": true,
-  "externalPhotographs": false,
+  "externalPhotographs": true,
   "limitations": [
     "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
-  ]
+  ],
+  "photo": {
+    "id": "train-alfa-pendular",
+    "author": "LuisFerreira4x4",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Alfa_Pendular_New_Livery.jpg",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+  }
 }
