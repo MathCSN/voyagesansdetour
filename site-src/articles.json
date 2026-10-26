@@ -3991,5 +3991,289 @@
         "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"
       }
     ]
+  },
+  {
+    "related": [
+      "vietnam-itineraire-15-jours",
+      "thailande-itineraire-2-semaines",
+      "japon-itineraire-2-semaines"
+    ],
+    "sourcesCheckedOn": "2026-10-26",
+    "publishedOn": "2026-10-26",
+    "updatedOn": "2026-10-26",
+    "slug": "vietnam-quand-partir",
+    "title": "Quand partir au Vietnam : le bon mois pour le Nord, le Centre et le Sud",
+    "shortTitle": "Quand partir au Vietnam",
+    "destination": "Vietnam",
+    "country": "vietnam",
+    "continent": "asie",
+    "category": "Choisir",
+    "cover": "vietnam-halong",
+    "description": "Hanoï à 16 °C en janvier, Hué sous 757 mm de pluie en octobre, Saïgon au sec de décembre à avril : le bon mois pour chaque région du Vietnam, avec les chiffres, les typhons et le Tết 2027.",
+    "readMinutes": 6,
+    "summary": "Le Vietnam a trois climats : un même mois peut être parfait à Saïgon et inondé à Hội An. Février à avril est la meilleure fenêtre pour tout enchaîner, octobre et novembre sont à éviter dans le Centre, et le Tết tombe le 6 février 2027, avec des trains pris d’assaut.",
+    "keyFacts": [
+      {
+        "value": "Février à avril",
+        "label": "la meilleure fenêtre pour un voyage nord-sud : Centre au plus sec, Sud en saison sèche, Nord doux"
+      },
+      {
+        "value": "757 mm",
+        "label": "de pluie à Hué en octobre, le mois le plus arrosé du Centre (contre 43 mm en mars)"
+      },
+      {
+        "value": "16,4 °C",
+        "label": "la température moyenne de Hanoï en janvier ; 29,2 °C en juillet"
+      },
+      {
+        "value": "4 mm",
+        "label": "de pluie à Hô-Chi-Minh-Ville en février, le mois le plus sec du Sud (307 mm en juillet)"
+      },
+      {
+        "value": "6 à 8",
+        "label": "typhons ou cyclones touchent le Vietnam chaque année ; ils frappent surtout le Centre en septembre et octobre"
+      },
+      {
+        "value": "6 février 2027",
+        "label": "le Tết, le Nouvel An lunaire : transports saturés et grandes villes vidées autour de cette date"
+      }
+    ],
+    "sections": [
+      {
+        "id": "en-bref",
+        "title": "En bref : trois régions, trois calendriers",
+        "paragraphs": [
+          "Le Vietnam s’étire sur plus de mille kilomètres du nord au sud, et la mousson ne frappe pas partout en même temps. Chaque région a donc sa propre bonne saison. Retenez ce tableau, puis lisez la région qui vous concerne.",
+          "Pour un seul voyage qui traverse le pays, comme l’itinéraire de notre guide du Vietnam en 15 jours, visez février à avril. Le Sud est alors en pleine saison sèche, le Centre vit sa période la plus sèche et le Nord remonte vers 20 °C. Seul bémol : le Tết, qui tombe en février en 2027."
+        ],
+        "table": {
+          "headers": [
+            "Région",
+            "Les meilleurs mois",
+            "À éviter"
+          ],
+          "rows": [
+            [
+              "Nord (Hanoï, Ninh Bình, Sa Pa)",
+              "Octobre-novembre et avril à juin (21 à 28 °C)",
+              "Juillet à septembre (30 à 40 °C, orages) ; janvier-février (frais, brouillard)"
+            ],
+            [
+              "Centre (Hué, Hội An, Đà Nẵng)",
+              "Février à mai",
+              "Septembre à novembre (fortes pluies, typhons, crues)"
+            ],
+            [
+              "Sud (Saïgon, delta du Mékong)",
+              "Décembre à avril (février est le plus sec)",
+              "Juillet à septembre (humide, averses presque chaque jour)"
+            ]
+          ]
+        },
+        "tip": "Si vous n’avez qu’un seul mois possible pour tout le pays, prenez mars : 20 °C à Hanoï, 43 mm de pluie à Hué, 13 mm à Saïgon. C’est le mois le plus équilibré des trois villes dans les relevés ci-dessous."
+      },
+      {
+        "id": "nord",
+        "title": "Le Nord : Hanoï, Ninh Bình et Sa Pa",
+        "image": "vietnam-rizieres-sapa",
+        "paragraphs": [
+          "Hanoï a quatre vraies saisons. Octobre et novembre sont la période rêvée : 24,9 °C et 156 mm de pluie en octobre, 21,5 °C et 59 mm en novembre. Avril à juin marche aussi, avec 21 à 28 °C ; mai peut apporter de courtes pluies fréquentes.",
+          "L’hiver surprend : de décembre à mars, comptez 15 à 18 °C dans le delta, parfois sous un épais brouillard. Janvier est le mois le plus frais de Hanoï (16,4 °C en moyenne). Prévoyez une polaire, pas un maillot.",
+          "L’été est chaud et orageux, de juillet à fin septembre : 30 à 40 °C, avec des pluies de juillet violentes mais généralement brèves, en fin d’après-midi ou la nuit. Hanoï reçoit 253 mm en juillet et 274 mm en août.",
+          "Sa Pa est une autre histoire. Dans les montagnes du Nord, la température moyenne annuelle est de 15,3 °C et elle descend à 8,7 °C en janvier, avec des nuits proches de 0 °C en janvier-février. Juillet y reçoit 465 mm de pluie : pour marcher dans les rizières au sec, évitez le cœur de l’été."
+        ],
+        "tip": "Pour la baie d’Ha Long, qui est dans le Nord, visez les mois les plus doux de Hanoï : octobre-novembre ou avril-juin."
+      },
+      {
+        "id": "centre",
+        "title": "Le Centre : Hué, Hội An, Đà Nẵng",
+        "image": "vietnam-hoi-an",
+        "paragraphs": [
+          "C’est la région la plus délicate. Le Centre prend la mousson de plein fouet : septembre à novembre y est la période la moins favorable, avec de fortes pluies. À Hué, il tombe 394 mm en septembre, 757 mm en octobre et 621 mm en novembre, soit plus de 1 770 mm en trois mois. Les typhons frappent surtout en octobre, et Hội An y est souvent entièrement inondée.",
+          "La meilleure période court de février à mai. À Hué, mars est le mois le plus sec du relevé (43 mm, 23,1 °C), avril reste au sec (58 mm, 26,1 °C), et la chaleur n’arrive vraiment qu’en juin (29,3 °C).",
+          "Si vous devez voyager en octobre-novembre, gardez de la marge : une nuit de plus à Hué ou à Hội An, pas de train de correspondance serré, et un plan B en intérieur (cité impériale, tailleurs, cours de cuisine). Plus haut dans les terres, Dalat (1 500 m) offre un climat agréable toute l’année : 17,9 °C de moyenne, et seulement 8 mm de pluie en janvier."
+        ],
+        "tip": "Hội An est souvent entièrement inondée en octobre : n’y calez pas un vol ou un train de correspondance sans marge."
+      },
+      {
+        "id": "sud",
+        "title": "Le Sud : Saïgon et le delta du Mékong",
+        "paragraphs": [
+          "Le Sud est simple : une saison sèche et une saison des pluies de durées à peu près égales. La saison sèche court de novembre à avril ; la meilleure fenêtre est décembre à avril. Février est le mois le plus sec (4 mm à Hô-Chi-Minh-Ville), mars et avril sont les plus chauds.",
+          "De mai à octobre, la pluie arrive presque chaque jour en fin d’après-midi et dure peu : 207 mm en mai, puis 281 à 307 mm de juin à octobre. Juillet à septembre est la période la plus humide. Le Mékong peut connaître des crues brutales entre mi-août et mi-septembre.",
+          "La température varie à peine : de 26 à 29,2 °C en moyenne toute l’année, et plus de 30 °C possibles à tout moment. Ici le choix du mois se joue sur la pluie, pas sur le thermomètre."
+        ]
+      },
+      {
+        "id": "typhons",
+        "title": "Typhons : ce qu’il faut savoir",
+        "paragraphs": [
+          "Le Vietnam est touché par 6 à 8 typhons ou cyclones tropicaux par an, selon Wikipédia. Pour un voyageur, ce qui compte, c’est où et quand : ils frappent le Centre en septembre et surtout en octobre, la période où Hué reçoit ses 757 mm.",
+          "Le typhon Yagi, en septembre 2024, a causé au moins 197 morts : le risque n’est pas théorique, même si l’immense majorité des séjours se passe sans incident. Avant de partir, consultez les conseils aux voyageurs du ministère français de l’Europe et des Affaires étrangères, et suivez les avis locaux sur place.",
+          "En pratique : évitez le Centre en septembre-octobre si vous avez des dates rigides, souscrivez une assurance qui couvre l’annulation et les aléas climatiques, et gardez un jour tampon avant tout vol international."
+        ]
+      },
+      {
+        "id": "tet",
+        "title": "Le Tết 2027 : le piège du calendrier",
+        "paragraphs": [
+          "Le Tết, le Nouvel An lunaire, tombe en 2027 le samedi 6 février. Les festivités officielles durent trois jours, mais beaucoup de Vietnamiens partent une semaine avant et reviennent une semaine après : les transports sont saturés et les grandes villes se vident. Certains trains, comme Hué-Hanoï, ont même été fermés aux touristes lors d’une année précédente.",
+          "Les congés officiels de 2027 n’étaient pas encore arrêtés au 26 octobre 2026 : le ministère de l’Intérieur a proposé une pause de sept jours, du jeudi 4 au mercredi 10 février 2027, et la décision revient au Premier ministre. Comptez donc de fin janvier à mi-février comme période perturbée.",
+          "Le plus simple : réservez vos billets de train et d’avion très tôt, ou voyagez après la mi-février."
+        ]
+      },
+      {
+        "id": "mois-par-mois",
+        "title": "Mois par mois : les chiffres des trois villes",
+        "paragraphs": [
+          "Température moyenne et pluie du mois, relevés de stations vietnamiennes (code du bâtiment du Vietnam, repris par Wikipédia). Les moyennes lissent les extrêmes : un typhon ou un orage ne s’y voient pas.",
+          "À lire : Hanoï monte de 16,4 °C en janvier à 29,2 °C en juillet ; Hué s’effondre sous la pluie en octobre-novembre ; Saïgon reste chaud toute l’année et ne change que de pluviométrie. Total annuel : 1 611 mm à Hanoï, 2 798 mm à Hué, 1 926 mm à Hô-Chi-Minh-Ville."
+        ],
+        "table": {
+          "headers": [
+            "Mois",
+            "Hanoï",
+            "Hué",
+            "Hô-Chi-Minh-Ville"
+          ],
+          "rows": [
+            [
+              "Janvier",
+              "16,4 °C / 18 mm",
+              "20,0 °C / 126 mm",
+              "26,0 °C / 12 mm"
+            ],
+            [
+              "Février",
+              "17,2 °C / 19 mm",
+              "20,7 °C / 65 mm",
+              "26,8 °C / 4 mm"
+            ],
+            [
+              "Mars",
+              "20,0 °C / 34 mm",
+              "23,1 °C / 43 mm",
+              "28,0 °C / 13 mm"
+            ],
+            [
+              "Avril",
+              "23,9 °C / 105 mm",
+              "26,1 °C / 58 mm",
+              "29,2 °C / 51 mm"
+            ],
+            [
+              "Mai",
+              "27,4 °C / 165 mm",
+              "28,2 °C / 102 mm",
+              "28,8 °C / 207 mm"
+            ],
+            [
+              "Juin",
+              "28,9 °C / 266 mm",
+              "29,3 °C / 113 mm",
+              "27,8 °C / 294 mm"
+            ],
+            [
+              "Juillet",
+              "29,2 °C / 253 mm",
+              "29,5 °C / 92 mm",
+              "27,5 °C / 307 mm"
+            ],
+            [
+              "Août",
+              "28,6 °C / 274 mm",
+              "29,0 °C / 117 mm",
+              "27,4 °C / 281 mm"
+            ],
+            [
+              "Septembre",
+              "27,5 °C / 243 mm",
+              "27,2 °C / 394 mm",
+              "27,2 °C / 305 mm"
+            ],
+            [
+              "Octobre",
+              "24,9 °C / 156 mm",
+              "25,3 °C / 757 mm",
+              "27,0 °C / 291 mm"
+            ],
+            [
+              "Novembre",
+              "21,5 °C / 59 mm",
+              "23,1 °C / 621 mm",
+              "26,7 °C / 135 mm"
+            ],
+            [
+              "Décembre",
+              "18,2 °C / 20 mm",
+              "20,7 °C / 311 mm",
+              "26,0 °C / 28 mm"
+            ]
+          ]
+        }
+      },
+      {
+        "id": "choisir",
+        "title": "Quel mois choisir selon votre voyage",
+        "paragraphs": [
+          "Un voyage nord-sud de deux ou trois semaines : février à avril, en évitant la semaine du Tết. C’est la combinaison la plus sûre, et c’est celle de notre itinéraire de 15 jours.",
+          "Le Nord seul, pour la randonnée et les rizières : octobre-novembre ou avril-mai. Le Centre seul, pour Hué et Hội An : mars à mai. Le Sud et le Mékong : décembre à avril.",
+          "Vous êtes coincé en été (juillet-août, vacances scolaires françaises) : le Sud est humide mais les averses sont courtes, le Nord est chaud et orageux, et le Centre est en fait plus sec qu’en automne : le relevé de Hué montre 92 à 117 mm par mois de mai à août, contre 757 mm en octobre. Dalat et Sa Pa offrent de la fraîcheur en altitude.",
+          "Côté papiers : les Français entrent sans visa pour 45 jours (exemption en vigueur jusqu’au 14 mars 2028). Le passeport doit être valable au moins 6 mois après l’arrivée. Au-delà de 45 jours, l’e-visa coûte 25 $ pour 90 jours maximum, à demander uniquement sur evisa.gov.vn."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Quel est le meilleur mois pour visiter tout le Vietnam ?",
+        "answer": "Février à avril : le Centre est à sa période la plus sèche (février à mai), le Sud en pleine saison sèche (décembre à avril) et le Nord doux. Évitez la semaine du Tết (6 février 2027)."
+      },
+      {
+        "question": "Quand éviter le Vietnam ?",
+        "answer": "Le Centre de septembre à novembre (fortes pluies, typhons, Hội An souvent inondée) ; le Sud de juillet à septembre (humide, averses quotidiennes) ; le Nord en juillet-août (30 à 40 °C, orages) et en janvier-février (15 à 18 °C, brouillard)."
+      },
+      {
+        "question": "Quelle est la saison des typhons au Vietnam ?",
+        "answer": "Le Vietnam subit 6 à 8 typhons ou cyclones tropicaux par an. Dans le Centre, ils frappent surtout en septembre et en octobre."
+      },
+      {
+        "question": "Quel temps fait-il à Hanoï en janvier ?",
+        "answer": "16,4 °C en moyenne et 18 mm de pluie. Dans le delta, comptez 15 à 18 °C de décembre à mars, parfois avec du brouillard ; à Sa Pa, la température moyenne de janvier est de 8,7 °C."
+      },
+      {
+        "question": "Quand le Tết a-t-il lieu en 2027 ?",
+        "answer": "Le samedi 6 février 2027. Le ministère vietnamien de l’Intérieur a proposé une pause de sept jours du 4 au 10 février, décision non arrêtée au 26 octobre 2026 : prévoyez de fin janvier à mi-février comme période perturbée."
+      },
+      {
+        "question": "Faut-il un visa pour le Vietnam quand on est français ?",
+        "answer": "Non pour 45 jours maximum, avec un passeport valable au moins 6 mois après l’arrivée. Au-delà, l’e-visa coûte 25 $ pour 90 jours maximum, sur evisa.gov.vn."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Wikipedia — Climate of Vietnam (relevés mensuels, saisons, typhons, Dalat, Sa Pa)",
+        "url": "https://en.wikipedia.org/wiki/Climate_of_Vietnam"
+      },
+      {
+        "label": "Wikivoyage — Viêt Nam (climat par région, Tết, formalités)",
+        "url": "https://fr.wikivoyage.org/wiki/Vi%C3%AAt_Nam"
+      },
+      {
+        "label": "Wikipédia — Géographie du Viêt Nam (climats régionaux, typhons)",
+        "url": "https://fr.wikipedia.org/wiki/G%C3%A9ographie_du_Vi%C3%AAt_Nam"
+      },
+      {
+        "label": "Jungle Boss Tours — Tet 2027 au Vietnam (6 février 2027)",
+        "url": "https://junglebosstours.com/explorer/tourism-blog/vietnam-tet-2027"
+      },
+      {
+        "label": "Lao Động — Le plan de 7 jours de congé pour le Tết 2027",
+        "url": "https://news.laodong.vn/thoi-su/phuong-an-nghi-tet-2027-dai-7-ngay-duoc-nhieu-co-quan-dong-thuan-1762260.ldo"
+      },
+      {
+        "label": "Vietcetera — Vietnam visa and immigration master guide 2026",
+        "url": "https://vietcetera.com/en/vietnam-visa-immigration-master-guide-2026-comprehensive-legal-practical-framework"
+      }
+    ]
   }
 ]

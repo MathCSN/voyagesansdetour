@@ -42,6 +42,12 @@
       "path": null,
       "place": "Belém"
     },
+    "centre|vietnam": {
+      "checkedOn": "2026-10-26",
+      "country": "Vietnam",
+      "path": null,
+      "place": "Centre"
+    },
     "chi-minh-ville|vietnam": {
       "checkedOn": "2026-10-24",
       "country": "Vietnam",
@@ -192,6 +198,12 @@
       "path": null,
       "place": "Noël"
     },
+    "nord|vietnam": {
+      "checkedOn": "2026-10-26",
+      "country": "Vietnam",
+      "path": null,
+      "place": "Nord"
+    },
     "pena|portugal": {
       "checkedOn": "2026-10-24",
       "country": "Portugal",
@@ -251,6 +263,12 @@
       "country": "Portugal",
       "path": "sintra-l99",
       "place": "Sintra"
+    },
+    "sud|vietnam": {
+      "checkedOn": "2026-10-26",
+      "country": "Vietnam",
+      "path": null,
+      "place": "Sud"
     },
     "tavira|portugal": {
       "checkedOn": "2026-10-24",

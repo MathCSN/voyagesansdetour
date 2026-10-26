@@ -941,6 +941,42 @@
       "license_url": "https://creativecommons.org/licenses/by/4.0",
       "alt_fr": "Les barques de Tràng An entre les pitons de Ninh Bình.",
       "credit_fr": "Jakub Hałun / Wikimedia Commons — CC BY 4.0."
+    },
+    {
+      "id": "vietnam-halong",
+      "file": "photos/vietnam-halong.jpg",
+      "width": 1600,
+      "height": 1200,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Traditional_junk,_Halong_Bay,_Quang_Ninh,_Vietnam_-_V%E1%BB%8Bnh_H%E1%BA%A1_Long,_Qu%E1%BA%A3ng_Ninh,_Vi%E1%BB%87t_Nam_(10226220073).jpg",
+      "author": "Romain Pontida",
+      "license": "CC BY-SA 2.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/2.0",
+      "alt_fr": "Une jonque aux voiles brunes entre les pitons calcaires couverts de forêt de la baie d’Ha Long.",
+      "credit_fr": "Romain Pontida / Wikimedia Commons — CC BY-SA 2.0."
+    },
+    {
+      "id": "vietnam-hoi-an",
+      "file": "photos/vietnam-hoi-an.jpg",
+      "width": 1600,
+      "height": 1127,
+      "source_page": "https://commons.wikimedia.org/wiki/File:H%E1%BB%99i_An,_Museum_of_Trade_Ceramics,_2020-01_CN-02.jpg",
+      "author": "Steffen Schmitz (Carschten)",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "alt_fr": "Une maison de bois de la vieille ville de Hội An, ornée de lanternes rouges et d’un bandeau de Nouvel An.",
+      "credit_fr": "Steffen Schmitz (Carschten) / Wikimedia Commons — CC BY-SA 4.0."
+    },
+    {
+      "id": "vietnam-rizieres-sapa",
+      "file": "photos/vietnam-rizieres-sapa.jpg",
+      "width": 1600,
+      "height": 1067,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Rice_terraces_in_Sapa,_Vietnam.jpg",
+      "author": "Eerin25",
+      "license": "CC0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "alt_fr": "Les rizières en terrasses autour de Sa Pa, dans le Nord.",
+      "credit_fr": "Eerin25 / Wikimedia Commons — CC0."
     }
   ]
 }
