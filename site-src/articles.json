@@ -1528,7 +1528,7 @@
     "description": "Rejoindre Guimarães en train, explorer les places et choisir ses visites : un itinéraire d’une journée sans voiture, avec les accès à vérifier.",
     "readMinutes": 6,
     "summary": "Guimarães se prête à une journée consacrée au centre historique et à la colline du château. Depuis Porto, cherchez la ligne urbaine CP de Guimarães et prévoyez ensuite la marche depuis la gare. Le parcours proposé relie Toural, Oliveira, la rua de Santa Maria et les monuments du haut de la ville, avec Couros en option. Choisissez une visite intérieure principale et gardez une marge pour le retour.",
-    "sourcesCheckedOn": "2026-09-27",
+    "sourcesCheckedOn": "2026-10-26",
     "sections": [
       {
         "id": "choisir-guimaraes",
@@ -1605,7 +1605,7 @@
         "title": "Château ou Paço dos Duques : choisir avec les accès réels",
         "paragraphs": [
           "Le Paço dos Duques de Bragança, l’église São Miguel et le château forment le groupe de monuments du haut de la ville. Les voir dans le même secteur ne signifie pas que leurs intérieurs demandent tous le même billet ou offrent les mêmes accès. Commencez par décider ce que vous souhaitez visiter, puis lisez la billetterie officielle.",
-          "Point vérifié le 27 septembre 2026 : la page pratique du Paço annonce des travaux, des espaces muséologiques indisponibles et un ascenseur pouvant être temporairement hors service. Elle indique aussi la fermeture du donjon du château. Une actualité distincte annonce la réouverture du chemin de ronde tout en maintenant le donjon fermé. Ne confondez donc pas l’accès au château avec l’accès à toutes ses parties.",
+          "Point vérifié le 26 octobre 2026 : la page pratique du Paço annonce des travaux, des espaces muséologiques indisponibles et un ascenseur pouvant être temporairement hors service. Elle annonce une ouverture tous les jours de 10 h à 18 h (dernière entrée à 17 h 30), avec fermeture les 1er janvier, dimanche de Pâques, 1er mai, 24 juin et 25 décembre, et un plein tarif de 5 € pour le Paço, 5 € pour le château et 8 € le billet circuit des deux (prix pratiqués pendant la fermeture partielle du Paço). Elle indique aussi la fermeture du donjon du château. Une actualité distincte annonce la réouverture du chemin de ronde tout en maintenant le donjon fermé. Ne confondez donc pas l’accès au château avec l’accès à toutes ses parties.",
           "Les billets sont proposés au Paço et en ligne depuis son site officiel. Avant l’achat, vérifiez les espaces effectivement visitables, les horaires, la dernière admission, les fermetures exceptionnelles et les tarifs applicables. Si l’ascenseur ou un parcours sans marches est indispensable, demandez une confirmation précise. En cas d’accès limité, raccourcissez cette étape et conservez la promenade dans le centre."
         ]
       },
@@ -1643,7 +1643,7 @@
       },
       {
         "question": "Le billet du château donne-t-il accès au donjon ?",
-        "answer": "Ne le supposez pas : lors du contrôle du 27 septembre 2026, le site officiel indiquait le donjon fermé. Consultez l’état des accès avant d’acheter. La réouverture annoncée du chemin de ronde ne vaut pas réouverture du donjon."
+        "answer": "Ne le supposez pas : lors du contrôle du 26 octobre 2026, le site officiel indiquait le donjon fermé. Consultez l’état des accès avant d’acheter. La réouverture annoncée du chemin de ronde ne vaut pas réouverture du donjon."
       },
       {
         "question": "Faut-il réserver plusieurs visites pour remplir la journée ?",
@@ -1691,7 +1691,7 @@
     ],
     "cover": "guimaraes-chateau",
     "publishedOn": "2026-10-24",
-    "updatedOn": "2026-10-24"
+    "updatedOn": "2026-10-26"
   },
   {
     "slug": "algarve-sans-voiture-train",
