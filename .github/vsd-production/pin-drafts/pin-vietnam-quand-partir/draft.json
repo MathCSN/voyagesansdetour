@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-vietnam-quand-partir",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Quand partir au Vietnam : le bon mois pour le Nord, le Centre et le Sud",
+  "targetUrl": "https://voyagesansdetour.fr/vietnam/vietnam-quand-partir/",
+  "articleSha256": "649e1c101b99a9d55870e417874dcd3a7b313f957cb05880ea4471853cfff128",
+  "imageSha256": "19841c59fb2505770665f50f9fb487ec45fdd7ef14c1b49015afac84a8f9c39a",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "9bce53ef6aec367007587753f135465dbe9bab90b780d903f876dbd2eb8ddb4e",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "vietnam-halong",
+    "author": "Romain Pontida",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Traditional_junk,_Halong_Bay,_Quang_Ninh,_Vietnam_-_V%E1%BB%8Bnh_H%E1%BA%A1_Long,_Qu%E1%BA%A3ng_Ninh,_Vi%E1%BB%87t_Nam_(10226220073).jpg",
+    "license": "CC BY-SA 2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0"
+  }
+}
