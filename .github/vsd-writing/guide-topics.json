@@ -13,7 +13,7 @@
       10,
       11
     ],
-    "priority": 92,
+    "priority": 10,
     "demand": {
       "googleSuggest": 100,
       "googleTrends": 100,
@@ -95,7 +95,7 @@
       2,
       3
     ],
-    "priority": 89,
+    "priority": 10,
     "demand": {
       "googleSuggest": 100,
       "googleTrends": 89,
@@ -173,7 +173,7 @@
       11,
       12
     ],
-    "priority": 78,
+    "priority": 10,
     "demand": {
       "googleSuggest": 70,
       "googleTrends": 85,
@@ -242,7 +242,7 @@
       11,
       12
     ],
-    "priority": 76,
+    "priority": 10,
     "demand": {
       "googleSuggest": 100,
       "googleTrends": 48,
@@ -316,7 +316,7 @@
       3,
       4
     ],
-    "priority": 72,
+    "priority": 10,
     "demand": {
       "googleSuggest": 100,
       "googleTrends": 34,
@@ -456,7 +456,7 @@
       11,
       12
     ],
-    "priority": 68,
+    "priority": 10,
     "demand": {
       "googleSuggest": 67,
       "googleTrends": 70,
@@ -1383,7 +1383,7 @@
       2,
       3
     ],
-    "priority": 55,
+    "priority": 10,
     "demand": {
       "googleSuggest": 42,
       "googleTrends": 58,
@@ -5199,6 +5199,414 @@
         ],
         "alt": "Les azulejos de l’ancienne gare d’Aveiro."
       }
+    ]
+  },
+  {
+    "slug": "tenerife-quand-partir",
+    "destination": "Tenerife",
+    "country": "espagne",
+    "continent": "europe",
+    "type": "quand-partir",
+    "question": "Quand partir à Tenerife : quel mois pour le soleil d’hiver, le nord vert et le sud sec, avec les températures et la baignade ?",
+    "travelMonths": [
+      11,
+      12,
+      1,
+      2,
+      3,
+      4
+    ],
+    "priority": 62,
+    "sources": [
+      {
+        "label": "Wikivoyage — Tenerife",
+        "url": "https://fr.wikivoyage.org/wiki/Tenerife"
+      },
+      {
+        "label": "Wikivoyage — Îles Canaries",
+        "url": "https://fr.wikivoyage.org/wiki/%C3%8Eles_Canaries"
+      },
+      {
+        "label": "Wikipedia — Tenerife",
+        "url": "https://en.wikipedia.org/wiki/Tenerife"
+      }
+    ],
+    "photos": [
+      {
+        "id": "tenerife-teide",
+        "query": "Teide Tenerife",
+        "must": [
+          "teide"
+        ],
+        "alt": "Le volcan du Teide, point culminant de Tenerife."
+      },
+      {
+        "id": "tenerife-masca",
+        "query": "Masca Tenerife",
+        "must": [
+          "masca"
+        ],
+        "alt": "Le village de Masca, dans le massif de Teno, à Tenerife."
+      },
+      {
+        "id": "tenerife-adeje",
+        "query": "Costa Adeje Tenerife",
+        "must": [
+          "adeje"
+        ],
+        "alt": "La côte de Costa Adeje, dans le sud de Tenerife."
+      }
+    ],
+    "keywords": [
+      "°c",
+      "mm",
+      "soleil",
+      "hiver",
+      "alizé",
+      "teide",
+      "nord",
+      "sud",
+      "plage",
+      "saison"
+    ]
+  },
+  {
+    "slug": "maldives-quand-partir",
+    "destination": "Maldives",
+    "country": "maldives",
+    "continent": "asie",
+    "type": "quand-partir",
+    "question": "Quand partir aux Maldives : quelle saison sèche, quels mois de mousson, et quelle île habitée ou quel atoll choisir ?",
+    "travelMonths": [
+      11,
+      12,
+      1,
+      2,
+      3,
+      4
+    ],
+    "priority": 58,
+    "sources": [
+      {
+        "label": "Wikivoyage — Maldives",
+        "url": "https://fr.wikivoyage.org/wiki/Maldives"
+      },
+      {
+        "label": "Wikipedia — Maldives",
+        "url": "https://en.wikipedia.org/wiki/Maldives"
+      }
+    ],
+    "photos": [
+      {
+        "id": "maldives-atoll",
+        "query": "Maldives atoll aerial",
+        "must": [
+          "maldives"
+        ],
+        "alt": "Un atoll des Maldives vu du ciel."
+      },
+      {
+        "id": "maldives-male",
+        "query": "Malé Maldives",
+        "must": [
+          "male",
+          "malé"
+        ],
+        "alt": "La capitale Malé, aux Maldives."
+      },
+      {
+        "id": "maldives-maafushi",
+        "query": "Maafushi",
+        "must": [
+          "maafushi"
+        ],
+        "alt": "La plage de l’île habitée de Maafushi, aux Maldives."
+      }
+    ],
+    "keywords": [
+      "°c",
+      "mm",
+      "mousson",
+      "saison",
+      "sèche",
+      "atoll",
+      "mois",
+      "pluie",
+      "île",
+      "vent"
+    ]
+  },
+  {
+    "slug": "oman-road-trip-10-jours",
+    "destination": "Oman",
+    "country": "oman",
+    "continent": "moyen-orient",
+    "type": "road-trip",
+    "question": "Quel road trip de 10 jours à Oman, de Mascate au désert de Wahiba, Nizwa et Wadi Shab, avec les distances et la location de voiture ?",
+    "travelMonths": [
+      10,
+      11,
+      12,
+      1,
+      2,
+      3
+    ],
+    "priority": 45,
+    "sources": [
+      {
+        "label": "Wikivoyage — Oman",
+        "url": "https://fr.wikivoyage.org/wiki/Oman"
+      },
+      {
+        "label": "Wikivoyage — Oman (anglais)",
+        "url": "https://en.wikivoyage.org/wiki/Oman"
+      },
+      {
+        "label": "Wikipedia — Oman",
+        "url": "https://en.wikipedia.org/wiki/Oman"
+      }
+    ],
+    "photos": [
+      {
+        "id": "oman-wahiba",
+        "query": "Wahiba Sands",
+        "must": [
+          "wahiba"
+        ],
+        "alt": "Les dunes du désert de Wahiba Sands, à Oman."
+      },
+      {
+        "id": "oman-nizwa",
+        "query": "Nizwa Fort",
+        "must": [
+          "nizwa"
+        ],
+        "alt": "Le fort de Nizwa, à Oman."
+      },
+      {
+        "id": "oman-wadi-shab",
+        "query": "Wadi Shab",
+        "must": [
+          "wadi shab"
+        ],
+        "alt": "Le Wadi Shab, une gorge turquoise d’Oman."
+      }
+    ],
+    "keywords": [
+      "km",
+      "heures",
+      "route",
+      "mascate",
+      "nizwa",
+      "wahiba",
+      "wadi",
+      "désert",
+      "voiture",
+      "4x4"
+    ]
+  },
+  {
+    "slug": "patagonie-argentine-itineraire",
+    "destination": "Patagonie argentine",
+    "country": "argentine",
+    "continent": "amerique-du-sud",
+    "type": "itineraire",
+    "question": "Quel itinéraire en Patagonie argentine, d’El Calafate et du glacier Perito Moreno à El Chaltén et Ushuaia, avec les distances et la meilleure période ?",
+    "travelMonths": [
+      11,
+      12,
+      1,
+      2,
+      3
+    ],
+    "priority": 42,
+    "sources": [
+      {
+        "label": "Wikivoyage — Patagonie",
+        "url": "https://fr.wikivoyage.org/wiki/Patagonie"
+      },
+      {
+        "label": "Wikivoyage — Argentine",
+        "url": "https://fr.wikivoyage.org/wiki/Argentine"
+      },
+      {
+        "label": "Wikipedia — Los Glaciares National Park",
+        "url": "https://en.wikipedia.org/wiki/Los_Glaciares_National_Park"
+      }
+    ],
+    "photos": [
+      {
+        "id": "patagonie-perito-moreno",
+        "query": "Perito Moreno glacier",
+        "must": [
+          "perito moreno"
+        ],
+        "alt": "Le glacier Perito Moreno, en Patagonie argentine."
+      },
+      {
+        "id": "patagonie-fitz-roy",
+        "query": "Fitz Roy El Chaltén",
+        "must": [
+          "fitz roy"
+        ],
+        "alt": "Le mont Fitz Roy, au-dessus d’El Chaltén."
+      },
+      {
+        "id": "patagonie-ushuaia",
+        "query": "Ushuaia",
+        "must": [
+          "ushuaia"
+        ],
+        "alt": "Le port d’Ushuaia, en Terre de Feu."
+      }
+    ],
+    "keywords": [
+      "km",
+      "heures",
+      "glacier",
+      "calafate",
+      "chaltén",
+      "ushuaia",
+      "trek",
+      "vol",
+      "saison",
+      "jours"
+    ]
+  },
+  {
+    "slug": "madere-itineraire-7-jours",
+    "destination": "Madère",
+    "country": "portugal",
+    "continent": "europe",
+    "type": "itineraire",
+    "question": "Quel itinéraire de 7 jours à Madère, de Funchal au pico do Arieiro et aux levadas, avec les distances, les randonnées et la location de voiture ?",
+    "travelMonths": [
+      11,
+      12,
+      1,
+      2,
+      3,
+      4
+    ],
+    "priority": 48,
+    "sources": [
+      {
+        "label": "Wikivoyage — Madère",
+        "url": "https://fr.wikivoyage.org/wiki/Mad%C3%A8re"
+      },
+      {
+        "label": "Wikivoyage — Madeira",
+        "url": "https://en.wikivoyage.org/wiki/Madeira"
+      },
+      {
+        "label": "Wikipedia — Madeira",
+        "url": "https://en.wikipedia.org/wiki/Madeira"
+      }
+    ],
+    "photos": [
+      {
+        "id": "madere-funchal",
+        "query": "Funchal Madeira",
+        "must": [
+          "funchal"
+        ],
+        "alt": "La baie de Funchal, à Madère."
+      },
+      {
+        "id": "madere-pico-arieiro",
+        "query": "Pico do Arieiro",
+        "must": [
+          "arieiro"
+        ],
+        "alt": "Le pico do Arieiro, sur l’île de Madère."
+      },
+      {
+        "id": "madere-levada",
+        "query": "Levada Madeira",
+        "must": [
+          "levada"
+        ],
+        "alt": "Une levada, canal d’irrigation bordé d’un sentier, à Madère."
+      }
+    ],
+    "keywords": [
+      "km",
+      "heures",
+      "levada",
+      "funchal",
+      "arieiro",
+      "randonnée",
+      "voiture",
+      "route",
+      "jours",
+      "°c"
+    ]
+  },
+  {
+    "slug": "kerala-itineraire-10-jours",
+    "destination": "Kerala",
+    "country": "inde",
+    "continent": "asie",
+    "type": "itineraire",
+    "question": "Quel itinéraire de 10 jours au Kerala, de Kochi à Munnar et aux backwaters d’Alleppey, avec les durées de route et la meilleure saison ?",
+    "travelMonths": [
+      11,
+      12,
+      1,
+      2,
+      3
+    ],
+    "priority": 40,
+    "sources": [
+      {
+        "label": "Wikivoyage — Kerala",
+        "url": "https://fr.wikivoyage.org/wiki/Kerala"
+      },
+      {
+        "label": "Wikipedia — Kerala",
+        "url": "https://en.wikipedia.org/wiki/Kerala"
+      }
+    ],
+    "photos": [
+      {
+        "id": "kerala-backwaters",
+        "query": "Kerala backwaters Alleppey",
+        "must": [
+          "kerala",
+          "alleppey",
+          "alappuzha"
+        ],
+        "alt": "Les backwaters du Kerala, près d’Alleppey."
+      },
+      {
+        "id": "kerala-munnar",
+        "query": "Munnar tea plantation",
+        "must": [
+          "munnar"
+        ],
+        "alt": "Les plantations de thé de Munnar, au Kerala."
+      },
+      {
+        "id": "kerala-kochi",
+        "query": "Chinese fishing nets Kochi",
+        "must": [
+          "kochi",
+          "cochin"
+        ],
+        "alt": "Les carrelets chinois de Kochi, au Kerala."
+      }
+    ],
+    "keywords": [
+      "km",
+      "heures",
+      "backwaters",
+      "munnar",
+      "kochi",
+      "alleppey",
+      "thé",
+      "saison",
+      "°c",
+      "mousson"
     ]
   }
 ]

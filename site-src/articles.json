@@ -2868,13 +2868,21 @@
         "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"
       }
     ],
-    "related": [],
+    "related": [
+      "vietnam-itineraire-15-jours",
+      "thailande-itineraire-2-semaines",
+      "costa-rica-itineraire-2-semaines"
+    ],
     "sourcesCheckedOn": "2026-10-24",
     "publishedOn": "2026-10-24",
     "updatedOn": "2026-10-24"
   },
   {
-    "related": [],
+    "related": [
+      "vietnam-itineraire-15-jours",
+      "japon-itineraire-2-semaines",
+      "costa-rica-itineraire-2-semaines"
+    ],
     "sourcesCheckedOn": "2026-10-24",
     "publishedOn": "2026-10-24",
     "updatedOn": "2026-10-24",
@@ -3373,7 +3381,11 @@
     ]
   },
   {
-    "related": [],
+    "related": [
+      "londres-noel-marches",
+      "new-york-noel",
+      "japon-itineraire-2-semaines"
+    ],
     "sourcesCheckedOn": "2026-10-24",
     "publishedOn": "2026-10-24",
     "updatedOn": "2026-10-24",
@@ -3578,7 +3590,11 @@
     ]
   },
   {
-    "related": [],
+    "related": [
+      "vietnam-itineraire-15-jours",
+      "thailande-itineraire-2-semaines",
+      "new-york-noel"
+    ],
     "sourcesCheckedOn": "2026-10-24",
     "publishedOn": "2026-10-24",
     "updatedOn": "2026-10-24",
@@ -3752,7 +3768,11 @@
     ]
   },
   {
-    "related": [],
+    "related": [
+      "thailande-itineraire-2-semaines",
+      "japon-itineraire-2-semaines",
+      "costa-rica-itineraire-2-semaines"
+    ],
     "sourcesCheckedOn": "2026-10-24",
     "publishedOn": "2026-10-24",
     "updatedOn": "2026-10-24",
