@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-vietnam-itineraire-15-jours",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Vietnam en 15 jours : de Hanoï à Hô-Chi-Minh-Ville en train, étape par étape (itinéraire 2026)",
+  "targetUrl": "https://voyagesansdetour.fr/vietnam/vietnam-itineraire-15-jours/",
+  "articleSha256": "f0db54e88dab516bd578c19abb3f892e65610c053c4922e79586d1ad20ef5de7",
+  "imageSha256": "94965bc49b78e86bc568909aa4284ed38d38a8be1bf42c14db783c5317c62ed3",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "9bce53ef6aec367007587753f135465dbe9bab90b780d903f876dbd2eb8ddb4e",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "vietnam-ninh-binh",
+    "author": "Jakub Hałun",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Trang_An_Landscape_Complex,_Ninh_Binh_Province,_Vietnam,_20240202_1456_5313.jpg",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0"
+  }
+}
