@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-thailande-itineraire-2-semaines",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Thaïlande en 2 semaines : Bangkok, Chiang Mai en train de nuit et la mer d’Andaman (prix 2026)",
+  "targetUrl": "https://voyagesansdetour.fr/thailande/thailande-itineraire-2-semaines/",
+  "articleSha256": "c838ab2a5c474f335787dfd95bcadf9aa325f1024f430a6a74ec569b35255f66",
+  "imageSha256": "6a251bc9b933977f222dbe04f2368eaa56dbfa63648322971184609f88637349",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "9bce53ef6aec367007587753f135465dbe9bab90b780d903f876dbd2eb8ddb4e",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "thailande-phi-phi",
+    "author": "Diego Delso",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Isla_Ko_Phi_Phi_Don,_Tailandia,_2013-08-19,_DD_02.JPG",
+    "license": "CC BY-SA 3.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0"
+  }
+}
