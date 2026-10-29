@@ -60,6 +60,12 @@
       "notBefore": "2026-10-24T06:45:00Z",
       "file": "scenarios/ig-sintra-pena-billets-2026-11.json",
       "sha256": "86723d140d107e72799e8dd1a6b65faa24494e0c3c70d8f882f862e211b90d45"
+    },
+    {
+      "contentId": "ig-vietnam-itineraire-15-jours-2026-11-25",
+      "notBefore": "2026-10-29T11:36:06Z",
+      "file": "scenarios/ig-vietnam-itineraire-15-jours-2026-11-25.json",
+      "sha256": "d16ee3ad805dc0f8362714e771f76eb27363ec4bf8d4c80190191379340fa4ef"
     }
   ]
 }

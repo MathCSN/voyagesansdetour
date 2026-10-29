@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-new-york-noel",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "New York à Noël 2026 : le sapin du Rockefeller Center le 2 décembre, patinoires et boutiques de Noël",
+  "targetUrl": "https://voyagesansdetour.fr/etats-unis/new-york-noel/",
+  "articleSha256": "164555f9489efe73067245998d7a04ded3e8339cd35681615a9f943f66111178",
+  "imageSha256": "19cb52fbb5b765374d4d99b62a7bd8dd21bafb2450fa4d9c3c8b49fe7f5c6b7d",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "9bce53ef6aec367007587753f135465dbe9bab90b780d903f876dbd2eb8ddb4e",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "new-york-rockefeller-noel",
+    "author": "Anthony Quintano from Mount Laurel, United States",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Rockefeller_Center_Christmas_Tree_2021_(51770696938).jpg",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0"
+  }
+}

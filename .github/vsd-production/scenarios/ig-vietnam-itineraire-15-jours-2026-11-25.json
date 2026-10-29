@@ -1,0 +1,220 @@
+{
+  "schemaVersion": 2,
+  "id": "ig-vietnam-itineraire-15-jours-2026-11-25",
+  "kind": "reel",
+  "channel": "instagram",
+  "destination": "Vietnam",
+  "title": "Le Vietnam en 15 jours : 5 repères",
+  "targetUrl": "https://voyagesansdetour.fr/vietnam/vietnam-itineraire-15-jours/",
+  "publishAt": "2026-11-25T17:00:00Z",
+  "review": {
+    "status": "reviewed_for_render",
+    "checkedAt": "2026-10-29T11:36:06Z",
+    "validUntil": "2026-11-28T11:36:06Z",
+    "method": "Généré automatiquement (auto_social.py) depuis la page publiée du guide relevée le 29/10/2026 : chaque chiffre est cité mot pour mot ; photos réelles sous licence libre (Wikimedia Commons), aucune image générée par IA ; garde-fous de production.py passés avant la mise en file."
+  },
+  "sources": {
+    "file": "auto/ig-vietnam-itineraire-15-jours-2026-11-25/sources.json",
+    "sha256": "3ab360a939abf6b7d947f4a10825d3db20c68e72ff62aae839c6ae60307d0621"
+  },
+  "photos": {
+    "file": "auto/ig-vietnam-itineraire-15-jours-2026-11-25/photos.json",
+    "sha256": "bb1026a6282fd5a6eb525294cdce25932b250641322ca4e4d8e443b73ea1cc99"
+  },
+  "caption": {
+    "hook": "🗺️ Vietnam en 15 jours : de Hanoï à Hô-Chi-Minh-Ville en train, étape par étape (itinéraire 2026)",
+    "lines": [
+      "⏱️ 45 jours de séjour sans visa pour les Français (e-visa à 25 $ au-delà, jusqu’à 90 jours)",
+      "⏱️ 10 h 24 de nuit entre Ninh Bình (SE3, 21 h 35) et Hué (arrivée 7 h 59)",
+      "⏱️ 2 h 32 de Hué à Đà Nẵng en train de jour (SE1, 9 h 40 → 12 h 12), porte d’entrée de Hội An à 35 km",
+      "📍 300 000 ₫ : la balade en barque de Tràng An à Ninh Bình, depuis janvier 2026 (≈ 10,70 €)",
+      "📍 200 000 ₫ : la cité impériale de Hué (≈ 7 €) ; les tombeaux coûtent 150 000 ₫ chacun"
+    ],
+    "cta": "🔗 Tous les prix, horaires et l’itinéraire : le guide complet est en lien dans la bio.",
+    "hashtags": [
+      "#Vietnam",
+      "#VoyageVietnam",
+      "#Itineraire",
+      "#VoyageSansDetour"
+    ]
+  },
+  "scenes": [
+    {
+      "photo": "vietnam-ninh-binh",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Vietnam",
+      "headline": [
+        "Le Vietnam en 15 jours",
+        "*5 chiffres* à connaître"
+      ],
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "Deux nuits à Hanoï, deux à Ninh Bình, un train de nuit à 10 h 24 jusqu’à Hué, trois nuits à Hội An, puis quatre à Saïgon."
+        }
+      ],
+      "tag": "Guide Vietnam · sources du 24/10/2026",
+      "seconds": 3.5
+    },
+    {
+      "photo": "vietnam-train-hanoi",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Quand partir",
+      "headline": [
+        "*45 jours*"
+      ],
+      "detail": "de séjour sans visa pour les Français (e-visa à 25 $ au-delà, jusqu’à 90 jours)",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "45 jours de séjour sans visa pour les Français (e-visa à 25 $ au-delà, jusqu’à 90 jours)"
+        }
+      ],
+      "tag": "Guide Vietnam · sources du 24/10/2026",
+      "seconds": 4
+    },
+    {
+      "photo": "vietnam-hue-citadelle",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Le parcours",
+      "headline": [
+        "*10 h 24*"
+      ],
+      "detail": "de nuit entre Ninh Bình (SE3, 21 h 35) et Hué (arrivée 7 h 59)",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "10 h 24 de nuit entre Ninh Bình (SE3, 21 h 35) et Hué (arrivée 7 h 59)"
+        }
+      ],
+      "tag": "Guide Vietnam · sources du 24/10/2026",
+      "seconds": 4
+    },
+    {
+      "photo": "vietnam-halong",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Le parcours",
+      "headline": [
+        "*2 h 32*"
+      ],
+      "detail": "de Hué à Đà Nẵng en train de jour (SE1, 9 h 40 → 12 h 12), porte d’entrée de Hội An à 35 km",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "2 h 32 de Hué à Đà Nẵng en train de jour (SE1, 9 h 40 → 12 h 12), porte d’entrée de Hội An à 35 km"
+        }
+      ],
+      "tag": "Guide Vietnam · sources du 24/10/2026",
+      "seconds": 4
+    },
+    {
+      "photo": "vietnam-hoi-an",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Jours 3 à 5",
+      "headline": [
+        "*300 000 ₫*"
+      ],
+      "detail": "la balade en barque de Tràng An à Ninh Bình, depuis janvier 2026 (≈ 10,70 €)",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "300 000 ₫ la balade en barque de Tràng An à Ninh Bình, depuis janvier 2026 (≈ 10,70 €)"
+        }
+      ],
+      "tag": "Guide Vietnam · sources du 24/10/2026",
+      "seconds": 4
+    },
+    {
+      "photo": "vietnam-rizieres-sapa",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Jours 6 et 7",
+      "headline": [
+        "*200 000 ₫*"
+      ],
+      "detail": "la cité impériale de Hué (≈ 7 €) ; les tombeaux coûtent 150 000 ₫ chacun",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "200 000 ₫ la cité impériale de Hué (≈ 7 €) ; les tombeaux coûtent 150 000 ₫ chacun"
+        }
+      ],
+      "tag": "Guide Vietnam · sources du 24/10/2026",
+      "seconds": 4
+    },
+    {
+      "photo": "vietnam-19a8005a",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Le guide complet",
+      "headline": [
+        "Le Vietnam en 15 jours"
+      ],
+      "seconds": 4.5,
+      "cta": true
+    }
+  ],
+  "musicStart": 0,
+  "assets": {
+    "regular": {
+      "file": "assets/dmsans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9"
+    },
+    "bold": {
+      "file": "assets/dmsans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211"
+    },
+    "serif": {
+      "file": "assets/playfair.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+      },
+      "sha256": "adefc53e7b3d483f1fa5e85edd82b7689ca79db25a1f6786bd7949cdcfeec601"
+    },
+    "music": {
+      "file": "assets/almost-bliss.mp3",
+      "sha256": "731e191cef927e43d352bd099ac63cd6ea54a6a84deec3cba77fb59e6903754c",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "commercialUseAllowed": true,
+      "title": "Almost Bliss",
+      "author": "Kevin MacLeod",
+      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1900015",
+      "provenance": {
+        "file": "evidence/almost-bliss-provenance.json",
+        "sha256": "2d2303c1a70fed68560808853466c997870cd8156737d96ca287a4332a5cd04d"
+      }
+    }
+  }
+}

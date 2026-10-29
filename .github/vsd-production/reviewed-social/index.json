@@ -126,6 +126,15 @@
       "itemIds": [
         "vsd-production:instagram:ig-lisbonne-tram28-tarifs-2026-10:photo-v1"
       ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-vietnam-itineraire-15-jours-2026-11-25-v1.json",
+      "fileSha256": "2c3a31e82fe13560bd8e323383add635ee525a4c5a6171c8c63d76230bdad218",
+      "batchId": "ig-vietnam-itineraire-15-jours-2026-11-25-v1",
+      "batchSha256": "47c3b1d57253eab2c430f745c5cf802cf8e5558ae1cd4687dc6dfc2a4d441f32",
+      "itemIds": [
+        "vsd-production:instagram:ig-vietnam-itineraire-15-jours-2026-11-25:photo-v1"
+      ]
     }
   ],
   "retirements": [

@@ -633,6 +633,37 @@
           "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
         }
       ]
+    },
+    {
+      "contentId": "ig-vietnam-itineraire-15-jours-2026-11-25",
+      "approved": true,
+      "files": [
+        {
+          "name": "reel.mp4",
+          "sha256": "c608aae04eb8398e676d235817c8866a7fa51466a99c062aad91a68e7d49c4d1",
+          "bytes": 13161870
+        },
+        {
+          "name": "poster.jpg",
+          "sha256": "88c1085c0559743b2dbb2e071178db6aabef3bb4d50d458cbce44b60aa5a21a0",
+          "bytes": 679922
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "bd95dd8f38202a17c4e678e2f2f83c42262f57f9c6ad6638b2bbe9f7352df819",
+          "bytes": 3482
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
     }
   ]
 }

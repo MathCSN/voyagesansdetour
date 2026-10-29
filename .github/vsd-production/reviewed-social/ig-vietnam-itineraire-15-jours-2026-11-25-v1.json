@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "batchId": "ig-vietnam-itineraire-15-jours-2026-11-25-v1",
+  "items": [
+    {
+      "contentId": "vsd-production:instagram:ig-vietnam-itineraire-15-jours-2026-11-25:photo-v1",
+      "deduplicationKey": "vsd-production:instagram:ig-vietnam-itineraire-15-jours-2026-11-25:photo-v1",
+      "title": "Le Vietnam en 15 jours : 5 repères",
+      "dueAt": "2026-11-25T17:00:00Z",
+      "payload": {
+        "schemaVersion": 1,
+        "channel": "instagram",
+        "kind": "reel",
+        "text": "🗺️ Vietnam en 15 jours : de Hanoï à Hô-Chi-Minh-Ville en train, étape par étape (itinéraire 2026)\n\n⏱️ 45 jours de séjour sans visa pour les Français (e-visa à 25 $ au-delà, jusqu’à 90 jours)\n⏱️ 10 h 24 de nuit entre Ninh Bình (SE3, 21 h 35) et Hué (arrivée 7 h 59)\n⏱️ 2 h 32 de Hué à Đà Nẵng en train de jour (SE1, 9 h 40 → 12 h 12), porte d’entrée de Hội An à 35 km\n📍 300 000 ₫ : la balade en barque de Tràng An à Ninh Bình, depuis janvier 2026 (≈ 10,70 €)\n📍 200 000 ₫ : la cité impériale de Hué (≈ 7 €) ; les tombeaux coûtent 150 000 ₫ chacun\n\n🔗 Tous les prix, horaires et l’itinéraire : le guide complet est en lien dans la bio.\n\nPhotos libres (Wikimedia Commons) et musique de Kevin MacLeod (CC BY 4.0) — crédits : https://voyagesansdetour.fr/social-media/production/ig-vietnam-itineraire-15-jours-2026-11-25/credits.txt\n\n#Vietnam #VoyageVietnam #Itineraire #VoyageSansDetour\n",
+        "aiGenerated": false,
+        "assets": [
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/ig-vietnam-itineraire-15-jours-2026-11-25/reel.mp4",
+            "sha256": "c608aae04eb8398e676d235817c8866a7fa51466a99c062aad91a68e7d49c4d1",
+            "mimeType": "video/mp4"
+          }
+        ]
+      },
+      "review": {
+        "schemaVersion": 1,
+        "contentId": "vsd-production:instagram:ig-vietnam-itineraire-15-jours-2026-11-25:photo-v1",
+        "approved": true,
+        "reviewedAt": "2026-10-29T11:37:18Z",
+        "validUntil": "2026-11-28T11:36:06Z",
+        "payloadRevision": "18ff382ee7c0916e3a5fde0369cb50e8cd2daa139649f30b1b59b39bf62d4551",
+        "checks": {
+          "editorialApproved": true,
+          "rightsApproved": true,
+          "creditsPreserved": true,
+          "disclosurePreserved": true,
+          "formatRequirementsVerified": true,
+          "requiresPaidCall": false,
+          "sources": {
+            "status": "verified",
+            "observedAt": "2026-10-29T11:36:06Z",
+            "validUntil": "2026-11-28T11:36:06Z"
+          },
+          "syntheticPerson": false,
+          "providerSyntheticSettingVerified": false
+        },
+        "media": {
+          "url": "https://voyagesansdetour.fr/social-media/production/ig-vietnam-itineraire-15-jours-2026-11-25/reel.mp4",
+          "mimeType": "video/mp4",
+          "sha256": "c608aae04eb8398e676d235817c8866a7fa51466a99c062aad91a68e7d49c4d1",
+          "required": true,
+          "status": "verified",
+          "observedAt": "2026-10-29T11:37:18Z",
+          "validUntil": "2026-11-28T11:36:06Z"
+        },
+        "destination": {
+          "url": "https://voyagesansdetour.fr/vietnam/vietnam-itineraire-15-jours/",
+          "status": "verified",
+          "observedAt": "2026-10-29T11:37:18Z",
+          "validUntil": "2026-11-28T11:36:06Z"
+        },
+        "monetization": {
+          "containsAffiliateLinks": false,
+          "partnerApproved": false,
+          "linksVerified": false,
+          "disclosurePreserved": false
+        },
+        "formatCapability": {
+          "status": "verified",
+          "observedAt": "2026-10-29T11:37:18Z",
+          "validUntil": "2026-11-28T11:36:06Z",
+          "automaticPublishing": true,
+          "verificationMethod": "official_documentation",
+          "sourceUrls": [
+            "https://support.buffer.com/en-us/articles/sharing-videos-through-buffer-LOe2p2rnAI",
+            "https://developers.buffer.com/types/InstagramPostMetadataInput.html",
+            "https://developers.buffer.com/guides/posts-and-scheduling.html"
+          ]
+        },
+        "evidence": {
+          "status": "rendered_local_bytes_verified_public_deploy_pending",
+          "format": "photo_reel",
+          "rendererContractVersion": 3,
+          "receiptSha256": "8d42b78d320586a73b81b3a16cb06fb39d15799594e90814cca636ffbc4a31cb",
+          "scenarioFingerprint": "0bb36774b5d5096e97fb63446852b0909a6d3a023a0f81ab241bc6f17355d6c3",
+          "sourceCheckedOn": "2026-10-29",
+          "sourceUrls": [
+            "https://voyagesansdetour.fr/vietnam/vietnam-itineraire-15-jours/"
+          ],
+          "creditsUrl": "https://voyagesansdetour.fr/social-media/production/ig-vietnam-itineraire-15-jours-2026-11-25/credits.txt",
+          "voice": null,
+          "music": "Almost Bliss",
+          "note": "Les octets publics sont à contrôler après déploiement avec social_stock.py --verify-public. Un créneau prévu n'est pas une réservation Buffer."
+        }
+      }
+    }
+  ]
+}
