@@ -1,0 +1,175 @@
+{
+  "schemaVersion": 2,
+  "id": "auto-9ae6e3fad9f7224cb01ef3a3",
+  "slug": "cinque-terre-sans-voiture",
+  "baseArticleSha256": "f9fc9ef33ba4065eda95c11bda1e37e17eb7e99be0129ce6a4009ab8743b936c",
+  "sectionId": "via-dell-amore",
+  "afterParagraphSha256": "d188493cda6a8c5a75fa675840456f35e6dc31fca4d945572aa034f51dcc3519",
+  "paragraph": "Pour les consignes présentées par Italia.it, le sentier n. 509 mène au santuario della Madonna di Soviore, à une altitude de 418 mètres, et permet de découvrir un merveilleux bosco di lecci et cipressi. Selon Italia.it, la Cinque Terre Card permet également de participer à des escursioni a tema naturalistico et letterario, entre avril et août, pour découvrir les lieux tels que Punta Mesco, La casa del Doganiere et Meriggiare pallido e assorto.",
+  "sources": [
+    {
+      "url": "https://www.italia.it/it/liguria/la-spezia/monterosso-al-mare",
+      "sha256": "e5e62dd1513ed58bbe1cce3a074f7efb44b70241b30cae7dabc85da4d1ba4172",
+      "normalization": "visible-text-cp-node-v1"
+    }
+  ],
+  "reviewedAt": "2026-10-31T15:30:01Z",
+  "validUntil": "2026-11-02T15:30:01Z",
+  "reviewMethod": "source-grounded-model-review-v1",
+  "reviewEvidence": {
+    "proposal": {
+      "schemaVersion": 2,
+      "status": "update_ready_for_pilot_review",
+      "guideSlug": "cinque-terre-sans-voiture",
+      "baseArticleSha256": "f9fc9ef33ba4065eda95c11bda1e37e17eb7e99be0129ce6a4009ab8743b936c",
+      "factsSha256": "04b766e88d7ee3bf723ddd058fb56dcf1300e13e01aa8fdafbb18eb2eb922f29",
+      "facts": [
+        {
+          "id": "c2",
+          "fact": "Le sentier n. 509 mène au santuario della Madonna di Soviore",
+          "source": 0,
+          "quote": "il sentiero n. 509, che conduce al santuario della Madonna di Soviore",
+          "usefulness": "Découvrir les sentiers de randonnée",
+          "sourceContext": {
+            "url": "https://www.italia.it/it/liguria/la-spezia/monterosso-al-mare",
+            "label": "Italia.it — Monterosso al Mare",
+            "excerpt": "oro , con la chiesa di S. Francesco. La sua cappella sinistra conserva una Crocifissione , secondo alcuni opera del fiammingo Antoon van Dyk, ma probabilmente creazione di un pittore locale. Nella cappella di destra spicca invece una settecentesca pala raffigurante la Madonna Immacolata del genovese Giuseppe Palmieri. Se percorrete la via Roma verso l’alto si trovano indicazioni per intraprendere il sentiero n. 509, che conduce al santuario della Madonna di Soviore , a un’altitudine di 418 metri. Il santuario, circondato da un meraviglioso bosco di lecci e cipressi, è meta di pellegrinaggi: i fedeli vi si recano per ammirare, nella chiesa tardo duecentesca, una statua della Pietà risalente al ‘300. Proprio per i pellegrini, annessa alla chiesa era stata annessa una foresteria, che offriva rifugio ai viandanti. Poco distante dal borgo si trova Fregina , zona"
+          }
+        },
+        {
+          "id": "c3",
+          "fact": "La Cinque Terre Card permet de participer à des escursioni a tema naturalistico et letterario",
+          "source": 0,
+          "quote": "è possibile partecipare gratuitamente (tra aprile e agosto) alle escursioni a tema naturalistico e letterario",
+          "usefulness": "Profiter des activités incluses dans la carte",
+          "sourceContext": {
+            "url": "https://www.italia.it/it/liguria/la-spezia/monterosso-al-mare",
+            "label": "Italia.it — Monterosso al Mare",
+            "excerpt": " che offriva rifugio ai viandanti. Poco distante dal borgo si trova Fregina , zona turistica che costituisce una meta di villeggiatura in cui soggiornò addirittura Eugenio Montale con la sua famiglia. Passeggiando sulla sua spiaggia è possibile avvistare la grande statua del Gigante , una scultura che rappresenta il dio Nettuno e che è il simbolo del paese. Se in possesso della Cinque Terre Card, è possibile partecipare gratuitamente (tra aprile e agosto) alle escursioni a tema naturalistico e letterario alla scoperta dei luoghi descritto in Punta Mesco , La casa del Doganiere e Meriggiare pallido e assorto . Alcune informazioni sono fornite da: Monterosso al Mare 19016 Monterosso al Mare SP, Italia Sito Web Mappa Chiudi Ascolta e viaggia Scopri di più Ti potrebbe interessare Precedente UNESCO Like Cinque Terre, incantevoli borghi affacciati sul mare della Liguria 4 minuti Sport Like Trekking in "
+          }
+        },
+        {
+          "id": "c4",
+          "fact": "Le site de Monterosso al Mare propose des informations sur les métas de villeggiatura",
+          "source": 0,
+          "quote": "Fregina , zona turistica che costituisce una meta di villeggiatura",
+          "usefulness": "Choisir son hébergement",
+          "sourceContext": {
+            "url": "https://www.italia.it/it/liguria/la-spezia/monterosso-al-mare",
+            "label": "Italia.it — Monterosso al Mare",
+            "excerpt": "nna di Soviore , a un’altitudine di 418 metri. Il santuario, circondato da un meraviglioso bosco di lecci e cipressi, è meta di pellegrinaggi: i fedeli vi si recano per ammirare, nella chiesa tardo duecentesca, una statua della Pietà risalente al ‘300. Proprio per i pellegrini, annessa alla chiesa era stata annessa una foresteria, che offriva rifugio ai viandanti. Poco distante dal borgo si trova Fregina , zona turistica che costituisce una meta di villeggiatura in cui soggiornò addirittura Eugenio Montale con la sua famiglia. Passeggiando sulla sua spiaggia è possibile avvistare la grande statua del Gigante , una scultura che rappresenta il dio Nettuno e che è il simbolo del paese. Se in possesso della Cinque Terre Card, è possibile partecipare gratuitamente (tra aprile e agosto) alle escursioni a tema naturalistico e letterario alla scoperta dei luoghi"
+          }
+        }
+      ],
+      "additions": [
+        {
+          "title": "Découvrir les sentiers de randonnée",
+          "paragraph": "Pour les consignes présentées par Italia.it, le sentier n. 509 mène au santuario della Madonna di Soviore, à une altitude de 418 mètres, et permet de découvrir un merveilleux bosco di lecci et cipressi. Selon Italia.it, la Cinque Terre Card permet également de participer à des escursioni a tema naturalistico et letterario, entre avril et août, pour découvrir les lieux tels que Punta Mesco, La casa del Doganiere et Meriggiare pallido e assorto.",
+          "claims": [
+            "c2",
+            "c3"
+          ],
+          "targetSectionId": "via-dell-amore"
+        },
+        {
+          "title": "Choisir son hébergement",
+          "paragraph": "Selon Italia.it, le site de Monterosso al Mare propose des informations sur les métas de villeggiatura, telles que Fregina, qui constitue une zone turistica et une meta di villeggiatura où Eugenio Montale a séjourné avec sa famille. Cette zone offre également une grande statua del Gigante, symbole du pays, et permet de profiter de la plage.",
+          "claims": [
+            "c4"
+          ],
+          "targetSectionId": "villages"
+        }
+      ],
+      "review": {
+        "supported": true,
+        "issues": [],
+        "checkedClaimIds": [
+          "c2",
+          "c3",
+          "c4"
+        ]
+      },
+      "usage": {
+        "writer": {
+          "prompt_tokens": 3736,
+          "completion_tokens": 294,
+          "total_tokens": 4030
+        },
+        "reviewer": {
+          "prompt_tokens": 5862,
+          "completion_tokens": 27,
+          "total_tokens": 5889
+        }
+      },
+      "callsAttempted": 2,
+      "publicationApproved": false,
+      "sourceManifest": [
+        {
+          "url": "https://www.italia.it/it/liguria/la-spezia/monterosso-al-mare",
+          "sha256": "e5e62dd1513ed58bbe1cce3a074f7efb44b70241b30cae7dabc85da4d1ba4172",
+          "normalizedSha256": "e5e62dd1513ed58bbe1cce3a074f7efb44b70241b30cae7dabc85da4d1ba4172"
+        }
+      ]
+    },
+    "entailment": {
+      "checks": [
+        {
+          "id": "c1",
+          "entailed": false,
+          "unsupportedDetails": [
+            "La gare de Monterosso al Mare est reliée à La Spezia et à Levanto par train"
+          ]
+        },
+        {
+          "id": "c2",
+          "entailed": true,
+          "unsupportedDetails": []
+        },
+        {
+          "id": "c3",
+          "entailed": true,
+          "unsupportedDetails": []
+        },
+        {
+          "id": "c4",
+          "entailed": true,
+          "unsupportedDetails": []
+        },
+        {
+          "id": "c5",
+          "entailed": false,
+          "unsupportedDetails": [
+            "Le ministère du Tourisme italien propose des informations sur les sites UNESCO"
+          ]
+        }
+      ]
+    },
+    "novelty": {
+      "decisions": [
+        {
+          "id": "c2",
+          "supported": true,
+          "newInformation": true,
+          "useful": true,
+          "reason": "La citation démontre exactement la paraphrase sans déduction supplémentaire, l'information est nouvelle et aide à la décision de voyage en découvrant les sentiers de randonnée."
+        },
+        {
+          "id": "c3",
+          "supported": true,
+          "newInformation": true,
+          "useful": true,
+          "reason": "La citation démontre exactement la paraphrase sans déduction supplémentaire, l'information est nouvelle et aide à la décision de voyage en profitant des activités incluses dans la carte."
+        },
+        {
+          "id": "c4",
+          "supported": true,
+          "newInformation": true,
+          "useful": true,
+          "reason": "La citation démontre exactement la paraphrase sans déduction supplémentaire, l'information est nouvelle et aide à la décision de voyage en choisissant son hébergement."
+        }
+      ]
+    },
+    "observedAt": "2026-10-31T15:29:17+00:00"
+  },
+  "approvalSha256": "ff463e14bc87226bda65c521d17da4da50c6a68b8025d323de658b36f3a40241"
+}

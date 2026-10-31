@@ -15,6 +15,15 @@
         "paragraphSha256": "5e377cf4bb24d754dd6bc0c782b3b9f48c777a97fbd55b9c86a78e9c3cc24c16",
         "verification": "exact-paragraph-presence-v1"
       }
+    },
+    {
+      "id": "auto-9ae6e3fad9f7224cb01ef3a3",
+      "slug": "cinque-terre-sans-voiture",
+      "approvalSha256": "ff463e14bc87226bda65c521d17da4da50c6a68b8025d323de658b36f3a40241",
+      "beforeSha256": "f9fc9ef33ba4065eda95c11bda1e37e17eb7e99be0129ce6a4009ab8743b936c",
+      "afterSha256": "bd0c39fa5c9c84b9a28d12f69d8daf969bdd0357d0ef477a6169ee6940648219",
+      "appliedAt": "2026-10-31T15:30:01Z",
+      "receipt": null
     }
   ]
 }
