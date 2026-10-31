@@ -23,7 +23,13 @@
       "beforeSha256": "f9fc9ef33ba4065eda95c11bda1e37e17eb7e99be0129ce6a4009ab8743b936c",
       "afterSha256": "bd0c39fa5c9c84b9a28d12f69d8daf969bdd0357d0ef477a6169ee6940648219",
       "appliedAt": "2026-10-31T15:30:01Z",
-      "receipt": null
+      "receipt": {
+        "verifiedAt": "2026-10-31T15:32:28Z",
+        "url": "https://voyagesansdetour.fr/italie/cinque-terre-sans-voiture/",
+        "htmlSha256": "f72ebec4b48442f76ea170b5e8734bbadf9a048ca6e8697ce18087995c82de94",
+        "paragraphSha256": "01b4dd7ab505e00b44739c8fb51f87ff4f3e3798146836762108fd6e42d69ddc",
+        "verification": "exact-paragraph-presence-v1"
+      }
     }
   ]
 }
