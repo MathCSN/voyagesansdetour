@@ -385,7 +385,7 @@
       11,
       12
     ],
-    "priority": 69,
+    "priority": 10,
     "demand": {
       "googleSuggest": 96,
       "googleTrends": 48,
@@ -5607,6 +5607,405 @@
       "saison",
       "°c",
       "mousson"
+    ]
+  },
+  {
+    "slug": "rio-de-janeiro-4-jours",
+    "destination": "Rio de Janeiro",
+    "country": "bresil",
+    "continent": "amerique-du-sud",
+    "type": "itineraire",
+    "question": "Que faire à Rio de Janeiro en 4 jours : Christ Rédempteur, Pain de Sucre, Copacabana et le carnaval, avec les trajets en métro et les prix ?",
+    "travelMonths": [
+      12,
+      1,
+      2,
+      3
+    ],
+    "priority": 60,
+    "sources": [
+      {
+        "label": "Wikivoyage — Rio de Janeiro",
+        "url": "https://fr.wikivoyage.org/wiki/Rio_de_Janeiro"
+      },
+      {
+        "label": "Wikipédia — Rio de Janeiro",
+        "url": "https://fr.wikipedia.org/wiki/Rio_de_Janeiro"
+      }
+    ],
+    "photos": [
+      {
+        "id": "rio-christ",
+        "query": "Christ Redeemer Corcovado",
+        "must": [
+          "christ",
+          "redeemer",
+          "corcovado",
+          "redentor"
+        ],
+        "alt": "Le Christ Rédempteur au sommet du Corcovado, à Rio de Janeiro."
+      },
+      {
+        "id": "rio-pain-de-sucre",
+        "query": "Sugarloaf Mountain Rio",
+        "must": [
+          "sugarloaf",
+          "pão de açúcar",
+          "pao de acucar"
+        ],
+        "alt": "Le Pain de Sucre, à Rio de Janeiro."
+      },
+      {
+        "id": "rio-copacabana",
+        "query": "Copacabana beach Rio",
+        "must": [
+          "copacabana"
+        ],
+        "alt": "La plage de Copacabana, à Rio de Janeiro."
+      }
+    ],
+    "keywords": [
+      "jours",
+      "carnaval",
+      "corcovado",
+      "pain de sucre",
+      "copacabana",
+      "métro",
+      "°c",
+      "saison",
+      "pluie",
+      "réais"
+    ]
+  },
+  {
+    "slug": "lanzarote-que-faire",
+    "destination": "Lanzarote",
+    "country": "espagne",
+    "continent": "europe",
+    "type": "que-faire",
+    "question": "Que faire à Lanzarote en une semaine : Timanfaya, Jameos del Agua, vignobles de La Geria et plages de Papagayo, avec les distances et la météo en hiver ?",
+    "travelMonths": [
+      11,
+      12,
+      1,
+      2,
+      3,
+      4
+    ],
+    "priority": 56,
+    "sources": [
+      {
+        "label": "Wikivoyage — Lanzarote",
+        "url": "https://fr.wikivoyage.org/wiki/Lanzarote"
+      },
+      {
+        "label": "Wikipédia — Lanzarote",
+        "url": "https://fr.wikipedia.org/wiki/Lanzarote"
+      }
+    ],
+    "photos": [
+      {
+        "id": "lanzarote-jameos",
+        "query": "Jameos del Agua",
+        "must": [
+          "jameos"
+        ],
+        "alt": "Les Jameos del Agua, à Lanzarote."
+      },
+      {
+        "id": "lanzarote-geria",
+        "query": "La Geria Lanzarote vineyard",
+        "must": [
+          "geria"
+        ],
+        "alt": "Les vignes de La Geria, à Lanzarote."
+      },
+      {
+        "id": "lanzarote-papagayo",
+        "query": "Papagayo beach Lanzarote",
+        "must": [
+          "papagayo"
+        ],
+        "alt": "La plage de Papagayo, à Lanzarote."
+      }
+    ],
+    "keywords": [
+      "km",
+      "jours",
+      "timanfaya",
+      "jameos",
+      "geria",
+      "papagayo",
+      "°c",
+      "vent",
+      "volcan",
+      "ferry"
+    ]
+  },
+  {
+    "slug": "tanzanie-safari-serengeti",
+    "destination": "Tanzanie",
+    "country": "tanzanie",
+    "continent": "afrique",
+    "type": "itineraire",
+    "question": "Comment organiser un safari en Tanzanie : Serengeti, Ngorongoro, lac Manyara, quand voir la grande migration et combien de jours prévoir ?",
+    "travelMonths": [
+      1,
+      2,
+      3,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "priority": 50,
+    "sources": [
+      {
+        "label": "Wikivoyage — Tanzanie",
+        "url": "https://fr.wikivoyage.org/wiki/Tanzanie"
+      },
+      {
+        "label": "Wikipédia — Parc national du Serengeti",
+        "url": "https://fr.wikipedia.org/wiki/Parc_national_du_Serengeti"
+      }
+    ],
+    "photos": [
+      {
+        "id": "tanzanie-serengeti",
+        "query": "Serengeti wildebeest",
+        "must": [
+          "serengeti"
+        ],
+        "alt": "Des gnous dans le Serengeti, en Tanzanie."
+      },
+      {
+        "id": "tanzanie-ngorongoro",
+        "query": "Ngorongoro crater",
+        "must": [
+          "ngorongoro"
+        ],
+        "alt": "Le cratère du Ngorongoro, en Tanzanie."
+      },
+      {
+        "id": "tanzanie-manyara",
+        "query": "Lake Manyara",
+        "must": [
+          "manyara"
+        ],
+        "alt": "Le lac Manyara, en Tanzanie."
+      }
+    ],
+    "keywords": [
+      "jours",
+      "serengeti",
+      "ngorongoro",
+      "migration",
+      "gnous",
+      "saison",
+      "pluies",
+      "km",
+      "parc",
+      "safari"
+    ]
+  },
+  {
+    "slug": "sicile-road-trip-10-jours",
+    "destination": "Sicile",
+    "country": "italie",
+    "continent": "europe",
+    "type": "road-trip",
+    "question": "Quel road trip de 10 jours en Sicile : Palerme, Agrigente, Taormine et l’Etna, avec les distances, les durées de route et la meilleure saison ?",
+    "travelMonths": [
+      4,
+      5,
+      6,
+      9,
+      10
+    ],
+    "priority": 47,
+    "sources": [
+      {
+        "label": "Wikivoyage — Sicile",
+        "url": "https://fr.wikivoyage.org/wiki/Sicile"
+      },
+      {
+        "label": "Wikipédia — Sicile",
+        "url": "https://fr.wikipedia.org/wiki/Sicile"
+      }
+    ],
+    "photos": [
+      {
+        "id": "sicile-agrigente",
+        "query": "Valle dei Templi Agrigento",
+        "must": [
+          "agrigento",
+          "templi"
+        ],
+        "alt": "La vallée des Temples, à Agrigente, en Sicile."
+      },
+      {
+        "id": "sicile-taormine",
+        "query": "Taormina Teatro Greco",
+        "must": [
+          "taormina"
+        ],
+        "alt": "Le théâtre antique de Taormine, en Sicile."
+      },
+      {
+        "id": "sicile-etna",
+        "query": "Mount Etna",
+        "must": [
+          "etna"
+        ],
+        "alt": "Le volcan Etna, au-dessus de la côte est de la Sicile."
+      }
+    ],
+    "keywords": [
+      "km",
+      "heures",
+      "jours",
+      "palerme",
+      "agrigente",
+      "taormine",
+      "etna",
+      "ferry",
+      "°c",
+      "saison"
+    ]
+  },
+  {
+    "slug": "perou-itineraire-2-semaines",
+    "destination": "Pérou",
+    "country": "perou",
+    "continent": "amerique-du-sud",
+    "type": "itineraire",
+    "question": "Quel itinéraire de deux semaines au Pérou : Lima, Cusco, Vallée sacrée et Machu Picchu, avec l’altitude, les trajets et la meilleure saison ?",
+    "travelMonths": [
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "priority": 44,
+    "sources": [
+      {
+        "label": "Wikivoyage — Pérou",
+        "url": "https://fr.wikivoyage.org/wiki/P%C3%A9rou"
+      },
+      {
+        "label": "Wikipédia — Cuzco",
+        "url": "https://fr.wikipedia.org/wiki/Cuzco"
+      }
+    ],
+    "photos": [
+      {
+        "id": "perou-vinicunca",
+        "query": "Rainbow Mountain Vinicunca",
+        "must": [
+          "vinicunca",
+          "rainbow"
+        ],
+        "alt": "La montagne de Vinicunca, au Pérou."
+      },
+      {
+        "id": "perou-vallee-sacree",
+        "query": "Sacred Valley Pisac",
+        "must": [
+          "pisac",
+          "sacred valley"
+        ],
+        "alt": "La Vallée sacrée près de Pisac, au Pérou."
+      },
+      {
+        "id": "perou-cusco",
+        "query": "Cusco Plaza de Armas",
+        "must": [
+          "cusco",
+          "cuzco"
+        ],
+        "alt": "La place d’Armes de Cusco, au Pérou."
+      }
+    ],
+    "keywords": [
+      "jours",
+      "altitude",
+      "cusco",
+      "lima",
+      "machu picchu",
+      "vallée sacrée",
+      "m",
+      "heures",
+      "saison",
+      "train"
+    ]
+  },
+  {
+    "slug": "ouzbekistan-itineraire-10-jours",
+    "destination": "Ouzbékistan",
+    "country": "ouzbekistan",
+    "continent": "asie",
+    "type": "itineraire",
+    "question": "Quel itinéraire de 10 jours en Ouzbékistan : Tachkent, Samarcande, Boukhara et Khiva, avec les trajets en train rapide et la meilleure saison ?",
+    "travelMonths": [
+      3,
+      4,
+      5,
+      9,
+      10
+    ],
+    "priority": 38,
+    "sources": [
+      {
+        "label": "Wikivoyage — Ouzbékistan",
+        "url": "https://fr.wikivoyage.org/wiki/Ouzb%C3%A9kistan"
+      },
+      {
+        "label": "Wikipédia — Samarcande",
+        "url": "https://fr.wikipedia.org/wiki/Samarcande"
+      }
+    ],
+    "photos": [
+      {
+        "id": "ouzbekistan-registan",
+        "query": "Registan Samarkand",
+        "must": [
+          "registan"
+        ],
+        "alt": "Le Registan, à Samarcande, en Ouzbékistan."
+      },
+      {
+        "id": "ouzbekistan-boukhara",
+        "query": "Bukhara Kalyan minaret",
+        "must": [
+          "bukhara",
+          "kalyan"
+        ],
+        "alt": "Le minaret Kalon, à Boukhara, en Ouzbékistan."
+      },
+      {
+        "id": "ouzbekistan-khiva",
+        "query": "Khiva Uzbekistan",
+        "must": [
+          "khiva"
+        ],
+        "alt": "Les remparts de Khiva, en Ouzbékistan."
+      }
+    ],
+    "keywords": [
+      "jours",
+      "samarcande",
+      "boukhara",
+      "khiva",
+      "tachkent",
+      "train",
+      "km",
+      "heures",
+      "°c",
+      "saison"
     ]
   }
 ]
