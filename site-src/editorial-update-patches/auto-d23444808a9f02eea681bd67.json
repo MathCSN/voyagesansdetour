@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 2,
+  "id": "auto-d23444808a9f02eea681bd67",
+  "slug": "douro-train-depuis-porto",
+  "baseArticleSha256": "d68846d9ff858abdc30296a8bccd524ad97731971328485e992c052d6acc88c7",
+  "sectionId": "regua",
+  "afterParagraphSha256": "9fb68aeab75f9d5d6f985f953fa37566c5980c9c1a35270ee5073a8bed246b99",
+  "paragraph": "Le Museu do Douro propose désormais des visites guidées avec dégustation de vin de Porto à partir de 10€ par personne, ainsi que des dégustations de vin documentées à partir de 12,50€ par personne. Pour les consignes présentées par le Museu do Douro, les visiteurs peuvent choisir entre différents packs, tels que le Pack MD1 qui inclut une visite au musée et une dégustation de vin de Porto pour 10,00€ par personne, ou le Pack MD2 qui inclut une visite au musée, une dégustation de vin de Porto et un cadeau de cálice MD pour 15,00€ par personne. De plus, le musée propose des dégustations de vin documentées, telles que la Prova Douro qui comprend 3 vins du Douro DOC pour 12,50€ par personne.",
+  "sources": [
+    {
+      "url": "https://museudodouro.pt/museu-programas-de-visita",
+      "sha256": "f97044be90ae40103fd4798cf6ecf7bbf70d962ab87463102d601efcd94d6022",
+      "normalization": "visible-text-cp-node-v1"
+    }
+  ],
+  "reviewedAt": "2026-11-03T17:20:57Z",
+  "validUntil": "2026-11-05T17:20:57Z",
+  "reviewMethod": "source-grounded-model-review-v1",
+  "reviewEvidence": {
+    "proposal": {
+      "schemaVersion": 2,
+      "status": "update_ready_for_pilot_review",
+      "guideSlug": "douro-train-depuis-porto",
+      "baseArticleSha256": "d68846d9ff858abdc30296a8bccd524ad97731971328485e992c052d6acc88c7",
+      "factsSha256": "63533a9da7e4a659b01067c7d419888c9491a9a018ab5815e962924cab771c48",
+      "facts": [
+        {
+          "id": "c1",
+          "fact": "Le Museu do Douro propose des visites guidées avec dégustation de vin de Porto à partir de 10€ par personne",
+          "source": 0,
+          "quote": "Pack MD1 – Visita ao Museu com prova de Vinho do Porto: 10,00€ por pessoa",
+          "usefulness": "Connaître les options de visites guidées avec dégustation de vin de Porto au Museu do Douro",
+          "sourceContext": {
+            "url": "https://museudodouro.pt/museu-programas-de-visita",
+            "label": "Museu do Douro — Programmes de visite",
+            "excerpt": "ouro TERRITÓRIO Região Demarcada do Douro PROGRAMAÇÃO Exposições Educação Eventos COLEÇÕES VISITAR O Museu do Douro Restaurante / Wine bar GALERIA INFORMAÇÕES LOJA Subscrever Agenda MD Museu do Douro Visite o Museu do Douro Informação para grupos Condições de Ingresso e Modalidades Programas de visita Cartão Museu do Douro Cedências de Espaços [Organização de Eventos] Programas de visita Packs MD Pack MD1 – Visita ao Museu com prova de Vinho do Porto: 10,00€ por pessoa. Inclui: Acolhimento e visita ao Museu do Douro; Visita à Exposição Permanente «Douro, Matéria e Espírito»; Prova de Vinho do Porto acompanhado de frutos secos. Pack MD2 – Visita ao Museu com prova de Vinho do Porto e oferta de cálice MD: 15,00€ por pessoa. Inclui: Acolhimento e visita ao Museu do Douro; Visita à Exposição Permanente «Douro, Matéria e Espírito»; prova de Vinho do Porto acompanhad"
+          }
+        },
+        {
+          "id": "c3",
+          "fact": "Le Museu do Douro propose des dégustations de vin documentées à partir de 12,50€ par personne",
+          "source": 0,
+          "quote": "Prova Douro (3 vinhos): 3 vinhos do Douro DOC (Rosé, Branco e Tinto): 12,50€ por pessoa",
+          "usefulness": "Connaître les options de dégustations de vin au Museu do Douro",
+          "sourceContext": {
+            "url": "https://museudodouro.pt/museu-programas-de-visita",
+            "label": "Museu do Douro — Programmes de visite",
+            "excerpt": "te \"A Companhia\" (só em dias úteis). Programa Cultura e Gastronomia Conheça os programas combinados com viagem de comboio regional e atividades no Museu do Douro ou usufrua do desconto de 20% na entrada do Museu, mediante a apresentação do bilhete de comboio. Parceria Museu do Douro e CP - Comboios de Portugal. Clique no link e consulte os programas que temos para si! Provas de Vinho Documentadas Prova Douro (3 vinhos): 3 vinhos do Douro DOC (Rosé, Branco e Tinto): 12,50€ por pessoa Prova Douro e Porto (4 vinhos): 2 vinhos do Douro DOC (Branco e Tinto) e 2 vinhos do Porto (Ruby e Tawny 10 anos): 17,50€ por pessoa Prova Premium (5 vinhos) : 2 vinhos do Douro DOC (Branco e Tinto), 1 Moscatel e 2 vinhos do Porto (Tawny 20 Anos e Vintage): 25,00€ por pessoa Marcação com antecedência mínima de 24 horas. Sujeito a confirmação posterior. Dimensão mínima de 4 pessoas por grupo. Dime"
+          }
+        }
+      ],
+      "additions": [
+        {
+          "title": "Nouvelles options de visites guidées au Museu do Douro",
+          "paragraph": "Le Museu do Douro propose désormais des visites guidées avec dégustation de vin de Porto à partir de 10€ par personne, ainsi que des dégustations de vin documentées à partir de 12,50€ par personne. Pour les consignes présentées par le Museu do Douro, les visiteurs peuvent choisir entre différents packs, tels que le Pack MD1 qui inclut une visite au musée et une dégustation de vin de Porto pour 10,00€ par personne, ou le Pack MD2 qui inclut une visite au musée, une dégustation de vin de Porto et un cadeau de cálice MD pour 15,00€ par personne. De plus, le musée propose des dégustations de vin documentées, telles que la Prova Douro qui comprend 3 vins du Douro DOC pour 12,50€ par personne.",
+          "claims": [
+            "c1",
+            "c3"
+          ],
+          "targetSectionId": "regua"
+        }
+      ],
+      "review": {
+        "supported": true,
+        "issues": [],
+        "checkedClaimIds": [
+          "c1",
+          "c3"
+        ]
+      },
+      "usage": {
+        "writer": {
+          "prompt_tokens": 3287,
+          "completion_tokens": 247,
+          "total_tokens": 3534
+        },
+        "reviewer": {
+          "prompt_tokens": 4842,
+          "completion_tokens": 23,
+          "total_tokens": 4865
+        }
+      },
+      "callsAttempted": 2,
+      "publicationApproved": false,
+      "sourceManifest": [
+        {
+          "url": "https://museudodouro.pt/museu-programas-de-visita",
+          "sha256": "f97044be90ae40103fd4798cf6ecf7bbf70d962ab87463102d601efcd94d6022",
+          "normalizedSha256": "f97044be90ae40103fd4798cf6ecf7bbf70d962ab87463102d601efcd94d6022"
+        }
+      ]
+    },
+    "entailment": {
+      "checks": [
+        {
+          "id": "c1",
+          "entailed": true,
+          "unsupportedDetails": []
+        },
+        {
+          "id": "c2",
+          "entailed": false,
+          "unsupportedDetails": [
+            "'Cultura e Gastronomia' est un programme spécifique"
+          ]
+        },
+        {
+          "id": "c3",
+          "entailed": true,
+          "unsupportedDetails": []
+        },
+        {
+          "id": "c4",
+          "entailed": false,
+          "unsupportedDetails": [
+            "Les parcours pédestres sont proposés par le Serviço Educativo du Museu do Douro, pas par le Museu do Douro lui-même"
+          ]
+        },
+        {
+          "id": "c5",
+          "entailed": false,
+          "unsupportedDetails": [
+            "L'espace de restauration et de vente de produits locaux est en réalité la Loja do Museu do Douro"
+          ]
+        }
+      ]
+    },
+    "novelty": {
+      "decisions": [
+        {
+          "id": "c1",
+          "supported": true,
+          "newInformation": true,
+          "useful": true,
+          "reason": "La citation démontre exactement la paraphrase sans déduction supplémentaire, l'information est nouvelle et aide à la décision concrète de voyage en proposant des visites guidées avec dégustation de vin de Porto au Museu do Douro."
+        },
+        {
+          "id": "c3",
+          "supported": true,
+          "newInformation": true,
+          "useful": true,
+          "reason": "La citation démontre exactement la paraphrase sans déduction supplémentaire, l'information est nouvelle et aide à la décision concrète de voyage en proposant des dégustations de vin documentées au Museu do Douro."
+        }
+      ]
+    },
+    "observedAt": "2026-11-03T17:20:17+00:00"
+  },
+  "approvalSha256": "f90924e5216d6d764840816177295705662ddb8589c6067bd2e01c45797c704d"
+}

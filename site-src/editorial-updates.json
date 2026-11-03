@@ -30,6 +30,15 @@
         "paragraphSha256": "01b4dd7ab505e00b44739c8fb51f87ff4f3e3798146836762108fd6e42d69ddc",
         "verification": "exact-paragraph-presence-v1"
       }
+    },
+    {
+      "id": "auto-d23444808a9f02eea681bd67",
+      "slug": "douro-train-depuis-porto",
+      "approvalSha256": "f90924e5216d6d764840816177295705662ddb8589c6067bd2e01c45797c704d",
+      "beforeSha256": "d68846d9ff858abdc30296a8bccd524ad97731971328485e992c052d6acc88c7",
+      "afterSha256": "40fbbde94ab319e2889123c2ed34c609189409affdf270a3416c365713459303",
+      "appliedAt": "2026-11-03T17:20:57Z",
+      "receipt": null
     }
   ]
 }
