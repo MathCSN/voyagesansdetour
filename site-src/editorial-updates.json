@@ -38,7 +38,13 @@
       "beforeSha256": "d68846d9ff858abdc30296a8bccd524ad97731971328485e992c052d6acc88c7",
       "afterSha256": "40fbbde94ab319e2889123c2ed34c609189409affdf270a3416c365713459303",
       "appliedAt": "2026-11-03T17:20:57Z",
-      "receipt": null
+      "receipt": {
+        "verifiedAt": "2026-11-03T17:26:03Z",
+        "url": "https://voyagesansdetour.fr/portugal/douro-train-depuis-porto/",
+        "htmlSha256": "c4c9c09b140ef5892cb14621213cb67dd2e67177ca0f5e42b9035e9c9f0d9fab",
+        "paragraphSha256": "a9ddc879fa0beef207c9d130b88793d37b38b72492ee049008112ba389861022",
+        "verification": "exact-paragraph-presence-v1"
+      }
     }
   ]
 }
