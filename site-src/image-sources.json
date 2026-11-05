@@ -977,6 +977,42 @@
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
       "alt_fr": "Les rizières en terrasses autour de Sa Pa, dans le Nord.",
       "credit_fr": "Eerin25 / Wikimedia Commons — CC0."
+    },
+    {
+      "id": "marrakech-place-jemaa-el-fna",
+      "file": "photos/marrakech-place-jemaa-el-fna.jpg",
+      "width": 1600,
+      "height": 871,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Jamaa_El_Fna,_Marrakesh,_Morocco,_20250124_1804_7017.jpg",
+      "author": "Jakub Hałun",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0",
+      "alt_fr": "La place Jemaa el-Fna en fin de journée, entre parasols verts et étals, au cœur de la médina de Marrakech.",
+      "credit_fr": "Jakub Hałun / Wikimedia Commons — CC BY 4.0."
+    },
+    {
+      "id": "marrakech-majorelle",
+      "file": "photos/marrakech-majorelle.jpg",
+      "width": 1600,
+      "height": 1063,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Le_jardin_des_majorelle_16.JPG",
+      "author": "Viault",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "alt_fr": "La villa bleue du jardin Majorelle.",
+      "credit_fr": "Viault / Wikimedia Commons — CC BY-SA 4.0."
+    },
+    {
+      "id": "marrakech-bahia",
+      "file": "photos/marrakech-bahia.jpg",
+      "width": 1600,
+      "height": 1068,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Bahia_Palace_large_court.jpg",
+      "author": "Val Traveler",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "alt_fr": "La grande cour carrelée de zelliges du palais de la Bahia, à Marrakech.",
+      "credit_fr": "Val Traveler / Wikimedia Commons — CC BY-SA 4.0."
     }
   ]
 }

@@ -168,11 +168,23 @@
       "path": null,
       "place": "Luís"
     },
+    "majorelle|maroc": {
+      "checkedOn": "2026-11-05",
+      "country": "Maroc",
+      "path": null,
+      "place": "Majorelle"
+    },
     "manuel-antonio|costa-rica": {
       "checkedOn": "2026-10-24",
       "country": "Costa Rica",
       "path": "manuel-antonio-l142888",
       "place": "Manuel Antonio"
+    },
+    "marrakech|maroc": {
+      "checkedOn": "2026-11-05",
+      "country": "Maroc",
+      "path": "marrakech-l208",
+      "place": "Marrakech"
     },
     "monteverde|costa-rica": {
       "checkedOn": "2026-10-24",
