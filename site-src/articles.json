@@ -1285,7 +1285,7 @@
         "title": "La ligne E : de l’aéroport à Trindade en une demi-heure",
         "image": "porto-metro-aeroport",
         "paragraphs": [
-          "La ligne E, violette, relie Aeroporto à Trindade, cœur du réseau. Selon les horaires publiés par Metro do Porto, le trajet prend 27 à 32 minutes, avec un départ toutes les 13 à 16 minutes en journée et toutes les 19 à 21 minutes après 21 h. Premier départ vers 6 h 06 en semaine (5 h 57 le dimanche), dernier vers 0 h 42 tous les jours, sur la grille valable jusqu’au 25 octobre 2026.",
+          "La ligne E, violette, relie Aeroporto à Trindade, cœur du réseau. Selon les horaires publiés par Metro do Porto, le trajet prend 27 à 32 minutes, avec un départ toutes les 13 à 16 minutes en journée et toutes les 19 à 21 minutes après 21 h. Premier départ vers 6 h 06 en semaine (5 h 57 le dimanche), dernier vers 0 h 42 tous les jours, sur la grille en vigueur depuis le 7 septembre 2026 (relevée le 25 octobre ; Metro do Porto ne publie pas de date de fin).",
           "Certains métros de la ligne E continuent jusqu’à Campanhã, la gare des trains pour Lisbonne, en 33 à 34 minutes depuis l’aéroport, environ toutes les demi-heures à partir de 7 h 20."
         ]
       },
@@ -1303,7 +1303,7 @@
         "title": "Arrivée tardive : le bus de nuit 3M",
         "paragraphs": [
           "Après le dernier métro, le bus de nuit 3M relie l’aéroport à l’Avenida dos Aliados, en plein centre, entre 0 h 30 et 5 h 30, à peu près toutes les heures. Si votre vol atterrit vers minuit, comptez le temps des bagages : un passage de 3M vaut mieux qu’une course pour attraper le dernier métro.",
-          "Pour un vol très tôt, le premier métro quitte Trindade vers l’aéroport à 5 h 58 en semaine mais seulement à 6 h 22 le week-end, d’après la grille de septembre–octobre 2026. La nuit précédant un départ à l’aube, dormir près de la ligne E ou prévoir le 3M évite les mauvaises surprises."
+          "Pour un vol très tôt, le premier métro quitte Trindade vers l’aéroport à 5 h 58 en semaine mais seulement à 6 h 22 le week-end, d’après la grille en vigueur depuis le 7 septembre 2026. La nuit précédant un départ à l’aube, dormir près de la ligne E ou prévoir le 3M évite les mauvaises surprises."
         ]
       },
       {
@@ -1375,9 +1375,9 @@
       "lisbonne-porto-train",
       "portugal-sans-voiture-bagages"
     ],
-    "sourcesCheckedOn": "2026-10-24",
+    "sourcesCheckedOn": "2026-11-05",
     "publishedOn": "2026-09-27",
-    "updatedOn": "2026-10-24"
+    "updatedOn": "2026-11-05"
   },
   {
     "slug": "portugal-sans-voiture-bagages",
