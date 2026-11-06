@@ -24,14 +24,21 @@ def link_or_copy(source, target):
         shutil.copy2(source, target)
 
 
+def within_review(scenario):
+    # Each scenario is checked inside its own review window: posts are generated on different days.
+    return p.instant(scenario["review"]["checkedAt"]) + dt.timedelta(seconds=1)
+
+
 class ProductionGuards(unittest.TestCase):
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)
         self.root = Path(self.temporary.name) / "bundle"
         self.root.mkdir()
-        for folder in ("assets", "evidence", "scenarios", "sources"):
-            shutil.copytree(p.HERE / folder, self.root / folder, copy_function=link_or_copy)
+        # auto/ holds the inputs of posts generated from guides; the catalogue references it once one exists.
+        for folder in ("assets", "evidence", "scenarios", "sources", "auto"):
+            if (p.HERE / folder).is_dir():
+                shutil.copytree(p.HERE / folder, self.root / folder, copy_function=link_or_copy)
         shutil.copyfile(p.HERE / "catalogue.json", self.root / "catalogue.json")
         self.catalogue = p.load_json(self.root / "catalogue.json")
         self.scenario_file = self.root / "scenarios/ig-lisbonne-tram28-tarifs-2026-10.json"
@@ -73,7 +80,7 @@ class ProductionGuards(unittest.TestCase):
         self.assertGreaterEqual(len(self.catalogue["items"]), 8)
         kinds = set()
         for _, _, scenario in p.catalogue_entries(self.root):
-            info = p.validate_scenario(scenario, self.root, self.now)
+            info = p.validate_scenario(scenario, self.root, within_review(scenario))
             size, carousel = (p.draw.SLIDE_SIZE, True) if scenario["kind"] == "carousel" else (p.draw.REEL_SIZE, False)
             self.assertEqual(len(p.prepared_scenes(scenario, self.root, info, size, carousel)), len(scenario["scenes"]))
             kinds.add(scenario["kind"])
@@ -81,7 +88,7 @@ class ProductionGuards(unittest.TestCase):
 
     def test_caption_is_short_and_lively_with_one_credit_line(self):
         for _, _, scenario in p.catalogue_entries(self.root):
-            info = p.validate_scenario(scenario, self.root, self.now)
+            info = p.validate_scenario(scenario, self.root, within_review(scenario))
             text = p.caption(scenario, info)
             self.assertTrue(text.startswith(scenario["caption"]["hook"]))
             self.assertLessEqual(len(text), 1000)
@@ -242,9 +249,11 @@ class ProductionGuards(unittest.TestCase):
     # --- Idempotence and safety, kept from the previous engine --------------
 
     def test_expired_and_future_content_do_not_invoke_renderer(self):
+        # Generated posts are reviewed on their own day: test before the first window and after the last.
+        reviews = [scenario["review"] for _, _, scenario in p.catalogue_entries(self.root)]
         with mock.patch.object(p, "render") as render:
-            early = p.run(self.root, self.output, now=self.now - dt.timedelta(hours=1))
-            late = p.run(self.root, self.output, now=p.instant(self.scenario["review"]["validUntil"]))
+            early = p.run(self.root, self.output, now=min(p.instant(r["checkedAt"]) for r in reviews) - dt.timedelta(hours=1))
+            late = p.run(self.root, self.output, now=max(p.instant(r["validUntil"]) for r in reviews))
         render.assert_not_called()
         self.assertEqual(early["productionReadiness"]["status"], "waiting_for_due_scenario")
         self.assertEqual(late["productionReadiness"]["expiredScenarios"], len(self.catalogue["items"]))
