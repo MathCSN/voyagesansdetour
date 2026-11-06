@@ -32,6 +32,9 @@ guide publié ──► rendu (production.py, reel_intake.py)
   dans le projet Codex local `~/.codex/.chatgpt-projects/g-p-6aa80b285c0081919bf16079e50bfb9e/`
   (`panneau-prive/` et `exploitation/cloud-publications/`). Il tient le registre D1, la clé Buffer
   et la cadence : **Instagram 1 post par semaine**, Facebook selon sa politique serveur.
+- **Remplaçant prêt** (06/11/2026) : panneau `vsd-admin` sur Cloudflare (dépôt privé `MathCSN/vsd-admin`),
+  modifiable et déployable par Claude seul. Il affiche déjà tout ; son moteur de publication attend la
+  bascule décrite dans `docs/migration-panneau.md`. D'ici là, l'ancien panneau reste le seul à publier.
 - **Un lot importé ne peut plus être annulé depuis ce dépôt** : le retirer de `index.json`
   ne le retire pas du registre cloud. Seule parade sans redéployer le serveur :
   mettre en pause la file du canal dans Buffer jusqu'à l'expiration de la relecture du lot (`validUntil`).
