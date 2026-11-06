@@ -10,8 +10,8 @@ on:
         required: false
         default: false
         type: boolean
-  schedule:
-    - cron: '23 6 * * 1,3,5'
+  # Old-format promotion chain, dormant since 06/11/2026: new posts are rendered and queued by
+  # vsd-render-content (auto_social + social_stock) and imported daily by vsd-cloud-control.
 
 permissions: {}
 concurrency:

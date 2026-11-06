@@ -69,7 +69,7 @@ jour sourcées des guides publiés. Les guides et mises à jour programmés vive
 | `vsd-render-content.yml` | lundi 05:17 | Rend les reels, brouillons et admission d'épingles |
 | `vsd-reel-intake.yml` | après chaque déploiement | Prépare un storyboard de reel depuis un nouveau guide |
 | `vsd-voice-production.yml` → `vsd-voice-adopt.yml` → `vsd-voice-review.yml` → `vsd-voice-promote.yml` | à la main seulement | Chaîne des reels voix de synthèse, en sommeil depuis le 24/10 (ancien format retiré) |
-| `vsd-promote-media.yml` | lundi, mercredi, vendredi 06:23 | Promeut un rendu relu en lot social |
+| `vsd-promote-media.yml` | à la main seulement | Ancienne promotion des rendus relus, en sommeil depuis le 06/11 : les nouveaux posts passent par `vsd-render-content` et l'import quotidien de `vsd-cloud-control` |
 | `vsd-writing-discovery.yml` | chaque jour 09:37 | Mises à jour sourcées des guides |
 | `vsd-weekly-report.yml` | chaque jour 09:07 (rapport le lundi) | Rapport hebdomadaire et alerte de file vide |
 
