@@ -137,7 +137,7 @@ Il reprend le contrat de lot actuel (`schemaVersion`, `contentId`, `deduplicatio
   `invoke.mjs` sans le bearer Sites, nonce à usage unique ;
 - page « Publication » : registre, journal et **plan à blanc** (ce que le moteur ferait, sans rien envoyer).
 
-Tests (`npm test`, 40 au 06/11) : contrat vérifié sur de vrais lots relus (l'empreinte
+Tests (`npm test`, 44 au 06/11, après revue de sécurité) : contrat vérifié sur de vrais lots relus (l'empreinte
 `payloadRevision` est recalculée à l'identique sur les 22 posts relus du dépôt), adoption d'un post
 déjà dans Buffer sans doublon, envoi incertain, refus Buffer, média absent, verrou, rejeu d'appel signé,
 import du stock (retraits, échéances passées), comparaison des registres.
