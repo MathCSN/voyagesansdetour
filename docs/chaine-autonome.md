@@ -60,6 +60,52 @@ jour sourcées des guides publiés. Les guides et mises à jour programmés vive
 `site-src/editorial-queue.json` et `site-src/editorial-candidates/` ; `build-pages.yml`
 (chaque jour 07:41 UTC) publie ceux dont l'heure est venue.
 
+**Calendrier.** Un nouveau guide sort au plus tôt deux jours (calendrier de Paris) après la
+dernière publication, quelle qu'en soit l'origine (chaîne, routine cloud ou promotion). Il peut
+être rédigé la veille de son créneau. `calendar_full` est donc normal le jour d'une
+publication et le lendemain matin ; il ne signifie jamais que la file est pleine. La chaîne
+dépense alors zéro photo, zéro source et zéro neurone. Un guide déjà réservé dans la file ou une
+promotion sans reçu de déploiement bloque aussi le calendrier.
+
+**Métadonnées.** Le rédacteur mettait un paragraphe entier dans `summary` (800 à 1 000
+caractères pour 360). Du 24/10 au 06/11, 22 passages sur 26 ont été jetés pour cette seule
+raison, après 700 à 1 000 neurones dépensés. Désormais, la consigne demande un résumé de deux
+phrases (200 à 320 caractères) et 2 à 4 paragraphes par section. Puis, avant tout contrôle, un
+champ trop long garde ses premières phrases entières (un titre garde sa partie avant « : »),
+sans un mot réécrit ni ajouté. S'il reste trop long (une seule phrase), un appel court le
+condense (environ 50 neurones, une seule fois) ; un second dépassement retient le guide. Un fait
+que le guide ne cite nulle part sort du dossier de preuves au lieu de faire jeter le guide,
+pourvu qu'il en reste au moins 5. Les relectures lisent toujours le texte final.
+
+**Photos.** Jamais d'image générée par IA. Chaque photo est un fichier de Wikimedia Commons,
+vérifié sur Commons même : licence CC BY, CC BY-SA ou CC0, auteur, page `File:`, données EXIF
+d'un appareil photo (marque ou modèle), et aucune marque IA dans le titre, la description, le
+crédit, l'auteur ou les catégories (« AI-generated », Midjourney, DALL·E, Stable Diffusion…).
+La chaîne cherche d'abord dans les images de qualité de Commons, puis dans tout Commons, puis
+avec **Openverse** (`api.openverse.org`, sans clé, licences `by`, `by-sa` et `cc0`, source
+`wikimedia`). Openverse remplace seulement le moteur de recherche de Commons, le plus
+rationné, et trouve d'autres fichiers ; chaque fichier qu'il propose repasse ensuite par les
+mêmes contrôles sur Commons. Openverse sert aussi des photos Flickr, mais elles restent
+écartées : leurs fichiers n'ont pas d'EXIF, et le site attribue chaque crédit à « Wikimedia
+Commons » (`generate.py`, `test_site.py`). Quand Commons ou Openverse répond 429 (ou 503),
+la requête attend le délai `Retry-After` (300 s au plus), sinon 10, 30 puis 90 s, dans un
+budget de 10 minutes d'attente par passage. Le détail de chaque recherche (origine, erreur,
+fichier retenu, secondes d'attente) est écrit dans `guide-photo-search.json`, dans l'artefact du
+passage.
+
+**Cadence et quota.** Workers AI gratuit : 10 000 neurones par jour (remise à zéro à minuit
+UTC). Un guide coûte environ 2 000 à 4 000 neurones (extraction, vérification des citations,
+rédaction, relecture globale, relecture bloc par bloc, réécriture éventuelle), et un passage est
+plafonné à 4 800. Deux passages par jour plus la découverte des mises à jour tiennent dans le
+gratuit, ce qui permet un guide tous les deux jours (3 à 4 par semaine avec les routines du lundi
+et du jeudi). Un rythme plus élevé demande d'abord de réduire `RELEASE_INTERVAL`
+(`site-src/editorial_queue.py`) et un troisième passage quotidien ; au-delà du gratuit, Workers
+Paid (5 $ par mois) facture 0,011 $ les 1 000 neurones, soit environ 0,04 $ par guide.
+
+**Essai sur une branche.** `gh workflow run vsd-writing-guide.yml --ref <branche>` fait tout le
+trajet, admission comprise, dans le seul runner, sans rien pousser. La file obtenue et la liste
+des fichiers changés sont dans l'artefact `new-guide-proposal`.
+
 ## Les workflows
 
 | Workflow | Quand | Rôle |

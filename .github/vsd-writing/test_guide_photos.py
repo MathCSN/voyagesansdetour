@@ -120,21 +120,106 @@ class AttachTests(unittest.TestCase):
 
 
 class RateLimitTests(unittest.TestCase):
-    def test_one_pause_then_one_retry_after_http_429(self):
+    @staticmethod
+    def limited(times,headers=None):
         import urllib.error
-        from unittest.mock import patch
         calls=[]
         class Limited(Opener):
             def open(self,request,timeout):
                 calls.append(request.full_url)
-                if len(calls)==1:raise urllib.error.HTTPError(request.full_url,429,'Too Many Requests',{},None)
+                if len(calls)<=times:raise urllib.error.HTTPError(request.full_url,429,'Too Many Requests',headers or {},None)
                 return super().open(request,timeout)
-        with patch.object(p.time,'sleep') as sleep:
-            self.assertEqual(p.search(SPEC,Limited([page()]))[0]['title'],page()['title'])
-        sleep.assert_called_once_with(p.RETRY_PAUSE)
-        class AlwaysLimited(Opener):
-            def open(self,request,timeout):raise urllib.error.HTTPError(request.full_url,429,'Too Many Requests',{},None)
-        with patch.object(p.time,'sleep'),self.assertRaises(urllib.error.HTTPError):p.search(SPEC,AlwaysLimited([]))
+        return Limited([page()]),calls
+    def test_http_429_waits_as_told_by_retry_after_then_retries(self):
+        slept=[];opener,calls=self.limited(2,{'Retry-After':'42'})
+        pages=p.search(SPEC,p.Patient(opener,sleep=slept.append))
+        self.assertEqual(pages[0]['title'],page()['title'])
+        self.assertEqual((slept,len(calls)),([42,42],3))
+    def test_http_429_without_retry_after_backs_off_step_by_step(self):
+        slept=[];opener,_=self.limited(3)
+        p.search(SPEC,p.Patient(opener,sleep=slept.append))
+        self.assertEqual(slept,list(p.RETRY_PAUSES))
+    def test_retry_after_as_an_http_date_is_honoured_and_capped(self):
+        import urllib.error
+        error=lambda value:urllib.error.HTTPError('u',429,'x',{'Retry-After':value},None)
+        self.assertEqual(p.retry_delay(error('Fri, 06 Nov 2026 12:01:00 GMT'),0,now=1793966400),60)
+        self.assertEqual(p.retry_delay(error('86400'),0),p.MAX_RETRY_AFTER)
+        self.assertEqual(p.retry_delay(error('demain'),1),p.RETRY_PAUSES[1])
+    def test_the_run_stops_waiting_once_its_budget_is_spent(self):
+        import urllib.error
+        slept=[];opener,_=self.limited(9,{'Retry-After':'50'})
+        patient=p.Patient(opener,budget=120,sleep=slept.append)
+        with self.assertRaises(urllib.error.HTTPError):p.search(SPEC,patient)
+        self.assertEqual((slept,patient.remaining),([50,50],20))
+    def test_other_http_errors_are_not_retried(self):
+        import urllib.error
+        class Missing(Opener):
+            def open(self,request,timeout):raise urllib.error.HTTPError(request.full_url,404,'Not Found',{},None)
+        slept=[]
+        with self.assertRaises(urllib.error.HTTPError):p.search(SPEC,p.Patient(Missing([]),sleep=slept.append))
+        self.assertEqual(slept,[])
+
+
+def openverse_row(name='Torii_path_at_Fushimi_Inari_Taisha,_Kyoto.jpg',host='upload.wikimedia.org'):
+    return {'url':'https://'+host+'/wikipedia/commons/0/0e/'+name,'license':'by-sa','creator':'Ex Ample'}
+
+
+class OpenverseOpener(Opener):
+    """Commons search is rate limited for good; Openverse answers, Commons confirms the files."""
+    def __init__(self,rows,pages):super().__init__(pages);self.rows=rows
+    def open(self,request,timeout):
+        import urllib.error
+        url=request.full_url;self.urls.append(url)
+        if 'generator=search' in url:raise urllib.error.HTTPError(url,429,'Too Many Requests',{'Retry-After':'1'},None)
+        if url.startswith(p.OPENVERSE):return Response(json.dumps({'results':self.rows}).encode())
+        if url.startswith(p.API) and 'titles=' in url and 'iiurlwidth=1600' in url:return Response(json.dumps({'query':{'pages':self.pages}}).encode())
+        self.urls.pop()
+        return super().open(request,timeout)
+
+
+class OpenverseFallbackTests(unittest.TestCase):
+    def setUp(self):
+        self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup)
+        self.out=Path(self.tmp.name)
+    def prepare(self,opener):
+        topic={'photos':[{'id':'porto-nuit'},{'id':'lisbonne-tram-28'},SPEC]}
+        catalogue=[{'id':'porto-nuit','source_page':'a'},{'id':'lisbonne-tram-28','source_page':'b'}]
+        from unittest.mock import patch
+        with patch.object(p.time,'sleep'):
+            return p.prepare(topic,catalogue,self.out,opener,compress=lambda data:data)
+    def test_openverse_finds_the_photo_when_commons_search_is_rate_limited(self):
+        opener=OpenverseOpener([openverse_row()],[page()])
+        result=self.prepare(opener)
+        self.assertEqual(result['ids'][-1],'kyoto-fushimi-inari')
+        self.assertEqual(result['records'][0]['source_page'],page()['imageinfo'][0]['descriptionurl'])
+        openverse=[u for u in opener.urls if u.startswith(p.OPENVERSE)][0]
+        self.assertIn('license=by%2Cby-sa%2Ccc0',openverse);self.assertIn('source=wikimedia',openverse)
+        self.assertIn('titles=File%3ATorii+path+at+Fushimi+Inari+Taisha%2C+Kyoto.jpg',[u for u in opener.urls if 'titles=' in u][0])
+        trace=json.loads((self.out/'guide-photo-search.json').read_text())['searches']['kyoto-fushimi-inari']
+        self.assertEqual([t['search'] for t in trace],['commons','commons','openverse','openverse'])
+        self.assertEqual(trace[0]['error'],429)
+    def test_openverse_files_pass_the_same_checks_as_commons_ones(self):
+        for refused in (page(categories=('Category:AI-generated images',)),page(exif=()),page(licence='CC BY-NC 4.0'),page(author='')):
+            with self.subTest(refused=refused['imageinfo'][0]['extmetadata']['LicenseShortName']):
+                with self.assertRaisesRegex(ValueError,'guide_photos_insufficient'):
+                    self.prepare(OpenverseOpener([openverse_row()],[refused]))
+    def test_only_original_commons_files_are_taken_from_openverse(self):
+        rows=[openverse_row(host='live.staticflickr.com'),openverse_row(name='Plan.png'),{'url':'http://upload.wikimedia.org/wikipedia/commons/0/0e/X.jpg'},
+              openverse_row(),openverse_row()]
+        self.assertEqual(p.openverse_titles(SPEC,OpenverseOpener(rows,[])),['File:Torii path at Fushimi Inari Taisha, Kyoto.jpg'])
+    def test_a_title_normalised_by_commons_keeps_its_openverse_rank(self):
+        lower=page(title='File:Fushimi inari torii.jpg')
+        class Normalising(OpenverseOpener):
+            def open(self,request,timeout):
+                if 'titles=' in request.full_url:
+                    return Response(json.dumps({'query':{'normalized':[{'from':'File:fushimi inari torii.jpg','to':'File:Fushimi inari torii.jpg'}],'pages':[lower]}}).encode())
+                return super().open(request,timeout)
+        pages=p.openverse_search(SPEC,Normalising([openverse_row(name='fushimi_inari_torii.jpg')],[]))
+        self.assertEqual([x['title'] for x in pages],['File:Fushimi inari torii.jpg'])
+    def test_no_openverse_result_means_no_commons_lookup(self):
+        opener=OpenverseOpener([],[page()])
+        self.assertEqual(p.openverse_search(SPEC,opener),[])
+        self.assertFalse(any('titles=' in u for u in opener.urls))
 
 
 class CompressionTests(unittest.TestCase):

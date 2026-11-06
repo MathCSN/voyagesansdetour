@@ -210,3 +210,57 @@ class GuideTests(unittest.TestCase):
         packet=json.dumps({'messages':[{'role':'system','content':'i'*2500},{'role':'user','content':json.dumps(g.critic_packet(article,{'s0':['c1']},facts,known),ensure_ascii=False)}],
                            'max_tokens':1400}).encode()
         self.assertLess(len(packet),45000)
+
+
+class MetadataFittingTests(unittest.TestCase):
+    """The writer once put a body paragraph in summary: the guide must not be lost for that."""
+    def setUp(self):
+        GuideTests.setUp(self)
+        self.approved=({'supported':True,'issues':[],'checkedClaimIds':['c1','c2','c3','c4','c5']},{})
+    def test_long_summary_keeps_its_leading_sentences_without_any_call(self):
+        sentence='Le bus urbain de Kyoto coûte 230 yens et la ligne 5 rejoint le pavillon d’Argent en 35 minutes. '
+        self.value['summary']=sentence*6
+        fitted,record=g.settle_metadata(self.value,lambda *args:self.fail('no call needed'),'')
+        self.assertEqual(fitted['summary'],(sentence*3).strip())
+        self.assertEqual(record,{'shortened':['summary'],'rewritten':[]})
+        self.assertEqual(len(self.value['summary']),len(sentence*6))
+    def test_title_keeps_its_leading_part(self):
+        self.value['title']='Kyoto en 3 jours : '+'bus à 230 yens, temples, jardins et cafés '*3
+        self.assertEqual(g.settle_metadata(self.value,None,'')[0]['title'],'Kyoto en 3 jours')
+    def test_one_long_sentence_gets_one_short_rewrite(self):
+        self.value['description']='Trois jours à Kyoto '+'en bus et à pied entre temples et jardins '*5+'.'
+        calls=[]
+        def invoke(messages,max_tokens,token):
+            calls.append((json.loads(messages[1]['content']),max_tokens))
+            return {'description':'Trois jours à Kyoto en bus à 230 yens et à pied, des temples aux jardins.'},{'completion_tokens':30}
+        fitted,record=g.settle_metadata(self.value,invoke,'')
+        self.assertEqual(calls,[({'fields':{'description':self.value['description']},'limits':{'description':180}},g.METADATA_REPAIR_TOKENS)])
+        self.assertEqual(fitted['description'],'Trois jours à Kyoto en bus à 230 yens et à pied, des temples aux jardins.')
+        self.assertEqual(record['rewritten'],['description'])
+        g.validate_article_output(fitted,self.topic,self.facts,[],self.now)
+    def test_a_rewrite_still_too_long_or_off_schema_holds_the_guide(self):
+        self.value['description']='x'*181
+        for answer in ({'description':'y'*181},{'description':'court','title':'ajout'},['liste']):
+            with self.subTest(answer=answer), self.assertRaisesRegex(ValueError,'guide_metadata_length'):
+                g.settle_metadata(self.value,lambda *args:(answer,{}),'')
+    def test_metadata_within_limits_are_left_untouched(self):
+        self.assertEqual(g.settle_metadata(self.value,None,''),(self.value,None))
+    def test_writer_summary_is_fitted_before_the_reviews(self):
+        self.value['summary']='Le bus urbain coûte 230 yens et relie les temples. '*12
+        answers=iter([(self.value,{}),self.approved])
+        result=g.create_guide(self.topic,self.facts,[],self.now,'',lambda *args:next(answers),block_reviewer=lambda *args:({'supported':True},{}))
+        self.assertLessEqual(len(result['article']['summary']),360)
+        self.assertEqual(result['metadataFitting']['shortened'],['summary'])
+        self.assertEqual(result['status'],'guide_ready_for_pilot_review')
+    def test_a_fact_the_guide_never_cites_leaves_its_evidence(self):
+        facts=self.facts+[{'id':'c6','fact':'Fait jamais cité'}]
+        answers=iter([(self.value,{}),self.approved])
+        result=g.create_guide(self.topic,facts,[],self.now,'',lambda *args:next(answers),block_reviewer=lambda *args:({'supported':True},{}))
+        self.assertEqual([f['id'] for f in result['facts']],['c1','c2','c3','c4','c5'])
+    def test_too_few_cited_facts_still_hold_the_guide(self):
+        for section in self.value['sections']:section['claims']=['c1'] if section['id']=='partie-1' else [section['claims'][-1]]
+        self.value['sections'][1]['claims']=['c2']
+        facts=self.facts+[{'id':'c6','fact':'Fait jamais cité'},{'id':'c7','fact':'Autre fait jamais cité'}]
+        self.value['sections']=self.value['sections'][:3]
+        with self.assertRaisesRegex(ValueError,'guide_unused_facts'):
+            g.validate_article_output(self.value,self.topic,facts,[],self.now)
