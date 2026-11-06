@@ -1,6 +1,11 @@
 # Migration du panneau admin hors de ChatGPT Sites
 
-Rédigé le 6 novembre 2026. But fixé par Mathis : **tout passe par Claude**. Le panneau privé
+Rédigé le 6 novembre 2026. But fixé par Mathis : **tout passe par Claude**.
+
+**État au 6 novembre 2026, 18 h** : le nouveau panneau est en ligne sur
+**https://vsd-admin.kartier.workers.dev** (dépôt privé `MathCSN/vsd-admin`), affichage vérifié dans le
+navigateur intégré ; le nouveau moteur de publication est prêt et testé mais **désactivé**. L'ancien serveur
+Sites publie toujours, rien n'a été basculé. Procédure exacte : `BASCULE.md` du dépôt privé. Le panneau privé
 actuel (`voyage-sans-detour-admin.cousinmathis31.chatgpt.site`) ne peut être déployé que par
 Codex ; on le remplace par un panneau que Claude modifie et déploie seul, sans jamais casser la
 publication en cours.
@@ -51,7 +56,8 @@ Registre relevé le 06/11 (lecture seule) : 10 publiés, 1 programmé dans Buffe
 | Vercel | Outils MCP disponibles | Seule équipe accessible : KOPRO ; la protection d'accès native ne couvre pas la production sur le forfait gratuit ; il faudrait une base externe |
 | Supabase | Base Postgres, Auth intégrée | Seule organisation : KOPRO, déjà 2 projets (limite gratuite) ; pas d'hébergement de pages HTML |
 
-**Décision** : Worker `vsd-admin` + base D1 `vsd-admin` sur le compte Cloudflare déjà connecté.
+**Décision** : Worker `vsd-admin` + base D1 `vsd-admin` sur le compte Cloudflare déjà connecté
+(sous-domaine `kartier.workers.dev`).
 Aucun service payant. Le Worker est déplaçable plus tard vers un autre compte Cloudflare
 (même code, `wrangler deploy` + export/import D1) si Mathis le souhaite.
 
@@ -88,7 +94,7 @@ chiffre porte sa source et sa date. Aucun texte de configuration figé.
 | Posts à venir | `reviewed-social/index.json` et lots du dépôt public | aucun (fichiers publics) |
 | Activité des posts (portée, vues) | Buffer `aggregatedPostMetrics` | même clé Buffer |
 | Guides publiés et à venir | `site-src/articles.json`, file éditoriale du dépôt | aucun |
-| Épingles et tableaux Pinterest | profil public Pinterest (tableaux, épingles, abonnés) et flux du site | aucun |
+| Épingles et tableaux Pinterest | flux RSS publics des 6 tableaux (dernière épingle de chacun) et épingles proposées par le site (`pinterest-additions.json`) ; le nombre d'abonnés et d'impressions demande l'API Pinterest, affiché « non relevé » | aucun |
 | Audiences Instagram / Facebook | statistiques Buffer ; le total d'abonnés exige une app Meta revue : affiché « non relevé » plutôt que zéro | — |
 | État des workflows GitHub | API GitHub publique du dépôt (lecture, mise en cache) | aucun |
 | Ce qui attend Mathis | `.github/vsd-control/attente-mathis.json` | aucun |
@@ -128,7 +134,13 @@ Il reprend le contrat de lot actuel (`schemaVersion`, `contentId`, `deduplicatio
   le job passe « à vérifier » et se résout par la lecture Buffer suivante ;
 - import des lots directement depuis le dépôt public (plus besoin que GitHub pousse le stock) ;
 - appel `POST /internal/tick` signé HMAC (clé dédiée `VSD_ADMIN_TICK_KEY`), même enveloppe que
-  `invoke.mjs` sans le bearer Sites.
+  `invoke.mjs` sans le bearer Sites, nonce à usage unique ;
+- page « Publication » : registre, journal et **plan à blanc** (ce que le moteur ferait, sans rien envoyer).
+
+Tests (`npm test`, 40 au 06/11) : contrat vérifié sur de vrais lots relus (l'empreinte
+`payloadRevision` est recalculée à l'identique sur les 22 posts relus du dépôt), adoption d'un post
+déjà dans Buffer sans doublon, envoi incertain, refus Buffer, média absent, verrou, rejeu d'appel signé,
+import du stock (retraits, échéances passées), comparaison des registres.
 
 ## 7. Procédure de bascule
 
@@ -150,8 +162,9 @@ envoyer).
    dont l'échéance est passée sans post trouvé est mis « à vérifier », jamais envoyé en retard.
 4. **Comparer** l'export de l'ancien et l'état reconstruit. Toute différence arrête la bascule.
 5. **Gel de l'ancien et bascule en un seul commit** sur `main` du dépôt public :
-   `vsd-cloud-control.yml` pointe vers le nouveau (origine, clé `VSD_ADMIN_TICK_KEY`), plus
-   aucun appel vers `chatgpt.site`. À partir de ce commit, l'ancien ne reçoit plus rien : il est
+   `vsd-cloud-control.yml` pointe vers le nouveau (origine, clé `VSD_ADMIN_TICK_KEY` créée juste avant,
+   même valeur dans Cloudflare et dans les secrets GitHub), et l'étape de lecture de l'ancien stock
+   disparaît du rapport hebdomadaire ; plus aucun appel planifié vers `chatgpt.site`. À partir de ce commit, l'ancien ne reçoit plus rien : il est
    gelé, ses données restent intactes.
 6. **Activer le nouveau** juste après le commit, avant le passage suivant.
 7. **Vérifier** au passage suivant : reçu `publications` en succès dans le workflow, aucun post
