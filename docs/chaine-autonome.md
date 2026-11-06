@@ -82,6 +82,13 @@ résultat repasse tous les contrôles et les relectures. Un fait
 que le guide ne cite nulle part sort du dossier de preuves au lieu de faire jeter le guide,
 pourvu qu'il en reste au moins 5. Les relectures lisent toujours le texte final.
 
+**Sujets.** Un sujet dont toutes les sources sont des wikis (Wikivoyage, Wikipédia) passe
+après ceux qui ont une page officielle ou d'opérateur : un wiki ne fournit jamais de prix, et
+ces sujets donnaient des guides trop courts ou complétés de détails inventés, que la relecture
+refusait (essais du 06/11 sur la Guadeloupe). Ajouter une source officielle à un tel sujet le
+remet à son rang. Le rédacteur Qwen (`writer=qwen`) n'est pas une issue : à l'essai, il
+inventait lignes de bus, prix et quartiers absents des faits.
+
 **Photos.** Jamais d'image générée par IA. Chaque photo est un fichier de Wikimedia Commons,
 vérifié sur Commons même : licence CC BY, CC BY-SA ou CC0, auteur, page `File:`, données EXIF
 d'un appareil photo (marque ou modèle), et aucune marque IA dans le titre, la description, le

@@ -16,6 +16,8 @@ OPTIONAL_KEYS={'category','cover','demand','keywords'}
 SEASON_BOOST={0:5,1:20,2:30,3:30,4:10}
 # The best few topics share the calendar, so one held topic never blocks the others.
 WINDOW=3
+# Community wikis: read for climate, geography and routes, never for a price.
+REFERENCE_HOSTS={'fr.wikivoyage.org','en.wikivoyage.org','fr.wikipedia.org','en.wikipedia.org'}
 
 
 def validate_topic(topic):
@@ -50,12 +52,21 @@ def score(topic,now):
     return topic['priority']+SEASON_BOOST.get(months_ahead(month,topic['travelMonths']),0)
 
 
+def wiki_only(topic):
+    """No operator or official page: no price, line or timetable can be quoted."""
+    return all(urllib.parse.urlsplit(s['url']).hostname in REFERENCE_HOSTS for s in topic['sources'])
+
+
 def ranked(topics,known,now):
+    """Best score first, but a topic read only from wikis waits behind the others.
+
+    On 06/11 a wiki-only itinerary (Guadeloupe) held the calendar: ten generic facts, no
+    price or route, a body too short to publish or padded with invented details."""
     slugs={a['slug'] for a in known}
     for topic in topics:validate_topic(topic)
     require(len({t['slug'] for t in topics})==len(topics),'guide_topic_duplicate')
     remaining=[t for t in topics if t['slug'] not in slugs]
-    return sorted(remaining,key=lambda t:(-score(t,now),t['slug']))
+    return sorted(remaining,key=lambda t:(wiki_only(t),-score(t,now),t['slug']))
 
 
 def select(topics,known,now):

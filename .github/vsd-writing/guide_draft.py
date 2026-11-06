@@ -56,7 +56,7 @@ REPAIRS={'guide_too_short':LENGTH_REPAIR,'guide_too_long':LENGTH_REPAIR,'guide_s
 FIGURE=re.compile(r'\d|€|\$|£|¥|฿|₫')
 # Community wikis are read for climate, geography and routes, never for a price: a wiki
 # price has no reliable date, and the site promises prices checked on a given day.
-REFERENCE_HOSTS={'fr.wikivoyage.org','en.wikivoyage.org','fr.wikipedia.org','en.wikipedia.org'}
+REFERENCE_HOSTS=topic_plan.REFERENCE_HOSTS
 PRICE=re.compile(r'€|\$|£|¥|฿|₫|\b(?:euros?|dollars?|yens?|bahts?|dongs?|roupies?|dirhams?|pesos?|colones?|shillings?|USD|EUR|JPY|THB|VND|MAD|MXN|CRC|TZS)\b',re.I)
 TYPE_GUIDANCE={
  'itineraire':'Organise le guide par étapes ou par jours (« Jours 1 et 2 — Kyoto »), avec pour chaque étape les trajets (durée, prix, ligne) et les lieux à voir, dans l’ordre du voyage.',

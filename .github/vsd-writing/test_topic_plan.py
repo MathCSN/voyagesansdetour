@@ -23,6 +23,11 @@ class SeasonTests(unittest.TestCase):
         low=dict(topic(),slug='bas',travelMonths=[7],priority=10)
         high=dict(topic(),slug='haut',travelMonths=[7],priority=90)
         self.assertEqual(t.ranked([low,high],[],dt.datetime(2026,10,10,tzinfo=q.UTC))[0]['slug'],'haut')
+    def test_a_topic_read_only_from_wikis_waits_behind_sourced_ones(self):
+        wiki=dict(topic(),slug='wiki',priority=95,sources=[{'label':'Wikivoyage','url':'https://fr.wikivoyage.org/wiki/Kyoto'},{'label':'Wikipedia','url':'https://en.wikipedia.org/wiki/Kyoto'}])
+        sourced=dict(topic(),slug='officiel',priority=40)
+        self.assertEqual([x['slug'] for x in t.ranked([wiki,sourced],[],dt.datetime(2026,10,10,tzinfo=q.UTC))],['officiel','wiki'])
+        self.assertTrue(t.wiki_only(wiki));self.assertFalse(t.wiki_only(sourced))
     def test_morning_and_afternoon_runs_try_different_topics(self):
         topics=[dict(topic(),slug='s'+str(i),priority=50) for i in range(4)]
         morning=dt.datetime(2026,10,10,6,23,tzinfo=q.UTC)
