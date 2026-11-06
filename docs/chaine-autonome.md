@@ -69,11 +69,15 @@ promotion sans reçu de déploiement bloque aussi le calendrier.
 
 **Métadonnées.** Le rédacteur mettait un paragraphe entier dans `summary` (800 à 1 000
 caractères pour 360). Du 24/10 au 06/11, 22 passages sur 26 ont été jetés pour cette seule
-raison, après 700 à 1 000 neurones dépensés. Désormais, la consigne demande un résumé de deux
-phrases (200 à 320 caractères) et 2 à 4 paragraphes par section. Puis, avant tout contrôle, un
-champ trop long garde ses premières phrases entières (un titre garde sa partie avant « : »),
-sans un mot réécrit ni ajouté. S'il reste trop long (une seule phrase), un appel court le
-condense (environ 50 neurones, une seule fois) ; un second dépassement retient le guide. Un fait
+raison, après 700 à 1 000 neurones dépensés. Désormais, le JSON demandé commence par les
+sections et finit par les métadonnées, écrites comme un résumé du guide déjà rédigé ; la consigne
+demande un résumé de deux phrases (200 à 320 caractères) et 2 à 4 paragraphes par section. Puis,
+avant tout contrôle, un champ trop long garde ses premières phrases entières (un titre garde sa
+partie avant « : »), sans un mot réécrit ni ajouté. S'il reste trop long (une seule phrase), un
+appel court le condense (environ 50 neurones, une seule fois) ; si cette réécriture manque sa
+limite, la phrase du rédacteur est coupée à une virgule ou à un mot et finit par « … ». La
+reprise de longueur du corps reçoit le brouillon brut, avec son long résumé à reporter dans les
+sections. Un fait
 que le guide ne cite nulle part sort du dossier de preuves au lieu de faire jeter le guide,
 pourvu qu'il en reste au moins 5. Les relectures lisent toujours le texte final.
 

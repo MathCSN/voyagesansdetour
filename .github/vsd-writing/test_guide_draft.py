@@ -238,11 +238,33 @@ class MetadataFittingTests(unittest.TestCase):
         self.assertEqual(fitted['description'],'Trois jours à Kyoto en bus à 230 yens et à pied, des temples aux jardins.')
         self.assertEqual(record['rewritten'],['description'])
         g.validate_article_output(fitted,self.topic,self.facts,[],self.now)
-    def test_a_rewrite_still_too_long_or_off_schema_holds_the_guide(self):
+    def test_a_missed_rewrite_falls_back_to_the_writer_words_cut_and_marked(self):
+        self.value['description']='Trois jours à Kyoto en bus, '+'entre temples et jardins du nord de la ville '*5+'pour 230 yens'
+        for answer in ({'description':'y'*181},{'title':'ajout'},['liste']):
+            with self.subTest(answer=answer):
+                fitted,record=g.settle_metadata(self.value,lambda *args:(answer,{}),'')
+                self.assertLessEqual(len(fitted['description']),180)
+                self.assertTrue(fitted['description'].endswith('…'))
+                self.assertTrue(self.value['description'].startswith(fitted['description'][:-1]))
+                self.assertEqual((record['clipped'],record['rewritten']),(['description'],[]))
+    def test_text_without_any_space_cannot_be_cut_and_holds_the_guide(self):
         self.value['description']='x'*181
-        for answer in ({'description':'y'*181},{'description':'court','title':'ajout'},['liste']):
-            with self.subTest(answer=answer), self.assertRaisesRegex(ValueError,'guide_metadata_length'):
-                g.settle_metadata(self.value,lambda *args:(answer,{}),'')
+        with self.assertRaisesRegex(ValueError,'guide_metadata_length'):
+            g.settle_metadata(self.value,lambda *args:({'description':'y'*181},{}),'')
+    def test_writer_is_asked_for_the_body_before_the_metadata(self):
+        instruction=g.writer_instruction(self.topic)
+        order=instruction[instruction.index('Retourne JSON'):]
+        self.assertLess(order.index('"sections"'),order.index('"summary"'))
+        self.assertLess(order.index('"faq"'),order.index('"shortTitle"'))
+    def test_length_repair_reads_the_raw_draft_with_its_long_summary(self):
+        short=copy.deepcopy(self.value)
+        for section in short['sections']:
+            section['paragraphs']=['Une description factuelle assez courte pour déclencher le contrôle du corps du guide.']
+        short['summary']='Le bus urbain coûte 230 yens et relie les temples du nord. '*10
+        answers=iter([(short,{}),(self.value,{}),self.approved]);packets=[]
+        def invoke(messages,*args):packets.append(messages[-1]['content']);return next(answers)
+        g.create_guide(self.topic,self.facts,[],self.now,'',invoke,block_reviewer=lambda *args:({'supported':True},{}))
+        self.assertEqual(json.loads(packets[1])['rejectedDraft']['summary'],short['summary'])
     def test_metadata_within_limits_are_left_untouched(self):
         self.assertEqual(g.settle_metadata(self.value,None,''),(self.value,None))
     def test_writer_summary_is_fitted_before_the_reviews(self):
