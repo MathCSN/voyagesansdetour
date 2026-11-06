@@ -7,7 +7,7 @@ import re
 from pathlib import Path
 import urllib.request
 from source_draft import call,require,HARD_STOP,MODEL,source_fingerprint
-from guide_draft import ROOT,MIN_WORDS,MAX_WORDS
+from guide_draft import ROOT,MIN_WORDS,MAX_WORDS,REVISABLE_BLOCKS
 from guide_admission import persist_qualification
 from guide_review import public_blocks,validate_checks,assess_article,validate_metadata,METADATA_LIMITS
 from discover_facts import SameHostRedirect
@@ -82,7 +82,7 @@ def kept_key_fact_citations(citations,article,corrections):
 
 def revision_packets(blocks,facts,review):
     failed={item['id'] for item in review['issues']}
-    require(1<=len(failed)<=8,'revision_block_budget')
+    require(1<=len(failed)<=REVISABLE_BLOCKS,'revision_block_budget')
     require(failed<={b['id'] for b in blocks},'revision_unknown_failed_block')
     packets=[]
     for block in blocks:

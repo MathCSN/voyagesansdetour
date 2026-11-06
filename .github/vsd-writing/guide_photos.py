@@ -1,9 +1,14 @@
-"""Free photos for a new guide: Wikimedia Commons only, licence checked, credit recorded.
+"""Free photos for a new guide: Wikimedia Commons files only, licence checked, credit recorded.
 
+Commons search finds them first; Openverse (api.openverse.org, no key) is the fallback search
+when Commons search is rate limited or finds nothing. Either way the file is then verified on
+Commons itself (licence, author, camera EXIF, categories and every AI mark), because the site
+credits each photo to its Commons page.
 The topic names each wanted subject (search words, required words, French alt text).
 Nothing is published here: files land in the run folder, then admission installs them
 with the guide that uses them. Standard library only, like the rest of the writing chain.
 """
+import email.utils
 import hashlib
 import html
 import io
@@ -18,6 +23,7 @@ import urllib.request
 from source_draft import require
 
 API='https://commons.wikimedia.org/w/api.php'
+OPENVERSE='https://api.openverse.org/v1/images/'
 USER_AGENT='VoyageSansDetour-photos/1 (https://voyagesansdetour.fr; contact@voyagesansdetour.fr)'
 IMAGE_HOSTS={'upload.wikimedia.org','thumb.wikimedia.org'}
 # Same rule as the site catalogue test: CC BY, CC BY-SA or CC0 only (no NC, ND or unknown terms).
@@ -34,8 +40,15 @@ AI_MARK=re.compile(r'\bai[- ]generated|generated (?:by|with|using) (?:an? )?(?:a
                    r'deepdream|firefly|imagen\b|flux\.1|ai image',re.I)
 # Commons thumbnails are barely compressed; the site's photos are progressive JPEG at this quality (measured on the existing set).
 JPEG_QUALITY=72
-# Wikimedia asks clients to slow down with HTTP 429: one pause, one retry, then the guide waits.
-RETRY_PAUSE=10
+# Wikimedia and Openverse ask clients to slow down with HTTP 429 (or 503), often for a few
+# minutes. Each request waits as told by Retry-After, else these pauses, within one budget
+# for the whole run (the job has 25 minutes and the writing still has to happen).
+RETRY_PAUSES=(10,30,90)
+MAX_RETRY_AFTER=300
+WAIT_BUDGET=600
+SLOW_DOWN={429,503}
+# Original Commons files, as Openverse lists them: /wikipedia/commons/a/ab/Name.jpg
+COMMONS_FILE=re.compile(r'/wikipedia/commons/[0-9a-f]/[0-9a-f]{2}/([^/]+\.jpe?g)\Z',re.I)
 ID=re.compile(r'[a-z0-9]+(?:-[a-z0-9]+)*\Z')
 
 
@@ -59,26 +72,84 @@ def validate_spec(spec):
     return spec
 
 
-def get_json(params,opener,pause=RETRY_PAUSE):
-    url=API+'?'+urllib.parse.urlencode(dict(params,format='json',formatversion='2'))
-    request=urllib.request.Request(url,headers={'User-Agent':USER_AGENT,'Accept':'application/json'})
+def retry_delay(error,attempt,now=None):
+    """Seconds asked by Retry-After (seconds or HTTP date), else the next planned pause."""
+    value=(error.headers.get('Retry-After') if error.headers else None) or ''
+    value=value.strip()
+    if value.isdigit():return min(int(value),MAX_RETRY_AFTER)
     try:
-        response=opener.open(request,timeout=30)
-    except urllib.error.HTTPError as error:
-        if error.code!=429 or not pause:raise
-        time.sleep(pause)
-        return get_json(params,opener,pause=0)
-    with response:
+        moment=email.utils.parsedate_to_datetime(value)
+    except (TypeError,ValueError,IndexError):
+        moment=None
+    if moment is not None and moment.tzinfo is not None:
+        now=now or time.time()
+        return min(max(0,round(moment.timestamp()-now)),MAX_RETRY_AFTER)
+    return RETRY_PAUSES[attempt]
+
+
+class Patient:
+    """Opener that waits and retries on HTTP 429/503 while the run's waiting budget lasts."""
+    def __init__(self,opener,budget=WAIT_BUDGET,sleep=None):
+        self.opener=opener;self.remaining=budget;self.waited=[]
+        self.sleep=sleep or (lambda seconds:time.sleep(seconds))
+    def open(self,request,timeout):
+        for attempt in range(len(RETRY_PAUSES)+1):
+            try:
+                return self.opener.open(request,timeout=timeout)
+            except urllib.error.HTTPError as error:
+                if error.code not in SLOW_DOWN or attempt==len(RETRY_PAUSES):raise
+                pause=retry_delay(error,attempt)
+                if pause>self.remaining:raise
+                self.remaining-=pause;self.waited.append(pause)
+                self.sleep(pause)
+
+
+def read_json(url,opener):
+    request=urllib.request.Request(url,headers={'User-Agent':USER_AGENT,'Accept':'application/json'})
+    with opener.open(request,timeout=30) as response:
         require(response.status==200,'guide_photo_api_status')
         return json.loads(response.read(2_000_001))
 
 
+def get_json(params,opener):
+    return read_json(API+'?'+urllib.parse.urlencode(dict(params,format='json',formatversion='2')),opener)
+
+
+FILE_PROPS={'prop':'imageinfo|categories','cllimit':'max','iiprop':'url|size|mime|extmetadata|commonmetadata','iiurlwidth':str(WIDE),
+            'iiextmetadatafilter':'LicenseShortName|LicenseUrl|Artist|Attribution|ImageDescription|Credit|Categories'}
+
+
 def search(spec,opener,quality=True):
     words=spec['query']+' filetype:bitmap filemime:image/jpeg filew:>'+str(WIDE-1)+(' incategory:Quality_images' if quality else '')
-    data=get_json({'action':'query','generator':'search','gsrnamespace':'6','gsrsearch':words,'gsrlimit':'20',
-                   'prop':'imageinfo|categories','cllimit':'max','iiprop':'url|size|mime|extmetadata|commonmetadata','iiurlwidth':str(WIDE),
-                   'iiextmetadatafilter':'LicenseShortName|LicenseUrl|Artist|Attribution|ImageDescription|Credit|Categories'},opener)
+    data=get_json(dict(FILE_PROPS,action='query',generator='search',gsrnamespace='6',gsrsearch=words,gsrlimit='20'),opener)
     return sorted(data.get('query',{}).get('pages',[]),key=lambda page:page.get('index',99))
+
+
+def openverse_titles(spec,opener):
+    """Commons file titles Openverse finds for the subject, best first, free licences only."""
+    query=urllib.parse.urlencode({'q':spec['query'],'source':'wikimedia','license':'by,by-sa,cc0','extension':'jpg','mature':'false','page_size':'20'})
+    data=read_json(OPENVERSE+'?'+query,opener)
+    titles=[]
+    for row in data.get('results',[]) if isinstance(data,dict) else []:
+        if not isinstance(row,dict) or not isinstance(row.get('url'),str):continue
+        url=urllib.parse.urlsplit(row['url'])
+        found=COMMONS_FILE.search(url.path) if url.scheme=='https' and url.hostname=='upload.wikimedia.org' else None
+        title='File:'+urllib.parse.unquote(found.group(1)).replace('_',' ') if found else None
+        if title and title not in titles:titles.append(title)
+    return titles
+
+
+def openverse_search(spec,opener):
+    """The same Commons pages as search() would give, found by Openverse instead of Commons search."""
+    titles=openverse_titles(spec,opener)
+    if not titles:return []
+    data=get_json(dict(FILE_PROPS,action='query',titles='|'.join(titles)),opener)
+    rank={title:index for index,title in enumerate(titles)}
+    # Commons may answer under a normalised title (first letter, Unicode form).
+    for pair in data.get('query',{}).get('normalized',[]):
+        if pair.get('from') in rank:rank[pair.get('to')]=rank[pair['from']]
+    pages=[p for p in data.get('query',{}).get('pages',[]) if p.get('title') in rank]
+    return sorted(pages,key=lambda page:rank[page['title']])
 
 
 def camera(info):
@@ -119,20 +190,14 @@ class WikimediaRedirect(urllib.request.HTTPRedirectHandler):
     """Follow redirects only to the Commons API and the Wikimedia image hosts."""
     def redirect_request(self,req,fp,code,msg,headers,newurl):
         target=urllib.parse.urlsplit(newurl)
-        require(target.scheme=='https' and target.hostname in IMAGE_HOSTS|{'commons.wikimedia.org'},'guide_photo_redirect_host')
+        require(target.scheme=='https' and target.hostname in IMAGE_HOSTS|{'commons.wikimedia.org','api.openverse.org'},'guide_photo_redirect_host')
         return super().redirect_request(req,fp,code,msg,headers,newurl)
 
 
-def download(url,opener,pause=RETRY_PAUSE):
+def download(url,opener):
     parsed=urllib.parse.urlsplit(url)
     require(parsed.scheme=='https' and parsed.hostname in IMAGE_HOSTS,'guide_photo_host')
-    try:
-        response=opener.open(urllib.request.Request(url,headers={'User-Agent':USER_AGENT}),timeout=60)
-    except urllib.error.HTTPError as error:
-        if error.code!=429 or not pause:raise
-        time.sleep(pause)
-        return download(url,opener,pause=0)
-    with response:
+    with opener.open(urllib.request.Request(url,headers={'User-Agent':USER_AGENT}),timeout=60) as response:
         require(response.status==200,'guide_photo_download_status')
         data=response.read(MAX_IMAGE_BYTES+1)
     require(len(data)<=MAX_IMAGE_BYTES and data[:3]==b'\xff\xd8\xff','guide_photo_not_jpeg')
@@ -154,9 +219,23 @@ def small_url(title,opener):
     return pages[0]['imageinfo'][0]['thumburl']
 
 
-def fetch_photo(spec,out,used,opener,compress=recompress):
-    for quality in (True,False):
-        for page in search(spec,opener,quality):
+def searches(spec,opener):
+    """Where to look, in order: Commons quality images, all of Commons, then Openverse."""
+    yield 'commons',lambda:search(spec,opener,True)
+    yield 'commons',lambda:search(spec,opener,False)
+    yield 'openverse',lambda:openverse_search(spec,opener)
+
+
+def fetch_photo(spec,out,used,opener,compress=recompress,trace=None):
+    trace=trace if trace is not None else []
+    for origin,find in searches(spec,opener):
+        try:
+            pages=find()
+        except (urllib.error.URLError,OSError,ValueError) as error:
+            # A search still rate limited after its retries, or down, hands over to the next one.
+            trace.append({'search':origin,'error':getattr(error,'code',None) or type(error).__name__});continue
+        trace.append({'search':origin,'pages':len(pages)})
+        for page in pages:
             found=candidate(page,spec,used)
             if not found:continue
             info=page['imageinfo'][0]
@@ -172,25 +251,28 @@ def fetch_photo(spec,out,used,opener,compress=recompress):
                     'source_page':found['source_page'],'author':found['author'],'license':found['license'],
                     'license_url':found['license_url'],'alt_fr':spec['alt'],
                     'credit_fr':found['author']+' / Wikimedia Commons — '+found['license']+'.'}
+            trace.append({'search':origin,'chosen':found['source_page']})
             return record,{'sha256':hashlib.sha256(wide).hexdigest(),'sha256Small':hashlib.sha256(small).hexdigest()}
     return None,None
 
 
 def prepare(topic,catalogue,out,opener=None,compress=recompress):
     """Photo ids for cover and sections, plus the new credit records to install with the guide."""
-    opener=opener or urllib.request.build_opener(WikimediaRedirect())
+    opener=Patient(opener or urllib.request.build_opener(WikimediaRedirect()))
     known={p['id'] for p in catalogue}
     used={p['source_page'] for p in catalogue}
     specs=[validate_spec(s) for s in topic.get('photos',[])]
     require(len({s['id'] for s in specs})==len(specs),'guide_photo_duplicate_id')
-    ids=[];records=[];hashes={}
+    ids=[];records=[];hashes={};searched={}
     for spec in specs:
         if spec['id'] in known:
             ids.append(spec['id']);continue
         require('query' in spec,'guide_photo_unknown_id')
-        record,digest=fetch_photo(spec,out,used,opener,compress)
+        record,digest=fetch_photo(spec,out,used,opener,compress,searched.setdefault(spec['id'],[]))
         if record is None:continue
         used.add(record['source_page']);records.append(record);hashes[spec['id']]=digest;ids.append(spec['id'])
+    # Written before the verdict: a held guide says which subject found nothing, and why.
+    (out/'guide-photo-search.json').write_text(json.dumps({'searches':searched,'waitedSeconds':opener.waited},ensure_ascii=False,indent=2)+'\n')
     require(len(ids)>=MIN_PHOTOS,'guide_photos_insufficient')
     return {'ids':ids,'records':records,'hashes':hashes}
 

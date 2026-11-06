@@ -56,9 +56,9 @@ class IsolatedEvidenceTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'missing_evidence'):
             revision_packets([{'id':'a','evidence':['absent']}],[],{'issues':[{'id':'a'}]})
     def test_excessive_revision_is_held_before_model_calls(self):
-        from guide_revision import revision_packets
+        from guide_revision import revision_packets,REVISABLE_BLOCKS
         with self.assertRaisesRegex(ValueError,'block_budget'):
-            revision_packets([],[],{'issues':[{'id':str(i)} for i in range(9)]})
+            revision_packets([],[],{'issues':[{'id':str(i)} for i in range(REVISABLE_BLOCKS+1)]})
 
 class BoundedFormatRepairTests(unittest.TestCase):
     def setUp(self):

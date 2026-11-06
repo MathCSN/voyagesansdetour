@@ -210,3 +210,106 @@ class GuideTests(unittest.TestCase):
         packet=json.dumps({'messages':[{'role':'system','content':'i'*2500},{'role':'user','content':json.dumps(g.critic_packet(article,{'s0':['c1']},facts,known),ensure_ascii=False)}],
                            'max_tokens':1400}).encode()
         self.assertLess(len(packet),45000)
+
+
+class MetadataFittingTests(unittest.TestCase):
+    """The writer once put a body paragraph in summary: the guide must not be lost for that."""
+    def setUp(self):
+        GuideTests.setUp(self)
+        self.approved=({'supported':True,'issues':[],'checkedClaimIds':['c1','c2','c3','c4','c5']},{})
+    def test_long_summary_keeps_its_leading_sentences_without_any_call(self):
+        sentence='Le bus urbain de Kyoto coûte 230 yens et la ligne 5 rejoint le pavillon d’Argent en 35 minutes. '
+        self.value['summary']=sentence*6
+        fitted,record=g.settle_metadata(self.value,lambda *args:self.fail('no call needed'),'')
+        self.assertEqual(fitted['summary'],(sentence*3).strip())
+        self.assertEqual(record,{'shortened':['summary'],'rewritten':[]})
+        self.assertEqual(len(self.value['summary']),len(sentence*6))
+    def test_title_keeps_its_leading_part(self):
+        self.value['title']='Kyoto en 3 jours : '+'bus à 230 yens, temples, jardins et cafés '*3
+        self.assertEqual(g.settle_metadata(self.value,None,'')[0]['title'],'Kyoto en 3 jours')
+    def test_one_long_sentence_gets_one_short_rewrite(self):
+        self.value['description']='Trois jours à Kyoto '+'en bus et à pied entre temples et jardins '*5+'.'
+        calls=[]
+        def invoke(messages,max_tokens,token):
+            calls.append((json.loads(messages[1]['content']),max_tokens))
+            return {'description':'Trois jours à Kyoto en bus à 230 yens et à pied, des temples aux jardins.'},{'completion_tokens':30}
+        fitted,record=g.settle_metadata(self.value,invoke,'')
+        self.assertEqual(calls,[({'fields':{'description':self.value['description']},'limits':{'description':180}},g.METADATA_REPAIR_TOKENS)])
+        self.assertEqual(fitted['description'],'Trois jours à Kyoto en bus à 230 yens et à pied, des temples aux jardins.')
+        self.assertEqual(record['rewritten'],['description'])
+        g.validate_article_output(fitted,self.topic,self.facts,[],self.now)
+    def test_a_missed_rewrite_falls_back_to_the_writer_words_cut_and_marked(self):
+        self.value['description']='Trois jours à Kyoto en bus, '+'entre temples et jardins du nord de la ville '*5+'pour 230 yens'
+        for answer in ({'description':'y'*181},{'title':'ajout'},['liste']):
+            with self.subTest(answer=answer):
+                fitted,record=g.settle_metadata(self.value,lambda *args:(answer,{}),'')
+                self.assertLessEqual(len(fitted['description']),180)
+                self.assertTrue(fitted['description'].endswith('…'))
+                self.assertTrue(self.value['description'].startswith(fitted['description'][:-1]))
+                self.assertEqual((record['clipped'],record['rewritten']),(['description'],[]))
+    def test_text_without_any_space_cannot_be_cut_and_holds_the_guide(self):
+        self.value['description']='x'*181
+        with self.assertRaisesRegex(ValueError,'guide_metadata_length'):
+            g.settle_metadata(self.value,lambda *args:({'description':'y'*181},{}),'')
+    def test_writer_is_asked_for_the_body_before_the_metadata(self):
+        instruction=g.writer_instruction(self.topic)
+        order=instruction[instruction.index('Retourne JSON'):]
+        self.assertLess(order.index('"sections"'),order.index('"summary"'))
+        self.assertLess(order.index('"faq"'),order.index('"shortTitle"'))
+    def test_length_repair_reads_the_raw_draft_with_its_long_summary(self):
+        short=copy.deepcopy(self.value)
+        for section in short['sections']:
+            section['paragraphs']=['Une description factuelle assez courte pour déclencher le contrôle du corps du guide.']
+        short['summary']='Le bus urbain coûte 230 yens et relie les temples du nord. '*10
+        answers=iter([(short,{}),(self.value,{}),self.approved]);packets=[]
+        def invoke(messages,*args):packets.append(messages[-1]['content']);return next(answers)
+        g.create_guide(self.topic,self.facts,[],self.now,'',invoke,block_reviewer=lambda *args:({'supported':True},{}))
+        self.assertEqual(json.loads(packets[1])['rejectedDraft']['summary'],short['summary'])
+    def test_metadata_within_limits_are_left_untouched(self):
+        self.assertEqual(g.settle_metadata(self.value,None,''),(self.value,None))
+    def test_writer_summary_is_fitted_before_the_reviews(self):
+        self.value['summary']='Le bus urbain coûte 230 yens et relie les temples. '*12
+        answers=iter([(self.value,{}),self.approved])
+        result=g.create_guide(self.topic,self.facts,[],self.now,'',lambda *args:next(answers),block_reviewer=lambda *args:({'supported':True},{}))
+        self.assertLessEqual(len(result['article']['summary']),360)
+        self.assertEqual(result['metadataFitting']['shortened'],['summary'])
+        self.assertEqual(result['status'],'guide_ready_for_pilot_review')
+    def test_a_fact_the_guide_never_cites_leaves_its_evidence(self):
+        facts=self.facts+[{'id':'c6','fact':'Fait jamais cité'}]
+        answers=iter([(self.value,{}),self.approved])
+        result=g.create_guide(self.topic,facts,[],self.now,'',lambda *args:next(answers),block_reviewer=lambda *args:({'supported':True},{}))
+        self.assertEqual([f['id'] for f in result['facts']],['c1','c2','c3','c4','c5'])
+    def test_too_few_cited_facts_still_hold_the_guide(self):
+        for section in self.value['sections']:section['claims']=['c1'] if section['id']=='partie-1' else [section['claims'][-1]]
+        self.value['sections'][1]['claims']=['c2']
+        facts=self.facts+[{'id':'c6','fact':'Fait jamais cité'},{'id':'c7','fact':'Autre fait jamais cité'}]
+        self.value['sections']=self.value['sections'][:3]
+        with self.assertRaisesRegex(ValueError,'guide_unused_facts'):
+            g.validate_article_output(self.value,self.topic,facts,[],self.now)
+    def test_a_section_without_a_new_fact_gets_the_one_bounded_repair(self):
+        padded=copy.deepcopy(self.value)
+        padded['sections'].append(dict(padded['sections'][0],id='partie-bis'))
+        answers=iter([(padded,{}),(self.value,{}),self.approved]);packets=[]
+        def invoke(messages,*args):packets.append(messages);return next(answers)
+        result=g.create_guide(self.topic,self.facts,[],self.now,'',invoke,block_reviewer=lambda *args:({'supported':True},{}))
+        self.assertEqual(result['status'],'guide_ready_for_pilot_review')
+        self.assertEqual(json.loads(packets[1][1]['content'])['defect'],'guide_section_padding')
+        self.assertIn('aucun fait nouveau',packets[1][0]['content'])
+    def test_a_section_citing_an_unknown_fact_is_never_repaired(self):
+        self.value['sections'][0]['claims']=['inventé']
+        calls=[]
+        def invoke(*args):calls.append(args);return self.value,{}
+        with self.assertRaisesRegex(ValueError,'guide_section_unproved_or_padding'):
+            g.create_guide(self.topic,self.facts,[],self.now,'',invoke)
+        self.assertEqual(len(calls),1)
+    def test_fact_ids_leave_the_prose_and_a_short_paragraph_joins_its_neighbour(self):
+        self.value['sections'][2]['paragraphs']=[PARAGRAPH,'La température moyenne est de 26,9 °C (c5).',PARAGRAPH+' (c3, c4)']
+        tidy=g.tidy_paragraphs(self.value)
+        paragraphs=tidy['sections'][2]['paragraphs']
+        self.assertEqual(paragraphs,[PARAGRAPH+' La température moyenne est de 26,9 °C.',PARAGRAPH])
+        self.assertIn('(c5)',self.value['sections'][2]['paragraphs'][1])
+        g.validate_article_output(tidy,self.topic,self.facts,[],self.now)
+    def test_a_short_first_paragraph_joins_the_next_one(self):
+        self.value['sections'][0]['paragraphs']=['Bus urbain : 230 yens.',PARAGRAPH]
+        self.assertEqual(g.tidy_paragraphs(self.value)['sections'][0]['paragraphs'],['Bus urbain : 230 yens. '+PARAGRAPH])
+
