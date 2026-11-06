@@ -76,8 +76,9 @@ avant tout contrôle, un champ trop long garde ses premières phrases entières 
 partie avant « : »), sans un mot réécrit ni ajouté. S'il reste trop long (une seule phrase), un
 appel court le condense (environ 50 neurones, une seule fois) ; si cette réécriture manque sa
 limite, la phrase du rédacteur est coupée à une virgule ou à un mot et finit par « … ». La
-reprise de longueur du corps reçoit le brouillon brut, avec son long résumé à reporter dans les
-sections. Un fait
+reprise unique du rédacteur (corps trop court ou trop long, ou section qui ne cite aucun fait
+nouveau) reçoit le brouillon brut, avec son long résumé à reporter dans les sections ; le
+résultat repasse tous les contrôles et les relectures. Un fait
 que le guide ne cite nulle part sort du dossier de preuves au lieu de faire jeter le guide,
 pourvu qu'il en reste au moins 5. Les relectures lisent toujours le texte final.
 

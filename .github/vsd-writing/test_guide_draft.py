@@ -286,3 +286,19 @@ class MetadataFittingTests(unittest.TestCase):
         self.value['sections']=self.value['sections'][:3]
         with self.assertRaisesRegex(ValueError,'guide_unused_facts'):
             g.validate_article_output(self.value,self.topic,facts,[],self.now)
+    def test_a_section_without_a_new_fact_gets_the_one_bounded_repair(self):
+        padded=copy.deepcopy(self.value)
+        padded['sections'].append(dict(padded['sections'][0],id='partie-bis'))
+        answers=iter([(padded,{}),(self.value,{}),self.approved]);packets=[]
+        def invoke(messages,*args):packets.append(messages);return next(answers)
+        result=g.create_guide(self.topic,self.facts,[],self.now,'',invoke,block_reviewer=lambda *args:({'supported':True},{}))
+        self.assertEqual(result['status'],'guide_ready_for_pilot_review')
+        self.assertEqual(json.loads(packets[1][1]['content'])['defect'],'guide_section_padding')
+        self.assertIn('aucun fait nouveau',packets[1][0]['content'])
+    def test_a_section_citing_an_unknown_fact_is_never_repaired(self):
+        self.value['sections'][0]['claims']=['inventé']
+        calls=[]
+        def invoke(*args):calls.append(args);return self.value,{}
+        with self.assertRaisesRegex(ValueError,'guide_section_unproved_or_padding'):
+            g.create_guide(self.topic,self.facts,[],self.now,'',invoke)
+        self.assertEqual(len(calls),1)
