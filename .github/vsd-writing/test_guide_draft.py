@@ -302,3 +302,14 @@ class MetadataFittingTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'guide_section_unproved_or_padding'):
             g.create_guide(self.topic,self.facts,[],self.now,'',invoke)
         self.assertEqual(len(calls),1)
+    def test_fact_ids_leave_the_prose_and_a_short_paragraph_joins_its_neighbour(self):
+        self.value['sections'][2]['paragraphs']=[PARAGRAPH,'La température moyenne est de 26,9 °C (c5).',PARAGRAPH+' (c3, c4)']
+        tidy=g.tidy_paragraphs(self.value)
+        paragraphs=tidy['sections'][2]['paragraphs']
+        self.assertEqual(paragraphs,[PARAGRAPH+' La température moyenne est de 26,9 °C.',PARAGRAPH])
+        self.assertIn('(c5)',self.value['sections'][2]['paragraphs'][1])
+        g.validate_article_output(tidy,self.topic,self.facts,[],self.now)
+    def test_a_short_first_paragraph_joins_the_next_one(self):
+        self.value['sections'][0]['paragraphs']=['Bus urbain : 230 yens.',PARAGRAPH]
+        self.assertEqual(g.tidy_paragraphs(self.value)['sections'][0]['paragraphs'],['Bus urbain : 230 yens. '+PARAGRAPH])
+
