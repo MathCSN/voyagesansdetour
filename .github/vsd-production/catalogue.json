@@ -66,6 +66,24 @@
       "notBefore": "2026-10-29T11:36:06Z",
       "file": "scenarios/ig-vietnam-itineraire-15-jours-2026-11-25.json",
       "sha256": "d16ee3ad805dc0f8362714e771f76eb27363ec4bf8d4c80190191379340fa4ef"
+    },
+    {
+      "contentId": "fb-marrakech-3-jours-2026-11-26",
+      "notBefore": "2026-11-06T15:34:20Z",
+      "file": "scenarios/fb-marrakech-3-jours-2026-11-26.json",
+      "sha256": "5ea88675e95a213a1f2139bd008c25103fd4d41d0149eae33c9e119d2f476f6a"
+    },
+    {
+      "contentId": "fb-vietnam-quand-partir-2026-11-29",
+      "notBefore": "2026-11-06T15:34:20Z",
+      "file": "scenarios/fb-vietnam-quand-partir-2026-11-29.json",
+      "sha256": "141aa6ba466f93edd40c6af927f16e5b29b7b4986bdf8bb4a69cae1e66284632"
+    },
+    {
+      "contentId": "ig-thailande-itineraire-2-semaines-2026-12-02",
+      "notBefore": "2026-11-06T15:34:20Z",
+      "file": "scenarios/ig-thailande-itineraire-2-semaines-2026-12-02.json",
+      "sha256": "ddc491072e542846b60e4c16979b0a2f3edee26efafb8dbfd8611fb0b652f337"
     }
   ]
 }

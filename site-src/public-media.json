@@ -664,6 +664,168 @@
           "bytes": 4449
         }
       ]
+    },
+    {
+      "contentId": "fb-marrakech-3-jours-2026-11-26",
+      "kind": "photos",
+      "approved": true,
+      "files": [
+        {
+          "name": "scene-01.jpg",
+          "sha256": "a446d59a99193e3ca695fc83e5789633e54e2435c3b66c944bb957da98699979",
+          "bytes": 250531
+        },
+        {
+          "name": "scene-02.jpg",
+          "sha256": "93897bb8824f3daffe296d9c676e8bfd06004cbba07c54336758dfd406ceb308",
+          "bytes": 329186
+        },
+        {
+          "name": "scene-03.jpg",
+          "sha256": "f79fba17b3208aa2b36af532b91a10f1ebd307e77f50b3fc92680d4d3e56ebaf",
+          "bytes": 303662
+        },
+        {
+          "name": "scene-04.jpg",
+          "sha256": "592d706256a3cea35dfc957345bb523b131f58eb23080169b7ebe008b8ba48f1",
+          "bytes": 445525
+        },
+        {
+          "name": "scene-05.jpg",
+          "sha256": "068ace79537798ff592985a2f71b1f73ff71d964004dac3108e87f8adcacca2b",
+          "bytes": 329722
+        },
+        {
+          "name": "scene-06.jpg",
+          "sha256": "25ba66af5646f5f679126c70394017cd0bfde464168c544bd3b5eb9f04f0d416",
+          "bytes": 339024
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "78b18baeb71c1f720bd292a152436b5535d6572d0a933e851be2259b4cc485fb",
+          "bytes": 2589
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "fb-vietnam-quand-partir-2026-11-29",
+      "kind": "photos",
+      "approved": true,
+      "files": [
+        {
+          "name": "scene-01.jpg",
+          "sha256": "19e9dfc83df6cb9f17e391bdd325c9a888c85ee203a9c5ed0b1a0e69f2738ab8",
+          "bytes": 370553
+        },
+        {
+          "name": "scene-02.jpg",
+          "sha256": "7ef16fba8892470115b782333e1588fdbea0a6764dba3ee1eebeeea0358d1cf0",
+          "bytes": 430958
+        },
+        {
+          "name": "scene-03.jpg",
+          "sha256": "b7bf65124d2d1d012eb5cc30b2b802036bede79f07a60905458b582f718d3668",
+          "bytes": 282384
+        },
+        {
+          "name": "scene-04.jpg",
+          "sha256": "e2510c4ded48e7d4973745ed1dc83bfa78df597745f0590d663d45ab86decd8a",
+          "bytes": 368468
+        },
+        {
+          "name": "scene-05.jpg",
+          "sha256": "7d613e54345505f1b6365c4e627742de4939d8a0a554b9313a9e39458ccbd67d",
+          "bytes": 343041
+        },
+        {
+          "name": "scene-06.jpg",
+          "sha256": "9ca9bc239f827b6ae2eccb02227af384f596b92fc7de67846fba7945d0d495a9",
+          "bytes": 499072
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "2463537a7ffa55757ade13401e5791663c24afcbaa74b2afd8cb42abacaca4e5",
+          "bytes": 2800
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "ig-thailande-itineraire-2-semaines-2026-12-02",
+      "approved": true,
+      "files": [
+        {
+          "name": "reel.mp4",
+          "sha256": "9d285bb3d7f45eddeceb7ccf6e19124d345960edc8c7756a1de00ab26e33affd",
+          "bytes": 9943534
+        },
+        {
+          "name": "poster.jpg",
+          "sha256": "172682754ee53f7a034ab67b457fb1b505b4e98a74bd6931b9540e371e45f850",
+          "bytes": 321440
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "fba7791eb78a26a4d215186e403545d2b4055a422c26511aee7b5eebc67b938f",
+          "bytes": 3576
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "pin-cote-amalfitaine-sans-voiture",
+      "kind": "pin",
+      "approved": true,
+      "files": [
+        {
+          "name": "pin.jpg",
+          "bytes": 576589,
+          "sha256": "43c908399ae50c1dd03e1673d44a822724b99d6d5e679a2fe1ea0878cae8f94b"
+        },
+        {
+          "name": "credits.txt",
+          "bytes": 317,
+          "sha256": "9ef41adb11897e364b193cb6b63dd303159e631732577aff6c9e58cc0726d76b"
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "bytes": 4482,
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "bytes": 4449,
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+        }
+      ]
     }
   ]
 }

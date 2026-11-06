@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "contentId": "fb-marrakech-3-jours-2026-11-26",
+  "status": "rendered_not_published",
+  "fingerprint": "65e473599816653298547cb5bd825738cdd7e4ae4f3d89b2fd0c514cdfe3751d",
+  "createdAt": "2026-11-06T15:34:43.472458Z",
+  "renderFinishedAt": "2026-11-06T15:34:44.533372Z",
+  "rendererContractVersion": 3,
+  "rendererSha256": "73d2f60a37f0b3d56ebffdf0ae8addf7c952b5c0e343af8471eb4e019f06a4f6",
+  "drawingSha256": "b8f922e8e3759eb1d0ad8847308e4bc9bf22d853c826ab31476a39b5e5df7a71",
+  "kind": "carousel",
+  "channel": "facebook",
+  "publishAt": "2026-11-26T17:00:00Z",
+  "reviewValidUntil": "2026-12-06T15:34:20Z",
+  "sourceCheckedOn": "2026-11-06",
+  "targetUrl": "https://voyagesansdetour.fr/maroc/marrakech-3-jours/",
+  "voice": null,
+  "presenter": null,
+  "sourceUrls": [
+    "https://voyagesansdetour.fr/maroc/marrakech-3-jours/"
+  ],
+  "photos": {
+    "marrakech-place-jemaa-el-fna": {
+      "licence": "CC BY 4.0",
+      "author": "Jakub Hałun",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Jamaa_El_Fna,_Marrakesh,_Morocco,_20250124_1804_7017.jpg"
+    },
+    "marrakech-bahia": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Val Traveler",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Bahia_Palace_large_court.jpg"
+    },
+    "marrakech-majorelle": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Viault",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Le_jardin_des_majorelle_16.JPG"
+    },
+    "marrakech-cb39d8f5": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Petar Milošević",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Oriental_hanging_lanterns._Souk_Haddadine,_Marrakech_Medina,_Morocco.jpg"
+    },
+    "marrakech-85ffbf38": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Petar Milošević",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Lamp_maker,_Medina_of_Marrakech.jpg"
+    },
+    "marrakech-87a15701": {
+      "licence": "CC BY-SA 3.0",
+      "author": "I.Barrios & J.Ligero",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Babuchas_02_--_2014_--_Marrakech,_Marruecos.jpg"
+    }
+  },
+  "video": null,
+  "files": [
+    {
+      "file": "apercu.jpg",
+      "sha256": "b3f9b77b19212a6bde06660770dfc4ec7375b6007a7d7a8fcaba5a9d01996865",
+      "bytes": 211258
+    },
+    {
+      "file": "credits.txt",
+      "sha256": "78b18baeb71c1f720bd292a152436b5535d6572d0a933e851be2259b4cc485fb",
+      "bytes": 2589
+    },
+    {
+      "file": "dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "file": "legende.txt",
+      "sha256": "490a041cf86088eed3a66fa357e881467b8e156ac6f9caef1c56f751c80a7db7",
+      "bytes": 931
+    },
+    {
+      "file": "playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    },
+    {
+      "file": "scenario.json",
+      "sha256": "5ea88675e95a213a1f2139bd008c25103fd4d41d0149eae33c9e119d2f476f6a",
+      "bytes": 6766
+    },
+    {
+      "file": "scene-01.jpg",
+      "sha256": "a446d59a99193e3ca695fc83e5789633e54e2435c3b66c944bb957da98699979",
+      "bytes": 250531
+    },
+    {
+      "file": "scene-02.jpg",
+      "sha256": "93897bb8824f3daffe296d9c676e8bfd06004cbba07c54336758dfd406ceb308",
+      "bytes": 329186
+    },
+    {
+      "file": "scene-03.jpg",
+      "sha256": "f79fba17b3208aa2b36af532b91a10f1ebd307e77f50b3fc92680d4d3e56ebaf",
+      "bytes": 303662
+    },
+    {
+      "file": "scene-04.jpg",
+      "sha256": "592d706256a3cea35dfc957345bb523b131f58eb23080169b7ebe008b8ba48f1",
+      "bytes": 445525
+    },
+    {
+      "file": "scene-05.jpg",
+      "sha256": "068ace79537798ff592985a2f71b1f73ff71d964004dac3108e87f8adcacca2b",
+      "bytes": 329722
+    },
+    {
+      "file": "scene-06.jpg",
+      "sha256": "25ba66af5646f5f679126c70394017cd0bfde464168c544bd3b5eb9f04f0d416",
+      "bytes": 339024
+    }
+  ],
+  "runtime": {
+    "wallSeconds": 0.977,
+    "encoderThreads": 2,
+    "pillowVersion": "11.3.0",
+    "ffmpegVersion": null
+  },
+  "publication": {
+    "uploaded": false,
+    "scheduled": false,
+    "published": false,
+    "readyForAutomaticImport": false
+  },
+  "cost": {
+    "newPaidService": false,
+    "providerCalls": 0,
+    "monetarySpendEur": 0
+  }
+}

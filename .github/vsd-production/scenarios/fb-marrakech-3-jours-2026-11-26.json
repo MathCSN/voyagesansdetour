@@ -1,0 +1,186 @@
+{
+  "schemaVersion": 2,
+  "id": "fb-marrakech-3-jours-2026-11-26",
+  "kind": "carousel",
+  "channel": "facebook",
+  "destination": "Marrakech",
+  "title": "Marrakech en 3 jours : 4 repères",
+  "targetUrl": "https://voyagesansdetour.fr/maroc/marrakech-3-jours/",
+  "publishAt": "2026-11-26T17:00:00Z",
+  "review": {
+    "status": "reviewed_for_render",
+    "checkedAt": "2026-11-06T15:34:20Z",
+    "validUntil": "2026-12-06T15:34:20Z",
+    "method": "Généré automatiquement (auto_social.py) depuis la page publiée du guide relevée le 06/11/2026 : chaque chiffre est cité mot pour mot ; photos réelles sous licence libre (Wikimedia Commons), aucune image générée par IA ; garde-fous de production.py passés avant la mise en file."
+  },
+  "sources": {
+    "file": "auto/fb-marrakech-3-jours-2026-11-26/sources.json",
+    "sha256": "6b83041620d810c99908744a3fbd004b184d012cc4265bd4d5978367f6de8ee7"
+  },
+  "photos": {
+    "file": "auto/fb-marrakech-3-jours-2026-11-26/photos.json",
+    "sha256": "6cbe189f5359e708303837ed49197e63946e602a9d336dbb323766db8d7e8ddc"
+  },
+  "caption": {
+    "hook": "🗺️ Marrakech en 3 jours : médina, Majorelle, palais et une escapade, sans se faire plumer",
+    "lines": [
+      "📍 30 dh : le bus 19 de l’aéroport à Jemaa el-Fna (50 dh l’aller-retour), toutes les 30 minutes de 7 h à 21 h 30",
+      "📍 70 dh : le prix attendu d’un petit taxi de l’aéroport à la médina ; une course à 400 dh a coûté leur licence à 46 chauffeurs",
+      "📍 150 à 165 dh : le jardin Majorelle selon les relevés 2023-2024, en billet daté vendu uniquement en ligne",
+      "⏱️ 17 h 30 : la fermeture du jardin Majorelle (dernière entrée 17 h) ; le musée Yves Saint Laurent ferme le mercredi"
+    ],
+    "cta": "🔗 Tous les prix, horaires et l’itinéraire dans le guide complet :",
+    "hashtags": [
+      "#Marrakech",
+      "#Maroc",
+      "#VoyageMaroc",
+      "#Itineraire",
+      "#VoyageSansDetour"
+    ]
+  },
+  "scenes": [
+    {
+      "photo": "marrakech-place-jemaa-el-fna",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Maroc · Marrakech",
+      "headline": [
+        "Marrakech en 3 jours",
+        "*4 chiffres* à connaître"
+      ],
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "Trois jours suffisent pour voir l’essentiel de Marrakech : la médina et ses souks, le jardin Majorelle, les palais de la Bahia et d’El Badi, puis une journée dans l’Atlas ou à Essaouira."
+        }
+      ],
+      "tag": "Guide Marrakech · sources du 05/11/2026",
+      "alt": "La place Jemaa el-Fna en fin de journée, entre parasols verts et étals, au cœur de la médina de Marrakech."
+    },
+    {
+      "photo": "marrakech-bahia",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Arriver",
+      "headline": [
+        "*30 dh*"
+      ],
+      "detail": "le bus 19 de l’aéroport à Jemaa el-Fna (50 dh l’aller-retour), toutes les 30 minutes de 7 h à 21 h 30",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "30 dh le bus 19 de l’aéroport à Jemaa el-Fna (50 dh l’aller-retour), toutes les 30 minutes de 7 h à 21 h 30"
+        }
+      ],
+      "tag": "Guide Marrakech · sources du 05/11/2026",
+      "alt": "La grande cour carrelée de zelliges du palais de la Bahia, à Marrakech."
+    },
+    {
+      "photo": "marrakech-majorelle",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Arriver",
+      "headline": [
+        "*70 dh*"
+      ],
+      "detail": "le prix attendu d’un petit taxi de l’aéroport à la médina ; une course à 400 dh a coûté leur licence à 46 chauffeurs",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "70 dh le prix attendu d’un petit taxi de l’aéroport à la médina ; une course à 400 dh a coûté leur licence à 46 chauffeurs"
+        }
+      ],
+      "tag": "Guide Marrakech · sources du 05/11/2026",
+      "alt": "La villa bleue du jardin Majorelle."
+    },
+    {
+      "photo": "marrakech-cb39d8f5",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Jour 2",
+      "headline": [
+        "*150 à 165 dh*"
+      ],
+      "detail": "le jardin Majorelle selon les relevés 2023-2024, en billet daté vendu uniquement en ligne",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "150 à 165 dh le jardin Majorelle selon les relevés 2023-2024, en billet daté vendu uniquement en ligne"
+        }
+      ],
+      "tag": "Guide Marrakech · sources du 05/11/2026",
+      "alt": "Marrakech (Maroc) : Oriental hanging lanterns. Souk Haddadine, Marrakech Medina, Morocco."
+    },
+    {
+      "photo": "marrakech-85ffbf38",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Jour 2",
+      "headline": [
+        "*17 h 30*"
+      ],
+      "detail": "la fermeture du jardin Majorelle (dernière entrée 17 h) ; le musée Yves Saint Laurent ferme le mercredi",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "17 h 30 la fermeture du jardin Majorelle (dernière entrée 17 h) ; le musée Yves Saint Laurent ferme le mercredi"
+        }
+      ],
+      "tag": "Guide Marrakech · sources du 05/11/2026",
+      "alt": "Marrakech (Maroc) : Lamp maker, Medina of Marrakech."
+    },
+    {
+      "photo": "marrakech-87a15701",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Le guide complet",
+      "headline": [
+        "Marrakech en 3 jours"
+      ],
+      "detail": "Trois jours à Marrakech heure par heure, avec les prix relevés en novembre 2026.",
+      "alt": "Marrakech (Maroc) : Babuchas 02 -- 2014 -- Marrakech, Marruecos.",
+      "cta": true
+    }
+  ],
+  "assets": {
+    "regular": {
+      "file": "assets/dmsans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9"
+    },
+    "bold": {
+      "file": "assets/dmsans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211"
+    },
+    "serif": {
+      "file": "assets/playfair.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+      },
+      "sha256": "adefc53e7b3d483f1fa5e85edd82b7689ca79db25a1f6786bd7949cdcfeec601"
+    }
+  }
+}

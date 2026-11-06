@@ -135,6 +135,33 @@
       "itemIds": [
         "vsd-production:instagram:ig-vietnam-itineraire-15-jours-2026-11-25:photo-v1"
       ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/fb-marrakech-3-jours-2026-11-26-v1.json",
+      "fileSha256": "984c97394ca296b33da7e2b5bd47d83fceea245d703e6a932a18cecf92c44185",
+      "batchId": "fb-marrakech-3-jours-2026-11-26-v1",
+      "batchSha256": "a4a7426ab4d074b189ec6376cbe10d41fd14575893d9a4d0d23acfaa5e5c9a4e",
+      "itemIds": [
+        "vsd-production:facebook:fb-marrakech-3-jours-2026-11-26:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/fb-vietnam-quand-partir-2026-11-29-v1.json",
+      "fileSha256": "80039d8fc7609feae5c9191fa9fc84e235d0bb9ad984a00f6ec1a053a35a8ea5",
+      "batchId": "fb-vietnam-quand-partir-2026-11-29-v1",
+      "batchSha256": "000a1ebca66fd18deba8a363c79380fdc9c78d56347596906e0e188caadd159c",
+      "itemIds": [
+        "vsd-production:facebook:fb-vietnam-quand-partir-2026-11-29:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-thailande-itineraire-2-semaines-2026-12-02-v1.json",
+      "fileSha256": "678f3beaa04d2ffd3adf0335700a842ccf69f13f220f4a14268c9a65bd09318a",
+      "batchId": "ig-thailande-itineraire-2-semaines-2026-12-02-v1",
+      "batchSha256": "6b05598d11ff61330590a91eb4541788b21e03ff24e33743df6970edb52602ba",
+      "itemIds": [
+        "vsd-production:instagram:ig-thailande-itineraire-2-semaines-2026-12-02:photo-v1"
+      ]
     }
   ],
   "retirements": [

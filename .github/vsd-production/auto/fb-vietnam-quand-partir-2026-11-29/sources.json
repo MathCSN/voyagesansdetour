@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "checkedOn": "2026-11-06",
+  "method": "Page publiée du guide relevée automatiquement ; texte visible conservé tel quel, première ligne = URL.",
+  "sources": {
+    "guide": {
+      "url": "https://voyagesansdetour.fr/vietnam/vietnam-quand-partir/",
+      "publisher": "Voyage Sans Détour",
+      "title": "Quand partir au Vietnam : le bon mois pour le Nord, le Centre et le Sud",
+      "retrievedAt": "2026-11-06T15:34:20Z",
+      "snapshot": {
+        "file": "auto/fb-vietnam-quand-partir-2026-11-29/guide.txt",
+        "sha256": "fac3635ab85b8d9af0af5824eda28e8c06aac18a9be9c8225572e2f008a0d9eb"
+      }
+    }
+  }
+}

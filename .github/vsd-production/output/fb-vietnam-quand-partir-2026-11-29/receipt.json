@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "contentId": "fb-vietnam-quand-partir-2026-11-29",
+  "status": "rendered_not_published",
+  "fingerprint": "82834cc11890549ecdb820880f4beda2deb8211a0f8c38f0cefaa77bca5f159b",
+  "createdAt": "2026-11-06T15:34:44.633615Z",
+  "renderFinishedAt": "2026-11-06T15:34:45.733086Z",
+  "rendererContractVersion": 3,
+  "rendererSha256": "73d2f60a37f0b3d56ebffdf0ae8addf7c952b5c0e343af8471eb4e019f06a4f6",
+  "drawingSha256": "b8f922e8e3759eb1d0ad8847308e4bc9bf22d853c826ab31476a39b5e5df7a71",
+  "kind": "carousel",
+  "channel": "facebook",
+  "publishAt": "2026-11-29T17:00:00Z",
+  "reviewValidUntil": "2026-12-06T15:34:20Z",
+  "sourceCheckedOn": "2026-11-06",
+  "targetUrl": "https://voyagesansdetour.fr/vietnam/vietnam-quand-partir/",
+  "voice": null,
+  "presenter": null,
+  "sourceUrls": [
+    "https://voyagesansdetour.fr/vietnam/vietnam-quand-partir/"
+  ],
+  "photos": {
+    "vietnam-halong": {
+      "licence": "CC BY-SA 2.0",
+      "author": "Romain Pontida",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Traditional_junk,_Halong_Bay,_Quang_Ninh,_Vietnam_-_V%E1%BB%8Bnh_H%E1%BA%A1_Long,_Qu%E1%BA%A3ng_Ninh,_Vi%E1%BB%87t_Nam_(10226220073).jpg"
+    },
+    "vietnam-rizieres-sapa": {
+      "licence": "CC0",
+      "author": "Eerin25",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Rice_terraces_in_Sapa,_Vietnam.jpg"
+    },
+    "vietnam-hoi-an": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Steffen Schmitz (Carschten)",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:H%E1%BB%99i_An,_Museum_of_Trade_Ceramics,_2020-01_CN-02.jpg"
+    },
+    "vietnam-train-hanoi": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Newone",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Newone_-_Hanoi_train_street_with_coffee_01.jpg"
+    },
+    "vietnam-hue-citadelle": {
+      "licence": "CC BY 4.0",
+      "author": "Supanut Arunoprayote",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Gate_in_Imperial_City,_Hu%E1%BA%BF_(III).jpg"
+    },
+    "vietnam-ninh-binh": {
+      "licence": "CC BY 4.0",
+      "author": "Jakub Hałun",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Trang_An_Landscape_Complex,_Ninh_Binh_Province,_Vietnam,_20240202_1456_5313.jpg"
+    }
+  },
+  "video": null,
+  "files": [
+    {
+      "file": "apercu.jpg",
+      "sha256": "cba632d4885cc9a564c4bb82e02d7d7c9193935434af6f141dca301ef0f00091",
+      "bytes": 230626
+    },
+    {
+      "file": "credits.txt",
+      "sha256": "2463537a7ffa55757ade13401e5791663c24afcbaa74b2afd8cb42abacaca4e5",
+      "bytes": 2800
+    },
+    {
+      "file": "dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "file": "legende.txt",
+      "sha256": "9a0aa9b97f7bd5e1fd38286947fc8240784270daf55f7458be06e9b4b9ad401d",
+      "bytes": 820
+    },
+    {
+      "file": "playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    },
+    {
+      "file": "scenario.json",
+      "sha256": "141aa6ba466f93edd40c6af927f16e5b29b7b4986bdf8bb4a69cae1e66284632",
+      "bytes": 6453
+    },
+    {
+      "file": "scene-01.jpg",
+      "sha256": "19e9dfc83df6cb9f17e391bdd325c9a888c85ee203a9c5ed0b1a0e69f2738ab8",
+      "bytes": 370553
+    },
+    {
+      "file": "scene-02.jpg",
+      "sha256": "7ef16fba8892470115b782333e1588fdbea0a6764dba3ee1eebeeea0358d1cf0",
+      "bytes": 430958
+    },
+    {
+      "file": "scene-03.jpg",
+      "sha256": "b7bf65124d2d1d012eb5cc30b2b802036bede79f07a60905458b582f718d3668",
+      "bytes": 282384
+    },
+    {
+      "file": "scene-04.jpg",
+      "sha256": "e2510c4ded48e7d4973745ed1dc83bfa78df597745f0590d663d45ab86decd8a",
+      "bytes": 368468
+    },
+    {
+      "file": "scene-05.jpg",
+      "sha256": "7d613e54345505f1b6365c4e627742de4939d8a0a554b9313a9e39458ccbd67d",
+      "bytes": 343041
+    },
+    {
+      "file": "scene-06.jpg",
+      "sha256": "9ca9bc239f827b6ae2eccb02227af384f596b92fc7de67846fba7945d0d495a9",
+      "bytes": 499072
+    }
+  ],
+  "runtime": {
+    "wallSeconds": 1.015,
+    "encoderThreads": 2,
+    "pillowVersion": "11.3.0",
+    "ffmpegVersion": null
+  },
+  "publication": {
+    "uploaded": false,
+    "scheduled": false,
+    "published": false,
+    "readyForAutomaticImport": false
+  },
+  "cost": {
+    "newPaidService": false,
+    "providerCalls": 0,
+    "monetarySpendEur": 0
+  }
+}

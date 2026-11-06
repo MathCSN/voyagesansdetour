@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-marrakech-3-jours",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Marrakech en 3 jours : médina, Majorelle, palais et une escapade, sans se faire plumer",
+  "targetUrl": "https://voyagesansdetour.fr/maroc/marrakech-3-jours/",
+  "articleSha256": "30fc621375b2d03e14553fa4f2c900a2d819c08f037a5a787cef885edeb43f8b",
+  "imageSha256": "54573a2058ae4643e9966fbc7dd7081e499370494037a6002723256c43d09f3f",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "9bce53ef6aec367007587753f135465dbe9bab90b780d903f876dbd2eb8ddb4e",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "marrakech-place-jemaa-el-fna",
+    "author": "Jakub Hałun",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Jamaa_El_Fna,_Marrakesh,_Morocco,_20250124_1804_7017.jpg",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0"
+  }
+}

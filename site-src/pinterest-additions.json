@@ -61,6 +61,15 @@
           "mediaId": "pin-cinque-terre-sans-voiture",
           "width": 1000,
           "height": 1500
+        },
+        {
+          "id": "pin-cote-amalfitaine-sans-voiture",
+          "title": "La côte amalfitaine sans voiture : ferry de Salerne à 12 €, bus SITA et sentier des Dieux",
+          "description": "📌 Retrouvez le guide et ses sources pour préparer votre voyage en Italie. Photo : Bernard Gagnon — CC BY 4.0. Crédits : https://voyagesansdetour.fr/social-media/production/pin-cote-amalfitaine-sans-voiture/credits.txt",
+          "linkPath": "/italie/cote-amalfitaine-sans-voiture/",
+          "mediaId": "pin-cote-amalfitaine-sans-voiture",
+          "width": 1000,
+          "height": 1500
         }
       ]
     },

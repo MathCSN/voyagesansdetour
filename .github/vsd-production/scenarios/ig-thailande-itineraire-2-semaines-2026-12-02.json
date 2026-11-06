@@ -1,0 +1,223 @@
+{
+  "schemaVersion": 2,
+  "id": "ig-thailande-itineraire-2-semaines-2026-12-02",
+  "kind": "reel",
+  "channel": "instagram",
+  "destination": "Thaïlande",
+  "title": "La Thaïlande en 2 semaines : 5 repères",
+  "targetUrl": "https://voyagesansdetour.fr/thailande/thailande-itineraire-2-semaines/",
+  "publishAt": "2026-12-02T17:00:00Z",
+  "review": {
+    "status": "reviewed_for_render",
+    "checkedAt": "2026-11-06T15:34:20Z",
+    "validUntil": "2026-12-06T15:34:20Z",
+    "method": "Généré automatiquement (auto_social.py) depuis la page publiée du guide relevée le 06/11/2026 : chaque chiffre est cité mot pour mot ; photos réelles sous licence libre (Wikimedia Commons), aucune image générée par IA ; garde-fous de production.py passés avant la mise en file."
+  },
+  "sources": {
+    "file": "auto/ig-thailande-itineraire-2-semaines-2026-12-02/sources.json",
+    "sha256": "86c7c2da5c2e3742fa633f4c9b2913a60f9e28c721376d8f035b913e4232e1ea"
+  },
+  "photos": {
+    "file": "auto/ig-thailande-itineraire-2-semaines-2026-12-02/photos.json",
+    "sha256": "0e9b8d7ee5d73eabd93f8ca3bfd6850b71ba38c8f1453abc0485dfd5c7ff9063"
+  },
+  "caption": {
+    "hook": "🗺️ Thaïlande en 2 semaines : Bangkok, Chiang Mai en train de nuit et la mer d’Andaman (prix 2026)",
+    "lines": [
+      "⏱️ 12 h 35 : Bangkok → Chiang Mai par le train de nuit n° 9, départ 18 h 40, arrivée 7 h 15",
+      "📍 938 ฿ : la couchette haute climatisée de 2e classe Bangkok–Chiang Mai (≈ 25 €, grille 2023)",
+      "📍 500 ฿ : le Grand Palais de Bangkok et le Wat Phra Kaew, de 8 h 30 à 16 h 30 (≈ 13 €)",
+      "⏱️ 26 min de l’aéroport de Suvarnabhumi à Phaya Thai en Airport Rail Link, 45 bahts",
+      "⏱️ 1 h 30 à 2 h : le ferry de Krabi ou de Phuket jusqu’aux îles Phi Phi"
+    ],
+    "cta": "🔗 Tous les prix, horaires et l’itinéraire : le guide complet est en lien dans la bio.",
+    "hashtags": [
+      "#Thailande",
+      "#VoyageThailande",
+      "#Itineraire",
+      "#VoyageSansDetour"
+    ]
+  },
+  "scenes": [
+    {
+      "photo": "thailande-phi-phi",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Thaïlande",
+      "headline": [
+        "La Thaïlande",
+        "en 2 semaines",
+        "*5 chiffres* à connaître"
+      ],
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "Trois nuits à Bangkok, le train de nuit jusqu’à Chiang Mai (trois nuits), puis la mer d’Andaman : Krabi, Railay et les îles Phi Phi."
+        }
+      ],
+      "tag": "Guide Thaïlande · sources du 24/10/2026",
+      "seconds": 3.5
+    },
+    {
+      "photo": "thailande-train-nuit",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Le train de nuit pour Chiang Mai",
+      "headline": [
+        "*12 h 35*"
+      ],
+      "detail": "Bangkok → Chiang Mai par le train de nuit n° 9, départ 18 h 40, arrivée 7 h 15",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "12 h 35 Bangkok → Chiang Mai par le train de nuit n° 9, départ 18 h 40, arrivée 7 h 15"
+        }
+      ],
+      "tag": "Guide Thaïlande · sources du 24/10/2026",
+      "seconds": 4
+    },
+    {
+      "photo": "thailande-wat-arun",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Le train de nuit pour Chiang Mai",
+      "headline": [
+        "*938 ฿*"
+      ],
+      "detail": "la couchette haute climatisée de 2e classe Bangkok–Chiang Mai (≈ 25 €, grille 2023)",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "938 ฿ la couchette haute climatisée de 2e classe Bangkok–Chiang Mai (≈ 25 €, grille 2023)"
+        }
+      ],
+      "tag": "Guide Thaïlande · sources du 24/10/2026",
+      "seconds": 4
+    },
+    {
+      "photo": "thailande-chiang-mai-doi-suthep",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Jours 1 à 3",
+      "headline": [
+        "*500 ฿*"
+      ],
+      "detail": "le Grand Palais de Bangkok et le Wat Phra Kaew, de 8 h 30 à 16 h 30 (≈ 13 €)",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "500 ฿ le Grand Palais de Bangkok et le Wat Phra Kaew, de 8 h 30 à 16 h 30 (≈ 13 €)"
+        }
+      ],
+      "tag": "Guide Thaïlande · sources du 24/10/2026",
+      "seconds": 4
+    },
+    {
+      "photo": "thailande-2ddb9240",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Jours 1 à 3",
+      "headline": [
+        "*26 min*"
+      ],
+      "detail": "de l’aéroport de Suvarnabhumi à Phaya Thai en Airport Rail Link, 45 bahts",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "26 min de l’aéroport de Suvarnabhumi à Phaya Thai en Airport Rail Link, 45 bahts"
+        }
+      ],
+      "tag": "Guide Thaïlande · sources du 24/10/2026",
+      "seconds": 4
+    },
+    {
+      "photo": "thailande-1ef558d5",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Jours 7 à 13",
+      "headline": [
+        "*1 h 30 à 2 h*"
+      ],
+      "detail": "le ferry de Krabi ou de Phuket jusqu’aux îles Phi Phi",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "1 h 30 à 2 h le ferry de Krabi ou de Phuket jusqu’aux îles Phi Phi"
+        }
+      ],
+      "tag": "Guide Thaïlande · sources du 24/10/2026",
+      "seconds": 4
+    },
+    {
+      "photo": "thailande-81679a1e",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Le guide complet",
+      "headline": [
+        "La Thaïlande",
+        "en 2 semaines"
+      ],
+      "detail": "Couchette de train dès 938 bahts, Grand Palais à 500 bahts, saison sèche de mi-octobre à mi-février.",
+      "seconds": 4.5,
+      "cta": true
+    }
+  ],
+  "musicStart": 8,
+  "assets": {
+    "regular": {
+      "file": "assets/dmsans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9"
+    },
+    "bold": {
+      "file": "assets/dmsans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211"
+    },
+    "serif": {
+      "file": "assets/playfair.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+      },
+      "sha256": "adefc53e7b3d483f1fa5e85edd82b7689ca79db25a1f6786bd7949cdcfeec601"
+    },
+    "music": {
+      "file": "assets/happy-alley.mp3",
+      "sha256": "f598c8ee624f1db9a2cd38886524a40baff4ce730dcf999c0763791268fa8265",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "commercialUseAllowed": true,
+      "title": "Happy Alley",
+      "author": "Kevin MacLeod",
+      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100482",
+      "provenance": {
+        "file": "evidence/happy-alley-provenance.json",
+        "sha256": "5a2ba8f3dba28b0a748b00089d3854db1fde92213429823746f6d01805f904ac"
+      }
+    }
+  }
+}

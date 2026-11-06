@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "checkedOn": "2026-11-06",
+  "method": "Page publiée du guide relevée automatiquement ; texte visible conservé tel quel, première ligne = URL.",
+  "sources": {
+    "guide": {
+      "url": "https://voyagesansdetour.fr/thailande/thailande-itineraire-2-semaines/",
+      "publisher": "Voyage Sans Détour",
+      "title": "Thaïlande en 2 semaines : Bangkok, Chiang Mai en train de nuit et la mer d’Andaman (prix 2026)",
+      "retrievedAt": "2026-11-06T15:34:20Z",
+      "snapshot": {
+        "file": "auto/ig-thailande-itineraire-2-semaines-2026-12-02/guide.txt",
+        "sha256": "721f2a6c50d35ca82723e34858b56237853731f04a50f0e1fde6461dc7c4d9b3"
+      }
+    }
+  }
+}

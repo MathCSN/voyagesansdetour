@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 1,
+  "batchId": "fb-marrakech-3-jours-2026-11-26-v1",
+  "items": [
+    {
+      "contentId": "vsd-production:facebook:fb-marrakech-3-jours-2026-11-26:photo-v1",
+      "deduplicationKey": "vsd-production:facebook:fb-marrakech-3-jours-2026-11-26:photo-v1",
+      "title": "Marrakech en 3 jours : 4 repères",
+      "dueAt": "2026-11-26T17:00:00Z",
+      "payload": {
+        "schemaVersion": 1,
+        "channel": "facebook",
+        "kind": "photos",
+        "text": "🗺️ Marrakech en 3 jours : médina, Majorelle, palais et une escapade, sans se faire plumer\n\n📍 30 dh : le bus 19 de l’aéroport à Jemaa el-Fna (50 dh l’aller-retour), toutes les 30 minutes de 7 h à 21 h 30\n📍 70 dh : le prix attendu d’un petit taxi de l’aéroport à la médina ; une course à 400 dh a coûté leur licence à 46 chauffeurs\n📍 150 à 165 dh : le jardin Majorelle selon les relevés 2023-2024, en billet daté vendu uniquement en ligne\n⏱️ 17 h 30 : la fermeture du jardin Majorelle (dernière entrée 17 h) ; le musée Yves Saint Laurent ferme le mercredi\n\n🔗 Tous les prix, horaires et l’itinéraire dans le guide complet :\nhttps://voyagesansdetour.fr/maroc/marrakech-3-jours/\n\nPhotos libres (Wikimedia Commons) — crédits : https://voyagesansdetour.fr/social-media/production/fb-marrakech-3-jours-2026-11-26/credits.txt\n\n#Marrakech #Maroc #VoyageMaroc #Itineraire #VoyageSansDetour\n",
+        "aiGenerated": false,
+        "assets": [
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-marrakech-3-jours-2026-11-26/scene-01.jpg",
+            "sha256": "a446d59a99193e3ca695fc83e5789633e54e2435c3b66c944bb957da98699979",
+            "mimeType": "image/jpeg",
+            "altText": "La place Jemaa el-Fna en fin de journée, entre parasols verts et étals, au cœur de la médina de Marrakech."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-marrakech-3-jours-2026-11-26/scene-02.jpg",
+            "sha256": "93897bb8824f3daffe296d9c676e8bfd06004cbba07c54336758dfd406ceb308",
+            "mimeType": "image/jpeg",
+            "altText": "La grande cour carrelée de zelliges du palais de la Bahia, à Marrakech."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-marrakech-3-jours-2026-11-26/scene-03.jpg",
+            "sha256": "f79fba17b3208aa2b36af532b91a10f1ebd307e77f50b3fc92680d4d3e56ebaf",
+            "mimeType": "image/jpeg",
+            "altText": "La villa bleue du jardin Majorelle."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-marrakech-3-jours-2026-11-26/scene-04.jpg",
+            "sha256": "592d706256a3cea35dfc957345bb523b131f58eb23080169b7ebe008b8ba48f1",
+            "mimeType": "image/jpeg",
+            "altText": "Marrakech (Maroc) : Oriental hanging lanterns. Souk Haddadine, Marrakech Medina, Morocco."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-marrakech-3-jours-2026-11-26/scene-05.jpg",
+            "sha256": "068ace79537798ff592985a2f71b1f73ff71d964004dac3108e87f8adcacca2b",
+            "mimeType": "image/jpeg",
+            "altText": "Marrakech (Maroc) : Lamp maker, Medina of Marrakech."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-marrakech-3-jours-2026-11-26/scene-06.jpg",
+            "sha256": "25ba66af5646f5f679126c70394017cd0bfde464168c544bd3b5eb9f04f0d416",
+            "mimeType": "image/jpeg",
+            "altText": "Marrakech (Maroc) : Babuchas 02 -- 2014 -- Marrakech, Marruecos."
+          }
+        ]
+      },
+      "review": {
+        "schemaVersion": 1,
+        "contentId": "vsd-production:facebook:fb-marrakech-3-jours-2026-11-26:photo-v1",
+        "approved": true,
+        "reviewedAt": "2026-11-06T15:35:26Z",
+        "validUntil": "2026-12-06T15:34:20Z",
+        "payloadRevision": "ab90c40d9689654f0650c33bb77485a09eaa422ab771ffa8523be920899ab51f",
+        "checks": {
+          "editorialApproved": true,
+          "rightsApproved": true,
+          "creditsPreserved": true,
+          "disclosurePreserved": true,
+          "formatRequirementsVerified": true,
+          "requiresPaidCall": false,
+          "sources": {
+            "status": "verified",
+            "observedAt": "2026-11-06T15:34:20Z",
+            "validUntil": "2026-12-06T15:34:20Z"
+          },
+          "syntheticPerson": false,
+          "providerSyntheticSettingVerified": false
+        },
+        "media": {
+          "required": true,
+          "url": null,
+          "sha256": null,
+          "items": [
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-marrakech-3-jours-2026-11-26/scene-01.jpg",
+              "sha256": "a446d59a99193e3ca695fc83e5789633e54e2435c3b66c944bb957da98699979",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-06T15:35:26Z",
+              "validUntil": "2026-12-06T15:34:20Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-marrakech-3-jours-2026-11-26/scene-02.jpg",
+              "sha256": "93897bb8824f3daffe296d9c676e8bfd06004cbba07c54336758dfd406ceb308",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-06T15:35:26Z",
+              "validUntil": "2026-12-06T15:34:20Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-marrakech-3-jours-2026-11-26/scene-03.jpg",
+              "sha256": "f79fba17b3208aa2b36af532b91a10f1ebd307e77f50b3fc92680d4d3e56ebaf",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-06T15:35:26Z",
+              "validUntil": "2026-12-06T15:34:20Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-marrakech-3-jours-2026-11-26/scene-04.jpg",
+              "sha256": "592d706256a3cea35dfc957345bb523b131f58eb23080169b7ebe008b8ba48f1",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-06T15:35:26Z",
+              "validUntil": "2026-12-06T15:34:20Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-marrakech-3-jours-2026-11-26/scene-05.jpg",
+              "sha256": "068ace79537798ff592985a2f71b1f73ff71d964004dac3108e87f8adcacca2b",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-06T15:35:26Z",
+              "validUntil": "2026-12-06T15:34:20Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-marrakech-3-jours-2026-11-26/scene-06.jpg",
+              "sha256": "25ba66af5646f5f679126c70394017cd0bfde464168c544bd3b5eb9f04f0d416",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-06T15:35:26Z",
+              "validUntil": "2026-12-06T15:34:20Z"
+            }
+          ]
+        },
+        "destination": {
+          "url": "https://voyagesansdetour.fr/maroc/marrakech-3-jours/",
+          "status": "verified",
+          "observedAt": "2026-11-06T15:35:26Z",
+          "validUntil": "2026-12-06T15:34:20Z"
+        },
+        "monetization": {
+          "containsAffiliateLinks": false,
+          "partnerApproved": false,
+          "linksVerified": false,
+          "disclosurePreserved": false
+        },
+        "formatCapability": {
+          "status": "verified",
+          "observedAt": "2026-11-06T15:35:26Z",
+          "validUntil": "2026-12-06T15:34:20Z",
+          "automaticPublishing": true,
+          "verificationMethod": "official_documentation",
+          "sourceUrls": [
+            "https://support.buffer.com/en-us/articles/using-facebook-with-buffer-jY1AM9fz2G",
+            "https://developers.buffer.com/types/FacebookPostMetadataInput.html",
+            "https://developers.buffer.com/guides/posts-and-scheduling.html"
+          ]
+        },
+        "evidence": {
+          "status": "rendered_local_bytes_verified_public_deploy_pending",
+          "format": "photo_carousel",
+          "rendererContractVersion": 3,
+          "receiptSha256": "e8b8b1f4846f166c6941c9fbc5830f1ef74370692ed3f7ab7e2d8ba0053cc9af",
+          "scenarioFingerprint": "65e473599816653298547cb5bd825738cdd7e4ae4f3d89b2fd0c514cdfe3751d",
+          "sourceCheckedOn": "2026-11-06",
+          "sourceUrls": [
+            "https://voyagesansdetour.fr/maroc/marrakech-3-jours/"
+          ],
+          "creditsUrl": "https://voyagesansdetour.fr/social-media/production/fb-marrakech-3-jours-2026-11-26/credits.txt",
+          "voice": null,
+          "music": null,
+          "note": "Les octets publics sont à contrôler après déploiement avec social_stock.py --verify-public. Un créneau prévu n'est pas une réservation Buffer."
+        }
+      }
+    }
+  ]
+}

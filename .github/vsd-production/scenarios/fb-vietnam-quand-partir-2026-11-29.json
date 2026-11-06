@@ -1,0 +1,186 @@
+{
+  "schemaVersion": 2,
+  "id": "fb-vietnam-quand-partir-2026-11-29",
+  "kind": "carousel",
+  "channel": "facebook",
+  "destination": "Vietnam",
+  "title": "Quand partir au Vietnam : 4 repères",
+  "targetUrl": "https://voyagesansdetour.fr/vietnam/vietnam-quand-partir/",
+  "publishAt": "2026-11-29T17:00:00Z",
+  "review": {
+    "status": "reviewed_for_render",
+    "checkedAt": "2026-11-06T15:34:20Z",
+    "validUntil": "2026-12-06T15:34:20Z",
+    "method": "Généré automatiquement (auto_social.py) depuis la page publiée du guide relevée le 06/11/2026 : chaque chiffre est cité mot pour mot ; photos réelles sous licence libre (Wikimedia Commons), aucune image générée par IA ; garde-fous de production.py passés avant la mise en file."
+  },
+  "sources": {
+    "file": "auto/fb-vietnam-quand-partir-2026-11-29/sources.json",
+    "sha256": "59a8e78b5cb9b29de3f33557193e020a59c25e62b084c2d081cd660ec55db569"
+  },
+  "photos": {
+    "file": "auto/fb-vietnam-quand-partir-2026-11-29/photos.json",
+    "sha256": "a5e50a043bf1556fbc737723ca5121b0b4e6586e7a5611d072c66ea7f248e476"
+  },
+  "caption": {
+    "hook": "🤔 Quand partir au Vietnam : le bon mois pour le Nord, le Centre et le Sud",
+    "lines": [
+      "📍 Février à avril : la meilleure fenêtre pour un voyage nord-sud : Centre au plus sec, Sud en saison sèche, Nord doux",
+      "📍 757 mm de pluie à Hué en octobre, le mois le plus arrosé du Centre (contre 43 mm en mars)",
+      "📍 16,4 °C : la température moyenne de Hanoï en janvier ; 29,2 °C en juillet",
+      "📍 4 mm de pluie à Hô-Chi-Minh-Ville en février, le mois le plus sec du Sud (307 mm en juillet)"
+    ],
+    "cta": "🔗 Tous les prix, horaires et l’itinéraire dans le guide complet :",
+    "hashtags": [
+      "#Vietnam",
+      "#VoyageVietnam",
+      "#IdeeVoyage",
+      "#VoyageSansDetour"
+    ]
+  },
+  "scenes": [
+    {
+      "photo": "vietnam-halong",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Vietnam",
+      "headline": [
+        "Quand partir au Vietnam",
+        "*4 repères* à connaître"
+      ],
+      "detail": "Le Vietnam a trois climats : un même mois peut être parfait à Saïgon et inondé à Hội An.",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "Le Vietnam a trois climats : un même mois peut être parfait à Saïgon et inondé à Hội An."
+        }
+      ],
+      "tag": "Guide Vietnam · sources du 26/10/2026",
+      "alt": "Une jonque aux voiles brunes entre les pitons calcaires couverts de forêt de la baie d’Ha Long."
+    },
+    {
+      "photo": "vietnam-rizieres-sapa",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "En bref",
+      "headline": [
+        "*Février à avril*"
+      ],
+      "detail": "la meilleure fenêtre pour un voyage nord-sud : Centre au plus sec, Sud en saison sèche, Nord doux",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "Février à avril la meilleure fenêtre pour un voyage nord-sud : Centre au plus sec, Sud en saison sèche, Nord doux"
+        }
+      ],
+      "tag": "Guide Vietnam · sources du 26/10/2026",
+      "alt": "Les rizières en terrasses autour de Sa Pa, dans le Nord."
+    },
+    {
+      "photo": "vietnam-hoi-an",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Le Centre",
+      "headline": [
+        "*757 mm*"
+      ],
+      "detail": "de pluie à Hué en octobre, le mois le plus arrosé du Centre (contre 43 mm en mars)",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "757 mm de pluie à Hué en octobre, le mois le plus arrosé du Centre (contre 43 mm en mars)"
+        }
+      ],
+      "tag": "Guide Vietnam · sources du 26/10/2026",
+      "alt": "Une maison de bois de la vieille ville de Hội An, ornée de lanternes rouges et d’un bandeau de Nouvel An."
+    },
+    {
+      "photo": "vietnam-train-hanoi",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Le Nord",
+      "headline": [
+        "*16,4 °C*"
+      ],
+      "detail": "la température moyenne de Hanoï en janvier ; 29,2 °C en juillet",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "16,4 °C la température moyenne de Hanoï en janvier ; 29,2 °C en juillet"
+        }
+      ],
+      "tag": "Guide Vietnam · sources du 26/10/2026",
+      "alt": "Une rue de Hanoï longée par la voie ferrée."
+    },
+    {
+      "photo": "vietnam-hue-citadelle",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Le Sud",
+      "headline": [
+        "*4 mm*"
+      ],
+      "detail": "de pluie à Hô-Chi-Minh-Ville en février, le mois le plus sec du Sud (307 mm en juillet)",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "4 mm de pluie à Hô-Chi-Minh-Ville en février, le mois le plus sec du Sud (307 mm en juillet)"
+        }
+      ],
+      "tag": "Guide Vietnam · sources du 26/10/2026",
+      "alt": "La cité impériale de Huế."
+    },
+    {
+      "photo": "vietnam-ninh-binh",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Le guide complet",
+      "headline": [
+        "Quand partir au Vietnam"
+      ],
+      "detail": "Le bon mois pour chaque région du Vietnam, avec les chiffres, les typhons et le Tết 2027.",
+      "alt": "Les barques de Tràng An entre les pitons de Ninh Bình.",
+      "cta": true
+    }
+  ],
+  "assets": {
+    "regular": {
+      "file": "assets/dmsans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9"
+    },
+    "bold": {
+      "file": "assets/dmsans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211"
+    },
+    "serif": {
+      "file": "assets/playfair.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+      },
+      "sha256": "adefc53e7b3d483f1fa5e85edd82b7689ca79db25a1f6786bd7949cdcfeec601"
+    }
+  }
+}
