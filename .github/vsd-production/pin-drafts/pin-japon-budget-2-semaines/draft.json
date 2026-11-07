@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-japon-budget-2-semaines",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Budget Japon 2 semaines : de 870 à 1 370 € sans le vol, poste par poste (prix 2026)",
+  "targetUrl": "https://voyagesansdetour.fr/japon/japon-budget-2-semaines/",
+  "articleSha256": "229d5573658b38bd7948d29c9c49dd1c22b2ff9824305c8a407de1e7476c8c31",
+  "imageSha256": "6fba960e6e823cae0f81f5149ca38a85ce339f10c1a60f690a8384c9885f2d19",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "9bce53ef6aec367007587753f135465dbe9bab90b780d903f876dbd2eb8ddb4e",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "japon-tokyo-shibuya",
+    "author": "David Kernan",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Shibuya_Crossing,_Aerial.jpg",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0"
+  }
+}

@@ -52,6 +52,15 @@
       "publicHtmlSha256": "ad3f8f7d170314b6abc5cc307331fcaa2f94827d39ca7953acee792859625ae9",
       "method": "exact_published_title_typographic_template_v1",
       "publicationConfirmed": false
+    },
+    {
+      "id": "pin-japon-budget-2-semaines",
+      "admittedAt": "2026-11-07T11:48:48.002559+00:00",
+      "articleSha256": "229d5573658b38bd7948d29c9c49dd1c22b2ff9824305c8a407de1e7476c8c31",
+      "imageSha256": "6fba960e6e823cae0f81f5149ca38a85ce339f10c1a60f690a8384c9885f2d19",
+      "publicHtmlSha256": "29fd7975ff96777c91a2a72e1369b1eacff87b72742936779c06cfd6e77f25d8",
+      "method": "exact_published_title_typographic_template_v1",
+      "publicationConfirmed": false
     }
   ]
 }

@@ -88,6 +88,15 @@
           "mediaId": "pin-japon-itineraire-2-semaines",
           "width": 1000,
           "height": 1500
+        },
+        {
+          "id": "pin-japon-budget-2-semaines",
+          "title": "Budget Japon 2 semaines : de 870 à 1 370 € sans le vol, poste par poste (prix 2026)",
+          "description": "📌 Retrouvez le guide et ses sources pour préparer votre voyage au Japon. Photo : David Kernan — CC BY 4.0. Crédits : https://voyagesansdetour.fr/social-media/production/pin-japon-budget-2-semaines/credits.txt",
+          "linkPath": "/japon/japon-budget-2-semaines/",
+          "mediaId": "pin-japon-budget-2-semaines",
+          "width": 1000,
+          "height": 1500
         }
       ]
     }

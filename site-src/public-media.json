@@ -826,6 +826,33 @@
           "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
         }
       ]
+    },
+    {
+      "contentId": "pin-japon-budget-2-semaines",
+      "kind": "pin",
+      "approved": true,
+      "files": [
+        {
+          "name": "pin.jpg",
+          "bytes": 577943,
+          "sha256": "6fba960e6e823cae0f81f5149ca38a85ce339f10c1a60f690a8384c9885f2d19"
+        },
+        {
+          "name": "credits.txt",
+          "bytes": 319,
+          "sha256": "ddfedfe06862112e458aad455cb7e56c218010e68b52f5a9008a4144856ccc90"
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "bytes": 4482,
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "bytes": 4449,
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+        }
+      ]
     }
   ]
 }
