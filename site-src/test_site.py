@@ -481,8 +481,10 @@ class WorldBuildTest(unittest.TestCase):
         self.assertEqual(article['contentLocation']['containedInPlace']['name'],'Japon')
         ns={'s':'http://www.sitemaps.org/schemas/sitemap/0.9'}
         dates={n.findtext('s:loc',namespaces=ns):n.findtext('s:lastmod',namespaces=ns) for n in ET.parse(self.out/'sitemap.xml').findall('s:url',ns)}
-        for route in ('/japon/test-kyoto-automne/','/japon/','/asie/','/guides/quand-partir/'):
-            self.assertEqual(dates[ORIGIN+route],'2026-10-26',route)
+        self.assertEqual(dates[ORIGIN+'/japon/test-kyoto-automne/'],'2026-10-26')
+        # Hubs carry the date of their newest guide, so a new real guide never breaks this check.
+        for route in ('/japon/','/asie/','/guides/quand-partir/'):
+            self.assertGreaterEqual(dates[ORIGIN+route],'2026-10-26',route)
         self.assertIn(ORIGIN+'/japon/test-kyoto-automne/',[n.findtext('link') for n in ET.parse(self.out/'feed.xml').findall('channel/item')])
 
     def test_country_missing_from_the_catalogue_never_breaks_the_build(self):

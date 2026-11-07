@@ -1013,6 +1013,42 @@
       "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
       "alt_fr": "La grande cour carrelée de zelliges du palais de la Bahia, à Marrakech.",
       "credit_fr": "Val Traveler / Wikimedia Commons — CC BY-SA 4.0."
+    },
+    {
+      "id": "japon-tokyo-shibuya",
+      "file": "photos/japon-tokyo-shibuya.jpg",
+      "width": 1600,
+      "height": 900,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Shibuya_Crossing,_Aerial.jpg",
+      "author": "David Kernan",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0",
+      "alt_fr": "Le carrefour de Shibuya, à Tokyo.",
+      "credit_fr": "David Kernan / Wikimedia Commons — CC BY 4.0."
+    },
+    {
+      "id": "japon-osaka-dotonbori",
+      "file": "photos/japon-osaka-dotonbori.jpg",
+      "width": 1600,
+      "height": 1153,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Dotonbori_Neon_Sign,_Osaka_20190415_1.jpg",
+      "author": "DXR",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "alt_fr": "Les enseignes lumineuses du canal de Dotonbori, à Osaka.",
+      "credit_fr": "DXR / Wikimedia Commons — CC BY-SA 4.0."
+    },
+    {
+      "id": "japon-nara-cerfs",
+      "file": "photos/japon-nara-cerfs.jpg",
+      "width": 1600,
+      "height": 1016,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Sika_deer_doe_and_fawn_Nara_2026_dllu.jpg",
+      "author": "Daniel Lu ( User:dllu )",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "alt_fr": "Des cerfs en liberté dans le parc de Nara.",
+      "credit_fr": "Daniel Lu ( User:dllu ) / Wikimedia Commons — CC BY-SA 4.0."
     }
   ]
 }
