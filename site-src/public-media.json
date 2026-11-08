@@ -853,6 +853,33 @@
           "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
         }
       ]
+    },
+    {
+      "contentId": "pin-lisbonne-porto-train",
+      "kind": "pin",
+      "approved": true,
+      "files": [
+        {
+          "name": "pin.jpg",
+          "bytes": 321712,
+          "sha256": "704b2334bb1ff461409cdaef412c11ceec1ff00a3e8363eb7c1fe718a1bb6064"
+        },
+        {
+          "name": "credits.txt",
+          "bytes": 323,
+          "sha256": "4e79e8656b542a5b441cdb960123d091dab74ea86126fcebea5b40ec67c526c7"
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "bytes": 4482,
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "bytes": 4449,
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+        }
+      ]
     }
   ]
 }

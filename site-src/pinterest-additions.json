@@ -25,6 +25,15 @@
           "mediaId": "pin-aeroport-porto-centre-ville",
           "width": 1000,
           "height": 1500
+        },
+        {
+          "id": "pin-lisbonne-porto-train",
+          "title": "Lisbonne–Porto en train : 35,70 € en Alfa Pendular, jusqu’à −65 % en Promo",
+          "description": "📌 Retrouvez le guide et ses sources pour préparer votre voyage au Portugal. Photo : LuisFerreira4x4 — CC0. Crédits : https://voyagesansdetour.fr/social-media/production/pin-lisbonne-porto-train/credits.txt",
+          "linkPath": "/portugal/lisbonne-porto-train/",
+          "mediaId": "pin-lisbonne-porto-train",
+          "width": 1000,
+          "height": 1500
         }
       ]
     },

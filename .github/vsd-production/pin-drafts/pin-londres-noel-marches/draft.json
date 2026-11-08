@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-londres-noel-marches",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Londres en décembre 2026 : Winter Wonderland, patinoires et métro plafonné à 8,90 £",
+  "targetUrl": "https://voyagesansdetour.fr/royaume-uni/londres-noel-marches/",
+  "articleSha256": "5aaf01aa4a31d8e090f85dc98dea6ca98d728e21864b7700c7e46f9f4b483506",
+  "imageSha256": "9f666a6432d6fcc98e1bfaa3e6182b0d33cc8f80fd351bd2e7d86328a7547b25",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "9bce53ef6aec367007587753f135465dbe9bab90b780d903f876dbd2eb8ddb4e",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "londres-tower-bridge",
+    "author": "Dietmar Rabich",
+    "source_page": "https://commons.wikimedia.org/wiki/File:London,_Tower_Bridge_--_2016_--_4676.jpg",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  }
+}
