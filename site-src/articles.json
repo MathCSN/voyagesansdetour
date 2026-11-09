@@ -31,7 +31,7 @@
       },
       {
         "value": "17 €",
-        "label": "le château São Jorge, ouvert jusqu’à 21 h jusqu’au 31 octobre"
+        "label": "le château São Jorge, ouvert de 9 h à 18 h depuis le 1er novembre (21 h en été)"
       }
     ],
     "sections": [
@@ -50,7 +50,7 @@
         "image": "lisbonne-praca-comercio",
         "paragraphs": [
           "Commencez au Rossio et descendez la rua Augusta, piétonne, jusqu’à l’arc triomphal qui ouvre sur la Praça do Comércio, immense place jaune posée sur le Tage. La Baixa a été reconstruite en damier après le séisme de 1755 : tout est plat, c’est le quartier idéal pour une première matinée.",
-          "Après déjeuner, remontez vers le Chiado par les rues commerçantes, puis poussez jusqu’au miradouro de São Pedro de Alcântara : un jardin à kiosque face au château, au-dessus de l’Avenida da Liberdade. En fin de journée, montez au château São Jorge (17 €, gratuit jusqu’à 12 ans) : jusqu’au 31 octobre il ouvre jusqu’à 21 h, de quoi voir le soleil tomber sur les toits et le pont du 25-Avril."
+          "Après déjeuner, remontez vers le Chiado par les rues commerçantes, puis poussez jusqu’au miradouro de São Pedro de Alcântara : un jardin à kiosque face au château, au-dessus de l’Avenida da Liberdade. En fin de journée, montez au château São Jorge (17 €, gratuit jusqu’à 12 ans) : depuis le 1er novembre il ferme à 18 h (dernière entrée 17 h 30), et jusqu’à 21 h seulement du 1er mars au 31 octobre : en hiver, venez en fin d’après-midi pour la lumière sur les toits et le pont du 25-Avril."
         ]
       },
       {
@@ -214,7 +214,7 @@
       "lisbonne-porto-train"
     ],
     "sourcesCheckedOn": "2026-10-24",
-    "updatedOn": "2026-10-24"
+    "updatedOn": "2026-11-09"
   },
   {
     "slug": "porto-3-jours-sans-voiture",
@@ -224,7 +224,7 @@
     "category": "Itinéraires",
     "description": "São Bento, Ribeira, Gaia et la Foz en trois jours : les lignes, les prix 2026 et les belvédères gratuits pour voir Porto d’en haut.",
     "readMinutes": 4,
-    "summary": "Jour 1 : la gare São Bento et ses 20 000 azulejos, la Sé (4 €), la tour des Clérigos (5 €) et la Ribeira. Jour 2 : traversée du pont Luís I en métro D, belvédère de la Serra do Pilar, téléphérique de Gaia (7 €) et visite d’une cave (Sandeman 23 €). Jour 3 : tram 1 le long du Douro jusqu’à la Foz et le phare de Felgueiras, ou Serralves. Le pass Andante Tour 3 coûte 16,55 € pour 72 h, sans le tram historique (6 € à bord).",
+    "summary": "Jour 1 : la gare São Bento et ses 20 000 azulejos, la Sé (4 €), la tour des Clérigos (10 € avec le musée) et la Ribeira. Jour 2 : traversée du pont Luís I en métro D, belvédère de la Serra do Pilar, téléphérique de Gaia (7 €) et visite d’une cave (Sandeman 23 €). Jour 3 : tram 1 le long du Douro jusqu’à la Foz et le phare de Felgueiras, ou Serralves. Le pass Andante Tour 3 coûte 16,55 € pour 72 h, sans le tram historique (6 € à bord).",
     "keyFacts": [
       {
         "value": "1,40 €",
@@ -240,7 +240,7 @@
       },
       {
         "value": "5 €",
-        "label": "la tour des Clérigos et sa vue à 360°, ouverte tous les jours 9 h–19 h"
+        "label": "la tour des Clérigos et son musée, billet de jour, ouverte tous les jours 9 h–19 h"
       },
       {
         "value": "6 €",
@@ -267,7 +267,7 @@
         "image": "porto-sao-bento",
         "paragraphs": [
           "Entrez dans la gare São Bento : le hall est couvert de 20 000 azulejos bleus et blancs peints par Jorge Colaço, qui racontent l’histoire du Portugal et celle des transports. Montez ensuite à la cathédrale : un billet de 4 € ouvre la Sé, son cloître gothique aux azulejos baroques, le musée et la tour.",
-          "Grimpez les marches de la tour des Clérigos, œuvre baroque de Nicolau Nasoni : 5 € pour la tour seule, gratuite jusqu’à 10 ans, ouverte tous les jours de 9 h à 19 h. La vue à 360° embrasse les toits rouges jusqu’au fleuve. Pour la Livraria Lello et son escalier cramoisi, réservez un créneau : le billet, valable 60 minutes après l’heure prévue, est déduit de l’achat d’un livre.",
+          "Grimpez les marches de la tour des Clérigos, œuvre baroque de Nicolau Nasoni : 10 € le billet de jour, qui inclut le musée (la tour seule à 5 € n’existe que le soir, à certaines dates), gratuit jusqu’à 10 ans, ouverte tous les jours de 9 h à 19 h. La vue à 360° embrasse les toits rouges jusqu’au fleuve. Pour la Livraria Lello et son escalier cramoisi, réservez un créneau : le billet, valable 60 minutes après l’heure prévue, est déduit de l’achat d’un livre.",
           "L’après-midi, descendez vers la Ribeira et les quais. Le Palácio da Bolsa se visite avec un guide en 30 minutes, pour son Salão Árabe ; il est fermé le 24 octobre, le 7 novembre et plusieurs jours de décembre. Un billet combiné Clérigos, Bolsa et musée MMIPO coûte 25 € à la billetterie des Clérigos."
         ]
       },
@@ -320,8 +320,8 @@
               "4 €"
             ],
             [
-              "Tour des Clérigos",
-              "5 €"
+              "Tour et musée des Clérigos",
+              "10 €"
             ],
             [
               "Téléphérique de Gaia, aller",
@@ -441,7 +441,7 @@
       "lisbonne-ou-porto"
     ],
     "sourcesCheckedOn": "2026-10-24",
-    "updatedOn": "2026-10-24"
+    "updatedOn": "2026-11-09"
   },
   {
     "slug": "sintra-depuis-lisbonne",
@@ -717,7 +717,7 @@
         "title": "Porto : le Douro, les ponts et les caves",
         "image": "porto-rabelo",
         "paragraphs": [
-          "Porto se lit depuis le fleuve. On traverse le pont Luís I en métro sur le tablier supérieur, on regarde la ville depuis la Serra do Pilar, on descend en téléphérique (7 €) vers les caves de porto de Gaia, où une visite avec dégustation commence à 23 € chez Sandeman. La gare São Bento et ses 20 000 azulejos, la tour des Clérigos (5 €), la Sé (4 €) : les grands sites coûtent peu.",
+          "Porto se lit depuis le fleuve. On traverse le pont Luís I en métro sur le tablier supérieur, on regarde la ville depuis la Serra do Pilar, on descend en téléphérique (7 €) vers les caves de porto de Gaia, où une visite avec dégustation commence à 23 € chez Sandeman. La gare São Bento et ses 20 000 azulejos, la tour des Clérigos (10 € avec le musée), la Sé (4 €) : les grands sites coûtent peu.",
           "Les transports y sont un peu moins chers qu’à Lisbonne : 1,40 € le trajet Z2, 16,55 € le pass Andante Tour de 72 heures. Le tram historique 1 mène en 6 € jusqu’à l’Atlantique, à la Foz."
         ]
       },
@@ -765,7 +765,7 @@
             ],
             [
               "Grande vue payante",
-              "Clérigos 5 €",
+              "Clérigos 10 €",
               "Château São Jorge 17 €"
             ],
             [
@@ -847,7 +847,7 @@
       "lisbonne-3-jours-sans-voiture"
     ],
     "sourcesCheckedOn": "2026-10-24",
-    "updatedOn": "2026-10-24"
+    "updatedOn": "2026-11-09"
   },
   {
     "slug": "lisbonne-porto-train",
