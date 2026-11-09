@@ -4694,5 +4694,287 @@
         "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"
       }
     ]
+  },
+  {
+    "related": [
+      "andalousie-train-seville-cordoue-grenade",
+      "vietnam-quand-partir",
+      "marrakech-3-jours"
+    ],
+    "sourcesCheckedOn": "2026-11-09",
+    "publishedOn": "2026-11-09",
+    "updatedOn": "2026-11-09",
+    "slug": "tenerife-quand-partir",
+    "title": "Quand partir à Tenerife : 22 °C en janvier au sud, 16 °C au nord, et le bon mois pour chaque côte",
+    "shortTitle": "Quand partir à Tenerife",
+    "destination": "Tenerife",
+    "country": "espagne",
+    "continent": "europe",
+    "category": "Choisir",
+    "cover": "tenerife-teide",
+    "description": "22,8 °C et 222 h de soleil en janvier à Tenerife Sud, 16 °C et 80 mm de pluie au nord : le bon mois pour la plage, le Teide et Masca, avec la mer, la calima et le Carnaval 2027.",
+    "readMinutes": 6,
+    "summary": "Tenerife a deux climats : un sud sec et ensoleillé toute l’année, un nord plus frais et nuageux. L’hiver y reste doux, avec 22 à 24 °C au sud en décembre-février, pendant que le Teide se couvre de neige. Le Carnaval de Santa Cruz tombe du 19 au 28 février 2027.",
+    "keyFacts": [
+      {
+        "value": "22,8 °C",
+        "label": "la température maximale moyenne de janvier à Tenerife Sud, contre 16,0 °C à La Laguna, dans le nord"
+      },
+      {
+        "value": "222 h",
+        "label": "de soleil en janvier au sud (aéroport Tenerife Sud), contre 150 h dans le nord"
+      },
+      {
+        "value": "119 mm",
+        "label": "de pluie par an à l’aéroport Tenerife Sud, contre 517 mm à La Laguna, dans le nord"
+      },
+      {
+        "value": "19 à 24 °C",
+        "label": "la température de la mer au fil de l’année, avec un creux en février-mars et un pic en septembre-octobre (valeurs approximatives)"
+      },
+      {
+        "value": "1,1 °C",
+        "label": "la minimale moyenne de janvier à l’observatoire d’Izaña (2 371 m), sur les pentes du Teide"
+      },
+      {
+        "value": "19 au 28 février 2027",
+        "label": "les dix jours de rue du Carnaval de Santa Cruz, avec le Mardi gras le 23 février"
+      }
+    ],
+    "sections": [
+      {
+        "id": "en-bref",
+        "title": "En bref : le sud pour la plage, le nord pour la verdure",
+        "paragraphs": [
+          "Tenerife est une montagne dans l’océan : les alizés butent sur le versant nord et y laissent des nuages, pendant que le sud reste sec et ensoleillé. D’où deux climats sur une île de 2 034 km². Dans le sud, l’aéroport de Tenerife Sud relève 119 mm de pluie par an et 3 055 heures de soleil. À La Laguna, au nord, c’est 517 mm et 2 410 heures.",
+          "Pour un séjour plage au soleil d’hiver, visez le sud de novembre à avril : 23 à 25 °C en journée, presque pas de pluie. Pour marcher dans la forêt de Masca ou d’Anaga, avril-mai et octobre sont les plus agréables. Pour nager sans frissonner, c’est de septembre à novembre, quand la mer approche 24 °C."
+        ],
+        "table": {
+          "headers": [
+            "Votre envie",
+            "Les meilleurs mois",
+            "À savoir"
+          ],
+          "rows": [
+            [
+              "Plage et soleil d’hiver (sud)",
+              "Novembre à avril",
+              "22,8 à 25,4 °C en journée ; la mer reste à 19-22 °C"
+            ],
+            [
+              "Nager dans une mer tiède",
+              "Septembre à novembre",
+              "Mer vers 22 à 24 °C ; le sud est à 25 à 28 °C"
+            ],
+            [
+              "Randonnées au nord (Masca, Anaga)",
+              "Avril-mai, octobre",
+              "Moins de pluie qu’en hiver (39 mm en avril à La Laguna, contre 80 mm en janvier)"
+            ],
+            [
+              "Teide et ciel étoilé",
+              "Avril à octobre",
+              "L’hiver apporte neige et gel à 2 371 m"
+            ],
+            [
+              "Carnaval de Santa Cruz",
+              "Février 2027",
+              "Rue du 19 au 28 février ; réservez très tôt"
+            ]
+          ]
+        },
+        "tip": "Un seul séjour, deux côtes : logez dans le sud (Costa Adeje, Los Cristianos) pour la plage, et louez une voiture un jour ou deux pour le nord. Même en janvier, l’écart de 6 à 7 °C entre les deux côtés se sent dès la sortie de l’aéroport."
+      },
+      {
+        "id": "sud",
+        "title": "Le sud : Costa Adeje, Los Cristianos, El Médano",
+        "image": "tenerife-adeje",
+        "paragraphs": [
+          "C’est la côte du soleil d’hiver. À l’aéroport Tenerife Sud, la température maximale moyenne reste entre 22,8 °C (janvier) et 25,4 °C (novembre) de novembre à avril ; elle monte à 28,8 °C en août. Le mois le plus pluvieux est décembre, avec 33 mm ; de mai à septembre, il tombe moins de 3 mm par mois.",
+          "Le soleil ne manque jamais : 222 heures en janvier, 219 en février, 256 en mars, jusqu’à 330 en juillet. Les nuits restent douces, entre 15 et 17 °C de décembre à avril.",
+          "L’été est sec et chaud : 28 °C de moyenne en journée en août, avec des pointes bien plus hautes certains jours de calima."
+        ],
+        "tip": "Au sud, comptez 25 à 28 °C de septembre à novembre : c’est la combinaison la plus agréable entre mer tiède et chaleur supportable."
+      },
+      {
+        "id": "nord",
+        "title": "Le nord : Puerto de la Cruz, La Laguna, Masca",
+        "image": "tenerife-masca",
+        "paragraphs": [
+          "Le nord prend les nuages et la pluie. À La Laguna (632 m), il tombe 80 mm en janvier, 82 mm en décembre et seulement 5 à 6 mm en juillet-août, pour 517 mm par an. Les maximales n’y dépassent pas 16 à 18 °C en hiver, et montent à 25,7 °C en août.",
+          "En contrepartie, c’est l’île verte : forêts de laurisilve, vallées profondes, villages accrochés aux pentes comme Masca, dans le massif de Teno. Les randonneurs viennent ici au printemps (avril : 39 mm, 18,5 °C) et en octobre, quand les sentiers sont secs mais pas écrasés de chaleur.",
+          "En hiver, prévoyez une veste coupe-vent et des chaussures qui accrochent : le nord compte 10 à 12 jours de pluie par mois de décembre à avril."
+        ],
+        "tip": "Au nord, les nuages ont tendance à s’accumuler pendant la journée (Wikivoyage) : partez tôt pour Masca ou Anaga, la vue est plus dégagée le matin."
+      },
+      {
+        "id": "teide",
+        "title": "Le Teide : de la neige au-dessus de la plage",
+        "paragraphs": [
+          "Le Pico del Teide culmine à 3 715 m, le point le plus haut d’Espagne. En altitude, le climat n’a rien à voir avec celui du littoral. À l’observatoire d’Izaña (2 371 m), la moyenne de janvier est de 4,3 °C, avec 7,5 °C de maximale et 1,1 °C de minimale. Même en juillet, les maximales plafonnent à 23,0 °C.",
+          "En hiver, la neige couvre le sommet pendant que la côte reste à 22 °C : il est possible de profiter du soleil sur la plage le matin et de voir la neige à midi. Prenez des couches, un bonnet et des lunettes : les écarts de température entre la côte et le parc national dépassent 15 °C.",
+          "Pour le téléphérique, la réservation se fait uniquement en ligne sur le site officiel Volcano Teide, et un billet se change ou se rembourse sans frais jusqu’à 18 h la veille de la date réservée (relevé le 9 novembre 2026). Les places sont limitées : réservez dès que vous connaissez votre jour."
+        ],
+        "tip": "Ne planifiez pas le Teide pour votre dernier jour : si le vent ou la météo ferme le téléphérique, il vous faut un jour de rechange."
+      },
+      {
+        "id": "mer",
+        "title": "La mer : quand la baignade est agréable",
+        "paragraphs": [
+          "Pas de mer chaude sous les Canaries : le courant des Canaries garde l’eau fraîche. D’après les relevés moyens de ou-et-quand.net (approximatifs), elle oscille autour de 19 à 20 °C de janvier à mars, 20 à 21 °C en avril-mai, 21 °C en juin, 22 à 23 °C en août, puis atteint 23,5 à 24 °C en septembre-octobre. En novembre, elle redescend vers 22 °C, et vers 21 °C en décembre.",
+          "Pour une vraie baignade, le meilleur créneau est donc septembre à novembre. De janvier à mars, on se baigne à Tenerife, mais l’eau est fraîche : prévoyez un temps de réaction, ou une combinaison courte pour la plongée et le snorkeling."
+        ],
+        "tip": "Pour tout savoir sur l’eau du jour, regardez le relevé en temps réel : les valeurs ci-dessus sont des moyennes sur plusieurs années, pas une prévision."
+      },
+      {
+        "id": "calima-baleines",
+        "title": "Calima, baleines et Carnaval : les pièges et les bonus",
+        "paragraphs": [
+          "La calima est un voile de poussière du Sahara qui réchauffe les îles et réduit la visibilité. Selon Wikivoyage, elle est plus fréquente en hiver, se produit environ une fois par mois et dure en général moins d’une semaine. Elle ne compromet pas le séjour, mais elle gâche les points de vue : gardez une journée de marge pour le Teide.",
+          "Les baleines sont un bonus toute l’année : plusieurs groupes de globicéphales résident au large, et les sorties partent du port de Puerto Colón, à Costa Adeje. La zone Tenerife-La Gomera a été désignée première zone européenne « Whale Heritage » en janvier 2021.",
+          "Le Carnaval de Santa Cruz est une fête d’intérêt touristique international. L’édition 2027 est décalée de deux semaines : gala d’ouverture le 22 janvier, rue du 19 au 28 février, et Mardi gras le 23 février, jour férié local à Santa Cruz (relevé le 9 novembre 2026). Pâques tombe le 28 mars 2027 : la Semana Santa a lieu juste après."
+        ],
+        "tip": "Pour le Carnaval, réservez le vol et l’hôtel à Santa Cruz ou à La Laguna dès l’automne : les chambres se vendent des mois avant."
+      },
+      {
+        "id": "mois-par-mois",
+        "title": "Mois par mois : sud et nord en chiffres",
+        "paragraphs": [
+          "Température maximale moyenne, pluie du mois et heures de soleil, relevés de l’Agencia Estatal de Meteorología (AEMET), repris par Wikipédia : aéroport Tenerife Sud (1991-2020) pour le sud ; La Laguna - Tenerife Nord (632 m, 1981-2010) pour le nord.",
+          "À lire : le sud reste entre 22,8 et 28,8 °C et ne reçoit presque jamais de pluie de mai à septembre ; le nord est de 6 à 7 °C plus frais l’hiver, avec 10 à 12 jours de pluie par mois. Décembre et janvier sont les plus sombres dans le nord (137 et 150 h), le sud garde plus de 200 h toute l’année."
+        ],
+        "table": {
+          "headers": [
+            "Mois",
+            "Sud : max. / pluie / soleil",
+            "Nord : max. / pluie / soleil"
+          ],
+          "rows": [
+            [
+              "Janvier",
+              "22,8 °C / 17 mm / 222 h",
+              "16,0 °C / 80 mm / 150 h"
+            ],
+            [
+              "Février",
+              "22,9 °C / 19 mm / 219 h",
+              "16,7 °C / 70 mm / 168 h"
+            ],
+            [
+              "Mars",
+              "23,6 °C / 13 mm / 257 h",
+              "18,2 °C / 61 mm / 188 h"
+            ],
+            [
+              "Avril",
+              "24,0 °C / 8 mm / 248 h",
+              "18,5 °C / 39 mm / 203 h"
+            ],
+            [
+              "Mai",
+              "25,0 °C / 1 mm / 275 h",
+              "20,1 °C / 19 mm / 234 h"
+            ],
+            [
+              "Juin",
+              "26,2 °C / 0 mm / 284 h",
+              "22,2 °C / 11 mm / 237 h"
+            ],
+            [
+              "Juillet",
+              "28,2 °C / 0 mm / 330 h",
+              "24,7 °C / 6 mm / 262 h"
+            ],
+            [
+              "Août",
+              "28,8 °C / 2 mm / 311 h",
+              "25,7 °C / 5 mm / 269 h"
+            ],
+            [
+              "Septembre",
+              "28,1 °C / 3 mm / 248 h",
+              "24,9 °C / 16 mm / 213 h"
+            ],
+            [
+              "Octobre",
+              "27,3 °C / 13 mm / 236 h",
+              "22,5 °C / 47 mm / 194 h"
+            ],
+            [
+              "Novembre",
+              "25,4 °C / 11 mm / 212 h",
+              "19,7 °C / 81 mm / 155 h"
+            ],
+            [
+              "Décembre",
+              "23,7 °C / 33 mm / 215 h",
+              "17,1 °C / 82 mm / 137 h"
+            ]
+          ]
+        }
+      },
+      {
+        "id": "choisir",
+        "title": "Quel mois choisir selon votre voyage",
+        "paragraphs": [
+          "Soleil d’hiver garanti, plage et petites randonnées : janvier à mars au sud. Vous aurez 22 à 24 °C, 200 à 260 heures de soleil par mois et une mer à 19-20 °C, donc à courtes baignades. Février a l’avantage du Carnaval, en 2027.",
+          "Baignade et douceur sans foule : octobre-novembre. La mer est à son maximum (23,5 à 24 °C en octobre), le sud est à 25 à 27 °C, et la pluie reste faible au sud (13 mm en octobre).",
+          "Randonnée et verdure : avril-mai, avec 18 à 20 °C au nord, des sentiers secs et un Teide sans neige. Chaleur d’été et plages : juillet-août au sud, avec 28 °C de maximale, 330 h de soleil en juillet et presque pas de pluie, mais c’est la saison la plus chaude.",
+          "Côté papiers : Tenerife est en Espagne et dans l’Union européenne, donc sans formalités particulières pour les Français, hors carte d’identité ou passeport en cours de validité."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Quel est le meilleur mois pour partir à Tenerife ?",
+        "answer": "Octobre-novembre pour la mer la plus chaude (23,5 à 24 °C) et le sud à 25-27 °C ; janvier à mars pour le soleil d’hiver (22,8 à 23,6 °C au sud). Avril-mai pour la randonnée."
+      },
+      {
+        "question": "Où loger à Tenerife en hiver ?",
+        "answer": "Dans le sud (Costa Adeje, Los Cristianos) : 22,8 °C en janvier et 222 h de soleil, contre 16,0 °C et 150 h à La Laguna, dans le nord."
+      },
+      {
+        "question": "Peut-on se baigner à Tenerife en hiver ?",
+        "answer": "Oui, mais l’eau est fraîche : environ 19 à 20 °C de janvier à mars (valeurs approximatives). La mer est à son meilleur en septembre-octobre, vers 24 °C."
+      },
+      {
+        "question": "Quand pleut-il à Tenerife ?",
+        "answer": "Surtout de novembre à mars, et bien davantage au nord (517 mm par an à La Laguna) qu’au sud (119 mm par an à l’aéroport Tenerife Sud). L’été est presque sec."
+      },
+      {
+        "question": "Y a-t-il de la neige à Tenerife ?",
+        "answer": "Oui, sur le Teide en hiver : à l’observatoire d’Izaña (2 371 m), la minimale moyenne de janvier est de 1,1 °C. Sur la côte, on reste à plus de 20 °C."
+      },
+      {
+        "question": "Quand a lieu le Carnaval de Santa Cruz en 2027 ?",
+        "answer": "Du 19 au 28 février 2027 pour les festivités de rue, avec le Mardi gras le 23 février et le gala d’ouverture le 22 janvier."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Wikipédia — Tenerife (relevés AEMET : Santa Cruz, Tenerife Sud, La Laguna, Izaña ; Carnaval ; baleines)",
+        "url": "https://en.wikipedia.org/wiki/Tenerife"
+      },
+      {
+        "label": "Wikivoyage — Îles Canaries (climat, calima, Teide)",
+        "url": "https://fr.wikivoyage.org/wiki/%C3%8Eles_Canaries"
+      },
+      {
+        "label": "Wikivoyage — Tenerife",
+        "url": "https://fr.wikivoyage.org/wiki/Tenerife"
+      },
+      {
+        "label": "Volcano Teide — téléphérique du Teide (réservation en ligne, modification gratuite)",
+        "url": "https://www.volcanoteide.com/en/"
+      },
+      {
+        "label": "RTVC — Santa Cruz fixe les festivos de 2027 et ajuste le calendrier du Carnaval",
+        "url": "https://rtvc.es/santa-cruz-fija-los-festivos-de-2027-y-ajusta-el-calendario-del-carnaval-27-marzo-2026/"
+      },
+      {
+        "label": "Ça baigne — température de la mer à Tenerife, mois par mois (d’après ou-et-quand.net)",
+        "url": "https://www.cabaigne.net/europe/tenerife/quand-se-baigner.html"
+      }
+    ]
   }
 ]

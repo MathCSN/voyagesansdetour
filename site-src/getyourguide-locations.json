@@ -288,6 +288,12 @@
       "path": "tavira-l1239",
       "place": "Tavira"
     },
+    "tenerife|espagne": {
+      "checkedOn": "2026-11-09",
+      "country": "Espagne",
+      "path": "tenerife-l350",
+      "place": "Tenerife"
+    },
     "thailande|thailande": {
       "checkedOn": "2026-10-24",
       "country": "Thaïlande",

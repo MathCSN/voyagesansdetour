@@ -1049,6 +1049,42 @@
       "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
       "alt_fr": "Des cerfs en liberté dans le parc de Nara.",
       "credit_fr": "Daniel Lu ( User:dllu ) / Wikimedia Commons — CC BY-SA 4.0."
+    },
+    {
+      "id": "tenerife-teide",
+      "file": "photos/tenerife-teide.jpg",
+      "width": 1600,
+      "height": 691,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Teide_Canadas.jpg",
+      "author": "Ingo Mehling",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "alt_fr": "Le volcan du Teide, point culminant de Tenerife.",
+      "credit_fr": "Ingo Mehling / Wikimedia Commons — CC BY-SA 4.0."
+    },
+    {
+      "id": "tenerife-masca",
+      "file": "photos/tenerife-masca.jpg",
+      "width": 1600,
+      "height": 1063,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Tenerife_Masca_R01.jpg",
+      "author": "Marc Ryckaert",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "alt_fr": "La route de Masca et les pentes du massif de Teno, au nord-ouest de Tenerife.",
+      "credit_fr": "Marc Ryckaert / Wikimedia Commons — CC BY-SA 4.0."
+    },
+    {
+      "id": "tenerife-adeje",
+      "file": "photos/tenerife-adeje.jpg",
+      "width": 1600,
+      "height": 1063,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Tenerife_Playa_El_Duque_R01.jpg",
+      "author": "Marc Ryckaert ( MJJR )",
+      "license": "CC BY 3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0",
+      "alt_fr": "La plage El Duque, à Costa Adeje, au crépuscule : la côte sud de Tenerife.",
+      "credit_fr": "Marc Ryckaert ( MJJR ) / Wikimedia Commons — CC BY 3.0."
     }
   ]
 }

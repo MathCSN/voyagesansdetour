@@ -196,8 +196,9 @@ class PublicBuildTest(unittest.TestCase):
     def test_home_shows_destinations_latest_guides_and_dated_figures(self):
         home=read(self.out,'/')
         self.assertIn('id="destinations"',home)
-        for name in ('Algarve','Douro','Andalousie','Côte amalfitaine','Cinque Terre'):
-            self.assertIn('<strong>'+name+'</strong>',home)
+        # L'accueil montre les destinations les plus récentes : un nouveau guide en écarte une ancienne.
+        tiles=re.search(r'<div class="destinations">(.*?)</div><div class="continents">',home,re.S).group(1)
+        self.assertGreaterEqual(len(re.findall(r'<strong>[^<]+</strong>',tiles)),5)
         self.assertIn('class="facts"',home)
         self.assertNotIn('Le Portugal, à votre rythme',home)
 
