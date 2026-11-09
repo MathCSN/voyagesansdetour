@@ -1,0 +1,187 @@
+{
+  "schemaVersion": 2,
+  "id": "fb-tenerife-quand-partir-2026-12-03",
+  "kind": "carousel",
+  "channel": "facebook",
+  "destination": "Tenerife",
+  "title": "Quand partir à Tenerife : 4 repères",
+  "targetUrl": "https://voyagesansdetour.fr/espagne/tenerife-quand-partir/",
+  "publishAt": "2026-12-03T17:00:00Z",
+  "review": {
+    "status": "reviewed_for_render",
+    "checkedAt": "2026-11-09T14:00:08Z",
+    "validUntil": "2026-12-09T14:00:08Z",
+    "method": "Généré automatiquement (auto_social.py) depuis la page publiée du guide relevée le 09/11/2026 : chaque chiffre est cité mot pour mot ; photos réelles sous licence libre (Wikimedia Commons), aucune image générée par IA ; garde-fous de production.py passés avant la mise en file."
+  },
+  "sources": {
+    "file": "auto/fb-tenerife-quand-partir-2026-12-03/sources.json",
+    "sha256": "36e16c101fa29232f5c9ec11c59a33698de74ac8d4d6a4283e5a87a335875763"
+  },
+  "photos": {
+    "file": "auto/fb-tenerife-quand-partir-2026-12-03/photos.json",
+    "sha256": "00e5f06148696261a21db0198a9aee6a48b2b7bdb85259b1de605ccec748305b"
+  },
+  "caption": {
+    "hook": "🤔 Quand partir à Tenerife : 22 °C en janvier au sud, 16 °C au nord, et le bon mois pour chaque côte",
+    "lines": [
+      "📍 22,8 °C : la température maximale moyenne de janvier à Tenerife Sud, contre 16,0 °C à La Laguna, dans le nord",
+      "⏱️ 222 h de soleil en janvier au sud (aéroport Tenerife Sud), contre 150 h dans le nord",
+      "📍 119 mm de pluie par an à l’aéroport Tenerife Sud, contre 517 mm à La Laguna, dans le nord",
+      "📍 1,1 °C : la minimale moyenne de janvier à l’observatoire d’Izaña (2 371 m), sur les pentes du Teide"
+    ],
+    "cta": "🔗 Tous les prix, horaires et l’itinéraire dans le guide complet :",
+    "hashtags": [
+      "#Tenerife",
+      "#Espagne",
+      "#VoyageEspagne",
+      "#IdeeVoyage",
+      "#VoyageSansDetour"
+    ]
+  },
+  "scenes": [
+    {
+      "photo": "tenerife-teide",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Espagne · Tenerife",
+      "headline": [
+        "Quand partir à Tenerife",
+        "*4 chiffres* à connaître"
+      ],
+      "detail": "Tenerife a deux climats : un sud sec et ensoleillé toute l’année, un nord plus frais et nuageux.",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "Tenerife a deux climats : un sud sec et ensoleillé toute l’année, un nord plus frais et nuageux."
+        }
+      ],
+      "tag": "Guide Tenerife · sources du 09/11/2026",
+      "alt": "Le volcan du Teide, point culminant de Tenerife."
+    },
+    {
+      "photo": "tenerife-adeje",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Mois par mois",
+      "headline": [
+        "*22,8 °C*"
+      ],
+      "detail": "la température maximale moyenne de janvier à Tenerife Sud, contre 16,0 °C à La Laguna, dans le nord",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "22,8 °C la température maximale moyenne de janvier à Tenerife Sud, contre 16,0 °C à La Laguna, dans le nord"
+        }
+      ],
+      "tag": "Guide Tenerife · sources du 09/11/2026",
+      "alt": "La plage El Duque, à Costa Adeje, au crépuscule : la côte sud de Tenerife."
+    },
+    {
+      "photo": "tenerife-masca",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Mois par mois",
+      "headline": [
+        "*222 h*"
+      ],
+      "detail": "de soleil en janvier au sud (aéroport Tenerife Sud), contre 150 h dans le nord",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "222 h de soleil en janvier au sud (aéroport Tenerife Sud), contre 150 h dans le nord"
+        }
+      ],
+      "tag": "Guide Tenerife · sources du 09/11/2026",
+      "alt": "La route de Masca et les pentes du massif de Teno, au nord-ouest de Tenerife."
+    },
+    {
+      "photo": "tenerife-1c34f078",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "En bref",
+      "headline": [
+        "*119 mm*"
+      ],
+      "detail": "de pluie par an à l’aéroport Tenerife Sud, contre 517 mm à La Laguna, dans le nord",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "119 mm de pluie par an à l’aéroport Tenerife Sud, contre 517 mm à La Laguna, dans le nord"
+        }
+      ],
+      "tag": "Guide Tenerife · sources du 09/11/2026",
+      "alt": "Tenerife (Espagne) : Coast at Chinamada - Tenerife 04."
+    },
+    {
+      "photo": "tenerife-143c0261",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Le Teide",
+      "headline": [
+        "*1,1 °C*"
+      ],
+      "detail": "la minimale moyenne de janvier à l’observatoire d’Izaña (2 371 m), sur les pentes du Teide",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "1,1 °C la minimale moyenne de janvier à l’observatoire d’Izaña (2 371 m), sur les pentes du Teide"
+        }
+      ],
+      "tag": "Guide Tenerife · sources du 09/11/2026",
+      "alt": "Tenerife (Espagne) : Vista de Garachico, Tenerife, España, 2012-12-13, DD 05."
+    },
+    {
+      "photo": "tenerife-f228851b",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Le guide complet",
+      "headline": [
+        "Quand partir à Tenerife"
+      ],
+      "detail": "Le bon mois pour la plage, le Teide et Masca, avec la mer, la calima et le Carnaval 2027.",
+      "alt": "Tenerife (Espagne) : La Tarta - Tenerife 02.",
+      "cta": true
+    }
+  ],
+  "assets": {
+    "regular": {
+      "file": "assets/dmsans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9"
+    },
+    "bold": {
+      "file": "assets/dmsans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211"
+    },
+    "serif": {
+      "file": "assets/playfair.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+      },
+      "sha256": "adefc53e7b3d483f1fa5e85edd82b7689ca79db25a1f6786bd7949cdcfeec601"
+    }
+  }
+}

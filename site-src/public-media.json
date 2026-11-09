@@ -880,6 +880,58 @@
           "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
         }
       ]
+    },
+    {
+      "contentId": "fb-tenerife-quand-partir-2026-12-03",
+      "kind": "photos",
+      "approved": true,
+      "files": [
+        {
+          "name": "scene-01.jpg",
+          "sha256": "116e985b9b05cb9e07348c049a58a88cdfae6571a42369f1ba8b173c8c5a1505",
+          "bytes": 361302
+        },
+        {
+          "name": "scene-02.jpg",
+          "sha256": "73151964f5a0ca83250fbd6c5909a7b539573670e81b76f970866fec30d60f08",
+          "bytes": 242778
+        },
+        {
+          "name": "scene-03.jpg",
+          "sha256": "53928cf77e34ff01649133261d9733dfec5fc7cef4feecd270ffcba2badcae26",
+          "bytes": 397009
+        },
+        {
+          "name": "scene-04.jpg",
+          "sha256": "9ce804d91c0cf87a982df8f42aaf5830ceb7cee492b2d073de04c00242d5f32c",
+          "bytes": 429617
+        },
+        {
+          "name": "scene-05.jpg",
+          "sha256": "a28e95509553dd1335970d7f4beeabdc5e59e379b63368717ef0388314e7731d",
+          "bytes": 449454
+        },
+        {
+          "name": "scene-06.jpg",
+          "sha256": "5a0ada914bfc6260dda16b03fb5b07b8a37fb07e7f19e95f631e74975d2c849c",
+          "bytes": 351390
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "573f7264581262c32c4e77e58a5ffeada97a8eec0188df61c29a453bcff430d0",
+          "bytes": 2459
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
     }
   ]
 }

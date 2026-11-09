@@ -162,6 +162,15 @@
       "itemIds": [
         "vsd-production:instagram:ig-thailande-itineraire-2-semaines-2026-12-02:photo-v1"
       ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/fb-tenerife-quand-partir-2026-12-03-v1.json",
+      "fileSha256": "d001d6e7c2fde0c5c3edb2aa7ea41a9f60f483cc79fb914719ac20ac91b3b1aa",
+      "batchId": "fb-tenerife-quand-partir-2026-12-03-v1",
+      "batchSha256": "c6b7dbbfc549e17998f4b24c56f4f6d48b74e275bed8149a92ac873a024ad748",
+      "itemIds": [
+        "vsd-production:facebook:fb-tenerife-quand-partir-2026-12-03:photo-v1"
+      ]
     }
   ],
   "retirements": [

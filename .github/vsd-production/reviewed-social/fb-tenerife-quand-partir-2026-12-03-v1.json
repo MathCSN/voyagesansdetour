@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 1,
+  "batchId": "fb-tenerife-quand-partir-2026-12-03-v1",
+  "items": [
+    {
+      "contentId": "vsd-production:facebook:fb-tenerife-quand-partir-2026-12-03:photo-v1",
+      "deduplicationKey": "vsd-production:facebook:fb-tenerife-quand-partir-2026-12-03:photo-v1",
+      "title": "Quand partir à Tenerife : 4 repères",
+      "dueAt": "2026-12-03T17:00:00Z",
+      "payload": {
+        "schemaVersion": 1,
+        "channel": "facebook",
+        "kind": "photos",
+        "text": "🤔 Quand partir à Tenerife : 22 °C en janvier au sud, 16 °C au nord, et le bon mois pour chaque côte\n\n📍 22,8 °C : la température maximale moyenne de janvier à Tenerife Sud, contre 16,0 °C à La Laguna, dans le nord\n⏱️ 222 h de soleil en janvier au sud (aéroport Tenerife Sud), contre 150 h dans le nord\n📍 119 mm de pluie par an à l’aéroport Tenerife Sud, contre 517 mm à La Laguna, dans le nord\n📍 1,1 °C : la minimale moyenne de janvier à l’observatoire d’Izaña (2 371 m), sur les pentes du Teide\n\n🔗 Tous les prix, horaires et l’itinéraire dans le guide complet :\nhttps://voyagesansdetour.fr/espagne/tenerife-quand-partir/\n\nPhotos libres (Wikimedia Commons) — crédits : https://voyagesansdetour.fr/social-media/production/fb-tenerife-quand-partir-2026-12-03/credits.txt\n\n#Tenerife #Espagne #VoyageEspagne #IdeeVoyage #VoyageSansDetour\n",
+        "aiGenerated": false,
+        "assets": [
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-tenerife-quand-partir-2026-12-03/scene-01.jpg",
+            "sha256": "116e985b9b05cb9e07348c049a58a88cdfae6571a42369f1ba8b173c8c5a1505",
+            "mimeType": "image/jpeg",
+            "altText": "Le volcan du Teide, point culminant de Tenerife."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-tenerife-quand-partir-2026-12-03/scene-02.jpg",
+            "sha256": "73151964f5a0ca83250fbd6c5909a7b539573670e81b76f970866fec30d60f08",
+            "mimeType": "image/jpeg",
+            "altText": "La plage El Duque, à Costa Adeje, au crépuscule : la côte sud de Tenerife."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-tenerife-quand-partir-2026-12-03/scene-03.jpg",
+            "sha256": "53928cf77e34ff01649133261d9733dfec5fc7cef4feecd270ffcba2badcae26",
+            "mimeType": "image/jpeg",
+            "altText": "La route de Masca et les pentes du massif de Teno, au nord-ouest de Tenerife."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-tenerife-quand-partir-2026-12-03/scene-04.jpg",
+            "sha256": "9ce804d91c0cf87a982df8f42aaf5830ceb7cee492b2d073de04c00242d5f32c",
+            "mimeType": "image/jpeg",
+            "altText": "Tenerife (Espagne) : Coast at Chinamada - Tenerife 04."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-tenerife-quand-partir-2026-12-03/scene-05.jpg",
+            "sha256": "a28e95509553dd1335970d7f4beeabdc5e59e379b63368717ef0388314e7731d",
+            "mimeType": "image/jpeg",
+            "altText": "Tenerife (Espagne) : Vista de Garachico, Tenerife, España, 2012-12-13, DD 05."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-tenerife-quand-partir-2026-12-03/scene-06.jpg",
+            "sha256": "5a0ada914bfc6260dda16b03fb5b07b8a37fb07e7f19e95f631e74975d2c849c",
+            "mimeType": "image/jpeg",
+            "altText": "Tenerife (Espagne) : La Tarta - Tenerife 02."
+          }
+        ]
+      },
+      "review": {
+        "schemaVersion": 1,
+        "contentId": "vsd-production:facebook:fb-tenerife-quand-partir-2026-12-03:photo-v1",
+        "approved": true,
+        "reviewedAt": "2026-11-09T14:00:22Z",
+        "validUntil": "2026-12-09T14:00:08Z",
+        "payloadRevision": "2aef00915d8dcaa0c4ebfdfc1fe37aa47176e4c913206e119ab6b2443395e0fa",
+        "checks": {
+          "editorialApproved": true,
+          "rightsApproved": true,
+          "creditsPreserved": true,
+          "disclosurePreserved": true,
+          "formatRequirementsVerified": true,
+          "requiresPaidCall": false,
+          "sources": {
+            "status": "verified",
+            "observedAt": "2026-11-09T14:00:08Z",
+            "validUntil": "2026-12-09T14:00:08Z"
+          },
+          "syntheticPerson": false,
+          "providerSyntheticSettingVerified": false
+        },
+        "media": {
+          "required": true,
+          "url": null,
+          "sha256": null,
+          "items": [
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-tenerife-quand-partir-2026-12-03/scene-01.jpg",
+              "sha256": "116e985b9b05cb9e07348c049a58a88cdfae6571a42369f1ba8b173c8c5a1505",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-09T14:00:22Z",
+              "validUntil": "2026-12-09T14:00:08Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-tenerife-quand-partir-2026-12-03/scene-02.jpg",
+              "sha256": "73151964f5a0ca83250fbd6c5909a7b539573670e81b76f970866fec30d60f08",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-09T14:00:22Z",
+              "validUntil": "2026-12-09T14:00:08Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-tenerife-quand-partir-2026-12-03/scene-03.jpg",
+              "sha256": "53928cf77e34ff01649133261d9733dfec5fc7cef4feecd270ffcba2badcae26",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-09T14:00:22Z",
+              "validUntil": "2026-12-09T14:00:08Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-tenerife-quand-partir-2026-12-03/scene-04.jpg",
+              "sha256": "9ce804d91c0cf87a982df8f42aaf5830ceb7cee492b2d073de04c00242d5f32c",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-09T14:00:22Z",
+              "validUntil": "2026-12-09T14:00:08Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-tenerife-quand-partir-2026-12-03/scene-05.jpg",
+              "sha256": "a28e95509553dd1335970d7f4beeabdc5e59e379b63368717ef0388314e7731d",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-09T14:00:22Z",
+              "validUntil": "2026-12-09T14:00:08Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-tenerife-quand-partir-2026-12-03/scene-06.jpg",
+              "sha256": "5a0ada914bfc6260dda16b03fb5b07b8a37fb07e7f19e95f631e74975d2c849c",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-09T14:00:22Z",
+              "validUntil": "2026-12-09T14:00:08Z"
+            }
+          ]
+        },
+        "destination": {
+          "url": "https://voyagesansdetour.fr/espagne/tenerife-quand-partir/",
+          "status": "verified",
+          "observedAt": "2026-11-09T14:00:22Z",
+          "validUntil": "2026-12-09T14:00:08Z"
+        },
+        "monetization": {
+          "containsAffiliateLinks": false,
+          "partnerApproved": false,
+          "linksVerified": false,
+          "disclosurePreserved": false
+        },
+        "formatCapability": {
+          "status": "verified",
+          "observedAt": "2026-11-09T14:00:22Z",
+          "validUntil": "2026-12-09T14:00:08Z",
+          "automaticPublishing": true,
+          "verificationMethod": "official_documentation",
+          "sourceUrls": [
+            "https://support.buffer.com/en-us/articles/using-facebook-with-buffer-jY1AM9fz2G",
+            "https://developers.buffer.com/types/FacebookPostMetadataInput.html",
+            "https://developers.buffer.com/guides/posts-and-scheduling.html"
+          ]
+        },
+        "evidence": {
+          "status": "rendered_local_bytes_verified_public_deploy_pending",
+          "format": "photo_carousel",
+          "rendererContractVersion": 3,
+          "receiptSha256": "e9665b14725c89c9df0c38b6c104b4d21c7b2acb56c102d301c94f973440cb98",
+          "scenarioFingerprint": "163097295e4bf6ab97fb3d3646e045ad947663886f2a2617d190008e2b4c00af",
+          "sourceCheckedOn": "2026-11-09",
+          "sourceUrls": [
+            "https://voyagesansdetour.fr/espagne/tenerife-quand-partir/"
+          ],
+          "creditsUrl": "https://voyagesansdetour.fr/social-media/production/fb-tenerife-quand-partir-2026-12-03/credits.txt",
+          "voice": null,
+          "music": null,
+          "note": "Les octets publics sont à contrôler après déploiement avec social_stock.py --verify-public. Un créneau prévu n'est pas une réservation Buffer."
+        }
+      }
+    }
+  ]
+}

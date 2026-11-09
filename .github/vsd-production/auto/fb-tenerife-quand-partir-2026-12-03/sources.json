@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "checkedOn": "2026-11-09",
+  "method": "Page publiée du guide relevée automatiquement ; texte visible conservé tel quel, première ligne = URL.",
+  "sources": {
+    "guide": {
+      "url": "https://voyagesansdetour.fr/espagne/tenerife-quand-partir/",
+      "publisher": "Voyage Sans Détour",
+      "title": "Quand partir à Tenerife : 22 °C en janvier au sud, 16 °C au nord, et le bon mois pour chaque côte",
+      "retrievedAt": "2026-11-09T14:00:08Z",
+      "snapshot": {
+        "file": "auto/fb-tenerife-quand-partir-2026-12-03/guide.txt",
+        "sha256": "2ca810e8a23972f4fec1e567dacf2adc5d73d66ce5ff2104b71800840d79c117"
+      }
+    }
+  }
+}

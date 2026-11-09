@@ -84,6 +84,12 @@
       "notBefore": "2026-11-06T15:34:20Z",
       "file": "scenarios/ig-thailande-itineraire-2-semaines-2026-12-02.json",
       "sha256": "ddc491072e542846b60e4c16979b0a2f3edee26efafb8dbfd8611fb0b652f337"
+    },
+    {
+      "contentId": "fb-tenerife-quand-partir-2026-12-03",
+      "notBefore": "2026-11-09T14:00:08Z",
+      "file": "scenarios/fb-tenerife-quand-partir-2026-12-03.json",
+      "sha256": "0671130a8739ee9bb3b0b52174efc82d4104a279136340227e442b8681cfeb9c"
     }
   ]
 }
