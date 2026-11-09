@@ -525,7 +525,7 @@
       11,
       12
     ],
-    "priority": 64,
+    "priority": 10,
     "demand": {
       "googleSuggest": 34,
       "googleTrends": 100,
@@ -604,7 +604,7 @@
       11,
       12
     ],
-    "priority": 62,
+    "priority": 10,
     "demand": {
       "googleSuggest": 41,
       "googleTrends": 100,
@@ -6006,6 +6006,422 @@
       "heures",
       "°c",
       "saison"
+    ]
+  },
+  {
+    "slug": "tromso-aurores-boreales",
+    "destination": "Tromsø",
+    "country": "norvege",
+    "continent": "europe",
+    "type": "que-faire",
+    "question": "Que faire à Tromsø pour voir les aurores boréales, avec la meilleure période, les durées d’excursion et la façon de s’y rendre ?",
+    "travelMonths": [
+      11,
+      12,
+      1,
+      2,
+      3
+    ],
+    "priority": 50,
+    "sources": [
+      {
+        "label": "Wikivoyage — Tromsø",
+        "url": "https://fr.wikivoyage.org/wiki/Troms%C3%B8"
+      },
+      {
+        "label": "Wikipedia — Tromsø",
+        "url": "https://en.wikipedia.org/wiki/Troms%C3%B8"
+      },
+      {
+        "label": "Seat61 — Voyager en train en Norvège",
+        "url": "https://www.seat61.com/Norway.htm"
+      }
+    ],
+    "photos": [
+      {
+        "id": "tromso-aurore",
+        "query": "Tromsø aurora borealis",
+        "must": [
+          "tromsø",
+          "tromso"
+        ],
+        "alt": "Une aurore boréale au-dessus de Tromsø."
+      },
+      {
+        "id": "tromso-cathedrale",
+        "query": "Arctic Cathedral Tromsø",
+        "must": [
+          "arctic cathedral",
+          "ishavskatedralen"
+        ],
+        "alt": "La cathédrale de l’Arctique, à Tromsø."
+      },
+      {
+        "id": "tromso-hiver",
+        "query": "Tromsø winter",
+        "must": [
+          "tromsø",
+          "tromso"
+        ],
+        "alt": "Les maisons de Tromsø sous la neige, en hiver."
+      }
+    ],
+    "keywords": [
+      "aurores",
+      "nuit",
+      "heures",
+      "km",
+      "°c",
+      "novembre",
+      "mars",
+      "excursion",
+      "téléphérique",
+      "vol"
+    ]
+  },
+  {
+    "slug": "taiwan-itineraire-10-jours",
+    "destination": "Taïwan",
+    "country": "taiwan",
+    "continent": "asie",
+    "type": "itineraire",
+    "question": "Quel itinéraire de 10 jours à Taïwan en train, de Taipei à Taroko, Tainan et Kaohsiung, avec les durées de trajet et les prix des billets ?",
+    "travelMonths": [
+      3,
+      4,
+      10,
+      11,
+      12
+    ],
+    "priority": 38,
+    "sources": [
+      {
+        "label": "Seat61 — Voyager en train à Taïwan",
+        "url": "https://www.seat61.com/Taiwan.htm"
+      },
+      {
+        "label": "Wikivoyage — Taïwan",
+        "url": "https://fr.wikivoyage.org/wiki/Ta%C3%AFwan"
+      },
+      {
+        "label": "Taiwan Tourism Administration",
+        "url": "https://www.taiwan.net.tw/"
+      }
+    ],
+    "photos": [
+      {
+        "id": "taiwan-taipei101",
+        "query": "Taipei 101",
+        "must": [
+          "taipei 101"
+        ],
+        "alt": "La tour Taipei 101, à Taipei."
+      },
+      {
+        "id": "taiwan-jiufen",
+        "query": "Jiufen",
+        "must": [
+          "jiufen"
+        ],
+        "alt": "Les ruelles de Jiufen, près de Taipei."
+      },
+      {
+        "id": "taiwan-taroko",
+        "query": "Taroko Gorge",
+        "must": [
+          "taroko"
+        ],
+        "alt": "Les gorges de Taroko, sur la côte est de Taïwan."
+      }
+    ],
+    "keywords": [
+      "train",
+      "heures",
+      "km",
+      "taipei",
+      "taroko",
+      "tainan",
+      "kaohsiung",
+      "easycard",
+      "°c",
+      "nt$"
+    ]
+  },
+  {
+    "slug": "georgie-itineraire-10-jours",
+    "destination": "Géorgie",
+    "country": "georgie",
+    "continent": "asie",
+    "type": "itineraire",
+    "question": "Quel itinéraire de 10 jours en Géorgie, de Tbilissi à Kazbegi, Kutaïssi et Svanétie, avec les durées de route et la meilleure saison ?",
+    "travelMonths": [
+      5,
+      6,
+      9,
+      10
+    ],
+    "priority": 36,
+    "sources": [
+      {
+        "label": "Wikivoyage — Géorgie",
+        "url": "https://fr.wikivoyage.org/wiki/G%C3%A9orgie"
+      },
+      {
+        "label": "Géorgie Tourisme",
+        "url": "https://www.visitgeorgia.ge/"
+      },
+      {
+        "label": "Wikipedia — Georgia (country)",
+        "url": "https://en.wikipedia.org/wiki/Georgia_(country)"
+      }
+    ],
+    "photos": [
+      {
+        "id": "georgie-tbilissi",
+        "query": "Tbilisi old town",
+        "must": [
+          "tbilisi"
+        ],
+        "alt": "La vieille ville de Tbilissi."
+      },
+      {
+        "id": "georgie-kazbegi",
+        "query": "Kazbegi Gergeti Trinity Church",
+        "must": [
+          "gergeti",
+          "kazbegi"
+        ],
+        "alt": "L’église de la Trinité de Gergeti, près de Kazbegi."
+      },
+      {
+        "id": "georgie-ushguli",
+        "query": "Svaneti Ushguli",
+        "must": [
+          "ushguli",
+          "svaneti"
+        ],
+        "alt": "Les tours de Ushguli, en Svanétie."
+      }
+    ],
+    "keywords": [
+      "km",
+      "heures",
+      "tbilissi",
+      "kazbegi",
+      "svanétie",
+      "kutaïssi",
+      "marchroutka",
+      "lari",
+      "°c",
+      "col"
+    ]
+  },
+  {
+    "slug": "floride-road-trip-10-jours",
+    "destination": "Floride",
+    "country": "etats-unis",
+    "continent": "amerique-du-nord",
+    "type": "road-trip",
+    "question": "Quel road trip de 10 jours en Floride, de Miami aux Keys, aux Everglades et à Orlando, avec les distances, les durées de route et la meilleure saison ?",
+    "travelMonths": [
+      2,
+      3,
+      4,
+      5,
+      11,
+      12
+    ],
+    "priority": 45,
+    "sources": [
+      {
+        "label": "Visit Florida",
+        "url": "https://www.visitflorida.com/"
+      },
+      {
+        "label": "Wikivoyage — Floride",
+        "url": "https://fr.wikivoyage.org/wiki/Floride"
+      },
+      {
+        "label": "Wikipedia — Florida",
+        "url": "https://en.wikipedia.org/wiki/Florida"
+      }
+    ],
+    "photos": [
+      {
+        "id": "floride-miami",
+        "query": "Miami Ocean Drive Art Deco",
+        "must": [
+          "ocean drive",
+          "art deco"
+        ],
+        "alt": "Les façades Art déco d’Ocean Drive, à Miami Beach."
+      },
+      {
+        "id": "floride-everglades",
+        "query": "Everglades airboat",
+        "must": [
+          "everglades"
+        ],
+        "alt": "Un aéroglisseur dans les Everglades."
+      },
+      {
+        "id": "floride-key-west",
+        "query": "Key West Florida",
+        "must": [
+          "key west"
+        ],
+        "alt": "Key West, au bout des Keys."
+      }
+    ],
+    "keywords": [
+      "miles",
+      "km",
+      "heures",
+      "miami",
+      "keys",
+      "everglades",
+      "orlando",
+      "°c",
+      "ouragans",
+      "péage"
+    ]
+  },
+  {
+    "slug": "madagascar-quand-partir",
+    "destination": "Madagascar",
+    "country": "madagascar",
+    "continent": "afrique",
+    "type": "quand-partir",
+    "question": "Quand partir à Madagascar, mois par mois, avec la saison des pluies et des cyclones, les baobabs, les lémuriens et les plages de Nosy Be ?",
+    "travelMonths": [
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "priority": 40,
+    "sources": [
+      {
+        "label": "Wikivoyage — Madagascar",
+        "url": "https://fr.wikivoyage.org/wiki/Madagascar"
+      },
+      {
+        "label": "Wikipedia — Madagascar",
+        "url": "https://en.wikipedia.org/wiki/Madagascar"
+      },
+      {
+        "label": "Office national du tourisme de Madagascar",
+        "url": "https://www.madagascar-tourisme.com/"
+      }
+    ],
+    "photos": [
+      {
+        "id": "madagascar-baobabs",
+        "query": "Avenue of the Baobabs",
+        "must": [
+          "baobab"
+        ],
+        "alt": "L’allée des baobabs, près de Morondava."
+      },
+      {
+        "id": "madagascar-tsingy",
+        "query": "Tsingy de Bemaraha",
+        "must": [
+          "tsingy"
+        ],
+        "alt": "Les tsingy de Bemaraha."
+      },
+      {
+        "id": "madagascar-nosy-be",
+        "query": "Nosy Be",
+        "must": [
+          "nosy"
+        ],
+        "alt": "Une plage de Nosy Be."
+      }
+    ],
+    "keywords": [
+      "saison",
+      "pluies",
+      "cyclones",
+      "°c",
+      "mois",
+      "baobabs",
+      "lémuriens",
+      "nosy be",
+      "mm",
+      "avril"
+    ]
+  },
+  {
+    "slug": "buenos-aires-4-jours",
+    "destination": "Buenos Aires",
+    "country": "argentine",
+    "continent": "amerique-du-sud",
+    "type": "itineraire",
+    "question": "Que faire à Buenos Aires en 4 jours : quartiers, Recoleta, La Boca, San Telmo, tango, et comment se déplacer en métro ?",
+    "travelMonths": [
+      3,
+      4,
+      5,
+      9,
+      10,
+      11
+    ],
+    "priority": 34,
+    "sources": [
+      {
+        "label": "Wikivoyage — Buenos Aires",
+        "url": "https://fr.wikivoyage.org/wiki/Buenos_Aires"
+      },
+      {
+        "label": "Wikipedia — Buenos Aires",
+        "url": "https://en.wikipedia.org/wiki/Buenos_Aires"
+      }
+    ],
+    "photos": [
+      {
+        "id": "buenos-aires-recoleta",
+        "query": "Recoleta Cemetery Buenos Aires",
+        "must": [
+          "recoleta"
+        ],
+        "alt": "Le cimetière de la Recoleta, à Buenos Aires."
+      },
+      {
+        "id": "buenos-aires-caminito",
+        "query": "Caminito La Boca",
+        "must": [
+          "caminito",
+          "la boca"
+        ],
+        "alt": "Le Caminito, dans le quartier de La Boca."
+      },
+      {
+        "id": "buenos-aires-colon",
+        "query": "Teatro Colón Buenos Aires",
+        "must": [
+          "colón",
+          "colon"
+        ],
+        "alt": "Le théâtre Colón, à Buenos Aires."
+      }
+    ],
+    "keywords": [
+      "subte",
+      "métro",
+      "heures",
+      "km",
+      "recoleta",
+      "san telmo",
+      "la boca",
+      "tango",
+      "°c",
+      "pesos"
     ]
   }
 ]
