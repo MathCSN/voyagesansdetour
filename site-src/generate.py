@@ -174,14 +174,16 @@ def title_tag(text):
     """La marque suit le titre seulement si l'ensemble tient dans un résultat de recherche."""
     suffix=' | '+BRAND
     return text+suffix if len(text)+len(suffix)<=TITLE_MAX else text
+def shorten(text,maximum):
+    """Un texte trop long est coupé à un mot entier, jamais au milieu, et finit par « … »."""
+    if len(text)<=maximum:return text
+    return text[:maximum-1].rsplit(' ',1)[0].rstrip(' ,;:–-(')+'…'
 def guide_title(a):
-    # Sans titre dédié : le titre s'il est court, sinon sa partie avant « : », sinon le titre de carte.
+    # Sans titre dédié : le titre s'il est court, sinon sa partie avant « : », sinon le titre de carte,
+    # lui-même coupé s'il dépasse (la file éditoriale n'en borne pas la longueur).
     head=a['title'].split(' : ')[0]
-    return title_tag(SEO.get(a['slug'],{}).get('title') or next((t for t in (a['title'],head) if len(t)<=TITLE_MAX),a['shortTitle']))
-def meta_description(text):
-    """Une description trop longue est coupée à un mot entier, jamais au milieu."""
-    if len(text)<=DESCRIPTION_MAX:return text
-    return text[:DESCRIPTION_MAX-1].rsplit(' ',1)[0].rstrip(' ,;:–-(')+'…'
+    return title_tag(SEO.get(a['slug'],{}).get('title') or next((t for t in (a['title'],head) if len(t)<=TITLE_MAX),shorten(a['shortTitle'],TITLE_MAX)))
+def meta_description(text):return shorten(text,DESCRIPTION_MAX)
 def guide_description(a):return meta_description(SEO.get(a['slug'],{}).get('description') or a['description'])
 def guide_faq(a):
     # Les questions réellement cherchées s'ajoutent à celles du guide, sans doublon.

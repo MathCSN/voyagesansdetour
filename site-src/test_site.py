@@ -550,6 +550,7 @@ class WorldBuildTest(unittest.TestCase):
         cls.addClassCleanup(shutil.rmtree,cls.workdir,True)
         guides=[synthetic_guide('test-kyoto-automne','Kyoto',country='japon',category='Quand partir',publishedOn='2026-10-25',updatedOn='2026-10-26',
                                 keyFacts=[{'value':'15 nov.','label':'pic des érables à Kyoto'}]),
+                synthetic_guide('test-titre-sans-fin','Nagoya',country='japon',title='Nagoya et ses environs en détail '*3,shortTitle='Nagoya et ses environs en détail '*3),
                 synthetic_guide('test-long-titre','Osaka',country='japon',title='Osaka en 3 jours : '+'un sous-titre très détaillé '*4,
                                 description='Une description de contrôle bien trop longue pour un résultat de recherche. '*4),
                 synthetic_guide('test-atlantide','Atlantide',country='atlantide',category='Budget'),
@@ -595,6 +596,10 @@ class WorldBuildTest(unittest.TestCase):
         self.assertLessEqual(len(description),160)
         self.assertTrue(description.endswith('…') and not description.endswith(' …'),description)
         self.assertIn('<h1>Osaka en 3 jours : un sous-titre',page)
+        # Ni le titre, ni sa partie avant « : », ni le titre de carte ne tiennent : le repli est coupé à un mot entier.
+        endless=html.unescape(re.search(r'<title>(.*?)</title>',read(self.out,'/japon/test-titre-sans-fin/')).group(1))
+        self.assertLessEqual(len(endless),60)
+        self.assertEqual(endless,'Nagoya et ses environs en détail Nagoya et ses environs en…')
         for route in ('/japon/','/japon/test-kyoto-automne/','/atlantide/','/guides/quand-partir/'):
             with self.subTest(route=route):
                 self.assertLessEqual(len(html.unescape(re.search(r'<title>(.*?)</title>',read(self.out,route)).group(1))),60)
