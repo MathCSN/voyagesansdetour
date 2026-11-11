@@ -37,8 +37,8 @@ fait échouer le build avant la mise en ligne.
 | Rubriques liées depuis le pied de toutes les pages ; « Quand partir » se déduit du titre, « Que faire » existe | `RUBRIQUES`, `theme_links` |
 | `/liens/` (page de liens des profils sociaux) hors des résultats et du sitemap | `noindex=True` |
 | Date de mise à jour visible et dans le schéma `Article` ; `FAQPage`, `BreadcrumbList`, `ItemList` | rendu d'article |
-| Polices en WOFF2 préchargées, images avec dimensions, `loading=lazy` sauf la première | `page`, `img` |
-| Copie de 1 200 px de chaque photo, créée au déploiement et jamais commitée : un téléphone ne télécharge plus le fichier de 1 600 px | `photo_variants.py`, étape de `build-pages.yml` |
+| Polices en WOFF2, images avec dimensions, `loading=lazy` sauf la première | `page`, `img` |
+| Copies de 400 et 1 200 px de chaque photo, créées au déploiement et jamais commitées : un téléphone ne télécharge plus le fichier de 1 600 px, une vignette plus celui de 800 px | `photo_variants.py`, étape de `build-pages.yml` |
 | Sitemap daté par page (`lastmod` = dernière mise à jour du guide ou du plus récent guide de la liste) | fin de `generate.py` |
 
 ### Pourquoi `seo.json` et pas `articles.json`
@@ -155,7 +155,7 @@ LIGHTHOUSE_PLACEHOLDER
 
 - GitHub Pages impose un cache de 10 minutes sur tous les fichiers : l'audit « cache » de Lighthouse
   ne peut pas passer sans changer d'hébergeur ou placer un CDN devant.
-- Les photos restent en JPEG (800, 1 200 et 1 600 px). La copie de 1 200 px est créée par le
+- Les photos restent en JPEG (400, 800, 1 200 et 1 600 px). Les copies de 400 et 1 200 px sont créées par le
   déploiement (Pillow, étape non bloquante) : si l'étape échoue, le site sort avec 800 et 1 600 px
   comme avant. Un format WebP ou AVIF demanderait de toucher à la chaîne des photos.
 - Lighthouse émule un téléphone à 1,75 pixel par point, qui prenait déjà le fichier de 800 px : le

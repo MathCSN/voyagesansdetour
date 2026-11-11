@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Lighter copies of the site's photos, so a phone never downloads the 1 600 px file.
+"""Lighter copies of the site's photos: a phone never downloads the 1 600 px file, a thumbnail never the 800 px one.
 
 Run by the deployment before the build (Pillow installed by the workflow). The copies are
 derived files: they are written beside the originals, never committed, and generate.py only
@@ -12,8 +12,9 @@ import pathlib
 import sys
 
 ASSETS = pathlib.Path(__file__).parent / 'dist' / 'assets'
-# A phone screen is 360 to 430 points wide at 2 to 3 pixels per point: 1 200 px covers it.
-WIDTHS = (1200, 800)
+# A phone screen is 360 to 430 points wide at 2 to 3 pixels per point: 1 200 px covers a full-width
+# photo, 400 px a thumbnail in a two-column grid.
+WIDTHS = (1200, 800, 400)
 # Same encoding as the photo chain (guide_photos.py): progressive JPEG, no metadata.
 JPEG_QUALITY = 72
 

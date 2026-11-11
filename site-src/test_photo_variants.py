@@ -28,7 +28,7 @@ class PhotoVariantsTest(unittest.TestCase):
         existing = self.photo('photos/kyoto-800.jpg', 800, 500)
         before = existing.read_bytes()
         written = photo_variants.build(self.folder)
-        self.assertEqual([p.name for p in written], ['kyoto-1200.jpg'])
+        self.assertEqual([p.name for p in written], ['kyoto-1200.jpg', 'kyoto-400.jpg'])
         with Image.open(self.folder / 'photos/kyoto-1200.jpg') as copy:
             self.assertEqual(copy.size, (1200, 750))
         self.assertEqual(existing.read_bytes(), before)
@@ -37,8 +37,8 @@ class PhotoVariantsTest(unittest.TestCase):
     def test_a_small_photo_is_never_enlarged_and_copies_are_not_copied_again(self):
         self.photo('petite.jpg', 1000, 600)
         written = photo_variants.build(self.folder)
-        self.assertEqual([p.name for p in written], ['petite-800.jpg'])
-        self.assertEqual(sorted(p.name for p in self.folder.rglob('*.jpg')), ['petite-800.jpg', 'petite.jpg'])
+        self.assertEqual([p.name for p in written], ['petite-800.jpg', 'petite-400.jpg'])
+        self.assertEqual(sorted(p.name for p in self.folder.rglob('*.jpg')), ['petite-400.jpg', 'petite-800.jpg', 'petite.jpg'])
 
 
 if __name__ == '__main__':

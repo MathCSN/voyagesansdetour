@@ -353,13 +353,14 @@ class PublicBuildTest(unittest.TestCase):
         self.assertRegex(page,r'Publié le 27 septembre 2026 · Mis à jour le \d+ \w+ 2026')
         self.assertNotIn('Mis à jour le',read(self.out,'/japon/japon-itineraire-2-semaines/').split('class="byline"')[1].split('</div>')[0])
 
-    def test_fonts_are_served_as_preloaded_woff2(self):
+    def test_fonts_are_served_as_woff2_and_never_ahead_of_the_first_photo(self):
         self.assertEqual(sorted(p.name for p in (self.out/'assets').glob('font-*')),[f'font-{i}.woff2' for i in range(7)])
         css=(self.out/'style.css').read_text()
         self.assertEqual(len(re.findall(r"url\(/assets/font-\d\.woff2\) format\('woff2'\)",css)),7)
         self.assertNotIn('.ttf',css)
         home=read(self.out,'/')
-        self.assertEqual(len(re.findall(r'<link rel="preload" href="/assets/font-\d\.woff2" as="font" type="font/woff2" crossorigin>',home)),2)
+        # Précharger les polices retardait la photo d'en-tête, qui est l'élément le plus long à afficher.
+        self.assertNotIn('rel="preload"',home)
 
     def test_canonical_urls_sitemap_and_robots_use_the_domain(self):
         for page in self.out.rglob('index.html'):
@@ -669,12 +670,12 @@ class LighterPhotoTest(TempDirTest):
     def test_copies_found_beside_a_photo_are_offered_to_phones(self):
         source=source_copy(self.workdir,[])
         # Le déploiement crée ces copies (photo_variants.py) ; ici leur seule présence compte.
-        for name in ('photos/japon-fuji-chureito-1200.jpg','lisbonne-800.jpg','lisbonne-1200.jpg'):
+        for name in ('photos/japon-fuji-chureito-1200.jpg','photos/japon-fuji-chureito-400.jpg','lisbonne-800.jpg','lisbonne-1200.jpg'):
             (source/'dist'/'assets'/name).write_bytes(b'copie')
         result,out=build(self.workdir,True,MENTIONS,source_root=source)
         self.assertEqual(result.returncode,0,result.stderr)
         japan=read(out,'/japon/japon-itineraire-2-semaines/')
-        self.assertIn('srcset="/assets/photos/japon-fuji-chureito-800.jpg 800w, /assets/photos/japon-fuji-chureito-1200.jpg 1200w, /assets/photos/japon-fuji-chureito.jpg 1600w"',japan)
+        self.assertIn('srcset="/assets/photos/japon-fuji-chureito-400.jpg 400w, /assets/photos/japon-fuji-chureito-800.jpg 800w, /assets/photos/japon-fuji-chureito-1200.jpg 1200w, /assets/photos/japon-fuji-chureito.jpg 1600w"',japan)
         self.assertIn('src="/assets/photos/japon-fuji-chureito.jpg"',japan)
         # Sans copie 1 200 px, une photo garde ses deux tailles du catalogue.
         self.assertIn('srcset="/assets/photos/japon-shinkansen-800.jpg 800w, /assets/photos/japon-shinkansen.jpg 1600w"',japan)
