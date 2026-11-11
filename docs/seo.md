@@ -149,7 +149,22 @@ Build de `main` (avant) et de cette branche (après), 57 puis 59 pages :
 | Photo d'en-tête d'un guide sur un téléphone récent (médiane) | 361 Ko | 185 Ko |
 | Photo d'en-tête des guides de Lisbonne (`lisbonne.jpg`) sur téléphone | 575 Ko | 79 à 163 Ko |
 
-LIGHTHOUSE_PLACEHOLDER
+Lighthouse mobile (version en ligne de commande, connexion 4G lente simulée), sur les deux builds
+servis en local. Une seule mesure par page, sauf l'accueil d'avant mesuré deux fois ; la machine
+était chargée, d'où l'écart entre ces deux mesures : à lire comme un ordre de grandeur.
+
+| Page | Performance avant | Performance après | Poids avant | Poids après | Plus grand élément affiché, avant puis après |
+| --- | ---: | ---: | ---: | ---: | --- |
+| Accueil | 42 et 76 | 90 | 1 663 Ko | 560 Ko | 7,3 à 7,5 s puis 3,5 s |
+| Guide (Japon en 2 semaines) | 94 | 100 | 633 Ko | 399 Ko | 0,9 s puis 0,9 s |
+| Page pays (Japon) | 81 | 90 | 639 Ko | 453 Ko | 4,1 s puis 3,5 s |
+
+Accessibilité, bonnes pratiques et SEO : 100 sur les trois pages après (la page pays était à 98 en
+accessibilité). Sur le site en ligne, avant, la même commande donnait 54 (accueil), 68 (guide) et
+63 (`/guides/`), avec un temps de blocage gonflé par la charge de la machine. Les poids locaux
+d'avant comptent les polices sans compression ; en ligne elles pesaient 263 Ko par page, 193 Ko
+désormais. Le plus grand élément des pages listes reste la photo d'en-tête de 800 px (85 à 160 Ko) :
+3,5 s en 4G lente simulée, au-dessus du seuil « bon » de 2,5 s.
 
 ## Limites connues
 
