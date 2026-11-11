@@ -296,8 +296,8 @@ class PublicBuildTest(unittest.TestCase):
             guide=catalogue[slug];page=read(self.out,'/'+guide.get('country','portugal')+'/'+slug+'/')
             with self.subTest(guide=slug):
                 self.assertIn('<title>'+html.escape(entry['title']).replace(' €',' €'),page)
-                # Le titre complet reste dans la page : la chaîne des posts refuse un guide dont le titre a disparu.
-                self.assertIn(guide['title'],html.unescape(page).replace(' ',' '))
+                # Même contrôle que auto_social.snapshot : la chaîne des posts refuse un guide dont le titre a disparu.
+                self.assertIn(guide['title'],html.unescape(page))
                 for question in entry.get('faq',[]):
                     self.assertGreaterEqual(page.count(html.escape(question['question'])),2,question['question'])
 
@@ -371,6 +371,10 @@ class PublicBuildTest(unittest.TestCase):
         robots=(self.out/'robots.txt').read_text()
         self.assertNotIn('Disallow: /',robots)
         self.assertIn(f'Sitemap: {ORIGIN}/sitemap.xml',robots)
+
+    def test_the_indexnow_key_file_is_published_at_the_root(self):
+        import indexnow
+        self.assertEqual((self.out/(indexnow.KEY+'.txt')).read_text().strip(),indexnow.KEY)
 
     def test_github_pages_files_are_present(self):
         self.assertEqual((self.out/'CNAME').read_text().strip(),'voyagesansdetour.fr')

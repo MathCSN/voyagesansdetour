@@ -129,7 +129,7 @@ des fichiers changés sont dans l'artefact `new-guide-proposal`.
 | `vsd-reel-intake.yml` | après chaque déploiement | Prépare un storyboard de reel depuis un nouveau guide |
 | `vsd-voice-production.yml` → `vsd-voice-adopt.yml` → `vsd-voice-review.yml` → `vsd-voice-promote.yml` | à la main seulement | Chaîne des reels voix de synthèse, en sommeil depuis le 24/10 (ancien format retiré) |
 | `vsd-promote-media.yml` | à la main seulement | Ancienne promotion des rendus relus, en sommeil depuis le 06/11 : les nouveaux posts passent par `vsd-render-content` et l'import quotidien de `vsd-cloud-control` |
-| `vsd-writing-discovery.yml` | chaque jour 09:37 | Mises à jour sourcées des guides |
+| `vsd-writing-discovery.yml` | chaque jour 09:37 | Mises à jour sourcées des guides ; une source injoignable est ignorée et notée, le passage continue |
 | `vsd-weekly-report.yml` | chaque jour 09:07 (rapport le lundi) | Rapport hebdomadaire et alerte de file vide |
 
 `vsd-writing-guide` tourne seul deux fois par jour (rédaction des nouveaux guides).
@@ -149,6 +149,11 @@ Secrets : `VSD_ADMIN_TICK_KEY` (appels signés du panneau privé), `CLOUDFLARE_W
   Instagram ou Facebook n'a plus de post programmé à 14 jours, si aucun nouveau guide n'est prévu
   à 28 jours, si un workflow échoue deux fois dans la semaine, ou à 60 jours de la date d'arrêt.
   Elle se ferme seule quand tout est revenu dans l'ordre.
+- **Référencement** (`docs/seo.md`) : le rapport du lundi donne les clics et impressions Google sur
+  28 jours, les requêtes en hausse et les pages indexées, lus dans le panneau privé par un appel
+  signé en lecture seule. L'alerte se lève aussi si l'indexation recule sur 7 jours ou si les
+  impressions sont divisées par deux. Après chaque déploiement, `indexnow.py` prévient Bing et
+  Yandex des pages changées.
 - Limite : la preuve de publication Instagram/Facebook n'est pas lisible depuis GitHub
   (pas d'API publique). Le rapport liste les posts dont l'échéance est passée ; la preuve
   est dans le panneau privé et sur les profils.

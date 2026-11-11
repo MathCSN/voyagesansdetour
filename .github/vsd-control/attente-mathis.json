@@ -28,6 +28,11 @@
       "action": "Les liens hôtels Stay22 sont actifs depuis le 24/10 (aid voyagesansdetourfr, domaine déclaré, commission 30 %). Il manque seulement le moyen de paiement : Hub Stay22 > Settings > Payout method. Les commissions s'accumulent en attendant."
     },
     {
+      "title": "Bing Webmaster Tools : importer le site depuis Search Console (2 minutes)",
+      "url": "https://www.bing.com/webmasters/",
+      "action": "Se connecter avec le compte Google du blog, choisir « Importer depuis Google Search Console » et valider voyagesansdetour.fr : le site et son sitemap sont repris sans nouvelle vérification. Bing alimente aussi DuckDuckGo, Ecosia et Copilot. Le site prévient déjà Bing à chaque mise en ligne (IndexNow) ; ce compte sert à voir ce que Bing en fait."
+    },
+    {
       "title": "Bios Instagram, Pinterest et Facebook « blog voyage, monde entier »",
       "url": "https://github.com/MathCSN/voyagesansdetour/blob/main/docs/bios-reseaux.md",
       "action": "Coller la bio retenue dans Instagram (@voyagesansdetour.fr > Modifier le profil), Pinterest (Paramètres > Modifier le profil) et, si souhaité, Facebook (intro de la page). Longueurs déjà vérifiées."
