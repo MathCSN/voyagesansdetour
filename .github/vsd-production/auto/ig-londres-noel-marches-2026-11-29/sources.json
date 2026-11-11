@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "checkedOn": "2026-11-11",
+  "method": "Page publiée du guide relevée automatiquement ; texte visible conservé tel quel, première ligne = URL.",
+  "sources": {
+    "guide": {
+      "url": "https://voyagesansdetour.fr/royaume-uni/londres-noel-marches/",
+      "publisher": "Voyage Sans Détour",
+      "title": "Londres en décembre 2026 : Winter Wonderland, patinoires et métro plafonné à 8,90 £",
+      "retrievedAt": "2026-11-11T02:39:00Z",
+      "snapshot": {
+        "file": "auto/ig-londres-noel-marches-2026-11-29/guide.txt",
+        "sha256": "427cb0573e8b19d619431947b698c54bd7590ed786be63506bcbace0eed4b971"
+      }
+    }
+  }
+}

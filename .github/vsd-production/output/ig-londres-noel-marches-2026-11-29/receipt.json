@@ -1,0 +1,183 @@
+{
+  "schemaVersion": 1,
+  "contentId": "ig-londres-noel-marches-2026-11-29",
+  "status": "rendered_not_published",
+  "fingerprint": "02cbebc31990cf691d83e79bb68ef02a05424815f1e9223cfebec55005e82965",
+  "createdAt": "2026-11-11T02:40:10.901107Z",
+  "renderFinishedAt": "2026-11-11T02:40:56.404403Z",
+  "rendererContractVersion": 4,
+  "rendererSha256": "2d337f981d604100e5bb89001e685106b0a2fa8aab05b9c4fe6eff0a448b6fe9",
+  "drawingSha256": "18fff20f2fc461191c57cdbfb620129502ac051e6b3719a239ac872df87e204a",
+  "motionSha256": "dd5608c3447e18a918c28e38fa6d664a31f4417591c1bbc60d7c07f269b40924",
+  "format": "liste",
+  "kind": "reel",
+  "channel": "instagram",
+  "publishAt": "2026-11-29T20:00:00Z",
+  "reviewValidUntil": "2026-12-11T02:39:00Z",
+  "sourceCheckedOn": "2026-11-11",
+  "targetUrl": "https://voyagesansdetour.fr/royaume-uni/londres-noel-marches/",
+  "voice": null,
+  "presenter": null,
+  "sourceUrls": [
+    "https://voyagesansdetour.fr/royaume-uni/londres-noel-marches/"
+  ],
+  "photos": {
+    "londres-tower-bridge": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Dietmar Rabich",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:London,_Tower_Bridge_--_2016_--_4676.jpg"
+    },
+    "londres-covent-garden": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Dietmar Rabich",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:London,_Covent_Garden_--_2016_--_4878.jpg"
+    },
+    "londres-big-ben": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Domob",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Palace_of_Westminster_and_Elizabeth_Tower_20250522.jpg"
+    },
+    "londres-c7e87321": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Diego Delso",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Museo_de_Historia_Natural,_Londres,_Inglaterra,_2022-11-25,_DD_50-52_HDR.jpg"
+    },
+    "londres-e2d58373": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Diego Delso",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:B%C3%B3veda_de_la_sala_de_entrada,_Galer%C3%ADa_Nacional,_Londres,_Inglaterra,_2014-08-11,_DD_170-172_HDR.JPG"
+    },
+    "londres-270a5996": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Diego Delso",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:B%C3%B3veda_de_la_sala_36,_Galer%C3%ADa_Nacional,_Londres,_Inglaterra,_2014-08-11,_DD_165-167_HDR.JPG"
+    },
+    "londres-5595b7d0": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Diego Delso",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Puente_de_la_Torre,_Londres,_Inglaterra,_2014-08-11,_DD_092.JPG"
+    }
+  },
+  "clips": {},
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "durationSeconds": 22.4,
+    "videoCodec": "h264",
+    "pixelFormat": "yuv420p",
+    "videoBitrateBps": 3573038,
+    "audioCodec": "aac",
+    "audioSampleRate": 48000,
+    "audioBitrateBps": 96482,
+    "fullDecodePassed": true,
+    "loudness": {
+      "integratedLufs": -16.1,
+      "truePeakDbfs": -2.2
+    }
+  },
+  "files": [
+    {
+      "file": "apercu.jpg",
+      "sha256": "39435e5de3daa8f6ebd454896dfb871df77c74318b36feedc8c737b9349ef677",
+      "bytes": 345333
+    },
+    {
+      "file": "credits.txt",
+      "sha256": "aa9fcd9b749d5b6e8876cb4b676698079e683c3340492bb7c592a0323b5347c4",
+      "bytes": 3633
+    },
+    {
+      "file": "dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "file": "encode.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "legende.txt",
+      "sha256": "df6a2e31c3e500637e4ef4d5ff0f622b8165398b13341474235db5ddceced7fe",
+      "bytes": 919
+    },
+    {
+      "file": "notosans-OFL.txt",
+      "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a",
+      "bytes": 4396
+    },
+    {
+      "file": "playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    },
+    {
+      "file": "poster.jpg",
+      "sha256": "47d6286110063f15ffc031c4f023b04968feccba80aafed17c2cbaa9da9e099e",
+      "bytes": 485987
+    },
+    {
+      "file": "reel.mp4",
+      "sha256": "91cc0c73456726b5628da2365d61b2d7643724aa70ded918faff04109bd1b280",
+      "bytes": 10300977
+    },
+    {
+      "file": "scenario.json",
+      "sha256": "f7e271b8b9325bf2eea603c3db9fab7ce9d69dd469121b224b34a5f7beb4bbca",
+      "bytes": 8119
+    },
+    {
+      "file": "scene-01.jpg",
+      "sha256": "f2945ee897424950dff6e0c179c28d6294b38cd6b5c709ac0844f025fe5a8d72",
+      "bytes": 443482
+    },
+    {
+      "file": "scene-02.jpg",
+      "sha256": "a487dd50f21e496684efc630af8c4cf083f4acfe932dbe32fcf5daebc170e828",
+      "bytes": 581807
+    },
+    {
+      "file": "scene-03.jpg",
+      "sha256": "77aa8084e2c2bbf51208eeb5c50c40a102f7bcd1c75e8a56aecfe7b20e5a6b98",
+      "bytes": 272264
+    },
+    {
+      "file": "scene-04.jpg",
+      "sha256": "bb09d7d501b43ed254718d3d0c65eb110034f52a17040b1b2b2b1e03ec4d5404",
+      "bytes": 638819
+    },
+    {
+      "file": "scene-05.jpg",
+      "sha256": "19624d44d21dcdeef43ae1c0235a0c16337b4df11c5fabdb3bbfa77a1062573f",
+      "bytes": 452719
+    },
+    {
+      "file": "scene-06.jpg",
+      "sha256": "e356a5f3340c5fca35c62d9c5561bc54dc919e03c1b9835c8599b3635f4d45dd",
+      "bytes": 583610
+    },
+    {
+      "file": "scene-07.jpg",
+      "sha256": "a1b906873c955347185b7f1f0421cbf4305318e058276bab727c539609c42eb3",
+      "bytes": 404815
+    }
+  ],
+  "runtime": {
+    "wallSeconds": 45.347,
+    "encoderThreads": 2,
+    "pillowVersion": "11.3.0",
+    "ffmpegVersion": "ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers"
+  },
+  "publication": {
+    "uploaded": false,
+    "scheduled": false,
+    "published": false,
+    "readyForAutomaticImport": false
+  },
+  "cost": {
+    "newPaidService": false,
+    "providerCalls": 0,
+    "monetarySpendEur": 0
+  }
+}

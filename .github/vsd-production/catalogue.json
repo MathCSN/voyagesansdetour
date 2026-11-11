@@ -90,6 +90,24 @@
       "notBefore": "2026-11-09T14:00:08Z",
       "file": "scenarios/fb-tenerife-quand-partir-2026-12-03.json",
       "sha256": "0671130a8739ee9bb3b0b52174efc82d4104a279136340227e442b8681cfeb9c"
+    },
+    {
+      "contentId": "ig-japon-budget-2-semaines-2026-11-15",
+      "notBefore": "2026-11-11T02:39:00Z",
+      "file": "scenarios/ig-japon-budget-2-semaines-2026-11-15.json",
+      "sha256": "7aa1b7757638ea7976c6a7218b35654b9bbcbd7f7098013408c43354af4af1ae"
+    },
+    {
+      "contentId": "ig-londres-noel-marches-2026-11-29",
+      "notBefore": "2026-11-11T02:39:00Z",
+      "file": "scenarios/ig-londres-noel-marches-2026-11-29.json",
+      "sha256": "f7e271b8b9325bf2eea603c3db9fab7ce9d69dd469121b224b34a5f7beb4bbca"
+    },
+    {
+      "contentId": "ig-new-york-noel-2026-11-22",
+      "notBefore": "2026-11-11T02:39:00Z",
+      "file": "scenarios/ig-new-york-noel-2026-11-22.json",
+      "sha256": "10a1e73f8e69c623508e191cfb764d34ce23f5d08da79a2d5b95245713cc5fde"
     }
   ]
 }

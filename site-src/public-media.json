@@ -932,6 +932,126 @@
           "bytes": 4449
         }
       ]
+    },
+    {
+      "contentId": "ig-japon-budget-2-semaines-2026-11-15",
+      "approved": true,
+      "files": [
+        {
+          "name": "reel.mp4",
+          "sha256": "213c60259ee58b5b2dc1da8e89a92ed294524622d87257094a2453e9a36aaa87",
+          "bytes": 9777833
+        },
+        {
+          "name": "poster.jpg",
+          "sha256": "d32d0455148e09504774860658e0b2eecd4141774d1a93fc202a7125f0e8c60d",
+          "bytes": 633040
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "5a5c680aa176a1beaa1901a51210336290d0e13743120920b570199c33a48e22",
+          "bytes": 3423
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "ig-londres-noel-marches-2026-11-29",
+      "approved": true,
+      "files": [
+        {
+          "name": "reel.mp4",
+          "sha256": "91cc0c73456726b5628da2365d61b2d7643724aa70ded918faff04109bd1b280",
+          "bytes": 10300977
+        },
+        {
+          "name": "poster.jpg",
+          "sha256": "47d6286110063f15ffc031c4f023b04968feccba80aafed17c2cbaa9da9e099e",
+          "bytes": 485987
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "aa9fcd9b749d5b6e8876cb4b676698079e683c3340492bb7c592a0323b5347c4",
+          "bytes": 3633
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "ig-new-york-noel-2026-11-22",
+      "approved": true,
+      "files": [
+        {
+          "name": "reel.mp4",
+          "sha256": "3334b79c6da33571ea8540b946b1b6f0f9c7e39e80f69b69eaf53ec4fd8162b0",
+          "bytes": 9210241
+        },
+        {
+          "name": "poster.jpg",
+          "sha256": "c276c7102848d67989c8b93b163317030d38e8581d7278a0208af284422d5802",
+          "bytes": 542226
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "ea9a01b5a30914ca1878d86d87f13ae2905975a846b192b80e3a52c01a69fa06",
+          "bytes": 3530
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "pin-londres-noel-marches",
+      "kind": "pin",
+      "approved": true,
+      "files": [
+        {
+          "name": "pin.jpg",
+          "bytes": 384291,
+          "sha256": "4f426eaf4837d20aa39b50df4e51decf972c51c4dce57dc3491e98bb2557516a"
+        },
+        {
+          "name": "credits.txt",
+          "bytes": 350,
+          "sha256": "d3b66e1d1bf6fc956a84b3f17405453603382b6d2d0b1103fe6a69c79c448863"
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "bytes": 4482,
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "bytes": 4449,
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+        }
+      ]
     }
   ]
 }

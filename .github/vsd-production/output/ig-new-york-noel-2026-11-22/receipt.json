@@ -1,0 +1,183 @@
+{
+  "schemaVersion": 1,
+  "contentId": "ig-new-york-noel-2026-11-22",
+  "status": "rendered_not_published",
+  "fingerprint": "d7aef9a21f652fdad9ec04d1ce24f99434f0c7db5759861f5ed39890533dc057",
+  "createdAt": "2026-11-11T02:40:56.597454Z",
+  "renderFinishedAt": "2026-11-11T02:41:41.373717Z",
+  "rendererContractVersion": 4,
+  "rendererSha256": "2d337f981d604100e5bb89001e685106b0a2fa8aab05b9c4fe6eff0a448b6fe9",
+  "drawingSha256": "18fff20f2fc461191c57cdbfb620129502ac051e6b3719a239ac872df87e204a",
+  "motionSha256": "dd5608c3447e18a918c28e38fa6d664a31f4417591c1bbc60d7c07f269b40924",
+  "format": "liste",
+  "kind": "reel",
+  "channel": "instagram",
+  "publishAt": "2026-11-22T20:00:00Z",
+  "reviewValidUntil": "2026-12-11T02:39:00Z",
+  "sourceCheckedOn": "2026-11-11",
+  "targetUrl": "https://voyagesansdetour.fr/etats-unis/new-york-noel/",
+  "voice": null,
+  "presenter": null,
+  "sourceUrls": [
+    "https://voyagesansdetour.fr/etats-unis/new-york-noel/"
+  ],
+  "photos": {
+    "new-york-rockefeller-noel": {
+      "licence": "CC BY 2.0",
+      "author": "Anthony Quintano from Mount Laurel, United States",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Rockefeller_Center_Christmas_Tree_2021_(51770696938).jpg"
+    },
+    "new-york-268e3ad7": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Dllu",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:View_of_Empire_State_Building_from_Rockefeller_Center_New_York_City_dllu.jpg"
+    },
+    "new-york-central-park-hiver": {
+      "licence": "CC BY-SA 4.0",
+      "author": "King of Hearts",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Central_Park_New_York_January_2016_001.jpg"
+    },
+    "new-york-skyline": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Christian David",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Lower_Manhattan_skyline_from_under_the_Brooklyn_Bridge_deck,_New_York_City.jpg"
+    },
+    "new-york-dc16e82d": {
+      "licence": "CC BY-SA 3.0",
+      "author": "King of Hearts / Wikimedia Commons /",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Long_Island_City_New_York_May_2015_panorama_3.jpg"
+    },
+    "new-york-d04988b4": {
+      "licence": "CC BY-SA 2.0",
+      "author": "Paulo Barcellos Jr",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:New_York_City_at_night_HDR.jpg"
+    },
+    "new-york-38b65cc7": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Rhododendrites",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Manhattan_at_night_north_of_Rockefeller_Center_(11226).jpg"
+    }
+  },
+  "clips": {},
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "durationSeconds": 22.2,
+    "videoCodec": "h264",
+    "pixelFormat": "yuv420p",
+    "videoBitrateBps": 3213456,
+    "audioCodec": "aac",
+    "audioSampleRate": 48000,
+    "audioBitrateBps": 96137,
+    "fullDecodePassed": true,
+    "loudness": {
+      "integratedLufs": -15.4,
+      "truePeakDbfs": -2.6
+    }
+  },
+  "files": [
+    {
+      "file": "apercu.jpg",
+      "sha256": "29ea7a56f98aa43cb5819437cfe5d9044f5ad869f530a576df362b126abc3238",
+      "bytes": 321394
+    },
+    {
+      "file": "credits.txt",
+      "sha256": "ea9a01b5a30914ca1878d86d87f13ae2905975a846b192b80e3a52c01a69fa06",
+      "bytes": 3530
+    },
+    {
+      "file": "dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "file": "encode.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "legende.txt",
+      "sha256": "a991cf4e281b13406f1535a693193f4f62a1d3172b8d66af9da63fb6795ae506",
+      "bytes": 943
+    },
+    {
+      "file": "notosans-OFL.txt",
+      "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a",
+      "bytes": 4396
+    },
+    {
+      "file": "playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    },
+    {
+      "file": "poster.jpg",
+      "sha256": "c276c7102848d67989c8b93b163317030d38e8581d7278a0208af284422d5802",
+      "bytes": 542226
+    },
+    {
+      "file": "reel.mp4",
+      "sha256": "3334b79c6da33571ea8540b946b1b6f0f9c7e39e80f69b69eaf53ec4fd8162b0",
+      "bytes": 9210241
+    },
+    {
+      "file": "scenario.json",
+      "sha256": "10a1e73f8e69c623508e191cfb764d34ce23f5d08da79a2d5b95245713cc5fde",
+      "bytes": 7962
+    },
+    {
+      "file": "scene-01.jpg",
+      "sha256": "d6261a6cfeea2cf27d2a69e1541c8015a7a64e3e1f951a383f012ce0bff67f55",
+      "bytes": 494913
+    },
+    {
+      "file": "scene-02.jpg",
+      "sha256": "c61fc329456b3bd287f43899ee64a2f96037fad603421823c4a31e4baa67eda3",
+      "bytes": 462383
+    },
+    {
+      "file": "scene-03.jpg",
+      "sha256": "df3d4dc7e8b7703023743006a031257447e75c73cc579b2c77c8a117b1d72b78",
+      "bytes": 612570
+    },
+    {
+      "file": "scene-04.jpg",
+      "sha256": "a213ef846307f3e10e2e6bd27bfcb649cd589185c79bedfe3ffd1970e79fb454",
+      "bytes": 479687
+    },
+    {
+      "file": "scene-05.jpg",
+      "sha256": "bc755405bc1e0a7dc378206ad16dad0c5d6eff5f9195cded66afb249c1c029fb",
+      "bytes": 378148
+    },
+    {
+      "file": "scene-06.jpg",
+      "sha256": "e6d3e6009aa9e2a139abd0830de5620e42a6a46ffbe353ba9e66f8797d89ab77",
+      "bytes": 319244
+    },
+    {
+      "file": "scene-07.jpg",
+      "sha256": "22667e2b89da37b15ce072d8b6963f59243f5a10ae4de8edb2a9632e98c7fc30",
+      "bytes": 345465
+    }
+  ],
+  "runtime": {
+    "wallSeconds": 44.602,
+    "encoderThreads": 2,
+    "pillowVersion": "11.3.0",
+    "ffmpegVersion": "ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers"
+  },
+  "publication": {
+    "uploaded": false,
+    "scheduled": false,
+    "published": false,
+    "readyForAutomaticImport": false
+  },
+  "cost": {
+    "newPaidService": false,
+    "providerCalls": 0,
+    "monetarySpendEur": 0
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "checkedOn": "2026-11-11",
+  "method": "Page publiée du guide relevée automatiquement ; texte visible conservé tel quel, première ligne = URL.",
+  "sources": {
+    "guide": {
+      "url": "https://voyagesansdetour.fr/etats-unis/new-york-noel/",
+      "publisher": "Voyage Sans Détour",
+      "title": "New York à Noël 2026 : le sapin du Rockefeller Center le 2 décembre, patinoires et boutiques de Noël",
+      "retrievedAt": "2026-11-11T02:39:00Z",
+      "snapshot": {
+        "file": "auto/ig-new-york-noel-2026-11-22/guide.txt",
+        "sha256": "5d6422000f2b8def11a5a5313389a24096bacaca68b65a3be0043277b8cd1b91"
+      }
+    }
+  }
+}

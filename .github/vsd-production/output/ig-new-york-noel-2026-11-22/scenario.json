@@ -1,0 +1,252 @@
+{
+  "schemaVersion": 3,
+  "id": "ig-new-york-noel-2026-11-22",
+  "kind": "reel",
+  "channel": "instagram",
+  "format": "liste",
+  "destination": "New York",
+  "title": "New York à Noël : les chiffres à connaître",
+  "targetUrl": "https://voyagesansdetour.fr/etats-unis/new-york-noel/",
+  "publishAt": "2026-11-22T20:00:00Z",
+  "review": {
+    "status": "reviewed_for_render",
+    "checkedAt": "2026-11-11T02:39:00Z",
+    "validUntil": "2026-12-11T02:39:00Z",
+    "method": "Généré automatiquement (auto_social.py) depuis la page publiée du guide relevée le 11/11/2026 : chaque chiffre, étape ou ligne de tableau est cité mot pour mot ; photos et vidéos réelles sous licence libre, aucune image ni vidéo générée par IA ; garde-fous de production.py passés avant la mise en file."
+  },
+  "sources": {
+    "file": "auto/ig-new-york-noel-2026-11-22/sources.json",
+    "sha256": "8ec0c4c831fb6aa008acadd42c6f7f72ff64686a7e1e04c6acc9d451f78df23e"
+  },
+  "photos": {
+    "file": "auto/ig-new-york-noel-2026-11-22/photos.json",
+    "sha256": "8e9b9ec194a2c41fa08f3994e339b43fca4e0aa43039c2f3dcb2d3534ce67d08"
+  },
+  "caption": {
+    "hook": "✈️ New York à Noël 2026 : le sapin du Rockefeller Center le 2 décembre, patinoires et boutiques de Noël",
+    "lines": [
+      "📍 2 déc. 2026 : l’allumage du sapin du Rockefeller Center, arrivé le 7 novembre",
+      "📍 0 $ : la patinoire de Bryant Park, la seule à entrée gratuite de New York, jusqu’au 28 février 2027",
+      "📍 180 : exposants et plus au marché de Noël de Bryant Park, du 28 octobre au 3 janvier",
+      "📍 3 $ : le trajet en métro ou en bus local (≈ 2,70 €), 7,25 $ en bus express",
+      "📍 6,9 °C : la maximale moyenne de décembre à Central Park, 1,1 °C la nuit"
+    ],
+    "cta": "📌 Enregistrez ce reel pour votre voyage. 🔗 Prix, horaires et détails : le guide complet est en lien dans la bio.",
+    "hashtags": [
+      "#NewYork",
+      "#EtatsUnis",
+      "#VoyageEtatsUnis",
+      "#ConseilsVoyage",
+      "#VoyageSansDetour"
+    ]
+  },
+  "scenes": [
+    {
+      "photo": "new-york-rockefeller-noel",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "hook",
+      "kicker": "États-Unis · New York",
+      "headline": [
+        "New York à Noël",
+        "*5 chiffres à connaître*"
+      ],
+      "seconds": 2.2,
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "Le sapin du Rockefeller Center arrive le 7 novembre et s’illumine le mercredi 2 décembre 2026."
+        }
+      ],
+      "tag": "Guide New York · sources du 24/10/2026"
+    },
+    {
+      "photo": "new-york-268e3ad7",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "fact",
+      "kicker": "Le calendrier des fêtes 2026",
+      "headline": [
+        "*2 déc. 2026*"
+      ],
+      "seconds": 4.0,
+      "detail": "l’allumage du sapin du Rockefeller Center, arrivé le 7 novembre",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "2 déc. 2026 l’allumage du sapin du Rockefeller Center, arrivé le 7 novembre"
+        }
+      ],
+      "tag": "Guide New York · sources du 24/10/2026",
+      "badge": "1/5"
+    },
+    {
+      "photo": "new-york-central-park-hiver",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "fact",
+      "kicker": "New York",
+      "headline": [
+        "*0 $*"
+      ],
+      "seconds": 2.6,
+      "detail": "la patinoire de Bryant Park",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "0 $ la patinoire de Bryant Park"
+        }
+      ],
+      "tag": "Guide New York · sources du 24/10/2026",
+      "badge": "2/5"
+    },
+    {
+      "photo": "new-york-skyline",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "fact",
+      "kicker": "New York",
+      "headline": [
+        "*180*"
+      ],
+      "seconds": 3.6,
+      "detail": "exposants et plus au marché de Noël de Bryant Park",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "180 exposants et plus au marché de Noël de Bryant Park"
+        }
+      ],
+      "tag": "Guide New York · sources du 24/10/2026",
+      "badge": "3/5"
+    },
+    {
+      "photo": "new-york-dc16e82d",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "fact",
+      "kicker": "Se déplacer",
+      "headline": [
+        "*3 $*"
+      ],
+      "seconds": 3.4,
+      "detail": "le trajet en métro ou en bus local (≈ 2,70 €)",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "3 $ le trajet en métro ou en bus local (≈ 2,70 €)"
+        }
+      ],
+      "tag": "Guide New York · sources du 24/10/2026",
+      "badge": "4/5"
+    },
+    {
+      "photo": "new-york-d04988b4",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "fact",
+      "kicker": "Se déplacer",
+      "headline": [
+        "*6,9 °C*"
+      ],
+      "seconds": 4.0,
+      "detail": "la maximale moyenne de décembre à Central Park, 1,1 °C la nuit",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "6,9 °C la maximale moyenne de décembre à Central Park, 1,1 °C la nuit"
+        }
+      ],
+      "tag": "Guide New York · sources du 24/10/2026",
+      "badge": "5/5"
+    },
+    {
+      "photo": "new-york-38b65cc7",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "cta",
+      "kicker": "Le guide complet",
+      "headline": [
+        "New York à Noël"
+      ],
+      "seconds": 2.4,
+      "note": "Enregistrez ce reel pour votre voyage"
+    }
+  ],
+  "musicStart": 0,
+  "assets": {
+    "regular": {
+      "file": "assets/dmsans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9"
+    },
+    "bold": {
+      "file": "assets/dmsans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211"
+    },
+    "serif": {
+      "file": "assets/playfair.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+      },
+      "sha256": "adefc53e7b3d483f1fa5e85edd82b7689ca79db25a1f6786bd7949cdcfeec601"
+    },
+    "fallbackRegular": {
+      "file": "assets/notosans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "478c558ea716033cd60c03438f628dfa75694dcf6b5f6d505a2f05fd2b4f3823"
+    },
+    "fallbackBold": {
+      "file": "assets/notosans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "1df075a380fc7cb898acf64c1f7b3b4dd780de3caa860178bf929de35817a913"
+    },
+    "music": {
+      "file": "assets/ascending-the-vale.mp3",
+      "sha256": "a0ab3aae9a942d797c381df8d914dfef453e7e455c1c6333d1916d59ba005353",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "commercialUseAllowed": true,
+      "title": "Ascending the Vale",
+      "author": "Kevin MacLeod",
+      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1600064",
+      "provenance": {
+        "file": "evidence/ascending-the-vale-provenance.json",
+        "sha256": "962e2b5bfd53fcadf57ab2d68fb5b845f58ff829c2c39d2d58888770fe70b7db"
+      }
+    }
+  }
+}

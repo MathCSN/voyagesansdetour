@@ -70,6 +70,15 @@
       "publicHtmlSha256": "9f11df64aef9e3f6ac4be8214e81aee95aca62bf7b9c8b3f6a124bf44ce3db2d",
       "method": "exact_published_title_typographic_template_v1",
       "publicationConfirmed": false
+    },
+    {
+      "id": "pin-londres-noel-marches",
+      "admittedAt": "2026-11-11T02:41:43.892441+00:00",
+      "articleSha256": "ae1889c434695b45b84a66192fed3c627b2f35132b1463c7f7cb8b83a86e18a6",
+      "imageSha256": "4f426eaf4837d20aa39b50df4e51decf972c51c4dce57dc3491e98bb2557516a",
+      "publicHtmlSha256": "28c6f993e93000546cd3a39390bc1b4f52f3a5e36a1aba5eaf2c6f85b0cbf222",
+      "method": "published_guide_photo_template_v3",
+      "publicationConfirmed": false
     }
   ]
 }

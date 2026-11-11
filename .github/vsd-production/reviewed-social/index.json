@@ -171,6 +171,33 @@
       "itemIds": [
         "vsd-production:facebook:fb-tenerife-quand-partir-2026-12-03:photo-v1"
       ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-japon-budget-2-semaines-2026-11-15-v1.json",
+      "fileSha256": "6d1e0906f1f2b5ec50ca5fb4298234ce81a7b51e8db970a6353fb6c9669e14f8",
+      "batchId": "ig-japon-budget-2-semaines-2026-11-15-v1",
+      "batchSha256": "64e4371aa91e4930d36ad5d7fbbaf64e3f766092e885bf2a2325706e53d69517",
+      "itemIds": [
+        "vsd-production:instagram:ig-japon-budget-2-semaines-2026-11-15:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-londres-noel-marches-2026-11-29-v1.json",
+      "fileSha256": "7941bf09effee11711ccc70e92664eb2392b33d27f56774fac9c9cee8fe24458",
+      "batchId": "ig-londres-noel-marches-2026-11-29-v1",
+      "batchSha256": "b3be5055bdc8e263755e51b45b44bcdf0daed72fde21c1b1ed39f3b0cf5c2ae9",
+      "itemIds": [
+        "vsd-production:instagram:ig-londres-noel-marches-2026-11-29:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-new-york-noel-2026-11-22-v1.json",
+      "fileSha256": "6c4ef2a7119c3e9a897f73e1f3ab782253c73a36a347043e0ec3b6b53561392d",
+      "batchId": "ig-new-york-noel-2026-11-22-v1",
+      "batchSha256": "a67db8f0852d9b2e6f78b9a49648642c1c79af89a61610b2aaa8cb2b1100367c",
+      "itemIds": [
+        "vsd-production:instagram:ig-new-york-noel-2026-11-22:photo-v1"
+      ]
     }
   ],
   "retirements": [

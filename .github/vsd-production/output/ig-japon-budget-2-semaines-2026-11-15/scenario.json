@@ -1,0 +1,254 @@
+{
+  "schemaVersion": 3,
+  "id": "ig-japon-budget-2-semaines-2026-11-15",
+  "kind": "reel",
+  "channel": "instagram",
+  "format": "prix",
+  "destination": "Japon",
+  "title": "Budget Japon, 2 semaines : combien ça coûte",
+  "targetUrl": "https://voyagesansdetour.fr/japon/japon-budget-2-semaines/",
+  "publishAt": "2026-11-15T20:00:00Z",
+  "review": {
+    "status": "reviewed_for_render",
+    "checkedAt": "2026-11-11T02:39:00Z",
+    "validUntil": "2026-12-11T02:39:00Z",
+    "method": "Généré automatiquement (auto_social.py) depuis la page publiée du guide relevée le 11/11/2026 : chaque chiffre, étape ou ligne de tableau est cité mot pour mot ; photos et vidéos réelles sous licence libre, aucune image ni vidéo générée par IA ; garde-fous de production.py passés avant la mise en file."
+  },
+  "sources": {
+    "file": "auto/ig-japon-budget-2-semaines-2026-11-15/sources.json",
+    "sha256": "4dff35ede685bc51623148ec6cf7b0207c2350fc6ddf24953394da0217e80ae0"
+  },
+  "photos": {
+    "file": "auto/ig-japon-budget-2-semaines-2026-11-15/photos.json",
+    "sha256": "5af476248692df5e2eb03c6cf01da5691c90fea04f9bdc4f17fafad55b536b79"
+  },
+  "caption": {
+    "hook": "💶 Budget Japon 2 semaines : de 870 à 1 370 € sans le vol, poste par poste (prix 2026)",
+    "lines": [
+      "💶 872 € : le budget serré pour 14 jours et 13 nuits (154 120 ¥), capsule ou dortoir, repas à 1 000 ¥, hors vol — estimation",
+      "💶 1 367 € : le budget confort (241 620 ¥) en business hôtel à deux, repas variés, visites — estimation",
+      "📍 44 620 ¥ : Tokyo–Kyoto–Hiroshima–Tokyo en billets à l’unité (≈ 252 €), contre 80 000 ¥ (≈ 453 €) pour un JR Pass 14 jours",
+      "📍 3 000 à 5 000 ¥ : une nuit en capsule ; 7 000 à 20 000 ¥ la chambre en business hôtel (relevé de mars 2025)",
+      "📍 500 à 1 500 ¥ : un bol de ramen ; un menu teishoku coûte 1 000 à 2 000 ¥ (relevé de juin 2025)"
+    ],
+    "cta": "📌 Enregistrez ce reel pour votre voyage. 🔗 Prix, horaires et détails : le guide complet est en lien dans la bio.",
+    "hashtags": [
+      "#Japon",
+      "#VoyageJapon",
+      "#VoyagePasCher",
+      "#VoyageSansDetour"
+    ]
+  },
+  "scenes": [
+    {
+      "photo": "japon-tokyo-shibuya",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "hook",
+      "kicker": "Combien ça coûte ?",
+      "headline": [
+        "Budget Japon,",
+        "2 semaines",
+        "*872 €*"
+      ],
+      "seconds": 2.8,
+      "detail": "le budget serré pour 14 jours et 13 nuits (154 120 ¥)",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "872 € le budget serré pour 14 jours et 13 nuits (154 120 ¥)"
+        }
+      ],
+      "tag": "Guide Japon · sources du 07/11/2026"
+    },
+    {
+      "photo": "japon-nara-cerfs",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "fact",
+      "kicker": "En bref",
+      "headline": [
+        "*1 367 €*"
+      ],
+      "seconds": 3.8,
+      "detail": "le budget confort (241 620 ¥) en business hôtel à deux",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "1 367 € le budget confort (241 620 ¥) en business hôtel à deux"
+        }
+      ],
+      "tag": "Guide Japon · sources du 07/11/2026",
+      "badge": "1/5"
+    },
+    {
+      "photo": "japon-osaka-dotonbori",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "fact",
+      "kicker": "En bref",
+      "headline": [
+        "*44 620 ¥*"
+      ],
+      "seconds": 3.9,
+      "detail": "Tokyo–Kyoto–Hiroshima–Tokyo en billets à l’unité (≈ 252 €)",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "44 620 ¥ Tokyo–Kyoto–Hiroshima–Tokyo en billets à l’unité (≈ 252 €)"
+        }
+      ],
+      "tag": "Guide Japon · sources du 07/11/2026",
+      "badge": "2/5"
+    },
+    {
+      "photo": "japon-fuji-chureito",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "fact",
+      "kicker": "Où dormir",
+      "headline": [
+        "*3 000 à 5 000 ¥*"
+      ],
+      "seconds": 2.4,
+      "detail": "une nuit en capsule",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "3 000 à 5 000 ¥ une nuit en capsule"
+        }
+      ],
+      "tag": "Guide Japon · sources du 07/11/2026",
+      "badge": "3/5"
+    },
+    {
+      "photo": "japon-shinkansen",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "fact",
+      "kicker": "Manger",
+      "headline": [
+        "*500 à 1 500 ¥*"
+      ],
+      "seconds": 3.8,
+      "detail": "un bol de ramen ; un menu teishoku coûte 1 000 à 2 000 ¥",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "500 à 1 500 ¥ un bol de ramen ; un menu teishoku coûte 1 000 à 2 000 ¥"
+        }
+      ],
+      "tag": "Guide Japon · sources du 07/11/2026",
+      "badge": "4/5"
+    },
+    {
+      "photo": "japon-kyoto-kiyomizu",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "fact",
+      "kicker": "En bref",
+      "headline": [
+        "*176,77 ¥*"
+      ],
+      "seconds": 3.9,
+      "detail": "pour 1 € au taux de référence de la BCE du 6 novembre 2026",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "176,77 ¥ pour 1 € au taux de référence de la BCE du 6 novembre 2026"
+        }
+      ],
+      "tag": "Guide Japon · sources du 07/11/2026",
+      "badge": "5/5"
+    },
+    {
+      "photo": "japon-hiroshima-miyajima",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "cta",
+      "kicker": "Le guide complet",
+      "headline": [
+        "Budget Japon,",
+        "2 semaines"
+      ],
+      "seconds": 2.4,
+      "note": "Enregistrez ce reel pour votre voyage"
+    }
+  ],
+  "musicStart": 0,
+  "assets": {
+    "regular": {
+      "file": "assets/dmsans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9"
+    },
+    "bold": {
+      "file": "assets/dmsans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211"
+    },
+    "serif": {
+      "file": "assets/playfair.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+      },
+      "sha256": "adefc53e7b3d483f1fa5e85edd82b7689ca79db25a1f6786bd7949cdcfeec601"
+    },
+    "fallbackRegular": {
+      "file": "assets/notosans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "478c558ea716033cd60c03438f628dfa75694dcf6b5f6d505a2f05fd2b4f3823"
+    },
+    "fallbackBold": {
+      "file": "assets/notosans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "1df075a380fc7cb898acf64c1f7b3b4dd780de3caa860178bf929de35817a913"
+    },
+    "music": {
+      "file": "assets/almost-bliss.mp3",
+      "sha256": "731e191cef927e43d352bd099ac63cd6ea54a6a84deec3cba77fb59e6903754c",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "commercialUseAllowed": true,
+      "title": "Almost Bliss",
+      "author": "Kevin MacLeod",
+      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1900015",
+      "provenance": {
+        "file": "evidence/almost-bliss-provenance.json",
+        "sha256": "2d2303c1a70fed68560808853466c997870cd8156737d96ca287a4332a5cd04d"
+      }
+    }
+  }
+}

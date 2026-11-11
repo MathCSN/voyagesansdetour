@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "batchId": "ig-londres-noel-marches-2026-11-29-v1",
+  "items": [
+    {
+      "contentId": "vsd-production:instagram:ig-londres-noel-marches-2026-11-29:photo-v1",
+      "deduplicationKey": "vsd-production:instagram:ig-londres-noel-marches-2026-11-29:photo-v1",
+      "title": "Londres en décembre : les chiffres à connaître",
+      "dueAt": "2026-11-29T20:00:00Z",
+      "payload": {
+        "schemaVersion": 1,
+        "channel": "instagram",
+        "kind": "reel",
+        "text": "✈️ Londres en décembre 2026 : Winter Wonderland, patinoires et métro plafonné à 8,90 £\n\n📍 8,90 £ : le plafond quotidien du métro en zones 1-2 en sans contact, 2026 (≈ 10,60 €)\n📍 44,70 £ : le plafond du lundi au dimanche en zones 1-2\n📍 1 £ : l’entrée de Winter Wonderland du lundi au jeudi en novembre, aux heures creuses\n📍 19 nov. : l’ouverture de Hyde Park Winter Wonderland, jusqu’au 3 janvier 2027\n📍 15 à 28,50 £ : une séance de patin adulte à Somerset House, du 11 novembre au 10 janvier\n\n📌 Enregistrez ce reel pour votre voyage. 🔗 Prix, horaires et détails : le guide complet est en lien dans la bio.\n\nPhotos libres (Wikimedia Commons) et musique de Kevin MacLeod (CC BY 4.0) — crédits : https://voyagesansdetour.fr/social-media/production/ig-londres-noel-marches-2026-11-29/credits.txt\n\n#Londres #RoyaumeUni #VoyageRoyaumeUni #ConseilsVoyage #VoyageSansDetour\n",
+        "aiGenerated": false,
+        "assets": [
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/ig-londres-noel-marches-2026-11-29/reel.mp4",
+            "sha256": "91cc0c73456726b5628da2365d61b2d7643724aa70ded918faff04109bd1b280",
+            "mimeType": "video/mp4"
+          }
+        ]
+      },
+      "review": {
+        "schemaVersion": 1,
+        "contentId": "vsd-production:instagram:ig-londres-noel-marches-2026-11-29:photo-v1",
+        "approved": true,
+        "reviewedAt": "2026-11-11T02:41:43Z",
+        "validUntil": "2026-12-11T02:39:00Z",
+        "payloadRevision": "eb9e061e4dbc99c8e9857865bf4bd929850e057750675f0ab14c51c9b9f8b81c",
+        "checks": {
+          "editorialApproved": true,
+          "rightsApproved": true,
+          "creditsPreserved": true,
+          "disclosurePreserved": true,
+          "formatRequirementsVerified": true,
+          "requiresPaidCall": false,
+          "sources": {
+            "status": "verified",
+            "observedAt": "2026-11-11T02:39:00Z",
+            "validUntil": "2026-12-11T02:39:00Z"
+          },
+          "syntheticPerson": false,
+          "providerSyntheticSettingVerified": false
+        },
+        "media": {
+          "url": "https://voyagesansdetour.fr/social-media/production/ig-londres-noel-marches-2026-11-29/reel.mp4",
+          "mimeType": "video/mp4",
+          "sha256": "91cc0c73456726b5628da2365d61b2d7643724aa70ded918faff04109bd1b280",
+          "required": true,
+          "status": "verified",
+          "observedAt": "2026-11-11T02:41:43Z",
+          "validUntil": "2026-12-11T02:39:00Z"
+        },
+        "destination": {
+          "url": "https://voyagesansdetour.fr/royaume-uni/londres-noel-marches/",
+          "status": "verified",
+          "observedAt": "2026-11-11T02:41:43Z",
+          "validUntil": "2026-12-11T02:39:00Z"
+        },
+        "monetization": {
+          "containsAffiliateLinks": false,
+          "partnerApproved": false,
+          "linksVerified": false,
+          "disclosurePreserved": false
+        },
+        "formatCapability": {
+          "status": "verified",
+          "observedAt": "2026-11-11T02:41:43Z",
+          "validUntil": "2026-12-11T02:39:00Z",
+          "automaticPublishing": true,
+          "verificationMethod": "official_documentation",
+          "sourceUrls": [
+            "https://support.buffer.com/en-us/articles/sharing-videos-through-buffer-LOe2p2rnAI",
+            "https://developers.buffer.com/types/InstagramPostMetadataInput.html",
+            "https://developers.buffer.com/guides/posts-and-scheduling.html"
+          ]
+        },
+        "evidence": {
+          "status": "rendered_local_bytes_verified_public_deploy_pending",
+          "format": "photo_reel",
+          "rendererContractVersion": 4,
+          "receiptSha256": "a62f79115ca568ca1314c520eb43361892351030cae7a268e5d6608eb4b4f10c",
+          "scenarioFingerprint": "02cbebc31990cf691d83e79bb68ef02a05424815f1e9223cfebec55005e82965",
+          "sourceCheckedOn": "2026-11-11",
+          "sourceUrls": [
+            "https://voyagesansdetour.fr/royaume-uni/londres-noel-marches/"
+          ],
+          "creditsUrl": "https://voyagesansdetour.fr/social-media/production/ig-londres-noel-marches-2026-11-29/credits.txt",
+          "voice": null,
+          "music": "Happy Alley",
+          "note": "Les octets publics sont à contrôler après déploiement avec social_stock.py --verify-public. Un créneau prévu n'est pas une réservation Buffer."
+        }
+      }
+    }
+  ]
+}
