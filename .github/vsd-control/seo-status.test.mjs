@@ -49,3 +49,16 @@ test('missing or malformed parts are dropped instead of trusted', () => {
   assert.equal(partial.search, null);
   assert.deepEqual(partial.indexation, { total: 3, inspected: 3, indexed: 2, notIndexedCount: 0, notIndexed: [], trend: { status: 'unknown' } });
 });
+
+test('nothing Markdown can read survives in a query, a state or a path', () => {
+  const hostile = checkedSeo({ kind: 'seo', status: 'reported',
+    search: { period: { startDate: '2026-10-12', endDate: '](x)' }, clicks: 1, impressions: 9, rising: [{ query: '@quelquun [gagnez](https://evil.example) ![x](https://evil.example/p.png)\n# titre #12 `code`', impressions: 9 }] },
+    indexation: { total: 1, inspected: 1, indexed: 0, notIndexed: [{ path: '/japon/`)<img>', state: 'Détectée, actuellement non indexée <b>@x</b>' }], trend: { status: 'drop', lost: 2, reference: 3, referenceDay: '[lien](x)' } } });
+  const query = hostile.search.rising[0].query;
+  assert.doesNotMatch(query, /[@\[\]()!#`<>\n]/);
+  assert.match(query, /^quelquun gagnez https evil example/);
+  assert.equal(hostile.search.period.endDate, '');
+  assert.deepEqual(hostile.indexation.notIndexed, [{ path: '/japon/img', state: 'Détectée, actuellement non indexée b x b' }]);
+  assert.equal(hostile.indexation.trend.referenceDay, '');
+});
+

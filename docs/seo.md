@@ -38,6 +38,7 @@ fait échouer le build avant la mise en ligne.
 | `/liens/` (page de liens des profils sociaux) hors des résultats et du sitemap | `noindex=True` |
 | Date de mise à jour visible et dans le schéma `Article` ; `FAQPage`, `BreadcrumbList`, `ItemList` | rendu d'article |
 | Polices en WOFF2 préchargées, images avec dimensions, `loading=lazy` sauf la première | `page`, `img` |
+| Copie de 1 200 px de chaque photo, créée au déploiement et jamais commitée : un téléphone ne télécharge plus le fichier de 1 600 px | `photo_variants.py`, étape de `build-pages.yml` |
 | Sitemap daté par page (`lastmod` = dernière mise à jour du guide ou du plus récent guide de la liste) | fin de `generate.py` |
 
 ### Pourquoi `seo.json` et pas `articles.json`
@@ -145,6 +146,8 @@ Build de `main` (avant) et de cette branche (après), 57 puis 59 pages :
 | Guides : liens entrants depuis le contenu des autres pages (minimum / médiane) | 7 / 10 | 12 / 18 |
 | Rubriques : pages qui y mènent depuis leur contenu (pied de page non compté) | 0 à 1 | 8 à 22 |
 | Polices : poids transféré des 7 fichiers | 288 Ko | 213 Ko |
+| Photo d'en-tête d'un guide sur un téléphone récent (médiane) | 361 Ko | 185 Ko |
+| Photo d'en-tête des guides de Lisbonne (`lisbonne.jpg`) sur téléphone | 575 Ko | 79 à 163 Ko |
 
 LIGHTHOUSE_PLACEHOLDER
 
@@ -152,8 +155,11 @@ LIGHTHOUSE_PLACEHOLDER
 
 - GitHub Pages impose un cache de 10 minutes sur tous les fichiers : l'audit « cache » de Lighthouse
   ne peut pas passer sans changer d'hébergeur ou placer un CDN devant.
-- Les photos restent en JPEG (800 et 1 600 px). Un format WebP ou une variante 400 px demande de
-  modifier la chaîne des photos (`guide_photos.py`), hors de ce chantier.
+- Les photos restent en JPEG (800, 1 200 et 1 600 px). La copie de 1 200 px est créée par le
+  déploiement (Pillow, étape non bloquante) : si l'étape échoue, le site sort avec 800 et 1 600 px
+  comme avant. Un format WebP ou AVIF demanderait de toucher à la chaîne des photos.
+- Lighthouse émule un téléphone à 1,75 pixel par point, qui prenait déjà le fichier de 800 px : le
+  gain des copies de 1 200 px ne se voit que sur les vrais téléphones (2 à 3 pixels par point).
 - L'inspection d'URL donne l'état connu de Google, pas une promesse d'indexation ; une page neuve
   met de quelques jours à quelques semaines à entrer dans l'index d'un site jeune.
 - Le suivi dépend du panneau privé : tant que sa version avec l'appel `seo` n'est pas déployée, le

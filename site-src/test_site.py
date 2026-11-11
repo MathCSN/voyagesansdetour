@@ -665,6 +665,21 @@ class SeoFileTest(TempDirTest):
         self.assertEqual(result.returncode,0,result.stderr)
         self.assertIn('<title>New York à Noël 2026 | Voyage Sans Détour</title>',read(out,'/etats-unis/new-york-noel/'))
 
+class LighterPhotoTest(TempDirTest):
+    def test_copies_found_beside_a_photo_are_offered_to_phones(self):
+        source=source_copy(self.workdir,[])
+        # Le déploiement crée ces copies (photo_variants.py) ; ici leur seule présence compte.
+        for name in ('photos/japon-fuji-chureito-1200.jpg','lisbonne-800.jpg','lisbonne-1200.jpg'):
+            (source/'dist'/'assets'/name).write_bytes(b'copie')
+        result,out=build(self.workdir,True,MENTIONS,source_root=source)
+        self.assertEqual(result.returncode,0,result.stderr)
+        japan=read(out,'/japon/japon-itineraire-2-semaines/')
+        self.assertIn('srcset="/assets/photos/japon-fuji-chureito-800.jpg 800w, /assets/photos/japon-fuji-chureito-1200.jpg 1200w, /assets/photos/japon-fuji-chureito.jpg 1600w"',japan)
+        self.assertIn('src="/assets/photos/japon-fuji-chureito.jpg"',japan)
+        # Sans copie 1 200 px, une photo garde ses deux tailles du catalogue.
+        self.assertIn('srcset="/assets/photos/japon-shinkansen-800.jpg 800w, /assets/photos/japon-shinkansen.jpg 1600w"',japan)
+        self.assertIn('srcset="/assets/lisbonne-800.jpg 800w, /assets/lisbonne-1200.jpg 1200w, /assets/lisbonne.jpg 1600w"',''.join(p.read_text() for p in (out/'portugal').rglob('index.html')))
+
 class PreviewBuildTest(TempDirTest):
     def test_preview_is_not_indexable_and_keeps_demo_page(self):
         result,out=build(self.workdir,False,None)

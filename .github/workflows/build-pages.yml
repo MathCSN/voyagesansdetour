@@ -99,10 +99,19 @@ jobs:
         run: python gyg_locations.py --update
       - name: Validate site
         if: steps.release.outputs.publish == 'true' || steps.generator.outputs.changed == 'true' || steps.intake.outputs.changed == 'true'
-        run: python -m unittest -q test_site test_stay22 test_affiliates test_gyg_locations test_editorial_queue test_public_media test_autonomous_editorial test_autonomous_candidate test_cloud_source_changes test_editorial_update test_pin_feed_status test_indexnow
+        run: python -m unittest -q test_site test_stay22 test_affiliates test_gyg_locations test_editorial_queue test_public_media test_autonomous_editorial test_autonomous_candidate test_cloud_source_changes test_editorial_update test_pin_feed_status test_indexnow test_photo_variants
       - name: Validate analytics consent without external calls
         if: steps.release.outputs.publish == 'true'
         run: node --test test_analytics.mjs
+      # Derived files, never committed: a 1200 px copy of each photo so a phone skips the 1600 px file.
+      # If this step fails the site is built with the catalogue sizes, as before.
+      - name: Add lighter photo copies for phones
+        if: steps.release.outputs.publish == 'true'
+        continue-on-error: true
+        timeout-minutes: 3
+        run: |
+          python -m pip install --disable-pip-version-check --quiet Pillow==11.3.0
+          python photo_variants.py
       - name: Build public artifact
         if: steps.release.outputs.publish == 'true'
         env:

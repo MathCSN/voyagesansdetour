@@ -22,6 +22,7 @@ MENTIONS_FILE=pathlib.Path(os.environ.get('SITE_MENTIONS') or ROOT/'mentions.jso
 SEO_FILE=pathlib.Path(os.environ.get('SITE_SEO') or ROOT/'seo.json')
 # Google coupe un titre vers 60 caractères et une description vers 160 : au-delà, l'accroche est perdue.
 TITLE_MAX=60
+VARIANT_WIDTHS=(800,1200)
 DESCRIPTION_MAX=160
 BRAND='Voyage Sans Détour'
 CONTACT='contact@voyagesansdetour.fr'
@@ -219,10 +220,11 @@ def uri(a):return '/'+country(a)+'/'+a['slug']+'/'
 def img(key,cls='',lazy=True,sizes='(max-width:700px) 100vw, 50vw'):
     filename,width,height,_=SHARE_IMAGES[key]
     image=image_data(key)
-    srcset=''
-    if key in photos and 'file' in photos[key]:
-        small=filename.removesuffix('.jpg')+'-800.jpg'
-        srcset=f' srcset="/assets/{small} 800w, /assets/{filename} {width}w" sizes="{sizes}"'
+    # Copies plus légères trouvées à côté de la photo (800 px du catalogue, 1 200 px créée au déploiement
+    # par photo_variants.py) : le navigateur prend la plus petite qui suffit à l'écran.
+    stem=filename.removesuffix('.jpg')
+    lighter=[(w,f'{stem}-{w}.jpg') for w in VARIANT_WIDTHS if filename.endswith('.jpg') and w<width and (STATIC/'assets'/f'{stem}-{w}.jpg').is_file()]
+    srcset=' srcset="'+', '.join(f'/assets/{name} {w}w' for w,name in lighter)+f', /assets/{filename} {width}w" sizes="{sizes}"' if lighter else ''
     return f'<img class="{cls}" src="/assets/{filename}"{srcset} alt="{e(image["caption"])}" width="{width}" height="{height}" {"loading=lazy" if lazy else "fetchpriority=high"} decoding="async">'
 def credit(key):
     if key in ILLUSTRATIONS:

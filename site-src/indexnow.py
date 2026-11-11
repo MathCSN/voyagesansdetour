@@ -11,6 +11,7 @@ A failed ping never blocks a release; the daily build tries again the next day.
 """
 import argparse
 import datetime as dt
+import http.client
 import json
 import sys
 import urllib.error
@@ -72,12 +73,12 @@ def run(today, since_days=RECENT_DAYS, dry_run=False, opener=None):
             return {'status': 'nothing_changed', 'urls': 0}
         if dry_run:
             return {'status': 'dry_run', 'urls': len(urls), 'urlList': urls}
-        if fetch(KEY_LOCATION, opener).strip() != KEY:
+        if fetch(f'{KEY_LOCATION}?indexnow={today.isoformat()}', opener).strip() != KEY:
             return {'status': 'key_not_published', 'urls': len(urls)}
         return {'status': 'submitted', 'urls': len(urls), 'httpStatus': submit(urls, opener)}
     except urllib.error.HTTPError as error:
         return {'status': 'refused', 'reason': f'http_{error.code}'}
-    except (OSError, ValueError, ET.ParseError) as error:
+    except (OSError, ValueError, ET.ParseError, http.client.HTTPException) as error:
         return {'status': 'unreachable', 'reason': type(error).__name__}
 
 

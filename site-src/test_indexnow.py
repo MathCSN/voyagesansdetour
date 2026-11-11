@@ -84,6 +84,15 @@ class SubmitTest(unittest.TestCase):
         report = indexnow.run(TODAY, opener=FakeWeb(status=403))
         self.assertEqual((report['status'], report['reason']), ('refused', 'http_403'))
 
+    def test_a_broken_connection_is_reported_without_raising(self):
+        import http.client
+
+        class Broken:
+            def open(self, request, timeout=None):
+                raise http.client.IncompleteRead(b'')
+
+        self.assertEqual(indexnow.run(TODAY, opener=Broken()), {'status': 'unreachable', 'reason': 'IncompleteRead'})
+
     def test_the_key_is_a_valid_indexnow_key(self):
         self.assertRegex(indexnow.KEY, r'^[0-9a-f]{32}$')
         self.assertEqual(indexnow.KEY_LOCATION, f'https://voyagesansdetour.fr/{indexnow.KEY}.txt')
