@@ -1121,6 +1121,42 @@
       "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
       "alt_fr": "Les ruines de Tulum au-dessus de la mer des Caraïbes.",
       "credit_fr": "Martin Falbisoner / Wikimedia Commons — CC BY-SA 4.0."
+    },
+    {
+      "id": "guimaraes-paco-duques",
+      "file": "photos/guimaraes-paco-duques.jpg",
+      "width": 1600,
+      "height": 1067,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Guimaraes_Portugal_Pa%C3%A7o-dos-Duques-de-Bragan%C3%A7a-02.jpg",
+      "author": "CEphoto, Uwe Aranas",
+      "license": "CC BY-SA 3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+      "alt_fr": "La statue d’Afonso Henriques devant la façade crénelée et les hautes cheminées du Paço dos Duques de Bragança, à Guimarães.",
+      "credit_fr": "CEphoto, Uwe Aranas / Wikimedia Commons — CC BY-SA 3.0."
+    },
+    {
+      "id": "guimaraes-teleferico-penha",
+      "file": "photos/guimaraes-teleferico-penha.jpg",
+      "width": 1600,
+      "height": 1200,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Guimar%C3%A3es_visto_de_uma_cabine_do_Telef%C3%A9rico_da_Penha_01.jpg",
+      "author": "Diogo e Vitória Oliveira Pacheco",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0",
+      "alt_fr": "Guimarães vue d’une cabine du téléphérique de la Penha, au-dessus de la forêt de la montagne.",
+      "credit_fr": "Diogo e Vitória Oliveira Pacheco / Wikimedia Commons — CC BY 2.0."
+    },
+    {
+      "id": "guimaraes-rua-santa-maria",
+      "file": "photos/guimaraes-rua-santa-maria.jpg",
+      "width": 1600,
+      "height": 1260,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Rua_de_Santa_Maria_in_Guimaraes_(2).jpg",
+      "author": "Krzysztof Golik",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "alt_fr": "La rua de Santa Maria, rue piétonne pavée aux maisons de pierre du centre historique de Guimarães.",
+      "credit_fr": "Krzysztof Golik / Wikimedia Commons — CC BY-SA 4.0."
     }
   ]
 }
