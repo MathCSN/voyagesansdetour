@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-douro-train-depuis-porto",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "La vallée du Douro en train depuis Porto : Pinhão, rabelo et quintas sans voiture",
+  "pinTitle": "La vallée du Douro en train depuis Porto : Pinhão, rabelo et quintas sans voiture",
+  "variant": "a",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/douro-train-depuis-porto/",
+  "articleSha256": "40fbbde94ab319e2889123c2ed34c609189409affdf270a3416c365713459303",
+  "imageSha256": "0f620246e7b977b0e4d093781a14cfc284147ba8f29d49b3b852e1d4db06ad1b",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "fdbf04a40b0bd104c5f381a47a9aa8aa30b6df590685a48e3ce4be0e6c3493b2",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "douro-vallee",
+    "author": "Rosino",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Terraced_vineyards_in_the_douro_valley.jpg",
+    "license": "CC BY-SA 2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0/"
+  }
+}

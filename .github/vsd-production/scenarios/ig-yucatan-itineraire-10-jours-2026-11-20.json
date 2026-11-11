@@ -1,0 +1,188 @@
+{
+  "schemaVersion": 3,
+  "id": "ig-yucatan-itineraire-10-jours-2026-11-20",
+  "kind": "reel",
+  "channel": "instagram",
+  "format": "express",
+  "destination": "Yucatán",
+  "title": "Yucatán en 10 jours : l’essentiel",
+  "targetUrl": "https://voyagesansdetour.fr/mexique/yucatan-itineraire-10-jours/",
+  "publishAt": "2026-11-20T17:00:00Z",
+  "review": {
+    "status": "reviewed_for_render",
+    "checkedAt": "2026-11-11T17:17:36Z",
+    "validUntil": "2026-12-11T17:17:36Z",
+    "method": "Généré automatiquement (auto_social.py) depuis la page publiée du guide relevée le 11/11/2026 : chaque chiffre, étape ou ligne de tableau est cité mot pour mot ; photos et vidéos réelles sous licence libre, aucune image ni vidéo générée par IA ; garde-fous de production.py passés avant la mise en file."
+  },
+  "sources": {
+    "file": "auto/ig-yucatan-itineraire-10-jours-2026-11-20/sources.json",
+    "sha256": "e24c968165d764b231db7156949581c01bdf15c9657c911fd22d3f8765ff91aa"
+  },
+  "photos": {
+    "file": "auto/ig-yucatan-itineraire-10-jours-2026-11-20/photos.json",
+    "sha256": "0ddf2fe6584202626a1601c58675591196f4541711410c1105ea9c38ca2414c5"
+  },
+  "caption": {
+    "hook": "🗺️ Yucatán en 10 jours : Valladolid, Chichén Itzá, Mérida et Tulum, avec le Tren Maya",
+    "lines": [
+      "⏱️ 10 jours : pour enchaîner Valladolid, Chichén Itzá, Mérida, Uxmal et Tulum sans courir",
+      "📍 977,50 pesos : le billet Mérida–Cancún aéroport en tarif touriste international, relevé en juillet 2026",
+      "📍 697 pesos : l’entrée de Chichén Itzá pour un étranger depuis le « boleto único » du 27 mars 2026 (105 pesos de tarif INAH inclus)",
+      "🥾 120 km : entre Mérida et la gare de Chichén Itzá, selon le site officiel du Tren Maya",
+      "📍 232 et 246 pesos : Cancún–Playa del Carmen et Playa del Carmen–Tulum en tarif touriste international (octobre 2026)"
+    ],
+    "cta": "📌 Enregistrez ce reel pour votre voyage. 🔗 Prix, horaires et détails : le guide complet est en lien dans la bio.",
+    "hashtags": [
+      "#Yucatan",
+      "#Mexique",
+      "#VoyageMexique",
+      "#Itineraire",
+      "#VoyageSansDetour"
+    ]
+  },
+  "scenes": [
+    {
+      "photo": "yucatan-chichen-itza",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "hook",
+      "kicker": "Mexique · Yucatán",
+      "headline": [
+        "Yucatán en",
+        "10 jours",
+        "*2 chiffres à retenir*"
+      ],
+      "seconds": 2.2,
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "Dix jours suffisent pour boucler le Yucatán : Valladolid et ses cenotes, Chichén Itzá, Mérida, puis Tulum sur la côte caraïbe."
+        }
+      ],
+      "tag": "Guide Yucatán · sources du 11/11/2026"
+    },
+    {
+      "photo": "yucatan-tulum",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "fact",
+      "kicker": "En bref",
+      "headline": [
+        "*10 jours*"
+      ],
+      "seconds": 3.5,
+      "detail": "pour enchaîner Valladolid, Chichén Itzá, Mérida",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "10 jours pour enchaîner Valladolid, Chichén Itzá, Mérida"
+        }
+      ],
+      "tag": "Guide Yucatán · sources du 11/11/2026",
+      "badge": "1/2"
+    },
+    {
+      "photo": "yucatan-cenote",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "fact",
+      "kicker": "Jour 7",
+      "headline": [
+        "*977,50 pesos*"
+      ],
+      "seconds": 4.0,
+      "detail": "le billet Mérida–Cancún aéroport en tarif touriste international",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "977,50 pesos le billet Mérida–Cancún aéroport en tarif touriste international"
+        }
+      ],
+      "tag": "Guide Yucatán · sources du 11/11/2026",
+      "badge": "2/2"
+    },
+    {
+      "photo": "yucatan-5308661b",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "cta",
+      "kicker": "Le guide complet",
+      "headline": [
+        "Yucatán en",
+        "10 jours"
+      ],
+      "seconds": 2.4,
+      "note": "Enregistrez ce reel pour votre voyage"
+    }
+  ],
+  "musicStart": 8,
+  "assets": {
+    "regular": {
+      "file": "assets/dmsans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9"
+    },
+    "bold": {
+      "file": "assets/dmsans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211"
+    },
+    "serif": {
+      "file": "assets/playfair.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+      },
+      "sha256": "adefc53e7b3d483f1fa5e85edd82b7689ca79db25a1f6786bd7949cdcfeec601"
+    },
+    "fallbackRegular": {
+      "file": "assets/notosans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "478c558ea716033cd60c03438f628dfa75694dcf6b5f6d505a2f05fd2b4f3823"
+    },
+    "fallbackBold": {
+      "file": "assets/notosans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "1df075a380fc7cb898acf64c1f7b3b4dd780de3caa860178bf929de35817a913"
+    },
+    "music": {
+      "file": "assets/happy-alley.mp3",
+      "sha256": "f598c8ee624f1db9a2cd38886524a40baff4ce730dcf999c0763791268fa8265",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "commercialUseAllowed": true,
+      "title": "Happy Alley",
+      "author": "Kevin MacLeod",
+      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100482",
+      "provenance": {
+        "file": "evidence/happy-alley-provenance.json",
+        "sha256": "5a2ba8f3dba28b0a748b00089d3854db1fde92213429823746f6d01805f904ac"
+      }
+    }
+  }
+}

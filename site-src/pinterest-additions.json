@@ -34,6 +34,15 @@
           "mediaId": "pin-lisbonne-porto-train",
           "width": 1000,
           "height": 1500
+        },
+        {
+          "id": "pin-douro-train-depuis-porto",
+          "title": "La vallée du Douro en train depuis Porto : Pinhão, rabelo et quintas sans voiture",
+          "description": "La ligne du Douro jusqu’à Pinhão, côté fenêtre, les azulejos de la gare, une heure de rabelo à 15 € et les travaux de l’hiver 2026-2027. 📌 Enregistrez ce guide pour préparer votre voyage au Portugal. Photo : Rosino — CC BY-SA 2.0. Crédits : https://voyagesansdetour.fr/social-media/production/pin-douro-train-depuis-porto/credits.txt",
+          "linkPath": "/portugal/douro-train-depuis-porto/",
+          "mediaId": "pin-douro-train-depuis-porto",
+          "width": 1000,
+          "height": 1500
         }
       ]
     },

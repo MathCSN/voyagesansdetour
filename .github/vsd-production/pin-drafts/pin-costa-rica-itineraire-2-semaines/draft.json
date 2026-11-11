@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-costa-rica-itineraire-2-semaines",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Costa Rica en 2 semaines sans voiture : Manuel Antonio, Monteverde, Arenal et Puerto Viejo, navettes et prix 2026",
+  "pinTitle": "Le Costa Rica en 2 semaines : itinéraire jour par jour, prix et conseils",
+  "variant": "a",
+  "targetUrl": "https://voyagesansdetour.fr/costa-rica/costa-rica-itineraire-2-semaines/",
+  "articleSha256": "4de986d053ee58ec98f4f77f121591143bb1cd37ed469c5baee80e081e1cc854",
+  "imageSha256": "f740f89d60319fd9310109ec847f305e24852065a61d1acf95e30ea1c2afacc7",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "fdbf04a40b0bd104c5f381a47a9aa8aa30b6df590685a48e3ce4be0e6c3493b2",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "costa-rica-arenal",
+    "author": "Rhododendrites",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Arenal_volcano_(70785p).jpg",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  }
+}

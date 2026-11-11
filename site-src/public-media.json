@@ -1079,6 +1079,95 @@
           "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
         }
       ]
+    },
+    {
+      "contentId": "ig-laponie-budget-rovaniemi-2026-11-27",
+      "approved": true,
+      "files": [
+        {
+          "name": "reel.mp4",
+          "sha256": "25de332dc8c359dccedf74efb8c4ab6636556045318141b2bfdafa682f2df85d",
+          "bytes": 9810219
+        },
+        {
+          "name": "poster.jpg",
+          "sha256": "ec30268f06bcb02576bc6b040a08a0e27a4bf4d1393a8efbe335bd90ffca926a",
+          "bytes": 385521
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "0c14de7e475779e51ebf25ece17f6f21c29fe878cdc5d8b088ae8238cc92d98c",
+          "bytes": 3602
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "ig-yucatan-itineraire-10-jours-2026-11-20",
+      "approved": true,
+      "files": [
+        {
+          "name": "reel.mp4",
+          "sha256": "2e4431e70cd71a8ed98d366f4fb3626698514643632271935dcb0663572e0137",
+          "bytes": 4980175
+        },
+        {
+          "name": "poster.jpg",
+          "sha256": "5d88e8658f60e886c2e07fa813a303c797c5b721dc5e1fb0ffe653d268416cad",
+          "bytes": 453330
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "e7ce0ba3a7645c2a8838cf134b8944b17eb79d42d3fa1b85d086ea13d3208b20",
+          "bytes": 2394
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "pin-douro-train-depuis-porto",
+      "kind": "pin",
+      "approved": true,
+      "files": [
+        {
+          "name": "pin.jpg",
+          "bytes": 414097,
+          "sha256": "0f620246e7b977b0e4d093781a14cfc284147ba8f29d49b3b852e1d4db06ad1b"
+        },
+        {
+          "name": "credits.txt",
+          "bytes": 345,
+          "sha256": "de8b522b07ec14f6d6b02b7fe81b8460cc77829f7d7d2c874105c90cef27bcfe"
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "bytes": 4482,
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "bytes": 4449,
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,183 @@
+{
+  "schemaVersion": 1,
+  "contentId": "ig-laponie-budget-rovaniemi-2026-11-27",
+  "status": "rendered_not_published",
+  "fingerprint": "f41cc43bfbd670ebaf835b572e4a5c81ea4af4e0bd0749b40086758a9f6b9a81",
+  "createdAt": "2026-11-11T17:17:53.566589Z",
+  "renderFinishedAt": "2026-11-11T17:18:34.849755Z",
+  "rendererContractVersion": 4,
+  "rendererSha256": "2d337f981d604100e5bb89001e685106b0a2fa8aab05b9c4fe6eff0a448b6fe9",
+  "drawingSha256": "18fff20f2fc461191c57cdbfb620129502ac051e6b3719a239ac872df87e204a",
+  "motionSha256": "dd5608c3447e18a918c28e38fa6d664a31f4417591c1bbc60d7c07f269b40924",
+  "format": "prix",
+  "kind": "reel",
+  "channel": "instagram",
+  "publishAt": "2026-11-27T17:00:00Z",
+  "reviewValidUntil": "2026-12-11T17:17:36Z",
+  "sourceCheckedOn": "2026-11-11",
+  "targetUrl": "https://voyagesansdetour.fr/finlande/laponie-budget-rovaniemi/",
+  "voice": null,
+  "presenter": null,
+  "sourceUrls": [
+    "https://voyagesansdetour.fr/finlande/laponie-budget-rovaniemi/"
+  ],
+  "photos": {
+    "laponie-6a8ce04f": {
+      "licence": "CC BY-SA 3.0",
+      "author": "H. Zell",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Balcones_de_la_Avenida_Maritima_-_Santa_Cruz_de_La_Palma_14.jpg"
+    },
+    "laponie-aurore": {
+      "licence": "CC BY-SA 4.0",
+      "author": "WikiLucas00",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Aurora_borealis_over_Saana_fell.jpg"
+    },
+    "laponie-954a1fb8": {
+      "licence": "Public domain",
+      "author": "Adam Cuerden",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Rose_O%27Neill_-_When_We_All_Believe_(Santa_Claus_and_children_illustration_from_the_1903_December_2_issue_of_Puck).jpg"
+    },
+    "laponie-ba3d6ca5": {
+      "licence": "Public domain",
+      "author": "Schmidt Litho. Co",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Santa_Claus_-_Sunkist_Ad_(1928).jpg"
+    },
+    "laponie-8cb90f89": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Livioandronico2013",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Dome_of_Cattedrale_di_Santa_Maria_del_Fiore_(Florence).jpg"
+    },
+    "laponie-0829ff82": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Krzysztof Golik",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Santa_Maria_in_Trastevere_church_in_Rome_(12).jpg"
+    },
+    "laponie-6b89503e": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Diego Delso",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Catedral_de_San_Miguel_y_Santa_G%C3%BAdula_de_Bruselas,_B%C3%A9lgica,_2021-12-15,_DD_46-48_HDR.jpg"
+    }
+  },
+  "clips": {},
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "durationSeconds": 23.4,
+    "videoCodec": "h264",
+    "pixelFormat": "yuv420p",
+    "videoBitrateBps": 3248255,
+    "audioCodec": "aac",
+    "audioSampleRate": 48000,
+    "audioBitrateBps": 96297,
+    "fullDecodePassed": true,
+    "loudness": {
+      "integratedLufs": -16.0,
+      "truePeakDbfs": -2.3
+    }
+  },
+  "files": [
+    {
+      "file": "apercu.jpg",
+      "sha256": "baf5a3207c60de8985021c28d7f8fa95709b88d5dc30472ef02e53dcf119f913",
+      "bytes": 347155
+    },
+    {
+      "file": "credits.txt",
+      "sha256": "0c14de7e475779e51ebf25ece17f6f21c29fe878cdc5d8b088ae8238cc92d98c",
+      "bytes": 3602
+    },
+    {
+      "file": "dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "file": "encode.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "legende.txt",
+      "sha256": "12920cdcfe458c7c38095204d8971156fc7501898c63327f567f4634d1b2a132",
+      "bytes": 921
+    },
+    {
+      "file": "notosans-OFL.txt",
+      "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a",
+      "bytes": 4396
+    },
+    {
+      "file": "playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    },
+    {
+      "file": "poster.jpg",
+      "sha256": "ec30268f06bcb02576bc6b040a08a0e27a4bf4d1393a8efbe335bd90ffca926a",
+      "bytes": 385521
+    },
+    {
+      "file": "reel.mp4",
+      "sha256": "25de332dc8c359dccedf74efb8c4ab6636556045318141b2bfdafa682f2df85d",
+      "bytes": 9810219
+    },
+    {
+      "file": "scenario.json",
+      "sha256": "4dc0f7022433e9c71a6b1d7a21226d3f6e200a731ba69a16ed76ab0bfb6fea44",
+      "bytes": 8040
+    },
+    {
+      "file": "scene-01.jpg",
+      "sha256": "6775ad0cb4fb2da62e04852216f5efbedb0c1d64686fa57fd8a858b3576109a3",
+      "bytes": 351793
+    },
+    {
+      "file": "scene-02.jpg",
+      "sha256": "01fda0d96bbdfec9899d540d209d3b2c44363e097c30d145dfc2bbd44b8de05e",
+      "bytes": 229889
+    },
+    {
+      "file": "scene-03.jpg",
+      "sha256": "4ad42c686b5bfd2d9d8c0ffe38a170366b44a2de21813fd89b01665dedee600b",
+      "bytes": 607650
+    },
+    {
+      "file": "scene-04.jpg",
+      "sha256": "19c8945f4383e71e5fa10c1d51715505461e3f46045f56540ed73d6235a2ee69",
+      "bytes": 490769
+    },
+    {
+      "file": "scene-05.jpg",
+      "sha256": "65fcd7e911213b8e8a04b8889bccbeefbdf56682d0c5a78304080f669ace28cb",
+      "bytes": 584023
+    },
+    {
+      "file": "scene-06.jpg",
+      "sha256": "a90788a9bf2c9880e39f31e2c4fd6352489c2feb1ed93004246b766caa56422f",
+      "bytes": 845562
+    },
+    {
+      "file": "scene-07.jpg",
+      "sha256": "dd58d6c2ccfe607a6fbfb8eccd2c2dedfacd7e500840f0432fa868559306f596",
+      "bytes": 406407
+    }
+  ],
+  "runtime": {
+    "wallSeconds": 41.13,
+    "encoderThreads": 2,
+    "pillowVersion": "11.3.0",
+    "ffmpegVersion": "ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers"
+  },
+  "publication": {
+    "uploaded": false,
+    "scheduled": false,
+    "published": false,
+    "readyForAutomaticImport": false
+  },
+  "cost": {
+    "newPaidService": false,
+    "providerCalls": 0,
+    "monetarySpendEur": 0
+  }
+}

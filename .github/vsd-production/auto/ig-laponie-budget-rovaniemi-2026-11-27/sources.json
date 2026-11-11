@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "checkedOn": "2026-11-11",
+  "method": "Page publiée du guide relevée automatiquement ; texte visible conservé tel quel, première ligne = URL.",
+  "sources": {
+    "guide": {
+      "url": "https://voyagesansdetour.fr/finlande/laponie-budget-rovaniemi/",
+      "publisher": "Voyage Sans Détour",
+      "title": "Combien coûte un voyage en Laponie ? Le budget de Rovaniemi 2026-2027, poste par poste",
+      "retrievedAt": "2026-11-11T17:17:36Z",
+      "snapshot": {
+        "file": "auto/ig-laponie-budget-rovaniemi-2026-11-27/guide.txt",
+        "sha256": "b0c13f4528c42e2a495e668f8cec9d32013cefd439d632198c05a1e073c53e07"
+      }
+    }
+  }
+}

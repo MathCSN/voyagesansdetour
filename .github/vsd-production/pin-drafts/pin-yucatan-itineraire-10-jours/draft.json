@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-yucatan-itineraire-10-jours",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Yucatán en 10 jours : Valladolid, Chichén Itzá, Mérida et Tulum, avec le Tren Maya",
+  "pinTitle": "Yucatán en 10 jours : Valladolid, Chichén Itzá, Mérida et Tulum, avec le Tren Maya",
+  "variant": "a",
+  "targetUrl": "https://voyagesansdetour.fr/mexique/yucatan-itineraire-10-jours/",
+  "articleSha256": "9d98fed2c497396d670cdc9b7684442a3aacbd38c841b28c0570317192cfbcf8",
+  "imageSha256": "f7826648cf857c1762194ac6787ba424ab999a43834433ed7f3b17609c6c6e8d",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "fdbf04a40b0bd104c5f381a47a9aa8aa30b6df590685a48e3ce4be0e6c3493b2",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "yucatan-chichen-itza",
+    "author": "Diego Delso",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Templo_el_Castillo_-_Chichen_Itza-Yucatan-Mexico0222.jpg",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "photos": {
+    "yucatan-5308661b": {
+      "file": "assets/photos/auto/yucatan-5308661b.jpg",
+      "sha256": "00710697c04c7c37c8f2ff07af62ec222685267067c33129ab63f07f0d066f78",
+      "width": 2398,
+      "height": 1600,
+      "commonsTitle": "File:194 White-nosed coati at the beach in Yucatán Photo by Giles Laurent.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:194_White-nosed_coati_at_the_beach_in_Yucat%C3%A1n_Photo_by_Giles_Laurent.jpg",
+      "author": "Giles Laurent",
+      "commonsCredit": "Own work",
+      "categories": "Self-published work|Nasua narica yucatanica|Beaches of Yucatán|Brown mammals|2020 in Yucatán|Featured pictures by Giles Laurent|Uploaded via Campaign:wsc-int|December 2020 in Mexico|Animals on blue background|Photos by Giles Laurent|Featured pictures of animals in Mexico|Mammals on sand|Procyonidae eating|Nasua narica in Mexico|Animals on beaches of Mexico|Wildlife and nature images from Wiki Science Competition 2025|Images from Wiki Science Competition 2025 in the rest of the world|Featured pictures of Nasua narica|Side views of Nasua narica",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        5127,
+        3421
+      ],
+      "commonsSha1": "b605eb50e52bc7752728434a86a95765eaa678cf",
+      "retrievedAt": "2026-11-11T17:17:36Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "yucatan-cenote": {
+      "file": "assets/photos/auto/yucatan-cenote.jpg",
+      "sha256": "ba20053511431cb332befa91c18488288cfffef499ace2941642597acf7e0131",
+      "width": 2400,
+      "height": 1600,
+      "commonsTitle": "File:Cenote Ik Kil, Yucatan, Dec 2011 - 06.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Cenote_Ik_Kil,_Yucatan,_Dec_2011_-_06.jpg",
+      "author": "Shinya Suzuki",
+      "commonsCredit": "https://www.flickr.com/photos/shinyasuzuki/6625264201/",
+      "categories": "Ik Kil Cenote|Flickr images reviewed by FlickreviewR 2|December 2011 in Yucatán",
+      "licence": "CC BY 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "originalSize": [
+        2592,
+        1728
+      ],
+      "commonsSha1": "ee1048333f440677dac4f848577c01333cd8c33a",
+      "retrievedAt": "2026-11-11T17:17:36Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "yucatan-chichen-itza": {
+      "file": "assets/photos/auto/yucatan-chichen-itza.jpg",
+      "sha256": "a33ba2274660e27cc9addf872c48009e2d5b35de18857bb6da9ccf1da81944da",
+      "width": 2133,
+      "height": 1600,
+      "commonsTitle": "File:Templo el Castillo - Chichen Itza-Yucatan-Mexico0222.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Templo_el_Castillo_-_Chichen_Itza-Yucatan-Mexico0222.jpg",
+      "author": "Diego Delso",
+      "commonsCredit": "Own work",
+      "categories": "GFDL|License migration redundant|CC-BY-SA-4.0,3.0,2.5,2.0,1.0|Self-published work|Images by User:Poco a poco|Images of Mexico by User:Poco a poco|Chichen Itza - Castillo - southwest|Details of Castillo in Chichén Itzá|Images by User:Poco a poco taken in 2006",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        2464,
+        1848
+      ],
+      "commonsSha1": "c2f51d705cd6612b2b723d1e14803f5abcad8e69",
+      "retrievedAt": "2026-11-11T17:17:36Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "yucatan-tulum": {
+      "file": "assets/photos/auto/yucatan-tulum.jpg",
+      "sha256": "b7ea3d327715a7de85ba484c476f8d4eea7e85baca172258ada0f54b4576b8be",
+      "width": 2880,
+      "height": 1328,
+      "commonsTitle": "File:Tulum - God of the Winds Temple 04.JPG",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tulum_-_God_of_the_Winds_Temple_04.JPG",
+      "author": "Martin Falbisoner",
+      "commonsCredit": "Own work",
+      "categories": "Featured pictures of Mexico|Self-published work|Featured Pictures by Martin Falbisoner|Cultural heritage monuments in Mexico with known IDs|Files with coordinates missing SDC location of creation|Templo del Dios Viento|Mexico photographs taken on 2016-03-16|Cultural heritage monuments in Mexico missing SDC location of creation|Cultural heritage monuments in Mexico missing SDC depicts",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        5509,
+        2539
+      ],
+      "commonsSha1": "e6b52e680fd7c9cc742e35bcbd4aa9cfe6bbfe78",
+      "retrievedAt": "2026-11-11T17:17:36Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    }
+  }
+}

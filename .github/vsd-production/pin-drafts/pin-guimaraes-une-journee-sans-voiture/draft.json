@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-guimaraes-une-journee-sans-voiture",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Guimarães en une journée depuis Porto : train à 3,60 €, Paço des ducs, château et téléphérique de la Penha",
+  "pinTitle": "Guimarães en une journée : itinéraire jour par jour, prix et conseils",
+  "variant": "a",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/guimaraes-une-journee-sans-voiture/",
+  "articleSha256": "d28c4b2ff496dd9632a9f3f33adc9781e004fb2200626eacc2b07f8043fa13ed",
+  "imageSha256": "dcbb64a826f1cfd0322aa76534a8fe5db405a03d4e9872393c509800b74945c6",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "fdbf04a40b0bd104c5f381a47a9aa8aa30b6df590685a48e3ce4be0e6c3493b2",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "guimaraes-chateau",
+    "author": "Krzysztof Golik",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Castelo_de_Guimaraes_(2).jpg",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+  }
+}

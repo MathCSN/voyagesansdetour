@@ -108,6 +108,18 @@
       "notBefore": "2026-11-11T02:39:00Z",
       "file": "scenarios/ig-new-york-noel-2026-11-22.json",
       "sha256": "10a1e73f8e69c623508e191cfb764d34ce23f5d08da79a2d5b95245713cc5fde"
+    },
+    {
+      "contentId": "ig-laponie-budget-rovaniemi-2026-11-27",
+      "notBefore": "2026-11-11T17:17:36Z",
+      "file": "scenarios/ig-laponie-budget-rovaniemi-2026-11-27.json",
+      "sha256": "4dc0f7022433e9c71a6b1d7a21226d3f6e200a731ba69a16ed76ab0bfb6fea44"
+    },
+    {
+      "contentId": "ig-yucatan-itineraire-10-jours-2026-11-20",
+      "notBefore": "2026-11-11T17:17:36Z",
+      "file": "scenarios/ig-yucatan-itineraire-10-jours-2026-11-20.json",
+      "sha256": "b68e38f01b84518b383f84003aa2eaffebf2db8d4c13b989bf21210cafac15aa"
     }
   ]
 }

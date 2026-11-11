@@ -225,6 +225,42 @@
       "itemIds": [
         "vsd-production:tiktok:ig-new-york-noel-2026-11-22:photo-v1"
       ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-laponie-budget-rovaniemi-2026-11-27-v1.json",
+      "fileSha256": "b9091f32a4398e77b375d123df86fbf5a0b286af469f6c298850a34d33680841",
+      "batchId": "ig-laponie-budget-rovaniemi-2026-11-27-v1",
+      "batchSha256": "861606e09299ca3ffcf95ba10bb02fabb3ef8a07cd0b718c238e167685dc5607",
+      "itemIds": [
+        "vsd-production:instagram:ig-laponie-budget-rovaniemi-2026-11-27:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-laponie-budget-rovaniemi-2026-11-27-tiktok-v1.json",
+      "fileSha256": "764e17ea506d30f26a33a2489c5b276feafffc348ebcb26ec1fdbe07060450ff",
+      "batchId": "ig-laponie-budget-rovaniemi-2026-11-27-tiktok-v1",
+      "batchSha256": "c3f11cfbe3536d800a391f31456e3de9f7b317ac93c5a4b4537b94db8d83e0af",
+      "itemIds": [
+        "vsd-production:tiktok:ig-laponie-budget-rovaniemi-2026-11-27:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-yucatan-itineraire-10-jours-2026-11-20-v1.json",
+      "fileSha256": "b32bdbff646bcca3fe59a2e6d6eee7b2cefb1b9fdbdd8ec1f726de8e564cbbf7",
+      "batchId": "ig-yucatan-itineraire-10-jours-2026-11-20-v1",
+      "batchSha256": "b69de84ccdba29114afe2b16e08b964726a50ff6407fba935520ddd094de62a6",
+      "itemIds": [
+        "vsd-production:instagram:ig-yucatan-itineraire-10-jours-2026-11-20:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-yucatan-itineraire-10-jours-2026-11-20-tiktok-v1.json",
+      "fileSha256": "f625e18ce854056de36da2729f1b9ae745f169292d74b1c0eb1b1eac4491c5b7",
+      "batchId": "ig-yucatan-itineraire-10-jours-2026-11-20-tiktok-v1",
+      "batchSha256": "5c6d41dc4daff5baca91a7d0bda41e90325fa3dde4d47f69599a1bc237df3efa",
+      "itemIds": [
+        "vsd-production:tiktok:ig-yucatan-itineraire-10-jours-2026-11-20:photo-v1"
+      ]
     }
   ],
   "retirements": [

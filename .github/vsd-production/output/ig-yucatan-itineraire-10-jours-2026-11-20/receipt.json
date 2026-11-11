@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "contentId": "ig-yucatan-itineraire-10-jours-2026-11-20",
+  "status": "rendered_not_published",
+  "fingerprint": "7cf6b5c1e28e4ab16f4e55d87ed8f4a44963bcbfb6473decc5fda5e4e07e3471",
+  "createdAt": "2026-11-11T17:18:35.008347Z",
+  "renderFinishedAt": "2026-11-11T17:18:56.088764Z",
+  "rendererContractVersion": 4,
+  "rendererSha256": "2d337f981d604100e5bb89001e685106b0a2fa8aab05b9c4fe6eff0a448b6fe9",
+  "drawingSha256": "18fff20f2fc461191c57cdbfb620129502ac051e6b3719a239ac872df87e204a",
+  "motionSha256": "dd5608c3447e18a918c28e38fa6d664a31f4417591c1bbc60d7c07f269b40924",
+  "format": "express",
+  "kind": "reel",
+  "channel": "instagram",
+  "publishAt": "2026-11-20T17:00:00Z",
+  "reviewValidUntil": "2026-12-11T17:17:36Z",
+  "sourceCheckedOn": "2026-11-11",
+  "targetUrl": "https://voyagesansdetour.fr/mexique/yucatan-itineraire-10-jours/",
+  "voice": null,
+  "presenter": null,
+  "sourceUrls": [
+    "https://voyagesansdetour.fr/mexique/yucatan-itineraire-10-jours/"
+  ],
+  "photos": {
+    "yucatan-chichen-itza": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Diego Delso",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Templo_el_Castillo_-_Chichen_Itza-Yucatan-Mexico0222.jpg"
+    },
+    "yucatan-tulum": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Martin Falbisoner",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tulum_-_God_of_the_Winds_Temple_04.JPG"
+    },
+    "yucatan-cenote": {
+      "licence": "CC BY 2.0",
+      "author": "Shinya Suzuki",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Cenote_Ik_Kil,_Yucatan,_Dec_2011_-_06.jpg"
+    },
+    "yucatan-5308661b": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Giles Laurent",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:194_White-nosed_coati_at_the_beach_in_Yucat%C3%A1n_Photo_by_Giles_Laurent.jpg"
+    }
+  },
+  "clips": {},
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "durationSeconds": 12.1,
+    "videoCodec": "h264",
+    "pixelFormat": "yuv420p",
+    "videoBitrateBps": 3186321,
+    "audioCodec": "aac",
+    "audioSampleRate": 48000,
+    "audioBitrateBps": 96434,
+    "fullDecodePassed": true,
+    "loudness": {
+      "integratedLufs": -16.1,
+      "truePeakDbfs": -2.4
+    }
+  },
+  "files": [
+    {
+      "file": "apercu.jpg",
+      "sha256": "adc9c9cdc38d585447b5d28bcb80c8e863dfd91588ce0e4fa042f535a0d93e16",
+      "bytes": 168221
+    },
+    {
+      "file": "credits.txt",
+      "sha256": "e7ce0ba3a7645c2a8838cf134b8944b17eb79d42d3fa1b85d086ea13d3208b20",
+      "bytes": 2394
+    },
+    {
+      "file": "dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "file": "encode.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "legende.txt",
+      "sha256": "ba3127d90d975a7f6ed411eaa665c0fe749d020e4733547f5c00d04197412203",
+      "bytes": 1054
+    },
+    {
+      "file": "notosans-OFL.txt",
+      "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a",
+      "bytes": 4396
+    },
+    {
+      "file": "playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    },
+    {
+      "file": "poster.jpg",
+      "sha256": "5d88e8658f60e886c2e07fa813a303c797c5b721dc5e1fb0ffe653d268416cad",
+      "bytes": 453330
+    },
+    {
+      "file": "reel.mp4",
+      "sha256": "2e4431e70cd71a8ed98d366f4fb3626698514643632271935dcb0663572e0137",
+      "bytes": 4980175
+    },
+    {
+      "file": "scenario.json",
+      "sha256": "b68e38f01b84518b383f84003aa2eaffebf2db8d4c13b989bf21210cafac15aa",
+      "bytes": 6546
+    },
+    {
+      "file": "scene-01.jpg",
+      "sha256": "c793cf605e389f7bf59503878fb7242ee8a0c83382705a767eb7380dd0ac8202",
+      "bytes": 417071
+    },
+    {
+      "file": "scene-02.jpg",
+      "sha256": "a5b15b9ed66c5321d72f18707916138b1adf893c04cd6711d8ab713103d7f19a",
+      "bytes": 329741
+    },
+    {
+      "file": "scene-03.jpg",
+      "sha256": "649b61032b53d9de3b6421b1ff1943b38fdda34a2bbb54349f0b7b98763fa4c0",
+      "bytes": 434442
+    },
+    {
+      "file": "scene-04.jpg",
+      "sha256": "676d773eb85ba80914521e6b78935d1225bf7cb1e1c207c2177dd42c7c97b30f",
+      "bytes": 313141
+    }
+  ],
+  "runtime": {
+    "wallSeconds": 20.926,
+    "encoderThreads": 2,
+    "pillowVersion": "11.3.0",
+    "ffmpegVersion": "ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers"
+  },
+  "publication": {
+    "uploaded": false,
+    "scheduled": false,
+    "published": false,
+    "readyForAutomaticImport": false
+  },
+  "cost": {
+    "newPaidService": false,
+    "providerCalls": 0,
+    "monetarySpendEur": 0
+  }
+}
