@@ -6,9 +6,10 @@ site-src/social-media/production/<id>/, list them in site-src/public-media.json,
 write the reviewed batch reviewed-social/<id>-v1.json and its index entry.
 Nothing is sent to Buffer: the publication panel imports the batches.
 
-An Instagram reel can also go, as the same file, to TikTok, YouTube Shorts and Facebook
+A fast Instagram reel can also go, as the same file, to TikTok, YouTube Shorts and Facebook
 Reels: one more batch per network, only for the networks switched on in cadence.json
-("crossposts"). All are off until the panel accepts those formats.
+("crossposts"), an hour or more after the Instagram slot. A network switched on later also
+gets the reels already queued whose slot is still a day ahead. No existing batch is rewritten.
 
 `--verify-public` checks, after deployment, that every queued asset URL serves
 the exact bytes recorded in its batch.
@@ -20,6 +21,7 @@ import datetime as dt
 import hashlib
 import json
 from pathlib import Path
+import re
 import shutil
 import urllib.request
 
@@ -45,9 +47,27 @@ FORMAT_DOCS = {
 }
 USER_AGENT = {"User-Agent": "VoyageSansDetour-stock/1.0 (contact@voyagesansdetour.fr)"}
 CADENCE = HERE / "cadence.json"
-# The same vertical file on other networks: payload kind, and whether the caption can point to a link in the bio.
-CROSSPOSTS = {"tiktok": {"kind": "video", "bio": True}, "youtube": {"kind": "short", "bio": False}, "facebook": {"kind": "reel", "bio": False}}
-CROSSPOST_DOCS = ["https://developers.buffer.com/guides/posts-and-scheduling.html"]
+# The same vertical file on other networks: payload kind, the call to action that replaces "lien dans la bio"
+# (None: the guide's address is written out), and the network's own caption limits.
+# TikTok: a caption link is not clickable, so the site is named; 2,200 characters and 5 hashtags at most
+# (Buffer help "Using TikTok with Buffer", read on 2026-11-11).
+SAVE = "📌 Enregistrez cette vidéo pour votre voyage. 🔗 "
+CROSSPOSTS = {
+    "tiktok": {"kind": "reel", "cta": SAVE + "Prix, horaires et détails : le guide complet sur " + p.ORIGIN.split("//", 1)[1],
+               "maxChars": 2200, "maxHashtags": 5},
+    "youtube": {"kind": "short", "cta": None},
+    "facebook": {"kind": "reel", "cta": None},
+}
+POSTING_GUIDE = "https://developers.buffer.com/guides/posts-and-scheduling.html"
+CROSSPOST_DOCS = {
+    "tiktok": ["https://support.buffer.com/article/559-using-tiktok-with-buffer",
+               "https://developers.buffer.com/types/TikTokPostMetadataInput.html", POSTING_GUIDE],
+    "youtube": [POSTING_GUIDE],
+    "facebook": [POSTING_GUIDE],
+}
+HASHTAG = re.compile(r"(?<!\w)#\w+")
+# A copy added after the reel was queued must still reach the panel's daily stock import before its slot.
+BACKFILL_LEAD = dt.timedelta(hours=24)
 
 
 def sha(raw: bytes) -> str:
@@ -101,28 +121,67 @@ def enabled_crossposts(path: Path = CADENCE) -> dict[str, dt.timedelta]:
 
 
 def crosspost_caption(scenario: dict, text: str, channel: str) -> str:
-    """The reel's caption for another network: where no bio link exists, the guide's address is written out."""
-    if CROSSPOSTS[channel]["bio"]:
-        return text
+    """The reel's caption for another network: only the call to action changes (no "lien dans la bio" elsewhere)."""
     cta = scenario["caption"]["cta"]
     p.ensure(text.count(cta) == 1, "Caption call to action not found")
-    return text.replace(cta, "📌 Enregistrez cette vidéo pour votre voyage. 🔗 Le guide complet : " + scenario["targetUrl"])
+    target = CROSSPOSTS[channel]
+    value = text.replace(cta, target["cta"] or SAVE + "Le guide complet : " + scenario["targetUrl"])
+    p.ensure(len(value) <= target.get("maxChars", len(value)), f"{channel} caption exceeds {target.get('maxChars')} characters")
+    p.ensure(len(HASHTAG.findall(value)) <= target.get("maxHashtags", len(value)), f"Too many hashtags for {channel}")
+    return value
 
 
 def build_crosspost(scenario: dict, folder: Path, now: str, channel: str, delay: dt.timedelta) -> dict:
     """One more batch for the same rendered reel, on another network, a little after the Instagram slot."""
     p.ensure(scenario["kind"] == "reel" and scenario["channel"] == "instagram" and channel in CROSSPOSTS, "Only an Instagram reel is cross-posted")
+    # Older reels end on a card that names the Instagram bio only; the fast format spells out the site's address.
+    p.ensure(scenario.get("schemaVersion") == p.MOTION_SCHEMA, "Only a fast reel is cross-posted")
     batch = build_batch(scenario, folder, now)
     item = batch["items"][0]
     content = f"vsd-production:{channel}:{scenario['id']}:photo-v1"
     payload = {**item["payload"], "channel": channel, "kind": CROSSPOSTS[channel]["kind"],
                "text": crosspost_caption(scenario, item["payload"]["text"], channel)}
     review = {**item["review"], "contentId": content, "payloadRevision": payload_revision(payload),
-              "formatCapability": {**item["review"]["formatCapability"], "sourceUrls": CROSSPOST_DOCS}}
+              "formatCapability": {**item["review"]["formatCapability"], "sourceUrls": CROSSPOST_DOCS[channel]}}
     due = p.stamp(p.instant(scenario["publishAt"]) + delay)
     p.ensure(p.instant(due) < p.instant(scenario["review"]["validUntil"]), "Cross-post slot outside the review window")
     return {"schemaVersion": 1, "batchId": f"{scenario['id']}-{channel}-v1",
             "items": [{**item, "contentId": content, "deduplicationKey": content, "dueAt": due, "payload": payload, "review": review}]}
+
+
+def first_crossposts(scenario: dict, folder: Path, stamp: str, crossposts: dict[str, dt.timedelta]) -> list[dict]:
+    """The copies queued together with a new Instagram reel; one that cannot be made never holds back the reel."""
+    batches = []
+    if scenario["kind"] == "reel" and scenario["channel"] == "instagram":
+        for channel, delay in crossposts.items():
+            try:
+                batches.append(build_crosspost(scenario, folder, stamp, channel, delay))
+            except p.Invalid:
+                continue
+    return batches
+
+
+def later_crossposts(scenario: dict, folder: Path, index: dict, crossposts: dict[str, dt.timedelta], now: dt.datetime,
+                     stock: Path = STOCK) -> list[dict]:
+    """Copies of a reel queued before a network was switched on: the very file already public, slot still a day ahead."""
+    main = scenario["id"] + "-v1"
+    known = {entry["batchId"] for entry in index["items"]}
+    retired = {entry["batchId"] for entry in index.get("retirements", [])}
+    if main not in known or main in retired:
+        return []
+    batches = []
+    for channel, delay in crossposts.items():
+        if f"{scenario['id']}-{channel}-v1" in known or p.instant(scenario["publishAt"]) + delay - now < BACKFILL_LEAD:
+            continue
+        try:
+            p.verify_receipt(folder, p.fingerprint(scenario))
+            batch = build_crosspost(scenario, folder, p.stamp(now.replace(microsecond=0)), channel, delay)
+            queued = json.loads((stock / (main + ".json")).read_text())["items"][0]["payload"]["assets"]
+            p.ensure(batch["items"][0]["payload"]["assets"] == queued, "Rendered reel differs from the queued one")
+        except (p.Invalid, OSError, ValueError, LookupError):
+            continue  # a copy that cannot be made never touches the reel already queued
+        batches.append(batch)
+    return batches
 
 
 def build_batch(scenario: dict, folder: Path, now: str) -> dict:
@@ -192,20 +251,16 @@ def admit(now: dt.datetime) -> dict:
     admitted, crossposts = [], enabled_crossposts()
     for _, _, scenario in p.catalogue_entries(HERE):
         folder = HERE / "output" / scenario["id"]
-        batch_id = scenario["id"] + "-v1"
-        if not folder.exists() or any(entry["batchId"] == batch_id for entry in index["items"]):
+        if not folder.exists():
             continue
-        p.verify_receipt(folder, p.fingerprint(scenario))
-        p.ensure(p.instant(scenario["publishAt"]) > now, "Publication slot already passed: " + scenario["id"])
-        p.ensure(destination_live(scenario["targetUrl"]), "Guide page not reachable: " + scenario["targetUrl"])
-        inventory = publish_media(scenario, folder, inventory)
-        batches = [build_batch(scenario, folder, stamp)]
-        if scenario["kind"] == "reel" and scenario["channel"] == "instagram":
-            for channel, delay in crossposts.items():
-                try:
-                    batches.append(build_crosspost(scenario, folder, stamp, channel, delay))
-                except p.Invalid:
-                    continue  # a copy that cannot be made never holds back the reel itself
+        if any(entry["batchId"] == scenario["id"] + "-v1" for entry in index["items"]):
+            batches = later_crossposts(scenario, folder, index, crossposts, now)
+        else:
+            p.verify_receipt(folder, p.fingerprint(scenario))
+            p.ensure(p.instant(scenario["publishAt"]) > now, "Publication slot already passed: " + scenario["id"])
+            p.ensure(destination_live(scenario["targetUrl"]), "Guide page not reachable: " + scenario["targetUrl"])
+            inventory = publish_media(scenario, folder, inventory)
+            batches = [build_batch(scenario, folder, stamp)] + first_crossposts(scenario, folder, stamp, crossposts)
         index = {**index, "items": index["items"] + [index_entry(batch) for batch in batches]}
         admitted += [batch["batchId"] for batch in batches]
     PUBLIC_MEDIA.write_text(json.dumps(inventory, ensure_ascii=False, indent=2) + "\n")
