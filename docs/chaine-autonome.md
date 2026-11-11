@@ -30,12 +30,20 @@ guide publié ──► rendu (production.py, reel_intake.py)
 - **Panneau privé** `vsd-admin` (https://vsd-admin.kartier.workers.dev, accès par clé d'accès) :
   Cloudflare Worker + base D1, code dans le dépôt privé `MathCSN/vsd-admin`, modifié et déployé par Claude
   seul. Il tient le registre, la clé Buffer (chiffrée) et les règles : programmation dans Buffer 3 jours
-  avant l'échéance, **2 posts au plus par réseau sur 7 jours**, contrôle anti-doublon sur ce que Buffer a
-  déjà, formats `instagram/reel`, `instagram/carousel` et `facebook/photos`. Bascule depuis l'ancien
+  avant l'échéance, **plafond par réseau sur 7 jours (Instagram 4, Facebook 2, TikTok 4)**, contrôle
+  anti-doublon sur ce que Buffer a déjà, formats `instagram/reel`, `instagram/carousel`, `facebook/photos`
+  et `tiktok/reel` (depuis le 11/11/2026). Les canaux Buffer sont relus à chaque passage : un canal
+  déconnecté, verrouillé ou en pause fait attendre ses seuls posts. Bascule depuis l'ancien
   serveur ChatGPT Sites le 11/11/2026 (`docs/migration-panneau.md`) ; l'ancien n'est plus appelé.
 - **Retirer un lot** : l'ajouter à `retirements` de `index.json`. Au passage `stock` suivant, ses posts
   pas encore envoyés passent « en attente » dans le registre et ne partent plus. Un post déjà programmé
-  dans Buffer se supprime dans Buffer.
+  dans Buffer se supprime dans Buffer. Les anciens garde-fous du dépôt n'admettent qu'un motif de
+  retrait, `duplicate_media_on_channel`.
+- **Défaut connu au 11/11/2026** : le lot Facebook Porto du 12/10/2026 (`facebook-porto-photos-2026-10-12-v1`,
+  publié par l'ancien moteur, relecture incomplète) est refusé par le panneau à chaque import du stock.
+  Les autres lots entrent normalement, mais le passage `stock` répond « attention » et le workflow
+  `vsd-cloud-control` de 8 h 53 UTC sort en erreur. Correction côté panneau (`importStock` : un lot
+  refusé dont l'échéance est passée est ignoré) à déployer.
 - Format d'un lot : un item `{contentId, deduplicationKey, title, dueAt, payload, review}` ;
   `payload` = `{schemaVersion, channel, kind, text, aiGenerated, assets[{url, sha256, mimeType}]}` ;
   la relecture doit couvrir l'échéance (`review.validUntil > dueAt`).
