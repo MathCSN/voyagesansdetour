@@ -60,6 +60,12 @@
       "path": "chiang-mai-l271",
       "place": "Chiang Mai"
     },
+    "chichen-itza|mexique": {
+      "checkedOn": "2026-11-11",
+      "country": "Mexique",
+      "path": "chichen-itza-l785",
+      "place": "Chichén Itzá"
+    },
     "cinque-terre|italie": {
       "checkedOn": "2026-10-24",
       "country": "Italie",
@@ -186,6 +192,12 @@
       "path": "marrakech-l208",
       "place": "Marrakech"
     },
+    "merida|mexique": {
+      "checkedOn": "2026-11-11",
+      "country": "Mexique",
+      "path": "merida-l1903",
+      "place": "Mérida"
+    },
     "monteverde|costa-rica": {
       "checkedOn": "2026-10-24",
       "country": "Costa Rica",
@@ -306,6 +318,12 @@
       "path": "tokyo-l193",
       "place": "Tokyo"
     },
+    "valladolid|mexique": {
+      "checkedOn": "2026-11-11",
+      "country": "Mexique",
+      "path": "valladolid-mexique-l101556",
+      "place": "Valladolid"
+    },
     "via|italie": {
       "checkedOn": "2026-10-24",
       "country": "Italie",
@@ -323,6 +341,12 @@
       "country": "Royaume-Uni",
       "path": null,
       "place": "Winter Wonderland"
+    },
+    "yucatan|mexique": {
+      "checkedOn": "2026-11-11",
+      "country": "Mexique",
+      "path": "yucatan-l227",
+      "place": "Yucatán"
     }
   },
   "schemaVersion": 1

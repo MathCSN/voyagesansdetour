@@ -1085,6 +1085,42 @@
       "license_url": "https://creativecommons.org/licenses/by/3.0",
       "alt_fr": "La plage El Duque, à Costa Adeje, au crépuscule : la côte sud de Tenerife.",
       "credit_fr": "Marc Ryckaert ( MJJR ) / Wikimedia Commons — CC BY 3.0."
+    },
+    {
+      "id": "yucatan-chichen-itza",
+      "file": "photos/yucatan-chichen-itza.jpg",
+      "width": 1600,
+      "height": 1200,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Templo_el_Castillo_-_Chichen_Itza-Yucatan-Mexico0222.jpg",
+      "author": "Diego Delso",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "alt_fr": "La pyramide d’El Castillo, à Chichén Itzá.",
+      "credit_fr": "Diego Delso / Wikimedia Commons — CC BY-SA 4.0."
+    },
+    {
+      "id": "yucatan-cenote",
+      "file": "photos/yucatan-cenote.jpg",
+      "width": 1600,
+      "height": 1067,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Cenote_Ik_Kil,_Yucatan,_Dec_2011_-_06.jpg",
+      "author": "Shinya Suzuki",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0",
+      "alt_fr": "Un cenote entouré de lianes, dans le Yucatán.",
+      "credit_fr": "Shinya Suzuki / Wikimedia Commons — CC BY 2.0."
+    },
+    {
+      "id": "yucatan-tulum",
+      "file": "photos/yucatan-tulum.jpg",
+      "width": 1600,
+      "height": 737,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Tulum_-_God_of_the_Winds_Temple_04.JPG",
+      "author": "Martin Falbisoner",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "alt_fr": "Les ruines de Tulum au-dessus de la mer des Caraïbes.",
+      "credit_fr": "Martin Falbisoner / Wikimedia Commons — CC BY-SA 4.0."
     }
   ]
 }

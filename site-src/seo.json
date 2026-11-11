@@ -153,6 +153,16 @@
     "tenerife-quand-partir": {
       "title": "Quand partir à Tenerife ? Le bon mois, côte par côte",
       "description": "22,8 °C en janvier au sud, 16 °C au nord : le bon mois pour la plage, le Teide et Masca à Tenerife, avec la mer, la calima et le Carnaval 2027."
+    },
+    "yucatan-itineraire-10-jours": {
+      "title": "Yucatán en 10 jours : itinéraire et prix 2026",
+      "description": "10 jours au Yucatán : Chichén Itzá à 697 pesos, Tren Maya Mérida–Cancún en 3 h 30, Valladolid, Mérida et Tulum, avec les tarifs relevés en 2026.",
+      "faq": [
+        {
+          "question": "Combien coûte l’entrée de Chichén Itzá pour un étranger ?",
+          "answer": "697 pesos depuis le 27 mars 2026, avec un billet unique payé au centre d’accueil des visiteurs (Yucatán, 24 mars 2026)."
+        }
+      ]
     }
   }
 }
