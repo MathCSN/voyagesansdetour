@@ -178,7 +178,7 @@ def later_crossposts(scenario: dict, folder: Path, index: dict, crossposts: dict
             batch = build_crosspost(scenario, folder, p.stamp(now.replace(microsecond=0)), channel, delay)
             queued = json.loads((stock / (main + ".json")).read_text())["items"][0]["payload"]["assets"]
             p.ensure(batch["items"][0]["payload"]["assets"] == queued, "Rendered reel differs from the queued one")
-        except (p.Invalid, OSError, ValueError, LookupError):
+        except (OSError, ValueError, LookupError):  # ValueError covers production.Invalid and unreadable JSON
             continue  # a copy that cannot be made never touches the reel already queued
         batches.append(batch)
     return batches
