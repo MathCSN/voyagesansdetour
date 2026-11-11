@@ -236,11 +236,22 @@
       ]
     },
     "costa-rica-itineraire-2-semaines": {
-      "title": "Costa Rica en 2 semaines : itinéraire, routes et prix 2026",
+      "title": "Costa Rica en 2 semaines : itinéraire, navettes et prix 2026",
+      "description": "Deux semaines au Costa Rica sans voiture : navettes Interbus de 70 à 84 $, Manuel Antonio à 18 $, Arenal, Puerto Viejo et budget de 931 $.",
       "faq": [
         {
           "question": "Que voir au Costa Rica en 2 semaines ?",
-          "answer": "Trois nuits à Manuel Antonio, deux à Monteverde, trois à La Fortuna au pied du volcan Arenal, puis quatre sur la côte caraïbe sud, autour de Cahuita. Entre les trois premières étapes, aucune route ne dépasse quatre heures."
+          "answer": "Trois nuits à Manuel Antonio, deux à Monteverde, trois à La Fortuna au pied du volcan Arenal, quatre à Puerto Viejo sur la côte caraïbe avec une journée à Cahuita, puis une dernière nuit à San José."
+        }
+      ],
+      "links": [
+        {
+          "phrase": "Yucatán en 10 jours",
+          "slug": "yucatan-itineraire-10-jours"
+        },
+        {
+          "phrase": "Thaïlande en deux semaines",
+          "slug": "thailande-itineraire-2-semaines"
         }
       ]
     },

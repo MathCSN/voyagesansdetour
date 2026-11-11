@@ -3750,174 +3750,319 @@
       "thailande-itineraire-2-semaines",
       "new-york-noel"
     ],
-    "sourcesCheckedOn": "2026-10-24",
+    "sourcesCheckedOn": "2026-11-11",
     "publishedOn": "2026-10-24",
-    "updatedOn": "2026-10-24",
+    "updatedOn": "2026-11-11",
     "slug": "costa-rica-itineraire-2-semaines",
-    "title": "Costa Rica en 2 semaines : Manuel Antonio, Monteverde, Arenal et la côte caraïbe (itinéraire 2026)",
+    "title": "Costa Rica en 2 semaines sans voiture : Manuel Antonio, Monteverde, Arenal et Puerto Viejo, navettes et prix 2026",
     "shortTitle": "Le Costa Rica en 2 semaines",
     "destination": "Costa Rica",
     "country": "costa-rica",
     "continent": "amerique-centrale-caraibes",
     "category": "Itinéraires",
     "cover": "costa-rica-arenal",
-    "description": "Une boucle de 14 jours depuis San José : routes de 3 à 4 heures, Manuel Antonio à 18,08 $ et fermé le mardi, forêt de nuages, volcan Arenal et côte caraïbe.",
-    "readMinutes": 7,
-    "summary": "Trois nuits à Manuel Antonio, deux à Monteverde, trois à La Fortuna au pied du volcan Arenal, puis quatre sur la côte caraïbe sud, autour de Cahuita. Entre les trois premières étapes, aucune route ne dépasse quatre heures. Réservez Manuel Antonio en ligne : 18,08 $ par adulte, fermé le mardi, ouvert de 7 h à 16 h. Partez pendant la saison sèche, de décembre à avril.",
+    "description": "Deux semaines au Costa Rica sans voiture : navettes de 70 à 84 $, Manuel Antonio à 18 $, ponts suspendus, Arenal et Caraïbes, où dormir et budget de 931 $.",
+    "readMinutes": 9,
+    "summary": "Quatorze jours, quatre étapes et aucune voiture : trois nuits à Manuel Antonio, deux à Monteverde, trois à La Fortuna sous l’Arenal, quatre à Puerto Viejo sur la côte caraïbe, puis une à San José. Les navettes Interbus coûtent de 70,15 à 84 $ par trajet, le bus du retour 6 975 colones : comptez environ 931 $ par personne à deux, hors repas et vols.",
     "keyFacts": [
       {
-        "value": "18,08 $",
-        "label": "l’entrée de Manuel Antonio (16 $ + TVA), en ligne uniquement, fermé le mardi (≈ 16 €)"
+        "value": "70,15 $",
+        "label": "la navette partagée Interbus de l’aéroport de San José à Manuel Antonio (départs 7 h 45 et 14 h 15)"
       },
       {
-        "value": "7 h – 16 h",
-        "label": "les horaires de Manuel Antonio du mercredi au lundi ; les plages ferment à 15 h"
+        "value": "18 $",
+        "label": "l’entrée de Manuel Antonio, en ligne uniquement, 600 visiteurs par jour, fermé le mardi"
       },
       {
-        "value": "160 km",
-        "label": "de San José à Manuel Antonio, 3 à 4 heures de route"
+        "value": "49 $",
+        "label": "les 8 ponts suspendus de Selvatura à Monteverde, de 55 à 157 m de long (+ 13 % de taxe)"
       },
       {
-        "value": "190 km",
-        "label": "de Manuel Antonio à Monteverde, 3 h 30 à 4 h, goudronnés par la route 606"
+        "value": "32 $",
+        "label": "les ponts suspendus de Místico en visite libre, à La Fortuna (+ taxes), environ 2 h"
       },
       {
-        "value": "115 km",
-        "label": "de Monteverde à La Fortuna, environ 3 heures de lacets et de ponts à une voie"
+        "value": "6 975 ₡",
+        "label": "le bus MEPE Puerto Viejo – San José, environ 4 h 30 pour 215 km (≈ 15,30 $)"
       },
       {
-        "value": "15 $",
-        "label": "l’entrée du volcan Poás, à réserver en ligne, dernière entrée à 14 h"
+        "value": "931 $",
+        "label": "par personne à deux pour 14 jours : navettes, bus, parcs et 13 nuits en chambre 1-2 étoiles, hors repas et vols"
       }
     ],
     "sections": [
       {
         "id": "parcours",
-        "title": "Le parcours : une boucle depuis San José",
+        "title": "Le parcours : quatre étapes en navette, retour en bus",
         "paragraphs": [
-          "La boucle part de l’aéroport de San José et y revient, ce qui évite les frais d’abandon d’une voiture de location. Manuel Antonio, Monteverde puis La Fortuna forment le trio classique d’un premier voyage : plages et animaux, forêt de nuages et ponts suspendus, puis volcan et sources chaudes. Les quatre derniers jours filent vers la côte caraïbe sud et sa culture afro-caribéenne.",
-          "La voiture reste la solution la plus souple, mais des navettes partagées relient chaque étape. En bus, les lignes partent de terminaux différents à San José : le Terminal 7-10 pour La Fortuna et Monteverde, Tracopa pour Quepos et Manuel Antonio, Mepe pour Limón et Cahuita. Sur la route, les péages des routes 1 et 27 se paient par carte, en colones ou en dollars, et les ponts à une seule voie sont fréquents : un sens a la priorité, l’autre attend."
+          "Ce Costa Rica-là se fait sans permis de conduire. Interbus, le réseau de navettes partagées, prend chaque voyageur à la porte de son hôtel et le dépose à celle du suivant : de l’aéroport de San José à Manuel Antonio, puis vers la forêt de nuages de Monteverde, le volcan Arenal et enfin la côte caraïbe. Seul le retour se fait en bus de ligne, avec la compagnie MEPE, de Puerto Viejo à San José.",
+          "L’ordre suit la logique des navettes : la côte Pacifique pour commencer, la montagne au milieu, la côte caraïbe pour finir, avec sa culture afro-caribéenne. Chaque étape dure au moins deux nuits, ce qui laisse une journée entière sur place entre deux trajets. C’est le même principe que notre Yucatán en 10 jours ou notre Thaïlande en deux semaines : peu d’étapes, de vraies journées sur place."
         ],
         "table": {
           "headers": [
+            "Jours",
             "Étape",
-            "Nuits",
-            "Route depuis l’étape précédente"
+            "Où dormir",
+            "Pour y arriver"
           ],
           "rows": [
             [
+              "1 à 3",
               "Manuel Antonio",
-              "3",
-              "160 km, 3 à 4 h depuis San José"
+              "Sur la route de Quepos à la plage",
+              "Navette depuis l’aéroport, 70,15 $"
             ],
             [
+              "4 et 5",
               "Monteverde",
-              "2",
-              "190 km, 3 h 30 à 4 h"
+              "Village de Santa Elena",
+              "Navette depuis Manuel Antonio, 84 $"
             ],
             [
+              "6 à 8",
               "La Fortuna (Arenal)",
-              "3",
-              "115 km, environ 3 h"
+              "Centre de La Fortuna",
+              "Navette depuis Monteverde, 70,15 $"
             ],
             [
-              "Cahuita (côte caraïbe sud)",
-              "4",
-              "via San José, bus Mepe"
+              "9 à 12",
+              "Puerto Viejo et Cahuita",
+              "Puerto Viejo ou Playa Cocles",
+              "Navette depuis La Fortuna, 81,65 $"
+            ],
+            [
+              "13 et 14",
+              "San José, puis l’avion",
+              "San José",
+              "Bus MEPE, 6 975 ₡"
             ]
           ]
         },
-        "tip": "Ne soyez pas trop serré : sur ces routes, un trajet annoncé de trois heures peut en prendre cinq derrière les camions et les bus."
+        "tip": "À partir de trois ou quatre voyageurs, comparez avec le minibus privé d’Interbus, prix par véhicule jusqu’à 9 personnes : 245 $ de Monteverde à La Fortuna, 275 $ de l’aéroport à Manuel Antonio, 380 $ de La Fortuna à Puerto Viejo, avec l’heure de départ au choix."
       },
       {
         "id": "manuel-antonio",
         "title": "Jours 1 à 3 — Manuel Antonio, les singes et la plage",
         "image": "costa-rica-manuel-antonio",
         "paragraphs": [
-          "Le parc national Manuel Antonio est le plus fréquenté du pays, et ses règles sont strictes : 18,08 $ par adulte (16 $ plus la TVA), 5,65 $ pour les enfants de 2 à 12 ans, gratuit avant 2 ans. Les billets se vendent uniquement en ligne, sur le portail officiel des parcs (SINAC), et pas à l’entrée. Le parc ouvre du mercredi au lundi de 7 h à 16 h, les plages ferment à 15 h, et il est fermé le mardi.",
-          "Entrez à 7 h : les animaux sont les plus actifs pendant les deux premières heures, et c’est le moment le plus frais. Paresseux, capucins à face blanche, singes-écureuils et iguanes se repèrent bien mieux avec un guide équipé d’une longue-vue : sans lui, ils restent souvent invisibles dans le feuillage. Les billets s’épuisent en haute saison, parfois des semaines à l’avance : réservez dès que vos dates sont fixées."
+          "À la sortie des arrivées internationales de l’aéroport Juan Santamaría, la navette Interbus de 14 h 15 (ou celle de 7 h 45 si l’avion arrive la veille) file vers le Pacifique pour 70,15 $. Le parc national se trouve à 7 km au sud de Quepos ; dormez sur la route qui relie Quepos à la plage, d’où l’on rejoint à pied la plage et les restaurants. Un bus fait la navette entre Quepos et Manuel Antonio toutes les 30 minutes, de 7 h à 22 h.",
+          "Manuel Antonio est le parc le plus visité du pays, et le plus réglementé. L’entrée coûte 18 $ à partir de 13 ans, 5 $ de 2 à 12 ans, et c’est gratuit avant 2 ans. Le parc ouvre du mercredi au lundi, de 7 h à 16 h, avec un créneau d’entrée tous les quarts d’heure jusqu’à 15 h, et ferme le mardi. Seuls 600 visiteurs entrent chaque jour, et les billets se vendent uniquement en ligne sur le portail du SINAC, l’agence des parcs : en haute saison, réservez plusieurs jours à l’avance.",
+          "Le vrai coût des grands parcs, c’est le guide naturaliste : 80 à 120 $ par jour, d’après The Rio Times, un prix qui se partage à plusieurs."
         ],
-        "tip": "Gardez le mardi pour la plage ou le kayak : c’est le jour de fermeture du parc."
+        "tip": "Placez le jour du parc un mercredi, un jeudi ou un week-end, et gardez le mardi pour la plage : c’est le jour de fermeture."
       },
       {
         "id": "monteverde",
         "title": "Jours 4 et 5 — Monteverde, la forêt de nuages",
         "image": "costa-rica-monteverde",
         "paragraphs": [
-          "La route de Manuel Antonio à Monteverde, 190 km, se fait en 3 h 30 à 4 h et reste goudronnée si l’on prend la route 606 pour monter. Il fait nettement plus frais en altitude : prévoyez une couche chaude.",
-          "Monteverde se découvre par la canopée : à Selvatura, huit ponts suspendus de 52 à 171 m de long font passer à hauteur des cimes, en une heure à une heure et demie. Le lendemain matin, une marche guidée dans une réserve privée comme Curi Cancha donne les meilleures chances d’apercevoir le quetzal resplendissant. Les amateurs de tyrolienne trouvent ici la plus longue du pays, chez 100% Aventura."
+          "Le quatrième jour, la navette de 13 h 45 relie Manuel Antonio à Monteverde pour 84 $, avec une pause de 20 minutes en chemin. On dort au village de Santa Elena : sa rue principale aligne les boutiques, et c’est là que se trouvent les meilleures tables, des sodas typiques aux restaurants italiens.",
+          "La réserve biologique de la forêt de nuages de Monteverde fonctionne désormais sur réservation, avec un créneau horaire choisi en ligne. On se gare ou l’on se fait déposer au centre d’accueil, 1,5 km en contrebas, au moins 15 minutes avant son heure ; une navette gratuite monte ensuite à l’entrée des sentiers. La réserve ouvre de 7 h 30 à 16 h. La boucle courte fait 2,8 km, environ 1 h 30 de marche facile à modérée, avec un pont suspendu au-dessus de la canopée ; la grande boucle de 4,1 km, en 2 h 30, monte jusqu’à la forêt naine et à la ligne de partage des eaux du continent. Une marche de nuit part entre 18 h et 18 h 30.",
+          "Aucune voiture particulière ne monte à l’entrée des sentiers : la navette limite le bruit et l’usure de la route d’accès. Sur place, les guides demandent de rester sur les chemins balisés, d’avancer en silence, de remporter ses déchets et de ne jamais nourrir les animaux. Les recettes des billets financent les patrouilles de gardes, la recherche et l’éducation à l’environnement dans la région de Monteverde.",
+          "Le lendemain, Selvatura fait marcher à hauteur des cimes : huit ponts suspendus de 55 à 157 mètres de long, larges de 1,22 mètre, sur 3 km de sentier, en 1 h à 1 h 30. Le parc ouvre tous les jours de 7 h à 16 h ; l’entrée coûte 49 $ à partir de 19 ans, 44,10 $ de 12 à 18 ans et 34,30 $ de 4 à 11 ans, plus 13 % de taxe."
         ]
       },
       {
         "id": "arenal",
         "title": "Jours 6 à 8 — La Fortuna et le volcan Arenal",
         "paragraphs": [
-          "De Monteverde à La Fortuna, il n’y a que 115 km, mais comptez environ 3 heures : la route, par les routes 606, 145 puis 142, enchaîne les virages et les ponts à une voie.",
-          "L’Arenal, le cône de carte postale qui domine La Fortuna, n’est plus entré en éruption depuis 2010. Dans le parc national, l’entrée étrangère tourne autour de 15 $ ; on y marche sur les anciennes coulées de lave et dans la forêt, avec le sommet en vue si les nuages se lèvent, ce qui arrive plus souvent le matin. Le reste du séjour se partage entre les ponts suspendus de Místico, la cascade de La Fortuna et les sources chaudes au coucher du soleil.",
-          "En rentrant vers San José, le volcan Poás vaut le détour : à 1 h 30 de la capitale, c’est le cratère actif le plus facile d’accès d’Amérique centrale. Entrée 15 $ pour un adulte étranger, ouvert de 8 h à 16 h avec une dernière entrée à 14 h, sur réservation en ligne uniquement."
+          "La navette quitte Monteverde à 9 h 10 et rejoint La Fortuna pour 70,15 $. Le village tient son nom de l’éruption de l’Arenal, qui l’avait épargné : El Borio devint alors « La Fortuna », la chanceuse. Dormez dans le centre, autour de la place centrale, où se trouvent la plupart des hôtels.",
+          "L’Arenal culmine à 1 633 mètres et n’est plus entré en éruption depuis 2010. Le parc national, autour de 15 $ l’entrée pour un étranger, fait marcher sur les anciennes coulées de lave et dans la forêt, face au cône quand les nuages se lèvent. La plupart des voyageurs finissent la journée dans les sources chaudes et passent la nuit au village.",
+          "Le troisième jour, les ponts suspendus de Místico font traverser la forêt tropicale à hauteur des cimes : 32 $ plus les taxes en visite libre, à son rythme, pendant environ 2 heures. La visite guidée, avec longue-vue et guide naturaliste, coûte 54 $ plus les taxes pour 2 h 30 ; la même formule existe au crépuscule et de nuit, quand sortent les kinkajous et les reptiles."
+        ],
+        "tip": "La navette du jour suivant part à 6 h 45 : réglez la note de l’hôtel la veille au soir."
+      },
+      {
+        "id": "puerto-viejo",
+        "title": "Jours 9 à 12 — Puerto Viejo, la côte caraïbe",
+        "image": "costa-rica-puerto-viejo",
+        "paragraphs": [
+          "La plus longue étape traverse le pays d’ouest en est : la navette quitte La Fortuna à 6 h 45 et file jusqu’à Puerto Viejo de Talamanca pour 81,65 $. Ce village de pêcheurs devenu station de surf est le centre de la côte caraïbe sud, entre Cahuita au nord et Manzanillo au sud. On y croise descendants afro-caribéens, Costaricains indigènes et Européens installés, et la vague de Salsa Brava, juste devant le village, attire les surfeurs.",
+          "Pour dormir, trois choix : le centre du village, près de l’arrêt de bus, des restaurants et des bars ; Playa Negra, à environ 1,6 km au nord ; ou les plages de Playa Cocles, Playa Chiquita et Punta Uva, au sud. La route côtière est goudronnée jusqu’à Manzanillo : à vélo, c’est une balade plate et facile, que l’on peut écourter à Punta Uva.",
+          "Le bus local MEPE longe la côte de Limón à Manzanillo en passant par Cahuita et Puerto Viejo : comptez 1 025 colones de Puerto Viejo à Cahuita, payés en espèces au chauffeur, et 850 colones vers Cocles, Playa Chiquita, Punta Uva ou Manzanillo (tarifs de mai 2026)."
         ]
       },
       {
-        "id": "caraibes",
-        "title": "Jours 9 à 13 — La côte caraïbe, de Cahuita à Tortuguero",
+        "id": "cahuita",
+        "title": "Jour 10 — Cahuita, le récif au bout du sentier",
+        "image": "costa-rica-cahuita",
         "paragraphs": [
-          "Sur la côte caraïbe sud, le parc national de Cahuita reste l’exception : à l’entrée de Kelly Creek, on laisse un don, de 5 à 10 $ par personne selon les guides, au lieu d’un billet fixe. Son sentier côtier, plat, longe un récif de corail : c’est l’une des plus belles marches faciles du pays.",
-          "Plus au nord, Tortuguero ne s’atteint qu’en bateau ou en petit avion. L’entrée coûte 17 $ plus les taxes pour un adulte non-résident, en ligne uniquement, et la visite se fait surtout en bateau sur les canaux. Les tortues vertes y pondent de juillet à octobre, hors de la saison sèche de cet itinéraire."
+          "Cahuita est le parc animalier le moins cher du pays : à l’entrée de Kelly Creek, on laisse un don, de 5 à 10 $ par personne selon les guides, au lieu d’un billet. Son sentier côtier, plat de bout en bout, longe un récif de corail : c’est l’une des plus belles marches faciles du Costa Rica.",
+          "Environ 123 espèces de poissons vivent au large, avec des coraux et d’autres invertébrés ; à terre, le parc protège une forêt tropicale, des forêts marécageuses et des marais. Singes, iguanes et oiseaux se repèrent facilement le long du sentier."
+        ],
+        "tip": "Gardez des colones en espèces : le billet du bus local se paie directement au chauffeur, qui rend la monnaie."
+      },
+      {
+        "id": "retour-san-jose",
+        "title": "Jours 13 et 14 — Le bus du retour et la dernière nuit",
+        "paragraphs": [
+          "Le bus direct MEPE quitte Puerto Viejo tous les jours à 9 h, passe à Cahuita à 9 h 30 et arrive à San José à 13 h. D’autres départs quotidiens partent à 3 h et 5 h 30, et le samedi et le dimanche à 8 h. Le billet coûte 6 975 colones, soit environ 15,30 $ au taux de 455,60 colones pour un dollar ; le trajet de 215 km dure environ 4 h 30, avec une pause de 15 minutes au terminal de Limón.",
+          "MEPE accepte les réservations par téléphone, au +506 2257 8129, des mois à l’avance : la place reste bloquée jusqu’à 30 minutes avant le départ. À San José, le bus arrive au terminal MEPE, calle 12, entre les avenues 7 et 9, dans le quartier de Barrio México. Les travaux sur la route 32, entre San José et Limón, peuvent rallonger le trajet : gardez la dernière nuit à San José plutôt que de viser un vol le jour même.",
+          "Le dernier matin, le volcan Poás, à 1 h 30 de San José, est le cratère actif le plus facile d’accès d’Amérique centrale. L’entrée coûte 15 $ pour un adulte étranger et 5 $ de 2 à 12 ans ; le parc ouvre de 8 h à 16 h, avec une dernière entrée à 14 h, et le billet, vendu uniquement en ligne, donne une fenêtre d’arrivée d’environ 20 minutes. Le belvédère du cratère n’est qu’à quelques minutes de marche.",
+          "Pour voir les tortues, Tortuguero ne s’atteint qu’en bateau ou en petit avion. L’entrée coûte 17 $ plus les taxes pour un adulte non résident et 5 $ de 6 à 12 ans, en ligne uniquement ; les tortues vertes y pondent de juillet à octobre, en dehors de la saison sèche de cet itinéraire."
         ]
+      },
+      {
+        "id": "budget",
+        "title": "Le budget : 931 $ par personne à deux, hors repas",
+        "paragraphs": [
+          "Pour deux personnes qui partagent une chambre, deux semaines reviennent à environ 931 $ chacune, soit environ 836 € au taux de la Banque centrale européenne du 11 novembre 2026, sans les vols ni les repas. L’hébergement pèse le plus : en 2023, une nuit coûtait en moyenne 74 $ en hôtel une ou deux étoiles et 125 $ en trois étoiles, selon le suivi des prix de l’office du tourisme cité par The Rio Times, un plancher depuis la hausse des prix en dollars.",
+          "Au restaurant comme à l’hôtel, l’addition comprend déjà 13 % de taxe et 10 % de service. Tous postes confondus, le visiteur étranger moyen dépense environ 180 $ par nuit sur place."
+        ],
+        "table": {
+          "headers": [
+            "Poste, par personne",
+            "Prix"
+          ],
+          "rows": [
+            [
+              "4 navettes Interbus (aéroport → Manuel Antonio → Monteverde → La Fortuna → Puerto Viejo)",
+              "305,95 $"
+            ],
+            [
+              "Bus MEPE Puerto Viejo → San José (6 975 ₡)",
+              "15,31 $"
+            ],
+            [
+              "Bus local aller-retour Puerto Viejo – Cahuita (2 × 1 025 ₡)",
+              "4,50 $"
+            ],
+            [
+              "Parc national Manuel Antonio",
+              "18 $"
+            ],
+            [
+              "Ponts suspendus de Selvatura (hors taxe)",
+              "49 $"
+            ],
+            [
+              "Parc national du volcan Arenal",
+              "15 $"
+            ],
+            [
+              "Ponts suspendus de Místico, visite libre (hors taxes)",
+              "32 $"
+            ],
+            [
+              "Don au parc national de Cahuita",
+              "10 $"
+            ],
+            [
+              "13 nuits en chambre double 1-2 étoiles, à partir de 74 $ la nuit, divisées par deux",
+              "481 $"
+            ],
+            [
+              "Total par personne, hors repas et vols",
+              "930,76 $"
+            ]
+          ]
+        }
       },
       {
         "id": "saison",
         "title": "Quand partir",
         "paragraphs": [
-          "La saison sèche, que les Costaricains appellent l’été, va de décembre à avril : c’est la meilleure période pour les plages, les routes et la vue sur l’Arenal. La saison des pluies, l’« hiver », va de mai à novembre ; à Manuel Antonio, septembre et octobre sont les mois les plus arrosés, avec des averses l’après-midi. Mai, juin et novembre offrent un compromis, avec moins de monde."
+          "La saison sèche, que les Costaricains appellent l’été, va de décembre à avril : c’est la meilleure période pour les plages, les sentiers et la vue sur l’Arenal, et la haute saison de la réserve de Monteverde, où les créneaux partent vite. La saison des pluies, l’« hiver », va de mai à novembre ; à Manuel Antonio, septembre et octobre sont les mois les plus arrosés."
         ]
       }
     ],
     "faq": [
       {
-        "question": "Combien coûte l’entrée de Manuel Antonio et quand est-il fermé ?",
-        "answer": "18,08 $ par adulte (16 $ plus la TVA) et 5,65 $ par enfant de 2 à 12 ans, en ligne uniquement. Le parc est fermé le mardi et ouvert de 7 h à 16 h les autres jours."
+        "question": "Combien coûte un voyage de deux semaines au Costa Rica ?",
+        "answer": "Environ 931 $ par personne à deux, hors repas et vols : 305,95 $ de navettes Interbus, le bus du retour, quatre parcs ou ponts suspendus et 13 nuits en hôtel une ou deux étoiles à partir de 74 $ la chambre."
       },
       {
-        "question": "Peut-on faire cet itinéraire sans voiture ?",
-        "answer": "Oui : des navettes partagées relient chaque étape, et des bus partent de San José, du Terminal 7-10 pour La Fortuna et Monteverde, de Tracopa pour Manuel Antonio et de Mepe pour Cahuita."
+        "question": "Comment aller de Manuel Antonio à Monteverde sans voiture ?",
+        "answer": "En navette partagée Interbus : 84 $ par adulte, prise en charge à l’hôtel à 13 h 45, avec une pause de 20 minutes en route."
       },
       {
-        "question": "Quelle est la meilleure saison pour le Costa Rica ?",
-        "answer": "La saison sèche, de décembre à avril. Septembre et octobre sont les mois les plus pluvieux à Manuel Antonio."
+        "question": "Combien coûte l’entrée du parc Manuel Antonio ?",
+        "answer": "18 $ à partir de 13 ans, 5 $ de 2 à 12 ans, gratuit avant 2 ans. Billets en ligne uniquement, 600 visiteurs par jour, ouvert de 7 h à 16 h et fermé le mardi."
       },
       {
-        "question": "Faut-il réserver les parcs nationaux à l’avance ?",
-        "answer": "Oui pour Manuel Antonio, Poás et Tortuguero : les billets se vendent uniquement en ligne, et il n’y a pas de vente à l’entrée."
+        "question": "Comment aller de Puerto Viejo à San José en bus ?",
+        "answer": "Avec le bus direct MEPE : 6 975 colones, environ 4 h 30, départ quotidien à 9 h pour une arrivée à 13 h au terminal MEPE de Barrio México."
       }
     ],
     "sources": [
       {
-        "label": "Earthtrekkers — Manuel Antonio National Park (mise à jour du 5 octobre 2026)",
-        "url": "https://www.earthtrekkers.com/manuel-antonio-national-park/"
+        "label": "Interbus — réservation des navettes partagées et privées : tarifs et horaires relevés pour des départs en novembre 2026 (lu le 11/11/2026)",
+        "url": "https://book.interbusonline.com/apps/book/book.php"
       },
       {
-        "label": "Earthtrekkers — Costa Rica itinerary (mise à jour du 11 mai 2026)",
-        "url": "https://www.earthtrekkers.com/costa-rica-itinerary/"
+        "label": "Interbus — circuits multi-étapes (lu le 11/11/2026)",
+        "url": "https://book.interbusonline.com/apps/book/interbus-itineraries.php"
       },
       {
-        "label": "Earthtrekkers — First trip to Costa Rica (mise à jour du 5 mai 2026)",
-        "url": "https://www.earthtrekkers.com/costa-rica-tips/"
-      },
-      {
-        "label": "The Rio Times — Costa Rica national parks guide 2026 (19 août 2026)",
+        "label": "The Rio Times — Seven Costa Rica national parks and what each one costs (19 août 2026) (lu le 11/11/2026)",
         "url": "https://www.riotimesonline.com/costa-rica-national-parks-guide-2026/"
       },
       {
-        "label": "Wikivoyage — Costa Rica (bus et climat)",
+        "label": "The Rio Times — Costa Rica travel guide: costs (11 octobre 2026) (lu le 11/11/2026)",
+        "url": "https://www.riotimesonline.com/costa-rica-travel-guide-costs/"
+      },
+      {
+        "label": "The Tico Times — Monteverde Reserve caps daily visitors with online timed entry system (25 mars 2026) (lu le 11/11/2026)",
+        "url": "https://ticotimes.net/2026/03/25/monteverde-reserve-caps-daily-visitors-with-online-timed-entry-system"
+      },
+      {
+        "label": "Réserve de la forêt de nuages de Monteverde — visiter la réserve (lu le 11/11/2026)",
+        "url": "https://cloudforestmonteverde.com/visit-the-preserve/"
+      },
+      {
+        "label": "Réserve de la forêt de nuages de Monteverde — fonctionnement et accès (lu le 11/11/2026)",
+        "url": "https://cloudforestmonteverde.com/how-we-operate/"
+      },
+      {
+        "label": "Selvatura — ponts suspendus : horaires, durée et tarifs (lu le 11/11/2026)",
+        "url": "https://www.selvatura.com/tours/treetop-walkways-suspension-bridges/"
+      },
+      {
+        "label": "Místico — ponts suspendus de La Fortuna : visites et tarifs (lu le 11/11/2026)",
+        "url": "https://misticopark.com/"
+      },
+      {
+        "label": "Puerto Viejo Satellite — hausse des tarifs de bus au 26 mai 2026 (lu le 11/11/2026)",
+        "url": "https://www.puertoviejosatellite.com/en/blog/10157284876709586/"
+      },
+      {
+        "label": "Puerto Viejo Satellite — bus MEPE San José – Puerto Viejo, horaires confirmés le 8 janvier 2026 (lu le 11/11/2026)",
+        "url": "https://www.puertoviejosatellite.com/en/bus-to-puerto-viejo"
+      },
+      {
+        "label": "Puerto Viejo Satellite — transports locaux sur la côte caraïbe (tarifs de mai 2026) (lu le 11/11/2026)",
+        "url": "https://www.puertoviejosatellite.com/en/local-transport-caribbean-coast/"
+      },
+      {
+        "label": "ICT, office du tourisme du Costa Rica — guide de Cahuita et Puerto Viejo : accès et bus MEPE (lu le 11/11/2026)",
+        "url": "https://ict.go.cr/flipbook/guias/flip-en/MINIGUIA_CAHUITA_PTOVIEJO/files/basic-html/page6.html"
+      },
+      {
+        "label": "ICT — guide de Cahuita et Puerto Viejo : parc national de Cahuita (lu le 11/11/2026)",
+        "url": "https://ict.go.cr/flipbook/guias/flip-en/MINIGUIA_CAHUITA_PTOVIEJO/files/basic-html/page8.html"
+      },
+      {
+        "label": "Wikivoyage — Manuel Antonio National Park (accès, bus, climat) (lu le 11/11/2026)",
+        "url": "https://en.wikivoyage.org/wiki/Manuel_Antonio_National_Park"
+      },
+      {
+        "label": "Wikivoyage — Monteverde et Santa Elena (lu le 11/11/2026)",
+        "url": "https://en.wikivoyage.org/wiki/Monteverde"
+      },
+      {
+        "label": "Wikivoyage — La Fortuna (lu le 11/11/2026)",
+        "url": "https://en.wikivoyage.org/wiki/La_Fortuna"
+      },
+      {
+        "label": "Wikivoyage — Puerto Viejo de Talamanca (lu le 11/11/2026)",
+        "url": "https://en.wikivoyage.org/wiki/Puerto_Viejo_de_Talamanca"
+      },
+      {
+        "label": "Wikivoyage — Costa Rica (saisons) (lu le 11/11/2026)",
         "url": "https://fr.wikivoyage.org/wiki/Costa_Rica"
       },
       {
-        "label": "Wikivoyage — Costa Rica (routes et saisons)",
-        "url": "https://en.wikivoyage.org/wiki/Costa_Rica"
-      },
-      {
-        "label": "Banque centrale européenne — Taux de référence du 23 octobre 2026",
+        "label": "Banque centrale européenne — taux de référence du 11 novembre 2026 (1 € = 1,1127 $) (lu le 11/11/2026)",
         "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"
       }
     ]
