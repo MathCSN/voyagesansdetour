@@ -64,6 +64,7 @@ MUSIC_FADE_OUT = 1.5
 REEL_BUTTON = {"instagram": "Le guide complet → lien en bio", "facebook": "Le guide complet → voyagesansdetour.fr"}
 # The same file goes to Instagram, TikTok and Shorts: the address is spelled out, the bio is named.
 MOTION_BUTTON = "voyagesansdetour.fr → lien en bio"
+UNBALANCED = "Unbalanced highlight markers"
 # The charter forbids the defensive boilerplate that emptied the old posts.
 FORBIDDEN = ("sans récit", "voix de synthèse", "aucune approbation", "si possible",
              "ne suffit pas", "consultez les horaires et alertes", "aucun personnage virtuel")
@@ -244,33 +245,33 @@ def numbers(value):
     return set(re.findall(r"\d+", value))
 
 
-def check_motion_scene(scene, snapshots, first, last, fact_plans):
-    """One plan of a fast reel: a layout, one picture, text that is quoted from a dated snapshot."""
-    layout = scene.get("layout")
-    ensure(layout in motion.LAYOUTS and (layout == "hook") == first and (layout == "cta") == last, "First plan is the hook, last plan is the call to action")
+def check_motion_shape(scene, layout):
+    """Texts, focus, duration and table of one plan: what must hold before any source is read."""
     ensure(("photo" in scene) != ("clip" in scene), "Each plan shows one photo or one clip")
     ensure(isinstance(scene.get("headline"), list) and 1 <= len(scene["headline"]) <= 3, "Headline requires one to three lines")
     for line in scene["headline"]:
         text(line, 34)
-        ensure(line.count("*") % 2 == 0, "Unbalanced highlight markers")
     text(scene.get("kicker"), 32)
     for key, maximum in (("detail", 120), ("badge", 8), ("note", 60)):
         if scene.get(key) is not None:
             text(scene[key], maximum)
-    ensure((scene.get("detail") or "").count("*") % 2 == 0, "Unbalanced highlight markers")
+    ensure(all(line.count("*") % 2 == 0 for line in scene["headline"] + [scene.get("detail") or ""]), UNBALANCED)
     focus = scene.get("focus", [0.5, 0.5])
     ensure(isinstance(focus, list) and len(focus) == 2 and all(type(v) in (int, float) and 0 <= v <= 1 for v in focus), "Invalid photo focus")
     seconds = scene.get("seconds")
     ensure(type(seconds) in (int, float) and MOTION_SCENE_SECONDS[0] <= seconds <= MOTION_SCENE_SECONDS[1], "Scene duration invalid")
     ensure(abs(seconds * FPS - round(seconds * FPS)) < 1e-6, "Scene duration must use whole frames")
-    if "clip" in scene:
-        ensure(layout == "fact" and seconds <= clip_intake.CLIP_SECONDS, "A clip illustrates a fact and never runs past its own length")
+    ensure("clip" not in scene or (layout == "fact" and seconds <= clip_intake.CLIP_SECONDS), "A clip illustrates a fact and never runs past its own length")
     rows = scene.get("rows")
     ensure((rows is not None) == (layout == "table"), "Only the table plan carries rows")
     if rows is not None:
         ensure(isinstance(rows, list) and 3 <= len(rows) <= motion.MAX_ROWS and all(isinstance(r, list) and len(r) == 2 for r in rows), "Table needs three to six rows of two cells")
         for cell in (cell for row in rows for cell in row):
             text(cell, 60)
+
+
+def quoted_excerpts(scene, snapshots, last):
+    """The plan's quotes, each read word for word in its dated snapshot: (source ids, normalised excerpts)."""
     facts = scene.get("facts", [])
     ensure(isinstance(facts, list) and (facts or last), "Each scene needs at least one sourced fact")
     if facts:
@@ -280,20 +281,36 @@ def check_motion_scene(scene, snapshots, first, last, fact_plans):
         ensure(fact.get("source") in snapshots, "Unknown fact source: " + str(fact.get("source")))
         excerpt = normalized(text(fact.get("excerpt"), 400))
         ensure(excerpt in snapshots[fact["source"]][1], "Fact excerpt is not in its dated snapshot: " + excerpt)
-        used.add(fact["source"]); quoted.append(excerpt)
+        used.add(fact["source"])
+        quoted.append(excerpt)
+    return used, quoted
+
+
+def check_screen_text(scene, layout, quoted, snapshots, fact_plans):
+    """Nothing numeric reaches the screen unless the plan quotes it."""
+    parts = [(part, lit) for line in scene["headline"] + [scene.get("detail") or ""] for part, lit in (draw.segments(line) if line else [])]
     # What is highlighted on screen is a figure: it must be read in one of this plan's own excerpts.
     # The hook may also announce how many plans follow ("5 chiffres à connaître"), and nothing else in figures.
-    parts = [(part, lit) for line in scene["headline"] + [scene.get("detail") or ""] for part, lit in (draw.segments(line) if line else [])]
-    if layout != "cta":
-        for figure in [part for part, lit in parts if lit] + [cell for row in rows or [] for cell in row]:
-            announced = layout == "hook" and re.findall(r"\d+", figure) in ([], [str(fact_plans)])
-            ensure(announced or any(whole(shown(figure), excerpt) for excerpt in quoted), "Text on screen is not quoted from this plan's sources: " + figure)
+    figures = [] if layout == "cta" else [part for part, lit in parts if lit] + [cell for row in scene.get("rows") or [] for cell in row]
+    for figure in figures:
+        announced = layout == "hook" and re.findall(r"\d+", figure) in ([], [str(fact_plans)])
+        ensure(announced or any(whole(shown(figure), excerpt) for excerpt in quoted), "Text on screen is not quoted from this plan's sources: " + figure)
     # Plain text may not smuggle a number either: every number read on a plan is in that plan's own quotes.
     # The guide's title, on the hook and the call, may also carry a number read anywhere on the dated page.
-    allowed = numbers(" ".join(quoted)) | (numbers(" ".join(text for _, text in snapshots.values())) if layout in ("hook", "cta") else set())
-    for part, lit in parts:
-        if not lit:
-            ensure(numbers(shown(part)) <= allowed, "Number on screen is not in this plan's sources: " + part)
+    allowed = numbers(" ".join(quoted))
+    if layout in ("hook", "cta"):
+        allowed |= numbers(" ".join(page for _, page in snapshots.values()))
+    for part in (part for part, lit in parts if not lit):
+        ensure(numbers(shown(part)) <= allowed, "Number on screen is not in this plan's sources: " + part)
+
+
+def check_motion_scene(scene, snapshots, first, last, fact_plans):
+    """One plan of a fast reel: a layout, one picture, text that is quoted from a dated snapshot."""
+    layout = scene.get("layout")
+    ensure(layout in motion.LAYOUTS and (layout == "hook") == first and (layout == "cta") == last, "First plan is the hook, last plan is the call to action")
+    check_motion_shape(scene, layout)
+    used, quoted = quoted_excerpts(scene, snapshots, last)
+    check_screen_text(scene, layout, quoted, snapshots, fact_plans)
     return used
 
 
@@ -301,7 +318,7 @@ def check_scene(scene, kind, snapshots, last):
     ensure(isinstance(scene.get("headline"), list) and 1 <= len(scene["headline"]) <= 3, "Headline requires one to three lines")
     for line in scene["headline"]:
         text(line, 34)
-        ensure(line.count("*") % 2 == 0, "Unbalanced highlight markers")
+        ensure(line.count("*") % 2 == 0, UNBALANCED)
     text(scene.get("kicker"), 32)
     if scene.get("detail") is not None:
         text(scene["detail"], 120)

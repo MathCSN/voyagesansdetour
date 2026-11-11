@@ -701,7 +701,7 @@ def generate(root: Path = HERE, site: Path = SITE, now: dt.datetime | None = Non
                     break
                 except Held as error:
                     held.append({"slug": article["slug"], "channel": channel.name, "kind": kind, "reason": str(error)})
-                except (p.Invalid, OSError, ValueError, KeyError, TypeError) as error:
+                except (OSError, ValueError, KeyError, TypeError) as error:  # a guard refusal (p.Invalid) is a ValueError
                     # One guide that breaks (odd data, a file that will not download) never stops the others.
                     held.append({"slug": article["slug"], "channel": channel.name, "kind": kind,
                                  "reason": "error: " + type(error).__name__ + ": " + str(error)[:120]})

@@ -110,7 +110,7 @@ class Photos:
             return None
         try:
             record = self.download(candidate["id"], title)
-        except (photo_intake.Refused, OSError, ValueError, KeyError):
+        except (OSError, ValueError, KeyError):  # a refusal (photo_intake.Refused) is a ValueError
             self.refused.add(title)
             return None
         self.created.append(self.root / record["file"])
@@ -172,7 +172,7 @@ class Clips:
             if candidate["sourcePage"] not in self.known:
                 try:
                     record = self.download(clip_intake.clip_id_for(place, candidate), candidate)
-                except (photo_intake.Refused, OSError, ValueError, KeyError):
+                except (OSError, ValueError, KeyError):  # a refusal (photo_intake.Refused) is a ValueError
                     continue
                 self.created.append(self.root / record["file"])
                 self.known[candidate["sourcePage"]] = (clip_intake.clip_id_for(place, candidate), record)
