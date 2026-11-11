@@ -228,11 +228,23 @@
       "path": null,
       "place": "Nord"
     },
+    "paco|portugal": {
+      "checkedOn": "2026-11-11",
+      "country": "Portugal",
+      "path": null,
+      "place": "Paço"
+    },
     "pena|portugal": {
       "checkedOn": "2026-10-24",
       "country": "Portugal",
       "path": null,
       "place": "Pena"
+    },
+    "penha|portugal": {
+      "checkedOn": "2026-11-11",
+      "country": "Portugal",
+      "path": "penha-l206944",
+      "place": "Penha"
     },
     "pinhao|portugal": {
       "checkedOn": "2026-10-24",

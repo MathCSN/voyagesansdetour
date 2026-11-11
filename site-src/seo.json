@@ -125,15 +125,22 @@
       ]
     },
     "guimaraes-une-journee-sans-voiture": {
-      "title": "Guimarães en une journée depuis Porto, sans voiture",
+      "title": "Guimarães en une journée depuis Porto : prix 2026",
+      "description": "Guimarães en un jour depuis Porto : train CP à 3,60 €, Paço dos Duques et château pour 13 €, téléphérique de la Penha et où manger.",
+      "faq": [
+        {
+          "question": "Combien coûte le train de Porto à Guimarães ?",
+          "answer": "3,60 € l’aller simple en train urbain CP (8 zones, tarif 2026), plus 0,50 € de carte rechargeable, pour environ 1 h 15 de trajet."
+        },
+        {
+          "question": "Combien coûte le téléphérique de Guimarães ?",
+          "answer": "5 € l’aller et 10 € l’aller-retour pour un adulte, tous les jours de 10 h à 17 h 30, sauf par mauvais temps."
+        }
+      ],
       "links": [
         {
           "phrase": "Porto São Bento",
           "slug": "porto-3-jours-sans-voiture"
-        },
-        {
-          "phrase": "votre solution pour les bagages",
-          "slug": "portugal-sans-voiture-bagages"
         }
       ]
     },

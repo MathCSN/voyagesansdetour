@@ -1,5 +1,6 @@
-// Lecture signée du résumé de référencement tenu par le panneau privé : clics, impressions,
-// requêtes en hausse et pages indexées. Lecture seule ; un échec n'arrête jamais le rapport.
+// Lecture signée du résumé tenu par le panneau privé : clics, impressions, requêtes en hausse,
+// pages indexées, et état du moteur de publication (canaux Buffer, dernier passage, posts bloqués).
+// Lecture seule ; un échec n'arrête jamais le rapport.
 import { randomUUID } from 'node:crypto';
 import { writeFile } from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
@@ -47,10 +48,52 @@ function checkedIndexation(index) {
   };
 }
 
+// État du moteur de publication : états pris dans des listes fermées, compteurs, dates ISO en UTC.
+// Un identifiant de post ou un code de motif s'écrit dans le rapport entre accents graves : il ne
+// contient donc ni accent grave, ni espace, ni rien d'autre que les signes ci-dessous.
+const CHANNELS = ['instagram', 'facebook', 'tiktok'];
+const CHANNEL_STATES = ['connected', 'absent', 'disconnected', 'locked', 'paused'];
+const JOB_STATES = ['ready', 'submitting', 'scheduled', 'published', 'to_verify', 'held', 'failed'];
+const TROUBLE_STATES = ['held', 'failed'];
+const POSTS_LISTED = 10;
+const isRecord = value => value !== null && typeof value === 'object' && !Array.isArray(value);
+const postId = value => (typeof value === 'string' && /^[A-Za-z0-9:._-]{1,128}$/.test(value) ? value : null);
+const reasonCode = value => (typeof value === 'string' && /^[a-z0-9_]{1,48}$/.test(value) ? value : 'autre');
+const instant = value => (typeof value === 'string' && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,3})?Z$/.test(value) && Number.isFinite(Date.parse(value)) ? value : null);
+const channelState = value => (CHANNEL_STATES.includes(value) ? value : 'unknown');
+const posts = (value, shape) => list(value, POSTS_LISTED).map(post => (isRecord(post) ? shape(post) : null)).filter(Boolean);
+
+function troublePost(post) {
+  const id = postId(post.id), at = instant(post.at);
+  if (!id || !at || !CHANNELS.includes(post.channel) || !TROUBLE_STATES.includes(post.state)) return null;
+  return { id, channel: post.channel, state: post.state, reason: reasonCode(post.reason), at };
+}
+
+function riskPost(post) {
+  const id = postId(post.id), dueAt = instant(post.dueAt);
+  if (!id || !dueAt || !CHANNELS.includes(post.channel)) return null;
+  return { id, channel: post.channel, dueAt, channelState: channelState(post.channelState) };
+}
+
+/** null tant que le panneau n'envoie pas ce bloc (version antérieure) ou l'envoie mal formé. */
+function checkedPublication(publication) {
+  if (!isRecord(publication) || typeof publication.enabled !== 'boolean' || !isRecord(publication.counts)) return null;
+  const problems = posts(publication.problems, troublePost), atRisk = posts(publication.atRisk, riskPost);
+  return {
+    enabled: publication.enabled,
+    // null : aucun accès Buffer enregistré dans le panneau.
+    channels: isRecord(publication.channels) ? Object.fromEntries(CHANNELS.map(channel => [channel, channelState(publication.channels[channel])])) : null,
+    lastPassAt: instant(publication.lastPassAt),
+    counts: Object.fromEntries(JOB_STATES.map(state => [state, countOr(publication.counts[state], 0)])),
+    problems, problemsCount: Math.max(problems.length, countOr(publication.problemsCount, 0)),
+    atRisk, atRiskCount: Math.max(atRisk.length, countOr(publication.atRiskCount, 0)),
+  };
+}
+
 /** Garde les seuls champs attendus, avec leurs types : la réponse ne porte aucune consigne. */
 export function checkedSeo(data) {
   if (data?.kind !== 'seo' || data.status !== 'reported') throw new SeoError('response_unexpected');
-  return { search: checkedSearch(data.search), indexation: checkedIndexation(data.indexation) };
+  return { search: checkedSearch(data.search), indexation: checkedIndexation(data.indexation), publication: checkedPublication(data.publication) };
 }
 
 export async function readSeo({ env = process.env, fetcher = fetch, clock = Date.now, nonce = randomUUID } = {}) {
@@ -75,6 +118,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
     const seo = await readSeo();
     await writeFile(process.env.VSD_REPORT_SEO, JSON.stringify(seo) + '\n');
     console.log(`Référencement relevé : ${seo.search ? seo.search.clicks + ' clics' : 'clics indisponibles'}, ${seo.indexation ? seo.indexation.indexed + ' pages indexées' : 'indexation indisponible'}.`);
+    console.log(seo.publication ? `Moteur de publication relevé : dernier passage ${seo.publication.lastPassAt ?? 'inconnu'}.` : 'Moteur de publication non relevé (panneau pas encore à jour).');
   } catch (error) {
     // Le rapport s'écrit quand même ; il dira que le relevé manque.
     console.log('Référencement non relevé : ' + (error instanceof SeoError ? error.code : 'erreur') + '.');

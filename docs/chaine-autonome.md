@@ -170,6 +170,23 @@ Secrets : `VSD_ADMIN_TICK_KEY` (appels signés du panneau privé), `CLOUDFLARE_W
   signé en lecture seule. L'alerte se lève aussi si l'indexation recule sur 7 jours ou si les
   impressions sont divisées par deux. Après chaque déploiement, `indexnow.py` prévient Bing et
   Yandex des pages changées.
+- **Publication** : le même appel signé rapporte l'état du moteur du panneau (section
+  « Publication » du rapport : état de chaque canal Buffer, dernier passage, posts par état, posts
+  retenus ou en échec, posts prêts dont le canal ne reçoit rien). L'alerte se lève aussi dans les
+  cas ci-dessous et retombe d'elle-même quand la cause disparaît. Si le panneau ne répond pas ou
+  n'envoie pas encore ce bloc, le rapport le dit et aucune alerte de publication n'est levée.
+
+  | Alerte | Déclenchement | Quoi faire |
+  | --- | --- | --- |
+  | Canal coupé | Instagram, Facebook ou TikTok déconnecté, verrouillé ou en pause dans Buffer (Instagram ou Facebook absent compte aussi ; TikTok absent non, il est facultatif) | Buffer, publish.buffer.com > Channels : reconnecter le canal, le déverrouiller ou relancer sa file. Le moteur relit les canaux à chaque passage : rien d'autre à faire. |
+  | Moteur silencieux | Aucun passage du moteur depuis plus de 6 heures (il passe à :37 et :52 de chaque heure), ou moteur désactivé | Page Publication du panneau, puis logs du Worker. Causes habituelles : clé Buffer refusée (la recoller page Connexions), Buffer injoignable, tâche planifiée arrêtée. |
+  | Accès Buffer absent | Aucune clé Buffer enregistrée dans le panneau | Page Connexions du panneau. |
+  | Posts bloqués | Un post retenu ou en échec depuis moins de 7 jours (un lot retiré du stock exprès ne compte pas) | Page Publication du panneau : lire le motif. Échéance dépassée : le post est perdu, corriger la cause (canal, clé) pour les suivants. L'alerte tombe 7 jours après le blocage. |
+  | Posts menacés | Un post prêt à moins de 24 h de son échéance sur un canal qui ne reçoit rien | Rétablir le canal avant l'échéance, sinon le post sera retenu. |
+
+  Les posts TikTok ne lèvent aucune alerte tant que TikTok est absent de Buffer (réseau facultatif) :
+  ils restent listés dans la section « Publication ». Non couvert : un post resté « à vérifier »
+  (envoi au résultat incertain) ; il se lit dans les compteurs du registre.
 - Limite : la preuve de publication Instagram/Facebook n'est pas lisible depuis GitHub
   (pas d'API publique). Le rapport liste les posts dont l'échéance est passée ; la preuve
   est dans le panneau privé et sur les profils.
