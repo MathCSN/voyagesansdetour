@@ -340,8 +340,8 @@ class StockAndIntake(unittest.TestCase):
         self.assertEqual(social_stock.payload_kind({"kind": "reel", "channel": "instagram"}), "reel")
 
     def test_cross_posts_stay_off_until_switched_on(self):
-        # The shipped cadence.json: TikTok is switched on only once the panel that accepts it is deployed.
-        self.assertEqual(social_stock.enabled_crossposts(), {})
+        # The shipped cadence.json: TikTok alone is on (panel deployed and channel seen connected on 2026-11-11).
+        self.assertEqual(social_stock.enabled_crossposts(), {"tiktok": dt.timedelta(hours=1)})
         with tempfile.TemporaryDirectory() as folder:
             path = Path(folder) / "cadence.json"
             path.write_text(json.dumps({"crossposts": {"tiktok": {"enabled": True, "delayHours": 1}, "youtube": {"enabled": False}, "snapchat": {"enabled": True}}}))

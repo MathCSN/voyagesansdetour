@@ -199,7 +199,7 @@ Ce que disent les données :
 | Instagram | 1 reel le mercredi à 17 h UTC | 2 reels : mardi 19 h et dimanche 21 h (Paris) | 4 posts : + carrousel le jeudi 9 h et reel le vendredi 18 h |
 | Facebook | 2 lots photos, jeudi et dimanche 17 h UTC | 2 lots photos, jeudi et dimanche 18 h (Paris) | Inchangé tant que la Page n'a pas d'abonnés ; y ajouter le reel en cross-post |
 | Pinterest | 1 épingle par tableau et par semaine, 1 par guide | 1 par jour au plus, 1 par tableau tous les 3 jours, 3 visuels par guide à 14 jours d'écart | Idem |
-| TikTok | Aucun compte | Prêt, éteint : chaque reel rapide une heure après Instagram | Les mêmes reels qu'Instagram : 2 par semaine, puis 3 |
+| TikTok | Aucun compte | Allumé le 11/11/2026 : chaque reel rapide une heure après Instagram | Les mêmes reels qu'Instagram : 2 par semaine, puis 3 |
 
 Les créneaux sont dans `.github/vsd-production/cadence.json`, en heure de Paris (l'heure d'été
 est suivie). Les créneaux libres des trois prochaines semaines sont comblés, y compris entre
@@ -285,7 +285,8 @@ est accepté au format `reel` ; l'envoi à Buffer porte `metadata.tiktok.isAiGen
 Buffer sont relus à chaque passage avec la clé déjà enregistrée : pas de clé à recoller. Canal
 TikTok absent ou déconnecté : seuls les posts TikTok attendent, Instagram et Facebook partent.
 
-**Ordre d'allumage** :
+**Ordre d'allumage**, suivi le 11/11/2026 (panneau déployé, version `9d779131` ; canal TikTok
+`@voyagesansdetour` relu connecté par le panneau ; `crossposts.tiktok.enabled` passé à `true`) :
 
 1. fusionner et déployer le panneau (`cd ~/vsd-admin && git pull && npm run deploy`, par Mathis) ;
 2. vérifier page Connexions du panneau que la ligne Buffer cite le compte TikTok ;
@@ -304,7 +305,8 @@ puis expirent.
 [Using TikTok with Buffer](https://support.buffer.com/article/559-using-tiktok-with-buffer)
 (2 200 signes, 5 hashtags, 25 posts par 24 heures, publication automatique des vidéos).
 
-**Non vérifié** : la présence du canal TikTok dans le Buffer du blog ; l'envoi réel d'une vidéo
+**Vérifié le 11/11/2026** : le canal TikTok `@voyagesansdetour` est dans le Buffer du blog,
+connecté, ni verrouillé ni en pause (relu par le panneau). **Non vérifié** : l'envoi réel d'une vidéo
 (prouvé par le schéma et la documentation, pas par un post) ; qu'un compte TikTok récent en
 publication automatique publie bien en public (l'aide Buffer dit « publicly by default » et
 demande un compte public).

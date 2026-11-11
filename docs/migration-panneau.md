@@ -124,7 +124,9 @@ chiffre porte sa source et sa date. Aucun texte de configuration figé.
 | État des workflows GitHub | API GitHub publique du dépôt (lecture, mise en cache) | aucun |
 | Ce qui attend Mathis | `.github/vsd-control/attente-mathis.json` | aucun |
 
-TikTok et YouTube n'apparaissent pas : le blog ne les utilise pas.
+TikTok est le troisième canal Buffer depuis le 11/11/2026 (copie de chaque reel Instagram, voir
+`docs/strategie-videos.md`, « TikTok : ce qui est branché »). YouTube n'apparaît pas : le blog ne
+l'utilise pas.
 
 ## 5. Les accès que Mathis doit donner
 
