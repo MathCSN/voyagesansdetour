@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "timezone": "Europe/Paris",
-  "note": "Créneaux en heure de Paris. weeklyLimit suit le plafond du panneau vsd-admin (POLICY.cadenceLimit, 2 posts par réseau sur 7 jours au 11/11/2026). Les créneaux \"enabled\": false sont la cadence cible de docs/strategie-videos.md : les activer avec weeklyLimit à 4 une fois le plafond du panneau relevé.",
+  "note": "Créneaux en heure de Paris. weeklyLimit ne doit jamais dépasser le plafond du panneau vsd-admin : 2 posts par réseau sur 7 jours dans la version en ligne au 11/11/2026 ; Instagram 4, Facebook 2, TikTok 4 (POLICY.weeklyLimit) une fois vsd-admin PR 2 déployée. Les créneaux \"enabled\": false sont la cadence cible de docs/strategie-videos.md : les activer avec weeklyLimit à 4 après ce déploiement.",
   "channels": {
     "instagram": {
       "weeklyLimit": 2,
@@ -55,7 +55,7 @@
     "perReel": 2
   },
   "crossposts": {
-    "note": "Le même reel sur d'autres réseaux. Éteints tant que le panneau vsd-admin n'accepte pas ces formats (docs/strategie-videos.md, « TikTok et Shorts »).",
+    "note": "Le même reel rapide sur d'autres réseaux, delayHours après le créneau Instagram. TikTok : passer enabled à true seulement après le déploiement du panneau qui l'accepte (vsd-admin PR 2), sinon l'import quotidien du stock sort en erreur. YouTube et Facebook : le panneau ne les accepte pas, laisser false. Voir docs/strategie-videos.md, « TikTok : ce qui est branché ».",
     "tiktok": {
       "enabled": false,
       "delayHours": 1

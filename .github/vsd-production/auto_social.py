@@ -56,6 +56,7 @@ REPOST_COOLDOWN = dt.timedelta(days=42)
 CROSS_CHANNEL_GAP = dt.timedelta(days=4)
 MAX_GUIDE_SOURCE_AGE = dt.timedelta(days=45)
 MAX_NEW_PER_RUN = 6                    # what one workflow run renders
+CAPTION_MAX = 1000                     # a short, lively caption: past this, detail lines are dropped (never under three)
 TITLE_WIDTHS = (34, 24, 18)            # characters per headline line, tried in turn until the layout fits
 REEL_TITLE_WIDTHS = (16, 20, 25)       # a reel hook is read in a second: two short lines in large type first
 USER_AGENT = {"User-Agent": "VoyageSansDetour-social/1.0 (contact@voyagesansdetour.fr)"}
@@ -486,7 +487,17 @@ def build(root: Path, article: dict, channel: Post, slot: dt.datetime, now: dt.d
     if start is not None:
         scenario["musicStart"] = start
     scenario["assets"] = assets
-    return scenario, inputs
+    return fitted_caption(scenario, {}), inputs
+
+
+def fitted_caption(scenario: dict, clips: dict) -> dict:
+    """The scenario with its written caption within CAPTION_MAX: detail lines are dropped from the end, never under three."""
+    lines = scenario["caption"]["lines"]
+    for count in range(len(lines), p.CAPTION_LINES[0] - 1, -1):
+        candidate = scenario if count == len(lines) else {**scenario, "caption": {**scenario["caption"], "lines": lines[:count]}}
+        if len(p.caption(candidate, {"clips": clips})) <= CAPTION_MAX:
+            return candidate
+    raise Held("caption_too_long")
 
 
 def reel_title_lines(article: dict, width: int) -> list[str]:
@@ -544,7 +555,7 @@ def build_reel(root: Path, article: dict, slot: dt.datetime, now: dt.datetime, t
     }
     if used_clips:
         scenario["clips"] = {"file": f"{folder}/clips.json", "sha256": p.digest(inputs[f"{folder}/clips.json"])}
-    return scenario, inputs
+    return fitted_caption(scenario, {clip_id: record for clip_id, record in clips if clip_id in used_clips}), inputs
 
 
 def json_bytes(value) -> bytes:

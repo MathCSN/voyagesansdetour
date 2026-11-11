@@ -165,6 +165,25 @@ class GeneratorTests(unittest.TestCase):
         catalogue = json.loads((f.root / "catalogue.json").read_text())
         self.assertEqual({i["contentId"] for i in catalogue["items"]}, {c["id"] for c in result["created"]})
 
+    def test_a_caption_never_runs_past_a_thousand_characters(self):
+        line = "📍 " + "x" * 140
+        scenario = {"kind": "reel", "channel": "instagram", "id": "ig-" + "a" * 70 + "-2026-11-15",
+                    "caption": {"hook": "💶 " + "h" * 140, "lines": [line] * 5, "cta": "c" * 150, "hashtags": ["#Japon", "#Voyage"]}}
+        self.assertGreater(len(p.caption(scenario, {})), a.CAPTION_MAX)
+        fitted = a.fitted_caption(scenario, {})
+        self.assertEqual(fitted["caption"]["lines"], [line] * 3)  # detail lines go first, never fewer than three
+        self.assertLessEqual(len(p.caption(fitted, {})), a.CAPTION_MAX)
+        self.assertEqual(len(scenario["caption"]["lines"]), 5)  # the draft itself is left as it was
+        short = {**scenario, "caption": {**scenario["caption"], "lines": ["📍 court"] * 5}}
+        self.assertIs(a.fitted_caption(short, {}), short)
+        with self.assertRaisesRegex(a.Held, "caption_too_long"):
+            a.fitted_caption({**scenario, "caption": {**scenario["caption"], "lines": [line + "y" * 17] * 5, "cta": "c" * 160}}, {})
+        # Every post the generator queues goes through it.
+        f = self.fixture()
+        for created in f.run(limit=3)["created"]:
+            made = f.scenario(created["id"])
+            self.assertLessEqual(len(p.caption(made, {})), a.CAPTION_MAX)
+
     def test_a_fast_reel_opens_on_its_promise_and_stays_short(self):
         reel = self.reel(self.fixture())
         hook, facts, call = reel["scenes"][0], reel["scenes"][1:-1], reel["scenes"][-1]

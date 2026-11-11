@@ -86,12 +86,16 @@ class ProductionGuards(unittest.TestCase):
             kinds.add(scenario["kind"])
         self.assertEqual(kinds, {"reel", "carousel"})
 
+    # Queued on 11/11/2026 two characters over, before auto_social.py kept every caption under the limit
+    # (fitted_caption). A queued post is never rewritten: the exception is named, the limit stays for all others.
+    LONGER_QUEUED_CAPTIONS = {"ig-japon-budget-2-semaines-2026-11-15": 1002}
+
     def test_caption_is_short_and_lively_with_one_credit_line(self):
         for _, _, scenario in p.catalogue_entries(self.root):
             info = p.validate_scenario(scenario, self.root, within_review(scenario))
             text = p.caption(scenario, info)
             self.assertTrue(text.startswith(scenario["caption"]["hook"]))
-            self.assertLessEqual(len(text), 1000)
+            self.assertLessEqual(len(text), self.LONGER_QUEUED_CAPTIONS.get(scenario["id"], 1000), scenario["id"])
             self.assertEqual(text.count("crédits : "), 1)
             self.assertIn(p.credits_url(scenario), text)
             self.assertNotIn("CC BY-SA", text)
@@ -336,30 +340,114 @@ class StockAndIntake(unittest.TestCase):
         self.assertEqual(social_stock.payload_kind({"kind": "reel", "channel": "instagram"}), "reel")
 
     def test_cross_posts_stay_off_until_switched_on(self):
-        self.assertEqual(social_stock.enabled_crossposts(), {})  # the shipped cadence.json: the panel does not take these formats yet
+        # The shipped cadence.json: TikTok is switched on only once the panel that accepts it is deployed.
+        self.assertEqual(social_stock.enabled_crossposts(), {})
         with tempfile.TemporaryDirectory() as folder:
             path = Path(folder) / "cadence.json"
             path.write_text(json.dumps({"crossposts": {"tiktok": {"enabled": True, "delayHours": 1}, "youtube": {"enabled": False}, "snapchat": {"enabled": True}}}))
             self.assertEqual(social_stock.enabled_crossposts(path), {"tiktok": dt.timedelta(hours=1)})
 
+    FAST_REEL = "output/ig-japon-budget-2-semaines-2026-11-15"
+
+    def fast_reel(self):
+        folder = p.HERE / self.FAST_REEL
+        return folder, json.loads((folder / "scenario.json").read_text())
+
     def test_a_cross_post_is_the_same_reel_with_its_own_identity_slot_and_caption(self):
-        folder = p.HERE / "output/ig-vietnam-itineraire-15-jours-2026-11-25"
-        scenario = json.loads((folder / "scenario.json").read_text())
+        folder, scenario = self.fast_reel()
         main = social_stock.build_batch(scenario, folder, scenario["review"]["checkedAt"])["items"][0]
-        for channel, kind in (("tiktok", "video"), ("youtube", "short"), ("facebook", "reel")):
+        for channel, kind in (("tiktok", "reel"), ("youtube", "short"), ("facebook", "reel")):
             batch = social_stock.build_crosspost(scenario, folder, scenario["review"]["checkedAt"], channel, dt.timedelta(hours=2))
             item = batch["items"][0]
+            text = item["payload"]["text"]
             self.assertEqual(batch["batchId"], f"{scenario['id']}-{channel}-v1")
             self.assertEqual((item["payload"]["channel"], item["payload"]["kind"]), (channel, kind))
             self.assertEqual(item["payload"]["assets"], main["payload"]["assets"])
             self.assertEqual(p.instant(item["dueAt"]) - p.instant(main["dueAt"]), dt.timedelta(hours=2))
             self.assertNotEqual(item["contentId"], main["contentId"])
+            self.assertEqual(item["review"]["contentId"], item["contentId"])
             self.assertEqual(item["review"]["payloadRevision"], social_stock.payload_revision(item["payload"]))
-            self.assertEqual("bio" in item["payload"]["text"], channel == "tiktok")
+            self.assertNotIn("lien dans la bio", text)
+            self.assertNotIn("ce reel", text)
+            self.assertIn("crédits : " + p.credits_url(scenario), text)
             if channel != "tiktok":
-                self.assertIn("Le guide complet : " + scenario["targetUrl"], item["payload"]["text"])
+                self.assertIn("Le guide complet : " + scenario["targetUrl"], text)
         with self.assertRaisesRegex(p.Invalid, "Only an Instagram reel"):
             social_stock.build_crosspost({**scenario, "kind": "carousel"}, folder, scenario["review"]["checkedAt"], "tiktok", dt.timedelta(hours=1))
+
+    def test_tiktok_copy_names_the_site_and_cites_the_tiktok_documentation(self):
+        folder, scenario = self.fast_reel()
+        main = social_stock.build_batch(scenario, folder, scenario["review"]["checkedAt"])["items"][0]
+        item = social_stock.build_crosspost(scenario, folder, scenario["review"]["checkedAt"], "tiktok", dt.timedelta(hours=1))["items"][0]
+        text = item["payload"]["text"]
+        # Same facts, same credits, same hashtags; only the call to action changes: no clickable link in a TikTok caption.
+        self.assertIn("📌 Enregistrez cette vidéo pour votre voyage. 🔗 Prix, horaires et détails : le guide complet sur voyagesansdetour.fr", text)
+        self.assertNotIn(scenario["targetUrl"], text)
+        self.assertEqual(text.replace(social_stock.CROSSPOSTS["tiktok"]["cta"], scenario["caption"]["cta"]), main["payload"]["text"])
+        self.assertLessEqual(len(text), 2200)
+        self.assertLessEqual(len(social_stock.HASHTAG.findall(text)), 5)
+        self.assertIs(item["payload"]["aiGenerated"], False)
+        self.assertEqual(item["review"]["formatCapability"]["sourceUrls"], social_stock.CROSSPOST_DOCS["tiktok"])
+        self.assertTrue(any("TikTokPostMetadataInput" in url for url in social_stock.CROSSPOST_DOCS["tiktok"]))
+        self.assertEqual(p.instant(item["dueAt"]), p.instant(scenario["publishAt"]) + dt.timedelta(hours=1))
+
+    def test_tiktok_copy_over_tiktok_limits_is_refused(self):
+        folder, scenario = self.fast_reel()
+        with tempfile.TemporaryDirectory() as temporary:
+            copy_ = Path(temporary) / scenario["id"]
+            copy_.mkdir()
+            for name in ("reel.mp4", "receipt.json"):
+                os.link(folder / name, copy_ / name)
+            caption = (folder / "legende.txt").read_text()
+            (copy_ / "legende.txt").write_text(caption.rstrip("\n") + " #Tokyo #Kyoto\n")
+            with self.assertRaisesRegex(p.Invalid, "hashtags"):
+                social_stock.build_crosspost(scenario, copy_, scenario["review"]["checkedAt"], "tiktok", dt.timedelta(hours=1))
+            # The same caption stays fine where the limit does not exist.
+            social_stock.build_crosspost(scenario, copy_, scenario["review"]["checkedAt"], "youtube", dt.timedelta(hours=1))
+            (copy_ / "legende.txt").write_text(caption.replace("\n\n📌", "\n" + "x" * 2200 + "\n\n📌"))
+            with self.assertRaisesRegex(p.Invalid, "2200"):
+                social_stock.build_crosspost(scenario, copy_, scenario["review"]["checkedAt"], "tiktok", dt.timedelta(hours=1))
+
+    def test_an_old_slow_reel_is_not_cross_posted(self):
+        folder = p.HERE / "output/ig-vietnam-itineraire-15-jours-2026-11-25"
+        scenario = json.loads((folder / "scenario.json").read_text())
+        with self.assertRaisesRegex(p.Invalid, "Only a fast reel"):
+            social_stock.build_crosspost(scenario, folder, scenario["review"]["checkedAt"], "tiktok", dt.timedelta(hours=1))
+
+    def test_a_reel_queued_before_a_network_was_switched_on_gets_its_copy_later(self):
+        folder, scenario = self.fast_reel()
+        entry = {"batchId": scenario["id"] + "-v1"}
+        index = {"items": [entry], "retirements": []}
+        on = {"tiktok": dt.timedelta(hours=1)}
+        due = p.instant(scenario["publishAt"])
+        early = due - dt.timedelta(days=3)
+        batches = social_stock.later_crossposts(scenario, folder, index, on, early)
+        self.assertEqual([batch["batchId"] for batch in batches], [scenario["id"] + "-tiktok-v1"])
+        admitted = json.loads((social_stock.STOCK / (scenario["id"] + "-v1.json")).read_text())["items"][0]
+        self.assertEqual(batches[0]["items"][0]["payload"]["assets"], admitted["payload"]["assets"])
+        # Nothing when the network is off, the copy exists, the slot is too close, or the reel was withdrawn or never queued.
+        self.assertEqual(social_stock.later_crossposts(scenario, folder, index, {}, early), [])
+        twice = {**index, "items": [entry, {"batchId": scenario["id"] + "-tiktok-v1"}]}
+        self.assertEqual(social_stock.later_crossposts(scenario, folder, twice, on, early), [])
+        self.assertEqual(social_stock.later_crossposts(scenario, folder, index, on, due - dt.timedelta(hours=20)), [])
+        retired = {**index, "retirements": [{"batchId": entry["batchId"]}]}
+        self.assertEqual(social_stock.later_crossposts(scenario, folder, retired, on, early), [])
+        self.assertEqual(social_stock.later_crossposts(scenario, folder, {"items": [], "retirements": []}, on, early), [])
+        old = p.HERE / "output/ig-vietnam-itineraire-15-jours-2026-11-25"
+        old_scenario = json.loads((old / "scenario.json").read_text())
+        old_index = {"items": [{"batchId": old_scenario["id"] + "-v1"}], "retirements": []}
+        self.assertEqual(social_stock.later_crossposts(old_scenario, old, old_index, on, p.instant(old_scenario["publishAt"]) - dt.timedelta(days=3)), [])
+
+    def test_a_copy_never_points_to_a_file_other_than_the_one_already_public(self):
+        folder, scenario = self.fast_reel()
+        index = {"items": [{"batchId": scenario["id"] + "-v1"}], "retirements": []}
+        early = p.instant(scenario["publishAt"]) - dt.timedelta(days=3)
+        with tempfile.TemporaryDirectory() as temporary:
+            stock = Path(temporary)
+            admitted = json.loads((social_stock.STOCK / (scenario["id"] + "-v1.json")).read_text())
+            admitted["items"][0]["payload"]["assets"][0]["sha256"] = "0" * 64
+            (stock / (scenario["id"] + "-v1.json")).write_text(json.dumps(admitted))
+            self.assertEqual(social_stock.later_crossposts(scenario, folder, index, {"tiktok": dt.timedelta(hours=1)}, early, stock=stock), [])
 
     def test_carousel_must_have_six_photos_for_the_site_inventory(self):
         scenario = {"kind": "carousel", "scenes": [{}] * 5}

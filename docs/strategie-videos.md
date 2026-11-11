@@ -199,6 +199,7 @@ Ce que disent les données :
 | Instagram | 1 reel le mercredi à 17 h UTC | 2 reels : mardi 19 h et dimanche 21 h (Paris) | 4 posts : + carrousel le jeudi 9 h et reel le vendredi 18 h |
 | Facebook | 2 lots photos, jeudi et dimanche 17 h UTC | 2 lots photos, jeudi et dimanche 18 h (Paris) | Inchangé tant que la Page n'a pas d'abonnés ; y ajouter le reel en cross-post |
 | Pinterest | 1 épingle par tableau et par semaine, 1 par guide | 1 par jour au plus, 1 par tableau tous les 3 jours, 3 visuels par guide à 14 jours d'écart | Idem |
+| TikTok | Aucun compte | Prêt, éteint : chaque reel rapide une heure après Instagram | Les mêmes reels qu'Instagram : 2 par semaine, puis 3 |
 
 Les créneaux sont dans `.github/vsd-production/cadence.json`, en heure de Paris (l'heure d'été
 est suivie). Les créneaux libres des trois prochaines semaines sont comblés, y compris entre
@@ -206,17 +207,15 @@ des posts déjà en file ; un post n'est jamais placé à moins de 40 h d'un aut
 Simulation du 11/11 sur la file réelle : trois reels s'ajoutent les dimanches 15, 22 et 29
 novembre entre les reels du mercredi déjà programmés.
 
-**Pourquoi 2 et pas 4 sur Instagram aujourd'hui** : le panneau `vsd-admin` refuse plus de 2
-posts par réseau sur 7 jours glissants (`POLICY.cadenceLimit` dans `src/engine/plan.js`). Pour
-passer à la cible, dans cet ordre :
+**Pourquoi 2 et pas 4 sur Instagram aujourd'hui** : le panneau `vsd-admin` refusait plus de 2
+posts par réseau sur 7 jours glissants. Sa version du 11/11/2026
+([vsd-admin, PR 2](https://github.com/MathCSN/vsd-admin/pull/2)) plafonne par réseau :
+Instagram 4, Facebook 2, TikTok 4 (`POLICY.weeklyLimit` dans `src/engine/plan.js`). C'est un
+garde-fou ; la cadence réelle reste celle de `cadence.json`. Une fois cette version déployée,
+passer à la cible ne demande plus qu'un changement, ici : `"weeklyLimit": 4` pour Instagram
+dans `cadence.json`, et retirer `"enabled": false` des créneaux du jeudi et du vendredi.
 
-1. dans `~/vsd-admin/src/engine/plan.js`, remplacer `cadenceLimit: 2` par une limite par réseau
-   (`{ instagram: 4, facebook: 2 }`) et l'utiliser dans `planDispatch`
-   (`load.before >= limit || load.after >= limit`) ; déployer ;
-2. dans `cadence.json`, mettre `"weeklyLimit": 4` pour Instagram et retirer `"enabled": false`
-   des créneaux du jeudi et du vendredi.
-
-Faire le 2 sans le 1 mettrait deux posts par semaine en attente jusqu'à leur échéance.
+Le faire avant le déploiement mettrait deux posts par semaine en attente jusqu'à leur échéance.
 
 ## Pinterest
 
@@ -251,20 +250,64 @@ Faire le 2 sans le 1 mettrait deux posts par semaine en attente jusqu'à leur é
 - **TikTok : oui, en premier.** Tous les formats étudiés y vivent, la recherche y sert de guide
   de voyage, et un compte sans abonnés peut y être vu (n° 19, 33). Le même fichier vertical
   convient. Buffer gratuit autorise trois canaux : Instagram et Facebook en occupent deux, le
-  troisième va à TikTok. Seule action de Mathis : créer le compte et le connecter à Buffer
-  (consigné dans `.github/vsd-control/attente-mathis.json`).
+  troisième va à TikTok. Mathis a indiqué le 11/11/2026 que le compte TikTok est connecté à
+  Buffer ; ce n'est pas vérifiable depuis le dépôt, le panneau le dira (voir plus bas).
 - **YouTube Shorts : utile, mais pas gratuit.** Un quatrième canal Buffer coûte 5 $ par mois.
-  À décider par Mathis plus tard.
-- **Reels Facebook** : même fichier, portée hors abonnés ; à activer avec le reste.
+  À décider par Mathis plus tard. Le panneau ne l'accepte pas.
+- **Reels Facebook** : même fichier, portée hors abonnés. Le panneau n'accepte que les lots
+  photos sur Facebook : à brancher comme TikTok le jour où la Page a des abonnés.
 
-Côté dépôt tout est prêt et **éteint** (`"crossposts"` dans `cadence.json`, `social_stock.py`) :
-chaque reel Instagram donne un lot de plus par réseau activé, même fichier, créneau décalé d'une
-à trois heures, légende adaptée (adresse du guide écrite quand il n'y a pas de lien en bio).
-Pour allumer TikTok, dans `~/vsd-admin` : ajouter `tiktok: ['video']` à `FORMATS` et une limite
-de texte dans `TEXT_LIMIT` (`src/engine/contract.js`), le canal TikTok dans les canaux lus et
-ses métadonnées dans `createInput` (`src/engine/buffer-client.js`), puis passer
-`crossposts.tiktok.enabled` à `true`. Un lot refusé par le panneau ne bloque pas les autres,
-mais il ne part pas : ne rien activer avant.
+### TikTok : ce qui est branché
+
+**Dans ce dépôt** (`social_stock.py`, `"crossposts"` dans `cadence.json`). Chaque reel rapide
+Instagram donne un second lot `<id>-tiktok-v1` :
+
+- **la même vidéo**, octet pour octet (même adresse publique, même empreinte) ;
+- **une heure après Instagram** : 20 h le mardi, 22 h le dimanche, heure de Paris ;
+- **la même légende, sauf l'appel à l'action** : « 📌 Enregistrez cette vidéo pour votre
+  voyage. 🔗 Prix, horaires et détails : le guide complet sur voyagesansdetour.fr ». Un lien
+  n'est pas cliquable dans une légende TikTok et un compte récent n'a pas de lien en bio : le
+  site est nommé, comme sur la dernière image de la vidéo. Les crédits et les hashtags restent ;
+- **les limites de TikTok contrôlées avant d'écrire le lot** : 2 200 signes et 5 hashtags. Une
+  copie impossible n'empêche jamais le reel Instagram de partir ;
+- **pas les reels de l'ancien rendu lent** : leur dernière image ne cite que la bio Instagram ;
+- **rattrapage** : un reel déjà en file quand TikTok est allumé reçoit sa copie si son créneau
+  est à plus de 24 heures. Aucun lot existant n'est récrit. Essai du 11/11 sur la file réelle :
+  les reels des 15, 22 et 29 novembre auraient leur copie à 22 h.
+
+Les trois reels en file respectent les exigences vidéo de TikTok via Buffer (3 s à 10 min,
+1 Go au plus, 360 px au moins, MP4, 23 à 60 images par seconde) : 22 à 23 s, 1080 × 1920,
+30 images par seconde, H.264 et AAC à 96 kbit/s, 9 à 10 Mo.
+
+**Dans le panneau** ([vsd-admin, PR 2](https://github.com/MathCSN/vsd-admin/pull/2)) : `tiktok`
+est accepté au format `reel` ; l'envoi à Buffer porte `metadata.tiktok.isAiGenerated` à faux
+(aucune image ni vidéo générée) et pas de titre, que l'API réserve aux posts photo. Les canaux
+Buffer sont relus à chaque passage avec la clé déjà enregistrée : pas de clé à recoller. Canal
+TikTok absent ou déconnecté : seuls les posts TikTok attendent, Instagram et Facebook partent.
+
+**Ordre d'allumage** :
+
+1. fusionner et déployer le panneau (`cd ~/vsd-admin && git pull && npm run deploy`, par Mathis) ;
+2. vérifier page Connexions du panneau que la ligne Buffer cite le compte TikTok ;
+3. passer `crossposts.tiktok.enabled` à `true` dans `cadence.json` : une ligne.
+
+Faire le 3 avant le 1 ne bloquerait pas Instagram, mais l'ancien panneau refuserait le lot
+TikTok et l'import quotidien du stock (`vsd-cloud-control`, 8 h 53 UTC) sortirait en erreur
+chaque jour. Faire le 3 sans canal TikTok dans Buffer est sans danger : les copies attendent
+puis expirent.
+
+**Sources**, lues le 11/11/2026 : le schéma public de l'API Buffer, interrogé sans clé
+(l'énumération `Service` contient `tiktok` ; `TikTokPostMetadataInput` a deux champs,
+`isAiGenerated` pour les vidéos et `title` pour les posts photo) ;
+[TikTokPostMetadataInput](https://developers.buffer.com/types/TikTokPostMetadataInput.html) ;
+[Posts & Scheduling](https://developers.buffer.com/guides/posts-and-scheduling.html) ;
+[Using TikTok with Buffer](https://support.buffer.com/article/559-using-tiktok-with-buffer)
+(2 200 signes, 5 hashtags, 25 posts par 24 heures, publication automatique des vidéos).
+
+**Non vérifié** : la présence du canal TikTok dans le Buffer du blog ; l'envoi réel d'une vidéo
+(prouvé par le schéma et la documentation, pas par un post) ; qu'un compte TikTok récent en
+publication automatique publie bien en public (l'aide Buffer dit « publicly by default » et
+demande un compte public).
 
 ## Limites connues
 
