@@ -1157,6 +1157,30 @@
       "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
       "alt_fr": "La rua de Santa Maria, rue piétonne pavée aux maisons de pierre du centre historique de Guimarães.",
       "credit_fr": "Krzysztof Golik / Wikimedia Commons — CC BY-SA 4.0."
+    },
+    {
+      "id": "costa-rica-cahuita",
+      "file": "photos/costa-rica-cahuita.jpg",
+      "width": 1600,
+      "height": 1082,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Cahuita_national_park,_Costa_Rica.jpg",
+      "author": "Haakon S. Krohn",
+      "license": "CC BY-SA 3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+      "alt_fr": "La plage bordée de palmiers et de forêt du parc national de Cahuita, sur la côte caraïbe du Costa Rica.",
+      "credit_fr": "Haakon S. Krohn / Wikimedia Commons — CC BY-SA 3.0."
+    },
+    {
+      "id": "costa-rica-puerto-viejo",
+      "file": "photos/costa-rica-puerto-viejo.jpg",
+      "width": 1600,
+      "height": 1059,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Puerto_Viejo_de_Talamanca,_Costa_Rica_2012.JPG",
+      "author": "Letartean",
+      "license": "CC BY 3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0",
+      "alt_fr": "Des barques de pêche sur la plage de Puerto Viejo de Talamanca, en fin de journée.",
+      "credit_fr": "Letartean / Wikimedia Commons — CC BY 3.0."
     }
   ]
 }
