@@ -173,7 +173,7 @@ class EditorialQueueTest(unittest.TestCase):
                      'analytics.json', 'pinterest-rss.json', 'image-sources.json'):
             shutil.copyfile(ROOT / name, self.root / name)
         (self.root / 'dist').mkdir()
-        for name in ('style.css', 'site.js', 'analytics.mjs'):
+        for name in ('style.css', 'site.js', 'analytics.mjs', 'favicon.ico', 'favicon.png', 'apple-touch-icon.png'):
             shutil.copyfile(ROOT / 'dist' / name, self.root / 'dist' / name)
         shutil.copytree(ROOT / 'dist/assets', self.root / 'dist/assets', ignore=shutil.ignore_patterns('reel-*'))
         shutil.copytree(ROOT / 'social-media', self.root / 'social-media')
