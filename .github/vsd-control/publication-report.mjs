@@ -28,7 +28,11 @@ const channelText=(channel,state)=>`${NETWORK[channel]} ${CHANNEL_STATE[state]}`
 const reasonText=reason=>REASON[reason]??'code `'+reason+'`';
 const troubleText=post=>`\`${post.id}\` (${NETWORK[post.channel]}, ${JOB_STATE[post.state][0]}, ${reasonText(post.reason)}`;
 const riskText=post=>`\`${post.id}\` (${channelText(post.channel,post.channelState)}, échéance le ${moment(post.dueAt)})`;
-const named=(texts,total)=>texts.slice(0,NAMED_IN_ALERT).join(' ; ')+(total>NAMED_IN_ALERT?` et ${plural(total-NAMED_IN_ALERT,['autre','autres'])}`:'');
+const named=(texts,total)=>{
+  const shown=texts.slice(0,NAMED_IN_ALERT),rest=total-shown.length;
+  if(!shown.length)return 'non détaillés ici, au-delà de la liste courte envoyée par le panneau';
+  return shown.join(' ; ')+(rest>0?` et ${plural(rest,['autre','autres'])}`:'');
+};
 
 /** Lines of the « Publication » section; null when the panel could not be read or does not send the block yet. */
 export function publicationLines(publication){
@@ -62,15 +66,16 @@ function postAlerts({channels,problems,problemsCount,atRisk,atRiskCount},now){
   const alerts=[];
   // An optional network left out of Buffer is a choice: its posts are listed in the report, never alerted on.
   const leftOut=channel=>!REQUIRED_CHANNELS.includes(channel)&&channels?.[channel]==='absent';
+  // Posts beyond the short list sent by the panel are unknown here: they are counted, never assumed harmless,
+  // so a list filled with posts of a left-out network cannot hide a blocked Instagram or Facebook post.
   const recent=problems.filter(post=>post.reason!==WITHDRAWN&&!leftOut(post.channel)&&now-Date.parse(post.at)<POST_TROUBLE_DAYS*DAY);
-  if(recent.length){
-    // Posts beyond the short list sent by the panel are counted, not named.
-    const total=recent.length+Math.max(0,problemsCount-problems.length);
-    alerts.push({code:'publication_posts_blocked',message:`${total} ${total>1?'posts retenus':'post retenu'} ou en échec depuis moins de ${POST_TROUBLE_DAYS} jours : ${named(recent.map(post=>troubleText(post)+')'),total)}. Détail sur la page Publication du panneau ; l’alerte tombe d’elle-même ${POST_TROUBLE_DAYS} jours après le blocage.`});
+  const blocked=recent.length+Math.max(0,problemsCount-problems.length);
+  if(blocked){
+    alerts.push({code:'publication_posts_blocked',message:`${blocked} ${blocked>1?'posts retenus':'post retenu'} ou en échec depuis moins de ${POST_TROUBLE_DAYS} jours : ${named(recent.map(post=>troubleText(post)+')'),blocked)}. Détail sur la page Publication du panneau ; l’alerte tombe d’elle-même ${POST_TROUBLE_DAYS} jours après le blocage.`});
   }
   const threatened=atRisk.filter(post=>!leftOut(post.channel));
-  if(threatened.length){
-    const total=threatened.length+Math.max(0,atRiskCount-atRisk.length);
+  const total=threatened.length+Math.max(0,atRiskCount-atRisk.length);
+  if(total){
     alerts.push({code:'publication_posts_at_risk',message:`${plural(total,['post prêt','posts prêts'])} à moins de 24 h de l’échéance sur un canal qui ne reçoit rien : ${named(threatened.map(riskText),total)}. Sans canal connecté avant l’échéance, le post sera retenu.`});
   }
   return alerts;

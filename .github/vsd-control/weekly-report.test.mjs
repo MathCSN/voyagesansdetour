@@ -190,6 +190,21 @@ test('TikTok left out of Buffer on purpose never alerts, for its channel or for 
   assert.deepEqual(publicationAlerts(required).map(a=>a.code),['publication_channel:instagram','publication_posts_blocked','publication_posts_at_risk']);
 });
 
+test('a short list filled with posts of a left-out network never hides the posts beyond it',()=>{
+  // The panel sends ten posts at most: here all ten are TikTok while TikTok is out of Buffer, and one more exists.
+  const tiktok=i=>({id:'tk:'+i,channel:'tiktok',dueAt:'2026-11-12T11:00:00.000Z',channelState:'absent'});
+  const risk=publicationAlerts({...PUBLICATION,atRisk:Array.from({length:10},(_,i)=>tiktok(i)),atRiskCount:11});
+  assert.deepEqual(risk.map(a=>a.code),['publication_posts_at_risk']);
+  assert.ok(risk[0].message.startsWith('1 post prêt à moins de 24 h de l’échéance sur un canal qui ne reçoit rien : non détaillés ici'),risk[0].message);
+  const heldTiktok=i=>({id:'tk:'+i,channel:'tiktok',state:'held',reason:'overdue',at:'2026-11-11T10:00:00.000Z'});
+  const blocked=publicationAlerts({...PUBLICATION,problems:Array.from({length:10},(_,i)=>heldTiktok(i)),problemsCount:12});
+  assert.deepEqual(blocked.map(a=>a.code),['publication_posts_blocked']);
+  assert.ok(blocked[0].message.startsWith('2 posts retenus ou en échec depuis moins de 7 jours : non détaillés ici'),blocked[0].message);
+  // Fewer names than posts: the remainder is always said.
+  const mixed=publicationAlerts({...PUBLICATION,problems:[held('ig:retenu','2026-11-11T10:00:00.000Z'),...Array.from({length:9},(_,i)=>heldTiktok(i))],problemsCount:13});
+  assert.ok(mixed[0].message.startsWith('4 posts retenus ou en échec depuis moins de 7 jours : `ig:retenu` (Instagram, retenu, échéance dépassée) et 3 autres.'),mixed[0].message);
+});
+
 test('publication alerts come first and leave the other alerts untouched',()=>{
   const dropped={...SEO,indexation:{...SEO.indexation,trend:{status:'drop',lost:8,reference:48,referenceDay:'2026-11-01'}},publication:{...PUBLICATION,channels:{...PUBLICATION.channels,instagram:'disconnected'}}};
   assert.deepEqual(computeAlerts({...QUIET,now:AT,seo:dropped}).map(a=>a.code),['publication_channel:instagram','indexation_drop']);
