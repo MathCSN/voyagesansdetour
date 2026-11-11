@@ -105,12 +105,13 @@ jobs:
         run: node --test test_analytics.mjs
       # Derived files, never committed: a 1200 px copy of each photo so a phone skips the 1600 px file.
       # If this step fails the site is built with the catalogue sizes, as before.
+      # Wheels only (--only-binary): installing Pillow never runs a setup script on the runner.
       - name: Add lighter photo copies for phones
         if: steps.release.outputs.publish == 'true'
         continue-on-error: true
         timeout-minutes: 3
         run: |
-          python -m pip install --disable-pip-version-check --quiet Pillow==11.3.0
+          python -m pip install --disable-pip-version-check --quiet --only-binary :all: Pillow==11.3.0
           python photo_variants.py
       - name: Build public artifact
         if: steps.release.outputs.publish == 'true'

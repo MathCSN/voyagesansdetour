@@ -66,7 +66,8 @@ export function seoLines(seo){
   if(search){
     const before=search.previousImpressions===null?'':` (28 jours précédents : ${plural(search.previousClicks??0,'clic')} et ${plural(search.previousImpressions,'impression')})`;
     lines.push(`- Recherche Google : ${plural(search.clicks,'clic')} et ${plural(search.impressions,'impression')} du ${search.period.startDate} au ${search.period.endDate}${before}.`);
-    if(search.rising.length)lines.push('- Requêtes en hausse : '+search.rising.map(q=>`« ${q.query} » (${plural(q.impressions,'impression')}, ${q.previousImpressions} avant${q.position?`, position ${fr(q.position)}`:''})`).join(' ; ')+'.');
+    const position=q=>q.position?', position '+fr(q.position):'';
+    if(search.rising.length)lines.push('- Requêtes en hausse : '+search.rising.map(q=>`« ${q.query} » (${plural(q.impressions,'impression')}, ${q.previousImpressions} avant${position(q)})`).join(' ; ')+'.');
   }else lines.push('- Clics et impressions : pas encore relevé.');
   if(indexation){
     const round=indexation.inspected<indexation.total*0.9?' ; tournée d’inspection en cours':'';

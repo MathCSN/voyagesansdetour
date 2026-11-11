@@ -23,29 +23,38 @@ HOST = 'voyagesansdetour.fr'
 KEY = '941b7cd762a90f96205dab900f573e3e'
 KEY_LOCATION = f'{ORIGIN}/{KEY}.txt'
 ENDPOINT = 'https://api.indexnow.org/indexnow'
-SITEMAP_NAMESPACE = {'s': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
 RECENT_DAYS = 1
 MAX_URLS = 10000
 TIMEOUT_SECONDS = 20
 USER_AGENT = 'VoyageSansDetour-IndexNow/1'
 
 
+def local_name(node):
+    """Tag without its XML namespace: the sitemap is read whatever prefix it declares."""
+    return node.tag.rsplit('}', 1)[-1]
+
+
+def is_recent(lastmod, earliest):
+    """True without a window; a page without a valid date is never selected by date."""
+    if earliest is None:
+        return True
+    try:
+        return dt.date.fromisoformat(lastmod) >= earliest
+    except ValueError:
+        return False
+
+
 def changed_urls(sitemap_xml, today, since_days=RECENT_DAYS):
     """URLs of this site dated within the window; since_days=None selects them all."""
     earliest = None if since_days is None else today - dt.timedelta(days=since_days)
     selected = []
-    for node in ET.fromstring(sitemap_xml).findall('s:url', SITEMAP_NAMESPACE):
-        location = (node.findtext('s:loc', namespaces=SITEMAP_NAMESPACE) or '').strip()
-        if not location.startswith(ORIGIN + '/'):
+    for node in ET.fromstring(sitemap_xml).iter():
+        if local_name(node) != 'url':
             continue
-        if earliest is not None:
-            try:
-                modified = dt.date.fromisoformat((node.findtext('s:lastmod', namespaces=SITEMAP_NAMESPACE) or '').strip())
-            except ValueError:
-                continue
-            if modified < earliest:
-                continue
-        selected.append(location)
+        fields = {local_name(child): (child.text or '').strip() for child in node}
+        location = fields.get('loc', '')
+        if location.startswith(ORIGIN + '/') and is_recent(fields.get('lastmod', ''), earliest):
+            selected.append(location)
     return selected[:MAX_URLS]
 
 
