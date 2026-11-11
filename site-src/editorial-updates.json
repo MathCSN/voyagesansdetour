@@ -53,7 +53,13 @@
       "beforeSha256": "ae1889c434695b45b84a66192fed3c627b2f35132b1463c7f7cb8b83a86e18a6",
       "afterSha256": "c5e4b5c4546972764f7b1051a001cb2edb813140eedc2c8873cdb494cb90d7dd",
       "appliedAt": "2026-11-11T02:45:45Z",
-      "receipt": null
+      "receipt": {
+        "verifiedAt": "2026-11-11T02:47:48Z",
+        "url": "https://voyagesansdetour.fr/royaume-uni/londres-noel-marches/",
+        "htmlSha256": "2b77a059c50fd1b9bcc371a48344a2baf71f4a43f8a5655ac4616093df03ca21",
+        "paragraphSha256": "2fa8515c5f1387162a24d9e6547d9e0736a956bb0cc89d62c85d6dde3edcc228",
+        "verification": "exact-paragraph-presence-v1"
+      }
     }
   ]
 }
