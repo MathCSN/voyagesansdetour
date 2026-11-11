@@ -1,5 +1,5 @@
-# Read-only monitoring: weekly report issue on Mondays, empty-queue alert issue checked daily.
-# No publication, no provider call besides the signed read-only stock status and the public Pinterest feed.
+# Read-only monitoring: weekly report issue on Mondays, alert issue (empty queues, indexing in retreat) checked daily.
+# No publication, no provider call besides the signed read-only search figures of the private panel and the public Pinterest feed.
 name: Voyage Sans Detour weekly report
 on:
   schedule:
@@ -32,7 +32,16 @@ jobs:
         with:
           node-version: 22
       - name: Test the report
-        run: node --test .github/vsd-control/weekly-report.test.mjs
+        run: node --test .github/vsd-control/weekly-report.test.mjs .github/vsd-control/seo-status.test.mjs
+      # Clicks, impressions and indexed pages come from the private panel, which holds the read-only
+      # Google access. A panel that cannot be read leaves the report without figures, never without a report.
+      - name: Read search figures from the private panel
+        continue-on-error: true
+        env:
+          VSD_ADMIN_ORIGIN: https://vsd-admin.kartier.workers.dev
+          VSD_ADMIN_TICK_KEY: ${{ secrets.VSD_ADMIN_TICK_KEY }}
+          VSD_REPORT_SEO: ${{ runner.temp }}/seo.json
+        run: node .github/vsd-control/seo-status.mjs
       - name: List this week's workflow runs
         env:
           GH_TOKEN: ${{ github.token }}
@@ -42,6 +51,7 @@ jobs:
         env:
           VSD_REPORT_OUT: ${{ runner.temp }}
           VSD_REPORT_RUNS: ${{ runner.temp }}/runs.json
+          VSD_REPORT_SEO: ${{ runner.temp }}/seo.json
         run: |
           node .github/vsd-control/weekly-report.mjs
           cat "$RUNNER_TEMP/vsd-report.md" >> "$GITHUB_STEP_SUMMARY"
