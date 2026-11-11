@@ -12,27 +12,34 @@ Depuis le 24/10/2026, le moteur ne produit plus qu’un seul format, celui de la
 
 Le moteur refuse l’ancien format (aplats, schéma « 1-2-3 », voix de synthèse), une photo ou un titre répété dans un même post, une scène sans fait sourcé, un extrait absent de son instantané, une licence non libre et les formules creuses de l’ancienne ligne (« sans récit vécu », « si possible »…).
 
-## Posts automatiques (depuis le 24/10/2026)
+## Posts automatiques
 
-Chaque guide publié, de n'importe quel pays, produit seul ses posts. Chaque jour, `vsd-render-content.yml` lance `auto_social.py`, qui garde **au moins trois semaines de posts en file** sur chaque réseau :
+Chaque guide publié, de n'importe quel pays, produit seul ses posts. Chaque jour, `vsd-render-content.yml` lance `auto_social.py`, qui remplit **tous les créneaux libres des trois prochaines semaines**. La stratégie, les exemples étudiés et les raisons de chaque choix sont dans `docs/strategie-videos.md`.
 
-- **Créneaux** : Instagram le mercredi à 17 h UTC, un reel par semaine ; Facebook le jeudi et le dimanche, à 3 jours d'écart au moins. Un créneau se place après le dernier post en file (scénarios et lots relus) et au plus 29 jours après la date du jour, car un relevé de source vaut 30 jours.
-- **Choix du guide** : d'abord les guides jamais publiés sur aucun réseau (le plus récent d'abord), puis ceux jamais publiés sur ce réseau, puis la reprise d'un guide au bout de 6 semaines, avec d'autres chiffres en tête. Un guide dont les sources ont plus de 45 jours attend sa mise à jour.
-- **Faits** : la page publiée du guide est relevée (`auto/<id>/guide.txt`, première ligne = URL). Chaque scène montre un chiffre du bloc « L'essentiel en chiffres », cité mot pour mot avec son libellé ; l'accroche cite la première phrase de « La réponse en bref ». Un chiffre absent de la page en ligne n'est jamais utilisé.
-- **Photos** : celles du guide (`site-src/image-sources.json`, auteur relu du site), puis les autres photos du site pour le même lieu, puis au besoin des « Featured pictures » de Wikimedia Commons dont le titre nomme le lieu. Licences libres seulement, **jamais d'image générée par IA** (catégorie, modèle ou mention refusés), crédit court sans adresse e-mail. Les fichiers vont dans `assets/photos/auto/`, les fiches dans `auto/<id>/photos.json`.
-- **Texte** : accroche = titre du guide ; une info par scène, jamais deux fois la même photo ni le même titre ; 3 à 5 lignes de légende ; 5 hashtags au plus, choisis par lieu, pays et type de guide (`destinations.py`, qui lit `site-src/destinations.json` avec un repli) ; une seule ligne de crédits.
-- **Garde-fous** : le scénario est figé avec ses propres entrées (`auto/<id>/`), puis passé aux contrôles de `production.py` (sources, licences, empreintes, mise en page) **avant** d'entrer au catalogue. Un refus est noté dans le résumé du workflow, le guide suivant est essayé. Rien d'existant n'est réécrit : un fichier déjà présent bloque l'écriture.
+- **Créneaux** : `cadence.json`, en heure de Paris. Instagram : reels le mardi à 19 h et le dimanche à 21 h ; Facebook : lots photos le jeudi et le dimanche à 18 h. `weeklyLimit` suit le plafond du panneau `vsd-admin` (2 posts par réseau sur 7 jours) ; les créneaux marqués `"enabled": false` sont la cadence cible (carrousel Instagram le jeudi, troisième reel le vendredi), à activer une fois ce plafond relevé. Un créneau libre entre deux posts déjà en file est comblé ; aucun post à moins de 40 h d'un autre sur Instagram.
+- **Reels rapides (schéma 3)** : `reel_formats.py` choisit le format selon le guide : `prix` (budget : le prix dans l'accroche), `itineraire` (une étape datée par plan, seulement sur une photo de ce lieu), `tableau` (un tableau court du guide, entier, à mettre en pause), `liste` (cinq chiffres numérotés), `express` (deux chiffres, moins de dix secondes). Un guide revient au bout de six semaines dans un format qu'il n'a pas encore eu. `motion_render.py` dessine : accroche encadrée dès la première image, plans de 2,4 à 4 s, chiffre seul puis explication, texte lisible sans le son, 9 à 25 s au total.
+- **Choix du guide** : d'abord les guides jamais publiés sur aucun réseau (le plus récent d'abord), puis ceux jamais publiés sous cette forme sur ce réseau, puis la reprise au bout de 6 semaines. Un guide dont les sources ont plus de 45 jours attend sa mise à jour.
+- **Faits** : la page publiée du guide est relevée (`auto/<id>/guide.txt`, première ligne = URL). Chiffres du bloc « L'essentiel en chiffres », titres de sections datées et lignes de tableau sont cités mot pour mot ; un libellé long est coupé à sa première pause naturelle, jamais réécrit. Le moteur refuse tout texte surligné qui n'est pas dans l'extrait du plan.
+- **Photos** : celles du guide (`site-src/image-sources.json`), puis les autres photos du site pour le même lieu, puis au besoin des « Featured pictures » de Wikimedia Commons dont le titre nomme le lieu (`media_library.py`). Licences libres seulement, **jamais d'image générée par IA**. La photo de couverture du guide ouvre le reel.
+- **Vrais plans vidéo** : `clip_intake.py` (Pexels si le secret `PEXELS_API_KEY` existe ; Wikimedia Commons éteint par défaut ; Pixabay écarté). Licence, auteur et page source consignés dans `auto/<id>/clips.json`, toute marque d'IA refusée, jamais en accroche ni en dernière image.
+- **Texte** : aucune case vide à l'écran : ce que DM Sans ne sait pas dessiner (₫, lettres vietnamiennes) passe en Noto Sans ; un caractère inconnu des deux polices écarte le chiffre. Légende : titre du guide, 3 à 5 lignes utiles, « Enregistrez… lien dans la bio », une ligne de crédits, 5 hashtags au plus.
+- **Garde-fous** : le scénario est figé avec ses propres entrées (`auto/<id>/`), puis passé aux contrôles de `production.py` (sources, licences, empreintes, mise en page) **avant** d'entrer au catalogue. Un refus est noté dans le résumé du workflow, le format ou le guide suivant est essayé. Rien d'existant n'est réécrit.
 
-Le même workflow rend ensuite jusqu'à six posts, les met en file (`social_stock.py`) et relance le site. Il signale par un avertissement une file de moins de trois semaines.
+Le même workflow rend ensuite jusqu'à six posts, les met en file (`social_stock.py`) et relance le site. Un lot Instagram de six photos part en `carousel`, un lot Facebook en `photos`. Le cross-post du reel vers TikTok, YouTube Shorts et les Reels Facebook est prêt et éteint (`"crossposts"` dans `cadence.json`).
 
-Pinterest suit le même principe : `pin_intake.py` dessine l'épingle de chaque nouveau guide, `pin_promotion.py` l'ajoute au flux de son tableau, une par semaine et par tableau. Les tableaux sont déclarés dans `site-src/pinterest-additions.json` (`countries`) ; un pays sans tableau part dans `inspirations-voyage.xml`.
+**Pinterest** : `pin_intake.py` dessine jusqu'à quatre brouillons par passage, trois épingles par guide (`pin_draft.py` : couverture et premier chiffre ; autre photo et trois chiffres ; troisième photo et titre de recherche). `pin_promotion.py` en admet une par jour au plus, une par tableau tous les trois jours, deux épingles d'un même guide à 14 jours d'écart, avec un titre de 100 caractères au plus et une description tirée de la présentation du guide. Les tableaux sont déclarés dans `site-src/pinterest-additions.json` (`countries`) ; un pays sans tableau part dans `inspirations-voyage.xml`.
 
 ## Fichiers
 
 | Fichier | Rôle |
 |---|---|
 | `production.py` | Valide un scénario (schéma 2), rend le reel ou le carrousel, écrit le reçu. Au plus un rendu par exécution. |
-| `social_render.py` | Dessin : photo plein cadre avec lent mouvement de caméra, dégradé, texte, fondus. |
+| `social_render.py` | Dessin des carrousels et des reels historiques (schéma 2) : photo plein cadre, dégradé, texte. |
+| `motion_render.py` | Dessin des reels rapides (schéma 3) : accroche encadrée, plans courts, tableau, clips, police de repli. |
+| `reel_formats.py` | Choix du format d'un reel selon le guide et construction de ses plans. |
+| `media_library.py` | Photos et clips d'un lieu, téléchargés une fois et réutilisés. |
+| `clip_intake.py` | Plans vidéo libres (Pexels, Wikimedia Commons) : licence, auteur, extrait de 4 s, IA refusée. |
+| `cadence.json` | Créneaux par réseau en heure de Paris, limite hebdomadaire, sources de clips, cross-posts. |
 | `auto_social.py` | Fabrique les scénarios des prochains créneaux libres à partir des guides publiés, les fige et les valide avant de les mettre au catalogue. |
 | `destinations.py` | Noms, prépositions et hashtags des pays, lus dans `site-src/destinations.json` avec un repli. |
 | `photo_intake.py` | Ajoute une photo Wikimedia Commons au catalogue `assets/photos/catalogue.json` (licence vérifiée, auteur, empreinte). |
@@ -53,9 +60,9 @@ Le workflow `vsd-render-content.yml` enchaîne les étapes 4 et 6 dans GitHub Ac
 
 ## Rythme et limites
 
-- Le contrôleur importe **un lot par passage** (lundi via `vsd-cloud-control`, lundi, mercredi et vendredi via `vsd-promote-media`), par ordre d’échéance.
-- Le serveur limite par défaut Instagram à 1 post par 168 h ; les reels sont donc espacés d’une semaine.
-- Le stock n’accepte aujourd’hui que les reels Instagram et les lots photos Facebook (2 à 10 images). Les carrousels Instagram demandent une extension de `stock-control.mjs` / `promotion-control.mjs`.
+- Le panneau `vsd-admin` importe chaque jour (08:53 UTC, `vsd-cloud-control`) les lots encore programmables et les envoie à Buffer trois jours avant leur échéance.
+- Le panneau `vsd-admin` limite chaque réseau à 2 posts sur 7 jours glissants ; `cadence.json` s’y tient.
+- Le panneau accepte les reels et carrousels Instagram et les lots photos Facebook (2 à 10 images).
 - L’inventaire du site publie exactement 6 images par carrousel (`site-src/public_media.py`).
 - Prix Andante (Porto) : la page officielle affiche encore les tarifs 2023 alors que la presse annonce une hausse en 2026 ; aucun prix Andante n’est cité tant qu’une source officielle à jour manque.
 
@@ -63,7 +70,7 @@ Le workflow `vsd-render-content.yml` enchaîne les étapes 4 et 6 dans GitHub Ac
 
 ```sh
 python3 -m pip install -r requirements.txt
-python3 -m unittest -q test_production
+python3 -m unittest -q test_production test_auto_social test_pin_draft test_pin_intake test_pin_promotion test_reel_intake
 python3 production.py --validate
 python3 production.py
 ```

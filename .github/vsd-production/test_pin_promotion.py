@@ -13,9 +13,9 @@ class PinPromotionTests(unittest.TestCase):
         self.article={'slug':'test-guide','title':'Un guide pour le Portugal','destination':'Portugal'}
         self.folder=render(self.article,self.root)
     def test_exact_title_can_be_selected_only_after_cadence(self):
-        chosen,status=select([self.article],self.root,set(),NOW-dt.timedelta(days=7),NOW)
+        chosen,status=select([self.article],self.root,set(),NOW-dt.timedelta(days=3),NOW)
         self.assertEqual(status,'eligible');self.assertEqual(chosen[1]['title'],self.article['title'])
-        self.assertEqual(select([self.article],self.root,set(),NOW-dt.timedelta(days=6),NOW)[1],'cadence_hold')
+        self.assertEqual(select([self.article],self.root,set(),NOW-dt.timedelta(days=2),NOW)[1],'cadence_hold')
     def test_known_id_never_republished(self):
         self.assertEqual(select([self.article],self.root,{'pin-test-guide'},None,NOW)[1],'no_eligible_new_draft')
     def test_changed_article_skips_old_draft_without_blocking(self):
@@ -55,7 +55,7 @@ class PinPromotionTests(unittest.TestCase):
     def test_countries_sharing_the_common_board_share_its_weekly_cadence(self):
         japan={'slug':'tokyo','title':'Tokyo en 4 jours','country':'japon'}
         render(japan,self.root)
-        recent={'inspirations-voyage.xml':NOW-dt.timedelta(days=2)}
+        recent={'inspirations-voyage.xml':NOW-dt.timedelta(days=1)}
         self.assertEqual(select([japan],self.root,{'pin-test-guide'},recent,NOW)[1],'cadence_hold')
     def test_spain_and_italy_guides_reach_their_own_boards(self):
         spain={'slug':'andalousie','title':'Andalousie en train','country':'espagne'}
@@ -71,6 +71,16 @@ class PinPromotionTests(unittest.TestCase):
         self.assertEqual(select([self.article],self.root,set(),recent,NOW)[1],'cadence_hold')
     def test_stop_date(self):
         self.assertEqual(select([self.article],self.root,set(),None,STOP)[1],'period_ended')
+    def test_two_pins_of_the_same_guide_are_two_weeks_apart(self):
+        recent={'test-guide':NOW-dt.timedelta(days=13)}
+        self.assertEqual(select([self.article],self.root,set(),None,NOW,guide_last=recent)[1],'cadence_hold')
+        self.assertEqual(select([self.article],self.root,set(),None,NOW,guide_last={'test-guide':NOW-dt.timedelta(days=14)})[1],'eligible')
+    def test_a_guide_title_too_long_for_pinterest_gets_its_search_style_title_instead_of_blocking(self):
+        long_guide={'slug':'long','title':'Un titre de guide très détaillé '+'et encore plus précis '*4,'shortTitle':'Porto en 3 jours','category':'Itinéraires'}
+        folder=render(long_guide,self.root)
+        self.assertEqual(json.loads((folder/'draft.json').read_text())['pinTitle'],'Porto en 3 jours : itinéraire jour par jour, prix et conseils')
+        chosen,status=select([long_guide],self.root,{'pin-test-guide'},None,NOW)
+        self.assertEqual(status,'eligible')
 
 class PinAdmissionTests(unittest.TestCase):
     def fixture(self,root):
@@ -140,6 +150,35 @@ class PinAdmissionTests(unittest.TestCase):
             self.assertEqual(result['id'],'pin-grenade')
             pin=json.loads((site/'pinterest-additions.json').read_text())['feeds'][0]['items'][0]
             self.assertIn('Photo :',pin['description']);self.assertLessEqual(len(pin['description']),500)
+    def test_description_carries_the_guide_summary_and_an_invitation_to_save(self):
+        from pin_promotion import describe
+        with tempfile.TemporaryDirectory() as temp:
+            site=Path(temp)
+            guide={'slug':'tenerife','country':'espagne','description':'22,8 °C et 222 h de soleil en janvier à Tenerife Sud : le bon mois pour la plage, le Teide et Masca.'}
+            text=describe(guide,{'author':'Jane Doe','license':'CC BY-SA 4.0'},'pin-tenerife',site)
+            self.assertTrue(text.startswith('22,8 °C et 222 h de soleil en janvier à Tenerife Sud'))
+            self.assertIn('📌 Enregistrez ce guide pour préparer votre voyage en Espagne.',text)
+            self.assertIn('Photo : Jane Doe — CC BY-SA 4.0.',text)
+            long_text=describe({**guide,'description':'Première phrase utile. '+'Une phrase de plus qui allonge le texte. '*20},None,'pin-tenerife',site)
+            self.assertLessEqual(len(long_text),500);self.assertTrue(long_text.startswith('Première phrase utile.'))
+    def test_variants_of_a_guide_join_the_feed_with_their_own_picture_title_and_campaign_tag(self):
+        from pin_promotion import run,run_many
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);production,site=self.fixture(root)
+            guide={'slug':'grenade','title':'Grenade sans voiture','shortTitle':'Grenade sans voiture','country':'portugal','category':'Itinéraires','cover':'grenade-alhambra',
+                   'sections':[{'image':'grenade-albaicin'}],'keyFacts':[{'value':'19 €','label':'l’Alhambra'},{'value':'3 h','label':'la visite'},{'value':'1,60 €','label':'le bus C30'}]}
+            for variant in ('a','b'):render(guide,production/'pin-drafts',variant=variant)
+            (site/'articles.json').write_text(json.dumps([guide]))
+            first=run_many(root,NOW,lambda url,title:'a'*64)
+            self.assertEqual(first['ids'],['pin-grenade'])  # the second Pin of the same guide waits two weeks
+            self.assertEqual(run(root,NOW+dt.timedelta(days=7),lambda url,title:'a'*64)['status'],'cadence_hold')
+            second=run(root,NOW+dt.timedelta(days=14),lambda url,title:'a'*64)
+            self.assertEqual(second['id'],'pin-grenade-b')
+            pins=json.loads((site/'pinterest-additions.json').read_text())['feeds'][0]['items']
+            self.assertEqual([p.get('linkQuery') for p in pins],[None,'utm_source=pinterest&utm_medium=social&utm_content=pin-grenade-b'])
+            self.assertEqual(pins[1]['title'],'Grenade sans voiture : itinéraire jour par jour, prix et conseils')
+            self.assertEqual({p['linkPath'] for p in pins},{'/portugal/grenade/'})
+            self.assertTrue((site/'social-media/production/pin-grenade-b/pin.jpg').is_file())
     def test_country_without_board_is_admitted_to_the_common_feed_with_its_preposition(self):
         from pin_promotion import run
         with tempfile.TemporaryDirectory() as temp:

@@ -21,7 +21,8 @@ def approved_files(root):
     if not isinstance(catalogue, dict) or set(catalogue) != {'schemaVersion', 'items'} or catalogue['schemaVersion'] != 1:
         raise ValueError('Invalid media catalogue')
     items = catalogue['items']
-    if not isinstance(items, list) or len(items) > 104:
+    # Every post and every Pin adds one entry: about fifteen a week at the cadence of docs/strategie-videos.md.
+    if not isinstance(items, list) or len(items) > 1000:
         raise ValueError('Invalid media inventory size')
     result, seen = [], set()
     for item in items:

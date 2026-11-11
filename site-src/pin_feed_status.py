@@ -38,7 +38,7 @@ def compare(root,fetcher=fetch):
                 guid='urn:vsd:pinterest:'+pin['id'];item=indexed.get(guid)
                 if item is None:missing.append(guid);continue
                 enclosure=item.find('enclosure')
-                if (item.findtext('title')!=pin['title'] or item.findtext('description')!=pin['description'] or item.findtext('link')!=ORIGIN+pin['linkPath'] or enclosure is None or enclosure.get('url')!=ORIGIN+'/social-media/production/'+pin['mediaId']+'/pin.jpg'):
+                if (item.findtext('title')!=pin['title'] or item.findtext('description')!=pin['description'] or item.findtext('link')!=ORIGIN+pin['linkPath']+('?'+pin['linkQuery'] if pin.get('linkQuery') else '') or enclosure is None or enclosure.get('url')!=ORIGIN+'/social-media/production/'+pin['mediaId']+'/pin.jpg'):
                     return {'status':'conflict','needsDeployment':False,'id':pin['id']}
         return {'status':'missing' if missing else 'current','needsDeployment':bool(missing),'missing':missing}
     except (OSError,ValueError,ET.ParseError,KeyError,TypeError) as error:

@@ -25,15 +25,20 @@ from urllib.parse import urlsplit
 
 from PIL import __version__ as pillow_version
 
+import clip_intake
+import motion_render as motion
 import social_render as draw
-from photo_intake import LICENCES, ai_record
+from photo_intake import AI_MARKERS, LICENCES, ai_record
 
 HERE = Path(__file__).resolve().parent
 W, H = draw.REEL_SIZE
 FPS = draw.FPS
-SCHEMA = 2
+SCHEMA = 2                 # photo reel with slow plans (historical) and photo carousel
+MOTION_SCHEMA = 3          # fast reel: hook card, short plans, boxed captions, table card, real clips
+CATALOGUE_SCHEMA = 2
 RENDERER_CONTRACT = 3
-SUPPORTED_RECEIPT_CONTRACTS = (3,)
+MOTION_CONTRACT = 4
+SUPPORTED_RECEIPT_CONTRACTS = (3, 4)
 ORIGIN = "https://voyagesansdetour.fr"
 ID = re.compile(r"[a-z0-9][a-z0-9_-]{0,95}\Z")
 HASH = re.compile(r"[a-f0-9]{64}\Z")
@@ -43,12 +48,22 @@ REVIEW_WINDOW = dt.timedelta(days=31)
 SCENE_COUNT = {"reel": (5, 8), "carousel": (5, 8)}
 REEL_SECONDS = (15, 45)
 SCENE_SECONDS = (2.5, 6)
+# Fast reels: what holds attention is a new picture every 1.5 to 3 seconds and a total under 30 seconds.
+MOTION_FORMATS = ("liste", "prix", "itineraire", "tableau", "express")
+MOTION_SCENE_COUNT = (3, 10)
+MOTION_REEL_SECONDS = (6, 30)
+MOTION_SCENE_SECONDS = (1.2, 7)
+MOTION_MAX_CLIPS = 3
+MOTION_FONTS = ("regular", "bold", "serif", "fallbackRegular", "fallbackBold")
+MOTION_VIDEO_MAXRATE = "3500k"
 CAPTION_LINES = (3, 5)
 # auto_social.py adds about three posts a week until HARD_STOP.
 CATALOGUE_MAX = 400
 INSTAGRAM_CAPTION_MAX = 2200
 MUSIC_FADE_OUT = 1.5
 REEL_BUTTON = {"instagram": "Le guide complet → lien en bio", "facebook": "Le guide complet → voyagesansdetour.fr"}
+# The same file goes to Instagram, TikTok and Shorts: the address is spelled out, the bio is named.
+MOTION_BUTTON = "voyagesansdetour.fr → lien en bio"
 # The charter forbids the defensive boilerplate that emptied the old posts.
 FORBIDDEN = ("sans récit", "voix de synthèse", "aucune approbation", "si possible",
              "ne suffit pas", "consultez les horaires et alertes", "aucun personnage virtuel")
@@ -194,6 +209,94 @@ def check_photo(photos, photo_id, root):
     return record
 
 
+def load_clips(scenario, root):
+    if "clips" not in scenario:
+        return {}
+    catalogue = load_json(verified_file(root, scenario["clips"]))
+    ensure(catalogue.get("schemaVersion") == 1 and isinstance(catalogue.get("clips"), dict), "Invalid clip catalogue")
+    return catalogue["clips"]
+
+
+def check_clip(clips, clip_id, root):
+    """A real filmed plan under a free licence, with its author and its source page; never an AI video."""
+    record = clips.get(clip_id)
+    ensure(isinstance(record, dict), "Unknown clip: " + str(clip_id))
+    described = " ".join(str(record.get(key, "")) for key in ("title", "sourcePage", "author", "categories")).replace("_", " ").replace("-", " ")
+    ensure(not AI_MARKERS.search(described), "AI-generated video refused: " + clip_id)
+    ensure(record.get("licence") in clip_intake.LICENCES and record.get("licenceUrl") == clip_intake.LICENCES[record["licence"]], "Clip licence not accepted: " + clip_id)
+    host = clip_intake.SOURCE_HOSTS.get(record.get("provider"))
+    ensure(host and https(record.get("sourcePage")).hostname == host and text(record.get("author"), 200), "Clip attribution missing: " + clip_id)
+    ensure((record.get("licence") == clip_intake.PEXELS_LICENCE) == (record["provider"] == "pexels"), "Clip licence does not match its source: " + clip_id)
+    verified_file(root, record)
+    return record
+
+
+def shown(value):
+    return normalized(value.replace("\u00a0", " "))
+
+
+def whole(figure, excerpt):
+    """`figure` read in `excerpt` as whole words: '8 €' is not quoted by '18 €'."""
+    return re.search(r"(?<![\w,.])" + re.escape(figure) + r"(?!\w)", excerpt) is not None
+
+
+def numbers(value):
+    return set(re.findall(r"\d+", value))
+
+
+def check_motion_scene(scene, snapshots, first, last, fact_plans):
+    """One plan of a fast reel: a layout, one picture, text that is quoted from a dated snapshot."""
+    layout = scene.get("layout")
+    ensure(layout in motion.LAYOUTS and (layout == "hook") == first and (layout == "cta") == last, "First plan is the hook, last plan is the call to action")
+    ensure(("photo" in scene) != ("clip" in scene), "Each plan shows one photo or one clip")
+    ensure(isinstance(scene.get("headline"), list) and 1 <= len(scene["headline"]) <= 3, "Headline requires one to three lines")
+    for line in scene["headline"]:
+        text(line, 34)
+        ensure(line.count("*") % 2 == 0, "Unbalanced highlight markers")
+    text(scene.get("kicker"), 32)
+    for key, maximum in (("detail", 120), ("badge", 8), ("note", 60)):
+        if scene.get(key) is not None:
+            text(scene[key], maximum)
+    ensure((scene.get("detail") or "").count("*") % 2 == 0, "Unbalanced highlight markers")
+    focus = scene.get("focus", [0.5, 0.5])
+    ensure(isinstance(focus, list) and len(focus) == 2 and all(type(v) in (int, float) and 0 <= v <= 1 for v in focus), "Invalid photo focus")
+    seconds = scene.get("seconds")
+    ensure(type(seconds) in (int, float) and MOTION_SCENE_SECONDS[0] <= seconds <= MOTION_SCENE_SECONDS[1], "Scene duration invalid")
+    ensure(abs(seconds * FPS - round(seconds * FPS)) < 1e-6, "Scene duration must use whole frames")
+    if "clip" in scene:
+        ensure(layout == "fact" and seconds <= clip_intake.CLIP_SECONDS, "A clip illustrates a fact and never runs past its own length")
+    rows = scene.get("rows")
+    ensure((rows is not None) == (layout == "table"), "Only the table plan carries rows")
+    if rows is not None:
+        ensure(isinstance(rows, list) and 3 <= len(rows) <= motion.MAX_ROWS and all(isinstance(r, list) and len(r) == 2 for r in rows), "Table needs three to six rows of two cells")
+        for cell in (cell for row in rows for cell in row):
+            text(cell, 60)
+    facts = scene.get("facts", [])
+    ensure(isinstance(facts, list) and (facts or last), "Each scene needs at least one sourced fact")
+    if facts:
+        text(scene.get("tag"), 52)
+    used, quoted = set(), []
+    for fact in facts:
+        ensure(fact.get("source") in snapshots, "Unknown fact source: " + str(fact.get("source")))
+        excerpt = normalized(text(fact.get("excerpt"), 400))
+        ensure(excerpt in snapshots[fact["source"]][1], "Fact excerpt is not in its dated snapshot: " + excerpt)
+        used.add(fact["source"]); quoted.append(excerpt)
+    # What is highlighted on screen is a figure: it must be read in one of this plan's own excerpts.
+    # The hook may also announce how many plans follow ("5 chiffres à connaître"), and nothing else in figures.
+    parts = [(part, lit) for line in scene["headline"] + [scene.get("detail") or ""] for part, lit in (draw.segments(line) if line else [])]
+    if layout != "cta":
+        for figure in [part for part, lit in parts if lit] + [cell for row in rows or [] for cell in row]:
+            announced = layout == "hook" and re.findall(r"\d+", figure) in ([], [str(fact_plans)])
+            ensure(announced or any(whole(shown(figure), excerpt) for excerpt in quoted), "Text on screen is not quoted from this plan's sources: " + figure)
+    # Plain text may not smuggle a number either: every number read on a plan is in that plan's own quotes.
+    # The guide's title, on the hook and the call, may also carry a number read anywhere on the dated page.
+    allowed = numbers(" ".join(quoted)) | (numbers(" ".join(text for _, text in snapshots.values())) if layout in ("hook", "cta") else set())
+    for part, lit in parts:
+        if not lit:
+            ensure(numbers(shown(part)) <= allowed, "Number on screen is not in this plan's sources: " + part)
+    return used
+
+
 def check_scene(scene, kind, snapshots, last):
     ensure(isinstance(scene.get("headline"), list) and 1 <= len(scene["headline"]) <= 3, "Headline requires one to three lines")
     for line in scene["headline"]:
@@ -240,7 +343,8 @@ def check_caption(scenario):
 
 def check_assets(scenario, root):
     assets = scenario.get("assets", {})
-    for name in ("regular", "bold", "serif"):
+    wanted = MOTION_FONTS if scenario["schemaVersion"] == MOTION_SCHEMA else MOTION_FONTS[:3] + tuple(name for name in MOTION_FONTS[3:] if name in assets)
+    for name in wanted:
         asset = assets.get(name, {})
         verified_file(root, asset)
         ensure(asset.get("license") == "OFL-1.1", "Unexpected font licence")
@@ -260,8 +364,10 @@ def check_assets(scenario, root):
 
 
 def validate_scenario(scenario, root, now):
-    ensure(scenario.get("schemaVersion") == SCHEMA and ID.fullmatch(scenario.get("id", "")), "Invalid scenario identity: only the photo format (schema 2) is produced")
+    ensure(scenario.get("schemaVersion") in (SCHEMA, MOTION_SCHEMA) and ID.fullmatch(scenario.get("id", "")), "Invalid scenario identity: only the photo formats (schema 2 and 3) are produced")
     ensure(scenario.get("kind") in SCENE_COUNT, "Unsupported kind: photo reel or carousel only")
+    fast = scenario["schemaVersion"] == MOTION_SCHEMA
+    ensure(not fast or (scenario["kind"] == "reel" and scenario.get("format") in MOTION_FORMATS), "A fast reel needs a known format")
     ensure(scenario.get("channel") in ("instagram", "facebook"), "Unsupported channel")
     ensure(scenario.get("voice") is None and scenario.get("presenter") is None, "No synthetic voice or virtual presenter")
     text(scenario.get("title"), 150); text(scenario.get("destination"), 22)
@@ -273,27 +379,42 @@ def validate_scenario(scenario, root, now):
     check_caption(scenario)
     check_assets(scenario, root)
     scenes = scenario.get("scenes")
-    low, high = SCENE_COUNT[scenario["kind"]]
+    low, high = MOTION_SCENE_COUNT if fast else SCENE_COUNT[scenario["kind"]]
     ensure(isinstance(scenes, list) and low <= len(scenes) <= high, f"Require {low} to {high} scenes")
-    photo_ids = [scene.get("photo") for scene in scenes]
-    ensure(len(set(photo_ids)) == len(photo_ids), "A photo cannot be repeated inside one post")
+    ensure(all(isinstance(scene, dict) for scene in scenes), "Invalid scene")
+    clips = load_clips(scenario, root) if fast else {}
+    media_ids = [("clip", scene["clip"]) if fast and "clip" in scene else ("photo", scene.get("photo")) for scene in scenes]
+    ensure(len(set(media_ids)) == len(media_ids), "A photo cannot be repeated inside one post")
+    ensure(sum(kind == "clip" for kind, _ in media_ids) <= MOTION_MAX_CLIPS, "Too many clips in one reel")
     headlines = [normalized(draw.plain(" ".join(scene.get("headline") or []))).lower() for scene in scenes]
     ensure(len(set(headlines)) == len(headlines), "A headline cannot be repeated inside one post")
-    used, records = set(), {}
+    used, records, clip_records = set(), {}, {}
     for index, scene in enumerate(scenes):
-        used |= check_scene(scene, scenario["kind"], snapshots, index == len(scenes) - 1)
-        records[scene["photo"]] = check_photo(photos, scene["photo"], root)
+        if fast:
+            used |= check_motion_scene(scene, snapshots, index == 0, index == len(scenes) - 1, sum(s.get("layout") == "fact" for s in scenes))
+        else:
+            used |= check_scene(scene, scenario["kind"], snapshots, index == len(scenes) - 1)
+        if media_ids[index][0] == "clip":
+            clip_records[scene["clip"]] = check_clip(clips, scene["clip"], root)
+        else:
+            records[scene["photo"]] = check_photo(photos, scene["photo"], root)
     ensure(used, "No sourced fact in this post")
     duration = sum(scene.get("seconds", 0) for scene in scenes)
     if scenario["kind"] == "reel":
-        ensure(REEL_SECONDS[0] <= duration <= REEL_SECONDS[1], "Render duration out of bounds")
+        bounds = MOTION_REEL_SECONDS if fast else REEL_SECONDS
+        ensure(bounds[0] <= duration <= bounds[1], "Render duration out of bounds")
     sources = {source_id: snapshots[source_id][0] for source_id in sorted(used)}
     checked_on = min(instant(record["retrievedAt"]) for record in sources.values()).date()
-    return {"duration": duration, "sources": sources, "photos": records, "sourceCheckedOn": str(checked_on)}
+    return {"duration": duration, "sources": sources, "photos": records, "clips": clip_records, "sourceCheckedOn": str(checked_on)}
 
 
-def fingerprint(scenario, contract_version=RENDERER_CONTRACT):
+def contract_of(scenario):
+    return MOTION_CONTRACT if scenario.get("schemaVersion") == MOTION_SCHEMA else RENDERER_CONTRACT
+
+
+def fingerprint(scenario, contract_version=None):
     # A new intended visual version needs a new ID; receipts keep their contract.
+    contract_version = contract_of(scenario) if contract_version is None else contract_version
     ensure(contract_version in SUPPORTED_RECEIPT_CONTRACTS, "Unsupported historical renderer contract")
     return digest(canonical({"scenario": scenario, "rendererContractVersion": contract_version}))
 
@@ -302,6 +423,9 @@ def caption(scenario, info):
     block = scenario["caption"]
     cta = block["cta"] + ("\n" + scenario["targetUrl"] if scenario["channel"] == "facebook" else "")
     credit = "Photos libres (Wikimedia Commons)"
+    if info.get("clips"):
+        providers = sorted({"Pexels" if record["provider"] == "pexels" else "Wikimedia Commons" for record in info["clips"].values()} | {"Wikimedia Commons"})
+        credit = "Photos et vidéos libres (" + ", ".join(providers) + ")"
     if scenario["kind"] == "reel":
         credit += " et musique de Kevin MacLeod (CC BY 4.0)"
     value = "\n\n".join([block["hook"], "\n".join(block["lines"]), cta,
@@ -311,9 +435,16 @@ def caption(scenario, info):
 
 
 def credits_text(scenario, info):
-    lines = [f"Voyage Sans Détour — {scenario['title']}", f"Guide : {scenario['targetUrl']}", "", "PHOTOS"]
+    lines = [f"Voyage Sans Détour — {scenario['title']}", f"Guide : {scenario['targetUrl']}", "", "PHOTOS ET VIDÉOS" if info.get("clips") else "PHOTOS"]
     share_alike = False
     for n, scene in enumerate(scenario["scenes"], 1):
+        if "clip" in scene:
+            clip = info["clips"][scene["clip"]]
+            share_alike |= "SA" in clip["licence"]
+            origin = "Pexels" if clip["provider"] == "pexels" else "Wikimedia Commons"
+            lines.append(f"{n}. Vidéo : {clip['author']} — « {clip['title'].removeprefix('File:')} », {origin}, {clip['sourcePage']}")
+            lines.append(f"   Licence {clip['licence']} : {clip['licenceUrl']}. Modifications : extrait de {clip['seconds']:g} s, recadrage vertical, son retiré, texte ajouté.")
+            continue
         photo = info["photos"][scene["photo"]]
         share_alike |= "SA" in photo["licence"]
         lines.append(f"{n}. {photo['author']} — « {photo['commonsTitle'].removeprefix('File:')} », Wikimedia Commons, {photo['sourcePage']}")
@@ -325,7 +456,8 @@ def credits_text(scenario, info):
         music = scenario["assets"]["music"]
         lines += ["", "MUSIQUE", f"« {music['title']} » — {music['author']} (incompetech.com), {music['sourceUrl']}",
                   f"Licence CC BY 4.0 : {music['licenseUrl']}. Modifications : extrait, fondus, niveau ajusté. Aucune voix."]
-    lines += ["", "POLICES", "DM Sans et Playfair Display — SIL Open Font License 1.1 (notices jointes).", "",
+    families = "DM Sans, Playfair Display et Noto Sans" if "fallbackRegular" in scenario["assets"] else "DM Sans et Playfair Display"
+    lines += ["", "POLICES", families + " — SIL Open Font License 1.1 (notices jointes).", "",
               f"SOURCES (relevées le {info['sourceCheckedOn']})"]
     for record in info["sources"].values():
         lines.append(f"- {record['publisher']} — {record['title']} : {record['url']} (relevé le {record['retrievedAt'][:10]})")
@@ -375,9 +507,21 @@ def fonts_of(scenario, root):
     return draw.Fonts(*(str(root / scenario["assets"][name]["file"]) for name in ("regular", "bold", "serif")))
 
 
+def motion_fonts(scenario, root):
+    return motion.Fonts(*(str(root / scenario["assets"][name]["file"]) for name in MOTION_FONTS))
+
+
 def prepared_scenes(scenario, root, info, size, carousel):
-    paths = [str(root / info["photos"][scene["photo"]]["file"]) for scene in scenario["scenes"]]
     try:
+        if scenario["schemaVersion"] == MOTION_SCHEMA:
+            media = [(str(root / info["clips"][scene["clip"]]["file"]), True) if "clip" in scene
+                     else (str(root / info["photos"][scene["photo"]]["file"]), False) for scene in scenario["scenes"]]
+            return motion.prepare(scenario["scenes"], media, motion_fonts(scenario, root), MOTION_BUTTON)
+        paths = [str(root / info["photos"][scene["photo"]]["file"]) for scene in scenario["scenes"]]
+        # A post sealed with the fallback fonts never shows an empty box; older posts are drawn as they were.
+        assets = scenario["assets"]
+        draw.use_fallbacks({str(root / assets[brand]["file"]): str(root / assets[other]["file"])
+                            for brand, other in (("regular", "fallbackRegular"), ("bold", "fallbackBold")) if other in assets})
         return draw.prepare(scenario["scenes"], paths, fonts_of(scenario, root), size, carousel, REEL_BUTTON[scenario["channel"]])
     except draw.LayoutError as error:
         raise Invalid("Layout overflow: " + str(error)) from error
@@ -392,12 +536,17 @@ def encode_reel(scenario, root, destination, info, prepared):
                "-ss", str(start), "-i", str(root / scenario["assets"]["music"]["file"]), "-map", "0:v:0", "-map", "1:a:0",
                "-af", f"atrim=0:{duration},asetpts=PTS-STARTPTS,afade=t=in:d=0.3,afade=t=out:st={duration - MUSIC_FADE_OUT}:d={MUSIC_FADE_OUT},loudnorm=I=-16:TP=-1.5:LRA=9",
                "-c:a", "aac", "-b:a", "96k", "-ar", "48000",
-               "-t", str(duration), "-c:v", "libx264", "-threads", "2", "-preset", "medium", "-crf", "23",
-               "-pix_fmt", "yuv420p", "-movflags", "+faststart", "-map_metadata", "-1", str(video)]
+               "-t", str(duration), "-c:v", "libx264", "-threads", "2", "-preset", "medium", "-crf", "23"]
+    fast = scenario["schemaVersion"] == MOTION_SCHEMA
+    if fast:
+        # Hard cuts and moving clips cost bits: a ceiling keeps a 20-second reel under 9 MB in the repository.
+        command += ["-maxrate", MOTION_VIDEO_MAXRATE, "-bufsize", "7000k"]
+    command += ["-pix_fmt", "yuv420p", "-movflags", "+faststart", "-map_metadata", "-1", str(video)]
+    frames = motion.reel_frames(prepared, motion_fonts(scenario, root)) if fast else draw.reel_frames(prepared)
     with (destination / "encode.log").open("wb") as errors:
         process = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.DEVNULL, stderr=errors)
         try:
-            for frame in draw.reel_frames(prepared):
+            for frame in frames:
                 process.stdin.write(frame.tobytes())
             process.stdin.close()
             ensure(process.wait(timeout=300) == 0, "Encoding failed; inspect encode.log")
@@ -418,7 +567,11 @@ def render(scenario, root, destination, now, info):
     else:
         ensure(shutil.which("ffmpeg") and shutil.which("ffprobe"), "ffmpeg and ffprobe required")
         prepared = prepared_scenes(scenario, root, info, draw.REEL_SIZE, False)
-        images = [draw.still(scene, i, len(prepared)) for i, scene in enumerate(prepared)]
+        if scenario["schemaVersion"] == MOTION_SCHEMA:
+            fonts = motion_fonts(scenario, root)
+            images = [motion.still(plan, i, len(prepared), fonts) for i, plan in enumerate(prepared)]
+        else:
+            images = [draw.still(scene, i, len(prepared)) for i, scene in enumerate(prepared)]
     for i, image in enumerate(images):
         image.save(destination / f"scene-{i + 1:02}.jpg", quality=90)
     draw.contact_sheet(images).save(destination / "apercu.jpg", quality=90)
@@ -427,7 +580,7 @@ def render(scenario, root, destination, now, info):
         spec = encode_reel(scenario, root, destination, info, prepared)
     (destination / "legende.txt").write_text(caption(scenario, info))
     (destination / "credits.txt").write_text(credits_text(scenario, info))
-    for asset in ("regular", "serif"):
+    for asset in ("regular", "serif") + (("fallbackRegular",) if "fallbackRegular" in scenario["assets"] else ()):
         license_file = root / scenario["assets"][asset]["licenseFile"]["file"]
         shutil.copyfile(license_file, destination / license_file.name)
     write_json(destination / "scenario.json", scenario)
@@ -435,13 +588,15 @@ def render(scenario, root, destination, now, info):
              for path in sorted(destination.iterdir()) if path.is_file()]
     receipt = {"schemaVersion": 1, "contentId": scenario["id"], "status": "rendered_not_published",
                "fingerprint": fingerprint(scenario), "createdAt": stamp(now), "renderFinishedAt": stamp(utcnow()),
-               "rendererContractVersion": RENDERER_CONTRACT, "rendererSha256": digest(Path(__file__).read_bytes()),
-               "drawingSha256": digest(Path(draw.__file__).read_bytes()),
+               "rendererContractVersion": contract_of(scenario), "rendererSha256": digest(Path(__file__).read_bytes()),
+               "drawingSha256": digest(Path(draw.__file__).read_bytes()), "motionSha256": digest(Path(motion.__file__).read_bytes()),
+               "format": scenario.get("format"),
                "kind": scenario["kind"], "channel": scenario["channel"], "publishAt": scenario["publishAt"],
                "reviewValidUntil": scenario["review"]["validUntil"], "sourceCheckedOn": info["sourceCheckedOn"],
                "targetUrl": scenario["targetUrl"], "voice": None, "presenter": None,
                "sourceUrls": sorted(record["url"] for record in info["sources"].values()),
                "photos": {photo_id: {"licence": record["licence"], "author": record["author"], "sourcePage": record["sourcePage"]} for photo_id, record in info["photos"].items()},
+               "clips": {clip_id: {"licence": record["licence"], "author": record["author"], "sourcePage": record["sourcePage"], "provider": record["provider"]} for clip_id, record in info.get("clips", {}).items()},
                "video": spec, "files": files,
                "runtime": {"wallSeconds": round(time.monotonic() - started, 3), "encoderThreads": 2, "pillowVersion": pillow_version,
                            "ffmpegVersion": subprocess.check_output(["ffmpeg", "-version"], text=True).splitlines()[0] if spec else None},
@@ -471,7 +626,7 @@ def exclusive(output):
 
 def catalogue_entries(root):
     catalogue = load_json(safe_path(root, "catalogue.json"))
-    ensure(catalogue.get("schemaVersion") == SCHEMA and isinstance(catalogue.get("items"), list) and len(catalogue["items"]) <= CATALOGUE_MAX, "Invalid catalogue")
+    ensure(catalogue.get("schemaVersion") == CATALOGUE_SCHEMA and isinstance(catalogue.get("items"), list) and len(catalogue["items"]) <= CATALOGUE_MAX, "Invalid catalogue")
     entries, identifiers, filenames = [], set(), set()
     for entry in catalogue["items"]:
         ensure(ID.fullmatch(entry.get("contentId", "")) and entry["contentId"] not in identifiers, "Duplicate/invalid catalogue identity")

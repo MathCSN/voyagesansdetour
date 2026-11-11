@@ -112,8 +112,12 @@ class ProductionGuards(unittest.TestCase):
     def test_publication_slots_cover_four_weeks(self):
         slots = sorted(p.instant(s["publishAt"]) for _, _, s in p.catalogue_entries(self.root))
         self.assertGreaterEqual((slots[-1] - slots[0]).days, 21)
-        reels = sorted(p.instant(s["publishAt"]) for _, _, s in p.catalogue_entries(self.root) if s["channel"] == "instagram")
-        self.assertTrue(all(b - a >= dt.timedelta(hours=168) for a, b in zip(reels, reels[1:])), "one Instagram post per 168 h")
+        # The publication panel counts posts per network over any seven days: the queue never asks for more than cadence.json allows.
+        limits = {name: entry["weeklyLimit"] for name, entry in json.loads((p.HERE / "cadence.json").read_text())["channels"].items()}
+        for channel, limit in limits.items():
+            due = sorted(p.instant(s["publishAt"]) for _, _, s in p.catalogue_entries(self.root) if s["channel"] == channel)
+            for moment in due:
+                self.assertLessEqual(sum(moment - dt.timedelta(days=7) < other <= moment for other in due), limit, channel)
 
     # --- The charter, enforced ----------------------------------------------
 
@@ -325,6 +329,37 @@ class StockAndIntake(unittest.TestCase):
         item = batch["items"][0]
         self.assertEqual(social_stock.payload_revision(item["payload"]), item["review"]["payloadRevision"])
         self.assertEqual(social_stock.batch_sha(batch), entry["batchSha256"])
+
+    def test_six_photos_are_a_carousel_on_instagram_and_a_photo_post_on_facebook(self):
+        self.assertEqual(social_stock.payload_kind({"kind": "carousel", "channel": "instagram"}), "carousel")
+        self.assertEqual(social_stock.payload_kind({"kind": "carousel", "channel": "facebook"}), "photos")
+        self.assertEqual(social_stock.payload_kind({"kind": "reel", "channel": "instagram"}), "reel")
+
+    def test_cross_posts_stay_off_until_switched_on(self):
+        self.assertEqual(social_stock.enabled_crossposts(), {})  # the shipped cadence.json: the panel does not take these formats yet
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "cadence.json"
+            path.write_text(json.dumps({"crossposts": {"tiktok": {"enabled": True, "delayHours": 1}, "youtube": {"enabled": False}, "snapchat": {"enabled": True}}}))
+            self.assertEqual(social_stock.enabled_crossposts(path), {"tiktok": dt.timedelta(hours=1)})
+
+    def test_a_cross_post_is_the_same_reel_with_its_own_identity_slot_and_caption(self):
+        folder = p.HERE / "output/ig-vietnam-itineraire-15-jours-2026-11-25"
+        scenario = json.loads((folder / "scenario.json").read_text())
+        main = social_stock.build_batch(scenario, folder, scenario["review"]["checkedAt"])["items"][0]
+        for channel, kind in (("tiktok", "video"), ("youtube", "short"), ("facebook", "reel")):
+            batch = social_stock.build_crosspost(scenario, folder, scenario["review"]["checkedAt"], channel, dt.timedelta(hours=2))
+            item = batch["items"][0]
+            self.assertEqual(batch["batchId"], f"{scenario['id']}-{channel}-v1")
+            self.assertEqual((item["payload"]["channel"], item["payload"]["kind"]), (channel, kind))
+            self.assertEqual(item["payload"]["assets"], main["payload"]["assets"])
+            self.assertEqual(p.instant(item["dueAt"]) - p.instant(main["dueAt"]), dt.timedelta(hours=2))
+            self.assertNotEqual(item["contentId"], main["contentId"])
+            self.assertEqual(item["review"]["payloadRevision"], social_stock.payload_revision(item["payload"]))
+            self.assertEqual("bio" in item["payload"]["text"], channel == "tiktok")
+            if channel != "tiktok":
+                self.assertIn("Le guide complet : " + scenario["targetUrl"], item["payload"]["text"])
+        with self.assertRaisesRegex(p.Invalid, "Only an Instagram reel"):
+            social_stock.build_crosspost({**scenario, "kind": "carousel"}, folder, scenario["review"]["checkedAt"], "tiktok", dt.timedelta(hours=1))
 
     def test_carousel_must_have_six_photos_for_the_site_inventory(self):
         scenario = {"kind": "carousel", "scenes": [{}] * 5}

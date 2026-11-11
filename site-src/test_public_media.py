@@ -79,6 +79,14 @@ class ApprovedMediaTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             approved_files(self.root)
 
+    def test_inventory_holds_a_year_of_posts_and_pins_and_stays_bounded(self):
+        self.save([self.item] * 1001)
+        with self.assertRaisesRegex(ValueError, 'Invalid media inventory size'):
+            approved_files(self.root)
+        self.save([self.item] * 105)  # past the former ceiling of 104: now refused only as a duplicate
+        with self.assertRaisesRegex(ValueError, 'Unapproved or duplicate media identity'):
+            approved_files(self.root)
+
     def test_symlinked_media_and_parent_are_rejected(self):
         self.save()
         target = self.folder / 'reel.mp4'

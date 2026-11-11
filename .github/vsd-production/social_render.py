@@ -69,8 +69,48 @@ def plain(line: str) -> str:
     return line.replace("*", "")
 
 
+# Brand font path → wide-coverage font path. A character the brand font lacks (₫, Vietnamese letters…)
+# is drawn with the other one instead of an empty box. Set per post from its sealed assets.
+FALLBACKS: dict[str, str] = {}
+NOTDEF = "\U0010ffff"
+
+
+def use_fallbacks(mapping: dict[str, str]) -> None:
+    FALLBACKS.clear()
+    FALLBACKS.update(mapping)
+
+
+@lru_cache(maxsize=4096)
+def has_glyph(path: str, char: str) -> bool:
+    face = font(path, 48)
+    return char.isspace() or bytes(face.getmask(char)) != bytes(face.getmask(NOTDEF))
+
+
+def face_runs(text: str, face: ImageFont.FreeTypeFont) -> list[tuple[str, ImageFont.FreeTypeFont]]:
+    """The text split by the font that can draw it: the given face, else its fallback at the same size."""
+    other = FALLBACKS.get(face.path)
+    if not other:
+        return [(text, face)]
+    result: list[tuple[str, ImageFont.FreeTypeFont]] = []
+    for char in text:
+        chosen = face if has_glyph(face.path, char) or not has_glyph(other, char) else font(other, face.size)
+        if result and result[-1][1] is chosen:
+            result[-1] = (result[-1][0] + char, chosen)
+        else:
+            result.append((char, chosen))
+    return result
+
+
+def draw_plain(draw: ImageDraw.ImageDraw, xy, text: str, face, fill) -> float:
+    x, y = xy
+    for part, used in face_runs(text, face):
+        draw.text((x, y), part, font=used, fill=fill)
+        x += draw.textlength(part, font=used)
+    return x
+
+
 def text_width(draw: ImageDraw.ImageDraw, line: str, face: ImageFont.FreeTypeFont) -> float:
-    return draw.textlength(plain(line), font=face)
+    return sum(draw.textlength(part, font=used) for part, used in face_runs(plain(line), face))
 
 
 def wrap(draw: ImageDraw.ImageDraw, text: str, face: ImageFont.FreeTypeFont, width: int) -> list[str]:
@@ -135,16 +175,15 @@ def gradient(size, start_y: int, strength: float, top: int = 300, top_strength: 
 def draw_rich(draw: ImageDraw.ImageDraw, xy, line: str, face, fill, accent=ACCENT):
     x, y = xy
     for text, highlighted in segments(line):
-        draw.text((x, y), text, font=face, fill=accent if highlighted else fill)
-        x += draw.textlength(text, font=face)
+        x = draw_plain(draw, (x, y), text, face, accent if highlighted else fill)
 
 
 def pill(draw: ImageDraw.ImageDraw, x, y, label: str, face, fill, text_fill, padding=(22, 12)):
-    w = draw.textlength(label, font=face)
+    w = text_width(draw, label, face)
     ascent, descent = face.getmetrics()
     h = ascent + descent
     draw.rounded_rectangle((x, y, x + w + 2 * padding[0], y + h + 2 * padding[1]), radius=(h + 2 * padding[1]) // 2, fill=fill)
-    draw.text((x + padding[0], y + padding[1]), label, font=face, fill=text_fill)
+    draw_plain(draw, (x + padding[0], y + padding[1]), label, face, text_fill)
     return w + 2 * padding[0], h + 2 * padding[1]
 
 
