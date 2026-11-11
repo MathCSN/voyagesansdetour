@@ -4,7 +4,11 @@
 For each rendered scenario (output/<id>/receipt.json): copy the public files to
 site-src/social-media/production/<id>/, list them in site-src/public-media.json,
 write the reviewed batch reviewed-social/<id>-v1.json and its index entry.
-Nothing is sent to Buffer: the cloud stock controller imports the batches.
+Nothing is sent to Buffer: the publication panel imports the batches.
+
+An Instagram reel can also go, as the same file, to TikTok, YouTube Shorts and Facebook
+Reels: one more batch per network, only for the networks switched on in cadence.json
+("crossposts"). All are off until the panel accepts those formats.
 
 `--verify-public` checks, after deployment, that every queued asset URL serves
 the exact bytes recorded in its batch.
@@ -40,6 +44,10 @@ FORMAT_DOCS = {
                  "https://developers.buffer.com/guides/posts-and-scheduling.html"],
 }
 USER_AGENT = {"User-Agent": "VoyageSansDetour-stock/1.0 (contact@voyagesansdetour.fr)"}
+CADENCE = HERE / "cadence.json"
+# The same vertical file on other networks: payload kind, and whether the caption can point to a link in the bio.
+CROSSPOSTS = {"tiktok": {"kind": "video", "bio": True}, "youtube": {"kind": "short", "bio": False}, "facebook": {"kind": "reel", "bio": False}}
+CROSSPOST_DOCS = ["https://developers.buffer.com/guides/posts-and-scheduling.html"]
 
 
 def sha(raw: bytes) -> str:
@@ -76,6 +84,47 @@ def destination_live(url: str) -> bool:
         return response.status == 200
 
 
+def payload_kind(scenario: dict) -> str:
+    """A reel is a reel; six photos are a "photos" post on Facebook and a "carousel" on Instagram."""
+    if scenario["kind"] == "reel":
+        return "reel"
+    return "carousel" if scenario["channel"] == "instagram" else "photos"
+
+
+def enabled_crossposts(path: Path = CADENCE) -> dict[str, dt.timedelta]:
+    """Networks that also receive each Instagram reel, with the delay after the Instagram slot."""
+    if not path.is_file():
+        return {}
+    entries = json.loads(path.read_text()).get("crossposts", {})
+    return {name: dt.timedelta(hours=float(entry.get("delayHours", 1))) for name, entry in entries.items()
+            if name in CROSSPOSTS and isinstance(entry, dict) and entry.get("enabled") is True}
+
+
+def crosspost_caption(scenario: dict, text: str, channel: str) -> str:
+    """The reel's caption for another network: where no bio link exists, the guide's address is written out."""
+    if CROSSPOSTS[channel]["bio"]:
+        return text
+    cta = scenario["caption"]["cta"]
+    p.ensure(text.count(cta) == 1, "Caption call to action not found")
+    return text.replace(cta, "📌 Enregistrez cette vidéo pour votre voyage. 🔗 Le guide complet : " + scenario["targetUrl"])
+
+
+def build_crosspost(scenario: dict, folder: Path, now: str, channel: str, delay: dt.timedelta) -> dict:
+    """One more batch for the same rendered reel, on another network, a little after the Instagram slot."""
+    p.ensure(scenario["kind"] == "reel" and scenario["channel"] == "instagram" and channel in CROSSPOSTS, "Only an Instagram reel is cross-posted")
+    batch = build_batch(scenario, folder, now)
+    item = batch["items"][0]
+    content = f"vsd-production:{channel}:{scenario['id']}:photo-v1"
+    payload = {**item["payload"], "channel": channel, "kind": CROSSPOSTS[channel]["kind"],
+               "text": crosspost_caption(scenario, item["payload"]["text"], channel)}
+    review = {**item["review"], "contentId": content, "payloadRevision": payload_revision(payload),
+              "formatCapability": {**item["review"]["formatCapability"], "sourceUrls": CROSSPOST_DOCS}}
+    due = p.stamp(p.instant(scenario["publishAt"]) + delay)
+    p.ensure(p.instant(due) < p.instant(scenario["review"]["validUntil"]), "Cross-post slot outside the review window")
+    return {"schemaVersion": 1, "batchId": f"{scenario['id']}-{channel}-v1",
+            "items": [{**item, "contentId": content, "deduplicationKey": content, "dueAt": due, "payload": payload, "review": review}]}
+
+
 def build_batch(scenario: dict, folder: Path, now: str) -> dict:
     content = f"vsd-production:{scenario['channel']}:{scenario['id']}:photo-v1"
     valid = scenario["review"]["validUntil"]
@@ -88,7 +137,7 @@ def build_batch(scenario: dict, folder: Path, now: str) -> dict:
                    "mimeType": "image/jpeg", "altText": scene["alt"]} for n, scene in enumerate(scenario["scenes"], 1)]
         media = {"required": True, "url": None, "sha256": None,
                  "items": [{"url": a["url"], "sha256": a["sha256"], "mimeType": a["mimeType"], **verified} for a in assets]}
-    payload = {"schemaVersion": 1, "channel": scenario["channel"], "kind": "reel" if scenario["kind"] == "reel" else "photos",
+    payload = {"schemaVersion": 1, "channel": scenario["channel"], "kind": payload_kind(scenario),
                "text": (folder / "legende.txt").read_text(), "aiGenerated": False, "assets": assets}
     receipt = p.load_json(folder / "receipt.json")
     review = {
@@ -129,11 +178,18 @@ def publish_media(scenario: dict, folder: Path, inventory: dict) -> dict:
     return {**inventory, "items": kept + [entry]}
 
 
+def index_entry(batch: dict) -> dict:
+    path = STOCK / (batch["batchId"] + ".json")
+    path.write_text(json.dumps(batch, ensure_ascii=False, indent=2) + "\n")
+    return {"path": PREFIX + path.name, "fileSha256": sha(path.read_bytes()), "batchId": batch["batchId"],
+            "batchSha256": batch_sha(batch), "itemIds": [batch["items"][0]["contentId"]]}
+
+
 def admit(now: dt.datetime) -> dict:
     stamp = p.stamp(now.replace(microsecond=0))
     inventory = json.loads(PUBLIC_MEDIA.read_text())
     index = json.loads(INDEX.read_text())
-    admitted = []
+    admitted, crossposts = [], enabled_crossposts()
     for _, _, scenario in p.catalogue_entries(HERE):
         folder = HERE / "output" / scenario["id"]
         batch_id = scenario["id"] + "-v1"
@@ -143,12 +199,15 @@ def admit(now: dt.datetime) -> dict:
         p.ensure(p.instant(scenario["publishAt"]) > now, "Publication slot already passed: " + scenario["id"])
         p.ensure(destination_live(scenario["targetUrl"]), "Guide page not reachable: " + scenario["targetUrl"])
         inventory = publish_media(scenario, folder, inventory)
-        batch = build_batch(scenario, folder, stamp)
-        path = STOCK / (batch_id + ".json")
-        path.write_text(json.dumps(batch, ensure_ascii=False, indent=2) + "\n")
-        index = {**index, "items": index["items"] + [{"path": PREFIX + path.name, "fileSha256": sha(path.read_bytes()), "batchId": batch_id,
-                                                       "batchSha256": batch_sha(batch), "itemIds": [batch["items"][0]["contentId"]]}]}
-        admitted.append(batch_id)
+        batches = [build_batch(scenario, folder, stamp)]
+        if scenario["kind"] == "reel" and scenario["channel"] == "instagram":
+            for channel, delay in crossposts.items():
+                try:
+                    batches.append(build_crosspost(scenario, folder, stamp, channel, delay))
+                except p.Invalid:
+                    continue  # a copy that cannot be made never holds back the reel itself
+        index = {**index, "items": index["items"] + [index_entry(batch) for batch in batches]}
+        admitted += [batch["batchId"] for batch in batches]
     PUBLIC_MEDIA.write_text(json.dumps(inventory, ensure_ascii=False, indent=2) + "\n")
     INDEX.write_text(json.dumps(index, ensure_ascii=False, indent=2) + "\n")
     return {"status": "admitted", "batches": admitted}
@@ -156,7 +215,7 @@ def admit(now: dt.datetime) -> dict:
 
 def verify_public() -> dict:
     index = json.loads(INDEX.read_text())
-    photo_batches = {scenario["id"] + "-v1" for _, _, scenario in p.catalogue_entries(HERE)}
+    photo_batches = {scenario["id"] + suffix for _, _, scenario in p.catalogue_entries(HERE) for suffix in ["-v1"] + [f"-{name}-v1" for name in CROSSPOSTS]}
     report = []
     for entry in index["items"]:
         if entry["batchId"] not in photo_batches:

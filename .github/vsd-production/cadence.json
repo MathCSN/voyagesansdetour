@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 1,
+  "timezone": "Europe/Paris",
+  "note": "Créneaux en heure de Paris. weeklyLimit suit le plafond du panneau vsd-admin (POLICY.cadenceLimit, 2 posts par réseau sur 7 jours au 11/11/2026). Les créneaux \"enabled\": false sont la cadence cible de docs/strategie-videos.md : les activer avec weeklyLimit à 4 une fois le plafond du panneau relevé.",
+  "channels": {
+    "instagram": {
+      "weeklyLimit": 2,
+      "minGapHours": 40,
+      "slots": [
+        {
+          "weekday": "tuesday",
+          "time": "19:00",
+          "kind": "reel"
+        },
+        {
+          "weekday": "thursday",
+          "time": "09:00",
+          "kind": "carousel",
+          "enabled": false
+        },
+        {
+          "weekday": "friday",
+          "time": "18:00",
+          "kind": "reel",
+          "enabled": false
+        },
+        {
+          "weekday": "sunday",
+          "time": "21:00",
+          "kind": "reel"
+        }
+      ]
+    },
+    "facebook": {
+      "weeklyLimit": 2,
+      "minGapHours": 60,
+      "slots": [
+        {
+          "weekday": "thursday",
+          "time": "18:00",
+          "kind": "carousel"
+        },
+        {
+          "weekday": "sunday",
+          "time": "18:00",
+          "kind": "carousel"
+        }
+      ]
+    }
+  },
+  "clips": {
+    "providers": [
+      "pexels"
+    ],
+    "perReel": 2
+  },
+  "crossposts": {
+    "note": "Le même reel sur d'autres réseaux. Éteints tant que le panneau vsd-admin n'accepte pas ces formats (docs/strategie-videos.md, « TikTok et Shorts »).",
+    "tiktok": {
+      "enabled": false,
+      "delayHours": 1
+    },
+    "youtube": {
+      "enabled": false,
+      "delayHours": 2
+    },
+    "facebook": {
+      "enabled": false,
+      "delayHours": 3
+    }
+  }
+}

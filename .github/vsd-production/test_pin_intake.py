@@ -68,6 +68,46 @@ class PinIntakeTests(unittest.TestCase):
             articles=[{'slug':'casse','title':'X','country':'Pas un pays','publishedOn':'2026-10-24'},{'slug':'bon','title':'Un bon guide','publishedOn':'2026-10-23'}]
             result=intake(articles,[],folder,now)
             self.assertEqual(result['id'],'pin-bon');self.assertEqual(result['held'],[{'id':'pin-casse','reason':'invalid_country'}])
+    def test_every_guide_gets_its_first_pin_before_any_variant_and_a_run_draws_several(self):
+        from pin_intake import intake_many
+        drawn=[]
+        def renderer(article,output,variant='a'):
+            drawn.append((article['slug'],variant));return self.fake(article,output,variant)
+        articles=[{'slug':'ancien','title':'Ancien guide','cover':'x','publishedOn':'2026-10-01'},{'slug':'recent','title':'Guide récent','cover':'x','publishedOn':'2026-10-20'},
+                  {'slug':'reserve','title':'Guide du lancement','cover':'x','publishedOn':'2026-09-01'}]
+        with tempfile.TemporaryDirectory() as folder:
+            now=dt.datetime(2026,10,24,tzinfo=dt.timezone.utc)
+            result=intake_many(articles,['reserve'],folder,now,renderer,limit=4)
+            self.assertEqual(result['ids'],['pin-recent','pin-ancien','pin-recent-b','pin-ancien-b'])
+            again=intake_many(articles,['reserve'],folder,now,renderer,limit=10)
+            self.assertEqual(again['ids'],['pin-reserve-b','pin-recent-c','pin-ancien-c','pin-reserve-c'])  # a reserved guide keeps its launch Pin, variants are new
+            self.assertEqual(intake_many(articles,['reserve'],folder,now,renderer)['status'],'no_new_article')
+    def fake(self,article,output,variant):
+        import hashlib
+        from pin_draft import pin_id
+        from pin_intake import digest,renderer_sha256
+        target=Path(output)/pin_id(article['slug'],variant);target.mkdir(parents=True);(target/'pin.jpg').write_bytes(variant.encode())
+        manifest={'id':target.name,'variant':variant,'status':'draft_requires_review','publicationApproved':False,'title':article['title'],
+                  'targetUrl':'https://voyagesansdetour.fr/portugal/'+article['slug']+'/','articleSha256':digest(article),
+                  'imageSha256':hashlib.sha256(variant.encode()).hexdigest(),'rendererSha256':renderer_sha256()}
+        (target/'draft.json').write_text(json.dumps(manifest));return target
+    def test_a_redraw_interrupted_by_any_error_never_blocks_the_next_run(self):
+        with tempfile.TemporaryDirectory() as folder:
+            now=dt.datetime(2026,10,19,tzinfo=dt.timezone.utc)
+            render({'slug':'guide','title':'Ancien titre'},folder)
+            def missing_photo(article,output):raise OSError('photo file missing')
+            self.assertEqual(intake([{'slug':'guide','title':'Nouveau titre'}],[],folder,now,missing_photo)['status'],'no_new_article')
+            self.assertEqual([p.name for p in Path(folder).iterdir()],['pin-guide'])
+            (Path(folder)/'pin-guide').rename(Path(folder)/'.pin-guide.previous')  # as a killed run would leave it
+            self.assertEqual(intake([{'slug':'guide','title':'Nouveau titre'}],[],folder,now)['status'],'draft_refreshed_not_published')
+            self.assertEqual([p.name for p in Path(folder).iterdir()],['pin-guide'])
+    def test_a_guide_whose_slug_ends_like_a_variant_never_collides_with_another_guide_pin(self):
+        from pin_intake import intake_many
+        articles=[{'slug':'kyoto','title':'Kyoto','cover':'x','publishedOn':'2026-10-02'},{'slug':'kyoto-b','title':'Kyoto bis','cover':'x','publishedOn':'2026-10-01'}]
+        with tempfile.TemporaryDirectory() as folder:
+            ids=intake_many(articles,[],folder,dt.datetime(2026,10,24,tzinfo=dt.timezone.utc),lambda article,output,variant='a':self.fake(article,output,variant),limit=10)['ids']
+            self.assertEqual(ids,['pin-kyoto','pin-kyoto-b','pin-kyoto-c'])  # 'pin-kyoto-b' is the guide kyoto-b, drawn once
+            self.assertEqual(json.loads((Path(folder)/'pin-kyoto-b/draft.json').read_text())['title'],'Kyoto bis')
     def test_invalid_country_is_refused(self):
         with tempfile.TemporaryDirectory() as folder, self.assertRaisesRegex(ValueError,'invalid_country'):
             render({'slug':'x','title':'X','country':'../etc'},folder)

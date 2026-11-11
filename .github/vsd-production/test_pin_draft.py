@@ -42,6 +42,32 @@ class PinDraftTests(unittest.TestCase):
                 (self.site/'image-sources.json').write_text(json.dumps({'photos':[dict(PHOTO,**{field:value})]}))
                 with self.assertRaisesRegex(ValueError,'photo_ai_generated'):render(GUIDE,self.output,site=self.site)
 
+    def test_each_variant_takes_another_photo_of_the_guide_and_its_own_title(self):
+        for name in ('grenade-albaicin','seville-plaza'):
+            Image.new('RGB',(1600,1067),'#c69c7a').save(self.site/('dist/assets/photos/'+name+'.jpg'))
+        photos=[PHOTO]+[dict(PHOTO,id=name,file='photos/'+name+'.jpg',author='Auteur '+name) for name in ('grenade-albaicin','seville-plaza')]
+        (self.site/'image-sources.json').write_text(json.dumps({'photos':photos}))
+        guide=dict(GUIDE,category='Itinéraires',sections=[{'image':'grenade-albaicin'},{'image':'grenade-alhambra'},{'image':'seville-plaza'}],
+                   keyFacts=[{'value':'40 min','label':'Séville → Cordoue en AVE'},{'value':'19 €','label':'l’Alhambra'},{'value':'300 000 ₫','label':'un prix en dongs'}])
+        manifests={v:json.loads((render(guide,self.output,site=self.site,variant=v)/'draft.json').read_text()) for v in ('a','b','c')}
+        self.assertEqual([m['id'] for m in manifests.values()],['pin-andalousie','pin-andalousie-b','pin-andalousie-c'])
+        self.assertEqual([m['photo']['id'] for m in manifests.values()],['grenade-alhambra','grenade-albaicin','seville-plaza'])
+        self.assertEqual(len({m['imageSha256'] for m in manifests.values()}),3)
+        self.assertEqual(manifests['a']['pinTitle'],GUIDE['title'])
+        self.assertEqual(manifests['b']['pinTitle'],'L’Andalousie en train : itinéraire jour par jour, prix et conseils')
+        self.assertEqual(manifests['c']['pinTitle'],'L’Andalousie en train : les chiffres à connaître avant de partir')
+        self.assertTrue(all(len(m['pinTitle'])<=100 for m in manifests.values()))
+
+    def test_a_variant_without_a_photo_of_its_own_is_not_drawn(self):
+        with self.assertRaisesRegex(ValueError,'no_distinct_photo'):render(GUIDE,self.output,site=self.site,variant='b')
+        with self.assertRaisesRegex(ValueError,'no_distinct_photo'):render({k:v for k,v in GUIDE.items() if k!='cover'},self.output,site=self.site,variant='c')
+
+    def test_search_title_follows_the_kind_of_guide(self):
+        from pin_draft import pin_title
+        self.assertEqual(pin_title({'title':'T','shortTitle':'Quand partir à Tenerife','category':'Choisir'},'b'),'Quand partir à Tenerife : la meilleure période, mois par mois')
+        self.assertEqual(pin_title({'title':'T','shortTitle':'Budget Japon, 2 semaines','category':'Budget'},'b'),'Budget Japon, 2 semaines : combien ça coûte, poste par poste')
+        self.assertEqual(pin_title({'title':'T','shortTitle':'Sintra','category':'Inconnue'},'b'),'Sintra : l’essentiel à savoir avant de partir')
+
     def test_label_names_the_country_and_place_never_a_fixed_angle(self):
         (self.site/'destinations.json').write_text(json.dumps({'countries':{'japon':{'name':'Japon','in':'au Japon'}}}))
         self.assertEqual(place_label({'country':'japon','destination':'Kyoto'},self.site),'JAPON · KYOTO')
