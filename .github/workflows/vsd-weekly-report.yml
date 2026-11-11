@@ -33,13 +33,6 @@ jobs:
           node-version: 22
       - name: Test the report
         run: node --test .github/vsd-control/weekly-report.test.mjs
-      - name: Read the cloud stock receipt without importing
-        env:
-          VSD_CLOUD_KEY: ${{ secrets.VSD_CLOUD_KEY }}
-          VSD_SITES_DISPATCH_TOKEN: ${{ secrets.VSD_SITES_DISPATCH_TOKEN }}
-          VSD_STOCK_READ_ONLY: 'true'
-        # A missing receipt only makes the report say "état cloud inconnu".
-        run: node .github/vsd-production/stock-control.mjs > "$RUNNER_TEMP/stock.txt" || echo '::warning::Reçu de stock cloud illisible.'
       - name: List this week's workflow runs
         env:
           GH_TOKEN: ${{ github.token }}
@@ -49,7 +42,6 @@ jobs:
         env:
           VSD_REPORT_OUT: ${{ runner.temp }}
           VSD_REPORT_RUNS: ${{ runner.temp }}/runs.json
-          VSD_REPORT_STOCK_EVIDENCE: ${{ runner.temp }}/stock.txt
         run: |
           node .github/vsd-control/weekly-report.mjs
           cat "$RUNNER_TEMP/vsd-report.md" >> "$GITHUB_STEP_SUMMARY"

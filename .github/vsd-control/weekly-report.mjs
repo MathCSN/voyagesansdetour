@@ -64,7 +64,7 @@ export function computeAlerts({social,guides,runs,stopAt=STOP_AT,now}){
   if(!guides.nextGuideAt)alerts.push({code:'guide_queue_empty',message:'File des guides vide : aucun nouveau guide programmé (site-src/editorial-queue.json ou editorial-candidates/).'});
   else if(Date.parse(guides.nextGuideAt)>now+GUIDE_LOW_DAYS*DAY)alerts.push({code:'guide_queue_low',message:`Prochain nouveau guide seulement le ${day(guides.nextGuideAt)}.`});
   for(const run of runs.filter(r=>r.failures>=REPEATED_FAILURES))alerts.push({code:`workflow_failures:${run.workflow}`,message:`${run.workflow} : ${run.failures} échecs sur ${run.total} exécutions cette semaine (${run.lastFailureUrl}).`});
-  if(Date.parse(stopAt)-now<STOP_WARNING_DAYS*DAY)alerts.push({code:'authorisation_end',message:`La chaîne s’arrête d’elle-même le ${day(stopAt)} (date STOP dans invoke.mjs, stock-control.mjs et pin_intake.py) : la prolonger.`});
+  if(Date.parse(stopAt)-now<STOP_WARNING_DAYS*DAY)alerts.push({code:'authorisation_end',message:`La chaîne s’arrête d’elle-même le ${day(stopAt)} (date STOP dans invoke-admin.mjs, stock-control.mjs et pin_intake.py) : la prolonger.`});
   return alerts;
 }
 

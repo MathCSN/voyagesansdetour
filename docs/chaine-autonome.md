@@ -23,21 +23,19 @@ ne peut plus les récupérer. **Après eux, la file sociale est vide** jusqu'aux
 ```
 guide publié ──► rendu (production.py, reel_intake.py)
               ──► lot relu dans .github/vsd-production/reviewed-social/ + index.json
-              ──► import quotidien vers le panneau privé (cloud control, 08:53 UTC)
-              ──► registre D1 du panneau privé ──► Buffer à l'échéance ──► Instagram / Facebook
+              ──► import quotidien par le panneau privé vsd-admin (appel signé, 08:53 UTC)
+              ──► registre D1 du panneau ──► Buffer 3 jours avant l'échéance ──► Instagram / Facebook
 ```
 
-- **Panneau privé** : application ChatGPT Sites
-  `voyage-sans-detour-admin.cousinmathis31.chatgpt.site`. Son code vit hors de ce dépôt,
-  dans le projet Codex local `~/.codex/.chatgpt-projects/g-p-6aa80b285c0081919bf16079e50bfb9e/`
-  (`panneau-prive/` et `exploitation/cloud-publications/`). Il tient le registre D1, la clé Buffer
-  et la cadence : **Instagram 1 post par semaine**, Facebook selon sa politique serveur.
-- **Remplaçant prêt** (06/11/2026) : panneau `vsd-admin` sur Cloudflare (dépôt privé `MathCSN/vsd-admin`),
-  modifiable et déployable par Claude seul. Il affiche déjà tout ; son moteur de publication attend la
-  bascule décrite dans `docs/migration-panneau.md`. D'ici là, l'ancien panneau reste le seul à publier.
-- **Un lot importé ne peut plus être annulé depuis ce dépôt** : le retirer de `index.json`
-  ne le retire pas du registre cloud. Seule parade sans redéployer le serveur :
-  mettre en pause la file du canal dans Buffer jusqu'à l'expiration de la relecture du lot (`validUntil`).
+- **Panneau privé** `vsd-admin` (https://vsd-admin.kartier.workers.dev, accès par clé d'accès) :
+  Cloudflare Worker + base D1, code dans le dépôt privé `MathCSN/vsd-admin`, modifié et déployé par Claude
+  seul. Il tient le registre, la clé Buffer (chiffrée) et les règles : programmation dans Buffer 3 jours
+  avant l'échéance, **2 posts au plus par réseau sur 7 jours**, contrôle anti-doublon sur ce que Buffer a
+  déjà, formats `instagram/reel`, `instagram/carousel` et `facebook/photos`. Bascule depuis l'ancien
+  serveur ChatGPT Sites le 11/11/2026 (`docs/migration-panneau.md`) ; l'ancien n'est plus appelé.
+- **Retirer un lot** : l'ajouter à `retirements` de `index.json`. Au passage `stock` suivant, ses posts
+  pas encore envoyés passent « en attente » dans le registre et ne partent plus. Un post déjà programmé
+  dans Buffer se supprime dans Buffer.
 - Format d'un lot : un item `{contentId, deduplicationKey, title, dueAt, payload, review}` ;
   `payload` = `{schemaVersion, channel, kind, text, aiGenerated, assets[{url, sha256, mimeType}]}` ;
   la relecture doit couvrir l'échéance (`review.validUntil > dueAt`).
@@ -126,7 +124,7 @@ des fichiers changés sont dans l'artefact `new-guide-proposal`.
 | Workflow | Quand | Rôle |
 | --- | --- | --- |
 | `build-pages.yml` | push sur main, chaque jour 07:41 | Construit et déploie le site, publie les guides dus |
-| `vsd-cloud-control.yml` | toutes les 30 min ; métriques 06–08 h ; stock 08:53 chaque jour | Déclenche l'envoi des posts dus ; importe un lot relu par jour |
+| `vsd-cloud-control.yml` | toutes les 30 min ; stock 08:53 chaque jour | Appels signés du panneau `vsd-admin` : programme les posts dus dans Buffer ; importe les lots relus encore programmables |
 | `vsd-render-content.yml` | lundi 05:17 | Rend les reels, brouillons et admission d'épingles |
 | `vsd-reel-intake.yml` | après chaque déploiement | Prépare un storyboard de reel depuis un nouveau guide |
 | `vsd-voice-production.yml` → `vsd-voice-adopt.yml` → `vsd-voice-review.yml` → `vsd-voice-promote.yml` | à la main seulement | Chaîne des reels voix de synthèse, en sommeil depuis le 24/10 (ancien format retiré) |
@@ -139,7 +137,7 @@ Lancés à la main seulement, pour qualifier un modèle : `vsd-writing-draft`, `
 `-evaluation`, `-guide-review`, `-guide-revision`, `-probe`. Ils ne tournent jamais seuls.
 `vsd-voice-pilot.yml` (qualification ponctuelle des voix, terminée le 12/10) a été supprimé.
 
-Secrets : `VSD_CLOUD_KEY`, `VSD_SITES_DISPATCH_TOKEN` (panneau privé), `CLOUDFLARE_WORKERS_AI_TOKEN`
+Secrets : `VSD_ADMIN_TICK_KEY` (appels signés du panneau privé), `CLOUDFLARE_WORKERS_AI_TOKEN`
 (rédaction). Variables : `VSD_FREE_PROMOTION_SCHEDULE` et `VSD_FREE_RENDER_SCHEDULE` à `true`.
 
 ## Surveillance
@@ -159,5 +157,5 @@ Secrets : `VSD_CLOUD_KEY`, `VSD_SITES_DISPATCH_TOKEN` (panneau privé), `CLOUDFL
 ## Date d'arrêt
 
 Toute la chaîne s'arrête d'elle-même le **14 septembre 2027** (constante `STOP` ou `END`
-dans `invoke.mjs`, `stock-control.mjs`, `pin_intake.py` et plusieurs workflows).
+dans `invoke-admin.mjs`, `stock-control.mjs`, `pin_intake.py` et plusieurs workflows).
 Le rapport alerte 60 jours avant ; il faudra alors repousser ces dates.

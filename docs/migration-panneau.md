@@ -10,6 +10,31 @@ actuel (`voyage-sans-detour-admin.cousinmathis31.chatgpt.site`) ne peut être d�
 Codex ; on le remplace par un panneau que Claude modifie et déploie seul, sans jamais casser la
 publication en cours.
 
+## Bascule du 11 novembre 2026
+
+Feu vert de Mathis transmis par le pilotage le 11/11 (Buffer, Stay22 et Google connectés au nouveau panneau
+par Mathis entre 01:00 et 01:16). Déroulé, selon `BASCULE.md` du dépôt privé :
+
+- **Export** de l'ancien registre en lecture seule à 00:19 UTC (29 entrées) et `stock_status`
+  (exécution 42930536413) : 18 lots importés par l'ancien, 1 retiré.
+- **Reprise** dans le nouveau, encore désactivé : 17 posts importés ; refus attendu d'un lot historique déjà
+  publié le 12/10 (`facebook-porto-photos-2026-10-12-v1`, relecture d'un ancien format, hors file).
+  Réconciliation Buffer complète : 7 posts passés retrouvés publiés, Facebook du 12/11 retrouvé programmé
+  (identifiant Buffer conservé), 9 posts à venir prêts.
+- **Comparaison** : « registres identiques sur les posts à venir ».
+- **Plan à blanc** : au premier passage, seul le reel Instagram du 11/11 (18:00 Paris) est programmé ; le
+  post Facebook du 12/11 reste tel quel dans Buffer.
+- **Gel et bascule** : fusion de la PR qui fait pointer `vsd-cloud-control.yml` vers le nouveau panneau ;
+  le rapport hebdomadaire ne lit plus l'ancien stock. L'ancien serveur n'est plus appelé, ses données restent
+  intactes.
+- **Retour arrière** : `PUBLICATION_ENABLED = "false"` dans `wrangler.toml` du dépôt privé et déploiement,
+  puis `git revert` du commit de bascule.
+
+**Visites GA4 à zéro** (vérifié le 11/11 par lecture de la propriété 556076363) : la propriété est la bonne
+et reçoit des données (7 pages vues, 3 sessions en 90 jours), mais aucune sur les 28 derniers jours. La balise
+ne mesure que les visiteurs qui acceptent la mesure d'audience, et le trafic reste très faible (6 clics
+depuis Google en un mois) : ce zéro est réel, ce n'est ni une mauvaise propriété ni un filtre.
+
 ## 1. Ce que fait le panneau actuel
 
 Code : `~/.codex/.chatgpt-projects/g-p-6aa80b285c0081919bf16079e50bfb9e/panneau-prive/`
