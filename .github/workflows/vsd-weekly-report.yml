@@ -1,5 +1,6 @@
-# Read-only monitoring: weekly report issue on Mondays, alert issue (empty queues, indexing in retreat) checked daily.
-# No publication, no provider call besides the signed read-only search figures of the private panel and the public Pinterest feed.
+# Read-only monitoring: weekly report issue on Mondays, alert issue (empty queues, indexing in retreat,
+# Buffer channel cut off, silent publication engine, blocked posts) checked daily.
+# No publication, no provider call besides the signed read-only summary of the private panel and the public Pinterest feed.
 name: Voyage Sans Detour weekly report
 on:
   schedule:
@@ -33,9 +34,10 @@ jobs:
           node-version: 22
       - name: Test the report
         run: node --test .github/vsd-control/weekly-report.test.mjs .github/vsd-control/seo-status.test.mjs
-      # Clicks, impressions and indexed pages come from the private panel, which holds the read-only
-      # Google access. A panel that cannot be read leaves the report without figures, never without a report.
-      - name: Read search figures from the private panel
+      # Clicks, impressions, indexed pages and the state of the publication engine come from the private panel,
+      # which holds the read-only Google access and the Buffer channels. A panel that cannot be read leaves the
+      # report without these figures and without publication alerts, never without a report.
+      - name: Read search figures and the publication engine state from the private panel
         continue-on-error: true
         env:
           VSD_ADMIN_ORIGIN: https://vsd-admin.kartier.workers.dev

@@ -1,6 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {socialQueue,guideQueue,parsePinterestRss,summarizeRuns,computeAlerts,renderReport,seoLines} from './weekly-report.mjs';
+import {publicationLines} from './publication-report.mjs';
 
 const NOW=Date.parse('2026-10-26T07:00:00Z');
 const batch=(batchId,channel,dueAt,title='Titre')=>({batchId,items:[{title,dueAt,payload:{channel,kind:'reel'}}]});
@@ -97,5 +98,101 @@ test('alerts fire when indexed pages or impressions fall',()=>{
   assert.deepEqual(fewer.map(a=>a.code),['search_impressions_drop']);
   // A small site moves a lot from week to week: tiny volumes never alert.
   assert.deepEqual(computeAlerts({...QUIET,seo:{...SEO,search:{...SEO.search,impressions:40,previousImpressions:120}}}),[]);
+});
+
+const AT=Date.parse('2026-11-12T09:00:00Z');
+const PUBLICATION={enabled:true,channels:{instagram:'connected',facebook:'connected',tiktok:'absent'},lastPassAt:'2026-11-12T08:37:00.000Z',
+  counts:{ready:4,submitting:0,scheduled:2,published:12,to_verify:0,held:0,failed:0},problems:[],problemsCount:0,atRisk:[],atRiskCount:0};
+const publicationAlerts=publication=>computeAlerts({...QUIET,now:AT,seo:{search:null,indexation:null,publication}});
+const held=(id,at,reason='overdue')=>({id,channel:'instagram',state:'held',reason,at});
+
+test('the publication section gives the engine, the channels, the register and the posts in trouble',()=>{
+  const lines=publicationLines({...PUBLICATION,channels:{instagram:'disconnected',facebook:'connected',tiktok:'absent'},counts:{...PUBLICATION.counts,held:1,failed:1},
+    problems:[held('ig:retenu','2026-11-10T17:00:00.000Z'),{id:'fb:echec',channel:'facebook',state:'failed',reason:'http_500',at:'2026-11-11T10:00:00.000Z'}],problemsCount:2,
+    atRisk:[{id:'ig:pret',channel:'instagram',dueAt:'2026-11-12T17:00:00.000Z',channelState:'disconnected'}],atRiskCount:1}).join('\n');
+  assert.ok(lines.includes('- Moteur du panneau : actif, dernier passage le 2026-11-12 à 09:37, heure de Paris.'),lines);
+  assert.ok(lines.includes('- Canaux Buffer : Instagram déconnecté de Buffer, Facebook connecté, TikTok absent de Buffer.'),lines);
+  assert.ok(lines.includes('- Registre : 4 prêts, 2 programmés dans Buffer, 12 publiés, 1 retenu, 1 en échec.'),lines);
+  assert.ok(lines.includes('- Retenus ou en échec depuis 7 jours (2) : `ig:retenu` (Instagram, retenu, échéance dépassée, 2026-11-10) ; `fb:echec` (Facebook, en échec, code `http_500`, 2026-11-11).'),lines);
+  assert.ok(lines.includes('- Prêts à moins de 24 h sur un canal qui ne reçoit rien (1) : `ig:pret` (Instagram déconnecté de Buffer, échéance le 2026-11-12 à 18:00, heure de Paris).'),lines);
+  const md=renderReport({now:AT,social:{items:[],horizon:{},lastWeek:[]},guides:{published:[],upcomingGuides:[],upcomingUpdates:[],nextGuideAt:null},pins:[],runs:[],alerts:[],waiting:[],seo:{search:null,indexation:null,publication:PUBLICATION}});
+  assert.ok(md.indexOf('## Publié cette semaine')<md.indexOf('## Publication')&&md.indexOf('## Publication')<md.indexOf('## Référencement Google'));
+  assert.ok(md.includes('- Moteur du panneau : actif'));
+});
+
+test('a healthy or empty register is said in one line each',()=>{
+  const lines=publicationLines({...PUBLICATION,enabled:false,channels:null,lastPassAt:null,counts:{ready:0,submitting:0,scheduled:0,published:0,to_verify:0,held:0,failed:0}});
+  assert.deepEqual(lines,['- Moteur du panneau : désactivé, aucun passage enregistré.','- Canaux Buffer : aucun accès Buffer enregistré dans le panneau.','- Registre : vide.']);
+  assert.equal(publicationLines(PUBLICATION).length,3);
+});
+
+test('a missing publication reading is said plainly and never raises an alert',()=>{
+  assert.deepEqual(publicationLines(null),['- État du moteur de publication indisponible (panneau privé injoignable ou pas encore à jour).']);
+  const md=renderReport({now:AT,social:{items:[],horizon:{},lastWeek:[]},guides:{published:[],upcomingGuides:[],upcomingUpdates:[],nextGuideAt:null},pins:[],runs:[],alerts:[],waiting:[]});
+  assert.ok(md.includes('## Publication\n\n- État du moteur de publication indisponible'));
+  assert.deepEqual(computeAlerts({...QUIET,now:AT,seo:null}),[]);
+  assert.deepEqual(publicationAlerts(null),[]);
+  assert.deepEqual(publicationAlerts(PUBLICATION),[]);
+});
+
+test('alerts name the channel that no longer receives posts and say what to do, then clear once it is back',()=>{
+  const alerts=publicationAlerts({...PUBLICATION,channels:{instagram:'disconnected',facebook:'locked',tiktok:'paused'}});
+  assert.deepEqual(alerts.map(a=>a.code),['publication_channel:instagram','publication_channel:facebook','publication_channel:tiktok']);
+  assert.ok(alerts[0].message.startsWith('Instagram déconnecté de Buffer : ses posts ne partent plus.'),alerts[0].message);
+  for(const alert of alerts)assert.ok(alert.message.includes('publish.buffer.com > Channels'),alert.message);
+  assert.ok(alerts[1].message.includes('Facebook verrouillé par Buffer'),alerts[1].message);
+  assert.ok(alerts[2].message.includes('TikTok en pause dans Buffer'),alerts[2].message);
+  // TikTok is optional: absent is not a fault. Instagram and Facebook are not.
+  assert.deepEqual(publicationAlerts({...PUBLICATION,channels:{instagram:'absent',facebook:'unknown',tiktok:'absent'}}).map(a=>a.code),['publication_channel:instagram']);
+  assert.deepEqual(publicationAlerts({...PUBLICATION,channels:null}).map(a=>a.code),['publication_buffer_access']);
+  assert.deepEqual(publicationAlerts(PUBLICATION),[]);
+});
+
+test('an alert fires when the engine has not passed for more than six hours, or is switched off',()=>{
+  const silent=publicationAlerts({...PUBLICATION,lastPassAt:'2026-11-12T02:59:00.000Z'});
+  assert.deepEqual(silent.map(a=>a.code),['publication_engine_silent']);
+  assert.ok(silent[0].message.includes('depuis le 2026-11-12 à 03:59, heure de Paris (plus de 6 heures)'),silent[0].message);
+  assert.deepEqual(publicationAlerts({...PUBLICATION,lastPassAt:'2026-11-12T03:00:00.000Z'}),[]);
+  const never=publicationAlerts({...PUBLICATION,lastPassAt:null});
+  assert.deepEqual(never.map(a=>a.code),['publication_engine_silent']);
+  assert.ok(never[0].message.includes('n’a encore enregistré aucun passage'),never[0].message);
+  assert.deepEqual(publicationAlerts({...PUBLICATION,enabled:false,lastPassAt:null}).map(a=>a.code),['publication_engine_disabled']);
+});
+
+test('posts held or failed within seven days raise one alert; a retired or older one does not',()=>{
+  const alerts=publicationAlerts({...PUBLICATION,problems:[held('ig:retenu','2026-11-10T17:00:00.000Z'),{id:'fb:echec',channel:'facebook',state:'failed',reason:'buffer_mutation_error',at:'2026-11-11T10:00:00.000Z'}],problemsCount:2});
+  assert.deepEqual(alerts.map(a=>a.code),['publication_posts_blocked']);
+  assert.ok(alerts[0].message.startsWith('2 posts retenus ou en échec depuis moins de 7 jours : `ig:retenu` (Instagram, retenu, échéance dépassée) ; `fb:echec` (Facebook, en échec, refusé par Buffer).'),alerts[0].message);
+  assert.deepEqual(publicationAlerts({...PUBLICATION,problems:[held('ig:retire','2026-11-11T10:00:00.000Z','retired'),held('ig:vieux','2026-11-05T08:59:59.000Z')],problemsCount:2}),[]);
+  const many=publicationAlerts({...PUBLICATION,problems:Array.from({length:7},(_,i)=>held('post-'+i,'2026-11-11T10:00:00.000Z')),problemsCount:9});
+  assert.ok(many[0].message.startsWith('9 posts retenus ou en échec'),many[0].message);
+  assert.ok(many[0].message.includes('`post-4` (Instagram, retenu, échéance dépassée) et 4 autres.'),many[0].message);
+  assert.ok(!many[0].message.includes('post-5'));
+  assert.ok(publicationAlerts({...PUBLICATION,problems:[held('seul','2026-11-11T10:00:00.000Z')],problemsCount:1})[0].message.startsWith('1 post retenu ou en échec depuis moins de 7 jours : '));
+});
+
+test('ready posts close to their due date on a channel that receives nothing raise an alert',()=>{
+  const paused={...PUBLICATION,channels:{...PUBLICATION.channels,tiktok:'paused'},atRisk:[{id:'tk:pret',channel:'tiktok',dueAt:'2026-11-12T11:00:00.000Z',channelState:'paused'}],atRiskCount:1};
+  const alerts=publicationAlerts(paused);
+  assert.deepEqual(alerts.map(a=>a.code),['publication_channel:tiktok','publication_posts_at_risk']);
+  assert.ok(alerts[1].message.startsWith('1 post prêt à moins de 24 h'),alerts[1].message);
+  assert.ok(alerts[1].message.includes('`tk:pret` (TikTok en pause dans Buffer, échéance le 2026-11-12 à 12:00, heure de Paris)'),alerts[1].message);
+});
+
+test('TikTok left out of Buffer on purpose never alerts, for its channel or for its posts',()=>{
+  // The panel imports TikTok batches even when no TikTok channel exists in Buffer: they wait, then are held.
+  const leftOut={...PUBLICATION,atRisk:[{id:'tk:pret',channel:'tiktok',dueAt:'2026-11-12T11:00:00.000Z',channelState:'absent'}],atRiskCount:1,
+    problems:[{id:'tk:retenu',channel:'tiktok',state:'held',reason:'overdue',at:'2026-11-11T10:00:00.000Z'}],problemsCount:1};
+  assert.deepEqual(publicationAlerts(leftOut),[]);
+  assert.ok(publicationLines(leftOut).join('\n').includes('`tk:retenu`'));
+  // Instagram is required: the same situation alerts.
+  const required={...leftOut,channels:{...PUBLICATION.channels,instagram:'absent'},atRisk:[{id:'ig:pret',channel:'instagram',dueAt:'2026-11-12T11:00:00.000Z',channelState:'absent'}],problems:[held('ig:retenu','2026-11-11T10:00:00.000Z')]};
+  assert.deepEqual(publicationAlerts(required).map(a=>a.code),['publication_channel:instagram','publication_posts_blocked','publication_posts_at_risk']);
+});
+
+test('publication alerts come first and leave the other alerts untouched',()=>{
+  const dropped={...SEO,indexation:{...SEO.indexation,trend:{status:'drop',lost:8,reference:48,referenceDay:'2026-11-01'}},publication:{...PUBLICATION,channels:{...PUBLICATION.channels,instagram:'disconnected'}}};
+  assert.deepEqual(computeAlerts({...QUIET,now:AT,seo:dropped}).map(a=>a.code),['publication_channel:instagram','indexation_drop']);
+  for(const alert of publicationAlerts({...PUBLICATION,channels:null,enabled:false,problems:[held('a','2026-11-11T10:00:00.000Z')],atRisk:[{id:'b',channel:'facebook',dueAt:'2026-11-12T11:00:00.000Z',channelState:'unknown'}]}))assert.doesNotMatch(alert.message,/[@\[\]<#!]|https?:/,alert.message);
 });
 
