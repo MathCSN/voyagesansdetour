@@ -10,6 +10,8 @@ const SOCIAL_LOW_DAYS=14,GUIDE_LOW_DAYS=28,STOP_WARNING_DAYS=60,REPEATED_FAILURE
 const PINTEREST_RSS='https://fr.pinterest.com/voyagesansdetour/feed.rss';
 const PROFILES={instagram:'https://www.instagram.com/voyagesansdetour.fr/',facebook:'https://business.facebook.com/latest/posts/published_posts?asset_id=1331092223422242',pinterest:'https://fr.pinterest.com/voyagesansdetour/'};
 const UPDATE_PREFIX='auto-mise-a-jour-';
+// Below this volume, a fall in impressions is noise on a young site; at half the previous period it is a signal.
+const SEARCH_ALERT_MIN_IMPRESSIONS=300,SEARCH_ALERT_SHARE=0.5;
 
 const day=value=>new Date(value).toISOString().slice(0,10);
 const latest=values=>values.reduce((max,value)=>(!max||Date.parse(value)>Date.parse(max)?value:max),null);
@@ -54,7 +56,28 @@ export function summarizeRuns(runs,since){
   return [...groups.values()].filter(g=>g.failures>0).sort((a,b)=>b.failures-a.failures);
 }
 
-export function computeAlerts({social,guides,runs,stopAt=STOP_AT,now}){
+const fr=value=>String(value).replace('.',',');
+const plural=(count,word)=>`${count} ${word}${count>1?'s':''}`;
+/** Search Console figures relayed by the private panel (docs/seo.md); null when the reading is missing. */
+export function seoLines(seo){
+  if(!seo)return ['- Relevé Search Console indisponible cette semaine (panneau privé injoignable ou pas encore à jour).'];
+  const lines=[];
+  const {search,indexation}=seo;
+  if(search){
+    const before=search.previousImpressions===null?'':` (28 jours précédents : ${plural(search.previousClicks??0,'clic')} et ${plural(search.previousImpressions,'impression')})`;
+    lines.push(`- Recherche Google : ${plural(search.clicks,'clic')} et ${plural(search.impressions,'impression')} du ${search.period.startDate} au ${search.period.endDate}${before}.`);
+    const position=q=>q.position?', position '+fr(q.position):'';
+    if(search.rising.length)lines.push('- Requêtes en hausse : '+search.rising.map(q=>`« ${q.query} » (${plural(q.impressions,'impression')}, ${q.previousImpressions} avant${position(q)})`).join(' ; ')+'.');
+  }else lines.push('- Clics et impressions : pas encore relevé.');
+  if(indexation){
+    const round=indexation.inspected<indexation.total*0.9?' ; tournée d’inspection en cours':'';
+    lines.push(`- Indexation : ${indexation.indexed} pages indexées sur ${indexation.inspected} inspectées (${indexation.total} dans le plan du site)${round}.`);
+    if(indexation.notIndexed.length)lines.push(`- Pas encore indexées (${indexation.notIndexedCount}) : `+indexation.notIndexed.map(p=>'`'+p.path+'`'+(p.state?` (${p.state})`:'')).join(', ')+'.');
+  }else lines.push('- Pages indexées : pas encore relevé.');
+  return lines;
+}
+
+export function computeAlerts({social,guides,runs,seo=null,stopAt=STOP_AT,now}){
   const alerts=[];
   for(const channel of SOCIAL_CHANNELS){
     const horizon=social.horizon[channel];
@@ -64,11 +87,15 @@ export function computeAlerts({social,guides,runs,stopAt=STOP_AT,now}){
   if(!guides.nextGuideAt)alerts.push({code:'guide_queue_empty',message:'File des guides vide : aucun nouveau guide programmé (site-src/editorial-queue.json ou editorial-candidates/).'});
   else if(Date.parse(guides.nextGuideAt)>now+GUIDE_LOW_DAYS*DAY)alerts.push({code:'guide_queue_low',message:`Prochain nouveau guide seulement le ${day(guides.nextGuideAt)}.`});
   for(const run of runs.filter(r=>r.failures>=REPEATED_FAILURES))alerts.push({code:`workflow_failures:${run.workflow}`,message:`${run.workflow} : ${run.failures} échecs sur ${run.total} exécutions cette semaine (${run.lastFailureUrl}).`});
+  const trend=seo?.indexation?.trend;
+  if(trend?.status==='drop')alerts.push({code:'indexation_drop',message:`Indexation Google en recul : ${trend.lost} pages de moins qu’au ${trend.referenceDay} (${trend.reference} puis ${seo.indexation.indexed}). Marche à suivre : docs/seo.md.`});
+  const search=seo?.search;
+  if(search&&search.previousImpressions>=SEARCH_ALERT_MIN_IMPRESSIONS&&search.impressions<search.previousImpressions*SEARCH_ALERT_SHARE)alerts.push({code:'search_impressions_drop',message:`Impressions Google divisées par deux en 28 jours : ${search.impressions} contre ${search.previousImpressions}. Marche à suivre : docs/seo.md.`});
   if(Date.parse(stopAt)-now<STOP_WARNING_DAYS*DAY)alerts.push({code:'authorisation_end',message:`La chaîne s’arrête d’elle-même le ${day(stopAt)} (date STOP dans invoke-admin.mjs, stock-control.mjs et pin_intake.py) : la prolonger.`});
   return alerts;
 }
 
-export function renderReport({now,social,guides,pins,runs,alerts,waiting}){
+export function renderReport({now,social,guides,pins,runs,alerts,waiting,seo=null}){
   const line=(items,format,empty)=>items.length?items.map(format).join('\n'):empty;
   return [`# Voyage Sans Détour — rapport du ${day(now)}`,
     '## Publié cette semaine',
@@ -76,6 +103,8 @@ export function renderReport({now,social,guides,pins,runs,alerts,waiting}){
     line(social.lastWeek,i=>`- ${day(i.dueAt)} · ${i.channel} · ${i.title} (${i.state})`,'- Aucun post Instagram ou Facebook prévu cette semaine.'),
     pins===null?'- Pinterest : flux public illisible cette semaine, vérifier le profil.':line(pins,p=>`- Pinterest · ${day(p.publishedAt)} · [${p.title.slice(0,90)}](${p.url})`,`- Pinterest : aucune nouvelle épingle ([profil](${PROFILES.pinterest})).`),
     line(guides.published,g=>`- Guide · ${g.publishedOn} · ${g.title}`,'- Aucun nouveau guide publié.'),
+    '## Référencement Google',
+    seoLines(seo).join('\n'),
     '## File à venir',
     line(social.items.filter(i=>i.dueAt&&Date.parse(i.dueAt)>now),i=>`- ${day(i.dueAt)} · ${i.channel} · ${i.title} (${i.state})`,'- Aucun post programmé.'),
     line(guides.upcomingGuides,g=>`- ${day(g.releaseAt)} · nouveau guide · ${g.title}`,'- Aucun nouveau guide programmé.'),
@@ -113,9 +142,11 @@ export async function main({root=process.cwd(),env=process.env,now=Date.now()}={
     candidates:await Promise.all(candidateFiles.map(f=>readJson(join(site,'editorial-candidates',f)))),now});
   const queue=socialQueue({index,batches,importedIds:importedFrom(stockOutput),now});
   const runs=summarizeRuns(env.VSD_REPORT_RUNS?await readJson(env.VSD_REPORT_RUNS):[],now-7*DAY);
-  const alerts=computeAlerts({social:queue,guides,runs,now});
+  // Written by seo-status.mjs just before; absent when the private panel could not be read.
+  const seo=env.VSD_REPORT_SEO?await readJson(env.VSD_REPORT_SEO).catch(()=>null):null;
+  const alerts=computeAlerts({social:queue,guides,runs,seo,now});
   const waiting=(await readJson(join(root,'.github/vsd-control/attente-mathis.json'))).items;
-  const report=renderReport({now,social:queue,guides,pins:await fetchPinterest(now-7*DAY),runs,alerts,waiting});
+  const report=renderReport({now,social:queue,guides,pins:await fetchPinterest(now-7*DAY),runs,alerts,waiting,seo});
   const out=env.VSD_REPORT_OUT??root;
   await writeFile(join(out,'vsd-report.md'),report);
   await writeFile(join(out,'vsd-alerts.json'),JSON.stringify(alerts,null,2)+'\n');

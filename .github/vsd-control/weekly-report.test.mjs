@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {socialQueue,guideQueue,parsePinterestRss,summarizeRuns,computeAlerts,renderReport} from './weekly-report.mjs';
+import {socialQueue,guideQueue,parsePinterestRss,summarizeRuns,computeAlerts,renderReport,seoLines} from './weekly-report.mjs';
 
 const NOW=Date.parse('2026-10-26T07:00:00Z');
 const batch=(batchId,channel,dueAt,title='Titre')=>({batchId,items:[{title,dueAt,payload:{channel,kind:'reel'}}]});
@@ -63,3 +63,39 @@ test('report renders every section in French with the waiting list',()=>{
   assert.ok(md.includes('Pinterest : flux public illisible'));
   assert.ok(md.includes('[Reconnecter Buffer](https://publish.buffer.com)'));
 });
+
+const QUIET={social:{horizon:{instagram:'2026-12-01T00:00:00Z',facebook:'2026-12-01T00:00:00Z'}},guides:{nextGuideAt:'2026-11-10T00:00:00Z'},runs:[],stopAt:'2027-09-14T21:59:59Z',now:NOW};
+const SEO={search:{period:{startDate:'2026-10-12',endDate:'2026-11-08'},clicks:6,impressions:771,previousClicks:1,previousImpressions:120,rising:[{query:'sapin rockefeller center 2026',impressions:37,previousImpressions:0,position:10.2}]},
+  indexation:{total:59,inspected:59,indexed:40,notIndexedCount:19,notIndexed:[{path:'/japon/',state:'Détectée, actuellement non indexée'},{path:'/guides/',state:''}],trend:{status:'stable'}}};
+
+test('search figures are reported with the previous period, indexed pages and rising queries',()=>{
+  const lines=seoLines(SEO).join('\n');
+  assert.ok(lines.includes('6 clics et 771 impressions du 2026-10-12 au 2026-11-08 (28 jours précédents : 1 clic et 120 impressions)'),lines);
+  assert.ok(lines.includes('40 pages indexées sur 59 inspectées (59 dans le plan du site)'),lines);
+  assert.ok(lines.includes('Pas encore indexées (19) : `/japon/` (Détectée, actuellement non indexée), `/guides/`'),lines);
+  assert.ok(lines.includes('« sapin rockefeller center 2026 » (37 impressions, 0 avant, position 10,2)'),lines);
+  const md=renderReport({now:NOW,social:{items:[],horizon:{},lastWeek:[]},guides:{published:[],upcomingGuides:[],upcomingUpdates:[],nextGuideAt:null},pins:[],runs:[],alerts:[],waiting:[],seo:SEO});
+  assert.ok(md.includes('## Référencement Google'));
+  assert.ok(md.indexOf('## Référencement Google')<md.indexOf('## File à venir'));
+});
+
+test('a missing search reading is said plainly and never raises an alert',()=>{
+  assert.deepEqual(seoLines(null),['- Relevé Search Console indisponible cette semaine (panneau privé injoignable ou pas encore à jour).']);
+  assert.ok(seoLines({search:null,indexation:null}).join('\n').includes('pas encore relevé'));
+  assert.deepEqual(computeAlerts({...QUIET,seo:null}),[]);
+  assert.deepEqual(computeAlerts({...QUIET,seo:SEO}),[]);
+  // An incomplete first inspection round is not a regression.
+  assert.ok(seoLines({search:null,indexation:{...SEO.indexation,inspected:16}}).join('\n').includes('tournée d’inspection en cours'));
+});
+
+test('alerts fire when indexed pages or impressions fall',()=>{
+  const dropped={...SEO,indexation:{...SEO.indexation,trend:{status:'drop',lost:8,reference:48,referenceDay:'2026-11-01'}}};
+  const alerts=computeAlerts({...QUIET,seo:dropped});
+  assert.deepEqual(alerts.map(a=>a.code),['indexation_drop']);
+  assert.ok(alerts[0].message.includes('8 pages de moins qu’au 2026-11-01 (48 puis 40)'),alerts[0].message);
+  const fewer=computeAlerts({...QUIET,seo:{...SEO,search:{...SEO.search,impressions:300,previousImpressions:900}}});
+  assert.deepEqual(fewer.map(a=>a.code),['search_impressions_drop']);
+  // A small site moves a lot from week to week: tiny volumes never alert.
+  assert.deepEqual(computeAlerts({...QUIET,seo:{...SEO,search:{...SEO.search,impressions:40,previousImpressions:120}}}),[]);
+});
+

@@ -78,7 +78,7 @@
       "continent": "europe",
       "iso": "PT",
       "flag": "🇵🇹",
-      "intro": "Lisbonne, Porto, Sintra, l’Algarve et le Douro : des trams qui grimpent, des trains qui longent l’océan et le fleuve, et des prix relevés pour préparer chaque journée."
+      "intro": "Lisbonne, Porto, Sintra, l’Algarve et le Douro : des trams qui grimpent, des trains le long de l’océan et du fleuve, et des prix relevés pour chaque journée."
     },
     {
       "id": "grece",
@@ -102,7 +102,8 @@
       "preposition": "au Royaume-Uni",
       "continent": "europe",
       "iso": "GB",
-      "flag": "🇬🇧"
+      "flag": "🇬🇧",
+      "intro": "Londres en hiver : Winter Wonderland à Hyde Park, la patinoire de Somerset House et le métro plafonné, avec les dates et les prix relevés."
     },
     {
       "id": "irlande",
@@ -190,7 +191,8 @@
       "preposition": "en Finlande",
       "continent": "europe",
       "iso": "FI",
-      "flag": "🇫🇮"
+      "flag": "🇫🇮",
+      "intro": "Rovaniemi et la Laponie : le Père Noël, les rennes, les huskies et le train de nuit depuis Helsinki, avec un budget relevé poste par poste."
     },
     {
       "id": "danemark",
@@ -366,7 +368,8 @@
       "preposition": "au Maroc",
       "continent": "afrique",
       "iso": "MA",
-      "flag": "🇲🇦"
+      "flag": "🇲🇦",
+      "intro": "Marrakech, sa médina, le jardin Majorelle, ses palais et une escapade vers l’Atlas ou Essaouira : le Maroc avec les prix en dirhams et les pièges à éviter."
     },
     {
       "id": "tunisie",
@@ -566,7 +569,8 @@
       "preposition": "au Japon",
       "continent": "asie",
       "iso": "JP",
-      "flag": "🇯🇵"
+      "flag": "🇯🇵",
+      "intro": "Tokyo, Kyoto, Nara et Hiroshima en shinkansen : l’itinéraire de deux semaines et le budget poste par poste, avec les prix en yens et en euros."
     },
     {
       "id": "thailande",
@@ -574,7 +578,8 @@
       "preposition": "en Thaïlande",
       "continent": "asie",
       "iso": "TH",
-      "flag": "🇹🇭"
+      "flag": "🇹🇭",
+      "intro": "Bangkok, Chiang Mai par le train de nuit, puis Krabi et les îles Phi Phi : la Thaïlande avec ses horaires, ses prix en bahts et sa bonne saison."
     },
     {
       "id": "vietnam",
@@ -582,7 +587,8 @@
       "preposition": "au Vietnam",
       "continent": "asie",
       "iso": "VN",
-      "flag": "🇻🇳"
+      "flag": "🇻🇳",
+      "intro": "De Hanoï à Hô-Chi-Minh-Ville en train, étape par étape, et le bon mois pour chaque région : le Vietnam avec ses horaires, ses prix en dongs et son climat."
     },
     {
       "id": "cambodge",
@@ -726,7 +732,8 @@
       "preposition": "aux États-Unis",
       "continent": "amerique-du-nord",
       "iso": "US",
-      "flag": "🇺🇸"
+      "flag": "🇺🇸",
+      "intro": "New York à Noël : le sapin du Rockefeller Center, la patinoire gratuite de Bryant Park et les marchés, avec les dates et les prix relevés."
     },
     {
       "id": "canada",
@@ -806,7 +813,8 @@
       "preposition": "au Costa Rica",
       "continent": "amerique-centrale-caraibes",
       "iso": "CR",
-      "flag": "🇨🇷"
+      "flag": "🇨🇷",
+      "intro": "Manuel Antonio, Monteverde, le volcan Arenal et la côte caraïbe : le Costa Rica en boucle, avec les routes, les entrées des parcs et la saison sèche."
     },
     {
       "id": "guatemala",

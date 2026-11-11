@@ -1,5 +1,5 @@
-# Read-only monitoring: weekly report issue on Mondays, empty-queue alert issue checked daily.
-# No publication, no provider call besides the signed read-only stock status and the public Pinterest feed.
+# Read-only monitoring: weekly report issue on Mondays, alert issue (empty queues, indexing in retreat) checked daily.
+# No publication, no provider call besides the signed read-only search figures of the private panel and the public Pinterest feed.
 name: Voyage Sans Detour weekly report
 on:
   schedule:
@@ -32,7 +32,16 @@ jobs:
         with:
           node-version: 22
       - name: Test the report
-        run: node --test .github/vsd-control/weekly-report.test.mjs
+        run: node --test .github/vsd-control/weekly-report.test.mjs .github/vsd-control/seo-status.test.mjs
+      # Clicks, impressions and indexed pages come from the private panel, which holds the read-only
+      # Google access. A panel that cannot be read leaves the report without figures, never without a report.
+      - name: Read search figures from the private panel
+        continue-on-error: true
+        env:
+          VSD_ADMIN_ORIGIN: https://vsd-admin.kartier.workers.dev
+          VSD_ADMIN_TICK_KEY: ${{ secrets.VSD_ADMIN_TICK_KEY }}
+          VSD_REPORT_SEO: ${{ runner.temp }}/seo.json
+        run: node .github/vsd-control/seo-status.mjs
       - name: List this week's workflow runs
         env:
           GH_TOKEN: ${{ github.token }}
@@ -42,6 +51,7 @@ jobs:
         env:
           VSD_REPORT_OUT: ${{ runner.temp }}
           VSD_REPORT_RUNS: ${{ runner.temp }}/runs.json
+          VSD_REPORT_SEO: ${{ runner.temp }}/seo.json
         run: |
           node .github/vsd-control/weekly-report.mjs
           cat "$RUNNER_TEMP/vsd-report.md" >> "$GITHUB_STEP_SUMMARY"
@@ -58,18 +68,18 @@ jobs:
             gh issue close "$number" --repo "$GITHUB_REPOSITORY" --reason completed
           done
           gh issue create --repo "$GITHUB_REPOSITORY" --label rapport-hebdo --title "Rapport hebdo Voyage Sans Détour — $(date -u +%F)" --body-file "$RUNNER_TEMP/vsd-report.md"
-      - name: Raise or clear the empty-queue alert
+      - name: Raise or clear the alert issue
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          gh label create alerte-file --repo "$GITHUB_REPOSITORY" --color D93F0B --description 'File de posts ou de guides bientôt vide' 2>/dev/null || true
+          gh label create alerte-file --repo "$GITHUB_REPOSITORY" --color D93F0B --description 'Alerte automatique : files de publication, référencement, workflows' 2>/dev/null || true
           open=$(gh issue list --repo "$GITHUB_REPOSITORY" --label alerte-file --state open --json number -q '.[0].number // empty')
           count=$(node -e 'console.log(JSON.parse(require("fs").readFileSync(process.argv[1],"utf8")).length)' "$RUNNER_TEMP/vsd-alerts.json")
           if [ "$count" = 0 ]; then
             if [ -n "$open" ]; then gh issue close "$open" --repo "$GITHUB_REPOSITORY" --comment 'Plus aucune alerte : fermeture automatique.'; fi
             exit 0
           fi
-          node -e 'const a=JSON.parse(require("fs").readFileSync(process.argv[1],"utf8"));console.log("Alertes au "+new Date().toISOString().slice(0,10)+" :\n\n"+a.map(x=>"- "+x.message).join("\n")+"\n\nCette issue se ferme seule quand les files sont réalimentées. Rapport complet : "+process.env.GITHUB_SERVER_URL+"/"+process.env.GITHUB_REPOSITORY+"/actions/runs/"+process.env.GITHUB_RUN_ID)' "$RUNNER_TEMP/vsd-alerts.json" > "$RUNNER_TEMP/alert.md"
+          node -e 'const a=JSON.parse(require("fs").readFileSync(process.argv[1],"utf8"));console.log("Alertes au "+new Date().toISOString().slice(0,10)+" :\n\n"+a.map(x=>"- "+x.message).join("\n")+"\n\nCette issue se ferme seule quand plus aucune alerte ne tient. Rapport complet : "+process.env.GITHUB_SERVER_URL+"/"+process.env.GITHUB_REPOSITORY+"/actions/runs/"+process.env.GITHUB_RUN_ID)' "$RUNNER_TEMP/vsd-alerts.json" > "$RUNNER_TEMP/alert.md"
           if [ -n "$open" ]; then gh issue edit "$open" --repo "$GITHUB_REPOSITORY" --body-file "$RUNNER_TEMP/alert.md"
-          else gh issue create --repo "$GITHUB_REPOSITORY" --label alerte-file --title '⚠️ File de publication bientôt vide' --body-file "$RUNNER_TEMP/alert.md"; fi
+          else gh issue create --repo "$GITHUB_REPOSITORY" --label alerte-file --title '⚠️ Alerte Voyage Sans Détour' --body-file "$RUNNER_TEMP/alert.md"; fi

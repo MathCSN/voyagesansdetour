@@ -1,4 +1,5 @@
-import json,os,pathlib,re,shutil,subprocess,sys,tempfile,unittest
+import html,json,os,pathlib,re,shutil,subprocess,sys,tempfile,unittest
+from unittest import mock
 import xml.etree.ElementTree as ET
 ROOT=pathlib.Path(__file__).parent
 ORIGIN='https://voyagesansdetour.fr'
@@ -264,10 +265,102 @@ class PublicBuildTest(unittest.TestCase):
                 if not target.is_file():broken.add(f'{page.relative_to(self.out)} -> {url}')
         self.assertEqual(sorted(broken),[])
 
-    def test_pages_are_indexable_except_404(self):
+    def test_pages_are_indexable_except_404_and_the_link_in_bio_page(self):
         blocked=[str(p.relative_to(self.out)) for p in self.out.rglob('*.html') if 'noindex' in p.read_text() and p.name!='404.html']
-        self.assertEqual(blocked,[])
+        # /liens/ sert de page de liens aux profils sociaux : elle reste en ligne, hors des résultats et du sitemap.
+        self.assertEqual(blocked,['liens/index.html'])
         self.assertIn('noindex',(self.out/'404.html').read_text())
+        self.assertNotIn(ORIGIN+'/liens/',(self.out/'sitemap.xml').read_text())
+
+    def indexable_pages(self):
+        return {str(p.relative_to(self.out)):p.read_text() for p in self.out.rglob('index.html') if 'noindex' not in p.read_text()}
+
+    def test_every_title_and_description_fits_a_search_result(self):
+        titles={};descriptions={}
+        for route,body in self.indexable_pages().items():
+            title=html.unescape(re.search(r'<title>(.*?)</title>',body).group(1))
+            description=html.unescape(re.search(r'<meta name="description" content="(.*?)"',body).group(1))
+            with self.subTest(route=route):
+                self.assertLessEqual(len(title),60,title)
+                self.assertTrue(70<=len(description)<=160,description)
+                self.assertEqual(body.count('<h1'),1)
+            titles.setdefault(title,[]).append(route);descriptions.setdefault(description,[]).append(route)
+        self.assertEqual([routes for routes in titles.values() if len(routes)>1],[])
+        self.assertEqual([routes for routes in descriptions.values() if len(routes)>1],[])
+
+    def test_seo_file_matches_the_catalogue_and_keeps_the_full_title_on_the_page(self):
+        catalogue={a['slug']:a for a in json.loads((ROOT/'articles.json').read_text())}
+        seo=json.loads((ROOT/'seo.json').read_text())['guides']
+        self.assertEqual(set(seo)-set(catalogue),set())
+        for slug,entry in seo.items():
+            guide=catalogue[slug];page=read(self.out,'/'+guide.get('country','portugal')+'/'+slug+'/')
+            with self.subTest(guide=slug):
+                self.assertIn('<title>'+html.escape(entry['title']).replace(' €',' €'),page)
+                # Même contrôle que auto_social.snapshot : la chaîne des posts refuse un guide dont le titre a disparu.
+                self.assertIn(guide['title'],html.unescape(page))
+                for question in entry.get('faq',[]):
+                    self.assertGreaterEqual(page.count(html.escape(question['question'])),2,question['question'])
+
+    def test_searched_questions_join_the_guide_faq_and_its_schema(self):
+        page=read(self.out,'/etats-unis/new-york-noel/')
+        self.assertIn('<title>Sapin du Rockefeller Center 2026 : dates de Noël à New York</title>',page)
+        self.assertIn('<summary>Quand arrive le sapin de Noël à New York en 2026 ?</summary>',page)
+        schemas=json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>',page).group(1))
+        names=[q['name'] for q in next(s for s in schemas if s.get('@type')=='FAQPage')['mainEntity']]
+        self.assertIn('Quand arrive le sapin de Noël à New York en 2026 ?',names)
+        self.assertEqual(len(names),len(set(names)))
+        article=next(s for s in schemas if s.get('@type')=='Article')
+        self.assertEqual(article['mainEntityOfPage'],{'@type':'WebPage','@id':ORIGIN+'/etats-unis/new-york-noel/'})
+        self.assertGreater(article['wordCount'],500)
+        organization=next(s for s in schemas if s.get('@type')=='Organization')
+        self.assertIn('https://www.instagram.com/voyagesansdetour.fr/',organization['sameAs'])
+
+    def test_country_and_continent_pages_read_on_their_own(self):
+        catalogue=json.loads((ROOT/'articles.json').read_text())
+        for country in {a.get('country','portugal') for a in catalogue}:
+            hub=read(self.out,'/'+country+'/')
+            guides=[a for a in catalogue if a.get('country','portugal')==country]
+            with self.subTest(country=country):
+                self.assertIn('class="section country-brief"',hub)
+                # La réponse courte d'au moins un guide du pays, avec ses chiffres datés.
+                self.assertTrue(any(html.escape(a['summary'],quote=False)[:60] in hub.replace(' ',' ') for a in guides))
+                self.assertGreater(len(re.sub(r'<[^>]+>',' ',re.search(r'<main.*?</main>',hub,re.S).group(0)).split()),250)
+        asia=read(self.out,'/asie/')
+        self.assertIn('id="par-pays"',asia)
+        self.assertIn('<a href="/japon/japon-budget-2-semaines/">Budget Japon, 2 semaines</a>',asia)
+
+    def test_every_guide_links_to_its_country_its_rubrique_and_other_guides(self):
+        catalogue=json.loads((ROOT/'articles.json').read_text())
+        routes={a['slug']:'/'+a.get('country','portugal')+'/'+a['slug']+'/' for a in catalogue}
+        inbound={route:0 for route in routes.values()}
+        for slug,route in routes.items():
+            page=read(self.out,route);main=re.search(r'<main.*?</main>',page,re.S).group(0)
+            with self.subTest(guide=slug):
+                self.assertRegex(main,r'<span class="eyebrow"><a href="/[a-z-]+/">[^<]+</a> · <a href="/guides/[a-z-]+/">')
+                self.assertIn('class="more-guides"',main)
+            for target in set(re.findall(r'href="(/[a-z-]+/[a-z0-9-]+/)"',main)):
+                if target in inbound and target!=route:inbound[target]+=1
+        # Aucun guide isolé : chacun est lié depuis au moins trois autres guides.
+        self.assertEqual({route:count for route,count in inbound.items() if count<3},{})
+        footer=re.search(r'<nav class="footer-themes".*?</nav>',read(self.out,'/')).group(0)
+        for rubrique in ('itineraires','quand-partir','budget','ou-dormir','que-faire'):
+            self.assertIn(f'href="/guides/{rubrique}/"',footer)
+        self.assertIn('href="/espagne/tenerife-quand-partir/"',read(self.out,'/guides/quand-partir/'))
+        self.assertIn('href="/etats-unis/new-york-noel/"',read(self.out,'/guides/que-faire/'))
+
+    def test_an_updated_guide_shows_its_update_date(self):
+        page=read(self.out,'/portugal/aeroport-porto-centre-ville/')
+        self.assertRegex(page,r'Publié le 27 septembre 2026 · Mis à jour le \d+ \w+ 2026')
+        self.assertNotIn('Mis à jour le',read(self.out,'/japon/japon-itineraire-2-semaines/').split('class="byline"')[1].split('</div>')[0])
+
+    def test_fonts_are_served_as_woff2_and_never_ahead_of_the_first_photo(self):
+        self.assertEqual(sorted(p.name for p in (self.out/'assets').glob('font-*')),[f'font-{i}.woff2' for i in range(7)])
+        css=(self.out/'style.css').read_text()
+        self.assertEqual(len(re.findall(r"url\(/assets/font-\d\.woff2\) format\('woff2'\)",css)),7)
+        self.assertNotIn('.ttf',css)
+        home=read(self.out,'/')
+        # Précharger les polices retardait la photo d'en-tête, qui est l'élément le plus long à afficher.
+        self.assertNotIn('rel="preload"',home)
 
     def test_canonical_urls_sitemap_and_robots_use_the_domain(self):
         for page in self.out.rglob('index.html'):
@@ -279,6 +372,10 @@ class PublicBuildTest(unittest.TestCase):
         robots=(self.out/'robots.txt').read_text()
         self.assertNotIn('Disallow: /',robots)
         self.assertIn(f'Sitemap: {ORIGIN}/sitemap.xml',robots)
+
+    def test_the_indexnow_key_file_is_published_at_the_root(self):
+        import indexnow
+        self.assertEqual((self.out/(indexnow.KEY+'.txt')).read_text().strip(),indexnow.KEY)
 
     def test_github_pages_files_are_present(self):
         self.assertEqual((self.out/'CNAME').read_text().strip(),'voyagesansdetour.fr')
@@ -453,6 +550,9 @@ class WorldBuildTest(unittest.TestCase):
         cls.addClassCleanup(shutil.rmtree,cls.workdir,True)
         guides=[synthetic_guide('test-kyoto-automne','Kyoto',country='japon',category='Quand partir',publishedOn='2026-10-25',updatedOn='2026-10-26',
                                 keyFacts=[{'value':'15 nov.','label':'pic des érables à Kyoto'}]),
+                synthetic_guide('test-titre-sans-fin','Nagoya',country='japon',title='Nagoya et ses environs en détail '*3,shortTitle='Nagoya et ses environs en détail '*3),
+                synthetic_guide('test-long-titre','Osaka',country='japon',title='Osaka en 3 jours : '+'un sous-titre très détaillé '*4,
+                                description='Une description de contrôle bien trop longue pour un résultat de recherche. '*4),
                 synthetic_guide('test-atlantide','Atlantide',country='atlantide',category='Budget'),
                 synthetic_guide('test-zanzibar','Stone Town',country='zanzibar',continent='afrique')]
         result,cls.out=build(cls.workdir,True,MENTIONS,source_root=source_copy(cls.workdir,guides))
@@ -487,6 +587,28 @@ class WorldBuildTest(unittest.TestCase):
         for route in ('/japon/','/asie/','/guides/quand-partir/'):
             self.assertGreaterEqual(dates[ORIGIN+route],'2026-10-26',route)
         self.assertIn(ORIGIN+'/japon/test-kyoto-automne/',[n.findtext('link') for n in ET.parse(self.out/'feed.xml').findall('channel/item')])
+
+    def test_a_guide_without_seo_entry_still_gets_a_short_title_and_description(self):
+        # La chaîne de rédaction n'écrit pas seo.json : un nouveau guide doit tenir seul dans un résultat.
+        page=read(self.out,'/japon/test-long-titre/')
+        self.assertIn('<title>Osaka en 3 jours | Voyage Sans Détour</title>',page)
+        description=html.unescape(re.search(r'<meta name="description" content="(.*?)"',page).group(1))
+        self.assertLessEqual(len(description),160)
+        self.assertTrue(description.endswith('…') and not description.endswith(' …'),description)
+        self.assertIn('<h1>Osaka en 3 jours : un sous-titre',page)
+        # Ni le titre, ni sa partie avant « : », ni le titre de carte ne tiennent : le repli est coupé à un mot entier.
+        endless=html.unescape(re.search(r'<title>(.*?)</title>',read(self.out,'/japon/test-titre-sans-fin/')).group(1))
+        self.assertLessEqual(len(endless),60)
+        self.assertEqual(endless,'Nagoya et ses environs en détail Nagoya et ses environs en…')
+        for route in ('/japon/','/japon/test-kyoto-automne/','/atlantide/','/guides/quand-partir/'):
+            with self.subTest(route=route):
+                self.assertLessEqual(len(html.unescape(re.search(r'<title>(.*?)</title>',read(self.out,route)).group(1))),60)
+
+    def test_a_new_country_page_summarises_its_guides_without_a_curated_intro(self):
+        hub=read(self.out,'/atlantide/')
+        self.assertIn('class="section country-brief"',hub)
+        self.assertIn('Article temporaire de contrôle.',hub)
+        self.assertIn('Préparer son voyage en Atlantide.',hub)
 
     def test_country_missing_from_the_catalogue_never_breaks_the_build(self):
         page=read(self.out,'/atlantide/test-atlantide/')
@@ -525,6 +647,44 @@ class ReservedCountryTest(TempDirTest):
         self.assertNotRegex(source,r"['\"](espagne|italie)['\"]")
         self.assertNotIn('COUNTRY_PAGES',source)
         self.assertNotIn('DESTINATION_IMAGES',source)
+
+class SeoFileTest(TempDirTest):
+    def build_with(self,seo):
+        path=self.workdir/'seo-test.json'
+        path.write_text(json.dumps(seo,ensure_ascii=False))
+        with mock.patch.dict(os.environ,{'SITE_SEO':str(path)}):
+            return build(self.workdir,True,MENTIONS)
+
+    def test_a_title_too_long_for_a_search_result_is_refused(self):
+        result,_=self.build_with({'schemaVersion':1,'guides':{'new-york-noel':{'title':'x'*61}}})
+        self.assertNotEqual(result.returncode,0)
+        self.assertIn('entrée invalide pour new-york-noel',result.stderr)
+
+    def test_unknown_fields_and_malformed_questions_are_refused(self):
+        for entry in ({'titre':'Mauvais champ'},{'faq':[{'question':'Sans réponse ?'}]},{'description':'x'*161}):
+            with self.subTest(entry=entry):
+                result,_=self.build_with({'schemaVersion':1,'guides':{'new-york-noel':entry}})
+                self.assertNotEqual(result.returncode,0)
+
+    def test_an_entry_for_a_guide_not_published_yet_is_ignored(self):
+        result,out=self.build_with({'schemaVersion':1,'guides':{'guide-a-venir':{'title':'Un guide pas encore publié'}}})
+        self.assertEqual(result.returncode,0,result.stderr)
+        self.assertIn('<title>New York à Noël 2026 | Voyage Sans Détour</title>',read(out,'/etats-unis/new-york-noel/'))
+
+class LighterPhotoTest(TempDirTest):
+    def test_copies_found_beside_a_photo_are_offered_to_phones(self):
+        source=source_copy(self.workdir,[])
+        # Le déploiement crée ces copies (photo_variants.py) ; ici leur seule présence compte.
+        for name in ('photos/japon-fuji-chureito-1200.jpg','photos/japon-fuji-chureito-400.jpg','lisbonne-800.jpg','lisbonne-1200.jpg'):
+            (source/'dist'/'assets'/name).write_bytes(b'copie')
+        result,out=build(self.workdir,True,MENTIONS,source_root=source)
+        self.assertEqual(result.returncode,0,result.stderr)
+        japan=read(out,'/japon/japon-itineraire-2-semaines/')
+        self.assertIn('srcset="/assets/photos/japon-fuji-chureito-400.jpg 400w, /assets/photos/japon-fuji-chureito-800.jpg 800w, /assets/photos/japon-fuji-chureito-1200.jpg 1200w, /assets/photos/japon-fuji-chureito.jpg 1600w"',japan)
+        self.assertIn('src="/assets/photos/japon-fuji-chureito.jpg"',japan)
+        # Sans copie 1 200 px, une photo garde ses deux tailles du catalogue.
+        self.assertIn('srcset="/assets/photos/japon-shinkansen-800.jpg 800w, /assets/photos/japon-shinkansen.jpg 1600w"',japan)
+        self.assertIn('srcset="/assets/lisbonne-800.jpg 800w, /assets/lisbonne-1200.jpg 1200w, /assets/lisbonne.jpg 1600w"',''.join(p.read_text() for p in (out/'portugal').rglob('index.html')))
 
 class PreviewBuildTest(TempDirTest):
     def test_preview_is_not_indexable_and_keeps_demo_page(self):
