@@ -162,8 +162,8 @@ servis en local. Une seule mesure par page, sauf l'accueil d'avant mesuré deux 
 Accessibilité, bonnes pratiques et SEO : 100 sur les trois pages après (la page pays était à 98 en
 accessibilité). Sur le site en ligne, avant, la même commande donnait 54 (accueil), 68 (guide) et
 63 (`/guides/`), avec un temps de blocage gonflé par la charge de la machine. Les poids locaux
-d'avant comptent les polices sans compression ; en ligne elles pesaient 263 Ko par page, 193 Ko
-désormais. Le plus grand élément des pages listes reste la photo d'en-tête de 800 px (85 à 160 Ko) :
+d'avant comptent les polices sans compression ; en ligne, les six polices de l'accueil pesaient
+263 Ko, 194 Ko désormais. Le plus grand élément des pages listes reste la photo d'en-tête de 800 px (85 à 160 Ko) :
 3,5 s en 4G lente simulée, au-dessus du seuil « bon » de 2,5 s.
 
 ## Limites connues
