@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 2,
+  "id": "auto-23704ea99841fc4e556c61f4",
+  "slug": "londres-noel-marches",
+  "baseArticleSha256": "ae1889c434695b45b84a66192fed3c627b2f35132b1463c7f7cb8b83a86e18a6",
+  "sectionId": "somerset-house",
+  "afterParagraphSha256": "069f9a74381c72a21f6b2a93cf4841ef5d6ab84e0513e37460032633e17df8dd",
+  "paragraph": "La patinoire de Somerset House propose désormais des sessions de patinage pour les utilisateurs de fauteuil roulant et des sessions relaxées à capacité réduite, selon Time Out London. Ces sessions sont prévues pour accueillir les personnes à mobilité réduite et offrir une expérience de patinage plus calme et accessible.",
+  "sources": [
+    {
+      "url": "https://www.timeout.com/london/news/state-at-somerset-house-2026-tickets-dates-prices-091826",
+      "sha256": "4772930a7a7e5529c5bad54a4c04bbfa7c49e692718a9796039503f1043da0a2",
+      "normalization": "visible-text-cp-node-v1"
+    }
+  ],
+  "reviewedAt": "2026-11-11T02:45:45Z",
+  "validUntil": "2026-11-13T02:45:45Z",
+  "reviewMethod": "source-grounded-model-review-v1",
+  "reviewEvidence": {
+    "proposal": {
+      "schemaVersion": 2,
+      "status": "update_ready_for_pilot_review",
+      "guideSlug": "londres-noel-marches",
+      "baseArticleSha256": "ae1889c434695b45b84a66192fed3c627b2f35132b1463c7f7cb8b83a86e18a6",
+      "factsSha256": "e493355adba5f6e7a9e1e84318018ada1997c333cc2fd397953f6e8071e2664e",
+      "facts": [
+        {
+          "id": "c3",
+          "fact": "Il y a des sessions de patinage pour les utilisateurs de fauteuil roulant et des sessions relaxées à capacité réduite",
+          "source": 1,
+          "quote": "There’ll also be dedicated sessions for wheelchair users and reduced-capacity relaxed sessions",
+          "usefulness": "Planifier une visite à la patinoire de Somerset House pour les personnes à mobilité réduite",
+          "sourceContext": {
+            "url": "https://www.timeout.com/london/news/state-at-somerset-house-2026-tickets-dates-prices-091826",
+            "label": "Time Out London — Skate at Somerset House 2026 (18 septembre 2026)",
+            "excerpt": "C-led bass collective BUMPAH and Latinx queer party organisers 2CPERREA . There’ll also be a K-Pop party on November 23 in collaboration with the Korean Cultural Centre, bringing tunes from BTS, BLACKPINK and emerging artists from the region. In the daytime, there will be a Skate School for adults and teens looking to boost their confidence on the ice and a Kids’ Club for children aged six to 12. There’ll also be dedicated sessions for wheelchair users and reduced-capacity relaxed sessions. Once again Shelter will be next to the rink with its boutique pop-up full of sought-after brands like AllSaints and Nobody’s Child, there’ll be food and drink offerings in The Chalet and, after they’re done skating, ticket holders will be able to access the exhibitions being held at Somerset House, too. ICYMI: Here’s how to get tickets for the Alexandra Palace Fireworks Festival . Plus: The best"
+          }
+        }
+      ],
+      "additions": [
+        {
+          "title": "Nouveautés à la patinoire de Somerset House",
+          "paragraph": "La patinoire de Somerset House propose désormais des sessions de patinage pour les utilisateurs de fauteuil roulant et des sessions relaxées à capacité réduite, selon Time Out London. Ces sessions sont prévues pour accueillir les personnes à mobilité réduite et offrir une expérience de patinage plus calme et accessible.",
+          "claims": [
+            "c3"
+          ],
+          "targetSectionId": "somerset-house"
+        }
+      ],
+      "review": {
+        "supported": true,
+        "issues": [],
+        "checkedClaimIds": [
+          "c3"
+        ]
+      },
+      "usage": {
+        "writer": {
+          "prompt_tokens": 2829,
+          "completion_tokens": 123,
+          "total_tokens": 2952
+        },
+        "reviewer": {
+          "prompt_tokens": 3656,
+          "completion_tokens": 19,
+          "total_tokens": 3675
+        }
+      },
+      "callsAttempted": 2,
+      "publicationApproved": false,
+      "sourceManifest": [
+        {
+          "url": "https://hydeparkwinterwonderland.com/",
+          "sha256": "db028f895ff52ce7a9bd7de10a3cf3f2571e43db364e0f48c7b4f7b6f412ba3f",
+          "normalizedSha256": "db028f895ff52ce7a9bd7de10a3cf3f2571e43db364e0f48c7b4f7b6f412ba3f"
+        },
+        {
+          "url": "https://www.timeout.com/london/news/state-at-somerset-house-2026-tickets-dates-prices-091826",
+          "sha256": "4772930a7a7e5529c5bad54a4c04bbfa7c49e692718a9796039503f1043da0a2",
+          "normalizedSha256": "4772930a7a7e5529c5bad54a4c04bbfa7c49e692718a9796039503f1043da0a2"
+        }
+      ]
+    },
+    "entailment": {
+      "checks": [
+        {
+          "id": "c1",
+          "entailed": true,
+          "unsupportedDetails": []
+        },
+        {
+          "id": "c2",
+          "entailed": true,
+          "unsupportedDetails": []
+        },
+        {
+          "id": "c3",
+          "entailed": true,
+          "unsupportedDetails": []
+        }
+      ]
+    },
+    "novelty": {
+      "decisions": [
+        {
+          "id": "c1",
+          "supported": true,
+          "newInformation": false,
+          "useful": true,
+          "reason": "La citation démontre exactement la paraphrase sans déduction supplémentaire, mais l'information est déjà présente dans le guide existant"
+        },
+        {
+          "id": "c2",
+          "supported": true,
+          "newInformation": false,
+          "useful": true,
+          "reason": "La citation démontre exactement la paraphrase sans déduction supplémentaire, mais l'information est déjà présente dans le guide existant"
+        },
+        {
+          "id": "c3",
+          "supported": true,
+          "newInformation": true,
+          "useful": true,
+          "reason": "La citation démontre exactement la paraphrase sans déduction supplémentaire, et l'information est nouvelle et utile pour planifier une visite à la patinoire de Somerset House pour les personnes à mobilité réduite"
+        }
+      ]
+    },
+    "observedAt": "2026-11-11T02:45:12+00:00"
+  },
+  "approvalSha256": "04bf830ed7fab53fd0c5f77ae6257888bca43ae80a856ab17b924acc588fea5c"
+}

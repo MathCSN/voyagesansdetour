@@ -45,6 +45,15 @@
         "paragraphSha256": "a9ddc879fa0beef207c9d130b88793d37b38b72492ee049008112ba389861022",
         "verification": "exact-paragraph-presence-v1"
       }
+    },
+    {
+      "id": "auto-23704ea99841fc4e556c61f4",
+      "slug": "londres-noel-marches",
+      "approvalSha256": "04bf830ed7fab53fd0c5f77ae6257888bca43ae80a856ab17b924acc588fea5c",
+      "beforeSha256": "ae1889c434695b45b84a66192fed3c627b2f35132b1463c7f7cb8b83a86e18a6",
+      "afterSha256": "c5e4b5c4546972764f7b1051a001cb2edb813140eedc2c8873cdb494cb90d7dd",
+      "appliedAt": "2026-11-11T02:45:45Z",
+      "receipt": null
     }
   ]
 }
