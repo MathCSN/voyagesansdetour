@@ -99,7 +99,7 @@ jobs:
         run: python gyg_locations.py --update
       - name: Validate site
         if: steps.release.outputs.publish == 'true' || steps.generator.outputs.changed == 'true' || steps.intake.outputs.changed == 'true'
-        run: python -m unittest -q test_site test_stay22 test_affiliates test_gyg_locations test_editorial_queue test_public_media test_autonomous_editorial test_autonomous_candidate test_cloud_source_changes test_editorial_update test_pin_feed_status
+        run: python -m unittest -q test_site test_stay22 test_affiliates test_gyg_locations test_editorial_queue test_public_media test_autonomous_editorial test_autonomous_candidate test_cloud_source_changes test_editorial_update test_pin_feed_status test_indexnow
       - name: Validate analytics consent without external calls
         if: steps.release.outputs.publish == 'true'
         run: node --test test_analytics.mjs
@@ -185,6 +185,13 @@ jobs:
           for path in / /robots.txt /sitemap.xml /social-media/lancement-2026-09/credits.txt; do
             curl --fail --silent --show-error --location --retry 3 --retry-delay 5 --max-time 30 "https://voyagesansdetour.fr$path" --output /dev/null
           done
+      # Bing, Yandex and the other IndexNow engines learn at once which pages changed.
+      # No secret (the key is a public file of the site) and never blocking: Google reads the sitemap dates.
+      - name: Tell IndexNow search engines which pages changed
+        continue-on-error: true
+        timeout-minutes: 2
+        working-directory: site-src
+        run: python indexnow.py
       - name: Confirm new pages by their exact HTML hashes
         env:
           RELEASE_MANIFEST: ${{ needs.build.outputs.release_manifest }}
