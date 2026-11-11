@@ -2,6 +2,7 @@
 import {readFile,readdir,writeFile} from 'node:fs/promises';
 import {join} from 'node:path';
 import {pathToFileURL} from 'node:url';
+import {publicationAlerts,publicationLines} from './publication-report.mjs';
 
 const DAY=864e5;
 export const STOP_AT='2027-09-14T21:59:59Z';
@@ -78,7 +79,8 @@ export function seoLines(seo){
 }
 
 export function computeAlerts({social,guides,runs,seo=null,stopAt=STOP_AT,now}){
-  const alerts=[];
+  // A channel cut off from Buffer or a silent engine stops every post: said first.
+  const alerts=[...publicationAlerts(seo?.publication??null,now)];
   for(const channel of SOCIAL_CHANNELS){
     const horizon=social.horizon[channel];
     if(!horizon||Date.parse(horizon)<=now)alerts.push({code:`social_queue_empty:${channel}`,message:`File ${channel} vide : plus aucun post programmé. Ajouter des lots dans .github/vsd-production/reviewed-social/.`});
@@ -103,6 +105,8 @@ export function renderReport({now,social,guides,pins,runs,alerts,waiting,seo=nul
     line(social.lastWeek,i=>`- ${day(i.dueAt)} · ${i.channel} · ${i.title} (${i.state})`,'- Aucun post Instagram ou Facebook prévu cette semaine.'),
     pins===null?'- Pinterest : flux public illisible cette semaine, vérifier le profil.':line(pins,p=>`- Pinterest · ${day(p.publishedAt)} · [${p.title.slice(0,90)}](${p.url})`,`- Pinterest : aucune nouvelle épingle ([profil](${PROFILES.pinterest})).`),
     line(guides.published,g=>`- Guide · ${g.publishedOn} · ${g.title}`,'- Aucun nouveau guide publié.'),
+    '## Publication',
+    publicationLines(seo?.publication??null).join('\n'),
     '## Référencement Google',
     seoLines(seo).join('\n'),
     '## File à venir',
