@@ -23,8 +23,8 @@ ne peut plus les récupérer. **Après eux, la file sociale est vide** jusqu'aux
 ```
 guide publié ──► rendu (production.py, reel_intake.py)
               ──► lot relu dans .github/vsd-production/reviewed-social/ + index.json
-              ──► import quotidien par le panneau privé vsd-admin (appel signé, 08:53 UTC)
-              ──► registre D1 du panneau ──► Buffer 3 jours avant l'échéance ──► Instagram / Facebook
+              ──► import chaque heure par le panneau privé vsd-admin (sa tâche planifiée, à :22)
+              ──► registre D1 du panneau ──► Buffer 3 jours avant l'échéance ──► Instagram / Facebook / TikTok
 ```
 
 - **Panneau privé** `vsd-admin` (https://vsd-admin.kartier.workers.dev, accès par clé d'accès) :
@@ -39,11 +39,19 @@ guide publié ──► rendu (production.py, reel_intake.py)
   pas encore envoyés passent « en attente » dans le registre et ne partent plus. Un post déjà programmé
   dans Buffer se supprime dans Buffer. Les anciens garde-fous du dépôt n'admettent qu'un motif de
   retrait, `duplicate_media_on_channel`.
-- **Défaut connu au 11/11/2026** : le lot Facebook Porto du 12/10/2026 (`facebook-porto-photos-2026-10-12-v1`,
-  publié par l'ancien moteur, relecture incomplète) est refusé par le panneau à chaque import du stock.
-  Les autres lots entrent normalement, mais le passage `stock` répond « attention » et le workflow
-  `vsd-cloud-control` de 8 h 53 UTC sort en erreur. Correction côté panneau (`importStock` : un lot
-  refusé dont l'échéance est passée est ignoré) à déployer.
+- **Qui déclenche le moteur** (depuis le 11/11/2026) : le panneau lui-même, par la tâche planifiée du
+  Worker (vsd-admin PR 4). À :22 il importe les lots relus encore programmables ; à :37 et :52 il
+  programme les posts dus dans Buffer ; à :07 il relève les statistiques. Les passages planifiés de GitHub sont trop rares
+  pour porter la publication (une demi-douzaine par jour au lieu de 48, et le passage `stock` de 08:53
+  presque jamais) : `vsd-cloud-control.yml` reste un déclencheur de secours, et le verrou du moteur
+  empêche deux passages simultanés.
+- **Import économe** : un Worker gratuit plafonne à 50 sous-requêtes par passage. L'import ne relit pas un
+  lot dont tous les posts sont au registre, ni un lot échu déjà connu du relevé ; il lit au plus 10
+  fichiers par passage, les plus récents d'abord, et reporte le reste au suivant.
+- **Lot refusé** : un lot que le panneau refuse et qui pourrait encore partir fait répondre « attention »
+  au passage `stock` (le workflow sort alors en erreur). Un lot refusé dont l'échéance est passée est
+  ignoré : c'est le cas du lot Facebook Porto du 12/10/2026, publié par l'ancien moteur avec une
+  relecture incomplète.
 - Format d'un lot : un item `{contentId, deduplicationKey, title, dueAt, payload, review}` ;
   `payload` = `{schemaVersion, channel, kind, text, aiGenerated, assets[{url, sha256, mimeType}]}` ;
   la relecture doit couvrir l'échéance (`review.validUntil > dueAt`).
@@ -132,7 +140,7 @@ des fichiers changés sont dans l'artefact `new-guide-proposal`.
 | Workflow | Quand | Rôle |
 | --- | --- | --- |
 | `build-pages.yml` | push sur main, chaque jour 07:41 | Construit et déploie le site, publie les guides dus |
-| `vsd-cloud-control.yml` | toutes les 30 min ; stock 08:53 chaque jour | Appels signés du panneau `vsd-admin` : programme les posts dus dans Buffer ; importe les lots relus encore programmables |
+| `vsd-cloud-control.yml` | toutes les 30 min ; stock 08:53 chaque jour (GitHub n'en lance qu'une partie) | Déclencheur de secours du panneau `vsd-admin`, qui importe et programme de lui-même depuis le 11/11/2026 : appels signés `publications` et `stock` |
 | `vsd-render-content.yml` | lundi 05:17 | Rend les reels, brouillons et admission d'épingles |
 | `vsd-reel-intake.yml` | après chaque déploiement | Prépare un storyboard de reel depuis un nouveau guide |
 | `vsd-voice-production.yml` → `vsd-voice-adopt.yml` → `vsd-voice-review.yml` → `vsd-voice-promote.yml` | à la main seulement | Chaîne des reels voix de synthèse, en sommeil depuis le 24/10 (ancien format retiré) |
