@@ -207,8 +207,10 @@ des posts déjà en file ; un post n'est jamais placé à moins de 40 h d'un aut
 Simulation du 11/11 sur la file réelle : trois reels s'ajoutent les dimanches 15, 22 et 29
 novembre entre les reels du mercredi déjà programmés.
 
-**Pourquoi 2 et pas 4 sur Instagram aujourd'hui** : le panneau `vsd-admin` refusait plus de 2
-posts par réseau sur 7 jours glissants. Sa version du 11/11/2026
+**Instagram est à 4 posts par semaine depuis le 11/11/2026** (`weeklyLimit: 4`, créneaux du jeudi
+9 h et du vendredi 18 h activés, `minGapHours: 30` puisque le jeudi 9 h tombe 38 heures après le
+mardi 19 h), une fois le premier reel publié par le nouveau panneau constaté en ligne. Historique :
+le panneau `vsd-admin` refusait plus de 2 posts par réseau sur 7 jours glissants. Sa version du 11/11/2026
 ([vsd-admin, PR 2](https://github.com/MathCSN/vsd-admin/pull/2)) plafonne par réseau :
 Instagram 4, Facebook 2, TikTok 4 (`POLICY.weeklyLimit` dans `src/engine/plan.js`). C'est un
 garde-fou ; la cadence réelle reste celle de `cadence.json`. Une fois cette version déployée,
