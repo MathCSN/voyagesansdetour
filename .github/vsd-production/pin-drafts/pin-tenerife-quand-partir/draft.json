@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-tenerife-quand-partir",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Quand partir à Tenerife : 22 °C en janvier au sud, 16 °C au nord, et le bon mois pour chaque côte",
+  "pinTitle": "Quand partir à Tenerife : 22 °C en janvier au sud, 16 °C au nord, et le bon mois pour chaque côte",
+  "variant": "a",
+  "targetUrl": "https://voyagesansdetour.fr/espagne/tenerife-quand-partir/",
+  "articleSha256": "1a7ed9ec282a718e0565d7c84cbc3cd2e01af92ce989f960314964a249fdfd7f",
+  "imageSha256": "2710eb744d6c8aee8e983d960837cbbf8a0bf016a01ef5a82658576572f01639",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "fdbf04a40b0bd104c5f381a47a9aa8aa30b6df590685a48e3ce4be0e6c3493b2",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "tenerife-teide",
+    "author": "Ingo Mehling",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Teide_Canadas.jpg",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  }
+}

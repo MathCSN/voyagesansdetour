@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "batchId": "ig-new-york-noel-2026-11-22-tiktok-v1",
+  "items": [
+    {
+      "contentId": "vsd-production:tiktok:ig-new-york-noel-2026-11-22:photo-v1",
+      "deduplicationKey": "vsd-production:tiktok:ig-new-york-noel-2026-11-22:photo-v1",
+      "title": "New York à Noël : les chiffres à connaître",
+      "dueAt": "2026-11-22T21:00:00Z",
+      "payload": {
+        "schemaVersion": 1,
+        "channel": "tiktok",
+        "kind": "reel",
+        "text": "✈️ New York à Noël 2026 : le sapin du Rockefeller Center le 2 décembre, patinoires et boutiques de Noël\n\n📍 2 déc. 2026 : l’allumage du sapin du Rockefeller Center, arrivé le 7 novembre\n📍 0 $ : la patinoire de Bryant Park, la seule à entrée gratuite de New York, jusqu’au 28 février 2027\n📍 180 : exposants et plus au marché de Noël de Bryant Park, du 28 octobre au 3 janvier\n📍 3 $ : le trajet en métro ou en bus local (≈ 2,70 €), 7,25 $ en bus express\n📍 6,9 °C : la maximale moyenne de décembre à Central Park, 1,1 °C la nuit\n\n📌 Enregistrez cette vidéo pour votre voyage. 🔗 Prix, horaires et détails : le guide complet sur voyagesansdetour.fr\n\nPhotos libres (Wikimedia Commons) et musique de Kevin MacLeod (CC BY 4.0) — crédits : https://voyagesansdetour.fr/social-media/production/ig-new-york-noel-2026-11-22/credits.txt\n\n#NewYork #EtatsUnis #VoyageEtatsUnis #ConseilsVoyage #VoyageSansDetour\n",
+        "aiGenerated": false,
+        "assets": [
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/ig-new-york-noel-2026-11-22/reel.mp4",
+            "sha256": "3334b79c6da33571ea8540b946b1b6f0f9c7e39e80f69b69eaf53ec4fd8162b0",
+            "mimeType": "video/mp4"
+          }
+        ]
+      },
+      "review": {
+        "schemaVersion": 1,
+        "contentId": "vsd-production:tiktok:ig-new-york-noel-2026-11-22:photo-v1",
+        "approved": true,
+        "reviewedAt": "2026-11-11T13:28:31Z",
+        "validUntil": "2026-12-11T02:39:00Z",
+        "payloadRevision": "d50d96a95745679127af320161d18bcc6a4e6c18ebd0e30ca1e6359d9543330a",
+        "checks": {
+          "editorialApproved": true,
+          "rightsApproved": true,
+          "creditsPreserved": true,
+          "disclosurePreserved": true,
+          "formatRequirementsVerified": true,
+          "requiresPaidCall": false,
+          "sources": {
+            "status": "verified",
+            "observedAt": "2026-11-11T02:39:00Z",
+            "validUntil": "2026-12-11T02:39:00Z"
+          },
+          "syntheticPerson": false,
+          "providerSyntheticSettingVerified": false
+        },
+        "media": {
+          "url": "https://voyagesansdetour.fr/social-media/production/ig-new-york-noel-2026-11-22/reel.mp4",
+          "mimeType": "video/mp4",
+          "sha256": "3334b79c6da33571ea8540b946b1b6f0f9c7e39e80f69b69eaf53ec4fd8162b0",
+          "required": true,
+          "status": "verified",
+          "observedAt": "2026-11-11T13:28:31Z",
+          "validUntil": "2026-12-11T02:39:00Z"
+        },
+        "destination": {
+          "url": "https://voyagesansdetour.fr/etats-unis/new-york-noel/",
+          "status": "verified",
+          "observedAt": "2026-11-11T13:28:31Z",
+          "validUntil": "2026-12-11T02:39:00Z"
+        },
+        "monetization": {
+          "containsAffiliateLinks": false,
+          "partnerApproved": false,
+          "linksVerified": false,
+          "disclosurePreserved": false
+        },
+        "formatCapability": {
+          "status": "verified",
+          "observedAt": "2026-11-11T13:28:31Z",
+          "validUntil": "2026-12-11T02:39:00Z",
+          "automaticPublishing": true,
+          "verificationMethod": "official_documentation",
+          "sourceUrls": [
+            "https://support.buffer.com/article/559-using-tiktok-with-buffer",
+            "https://developers.buffer.com/types/TikTokPostMetadataInput.html",
+            "https://developers.buffer.com/guides/posts-and-scheduling.html"
+          ]
+        },
+        "evidence": {
+          "status": "rendered_local_bytes_verified_public_deploy_pending",
+          "format": "photo_reel",
+          "rendererContractVersion": 4,
+          "receiptSha256": "ed0e66f4379d667c773763de9dcdcce9e897ff24951863b161a8874e602e0371",
+          "scenarioFingerprint": "d7aef9a21f652fdad9ec04d1ce24f99434f0c7db5759861f5ed39890533dc057",
+          "sourceCheckedOn": "2026-11-11",
+          "sourceUrls": [
+            "https://voyagesansdetour.fr/etats-unis/new-york-noel/"
+          ],
+          "creditsUrl": "https://voyagesansdetour.fr/social-media/production/ig-new-york-noel-2026-11-22/credits.txt",
+          "voice": null,
+          "music": "Ascending the Vale",
+          "note": "Les octets publics sont à contrôler après déploiement avec social_stock.py --verify-public. Un créneau prévu n'est pas une réservation Buffer."
+        }
+      }
+    }
+  ]
+}

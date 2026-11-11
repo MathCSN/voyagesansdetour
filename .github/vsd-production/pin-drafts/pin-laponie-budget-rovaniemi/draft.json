@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-laponie-budget-rovaniemi",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Combien coûte un voyage en Laponie ? Le budget de Rovaniemi 2026-2027, poste par poste",
+  "pinTitle": "Combien coûte un voyage en Laponie ? Le budget de Rovaniemi 2026-2027, poste par poste",
+  "variant": "a",
+  "targetUrl": "https://voyagesansdetour.fr/finlande/laponie-budget-rovaniemi/",
+  "articleSha256": "0b543df4472cb0da25dde806d8878fde9fb27e5b74b0aad7ea81ef575f3db0bc",
+  "imageSha256": "20aac5ca9a4e1cd66e30adfcc54648768949523f4646a7901c962a224bc8902c",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "fdbf04a40b0bd104c5f381a47a9aa8aa30b6df590685a48e3ce4be0e6c3493b2",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "laponie-rovaniemi-village",
+    "author": "Timo Newton-Syms from Helsinki, Finland and Chalfont St Giles, Bucks, UK",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Santa_Claus_Village_(5307460482).jpg",
+    "license": "CC BY-SA 2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0"
+  }
+}

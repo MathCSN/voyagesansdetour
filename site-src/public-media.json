@@ -1052,6 +1052,33 @@
           "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
         }
       ]
+    },
+    {
+      "contentId": "pin-tenerife-quand-partir",
+      "kind": "pin",
+      "approved": true,
+      "files": [
+        {
+          "name": "pin.jpg",
+          "bytes": 328746,
+          "sha256": "2710eb744d6c8aee8e983d960837cbbf8a0bf016a01ef5a82658576572f01639"
+        },
+        {
+          "name": "credits.txt",
+          "bytes": 325,
+          "sha256": "5454f89d8dc4170a27b3cf6c0ed1e22f9f19c5e854027cf919f8d63996b99422"
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "bytes": 4482,
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "bytes": 4449,
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+        }
+      ]
     }
   ]
 }

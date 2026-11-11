@@ -198,6 +198,33 @@
       "itemIds": [
         "vsd-production:instagram:ig-new-york-noel-2026-11-22:photo-v1"
       ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-japon-budget-2-semaines-2026-11-15-tiktok-v1.json",
+      "fileSha256": "9ec986a5d588f542c06fb2c98a9ebcccc2ef9f012efd1644a3a53f6147e8619b",
+      "batchId": "ig-japon-budget-2-semaines-2026-11-15-tiktok-v1",
+      "batchSha256": "f530ac7f1addbd37a77495333e88615bae167e36a82f970dc432f608abed41e3",
+      "itemIds": [
+        "vsd-production:tiktok:ig-japon-budget-2-semaines-2026-11-15:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-londres-noel-marches-2026-11-29-tiktok-v1.json",
+      "fileSha256": "a5526de4edb959883d4fc2d0623d6d2bd2be78aec00beb70ccae8829f7f5030b",
+      "batchId": "ig-londres-noel-marches-2026-11-29-tiktok-v1",
+      "batchSha256": "614b2a1a792b7c9040e4161e597d54d1df6ee4cf6001ea45077be83f5abe61d8",
+      "itemIds": [
+        "vsd-production:tiktok:ig-londres-noel-marches-2026-11-29:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-new-york-noel-2026-11-22-tiktok-v1.json",
+      "fileSha256": "16b5a648142b779904d08b81a65677dde846363bb6e22a3f3460ba06032aa04b",
+      "batchId": "ig-new-york-noel-2026-11-22-tiktok-v1",
+      "batchSha256": "4dc21fa5f42ce4ee25bb9132be905683f4297cc4ba07e9af844f0d9e2c03e7f0",
+      "itemIds": [
+        "vsd-production:tiktok:ig-new-york-noel-2026-11-22:photo-v1"
+      ]
     }
   ],
   "retirements": [

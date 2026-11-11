@@ -79,6 +79,15 @@
       "publicHtmlSha256": "28c6f993e93000546cd3a39390bc1b4f52f3a5e36a1aba5eaf2c6f85b0cbf222",
       "method": "published_guide_photo_template_v3",
       "publicationConfirmed": false
+    },
+    {
+      "id": "pin-tenerife-quand-partir",
+      "admittedAt": "2026-11-11T13:28:32.193591+00:00",
+      "articleSha256": "1a7ed9ec282a718e0565d7c84cbc3cd2e01af92ce989f960314964a249fdfd7f",
+      "imageSha256": "2710eb744d6c8aee8e983d960837cbbf8a0bf016a01ef5a82658576572f01639",
+      "publicHtmlSha256": "7df2b202685e0993fca3a9feeb076666e1ff8ab145c4d2d89ad5027039ede32f",
+      "method": "published_guide_photo_template_v3",
+      "publicationConfirmed": false
     }
   ]
 }
