@@ -66,6 +66,100 @@ class SourceCoverageTests(unittest.TestCase):
         from discover_facts import source_window
         with self.assertRaisesRegex(ValueError,'invalid_source_pass'):source_window({},-1)
 
+class UnreachableSourceTests(unittest.TestCase):
+    """One dead source is skipped and noted; only a broken configuration fails the run."""
+    URLS=['https://www.cp.pt/info/en/w/a','https://www.cp.pt/info/en/w/b','https://www.cp.pt/info/en/w/c']
+
+    def article(self):
+        return {'slug':'guide-test','title':'Guide de test','category':'Itinéraires',
+                'sources':[{'label':f'Source {i}','url':url} for i,url in enumerate(self.URLS)]}
+
+    def fetcher(self,dead):
+        import urllib.error
+        def fetch(url,opener=None):
+            if url in dead:raise urllib.error.HTTPError(url,503,'Service Unavailable',None,None)
+            return {'sha256':'0'*64,'text':'Visible text of '+url}
+        return fetch
+
+    def run_main(self,dead,token='token',facts=None):
+        import datetime as dt,json,os,tempfile
+        from pathlib import Path
+        from unittest import mock
+        import discover_facts
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder)/'site-src';root.mkdir()
+            (root/'articles.json').write_text(json.dumps([self.article()]))
+            out=Path(folder)/'report'
+            env={'REPORT_DIR':str(out),'GUIDE_SLUG':'guide-test','CLOUDFLARE_WORKERS_AI_TOKEN':token}
+            calls=mock.Mock(return_value=({'facts':facts or []},{'neurons':1}))
+            with mock.patch.dict(os.environ,env),mock.patch.object(discover_facts,'ROOT',root), \
+                 mock.patch.object(discover_facts,'HARD_STOP',dt.datetime(2999,1,1,tzinfo=dt.timezone.utc)), \
+                 mock.patch.object(discover_facts,'quota_hold',return_value=None), \
+                 mock.patch.object(discover_facts,'source_fingerprint',self.fetcher(dead)), \
+                 mock.patch.object(discover_facts,'call',calls):
+                code=discover_facts.main()
+            return code,json.loads((out/'discovery-report.json').read_text()),calls
+
+    def test_unreachable_source_is_skipped_and_noted(self):
+        from discover_facts import read_sources
+        sources,skipped=read_sources(self.article(),self.URLS,self.fetcher({self.URLS[1]}))
+        self.assertEqual([s['url'] for s in sources],[self.URLS[0],self.URLS[2]])
+        self.assertEqual([s['label'] for s in sources],['Source 0','Source 2'])
+        self.assertEqual(skipped,[{'url':self.URLS[1],'errorType':'HTTPError','reason':'http_503'}])
+
+    def test_refused_document_and_network_failure_are_skipped_too(self):
+        from discover_facts import read_sources
+        def fetch(url,opener=None):
+            if url==self.URLS[0]:raise ValueError('La source ne renvoie pas du HTML.')
+            if url==self.URLS[1]:raise TimeoutError('timed out')
+            return {'sha256':'0'*64,'text':'Visible text'}
+        sources,skipped=read_sources(self.article(),self.URLS,fetch)
+        self.assertEqual(len(sources),1)
+        self.assertEqual([s['reason'] for s in skipped],['La source ne renvoie pas du HTML.','timeouterror'])
+
+    def test_run_continues_with_the_remaining_sources(self):
+        code,report,calls=self.run_main({self.URLS[0]})
+        self.assertEqual(code,0)
+        self.assertEqual(report['status'],'no_new_facts')
+        self.assertEqual([s['url'] for s in report['sources']],self.URLS[1:])
+        self.assertEqual([s['url'] for s in report['skippedSources']],[self.URLS[0]])
+        self.assertEqual(calls.call_count,1)
+
+    def test_no_reachable_source_holds_the_run_without_failing_the_workflow(self):
+        code,report,calls=self.run_main(set(self.URLS))
+        self.assertEqual(code,0)
+        self.assertEqual(report['status'],'held_no_source')
+        self.assertEqual(len(report['skippedSources']),3)
+        self.assertEqual(report['callsAttempted'],0)
+        calls.assert_not_called()
+
+    def test_broken_configuration_still_fails_the_workflow(self):
+        code,report,_=self.run_main(set(),token='')
+        self.assertEqual(code,1)
+        self.assertEqual((report['status'],report['reason']),('held_no_retry','missing_secret'))
+
+class GuideRotationTests(unittest.TestCase):
+    def guides(self,count):
+        sources=[{'url':'https://www.cp.pt/info/en/w/a'},{'url':'https://www.cp.pt/info/en/w/b'}]
+        return [{'slug':f'guide-{i:03d}','sources':sources} for i in range(count)]
+
+    def test_a_catalogue_growing_every_two_days_never_freezes_the_rotation(self):
+        # day % len(catalogue) stayed on the same two guides while one guide was added every two days.
+        import datetime as dt
+        from discover_facts import select_guide
+        start=dt.datetime(2026,11,4,12,tzinfo=dt.timezone.utc)
+        visited={select_guide(self.guides(22+day//2),start+dt.timedelta(days=day))['slug'] for day in range(120)}
+        self.assertGreaterEqual(len(visited),20)
+
+    def test_selection_is_stable_within_a_day_and_bounded(self):
+        import datetime as dt
+        from discover_facts import select_guide,rotation
+        morning=dt.datetime(2026,11,11,6,tzinfo=dt.timezone.utc)
+        evening=dt.datetime(2026,11,11,22,tzinfo=dt.timezone.utc)
+        self.assertEqual(rotation(morning),rotation(evening))
+        guides=self.guides(7)
+        self.assertIs(select_guide(guides,morning),select_guide(guides,evening))
+
 class SourceContextTests(unittest.TestCase):
     def test_context_is_derived_from_selected_source_not_model(self):
         from discover_facts import attach_context
