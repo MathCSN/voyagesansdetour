@@ -173,7 +173,10 @@ class PublicBuildTest(unittest.TestCase):
         for item in catalogue:
             path='/'+item.get('country','portugal')+'/'+item['slug']+'/'
             self.assertEqual(dates[ORIGIN+path],item.get('updatedOn','2026-09-14'))
-        for country in {item.get('country','portugal') for item in catalogue}:
+        # Une page pays de moins de trois guides est hors du plan du site ; les autres portent la date de leur guide le plus récent.
+        listed=[country for country in {item.get('country','portugal') for item in catalogue} if ORIGIN+'/'+country+'/' in dates]
+        self.assertIn('portugal',listed)
+        for country in listed:
             latest=max(a.get('updatedOn','2026-09-14') for a in catalogue if a.get('country','portugal')==country)
             self.assertEqual(dates[ORIGIN+'/'+country+'/'],latest)
         items=ET.parse(self.out/'feed.xml').findall('channel/item')
@@ -265,12 +268,105 @@ class PublicBuildTest(unittest.TestCase):
                 if not target.is_file():broken.add(f'{page.relative_to(self.out)} -> {url}')
         self.assertEqual(sorted(broken),[])
 
-    def test_pages_are_indexable_except_404_and_the_link_in_bio_page(self):
-        blocked=[str(p.relative_to(self.out)) for p in self.out.rglob('*.html') if 'noindex' in p.read_text() and p.name!='404.html']
-        # /liens/ sert de page de liens aux profils sociaux : elle reste en ligne, hors des résultats et du sitemap.
-        self.assertEqual(blocked,['liens/index.html'])
+    def list_pages(self):
+        """Pages listes (pays, continents, rubriques, tous les guides) et leur nombre de guides."""
+        sizes={}
+        for page in self.out.rglob('index.html'):
+            grid=re.search(r'<div class="grid" id="guide-grid">(.*?)</div><p class="empty"',page.read_text(),re.S)
+            if grid:sizes['/'+str(page.parent.relative_to(self.out))+'/']=grid.group(1).count('<a class="card"')
+        return sizes
+
+    def test_only_thin_list_pages_utility_pages_and_the_404_stay_out_of_the_index(self):
+        sizes=self.list_pages()
+        # Moins de trois guides : la page répète surtout ses guides. Elle reste en ligne et ses liens sont suivis.
+        thin=[route for route,count in sizes.items() if count<3]
+        for route in ('/mexique/','/japon/','/afrique/','/guides/ou-dormir/'):self.assertIn(route,thin)
+        for route in ('/portugal/','/europe/','/asie/','/guides/','/guides/itineraires/'):self.assertNotIn(route,thin)
+        blocked=sorted('/'+str(p.parent.relative_to(self.out))+'/' for p in self.out.rglob('index.html') if 'noindex' in p.read_text())
+        # /liens/ sert de page de liens aux profils sociaux ; /credits/ et /carnet/ sont des pages utilitaires.
+        self.assertEqual(blocked,sorted(thin+['/liens/','/credits/','/carnet/']))
+        sitemap=set(re.findall(r'<loc>([^<]+)</loc>',(self.out/'sitemap.xml').read_text()))
+        for route in blocked:
+            with self.subTest(route=route):
+                self.assertIn('<meta name="robots" content="noindex,follow">',read(self.out,route))
+                self.assertNotIn(ORIGIN+route,sitemap)
+        for route,count in sizes.items():
+            if count>=3:self.assertIn(ORIGIN+route,sitemap)
         self.assertIn('noindex',(self.out/'404.html').read_text())
-        self.assertNotIn(ORIGIN+'/liens/',(self.out/'sitemap.xml').read_text())
+        # Sortie de l'index, pas du site : le guide et le pied de page y mènent toujours.
+        guide=read(self.out,'/mexique/yucatan-itineraire-10-jours/')
+        self.assertIn('href="/mexique/"',guide)
+        self.assertIn('href="/guides/ou-dormir/"',guide)
+
+    def test_the_mexico_page_has_its_own_introduction(self):
+        guide=next(a for a in json.loads((ROOT/'articles.json').read_text()) if a['slug']=='yucatan-itineraire-10-jours')
+        intro=html.unescape(re.search(r'<meta name="description" content="(.*?)"',read(self.out,'/mexique/')).group(1))
+        self.assertTrue(70<=len(intro)<=160,intro)
+        self.assertNotIn('pour préparer votre voyage',intro)
+        for text in (guide['summary'],guide['description']):self.assertNotIn(intro[:30],text)
+
+    def test_declared_links_are_placed_once_in_the_body_of_their_guide(self):
+        catalogue={a['slug']:a for a in json.loads((ROOT/'articles.json').read_text())}
+        route=lambda guide:'/'+guide.get('country','portugal')+'/'+guide['slug']+'/'
+        placed=0
+        for slug,entry in json.loads((ROOT/'seo.json').read_text())['guides'].items():
+            links=entry.get('links',[])
+            if not links:continue
+            body=read(self.out,route(catalogue[slug])).split('<div class="answer">')[1].split('<section id="questions">')[0]
+            with self.subTest(guide=slug):
+                self.assertLessEqual(len(links),3)
+                for link in links:
+                    anchor=f'<a href="{route(catalogue[link["slug"]])}">{html.escape(link["phrase"])}</a>'
+                    self.assertEqual(body.count(anchor),1,anchor)
+                    placed+=1
+        self.assertGreaterEqual(placed,20)
+        budget=read(self.out,'/japon/japon-budget-2-semaines/')
+        self.assertIn('sur <a href="/japon/japon-itineraire-2-semaines/">le parcours Tokyo, Kyoto, Nara, Hiroshima</a>, comptez',budget)
+        self.assertIn('<a href="/vietnam/vietnam-itineraire-15-jours/">notre guide du Vietnam en 15 jours</a>',read(self.out,'/vietnam/vietnam-quand-partir/'))
+
+    def test_wide_photos_declare_the_real_width_of_the_layout(self):
+        # La mise en page plafonne à 1 360 px avec 56 px de marge de chaque côté (style.css, .wrap).
+        self.assertIn('.wrap{max-width:1360px;margin:auto;padding:0 56px}',(self.out/'style.css').read_text())
+        for route in ('/japon/japon-itineraire-2-semaines/','/japon/','/'):
+            with self.subTest(route=route):
+                tag=re.search(r'<img class="(?:article-cover|hero-photo)"[^>]*>',read(self.out,route)).group(0)
+                self.assertIn('sizes="(min-width:1360px) 1248px, 100vw"',tag)
+        self.assertEqual([str(p.relative_to(self.out)) for p in self.out.rglob('*.html') if 'sizes="100vw"' in p.read_text()],[])
+
+    def test_real_favicon_files_are_published_and_declared_on_every_page(self):
+        def png_size(name):
+            data=(self.out/name).read_bytes()
+            self.assertEqual(data[:8],b'\x89PNG\r\n\x1a\n',name)
+            return int.from_bytes(data[16:20],'big'),int.from_bytes(data[20:24],'big')
+        self.assertEqual(png_size('favicon.png'),(96,96))
+        self.assertEqual(png_size('apple-touch-icon.png'),(180,180))
+        icon=(self.out/'favicon.ico').read_bytes()
+        # En-tête ICO : réservé 0, type 1, puis le nombre d'images (16, 32 et 48 px).
+        self.assertEqual((icon[:4],int.from_bytes(icon[4:6],'little')),(b'\x00\x00\x01\x00',3))
+        for page in self.out.rglob('*.html'):
+            head=page.read_text().split('</head>')[0]
+            with self.subTest(page=str(page.relative_to(self.out))):
+                self.assertIn('<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48"><link rel="icon" type="image/png" sizes="96x96" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">',head)
+                self.assertNotIn('href="data:',head)
+
+    def test_the_ai_mention_stays_on_guides_and_the_method_page_not_in_every_footer(self):
+        for page in self.out.rglob('*.html'):
+            body=page.read_text();footer=body.split('<footer')[1]
+            with self.subTest(page=str(page.relative_to(self.out))):
+                self.assertNotIn('Guides préparés avec l’aide de l’IA',body)
+                self.assertEqual(footer.count('<a href="/methode/">Notre méthode et nos sources</a>'),1)
+                self.assertEqual(footer.count('href="/methode/"'),1)
+                # Aucun titre hors du contenu principal.
+                self.assertNotRegex(body.split('</main>')[1],r'<h[1-6]')
+        self.assertIn('Guide préparé avec l’aide de l’IA à partir de ces sources.',read(self.out,'/portugal/lisbonne-3-jours-sans-voiture/'))
+        self.assertIn('<h2>Le rôle de l’intelligence artificielle</h2>',read(self.out,'/methode/'))
+
+    def test_about_and_transparency_titles_say_what_the_pages_are(self):
+        about=read(self.out,'/a-propos/');transparency=read(self.out,'/transparence/')
+        self.assertIn('<title>À propos de Voyage Sans Détour</title>',about)
+        self.assertIn('<h1>Un peu plus d’ailleurs.</h1>',about)
+        self.assertIn('<title>Transparence et liens partenaires | Voyage Sans Détour</title>',transparency)
+        self.assertIn('<h1>La confiance fait partie du voyage.</h1>',transparency)
 
     def indexable_pages(self):
         return {str(p.relative_to(self.out)):p.read_text() for p in self.out.rglob('index.html') if 'noindex' not in p.read_text()}
@@ -671,6 +767,50 @@ class SeoFileTest(TempDirTest):
         self.assertEqual(result.returncode,0,result.stderr)
         self.assertIn('<title>New York à Noël 2026 | Voyage Sans Détour</title>',read(out,'/etats-unis/new-york-noel/'))
 
+    def with_links(self,links):
+        return self.build_with({'schemaVersion':1,'guides':{'japon-budget-2-semaines':{'links':links}}})
+
+    def test_a_declared_link_lands_on_the_first_exact_occurrence_of_its_phrase(self):
+        result,out=self.with_links([{'phrase':'Kyoto','slug':'japon-itineraire-2-semaines'}])
+        self.assertEqual(result.returncode,0,result.stderr)
+        page=read(out,'/japon/japon-budget-2-semaines/')
+        self.assertEqual(page.count('<a href="/japon/japon-itineraire-2-semaines/">Kyoto</a>'),1)
+        guide=next(a for a in json.loads((ROOT/'articles.json').read_text()) if a['slug']=='japon-budget-2-semaines')
+        sections=page.split(f'<section id="{guide["sections"][0]["id"]}">')[1]
+        # Première occurrence du corps (les sections, pas le résumé ni les chiffres clés), texte autour
+        # inchangé, espace insécable avant € comprise.
+        self.assertNotIn('Kyoto',sections.split('<a href="/japon/japon-itineraire-2-semaines/">Kyoto</a>')[0])
+        self.assertIn('sur le parcours Tokyo, <a href="/japon/japon-itineraire-2-semaines/">Kyoto</a>, Nara, Hiroshima, comptez 154 000 ¥ (870 €)',page)
+
+    def test_of_two_phrases_starting_at_the_same_place_the_longer_one_wins(self):
+        result,out=self.with_links([{'phrase':'Tokyo','slug':'japon-itineraire-2-semaines'},{'phrase':'Tokyo, Kyoto, Nara','slug':'vietnam-quand-partir'}])
+        self.assertEqual(result.returncode,0,result.stderr)
+        page=read(out,'/japon/japon-budget-2-semaines/')
+        self.assertIn('sur le parcours <a href="/vietnam/vietnam-quand-partir/">Tokyo, Kyoto, Nara</a>, Hiroshima',page)
+        # La phrase courte se pose à son occurrence suivante, dans un autre paragraphe.
+        self.assertEqual(page.count('<a href="/japon/japon-itineraire-2-semaines/">Tokyo</a>'),1)
+
+    def test_a_link_that_cannot_be_placed_stops_the_build_instead_of_vanishing(self):
+        cases={
+            'phrase absente':[{'phrase':'une phrase que ce guide ne contient pas','slug':'japon-itineraire-2-semaines'}],
+            'guide cible inconnu':[{'phrase':'Kyoto','slug':'guide-qui-n-existe-pas'}],
+            'lien vers le guide lui-même':[{'phrase':'Kyoto','slug':'japon-budget-2-semaines'}],
+            'deux liens vers le même guide':[{'phrase':'Kyoto','slug':'japon-itineraire-2-semaines'},{'phrase':'Hiroshima','slug':'japon-itineraire-2-semaines'}],
+        }
+        for name,links in cases.items():
+            with self.subTest(case=name):
+                result,_=self.with_links(links)
+                self.assertNotEqual(result.returncode,0)
+                self.assertIn('lien interne impossible dans japon-budget-2-semaines',result.stderr)
+
+    def test_malformed_or_too_many_links_are_refused(self):
+        link=lambda slug:{'phrase':'Kyoto','slug':slug}
+        for links in ('Kyoto',[{'phrase':'Kyoto'}],[{'phrase':'','slug':'japon-itineraire-2-semaines'}],[{'phrase':' Kyoto','slug':'japon-itineraire-2-semaines'}],[dict(link('japon-itineraire-2-semaines'),titre='x')],[link('a'),link('b'),link('c'),link('d')]):
+            with self.subTest(links=links):
+                result,_=self.with_links(links)
+                self.assertNotEqual(result.returncode,0)
+                self.assertIn('entrée invalide pour japon-budget-2-semaines',result.stderr)
+
 class LighterPhotoTest(TempDirTest):
     def test_copies_found_beside_a_photo_are_offered_to_phones(self):
         source=source_copy(self.workdir,[])
@@ -719,6 +859,9 @@ class AnalyticsBuildTest(TempDirTest):
             self.assertIn('data-audience-refuse>Tout refuser</button>',body)
             self.assertIn('data-audience-accept>Accepter la mesure d’audience</button>',body)
             self.assertIn('data-audience-settings',body)
+            # Le panneau est hors du contenu principal : son titre est un paragraphe en gras, toujours relié par aria-labelledby.
+            self.assertIn('<section id="audience-choice" class="audience-choice" aria-labelledby="audience-title" hidden><p id="audience-title" class="audience-title"><strong>La mesure d’audience, à votre choix</strong></p>',body)
+            self.assertNotRegex(body.split('</main>')[1],r'<h[1-6]')
             self.assertNotRegex(body,r'<(?:script|link)[^>]+(?:src|href)="https://(?:www\.)?(?:google|googletagmanager)')
             self.assertNotRegex(body,r'rel="(?:preconnect|dns-prefetch|prefetch)"')
         self.assertNotIn('data-vsd-analytics',(out/'404.html').read_text())

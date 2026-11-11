@@ -3,7 +3,13 @@
   "note": "Titres (60 caractères au plus), descriptions (160 au plus) et questions réellement cherchées, par guide. Tenu hors d’articles.json : l’empreinte d’un guide lie ses épingles, ses reels et son reçu de publication. Chaque réponse reprend un fait déjà sourcé dans le guide. Méthode : docs/seo.md.",
   "guides": {
     "lisbonne-3-jours-sans-voiture": {
-      "title": "Lisbonne en 3 jours sans voiture : itinéraire et prix 2026"
+      "title": "Lisbonne en 3 jours sans voiture : itinéraire et prix 2026",
+      "links": [
+        {
+          "phrase": "les trains CP de Sintra",
+          "slug": "sintra-depuis-lisbonne"
+        }
+      ]
     },
     "porto-3-jours-sans-voiture": {
       "title": "Porto en 3 jours sans voiture : itinéraire et prix 2026",
@@ -11,6 +17,12 @@
         {
           "question": "Que faire à Porto en 3 jours ?",
           "answer": "Jour 1 : la gare São Bento, la Sé, la tour des Clérigos et la Ribeira. Jour 2 : le pont Luís I en métro D, le belvédère de la Serra do Pilar, le téléphérique de Gaia et une cave. Jour 3 : le tram 1 le long du Douro jusqu’à la Foz et le phare de Felgueiras, ou Serralves."
+        }
+      ],
+      "links": [
+        {
+          "phrase": "longe le Douro",
+          "slug": "douro-train-depuis-porto"
         }
       ]
     },
@@ -21,10 +33,30 @@
           "question": "Comment aller à Sintra depuis Lisbonne ?",
           "answer": "En train CP depuis la gare de Rossio, dans la Baixa, jusqu’au terminus de Sintra : 2,55 € en plein tarif (grille 2026, 4 zones), à charger sur une carte Navegante à 0,50 €."
         }
+      ],
+      "links": [
+        {
+          "phrase": "en plein cœur de la Baixa",
+          "slug": "ou-dormir-lisbonne-quartiers"
+        }
       ]
     },
     "lisbonne-ou-porto": {
-      "title": "Lisbonne ou Porto : laquelle choisir ? Comparatif chiffré"
+      "title": "Lisbonne ou Porto : laquelle choisir ? Comparatif chiffré",
+      "links": [
+        {
+          "phrase": "trois jours à Lisbonne",
+          "slug": "lisbonne-3-jours-sans-voiture"
+        },
+        {
+          "phrase": "trois jours à Porto",
+          "slug": "porto-3-jours-sans-voiture"
+        },
+        {
+          "phrase": "une excursion à Sintra",
+          "slug": "sintra-depuis-lisbonne"
+        }
+      ]
     },
     "lisbonne-porto-train": {
       "title": "Train Lisbonne–Porto : prix 2026, durée et billets Promo",
@@ -33,19 +65,77 @@
           "question": "Où acheter un billet de train Lisbonne–Porto ?",
           "answer": "Sur l’application ou le site de CP : la vente ouvre 60 jours avant le départ, et le billet Promo descend jusqu’à −65 % s’il est acheté 8 jours ou plus à l’avance."
         }
+      ],
+      "links": [
+        {
+          "phrase": "Si vous logez à Baixa ou Alfama",
+          "slug": "ou-dormir-lisbonne-quartiers"
+        },
+        {
+          "phrase": "un bagage à main gratuit par voyageur",
+          "slug": "portugal-sans-voiture-bagages"
+        }
       ]
     },
     "ou-dormir-lisbonne-quartiers": {
-      "title": "Où dormir à Lisbonne : 7 quartiers comparés, métro et pentes"
+      "title": "Où dormir à Lisbonne : 7 quartiers comparés, métro et pentes",
+      "links": [
+        {
+          "phrase": "la gare des trains pour Porto",
+          "slug": "lisbonne-porto-train"
+        },
+        {
+          "phrase": "Avec une valise à roulettes",
+          "slug": "portugal-sans-voiture-bagages"
+        }
+      ]
     },
     "aeroport-porto-centre-ville": {
-      "title": "Aéroport de Porto au centre-ville : métro E, 2,30 €, 30 min"
+      "title": "Aéroport de Porto au centre-ville : métro E, 2,30 €, 30 min",
+      "links": [
+        {
+          "phrase": "la gare des trains pour Lisbonne",
+          "slug": "lisbonne-porto-train"
+        },
+        {
+          "phrase": "les casiers à bagages",
+          "slug": "portugal-sans-voiture-bagages"
+        },
+        {
+          "phrase": "São Bento et la Ribeira",
+          "slug": "porto-3-jours-sans-voiture"
+        }
+      ]
     },
     "portugal-sans-voiture-bagages": {
-      "title": "Bagages au Portugal : règles des trains CP et consignes"
+      "title": "Bagages au Portugal : règles des trains CP et consignes",
+      "links": [
+        {
+          "phrase": "les excursions à Sintra",
+          "slug": "sintra-depuis-lisbonne"
+        },
+        {
+          "phrase": "les quartiers de la ligne rouge",
+          "slug": "ou-dormir-lisbonne-quartiers"
+        },
+        {
+          "phrase": "le trajet de l’aéroport au centre",
+          "slug": "aeroport-porto-centre-ville"
+        }
+      ]
     },
     "guimaraes-une-journee-sans-voiture": {
-      "title": "Guimarães en une journée depuis Porto, sans voiture"
+      "title": "Guimarães en une journée depuis Porto, sans voiture",
+      "links": [
+        {
+          "phrase": "Porto São Bento",
+          "slug": "porto-3-jours-sans-voiture"
+        },
+        {
+          "phrase": "votre solution pour les bagages",
+          "slug": "portugal-sans-voiture-bagages"
+        }
+      ]
     },
     "algarve-sans-voiture-train": {
       "title": "Algarve sans voiture : Faro, Tavira et Lagos en train"
@@ -79,6 +169,12 @@
           "question": "Comment aller de Porto à Pinhão en train ?",
           "answer": "Par la ligne du Douro depuis Porto-Campanhã : 2 h 21 jusqu’à Pinhão (départ 7 h 30, arrivée 9 h 51). Du 3 novembre 2026 au 24 mars 2027, des bus remplacent les trains entre Marco de Canaveses et Régua."
         }
+      ],
+      "links": [
+        {
+          "phrase": "de Porto-Campanhã",
+          "slug": "porto-3-jours-sans-voiture"
+        }
       ]
     },
     "japon-itineraire-2-semaines": {
@@ -87,6 +183,12 @@
         {
           "question": "Quel itinéraire pour 2 semaines au Japon ?",
           "answer": "Quatre nuits à Tokyo, quatre à Kyoto avec Nara en excursion, deux à Hiroshima pour Miyajima, puis retour à Tokyo. Le Nozomi relie Tokyo à Kyoto en 2 h 18 et Kyoto à Hiroshima en 1 h 36."
+        }
+      ],
+      "links": [
+        {
+          "phrase": "Le Japan Rail Pass ordinaire",
+          "slug": "japon-budget-2-semaines"
         }
       ]
     },
@@ -136,11 +238,23 @@
       ]
     },
     "vietnam-itineraire-15-jours": {
-      "title": "Vietnam en 15 jours : itinéraire du nord au sud en train"
+      "title": "Vietnam en 15 jours : itinéraire du nord au sud en train",
+      "links": [
+        {
+          "phrase": "la meilleure fenêtre pour un itinéraire nord-sud",
+          "slug": "vietnam-quand-partir"
+        }
+      ]
     },
     "vietnam-quand-partir": {
       "title": "Quand partir au Vietnam ? Le bon mois, région par région",
-      "description": "Hanoï à 16 °C en janvier, 757 mm de pluie à Hué en octobre, Saïgon au sec de décembre à avril : le bon mois par région, les typhons et le Tết 2027."
+      "description": "Hanoï à 16 °C en janvier, 757 mm de pluie à Hué en octobre, Saïgon au sec de décembre à avril : le bon mois par région, les typhons et le Tết 2027.",
+      "links": [
+        {
+          "phrase": "notre guide du Vietnam en 15 jours",
+          "slug": "vietnam-itineraire-15-jours"
+        }
+      ]
     },
     "marrakech-3-jours": {
       "title": "Marrakech en 3 jours : itinéraire, prix et pièges à éviter",
@@ -148,7 +262,13 @@
     },
     "japon-budget-2-semaines": {
       "title": "Budget Japon 2 semaines : 870 à 1 370 € sans le vol (2026)",
-      "description": "Train à 44 620 ¥ plutôt que JR Pass à 80 000 ¥, nuit en capsule ou en business hôtel, repas à 1 000 ¥ : deux budgets chiffrés pour 2 semaines au Japon."
+      "description": "Train à 44 620 ¥ plutôt que JR Pass à 80 000 ¥, nuit en capsule ou en business hôtel, repas à 1 000 ¥ : deux budgets chiffrés pour 2 semaines au Japon.",
+      "links": [
+        {
+          "phrase": "le parcours Tokyo, Kyoto, Nara, Hiroshima",
+          "slug": "japon-itineraire-2-semaines"
+        }
+      ]
     },
     "tenerife-quand-partir": {
       "title": "Quand partir à Tenerife ? Le bon mois, côte par côte",
