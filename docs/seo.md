@@ -36,6 +36,10 @@ fait échouer le build avant la mise en ligne.
 | Chaque guide renvoie vers son pays, sa rubrique, trois guides liés et jusqu'à douze voisins | `more_guides`, `main_rubrique` |
 | Rubriques liées depuis le pied de toutes les pages ; « Quand partir » se déduit du titre, « Que faire » existe | `RUBRIQUES`, `theme_links` |
 | `/liens/` (page de liens des profils sociaux) hors des résultats et du sitemap | `noindex=True` |
+| Une page pays, continent ou rubrique de moins de 3 guides est en `noindex,follow` et hors du sitemap : elle reste en ligne et liée, et revient seule dans l'index à son troisième guide. `/credits/` et `/carnet/` aussi (depuis le 11/11/2026 : 60 adresses soumises → 40) | `HUB_MIN_GUIDES`, `hub_page` |
+| Deux ou trois liens par guide vers des guides proches, dans le texte : `links` de `seo.json`, `{"phrase": texte exact du corps, "slug": guide cible}`, posé sur la première occurrence de la phrase. Une phrase ou un guide cible introuvable arrête la construction et `test_site` : **quand un guide est récrit, relire ses `links` et ceux qui pointent vers lui** | `site-src/seo.json`, `section_html` |
+| Vraies icônes du site (`favicon.ico`, `favicon.png`, `apple-touch-icon.png`), dessinées aux mesures du logo | `favicon_files.py` |
+| Pied de page : un lien « Notre méthode et nos sources » ; la mention de l'aide de l'IA reste au bas de chaque guide et sur `/methode/` | `footer` |
 | Date de mise à jour visible et dans le schéma `Article` ; `FAQPage`, `BreadcrumbList`, `ItemList` | rendu d'article |
 | Polices en WOFF2, images avec dimensions, `loading=lazy` sauf la première | `page`, `img` |
 | Copies de 400 et 1 200 px de chaque photo, créées au déploiement et jamais commitées : un téléphone ne télécharge plus le fichier de 1 600 px, une vignette plus celui de 800 px | `photo_variants.py`, étape de `build-pages.yml` |
