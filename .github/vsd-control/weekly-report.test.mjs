@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {socialQueue,guideQueue,parsePinterestRss,summarizeRuns,computeAlerts,renderReport,seoLines} from './weekly-report.mjs';
-import {publicationLines} from './publication-report.mjs';
+import {publicationLines,readingState} from './publication-report.mjs';
 
 const NOW=Date.parse('2026-10-26T07:00:00Z');
 const batch=(batchId,channel,dueAt,title='Titre')=>({batchId,items:[{title,dueAt,payload:{channel,kind:'reel'}}]});
@@ -26,7 +26,9 @@ test('guide queue separates new guides from updates and lists recent publication
   const guides=guideQueue({
     articles:[{slug:'old',title:'Ancien',publishedOn:'2026-09-27'},{slug:'new',title:'Nouveau',publishedOn:'2026-10-25'}],
     drafts:[{id:'guimaraes-2026-10-25',releaseAt:'2026-10-25T08:00:00Z',article:{slug:'guimaraes',title:'Guimarães'}}],
-    candidates:[{id:'ou-dormir-porto-2026-11-22',releaseAt:'2026-11-22T08:00:00Z',article:{title:'Où dormir à Porto'}},{id:'auto-mise-a-jour-x-2026-12-06',releaseAt:'2026-12-06T08:00:00Z',article:{title:'X'}}],
+    candidates:[{id:'ou-dormir-porto-2026-11-22',releaseAt:'2026-11-22T08:00:00Z',article:{title:'Où dormir à Porto'}},{id:'auto-mise-a-jour-x-2026-12-06',releaseAt:'2026-12-06T08:00:00Z',article:{title:'X'}},
+      // The build never releases a candidate that is only a source recheck: it is not a coming update.
+      {id:'auto-mise-a-jour-y-2026-12-20',releaseAt:'2026-12-20T08:00:00Z',article:{title:'Y'},review:{method:'deterministic-source-recheck-v1'}}],
     now:NOW});
   assert.deepEqual(guides.published.map(g=>g.slug),['new']);
   assert.deepEqual(guides.upcomingGuides.map(g=>g.id),['ou-dormir-porto-2026-11-22']);
@@ -46,9 +48,10 @@ test('workflow runs are summarised with failures first',()=>{
   assert.deepEqual(summary,[{workflow:'A',total:2,failures:1,lastFailureUrl:'u2'}]);
 });
 
-test('alerts fire when the social or guide queue runs dry, and stay quiet otherwise',()=>{
+test('alerts fire when the social queue runs dry, and stay quiet otherwise',()=>{
+  // Guides are written straight into the catalogue: an empty guide queue is the normal state, not an alert.
   const dry=computeAlerts({social:{horizon:{instagram:'2026-11-01T17:00:00Z'}},guides:{nextGuideAt:null},runs:[],stopAt:'2027-09-14T21:59:59Z',now:NOW});
-  assert.deepEqual(dry.map(a=>a.code),['social_queue_low:instagram','social_queue_empty:facebook','guide_queue_empty']);
+  assert.deepEqual(dry.map(a=>a.code),['social_queue_low:instagram','social_queue_empty:facebook']);
   const full=computeAlerts({social:{horizon:{instagram:'2026-12-01T00:00:00Z',facebook:'2026-12-01T00:00:00Z'}},guides:{nextGuideAt:'2026-11-10T00:00:00Z'},runs:[],stopAt:'2027-09-14T21:59:59Z',now:NOW});
   assert.deepEqual(full,[]);
 });
@@ -126,13 +129,54 @@ test('a healthy or empty register is said in one line each',()=>{
   assert.equal(publicationLines(PUBLICATION).length,3);
 });
 
-test('a missing publication reading is said plainly and never raises an alert',()=>{
+test('a missing publication reading is said plainly in the report',()=>{
   assert.deepEqual(publicationLines(null),['- État du moteur de publication indisponible (panneau privé injoignable ou pas encore à jour).']);
   const md=renderReport({now:AT,social:{items:[],horizon:{},lastWeek:[]},guides:{published:[],upcomingGuides:[],upcomingUpdates:[],nextGuideAt:null},pins:[],runs:[],alerts:[],waiting:[]});
   assert.ok(md.includes('## Publication\n\n- État du moteur de publication indisponible'));
-  assert.deepEqual(computeAlerts({...QUIET,now:AT,seo:null}),[]);
-  assert.deepEqual(publicationAlerts(null),[]);
   assert.deepEqual(publicationAlerts(PUBLICATION),[]);
+});
+
+test('a panel that stops giving the engine state is an alert after a few hours, not at the first miss',()=>{
+  const HOUR=36e5,iso=value=>new Date(value).toISOString();
+  const alerts=(seo,reading,now)=>computeAlerts({...QUIET,now,seo,reading});
+  // First miss: remembered, no alert.
+  const first=readingState(null,null,AT);
+  assert.deepEqual(first,{missingSince:iso(AT),reason:'panel_unreadable'});
+  assert.deepEqual(alerts(null,first,AT),[]);
+  // Still missing at the next run, six hours later: the alert says since when and why it matters.
+  const second=readingState(first,null,AT+6*HOUR);
+  assert.equal(second.missingSince,iso(AT));
+  const raised=alerts(null,second,AT+6*HOUR);
+  assert.deepEqual(raised.map(a=>a.code),['publication_reading_missing']);
+  assert.ok(raised[0].message.startsWith('Le panneau ne répond plus au rapport depuis le 2026-11-12 à 10:00, heure de Paris'),raised[0].message);
+  assert.ok(raised[0].message.includes('aveugles'),raised[0].message);
+  // The panel answers but without the publication block: same alert, another cause.
+  const noBlock={search:null,indexation:null,publication:null};
+  const absent=readingState(readingState(null,noBlock,AT),noBlock,AT+6*HOUR);
+  assert.equal(absent.reason,'block_absent');
+  assert.ok(alerts(noBlock,absent,AT+6*HOUR)[0].message.startsWith('Le panneau répond sans l’état du moteur de publication'));
+  // A good reading clears the memory, and the alert with it.
+  const back={search:null,indexation:null,publication:{...PUBLICATION,lastPassAt:iso(AT+12*HOUR-20*6e4)}};
+  assert.deepEqual(readingState(second,back,AT+12*HOUR),{missingSince:null});
+  assert.deepEqual(alerts(back,readingState(second,back,AT+12*HOUR),AT+12*HOUR),[]);
+  // A lost, malformed or future memory starts the delay again instead of alerting on its own.
+  for(const previous of [undefined,{},{missingSince:'hier'},{missingSince:iso(AT+48*HOUR)},{missingSince:42}])assert.equal(readingState(previous,null,AT).missingSince,iso(AT));
+  // Without any memory (an older caller), a missing reading stays silent.
+  assert.deepEqual(computeAlerts({...QUIET,now:AT,seo:null}),[]);
+});
+
+test('guide alerts join the others: stale sources, no publication, idle writer',()=>{
+  const articles=[{slug:'vieux',title:'Vieux guide',shortTitle:'Vieux',destination:'Lieu',publishedOn:'2026-10-01',sourcesCheckedOn:'2026-09-20'}];
+  const alerts=computeAlerts({...QUIET,now:AT,articles,writer:{runsThisWeek:14,lastAdmissionAt:null}});
+  assert.deepEqual(alerts.map(a=>a.code),['guide_sources_expired','guide_publication_stalled','guide_writer_idle']);
+});
+
+test('the report lists the guides whose sources are about to be too old for the post chain',()=>{
+  const sources=[{slug:'lisbonne',checkedOn:'2026-10-24',expiresOn:'2026-12-08',expired:false}];
+  const md=renderReport({now:AT,social:{items:[],horizon:{},lastWeek:[]},guides:{published:[],upcomingGuides:[],upcomingUpdates:[],nextGuideAt:null},pins:[],runs:[],alerts:[],waiting:[],sources});
+  assert.ok(md.includes('## Sources des guides\n\nAu-delà de 45 jours'),md);
+  assert.ok(md.includes('- Le 2026-12-08 (1 guide) : `lisbonne`.'));
+  assert.ok(md.indexOf('## Référencement Google')<md.indexOf('## Sources des guides')&&md.indexOf('## Sources des guides')<md.indexOf('## File à venir'));
 });
 
 test('alerts name the channel that no longer receives posts and say what to do, then clear once it is back',()=>{

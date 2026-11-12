@@ -1,10 +1,13 @@
-# Read-only monitoring: weekly report issue on Mondays, alert issue (empty queues, indexing in retreat,
-# Buffer channel cut off, silent publication engine, blocked posts) checked daily.
+# Read-only monitoring, every six hours: weekly report issue from Sunday noon UTC (before the Monday routines
+# read it), alert issue (empty queues, indexing in retreat, Buffer channel cut off, silent publication engine,
+# blocked posts, panel no longer giving the engine state, guides without fresh sources or without a writer).
+# A new alert is announced by a comment on the alert issue: editing its body would notify nobody.
 # No publication, no provider call besides the signed read-only summary of the private panel and the public Pinterest feed.
 name: Voyage Sans Detour weekly report
 on:
   schedule:
-    - cron: '7 9 * * *'
+    # Four runs a day: an alert is at most six hours late, and a run GitHub skips is caught up by the next.
+    - cron: '7 1,7,13,19 * * *'
   workflow_dispatch:
     inputs:
       publish_report:
@@ -33,7 +36,15 @@ jobs:
         with:
           node-version: 22
       - name: Test the report
-        run: node --test .github/vsd-control/weekly-report.test.mjs .github/vsd-control/seo-status.test.mjs
+        run: node --test .github/vsd-control/*.test.mjs
+      # What the report remembers between two runs: since when the panel has stopped giving the engine state.
+      # One missed reading is not an alert; two runs in a row are. A lost memory only delays that alert.
+      - name: Restore the memory of the previous run
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
+        with:
+          path: .vsd-report-state
+          key: vsd-report-state-${{ github.run_id }}
+          restore-keys: vsd-report-state-
       # Clicks, impressions, indexed pages and the state of the publication engine come from the private panel,
       # which holds the read-only Google access and the Buffer channels. A panel that cannot be read leaves the
       # report without these figures and without publication alerts, never without a report.
@@ -49,39 +60,69 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         # Cloud control is scheduled ~50 times a day: filter by date rather than by count.
         run: gh run list --repo "$GITHUB_REPOSITORY" --created ">=$(date -u -d '8 days ago' +%F)" --limit 1500 --json workflowName,conclusion,createdAt,url > "$RUNNER_TEMP/runs.json"
+      # The automatic writer commits with this message when it admits a guide. Empty: it never did.
+      # « unknown » when the search fails: the report then says nothing about the writer.
+      - name: Find when the automatic writer last admitted a guide
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api -X GET search/commits -f q="repo:$GITHUB_REPOSITORY \"Admit a source-verified new guide\"" -f sort=committer-date -f order=desc -f per_page=1 \
+            --jq 'if .incomplete_results then "unknown" else (.items[0].commit.committer.date // "") end' > "$RUNNER_TEMP/last-admission.txt" || echo unknown > "$RUNNER_TEMP/last-admission.txt"
       - name: Write the report and alerts
         env:
           VSD_REPORT_OUT: ${{ runner.temp }}
           VSD_REPORT_RUNS: ${{ runner.temp }}/runs.json
           VSD_REPORT_SEO: ${{ runner.temp }}/seo.json
+          VSD_REPORT_LAST_ADMISSION: ${{ runner.temp }}/last-admission.txt
+          VSD_REPORT_STATE: .vsd-report-state/state.json
         run: |
           node .github/vsd-control/weekly-report.mjs
           cat "$RUNNER_TEMP/vsd-report.md" >> "$GITHUB_STEP_SUMMARY"
-      - name: Open the weekly report issue on Mondays
+      # Tested logic (issue-plan.mjs): is this week's report still to open, what the alert issue is called,
+      # and which alerts are new since the previous run.
+      - name: Decide what to do with the report and alert issues
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VSD_REPORT_OUT: ${{ runner.temp }}
+          VSD_ALERT_PREVIOUS: ${{ runner.temp }}/alert-previous.md
+        run: |
+          set -euo pipefail
+          gh label create rapport-hebdo --repo "$GITHUB_REPOSITORY" --color 1D76DB --description 'Rapport hebdomadaire automatique' 2>/dev/null || true
+          gh label create alerte-file --repo "$GITHUB_REPOSITORY" --color D93F0B --description 'Alerte automatique : publication, files, guides, référencement, workflows' 2>/dev/null || true
+          open=$(gh issue list --repo "$GITHUB_REPOSITORY" --label alerte-file --state open --json number -q '.[0].number // empty')
+          echo "$open" > "$RUNNER_TEMP/alert-open.txt"
+          if [ -n "$open" ]; then gh issue view "$open" --repo "$GITHUB_REPOSITORY" --json body -q .body > "$VSD_ALERT_PREVIOUS"; fi
+          VSD_REPORT_LAST_ISSUE_AT=$(gh issue list --repo "$GITHUB_REPOSITORY" --label rapport-hebdo --state all --limit 1 --json createdAt -q '.[0].createdAt // empty')
+          export VSD_REPORT_LAST_ISSUE_AT
+          node .github/vsd-control/issue-plan.mjs
+      - name: Open the weekly report issue when this week has none yet
         env:
           GH_TOKEN: ${{ github.token }}
           REQUESTED: ${{ github.event_name == 'workflow_dispatch' && (inputs.publish_report && 'yes' || 'no') || 'auto' }}
         run: |
           set -euo pipefail
           if [ "$REQUESTED" = no ]; then exit 0; fi
-          if [ "$REQUESTED" = auto ] && [ "$(date -u +%u)" != 1 ]; then echo 'Pas lundi : pas de rapport.'; exit 0; fi
-          gh label create rapport-hebdo --repo "$GITHUB_REPOSITORY" --color 1D76DB --description 'Rapport hebdomadaire automatique' 2>/dev/null || true
+          if [ "$REQUESTED" = auto ] && [ "$(cat "$RUNNER_TEMP/report-due.txt")" != yes ]; then echo 'Le rapport de la semaine est déjà ouvert.'; exit 0; fi
           for number in $(gh issue list --repo "$GITHUB_REPOSITORY" --label rapport-hebdo --state open --json number -q '.[].number'); do
             gh issue close "$number" --repo "$GITHUB_REPOSITORY" --reason completed
           done
           gh issue create --repo "$GITHUB_REPOSITORY" --label rapport-hebdo --title "Rapport hebdo Voyage Sans Détour — $(date -u +%F)" --body-file "$RUNNER_TEMP/vsd-report.md"
-      - name: Raise or clear the alert issue
+      - name: Raise, announce or clear the alert issue
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          gh label create alerte-file --repo "$GITHUB_REPOSITORY" --color D93F0B --description 'Alerte automatique : files de publication, référencement, workflows' 2>/dev/null || true
-          open=$(gh issue list --repo "$GITHUB_REPOSITORY" --label alerte-file --state open --json number -q '.[0].number // empty')
-          count=$(node -e 'console.log(JSON.parse(require("fs").readFileSync(process.argv[1],"utf8")).length)' "$RUNNER_TEMP/vsd-alerts.json")
-          if [ "$count" = 0 ]; then
+          open=$(cat "$RUNNER_TEMP/alert-open.txt")
+          if [ ! -f "$RUNNER_TEMP/alert-body.md" ]; then
             if [ -n "$open" ]; then gh issue close "$open" --repo "$GITHUB_REPOSITORY" --comment 'Plus aucune alerte : fermeture automatique.'; fi
             exit 0
           fi
-          node -e 'const a=JSON.parse(require("fs").readFileSync(process.argv[1],"utf8"));console.log("Alertes au "+new Date().toISOString().slice(0,10)+" :\n\n"+a.map(x=>"- "+x.message).join("\n")+"\n\nCette issue se ferme seule quand plus aucune alerte ne tient. Rapport complet : "+process.env.GITHUB_SERVER_URL+"/"+process.env.GITHUB_REPOSITORY+"/actions/runs/"+process.env.GITHUB_RUN_ID)' "$RUNNER_TEMP/vsd-alerts.json" > "$RUNNER_TEMP/alert.md"
-          if [ -n "$open" ]; then gh issue edit "$open" --repo "$GITHUB_REPOSITORY" --body-file "$RUNNER_TEMP/alert.md"
-          else gh issue create --repo "$GITHUB_REPOSITORY" --label alerte-file --title '⚠️ Alerte Voyage Sans Détour' --body-file "$RUNNER_TEMP/alert.md"; fi
+          title=$(cat "$RUNNER_TEMP/alert-title.txt")
+          if [ -z "$open" ]; then
+            gh issue create --repo "$GITHUB_REPOSITORY" --label alerte-file --title "$title" --body-file "$RUNNER_TEMP/alert-body.md"
+            exit 0
+          fi
+          # GitHub notifies nobody for an edited body: each alert that is new since the previous run gets a comment.
+          # Comment first: if it fails, the body keeps the previous codes and the next run announces the alert again.
+          if [ -f "$RUNNER_TEMP/alert-comment.md" ]; then gh issue comment "$open" --repo "$GITHUB_REPOSITORY" --body-file "$RUNNER_TEMP/alert-comment.md"; fi
+          gh issue edit "$open" --repo "$GITHUB_REPOSITORY" --title "$title" --body-file "$RUNNER_TEMP/alert-body.md"

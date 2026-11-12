@@ -3,6 +3,8 @@
 // post identifiers and unknown codes are only ever written inside a code span.
 const HOUR=36e5,DAY=24*HOUR;
 export const ENGINE_SILENCE_HOURS=6,POST_TROUBLE_DAYS=7;
+// The report runs every six hours: past this delay, the engine state has been missing at two runs in a row.
+const READING_GRACE_HOURS=4;
 const NAMED_IN_ALERT=5;
 // TikTok is optional: its absence from Buffer is a choice, not a fault.
 const REQUIRED_CHANNELS=['instagram','facebook'];
@@ -81,8 +83,28 @@ function postAlerts({channels,problems,problemsCount,atRisk,atRiskCount},now){
   return alerts;
 }
 
-/** Every alert is recomputed from the current state: it disappears with its cause. No reading, no alert. */
-export function publicationAlerts(publication,now){
-  if(!publication)return [];
+/**
+ * What the report remembers from one run to the next: since when the panel has stopped giving the engine
+ * state. The panel has been deployed for long, so its silence is a fault, but one missed reading is not.
+ */
+export function readingState(previous,seo,now){
+  if(seo?.publication)return {missingSince:null};
+  const before=typeof previous?.missingSince==='string'?Date.parse(previous.missingSince):NaN;
+  const since=Number.isFinite(before)&&before<=now?before:now;
+  return {missingSince:new Date(since).toISOString(),reason:seo?'block_absent':'panel_unreadable'};
+}
+
+function readingAlerts(reading,now){
+  if(!reading?.missingSince||now-Date.parse(reading.missingSince)<=READING_GRACE_HOURS*HOUR)return [];
+  const what=reading.reason==='block_absent'?'répond sans l’état du moteur de publication (version en ligne trop ancienne, ou registre illisible)':'ne répond plus au rapport';
+  return [{code:'publication_reading_missing',message:`Le panneau ${what} depuis le ${moment(reading.missingSince)} : les alertes sur les canaux Buffer, le moteur et les posts sont aveugles. Vérifier que le panneau est en ligne et déployé à jour.`}];
+}
+
+/**
+ * Every alert is recomputed from the current state: it disappears with its cause. Without the engine
+ * state, the only alert is the one saying the state has been missing for too long (`reading`).
+ */
+export function publicationAlerts(publication,now,reading=null){
+  if(!publication)return readingAlerts(reading,now);
   return [...channelAlerts(publication.channels),...engineAlerts(publication,now),...postAlerts(publication,now)];
 }

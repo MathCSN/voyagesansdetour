@@ -1,16 +1,20 @@
 // Weekly publication report and empty-queue alerts. Read-only: no provider call, no publication.
-import {readFile,readdir,writeFile} from 'node:fs/promises';
-import {join} from 'node:path';
+import {mkdir,readFile,readdir,writeFile} from 'node:fs/promises';
+import {dirname,join} from 'node:path';
 import {pathToFileURL} from 'node:url';
-import {publicationAlerts,publicationLines} from './publication-report.mjs';
+import {guideAlerts,sourceFreshness,sourceLines,writerActivity} from './guide-health.mjs';
+import {publicationAlerts,publicationLines,readingState} from './publication-report.mjs';
 
 const DAY=864e5;
 export const STOP_AT='2027-09-14T21:59:59Z';
 export const SOCIAL_CHANNELS=['instagram','facebook'];
-const SOCIAL_LOW_DAYS=14,GUIDE_LOW_DAYS=28,STOP_WARNING_DAYS=60,REPEATED_FAILURES=2;
+const SOCIAL_LOW_DAYS=14,STOP_WARNING_DAYS=60,REPEATED_FAILURES=2;
 const PINTEREST_RSS='https://fr.pinterest.com/voyagesansdetour/feed.rss';
 const PROFILES={instagram:'https://www.instagram.com/voyagesansdetour.fr/',facebook:'https://business.facebook.com/latest/posts/published_posts?asset_id=1331092223422242',pinterest:'https://fr.pinterest.com/voyagesansdetour/'};
 const UPDATE_PREFIX='auto-mise-a-jour-';
+// Candidates of the retired maintenance generator: the build sets them aside (autonomous_editorial.py,
+// « source_recheck_is_not_original_editorial_review »), so they are never a coming update.
+const RECHECK_ONLY='deterministic-source-recheck-v1';
 // Below this volume, a fall in impressions is noise on a young site; at half the previous period it is a signal.
 const SEARCH_ALERT_MIN_IMPRESSIONS=300,SEARCH_ALERT_SHARE=0.5;
 
@@ -35,7 +39,7 @@ export function socialQueue({index,batches,importedIds,now}){
 
 export function guideQueue({articles,drafts,candidates,now}){
   const published=articles.filter(a=>a.publishedOn&&Date.parse(a.publishedOn)>now-7*DAY).map(a=>({slug:a.slug,title:a.title,publishedOn:a.publishedOn}));
-  const upcoming=[...drafts,...candidates].filter(c=>Date.parse(c.releaseAt)>now).map(c=>({id:c.id,title:c.article?.title??c.id,releaseAt:c.releaseAt})).sort((a,b)=>Date.parse(a.releaseAt)-Date.parse(b.releaseAt));
+  const upcoming=[...drafts,...candidates].filter(c=>Date.parse(c.releaseAt)>now&&c.review?.method!==RECHECK_ONLY).map(c=>({id:c.id,title:c.article?.title??c.id,releaseAt:c.releaseAt})).sort((a,b)=>Date.parse(a.releaseAt)-Date.parse(b.releaseAt));
   const upcomingGuides=upcoming.filter(c=>!c.id.startsWith(UPDATE_PREFIX)),upcomingUpdates=upcoming.filter(c=>c.id.startsWith(UPDATE_PREFIX));
   return {published,upcomingGuides,upcomingUpdates,nextGuideAt:upcomingGuides[0]?.releaseAt??null};
 }
@@ -78,16 +82,16 @@ export function seoLines(seo){
   return lines;
 }
 
-export function computeAlerts({social,guides,runs,seo=null,stopAt=STOP_AT,now}){
+export function computeAlerts({social,runs,seo=null,articles=[],writer=null,reading=null,stopAt=STOP_AT,now}){
   // A channel cut off from Buffer or a silent engine stops every post: said first.
-  const alerts=[...publicationAlerts(seo?.publication??null,now)];
+  const alerts=[...publicationAlerts(seo?.publication??null,now,reading)];
   for(const channel of SOCIAL_CHANNELS){
     const horizon=social.horizon[channel];
     if(!horizon||Date.parse(horizon)<=now)alerts.push({code:`social_queue_empty:${channel}`,message:`File ${channel} vide : plus aucun post programmé. Ajouter des lots dans .github/vsd-production/reviewed-social/.`});
     else if(Date.parse(horizon)<now+SOCIAL_LOW_DAYS*DAY)alerts.push({code:`social_queue_low:${channel}`,message:`File ${channel} presque vide : dernier post programmé le ${day(horizon)}.`});
   }
-  if(!guides.nextGuideAt)alerts.push({code:'guide_queue_empty',message:'File des guides vide : aucun nouveau guide programmé (site-src/editorial-queue.json ou editorial-candidates/).'});
-  else if(Date.parse(guides.nextGuideAt)>now+GUIDE_LOW_DAYS*DAY)alerts.push({code:'guide_queue_low',message:`Prochain nouveau guide seulement le ${day(guides.nextGuideAt)}.`});
+  // Guides are written straight into the catalogue, not through the queue: what counts is what is published.
+  alerts.push(...guideAlerts({articles,writer,now}));
   for(const run of runs.filter(r=>r.failures>=REPEATED_FAILURES))alerts.push({code:`workflow_failures:${run.workflow}`,message:`${run.workflow} : ${run.failures} échecs sur ${run.total} exécutions cette semaine (${run.lastFailureUrl}).`});
   const trend=seo?.indexation?.trend;
   if(trend?.status==='drop')alerts.push({code:'indexation_drop',message:`Indexation Google en recul : ${trend.lost} pages de moins qu’au ${trend.referenceDay} (${trend.reference} puis ${seo.indexation.indexed}). Marche à suivre : docs/seo.md.`});
@@ -97,7 +101,7 @@ export function computeAlerts({social,guides,runs,seo=null,stopAt=STOP_AT,now}){
   return alerts;
 }
 
-export function renderReport({now,social,guides,pins,runs,alerts,waiting,seo=null}){
+export function renderReport({now,social,guides,pins,runs,alerts,waiting,seo=null,sources=[]}){
   const line=(items,format,empty)=>items.length?items.map(format).join('\n'):empty;
   return [`# Voyage Sans Détour — rapport du ${day(now)}`,
     '## Publié cette semaine',
@@ -109,6 +113,8 @@ export function renderReport({now,social,guides,pins,runs,alerts,waiting,seo=nul
     publicationLines(seo?.publication??null).join('\n'),
     '## Référencement Google',
     seoLines(seo).join('\n'),
+    '## Sources des guides',
+    sourceLines(sources).join('\n'),
     '## File à venir',
     line(social.items.filter(i=>i.dueAt&&Date.parse(i.dueAt)>now),i=>`- ${day(i.dueAt)} · ${i.channel} · ${i.title} (${i.state})`,'- Aucun post programmé.'),
     line(guides.upcomingGuides,g=>`- ${day(g.releaseAt)} · nouveau guide · ${g.title}`,'- Aucun nouveau guide programmé.'),
@@ -142,15 +148,27 @@ export async function main({root=process.cwd(),env=process.env,now=Date.now()}={
   const batches=await Promise.all(index.items.map(i=>readJson(join(root,i.path)).catch(()=>({batchId:i.batchId}))));
   const stockOutput=env.VSD_REPORT_STOCK_EVIDENCE?await readFile(env.VSD_REPORT_STOCK_EVIDENCE,'utf8').catch(()=>''):'';
   const candidateFiles=(await readdir(join(site,'editorial-candidates'))).filter(f=>f.endsWith('.json'));
-  const guides=guideQueue({articles:await readJson(join(site,'articles.json')),drafts:(await readJson(join(site,'editorial-queue.json'))).drafts,
+  const articles=await readJson(join(site,'articles.json'));
+  const guides=guideQueue({articles,drafts:(await readJson(join(site,'editorial-queue.json'))).drafts,
     candidates:await Promise.all(candidateFiles.map(f=>readJson(join(site,'editorial-candidates',f)))),now});
   const queue=socialQueue({index,batches,importedIds:importedFrom(stockOutput),now});
-  const runs=summarizeRuns(env.VSD_REPORT_RUNS?await readJson(env.VSD_REPORT_RUNS):[],now-7*DAY);
+  const allRuns=env.VSD_REPORT_RUNS?await readJson(env.VSD_REPORT_RUNS):[];
+  const runs=summarizeRuns(allRuns,now-7*DAY);
+  // Date of the last commit by which the automatic writer admitted a guide, found by the workflow:
+  // empty when there is none, « unknown » when the search failed. No file, no alert on the writer.
+  const writer=env.VSD_REPORT_LAST_ADMISSION?writerActivity(allRuns,await readFile(env.VSD_REPORT_LAST_ADMISSION,'utf8').catch(()=>'unknown'),now):null;
   // Written by seo-status.mjs just before; absent when the private panel could not be read.
   const seo=env.VSD_REPORT_SEO?await readJson(env.VSD_REPORT_SEO).catch(()=>null):null;
-  const alerts=computeAlerts({social:queue,guides,runs,seo,now});
+  // Kept by the workflow from one run to the next: a single missed reading of the panel is not an alert.
+  const statePath=env.VSD_REPORT_STATE;
+  const reading=statePath?readingState((await readJson(statePath).catch(()=>null))?.publicationReading,seo,now):null;
+  const alerts=computeAlerts({social:queue,guides,runs,seo,articles,writer,reading,now});
   const waiting=(await readJson(join(root,'.github/vsd-control/attente-mathis.json'))).items;
-  const report=renderReport({now,social:queue,guides,pins:await fetchPinterest(now-7*DAY),runs,alerts,waiting,seo});
+  const report=renderReport({now,social:queue,guides,pins:await fetchPinterest(now-7*DAY),runs,alerts,waiting,seo,sources:sourceFreshness(articles,now)});
+  if(statePath){
+    await mkdir(dirname(statePath),{recursive:true});
+    await writeFile(statePath,JSON.stringify({publicationReading:reading})+'\n');
+  }
   const out=env.VSD_REPORT_OUT??root;
   await writeFile(join(out,'vsd-report.md'),report);
   await writeFile(join(out,'vsd-alerts.json'),JSON.stringify(alerts,null,2)+'\n');

@@ -24,6 +24,34 @@ class GroundingTests(unittest.TestCase):
         self.draft['claims'][1]['id']='c1'
         with self.assertRaisesRegex(ValueError,'claim_id'):validate(self.draft,self.sources)
 
+class ProviderAccessTests(unittest.TestCase):
+    """A token the model provider refuses must fail the run; a busy or broken provider only holds it."""
+    def call_with(self,code):
+        import datetime as dt,urllib.error
+        from unittest import mock
+        import source_draft
+        class Opener:
+            def open(self,request,timeout=None):raise urllib.error.HTTPError(request.full_url,code,'refused',None,None)
+        with mock.patch.object(source_draft,'HARD_STOP',dt.datetime(2999,1,1,tzinfo=dt.timezone.utc)), \
+             mock.patch.object(source_draft,'quota_hold',return_value=None), \
+             mock.patch.object(source_draft.urllib.request,'build_opener',return_value=Opener()):
+            return source_draft.call([{'role':'user','content':'x'}],10,'jeton-secret')
+
+    def test_a_refused_or_revoked_token_is_a_setup_failure(self):
+        from source_draft import ProviderAccessError
+        for code in (401,403):
+            with self.subTest(code=code):
+                with self.assertRaises(ProviderAccessError) as raised:self.call_with(code)
+                self.assertEqual(str(raised.exception),'provider_access_refused')
+                self.assertNotIn('jeton-secret',repr(raised.exception))
+
+    def test_other_provider_errors_keep_their_http_error(self):
+        import urllib.error
+        for code in (429,500,503):
+            with self.subTest(code=code):
+                with self.assertRaises(urllib.error.HTTPError) as raised:self.call_with(code)
+                self.assertEqual(raised.exception.code,code)
+
 if __name__=='__main__': unittest.main()
 
 class LedgerTests(unittest.TestCase):

@@ -5,6 +5,7 @@ import json
 import os
 from pathlib import Path
 import sys
+import urllib.error
 import urllib.request
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'site-src'))
@@ -81,6 +82,9 @@ def check_review(review, draft):
     require(not review['supported'] or not review['issues'],'review_contradictory')
     return review
 
+class ProviderAccessError(RuntimeError):
+    """The model provider refused the token (HTTP 401 or 403)."""
+
 def call(messages, max_tokens, token, *, model=MODEL):
     now=dt.datetime.now(dt.timezone.utc)
     require(now<HARD_STOP,'authorization_period_ended')
@@ -93,8 +97,14 @@ def call(messages, max_tokens, token, *, model=MODEL):
     endpoint=f'https://api.cloudflare.com/client/v4/accounts/{ACCOUNT}/ai/run/{model}'
     req=urllib.request.Request(endpoint,data=payload,method='POST',headers={
         'Authorization':'Bearer '+token,'Content-Type':'application/json'})
-    with urllib.request.build_opener(NoRedirect()).open(req,timeout=90) as r:
-        raw=r.read(100001)
+    try:
+        with urllib.request.build_opener(NoRedirect()).open(req,timeout=90) as r:
+            raw=r.read(100001)
+    except urllib.error.HTTPError as error:
+        # A refused or revoked token is a broken setup: it must fail the run, where the callers
+        # hold a guide on any other network error and come out green.
+        if error.code in (401,403):raise ProviderAccessError('provider_access_refused') from None
+        raise
     require(len(raw)<=100000,'response_too_large')
     data=json.loads(raw)
     require(data.get('success') is True,'provider_unsuccessful')

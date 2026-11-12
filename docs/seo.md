@@ -93,7 +93,7 @@ Où lire :
 
 - le **panneau**, bloc « Indexation Google » : pages indexées, pages en attente avec leur état,
   requêtes en hausse ;
-- le **rapport hebdomadaire** (issue `rapport-hebdo` du lundi), section « Référencement Google ».
+- le **rapport hebdomadaire** (issue `rapport-hebdo` de la semaine), section « Référencement Google ».
   `seo-status.mjs` lit le résumé du panneau par un appel signé en lecture seule ; si le panneau ne
   répond pas, le rapport le dit et continue.
 

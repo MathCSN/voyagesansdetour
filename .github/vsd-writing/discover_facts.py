@@ -63,12 +63,17 @@ def rotation(now):
     """
     return int.from_bytes(hashlib.sha256(now.date().isoformat().encode()).digest()[:8],'big')
 
+# The guide travels whole in the prompt, beside three sources, under the 50 000 bytes of source_draft.call.
+GUIDE_BYTES_MAX=18000
+def guide_bytes(article):return len(json.dumps(article,ensure_ascii=False).encode())
+
 def select_guide(articles, now, requested=""):
     if requested:
         matches=[a for a in articles if a.get("slug")==requested and len(eligible_urls(a))>=2 and a.get("category")!="Mises à jour"]
         require(len(matches)==1,"unknown_or_ineligible_guide")
         return matches[0]
-    candidates=[a for a in articles if len(eligible_urls(a))>=2 and a.get('category')!='Mises à jour']
+    # A guide too long for one prompt is left out: it would take a day of the rotation for nothing.
+    candidates=[a for a in articles if len(eligible_urls(a))>=2 and a.get('category')!='Mises à jour' and guide_bytes(a)<GUIDE_BYTES_MAX]
     require(bool(candidates),'no_eligible_guide')
     candidates.sort(key=lambda a:a['slug'])
     return candidates[rotation(now)%len(candidates)]
@@ -172,18 +177,10 @@ def main():
         articles=json.loads((ROOT/'articles.json').read_text())
         article=select_guide(articles,now,os.environ.get("GUIDE_SLUG",""));report['guideSlug']=article['slug']
         existing=json.dumps(article,ensure_ascii=False)
-        require(len(existing.encode())<18000,'existing_guide_too_large')
         report['existingArticleSha256']=hashlib.sha256(existing.encode()).hexdigest()
-        # Independent of the guide choice: the window of three sources also turns from day to day.
-        source_pass=(rotation(now)>>16)%SOURCE_PASSES
-        report['sourceWindowPass']=source_pass
-        report['eligibleSourceCount']=len(eligible_urls(article))
-        sources,skipped=read_sources(article,source_window(article,source_pass),source_fingerprint)
-        report['sources']=[{k:s[k] for k in ('url','sha256','normalizedSha256')} for s in sources]
-        report['skippedSources']=skipped
-        if sources:propose(article,sources,report,out,token)
-        # No readable source today is a hold, not a failure: the guide comes back with the rotation.
-        else:report['status']='held_no_source'
+        # Only reached when the guide is asked for by name: a hold, not a failure of the workflow.
+        if guide_bytes(article)>=GUIDE_BYTES_MAX:report['status']='held_guide_too_large'
+        else:discover(article,report,out,token,now)
         report['limitation']='Discovery within existing official sources, not unrestricted destination research; model critique is not infallible.'
     except Exception as error:
         report.update(status='held_no_retry',errorType=type(error).__name__)
@@ -191,6 +188,19 @@ def main():
     (out/'discovery-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
     print(json.dumps({'status':report['status'],'callsAttempted':report['callsAttempted'],'skippedSources':len(report.get('skippedSources',[]))}))
     return 1 if report['status']=='held_no_retry' else 0
+
+def discover(article,report,out,token,now):
+    """Read today's window of sources and propose facts from those that answered."""
+    # Independent of the guide choice: the window of three sources also turns from day to day.
+    source_pass=(rotation(now)>>16)%SOURCE_PASSES
+    report['sourceWindowPass']=source_pass
+    report['eligibleSourceCount']=len(eligible_urls(article))
+    sources,skipped=read_sources(article,source_window(article,source_pass),source_fingerprint)
+    report['sources']=[{k:s[k] for k in ('url','sha256','normalizedSha256')} for s in sources]
+    report['skippedSources']=skipped
+    if sources:propose(article,sources,report,out,token)
+    # No readable source today is a hold, not a failure: the guide comes back with the rotation.
+    else:report['status']='held_no_source'
 
 def propose(article,sources,report,out,token):
     """Extract, check and review candidate facts from the sources that answered."""

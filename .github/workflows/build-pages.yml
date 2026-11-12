@@ -17,6 +17,10 @@ on:
         description: Deploy the existing reviewed Pin feed after an automated admission
         type: boolean
         default: false
+      republish:
+        description: Deploy the current source again after a deployment was overtaken by a newer commit
+        type: boolean
+        default: false
   schedule:
     - cron: '41 7 * * *'
 
@@ -62,6 +66,7 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
           REVIEWED_MEDIA_REQUESTED: ${{ inputs.publish_reviewed_media }}
           PIN_FEED_REQUESTED: ${{ inputs.publish_pin_feed }}
+          REPUBLISH_REQUESTED: ${{ inputs.republish }}
           INTAKE_CHANGED: ${{ steps.intake.outputs.changed }}
         run: |
           python - <<'PY'
@@ -87,7 +92,9 @@ jobs:
           print('Pin feed reconciliation:', feed_status)
           pin_requested = os.environ['EVENT_NAME'] == 'workflow_dispatch' and os.environ.get('PIN_FEED_REQUESTED') == 'true'
           media_requested = os.environ['EVENT_NAME'] == 'workflow_dispatch' and os.environ.get('REVIEWED_MEDIA_REQUESTED') == 'true'
-          publish = active and (media_requested or changed or pending or pending_updates or intake_changed or source_changed or pin_requested or feed_status['needsDeployment'])
+          # Asked by the deploy job of a run that was overtaken by a newer commit: this main was never published.
+          republish_requested = os.environ['EVENT_NAME'] == 'workflow_dispatch' and os.environ.get('REPUBLISH_REQUESTED') == 'true'
+          publish = active and (media_requested or changed or pending or pending_updates or intake_changed or source_changed or pin_requested or republish_requested or feed_status['needsDeployment'])
           with Path(os.environ['GITHUB_OUTPUT']).open('a') as f:
               f.write('publish=' + str(publish).lower() + '\n')
           PY
@@ -163,6 +170,8 @@ jobs:
       pages: write
       id-token: write
       contents: write
+      # Only to start this same workflow again when main moved during the build.
+      actions: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -176,19 +185,31 @@ jobs:
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: '3.12'
+      # A commit pushed to main since the build is not in this artifact, and the site never goes back in time:
+      # this run deploys nothing. It used to fail there, and a commit outside site-src (docs, workflows), which
+      # triggers no build, left the new guide offline until the next push. It now starts a build of the new main.
       - name: Recheck release validity before deployment
+        id: recheck
         env:
           RELEASE_MANIFEST: ${{ needs.build.outputs.release_manifest }}
+          GH_TOKEN: ${{ github.token }}
         working-directory: site-src
         run: |
           set -euo pipefail
-          test "$(git ls-remote origin refs/heads/main | cut -f1)" = "$(git rev-parse HEAD)"
+          if [ "$(git ls-remote origin refs/heads/main | cut -f1)" != "$(git rev-parse HEAD)" ]; then
+            gh workflow run build-pages.yml --repo "$GITHUB_REPOSITORY" --ref main -f republish=true
+            echo 'overtaken=true' >> "$GITHUB_OUTPUT"
+            echo 'main a avancé pendant la construction : rien n’est déployé ici, une construction du nouveau main est lancée.' >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
           python editorial_queue.py check-window --manifest-json "$RELEASE_MANIFEST"
           python editorial_update.py check
       - name: Deploy tested artifact
+        if: steps.recheck.outputs.overtaken != 'true'
         id: deployment
         uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
       - name: Check public endpoints
+        if: steps.recheck.outputs.overtaken != 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -198,11 +219,13 @@ jobs:
       # Bing, Yandex and the other IndexNow engines learn at once which pages changed.
       # No secret (the key is a public file of the site) and never blocking: Google reads the sitemap dates.
       - name: Tell IndexNow search engines which pages changed
+        if: steps.recheck.outputs.overtaken != 'true'
         continue-on-error: true
         timeout-minutes: 2
         working-directory: site-src
         run: python indexnow.py
       - name: Confirm new pages by their exact HTML hashes
+        if: steps.recheck.outputs.overtaken != 'true'
         env:
           RELEASE_MANIFEST: ${{ needs.build.outputs.release_manifest }}
         working-directory: site-src

@@ -56,6 +56,15 @@ class GuideTests(unittest.TestCase):
             with tempfile.TemporaryDirectory() as tmp, patch.dict(g.os.environ,{'REPORT_DIR':tmp},clear=True), patch.object(g,'quota_hold',return_value=None), patch.object(g,'guide_release_at',return_value=self.now), patch.object(g.guide_photos,'prepare',side_effect=error):
                 self.assertEqual(g.main(),1,error)
                 self.assertTrue(json.loads((Path(tmp)/'guide-report.json').read_text())['setupFailure'])
+    def test_a_token_the_model_refuses_fails_the_workflow_while_a_busy_model_only_holds_the_guide(self):
+        import urllib.error
+        from source_draft import ProviderAccessError
+        busy=urllib.error.HTTPError('https://api.cloudflare.com/client/v4/accounts/x/ai/run/y',429,'Too Many Requests',None,None)
+        for error,code,reason in ((ProviderAccessError('provider_access_refused'),1,'provider_access_refused'),(busy,0,None)):
+            with tempfile.TemporaryDirectory() as tmp, patch.dict(g.os.environ,{'REPORT_DIR':tmp},clear=True), patch.object(g,'quota_hold',return_value=None), patch.object(g,'guide_release_at',return_value=self.now), patch.object(g.guide_photos,'prepare',side_effect=error):
+                self.assertEqual(g.main(),code,error)
+                report=json.loads((Path(tmp)/'guide-report.json').read_text())
+                self.assertEqual((report['setupFailure'],report.get('reason')),(code==1,reason))
     def test_overlong_metadata_is_rejected_before_editorial_review(self):
         self.value['description']='x'*181
         with self.assertRaisesRegex(ValueError,'metadata_length'):

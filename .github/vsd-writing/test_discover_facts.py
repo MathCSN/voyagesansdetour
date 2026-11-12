@@ -133,6 +133,16 @@ class UnreachableSourceTests(unittest.TestCase):
         self.assertEqual(report['callsAttempted'],0)
         calls.assert_not_called()
 
+    def test_a_guide_too_long_for_one_prompt_is_held_without_failing_the_workflow(self):
+        # Asked for by name (GUIDE_SLUG): no source is read, no call is made, and the run stays green.
+        from unittest import mock
+        import discover_facts
+        with mock.patch.object(discover_facts,'GUIDE_BYTES_MAX',50):
+            code,report,calls=self.run_main(set())
+        self.assertEqual((code,report['status'],report['callsAttempted']),(0,'held_guide_too_large',0))
+        self.assertNotIn('sources',report)
+        calls.assert_not_called()
+
     def test_broken_configuration_still_fails_the_workflow(self):
         code,report,_=self.run_main(set(),token='')
         self.assertEqual(code,1)
@@ -142,6 +152,15 @@ class GuideRotationTests(unittest.TestCase):
     def guides(self,count):
         sources=[{'url':'https://www.cp.pt/info/en/w/a'},{'url':'https://www.cp.pt/info/en/w/b'}]
         return [{'slug':f'guide-{i:03d}','sources':sources} for i in range(count)]
+
+    def test_a_guide_too_long_for_one_prompt_never_takes_a_day_of_the_rotation(self):
+        import datetime as dt
+        from discover_facts import select_guide,GUIDE_BYTES_MAX
+        guides=self.guides(5)
+        guides[2]['sections']=[{'paragraphs':['x'*GUIDE_BYTES_MAX]}]
+        start=dt.datetime(2026,11,4,12,tzinfo=dt.timezone.utc)
+        visited={select_guide(guides,start+dt.timedelta(days=day))['slug'] for day in range(60)}
+        self.assertEqual(visited,{'guide-000','guide-001','guide-003','guide-004'})
 
     def test_a_catalogue_growing_every_two_days_never_freezes_the_rotation(self):
         # day % len(catalogue) stayed on the same two guides while one guide was added every two days.
