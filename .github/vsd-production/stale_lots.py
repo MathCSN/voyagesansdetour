@@ -60,11 +60,13 @@ QUOTE_SHOWN = 160
 AROUND = 100   # characters read on each side of a figure, beyond the length of the quote itself
 THOUSANDS = re.compile(r"(?<=\d) (?=\d{3}(?!\d))")
 CELL = " | "                               # between two elements of a page, once folded (plain)
-ROW_END = re.compile(r"\s?\S{0,8}\Z")      # what may follow the last cell of a row in a quote: its unit, nothing else
+ROW_UNIT = 8                               # what may follow the last cell of a row in a quote: its unit, one short word
+START, END = r"(?<![\d,])", r"(?!\d|,\d)"   # a number read whole: no digit or decimal comma on either side
+RANK = r"(?:e(?:r|re|me)?|re|nde?)\b"      # "1er", "1ere", "1re", "2e", "2eme", "2nd", "2nde", and the "E" of "tram 15E"
 # A number, never an ordinal: "2e classe", "1er dimanche" and "tram 15E" are read apart (ORDINAL).
-NUMBER = re.compile(r"(?<![\d,])\d+(?:,\d+)?(?!\d|,\d)(?!(?:er|ere|re|e|eme|nd|nde)\b)")
-ORDINAL = re.compile(r"(?<![\d,])\d+(?:er|ere|re|e|eme|nd|nde)\b")
-GROUPED = re.compile(r"(?<![\d,])\d{1,3}(?: \d{3})+(?:,\d+)?(?!\d|,\d)")
+NUMBER = re.compile(START + r"\d+(?:,\d+)?" + END + r"(?!" + RANK + r")")
+ORDINAL = re.compile(START + r"\d+" + RANK)
+GROUPED = re.compile(START + r"\d{1,3}(?: \d{3})+(?:,\d+)?" + END)
 # How a guide may write the first ordinals in full: "2e classe" and "seconde classe" say the same.
 IN_FULL = {"1": ("premier", "premiere"), "2": ("second", "seconde", "deuxieme"), "3": ("troisieme",), "4": ("quatrieme",),
            "5": ("cinquieme",), "6": ("sixieme",), "7": ("septieme",), "8": ("huitieme",), "9": ("neuvieme",), "10": ("dixieme",)}
@@ -103,7 +105,8 @@ def readings(excerpt: str) -> tuple[Counter, dict[str, tuple[str, str]]]:
     for group in GROUPED.finditer(quote):
         number, pieces = group[0].replace(" ", ""), group[0].split(" ")
         counts[number] += 1
-        labelled = re.search(r"[^\W\d]\W*\Z", quote[:group.start()]) and ROW_END.match(quote, group.end())
+        unit = quote[group.end():].strip()
+        labelled = re.search(r"[^\W\d]\W*\Z", quote[:group.start()]) and len(unit) <= ROW_UNIT and " " not in unit
         if len(pieces) == 2 and not pieces[1].startswith("0") and labelled:
             rows[number] = (pieces[0], pieces[1])
     counts.update(NUMBER.findall(folded(GROUPED.sub(" ", quote))))
@@ -117,19 +120,19 @@ def ordinals(excerpt: str) -> list[str]:
 
 def whole(number: str) -> re.Pattern:
     """The number read whole: "30" is neither in "30 000" nor in "1,30"."""
-    return re.compile(r"(?<![\d,])" + re.escape(number) + r"(?!\d|,\d)(?!(?:er|ere|re|e|eme|nd|nde)\b)")
+    return re.compile(START + re.escape(number) + END + r"(?!" + RANK + r")")
 
 
 def ordinal(token: str) -> re.Pattern:
     """That ordinal as the page may write it: the same rank in figures ("1er", "1re"), or in full for the first ten."""
     rank = re.match(r"\d+", token)[0]
     in_full = "|".join(IN_FULL.get(rank, ()))
-    return re.compile(r"(?<![\d,])" + rank + r"(?:er|ere|re|e|eme|nd|nde)\b" + (rf"|\b(?:{in_full})\b" if in_full else ""))
+    return re.compile(START + rank + RANK + (rf"|\b(?:{in_full})\b" if in_full else ""))
 
 
 def in_cells(first: str, second: str) -> re.Pattern:
     """Two numbers as a row gives them: the first in one element of the page, the second opening the next one."""
-    return re.compile(r"(?<![\d,])" + re.escape(first) + r"(?!\d|,\d)[^|]*" + re.escape(CELL) + re.escape(second) + r"(?!\d|,\d)")
+    return re.compile(START + re.escape(first) + END + r"[^|]*" + re.escape(CELL) + re.escape(second) + END)
 
 
 def numbers_gone(excerpt: str, page: str) -> list[str]:
