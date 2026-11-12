@@ -1,4 +1,4 @@
-import json,html,pathlib,datetime,os,shutil,sys,unicodedata
+import functools,json,html,pathlib,datetime,os,shutil,sys,unicodedata
 import xml.etree.ElementTree as ET
 from email.utils import format_datetime
 from urllib.parse import urlparse
@@ -22,6 +22,8 @@ MENTIONS_FILE=pathlib.Path(os.environ.get('SITE_MENTIONS') or ROOT/'mentions.jso
 SEO_FILE=pathlib.Path(os.environ.get('SITE_SEO') or ROOT/'seo.json')
 # Google coupe un titre vers 60 caractères et une description vers 160 : au-delà, l'accroche est perdue.
 TITLE_MAX=60
+# L'en-tête d'un JPEG sans métadonnées tient dans ses premiers octets.
+JPEG_HEADER_BYTES=262144
 # Une page pays, continent ou rubrique de moins de trois guides répète surtout ses guides : elle reste en
 # ligne, liens suivis, mais sort de l'index et du plan du site jusqu'à son troisième guide.
 HUB_MIN_GUIDES=3
@@ -153,8 +155,23 @@ SHARE_IMAGES={
     'guimaraes':('guimaraes-cover.png',1600,900,'image/png'),
 }
 # Photos libres du dossier photos/ : fichier 1600 px et variante 800 px pour les cartes et le mobile.
+@functools.lru_cache(maxsize=None)
+def jpeg_size(path):
+    """Largeur et hauteur réelles d'un JPEG, lues dans son en-tête ; None si ce n'en est pas un."""
+    try:
+        with open(path,'rb') as file:data=file.read(JPEG_HEADER_BYTES)
+    except OSError:return None
+    position=2
+    while data[:2]==b'\xff\xd8' and position+9<=len(data) and data[position]==0xFF:
+        marker=data[position+1]
+        if marker in (0xC0,0xC1,0xC2):return int.from_bytes(data[position+7:position+9],'big'),int.from_bytes(data[position+5:position+7],'big')
+        position+=2+int.from_bytes(data[position+2:position+4],'big')
+    return None
+# Wikimedia ne sert que des tailles standard : une photo demandée en 1 600 px en fait souvent 1 920, et sa
+# copie « -800 » 960. La taille publiée (balise img, srcset, Open Graph, JSON-LD) est celle du fichier ;
+# celle du catalogue ne sert que si le fichier est illisible.
 for key,p in photos.items():
-    if 'file' in p:SHARE_IMAGES[key]=(p['file'],p['width'],p['height'],'image/jpeg')
+    if 'file' in p:SHARE_IMAGES[key]=(p['file'],*(jpeg_size(str(STATIC/'assets'/p['file'])) or (p['width'],p['height'])),'image/jpeg')
 try:PLACES=places.load()
 except (OSError,ValueError,TypeError,KeyError) as error:sys.exit(f'destinations.json : {error}')
 # Rubriques par type de guide : (identifiant, nom, accroche, catégories, expressions du titre ou du slug).
@@ -240,7 +257,10 @@ def img(key,cls='',lazy=True,sizes='(max-width:700px) 100vw, 50vw'):
     # Copies plus légères trouvées à côté de la photo (800 px du catalogue, 400 et 1 200 px créées au
     # déploiement par photo_variants.py) : le navigateur prend la plus petite qui suffit à l'écran.
     stem=filename.removesuffix('.jpg')
-    lighter=[(w,f'{stem}-{w}.jpg') for w in VARIANT_WIDTHS if filename.endswith('.jpg') and w<width and (STATIC/'assets'/f'{stem}-{w}.jpg').is_file()]
+    copies=[(w,STATIC/'assets'/f'{stem}-{w}.jpg') for w in VARIANT_WIDTHS if filename.endswith('.jpg')]
+    # Largeur réelle de chaque copie (son nom n'en donne qu'une valeur nominale), triée, toujours sous celle de l'original.
+    lighter=sorted({((jpeg_size(str(path)) or (w,))[0],path.name) for w,path in copies if path.is_file()})
+    lighter=[(w,f'{stem.rsplit("/",1)[0]+"/" if "/" in stem else ""}{name}') for w,name in lighter if w<width]
     srcset=' srcset="'+', '.join(f'/assets/{name} {w}w' for w,name in lighter)+f', /assets/{filename} {width}w" sizes="{sizes}"' if lighter else ''
     return f'<img class="{cls}" src="/assets/{filename}"{srcset} alt="{e(image["caption"])}" width="{width}" height="{height}" {"loading=lazy" if lazy else "fetchpriority=high"} decoding="async">'
 def credit(key):
@@ -257,11 +277,11 @@ def has_rubrique(a,key):return key in [r[0] for r in rubriques(a)]
 active_rubriques=[r for r in RUBRIQUES if any(has_rubrique(a,r[0]) for a in articles)]
 theme_links=''.join(f'<a href="/guides/{r[0]}/">{e(r[1])}</a>' for r in active_rubriques)
 continent_links=''.join(f'<a href="/{key}/">{e(value["short"])}</a>' for key,value in CONTINENTS.items())
-header=f'''<a class="skip" href="#contenu">Aller au contenu</a><div class="topline">DES GUIDES DE VOYAGE DIRECTS · DES PRIX RELEVÉS ET DATÉS · DES PHOTOS DES VRAIS LIEUX</div><div class="wrap"><header class="header"><a class="brand" href="/" aria-label="Voyage sans détour, accueil"><small>VOYAGE</small> <span>sans détour.</span></a><nav class="nav" aria-label="Navigation principale">{continent_links}<a href="/guides/">Guides</a><a href="/destinations/">Destinations</a></nav></header>'''
+header=f'''<a class="skip" href="#contenu">Aller au contenu</a><div class="topline">DES GUIDES DE VOYAGE DIRECTS · DES PRIX RELEVÉS ET DATÉS · DES PHOTOS DES VRAIS LIEUX</div><div class="wrap"><header class="header"><a class="brand" href="/" aria-label="Voyage sans détour, accueil"><small>VOYAGE</small> <span>sans détour.</span></a><nav class="nav" aria-label="Navigation principale">{continent_links}<a class="nav-main" href="/guides/">Guides</a><a class="nav-main" href="/destinations/">Destinations</a></nav></header>'''
 header+=AFF.preview_banner
 shorts_link='<a href="/formats-courts/">Formats courts</a>' if SHOW_SHORTS else ''
 audience_settings='<button type="button" class="audience-settings" data-audience-settings hidden>Gérer la mesure d’audience</button>' if ANALYTICS_ACTIVE else ''
-audience_panel='''<section id="audience-choice" class="audience-choice" aria-labelledby="audience-title" hidden><p id="audience-title" class="audience-title"><strong>La mesure d’audience, à votre choix</strong></p><p>Avec votre accord, Google Analytics utilise des cookies pour compter les visites et comprendre les pages consultées. Aucune publicité personnalisée. Refuser ne change pas votre accès au blog.</p><p id="audience-status" role="status">Aucune mesure d’audience sans votre accord.</p><div class="audience-actions"><button type="button" data-audience-refuse>Tout refuser</button><button type="button" data-audience-accept>Accepter la mesure d’audience</button></div><p><a href="/confidentialite/">Données, destinataires et durées</a> · Choix conservé 180 jours. Retrait possible dans « Gérer la mesure d’audience » en bas de chaque page.</p></section>''' if ANALYTICS_ACTIVE else ''
+audience_panel='''<section id="audience-choice" class="audience-choice" aria-labelledby="audience-title" hidden><p id="audience-title" class="audience-title"><strong>La mesure d’audience, à votre choix</strong></p><p>Avec votre accord, Google Analytics utilise des cookies pour compter les visites et comprendre les pages consultées. Aucune publicité personnalisée. Refuser ne change pas votre accès au blog.</p><p id="audience-status" role="status">Aucune mesure d’audience sans votre accord.</p><div class="audience-actions"><button type="button" data-audience-refuse>Tout refuser</button><button type="button" data-audience-accept>Accepter la mesure d’audience</button></div><p><a href="/confidentialite/">Données, destinataires et durées</a><span class="audience-more"> · Choix conservé 180 jours. Retrait possible dans « Gérer la mesure d’audience » en bas de chaque page.</span></p></section>''' if ANALYTICS_ACTIVE else ''
 footer=f'''<footer class="footer"><div class="footer-top"><a class="brand" href="/"><small>VOYAGE</small><span>sans détour.</span></a><div class="footer-links"><a href="/destinations/">Toutes les destinations</a><a href="/carnet/">Mon carnet de départ</a><a href="/a-propos/">À propos</a><a href="/transparence/">Transparence</a>{shorts_link}<a href="/credits/">Crédits photos</a><a href="{PINTEREST_URL}" rel="me">Pinterest</a><a href="{INSTAGRAM_URL}" rel="me">Instagram</a></div></div><small>© 2026 {BRAND} · <a href="/methode/">Notre méthode et nos sources</a> · <a href="mailto:{CONTACT}">Contact</a> · <a href="/confidentialite/">Confidentialité</a> · <a href="/mentions-legales/">Mentions légales</a> {audience_settings}</small></footer></div>'''
 footer=footer.replace('<small>©',f'<nav class="footer-themes" aria-label="Guides par thème"><span>Guides par thème</span>{theme_links}</nav><small>©',1)
 icons='<link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48"><link rel="icon" type="image/png" sizes="96x96" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">'
@@ -284,7 +304,7 @@ def page(path,title,description,content,schema=None,noindex=False,share_image='b
     if not noindex:pages.append(path)
 def card(a,lead=False):
     search=' '.join([a['title'],a['description'],a['category'],a['destination'],place(a)['name']]+[r[1] for r in rubriques(a)])
-    return f'''<a class="card{' card-lead' if lead else ''}" href="{uri(a)}" data-destination="{e(a['destination'])}" data-search="{e(search)}"><div class="card-image">{img(photo(a),sizes='(max-width:700px) 100vw, 33vw')}<span class="tag">{e(a['destination'])}</span></div><span class="meta">{e(a['category'].upper())} · {a['readMinutes']} MIN DE LECTURE</span><h3>{e(a['shortTitle'])}</h3><p>{e(a['description'])}</p></a>'''
+    return f'''<a class="card{' card-lead' if lead else ''}" href="{uri(a)}" data-destination="{e(a['destination'])}" data-country="{e(place(a)['name'])}" data-themes="{e('|'.join(r[1] for r in rubriques(a)))}" data-search="{e(search)}"><div class="card-image">{img(photo(a),sizes='(max-width:700px) 100vw, 33vw')}<span class="tag">{e(a['destination'])}</span></div><span class="meta">{e(a['category'].upper())} · {a['readMinutes']} MIN DE LECTURE</span><h3>{e(a['shortTitle'])}</h3><p>{e(a['description'])}</p></a>'''
 def trail_to(slug):
     info=COUNTRY[slug];steps=[('Accueil','/')]
     if info['continent']:steps.append((CONTINENTS[info['continent']]['name'],'/'+info['continent']+'/'))
@@ -321,12 +341,14 @@ def hero(cover,eyebrow,title,intro):
     picture=img(cover,'hero-photo',lazy=False,sizes=WIDE_SIZES) if is_photo(cover) else ''
     return f'''<section class="country-hero{'' if picture else ' no-photo'}">{picture}<div class="country-copy"><span class="eyebrow">{eyebrow}</span><h1>{e(title)}</h1><p>{e(intro)}</p></div></section>{credit(cover) if picture else ''}'''
 hub_dates={}
-def hub_page(path,title,description,steps,hero_html,selected,filters,cover,extra='',heading='Tous les guides'):
+def hub_page(path,title,description,steps,hero_html,selected,filters,cover,extra='',heading='Tous les guides',filter_by='destination'):
+    # filter_by : le champ exact des cartes que comparent les boutons (destination, country ou theme) ; site.js.
+    # La recherche libre, elle, porte sur tout le texte de la carte.
     nav,trail_data=crumbs(steps)
     buttons=''.join(f'<button class="filter" aria-pressed="false" data-filter="{e(n)}">{e(n)}</button>' for n in filters) if len(filters)>1 else ''
     schema=[trail_data,{'@context':'https://schema.org','@type':'ItemList','name':steps[-1][0],'itemListElement':[{'@type':'ListItem','position':i+1,'url':ORIGIN+uri(a),'name':a['title']} for i,a in enumerate(selected)]}]
     count=f'{guides_label(len(selected))} pour préparer votre séjour'
-    page(path,title_tag(title),description,f'''{nav}{hero_html}<section class="section" id="guides" style="padding-top:30px"><h2 class="grid-title">{e(heading)}</h2><div class="filters" aria-label="Rechercher un guide"><label class="sr-only" for="search">Rechercher un guide</label><input type="search" id="search" placeholder="Une ville, un pays, une envie…"><button class="filter" aria-pressed="true" data-filter="Tous">Tous</button>{buttons}</div><p class="result-count" id="result-count" aria-live="polite">{count}</p><div class="grid" id="guide-grid">{''.join(card(a) for a in selected)}</div><p class="empty" id="empty" hidden>Aucun guide ne correspond. Essayez « itinéraire », « budget » ou une autre destination.</p></section>{extra}''',schema,noindex=len(selected)<HUB_MIN_GUIDES,share_image=cover)
+    page(path,title_tag(title),description,f'''{nav}{hero_html}<section class="section" id="guides" style="padding-top:30px"><h2 class="grid-title">{e(heading)}</h2><div class="filters" aria-label="Rechercher un guide"><label class="sr-only" for="search">Rechercher un guide</label><input type="search" id="search" placeholder="Une ville, un pays, une envie…"><button class="filter" aria-pressed="true" data-filter="Tous">Tous</button>{buttons}</div><p class="result-count" id="result-count" aria-live="polite">{count}</p><div class="grid" id="guide-grid" data-filter-by="{filter_by}">{''.join(card(a) for a in selected)}</div><p class="empty" id="empty" hidden>Aucun guide ne correspond. Essayez « itinéraire », « budget » ou une autre destination.</p></section>{extra}''',schema,noindex=len(selected)<HUB_MIN_GUIDES,share_image=cover)
     hub_dates[path]=max(article_date(a,'updatedOn') for a in selected)
 BRIEF_MAX=6
 BRIEF_FACTS=3
@@ -359,14 +381,14 @@ def continent_page(key):
     tiles=f'''<section class="section" style="padding-bottom:0"><div class="section-head"><div><span class="eyebrow">{len(slugs)} pays {e(info["preposition"])}</span><h2>Choisir son pays.</h2></div></div><div class="destinations destinations-compact">{''.join(country_tile(s) for s in slugs)}</div></section>'''
     digest=''.join(f'''<article class="brief"><h3><a href="/{s}/">{flag(s)} {e(COUNTRY[s]['name'])}</a></h3><p>{e(country_intro(s))}</p><p class="brief-links">{' · '.join(f'<a href="{uri(a)}">{e(a["shortTitle"])}</a>' for a in in_country(s))}</p></article>''' for s in slugs)
     tiles+=f'''<section class="section country-brief" aria-labelledby="par-pays"><div class="section-head"><div><span class="eyebrow">Pays par pays</span><h2 id="par-pays">Nos guides {e(info["preposition"])}.</h2></div></div><div class="briefs">{digest}</div></section>'''
-    hub_page(f'/{key}/',f'{info["name"]} : guides de voyage par pays',intro,[('Accueil','/'),(info['name'],f'/{key}/')],hero(cover,f'Continent · {guides_label(len(selected))}',f'Voyager {info["preposition"]}.',intro)+tiles,selected,[COUNTRY[s]['name'] for s in slugs],cover,heading=f'Tous nos guides {info["preposition"]}')
+    hub_page(f'/{key}/',f'{info["name"]} : guides de voyage par pays',intro,[('Accueil','/'),(info['name'],f'/{key}/')],hero(cover,f'Continent · {guides_label(len(selected))}',f'Voyager {info["preposition"]}.',intro)+tiles,selected,[COUNTRY[s]['name'] for s in slugs],cover,heading=f'Tous nos guides {info["preposition"]}',filter_by='country')
 def theme_chips(current=''):
     chips=''.join(f'<a class="chip" href="/guides/{r[0]}/">{e(r[1])} <small>{len(in_rubrique(r[0]))}</small></a>' for r in active_rubriques if r[0]!=current)
     return f'''<section class="section continent-block"><div class="section-head"><div><span class="eyebrow">Par thème</span><h2>{'Les autres rubriques.' if current else 'Choisir par envie.'}</h2></div></div><div class="chips">{chips}</div></section>'''
 def rubrique_page(r):
     selected=in_rubrique(r[0]);cover=cover_of(selected)
     intro=f'{r[2]} {guides_label(len(selected))}, partout dans le monde.'
-    hub_page(f'/guides/{r[0]}/',f'{r[1]} : nos guides de voyage',intro,[('Accueil','/'),('Guides','/guides/'),(r[1],f'/guides/{r[0]}/')],hero(cover,f'Rubrique · {guides_label(len(selected))}',r[1]+'.',intro),selected,[COUNTRY[s]['name'] for s in dict.fromkeys(country(a) for a in selected)],cover,theme_chips(r[0]),f'{r[1]} : tous les guides')
+    hub_page(f'/guides/{r[0]}/',f'{r[1]} : nos guides de voyage',intro,[('Accueil','/'),('Guides','/guides/'),(r[1],f'/guides/{r[0]}/')],hero(cover,f'Rubrique · {guides_label(len(selected))}',r[1]+'.',intro),selected,[COUNTRY[s]['name'] for s in dict.fromkeys(country(a) for a in selected)],cover,theme_chips(r[0]),f'{r[1]} : tous les guides',filter_by='country')
 def published(a):return article_date(a,'publishedOn')
 latest=sorted(articles,key=lambda a:(published(a),articles.index(a)),reverse=True)
 country_order=list(dict.fromkeys(country(a) for a in latest))
@@ -394,7 +416,7 @@ page('/',BRAND+' : blog voyage, guides directs et chiffrés',f'Itinéraires, bud
 for slug in country_order:country_page(slug)
 for key in CONTINENTS:continent_page(key)
 for r in active_rubriques:rubrique_page(r)
-hub_page('/guides/','Tous nos guides de voyage',f'{guides_label(len(articles))} de voyage directs et chiffrés, dans {len(COUNTRY)} pays : itinéraires, budget, quand partir, où dormir.',[('Accueil','/'),('Guides','/guides/')],f'<div class="page-heading"><span class="eyebrow">{guides_label(len(articles))} · {len(COUNTRY)} pays</span><h1>Tous nos guides.</h1><p>Itinéraires, budget, quand partir, où dormir : cherchez par ville, par pays ou par envie.</p></div>',latest,[r[1] for r in active_rubriques],'brand',theme_chips(),'Rechercher un guide')
+hub_page('/guides/','Tous nos guides de voyage',f'{guides_label(len(articles))} de voyage directs et chiffrés, dans {len(COUNTRY)} pays : itinéraires, budget, quand partir, où dormir.',[('Accueil','/'),('Guides','/guides/')],f'<div class="page-heading"><span class="eyebrow">{guides_label(len(articles))} · {len(COUNTRY)} pays</span><h1>Tous nos guides.</h1><p>Itinéraires, budget, quand partir, où dormir : cherchez par ville, par pays ou par envie.</p></div>',latest,[r[1] for r in active_rubriques],'brand',theme_chips(),'Rechercher un guide',filter_by='theme')
 unclassified=[s for s in country_order if not COUNTRY[s]['continent']]
 continent_sections=''.join(f'''<section class="section continent-block"><div class="section-head"><div><span class="eyebrow">{guides_label(len(in_continent(key)))}</span><h2><a href="/{key}/">{e(value["name"])}</a></h2></div><a class="text-link" href="/{key}/">Voyager {e(value["preposition"])} ↗</a></div><div class="destinations destinations-compact">{''.join(country_tile(s) for s in country_order if COUNTRY[s]['continent']==key)}</div></section>''' for key,value in CONTINENTS.items())
 if unclassified:continent_sections+=f'''<section class="section continent-block"><div class="section-head"><div><span class="eyebrow">{guides_label(sum(len(in_country(s)) for s in unclassified))}</span><h2>Autres destinations</h2></div></div><div class="destinations destinations-compact">{''.join(country_tile(s) for s in unclassified)}</div></section>'''

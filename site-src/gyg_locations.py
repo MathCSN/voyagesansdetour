@@ -106,18 +106,25 @@ def save(path: Path, cache: dict) -> None:
 
 # --- résolution --------------------------------------------------------------------------
 
-def needed(articles: list, countries: dict) -> dict:
+def guide_places(root: Path = ROOT) -> dict:
+    """Lieux de remplacement par guide (clé « places » d'affiliates.json), comme les lit le site."""
+    return affiliates.load_config(root / 'affiliates.json').get('places', {})
+
+
+def needed(articles: list, countries: dict, places: dict | None = None) -> dict:
     """Tous les lieux que les guides peuvent lier : {clé: (lieu, nom du pays)}."""
+    places = guide_places() if places is None else places
     result = {}
     for article in articles:
         country_name, _ = affiliates.country_of(article, countries)
-        for place in affiliates.places_for(article, articles, country_name) + affiliates.title_places(article, country_name):
+        linked = affiliates.places_for(article, articles, country_name, places.get(article.get('slug')))
+        for place in linked + affiliates.title_places(article, country_name):
             result.setdefault(place.key, (place.name, country_name))
     return result
 
 
-def needed_keys(articles: list, countries: dict) -> set:
-    return set(needed(articles, countries))
+def needed_keys(articles: list, countries: dict, places: dict | None = None) -> set:
+    return set(needed(articles, countries, places))
 
 
 def is_settled(entry: dict | None, today: str) -> bool:

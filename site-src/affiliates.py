@@ -28,6 +28,13 @@ LOCATION_PATTERN = re.compile(r'[a-z0-9]+(?:-[a-z0-9]+)*-l[0-9]+')
 ID_PATTERN = re.compile(r'[A-Za-z0-9._~-]{1,80}')
 PARTNER_KEYS = {'key', 'name', 'category', 'engine', 'enabled', 'id', 'template', 'domains', 'signup', 'commission'}
 CONFIG_KEYS = {'schema_version', 'max_links_per_guide', 'partners'}
+# Clé facultative « places » : le lieu des liens d'un guide dont la destination est une région mais qui
+# parle d'une ville précise ({"laponie-budget-rovaniemi": "Rovaniemi"}). « Laponie, Finlande » est géocodé
+# au milieu de la région, à 160 km de Rovaniemi. Le guide lui-même n'est pas modifié : son empreinte lie
+# ses posts et ses reçus.
+OPTIONAL_CONFIG_KEYS = {'places'}
+GUIDE_SLUG = re.compile(r'[a-z0-9]+(?:-[a-z0-9]+){0,30}')
+PLACE_NAME = re.compile(r"[^\W\d_][\w '’.-]{0,59}")
 
 # Expressions cherchées dans le texte normalisé du guide (minuscules, sans accents).
 # « billet » et « réserver » servent aussi aux trains et aux trams : ils ne signalent pas une visite.
@@ -132,8 +139,12 @@ def validate_template(partner: dict) -> None:
 
 
 def validate_config(config: dict) -> dict:
-    if not isinstance(config, dict) or set(config) != CONFIG_KEYS or config['schema_version'] != 1:
+    if not isinstance(config, dict) or set(config) - OPTIONAL_CONFIG_KEYS != CONFIG_KEYS or config['schema_version'] != 1:
         raise ValueError('Partenaires : configuration incomplète ou version invalide.')
+    places = config.get('places', {})
+    if not isinstance(places, dict) or not all(isinstance(slug, str) and GUIDE_SLUG.fullmatch(slug) and isinstance(name, str)
+                                               and PLACE_NAME.fullmatch(name) for slug, name in places.items()):
+        raise ValueError('Partenaires : table « places » invalide (identifiant de guide → nom de lieu).')
     limit = config['max_links_per_guide']
     if type(limit) is not int or not 1 <= limit <= MAX_LINKS:
         raise ValueError(f'Partenaires : 1 à {MAX_LINKS} liens par guide.')
@@ -182,10 +193,10 @@ def place_key(name: str, article: dict) -> str:
     return slugify(name) + '|' + article.get('country', 'portugal')
 
 
-def places_for(article: dict, catalogue: list, country_name: str) -> tuple:
+def places_for(article: dict, catalogue: list, country_name: str, override: str | None = None) -> tuple:
     destination = str(article['destination'])
-    names = [destination]
-    if normalize(destination) == normalize(country_name):
+    names = [override or destination]
+    if not override and normalize(destination) == normalize(country_name):
         title = normalize(article.get('title', ''))
         same = {str(o['destination']) for o in catalogue if o.get('country', 'portugal') == article.get('country', 'portugal')}
         found = sorted((title.find(normalize(d)), d) for d in same
@@ -300,7 +311,7 @@ class Site:
         sections = article.get('sections', [])
         texts = [section_text(s) for s in sections]
         country_name, continent = country_of(article, self.countries)
-        places = places_for(article, catalogue, country_name)
+        places = places_for(article, catalogue, country_name, self.config.get('places', {}).get(article['slug']))
         fallback = title_places(article, country_name)
         campaign = stay22.campaign_for(self.stay22, article['slug'])
         budget, boxes = self.config['max_links_per_guide'], []
