@@ -48,6 +48,8 @@ MONTHS = "janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|n
 # "(octobre 2026)". Not a period ("du 2 novembre au 31 décembre 2026") nor a start ("depuis janvier 2026").
 OWN_DATE = re.compile(rf"\brelevée?s? (?:en |de |d’|d'|le |du |au )((?:\d{{1,2}}(?:er)? )?(?:{MONTHS}) 20\d\d)"
                       rf"|\((?:[^()]*, )?((?:{MONTHS}) 20\d\d)\)", re.IGNORECASE)
+# "(novembre 2026)" after an opening, a festival or a deadline dates that event, not the day the figure was read.
+EVENT = re.compile(r"\b(?:ouvertures?|réouvertures?|inaugurations?|festivals?|fêtes?|carnavals?|éditions?|prévue?s?)\b", re.IGNORECASE)
 SOURCES_READ = re.compile(r"sources du (\d\d)/(\d\d)/(20\d\d)\Z")
 TAG_MAX = 52
 
@@ -115,7 +117,10 @@ def in_enumeration(label: str, cut: int) -> bool:
     the middle of a list. A comma after a long clause ('…et 13 nuits (154 120 ¥), capsule ou dortoir') is a pause."""
     before = re.split(r", | et | ou ", label[:cut])[-1]
     after = re.split(r", | et | ou ", label[cut + 2:], maxsplit=1)
-    return len(before.split()) <= 3 and len(after) == 2 and len(after[0].split()) <= 3
+    if len(after) < 2 or len(after[0].split()) > 3:
+        return False
+    # "…de la Bahia, des tombeaux saadiens ou d’El Badi": the item after the comma carries on a list of "de …".
+    return len(before.split()) <= 3 or bool(re.match(r"(?:des?|du) |d[’']", after[0]) and re.search(r"\b(?:des?|du) |\bd[’']", before))
 
 
 def short_label(label: str, limit: int = SHORT_LABEL) -> str:
@@ -169,6 +174,8 @@ def dated_tag(fact: dict, tag: str) -> str:
     match = OWN_DATE.search(fact["label"])
     # "(mars, avril 2026)" names two months: a period, not the date the figure was read.
     if not match or (match[2] and re.search(rf"\b(?:{MONTHS})\b", match[0][:match.start(2) - match.start()], re.IGNORECASE)):
+        return tag
+    if match[2] and EVENT.search(fact["label"]):
         return tag
     date = (match[1] or match[2]).lower()
     # A figure is never read after the guide's sources were: "ouverture prévue (décembre 2026)" in a guide read in
@@ -284,13 +291,14 @@ PLACE_KINDS = frozenset("tour tours villa villas ville villes village villages m
                         "quartier quartiers gare gares port ports centre monument monuments".split())
 
 
-def words_shown(photo: tuple, target: set[str], family: str | None = None) -> int:
+def words_shown(photo: tuple, target: set[str], family: str | None = None, kinds: bool = False) -> int:
     """How many of these words the photo's caption, its Commons title and its identifier carry. `family`: the prefix
-    all the photos of the post share says nothing of what one of them shows ("amalfi-positano" is a photo of Positano)."""
+    all the photos of the post share says nothing of what one of them shows ("amalfi-positano" is a photo of Positano).
+    `kinds`: a kind of place shared alone counts too (for the photo the guide itself put beside that text)."""
     prefix, _, rest = photo[0].partition("-")
     described = " ".join([(rest if prefix == family else photo[0]).replace("-", " "), photo[2], str(photo[1].get("commonsTitle", ""))])
     shared = target & words_of(described)
-    return len(shared) if shared - PLACE_KINDS else 0
+    return len(shared) if kinds or shared - PLACE_KINDS else 0
 
 
 class Media:
@@ -352,7 +360,9 @@ class Media:
         pool = self.free()
         own = next((ph for ph in pool if ph[0] == wanted), None)
         best = max(pool, key=shared, default=None)
-        if own and (best is None or shared(own) or not shared(best)):
+        # The guide put its own photo beside this text: a kind of place the two share ("Le pont en métro" and the photo
+        # of the bridge) is proof enough for that photo, and for no other.
+        if own and (best is None or words_shown(own, target, self.family, kinds=True) or not shared(best)):
             return own
         return best if best is not None and shared(best) else None
 
@@ -370,12 +380,14 @@ class Media:
 
     def closing(self, required: bool = True) -> tuple[str, str]:
         """The picture under the call to action: one that stands for the place, a photo marked `emblematic` by hand
-        or one the guide itself shows. Never a detail kept for one plan (a hut, a dog team) nor a file found by the
-        search: `required`, the post waits for such a photo; otherwise any photo left will do (a carousel)."""
+        or one the guide itself shows. Never a detail kept for one plan (a hut, a dog team): `required`, the post
+        waits for such a photo; otherwise any photo a person looked at will do (a carousel). Never a file found by
+        the search."""
         pick = next((ph for wanted in self.emblematic for ph in self.photos if ph[0] == wanted), None)
-        if not pick and (required or not self.photos):
+        seen = [ph for ph in self.photos if ph[0] not in self.found]
+        if not pick and (required or not seen):
             raise Held("no_emblematic_photo_for_the_call")
-        pick = pick or self.photos[0]
+        pick = pick or seen[0]
         self.photos.remove(pick)
         return ("photo", pick[0])
 

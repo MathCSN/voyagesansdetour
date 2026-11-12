@@ -10,7 +10,7 @@ import unittest
 from unittest import mock
 from zoneinfo import ZoneInfo
 
-from PIL import Image, ImageChops
+from PIL import Image
 
 import auto_social as a
 import clip_intake
@@ -690,6 +690,13 @@ class PhotoIntakeTests(unittest.TestCase):
         self.assertFalse(refuse("File:Aurora borealis over Saana fell.jpg", recent))
         self.assertFalse(refuse("File:Santa Maria in Trastevere church in Rome (12).jpg", {"Categories": {"value": "Interior of Santa Maria in Trastevere"}}))
         self.assertFalse(refuse("File:Lisbon Praça do Comércio BW 2018-10-03 13-29-10.jpg", {}))
+        # A photograph of a tram that carries an advert is filed under "advertisements on trams": still a photograph.
+        tram = {"DateTimeOriginal": {"value": "2014-10-22 11:00"}, "Categories": {"value": "Taken with Sony SLT-A55V|Oporto trams in 2014|Coca-Cola advertisements on trams in Porto"}}
+        self.assertFalse(refuse("File:2014-P53 Porto (15088676433).jpg", tram))
+        self.assertTrue(refuse("File:Porto.jpg", {"Categories": {"value": "Advertisements in Porto"}}))
+        self.assertTrue(refuse("File:Port wine advertisement.jpg", {}))
+        self.assertTrue(refuse("File:Advertisement on a magazine page.jpg", {}))
+        self.assertTrue(refuse("File:Lisbon.jpg", {"Categories": {"value": "Ads on walls in Lisbon"}}))
         self.assertTrue(photo_intake.unphotographic_record({"commonsTitle": "File:Santa Claus - Sunkist Ad (1928).jpg", "categories": "Sunkist advertisements"}))
         self.assertFalse(photo_intake.unphotographic_record({"commonsTitle": "File:Teide Canadas.jpg", "categories": "Teide"}))
 
@@ -1020,7 +1027,14 @@ class ShownTests(unittest.TestCase):
         self.assertEqual(dated("la haute saison des baleines (mars, avril 2026)"), tag)  # two months: a period
         # A figure is never read after the guide's sources were: a later month is an opening or an event, not a reading.
         self.assertEqual(dated("l’entrée du nouveau musée, ouverture prévue (décembre 2026)"), tag)
-        self.assertEqual(dated("l’entrée du festival des lanternes (novembre 2026)"), "Guide Yucatán · chiffre de novembre 2026")
+        self.assertEqual(dated("le forfait de deux jours (novembre 2026)"), "Guide Yucatán · chiffre de novembre 2026")
+        # A month in brackets after an opening, a festival or a deadline dates that event, even in the past.
+        for label in ("l’entrée du festival des lanternes (novembre 2026)", "le billet, à l’ouverture de la nouvelle ligne (octobre 2026)",
+                      "le billet du carnaval (février 2026)", "le tarif réduit, prévu (mai 2026)"):
+            self.assertEqual(dated(label), tag)
+        # An ordinary reading keeps its date, whatever the label says of hours or thresholds.
+        for label in ("le musée, ouvert tous les jours (octobre 2026)", "le pass à partir de 12 ans (octobre 2026)", "le tarif jusqu’à 25 ans (octobre 2026)"):
+            self.assertEqual(dated(label), "Guide Yucatán · chiffre d’octobre 2026")
         self.assertEqual(dated("les deux trajets, relevés d’octobre 2026"), "Guide Yucatán · chiffre d’octobre 2026")
         self.assertEqual(dated("le tarif plein, relevé le 11 novembre 2026"), "Guide Yucatán · chiffre du 11 novembre 2026")
         self.assertEqual(dated("le tarif plein, relevé le 15 novembre 2026"), tag)  # after the day the sources were read
@@ -1183,6 +1197,12 @@ class CaptionTextTests(unittest.TestCase):
     def test_an_enumeration_is_never_cut_before_its_last_items(self):
         label = "pour enchaîner Valladolid, Chichén Itzá, Mérida, Uxmal et Tulum sans courir"
         self.assertEqual(reel_formats.short_label(label), label)
+        # "de la Bahia, des tombeaux saadiens ou d’El Badi" is one list: cut after its first item, the plan would name
+        # the palace alone over a photo of the tombs.
+        fee = "l’entrée de la Bahia, des tombeaux saadiens ou d’El Badi pour un adulte étranger, de 9 h à 17 h"
+        self.assertEqual(reel_formats.short_label(fee), fee)
+        self.assertEqual(reel_formats.short_label("le budget serré pour 14 jours et 13 nuits (154 120 ¥), capsule ou dortoir, konbini et un seul long trajet en shinkansen"),
+                         "le budget serré pour 14 jours et 13 nuits (154 120 ¥)")
         self.assertEqual(reel_formats.short_label("le trajet en Tren Maya de Mérida à l’aéroport de Cancún, avec arrêts à Izamal, Chichén Itzá et Valladolid (Por Esto, juillet 2026)"),
                          "le trajet en Tren Maya de Mérida à l’aéroport de Cancún")
 
@@ -1270,6 +1290,15 @@ class RealGuideTests(unittest.TestCase):
         city = reel_formats.Media(porto, [], everywhere="Portugal · Porto")
         self.assertEqual(city.named("l’Andante Tour 3 : métro, bus et trains urbains pendant 72 h", None)[0], "porto-metro-aeroport")
         self.assertEqual(city.named("la tour des Clérigos et son musée, billet de jour", None)[0], "porto-vue-clerigos")
+        # The photo the guide put beside a day is that day's photo when the two share a kind of place: "Le pont en
+        # métro" goes over the bridge, not over the quays that share "Douro" with it.
+        days = porto + [("porto-ponte-luis", {"commonsTitle": "File:Puente Don Luis I, Oporto, Portugal, 2012-05-09, DD 13.JPG"},
+                         "Le pont Luís I et la Ribeira vus depuis la Serra do Pilar, à Gaia."),
+                        ("porto", {"commonsTitle": "File:Porto-Panorama de Ribeira-Rabelos-20120910.jpg"},
+                         "Les façades de Ribeira au bord du Douro à Porto, avec des bateaux rabelos au premier plan.")]
+        crossing = "Le pont en métro de métro D au-dessus du Douro"
+        self.assertEqual(reel_formats.Media(days, [], everywhere="Portugal · Porto").named(crossing, {"image": "porto-ponte-luis"})[0], "porto-ponte-luis")
+        self.assertNotEqual(reel_formats.Media(days, [], everywhere="Portugal · Porto").named(crossing, None)[0], "porto-ponte-luis")
         villa = ("amalfi-ravello", {"commonsTitle": "File:Villa Cimbrone Ravello 12.JPG"}, "Les jardins de la villa Cimbrone, à Ravello.")
         self.assertEqual(reel_formats.words_shown(villa, reel_formats.words_of("Pompéi (25 € avec la villa des Mystères)")), 0)
         self.assertEqual(reel_formats.words_shown(villa, reel_formats.words_of("la villa Cimbrone et ses jardins")), 3)
@@ -1289,6 +1318,12 @@ class RealGuideTests(unittest.TestCase):
         alone = reel_formats.Media(found, [], reserve=2, emblematic=reel_formats.emblematic(found))
         with self.assertRaisesRegex(reel_formats.Held, "no_reviewed_photo_to_open_with"):
             alone.opening(None)
+        # A photo post may close on any photo a person looked at, never on a found file.
+        mixed = [self.MARRAKECH[0], ("marrakech-souk", {"commonsTitle": "File:Souk.jpg"}, "Une allée du souk.")] + [ph for ph in self.MARRAKECH if ph[1].get("automatic")]
+        post = reel_formats.Media(mixed, [], reserve=2, cover=mixed[0][0], emblematic=reel_formats.emblematic(mixed))
+        self.assertEqual((post.opening(post.cover)[1], post.closing(required=False)[1]), ("marrakech-place-jemaa-el-fna", "marrakech-souk"))
+        with self.assertRaisesRegex(reel_formats.Held, "no_emblematic_photo_for_the_call"):
+            post.closing(required=False)
         # Even named as the cover (a guide whose own photos were all refused), a found file does not open the post.
         only = [photo for photo in self.MARRAKECH if photo[1].get("automatic")]
         with self.assertRaisesRegex(reel_formats.Held, "no_reviewed_photo_to_open_with"):
@@ -1297,23 +1332,63 @@ class RealGuideTests(unittest.TestCase):
             reel_formats.build("liste", guide(cover="absente"), figures([(f["value"], f["label"]) for f in FACTS]), only * 3, [],
                                "Phrase d’ouverture.", "Marrakech", "Maroc · Marrakech", "Guide Marrakech · sources du 05/11/2026", ["Marrakech"], "")
 
-    def test_a_reel_sealed_before_the_neutral_button_is_redrawn_as_it_was(self):
-        for name in ("ig-yucatan-itineraire-10-jours-2026-11-20-2", "ig-laponie-budget-rovaniemi-2026-11-27-2"):
-            scenario = json.loads((HERE / "scenarios" / f"{name}.json").read_text())
-            self.assertNotIn("button", scenario["scenes"][-1])
-            info = {"photos": p.load_photos(scenario, HERE), "clips": {}}
-            fonts, count = p.motion_fonts(scenario, HERE), len(scenario["scenes"])
-            stored = Image.open(HERE / "output" / name / f"scene-{count:02}.jpg").convert("RGB")
+    SEALED = ("ig-yucatan-itineraire-10-jours-2026-11-20-2", "ig-laponie-budget-rovaniemi-2026-11-27-2")
 
-            def distance(plan):
-                # The largest average difference over a block of 60 pixels: a few levels for the JPEG, dozens for another button.
+    def sealed(self, name):
+        """A reel sealed before the neutral button: its scenario, its plans as production draws them today, its fonts."""
+        scenario = json.loads((HERE / "scenarios" / f"{name}.json").read_text())
+        info = {"photos": p.load_photos(scenario, HERE), "clips": {}}
+        return scenario, info, p.prepared_scenes(scenario, HERE, info, None, False), p.motion_fonts(scenario, HERE)
+
+    def test_a_reel_sealed_before_the_neutral_button_keeps_the_button_it_was_given(self):
+        # Drawn twice on the same machine: nothing here depends on how this machine draws text.
+        for name in self.SEALED:
+            scenario, info, plans, fonts = self.sealed(name)
+            last, count = scenario["scenes"][-1], len(scenario["scenes"])
+            self.assertNotIn("button", last)
+            media = [(str(HERE / info["photos"][last["photo"]]["file"]), False)]
+            drawn = lambda plan: motion_render.still(plan, count - 1, count, fonts).tobytes()
+            before, neutral = (motion_render.prepare([last], media, fonts, button)[0] for button in (p.MOTION_BUTTON_BEFORE, p.MOTION_BUTTON))
+            self.assertEqual(drawn(plans[-1]), drawn(before))
+            self.assertNotEqual(drawn(plans[-1]), drawn(neutral))
+            # A scenario made today carries the neutral button and is drawn with it.
+            today = {**scenario, "scenes": scenario["scenes"][:-1] + [{**last, "button": p.MOTION_BUTTON}]}
+            self.assertEqual(drawn(p.prepared_scenes(today, HERE, info, None, False)[-1]), drawn(neutral))
+
+    def test_on_the_machine_that_rendered_it_a_sealed_reel_is_redrawn_to_the_byte(self):
+        # The stills in output/ were drawn by one machine; another one (another text engine) draws the same plans a few
+        # pixels apart. A reel is compared only where every plan before the last already comes out identical.
+        compared = 0
+        for name in self.SEALED:
+            scenario, _, plans, fonts = self.sealed(name)
+
+            def redrawn(index):
                 saved = io.BytesIO()
-                motion_render.still(plan, count - 1, count, fonts).save(saved, "JPEG", quality=90)
-                return max(high for _, high in ImageChops.difference(Image.open(saved).convert("RGB"), stored).resize((18, 32), Image.BOX).getextrema())
+                motion_render.still(plans[index], index, len(plans), fonts).save(saved, "JPEG", quality=90)
+                return saved.getvalue()
 
-            self.assertLess(distance(p.prepared_scenes(scenario, HERE, info, None, False)[-1]), 8)
-            media = [(str(HERE / info["photos"][scenario["scenes"][-1]["photo"]]["file"]), False)]
-            self.assertGreater(distance(motion_render.prepare(scenario["scenes"][-1:], media, fonts, p.MOTION_BUTTON)[0]), 20)
+            stored = lambda index: (HERE / "output" / name / f"scene-{index + 1:02}.jpg").read_bytes()
+            if any(redrawn(index) != stored(index) for index in range(len(plans) - 1)):
+                continue
+            compared += 1
+            with self.subTest(name):
+                self.assertEqual(redrawn(len(plans) - 1), stored(len(plans) - 1))
+        if not compared:
+            self.skipTest("this machine does not draw text as the one that rendered these reels")
+
+    def test_a_panorama_as_high_as_the_frame_at_zoom_one_is_framed_inside_the_photo(self):
+        # 2880 × 854: the rounding of the division put the top of the box a hair above the photo and stopped the render.
+        for size in ((2880, 854), (2880, 803), (2880, 1600), (1021, 2880)):
+            for zoom in (1.0, 1.0 + motion_render.ZOOM_RANGE, 1.0 + motion_render.ZOOM_RANGE + motion_render.PUNCH):
+                for center in ((0.43, 0.5), (0.5, 0.5), (0.57, 0.5)):
+                    left, top, right, bottom = motion_render.base.cover_box(size, motion_render.SIZE, zoom, center)
+                    self.assertTrue(0 <= left < right <= size[0] and 0 <= top < bottom <= size[1], (size, zoom, center))
+        picture = Image.new("RGB", (2880, 854), (40, 90, 140))
+        with tempfile.TemporaryDirectory() as folder:
+            picture.save(Path(folder) / "panorama.jpg")
+            for index in (0, 1):
+                for moment in (0.0, 1.0):
+                    self.assertEqual(motion_render.photo_frame(str(Path(folder) / "panorama.jpg"), (0.5, 0.5), moment, index, False).size, motion_render.SIZE)
 
 
 if __name__ == "__main__":

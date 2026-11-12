@@ -235,7 +235,32 @@ Salerne → Amalfi » sur Positano et s'ouvrait sur une photo trouvée par la re
   (« ouverture prévue (décembre 2026) » dans un guide relu en novembre) ;
 - **le bouton du dernier plan est écrit dans le scénario** (`"button": "voyagesansdetour.fr"`) :
   un reel scellé avant le 12/11/2026 n'en porte pas et se redessine avec le bouton qu'il avait,
-  à l'identique (un test compare le dernier plan de deux reels en file à leur image rendue).
+  à l'identique. Le test le vérifie en dessinant deux fois le dernier plan sur la même machine ;
+  la comparaison aux images de `output/` ne se fait que sur une machine qui redessine déjà le
+  premier plan à l'octet près (le texte n'est pas dessiné pareil sur le Mac et sur le robot) ;
+- **la photo que le guide a mise à côté d'un jour reste celle de ce jour** quand elle partage
+  avec lui un type de lieu : « Le pont en métro » va sur le pont, pas sur les quais qui
+  partagent « Douro » ;
+- **un carrousel ne se ferme jamais non plus sur une image trouvée par la recherche** ;
+- **une parenthèse « (mois année) » après une ouverture, un festival, une fête, « prévu » ou
+  « jusqu'au » date cet événement**, pas le relevé du chiffre ;
+- **un libellé n'est pas coupé au milieu d'une énumération en « de… »** : « l'entrée de la
+  Bahia, des tombeaux saadiens ou d'El Badi » reste entier, sinon le plan nommerait le palais
+  seul sur la photo des tombeaux ;
+- **une photo classée « advertisements on trams » est une photo de tram** : le filtre « pas une
+  photographie » la laisse passer (la photo du tram de Porto que le site publie était refusée).
+- **un panorama aussi haut que le cadre ne fait plus planter le rendu** : au zoom 1, l'arrondi
+  du calcul sortait le cadre de la photo d'un cheveu (« box offset can't be negative ») sur un
+  panorama de 2880 × 854 ; `social_render.cover_box` ramène le cadre dans la photo, sans changer
+  les cadrages valides.
+
+Ce qui reste, mesuré le 12/11/2026 sur les 26 guides : un chiffre qu'aucune photo ne montre
+complète encore un post, y compris sur une image trouvée par la recherche (Marrakech : « 3 h de
+car pour Essaouira » sur un lampiste de la médina). L'interdire partout ferait passer les guides
+avec reel de 23 à 20 et avec carrousel de 19 à 12 ; l'interdire sur les seules images trouvées,
+de 23 à 21 et de 19 à 16 ; ne refuser que les chiffres qui portent un nom propre absent des
+photos, de 23 à 22 et de 19 à 17, mais un nom de train (« Nozomi ») y passe pour un lieu. La
+voie sûre est d'ajouter des photos relues (`photo_intake.py`) aux guides qui en manquent.
 
 Règles communes à tous les reels (`motion_render.py`) :
 
