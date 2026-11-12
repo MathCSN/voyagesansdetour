@@ -175,6 +175,93 @@ des photos du guide (« Santa », de « Santa Claus Village »). Désormais :
   toute recherche. C'est la voie à prendre pour un guide qui manque de photos. L'ancien
   `catalogue.json` est scellé par l'empreinte des scénarios écrits à la main : on n'y écrit plus.
 
+**Suite de la vérification du 12/11/2026** (reels, carrousels et recherche de photos) :
+
+- **un plan de fait montre toujours un chiffre** : un repère sans chiffre (« Ligne rouge ») reste
+  dans le guide ; dans un itinéraire, une étape pour laquelle le guide ne donne aucun chiffre
+  n'est pas montrée, et il faut trois étapes chiffrées pour un reel « jour par jour » ;
+- **un chiffre va sur la photo qui montre le mieux ce qu'il nomme, ou nulle part** : si cette
+  photo est déjà prise par un autre plan du même post, le chiffre reste dans le guide au lieu
+  d'être posé sur un autre lieu (le prix de Chichén Itzá sur la cathédrale de Mérida). Les mots
+  qui ne nomment rien (« pour », « entre ») et le nom du lieu ou du pays ne comptent pas. Un
+  chiffre qu'aucune photo du post ne montre complète encore un post jusqu'à ses quatre chiffres ;
+- **la photo de couverture ouvre le post, sauf si un plan nomme ce qu'elle montre** : la photo
+  suivante du guide ouvre alors le post ;
+- **le carrousel suit les mêmes règles que le reel** : même choix de photo, chiffre qui répète
+  le titre écarté, et il choisit parmi huit photos au lieu de six ;
+- **la dernière image est une photo emblématique** : une photo que le site publie pour ce lieu,
+  ou une photo de `reviewed.json` marquée `"emblematic": true` par celui qui l'a regardée. Jamais
+  une photo ajoutée pour un seul plan (un cabanon, un attelage) ni une image trouvée par la
+  recherche. La dernière photo emblématique libre est gardée pour la fin ; s'il n'en reste
+  aucune, le reel attend ;
+- **la petite étiquette porte la date du chiffre quand le guide la donne** (« relevé en juillet
+  2026 », « (octobre 2026) ») : « Guide Yucatán · chiffre de juillet 2026 », et le plan cite alors
+  l'extrait entier, date comprise (`production.py` le vérifie). Sans date propre, elle garde
+  « sources du… », la date de relecture du guide. Une période de validité (« du 2 novembre au
+  31 décembre ») ou un début (« depuis janvier ») n'est pas une date de relevé ;
+- **recherche de photos** : un homonyme du même pays est refusé d'après la liste relue à la main
+  `destinations.HOMONYMS` (Porto Covo, Porto Moniz, Porto Santo… pour Porto), dans le titre comme
+  dans les catégories ; une image dont le titre ou les catégories disent qu'elle montre un
+  animal, une plante ou un match (« Mammals of… », « in flight », nom latin entre parenthèses,
+  « sports ») n'est pas une photo du lieu. Ce qui reste possible : un homonyme du même pays
+  absent de la liste (à lire dans la liste des communes du pays quand on ajoute une destination
+  au nom courant), et une photo de détail du bon lieu (un reflet dans une vitre) ; les deux ne
+  touchent que les guides qui ont moins de huit photos relues à la main.
+
+**Revue de la PR 46, même jour** (le reel « tableau » de la Côte amalfitaine posait « 12 € le ferry
+Salerne → Amalfi » sur Positano et s'ouvrait sur une photo trouvée par la recherche) :
+
+- **le reel « tableau » choisit ses chiffres comme une liste** : celui qu'une photo libre montre
+  d'abord, jamais celui dont la photo est déjà prise (le tarif du ferry reste dans le tableau,
+  posé sur le ferry) ;
+- **le préfixe d'identifiant que toutes les photos du post partagent ne nomme rien** :
+  `amalfi-positano` est une photo de Positano, pas d'Amalfi. Dans un guide de plusieurs villes
+  (`seville-…`, `grenade-…`), le préfixe est la ville et il compte ;
+- **un type de lieu seul ne relie pas un chiffre à une photo** (`reel_formats.PLACE_KINDS` : tour,
+  villa, médina, place, gare…) : « l'Andante Tour 3 » n'est pas la tour des Clérigos, la villa des
+  Mystères n'est pas la villa Cimbrone, « un monument de la médina » n'est pas un lampiste « in
+  the medina ». À côté d'un nom que le chiffre et la photo partagent, le mot compte ;
+- **une image trouvée par la recherche n'ouvre jamais un post** (sa fiche porte
+  `"automatic": true`) : dans un post complété par de telles images, la couverture est gardée
+  pour l'accroche et le chiffre qui la nomme reste dans le guide ; sans photo relue pour
+  l'ouvrir, le post attend (`no_reviewed_photo_to_open_with`) ;
+- **toute photo du site n'est pas une dernière image** : `media_library.NOT_A_CLOSING` liste
+  celles qui n'illustrent qu'un paragraphe (un panneau de gare, une terrasse d'hôtel, une porte
+  sombre, un train, un animal), regardées une à une le 12/11/2026. Une photo ajoutée au site
+  depuis peut fermer un post tant qu'elle n'y est pas inscrite ;
+- **« jour par jour » n'est promis que si chaque jour du guide est montré** : sinon l'accroche et
+  le titre du post disent « 3 étapes clés » ;
+- **une date entre parenthèses postérieure à la relecture du guide n'est pas une date de relevé**
+  (« ouverture prévue (décembre 2026) » dans un guide relu en novembre) ;
+- **le bouton du dernier plan est écrit dans le scénario** (`"button": "voyagesansdetour.fr"`) :
+  un reel scellé avant le 12/11/2026 n'en porte pas et se redessine avec le bouton qu'il avait,
+  à l'identique. Le test le vérifie en dessinant deux fois le dernier plan sur la même machine ;
+  la comparaison aux images de `output/` ne se fait que sur une machine qui redessine déjà le
+  premier plan à l'octet près (le texte n'est pas dessiné pareil sur le Mac et sur le robot) ;
+- **la photo que le guide a mise à côté d'un jour reste celle de ce jour** quand elle partage
+  avec lui un type de lieu : « Le pont en métro » va sur le pont, pas sur les quais qui
+  partagent « Douro » ;
+- **un carrousel ne se ferme jamais non plus sur une image trouvée par la recherche** ;
+- **une parenthèse « (mois année) » après une ouverture, un festival, une fête, « prévu » ou
+  « jusqu'au » date cet événement**, pas le relevé du chiffre ;
+- **un libellé n'est pas coupé au milieu d'une énumération en « de… »** : « l'entrée de la
+  Bahia, des tombeaux saadiens ou d'El Badi » reste entier, sinon le plan nommerait le palais
+  seul sur la photo des tombeaux ;
+- **une photo classée « advertisements on trams » est une photo de tram** : le filtre « pas une
+  photographie » la laisse passer (la photo du tram de Porto que le site publie était refusée).
+- **un panorama aussi haut que le cadre ne fait plus planter le rendu** : au zoom 1, l'arrondi
+  du calcul sortait le cadre de la photo d'un cheveu (« box offset can't be negative ») sur un
+  panorama de 2880 × 854 ; `social_render.cover_box` ramène le cadre dans la photo, sans changer
+  les cadrages valides.
+
+Ce qui reste, mesuré le 12/11/2026 sur les 26 guides : un chiffre qu'aucune photo ne montre
+complète encore un post, y compris sur une image trouvée par la recherche (Marrakech : « 3 h de
+car pour Essaouira » sur un lampiste de la médina). L'interdire partout ferait passer les guides
+avec reel de 23 à 20 et avec carrousel de 19 à 12 ; l'interdire sur les seules images trouvées,
+de 23 à 21 et de 19 à 16 ; ne refuser que les chiffres qui portent un nom propre absent des
+photos, de 23 à 22 et de 19 à 17, mais un nom de train (« Nozomi ») y passe pour un lieu. La
+voie sûre est d'ajouter des photos relues (`photo_intake.py`) aux guides qui en manquent.
+
 Règles communes à tous les reels (`motion_render.py`) :
 
 - accroche encadrée au milieu du cadre, complète dès la première image (c'est aussi la couverture) ;
@@ -184,8 +271,12 @@ Règles communes à tous les reels (`motion_render.py`) :
 - libellé raccourci à sa première pause naturelle (toujours les mots du guide) et posé sur
   un panneau sombre : tout se comprend sans le son ;
 - la photo d'un plan montre ce que le plan nomme : une étape d'itinéraire n'apparaît que si le
-  guide a une photo de ce lieu ; la photo de couverture du guide ouvre le reel ;
-- dernière image : « voyagesansdetour.fr → lien en bio » et « Enregistrez ce reel pour votre voyage » ;
+  guide a une photo de ce lieu ; la photo de couverture du guide ouvre le reel, sauf si un plan
+  nomme ce qu'elle montre ;
+- dernière image : « Le guide complet », « voyagesansdetour.fr » et « Enregistrez cette vidéo
+  pour votre voyage », sur une photo emblématique du lieu. Depuis le 12/11/2026 elle ne dit plus
+  « lien en bio » ni « ce reel » : le même fichier part sur TikTok, où il n'y a pas de lien en
+  bio. Les reels déjà rendus gardent l'ancienne image ;
 - légende : titre du guide, 3 à 5 lignes utiles, « Enregistrez… le guide complet est en lien
   dans la bio », une ligne de crédits, 5 hashtags au plus (lieu, pays, type de guide, marque).
 

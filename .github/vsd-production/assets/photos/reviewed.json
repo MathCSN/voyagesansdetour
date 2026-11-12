@@ -113,6 +113,7 @@
     },
     "laponie-village-boules-neige": {
       "alt": "Le village du Père Noël de Rovaniemi la nuit, avec sa pyramide de boules de neige éclairée.",
+      "emblematic": true,
       "file": "assets/photos/laponie-village-boules-neige.jpg",
       "sha256": "a9901fab9100f9ef3a38810eeefc4ad3a441ee7be77eacc94f63c9bf2928aad5",
       "width": 2135,
@@ -135,6 +136,7 @@
     "laponie-village-pere-noel-hiver": {
       "camera": "uD600,S600",
       "alt": "Le village du Père Noël de Rovaniemi sous la neige, en décembre.",
+      "emblematic": true,
       "file": "assets/photos/laponie-village-pere-noel-hiver.jpg",
       "sha256": "88cccce03eda23b8431385bbc1e120f26e4cfb75b33db5473f69a30f3b461cfe",
       "width": 2133,
@@ -201,6 +203,7 @@
     "yucatan-uxmal-pyramide": {
       "camera": "X-T4",
       "alt": "La pyramide du Devin à Uxmal, au sud de Mérida.",
+      "emblematic": true,
       "file": "assets/photos/yucatan-uxmal-pyramide.jpg",
       "sha256": "6f9c4a7c821eecad09f036dda963e2e005dd439be9c9f8a51fcec9bbd3310723",
       "width": 2400,

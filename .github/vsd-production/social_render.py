@@ -140,7 +140,10 @@ def cover_box(image_size, target, zoom, center):
     bw, bh = tw / scale, th / scale
     cx = min(max(center[0] * iw, bw / 2), iw - bw / 2)
     cy = min(max(center[1] * ih, bh / 2), ih - bh / 2)
-    return (cx - bw / 2, cy - bh / 2, cx + bw / 2, cy + bh / 2)
+    # At zoom 1 the box is as high (or as wide) as the photo, and the rounding of the division can push an edge a
+    # hair outside it: a panorama 854 pixels high stopped the render ("box offset can't be negative").
+    left, top = max(0.0, cx - bw / 2), max(0.0, cy - bh / 2)
+    return (left, top, min(float(iw), left + bw), min(float(ih), top + bh))
 
 
 def photo_frame(path: str, target, focus, t: float, index: int) -> Image.Image:

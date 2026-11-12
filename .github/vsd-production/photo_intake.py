@@ -58,8 +58,9 @@ AI_MARKERS = re.compile(r"ai[- ]generated|generated (?:by|with) (?:an )?(?:ai|ar
 
 # Only photographs (CLAUDE.md): never a drawing, a poster, an advert, a reproduced artwork, a map or a scan.
 # Read in the file title and in its Commons categories; a work dated before 1950 is refused as well.
+# "Coca-Cola advertisements on trams in Porto" files a photograph of a tram, not an advert: on a vehicle, it is let through.
 NOT_A_PHOTO = re.compile(r"\b(?:illustrations?|illustrated|drawings?|engravings?|lithographs?|etchings?|woodcuts?|ukiyo-e|prints? (?:of|by|from)|"
-                         r"posters?|advertisements?|adverts?|ads?|caricatures?|cartoons?|comics?|postcards?|paintings? (?:by|of|from|in)|"
+                         r"posters?|(?:advertisements?|adverts?|ads?)(?! on (?:the |a )?(?:trams?|bus(?:es)?|trains?|metros?|taxis?|vehicles?)\b)|caricatures?|cartoons?|comics?|postcards?|paintings? (?:by|of|from|in)|"
                          r"oil on canvas|watercolou?rs?|frescos? by|maps? of|old maps|diagrams?|logos?|coats? of arms|book covers?|"
                          r"magazine covers?|scans? (?:of|from)|scanned|pd-art|google art project|renderings?|3d models?|puck \(magazine\))\b", re.IGNORECASE)
 OLDEST_YEAR = 1950
