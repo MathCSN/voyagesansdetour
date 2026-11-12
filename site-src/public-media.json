@@ -1232,37 +1232,6 @@
       ]
     },
     {
-      "contentId": "ig-lisbonne-porto-train-2026-11-18",
-      "approved": true,
-      "files": [
-        {
-          "name": "reel.mp4",
-          "sha256": "3afa44ece798f455185d54c12fa909d7b175a3d8e0631e829fa7e799b897bf6f",
-          "bytes": 5325706
-        },
-        {
-          "name": "poster.jpg",
-          "sha256": "584a22b39c2c0af9bb2d33a1d14efbbbbf4751cbf0821ca2977792b143880e03",
-          "bytes": 478788
-        },
-        {
-          "name": "credits.txt",
-          "sha256": "cae6030deefbebc8b78cd37582f17fb31424dbc9aa14e20baa616f197f79bf63",
-          "bytes": 2729
-        },
-        {
-          "name": "dmsans-OFL.txt",
-          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
-          "bytes": 4482
-        },
-        {
-          "name": "playfairdisplay-OFL.txt",
-          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
-          "bytes": 4449
-        }
-      ]
-    },
-    {
       "contentId": "ig-yucatan-itineraire-10-jours-2026-11-20-3",
       "approved": true,
       "files": [
@@ -1363,6 +1332,37 @@
           "name": "credits.txt",
           "sha256": "4376848a5754e534877f2323c5f6882ce4fea3345b69744b45e2c75cc2653723",
           "bytes": 2580
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "ig-lisbonne-porto-train-2026-11-18",
+      "approved": true,
+      "files": [
+        {
+          "name": "reel.mp4",
+          "sha256": "7d23d6f1b34d445591bef8fe6ac700309be312459e889875299c7ec91781a42e",
+          "bytes": 6271398
+        },
+        {
+          "name": "poster.jpg",
+          "sha256": "eb54be362921d47fd3892b88ccb1365b1cff444c198c8cae94af9059789d4a79",
+          "bytes": 392898
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "3bdfc2631d604966cffd981a4d36d8a40ae64be196772b2e4699ca619947d3ff",
+          "bytes": 2663
         },
         {
           "name": "dmsans-OFL.txt",

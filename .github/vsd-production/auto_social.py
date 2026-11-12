@@ -233,12 +233,18 @@ def whole_figure(value: str, text: str) -> bool:
     return re.search(r"(?<![\w,.])(?<!\d\s)" + re.escape(p.normalized(value)) + r"(?!\w)", text) is not None
 
 
+# Sections that sum the guide up: they give many figures and are about none of them.
+SUMMARY = re.compile(r"\b(?:comparatif|en bref|avant tout|coup d.oeil|recapitulatif|resume|essentiel|a retenir)\b")
+
+
 def section_of(value: str, label: str, sections: list[dict]) -> dict | None:
     """The section that talks about this figure: the only one that gives the figure itself when there is just one
-    ("604 pesos" is read under "Jours 4-6 : Mérida et Uxmal", nowhere else); otherwise the one that shares the most
-    words with its label, the figure itself as a tie-break."""
+    ("604 pesos" is read under "Jours 4-6 : Mérida et Uxmal", nowhere else), unless it only sums the guide up ("Le
+    comparatif en un coup d'œil", "Avant tout": the time from the airport to Rossio belongs to "Baixa et Chiado");
+    otherwise the one that shares the most words with its label, the figure itself as a tie-break."""
     holders = [section for section in sections if whole_figure(value, section_text(section))]
-    if len(holders) == 1:
+    title = destinations.ascii_fold(re.sub(r"[’']", " ", holders[0].get("title", "").replace("œ", "oe"))).lower() if holders else ""
+    if len(holders) == 1 and not SUMMARY.search(title):
         return holders[0]
     words, best, best_score = significant(label), None, 0
     for section in sections:

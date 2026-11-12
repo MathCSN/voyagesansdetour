@@ -640,6 +640,11 @@ class TextTests(unittest.TestCase):
         # Given by both, or by none: the words of its label decide, as before.
         both = [sections[0], {**sections[1], "paragraphs": ["Le site est à 80 km : 697 pesos aussi."]}]
         self.assertEqual(a.section_of("697 pesos", "l’entrée de Chichén Itzá pour un étranger", both)["title"], "Jour 3 : Chichén Itzá à l’ouverture")
+        # A section that only sums the guide up is about none of its figures: the district keeps its own.
+        for title in ("Le comparatif en un coup d’œil", "Avant tout", "En bref", "L’essentiel"):
+            districts = [{"title": "Baixa et Chiado", "paragraphs": ["De l’aéroport à Rossio, comptez une petite demi-heure en métro."]},
+                         {"title": title, "table": {"headers": ["Quartier", "Métro"], "rows": [["Baixa", "25 min"], ["Saldanha", "18 min"]]}}]
+            self.assertEqual(a.section_of("25 min", "de l’aéroport à Rossio, en métro", districts)["title"], "Baixa et Chiado", title)
 
     def test_title_lines_are_balanced(self):
         self.assertEqual(a.lines_of("La côte amalfitaine sans voiture", 24), ["La côte amalfitaine", "sans voiture"])
@@ -1450,9 +1455,38 @@ class RealGuideTests(unittest.TestCase):
         self.assertEqual([scene["headline"][0].strip("*").replace(reel_formats.NBSP, " ") for scene in scenes[2:-1]], ["≈ 3 h", "38,3 %"])
         self.assertEqual(lines[0], "📅 Alfa Pendular ou Intercidades · Aller simple 2026 — Alfa Pendular Turística : 35,70 €")
         self.assertEqual(lines[3], "⏱️ ≈ 3 h de trajet en Alfa Pendular entre Santa Apolónia et Campanhã")
+        # The table is never laid over a photo that shows numbers of its own, even when it is the first one free.
+        display = ("train-afficheur", {"commonsTitle": "File:Display.jpg", "figures": True}, "L’afficheur d’une voiture : 220 km/h.")
+        scenes, _ = reel_formats.build("tableau", article, figures(pairs), [photos[0], display] + photos[1:], [], "Phrase d’ouverture.", "Portugal", "Portugal",
+                                       "Guide Portugal · sources du 24/10/2026", ["Lisbonne–Porto", "en train"], read)
+        self.assertNotEqual(scenes[1]["photo"], "train-afficheur")
+        self.assertEqual(scenes[1]["layout"], "table")
         # A table that no leading columns can tell apart, or with nothing after them, is left alone.
         twins = {**fares, "table": {"headers": ["Train", "Classe"], "rows": [["Alfa Pendular", "Turística"], ["Alfa Pendular", "Turística"], ["Intercidades", "2e classe"]]}}
         self.assertIsNone(reel_formats.table_of({**article, "sections": [twins]}, read))
+
+    def test_the_first_caption_line_of_a_table_is_headed_only_by_a_heading_that_names_something(self):
+        rows = [["1 jour", "22 €"], ["2 jours", "34 €"]]
+        for header, first in (("Départ de Bangkok", "📅 Départ de Bangkok — 1 jour : 22 €"), ("Aller simple 2026", "📅 Aller simple 2026 — 1 jour : 22 €"),
+                              ("Jour A", "📅 1 jour : 22 €"), ("Étape", "📅 1 jour : 22 €"), ("Notre choix", "📅 1 jour : 22 €"), ("Prix", "📅 1 jour : 22 €")):
+            self.assertEqual(reel_formats.table_lines(header, rows), [first, "📅 2 jours : 34 €"], header)
+        # The name of the section, when the plan carries it, is part of what the heading names.
+        self.assertEqual(reel_formats.table_lines("Le train de nuit pour Chiang Mai · Prix", rows)[0], "📅 Le train de nuit pour Chiang Mai · Prix — 1 jour : 22 €")
+
+    def test_a_name_with_a_year_is_not_written_over_a_figure_of_another_year(self):
+        # Verification of 12/11/2026: "La ligne du Nord en 2026" stood over "38,3 % des Alfa Pendular à l'heure en 2025".
+        north = {"title": "La ligne du Nord en 2026 : prévoir de la marge"}
+        late = {"value": "38,3 %", "label": "des Alfa Pendular à l’heure (à 5 minutes près) en 2025", "short": "des Alfa Pendular à l’heure (à 5 minutes près) en 2025",
+                "shortExcerpt": "38,3 % des Alfa Pendular à l’heure (à 5 minutes près) en 2025", "excerpt": "38,3 % des Alfa Pendular à l’heure (à 5 minutes près) en 2025", "section": north}
+        media = lambda: reel_formats.Media([("train-interieur", {"commonsTitle": "File:Alfa Pendular interior.jpg"}, "L’intérieur d’une voiture Alfa Pendular."),
+                                            ("train-campanha", {"commonsTitle": "File:Campanha.jpg", "emblematic": True}, "La gare de Porto-Campanhã.")], [])
+        tag = "Guide Portugal · sources du 24/10/2026"
+        self.assertEqual(reel_formats.fact_plan(late, media(), "Portugal", tag)["kicker"], "Portugal")
+        # The same year, or no year on one side: the name of the section stays.
+        works = {**late, "label": "des Alfa Pendular à l’heure en 2026, travaux compris"}
+        self.assertEqual(reel_formats.fact_plan(works, media(), "Portugal", tag)["kicker"], "La ligne du Nord en 2026")
+        undated = {**late, "label": "des Alfa Pendular à l’heure, à 5 minutes près"}
+        self.assertEqual(reel_formats.fact_plan(undated, media(), "Portugal", tag)["kicker"], "La ligne du Nord en 2026")
 
     def test_a_photo_post_whose_figures_all_belong_to_a_day_reads_day_after_day(self):
         days = {number: {"title": f"Jour {number} — {name}"} for number, name in ((1, "La médina"), (2, "Le jardin Majorelle"), (3, "Sortir de la ville"))}

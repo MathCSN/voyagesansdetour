@@ -270,6 +270,129 @@ class StaleLotsTests(unittest.TestCase):
             lost = gone(quote, today)
             self.assertTrue(lost and not wording(lost, quote), quote)
 
+    def test_a_quote_found_inside_a_longer_number_is_not_found(self):
+        # Verification of 12/11/2026: the quote was looked for as a plain piece of text, and "5 € l'entrée" was "found
+        # word for word" in "15 € l'entrée": the batch stayed current, without even a line in the summary.
+        cases = (("0 $ la patinoire de Bryant Park", "10 $ la patinoire de Bryant Park"),
+                 ("5 € l’entrée du monastère des Hiéronymites", "15 € l’entrée du monastère des Hiéronymites"),
+                 ("500 bahts l’entrée du Grand Palais", "1 500 bahts l’entrée du Grand Palais"),
+                 ("370 € la semaine de logement", "1 370 € la semaine de logement"),
+                 ("5 € le ticket du funiculaire", "7,5 € le ticket du funiculaire"),
+                 ("30 min de marche jusqu’au belvédère", "1 h 30 min de marche jusqu’au belvédère"),
+                 ("50 pesos le colectivo pour Tulum", "150 pesos le colectivo pour Tulum"),
+                 ("depuis l’aéroport par le bus 19", "depuis l’aéroport par le bus 190"),
+                 ("le billet du matin coûte dès 9", "le billet du matin coûte dès 9,50 €"),
+                 ("pour une nuit en bungalow comptez 1", "pour une nuit en bungalow comptez 1 500 bahts"))
+        for quote, today in cases:
+            stock = self.stock()
+            stock.post("ig-cas", [OPENING, quote], copies=("", "-tiktok"))
+            stock.post("fb-temoin", [ENTRY])
+            stock.post("fb-autre", [OPENING])
+            stock.pages = {GUIDE: page(OPENING, ENTRY, today)}
+            result = stock.run()
+            said = result["retired"] + result["reported"]
+            self.assertEqual((result["status"], sorted(said)), ("stale", ["ig-cas-tiktok-v1", "ig-cas-v1"]), quote)
+            self.assertEqual(stale_lots.quoted(quote, today)[0], False, quote)
+        # A quote that ends on the number of a line, or on the unit of a duration, and that the page goes on with.
+        for quote, today in (("Prenez le tram 28", "Prenez le tram 28E"), ("depuis la gare par le bus 19", "depuis la gare par le bus 19A"),
+                             ("30 min de marche", "2 heures 30 min de marche"), ("30 min de marche", "1 heure et 30 min de marche"),
+                             ("le trajet dure 2 h", "le trajet dure 2 h 30"), ("départ à 7 h", "départ à 7 h 15"), ("comptez 20 min", "comptez 20 min 30")):
+            self.assertEqual(stale_lots.quoted(quote, today)[0], False, quote)
+            stale = stale_lots.reread([(GUIDE, quote)], {GUIDE: today})
+            self.assertEqual((stale["status"], all(entry["wording"] for entry in stale["missing"])), ("stale", True), quote)   # reported
+        self.assertEqual(stale_lots.reread([(GUIDE, "Prenez le tram 28")], {GUIDE: "Prenez le tram 28E"})["missing"][0]["numbers"], ["28e"])
+        self.assertEqual(stale_lots.quoted("le trajet dure 2 h", "Ici le trajet dure 2 h. 15 € le billet."), (True, None))
+        # A price that changed is withdrawn; a quote that only became longer is reported with what the page says.
+        self.assertEqual(stale_lots.reread([(GUIDE, cases[1][0])], {GUIDE: cases[1][1]})["missing"][0], {"quote": cases[1][0], "numbers": ["5"], "wording": False})
+        longer = stale_lots.reread([(GUIDE, cases[5][0])], {GUIDE: cases[5][1]})["missing"][0]
+        self.assertEqual((longer["numbers"], longer["wording"]), (["→ 1 h 30 min de marche jusqu’au belvédère"], True))
+        # The same words with whole numbers are found: after a year, after another element, before a full stop.
+        for quote, today in (("500 bahts l’entrée du Grand Palais", "Tarif de novembre 2026 : 500 bahts l’entrée du Grand Palais."),
+                             ("200 ¥ le trajet", "Ligne 15\n200 ¥ le trajet"), ("le bus 19", "Prenez le bus 19. 30 minutes plus tard, la médina."),
+                             ("30 min de marche", "Comptez 30 min de marche."), ("938 bahts la couchette", "N° 9, 18 h 40\n938 bahts la couchette")):
+            self.assertEqual(stale_lots.quoted(quote, today), (True, None), quote)
+
+    def test_a_figure_put_right_everywhere_is_not_read_in_another_fact_a_few_elements_away(self):
+        gone = stale_lots.numbers_gone
+        # The entrance of the palaces went from 100 to 120 dh; the taxi fare "100 à 160 dh" stands three tiles below.
+        palaces = "l’entrée de la Bahia, des tombeaux saadiens ou d’El Badi pour un adulte étranger"
+        marrakech = "\n".join(["120 dh", palaces + ", de 9 h à 17 h", "170 dh", "le jardin Majorelle en plein tarif", "100 à 160 dh",
+                               "le prix d’un petit taxi de l’aéroport à la médina"])
+        self.assertEqual(gone("100 dh " + palaces, marrakech), ["100"])
+        # Santa Claus went from free to 25 €; a photo credit seven lines above says "CC BY-SA 2 0".
+        lapland = "\n".join(["Photo : Visit Rovaniemi, CC BY-SA 2 0"] + [f"Ligne {n} du guide, sans rapport" for n in "abcdef"] + ["25 €", "rencontrer le Père Noël au village"])
+        self.assertEqual(gone("0 € rencontrer le Père Noël au village", lapland), ["0"])
+        # Winter Wonderland went from 1 £ to 5 £; "zones 1-2" stands in the transport tile, further down.
+        london = "\n".join(["5 £", "l’entrée de Winter Wonderland en semaine", "8,90 £", "le plafond quotidien", "Transports", "le plafond des zones 1-2 du métro"])
+        self.assertEqual(gone("1 £ l’entrée de Winter Wonderland en semaine", london), ["1"])
+        # Rain in February went from 4 to 14 mm in the three lines that give it.
+        vietnam = "\n".join(["Février", "14 mm de pluie à Hô-Chi-Minh-Ville", "Mars", "9 mm de pluie à Hô-Chi-Minh-Ville"])
+        stale = stale_lots.reread([(GUIDE, "4 mm de pluie à Hô-Chi-Minh-Ville")], {GUIDE: vietnam})
+        self.assertEqual((stale["status"], stale["missing"][0]["numbers"]), ("stale", ["4"]))
+        # Worded again in the same element or the next one, the figure is still read.
+        self.assertEqual(gone("100 dh " + palaces, "\n".join(["Les palais", "L’entrée coûte 100 dh pour un adulte étranger : Bahia, tombeaux saadiens, El Badi."])), [])
+        self.assertEqual(gone("100 dh " + palaces, "\n".join(["100 dh", "pour un adulte étranger, l’entrée de la Bahia, des tombeaux saadiens ou d’El Badi"])), [])
+        # The limit that is left, written in the code: the old number given for something else in the very same paragraph.
+        self.assertEqual(gone("1 £ l’entrée de Winter Wonderland en semaine", "Winter Wonderland : une entrée à 5 £ en semaine, dans les zones 1-2 du métro."), [])
+
+    def test_the_same_figure_written_otherwise_withdraws_nothing(self):
+        gone, wording = stale_lots.numbers_gone, stale_lots.only_wording
+        # The line is now written with its letter: reported, to be read by eye, never withdrawn alone.
+        quote = "le tram 28 traverse l’Alfama et Graça"
+        lost = gone(quote, "Le tram 28E traverse l’Alfama puis Graça.")
+        self.assertEqual((lost, wording(lost, quote)), (["28e"], True))
+        # …but a price is not a line: "2 €" is not read in "2e classe".
+        quote = "2 € le ticket acheté à bord"
+        lost = gone(quote, "3 € le ticket acheté à bord, en 2e classe")
+        self.assertEqual((lost, wording(lost, quote)), (["2"], False))
+        # A decimal point is a decimal comma.
+        self.assertEqual(gone("2,10 € le ticket Carris acheté à bord", "2.10 € le ticket Carris, acheté à bord"), [])
+        self.assertEqual(gone("2,10 € le ticket Carris acheté à bord", "2.40 € le ticket Carris, acheté à bord"), ["2,10"])
+        self.assertEqual(gone("1 500 bahts la nuit en bungalow", "la nuit en bungalow : 1.500 bahts"), ["1500"])   # a point for the thousands is not read
+        # A year is not the head of a number in the millions: the price that follows it is read alone.
+        self.assertEqual(gone("500 bahts l’entrée du Grand Palais de Bangkok", "Tarif de novembre 2026 500 bahts pour entrer au Grand Palais de Bangkok"), [])
+        self.assertEqual(stale_lots.plain("En 2026 500 bahts, 12 500 000 dongs et 1 041,50 pesos"), "en 2026 500 bahts, 12500000 dongs et 1041,50 pesos")
+
+    def test_a_post_is_never_half_withdrawn_and_a_missing_file_is_counted(self):
+        stock = self.stock()
+        stock.post("ig-yucatan", [FARE, ENTRY], copies=("", "-tiktok"))
+        stock.post("fb-yucatan", [ENTRY])
+        stock.post("fb-kyoto", [OPENING])
+        stock.post("fb-nara", [OPENING])
+        stock.pages = {GUIDE: page(OPENING, ENTRY)}
+        # The file of the reel is broken: its copy is stale, and would have gone out of the stock alone.
+        (stock.root / "reviewed-social" / "ig-yucatan-v1.json").write_text("{")
+        result = stock.run()
+        self.assertEqual((result["retired"], result["reported"], result["unread"]), ([], ["ig-yucatan-tiktok-v1"], ["ig-yucatan-v1"]))
+        self.assertEqual(next(row["why"] for row in result["batches"] if row["batchId"] == "ig-yucatan-tiktok-v1"), "another_batch_of_the_post_is_unread")
+        self.assertEqual(stock.retirements(), [])
+        # A batch of the index whose file is gone is counted among the unread, not passed over.
+        (stock.root / "reviewed-social" / "fb-kyoto-v1.json").unlink()
+        result = stock.run()
+        self.assertEqual((result["checked"], sorted(result["unread"])), (3, ["fb-kyoto-v1", "ig-yucatan-v1"]))
+        self.assertEqual(next(row["why"] for row in result["batches"] if row["batchId"] == "fb-kyoto-v1"), "no_batch_file")
+
+    def test_nothing_is_written_through_an_index_that_is_a_link(self):
+        stock = self.stock()
+        stock.post("ig-yucatan", [FARE, ENTRY])
+        stock.post("fb-yucatan", [ENTRY])
+        stock.post("fb-kyoto", [OPENING])
+        stock.pages = {GUIDE: page(OPENING, ENTRY)}
+        index = stock.root / "reviewed-social" / "index.json"
+        outside = stock.root.parent / "outside-index.json"
+        outside.write_text(index.read_text())
+        self.addCleanup(outside.unlink)
+        index.unlink()
+        index.symlink_to(outside)
+        before = outside.read_bytes()
+        result = stock.run()
+        # Nothing is withdrawn; the stale batch is still told, as it is without the flag.
+        self.assertEqual((result["status"], result["retired"], result["reported"]), ("stale", [], ["ig-yucatan-v1"]))
+        self.assertEqual(outside.read_bytes(), before)
+        with self.assertRaisesRegex(ValueError, "is a link"):
+            stale_lots.retire(stock.root, result["batches"], NOW)
+        self.assertEqual(outside.read_bytes(), before)
+
     def test_figures_taken_from_another_site_are_listed_with_the_day_they_were_read(self):
         stock = self.stock()
         stock.post("ig-train", [ENTRY], other=["dès 10,50 € le billet promotionnel", "Une phrase sans chiffre."])

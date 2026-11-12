@@ -1,24 +1,6 @@
 {
   "schemaVersion": 1,
   "photos": {
-    "train-alfa-220": {
-      "file": "assets/photos/train-alfa-220.jpg",
-      "sha256": "456dcc13b391297754b1eeefb52f1eac241585e50082356e06f553f960c6551b",
-      "width": 1600,
-      "height": 2133,
-      "commonsTitle": "File:ألفا بندلار 220 ك س.jpg",
-      "sourcePage": "https://commons.wikimedia.org/wiki/File:%D8%A3%D9%84%D9%81%D8%A7_%D8%A8%D9%86%D8%AF%D9%84%D8%A7%D8%B1_220_%D9%83_%D8%B3.jpg",
-      "author": "Sambasoccer27",
-      "licence": "CC BY-SA 4.0",
-      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-      "originalSize": [
-        2448,
-        3264
-      ],
-      "commonsSha1": "ff24a2f60f707e1af172ed2f6464d0e225b9c552",
-      "retrievedAt": "2026-10-24T06:33:21Z",
-      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
-    },
     "train-alfa-aqueduc": {
       "file": "assets/photos/train-alfa-aqueduc.jpg",
       "sha256": "81b64b10cdbe0bfb5233928986d099146426ebaa1a9e4dc19fb3cb005c1dde8f",
@@ -55,6 +37,24 @@
       "retrievedAt": "2026-10-24T06:33:21Z",
       "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
     },
+    "train-alfa-oriente": {
+      "file": "assets/photos/train-alfa-oriente.jpg",
+      "sha256": "12f10500b64f649eb83849611b018aeb6168ec64a094d06c53a91c08739799a0",
+      "width": 2844,
+      "height": 1600,
+      "commonsTitle": "File:Alfa-Pendular im Gare Oriente.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Alfa-Pendular_im_Gare_Oriente.jpg",
+      "author": "Bunks",
+      "licence": "CC0",
+      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "originalSize": [
+        3264,
+        1836
+      ],
+      "commonsSha1": "82c3f032b10915f3b9b76c1eb2e650331dc4d1bb",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
     "train-alfa-pendular": {
       "camera": "ASUS_Z017D",
       "file": "assets/photos/auto/train-alfa-pendular.jpg",
@@ -73,7 +73,7 @@
         2620
       ],
       "commonsSha1": "53dc8fe943795f990687c69e284aedba28e9c1a7",
-      "retrievedAt": "2026-11-12T22:10:05Z",
+      "retrievedAt": "2026-11-12T23:12:31Z",
       "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux.",
       "emblematic": true
     },
@@ -95,7 +95,7 @@
         3264
       ],
       "commonsSha1": "b45fbc1b5b44ddd2a9ffeea65d23fb10cb86650f",
-      "retrievedAt": "2026-11-12T22:10:05Z",
+      "retrievedAt": "2026-11-12T23:12:31Z",
       "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux.",
       "emblematic": true
     }

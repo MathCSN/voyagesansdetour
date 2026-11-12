@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "contentId": "ig-lisbonne-porto-train-2026-11-18",
   "status": "rendered_not_published",
-  "fingerprint": "5a8da2d89652dbb960affe35c41ba5bca6144ae23d82c5583d2cfc7bd2d9edf3",
-  "createdAt": "2026-11-12T22:15:14.008827Z",
-  "renderFinishedAt": "2026-11-12T22:15:33.139094Z",
+  "fingerprint": "568c2697e146dda73b9913b67d9a5d303b88345a63290e097903988bdb8f9f99",
+  "createdAt": "2026-11-12T23:12:52.758554Z",
+  "renderFinishedAt": "2026-11-12T23:13:11.193984Z",
   "rendererContractVersion": 4,
   "rendererSha256": "53771f8977e744f7e898c21c13d02cd1f80ec9d9fcff06e28a9c095db57efd0a",
   "drawingSha256": "b78990f497d03baf754e3b2b68a795a5e9d3b91a0b6a2f8dad2ebcd7fec2907c",
@@ -13,7 +13,7 @@
   "kind": "reel",
   "channel": "instagram",
   "publishAt": "2026-11-18T17:00:00Z",
-  "reviewValidUntil": "2026-12-12T22:10:05Z",
+  "reviewValidUntil": "2026-12-12T23:12:31Z",
   "sourceCheckedOn": "2026-11-12",
   "targetUrl": "https://voyagesansdetour.fr/portugal/lisbonne-porto-train/",
   "voice": null,
@@ -22,15 +22,15 @@
     "https://voyagesansdetour.fr/portugal/lisbonne-porto-train/"
   ],
   "photos": {
+    "train-alfa-oriente": {
+      "licence": "CC0",
+      "author": "Bunks",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Alfa-Pendular_im_Gare_Oriente.jpg"
+    },
     "train-alfa-aqueduc": {
       "licence": "CC BY 2.0",
       "author": "Nicky Boogaard from Hardinxveld-Giessendam, Netherlands",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:CP_AlfaPendular_storming_through_Campolide_railway_station_(47548338771).jpg"
-    },
-    "train-alfa-220": {
-      "licence": "CC BY-SA 4.0",
-      "author": "Sambasoccer27",
-      "sourcePage": "https://commons.wikimedia.org/wiki/File:%D8%A3%D9%84%D9%81%D8%A7_%D8%A8%D9%86%D8%AF%D9%84%D8%A7%D8%B1_220_%D9%83_%D8%B3.jpg"
     },
     "train-alfa-pendular": {
       "licence": "CC0",
@@ -56,7 +56,7 @@
     "durationSeconds": 18.2,
     "videoCodec": "h264",
     "pixelFormat": "yuv420p",
-    "videoBitrateBps": 2233614,
+    "videoBitrateBps": 2649303,
     "audioCodec": "aac",
     "audioSampleRate": 48000,
     "audioBitrateBps": 97827,
@@ -69,13 +69,13 @@
   "files": [
     {
       "file": "apercu.jpg",
-      "sha256": "5e1ebea834794548eb722f068434d4e7878a89a358c8261f044c6bd32bbb5410",
-      "bytes": 204035
+      "sha256": "aba9a0f86db51a060565aec025ae9d3ef4924deea769495e673ae89e8deb9257",
+      "bytes": 221423
     },
     {
       "file": "credits.txt",
-      "sha256": "cae6030deefbebc8b78cd37582f17fb31424dbc9aa14e20baa616f197f79bf63",
-      "bytes": 2729
+      "sha256": "3bdfc2631d604966cffd981a4d36d8a40ae64be196772b2e4699ca619947d3ff",
+      "bytes": 2663
     },
     {
       "file": "dmsans-OFL.txt",
@@ -104,28 +104,28 @@
     },
     {
       "file": "poster.jpg",
-      "sha256": "584a22b39c2c0af9bb2d33a1d14efbbbbf4751cbf0821ca2977792b143880e03",
-      "bytes": 478788
+      "sha256": "eb54be362921d47fd3892b88ccb1365b1cff444c198c8cae94af9059789d4a79",
+      "bytes": 392898
     },
     {
       "file": "reel.mp4",
-      "sha256": "3afa44ece798f455185d54c12fa909d7b175a3d8e0631e829fa7e799b897bf6f",
-      "bytes": 5325706
+      "sha256": "7d23d6f1b34d445591bef8fe6ac700309be312459e889875299c7ec91781a42e",
+      "bytes": 6271398
     },
     {
       "file": "scenario.json",
-      "sha256": "23b89eec4223478c3858f8939daf4abe50dc44a4443e553f661f2bce57c58a68",
-      "bytes": 7361
+      "sha256": "abf46fb42498b97ca849f67f7d98e908b2c9b4ad1a47709f005ccabc347b84f5",
+      "bytes": 7349
     },
     {
       "file": "scene-01.jpg",
-      "sha256": "d96dcc25a02fb248bab61e9e7ff91977c4adc90d99402aedc8a1f55817e9b49d",
-      "bytes": 438153
+      "sha256": "dee28c96bfff874b31f8043528781707f651b130f9a809282d96d22d9e9ed39f",
+      "bytes": 363818
     },
     {
       "file": "scene-02.jpg",
-      "sha256": "1d963b58419092ec90fa7d7f2e5b407ce1532f397906fc97667b595c2eabe454",
-      "bytes": 272405
+      "sha256": "d788d63b8b470335acab2d1603d518a3ddcaa0be1d607f10c5dca53df93085e7",
+      "bytes": 452521
     },
     {
       "file": "scene-03.jpg",
@@ -134,8 +134,8 @@
     },
     {
       "file": "scene-04.jpg",
-      "sha256": "c9c192835f2407f052718c16c90dbe19311ff30ba168ceec722668682c53ff53",
-      "bytes": 344565
+      "sha256": "d7b4624e136d7eb3c20b353ef2c00aaf6df73e7a6b4a8e09ca3b029d9ca95026",
+      "bytes": 341055
     },
     {
       "file": "scene-05.jpg",
@@ -144,7 +144,7 @@
     }
   ],
   "runtime": {
-    "wallSeconds": 18.755,
+    "wallSeconds": 18.006,
     "encoderThreads": 2,
     "pillowVersion": "11.3.0",
     "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers"

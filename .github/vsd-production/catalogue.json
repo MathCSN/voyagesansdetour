@@ -134,12 +134,6 @@
       "sha256": "6999717cf2c29d737ccac377110f183538c2f405860db582394a0a8f13ba26f3"
     },
     {
-      "contentId": "ig-lisbonne-porto-train-2026-11-18",
-      "notBefore": "2026-11-12T22:10:05Z",
-      "file": "scenarios/ig-lisbonne-porto-train-2026-11-18.json",
-      "sha256": "23b89eec4223478c3858f8939daf4abe50dc44a4443e553f661f2bce57c58a68"
-    },
-    {
       "contentId": "ig-yucatan-itineraire-10-jours-2026-11-20-3",
       "notBefore": "2026-11-12T22:14:44Z",
       "file": "scenarios/ig-yucatan-itineraire-10-jours-2026-11-20-3.json",
@@ -156,6 +150,12 @@
       "notBefore": "2026-11-12T22:14:48Z",
       "file": "scenarios/fb-marrakech-3-jours-2026-11-26-2.json",
       "sha256": "320302da5ca0fa3b5f645c306071f685a947c3d7a82835bdb5fb26f660cdc435"
+    },
+    {
+      "contentId": "ig-lisbonne-porto-train-2026-11-18",
+      "notBefore": "2026-11-12T23:12:31Z",
+      "file": "scenarios/ig-lisbonne-porto-train-2026-11-18.json",
+      "sha256": "abf46fb42498b97ca849f67f7d98e908b2c9b4ad1a47709f005ccabc347b84f5"
     }
   ]
 }

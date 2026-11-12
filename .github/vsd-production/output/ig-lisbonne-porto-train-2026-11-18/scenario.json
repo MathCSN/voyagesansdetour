@@ -10,17 +10,17 @@
   "publishAt": "2026-11-18T17:00:00Z",
   "review": {
     "status": "reviewed_for_render",
-    "checkedAt": "2026-11-12T22:10:05Z",
-    "validUntil": "2026-12-12T22:10:05Z",
+    "checkedAt": "2026-11-12T23:12:31Z",
+    "validUntil": "2026-12-12T23:12:31Z",
     "method": "Généré automatiquement (auto_social.py) depuis la page publiée du guide relevée le 12/11/2026 : chaque chiffre, étape ou ligne de tableau est cité mot pour mot ; photos et vidéos réelles sous licence libre, aucune image ni vidéo générée par IA ; garde-fous de production.py passés avant la mise en file."
   },
   "sources": {
     "file": "auto/ig-lisbonne-porto-train-2026-11-18/sources.json",
-    "sha256": "f689db303c0d3247b5fdcd09f77e9dec6918181b5fef5786248915cf6fa1c408"
+    "sha256": "5b4b22e20c58d4d719a1faa64796253aff044b86b97c1876e1774e79eae0fc8d"
   },
   "photos": {
     "file": "auto/ig-lisbonne-porto-train-2026-11-18/photos.json",
-    "sha256": "eae0ac3ebc5e9a7a97430c92b6adac4030e9c5ee9e32afe8a19156ebacdd98e4"
+    "sha256": "1e070aa14174ecb7d357f4f84d4e63d62c2ef4f0487daa6afbd30839eed1d1c4"
   },
   "caption": {
     "hook": "🚆 Lisbonne–Porto en train : 35,70 € en Alfa Pendular, jusqu’à −65 % en Promo",
@@ -41,7 +41,7 @@
   },
   "scenes": [
     {
-      "photo": "train-alfa-aqueduc",
+      "photo": "train-alfa-oriente",
       "focus": [
         0.5,
         0.5
@@ -63,7 +63,7 @@
       "tag": "Guide Portugal · sources du 24/10/2026"
     },
     {
-      "photo": "train-alfa-220",
+      "photo": "train-alfa-aqueduc",
       "focus": [
         0.5,
         0.5
@@ -137,7 +137,7 @@
         0.5
       ],
       "layout": "fact",
-      "kicker": "La ligne du Nord en 2026",
+      "kicker": "Portugal",
       "headline": [
         "*38,3 %*"
       ],

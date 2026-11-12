@@ -35,6 +35,10 @@ NOT_A_CLOSING = frozenset({
     "douro-pinhao-azulejos", "seville-alcazar", "amalfi-ravello", "amalfi-ferry", "cinque-train", "thailande-train-nuit",
     "costa-rica-monteverde", "japon-shinkansen", "japon-nara-cerfs", "laponie-husky", "tenerife-adeje"})
 
+# Photos that show numbers of their own (a display, a board of fares): a table is never laid over them, its figures
+# would be read among theirs. `train-alfa-220` is the display of an Alfa Pendular carriage: "220 km/h · 10:22 · 21 °C".
+OWN_FIGURES = frozenset({"train-alfa-220"})
+
 # Where the subject of a photo of the site is (x, y from 0 to 1), when a vertical frame cut around its middle misses it:
 # the gable of the Grand Palace stands on the right of its photo, under a wide evening sky.
 # The temple of Tulum stands right of the middle of a panorama: cut around the middle, the frame slid off it.
@@ -252,7 +256,9 @@ def new_photo(candidate: dict, photos: Photos, chosen: list) -> tuple[str, dict,
     same = got[1].get("commonsSha1")
     if same and same in {photo[1].get("commonsSha1") for photo in chosen}:
         return None
-    record = closing_mark(candidate, got[1])
+    record = {key: value for key, value in closing_mark(candidate, got[1]).items() if key != "figures"}
+    if got[0] in OWN_FIGURES:
+        record = {**record, "figures": True}
     # A photo reviewed by hand carries its own "focus" (reviewed.json); a photo of the site takes it from SITE_FOCUS.
     return (got[0], {**record, "focus": candidate["focus"]} if candidate.get("focus") else record, candidate["alt"])
 

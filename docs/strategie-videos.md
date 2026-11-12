@@ -305,7 +305,19 @@ Yucatán donnait trois étapes sur quatre, celle de la Thaïlande quatre heures 
   chiffre à l'écran ;
 - **un chiffre que le guide ne donne que dans une section appartient à cette section** (« 604
   pesos l'entrée d'Uxmal » sous « Jours 4-6 : Mérida et Uxmal », pas sous « Jour 3 ») : le Yucatán
-  retrouve ses cinq étapes et son « jour par jour ».
+  retrouve ses cinq étapes et son « jour par jour ». Une section qui ne fait que résumer le guide
+  (« Le comparatif en un coup d'œil », « Avant tout ») n'y gagne rien : à Lisbonne, « 25 min de
+  l'aéroport à Rossio » reste sous « Baixa et Chiado ». Mesuré sur les 27 guides, code de main
+  contre code de la branche : seuls deux chiffres changent de section, Uxmal et « 2 h 32 de Hué à
+  Đà Nẵng » (de « Le parcours » à « Jours 8 à 10 ») ;
+- **un tableau n'est jamais posé sur une photo qui porte ses propres chiffres** : l'afficheur de
+  bord d'un Alfa Pendular (« 220 km/h · 10:22 · 21 °C ») se lisait autour des tarifs. Ces photos
+  sont listées dans `media_library.OWN_FIGURES` (ou marquées `"figures": true` dans
+  `reviewed.json`) ; elles n'ouvrent un post que faute d'une autre photo ;
+- **l'en-tête ne précède la première ligne de légende que s'il nomme quelque chose** (« Départ de
+  Bangkok », « Aller simple 2026 ») : « Jour A », « Étape », « Notre choix » laissent la ligne nue ;
+- **une étiquette datée n'est pas posée sur un chiffre d'une autre année** : « La ligne du Nord en
+  2026 » au-dessus de « 38,3 % des Alfa Pendular à l'heure en 2025 » devient « Portugal ».
 
 Ce qui reste, mesuré le 12/11/2026 sur les 26 guides : un chiffre qu'aucune photo ne montre
 complète encore un post, y compris sur une image trouvée par la recherche (Marrakech : « 3 h de

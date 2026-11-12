@@ -52,6 +52,7 @@ OWN_DATE = re.compile(rf"\brelevée?s? (?:en |de |d’|d'|le |du |au )((?:\d{{1,
                       rf"|\((?:[^()]*, )?((?:{MONTHS}) 20\d\d)\)", re.IGNORECASE)
 # "(novembre 2026)" after an opening, a festival or a deadline dates that event, not the day the figure was read.
 EVENT = re.compile(r"\b(?:ouvertures?|réouvertures?|inaugurations?|festivals?|fêtes?|carnavals?|éditions?|prévue?s?)\b", re.IGNORECASE)
+YEAR = re.compile(r"\b20\d\d\b")
 SOURCES_READ = re.compile(r"sources du (\d\d)/(\d\d)/(20\d\d)\Z")
 TAG_MAX = 52
 
@@ -405,7 +406,7 @@ class Media:
         pick = self.named(text, section, avoid, also)
         if not pick and (strict or len(self.photos) <= self.reserve):
             raise Held("no_photo_of_this_place" if strict else "not_enough_photos_or_figures")
-        kept, free = self.kept(), self.free()
+        kept, free = self.kept(), [ph for ph in self.free() if ph[0] not in avoid]
         pick = pick or next((ph for ph in free if ph[0] not in kept), free[0] if free else None)
         if not pick:
             raise Held("not_enough_photos_or_figures")
@@ -439,6 +440,8 @@ class Media:
         spare = self.spare()
         seen = [ph for ph in self.photos if ph[0] not in self.found]
         left = [ph for ph in seen if ph[0] != spare]
+        # A photo that shows numbers of its own (a display, a board of fares) opens a post only when no other can.
+        left = [ph for ph in left if not ph[1].get("figures")] or left
         pick = (next((ph for ph in seen if ph[0] == cover), None) or next((ph for ph in left if ph[0] in self.emblematic), None)
                 or (left[0] if left else None))
         if not pick:
@@ -466,6 +469,11 @@ def fact_plan(fact: dict, media: Media, place: str, tag: str, badge: str | None 
     # none: "Aurores boréales" is not written over a picture of the village.
     own = fact["section"].get("image") if fact["section"] else None
     kicker = kicker_of(fact["section"], place) if not own or picture[1] == own else place
+    # …and a name that carries a year is not written over a figure of another year ("La ligne du Nord en 2026" over
+    # "38,3 % des Alfa Pendular à l'heure en 2025").
+    years, dated = set(YEAR.findall(kicker)), set(YEAR.findall(fact["label"]))
+    if years and dated and not years & dated:
+        kicker = place
     excerpt, label = quoted(fact, tag)
     return plan("fact", picture, kicker, headline, seconds_for(detail), detail=detail,
                 facts=[{"source": "guide", "excerpt": excerpt}], tag=label, badge=badge)
@@ -586,13 +594,18 @@ def itinerary_reel(brief: Brief) -> tuple[dict, list[dict], list[str]]:
     return brief.hook(EVERY_DAY if every_day else f"*{len(body)} étapes clés*"), body, lines
 
 
+HOLLOW_HEADING = frozenset({"notre", "votre", "choix"})   # words of a column heading that name nothing ("Notre choix")
+
+
 def table_lines(heading: str, rows: list[list[str]]) -> list[str]:
     """The table in the caption, a row a line. The first one says what the table lists ("Le train de nuit pour Chiang
     Mai · Départ de Bangkok — N° 9 : 18 h 40"): four times alone, with nothing to say where they leave from, tell
-    nothing (review of 12/11/2026)."""
+    nothing (review of 12/11/2026). Only where that heading names something, two words that count at least: "Jour A
+    — 1 jour : 22 €" or "Étape — 1 à 3 : Manuel Antonio" says less than the bare row."""
     lines = [f"📅 {label} : {value}" for label, value in rows]
     named = f"📅 {heading} — {rows[0][0]} : {rows[0][1]}"
-    return [named if len(named) <= CAPTION_LINE else lines[0]] + lines[1:]
+    telling = len(words_of(heading) - HOLLOW_HEADING) >= 2
+    return [named if telling and len(named) <= CAPTION_LINE else lines[0]] + lines[1:]
 
 
 def table_kicker(brief: Brief, section: dict, photo_id: str) -> str:
@@ -631,7 +644,9 @@ def table_reel(brief: Brief) -> tuple[dict, list[dict], list[str]]:
     if brief.media.room() < 1:
         raise Held("not_enough_photos_or_figures")
     rows = table["rows"]
-    picture = brief.media.photo(section=table["section"])
+    # Never under a table a photo that shows numbers of its own (the display of a carriage, "220 km/h · 10:22 · 21 °C",
+    # read around and behind the fares on 12/11/2026).
+    picture = brief.media.photo(section=table["section"], avoid=frozenset(photo[0] for photo in brief.media.all if photo[1].get("figures")))
     # The table is named by its section ("Le train de nuit pour Chiang Mai" above "Départ de Bangkok"), and the price
     # the guide gives for what it lists is written under it.
     price = under_table(brief, picture[1], rows)
