@@ -175,6 +175,39 @@ des photos du guide (« Santa », de « Santa Claus Village »). Désormais :
   toute recherche. C'est la voie à prendre pour un guide qui manque de photos. L'ancien
   `catalogue.json` est scellé par l'empreinte des scénarios écrits à la main : on n'y écrit plus.
 
+**Suite de la vérification du 12/11/2026** (reels, carrousels et recherche de photos) :
+
+- **un plan de fait montre toujours un chiffre** : un repère sans chiffre (« Ligne rouge ») reste
+  dans le guide ; dans un itinéraire, une étape pour laquelle le guide ne donne aucun chiffre
+  n'est pas montrée, et il faut trois étapes chiffrées pour un reel « jour par jour » ;
+- **un chiffre va sur la photo qui montre le mieux ce qu'il nomme, ou nulle part** : si cette
+  photo est déjà prise par un autre plan du même post, le chiffre reste dans le guide au lieu
+  d'être posé sur un autre lieu (le prix de Chichén Itzá sur la cathédrale de Mérida). Les mots
+  qui ne nomment rien (« pour », « entre ») et le nom du lieu ou du pays ne comptent pas. Un
+  chiffre qu'aucune photo du post ne montre complète encore un post jusqu'à ses quatre chiffres ;
+- **la photo de couverture ouvre le post, sauf si un plan nomme ce qu'elle montre** : la photo
+  suivante du guide ouvre alors le post ;
+- **le carrousel suit les mêmes règles que le reel** : même choix de photo, chiffre qui répète
+  le titre écarté, et il choisit parmi huit photos au lieu de six ;
+- **la dernière image est une photo emblématique** : une photo que le site publie pour ce lieu,
+  ou une photo de `reviewed.json` marquée `"emblematic": true` par celui qui l'a regardée. Jamais
+  une photo ajoutée pour un seul plan (un cabanon, un attelage) ni une image trouvée par la
+  recherche. La dernière photo emblématique libre est gardée pour la fin ; s'il n'en reste
+  aucune, le reel attend ;
+- **la petite étiquette porte la date du chiffre quand le guide la donne** (« relevé en juillet
+  2026 », « (octobre 2026) ») : « Guide Yucatán · chiffre de juillet 2026 », et le plan cite alors
+  l'extrait entier, date comprise (`production.py` le vérifie). Sans date propre, elle garde
+  « sources du… », la date de relecture du guide. Une période de validité (« du 2 novembre au
+  31 décembre ») ou un début (« depuis janvier ») n'est pas une date de relevé ;
+- **recherche de photos** : un homonyme du même pays est refusé d'après la liste relue à la main
+  `destinations.HOMONYMS` (Porto Covo, Porto Moniz, Porto Santo… pour Porto), dans le titre comme
+  dans les catégories ; une image dont le titre ou les catégories disent qu'elle montre un
+  animal, une plante ou un match (« Mammals of… », « in flight », nom latin entre parenthèses,
+  « sports ») n'est pas une photo du lieu. Ce qui reste possible : un homonyme du même pays
+  absent de la liste (à lire dans la liste des communes du pays quand on ajoute une destination
+  au nom courant), et une photo de détail du bon lieu (un reflet dans une vitre) ; les deux ne
+  touchent que les guides qui ont moins de huit photos relues à la main.
+
 Règles communes à tous les reels (`motion_render.py`) :
 
 - accroche encadrée au milieu du cadre, complète dès la première image (c'est aussi la couverture) ;
@@ -184,8 +217,12 @@ Règles communes à tous les reels (`motion_render.py`) :
 - libellé raccourci à sa première pause naturelle (toujours les mots du guide) et posé sur
   un panneau sombre : tout se comprend sans le son ;
 - la photo d'un plan montre ce que le plan nomme : une étape d'itinéraire n'apparaît que si le
-  guide a une photo de ce lieu ; la photo de couverture du guide ouvre le reel ;
-- dernière image : « voyagesansdetour.fr → lien en bio » et « Enregistrez ce reel pour votre voyage » ;
+  guide a une photo de ce lieu ; la photo de couverture du guide ouvre le reel, sauf si un plan
+  nomme ce qu'elle montre ;
+- dernière image : « Le guide complet », « voyagesansdetour.fr » et « Enregistrez cette vidéo
+  pour votre voyage », sur une photo emblématique du lieu. Depuis le 12/11/2026 elle ne dit plus
+  « lien en bio » ni « ce reel » : le même fichier part sur TikTok, où il n'y a pas de lien en
+  bio. Les reels déjà rendus gardent l'ancienne image ;
 - légende : titre du guide, 3 à 5 lignes utiles, « Enregistrez… le guide complet est en lien
   dans la bio », une ligne de crédits, 5 hashtags au plus (lieu, pays, type de guide, marque).
 

@@ -48,7 +48,9 @@ def photo_candidates(article: dict, site_photos: dict, country: str, shared: dic
         record = site_photos.get(photo_id) or {}
         title = commons_title(record.get("source_page", ""))
         if title:
-            candidates.append({"id": photo_id, "title": title, "alt": record.get("alt_fr") or fallback, "author": record.get("author")})
+            # A photo the site publishes for this place was chosen to stand for it: it may close a post.
+            candidates.append({"id": photo_id, "title": title, "alt": record.get("alt_fr") or fallback, "author": record.get("author"),
+                               "emblematic": True})
     taken = {candidate["title"] for candidate in candidates}
     for photo_id, record in (shared or {}).items():
         title = record.get("commonsTitle")
@@ -79,6 +81,34 @@ def names_place(title: str, names: list[str]) -> bool:
     return any(f"-{slugged(name)}-" in words for name in names if slugged(name))
 
 
+def homonyms(article: dict) -> list[str]:
+    """Other places of the same country whose name holds the guide's (destinations.HOMONYMS): Porto Covo for Porto."""
+    return list(destinations.HOMONYMS.get(slugged(article["destination"]), ()))
+
+
+def names_another_place(record: dict, others: list[str]) -> bool:
+    """The file's title or one of its Commons categories names a homonym of the guide's place: "Porto Covo Outubro
+    2014" and "Foggy Fanal forest in Seixal, Porto Moniz" both carry the word "Porto" and neither is Porto."""
+    texts = [str(record.get("commonsTitle") or ""), *str(record.get("categories") or "").split("|")]
+    return any(names_place(text, others) for text in texts)
+
+
+# A found file must show the place, not what lives or happens there: Commons files a coati on a beach of Yucatán, a
+# flatfish off Tenerife or a football match in London under the name of the place. Its categories say so in English.
+NOT_THE_PLACE = re.compile(
+    r"\b(?:animals?|animalia|wildlife|fauna|flora|mammals?|mammalia|birds?(?!['’]?s?[ -]eye)|aves|fish(?:es)?|actinopterygii"
+    r"|insects?|insecta|arthropod[as]?|reptiles?|reptilia|amphibia(?:ns)?|butterfl(?:y|ies)|lepidoptera|dragonfl(?:y|ies)|odonata"
+    r"|bees?|spiders?|mollus[ck]s?|mollusca|cephalopod[as]?|octopus(?:es)?|[a-z]+idae|underwater|in flight|zoo"
+    r"|flowers?|tulips?|plantae|fungi|mushrooms?|sports?|football|matches)\b", re.IGNORECASE)
+SPECIES = re.compile(r"\([A-Z][a-z]+ [a-z]+\)")     # a Latin name in the title: "Tapaculo (Bothus podas), Tenerife"
+
+
+def shows_something_else(record: dict) -> bool:
+    """An animal, a plant or a match rather than the place, by the file's own title and categories."""
+    title = str(record.get("commonsTitle") or "")
+    return bool(SPECIES.search(title) or NOT_THE_PLACE.search(title + "|" + str(record.get("categories") or "")))
+
+
 def country_names(article: dict, table: dict) -> list[str]:
     """The guide's country as Commons writes it: its French name, then English and Spanish (destinations.EXONYMS)."""
     slug = destinations.country_slug(article)
@@ -102,7 +132,7 @@ def featured_candidates(article: dict, names: list[str], country: str, searcher,
     countries = countries or []
     if {slugged(name) for name in names} & {slugged(name) for name in countries}:
         return []
-    found = []
+    found, others = [], homonyms(article)
     for name in names:
         try:
             titles = searcher(f'"{name}" {FEATURED}')
@@ -110,11 +140,13 @@ def featured_candidates(article: dict, names: list[str], country: str, searcher,
             continue
         for title in titles:
             # The place must be named in the file title: a search hit on the description alone is refused.
-            if not names_place(title, names):
+            # And it must be that place: "Porto Covo" names another town of the same country.
+            if not names_place(title, names) or names_place(title, others):
                 continue
             label = re.sub(r"\s+", " ", re.sub(r"\.(jpe?g)$", "", title.removeprefix("File:"), flags=re.IGNORECASE)).strip()
             found.append({"id": slugged(article["destination"])[:40] + "-" + hashlib.sha1(title.encode()).hexdigest()[:8], "title": title,
-                          "alt": f"{article['destination']} ({country}) : {label}."[:300], "automatic": True, "countryNames": countries})
+                          "alt": f"{article['destination']} ({country}) : {label}."[:300], "automatic": True, "countryNames": countries,
+                          "homonyms": others})
     return found
 
 
@@ -143,8 +175,11 @@ class Photos:
     @staticmethod
     def acceptable(candidate: dict, record: dict, fetched: bool) -> bool:
         """Nobody looked at a file found by the search: it must be a photograph (a camera in its own data when it is
-        fetched today, nothing in its record that says otherwise) and be tied to the guide's country."""
+        fetched today, nothing in its record that says otherwise), show the place rather than an animal, a plant or a
+        match, be tied to the guide's country and name no other place of that country."""
         if photo_intake.unphotographic_record(record) or (fetched and not record.get("camera")):
+            return False
+        if shows_something_else(record) or names_another_place(record, candidate.get("homonyms") or []):
             return False
         return tied_to_country(record, candidate.get("countryNames") or [])
 
@@ -177,6 +212,16 @@ class Photos:
         return self.known[title]
 
 
+def closing_mark(candidate: dict, record: dict) -> dict:
+    """The record with what decides whether the photo may close a post (`emblematic`): yes for a photo of the site,
+    never for a file found by the search, and what a human wrote in reviewed.json for the photos added by hand."""
+    if candidate.get("emblematic"):
+        return {**record, "emblematic": True}
+    if candidate.get("automatic"):
+        return {key: value for key, value in record.items() if key != "emblematic"}
+    return record
+
+
 def gather_photos(article: dict, needed: int, photos: Photos, site_photos: dict, country: str, searcher,
                   table: dict | None = None) -> list[tuple[str, dict, str]]:
     """Up to `needed` distinct, freely licensed photographs of the place: (id, record, alt)."""
@@ -191,7 +236,7 @@ def gather_photos(article: dict, needed: int, photos: Photos, site_photos: dict,
             got = photos.get(candidate)
             if got and got[0] not in seen and got[1].get("commonsSha1") not in {c[1].get("commonsSha1") for c in chosen if c[1].get("commonsSha1")}:
                 seen.add(got[0])
-                chosen.append((got[0], got[1], candidate["alt"]))
+                chosen.append((got[0], closing_mark(candidate, got[1]), candidate["alt"]))
 
     take(photo_candidates(article, site_photos, country, photos.shared))
     if len(chosen) < needed:

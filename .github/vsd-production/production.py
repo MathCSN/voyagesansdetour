@@ -62,8 +62,11 @@ CATALOGUE_MAX = 400
 INSTAGRAM_CAPTION_MAX = 2200
 MUSIC_FADE_OUT = 1.5
 REEL_BUTTON = {"instagram": "Le guide complet → lien en bio", "facebook": "Le guide complet → voyagesansdetour.fr"}
-# The same file goes to Instagram, TikTok and Shorts: the address is spelled out, the bio is named.
-MOTION_BUTTON = "voyagesansdetour.fr → lien en bio"
+# The same file goes to Instagram, TikTok and Shorts: the last card names the site and nothing that exists on one
+# network only ("lien en bio" was false on TikTok). Reels already rendered keep the card they were given.
+MOTION_BUTTON = "voyagesansdetour.fr"
+# The small label of a plan may give the figure's own date ("chiffre de juillet 2026"): then the plan quotes it.
+OWN_DATE_TAG = re.compile(r" · chiffre (?:de |du |d’)(.+)\Z")
 UNBALANCED = "Unbalanced highlight markers"
 # The charter forbids the defensive boilerplate that emptied the old posts.
 FORBIDDEN = ("sans récit", "voix de synthèse", "aucune approbation", "si possible",
@@ -283,6 +286,9 @@ def quoted_excerpts(scene, snapshots, last):
         ensure(excerpt in snapshots[fact["source"]][1], "Fact excerpt is not in its dated snapshot: " + excerpt)
         used.add(fact["source"])
         quoted.append(excerpt)
+    # A date the label gives to the figure is the figure's own: it is read in what this very plan quotes.
+    dated = OWN_DATE_TAG.search(scene.get("tag") or "")
+    ensure(not dated or any(normalized(dated[1]).lower() in excerpt.lower() for excerpt in quoted), "The label dates a figure that its plan does not quote with that date")
     return used, quoted
 
 
@@ -331,17 +337,7 @@ def check_scene(scene, kind, snapshots, last):
     else:
         text(scene.get("alt"), 300)
     ensure(bool(scene.get("cta")) == last, "Only the last scene is the call to action")
-    facts = scene.get("facts", [])
-    ensure(isinstance(facts, list) and (facts or last), "Each scene needs at least one sourced fact")
-    if facts:
-        text(scene.get("tag"), 52)
-    used = set()
-    for fact in facts:
-        ensure(fact.get("source") in snapshots, "Unknown fact source: " + str(fact.get("source")))
-        excerpt = normalized(text(fact.get("excerpt"), 400))
-        ensure(excerpt in snapshots[fact["source"]][1], "Fact excerpt is not in its dated snapshot: " + excerpt)
-        used.add(fact["source"])
-    return used
+    return quoted_excerpts(scene, snapshots, last)[0]
 
 
 def check_caption(scenario):

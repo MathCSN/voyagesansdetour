@@ -393,17 +393,28 @@ class GeneratorTests(unittest.TestCase):
         self.assertEqual(reel["scenes"][1]["headline"], ["*14 170 ¥*"])  # prices first
 
     def test_an_itinerary_goes_day_by_day_and_never_shows_a_stage_over_another_place(self):
-        reel = self.reel(self.fixture([guide(category="Itinéraires", sections=DAYS)]))
+        bamboo = {"value": "1 000 ¥", "label": "la traversée en barque de la rivière Hozu à Arashiyama"}
+        nara = {"title": "Jour 5 — Nara", "image": "kyoto-6", "paragraphs": ["Les daims du parc."]}
+        reel = self.reel(self.fixture([guide(category="Itinéraires", sections=DAYS + [nara], keyFacts=FACTS + [bamboo])]))
         stages = reel["scenes"][1:-1]
         self.assertEqual((reel["format"], reel["scenes"][0]["headline"][-1]), ("itineraire", "*jour par jour*"))
         self.assertEqual([(s["kicker"], s["headline"], s["photo"]) for s in stages],
                          [("Jour 1", ["Kiyomizu-dera"], "kyoto-3"), ("Jour 2", ["Fushimi Inari", "et ses torii"], "kyoto-4"), ("Jour 3", ["Arashiyama"], "kyoto-5")])
         self.assertEqual(stages[0]["facts"][0]["excerpt"], "Jour 1 — Kiyomizu-dera, le temple sur pilotis")
         self.assertEqual(stages[0]["detail"], "*500 ¥* l’entrée du temple Kiyomizu-dera")
-        # The caption carries the figure each stage shows, with its whole label.
+        # Every stage shown carries a figure of the guide, on screen and in the caption with its whole label.
+        self.assertTrue(all(len(s["facts"]) == 2 and "*" in s["detail"] for s in stages))
         self.assertIn("📍 Jour 2 : Fushimi Inari et ses torii · 10 000 torii rouges sur la colline du Fushimi Inari", reel["caption"]["lines"])
-        self.assertIn("📍 Jour 3 : Arashiyama", reel["caption"]["lines"])
-        self.assertNotIn("Osaka", json.dumps(reel["scenes"], ensure_ascii=False))  # no photo of Osaka in this guide
+        self.assertIn("📍 Jour 3 : Arashiyama · 1 000 ¥ la traversée en barque de la rivière Hozu à Arashiyama", reel["caption"]["lines"])
+        shown = json.dumps(reel["scenes"], ensure_ascii=False)
+        self.assertNotIn("Osaka", shown)  # no photo of Osaka in this guide
+        self.assertNotIn("Nara", shown)   # a photo, but no figure for that day: the stage stays in the guide
+
+    def test_an_itinerary_whose_days_have_no_figure_takes_another_format(self):
+        # Two days out of three with a figure (review of 12/11/2026: "Valladolid, la base de l'intérieur" said nothing).
+        reel = self.reel(self.fixture([guide(category="Itinéraires", sections=DAYS)]))
+        self.assertEqual(reel["format"], "liste")
+        self.assertTrue(all(any(c.isdigit() for c in s["headline"][0]) for s in reel["scenes"][1:-1]))
 
     def test_a_when_to_go_guide_becomes_a_table_to_pause(self):
         article = guide(category="Choisir", shortTitle="Quand partir à Kyoto", sections=[TABLE] + SECTIONS)
@@ -523,6 +534,9 @@ class FastReelGuards(unittest.TestCase):
     def test_a_figure_on_screen_must_be_read_in_the_plan_own_quote(self):
         self.refused("not quoted from this plan", lambda s: s["scenes"][1].update(headline=["*3 h 59*"]))
         self.refused("not quoted from this plan", lambda s: s["scenes"][0].update(headline=["Kyoto en train", "*dès 99 €*"]))
+
+    def test_a_label_cannot_date_a_figure_with_a_date_its_plan_does_not_quote(self):
+        self.refused("does not quote with that date", lambda s: s["scenes"][1].update(tag="Guide Kyoto · chiffre de juillet 2026"))
 
     def test_the_hook_announces_only_the_plans_that_follow(self):
         self.refused("not quoted from this plan", lambda s: s["scenes"][0].update(headline=["Kyoto en train", "*9 chiffres à connaître*"]))
@@ -887,7 +901,7 @@ class StageTests(unittest.TestCase):
     def test_a_stage_carries_its_price_with_what_it_pays_for(self):
         label = "l’entrée de Chichén Itzá pour un étranger depuis le « boleto único » du 27 mars 2026 (105 pesos de tarif INAH inclus)"
         fact = {"value": "697 pesos", "label": label, "short": reel_formats.short_label(label), "shortExcerpt": "697 pesos " + label}
-        step = {"kicker": "Jour 3", "lines": ["Chichén Itzá"], "title": "Jour 3 : Chichén Itzá à l’ouverture", "rest": "Ik Kil l’après-midi", "fact": fact}
+        step = {"kicker": "Jour 3", "lines": ["Chichén Itzá"], "title": "Jour 3 : Chichén Itzá à l’ouverture", "fact": fact}
         # No punctuation within reach: the label stops before what only qualifies the figure, still the guide's own words.
         shown = "l’entrée de Chichén Itzá pour un étranger"
         self.assertEqual(fact["short"], shown)
@@ -897,14 +911,20 @@ class StageTests(unittest.TestCase):
         self.assertEqual(scene["facts"][1]["excerpt"], "697 pesos " + shown)
         self.assertEqual(reel_formats.short_label("Cancún–Playa del Carmen et Playa del Carmen–Tulum en tarif touriste international (octobre 2026)"),
                          "Cancún–Playa del Carmen et Playa del Carmen–Tulum")
-        too_long = {**fact, "short": "x" * 90}
-        self.assertEqual(reel_formats.stage_plan({**step, "fact": too_long}, ("photo", "yucatan-cenote"), "Guide")["detail"], "Ik Kil l’après-midi")
+
+    def test_a_stage_whose_figure_does_not_fit_has_none(self):
+        day = {"title": "Jour 3 — Chichén Itzá"}
+        fact = {"value": "697 pesos", "label": "l’entrée", "short": "l’entrée", "section": day}
+        stage = lambda facts: reel_formats.stages({"sections": [day]}, "Jour 3 — Chichén Itzá", facts)[0]["fact"]
+        self.assertIs(stage([fact]), fact)
+        self.assertIsNone(stage([{**fact, "short": "x" * 90}]))  # longer than three lines under the stage: not shown, so no stage
+        self.assertIsNone(stage([{**fact, "section": {"title": "Un autre jour"}}]))
 
     def test_the_first_photo_opens_the_reel_when_the_cover_is_too_small_for_it(self):
         article = guide(cover="kyoto-absente")
         facts = [{**fact, "short": fact["label"], "shortExcerpt": fact["value"] + " " + fact["label"], "excerpt": fact["value"] + " " + fact["label"], "section": None}
                  for fact in FACTS]
-        photos = [(f"kyoto-{n}", {"commonsTitle": f"File:Kyoto {n}.jpg"}, f"Kyoto, vue {n}.") for n in range(1, 8)]
+        photos = [(f"kyoto-{n}", {"commonsTitle": f"File:Kyoto {n}.jpg", "emblematic": True}, f"Kyoto, vue {n}.") for n in range(1, 8)]
         scenes, _ = reel_formats.build("liste", article, facts, photos, [], "Le Nozomi relie Tokyo à Kyoto.", "Kyoto", "Japon · Kyoto", "Guide Kyoto",
                                        ["Kyoto en train"], "")
         self.assertEqual(scenes[0]["photo"], "kyoto-1")
@@ -921,17 +941,60 @@ class ShownTests(unittest.TestCase):
               ("lap-train", {"commonsTitle": "File:Train.jpg"}, "Le train de nuit en gare de Rovaniemi."),
               ("lap-traineau", {"commonsTitle": "File:Sleigh.jpg", "focus": [0.8, 0.55]}, "Une balade en traîneau tiré par un renne."),
               ("lap-village", {"commonsTitle": "File:Village.jpg"}, "Le village sous la neige en décembre, à Rovaniemi."),
-              ("lap-pyramide", {"commonsTitle": "File:Balls.jpg"}, "Une pyramide de boules de neige.")]
+              ("lap-pyramide", {"commonsTitle": "File:Balls.jpg", "emblematic": True}, "Une pyramide de boules de neige.")]
     FIGURES = [("59 €", "la cabine privative du train de nuit Helsinki–Rovaniemi"), ("0 €", "rencontrer le Père Noël dans son bureau"),
                ("30 à 60 €", "une balade en traîneau à renne de 400 ou 800 m"), ("63 €", "la courte balade en huskies au village"),
                ("42 €", "l’entrée adulte de SantaPark, ouvert du 31 octobre au 23 janvier"), ("−6 °C", "la maximale moyenne de décembre à Rovaniemi")]
 
-    def build(self, fmt="liste"):
-        facts = [{"value": value, "label": label, "short": label, "shortExcerpt": value + " " + label, "excerpt": value + " " + label, "section": None}
-                 for value, label in self.FIGURES]
+    def build(self, fmt="liste", photos=None, figures=None):
+        facts = [{"value": value, "label": label, "short": reel_formats.short_label(label), "shortExcerpt": value + " " + reel_formats.short_label(label),
+                  "excerpt": value + " " + label, "section": None} for value, label in figures or self.FIGURES]
         article = guide(cover="absente", shortTitle="Laponie : le budget", destination="Laponie")
-        return reel_formats.build(fmt, article, facts, list(self.PHOTOS), [], "Phrase d’ouverture.", "Laponie", "Finlande · Laponie", "Guide Laponie",
-                                  ["Laponie :", "le budget"], "")
+        return reel_formats.build(fmt, article, facts, list(photos or self.PHOTOS), [], "Phrase d’ouverture.", "Laponie", "Finlande · Laponie",
+                                  "Guide Laponie · sources du 24/10/2026", ["Laponie :", "le budget"], "")
+
+    def test_the_call_to_action_is_shown_over_an_emblematic_photo_never_a_detail(self):
+        scenes, _ = self.build()
+        self.assertEqual(scenes[-1]["photo"], "lap-pyramide")  # the one a human marked; the hut was free too
+        # Nothing emblematic left: the reel waits for such a photo rather than closing on a hut.
+        plain = [(photo_id, {"commonsTitle": record["commonsTitle"]}, alt) for photo_id, record, alt in self.PHOTOS]
+        with self.assertRaisesRegex(reel_formats.Held, "no_emblematic_photo_for_the_call"):
+            self.build(photos=plain)
+
+    def test_the_last_card_names_the_site_and_nothing_one_network_only_has(self):
+        scenes, _ = self.build()
+        self.assertEqual(scenes[-1]["note"], "Enregistrez cette vidéo pour votre voyage")
+        self.assertEqual(p.MOTION_BUTTON, "voyagesansdetour.fr")
+        for text in (scenes[-1]["note"], p.MOTION_BUTTON):
+            self.assertNotRegex(text.lower(), r"\bbio\b|\breel\b|instagram|tiktok")
+
+    def test_a_plan_of_fact_always_shows_a_number(self):
+        scenes, _ = self.build(figures=[("Février à avril", "la meilleure fenêtre pour les aurores")] + self.FIGURES)
+        self.assertNotIn("Février", json.dumps(scenes, ensure_ascii=False))
+        self.assertTrue(all(any(c.isdigit() for c in scene["headline"][0]) for scene in scenes[1:-1]))
+
+    def test_a_figure_with_its_own_date_is_labelled_with_that_date(self):
+        tag, dated = "Guide Yucatán · sources du 11/11/2026", lambda label: reel_formats.dated_tag({"label": label}, "Guide Yucatán · sources du 11/11/2026")
+        self.assertEqual(dated("le billet Mérida–Cancún aéroport en tarif touriste international, relevé en juillet 2026"), "Guide Yucatán · chiffre de juillet 2026")
+        self.assertEqual(dated("Cancún–Playa del Carmen et Playa del Carmen–Tulum en tarif touriste international (octobre 2026)"), "Guide Yucatán · chiffre d’octobre 2026")
+        self.assertEqual(dated("une nuit en capsule ; 7 000 à 20 000 ¥ la chambre en business hôtel (relevé de mars 2025)"), "Guide Yucatán · chiffre de mars 2025")
+        self.assertEqual(dated("une torta de Guimarães chez Clarinha, rua de Santa Maria (Guia Repsol, mai 2026)"), "Guide Yucatán · chiffre de mai 2026")
+        self.assertEqual(dated("le tarif plein, relevé le 3 août 2026"), "Guide Yucatán · chiffre du 3 août 2026")
+        # A period of validity or a start is not the date the figure was read: the guide's own date stays.
+        for label in ("la Treno Card de deux jours, du 2 novembre au 31 décembre 2026", "la balade en barque, depuis janvier 2026 (≈ 10,70 €)",
+                      "l’entrée pour un étranger depuis le « boleto único » du 27 mars 2026 (105 pesos de tarif INAH inclus)", "le billet en siège réservé"):
+            self.assertEqual(dated(label), tag)
+        long = reel_formats.dated_tag({"label": "le forfait, relevé en septembre 2026"}, "Guide Parc national des Cinque Terre · sources du 11/11/2026")
+        self.assertEqual(long, "Notre guide · chiffre de septembre 2026")
+
+    def test_the_plan_quotes_the_date_its_label_gives(self):
+        fare = ("977,50 pesos", "le billet du train de nuit en tarif touriste international, relevé en juillet 2026")
+        scenes, _ = self.build(figures=[fare] + self.FIGURES[1:])
+        plan = next(scene for scene in scenes if "977,50" in scene["headline"][0])
+        self.assertEqual(plan["detail"], "le billet du train de nuit en tarif touriste international")  # the short label on screen
+        self.assertEqual(plan["tag"], "Guide Laponie · chiffre de juillet 2026")
+        self.assertEqual(plan["facts"][0]["excerpt"], " ".join(fare))  # the whole quote, so the date is read in the plan's source
+        self.assertEqual({scene["tag"] for scene in scenes[1:-1] if scene is not plan}, {"Guide Laponie · sources du 24/10/2026"})
 
     def test_a_figure_that_no_photo_shows_stays_out_of_the_reel(self):
         scenes, lines = self.build()
@@ -952,16 +1015,117 @@ class ShownTests(unittest.TestCase):
                                     ("yuc-cenote", {"commonsTitle": "File:Cenote Ik Kil.jpg"}, "Un cenote entouré de lianes.")], [], cover="yuc-castillo")
         day = {"image": "yuc-cenote"}
         # The guide gives the cenote to the whole day; the plan only says "Chichén Itzá à l'ouverture, 697 pesos l'entrée".
-        self.assertEqual(media.named("Chichén Itzá à l’ouverture l’entrée de Chichén Itzá pour un étranger", day, keep_cover=False)[0], "yuc-castillo")
-        self.assertEqual(media.named("Ik Kil l’après-midi", day, keep_cover=False)[0], "yuc-cenote")
-        self.assertEqual(media.named("Une journée sans rien de nommé", day, keep_cover=False)[0], "yuc-cenote")
+        self.assertEqual(media.named("Chichén Itzá à l’ouverture l’entrée de Chichén Itzá pour un étranger", day)[0], "yuc-castillo")
+        self.assertEqual(media.named("Ik Kil l’après-midi", day)[0], "yuc-cenote")
+        self.assertEqual(media.named("Une journée sans rien de nommé", day)[0], "yuc-cenote")
         fact = {"value": "697 pesos", "label": "l’entrée de Chichén Itzá pour un étranger depuis le 27 mars 2026", "short": "l’entrée de Chichén Itzá pour un étranger"}
         step = {"kicker": "Jour 3", "lines": ["Chichén Itzá", "à l’ouverture"], "fact": fact}
-        self.assertEqual(reel_formats.stage_line(step, priced=True),
+        self.assertEqual(reel_formats.stage_line(step),
                          "📍 Jour 3 : Chichén Itzá à l’ouverture · 697 pesos l’entrée de Chichén Itzá pour un étranger depuis le 27 mars 2026")
-        self.assertEqual(reel_formats.stage_line(step, priced=False), "📍 Jour 3 : Chichén Itzá à l’ouverture")
         long = {**fact, "label": fact["label"] + " " + "x" * 120}
-        self.assertEqual(reel_formats.stage_line({**step, "fact": long}, priced=True), "📍 Jour 3 : Chichén Itzá à l’ouverture · 697 pesos l’entrée de Chichén Itzá pour un étranger")
+        self.assertEqual(reel_formats.stage_line({**step, "fact": long}), "📍 Jour 3 : Chichén Itzá à l’ouverture · 697 pesos l’entrée de Chichén Itzá pour un étranger")
+
+
+class FoundPhotoTests(unittest.TestCase):
+    """What the search may keep (verification of 12/11/2026: Porto Covo for Porto, coatis for Yucatán)."""
+
+    def test_a_namesake_in_the_same_country_is_refused(self):
+        porto = guide(slug="porto-3-jours", destination="Porto", country="portugal")
+        chapel = "File:Azulejo facade of the Capela das Almas in Porto (4).jpg"
+        hits = ["File:Porto Covo Outubro 2014-3.jpg", "File:Foggy Fanal forest in Seixal, Porto Moniz, Madeira, 2023 May.jpg", chapel,
+                "File:Dragonfly Porto Covo August 2021-4.jpg", "File:Porto de Mós castle.jpg"]
+        found = media_library.featured_candidates(porto, ["Porto"], "Portugal", lambda query: hits, ["Portugal"])
+        self.assertEqual([candidate["title"] for candidate in found], [chapel])
+        # A title may be silent while the categories say where the picture was taken.
+        beach = {"commonsTitle": "File:Atlantic waves near Porto.jpg", "categories": "Beaches of Porto Covo|Water waves of Portugal", "camera": "NIKON D800E"}
+        there = {"commonsTitle": chapel, "categories": "Featured pictures of Porto|Azulejos in Portugal", "camera": "NIKON D3300"}
+        self.assertFalse(media_library.Photos.acceptable(found[0], beach, fetched=True))
+        self.assertTrue(media_library.Photos.acceptable(found[0], there, fetched=True))
+        self.assertEqual(media_library.homonyms(guide()), [])
+
+    def test_an_animal_a_plant_or_a_match_is_not_a_photo_of_the_place(self):
+        other = media_library.shows_something_else
+        for title, categories in (
+                ("File:194 White-nosed coati at the beach in Yucatán Photo by Giles Laurent.jpg", "Beaches of Yucatán|Nasua narica in Mexico|Mammals of Mexico"),
+                ("File:196 Laughing gulls at the beach in Yucatán Photo by Giles Laurent.jpg", "Leucophaeus atricilla in flight|Beaches of Yucatán"),
+                ("File:Tapaculo (Bothus podas), franja marina Teno-Rasca, Tenerife, España, 2022-01-05, DD 64.jpg", "Protected areas of Spain"),
+                ("File:London Bees v Millwall Lionesses, 15 April 2017 (062).jpg", "Featured pictures of sports in London"),
+                ("File:Red and white tulip at Myddelton House, Enfield, London.jpg", "Featured pictures of flowers"),
+                ("File:Pot-bellied pigs in Lisbon Zoo 2008.jpg", "Featured pictures of Lisbon"),
+                ("File:Red admiral on purple coneflower in New York.jpg", "Nymphalidae of New York (state)")):
+            self.assertTrue(other({"commonsTitle": title, "categories": categories}), title)
+        for title, categories in (
+                ("File:Vista de Garachico, Tenerife, España, 2012-12-13, DD 05.jpg", "Featured pictures of Tenerife"),
+                ("File:London Eye at Night (long exposure).JPG", "London Eye at night"),
+                ("File:Long Island City New York May 2015 panorama 3.jpg", "East River (New York)|Bird's-eye views of New York City"),
+                ("File:Lisbon (Lisboa) historic elevator Santa Justa.jpg", "Fishing boats in Lisbon|Featured pictures of Lisbon")):
+            self.assertFalse(other({"commonsTitle": title, "categories": categories}), title)
+        candidate = {"countryNames": ["Mexique", "Mexico"], "homonyms": []}
+        coati = {"commonsTitle": "File:194 White-nosed coati at the beach in Yucatán.jpg", "categories": "Beaches of Yucatán|Mammals of Mexico", "camera": "ILCE-1"}
+        self.assertFalse(media_library.Photos.acceptable(candidate, coati, fetched=True))
+
+    def test_only_a_photo_of_the_site_or_one_marked_by_hand_may_close_a_post(self):
+        mark = media_library.closing_mark
+        self.assertEqual(mark({"emblematic": True}, {"file": "a.jpg"}), {"file": "a.jpg", "emblematic": True})  # the site's photo
+        self.assertEqual(mark({"automatic": True}, {"file": "a.jpg", "emblematic": True}), {"file": "a.jpg"})   # found by the search: never
+        self.assertEqual(mark({}, {"file": "a.jpg", "emblematic": True}), {"file": "a.jpg", "emblematic": True})  # marked in reviewed.json
+        self.assertEqual(mark({}, {"file": "a.jpg"}), {"file": "a.jpg"})                                        # added for one plan
+        f = Fixture([guide()], photos=5)
+        self.addCleanup(f.cleanup)
+        found = "File:Kyoto Kinkaku-ji in autumn.jpg"
+        made = f.run(limit=30, searcher=lambda query: [found] if "Featured_pictures" in query else [])["created"]
+        reel = f.scenario(next(c["id"] for c in made if c["kind"] == "reel"))
+        records = json.loads((f.root / a.AUTO / reel["id"] / "photos.json").read_text())["photos"]
+        closing = records[reel["scenes"][-1]["photo"]]
+        self.assertTrue(closing["emblematic"])
+        self.assertNotEqual(closing["commonsTitle"], found)
+        self.assertNotIn("emblematic", next((r for r in records.values() if r["commonsTitle"] == found), {}))
+
+
+class PhotoPostTests(unittest.TestCase):
+    """A photo post follows the reels' rules (verification of 12/11/2026: two prices over another site of Yucatán)."""
+
+    PHOTOS = [("yuc-castillo", {"commonsTitle": "File:Templo el Castillo - Chichen Itza.jpg", "emblematic": True}, "La pyramide d’El Castillo, à Chichén Itzá."),
+              ("yuc-cenote", {"commonsTitle": "File:Cenote Ik Kil.jpg", "emblematic": True}, "Un cenote entouré de lianes, dans le Yucatán."),
+              ("yuc-tulum", {"commonsTitle": "File:Tulum.jpg", "emblematic": True}, "Les ruines de Tulum au-dessus de la mer."),
+              ("yuc-merida", {"commonsTitle": "File:Catedral.jpg"}, "La cathédrale de Mérida."),
+              ("yuc-train", {"commonsTitle": "File:Tren Maya.jpg"}, "Une rame du Tren Maya en gare de Teya."),
+              ("yuc-uxmal", {"commonsTitle": "File:Uxmal.jpg", "emblematic": True}, "La pyramide du Devin à Uxmal.")]
+    FIGURES = [("10 jours", "pour enchaîner Valladolid, Chichén Itzá, Mérida, Uxmal et Tulum sans courir"),
+               ("977,50 pesos", "le billet Mérida–Cancún aéroport en tarif touriste international, relevé en juillet 2026"),
+               ("697 pesos", "l’entrée de Chichén Itzá pour un étranger"),
+               ("120 km", "entre Mérida et la gare de Teya, selon le site officiel du Tren Maya"),
+               ("45 jours", "la durée du passe ferroviaire"),
+               ("232 et 246 pesos", "Cancún–Playa del Carmen et Playa del Carmen–Tulum (octobre 2026)")]
+
+    def scenes(self, figures=None, photos=None):
+        article = guide(shortTitle="Yucatán en 10 jours", destination="Yucatán", country="mexique", sourcesCheckedOn="2026-11-11", sections=[])
+        facts = [{"value": value, "label": label, "excerpt": value + " " + label, "section": None} for value, label in figures or self.FIGURES]
+        return a.scenes_for(article, a.Post("facebook", "carousel"), facts, list(photos or self.PHOTOS), "Phrase d’ouverture.", "Yucatán", "Mexique")
+
+    def test_each_figure_takes_the_photo_that_shows_it_and_the_title_is_not_said_again(self):
+        scenes = self.scenes()
+        shown = {scene["headline"][0].strip("*"): scene["photo"] for scene in scenes[1:-1]}
+        self.assertEqual(shown, {"977,50 pesos": "yuc-merida", "697 pesos": "yuc-castillo", "120 km": "yuc-train", "232 et 246 pesos": "yuc-tulum"})
+        self.assertNotIn("10 jours", shown)   # the title said again
+        self.assertNotIn("45 jours", shown)   # no photo shows it, and four figures have theirs
+        # The entrance fee took the cover it names: the next photo of the guide opens the post, another one closes it.
+        self.assertEqual((scenes[0]["photo"], scenes[-1]["photo"]), ("yuc-cenote", "yuc-uxmal"))
+        self.assertEqual(scenes[0]["headline"][-1], "*4 chiffres* à connaître")
+        tags = {scene["headline"][0].strip("*"): scene["tag"] for scene in scenes[1:-1]}
+        self.assertEqual(tags["977,50 pesos"], "Guide Yucatán · chiffre de juillet 2026")
+        self.assertEqual(tags["232 et 246 pesos"], "Guide Yucatán · chiffre d’octobre 2026")
+        self.assertEqual(tags["697 pesos"], "Guide Yucatán · sources du 11/11/2026")
+
+    def test_a_figure_whose_photo_another_plan_took_is_never_put_over_another_place(self):
+        # Two figures name Chichén Itzá and one photo shows it: the second stays in the guide rather than go over Uxmal.
+        figures = [("697 pesos", "l’entrée de Chichén Itzá pour un étranger"), ("3 h", "la visite de Chichén Itzá à l’ouverture")] + self.FIGURES[1:2] + self.FIGURES[3:]
+        scenes = self.scenes(figures)
+        shown = {scene["headline"][0].strip("*").replace(reel_formats.NBSP, " "): scene["photo"] for scene in scenes[1:-1]}
+        self.assertEqual(shown["697 pesos"], "yuc-castillo")
+        self.assertNotIn("3 h", shown)
+        with self.assertRaisesRegex(reel_formats.Held, "not_enough_figures_with_their_photo"):
+            self.scenes(figures[:2] + [("2 h", "la baignade au pied de la pyramide de Chichén Itzá"), ("4 h", "le retour depuis Chichén Itzá"), ("5 h", "la nuit à Chichén Itzá")])
 
 
 class CaptionTextTests(unittest.TestCase):

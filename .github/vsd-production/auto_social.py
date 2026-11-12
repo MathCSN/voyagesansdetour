@@ -404,32 +404,39 @@ def french_date(value: str) -> str:
 
 def scenes_for(article: dict, channel: Post, facts: list[dict], photos: list[tuple[str, dict, str]],
                opening: str, place: str, country: str, width: int = 34) -> list[dict]:
-    count = min(channel.scenes[1], len(photos), len(facts) + 2)
+    # "10 jours" under "Yucatán en 10 jours" says the title again: that figure stays in the guide.
+    offered = [fact for fact in facts if not reel_formats.repeats_title(fact, article)]
+    count = min(channel.scenes[1], len(photos), len(offered) + 2)
     if count < channel.scenes[0]:
         raise Held("not_enough_photos_or_figures")
-    facts = facts[:count - 2]
-    tag = f"Guide {article['destination']} · sources du {french_date(article['sourcesCheckedOn'])}"
-    if len(tag) > 52:
-        tag = f"Notre guide · sources du {french_date(article['sourcesCheckedOn'])}"
-    word = "chiffres" if all(re.search(r"\d", fact["value"]) for fact in facts) else "repères"
     title_lines = lines_of(article["shortTitle"], width) or lines_of(article["destination"], width)
     if not title_lines:
         raise Held("short_title_too_long")
-    remaining = list(photos)
+    by_id = {photo[0]: photo for photo in photos}
+    media = reel_formats.Media(photos, [], reserve=2, cover=photos[0][0], emblematic=reel_formats.emblematic(photos),
+                               everywhere=place + " " + country)
+    # As in a reel: a figure that a photo shows comes first and takes that photo (the fare over the train); a figure
+    # that no photo shows only completes the post; a figure whose photo is already taken stays in the guide, never
+    # over another place. Then the post reads in the guide's order.
+    pictures = {index: media.photo(offered[index]["label"], offered[index]["section"])
+                for index in reel_formats.placed(offered, media, count - 2, count - 2)}
+    if len(pictures) + 2 < channel.scenes[0]:
+        raise Held("not_enough_figures_with_their_photo")
+    facts = [offered[index] for index in sorted(pictures)]
+    pictures = {offered[index]["value"]: picture for index, picture in pictures.items()}
+    # The guide's cover opens the post, unless a figure names what it shows: then the next photo of the guide does.
+    opening_picture = media.opening(media.cover)
+    tag = reel_formats.source_tag(article, french_date(article["sourcesCheckedOn"]))
+    word = "chiffres" if all(re.search(r"\d", fact["value"]) for fact in facts) else "repères"
 
-    def photo_for(section=None):
-        wanted = section.get("image") if section else None
-        pick = next((ph for ph in remaining if ph[0] == wanted), remaining[0])
-        remaining.remove(pick)
-        return pick
-
-    def scene(photo, kicker, headline, detail, seconds, facts_=None, cta=False):
+    def scene(picture, kicker, headline, detail, seconds, facts_=None, label=tag, cta=False):
+        photo = by_id[picture[1]]
         value = {"photo": photo[0], "focus": [0.5, 0.5], "kicker": kicker, "headline": headline}
         if detail:
             value["detail"] = detail
         if facts_:
             value["facts"] = facts_
-            value["tag"] = tag
+            value["tag"] = label
         if channel.kind == "reel":
             value["seconds"] = seconds
         else:
@@ -440,12 +447,13 @@ def scenes_for(article: dict, channel: Post, facts: list[dict], photos: list[tup
 
     hook_kicker = place if country.lower() == place.lower() else f"{country} · {place}"
     hook_kicker = hook_kicker if len(hook_kicker) <= 32 else place[:32]
-    scenes = [scene(photo_for(), hook_kicker, title_lines + [f"*{len(facts)} {word}* à connaître"],
+    scenes = [scene(opening_picture, hook_kicker, title_lines + [f"*{len(facts)} {word}* à connaître"],
                     unbreakable(opening) if len(opening) <= 120 else None, 3.5, [{"source": "guide", "excerpt": opening}])]
     for fact in facts:
-        scenes.append(scene(photo_for(fact["section"]), kicker_of(fact["section"], place), ["*" + fact["value"] + "*"],
-                            unbreakable(fact["label"]), 4, [{"source": "guide", "excerpt": fact["excerpt"]}]))
-    scenes.append(scene(photo_for(), "Le guide complet", title_lines, call_detail(article), 4.5, cta=True))
+        scenes.append(scene(pictures[fact["value"]], kicker_of(fact["section"], place), ["*" + fact["value"] + "*"],
+                            unbreakable(fact["label"]), 4, [{"source": "guide", "excerpt": fact["excerpt"]}],
+                            label=reel_formats.dated_tag(fact, tag)))
+    scenes.append(scene(media.closing(required=False), "Le guide complet", title_lines, call_detail(article), 4.5, cta=True))
     return scenes
 
 
@@ -541,9 +549,7 @@ def build_reel(root: Path, article: dict, slot: dt.datetime, now: dt.datetime, t
     country = destinations.name(destinations.country_slug(article), table)
     place = article["destination"] if len(article["destination"]) <= 22 else country
     facts = rotate(usable_facts(article, text, root), variant)
-    tag = f"Guide {article['destination']} · sources du {french_date(article['sourcesCheckedOn'])}"
-    if len(tag) > 52:
-        tag = f"Notre guide · sources du {french_date(article['sourcesCheckedOn'])}"
+    tag = reel_formats.source_tag(article, french_date(article["sourcesCheckedOn"]))
     kicker = place if country.lower() == place.lower() else f"{country} · {place}"
     kicker = kicker if len(kicker) <= 32 else place[:32]
     scenes, lines = reel_formats.build(fmt, article, facts, rotate(photos, variant), clips, opening_sentence(article, text), place, kicker, tag,
@@ -694,7 +700,8 @@ def make_post(root, article, post, slot, now, rows, texts, photos, clips, site_p
     if len(usable_facts(article, text, root)) < 2:
         raise Held("not_enough_quotable_figures")
     country = destinations.name(destinations.country_slug(article), table)
-    chosen = gather_photos(article, post.scenes[1], photos, site_photos, country, searcher, table)
+    # A photo post is given as many photos to choose from as a reel: each figure then finds the one that shows it.
+    chosen = gather_photos(article, max(post.scenes[1], SCENES["reel"][1]), photos, site_photos, country, searcher, table)
     if post.kind == "reel":
         return make_reel(root, article, slot, now, rows, text, chosen, clips.gather(article), table)
     if len(usable_facts(article, text, root)) < post.scenes[0] - 2:

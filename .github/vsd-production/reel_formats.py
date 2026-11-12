@@ -39,8 +39,15 @@ BUDGET = re.compile(r"\bbudget\b|\bau total\b|\ben tout\b|\bpar personne\b|\btou
 MIN_FACTS = 4                          # a reel that says fewer than four things is not worth a slot (audit of 12/11/2026)
 # One space at most between the parts: section titles are plain text, and nothing here can backtrack.
 DAY = re.compile(r"(Jours? \d+(?: ?(?:à|et|[-–]) ?\d+)?) ?[—–:,-] ?(\S.*)", re.IGNORECASE)
-SAVE_NOTE = "Enregistrez ce reel pour votre voyage"
+# The same file goes to Instagram and TikTok: "cette vidéo", never "ce reel".
+SAVE_NOTE = "Enregistrez cette vidéo pour votre voyage"
 PAUSE_NOTE = "Faites pause pour tout lire"
+MONTHS = "janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre"
+# The date a figure gives for itself: "relevé en juillet 2026", "(relevé de mars 2025)", "(Por Esto, juillet 2026)",
+# "(octobre 2026)". Not a period ("du 2 novembre au 31 décembre 2026") nor a start ("depuis janvier 2026").
+OWN_DATE = re.compile(rf"\brelevée?s? (?:en|de|d’|le|du|au) ((?:\d{{1,2}}(?:er)? )?(?:{MONTHS}) 20\d\d)"
+                      rf"|\((?:[^()]*, )?((?:{MONTHS}) 20\d\d)\)", re.IGNORECASE)
+TAG_MAX = 52
 
 
 class Held(ValueError):
@@ -148,6 +155,30 @@ def repeats_title(fact: dict, article: dict) -> bool:
     return bool(value) and f"-{value}-" in f"-{title}-"
 
 
+def source_tag(article: dict, checked_on: str) -> str:
+    """The small label of a plan: whose figures these are and when the guide's sources were last read."""
+    tag = f"Guide {article['destination']} · sources du {checked_on}"
+    return tag if len(tag) <= TAG_MAX else f"Notre guide · sources du {checked_on}"
+
+
+def dated_tag(fact: dict, tag: str) -> str:
+    """A figure that carries its own date is labelled with it: "sources du 11/11/2026" under a fare read in July
+    would date the fare wrongly. Any other figure keeps the date the guide's sources were last read."""
+    match = OWN_DATE.search(fact["label"])
+    if not match:
+        return tag
+    date = (match[1] or match[2]).lower()
+    own = "chiffre " + ("du " if date[0].isdigit() else "d’" if date[0] in "ao" else "de ") + date
+    return next(text for text in (tag.split(" · ")[0] + " · " + own, "Notre guide · " + own) if len(text) <= TAG_MAX)
+
+
+def quoted(fact: dict, tag: str) -> tuple[str, str]:
+    """What a plan quotes for its figure, and its label: the short quote, or the whole one when the label gives the
+    figure's own date, so that the date on screen is read in the plan's own source."""
+    own = dated_tag(fact, tag)
+    return (fact["shortExcerpt"], tag) if own == tag else (fact["excerpt"], own)
+
+
 def figure_lines(value: str) -> list[str] | None:
     """A short value is the yellow figure; a longer one ('19 au 28 février 2027') goes on white boxes."""
     if len(value) <= FIGURE_MAX:
@@ -159,7 +190,8 @@ def figure_lines(value: str) -> list[str] | None:
 # --- what the guide offers --------------------------------------------------
 
 def stages(article: dict, page: str, facts: list[dict]) -> list[dict]:
-    """The 'Jour 3 — …' sections, as quoted on the page: day marker, place, and one figure when the guide gives it."""
+    """The 'Jour 3 — …' sections, as quoted on the page: day marker, place, and the figure the guide gives for that
+    day when it fits under the stage (None otherwise: that stage stays in the guide)."""
     found = []
     for section in article.get("sections", []):
         title = str(section.get("title", "")).strip()
@@ -173,10 +205,8 @@ def stages(article: dict, page: str, facts: list[dict]) -> list[dict]:
             lines = lines_of(candidate, 22)
             if not (len(candidate) >= 3 and lines and checked(match[1], 32) and all(checked(line, 34) for line in lines)):
                 continue
-            rest = name[len(candidate):].lstrip(" ,:—–").removeprefix("et ").strip()
-            fact = next((f for f in facts if f["section"] is section), None)
-            found.append({"kicker": match[1], "lines": lines, "title": title, "section": section, "fact": fact,
-                          "rest": rest[:1].upper() + rest[1:] if 8 <= len(rest) <= 90 and checked(rest, 120) else None})
+            fact = next((f for f in facts if f["section"] is section and len(f["value"] + f["short"]) <= STAGE_DETAIL), None)
+            found.append({"kicker": match[1], "lines": lines, "title": title, "section": section, "fact": fact})
             break
     return found[:MAX_STAGES]
 
@@ -203,7 +233,7 @@ def applicable(article: dict, facts: list[dict], page: str) -> list[str]:
     # Price first only where the guide's first figure is the cost of the trip itself: a budget guide whose first figure says so.
     if category == "budget" and facts and opens_on_budget(facts[0]):
         formats.append("prix")
-    if len(stages(article, page, facts)) >= MIN_STAGES:
+    if sum(1 for step in stages(article, page, facts) if step["fact"]) >= MIN_STAGES:
         formats.append("itineraire")
     if table_of(article, page):
         # "When to go" is a table before anything else; elsewhere the table comes after the guide's own format.
@@ -220,30 +250,71 @@ def ordered(formats: list[str], used: list[str]) -> list[str]:
 
 # --- plans -------------------------------------------------------------------
 
+# Words that name nothing: two texts that share only these are not about the same thing.
+EMPTY_WORDS = frozenset("pour entre dans avec sans sous vers chez depuis selon plus moins tout tous toute toutes cette leur leurs "
+                        "dont comme aussi tres deux trois quatre jour jours nuit nuits prix tarif euros pesos".split())
+
+
 def words_of(value: str) -> set[str]:
-    """Words of four letters and more; a dash separates two words ('Mérida–Cancún' names both towns)."""
-    return set(re.findall(r"[a-z0-9]{4,}", destinations.ascii_fold(re.sub(r"[^\w\s]", " ", value)).lower()))
+    """Words of four letters and more that name something; a dash separates two words ('Mérida–Cancún' names both towns)."""
+    return set(re.findall(r"[a-z0-9]{4,}", destinations.ascii_fold(re.sub(r"[^\w\s]", " ", value)).lower())) - EMPTY_WORDS
+
+
+def words_shown(photo: tuple, target: set[str]) -> int:
+    """How many of these words the photo's identifier, caption and Commons title carry."""
+    return len(target & words_of(" ".join([photo[0].replace("-", " "), photo[2], str(photo[1].get("commonsTitle", ""))])))
 
 
 class Media:
     """Photos and clips still unused in this reel: a photo is never shown twice, and never under another place's name."""
 
-    def __init__(self, photos: list[tuple[str, dict, str]], clips: list[tuple[str, dict]], reserve: int = 0, cover: str | None = None):
+    def __init__(self, photos: list[tuple[str, dict, str]], clips: list[tuple[str, dict]], reserve: int = 0, cover: str | None = None,
+                 emblematic: tuple[str, ...] = (), everywhere: str = ""):
         self.photos, self.clips, self.reserve, self.cover = list(photos), list(clips), reserve, cover
+        self.all = list(photos)
+        # The pictures that can stand for the whole place under the call to action, the best first.
+        self.emblematic = [photo_id for photo_id in emblematic if photo_id != cover]
+        # The name of the place and of its country is in every caption: sharing it says nothing of what a photo shows.
+        self.everywhere = words_of(everywhere)
+
+    def target(self, text: str) -> set[str]:
+        return words_of(text) - self.everywhere
+
+    def shown_elsewhere(self, text: str) -> bool:
+        """A photo of this post that another plan has taken shows what `text` names better than any photo still
+        free: over another picture, that figure would name one place and show another."""
+        target = self.target(text)
+        free = self.free()
+        return max((words_shown(ph, target) for ph in self.all), default=0) > max((words_shown(ph, target) for ph in free), default=0)
+
+    def spare(self) -> str | None:
+        """The last photo left that can close the post: no plan takes it, whatever it names."""
+        left = [wanted for wanted in self.emblematic if any(ph[0] == wanted for ph in self.photos)]
+        return left[0] if len(left) == 1 else None
+
+    def free(self) -> list:
+        """The photos a plan may take when it names what they show: all but the last one kept for the call."""
+        spare = self.spare()
+        return [ph for ph in self.photos if ph[0] != spare]
 
     def room(self) -> int:
         return len(self.photos) + len(self.clips) - self.reserve
 
-    def named(self, text: str, section: dict | None, keep_cover: bool = True) -> tuple | None:
+    def kept(self) -> set[str]:
+        """The two pictures a plan takes only when its text names what they show: the cover, which opens the post
+        otherwise, and the best one still free for the call to action. A plan that no photo shows is given another."""
+        last = next((wanted for wanted in self.emblematic if any(ph[0] == wanted for ph in self.photos)), None)
+        return {self.cover, last} - {None}
+
+    def named(self, text: str, section: dict | None) -> tuple | None:
         """The photo that shows what `text` names: the one whose id, caption or title shares the most words with it.
         The section's own photo wins when it shares as many, and stands in when no photo shares any; it gives way
         when it shows something else ("Chichén Itzá à l'ouverture" is not shown by the cenote of that afternoon)."""
-        target = words_of(text)
-        shared = lambda ph: len(target & words_of(" ".join([ph[0].replace("-", " "), ph[2], str(ph[1].get("commonsTitle", ""))])))
+        target = self.target(text)
+        shared = lambda ph: words_shown(ph, target)
         wanted = section.get("image") if section else None
-        own = next((ph for ph in self.photos if ph[0] == wanted), None)
-        # The cover is kept for the hook unless a stage of the itinerary is that very place.
-        pool = [ph for ph in self.photos if not (keep_cover and ph[0] == self.cover)]
+        pool = self.free()
+        own = next((ph for ph in pool if ph[0] == wanted), None)
         best = max(pool, key=shared, default=None)
         if own and (best is None or shared(own) or not shared(best)):
             return own
@@ -251,10 +322,24 @@ class Media:
 
     def photo(self, text: str = "", section: dict | None = None, strict: bool = False) -> tuple[str, str]:
         """A photo for this text. `strict`: only a photo that shows what the text names (a stage of an itinerary)."""
-        pick = self.named(text, section, keep_cover=not strict)
+        pick = self.named(text, section)
         if not pick and (strict or len(self.photos) <= self.reserve):
             raise Held("no_photo_of_this_place" if strict else "not_enough_photos_or_figures")
-        pick = pick or next((ph for ph in self.photos if ph[0] != self.cover), self.photos[0])
+        kept, free = self.kept(), self.free()
+        pick = pick or next((ph for ph in free if ph[0] not in kept), free[0] if free else None)
+        if not pick:
+            raise Held("not_enough_photos_or_figures")
+        self.photos.remove(pick)
+        return ("photo", pick[0])
+
+    def closing(self, required: bool = True) -> tuple[str, str]:
+        """The picture under the call to action: one that stands for the place, a photo marked `emblematic` by hand
+        or one the guide itself shows. Never a detail kept for one plan (a hut, a dog team) nor a file found by the
+        search: `required`, the post waits for such a photo; otherwise any photo left will do (a carousel)."""
+        pick = next((ph for wanted in self.emblematic for ph in self.photos if ph[0] == wanted), None)
+        if not pick and (required or not self.photos):
+            raise Held("no_emblematic_photo_for_the_call")
+        pick = pick or self.photos[0]
         self.photos.remove(pick)
         return ("photo", pick[0])
 
@@ -265,9 +350,12 @@ class Media:
         return self.photo(text, section, strict)
 
     def opening(self, cover: str | None) -> tuple[str, str]:
-        """The cover photo of the guide when it is still free: it is the picture people see first."""
+        """The cover photo of the guide when it is still free: it is the picture people see first. When a plan took
+        it, another photo that stands for the place, and never the last one kept for the call to action."""
         self.reserve = max(0, self.reserve - 1)
-        pick = next((ph for ph in self.photos if ph[0] == cover), self.photos[0] if self.photos else None)
+        left = self.free()
+        pick = (next((ph for ph in self.photos if ph[0] == cover), None) or next((ph for ph in left if ph[0] in self.emblematic), None)
+                or (left[0] if left else None))
         if not pick:
             raise Held("not_enough_photos_or_figures")
         self.photos.remove(pick)
@@ -293,8 +381,9 @@ def fact_plan(fact: dict, media: Media, place: str, tag: str, badge: str | None 
     # none: "Aurores boréales" is not written over a picture of the village.
     own = fact["section"].get("image") if fact["section"] else None
     kicker = kicker_of(fact["section"], place) if not own or picture[1] == own else place
+    excerpt, label = quoted(fact, tag)
     return plan("fact", picture, kicker, headline, seconds_for(detail), detail=detail,
-                facts=[{"source": "guide", "excerpt": fact["shortExcerpt"]}], tag=tag, badge=badge)
+                facts=[{"source": "guide", "excerpt": excerpt}], tag=label, badge=badge)
 
 
 @dataclass(frozen=True)
@@ -312,11 +401,27 @@ class Brief:
 
     @property
     def numbered(self) -> list[dict]:
-        return [f for f in self.facts if figure_lines(f["value"]) and not repeats_title(f, self.article) and len(f["short"]) <= DETAIL_MAX]
+        """The figures a plan may show: a number on screen (a plan of fact without a figure says too little), not the
+        title said again, and a label that fits."""
+        return [f for f in self.facts if re.search(r"\d", f["value"]) and figure_lines(f["value"])
+                and not repeats_title(f, self.article) and len(f["short"]) <= DETAIL_MAX]
 
     def hook(self, promise: str) -> dict:
         return plan("hook", self.media.opening(self.media.cover), self.kicker, self.title_lines + [promise], HOOK_SECONDS,
                     facts=[{"source": "guide", "excerpt": self.opening}], tag=self.tag)
+
+
+def placed(facts: list[dict], media: Media, limit: int, least: int):
+    """The figures a post shows, as indexes of `facts`, each yielded when its photo is about to be taken: first those
+    a free photo shows, up to `limit`; then, only to reach `least`, those that no photo of the post shows at all."""
+    done = set()
+    for wanted, most in ((True, limit), (False, least)):
+        for index, fact in enumerate(facts):
+            if index in done or len(done) >= most or media.shown_elsewhere(fact["label"]):
+                continue
+            if not wanted or media.named(fact["label"], fact["section"]):
+                done.add(index)
+                yield index
 
 
 def figures_reel(fmt: str, brief: Brief) -> tuple[dict, list[dict], list[str]]:
@@ -329,62 +434,57 @@ def figures_reel(fmt: str, brief: Brief) -> tuple[dict, list[dict], list[str]]:
         chosen = sorted(chosen, key=lambda f: not is_price(f))
     limit, plans = min(MAX_FACTS[fmt], brief.media.room()), {}
     # A figure that a photo shows goes first (the price of the huskies over the huskies); a figure that no photo shows
-    # only fills the reel up to its four facts, and otherwise stays in the caption and the guide.
-    for index, fact in enumerate(chosen):
-        if len(plans) < limit and brief.media.named(fact["label"], fact["section"]):
-            plans[index] = fact_plan(fact, brief.media, brief.place, brief.tag)
-    for index, fact in enumerate(chosen):
-        if index not in plans and len(plans) < min(limit, MIN_FACTS - bool(lead)):
-            plans[index] = fact_plan(fact, brief.media, brief.place, brief.tag)
+    # only fills the reel up to its four facts, and otherwise stays in the caption and the guide. A figure whose
+    # photo another plan has taken is never put over a different place.
+    for index in placed(chosen, brief.media, limit, min(limit, MIN_FACTS - bool(lead))):
+        plans[index] = fact_plan(chosen[index], brief.media, brief.place, brief.tag)
     if len(plans) < 3:
         raise Held("not_enough_photos_or_figures")
     chosen, body = [chosen[index] for index in sorted(plans)], [plans[index] for index in sorted(plans)]
     for number, scene in enumerate(body, 1):
         scene["badge"] = f"{number}/{len(body)}"
     if lead:
+        excerpt, label = quoted(lead, brief.tag)
         hook = plan("hook", brief.media.opening(brief.media.cover), "Combien ça coûte ?", brief.title_lines + ["*" + unbreakable(lead["value"]) + "*"],
-                    round(HOOK_SECONDS + 0.6, 1), detail=unbreakable(lead["short"]), facts=[{"source": "guide", "excerpt": lead["shortExcerpt"]}], tag=brief.tag)
+                    round(HOOK_SECONDS + 0.6, 1), detail=unbreakable(lead["short"]), facts=[{"source": "guide", "excerpt": excerpt}], tag=label)
         return hook, body, [caption_line(f) for f in [lead] + chosen]
-    word = "chiffres" if all(re.search(r"\d", f["value"]) for f in chosen) else "repères"
     verb = "retenir" if fmt == "express" else "connaître"
-    return brief.hook(f"*{len(chosen)} {word} à {verb}*"), body, [caption_line(f) for f in chosen]
+    return brief.hook(f"*{len(chosen)} chiffres à {verb}*"), body, [caption_line(f) for f in chosen]
 
 
 def stage_plan(step: dict, picture: tuple[str, str], tag: str) -> dict:
-    quotes, detail, fact = [{"source": "guide", "excerpt": step["title"]}], step["rest"], step["fact"]
-    short = fact["short"] if fact else ""
-    if fact and len(fact["value"] + short) <= STAGE_DETAIL:
-        detail = "*" + unbreakable(fact["value"]) + "* " + unbreakable(short)
-        quotes.append({"source": "guide", "excerpt": fact["value"] + " " + short})
-    return plan("fact", picture, step["kicker"], step["lines"], round(seconds_for(detail) - 0.4, 1), detail=detail, facts=quotes, tag=tag)
-
-
-def stage_line(step: dict, priced: bool) -> str:
-    """The stage in the caption, with the figure its plan shows and that figure's whole label when it fits (its date is there)."""
-    line = f"📍 {step['kicker']} : {' '.join(step['lines'])}"
-    if not priced:
-        return line
+    """One day of the itinerary and the figure the guide gives for it: a stage is never shown without one."""
     fact = step["fact"]
+    excerpt, label = quoted(fact, tag)
+    detail = "*" + unbreakable(fact["value"]) + "* " + unbreakable(fact["short"])
+    return plan("fact", picture, step["kicker"], step["lines"], round(seconds_for(detail) - 0.4, 1), detail=detail,
+                facts=[{"source": "guide", "excerpt": step["title"]}, {"source": "guide", "excerpt": excerpt}], tag=label)
+
+
+def stage_line(step: dict) -> str:
+    """The stage in the caption, with the figure its plan shows and that figure's whole label when it fits (its date is there)."""
+    line, fact = f"📍 {step['kicker']} : {' '.join(step['lines'])}", step["fact"]
     return next((text for text in (f"{line} · {fact['value']} {label}" for label in (fact["label"], fact["short"])) if len(text) <= 160), line)
 
 
 def itinerary_reel(brief: Brief) -> tuple[dict, list[dict], list[str]]:
-    """"itineraire": one dated stage per plan, shown only over a photo of that very place; the others stay in the guide."""
+    """"itineraire": one dated stage per plan, with its figure, shown only over a photo of that very place.
+    A stage for which the guide gives no figure, or that no photo shows, stays in the guide."""
     body, lines = [], []
     for step in stages(brief.article, brief.page, brief.numbered):
         if brief.media.room() < 1:
             break
+        if not step["fact"]:
+            continue
         # The photo is chosen for what the plan will say (its name, its price), not for the whole title of the day.
-        shown = " ".join(step["lines"] + [step["fact"]["short"] if step["fact"] else step["rest"] or ""])
         try:
-            picture = brief.media.photo(shown, step["section"], strict=True)
+            picture = brief.media.photo(" ".join(step["lines"] + [step["fact"]["short"]]), step["section"], strict=True)
         except Held:
             continue
-        scene = stage_plan(step, picture, brief.tag)
-        body.append(scene)
-        lines.append(stage_line(step, priced=len(scene["facts"]) > 1))
+        body.append(stage_plan(step, picture, brief.tag))
+        lines.append(stage_line(step))
     if len(body) < MIN_STAGES:
-        raise Held("not_enough_stages_with_their_photo")
+        raise Held("not_enough_stages_with_a_figure_and_their_photo")
     return brief.hook("*jour par jour*"), body, lines
 
 
@@ -402,13 +502,21 @@ def table_reel(brief: Brief) -> tuple[dict, list[dict], list[str]]:
     return brief.hook("*le tableau à garder*"), body, [f"📅 {a} : {b}" for a, b in rows]
 
 
+def emblematic(photos: list) -> tuple[str, ...]:
+    """The photos that can close a post, the guide's own first: those the site publishes for this place and those a
+    human marked `emblematic` in reviewed.json (media_library.gather_photos). A photo added for one plan (a hut, a
+    dog team) or found by the search is not one of them."""
+    return tuple(photo[0] for photo in photos if photo[1].get("emblematic") is True)
+
+
 def build(fmt: str, article: dict, facts: list[dict], photos: list, clips: list, opening: str, place: str, kicker: str,
           tag: str, title_lines: list[str], page: str) -> tuple[list[dict], list[str]]:
     """The plans of one reel and the useful lines of its caption. Raises Held when the guide cannot fill the format."""
     # The body takes the photos that show what it names; the hook and the call keep two, the cover first.
     # The picture people see first: the guide's cover, or its first photo when the cover is too small for a reel.
     cover = article.get("cover") if any(photo[0] == article.get("cover") for photo in photos) else (photos[0][0] if photos else None)
-    brief = Brief(article, facts, Media(photos, clips, reserve=2, cover=cover), opening, place, kicker, tag, title_lines, page)
+    brief = Brief(article, facts, Media(photos, clips, reserve=2, cover=cover, emblematic=emblematic(photos), everywhere=kicker),
+                  opening, place, kicker, tag, title_lines, page)
     if fmt in ("liste", "express", "prix"):
         hook, body, lines = figures_reel(fmt, brief)
     elif fmt == "itineraire":
@@ -421,7 +529,7 @@ def build(fmt: str, article: dict, facts: list[dict], photos: list, clips: list,
     said = {fact["excerpt"] for scene in [hook] + body for fact in scene.get("facts", [])} - {opening}
     if len(said) < MIN_FACTS:
         raise Held("fewer_than_four_facts")
-    closing = plan("cta", brief.media.opening(None), "Le guide complet", title_lines, CTA_SECONDS, note=SAVE_NOTE)
+    closing = plan("cta", brief.media.closing(), "Le guide complet", title_lines, CTA_SECONDS, note=SAVE_NOTE)
     # A photo reviewed by hand may say where its subject is (reviewed.json, "focus"): the vertical frame is cut around it.
     records = {photo[0]: photo[1] for photo in photos}
     for scene in [hook] + body + [closing]:

@@ -43,6 +43,12 @@ EXONYMS = {
     "athenes": ("Athens", "Atenas"), "bruxelles": ("Brussels", "Bruselas"), "edimbourg": ("Edinburgh", "Edimburgo"),
     "copenhague": ("Copenhagen",),
 }
+# Other places of the same country whose name holds the name of one we write about: the country cannot tell them
+# apart, so a found photo that names one of them is refused. Reviewed by hand, like EXONYMS; read the list of
+# towns of the country when a new destination's name is a common word ("Porto", "Santa Cruz", "San José").
+HOMONYMS = {
+    "porto": ("Porto Covo", "Porto Moniz", "Porto Santo", "Porto de Mós", "Porto da Cruz", "Porto Martins", "Porto Judeu"),
+}
 GENERIC_TYPE_HASHTAG = "#ConseilsVoyage"
 BRAND_HASHTAG = "#VoyageSansDetour"
 MAX_HASHTAGS = 5
