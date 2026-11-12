@@ -235,17 +235,19 @@ class Media:
         return len(self.photos) + len(self.clips) - self.reserve
 
     def named(self, text: str, section: dict | None, keep_cover: bool = True) -> tuple | None:
-        """The section's own photo, else the photo whose id, caption or title shares the most words with `text`."""
+        """The photo that shows what `text` names: the one whose id, caption or title shares the most words with it.
+        The section's own photo wins when it shares as many, and stands in when no photo shares any; it gives way
+        when it shows something else ("Chichén Itzá à l'ouverture" is not shown by the cenote of that afternoon)."""
+        target = words_of(text)
+        shared = lambda ph: len(target & words_of(" ".join([ph[0].replace("-", " "), ph[2], str(ph[1].get("commonsTitle", ""))])))
         wanted = section.get("image") if section else None
         own = next((ph for ph in self.photos if ph[0] == wanted), None)
-        if own:
-            return own
-        target = words_of(text)
         # The cover is kept for the hook unless a stage of the itinerary is that very place.
         pool = [ph for ph in self.photos if not (keep_cover and ph[0] == self.cover)]
-        scored = [(len(target & words_of(" ".join([ph[0].replace("-", " "), ph[2], str(ph[1].get("commonsTitle", ""))]))), ph) for ph in pool]
-        best = max(scored, key=lambda pair: pair[0], default=(0, None))
-        return best[1] if best[0] else None
+        best = max(pool, key=shared, default=None)
+        if own and (best is None or shared(own) or not shared(best)):
+            return own
+        return best if best is not None and shared(best) else None
 
     def photo(self, text: str = "", section: dict | None = None, strict: bool = False) -> tuple[str, str]:
         """A photo for this text. `strict`: only a photo that shows what the text names (a stage of an itinerary)."""
@@ -281,12 +283,17 @@ def plan(layout: str, media: tuple[str, str], kicker: str, headline: list[str], 
     return {**scene, **{key: value for key, value in extra.items() if value}}
 
 
-def fact_plan(fact: dict, media: Media, place: str, tag: str, badge: str | None) -> dict:
+def fact_plan(fact: dict, media: Media, place: str, tag: str, badge: str | None = None) -> dict:
     headline = figure_lines(fact["value"])
     if not headline:
         raise Held("figure_too_long")
     detail = unbreakable(fact["short"])
-    return plan("fact", media.moving(fact["label"], fact["section"]), kicker_of(fact["section"], place), headline, seconds_for(detail), detail=detail,
+    picture = media.moving(fact["label"], fact["section"])
+    # The label above the figure is the section's name only over that section's own photo, or when the section has
+    # none: "Aurores boréales" is not written over a picture of the village.
+    own = fact["section"].get("image") if fact["section"] else None
+    kicker = kicker_of(fact["section"], place) if not own or picture[1] == own else place
+    return plan("fact", picture, kicker, headline, seconds_for(detail), detail=detail,
                 facts=[{"source": "guide", "excerpt": fact["shortExcerpt"]}], tag=tag, badge=badge)
 
 
@@ -320,10 +327,20 @@ def figures_reel(fmt: str, brief: Brief) -> tuple[dict, list[dict], list[str]]:
         if not lead:
             raise Held("no_price_to_open_with")
         chosen = sorted(chosen, key=lambda f: not is_price(f))
-    chosen = chosen[:min(MAX_FACTS[fmt], brief.media.room())]
-    if len(chosen) < 3:
+    limit, plans = min(MAX_FACTS[fmt], brief.media.room()), {}
+    # A figure that a photo shows goes first (the price of the huskies over the huskies); a figure that no photo shows
+    # only fills the reel up to its four facts, and otherwise stays in the caption and the guide.
+    for index, fact in enumerate(chosen):
+        if len(plans) < limit and brief.media.named(fact["label"], fact["section"]):
+            plans[index] = fact_plan(fact, brief.media, brief.place, brief.tag)
+    for index, fact in enumerate(chosen):
+        if index not in plans and len(plans) < min(limit, MIN_FACTS - bool(lead)):
+            plans[index] = fact_plan(fact, brief.media, brief.place, brief.tag)
+    if len(plans) < 3:
         raise Held("not_enough_photos_or_figures")
-    body = [fact_plan(fact, brief.media, brief.place, brief.tag, f"{n}/{len(chosen)}") for n, fact in enumerate(chosen, 1)]
+    chosen, body = [chosen[index] for index in sorted(plans)], [plans[index] for index in sorted(plans)]
+    for number, scene in enumerate(body, 1):
+        scene["badge"] = f"{number}/{len(body)}"
     if lead:
         hook = plan("hook", brief.media.opening(brief.media.cover), "Combien ça coûte ?", brief.title_lines + ["*" + unbreakable(lead["value"]) + "*"],
                     round(HOOK_SECONDS + 0.6, 1), detail=unbreakable(lead["short"]), facts=[{"source": "guide", "excerpt": lead["shortExcerpt"]}], tag=brief.tag)
@@ -342,18 +359,30 @@ def stage_plan(step: dict, picture: tuple[str, str], tag: str) -> dict:
     return plan("fact", picture, step["kicker"], step["lines"], round(seconds_for(detail) - 0.4, 1), detail=detail, facts=quotes, tag=tag)
 
 
+def stage_line(step: dict, priced: bool) -> str:
+    """The stage in the caption, with the figure its plan shows and that figure's whole label when it fits (its date is there)."""
+    line = f"📍 {step['kicker']} : {' '.join(step['lines'])}"
+    if not priced:
+        return line
+    fact = step["fact"]
+    return next((text for text in (f"{line} · {fact['value']} {label}" for label in (fact["label"], fact["short"])) if len(text) <= 160), line)
+
+
 def itinerary_reel(brief: Brief) -> tuple[dict, list[dict], list[str]]:
     """"itineraire": one dated stage per plan, shown only over a photo of that very place; the others stay in the guide."""
     body, lines = [], []
     for step in stages(brief.article, brief.page, brief.numbered):
         if brief.media.room() < 1:
             break
+        # The photo is chosen for what the plan will say (its name, its price), not for the whole title of the day.
+        shown = " ".join(step["lines"] + [step["fact"]["short"] if step["fact"] else step["rest"] or ""])
         try:
-            picture = brief.media.photo(step["title"], step["section"], strict=True)
+            picture = brief.media.photo(shown, step["section"], strict=True)
         except Held:
             continue
-        body.append(stage_plan(step, picture, brief.tag))
-        lines.append(f"📍 {step['kicker']} : {' '.join(step['lines'])}")
+        scene = stage_plan(step, picture, brief.tag)
+        body.append(scene)
+        lines.append(stage_line(step, priced=len(scene["facts"]) > 1))
     if len(body) < MIN_STAGES:
         raise Held("not_enough_stages_with_their_photo")
     return brief.hook("*jour par jour*"), body, lines
@@ -393,6 +422,12 @@ def build(fmt: str, article: dict, facts: list[dict], photos: list, clips: list,
     if len(said) < MIN_FACTS:
         raise Held("fewer_than_four_facts")
     closing = plan("cta", brief.media.opening(None), "Le guide complet", title_lines, CTA_SECONDS, note=SAVE_NOTE)
+    # A photo reviewed by hand may say where its subject is (reviewed.json, "focus"): the vertical frame is cut around it.
+    records = {photo[0]: photo[1] for photo in photos}
+    for scene in [hook] + body + [closing]:
+        focus = records.get(scene.get("photo"), {}).get("focus")
+        if isinstance(focus, list) and len(focus) == 2:
+            scene["focus"] = focus
     # Three to five useful caption lines: the figures left unshown complete a short list.
     lines += [caption_line(f) for f in facts if caption_line(f) not in lines]
     lines = [line for line in lines if checked(line, 160)][:5]

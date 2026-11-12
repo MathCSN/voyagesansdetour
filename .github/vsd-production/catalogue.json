@@ -123,15 +123,15 @@
     },
     {
       "contentId": "ig-laponie-budget-rovaniemi-2026-11-27-2",
-      "notBefore": "2026-11-12T12:30:36Z",
+      "notBefore": "2026-11-12T14:07:10Z",
       "file": "scenarios/ig-laponie-budget-rovaniemi-2026-11-27-2.json",
-      "sha256": "c5bdb158c0a6fcc5407d51b5f6cd605b4d84689e4dbcf018116264b89ac84c14"
+      "sha256": "7edc34e48f4cb5a1083d08cb08a909c52e1305e6285738248b21482cce03f311"
     },
     {
       "contentId": "ig-yucatan-itineraire-10-jours-2026-11-20-2",
-      "notBefore": "2026-11-12T12:30:36Z",
+      "notBefore": "2026-11-12T14:07:10Z",
       "file": "scenarios/ig-yucatan-itineraire-10-jours-2026-11-20-2.json",
-      "sha256": "4c1d76d8ff6fa133d2ed467f11d247694c6b3dd31c8708abe54beb609b4d1952"
+      "sha256": "6999717cf2c29d737ccac377110f183538c2f405860db582394a0a8f13ba26f3"
     }
   ]
 }

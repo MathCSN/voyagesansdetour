@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "contentId": "ig-laponie-budget-rovaniemi-2026-11-27-2",
   "status": "rendered_not_published",
-  "fingerprint": "062af2fb61befbb1935dfb0da586b2818027aeec6b1c6eec8a21497154f07904",
-  "createdAt": "2026-11-12T12:30:53.313852Z",
-  "renderFinishedAt": "2026-11-12T12:31:19.634453Z",
+  "fingerprint": "315cad88995c165abdd093f3958ec53356e97f34ea27f79faa52345b2739d76d",
+  "createdAt": "2026-11-12T14:07:12.451402Z",
+  "renderFinishedAt": "2026-11-12T14:07:39.523700Z",
   "rendererContractVersion": 4,
   "rendererSha256": "2d337f981d604100e5bb89001e685106b0a2fa8aab05b9c4fe6eff0a448b6fe9",
   "drawingSha256": "18fff20f2fc461191c57cdbfb620129502ac051e6b3719a239ac872df87e204a",
@@ -13,7 +13,7 @@
   "kind": "reel",
   "channel": "instagram",
   "publishAt": "2026-11-27T17:00:00Z",
-  "reviewValidUntil": "2026-12-12T12:30:36Z",
+  "reviewValidUntil": "2026-12-12T14:07:10Z",
   "sourceCheckedOn": "2026-11-12",
   "targetUrl": "https://voyagesansdetour.fr/finlande/laponie-budget-rovaniemi/",
   "voice": null,
@@ -47,15 +47,15 @@
       "author": "darkroomsg (Unsplash)",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Dog_sledding_in_Rovaniemi_(Unsplash).jpg"
     },
-    "laponie-cabane-neige-rovaniemi": {
-      "licence": "CC BY-SA 4.0",
-      "author": "Kim.schnackenberg",
-      "sourcePage": "https://commons.wikimedia.org/wiki/File:Schneebedeckte_H%C3%BCtte_in_Rovanimie,_Lapland,_Finland._24.02.2019.jpg"
-    },
     "laponie-village-boules-neige": {
       "licence": "CC BY-SA 2.5",
       "author": "Samuli Lintula",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Snowball_pyramid_at_Santa_Claus%27_Village_Large.jpg"
+    },
+    "laponie-cabane-neige-rovaniemi": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Kim.schnackenberg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Schneebedeckte_H%C3%BCtte_in_Rovanimie,_Lapland,_Finland._24.02.2019.jpg"
     }
   },
   "clips": {},
@@ -66,7 +66,7 @@
     "durationSeconds": 22.6,
     "videoCodec": "h264",
     "pixelFormat": "yuv420p",
-    "videoBitrateBps": 2386113,
+    "videoBitrateBps": 2329061,
     "audioCodec": "aac",
     "audioSampleRate": 48000,
     "audioBitrateBps": 96343,
@@ -79,12 +79,12 @@
   "files": [
     {
       "file": "apercu.jpg",
-      "sha256": "b26719473fd80d7a9dcf02675aa3958b7da07df2449b618df6f6532f6ca270d4",
-      "bytes": 261962
+      "sha256": "e1897fb204e8324cb45d38509a91b1c13b26b8cb25f4e74e8929b66ed75eb964",
+      "bytes": 262709
     },
     {
       "file": "credits.txt",
-      "sha256": "75e92bdf578638bbbae315aa71a35e88ca4bda48b0ab177509b7e09ae26e0660",
+      "sha256": "af037c54041ac7056c4fd3f061c47aaa0cd1b72fcda59820f3513f7a3a5304b5",
       "bytes": 3297
     },
     {
@@ -99,8 +99,8 @@
     },
     {
       "file": "legende.txt",
-      "sha256": "6ac21b778d30973ae567c95d6a5a7792f09ba349c338c7a4c4d8f311ebec00d0",
-      "bytes": 923
+      "sha256": "cbd373bdbdd1c78e0b671d567d4819371f42542e62b627657cb20a51b5d04d3c",
+      "bytes": 922
     },
     {
       "file": "notosans-OFL.txt",
@@ -119,13 +119,13 @@
     },
     {
       "file": "reel.mp4",
-      "sha256": "6568251ff786c9ab2db1ff525df3b0467caf63055656521bd34052c96e1d244f",
-      "bytes": 7039439
+      "sha256": "0ac6cad1b0d69550d41b7b7243f9d84cafc6048e42cd4e5b1fbe9feba52a8c8f",
+      "bytes": 6878299
     },
     {
       "file": "scenario.json",
-      "sha256": "c5bdb158c0a6fcc5407d51b5f6cd605b4d84689e4dbcf018116264b89ac84c14",
-      "bytes": 8113
+      "sha256": "7edc34e48f4cb5a1083d08cb08a909c52e1305e6285738248b21482cce03f311",
+      "bytes": 8068
     },
     {
       "file": "scene-01.jpg",
@@ -144,27 +144,27 @@
     },
     {
       "file": "scene-04.jpg",
-      "sha256": "bd456b10668f60d5de4357eb1b2f70795d18fc14abd5a394a44ffb7d45ad7a25",
-      "bytes": 398567
+      "sha256": "b036101c67464b9519c5bce7ec4f59912367043d44bb10e4b89fcadb5171b628",
+      "bytes": 411081
     },
     {
       "file": "scene-05.jpg",
-      "sha256": "b071d190205b103339348aa11e36d14b411f04b398d0fb442e211dec80ad531b",
-      "bytes": 242947
+      "sha256": "57a9174f372b12ddc2b798b1befd4e11d8d991119c0f6107f8106a51235a3c0c",
+      "bytes": 238998
     },
     {
       "file": "scene-06.jpg",
-      "sha256": "3e6d2492966f312737a0c0a96dacb1db2f77650a7cf4551405973f3161f1b2c5",
-      "bytes": 395892
+      "sha256": "9a55f033d8ce6131193d85501d7be562cce7b99d8999d690a0840380fbe4c675",
+      "bytes": 236343
     },
     {
       "file": "scene-07.jpg",
-      "sha256": "6ab3d44304c9711e194f5a0dac1b35e8be00de96081036a1760494bceb92ea0b",
-      "bytes": 238741
+      "sha256": "9bba018e086f71d96c8904751b19caf272b4da41a465c1ed120e2435c16e914d",
+      "bytes": 411215
     }
   ],
   "runtime": {
-    "wallSeconds": 24.978,
+    "wallSeconds": 26.737,
     "encoderThreads": 2,
     "pillowVersion": "11.3.0",
     "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers"

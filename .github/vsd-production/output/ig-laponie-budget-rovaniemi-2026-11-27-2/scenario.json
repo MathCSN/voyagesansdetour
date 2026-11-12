@@ -10,17 +10,17 @@
   "publishAt": "2026-11-27T17:00:00Z",
   "review": {
     "status": "reviewed_for_render",
-    "checkedAt": "2026-11-12T12:30:36Z",
-    "validUntil": "2026-12-12T12:30:36Z",
+    "checkedAt": "2026-11-12T14:07:10Z",
+    "validUntil": "2026-12-12T14:07:10Z",
     "method": "Généré automatiquement (auto_social.py) depuis la page publiée du guide relevée le 12/11/2026 : chaque chiffre, étape ou ligne de tableau est cité mot pour mot ; photos et vidéos réelles sous licence libre, aucune image ni vidéo générée par IA ; garde-fous de production.py passés avant la mise en file."
   },
   "sources": {
     "file": "auto/ig-laponie-budget-rovaniemi-2026-11-27-2/sources.json",
-    "sha256": "f2ccd769767364204dc1a2184d364038de54f7516a049a4cf2470ac1b7d16dc2"
+    "sha256": "b05b203fe1dabbb9a6e5e31e2e77986c5a17ed1ec9e8a8bb929204d42b29910c"
   },
   "photos": {
     "file": "auto/ig-laponie-budget-rovaniemi-2026-11-27-2/photos.json",
-    "sha256": "2b5eed6c61da67914220ff4afa2873b2d9b364c50176a6088c58244ae1011d6f"
+    "sha256": "ea8aaf2bf7d1a64c94b2c2b2ca619e66c56d793cd77ef5a99bd1a372b7c94cc5"
   },
   "caption": {
     "hook": "💶 Combien coûte un voyage en Laponie ? Le budget de Rovaniemi 2026-2027, poste par poste",
@@ -29,7 +29,7 @@
       "💶 0 € : rencontrer le Père Noël dans son bureau, tous les jours de l’année",
       "💶 30 à 60 € : une balade en traîneau à renne de 400 ou 800 m au village du Père Noël",
       "💶 63 € : la courte balade en huskies au village, du 30 novembre au 4 avril",
-      "💶 42 € : l’entrée adulte de SantaPark, ouvert du 31 octobre au 23 janvier"
+      "📍 −6 °C : la maximale moyenne de décembre à Rovaniemi, −13 °C la nuit"
     ],
     "cta": "📌 Enregistrez ce reel pour votre voyage. 🔗 Prix, horaires et détails : le guide complet est en lien dans la bio.",
     "hashtags": [
@@ -110,11 +110,11 @@
     {
       "photo": "laponie-traineau-renne",
       "focus": [
-        0.5,
-        0.5
+        0.78,
+        0.55
       ],
       "layout": "fact",
-      "kicker": "Le prix des activités",
+      "kicker": "Laponie",
       "headline": [
         "*30 à 60 €*"
       ],
@@ -136,7 +136,7 @@
         0.5
       ],
       "layout": "fact",
-      "kicker": "Le prix des activités",
+      "kicker": "Laponie",
       "headline": [
         "*63 €*"
       ],
@@ -152,29 +152,29 @@
       "badge": "4/5"
     },
     {
-      "photo": "laponie-cabane-neige-rovaniemi",
+      "photo": "laponie-village-boules-neige",
       "focus": [
         0.5,
         0.5
       ],
       "layout": "fact",
-      "kicker": "Le prix des activités",
+      "kicker": "Laponie",
       "headline": [
-        "*42 €*"
+        "*−6 °C*"
       ],
       "seconds": 4.0,
-      "detail": "l’entrée adulte de SantaPark, ouvert du 31 octobre au 23 janvier",
+      "detail": "la maximale moyenne de décembre à Rovaniemi, −13 °C la nuit",
       "facts": [
         {
           "source": "guide",
-          "excerpt": "42 € l’entrée adulte de SantaPark, ouvert du 31 octobre au 23 janvier"
+          "excerpt": "−6 °C la maximale moyenne de décembre à Rovaniemi, −13 °C la nuit"
         }
       ],
       "tag": "Guide Laponie · sources du 24/10/2026",
       "badge": "5/5"
     },
     {
-      "photo": "laponie-village-boules-neige",
+      "photo": "laponie-cabane-neige-rovaniemi",
       "focus": [
         0.5,
         0.5

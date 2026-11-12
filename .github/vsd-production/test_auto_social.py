@@ -400,7 +400,9 @@ class GeneratorTests(unittest.TestCase):
                          [("Jour 1", ["Kiyomizu-dera"], "kyoto-3"), ("Jour 2", ["Fushimi Inari", "et ses torii"], "kyoto-4"), ("Jour 3", ["Arashiyama"], "kyoto-5")])
         self.assertEqual(stages[0]["facts"][0]["excerpt"], "Jour 1 — Kiyomizu-dera, le temple sur pilotis")
         self.assertEqual(stages[0]["detail"], "*500 ¥* l’entrée du temple Kiyomizu-dera")
-        self.assertIn("📍 Jour 2 : Fushimi Inari et ses torii", reel["caption"]["lines"])
+        # The caption carries the figure each stage shows, with its whole label.
+        self.assertIn("📍 Jour 2 : Fushimi Inari et ses torii · 10 000 torii rouges sur la colline du Fushimi Inari", reel["caption"]["lines"])
+        self.assertIn("📍 Jour 3 : Arashiyama", reel["caption"]["lines"])
         self.assertNotIn("Osaka", json.dumps(reel["scenes"], ensure_ascii=False))  # no photo of Osaka in this guide
 
     def test_a_when_to_go_guide_becomes_a_table_to_pause(self):
@@ -833,7 +835,8 @@ class DensityTests(unittest.TestCase):
         f = self.fixture([guide(category="Budget", shortTitle="Laponie : le budget", keyFacts=cabin)])
         reel = self.reels(f.run(limit=1), f)[0]
         self.assertEqual(reel["format"], "liste")
-        self.assertEqual(reel["scenes"][0]["headline"][-1], "*5 chiffres à connaître*")
+        # Four figures, not five: only one of them is shown by a photo of this guide, the others just fill the reel.
+        self.assertEqual(reel["scenes"][0]["headline"][-1], "*4 chiffres à connaître*")
         self.assertEqual(reel["title"], "Laponie : le budget — les chiffres à connaître")
         self.assertTrue(reel_formats.opens_on_budget({"value": "872 €", "label": "le budget serré pour 14 jours et 13 nuits"}))
         self.assertTrue(reel_formats.opens_on_budget({"value": "1 370 €", "label": "par personne, hors vol"}))
@@ -906,6 +909,59 @@ class StageTests(unittest.TestCase):
                                        ["Kyoto en train"], "")
         self.assertEqual(scenes[0]["photo"], "kyoto-1")
         self.assertNotIn("kyoto-1", [scene["photo"] for scene in scenes[1:]])
+
+
+class ShownTests(unittest.TestCase):
+    """Each plan shows what its text names (review of 12/11/2026)."""
+
+    PHOTOS = [("lap-aurore", {"commonsTitle": "File:Aurora.jpg"}, "Une aurore boréale en Laponie."),
+              ("lap-bureau", {"commonsTitle": "File:Office.jpg"}, "Le bureau du Père Noël illuminé, à Rovaniemi."),
+              ("lap-cabane", {"commonsTitle": "File:Hut.jpg"}, "Une cabane sous la neige."),
+              ("lap-huskies", {"commonsTitle": "File:Dogs.jpg"}, "Un attelage de huskies."),
+              ("lap-train", {"commonsTitle": "File:Train.jpg"}, "Le train de nuit en gare de Rovaniemi."),
+              ("lap-traineau", {"commonsTitle": "File:Sleigh.jpg", "focus": [0.8, 0.55]}, "Une balade en traîneau tiré par un renne."),
+              ("lap-village", {"commonsTitle": "File:Village.jpg"}, "Le village sous la neige en décembre, à Rovaniemi."),
+              ("lap-pyramide", {"commonsTitle": "File:Balls.jpg"}, "Une pyramide de boules de neige.")]
+    FIGURES = [("59 €", "la cabine privative du train de nuit Helsinki–Rovaniemi"), ("0 €", "rencontrer le Père Noël dans son bureau"),
+               ("30 à 60 €", "une balade en traîneau à renne de 400 ou 800 m"), ("63 €", "la courte balade en huskies au village"),
+               ("42 €", "l’entrée adulte de SantaPark, ouvert du 31 octobre au 23 janvier"), ("−6 °C", "la maximale moyenne de décembre à Rovaniemi")]
+
+    def build(self, fmt="liste"):
+        facts = [{"value": value, "label": label, "short": label, "shortExcerpt": value + " " + label, "excerpt": value + " " + label, "section": None}
+                 for value, label in self.FIGURES]
+        article = guide(cover="absente", shortTitle="Laponie : le budget", destination="Laponie")
+        return reel_formats.build(fmt, article, facts, list(self.PHOTOS), [], "Phrase d’ouverture.", "Laponie", "Finlande · Laponie", "Guide Laponie",
+                                  ["Laponie :", "le budget"], "")
+
+    def test_a_figure_that_no_photo_shows_stays_out_of_the_reel(self):
+        scenes, lines = self.build()
+        shown = {scene["headline"][0].strip("*").replace(reel_formats.NBSP, " "): scene["photo"] for scene in scenes[1:-1]}
+        self.assertEqual(shown, {"59 €": "lap-train", "0 €": "lap-bureau", "30 à 60 €": "lap-traineau", "63 €": "lap-huskies", "−6 °C": "lap-village"})
+        self.assertNotIn("42 €", shown)  # no photo of SantaPark: its price is not put over a cabin in the woods
+        self.assertEqual([scene["badge"] for scene in scenes[1:-1]], [f"{n}/5" for n in range(1, 6)])
+        self.assertEqual(len(lines), 5)
+
+    def test_a_reviewed_photo_is_framed_around_its_subject(self):
+        scenes, _ = self.build()
+        frames = {scene["photo"]: scene["focus"] for scene in scenes}
+        self.assertEqual(frames["lap-traineau"], [0.8, 0.55])
+        self.assertEqual(frames["lap-train"], [0.5, 0.5])
+
+    def test_a_stage_takes_the_photo_of_what_it_says_and_its_caption_line_carries_its_price(self):
+        media = reel_formats.Media([("yuc-castillo", {"commonsTitle": "File:Templo el Castillo - Chichen Itza.jpg"}, "La pyramide de Chichén Itzá."),
+                                    ("yuc-cenote", {"commonsTitle": "File:Cenote Ik Kil.jpg"}, "Un cenote entouré de lianes.")], [], cover="yuc-castillo")
+        day = {"image": "yuc-cenote"}
+        # The guide gives the cenote to the whole day; the plan only says "Chichén Itzá à l'ouverture, 697 pesos l'entrée".
+        self.assertEqual(media.named("Chichén Itzá à l’ouverture l’entrée de Chichén Itzá pour un étranger", day, keep_cover=False)[0], "yuc-castillo")
+        self.assertEqual(media.named("Ik Kil l’après-midi", day, keep_cover=False)[0], "yuc-cenote")
+        self.assertEqual(media.named("Une journée sans rien de nommé", day, keep_cover=False)[0], "yuc-cenote")
+        fact = {"value": "697 pesos", "label": "l’entrée de Chichén Itzá pour un étranger depuis le 27 mars 2026", "short": "l’entrée de Chichén Itzá pour un étranger"}
+        step = {"kicker": "Jour 3", "lines": ["Chichén Itzá", "à l’ouverture"], "fact": fact}
+        self.assertEqual(reel_formats.stage_line(step, priced=True),
+                         "📍 Jour 3 : Chichén Itzá à l’ouverture · 697 pesos l’entrée de Chichén Itzá pour un étranger depuis le 27 mars 2026")
+        self.assertEqual(reel_formats.stage_line(step, priced=False), "📍 Jour 3 : Chichén Itzá à l’ouverture")
+        long = {**fact, "label": fact["label"] + " " + "x" * 120}
+        self.assertEqual(reel_formats.stage_line({**step, "fact": long}, priced=True), "📍 Jour 3 : Chichén Itzá à l’ouverture · 697 pesos l’entrée de Chichén Itzá pour un étranger")
 
 
 class CaptionTextTests(unittest.TestCase):

@@ -157,8 +157,15 @@ illustrations et trois églises : la recherche prenait comme mot-clé tout mot �
 des photos du guide (« Santa », de « Santa Claus Village »). Désormais :
 
 - sont cherchés, et exigés en mot entier dans le titre du fichier, le nom du lieu en français et
-  ses noms relus à la main dans `destinations.EXONYMS` (Lapland, London, Tailandia) ; le pays
-  n'est cherché que pour un guide qui couvre tout le pays ;
+  ses noms relus à la main dans `destinations.EXONYMS` (Lapland, London, Tailandia) ;
+- le nom ne suffit pas (« Chapada dos Guimarães » est au Brésil, la « Laponie suédoise » n'est pas
+  Rovaniemi) : une image trouvée n'est gardée que si son titre ou ses catégories Commons nomment
+  aussi le pays du guide. Rien ne le dit : pas de photo. Un guide de tout un pays ne lance aucune
+  recherche, le nom d'un pays dans un titre ne disant rien de ce que montre l'image ;
+- dans un reel de chiffres, ceux qu'une photo montre passent d'abord (le prix des huskies sur les
+  huskies) ; un chiffre qu'aucune photo ne montre ne sert qu'à atteindre quatre faits, sinon il
+  reste dans la légende ; dans un itinéraire, la photo est choisie pour ce que dit le plan, et la
+  ligne de légende de l'étape porte son prix ;
 - une illustration, une affiche, une publicité, une œuvre reproduite ou antérieure à 1950 est
   refusée ; une image trouvée par la recherche doit en plus porter l'appareil photo dans ses
   propres données ;

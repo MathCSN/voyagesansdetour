@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "contentId": "ig-yucatan-itineraire-10-jours-2026-11-20-2",
   "status": "rendered_not_published",
-  "fingerprint": "e42320f51a8ca5c238e671b5dc53d6e64a8fec8da8c0305166b160a18448dfe4",
-  "createdAt": "2026-11-12T12:31:19.808834Z",
-  "renderFinishedAt": "2026-11-12T12:31:42.322423Z",
+  "fingerprint": "80fdbe1b5fde315e4f803688dd80d75b33362275823dd196cc60f4661bdede54",
+  "createdAt": "2026-11-12T14:07:40.007060Z",
+  "renderFinishedAt": "2026-11-12T14:08:06.612385Z",
   "rendererContractVersion": 4,
   "rendererSha256": "2d337f981d604100e5bb89001e685106b0a2fa8aab05b9c4fe6eff0a448b6fe9",
   "drawingSha256": "18fff20f2fc461191c57cdbfb620129502ac051e6b3719a239ac872df87e204a",
@@ -13,7 +13,7 @@
   "kind": "reel",
   "channel": "instagram",
   "publishAt": "2026-11-20T17:00:00Z",
-  "reviewValidUntil": "2026-12-12T12:30:36Z",
+  "reviewValidUntil": "2026-12-12T14:07:10Z",
   "sourceCheckedOn": "2026-11-12",
   "targetUrl": "https://voyagesansdetour.fr/mexique/yucatan-itineraire-10-jours/",
   "voice": null,
@@ -22,20 +22,20 @@
     "https://voyagesansdetour.fr/mexique/yucatan-itineraire-10-jours/"
   ],
   "photos": {
-    "yucatan-chichen-itza": {
-      "licence": "CC BY-SA 4.0",
-      "author": "Diego Delso",
-      "sourcePage": "https://commons.wikimedia.org/wiki/File:Templo_el_Castillo_-_Chichen_Itza-Yucatan-Mexico0222.jpg"
+    "yucatan-cenote": {
+      "licence": "CC BY 2.0",
+      "author": "Shinya Suzuki",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Cenote_Ik_Kil,_Yucatan,_Dec_2011_-_06.jpg"
     },
     "yucatan-valladolid-calzada": {
       "licence": "CC BY-SA 4.0",
       "author": "DaLoetz",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Valladolid_(Yucatan)_Calzada_de_los_Frailes.jpg"
     },
-    "yucatan-cenote": {
-      "licence": "CC BY 2.0",
-      "author": "Shinya Suzuki",
-      "sourcePage": "https://commons.wikimedia.org/wiki/File:Cenote_Ik_Kil,_Yucatan,_Dec_2011_-_06.jpg"
+    "yucatan-chichen-itza": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Diego Delso",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Templo_el_Castillo_-_Chichen_Itza-Yucatan-Mexico0222.jpg"
     },
     "yucatan-uxmal-pyramide": {
       "licence": "CC BY-SA 4.0",
@@ -66,7 +66,7 @@
     "durationSeconds": 19.1,
     "videoCodec": "h264",
     "pixelFormat": "yuv420p",
-    "videoBitrateBps": 2949465,
+    "videoBitrateBps": 2936739,
     "audioCodec": "aac",
     "audioSampleRate": 48000,
     "audioBitrateBps": 96422,
@@ -79,12 +79,12 @@
   "files": [
     {
       "file": "apercu.jpg",
-      "sha256": "781fdde9a802aa1350fd5c418d1a4707d3131ffc093de9bf347478eee8b38564",
-      "bytes": 276796
+      "sha256": "043368eff34a84e268a22664a2b56c29cb4950f82d6bd4e197244da27b8518be",
+      "bytes": 275693
     },
     {
       "file": "credits.txt",
-      "sha256": "a7477ce2b5f87e9affaeb4aa63c2a11d4633b49507e1d9945cf6a97873466bd2",
+      "sha256": "308ae84e1eb8e9519cd38bf8ab95f9b6013da1e997c5495a690d22eab27895d6",
       "bytes": 3440
     },
     {
@@ -99,8 +99,8 @@
     },
     {
       "file": "legende.txt",
-      "sha256": "777df099f53a4fab833206e733eee020b40205bd9a97570bb899372c91b5c066",
-      "bytes": 669
+      "sha256": "ccd137199cdfeb7ddf47c12f26929eab03cb8af3fd2ae293cc0321a41986fab5",
+      "bytes": 963
     },
     {
       "file": "notosans-OFL.txt",
@@ -114,23 +114,23 @@
     },
     {
       "file": "poster.jpg",
-      "sha256": "c6b5203d74b0fef69557440cbb5cbbdff90535e40e89fcbada4c06295648d713",
-      "bytes": 446851
+      "sha256": "46bf5bbe421d4d353e267ab20a1a68073a43d63958361bb2f4beb3a05f2a4ef8",
+      "bytes": 433404
     },
     {
       "file": "reel.mp4",
-      "sha256": "8d1250e2d6c19aa873d4e45eed8126f3a38fc6fac6e3ed6ef48b2e8b453dcbdb",
-      "bytes": 7294737
+      "sha256": "c0813fc7bdfb34d239259abbf8da69e9a4ed8a6f965902756fc1a3ceef562276",
+      "bytes": 7264336
     },
     {
       "file": "scenario.json",
-      "sha256": "4c1d76d8ff6fa133d2ed467f11d247694c6b3dd31c8708abe54beb609b4d1952",
-      "bytes": 8017
+      "sha256": "6999717cf2c29d737ccac377110f183538c2f405860db582394a0a8f13ba26f3",
+      "bytes": 8311
     },
     {
       "file": "scene-01.jpg",
-      "sha256": "a8e60c81eea31182787847526348590ca40b6263cffa33ba4631a08f89145559",
-      "bytes": 411020
+      "sha256": "f09d1377d83aecb9ab4f42f92f0d63694c2a9ebe5b24a5f5f9ac50afc48b8ee9",
+      "bytes": 399041
     },
     {
       "file": "scene-02.jpg",
@@ -139,8 +139,8 @@
     },
     {
       "file": "scene-03.jpg",
-      "sha256": "8fb92d322578ff33cd1a78942396ec2769472958f7a6f729554c2adb5f842e8d",
-      "bytes": 419369
+      "sha256": "2db0cfdc0d78e7ea9c3cd6b31c956208efa982c98583b7a024d91ac6903abb4e",
+      "bytes": 419262
     },
     {
       "file": "scene-04.jpg",
@@ -164,7 +164,7 @@
     }
   ],
   "runtime": {
-    "wallSeconds": 22.108,
+    "wallSeconds": 26.164,
     "encoderThreads": 2,
     "pillowVersion": "11.3.0",
     "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers"

@@ -91,6 +91,7 @@
     "laponie-traineau-renne": {
       "camera": "GT-I9500",
       "alt": "Une balade en traîneau tiré par un renne sur la neige, en Laponie.",
+      "focus": [0.78, 0.55],
       "file": "assets/photos/laponie-traineau-renne.jpg",
       "sha256": "a9567eacd67ece8dbe02ee3c8a6bdbda77cff138070b443afd432f99b7cf296f",
       "width": 2844,
