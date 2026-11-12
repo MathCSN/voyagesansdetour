@@ -75,10 +75,21 @@ class ParagraphDefectTests(unittest.TestCase):
                      'Le sentier traverse un merveilleux bosco di lecci, puis la casa del guardiano.',
                      'Il sentiero porta al santuario in due ore e costa dieci euro.',
                      'The trail leads to the sanctuary in two hours and costs ten euros.',
-                     'O comboio parte às sete e meia e chega ao Pinhão duas horas depois.'):
+                     'O comboio parte às sete e meia e chega ao Pinhão duas horas depois.',
+                     'Le sentier 509 mène au santuario de Soviore en 1 h 40, à travers un bosco de chênes verts, et les escursioni guidées du parc coûtent 7,50 €.'):
             with self.subTest(text=text):self.assertIn('update_untranslated',paragraph_defects(text))
     def test_a_sentence_without_french_words_is_refused(self):
         self.assertIn('update_not_french',paragraph_defects('Sentiero panoramico, vista mozzafiato, costo dieci euro, durata due ore, partenza ogni mattina presto.'))
+    def test_a_foreign_sentence_or_clause_inside_french_is_refused(self):
+        # Reviewer's cases on PR 45: « La », « Il » or « Un » open Italian and Spanish sentences too,
+        # and a foreign list after a colon is judged on its own.
+        for text in ('La carte se prend en gare et coûte 19,50 € par jour en haute saison. La carta comprende treni regionali, autobus locali, sentieri costieri, bagni pubblici, connessione internet gratuita.',
+                     'La carte se prend en gare et coûte 19,50 € par jour en haute saison. Il biglietto giornaliero costa diciannove euro e i bambini sotto i quattro anni viaggiano gratis.',
+                     'Le billet coûte 697 pesos depuis mars. Un boleto único reemplaza ahora el doble pago federal y estatal en la taquilla del centro de visitantes.',
+                     'Le musée ouvre à 10 h et coûte 12 €. Le panneau précise : free entry every first Sunday, guided tours daily, children under five go free.',
+                     'O Paço dos Duques fica perto dos jardins dos condes, a 300 metros do castelo.',
+                     'Le marché vend du fish and chips à 14,50 £, puis cheap and cheerful street food and drinks.'):
+            with self.subTest(text=text):self.assertTrue(set(paragraph_defects(text))&{'update_untranslated','update_not_french'})
     def test_french_with_foreign_names_dishes_and_homographs_stays_allowed(self):
         for text in ('Après 3 km, on est las de monter : le bus 435 redescend pour 2 €.',
                      'Goûtez les spaghetti alle vongole du port, à 14 € l’assiette.',
@@ -90,8 +101,21 @@ class ParagraphDefectTests(unittest.TestCase):
                      'Au Yucatán, la Ruta de los Cenotes relie Valladolid à Mérida ; le toucinho-do-céu coûte 2,40 €.',
                      'Le billet Top of the Rock coûte 49 $ ; le sapin se dresse entre les 49e et 50e Rues.',
                      'Via dell’Amore, miradouro da Graça, Madonna di Soviore et Tren Maya gardent leur nom.',
-                     'Les bols de « bún chả » coûtent 50 000 dongs dans le Vieux Quartier.'):
+                     'Les bols de « bún chả » coûtent 50 000 dongs dans le Vieux Quartier.',
+                     'Les places des Rockettes se réservent sur rockettes.com ou sur ticketmaster.com, à partir de 53 $ en semaine pour la séance de 11 h.',
+                     'Les horaires d’hiver se vérifient sur nlg.it et sur trenitalia.it : le dernier train quitte Monterosso à 23 h 37 et coûte 5,20 €.',
+                     'Avec un sac à dos, on monte sans peine au marché du Bolhão, où le bacalhau com natas se vend 9,80 € la part à emporter.',
+                     'Un fish and chips se paie 14,50 £ au marché de Borough, et un bed and breakfast du quartier revient à 95 £ la nuit en décembre.',
+                     'La patinoire ouvre chaque jour : lundi, mardi, mercredi, jeudi, vendredi 10 h, samedi, dimanche 9 h, dernière entrée 21 h 15, tarif enfant 11,50 £.',
+                     'Le billet « Skip the Line to the Top of the Rock » coûte 71 $ et donne accès à la terrasse sans attendre, de 9 h à 23 h.'):
             with self.subTest(text=text):self.assertEqual(paragraph_defects(text),[])
+    def test_known_limits_are_left_to_the_model_reviewer(self):
+        # Two foreign dishes in one sentence look like the Cinque Terre paragraph and are held back;
+        # a short foreign sentence carries too few words to judge. The prompt and the reviewer cover both.
+        self.assertIn('update_untranslated',paragraph_defects('Sur le port de Cetara, les spaghetti alle vongole se paient 16,50 € l’assiette et la colatura di alici 9,50 € le flacon.'))
+        self.assertEqual(paragraph_defects('Le train de 8 h 12 rejoint Vernazza en 4 minutes pour 5,20 €. Prossima fermata Vernazza. Descendez côté mer.'),[])
+        # A Spanish sentence whose function words French shares (« se », « en », « la ») passes, as on main.
+        self.assertEqual(paragraph_defects('Le billet coûte 697 pesos depuis mars. El boleto único cuesta 697 pesos y se paga en la taquilla del centro.'),[])
     def test_no_published_paragraph_is_refused(self):
         articles=json.loads((PATCHES.parent/'articles.json').read_text(encoding='utf-8'))
         flagged=[p for a in articles for s in a['sections'] for p in s.get('paragraphs',[]) if paragraph_defects(p)]

@@ -456,6 +456,15 @@ class PublicBuildTest(unittest.TestCase):
         self.assertEqual([routes for routes in titles.values() if len(routes)>1],[])
         self.assertEqual([routes for routes in descriptions.values() if len(routes)>1],[])
 
+    def test_every_key_figure_can_feed_a_post(self):
+        # Mêmes bornes que guide_draft.validate_key_facts et auto_social.usable_facts :
+        # au-delà de 120 caractères, le chiffre clé disparaît des reels et des carrousels.
+        for guide in json.loads((ROOT/'articles.json').read_text()):
+            for fact in guide.get('keyFacts',[]):
+                with self.subTest(guide=guide['slug'],value=fact['value']):
+                    self.assertLessEqual(len(fact['value']),24)
+                    self.assertTrue(10<=len(fact['label'])<=120,len(fact['label']))
+
     def test_seo_file_matches_the_catalogue_and_keeps_the_full_title_on_the_page(self):
         catalogue={a['slug']:a for a in json.loads((ROOT/'articles.json').read_text())}
         seo=json.loads((ROOT/'seo.json').read_text())['guides']
