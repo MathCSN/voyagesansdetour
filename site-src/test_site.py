@@ -377,6 +377,18 @@ class PublicBuildTest(unittest.TestCase):
         self.assertIn('.section-head{align-items:start;flex-wrap:wrap}',css)
         self.assertIn('.section-head .text-link{font-size:12px;white-space:normal;margin-top:8px}',css)
 
+    def test_a_sticky_table_of_contents_taller_than_the_window_scrolls_inside_itself(self):
+        css=(self.out/'style.css').read_text()
+        # Collé à 30 px du haut : sans hauteur maximale, la fin d'un long sommaire (« Sources », « Imprimer le guide ») restait sous l'écran.
+        sticky=css.split('.toc{position:sticky;')[1].split('}')[0]
+        self.assertIn('top:30px;',sticky)
+        self.assertIn('max-height:calc(100vh - 60px);overflow-y:auto',sticky)
+        # Un bloc qui défile rogne ce qui dépasse : la marge intérieure garde entier l'anneau de focus du bouton
+        # « Imprimer le guide », et la marge négative laisse le contenu à sa place.
+        self.assertIn('margin:0 -8px;padding:18px 8px 10px',sticky)
+        # Sur téléphone le sommaire n'est plus collé : il reprend toute sa hauteur, sans défilement interne.
+        self.assertIn('.toc{position:static;order:-1;max-height:none;overflow-y:visible;margin:0;padding:18px 0 0}',css)
+
     def test_list_page_buttons_filter_on_exact_fields_and_agree_with_the_counts(self):
         cards=lambda page:re.findall(r'<a class="card[^"]*"[^>]*>',re.search(r'<div class="grid" id="guide-grid"[^>]*>(.*?)</div><p class="empty"',page,re.S).group(1))
         field=lambda card,name:html.unescape(re.search(name+r'="([^"]*)"',card).group(1))
@@ -920,12 +932,18 @@ class AnalyticsBuildTest(TempDirTest):
             # Le panneau est hors du contenu principal : son titre est un paragraphe en gras, toujours relié par aria-labelledby.
             self.assertIn('<section id="audience-choice" class="audience-choice" aria-labelledby="audience-title" hidden><p id="audience-title" class="audience-title"><strong>La mesure d’audience, à votre choix</strong></p>',body)
             self.assertNotRegex(body.split('</main>')[1],r'<h[1-6]')
-            # Sur téléphone, la seconde phrase du dernier paragraphe se replie : le lien vers le détail reste.
-            self.assertIn('<a href="/confidentialite/">Données, destinataires et durées</a><span class="audience-more"> · Choix conservé 180 jours.',body)
+            # La durée du choix et le moyen de le retirer se lisent avant le clic sur tous les écrans :
+            # en entier sur ordinateur, en une ligne courte sur téléphone.
+            self.assertIn('<a href="/confidentialite/">Données, destinataires et durées</a><span class="audience-more"> · Choix conservé 180 jours. Retrait possible dans « Gérer la mesure d’audience » en bas de chaque page.</span><span class="audience-short"> · Choix gardé 180 jours, retrait en bas de chaque page.</span></p></section>',body)
             self.assertNotRegex(body,r'<(?:script|link)[^>]+(?:src|href)="https://(?:www\.)?(?:google|googletagmanager)')
             self.assertNotRegex(body,r'rel="(?:preconnect|dns-prefetch|prefetch)"')
         self.assertNotIn('data-vsd-analytics',(out/'404.html').read_text())
         self.assertTrue((out/'analytics.mjs').is_file())
+        css=(out/'style.css').read_text()
+        # Une seule des deux versions est affichée, jamais aucune.
+        self.assertIn('.audience-choice .audience-short{display:none}',css.split('@media(max-width:480px){.audience-choice{')[0])
+        phone=css.split('@media(max-width:480px){.audience-choice{')[1].split('@media')[0]
+        self.assertIn('.audience-choice .audience-more{display:none}.audience-choice .audience-short{display:inline}',phone)
         privacy=read(out,'/confidentialite/')
         self.assertIn('180 jours',privacy)
         self.assertIn('retirer votre accord',privacy)
