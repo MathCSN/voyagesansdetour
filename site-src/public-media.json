@@ -1243,13 +1243,13 @@
         },
         {
           "name": "scene-02.jpg",
-          "sha256": "91781a2d38b2607f2d15b5a975189f4e18edc0fc3919cf172217e35eaa78f5ce",
-          "bytes": 300936
+          "sha256": "8be9c00673302e15ec0e564f7e760e64015f2d6a4fc13ceed44b82a1096659b9",
+          "bytes": 328402
         },
         {
           "name": "scene-03.jpg",
-          "sha256": "74a1e4913f6b54a3d378c556df66bd2cf8a66f390a6a7025bcb8b104fa835249",
-          "bytes": 328368
+          "sha256": "c4f7754417ee74958d6ea46026b4ef301fbf88251352027df9b6a78ab3f4cb3b",
+          "bytes": 300928
         },
         {
           "name": "scene-04.jpg",
@@ -1268,39 +1268,8 @@
         },
         {
           "name": "credits.txt",
-          "sha256": "92310a09d0c0872061898230e6e954ac05a5630b8f50500b0db4a2129473f759",
+          "sha256": "4376848a5754e534877f2323c5f6882ce4fea3345b69744b45e2c75cc2653723",
           "bytes": 2580
-        },
-        {
-          "name": "dmsans-OFL.txt",
-          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
-          "bytes": 4482
-        },
-        {
-          "name": "playfairdisplay-OFL.txt",
-          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
-          "bytes": 4449
-        }
-      ]
-    },
-    {
-      "contentId": "ig-yucatan-itineraire-10-jours-2026-11-20-3",
-      "approved": true,
-      "files": [
-        {
-          "name": "reel.mp4",
-          "sha256": "193a0e93274c4cc13a316d0585cf007d6ca9122a6cf1df65389198a3406210b2",
-          "bytes": 5740218
-        },
-        {
-          "name": "poster.jpg",
-          "sha256": "f268c26923e5730002c38e47c9a6318b47fdf4a9f335ffb7e8bdc8630b607f5a",
-          "bytes": 435457
-        },
-        {
-          "name": "credits.txt",
-          "sha256": "51ec138cb1991247e36caba6bf0666e41f039429bb6558d72c71e616ffc230b9",
-          "bytes": 2731
         },
         {
           "name": "dmsans-OFL.txt",
@@ -1320,8 +1289,8 @@
       "files": [
         {
           "name": "reel.mp4",
-          "sha256": "eb458487df9206f1ae8f6030b3f0e3bd33fbc714bb26a00c41f6c70d94026803",
-          "bytes": 5694308
+          "sha256": "1f5696afe19d887bcccaa97bf55f5c9addb4193fdb4eb404bc9c3e6781029c0d",
+          "bytes": 5734697
         },
         {
           "name": "poster.jpg",
@@ -1332,6 +1301,37 @@
           "name": "credits.txt",
           "sha256": "201a79e60b1f8c95a71da21e4cfe4a61544d4b8cb53f4795a96354a58ccbead5",
           "bytes": 2868
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "ig-yucatan-itineraire-10-jours-2026-11-20-3",
+      "approved": true,
+      "files": [
+        {
+          "name": "reel.mp4",
+          "sha256": "e4dec922d1ae39f0f3d858f19c89a8f634dc7fcc59f38010c58316d2cfd3a0a1",
+          "bytes": 7015092
+        },
+        {
+          "name": "poster.jpg",
+          "sha256": "3755706943c29c35b4e7dd5c1362febd6beaaabe7d4dbb14e347176117f36b4a",
+          "bytes": 435639
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "bbde5738b19a9498c63fcdef07824575ece24de9b1f00d857d9e1235bc67573a",
+          "bytes": 3142
         },
         {
           "name": "dmsans-OFL.txt",

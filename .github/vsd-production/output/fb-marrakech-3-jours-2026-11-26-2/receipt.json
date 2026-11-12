@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "contentId": "fb-marrakech-3-jours-2026-11-26-2",
   "status": "rendered_not_published",
-  "fingerprint": "8879cb7148da01ef022505870ac3bd692637569d279a0509cde1d3a1f0831893",
-  "createdAt": "2026-11-12T20:00:22.778326Z",
-  "renderFinishedAt": "2026-11-12T20:00:23.986899Z",
+  "fingerprint": "f82df76124bc92c423317bc7cb76c98c1f901576a2b397170de626304596a51f",
+  "createdAt": "2026-11-12T21:04:08.447830Z",
+  "renderFinishedAt": "2026-11-12T21:04:09.643977Z",
   "rendererContractVersion": 3,
   "rendererSha256": "53771f8977e744f7e898c21c13d02cd1f80ec9d9fcff06e28a9c095db57efd0a",
   "drawingSha256": "b78990f497d03baf754e3b2b68a795a5e9d3b91a0b6a2f8dad2ebcd7fec2907c",
@@ -13,7 +13,7 @@
   "kind": "carousel",
   "channel": "facebook",
   "publishAt": "2026-11-26T17:00:00Z",
-  "reviewValidUntil": "2026-12-12T19:57:40Z",
+  "reviewValidUntil": "2026-12-12T21:03:44Z",
   "sourceCheckedOn": "2026-11-12",
   "targetUrl": "https://voyagesansdetour.fr/maroc/marrakech-3-jours/",
   "voice": null,
@@ -27,15 +27,15 @@
       "author": "Jakub Hałun",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Jamaa_El_Fna,_Marrakesh,_Morocco,_20250124_1804_7017.jpg"
     },
-    "marrakech-majorelle": {
-      "licence": "CC BY-SA 4.0",
-      "author": "Viault",
-      "sourcePage": "https://commons.wikimedia.org/wiki/File:Le_jardin_des_majorelle_16.JPG"
-    },
     "marrakech-bahia": {
       "licence": "CC BY-SA 4.0",
       "author": "Val Traveler",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Bahia_Palace_large_court.jpg"
+    },
+    "marrakech-majorelle": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Viault",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Le_jardin_des_majorelle_16.JPG"
     },
     "marrakech-essaouira-port": {
       "licence": "CC BY-SA 4.0",
@@ -58,12 +58,12 @@
   "files": [
     {
       "file": "apercu.jpg",
-      "sha256": "a7f4fc8e8db7ac5ad325475809a3a99433a7645396fb25b6368cbad2c97776e7",
-      "bytes": 188774
+      "sha256": "9e4f5a703d97ea6d7464376f3f80729fe250619c73e4f6197b4225d5498c020e",
+      "bytes": 188908
     },
     {
       "file": "credits.txt",
-      "sha256": "92310a09d0c0872061898230e6e954ac05a5630b8f50500b0db4a2129473f759",
+      "sha256": "4376848a5754e534877f2323c5f6882ce4fea3345b69744b45e2c75cc2653723",
       "bytes": 2580
     },
     {
@@ -73,7 +73,7 @@
     },
     {
       "file": "legende.txt",
-      "sha256": "c31c5f5fd428b5f8ac26c1a12ba8e0816c701da5ebe76beb0cd5e0e87abeb34f",
+      "sha256": "48309bc6e5a3114cf0ba9a48fa2b648a3cb97ee4845952a86c6df4e2a6812ebd",
       "bytes": 898
     },
     {
@@ -88,7 +88,7 @@
     },
     {
       "file": "scenario.json",
-      "sha256": "6abeb357df5580dccb667e7f79ad0782c91f39cbf153fd049fdf21d13262dc80",
+      "sha256": "25ba99f49ec8c04406d5ad2744e17a0e69a47e562723c255fb5e250880ee8def",
       "bytes": 7353
     },
     {
@@ -98,13 +98,13 @@
     },
     {
       "file": "scene-02.jpg",
-      "sha256": "91781a2d38b2607f2d15b5a975189f4e18edc0fc3919cf172217e35eaa78f5ce",
-      "bytes": 300936
+      "sha256": "8be9c00673302e15ec0e564f7e760e64015f2d6a4fc13ceed44b82a1096659b9",
+      "bytes": 328402
     },
     {
       "file": "scene-03.jpg",
-      "sha256": "74a1e4913f6b54a3d378c556df66bd2cf8a66f390a6a7025bcb8b104fa835249",
-      "bytes": 328368
+      "sha256": "c4f7754417ee74958d6ea46026b4ef301fbf88251352027df9b6a78ab3f4cb3b",
+      "bytes": 300928
     },
     {
       "file": "scene-04.jpg",
@@ -123,7 +123,7 @@
     }
   ],
   "runtime": {
-    "wallSeconds": 0.823,
+    "wallSeconds": 0.818,
     "encoderThreads": 2,
     "pillowVersion": "11.3.0",
     "ffmpegVersion": null

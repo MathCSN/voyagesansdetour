@@ -10,17 +10,17 @@
   "publishAt": "2026-11-20T17:00:00Z",
   "review": {
     "status": "reviewed_for_render",
-    "checkedAt": "2026-11-12T19:57:40Z",
-    "validUntil": "2026-12-12T19:57:40Z",
+    "checkedAt": "2026-11-12T21:03:44Z",
+    "validUntil": "2026-12-12T21:03:44Z",
     "method": "Généré automatiquement (auto_social.py) depuis la page publiée du guide relevée le 12/11/2026 : chaque chiffre, étape ou ligne de tableau est cité mot pour mot ; photos et vidéos réelles sous licence libre, aucune image ni vidéo générée par IA ; garde-fous de production.py passés avant la mise en file."
   },
   "sources": {
     "file": "auto/ig-yucatan-itineraire-10-jours-2026-11-20-3/sources.json",
-    "sha256": "092696c2d99289a6fe1da35d850fba6eda2e17160f3a3c2f27c7c4807789cba8"
+    "sha256": "ce059b59024e41ee75d733ac7979e247142aeb50edb52801cc9ee99a9a7b2c6a"
   },
   "photos": {
     "file": "auto/ig-yucatan-itineraire-10-jours-2026-11-20-3/photos.json",
-    "sha256": "ea85e6639ae1ce5f2d8844317658a7fab92c562a635588344b9756cb53b6c7c8"
+    "sha256": "2d76c189c1fe0a5bcddff96130b7bcbe5f7c11a13bd0d6a7bdc11dcd74dc656b"
   },
   "caption": {
     "hook": "🗺️ Yucatán en 10 jours : Valladolid, Chichén Itzá, Mérida et Tulum, avec le Tren Maya",
@@ -50,7 +50,7 @@
       "headline": [
         "Yucatán en",
         "10 jours",
-        "*3 étapes clés*"
+        "*4 étapes clés*"
       ],
       "seconds": 2.2,
       "facts": [
@@ -113,7 +113,7 @@
       "tag": "Guide Yucatán · sources du 12/11/2026"
     },
     {
-      "photo": "yucatan-tulum",
+      "photo": "yucatan-tren-maya-merida",
       "focus": [
         0.5,
         0.5
@@ -134,6 +134,31 @@
         {
           "source": "guide",
           "excerpt": "5 h 16 le train direct Mérida Teya → Tulum de 7 h, arrivée 13 h 16"
+        }
+      ],
+      "tag": "Guide Yucatán · sources du 12/11/2026"
+    },
+    {
+      "photo": "yucatan-tulum",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "fact",
+      "kicker": "Jours 8-10",
+      "headline": [
+        "Tulum et le retour"
+      ],
+      "seconds": 3.6,
+      "detail": "*265 pesos* les ruines de Tulum pour un étranger, parc du Jaguar compris",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "Jours 8-10 : Tulum et le retour"
+        },
+        {
+          "source": "guide",
+          "excerpt": "265 pesos les ruines de Tulum pour un étranger, parc du Jaguar compris"
         }
       ],
       "tag": "Guide Yucatán · sources du 12/11/2026"

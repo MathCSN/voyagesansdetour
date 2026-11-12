@@ -179,7 +179,8 @@ des photos du guide (« Santa », de « Santa Claus Village »). Désormais :
 
 - **un plan de fait montre toujours un chiffre** : un repère sans chiffre (« Ligne rouge ») reste
   dans le guide ; dans un itinéraire, une étape pour laquelle le guide ne donne aucun chiffre
-  n'est pas montrée, et il faut trois étapes chiffrées pour un reel « jour par jour » ;
+  n'est pas montrée, et il faut quatre étapes chiffrées pour un reel « jour par jour » (trois
+  jusqu'au 12/11/2026 au soir) ;
 - **un chiffre va sur la photo qui montre le mieux ce qu'il nomme, ou nulle part** : si cette
   photo est déjà prise par un autre plan du même post, le chiffre reste dans le guide au lieu
   d'être posé sur un autre lieu (le prix de Chichén Itzá sur la cathédrale de Mérida). Les mots
@@ -267,6 +268,20 @@ Salerne → Amalfi » sur Positano et s'ouvrait sur une photo trouvée par la re
 - **un guide qui manque de photos en reçoit de relues** plutôt qu'un chiffre posé sur une autre
   vue : Marrakech a reçu la Koutoubia (dernière image), le port d'Essaouira et les cascades
   d'Ouzoud (`photo_intake.py`, `reviewed.json`).
+
+**Relecture de ces posts, même soir** :
+
+- **un itinéraire montre quatre étapes chiffrées au moins** : un reel dit quatre choses, et une
+  étape en dit une, son chiffre (le titre du jour qu'elle cite aussi n'en est pas une seconde).
+  Un guide de trois jours prend un autre format ;
+- **une étape ne prend pas la photo que le guide a mise à côté d'un jour suivant**, et deux photos
+  à égalité sont départagées par le reste du plan : « Mérida–Tulum en train direct » va sur la
+  rame à Mérida Teya, « Tulum et le retour » garde les ruines et ses 265 pesos ;
+- **le plan tableau porte le nom de sa section** (« Le train de nuit pour Chiang Mai » au-dessus
+  de « Départ de Bangkok ») **et, en dessous, le prix de ce qu'il liste** quand sa photo est la
+  seule à le montrer (« 938 bahts la couchette… ») ; ce prix ouvre aussi la légende ;
+- **un carrousel dont tous les chiffres appartiennent à un jour du guide se lit jour après jour**
+  (Jour 1, Jour 2, Jour 3), sinon dans l'ordre des chiffres du guide.
 
 Ce qui reste, mesuré le 12/11/2026 sur les 26 guides : un chiffre qu'aucune photo ne montre
 complète encore un post, y compris sur une image trouvée par la recherche (Marrakech : « 3 h de

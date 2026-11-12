@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "contentId": "ig-yucatan-itineraire-10-jours-2026-11-20-3",
   "status": "rendered_not_published",
-  "fingerprint": "63330057d923b6326f642a5d9e3ddf2bb631cfc797da095007454ba81ea9b8f6",
-  "createdAt": "2026-11-12T20:00:24.105001Z",
-  "renderFinishedAt": "2026-11-12T20:00:40.244450Z",
+  "fingerprint": "b1b4689c98387906aef7e7a0dc52c58f143baa19e6b8bce763b9f7636eb85d6b",
+  "createdAt": "2026-11-12T21:04:27.800752Z",
+  "renderFinishedAt": "2026-11-12T21:04:46.177539Z",
   "rendererContractVersion": 4,
   "rendererSha256": "53771f8977e744f7e898c21c13d02cd1f80ec9d9fcff06e28a9c095db57efd0a",
   "drawingSha256": "b78990f497d03baf754e3b2b68a795a5e9d3b91a0b6a2f8dad2ebcd7fec2907c",
@@ -13,7 +13,7 @@
   "kind": "reel",
   "channel": "instagram",
   "publishAt": "2026-11-20T17:00:00Z",
-  "reviewValidUntil": "2026-12-12T19:57:40Z",
+  "reviewValidUntil": "2026-12-12T21:03:44Z",
   "sourceCheckedOn": "2026-11-12",
   "targetUrl": "https://voyagesansdetour.fr/mexique/yucatan-itineraire-10-jours/",
   "voice": null,
@@ -37,6 +37,11 @@
       "author": "Diego Delso",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Templo_el_Castillo_-_Chichen_Itza-Yucatan-Mexico0222.jpg"
     },
+    "yucatan-tren-maya-merida": {
+      "licence": "CC BY-SA 4.0",
+      "author": "ProtoplasmaKid",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tren_X%27Trapolis_Ts%C3%ADimin_K%E2%80%99%C3%A1ak_arribando_a_la_estaci%C3%B3n_M%C3%A9rida_Teya.jpg"
+    },
     "yucatan-tulum": {
       "licence": "CC BY-SA 4.0",
       "author": "Martin Falbisoner",
@@ -53,13 +58,13 @@
     "width": 1080,
     "height": 1920,
     "fps": 30,
-    "durationSeconds": 15.0,
+    "durationSeconds": 18.6,
     "videoCodec": "h264",
     "pixelFormat": "yuv420p",
-    "videoBitrateBps": 2955423,
+    "videoBitrateBps": 2911337,
     "audioCodec": "aac",
     "audioSampleRate": 48000,
-    "audioBitrateBps": 96333,
+    "audioBitrateBps": 96384,
     "fullDecodePassed": true,
     "loudness": {
       "integratedLufs": -16.1,
@@ -69,13 +74,13 @@
   "files": [
     {
       "file": "apercu.jpg",
-      "sha256": "34aefed226cb0408f484aedc1946e34b24f856f10502e2a7013cce103896563b",
-      "bytes": 209229
+      "sha256": "15b08e5746a8a3b80372a23168e2fc165f175bf08eed72a148d3580e8157d0ca",
+      "bytes": 242448
     },
     {
       "file": "credits.txt",
-      "sha256": "51ec138cb1991247e36caba6bf0666e41f039429bb6558d72c71e616ffc230b9",
-      "bytes": 2731
+      "sha256": "bbde5738b19a9498c63fcdef07824575ece24de9b1f00d857d9e1235bc67573a",
+      "bytes": 3142
     },
     {
       "file": "dmsans-OFL.txt",
@@ -104,47 +109,52 @@
     },
     {
       "file": "poster.jpg",
-      "sha256": "f268c26923e5730002c38e47c9a6318b47fdf4a9f335ffb7e8bdc8630b607f5a",
-      "bytes": 435457
+      "sha256": "3755706943c29c35b4e7dd5c1362febd6beaaabe7d4dbb14e347176117f36b4a",
+      "bytes": 435639
     },
     {
       "file": "reel.mp4",
-      "sha256": "193a0e93274c4cc13a316d0585cf007d6ca9122a6cf1df65389198a3406210b2",
-      "bytes": 5740218
+      "sha256": "e4dec922d1ae39f0f3d858f19c89a8f634dc7fcc59f38010c58316d2cfd3a0a1",
+      "bytes": 7015092
     },
     {
       "file": "scenario.json",
-      "sha256": "64f7dda960def9c98fdcf5f8bd67958d434ce807831146d6b94bafd51d7db2bc",
-      "bytes": 7428
+      "sha256": "a02646f4b6644d014468d603241064a16c51ed1486de76d7e9202fd1bc323ba9",
+      "bytes": 8092
     },
     {
       "file": "scene-01.jpg",
-      "sha256": "59eaa80f1f526f5be565f3b9b743cfd1c0b0e89670ad039402d5bec59dbb90a2",
-      "bytes": 400795
+      "sha256": "5ddb7f99cc6bff1bcaedb077fd65789b063e7231bfb1a4c4ade538bc93430774",
+      "bytes": 401002
     },
     {
       "file": "scene-02.jpg",
-      "sha256": "a492af233c47926e0819728f9001d229a6f99f470e3cca5be90ed08b0b82296e",
-      "bytes": 322586
+      "sha256": "d9f53e8ff49030446c01b5f6e2ce59803ef2e0ba904a17ae75ff5da85fb6dc7e",
+      "bytes": 322638
     },
     {
       "file": "scene-03.jpg",
-      "sha256": "1061aab3bc234a96aa5bc00f35cf59a85db3887aa3113dd3f5a875a60333263b",
-      "bytes": 419088
+      "sha256": "2ce4ac98cd24ea29c1f0b938f2883229ae48ea8002438ced101d7087e73a7d03",
+      "bytes": 419276
     },
     {
       "file": "scene-04.jpg",
-      "sha256": "abfb8ab10a5cc74e1f613a245c0fd566a2ffae725e910595b379fbcf9f7dac11",
-      "bytes": 310618
+      "sha256": "f2ce7f95e2bccdd52c5c750fe5d04bb96f769486e62625fd52fed7fe182e96d0",
+      "bytes": 409614
     },
     {
       "file": "scene-05.jpg",
-      "sha256": "1a83083e8acbbfb7e9a2a9c0ac1f1e27768888f91e2986384a30f2928ec23d47",
-      "bytes": 437564
+      "sha256": "1b9ab9c91abbe37616356db078c815bbde28fdd87fc0cc8f723a00283816f8cf",
+      "bytes": 306053
+    },
+    {
+      "file": "scene-06.jpg",
+      "sha256": "f48cfc4cdf251b1896a9ea9bb9bf39d9d911aae7e8cef1d4f0a1eee6ab53dec4",
+      "bytes": 437788
     }
   ],
   "runtime": {
-    "wallSeconds": 15.983,
+    "wallSeconds": 17.997,
     "encoderThreads": 2,
     "pillowVersion": "11.3.0",
     "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers"

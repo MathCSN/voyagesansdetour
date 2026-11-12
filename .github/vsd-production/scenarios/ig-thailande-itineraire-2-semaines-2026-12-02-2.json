@@ -10,26 +10,26 @@
   "publishAt": "2026-12-02T17:00:00Z",
   "review": {
     "status": "reviewed_for_render",
-    "checkedAt": "2026-11-12T20:01:53Z",
-    "validUntil": "2026-12-12T20:01:53Z",
+    "checkedAt": "2026-11-12T21:03:44Z",
+    "validUntil": "2026-12-12T21:03:44Z",
     "method": "Généré automatiquement (auto_social.py) depuis la page publiée du guide relevée le 12/11/2026 : chaque chiffre, étape ou ligne de tableau est cité mot pour mot ; photos et vidéos réelles sous licence libre, aucune image ni vidéo générée par IA ; garde-fous de production.py passés avant la mise en file."
   },
   "sources": {
     "file": "auto/ig-thailande-itineraire-2-semaines-2026-12-02-2/sources.json",
-    "sha256": "dc386f03792ac9cba99fa9773102ff238d4018f1df2783f29de10587b21a1af3"
+    "sha256": "1fd47227e1885f967cdb77e5d837c19b739aa056c3dfada8b8512702a0e103cb"
   },
   "photos": {
     "file": "auto/ig-thailande-itineraire-2-semaines-2026-12-02-2/photos.json",
-    "sha256": "459555766da66ca097f6a8f9d7492a4e5f70153e7806faa3c3dc3454f16ab349"
+    "sha256": "f6e65fd1d4093fd0233e407236f533b78e583d216a48f7fafa8e07b07034193a"
   },
   "caption": {
     "hook": "🗺️ Thaïlande en 2 semaines : Bangkok, Chiang Mai en train de nuit et la mer d’Andaman (prix 2026)",
     "lines": [
+      "🚆 938 bahts : la couchette haute climatisée de 2e classe du train 9 (≈ 25 €, tarif SRT de novembre 2026)",
       "📅 N° 7 (autorail de jour) : 7 h 30",
       "📅 N° 9 (couchettes récentes) : 18 h 40",
       "📅 N° 13 (couchettes) : 20 h 05",
-      "📅 N° 51 (couchettes) : 22 h 30",
-      "⏱️ 12 h 35 : Bangkok → Chiang Mai par le train de nuit n° 9, départ 18 h 40, arrivée 7 h 15"
+      "📅 N° 51 (couchettes) : 22 h 30"
     ],
     "cta": "📌 Enregistrez ce reel pour votre voyage. 🔗 Prix, horaires et détails : le guide complet est en lien dans la bio.",
     "hashtags": [
@@ -69,11 +69,12 @@
         0.5
       ],
       "layout": "table",
-      "kicker": "Thaïlande",
+      "kicker": "Le train de nuit pour Chiang Mai",
       "headline": [
         "Départ de Bangkok"
       ],
       "seconds": 6.4,
+      "detail": "*938 bahts* la couchette haute climatisée de 2e classe du train 9",
       "facts": [
         {
           "source": "guide",
@@ -90,6 +91,10 @@
         {
           "source": "guide",
           "excerpt": "N° 51 (couchettes) 22 h 30"
+        },
+        {
+          "source": "guide",
+          "excerpt": "938 bahts la couchette haute climatisée de 2e classe du train 9"
         }
       ],
       "tag": "Guide Thaïlande · sources du 12/11/2026",

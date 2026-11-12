@@ -11,12 +11,12 @@
         "schemaVersion": 1,
         "channel": "instagram",
         "kind": "reel",
-        "text": "🗺️ Thaïlande en 2 semaines : Bangkok, Chiang Mai en train de nuit et la mer d’Andaman (prix 2026)\n\n📅 N° 7 (autorail de jour) : 7 h 30\n📅 N° 9 (couchettes récentes) : 18 h 40\n📅 N° 13 (couchettes) : 20 h 05\n📅 N° 51 (couchettes) : 22 h 30\n⏱️ 12 h 35 : Bangkok → Chiang Mai par le train de nuit n° 9, départ 18 h 40, arrivée 7 h 15\n\n📌 Enregistrez ce reel pour votre voyage. 🔗 Prix, horaires et détails : le guide complet est en lien dans la bio.\n\nPhotos libres (Wikimedia Commons) et musique de Kevin MacLeod (CC BY 4.0) — crédits : https://voyagesansdetour.fr/social-media/production/ig-thailande-itineraire-2-semaines-2026-12-02-2/credits.txt\n\n#Thailande #VoyageThailande #Itineraire #VoyageSansDetour\n",
+        "text": "🗺️ Thaïlande en 2 semaines : Bangkok, Chiang Mai en train de nuit et la mer d’Andaman (prix 2026)\n\n🚆 938 bahts : la couchette haute climatisée de 2e classe du train 9 (≈ 25 €, tarif SRT de novembre 2026)\n📅 N° 7 (autorail de jour) : 7 h 30\n📅 N° 9 (couchettes récentes) : 18 h 40\n📅 N° 13 (couchettes) : 20 h 05\n📅 N° 51 (couchettes) : 22 h 30\n\n📌 Enregistrez ce reel pour votre voyage. 🔗 Prix, horaires et détails : le guide complet est en lien dans la bio.\n\nPhotos libres (Wikimedia Commons) et musique de Kevin MacLeod (CC BY 4.0) — crédits : https://voyagesansdetour.fr/social-media/production/ig-thailande-itineraire-2-semaines-2026-12-02-2/credits.txt\n\n#Thailande #VoyageThailande #Itineraire #VoyageSansDetour\n",
         "aiGenerated": false,
         "assets": [
           {
             "url": "https://voyagesansdetour.fr/social-media/production/ig-thailande-itineraire-2-semaines-2026-12-02-2/reel.mp4",
-            "sha256": "eb458487df9206f1ae8f6030b3f0e3bd33fbc714bb26a00c41f6c70d94026803",
+            "sha256": "1f5696afe19d887bcccaa97bf55f5c9addb4193fdb4eb404bc9c3e6781029c0d",
             "mimeType": "video/mp4"
           }
         ]
@@ -25,9 +25,9 @@
         "schemaVersion": 1,
         "contentId": "vsd-production:instagram:ig-thailande-itineraire-2-semaines-2026-12-02-2:photo-v1",
         "approved": true,
-        "reviewedAt": "2026-11-12T20:02:24Z",
-        "validUntil": "2026-12-12T20:01:53Z",
-        "payloadRevision": "f18a970dc37335bb435f821bee19048dd9026b8ed76b3e746deab0fae8e80835",
+        "reviewedAt": "2026-11-12T21:04:47Z",
+        "validUntil": "2026-12-12T21:03:44Z",
+        "payloadRevision": "369597be2b456ff5d2f2645192ec890b2faa2f5e7555efb70243efd4af8bba40",
         "checks": {
           "editorialApproved": true,
           "rightsApproved": true,
@@ -37,8 +37,8 @@
           "requiresPaidCall": false,
           "sources": {
             "status": "verified",
-            "observedAt": "2026-11-12T20:01:53Z",
-            "validUntil": "2026-12-12T20:01:53Z"
+            "observedAt": "2026-11-12T21:03:44Z",
+            "validUntil": "2026-12-12T21:03:44Z"
           },
           "syntheticPerson": false,
           "providerSyntheticSettingVerified": false
@@ -46,17 +46,17 @@
         "media": {
           "url": "https://voyagesansdetour.fr/social-media/production/ig-thailande-itineraire-2-semaines-2026-12-02-2/reel.mp4",
           "mimeType": "video/mp4",
-          "sha256": "eb458487df9206f1ae8f6030b3f0e3bd33fbc714bb26a00c41f6c70d94026803",
+          "sha256": "1f5696afe19d887bcccaa97bf55f5c9addb4193fdb4eb404bc9c3e6781029c0d",
           "required": true,
           "status": "verified",
-          "observedAt": "2026-11-12T20:02:24Z",
-          "validUntil": "2026-12-12T20:01:53Z"
+          "observedAt": "2026-11-12T21:04:47Z",
+          "validUntil": "2026-12-12T21:03:44Z"
         },
         "destination": {
           "url": "https://voyagesansdetour.fr/thailande/thailande-itineraire-2-semaines/",
           "status": "verified",
-          "observedAt": "2026-11-12T20:02:24Z",
-          "validUntil": "2026-12-12T20:01:53Z"
+          "observedAt": "2026-11-12T21:04:47Z",
+          "validUntil": "2026-12-12T21:03:44Z"
         },
         "monetization": {
           "containsAffiliateLinks": false,
@@ -66,8 +66,8 @@
         },
         "formatCapability": {
           "status": "verified",
-          "observedAt": "2026-11-12T20:02:24Z",
-          "validUntil": "2026-12-12T20:01:53Z",
+          "observedAt": "2026-11-12T21:04:47Z",
+          "validUntil": "2026-12-12T21:03:44Z",
           "automaticPublishing": true,
           "verificationMethod": "official_documentation",
           "sourceUrls": [
@@ -80,8 +80,8 @@
           "status": "rendered_local_bytes_verified_public_deploy_pending",
           "format": "photo_reel",
           "rendererContractVersion": 4,
-          "receiptSha256": "186d661b30341a9a689b76569d116443edd3ce7cd84df450e18b461c35b33ea8",
-          "scenarioFingerprint": "d68e16b0968a7fa81e610f71bf1d64ff2474ad779a39ade03e15c65abc21944c",
+          "receiptSha256": "5a76c3073545f9f7ad1f0c64c942573fe17e6d832bf698734951d78b45f3bbe2",
+          "scenarioFingerprint": "61d6974b450ae6aa7da4d5f66533ac68e8671c44c2ffc30e8b919fc8caa271e7",
           "sourceCheckedOn": "2026-11-12",
           "sourceUrls": [
             "https://voyagesansdetour.fr/thailande/thailande-itineraire-2-semaines/"

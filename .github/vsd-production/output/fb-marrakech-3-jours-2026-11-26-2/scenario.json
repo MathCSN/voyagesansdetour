@@ -9,13 +9,13 @@
   "publishAt": "2026-11-26T17:00:00Z",
   "review": {
     "status": "reviewed_for_render",
-    "checkedAt": "2026-11-12T19:57:40Z",
-    "validUntil": "2026-12-12T19:57:40Z",
+    "checkedAt": "2026-11-12T21:03:44Z",
+    "validUntil": "2026-12-12T21:03:44Z",
     "method": "Généré automatiquement (auto_social.py) depuis la page publiée du guide relevée le 12/11/2026 : chaque chiffre est cité mot pour mot ; photos réelles sous licence libre (Wikimedia Commons), aucune image générée par IA ; garde-fous de production.py passés avant la mise en file."
   },
   "sources": {
     "file": "auto/fb-marrakech-3-jours-2026-11-26-2/sources.json",
-    "sha256": "8a213cf6266b7c0f13ccecd0bea7e62184edfe89e7dffd40ae3f90545716d10c"
+    "sha256": "384b5869579d42cd8a996d7d7ffc7f555db5a4710fb45ac209eb812ecfee39d8"
   },
   "photos": {
     "file": "auto/fb-marrakech-3-jours-2026-11-26-2/photos.json",
@@ -24,8 +24,8 @@
   "caption": {
     "hook": "🗺️ Marrakech en 3 jours : médina, Majorelle, palais et une escapade, sans se faire plumer",
     "lines": [
-      "📍 170 dh : le jardin Majorelle en plein tarif, billet daté vendu uniquement en ligne (330 dh avec les deux musées)",
       "📍 100 dh : l’entrée de la Bahia, des tombeaux saadiens ou d’El Badi pour un adulte étranger, de 9 h à 17 h",
+      "📍 170 dh : le jardin Majorelle en plein tarif, billet daté vendu uniquement en ligne (330 dh avec les deux musées)",
       "⏱️ 3 h de car pour Essaouira : dès 100 dh chez Supratours (7 départs par jour), dès 105 dh chez CTM",
       "📍 150 km jusqu’aux cascades d’Ouzoud, soit 2 h 30 à 3 h de route ; la vallée de l’Ourika est à environ 60 km"
     ],
@@ -60,26 +60,6 @@
       "alt": "La place Jemaa el-Fna en fin de journée, entre parasols verts et étals, au cœur de la médina de Marrakech."
     },
     {
-      "photo": "marrakech-majorelle",
-      "focus": [
-        0.5,
-        0.5
-      ],
-      "kicker": "Jour 2",
-      "headline": [
-        "*170 dh*"
-      ],
-      "detail": "le jardin Majorelle en plein tarif, billet daté vendu uniquement en ligne (330 dh avec les deux musées)",
-      "facts": [
-        {
-          "source": "guide",
-          "excerpt": "170 dh le jardin Majorelle en plein tarif, billet daté vendu uniquement en ligne (330 dh avec les deux musées)"
-        }
-      ],
-      "tag": "Guide Marrakech · sources du 12/11/2026",
-      "alt": "La villa bleue du jardin Majorelle."
-    },
-    {
       "photo": "marrakech-bahia",
       "focus": [
         0.5,
@@ -98,6 +78,26 @@
       ],
       "tag": "Guide Marrakech · sources du 12/11/2026",
       "alt": "La grande cour carrelée de zelliges du palais de la Bahia, à Marrakech."
+    },
+    {
+      "photo": "marrakech-majorelle",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Jour 2",
+      "headline": [
+        "*170 dh*"
+      ],
+      "detail": "le jardin Majorelle en plein tarif, billet daté vendu uniquement en ligne (330 dh avec les deux musées)",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "170 dh le jardin Majorelle en plein tarif, billet daté vendu uniquement en ligne (330 dh avec les deux musées)"
+        }
+      ],
+      "tag": "Guide Marrakech · sources du 12/11/2026",
+      "alt": "La villa bleue du jardin Majorelle."
     },
     {
       "photo": "marrakech-essaouira-port",
