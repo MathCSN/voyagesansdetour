@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "timezone": "Europe/Paris",
-  "note": "Créneaux en heure de Paris. weeklyLimit ne doit jamais dépasser le plafond du panneau vsd-admin : Instagram 4, Facebook 2, TikTok 4 (POLICY.weeklyLimit, version déployée le 11/11/2026). Instagram est à sa cadence cible depuis le 11/11/2026 (docs/strategie-videos.md) : 4 posts par semaine, mardi 19 h, jeudi 9 h, vendredi 18 h, dimanche 21 h ; minGapHours à 30 parce que le jeudi 9 h tombe 38 heures après le mardi 19 h et 33 heures avant le vendredi 18 h. Un créneau se met en réserve avec \"enabled\": false.",
+  "note": "Créneaux en heure de Paris. weeklyLimit ne doit jamais dépasser le plafond du panneau vsd-admin : Instagram 4, Facebook 2, TikTok 4 (POLICY.weeklyLimit, version déployée le 11/11/2026). Instagram est à sa cadence cible depuis le 11/11/2026 (docs/strategie-videos.md) : 4 posts par semaine, mardi 19 h, jeudi 9 h, vendredi 18 h, dimanche 21 h ; minGapHours à 30 parce que le jeudi 9 h tombe 38 heures après le mardi 19 h et 33 heures avant le vendredi 18 h. Un créneau se met en réserve avec \"enabled\": false. Changer un créneau : le plafond du panneau compte sur 7 jours exacts, en heure de Paris, et le même créneau de la semaine précédente en sort tout juste. La grille remplit ce plafond (Instagram 4 créneaux pour 4, Facebook 2 pour 2) : avancer un créneau, même d'une heure, fait donc retenir le premier post de la nouvelle grille, placé moins de 7 jours après l'ancien créneau. Sauter cette première occurrence, ou garder sept jours pleins entre le dernier post de l'ancien créneau et le premier du nouveau. Reculer un créneau d'une heure ne retient rien (rejeu du 12/11/2026 sur le moteur du panneau).",
   "channels": {
     "instagram": {
       "weeklyLimit": 4,

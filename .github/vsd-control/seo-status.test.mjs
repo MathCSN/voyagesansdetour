@@ -63,7 +63,7 @@ test('nothing Markdown can read survives in a query, a state or a path', () => {
 });
 
 const PUBLICATION = {
-  enabled: true, channels: { instagram: 'disconnected', facebook: 'connected', tiktok: 'absent' }, lastPassAt: '2026-11-12T08:37:00.000Z',
+  enabled: true, channels: { instagram: 'disconnected', facebook: 'connected', tiktok: 'absent' }, channelsCheckedAt: '2026-11-12T08:02:11.000Z', lastPassAt: '2026-11-12T08:37:00.000Z',
   counts: { ready: 4, submitting: 0, scheduled: 2, published: 12, to_verify: 0, held: 1, failed: 0 },
   problems: [{ id: 'reviewed-social:instagram:reel:vietnam_2026-11-25.v1', channel: 'instagram', state: 'held', reason: 'overdue', at: '2026-11-10T17:00:00.000Z' }], problemsCount: 1,
   atRisk: [{ id: 'ig:pret', channel: 'instagram', dueAt: '2026-11-12T17:00:00.000Z', channelState: 'disconnected' }], atRiskCount: 1,
@@ -82,6 +82,10 @@ test('a panel that does not send the publication block yet, or sends a malformed
   }
   // No Buffer access recorded in the panel: channels are null, the rest is kept.
   assert.equal(checkedSeo({ ...reply, publication: { ...PUBLICATION, channels: null } }).publication.channels, null);
+  // A panel older than the date of the last channel re-reading, or one that never re-read them: no date.
+  const { channelsCheckedAt, ...older } = PUBLICATION;
+  assert.equal(checkedSeo({ ...reply, publication: older }).publication.channelsCheckedAt, null);
+  assert.equal(checkedSeo({ ...reply, publication: { ...PUBLICATION, channelsCheckedAt: null } }).publication.channelsCheckedAt, null);
 });
 
 test('nothing Markdown can read survives in the publication block', () => {
@@ -89,6 +93,7 @@ test('nothing Markdown can read survives in the publication block', () => {
   const hostile = checkedSeo({ kind: 'seo', status: 'reported', publication: {
     enabled: true,
     channels: { instagram: '[déconnecté](https://evil.example)', facebook: 'connected', pinterest: 'connected', '@x': 'locked' },
+    channelsCheckedAt: 'hier [ici](https://evil.example) @mathis',
     lastPassAt: '2026-11-12 08:37 <b>',
     counts: { ready: '4', held: -1, failed: 2, autre: 9 },
     problems: [
@@ -103,7 +108,7 @@ test('nothing Markdown can read survives in the publication block', () => {
     atRisk: [{ id: 'ok:5', channel: 'tiktok', dueAt: '2026-11-12T11:00:00.000Z', channelState: '<img>' }, { id: 'ok:6', channel: 'tiktok', dueAt: 'bientôt', channelState: 'absent' }],
   } }).publication;
   assert.deepEqual(hostile, {
-    enabled: true, channels: { instagram: 'unknown', facebook: 'connected', tiktok: 'unknown' }, lastPassAt: null,
+    enabled: true, channels: { instagram: 'unknown', facebook: 'connected', tiktok: 'unknown' }, channelsCheckedAt: null, lastPassAt: null,
     counts: { ready: 0, submitting: 0, scheduled: 0, published: 0, to_verify: 0, held: 0, failed: 2 },
     problems: [{ id: 'ok:1', channel: 'instagram', state: 'failed', reason: 'autre', at }], problemsCount: 1,
     atRisk: [{ id: 'ok:5', channel: 'tiktok', dueAt: '2026-11-12T11:00:00.000Z', channelState: 'unknown' }], atRiskCount: 1,
