@@ -18,24 +18,35 @@ def digest(value):
 BOILERPLATE=re.compile(r'\bpour les consignes présentées par\b',re.I)
 GLUED_PRICE=re.compile(r'\d€|€\d')
 # Function words of Italian, Portuguese, Spanish and English that French never writes.
-# Homographs French uses (il, la, de, a, en, on, y, las, nos, an…) are left out.
+# Homographs French uses (il, la, de, a, en, on, y, las, nos, an, dos…) are left out.
 FOREIGN_WORDS=frozenset(
     'di della delle degli dei del gli nel nella nelle sul sulla alla alle agli al con per che e è lo uno una sono anche in '
-    'do da dos das os um às ao aos não com pelo pela em na nas o é el los por para muy es está '
+    'do da das os um às ao aos não com pelo pela em na nas o é el los por para muy es está '
     'the and of with to is are for from at by this that which will be it you your our'.split())
+# Common nouns the October and November updates left in Italian or Portuguese: each one counts
+# as a foreign word, so three of them in a sentence are refused even without a function word.
+FOREIGN_NOUNS=frozenset('santuario bosco escursioni sentiero comboio cálice'.split())
 # French function words: a French paragraph is made of them for a third to a half
 # (32 % at the lowest across the 345 paragraphs published on 12/11/2026).
 FRENCH_WORDS=frozenset(
     'les des du et à au aux pour par sur dans avec est sont qui ne ni pas ce cette ces elle vous nous sa ses '
     'leur leurs plus ou où mais comme sans chez dès une aussi très puis été être ont peut depuis jusqu après avant vers '
     'il le la un de en que se on y son'.split())
-# Short words that stay inside a proper noun (« Top of the Rock », « Ruta de los Cenotes »).
-NAME_LINKS=FOREIGN_WORDS|{'de','la','le','des','du','y','a','à','l'}
+# Days and months are French in no other watched language: an opening-hours list (« lundi, mardi… »)
+# counts as French even without a function word.
+FRENCH_EVIDENCE=FRENCH_WORDS|frozenset(
+    'lundi mardi mercredi jeudi vendredi samedi dimanche janvier février mars avril mai juin juillet août '
+    'septembre octobre novembre décembre'.split())
+# Short words that stay inside a proper noun (« Top of the Rock », « Ruta de los Cenotes », « Paço dos Duques »).
+NAME_LINKS=FOREIGN_WORDS|{'de','la','le','des','du','y','a','à','l','dos'}
 MAX_FOREIGN_PER_SENTENCE=1
 MIN_FRENCH_SHARE=0.2
 MIN_WORDS_FOR_SHARE=8
 QUOTED=re.compile(r'«[^»]*»|“[^”]*”|"[^"]*"')
+# A web address (« rockettes.com », « nlg.it ») is not a word of any language.
+DOMAIN=re.compile(r'[^\W_][\w-]*(?:\.[^\W\d_][\w-]*)+')
 SENTENCE=re.compile(r'(?<=[.!?;:])\s+')
+FULL_SENTENCE=re.compile(r'(?<=[.!?])\s+')
 TOKEN=re.compile(r"[^\W_]+(?:['’-][^\W_]+)*")
 ELISION=re.compile(r"^(?:[dlnmstcj]|qu|jusqu|lorsqu|puisqu)['’]",re.I)
 
@@ -46,10 +57,16 @@ def sentence_words(sentence):
     return [w for w in words if w]
 
 
+def borrowed_and(words,index):
+    """English « and » inside a borrowed lowercase phrase: « fish and chips », « bed and breakfast »."""
+    if words[index].lower()!='and' or not 0<index<len(words)-1:return False
+    return all(w[0].islower() and w.lower() not in FOREIGN_WORDS for w in (words[index-1],words[index+1]))
+
+
 def foreign_words(words):
-    """Foreign function words outside proper nouns: « Ponte da Arrábida » keeps its « da »."""
+    """Foreign words outside proper nouns: « Ponte da Arrábida » keeps its « da »."""
     found=[];in_name=False
-    for word in words:
+    for index,word in enumerate(words):
         lower=word.lower()
         if word[0].isupper():
             in_name=True
@@ -57,24 +74,32 @@ def foreign_words(words):
             continue
         else:
             in_name=False
-            if lower in FOREIGN_WORDS:found.append(lower)
+            if lower in FOREIGN_NOUNS or (lower in FOREIGN_WORDS and not borrowed_and(words,index)):found.append(lower)
     return found
 
 
-def language_defects(text):
-    """A sentence with two foreign function words, or too few French words, is untranslated.
+def without_french(sentence):
+    """A long sentence with no French function word, its first word included (« La patinoire ouvre… »)."""
+    words=sentence_words(sentence)
+    common=[w.lower() for w in words if w[0].islower()]
+    present={w.lower() for w in words[:1]}|set(common)
+    return len(common)>=MIN_WORDS_FOR_SHARE and not FRENCH_EVIDENCE.intersection(present)
 
-    Quoted words and proper nouns are free: a dish (« bacalhau à brás ») or a place
-    (« Museu do Douro ») may keep its language."""
-    sentences=[sentence_words(s) for s in SENTENCE.split(QUOTED.sub(' ',text))]
+
+def language_defects(text):
+    """A sentence with two foreign words, or too few French words, is untranslated.
+
+    Quoted words, web addresses and proper nouns are free: a dish (« bacalhau à brás »)
+    or a place (« Museu do Douro ») may keep its language. Known limits, left to the
+    model reviewer: a short foreign sentence (« Prossima fermata Vernazza. ») passes, and
+    two foreign dishes in one sentence (« alle vongole », « di alici ») are refused."""
+    text=DOMAIN.sub(' ',QUOTED.sub(' ',text))
     defects=[]
-    if any(len(foreign_words(words))>MAX_FOREIGN_PER_SENTENCE for words in sentences):
+    if any(len(foreign_words(sentence_words(s)))>MAX_FOREIGN_PER_SENTENCE for s in SENTENCE.split(text)):
         defects.append('update_untranslated')
-    lowered=[[w.lower() for w in words if w[0].islower()] for words in sentences]
-    common=[w for words in lowered for w in words]
-    share=sum(w in FRENCH_WORDS for w in common)/len(common) if common else 1
-    sentence_without_french=any(len(words)>=MIN_WORDS_FOR_SHARE and not FRENCH_WORDS.intersection(words) for words in lowered)
-    if sentence_without_french or (len(common)>=MIN_WORDS_FOR_SHARE and share<MIN_FRENCH_SHARE):
+    common=[w.lower() for s in FULL_SENTENCE.split(text) for w in sentence_words(s) if w[0].islower()]
+    share=sum(w in FRENCH_EVIDENCE for w in common)/len(common) if common else 1
+    if any(without_french(s) for s in FULL_SENTENCE.split(text)) or (len(common)>=MIN_WORDS_FOR_SHARE and share<MIN_FRENCH_SHARE):
         defects.append('update_not_french')
     return defects
 
