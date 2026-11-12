@@ -47,7 +47,8 @@ EXONYMS = {
 # apart, so a found photo that names one of them is refused. Reviewed by hand, like EXONYMS; read the list of
 # towns of the country when a new destination's name is a common word ("Porto", "Santa Cruz", "San José").
 HOMONYMS = {
-    "porto": ("Porto Covo", "Porto Moniz", "Porto Santo", "Porto de Mós", "Porto da Cruz", "Porto Martins", "Porto Judeu"),
+    "porto": ("Porto Covo", "Porto Moniz", "Porto Santo", "Porto de Mós", "Porto da Cruz", "Porto Martins", "Porto Judeu",
+              "Porto Pim", "Porto Formoso", "Porto Salvo"),
 }
 GENERIC_TYPE_HASHTAG = "#ConseilsVoyage"
 BRAND_HASHTAG = "#VoyageSansDetour"

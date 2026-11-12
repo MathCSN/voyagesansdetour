@@ -1,6 +1,7 @@
 """Offline tests for auto_social.py: guide pages, Commons and downloads are faked."""
 import datetime as dt
 import hashlib
+import io
 import json
 from pathlib import Path
 import shutil
@@ -9,7 +10,7 @@ import unittest
 from unittest import mock
 from zoneinfo import ZoneInfo
 
-from PIL import Image
+from PIL import Image, ImageChops
 
 import auto_social as a
 import clip_intake
@@ -397,7 +398,9 @@ class GeneratorTests(unittest.TestCase):
         nara = {"title": "Jour 5 — Nara", "image": "kyoto-6", "paragraphs": ["Les daims du parc."]}
         reel = self.reel(self.fixture([guide(category="Itinéraires", sections=DAYS + [nara], keyFacts=FACTS + [bamboo])]))
         stages = reel["scenes"][1:-1]
-        self.assertEqual((reel["format"], reel["scenes"][0]["headline"][-1]), ("itineraire", "*jour par jour*"))
+        # Three days out of five are shown: the hook counts them instead of promising every day.
+        self.assertEqual((reel["format"], reel["scenes"][0]["headline"][-1]), ("itineraire", "*3 étapes clés*"))
+        self.assertEqual(reel["title"], "Kyoto en train : les étapes clés")
         self.assertEqual([(s["kicker"], s["headline"], s["photo"]) for s in stages],
                          [("Jour 1", ["Kiyomizu-dera"], "kyoto-3"), ("Jour 2", ["Fushimi Inari", "et ses torii"], "kyoto-4"), ("Jour 3", ["Arashiyama"], "kyoto-5")])
         self.assertEqual(stages[0]["facts"][0]["excerpt"], "Jour 1 — Kiyomizu-dera, le temple sur pilotis")
@@ -409,6 +412,13 @@ class GeneratorTests(unittest.TestCase):
         shown = json.dumps(reel["scenes"], ensure_ascii=False)
         self.assertNotIn("Osaka", shown)  # no photo of Osaka in this guide
         self.assertNotIn("Nara", shown)   # a photo, but no figure for that day: the stage stays in the guide
+
+    def test_day_by_day_is_promised_only_when_every_day_of_the_guide_is_shown(self):
+        bamboo = {"value": "1 000 ¥", "label": "la traversée en barque de la rivière Hozu à Arashiyama"}
+        reel = self.reel(self.fixture([guide(category="Itinéraires", sections=DAYS[:3], keyFacts=FACTS + [bamboo])]))
+        self.assertEqual((reel["format"], reel["scenes"][0]["headline"][-1]), ("itineraire", "*jour par jour*"))
+        self.assertEqual([s["kicker"] for s in reel["scenes"][1:-1]], ["Jour 1", "Jour 2", "Jour 3"])
+        self.assertEqual(reel["title"], "Kyoto en train : jour par jour")
 
     def test_an_itinerary_whose_days_have_no_figure_takes_another_format(self):
         # Two days out of three with a figure (review of 12/11/2026: "Valladolid, la base de l'intérieur" said nothing).
@@ -543,6 +553,12 @@ class FastReelGuards(unittest.TestCase):
 
     def test_the_hook_announces_only_the_plans_that_follow(self):
         self.refused("not quoted from this plan", lambda s: s["scenes"][0].update(headline=["Kyoto en train", "*9 chiffres à connaître*"]))
+
+    def test_the_button_is_the_site_name_on_the_last_plan_only(self):
+        self.assertEqual(self.reel["scenes"][-1]["button"], p.MOTION_BUTTON)
+        self.refused("Only the last plan carries the button", lambda s: s["scenes"][1].update(button=p.MOTION_BUTTON))
+        self.refused("Only the last plan carries the button", lambda s: s["scenes"][-1].update(button="Le lien est en bio"))
+        self.refused("Only the last plan carries the button", lambda s: s["scenes"][-1].update(button=p.MOTION_BUTTON_BEFORE))
 
     def test_first_plan_is_the_hook_and_last_plan_the_call(self):
         self.refused("First plan is the hook", lambda s: s["scenes"][0].update(layout="fact"))
@@ -980,8 +996,9 @@ class ShownTests(unittest.TestCase):
     def test_the_last_card_names_the_site_and_nothing_one_network_only_has(self):
         scenes, _ = self.build()
         self.assertEqual(scenes[-1]["note"], "Enregistrez cette vidéo pour votre voyage")
-        self.assertEqual(p.MOTION_BUTTON, "voyagesansdetour.fr")
-        for text in (scenes[-1]["note"], p.MOTION_BUTTON):
+        self.assertEqual((scenes[-1]["button"], p.MOTION_BUTTON), ("voyagesansdetour.fr", "voyagesansdetour.fr"))
+        self.assertTrue(all("button" not in scene for scene in scenes[:-1]))
+        for text in (scenes[-1]["note"], scenes[-1]["button"]):
             self.assertNotRegex(text.lower(), r"\bbio\b|\breel\b|instagram|tiktok")
 
     def test_a_plan_of_fact_always_shows_a_number(self):
@@ -1001,6 +1018,12 @@ class ShownTests(unittest.TestCase):
                       "l’entrée pour un étranger depuis le « boleto único » du 27 mars 2026 (105 pesos de tarif INAH inclus)", "le billet en siège réservé"):
             self.assertEqual(dated(label), tag)
         self.assertEqual(dated("la haute saison des baleines (mars, avril 2026)"), tag)  # two months: a period
+        # A figure is never read after the guide's sources were: a later month is an opening or an event, not a reading.
+        self.assertEqual(dated("l’entrée du nouveau musée, ouverture prévue (décembre 2026)"), tag)
+        self.assertEqual(dated("l’entrée du festival des lanternes (novembre 2026)"), "Guide Yucatán · chiffre de novembre 2026")
+        self.assertEqual(dated("les deux trajets, relevés d’octobre 2026"), "Guide Yucatán · chiffre d’octobre 2026")
+        self.assertEqual(dated("le tarif plein, relevé le 11 novembre 2026"), "Guide Yucatán · chiffre du 11 novembre 2026")
+        self.assertEqual(dated("le tarif plein, relevé le 15 novembre 2026"), tag)  # after the day the sources were read
         long = reel_formats.dated_tag({"label": "le forfait, relevé en septembre 2026"}, "Guide Parc national des Cinque Terre · sources du 11/11/2026")
         self.assertEqual(long, "Notre guide · chiffre de septembre 2026")
 
@@ -1085,9 +1108,19 @@ class FoundPhotoTests(unittest.TestCase):
     def test_only_a_photo_of_the_site_or_one_marked_by_hand_may_close_a_post(self):
         mark = media_library.closing_mark
         self.assertEqual(mark({"emblematic": True}, {"file": "a.jpg"}), {"file": "a.jpg", "emblematic": True})  # the site's photo
-        self.assertEqual(mark({"automatic": True}, {"file": "a.jpg", "emblematic": True}), {"file": "a.jpg"})   # found by the search: never
+        # Found by the search: never, and said so in the record, whatever an earlier post recorded.
+        self.assertEqual(mark({"automatic": True}, {"file": "a.jpg", "emblematic": True}), {"file": "a.jpg", "automatic": True})
         self.assertEqual(mark({}, {"file": "a.jpg", "emblematic": True}), {"file": "a.jpg", "emblematic": True})  # marked in reviewed.json
         self.assertEqual(mark({}, {"file": "a.jpg"}), {"file": "a.jpg"})                                        # added for one plan
+        # A photo of the site that only illustrates one paragraph (a station sign, a hotel terrace) closes nothing.
+        self.assertEqual(mark({"emblematic": False}, {"file": "a.jpg", "emblematic": True, "automatic": True}), {"file": "a.jpg"})
+        article = guide(cover="japon-fuji-chureito", sections=[{"title": "Le train", "image": "japon-shinkansen"}])
+        site = {photo_id: {"source_page": f"https://commons.wikimedia.org/wiki/File:{photo_id}.jpg", "alt_fr": "Une photo du Japon."}
+                for photo_id in ("japon-fuji-chureito", "japon-shinkansen", "japon-tokyo-shibuya")}
+        marks = {c["id"]: c["emblematic"] for c in media_library.photo_candidates(article, site, "Japon")}
+        self.assertEqual(marks, {"japon-fuji-chureito": True, "japon-shinkansen": False, "japon-tokyo-shibuya": True})
+        published = {photo["id"] for photo in json.loads((HERE.parents[1] / "site-src" / "image-sources.json").read_text())["photos"]}
+        self.assertEqual(media_library.NOT_A_CLOSING - published, set())  # every listed photo is one the site publishes
         f = Fixture([guide()], photos=5)
         self.addCleanup(f.cleanup)
         found = "File:Kyoto Kinkaku-ji in autumn.jpg"
@@ -1160,6 +1193,127 @@ class CaptionTextTests(unittest.TestCase):
         self.assertEqual(line({"value": "59 €", "label": "la cabine privative du train de nuit"}), "💶 59 € : la cabine privative du train de nuit")
         self.assertEqual(line({"value": "45 jours", "label": "de séjour sans visa"}), "⏱️ 45 jours de séjour sans visa")
         self.assertEqual(line({"value": "287", "label": "marches jusqu’au sommet de la tour"}), "🥾 287 marches jusqu’au sommet de la tour")
+
+
+def figures(pairs, sections=None):
+    """Key figures as usable_facts gives them to the formats."""
+    return [{"value": value, "label": label, "short": reel_formats.short_label(label), "shortExcerpt": value + " " + reel_formats.short_label(label),
+             "excerpt": value + " " + label, "section": (sections or {}).get(value)} for value, label in pairs]
+
+
+class RealGuideTests(unittest.TestCase):
+    """Posts the generator built for published guides, as found by the review of the pull request (12/11/2026)."""
+
+    AMALFI = [("amalfi-positano", {"commonsTitle": "File:Positano (Italy) 02.jpg", "emblematic": True}, "Les maisons de Positano en cascade jusqu’à la plage."),
+              ("amalfi-ferry", {"commonsTitle": "File:Traghetto Amalfi - Salerno (9704145024).jpg"}, "Un ferry entre Amalfi et Salerne, au pied des falaises."),
+              ("amalfi-sentiero", {"commonsTitle": "File:Sentiero degli Dei 15 Campania.jpg", "emblematic": True}, "Le sentier des Dieux à Agerola, au-dessus de la mer."),
+              ("amalfi-ville", {"commonsTitle": "File:Amalfi (Italy).jpg", "emblematic": True}, "Amalfi vue de la mer, entre falaises et port."),
+              ("cote-amalfitaine-1ea2dd94", {"commonsTitle": "File:Atrani (Costiera Amalfitana, 23-8-2011).jpg", "automatic": True},
+               "Côte amalfitaine (Italie) : Atrani (Costiera Amalfitana, 23-8-2011).")]
+    AMALFI_FIGURES = [("1 h 39", "Rome → Salerne en Italo, 10 trains par jour, dès 14,90 €"), ("12 €", "le ferry Travelmar Salerne → Amalfi, 35 minutes"),
+                      ("17 €", "Salerne → Positano en ferry, 70 minutes"), ("10 €", "le ticket bus SITA COSTIERASITA, illimité pendant 24 h"),
+                      ("7,8 km", "le sentier des Dieux, de Bomerano à Nocelle, en 3 à 4 heures"),
+                      ("20 €", "Pompéi (25 € avec la villa des Mystères), gratuit le 1er dimanche du mois")]
+    FERRIES = {"title": "Arriver : Salerne plutôt que Naples", "image": "amalfi-ferry",
+               "table": {"headers": ["Ferry Travelmar 2026", "Prix", "Durée"],
+                         "rows": [["Salerne → Amalfi", "12 €", "35 min"], ["Salerne → Positano", "17 €", "70 min"], ["Amalfi → Positano", "10 €", "25 min"],
+                                  ["Amalfi → Minori", "5 €", "—"], ["Boucle Salerne–Positano–Amalfi–Salerne", "39 €", "journée"]]}}
+    MARRAKECH = [("marrakech-place-jemaa-el-fna", {"commonsTitle": "File:Jamaa El Fna, Marrakesh, Morocco, 20250124 1804 7017.jpg", "emblematic": True},
+                  "La place Jemaa el-Fna en fin de journée, entre parasols verts et étals, au cœur de la médina de Marrakech."),
+                 ("marrakech-bahia", {"commonsTitle": "File:Bahia Palace large court.jpg", "emblematic": True}, "La grande cour carrelée de zelliges du palais de la Bahia, à Marrakech."),
+                 ("marrakech-majorelle", {"commonsTitle": "File:Le jardin des majorelle 16.JPG", "emblematic": True}, "La villa bleue du jardin Majorelle."),
+                 ("marrakech-85ffbf38", {"commonsTitle": "File:Lamp maker, Medina of Marrakech.jpg", "automatic": True}, "Marrakech (Maroc) : Lamp maker, Medina of Marrakech."),
+                 ("marrakech-fecfeec6", {"commonsTitle": "File:Maroc Marrakech Saadiens Luc Viatour 5.jpg", "automatic": True}, "Marrakech (Maroc) : Maroc Marrakech Saadiens Luc Viatour 5.")]
+
+    def amalfi_table_reel(self):
+        article = guide(slug="cote-amalfitaine-sans-voiture", country="italie", cover="amalfi-positano", destination="Côte amalfitaine",
+                        shortTitle="La côte amalfitaine sans voiture", category="Itinéraires", sections=[self.FERRIES])
+        read = p.normalized("Prix " + " ".join(row[0] + " " + row[1] for row in self.FERRIES["table"]["rows"]))
+        return reel_formats.build("tableau", article, figures(self.AMALFI_FIGURES), list(self.AMALFI), [], "Phrase d’ouverture.", "Côte amalfitaine",
+                                  "Italie · Côte amalfitaine", "Guide Côte amalfitaine · sources du 24/10/2026", ["La côte amalfitaine", "sans voiture"], read)
+
+    def test_the_amalfi_coast_table_reel_opens_on_its_cover_and_puts_no_amalfi_fare_over_positano(self):
+        scenes, _ = self.amalfi_table_reel()
+        self.assertEqual(scenes[0]["photo"], "amalfi-positano")  # the guide's cover, not the view of Atrani the search found
+        self.assertEqual((scenes[1]["layout"], scenes[1]["photo"]), ("table", "amalfi-ferry"))
+        named = [scene["photo"] for scene in scenes[2:-1] if "Amalfi" in scene["detail"]]
+        self.assertNotIn("amalfi-positano", named)
+        # The ferry fares are in the table, over the ferry: said again, they would go over another village.
+        shown = {scene["headline"][0].strip("*").replace(reel_formats.NBSP, " "): scene["photo"] for scene in scenes[2:-1]}
+        self.assertEqual(shown, {"10 €": "cote-amalfitaine-1ea2dd94", "7,8 km": "amalfi-sentiero"})
+        self.assertEqual(scenes[-1]["photo"], "amalfi-ville")
+
+    def test_the_prefix_all_the_photos_share_names_nothing(self):
+        media = reel_formats.Media(list(self.AMALFI), [], reserve=2, cover="amalfi-positano", emblematic=reel_formats.emblematic(self.AMALFI),
+                                   everywhere="Italie · Côte amalfitaine")
+        self.assertEqual(media.family, "amalfi")
+        shared = {photo[0]: media.shared(photo, {"amalfi"}) for photo in self.AMALFI}
+        self.assertEqual(shared, {"amalfi-positano": 0, "amalfi-ferry": 1, "amalfi-sentiero": 0, "amalfi-ville": 1, "cote-amalfitaine-1ea2dd94": 0})
+        # In a guide of several towns the prefix is the town: it tells the photos apart.
+        towns = [("seville-alcazar", {"commonsTitle": "File:A.jpg"}, "Une porte du palais."), ("grenade-myrtes", {"commonsTitle": "File:B.jpg"}, "La cour des Myrtes.")]
+        self.assertEqual(reel_formats.Media(towns, []).named("le Real Alcázar de Séville", None)[0], "seville-alcazar")
+
+    def test_a_kind_of_place_alone_ties_no_figure_to_a_photo(self):
+        media = reel_formats.Media(list(self.MARRAKECH), [], reserve=2, cover="marrakech-place-jemaa-el-fna",
+                                   emblematic=reel_formats.emblematic(self.MARRAKECH), everywhere="Maroc · Marrakech")
+        # "Médina" names no monument: the fee of the Saadian tombs goes over the tombs, not over a lamp maker "in the medina".
+        monument = "l’entrée d’un grand monument de la médina (Bahia, tombeaux saadiens, El Badi) selon les sources"
+        self.assertEqual(media.named(monument, None)[0], "marrakech-bahia")
+        # Once the garden has its plan, the palace is the last photo that can close the post: the tombs take the fee.
+        media.photo("le jardin Majorelle selon les relevés 2023-2024")
+        self.assertEqual((media.spare(), media.named(monument, None)[0]), ("marrakech-bahia", "marrakech-fecfeec6"))
+        self.assertIsNone(media.named("le prix attendu d’un petit taxi de l’aéroport à la médina", None))
+        porto = [("porto-vue-clerigos", {"commonsTitle": "File:View of Porto Cathedral from Clérigos Tower, 20250605 1724 9965.jpg"},
+                  "La cathédrale et les toits de Porto vus depuis la tour des Clérigos."),
+                 ("porto-metro-aeroport", {"commonsTitle": "File:Aeroporto metro station (Porto) - 3.jpg"}, "La station de métro Aeroporto, terminus de la ligne E à Porto."),
+                 ("porto-rabelo", {"commonsTitle": "File:View of Ribeira (21).jpg"}, "Un bateau rabelo sur le Douro, face aux façades de la Ribeira.")]
+        city = reel_formats.Media(porto, [], everywhere="Portugal · Porto")
+        self.assertEqual(city.named("l’Andante Tour 3 : métro, bus et trains urbains pendant 72 h", None)[0], "porto-metro-aeroport")
+        self.assertEqual(city.named("la tour des Clérigos et son musée, billet de jour", None)[0], "porto-vue-clerigos")
+        villa = ("amalfi-ravello", {"commonsTitle": "File:Villa Cimbrone Ravello 12.JPG"}, "Les jardins de la villa Cimbrone, à Ravello.")
+        self.assertEqual(reel_formats.words_shown(villa, reel_formats.words_of("Pompéi (25 € avec la villa des Mystères)")), 0)
+        self.assertEqual(reel_formats.words_shown(villa, reel_formats.words_of("la villa Cimbrone et ses jardins")), 3)
+
+    def test_a_file_found_by_the_search_never_opens_a_post(self):
+        media = reel_formats.Media(list(self.MARRAKECH), [], reserve=2, cover="marrakech-place-jemaa-el-fna",
+                                   emblematic=reel_formats.emblematic(self.MARRAKECH), everywhere="Maroc · Marrakech")
+        # The post leans on found files: its cover is kept for the opening, and the fare that names it stays in the guide.
+        bus = "le bus 19 de l’aéroport à Jemaa el-Fna (50 dh l’aller-retour)"
+        self.assertIsNone(media.named(bus, None))
+        self.assertTrue(media.shown_elsewhere(bus))
+        self.assertEqual(media.photo("le jardin Majorelle selon les relevés 2023-2024")[1], "marrakech-majorelle")
+        self.assertEqual(media.opening(media.cover)[1], "marrakech-place-jemaa-el-fna")
+        self.assertEqual(media.closing()[1], "marrakech-bahia")
+        # No cover and nothing a person looked at but the photo kept for the end: the post waits.
+        found = [photo for photo in self.MARRAKECH if photo[1].get("automatic")] + [self.MARRAKECH[1]]
+        alone = reel_formats.Media(found, [], reserve=2, emblematic=reel_formats.emblematic(found))
+        with self.assertRaisesRegex(reel_formats.Held, "no_reviewed_photo_to_open_with"):
+            alone.opening(None)
+        # Even named as the cover (a guide whose own photos were all refused), a found file does not open the post.
+        only = [photo for photo in self.MARRAKECH if photo[1].get("automatic")]
+        with self.assertRaisesRegex(reel_formats.Held, "no_reviewed_photo_to_open_with"):
+            reel_formats.Media(only, [], reserve=2, cover=only[0][0]).opening(only[0][0])
+        with self.assertRaisesRegex(reel_formats.Held, "no_reviewed_photo_to_open_with|not_enough"):
+            reel_formats.build("liste", guide(cover="absente"), figures([(f["value"], f["label"]) for f in FACTS]), only * 3, [],
+                               "Phrase d’ouverture.", "Marrakech", "Maroc · Marrakech", "Guide Marrakech · sources du 05/11/2026", ["Marrakech"], "")
+
+    def test_a_reel_sealed_before_the_neutral_button_is_redrawn_as_it_was(self):
+        for name in ("ig-yucatan-itineraire-10-jours-2026-11-20-2", "ig-laponie-budget-rovaniemi-2026-11-27-2"):
+            scenario = json.loads((HERE / "scenarios" / f"{name}.json").read_text())
+            self.assertNotIn("button", scenario["scenes"][-1])
+            info = {"photos": p.load_photos(scenario, HERE), "clips": {}}
+            fonts, count = p.motion_fonts(scenario, HERE), len(scenario["scenes"])
+            stored = Image.open(HERE / "output" / name / f"scene-{count:02}.jpg").convert("RGB")
+
+            def distance(plan):
+                # The largest average difference over a block of 60 pixels: a few levels for the JPEG, dozens for another button.
+                saved = io.BytesIO()
+                motion_render.still(plan, count - 1, count, fonts).save(saved, "JPEG", quality=90)
+                return max(high for _, high in ImageChops.difference(Image.open(saved).convert("RGB"), stored).resize((18, 32), Image.BOX).getextrema())
+
+            self.assertLess(distance(p.prepared_scenes(scenario, HERE, info, None, False)[-1]), 8)
+            media = [(str(HERE / info["photos"][scenario["scenes"][-1]["photo"]]["file"]), False)]
+            self.assertGreater(distance(motion_render.prepare(scenario["scenes"][-1:], media, fonts, p.MOTION_BUTTON)[0]), 20)
 
 
 if __name__ == "__main__":

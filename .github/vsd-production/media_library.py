@@ -25,6 +25,17 @@ AUTO_PHOTOS = "assets/photos/auto"
 FEATURED = "incategory:Featured_pictures_on_Wikimedia_Commons"
 
 
+# Photos of the site that illustrate one paragraph and cannot stand for the place under the call to action: a vehicle,
+# a station, an interior, an animal, a terrace, a street like any other. Each photo of the site was looked at on
+# 12/11/2026 (the last card of a reel had been put on a station sign, a hotel terrace and a dark door); a photo added
+# to the site since then may close a post until someone lists it here.
+NOT_A_CLOSING = frozenset({
+    "lisbonne-miradouro", "lisbonne-cacilhas-ferry", "porto-tram-historique", "porto-metro-aeroport", "porto-caves-gaia",
+    "guimaraes-teleferico-penha", "guimaraes-rua-santa-maria", "algarve-faro", "algarve-train", "douro-pinhao-gare",
+    "douro-pinhao-azulejos", "seville-alcazar", "amalfi-ravello", "amalfi-ferry", "cinque-train", "thailande-train-nuit",
+    "costa-rica-monteverde", "japon-shinkansen", "japon-nara-cerfs", "laponie-husky", "tenerife-adeje"})
+
+
 def commons_title(source_page: str) -> str | None:
     parsed = urllib.parse.urlsplit(source_page or "")
     if parsed.hostname != "commons.wikimedia.org" or not parsed.path.startswith("/wiki/"):
@@ -48,9 +59,10 @@ def photo_candidates(article: dict, site_photos: dict, country: str, shared: dic
         record = site_photos.get(photo_id) or {}
         title = commons_title(record.get("source_page", ""))
         if title:
-            # A photo the site publishes for this place was chosen to stand for it: it may close a post.
+            # A photo the site publishes for this place was chosen to stand for it: it may close a post, unless it only
+            # illustrates one paragraph (NOT_A_CLOSING).
             candidates.append({"id": photo_id, "title": title, "alt": record.get("alt_fr") or fallback, "author": record.get("author"),
-                               "emblematic": True})
+                               "emblematic": photo_id not in NOT_A_CLOSING})
     taken = {candidate["title"] for candidate in candidates}
     for photo_id, record in (shared or {}).items():
         title = record.get("commonsTitle")
@@ -215,13 +227,16 @@ class Photos:
 
 
 def closing_mark(candidate: dict, record: dict) -> dict:
-    """The record with what decides whether the photo may close a post (`emblematic`): yes for a photo of the site,
-    never for a file found by the search, and what a human wrote in reviewed.json for the photos added by hand."""
-    if candidate.get("emblematic"):
-        return {**record, "emblematic": True}
+    """The record with what decides where the photo may stand in a post, whatever an earlier post recorded: a photo of
+    the site may close a post (`emblematic`) unless it is listed in NOT_A_CLOSING; a file found by the search never
+    closes nor opens one (`automatic`: nobody looked at it); a photo added by hand keeps what its reviewer wrote in
+    reviewed.json."""
+    plain = {key: value for key, value in record.items() if key not in ("automatic", "emblematic")}
     if candidate.get("automatic"):
-        return {key: value for key, value in record.items() if key != "emblematic"}
-    return record
+        return {**plain, "automatic": True}
+    if "emblematic" in candidate:
+        return {**plain, "emblematic": True} if candidate["emblematic"] else plain
+    return {key: value for key, value in record.items() if key != "automatic"}
 
 
 def gather_photos(article: dict, needed: int, photos: Photos, site_photos: dict, country: str, searcher,

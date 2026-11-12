@@ -63,8 +63,10 @@ INSTAGRAM_CAPTION_MAX = 2200
 MUSIC_FADE_OUT = 1.5
 REEL_BUTTON = {"instagram": "Le guide complet → lien en bio", "facebook": "Le guide complet → voyagesansdetour.fr"}
 # The same file goes to Instagram, TikTok and Shorts: the last card names the site and nothing that exists on one
-# network only ("lien en bio" was false on TikTok). Reels already rendered keep the card they were given.
+# network only ("lien en bio" was false on TikTok). The last plan of a scenario carries that button; a reel sealed
+# before 12/11/2026 carries none and is drawn with the button it was given, so that it is redrawn as it was.
 MOTION_BUTTON = "voyagesansdetour.fr"
+MOTION_BUTTON_BEFORE = "voyagesansdetour.fr → lien en bio"
 # The small label of a plan may give the figure's own date ("chiffre de juillet 2026"): then the plan quotes it.
 OWN_DATE_TAG = re.compile(r" · chiffre (?:de |du |d’)(.+)\Z")
 UNBALANCED = "Unbalanced highlight markers"
@@ -259,6 +261,7 @@ def check_motion_shape(scene, layout):
         if scene.get(key) is not None:
             text(scene[key], maximum)
     ensure(all(line.count("*") % 2 == 0 for line in scene["headline"] + [scene.get("detail") or ""]), UNBALANCED)
+    ensure("button" not in scene or (layout == "cta" and scene["button"] == MOTION_BUTTON), "Only the last plan carries the button, and only the site's name")
     focus = scene.get("focus", [0.5, 0.5])
     ensure(isinstance(focus, list) and len(focus) == 2 and all(type(v) in (int, float) and 0 <= v <= 1 for v in focus), "Invalid photo focus")
     seconds = scene.get("seconds")
@@ -531,7 +534,7 @@ def prepared_scenes(scenario, root, info, size, carousel):
         if scenario["schemaVersion"] == MOTION_SCHEMA:
             media = [(str(root / info["clips"][scene["clip"]]["file"]), True) if "clip" in scene
                      else (str(root / info["photos"][scene["photo"]]["file"]), False) for scene in scenario["scenes"]]
-            return motion.prepare(scenario["scenes"], media, motion_fonts(scenario, root), MOTION_BUTTON)
+            return motion.prepare(scenario["scenes"], media, motion_fonts(scenario, root), scenario["scenes"][-1].get("button", MOTION_BUTTON_BEFORE))
         paths = [str(root / info["photos"][scene["photo"]]["file"]) for scene in scenario["scenes"]]
         # A post sealed with the fallback fonts never shows an empty box; older posts are drawn as they were.
         assets = scenario["assets"]

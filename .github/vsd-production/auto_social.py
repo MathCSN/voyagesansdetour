@@ -570,7 +570,7 @@ def build_reel(root: Path, article: dict, slot: dt.datetime, now: dt.datetime, t
         inputs[f"{folder}/clips.json"] = json_bytes({"schemaVersion": 1, "clips": dict(sorted((clip_id, record) for clip_id, record in clips if clip_id in used_clips))})
     assets, start = sealed_assets(root, "reel", reel_number)
     emoji = CATEGORY_EMOJI.get(destinations.ascii_fold(article.get("category", "")).lower(), "✈️")
-    label = reel_formats.FORMAT_LABELS[fmt]
+    label = reel_formats.label_of(fmt, scenes)
     named = joined_title(article["shortTitle"], label)
     hook = next((h for h in (f"{emoji} {article['title']}", f"{emoji} {named}.") if len(h) <= 150), f"{emoji} {article['shortTitle']}"[:150])
     scenario = {

@@ -208,6 +208,35 @@ des photos du guide (« Santa », de « Santa Claus Village »). Désormais :
   au nom courant), et une photo de détail du bon lieu (un reflet dans une vitre) ; les deux ne
   touchent que les guides qui ont moins de huit photos relues à la main.
 
+**Revue de la PR 46, même jour** (le reel « tableau » de la Côte amalfitaine posait « 12 € le ferry
+Salerne → Amalfi » sur Positano et s'ouvrait sur une photo trouvée par la recherche) :
+
+- **le reel « tableau » choisit ses chiffres comme une liste** : celui qu'une photo libre montre
+  d'abord, jamais celui dont la photo est déjà prise (le tarif du ferry reste dans le tableau,
+  posé sur le ferry) ;
+- **le préfixe d'identifiant que toutes les photos du post partagent ne nomme rien** :
+  `amalfi-positano` est une photo de Positano, pas d'Amalfi. Dans un guide de plusieurs villes
+  (`seville-…`, `grenade-…`), le préfixe est la ville et il compte ;
+- **un type de lieu seul ne relie pas un chiffre à une photo** (`reel_formats.PLACE_KINDS` : tour,
+  villa, médina, place, gare…) : « l'Andante Tour 3 » n'est pas la tour des Clérigos, la villa des
+  Mystères n'est pas la villa Cimbrone, « un monument de la médina » n'est pas un lampiste « in
+  the medina ». À côté d'un nom que le chiffre et la photo partagent, le mot compte ;
+- **une image trouvée par la recherche n'ouvre jamais un post** (sa fiche porte
+  `"automatic": true`) : dans un post complété par de telles images, la couverture est gardée
+  pour l'accroche et le chiffre qui la nomme reste dans le guide ; sans photo relue pour
+  l'ouvrir, le post attend (`no_reviewed_photo_to_open_with`) ;
+- **toute photo du site n'est pas une dernière image** : `media_library.NOT_A_CLOSING` liste
+  celles qui n'illustrent qu'un paragraphe (un panneau de gare, une terrasse d'hôtel, une porte
+  sombre, un train, un animal), regardées une à une le 12/11/2026. Une photo ajoutée au site
+  depuis peut fermer un post tant qu'elle n'y est pas inscrite ;
+- **« jour par jour » n'est promis que si chaque jour du guide est montré** : sinon l'accroche et
+  le titre du post disent « 3 étapes clés » ;
+- **une date entre parenthèses postérieure à la relecture du guide n'est pas une date de relevé**
+  (« ouverture prévue (décembre 2026) » dans un guide relu en novembre) ;
+- **le bouton du dernier plan est écrit dans le scénario** (`"button": "voyagesansdetour.fr"`) :
+  un reel scellé avant le 12/11/2026 n'en porte pas et se redessine avec le bouton qu'il avait,
+  à l'identique (un test compare le dernier plan de deux reels en file à leur image rendue).
+
 Règles communes à tous les reels (`motion_render.py`) :
 
 - accroche encadrée au milieu du cadre, complète dès la première image (c'est aussi la couverture) ;

@@ -33,6 +33,7 @@ MAX_STAGES, MIN_STAGES = 6, 3
 TABLE_ROWS = (3, 5)
 FORMAT_LABELS = {"liste": "les chiffres à connaître", "prix": "combien ça coûte", "itineraire": "jour par jour",
                  "tableau": "le tableau à garder", "express": "l’essentiel"}
+EVERY_DAY = "*jour par jour*"          # the promise of an itinerary whose every day is shown
 PRICE = re.compile(r"€|\$|¥|£|₫|฿|\bCHF\b|\bdh\b|\bMAD\b")
 BUDGET = re.compile(r"\bbudget\b|\bau total\b|\ben tout\b|\bpar personne\b|\btout compris\b|\bhors vols?\b|\bsans le vol\b|"
                     r"\bpour \d+ (?:jours|nuits|semaines)\b|\bpar jour\b", re.IGNORECASE)
@@ -45,8 +46,9 @@ PAUSE_NOTE = "Faites pause pour tout lire"
 MONTHS = "janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre"
 # The date a figure gives for itself: "relevé en juillet 2026", "(relevé de mars 2025)", "(Por Esto, juillet 2026)",
 # "(octobre 2026)". Not a period ("du 2 novembre au 31 décembre 2026") nor a start ("depuis janvier 2026").
-OWN_DATE = re.compile(rf"\brelevée?s? (?:en|de|d’|le|du|au) ((?:\d{{1,2}}(?:er)? )?(?:{MONTHS}) 20\d\d)"
+OWN_DATE = re.compile(rf"\brelevée?s? (?:en |de |d’|d'|le |du |au )((?:\d{{1,2}}(?:er)? )?(?:{MONTHS}) 20\d\d)"
                       rf"|\((?:[^()]*, )?((?:{MONTHS}) 20\d\d)\)", re.IGNORECASE)
+SOURCES_READ = re.compile(r"sources du (\d\d)/(\d\d)/(20\d\d)\Z")
 TAG_MAX = 52
 
 
@@ -169,6 +171,12 @@ def dated_tag(fact: dict, tag: str) -> str:
     if not match or (match[2] and re.search(rf"\b(?:{MONTHS})\b", match[0][:match.start(2) - match.start()], re.IGNORECASE)):
         return tag
     date = (match[1] or match[2]).lower()
+    # A figure is never read after the guide's sources were: "ouverture prévue (décembre 2026)" in a guide read in
+    # November dates an opening, not the figure.
+    read, (*day, month, year) = SOURCES_READ.search(tag), date.split()
+    own = (int(year), MONTHS.split("|").index(month) + 1, int(re.sub(r"\D", "", day[0])) if day else 0)
+    if read and own > (int(read[3]), int(read[2]), int(read[1])):
+        return tag
     own = "chiffre " + ("du " if date[0].isdigit() else "d’" if date[0] in "ao" else "de ") + date
     return next(text for text in (tag.split(" · ")[0] + " · " + own, "Notre guide · " + own) if len(text) <= TAG_MAX)
 
@@ -268,9 +276,21 @@ def words_of(value: str) -> set[str]:
     return set(re.findall(r"[a-z0-9]{4,}", destinations.ascii_fold(re.sub(r"[^\w\s]", " ", value)).lower())) - EMPTY_WORDS
 
 
-def words_shown(photo: tuple, target: set[str]) -> int:
-    """How many of these words the photo's identifier, caption and Commons title carry."""
-    return len(target & words_of(" ".join([photo[0].replace("-", " "), photo[2], str(photo[1].get("commonsTitle", ""))])))
+# Kinds of places: "la tour des Clérigos" and "l’Andante Tour 3", "la villa des Mystères" and the villa Cimbrone, "un
+# monument de la médina" and a lamp maker "in the medina" share such a word and nothing else. Alone it ties no figure
+# to a photo; beside a name the two share, it counts.
+PLACE_KINDS = frozenset("tour tours villa villas ville villes village villages medina place places pont ponts palais jardin jardins "
+                        "musee musees temple temples eglise eglises cathedrale chateau plage plages marche marches parc parcs "
+                        "quartier quartiers gare gares port ports centre monument monuments".split())
+
+
+def words_shown(photo: tuple, target: set[str], family: str | None = None) -> int:
+    """How many of these words the photo's caption, its Commons title and its identifier carry. `family`: the prefix
+    all the photos of the post share says nothing of what one of them shows ("amalfi-positano" is a photo of Positano)."""
+    prefix, _, rest = photo[0].partition("-")
+    described = " ".join([(rest if prefix == family else photo[0]).replace("-", " "), photo[2], str(photo[1].get("commonsTitle", ""))])
+    shared = target & words_of(described)
+    return len(shared) if shared - PLACE_KINDS else 0
 
 
 class Media:
@@ -282,6 +302,10 @@ class Media:
         self.all = list(photos)
         # The pictures that can stand for the whole place under the call to action, the best first.
         self.emblematic = [photo_id for photo_id in emblematic if photo_id != cover]
+        # Files found by the search (media_library.closing_mark): nobody looked at them, they never open a post.
+        self.found = {photo[0] for photo in photos if photo[1].get("automatic") is True}
+        prefixes = {photo[0].partition("-")[0] for photo in photos if photo[0] not in self.found}
+        self.family = prefixes.pop() if len(prefixes) == 1 else None
         # The name of the place and of its country is in every caption: sharing it says nothing of what a photo shows.
         self.everywhere = words_of(everywhere)
 
@@ -293,8 +317,10 @@ class Media:
         `text` names better than any photo still free: over another picture, that figure would name one place while
         the post shows it elsewhere. The figure stays in the guide."""
         target = self.target(text)
-        free = self.free()
-        return max((words_shown(ph, target) for ph in self.all), default=0) > max((words_shown(ph, target) for ph in free), default=0)
+        return max((self.shared(ph, target) for ph in self.all), default=0) > max((self.shared(ph, target) for ph in self.free()), default=0)
+
+    def shared(self, photo: tuple, target: set[str]) -> int:
+        return words_shown(photo, target, self.family)
 
     def spare(self) -> str | None:
         """The last photo left that can close the post: no plan takes it, whatever it names."""
@@ -302,9 +328,10 @@ class Media:
         return left[0] if len(left) == 1 else None
 
     def free(self) -> list:
-        """The photos a plan may take when it names what they show: all but the last one kept for the call."""
-        spare = self.spare()
-        return [ph for ph in self.photos if ph[0] != spare]
+        """The photos a plan may take when it names what they show: all but the last one that can close the post. In a
+        post completed by files found by the search, the cover too is kept: such a file never opens a post."""
+        held = {self.spare(), self.cover if self.found else None}
+        return [ph for ph in self.photos if ph[0] not in held]
 
     def room(self) -> int:
         return len(self.photos) + len(self.clips) - self.reserve
@@ -320,7 +347,7 @@ class Media:
         The section's own photo wins when it shares as many, and stands in when no photo shares any; it gives way
         when it shows something else ("Chichén Itzá à l'ouverture" is not shown by the cenote of that afternoon)."""
         target = self.target(text)
-        shared = lambda ph: words_shown(ph, target)
+        shared = lambda ph: self.shared(ph, target)
         wanted = section.get("image") if section else None
         pool = self.free()
         own = next((ph for ph in pool if ph[0] == wanted), None)
@@ -360,13 +387,16 @@ class Media:
 
     def opening(self, cover: str | None) -> tuple[str, str]:
         """The cover photo of the guide when it is still free: it is the picture people see first. When a plan took
-        it, another photo that stands for the place, and never the last one kept for the call to action."""
+        it, another photo that stands for the place, else one a person looked at; never the last one kept for the
+        call to action, and never a file found by the search: the post waits rather than open on it."""
         self.reserve = max(0, self.reserve - 1)
-        left = self.free()
-        pick = (next((ph for ph in self.photos if ph[0] == cover), None) or next((ph for ph in left if ph[0] in self.emblematic), None)
+        spare = self.spare()
+        seen = [ph for ph in self.photos if ph[0] not in self.found]
+        left = [ph for ph in seen if ph[0] != spare]
+        pick = (next((ph for ph in seen if ph[0] == cover), None) or next((ph for ph in left if ph[0] in self.emblematic), None)
                 or (left[0] if left else None))
         if not pick:
-            raise Held("not_enough_photos_or_figures")
+            raise Held("no_reviewed_photo_to_open_with")
         self.photos.remove(pick)
         return ("photo", pick[0])
 
@@ -491,7 +521,9 @@ def itinerary_reel(brief: Brief) -> tuple[dict, list[dict], list[str]]:
         lines.append(stage_line(step))
     if len(body) < MIN_STAGES:
         raise Held("not_enough_stages_with_a_figure_and_their_photo")
-    return brief.hook("*jour par jour*"), body, lines
+    # "Jour par jour" is promised only when every day of the guide is there; otherwise the hook counts what follows.
+    every_day = len(body) == sum(1 for section in brief.article.get("sections", []) if DAY.fullmatch(str(section.get("title", "")).strip()))
+    return brief.hook(EVERY_DAY if every_day else f"*{len(body)} étapes clés*"), body, lines
 
 
 def table_reel(brief: Brief) -> tuple[dict, list[dict], list[str]]:
@@ -504,8 +536,19 @@ def table_reel(brief: Brief) -> tuple[dict, list[dict], list[str]]:
     rows = table["rows"]
     body = [plan("table", brief.media.photo(section=table["section"]), brief.place, table["title"], min(7.0, round(4.0 + 0.6 * len(rows), 1)),
                  rows=rows, facts=[{"source": "guide", "excerpt": a + " " + b} for a, b in rows], tag=brief.tag, note=PAUSE_NOTE)]
-    body += [fact_plan(fact, brief.media, brief.place, brief.tag, None) for fact in brief.numbered[:min(MAX_FACTS["tableau"], brief.media.room())]]
+    # Then its figures, chosen as in a list: the one a free photo shows first, and never a figure whose photo is taken
+    # (the fare of the ferry stays in the table, over the ferry, rather than go over another village).
+    chosen, limit, plans = brief.numbered, min(MAX_FACTS["tableau"], brief.media.room()), {}
+    for index in placed(chosen, brief.media, limit, limit):
+        plans[index] = fact_plan(chosen[index], brief.media, brief.place, brief.tag)
+    body += [plans[index] for index in sorted(plans)]
     return brief.hook("*le tableau à garder*"), body, [f"📅 {a} : {b}" for a, b in rows]
+
+
+def label_of(fmt: str, scenes: list[dict]) -> str:
+    """The format in the title of the post: no "jour par jour" for an itinerary that leaves days out."""
+    partial = fmt == "itineraire" and scenes[0]["headline"][-1] != EVERY_DAY
+    return "les étapes clés" if partial else FORMAT_LABELS[fmt]
 
 
 def emblematic(photos: list) -> tuple[str, ...]:
@@ -520,7 +563,9 @@ def build(fmt: str, article: dict, facts: list[dict], photos: list, clips: list,
     """The plans of one reel and the useful lines of its caption. Raises Held when the guide cannot fill the format."""
     # The body takes the photos that show what it names; the hook and the call keep two, the cover first.
     # The picture people see first: the guide's cover, or its first photo when the cover is too small for a reel.
-    cover = article.get("cover") if any(photo[0] == article.get("cover") for photo in photos) else (photos[0][0] if photos else None)
+    # Never a file found by the search: nobody looked at it.
+    seen = [photo[0] for photo in photos if photo[1].get("automatic") is not True]
+    cover = article.get("cover") if article.get("cover") in seen else (seen[0] if seen else None)
     brief = Brief(article, facts, Media(photos, clips, reserve=2, cover=cover, emblematic=emblematic(photos), everywhere=kicker),
                   opening, place, kicker, tag, title_lines, page)
     if fmt in ("liste", "express", "prix"):
@@ -535,7 +580,8 @@ def build(fmt: str, article: dict, facts: list[dict], photos: list, clips: list,
     said = {fact["excerpt"] for scene in [hook] + body for fact in scene.get("facts", [])} - {opening}
     if len(said) < MIN_FACTS:
         raise Held("fewer_than_four_facts")
-    closing = plan("cta", brief.media.closing(), "Le guide complet", title_lines, CTA_SECONDS, note=SAVE_NOTE)
+    # The button is written in the scenario: a reel sealed before 12/11/2026 has none and keeps the card it was given.
+    closing = plan("cta", brief.media.closing(), "Le guide complet", title_lines, CTA_SECONDS, note=SAVE_NOTE, button=p.MOTION_BUTTON)
     # A photo reviewed by hand may say where its subject is (reviewed.json, "focus"): the vertical frame is cut around it.
     records = {photo[0]: photo[1] for photo in photos}
     for scene in [hook] + body + [closing]:
