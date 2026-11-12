@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-vietnam-quand-partir-b",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Quand partir au Vietnam : le bon mois pour le Nord, le Centre et le Sud",
+  "pinTitle": "Quand partir au Vietnam : la meilleure période, mois par mois",
+  "variant": "b",
+  "targetUrl": "https://voyagesansdetour.fr/vietnam/vietnam-quand-partir/",
+  "articleSha256": "649e1c101b99a9d55870e417874dcd3a7b313f957cb05880ea4471853cfff128",
+  "imageSha256": "0e452ab30501f584ff57a2680e1fff3c5e79d677ccad43dc60aec4dd65fb662b",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "fdbf04a40b0bd104c5f381a47a9aa8aa30b6df590685a48e3ce4be0e6c3493b2",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "vietnam-rizieres-sapa",
+    "author": "Eerin25",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Rice_terraces_in_Sapa,_Vietnam.jpg",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/"
+  }
+}

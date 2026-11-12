@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-marrakech-3-jours-b",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Marrakech en 3 jours : médina, Majorelle, palais et une escapade, sans se faire plumer",
+  "pinTitle": "Marrakech en 3 jours : itinéraire jour par jour, prix et conseils",
+  "variant": "b",
+  "targetUrl": "https://voyagesansdetour.fr/maroc/marrakech-3-jours/",
+  "articleSha256": "feba6a421554fa4d22cefa56797e9f79db0ca98de277099b85ab3f49ec10515c",
+  "imageSha256": "52601b9bd1b08211ed8fa7326939254791fe27a8752ee6e16519739d6e92b1c1",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "fdbf04a40b0bd104c5f381a47a9aa8aa30b6df590685a48e3ce4be0e6c3493b2",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "marrakech-bahia",
+    "author": "Val Traveler",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Bahia_Palace_large_court.jpg",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  }
+}

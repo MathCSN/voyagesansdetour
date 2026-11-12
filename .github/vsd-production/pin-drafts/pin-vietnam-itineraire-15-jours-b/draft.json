@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-vietnam-itineraire-15-jours-b",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Vietnam en 15 jours : de Hanoï à Hô-Chi-Minh-Ville en train, étape par étape (itinéraire 2026)",
+  "pinTitle": "Le Vietnam en 15 jours : itinéraire jour par jour, prix et conseils",
+  "variant": "b",
+  "targetUrl": "https://voyagesansdetour.fr/vietnam/vietnam-itineraire-15-jours/",
+  "articleSha256": "f0db54e88dab516bd578c19abb3f892e65610c053c4922e79586d1ad20ef5de7",
+  "imageSha256": "8bfaf7a7c2120c507772dce9a7206bc45f5169575747c008bd70e481ab4c66a1",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "fdbf04a40b0bd104c5f381a47a9aa8aa30b6df590685a48e3ce4be0e6c3493b2",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "vietnam-train-hanoi",
+    "author": "Newone",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Newone_-_Hanoi_train_street_with_coffee_01.jpg",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  }
+}

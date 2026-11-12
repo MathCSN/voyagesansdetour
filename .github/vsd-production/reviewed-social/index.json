@@ -261,6 +261,42 @@
       "itemIds": [
         "vsd-production:tiktok:ig-yucatan-itineraire-10-jours-2026-11-20:photo-v1"
       ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-laponie-budget-rovaniemi-2026-11-27-2-v1.json",
+      "fileSha256": "d4687de9097164bc3d5484ed9cd5cf1b41b0413a74c94554aa40a65334e554d0",
+      "batchId": "ig-laponie-budget-rovaniemi-2026-11-27-2-v1",
+      "batchSha256": "7a6930b0b1c438f5bf195663d489f475cba710fcc18b6e158a09ee169bf8b44c",
+      "itemIds": [
+        "vsd-production:instagram:ig-laponie-budget-rovaniemi-2026-11-27-2:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-laponie-budget-rovaniemi-2026-11-27-2-tiktok-v1.json",
+      "fileSha256": "ef99d86819e53954fb0d46c5fbc6f8f626a3f725f152860346c90560c540d4f2",
+      "batchId": "ig-laponie-budget-rovaniemi-2026-11-27-2-tiktok-v1",
+      "batchSha256": "2c0657254f8eb434d6676c2d91ee1e8dc5e78ffc14f46bd01b516a40f7d1518f",
+      "itemIds": [
+        "vsd-production:tiktok:ig-laponie-budget-rovaniemi-2026-11-27-2:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-yucatan-itineraire-10-jours-2026-11-20-2-v1.json",
+      "fileSha256": "11ed650bcfa68ec8e46ff72ac64412419ce7989952c4a3129ae01c397b4a6fed",
+      "batchId": "ig-yucatan-itineraire-10-jours-2026-11-20-2-v1",
+      "batchSha256": "16813da58a706f9f807ad62ffa88b7bec346faef742a7b34079b55ff4639ba38",
+      "itemIds": [
+        "vsd-production:instagram:ig-yucatan-itineraire-10-jours-2026-11-20-2:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-yucatan-itineraire-10-jours-2026-11-20-2-tiktok-v1.json",
+      "fileSha256": "a4410561668c1957bf62c2f20a4e65a1f8104c9baa59dce01c5ca0aca4237e0b",
+      "batchId": "ig-yucatan-itineraire-10-jours-2026-11-20-2-tiktok-v1",
+      "batchSha256": "07f5a1da1759561f4b95c7cfe5b147f5ebf4c229b1e65053ed2f5bd480debc96",
+      "itemIds": [
+        "vsd-production:tiktok:ig-yucatan-itineraire-10-jours-2026-11-20-2:photo-v1"
+      ]
     }
   ],
   "retirements": [

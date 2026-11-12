@@ -1168,6 +1168,68 @@
           "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
         }
       ]
+    },
+    {
+      "contentId": "ig-laponie-budget-rovaniemi-2026-11-27-2",
+      "approved": true,
+      "files": [
+        {
+          "name": "reel.mp4",
+          "sha256": "0ac6cad1b0d69550d41b7b7243f9d84cafc6048e42cd4e5b1fbe9feba52a8c8f",
+          "bytes": 6878299
+        },
+        {
+          "name": "poster.jpg",
+          "sha256": "75fc4c41841641a556807946173b197712f8f07766bcc60672eeb9f0a0076597",
+          "bytes": 272745
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "af037c54041ac7056c4fd3f061c47aaa0cd1b72fcda59820f3513f7a3a5304b5",
+          "bytes": 3297
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "ig-yucatan-itineraire-10-jours-2026-11-20-2",
+      "approved": true,
+      "files": [
+        {
+          "name": "reel.mp4",
+          "sha256": "c0813fc7bdfb34d239259abbf8da69e9a4ed8a6f965902756fc1a3ceef562276",
+          "bytes": 7264336
+        },
+        {
+          "name": "poster.jpg",
+          "sha256": "46bf5bbe421d4d353e267ab20a1a68073a43d63958361bb2f4beb3a05f2a4ef8",
+          "bytes": 433404
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "308ae84e1eb8e9519cd38bf8ab95f9b6013da1e997c5495a690d22eab27895d6",
+          "bytes": 3440
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
     }
   ]
 }
