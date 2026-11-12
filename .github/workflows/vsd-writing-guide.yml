@@ -1,10 +1,9 @@
 name: Qualify a source-grounded new VSD guide
 on:
-  # Twice a day: a run spends nothing when the two-day release slot is already filled,
-  # and a morning hold leaves the afternoon to try another topic (3 to 4 guides a week).
-  schedule:
-    - cron: "23 6 * * *"
-    - cron: "23 15 * * *"
+  # Asleep since 2026-11-12: in 51 scheduled runs since 2026-10-12 this writer never got a guide past its own
+  # review (guide_held_by_review, guide_photos_insufficient), while spending up to 3 000 neurons a run.
+  # New guides come from the cloud routines (Monday and Thursday). To wake it up once its review passes on a
+  # manual run, put back: schedule: [{cron: "23 6 * * *"}, {cron: "23 15 * * *"}].
   workflow_dispatch:
     inputs:
       writer:

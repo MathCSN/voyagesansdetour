@@ -73,7 +73,12 @@ qui ne se dessine pas est mis en attente (`held`) sans bloquer les suivants.
 
 ## Le trajet d'un guide
 
-`vsd-writing-guide.yml` (chaque jour à 06:23 et 15:23 UTC) choisit le sujet le mieux classé du plan
+**Les nouveaux guides viennent des routines cloud** (rédaction le lundi et le jeudi à 9 h, veille le
+lundi ; règles dans `bureau/blog/regles.md` de la holding). Le rédacteur GitHub décrit ci-dessous est
+**en sommeil depuis le 12/11/2026** : en 51 passages planifiés il n'a jamais fait passer un guide à sa
+propre relecture. Il se lance encore à la main.
+
+`vsd-writing-guide.yml` (à la main seulement depuis le 12/11/2026) choisit le sujet le mieux classé du plan
 (`guide-topics.json`, voir `docs/strategie-sujets.md`), trouve ses photos libres sur Wikimedia Commons,
 lit ses sources, rédige, relit bloc par bloc et met le guide en file avec ses photos et ses preuves,
 au plus un guide tous les deux jours. `vsd-writing-discovery.yml` (chaque jour) cherche des mises à
@@ -165,7 +170,7 @@ des fichiers changés sont dans l'artefact `new-guide-proposal`.
 | `vsd-writing-discovery.yml` | chaque jour 09:37 | Mises à jour sourcées des guides ; une source injoignable est ignorée et notée, le passage continue |
 | `vsd-weekly-report.yml` | toutes les 6 heures (01:07, 07:07, 13:07, 19:07 ; rapport dès le dimanche midi) | Rapport hebdomadaire et issue d'alerte |
 
-`vsd-writing-guide` tourne seul deux fois par jour (rédaction des nouveaux guides).
+`vsd-writing-guide` ne tourne plus seul depuis le 12/11/2026 (voir « Le trajet d'un guide »).
 Lancés à la main seulement, pour qualifier un modèle : `vsd-writing-draft`, `-entailment`,
 `-evaluation`, `-guide-review`, `-guide-revision`, `-probe`. Ils ne tournent jamais seuls.
 `vsd-voice-pilot.yml` (qualification ponctuelle des voix, terminée le 12/10) a été supprimé.
