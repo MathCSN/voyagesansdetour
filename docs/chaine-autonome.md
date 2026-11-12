@@ -176,7 +176,7 @@ des fichiers changés sont dans l'artefact `new-guide-proposal`.
 | `vsd-voice-production.yml` → `vsd-voice-adopt.yml` → `vsd-voice-review.yml` → `vsd-voice-promote.yml` | à la main seulement | Chaîne des reels voix de synthèse, en sommeil depuis le 24/10 (ancien format retiré) |
 | `vsd-promote-media.yml` | à la main seulement | Ancienne promotion des rendus relus, en sommeil depuis le 06/11 : les nouveaux posts passent par `vsd-render-content` et l'import quotidien de `vsd-cloud-control` |
 | `vsd-writing-discovery.yml` | chaque jour 09:37 | Mises à jour sourcées des guides ; une source injoignable est ignorée et notée, le passage continue |
-| `vsd-weekly-report.yml` | toutes les 6 heures (01:07, 07:07, 13:07, 19:07 ; rapport dès le dimanche midi) | Rapport hebdomadaire et issue d'alerte |
+| `vsd-weekly-report.yml` | planifié 4 fois par jour (01:07, 07:07, 13:07, 19:07 UTC ; rapport dès le dimanche midi) ; GitHub démarre ces passages avec plusieurs heures de retard | Rapport hebdomadaire et issue d'alerte |
 
 `vsd-writing-guide` ne tourne plus seul depuis le 12/11/2026 (voir « Le trajet d'un guide »).
 Lancés à la main seulement, pour qualifier un modèle : `vsd-writing-draft`, `-entailment`,
@@ -193,10 +193,17 @@ Secrets : `VSD_ADMIN_TICK_KEY` (appels signés du panneau privé), `CLOUDFLARE_W
   (publié cette semaine, publication, référencement, sources des guides, file à venir, échecs de
   workflows, alertes, ce qui attend Mathis). La précédente est fermée automatiquement. Si GitHub
   saute un passage, le suivant ouvre le rapport de la semaine.
-- **Alerte** : toutes les six heures, une issue `alerte-file` s'ouvre ou se met à jour si
+- **Alerte** : à chaque passage du rapport, une issue `alerte-file` s'ouvre ou se met à jour si
   Instagram ou Facebook n'a plus de post programmé à 14 jours, si un workflow échoue deux fois dans
   la semaine, ou à 60 jours de la date d'arrêt ; s'y ajoutent les alertes de publication, de
   référencement et de guides décrites plus bas. Elle se ferme seule quand tout est revenu dans l'ordre.
+  - **Délai réel** : le rapport est planifié quatre fois par jour, mais GitHub démarre les passages
+    planifiés de ce dépôt avec plusieurs heures de retard et en saute. Constaté du 08/11 au
+    12/11/2026 : le rapport, alors planifié à 09:07 UTC, a démarré entre 15:55 et 19:44 UTC ;
+    `vsd-cloud-control`, planifié 49 fois par jour, a démarré 4 à 6 fois par jour. Une alerte peut
+    donc attendre une demi-journée. La publication n'en dépend pas : le panneau est le seul à
+    publier à l'heure, par sa propre tâche planifiée. Pour ne pas attendre, lancer
+    `vsd-weekly-report.yml` à la main.
   - Son **titre** dit ce qui se passe (« ⚠️ Instagram coupé de Buffer et 2 autres alertes »).
   - GitHub ne prévient personne quand le texte d'une issue change : chaque alerte **nouvelle** depuis
     le passage précédent est donc annoncée par un **commentaire** qui la nomme et mentionne le
@@ -237,8 +244,11 @@ Secrets : `VSD_ADMIN_TICK_KEY` (appels signés du panneau privé), `CLOUDFLARE_W
   4 heures), l'alerte « état du moteur illisible » se lève, car les autres alertes de publication
   sont alors aveugles. La date de la première lecture manquée est gardée d'un passage à l'autre
   dans le cache du workflow, enregistré juste après l'écriture du rapport, même si une étape
-  suivante échoue. Une mémoire perdue, ou vieille de plus de 9 heures (passage sauté, cache non
-  enregistré), ne compte pas : le délai repart, ce qui ne fait que retarder cette alerte d'un passage.
+  suivante échoue. Le passage d'avant est reconnu à son numéro (`github.run_number`), pas à une
+  durée : deux lectures manquées de suite (deux passages qui se suivent, ou un même passage
+  relancé) lèvent l'alerte même si GitHub a démarré le second passage un jour plus tard. Une mémoire perdue, ou laissée par un autre passage que celui d'avant
+  (cache non enregistré, passage arrêté avant d'écrire le rapport), ne compte pas : le délai
+  repart, ce qui ne fait que retarder cette alerte d'un passage.
 
   | Alerte | Déclenchement | Quoi faire |
   | --- | --- | --- |
@@ -248,7 +258,7 @@ Secrets : `VSD_ADMIN_TICK_KEY` (appels signés du panneau privé), `CLOUDFLARE_W
   | Canaux plus relus | La dernière relecture réussie des canaux Buffer par le panneau a plus de 24 heures (il les relit à chaque collecte et à chaque passage du moteur, et récrit cette date au plus toutes les 6 heures) | Page Connexions du panneau : vérifier la clé Buffer, la recoller si elle est refusée ; sinon logs du Worker (`buffer_channels_unreadable`). Tant que l'alerte tient, l'état des canaux donné par le rapport est celui de cette date : une coupure plus récente n'est pas vue. |
   | Posts bloqués | Un post retenu ou en échec depuis moins de 7 jours (un lot retiré du stock exprès ne compte pas) | Page Publication du panneau : lire le motif. Échéance dépassée : le post est perdu, corriger la cause (canal, clé) pour les suivants. L'alerte tombe 7 jours après le blocage. |
   | Posts menacés | Un post prêt à moins de 24 h de son échéance sur un canal qui ne reçoit rien | Rétablir le canal avant l'échéance, sinon le post sera retenu. |
-  | État du moteur illisible | Le panneau ne répond plus au rapport, ou répond sans le bloc « publication », depuis plus de 4 heures | Vérifier que le panneau est en ligne, puis que la version déployée est à jour (`npm run deploy` par Mathis). |
+  | État du moteur illisible | Le panneau ne répond plus au rapport, ou répond sans le bloc « publication », à deux passages de suite du rapport et depuis plus de 4 heures | Vérifier que le panneau est en ligne, puis que la version déployée est à jour (`npm run deploy` par Mathis). |
 
   Les posts TikTok ne lèvent aucune alerte tant que TikTok est absent de Buffer (réseau facultatif) :
   ils restent listés dans la section « Publication ». Non couvert : un post resté « à vérifier »

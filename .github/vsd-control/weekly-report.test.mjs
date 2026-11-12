@@ -1,6 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {socialQueue,guideQueue,parsePinterestRss,summarizeRuns,computeAlerts,renderReport,seoLines,unreadKinds} from './weekly-report.mjs';
+import {readFile} from 'node:fs/promises';
+import {socialQueue,guideQueue,parsePinterestRss,summarizeRuns,computeAlerts,renderReport,seoLines,unreadKinds,runNumber} from './weekly-report.mjs';
 import {PUBLICATION_KINDS,publicationLines,readingState} from './publication-report.mjs';
 
 const NOW=Date.parse('2026-10-26T07:00:00Z');
@@ -158,52 +159,70 @@ test('a missing publication reading is said plainly in the report',()=>{
   assert.deepEqual(publicationAlerts(PUBLICATION),[]);
 });
 
-test('a panel that stops giving the engine state is an alert after a few hours, not at the first miss',()=>{
+test('a panel that stops giving the engine state is an alert at the second run in a row, not at the first miss',()=>{
   const HOUR=36e5,iso=value=>new Date(value).toISOString();
   const alerts=(seo,reading,now)=>computeAlerts({...QUIET,now,seo,reading});
-  // First miss: remembered, no alert.
-  const first=readingState(null,null,AT);
-  assert.deepEqual(first,{missingSince:iso(AT),reason:'panel_unreadable',seenAt:iso(AT)});
+  // First miss, at run 7: remembered with the number of the run, no alert.
+  const first=readingState(null,null,AT,7);
+  assert.deepEqual(first,{missingSince:iso(AT),reason:'panel_unreadable',run:7});
   assert.deepEqual(alerts(null,first,AT),[]);
-  // Still missing at the next run, six hours later: the alert says since when and why it matters.
-  const second=readingState(first,null,AT+6*HOUR);
-  assert.equal(second.missingSince,iso(AT));
+  // Still missing at the next run: the alert says since when and why it matters.
+  const second=readingState(first,null,AT+6*HOUR,8);
+  assert.deepEqual(second,{missingSince:iso(AT),reason:'panel_unreadable',run:8});
   const raised=alerts(null,second,AT+6*HOUR);
   assert.deepEqual(raised.map(a=>a.code),['publication_reading_missing']);
   assert.ok(raised[0].message.startsWith('Le panneau ne répond plus au rapport depuis le 2026-11-12 à 10:00, heure de Paris'),raised[0].message);
   assert.ok(raised[0].message.includes('aveugles'),raised[0].message);
   // The panel answers but without the publication block: same alert, another cause.
   const noBlock={search:null,indexation:null,publication:null};
-  const absent=readingState(readingState(null,noBlock,AT),noBlock,AT+6*HOUR);
+  const absent=readingState(readingState(null,noBlock,AT,7),noBlock,AT+6*HOUR,8);
   assert.equal(absent.reason,'block_absent');
   assert.ok(alerts(noBlock,absent,AT+6*HOUR)[0].message.startsWith('Le panneau répond sans l’état du moteur de publication'));
   // A good reading clears the memory, and the alert with it.
   const back={search:null,indexation:null,publication:{...PUBLICATION,channelsCheckedAt:iso(AT+12*HOUR-HOUR),lastPassAt:iso(AT+12*HOUR-20*6e4)}};
-  assert.deepEqual(readingState(second,back,AT+12*HOUR),{missingSince:null,seenAt:iso(AT+12*HOUR)});
-  assert.deepEqual(alerts(back,readingState(second,back,AT+12*HOUR),AT+12*HOUR),[]);
+  assert.deepEqual(readingState(second,back,AT+12*HOUR,9),{missingSince:null,run:9});
+  assert.deepEqual(alerts(back,readingState(second,back,AT+12*HOUR,9),AT+12*HOUR),[]);
   // A lost, malformed or future memory starts the delay again instead of alerting on its own.
-  for(const previous of [undefined,{},{missingSince:'hier',seenAt:iso(AT-6*HOUR)},{missingSince:iso(AT+48*HOUR),seenAt:iso(AT-6*HOUR)},{missingSince:42,seenAt:iso(AT-6*HOUR)}])assert.equal(readingState(previous,null,AT).missingSince,iso(AT));
+  for(const previous of [undefined,{},{run:6},{missingSince:'hier',run:6},{missingSince:iso(AT+48*HOUR),run:6},{missingSince:42,run:6}])assert.equal(readingState(previous,null,AT,7).missingSince,iso(AT));
   // Without any memory (an older caller), a missing reading stays silent.
   assert.deepEqual(computeAlerts({...QUIET,now:AT,seo:null}),[]);
 });
 
-test('a stale memory of a missed reading can only delay the alert, never raise it at a single miss',()=>{
+test('the run before is known by its number, however late GitHub starts the runs',()=>{
   const HOUR=36e5,iso=value=>new Date(value).toISOString();
   const codes=(reading,now)=>computeAlerts({...QUIET,now,seo:null,reading}).map(a=>a.code);
-  // Run k misses and is saved; run k+1 reads the panel but its memory is not saved; run k+2 misses.
-  const k=readingState(null,null,AT);
-  assert.equal(k.seenAt,iso(AT));
-  const afterGap=readingState(k,null,AT+12*HOUR);
-  assert.deepEqual(afterGap,{missingSince:iso(AT+12*HOUR),reason:'panel_unreadable',seenAt:iso(AT+12*HOUR)});
+  const k=readingState(null,null,AT,7);
+  // GitHub starts scheduled runs hours late: the next run comes 27 hours after, and the panel is still mute.
+  const late=readingState(k,null,AT+27*HOUR,8);
+  assert.equal(late.missingSince,iso(AT));
+  assert.deepEqual(codes(late,AT+27*HOUR),['publication_reading_missing']);
+  // Run 7 misses; run 8 reads the panel but its memory is not saved; run 9 misses: only one miss is known.
+  const afterGap=readingState(k,null,AT+12*HOUR,9);
+  assert.deepEqual(afterGap,{missingSince:iso(AT+12*HOUR),reason:'panel_unreadable',run:9});
   assert.deepEqual(codes(afterGap,AT+12*HOUR),[]);
-  // The next run misses too, six hours later: two misses in a row, the alert is due.
-  const next=readingState(afterGap,null,AT+18*HOUR);
+  // Run 10 misses too: two misses in a row, the alert is due, dated from run 9.
+  const next=readingState(afterGap,null,AT+18*HOUR,10);
   assert.equal(next.missingSince,iso(AT+12*HOUR));
   assert.deepEqual(codes(next,AT+18*HOUR),['publication_reading_missing']);
-  // A run GitHub starts late still follows the previous one; a memory without its date does not count.
-  assert.equal(readingState(k,null,AT+7.5*HOUR).missingSince,iso(AT));
-  assert.equal(readingState({missingSince:iso(AT-6*HOUR)},null,AT).missingSince,iso(AT));
-  assert.equal(readingState({missingSince:iso(AT-6*HOUR),seenAt:iso(AT+HOUR)},null,AT).missingSince,iso(AT));
+  // The same run started again (« Re-run ») keeps its number: it follows its own first attempt.
+  assert.equal(readingState(k,null,AT+5*HOUR,7).missingSince,iso(AT));
+  // Two runs in a row a few minutes apart (a manual run after a scheduled one) are one outage, not yet an alert.
+  const close=readingState(k,null,AT+10*6e4,8);
+  assert.equal(close.missingSince,iso(AT));
+  assert.deepEqual(codes(close,AT+10*6e4),[]);
+  // A memory from another run than the one before, or without a usable number, does not count.
+  for(const run of [5,9,'7',7.5,null,undefined])assert.equal(readingState({...k,run},null,AT+6*HOUR,8).missingSince,iso(AT+6*HOUR),String(run));
+  // No run number at all (a run outside GitHub Actions): nothing follows, the delay starts again each time.
+  assert.deepEqual(readingState(k,null,AT+6*HOUR),{missingSince:iso(AT+6*HOUR),reason:'panel_unreadable',run:null});
+  assert.equal(readingState({missingSince:iso(AT),reason:'panel_unreadable',run:null},null,AT+6*HOUR,null).missingSince,iso(AT+6*HOUR));
+});
+
+test('the run number comes from the workflow, and anything else is no number',async()=>{
+  assert.equal(runNumber({VSD_REPORT_RUN:'412'}),412);
+  for(const value of [undefined,'','0','-3','1.5','12abc','1e3',' 7'])assert.equal(runNumber({VSD_REPORT_RUN:value}),null,String(value));
+  // Without this line in the workflow the alert on a mute panel would never be raised.
+  const workflow=await readFile(new URL('../workflows/vsd-weekly-report.yml',import.meta.url),'utf8');
+  assert.ok(workflow.includes('VSD_REPORT_RUN: ${{ github.run_number }}'),'run number not passed to the report');
 });
 
 test('the report says which alerts it could not re-read, so a missed reading neither lifts nor announces them',()=>{

@@ -3,11 +3,9 @@
 // post identifiers and unknown codes are only ever written inside a code span.
 const HOUR=36e5,DAY=24*HOUR;
 export const ENGINE_SILENCE_HOURS=6,POST_TROUBLE_DAYS=7;
-// The report runs every six hours: past this delay, the engine state has been missing at two runs in a row.
+// Two runs in a row can be minutes apart (a manual run after a scheduled one, a run started again): the
+// engine state must also have been missing for this long before the alert is raised.
 const READING_GRACE_HOURS=4;
-// A memory older than this was not written by the previous run (a run was skipped, or its memory was not
-// saved): what the panel answered in between is unknown, so the delay starts again.
-const READING_MEMORY_MAX_HOURS=9;
 // Kinds of the alerts drawn from the engine state. When that state is missing, the report says so and the
 // alert issue keeps those it already had (issue-plan.mjs) instead of dropping them.
 export const PUBLICATION_KINDS=['publication_channel','publication_buffer_access','publication_engine_disabled','publication_engine_silent','publication_channels_stale','publication_posts_blocked','publication_posts_at_risk'];
@@ -104,16 +102,17 @@ function postAlerts({channels,problems,problemsCount,atRisk,atRiskCount},now){
 /**
  * What the report remembers from one run to the next: since when the panel has stopped giving the engine
  * state. The panel has been deployed for long, so its silence is a fault, but one missed reading is not.
- * `seenAt` dates the memory: a missed reading only continues the previous one when the memory was written
- * by the run just before. A lost or stale memory can therefore delay the alert, never raise it.
+ * `run` is the number GitHub gives each run of the workflow. A missed reading only continues the previous
+ * one when the memory comes from the run just before, or from this same run started again. The time between
+ * two runs says nothing: GitHub starts the scheduled runs hours late and skips some. A lost memory, a run
+ * that left none, or no run number can therefore delay the alert, never raise it.
  */
-export function readingState(previous,seo,now){
-  const seenAt=new Date(now).toISOString();
-  if(seo?.publication)return {missingSince:null,seenAt};
-  const time=value=>typeof value==='string'?Date.parse(value):NaN;
-  const since=time(previous?.missingSince),seen=time(previous?.seenAt);
-  const follows=since<=now&&seen<=now&&now-seen<=READING_MEMORY_MAX_HOURS*HOUR;
-  return {missingSince:follows?new Date(since).toISOString():seenAt,reason:seo?'block_absent':'panel_unreadable',seenAt};
+export function readingState(previous,seo,now,run=null){
+  const number=Number.isInteger(run)&&run>0?run:null;
+  if(seo?.publication)return {missingSince:null,run:number};
+  const since=typeof previous?.missingSince==='string'?Date.parse(previous.missingSince):NaN;
+  const follows=since<=now&&number!==null&&(previous.run===number||previous.run===number-1);
+  return {missingSince:new Date(follows?since:now).toISOString(),reason:seo?'block_absent':'panel_unreadable',run:number};
 }
 
 function readingAlerts(reading,now){
