@@ -151,13 +151,18 @@ def scenario_id(batch_id: str) -> str:
     return next((name.removesuffix("-" + channel) for channel in social_stock.CROSSPOSTS if name.endswith("-" + channel)), name)
 
 
-def stored(root: Path, folder: str, name: str) -> dict | None:
-    """The JSON file `<folder>/<name>.json`, None when there is none. The name is read in the index: it must be an
-    identifier (letters, digits, dashes), so that it names a file of that folder and nothing else."""
+def shelf(root: Path, folder: str) -> dict[str, Path]:
+    """The JSON files of one folder of the production tree, by their name without ".json"."""
+    return {path.stem: path for path in (root / folder).glob("*.json")}
+
+
+def stored(files: dict[str, Path], name: str) -> dict | None:
+    """The JSON file of that name on a shelf, None when there is none. The name is read in the index: it must be an
+    identifier (letters, digits, dashes), and it is looked up among the files of the folder, never made into a path."""
     if not isinstance(name, str) or not p.ID.match(name):
         raise ValueError("Not an identifier: " + str(name))
-    path = root / folder / (name + ".json")
-    return json.loads(path.read_text()) if path.is_file() else None
+    path = files.get(name)
+    return json.loads(path.read_text()) if path else None
 
 
 def registries(root: Path) -> dict[str, Path]:
@@ -202,6 +207,7 @@ class Reader:
         self.root, self.now, self.fetcher = root, now, fetcher
         self.pages: dict[str, str | None] = {}
         self.registries = registries(root)
+        self.batches, self.scenarios = shelf(root, "reviewed-social"), shelf(root, "scenarios")
 
     def text_of(self, url: str) -> str | None:
         if url not in self.pages:
@@ -213,12 +219,12 @@ class Reader:
 
     def row(self, entry: dict) -> dict | None:
         """The batch read again, or None when it is not to come any more."""
-        batch = stored(self.root, "reviewed-social", entry["batchId"])
+        batch = stored(self.batches, entry["batchId"])
         item = batch["items"][0] if batch else None
         if not item or p.instant(item["dueAt"]) <= self.now:
             return None
         row = {"batchId": entry["batchId"], "dueAt": item["dueAt"], "channel": item["payload"]["channel"], "scenario": scenario_id(entry["batchId"])}
-        scenario = stored(self.root, "scenarios", row["scenario"])
+        scenario = stored(self.scenarios, row["scenario"])
         if not scenario:
             return {**row, "status": "unread", "why": "no_scenario"}
         quotes, outside = quotes_of(scenario, self.registries)

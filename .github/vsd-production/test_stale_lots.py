@@ -231,9 +231,12 @@ class StaleLotsTests(unittest.TestCase):
         self.assertEqual([(row["batchId"], row["status"], row.get("why")) for row in result["batches"]],
                          [("ig-yucatan-v1", "current", None), ("../outside", "unread", "unreadable_batch"), ("ig-escape-v1", "unread", "unreadable_batch")])
         self.assertFalse(secret.exists())
+        scenarios = stale_lots.shelf(stock.root, "scenarios")
+        self.assertEqual(sorted(scenarios), ["ig-escape", "ig-yucatan"])
         for name in ("../../x", "a/b", "A", "x.json", "", None):
             with self.assertRaises(ValueError):
-                stale_lots.stored(stock.root, "scenarios", name)
+                stale_lots.stored(scenarios, name)
+        self.assertIsNone(stale_lots.stored(scenarios, "ig-absent"))
         # A registry is looked up among the files of the production folder, never opened from what a scenario says.
         self.assertEqual(sorted(stale_lots.registries(stock.root)), ["auto/ig-escape/sources.json", "auto/ig-yucatan/sources.json"])
         with self.assertRaises(KeyError):
