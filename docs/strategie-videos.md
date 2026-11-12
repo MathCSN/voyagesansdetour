@@ -179,7 +179,8 @@ des photos du guide (« Santa », de « Santa Claus Village »). Désormais :
 
 - **un plan de fait montre toujours un chiffre** : un repère sans chiffre (« Ligne rouge ») reste
   dans le guide ; dans un itinéraire, une étape pour laquelle le guide ne donne aucun chiffre
-  n'est pas montrée, et il faut trois étapes chiffrées pour un reel « jour par jour » ;
+  n'est pas montrée, et il faut quatre étapes chiffrées pour un reel « jour par jour » (trois
+  jusqu'au 12/11/2026 au soir) ;
 - **un chiffre va sur la photo qui montre le mieux ce qu'il nomme, ou nulle part** : si cette
   photo est déjà prise par un autre plan du même post, le chiffre reste dans le guide au lieu
   d'être posé sur un autre lieu (le prix de Chichén Itzá sur la cathédrale de Mérida). Les mots
@@ -230,7 +231,9 @@ Salerne → Amalfi » sur Positano et s'ouvrait sur une photo trouvée par la re
   sombre, un train, un animal), regardées une à une le 12/11/2026. Une photo ajoutée au site
   depuis peut fermer un post tant qu'elle n'y est pas inscrite ;
 - **« jour par jour » n'est promis que si chaque jour du guide est montré** : sinon l'accroche et
-  le titre du post disent « 3 étapes clés » ;
+  le titre du post comptent les étapes (« 4 étapes clés »). Un itinéraire montre **au moins quatre
+  étapes chiffrées** (`MIN_STAGES`) : chaque étape est une seule chose dite, et un reel en dit au
+  moins quatre ; avec moins, le guide prend un autre format ;
 - **une date entre parenthèses postérieure à la relecture du guide n'est pas une date de relevé**
   (« ouverture prévue (décembre 2026) » dans un guide relu en novembre) ;
 - **le bouton du dernier plan est écrit dans le scénario** (`"button": "voyagesansdetour.fr"`) :
@@ -253,6 +256,68 @@ Salerne → Amalfi » sur Positano et s'ouvrait sur une photo trouvée par la re
   du calcul sortait le cadre de la photo d'un cheveu (« box offset can't be negative ») sur un
   panorama de 2880 × 854 ; `social_render.cover_box` ramène le cadre dans la photo, sans changer
   les cadrages valides.
+
+**Posts refaits le 12/11/2026 après la revérification des guides** (Yucatán, Marrakech, Thaïlande) :
+
+- **une étape d'itinéraire prend d'abord la photo du lieu qu'elle nomme** (« Valladolid » sur
+  Valladolid, pas sur la rame qui y mène), et seulement à défaut la photo de ce que son chiffre
+  nomme ;
+- **la photo de la section cède à celle qui partage tout ce qu'elle partage et davantage** : le
+  prix du Grand Palais va sur le Grand Palais, pas sur le Wat Arun que le guide montre pour ces
+  jours-là (les deux sont « à Bangkok ») ;
+- **une photo du site dont le sujet est décentré le dit** (`media_library.SITE_FOCUS`) : le cadre
+  vertical est coupé autour du pignon du Grand Palais, pas autour du ciel ;
+- **un guide qui manque de photos en reçoit de relues** plutôt qu'un chiffre posé sur une autre
+  vue : Marrakech a reçu la Koutoubia (dernière image), le port d'Essaouira et les cascades
+  d'Ouzoud (`photo_intake.py`, `reviewed.json`).
+
+**Relecture de ces posts, même soir** :
+
+- **un itinéraire montre quatre étapes chiffrées au moins** : un reel dit quatre choses, et une
+  étape en dit une, son chiffre (le titre du jour qu'elle cite aussi n'en est pas une seconde).
+  Un guide de trois jours prend un autre format ;
+- **une étape ne prend pas la photo que le guide a mise à côté d'un jour suivant**, et deux photos
+  à égalité sont départagées par le reste du plan : « Mérida–Tulum en train direct » va sur la
+  rame à Mérida Teya, « Tulum et le retour » garde les ruines et ses 265 pesos ;
+- **le plan tableau porte le nom de sa section** (« Le train de nuit pour Chiang Mai » au-dessus
+  de « Départ de Bangkok ») **et, en dessous, le prix de ce qu'il liste** quand sa photo est la
+  seule à le montrer (« 938 bahts la couchette… ») ; ce prix ouvre aussi la légende ;
+- **un carrousel dont tous les chiffres appartiennent à un jour du guide se lit jour après jour**
+  (Jour 1, Jour 2, Jour 3), sinon dans l'ordre des chiffres du guide.
+
+**Vérification de la PR 47, même jour** (le temple de Tulum sortait du cadre, la légende du
+Yucatán donnait trois étapes sur quatre, celle de la Thaïlande quatre heures sans dire d'où) :
+
+- **le cadre ne quitte pas le sujet de la photo** : le glissement est borné à 19 % de la largeur
+  du cadre (`motion_render.drift_of`). Une photo 3:2 glisse comme avant ; un panorama, dont le
+  cadre vertical ne couvre qu'un quart, glisse moins. Une photo dont le sujet n'est pas au milieu
+  porte son point d'intérêt (`focus` dans `reviewed.json`, `SITE_FOCUS` pour une photo du site) ;
+- **une légende trop longue dit d'abord chaque étape plus court** (le libellé que montre le plan)
+  avant de retirer une ligne : la légende ne donne plus trois étapes quand l'écran en promet quatre ;
+- **la première ligne du tableau dit ce qu'il liste** (« Le train de nuit pour Chiang Mai · Départ
+  de Bangkok — N° 7 : 7 h 30 »), puis viennent les chiffres que le reel montre ensuite ;
+- **le tableau ne prend le nom de sa section que s'il nomme ce que montre sa photo** ; « En bref »,
+  « Arriver », « Le parcours » laissent le lieu au-dessus du tableau ;
+- **une ligne de tableau est nommée par les colonnes qui la distinguent** : « Alfa Pendular |
+  Turística | 35,70 € » donne « Alfa Pendular Turística : 35,70 € », pas « Alfa Pendular :
+  Turística » trois fois sans un prix. Un chiffre qu'une ligne donne déjà pour la même chose n'a
+  pas de plan à lui ; un en-tête qui porte un nombre (« Aller simple 2026 ») est cité comme tout
+  chiffre à l'écran ;
+- **un chiffre que le guide ne donne que dans une section appartient à cette section** (« 604
+  pesos l'entrée d'Uxmal » sous « Jours 4-6 : Mérida et Uxmal », pas sous « Jour 3 ») : le Yucatán
+  retrouve ses cinq étapes et son « jour par jour ». Une section qui ne fait que résumer le guide
+  (« Le comparatif en un coup d'œil », « Avant tout ») n'y gagne rien : à Lisbonne, « 25 min de
+  l'aéroport à Rossio » reste sous « Baixa et Chiado ». Mesuré sur les 27 guides, code de main
+  contre code de la branche : seuls deux chiffres changent de section, Uxmal et « 2 h 32 de Hué à
+  Đà Nẵng » (de « Le parcours » à « Jours 8 à 10 ») ;
+- **un tableau n'est jamais posé sur une photo qui porte ses propres chiffres** : l'afficheur de
+  bord d'un Alfa Pendular (« 220 km/h · 10:22 · 21 °C ») se lisait autour des tarifs. Ces photos
+  sont listées dans `media_library.OWN_FIGURES` (ou marquées `"figures": true` dans
+  `reviewed.json`) ; elles n'ouvrent un post que faute d'une autre photo ;
+- **l'en-tête ne précède la première ligne de légende que s'il nomme quelque chose** (« Départ de
+  Bangkok », « Aller simple 2026 ») : « Jour A », « Étape », « Notre choix » laissent la ligne nue ;
+- **une étiquette datée n'est pas posée sur un chiffre d'une autre année** : « La ligne du Nord en
+  2026 » au-dessus de « 38,3 % des Alfa Pendular à l'heure en 2025 » devient « Portugal ».
 
 Ce qui reste, mesuré le 12/11/2026 sur les 26 guides : un chiffre qu'aucune photo ne montre
 complète encore un post, y compris sur une image trouvée par la recherche (Marrakech : « 3 h de

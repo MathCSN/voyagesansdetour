@@ -40,6 +40,8 @@ DAYS = [{"title": "Jour 1 — Kiyomizu-dera, le temple sur pilotis", "image": "k
         {"title": "Jour 2 — Fushimi Inari et ses torii", "image": "kyoto-4", "paragraphs": ["Des milliers de torii rouges."]},
         {"title": "Jour 3 — Arashiyama", "image": "kyoto-5", "paragraphs": ["La bambouseraie."]},
         {"title": "Jour 4 — Osaka", "paragraphs": ["Une ville sans photo dans ce guide."]}]
+GION = {"title": "Jour 6 — Gion et ses ruelles", "image": "kyoto-7", "paragraphs": ["Le quartier des maisons de thé."]}
+LANES = {"value": "30 min", "label": "de marche dans les ruelles de Gion"}
 TABLE = {"title": "En bref", "table": {"headers": ["Votre envie", "Les meilleurs mois", "À savoir"],
                                         "rows": [["Cerisiers en fleurs", "Fin mars à début avril", "Réservez tôt"],
                                                  ["Érables rouges", "Mi-novembre", "Temples illuminés le soir"],
@@ -396,13 +398,14 @@ class GeneratorTests(unittest.TestCase):
     def test_an_itinerary_goes_day_by_day_and_never_shows_a_stage_over_another_place(self):
         bamboo = {"value": "1 000 ¥", "label": "la traversée en barque de la rivière Hozu à Arashiyama"}
         nara = {"title": "Jour 5 — Nara", "image": "kyoto-6", "paragraphs": ["Les daims du parc."]}
-        reel = self.reel(self.fixture([guide(category="Itinéraires", sections=DAYS + [nara], keyFacts=FACTS + [bamboo])]))
+        reel = self.reel(self.fixture([guide(category="Itinéraires", sections=DAYS + [nara, GION], keyFacts=FACTS + [bamboo, LANES])]))
         stages = reel["scenes"][1:-1]
-        # Three days out of five are shown: the hook counts them instead of promising every day.
-        self.assertEqual((reel["format"], reel["scenes"][0]["headline"][-1]), ("itineraire", "*3 étapes clés*"))
+        # Four days out of six are shown: the hook counts them instead of promising every day.
+        self.assertEqual((reel["format"], reel["scenes"][0]["headline"][-1]), ("itineraire", "*4 étapes clés*"))
         self.assertEqual(reel["title"], "Kyoto en train : les étapes clés")
         self.assertEqual([(s["kicker"], s["headline"], s["photo"]) for s in stages],
-                         [("Jour 1", ["Kiyomizu-dera"], "kyoto-3"), ("Jour 2", ["Fushimi Inari", "et ses torii"], "kyoto-4"), ("Jour 3", ["Arashiyama"], "kyoto-5")])
+                         [("Jour 1", ["Kiyomizu-dera"], "kyoto-3"), ("Jour 2", ["Fushimi Inari", "et ses torii"], "kyoto-4"), ("Jour 3", ["Arashiyama"], "kyoto-5"),
+                          ("Jour 6", ["Gion et ses ruelles"], "kyoto-7")])
         self.assertEqual(stages[0]["facts"][0]["excerpt"], "Jour 1 — Kiyomizu-dera, le temple sur pilotis")
         self.assertEqual(stages[0]["detail"], "*500 ¥* l’entrée du temple Kiyomizu-dera")
         # Every stage shown carries a figure of the guide, on screen and in the caption with its whole label.
@@ -415,9 +418,12 @@ class GeneratorTests(unittest.TestCase):
 
     def test_day_by_day_is_promised_only_when_every_day_of_the_guide_is_shown(self):
         bamboo = {"value": "1 000 ¥", "label": "la traversée en barque de la rivière Hozu à Arashiyama"}
-        reel = self.reel(self.fixture([guide(category="Itinéraires", sections=DAYS[:3], keyFacts=FACTS + [bamboo])]))
+        reel = self.reel(self.fixture([guide(category="Itinéraires", sections=DAYS[:3] + [GION], keyFacts=FACTS + [bamboo, LANES])]))
         self.assertEqual((reel["format"], reel["scenes"][0]["headline"][-1]), ("itineraire", "*jour par jour*"))
-        self.assertEqual([s["kicker"] for s in reel["scenes"][1:-1]], ["Jour 1", "Jour 2", "Jour 3"])
+        self.assertEqual([s["kicker"] for s in reel["scenes"][1:-1]], ["Jour 1", "Jour 2", "Jour 3", "Jour 6"])
+        # Three days are three things said: an itinerary shows four stages at least, or the guide takes another format.
+        short = self.reel(self.fixture([guide(category="Itinéraires", sections=DAYS[:3], keyFacts=FACTS + [bamboo])]))
+        self.assertEqual(short["format"], "liste")
         self.assertEqual(reel["title"], "Kyoto en train : jour par jour")
 
     def test_an_itinerary_whose_days_have_no_figure_takes_another_format(self):
@@ -434,7 +440,9 @@ class GeneratorTests(unittest.TestCase):
         self.assertEqual(table["rows"][0], ["Cerisiers en fleurs", "Fin mars à début avril"])
         self.assertEqual(table["note"], "Faites pause pour tout lire")
         self.assertEqual([fact["excerpt"] for fact in table["facts"]][1], "Érables rouges Mi-novembre")
-        self.assertEqual(reel["caption"]["lines"][0], "📅 Cerisiers en fleurs : Fin mars à début avril")
+        # The first row says what the table lists; "Quand partir" names nothing the photo shows, the place stays above.
+        self.assertEqual(reel["caption"]["lines"][:2], ["📅 Les meilleurs mois — Cerisiers en fleurs : Fin mars à début avril", "📅 Érables rouges : Mi-novembre"])
+        self.assertEqual(table["kicker"], "Kyoto")
 
     def test_a_table_too_long_to_read_is_never_cut(self):
         rows = [[f"Mois {n}", "16 °C"] for n in range(12)]
@@ -622,6 +630,21 @@ class TextTests(unittest.TestCase):
         sections = [{"title": "Le train", "paragraphs": ["Un train toutes les 30 minutes."]},
                     {"title": "La Via dell’Amore", "paragraphs": ["De Riomaggiore à Manarola, sur réservation."]}]
         self.assertEqual(a.section_of("30 min", "la Via dell’Amore, de Riomaggiore à Manarola, sur réservation", sections)["title"], "La Via dell’Amore")
+
+    def test_a_figure_that_one_section_alone_gives_belongs_to_it(self):
+        # Review of 12/11/2026: "604 pesos l'entrée d'Uxmal" went under "Jour 3", whose words it shares, though the guide
+        # gives that price under "Jours 4-6" only.
+        sections = [{"title": "Jour 3 : Chichén Itzá à l’ouverture", "paragraphs": ["L’entrée pour un étranger coûte 697 pesos ; Uxmal attendra Mérida. Comptez 1 604 pesos à deux."]},
+                    {"title": "Jours 4-6 : Mérida et Uxmal", "paragraphs": ["Le site est à 80 km : 604 pesos pour un étranger."]}]
+        self.assertEqual(a.section_of("604 pesos", "l’entrée d’Uxmal pour un étranger, à l’ouverture", sections)["title"], "Jours 4-6 : Mérida et Uxmal")
+        # Given by both, or by none: the words of its label decide, as before.
+        both = [sections[0], {**sections[1], "paragraphs": ["Le site est à 80 km : 697 pesos aussi."]}]
+        self.assertEqual(a.section_of("697 pesos", "l’entrée de Chichén Itzá pour un étranger", both)["title"], "Jour 3 : Chichén Itzá à l’ouverture")
+        # A section that only sums the guide up is about none of its figures: the district keeps its own.
+        for title in ("Le comparatif en un coup d’œil", "Avant tout", "En bref", "L’essentiel"):
+            districts = [{"title": "Baixa et Chiado", "paragraphs": ["De l’aéroport à Rossio, comptez une petite demi-heure en métro."]},
+                         {"title": title, "table": {"headers": ["Quartier", "Métro"], "rows": [["Baixa", "25 min"], ["Saldanha", "18 min"]]}}]
+            self.assertEqual(a.section_of("25 min", "de l’aéroport à Rossio, en métro", districts)["title"], "Baixa et Chiado", title)
 
     def test_title_lines_are_balanced(self):
         self.assertEqual(a.lines_of("La côte amalfitaine sans voiture", 24), ["La côte amalfitaine", "sans voiture"])
@@ -1078,6 +1101,19 @@ class ShownTests(unittest.TestCase):
                          "📍 Jour 3 : Chichén Itzá à l’ouverture · 697 pesos l’entrée de Chichén Itzá pour un étranger depuis le 27 mars 2026")
         long = {**fact, "label": fact["label"] + " " + "x" * 120}
         self.assertEqual(reel_formats.stage_line({**step, "fact": long}), "📍 Jour 3 : Chichén Itzá à l’ouverture · 697 pesos l’entrée de Chichén Itzá pour un étranger")
+        # Each line can be said shorter, as its plan says it: a caption too long shortens every stage before it drops one.
+        self.assertEqual(reel_formats.stage_line(step).short, "📍 Jour 3 : Chichén Itzá à l’ouverture · 697 pesos l’entrée de Chichén Itzá pour un étranger")
+
+    def test_a_caption_too_long_says_every_stage_shorter_before_it_drops_one(self):
+        # Review of 12/11/2026: the screen promised "4 étapes clés" and the caption gave three, Tulum cut for length.
+        stages = [reel_formats.Line(f"📍 Jour {n} : étape · 100 pesos " + "x" * 120, f"📍 Jour {n} : étape · 100 pesos l’entrée") for n in range(1, 5)]
+        scenario = {"kind": "reel", "channel": "instagram", "id": "ig-" + "a" * 70 + "-2026-11-15",
+                    "caption": {"hook": "🗺️ " + "h" * 140, "lines": stages, "cta": "c" * 150, "hashtags": ["#Mexique", "#Voyage"]}}
+        self.assertGreater(len(p.caption(scenario, {})), a.CAPTION_MAX)
+        fitted = a.fitted_caption(scenario, {})
+        self.assertEqual(fitted["caption"]["lines"], [stage.short for stage in stages])
+        self.assertTrue(all(type(line) is str for line in fitted["caption"]["lines"]))
+        self.assertLessEqual(len(p.caption(fitted, {})), a.CAPTION_MAX)
 
 
 class FoundPhotoTests(unittest.TestCase):
@@ -1133,6 +1169,12 @@ class FoundPhotoTests(unittest.TestCase):
                 for photo_id in ("japon-fuji-chureito", "japon-shinkansen", "japon-tokyo-shibuya")}
         marks = {c["id"]: c["emblematic"] for c in media_library.photo_candidates(article, site, "Japon")}
         self.assertEqual(marks, {"japon-fuji-chureito": True, "japon-shinkansen": False, "japon-tokyo-shibuya": True})
+        # A photo of the site whose subject is off centre says where it is: the vertical frame is cut around it.
+        palace = {"thailande-bangkok-grand-palais": {"source_page": "https://commons.wikimedia.org/wiki/File:Palace.jpg", "alt_fr": "Le Grand Palais de Bangkok."}}
+        thai = guide(slug="thailande", cover="thailande-bangkok-grand-palais", sections=[])
+        self.assertEqual(media_library.photo_candidates(thai, palace, "Thaïlande")[0]["focus"], [0.72, 0.7])
+        got = media_library.gather_photos(thai, 1, mock.Mock(shared={}, get=lambda candidate: ("thailande-bangkok-grand-palais", {"file": "a.jpg"})), palace, "Thaïlande", lambda query: [])
+        self.assertEqual(got[0][1], {"file": "a.jpg", "emblematic": True, "focus": [0.72, 0.7]})
         published = {photo["id"] for photo in json.loads((HERE.parents[1] / "site-src" / "image-sources.json").read_text())["photos"]}
         self.assertEqual(media_library.NOT_A_CLOSING - published, set())  # every listed photo is one the site publishes
         f = Fixture([guide()], photos=5)
@@ -1299,9 +1341,171 @@ class RealGuideTests(unittest.TestCase):
         crossing = "Le pont en métro de métro D au-dessus du Douro"
         self.assertEqual(reel_formats.Media(days, [], everywhere="Portugal · Porto").named(crossing, {"image": "porto-ponte-luis"})[0], "porto-ponte-luis")
         self.assertNotEqual(reel_formats.Media(days, [], everywhere="Portugal · Porto").named(crossing, None)[0], "porto-ponte-luis")
+        # The section's photo gives way to one that shares all it shares and more: the Grand Palace, not Wat Arun, for
+        # the fee of the Grand Palace (both are in Bangkok); it keeps a text another photo only half shares.
+        bangkok = [("thailande-wat-arun", {"commonsTitle": "File:Wat Arun.jpg"}, "Le temple Wat Arun au bord du fleuve Chao Phraya, à Bangkok."),
+                   ("thailande-bangkok-grand-palais", {"commonsTitle": "File:Roof.jpg"}, "Les toits du Grand Palais de Bangkok au coucher du soleil."),
+                   ("thailande-ferry", {"commonsTitle": "File:Ferry.jpg"}, "Un ferry sur le fleuve Chao Phraya.")]
+        thai = lambda: reel_formats.Media(bangkok, [], everywhere="Thaïlande")
+        self.assertEqual(thai().named("le Grand Palais de Bangkok et le Wat Phra Kaew", {"image": "thailande-wat-arun"})[0], "thailande-bangkok-grand-palais")
+        self.assertEqual(thai().named("la traversée du fleuve en ferry depuis Bangkok", {"image": "thailande-wat-arun"})[0], "thailande-wat-arun")
         villa = ("amalfi-ravello", {"commonsTitle": "File:Villa Cimbrone Ravello 12.JPG"}, "Les jardins de la villa Cimbrone, à Ravello.")
         self.assertEqual(reel_formats.words_shown(villa, reel_formats.words_of("Pompéi (25 € avec la villa des Mystères)")), 0)
         self.assertEqual(reel_formats.words_shown(villa, reel_formats.words_of("la villa Cimbrone et ses jardins")), 3)
+
+    def test_a_stage_takes_the_photo_of_the_place_it_names_before_the_photo_of_what_its_figure_names(self):
+        photos = [("yucatan-cenote", {"commonsTitle": "File:Cenote Ik Kil.jpg", "emblematic": True}, "Un cenote entouré de lianes."),
+                  ("yucatan-merida-cathedrale", {"commonsTitle": "File:Catedral.jpg"}, "La cathédrale de Mérida."),
+                  ("yucatan-tren-maya-merida", {"commonsTitle": "File:Tren Maya.jpg"}, "Une rame du Tren Maya en gare de Mérida-Teya."),
+                  ("yucatan-valladolid-calzada", {"commonsTitle": "File:Calzada de los Frailes.jpg"}, "La calzada de los Frailes, à Valladolid."),
+                  ("yucatan-chichen-itza", {"commonsTitle": "File:El Castillo, Chichen Itza.jpg"}, "La pyramide d’El Castillo, à Chichén Itzá."),
+                  ("yucatan-tulum", {"commonsTitle": "File:Tulum.jpg"}, "Les ruines de Tulum au-dessus de la mer."),
+                  ("yucatan-uxmal-pyramide", {"commonsTitle": "File:Uxmal.jpg", "emblematic": True}, "La pyramide du Devin à Uxmal.")]
+        days = [{"title": "Jours 1-2 — Valladolid"}, {"title": "Jour 3 — Chichén Itzá à l’ouverture", "image": "yucatan-cenote"},
+                {"title": "Jour 7 — Mérida–Tulum en train direct"}, {"title": "Jours 8-10 — Tulum et le retour", "image": "yucatan-tulum"}]
+        pairs = [("1 h 43", "de l’aéroport de Cancún à Valladolid en Tren Maya"), ("697 pesos", "l’entrée de Chichén Itzá pour un étranger"),
+                 ("5 h 16", "le train direct Mérida Teya → Tulum de 7 h"), ("265 pesos", "les ruines de Tulum pour un étranger")]
+        facts = figures(pairs, {value: day for (value, _), day in zip(pairs, days)})
+        article = guide(slug="yucatan", country="mexique", cover="yucatan-cenote", destination="Yucatán", shortTitle="Yucatán en 10 jours", sections=days)
+        read = p.normalized(" ".join(day["title"] for day in days))
+        scenes, _ = reel_formats.build("itineraire", article, facts, photos, [], "Phrase d’ouverture.", "Yucatán", "Mexique · Yucatán",
+                                       "Guide Yucatán · sources du 12/11/2026", ["Yucatán en", "10 jours"], read)
+        # "Valladolid" is shown over Valladolid, though the train photo shares more words with the figure of that day.
+        # The train to Tulum takes the train, not the ruins the guide put beside the days in Tulum, nor the cathedral that
+        # shares "Mérida" as well: what the plan says of its figure decides between the two. Four stages, four figures.
+        self.assertEqual([(scene["headline"], scene["photo"]) for scene in scenes[1:-1]],
+                         [(["Valladolid"], "yucatan-valladolid-calzada"), (["Chichén Itzá", "à l’ouverture"], "yucatan-chichen-itza"),
+                          (["Mérida–Tulum en", "train direct"], "yucatan-tren-maya-merida"), (["Tulum et le retour"], "yucatan-tulum")])
+        self.assertEqual(scenes[0]["headline"][-1], "*jour par jour*")
+        self.assertIn("*265 pesos*", scenes[4]["detail"])
+        # One thing said per stage: its figure. The title of the day it also quotes is not a second one.
+        self.assertEqual(len(reel_formats.said_by(scenes[0], scenes[1:-1], "Phrase d’ouverture.")), 4)
+        with self.assertRaisesRegex(reel_formats.Held, "not_enough_stages"):
+            reel_formats.build("itineraire", {**article, "sections": days[:3]}, facts[:3], photos, [], "Phrase d’ouverture.", "Yucatán", "Mexique · Yucatán",
+                               "Guide Yucatán · sources du 12/11/2026", ["Yucatán en", "10 jours"], read)
+
+    def test_a_table_is_named_by_its_section_and_carries_the_price_of_what_it_lists(self):
+        trains = {"title": "Le train de nuit pour Chiang Mai", "image": "thailande-train-nuit",
+                  "table": {"headers": ["Train", "Départ de Bangkok", "Arrivée à Chiang Mai", "2e classe"],
+                            "rows": [["N° 7 (autorail de jour)", "7 h 30", "17 h 50", "558 ฿ assis"], ["N° 9 (couchettes récentes)", "18 h 40", "7 h 15", "938 / 1 038 ฿"],
+                                     ["N° 13 (couchettes)", "20 h 05", "8 h 45", "768 / 838 ฿"], ["N° 51 (couchettes)", "22 h 30", "11 h 40", "728 / 798 ฿"]]}}
+        photos = [("thailande-phi-phi", {"commonsTitle": "File:Phi Phi.jpg", "emblematic": True}, "La plage de Ko Phi Phi Don."),
+                  ("thailande-train-nuit", {"commonsTitle": "File:Sleeper.jpg"}, "Une voiture-couchettes d’un train de nuit thaïlandais."),
+                  ("thailande-bangkok-grand-palais", {"commonsTitle": "File:Roof.jpg"}, "Les toits du Grand Palais de Bangkok au coucher du soleil."),
+                  ("thailande-railay", {"commonsTitle": "File:Railay.jpg"}, "La plage de Railay, près de Krabi."),
+                  ("thailande-wat-arun", {"commonsTitle": "File:Wat Arun.jpg", "emblematic": True}, "Le temple Wat Arun au bord du fleuve Chao Phraya.")]
+        pairs = [("938 bahts", "la couchette haute climatisée de 2e classe du train 9 (≈ 25 €, tarif SRT de novembre 2026)"),
+                 ("500 bahts", "le Grand Palais de Bangkok et le Wat Phra Kaew, de 8 h 30 à 16 h 30 (≈ 13 €)"),
+                 ("330 bahts", "le minibus Phantip de Surat Thani à Krabi, 6 départs de 9 h à 16 h 30, 3 h de route")]
+        article = guide(slug="thailande", country="thailande", cover="thailande-phi-phi", destination="Thaïlande", shortTitle="La Thaïlande en 2 semaines", sections=[trains])
+        read = p.normalized("Départ de Bangkok " + " ".join(row[0] + " " + row[1] for row in trains["table"]["rows"]))
+        scenes, lines = reel_formats.build("tableau", article, figures(pairs), photos, [], "Phrase d’ouverture.", "Thaïlande", "Thaïlande",
+                                           "Guide Thaïlande · sources du 12/11/2026", ["La Thaïlande", "en 2 semaines"], read)
+        table = scenes[1]
+        # The plan says where the trains go (its section) and what the berth costs (the price that its own photo shows).
+        self.assertEqual((table["layout"], table["kicker"], table["headline"], table["photo"]), ("table", "Le train de nuit pour Chiang Mai", ["Départ de Bangkok"], "thailande-train-nuit"))
+        self.assertEqual(table["detail"], "*938 bahts* la couchette haute climatisée de 2e classe du train 9")
+        self.assertIn("938 bahts la couchette haute climatisée de 2e classe du train 9", [fact["excerpt"] for fact in table["facts"]])
+        self.assertEqual(lines[0], "🚆 938 bahts : la couchette haute climatisée de 2e classe du train 9 (≈ 25 €, tarif SRT de novembre 2026)")
+        # The caption says what the four times are: departures from Bangkok of the trains for Chiang Mai.
+        self.assertEqual(lines[1:3], ["📅 Le train de nuit pour Chiang Mai · Départ de Bangkok — N° 7 (autorail de jour) : 7 h 30", "📅 N° 9 (couchettes récentes) : 18 h 40"])
+        # A section whose title names nothing the photo shows ("Arriver", "En bref", "Le parcours") leaves the place above the table.
+        for title in ("Arriver", "En bref", "Le parcours"):
+            scenes, lines = reel_formats.build("tableau", {**article, "sections": [{**trains, "title": title}]}, figures(pairs), photos, [], "Phrase d’ouverture.", "Thaïlande", "Thaïlande",
+                                               "Guide Thaïlande · sources du 12/11/2026", ["La Thaïlande", "en 2 semaines"], read)
+            self.assertEqual((scenes[1]["kicker"], scenes[1]["photo"]), ("Thaïlande", "thailande-train-nuit"), title)
+            self.assertIn("📅 Départ de Bangkok — N° 7 (autorail de jour) : 7 h 30", lines)
+        self.assertEqual([scene["headline"][0].strip("*").replace(reel_formats.NBSP, " ") for scene in scenes[2:-1]], ["500 bahts", "330 bahts"])  # not said twice
+        # A price the table already gives in a row is not written under it again.
+        rows = dict(trains, table={"headers": ["Train", "2e classe"], "rows": [["N° 7 (autorail de jour)", "558 bahts"], ["N° 9 (couchettes récentes)", "938 bahts"], ["N° 13 (couchettes)", "768 bahts"]]})
+        priced = p.normalized("2e classe " + " ".join(row[0] + " " + row[1] for row in rows["table"]["rows"]))
+        scenes, _ = reel_formats.build("tableau", {**article, "sections": [rows]}, figures(pairs), photos, [], "Phrase d’ouverture.", "Thaïlande", "Thaïlande",
+                                       "Guide Thaïlande · sources du 12/11/2026", ["La Thaïlande", "en 2 semaines"], priced)
+        self.assertNotIn("detail", scenes[1])
+        # A price that another photo shows as well is not the table's own: it stays a plan of its own.
+        twin = photos[:2] + [("thailande-gare", {"commonsTitle": "File:Station.jpg"}, "Un train en gare de Bangkok.")] + photos[2:]
+        scenes, _ = reel_formats.build("tableau", article, figures(pairs), twin, [], "Phrase d’ouverture.", "Thaïlande", "Thaïlande",
+                                       "Guide Thaïlande · sources du 12/11/2026", ["La Thaïlande", "en 2 semaines"], read)
+        self.assertNotIn("detail", scenes[1])
+
+    def test_a_table_whose_first_column_repeats_names_its_rows_with_the_next_one(self):
+        # Review of 12/11/2026: "Alfa Pendular : Turística", "Alfa Pendular : Conforto" gave a table with no fare in it.
+        fares = {"title": "Alfa Pendular ou Intercidades : 7,65 € d’écart", "image": "train-oriente",
+                 "table": {"headers": ["Train", "Classe", "Aller simple 2026", "Durée type"],
+                           "rows": [["Alfa Pendular", "Turística", "35,70 €", "≈ 2 h 58"], ["Alfa Pendular", "Conforto", "49,90 €", "≈ 2 h 58"], ["Intercidades", "2e classe", "28,05 €", "≈ 3 h 23"]]}}
+        photos = [("train-alfa-pendular", {"commonsTitle": "File:Alfa.jpg", "emblematic": True}, "Un train Alfa Pendular de CP à quai."),
+                  ("train-oriente", {"commonsTitle": "File:Oriente.jpg"}, "Un Alfa Pendular sous les arbres de béton de la gare d’Oriente."),
+                  ("train-interieur", {"commonsTitle": "File:Alfa Pendular interior.jpg"}, "L’intérieur d’une voiture Alfa Pendular."),
+                  ("train-nord", {"commonsTitle": "File:Linha do Norte.jpg"}, "La ligne du Nord et ses caténaires."),
+                  ("train-campanha", {"commonsTitle": "File:Campanha.jpg", "emblematic": True}, "La façade de la gare de Porto-Campanhã.")]
+        pairs = [("35,70 €", "Alfa Pendular Lisbonne → Porto-Campanhã en Turística (49,90 € en Conforto)"), ("28,05 €", "Intercidades en 2e classe, pour environ 25 minutes de plus"),
+                 ("≈ 3 h", "de trajet en Alfa Pendular entre Santa Apolónia et Campanhã"), ("38,3 %", "des Alfa Pendular à l’heure sur la ligne du Nord en 2025")]
+        article = guide(slug="lisbonne-porto-train", country="portugal", cover="train-alfa-pendular", destination="Portugal", shortTitle="Lisbonne–Porto en train", sections=[fares])
+        table = fares["table"]
+        read = p.normalized(" ".join(table["headers"]) + " " + " ".join(" ".join(row) for row in table["rows"]))
+        self.assertEqual(reel_formats.table_of(article, read)["rows"], [["Alfa Pendular Turística", "35,70 €"], ["Alfa Pendular Conforto", "49,90 €"], ["Intercidades 2e classe", "28,05 €"]])
+        scenes, lines = reel_formats.build("tableau", article, figures(pairs), photos, [], "Phrase d’ouverture.", "Portugal", "Portugal",
+                                           "Guide Portugal · sources du 24/10/2026", ["Lisbonne–Porto", "en train"], read)
+        plan = scenes[1]
+        self.assertEqual((plan["headline"], plan["rows"][2]), (["Aller simple 2026"], ["Intercidades 2e classe", "28,05 €"]))
+        # The year in the heading is a number on screen: the plan quotes the heading, and it is not one more thing said.
+        self.assertIn("Aller simple 2026", [fact["excerpt"] for fact in plan["facts"]])
+        self.assertEqual(len(reel_formats.said_by(scenes[0], scenes[1:-1], "Phrase d’ouverture.")), 5)
+        # The fares the table gives get no plan of their own; the caption gives the table, then what the reel shows next.
+        self.assertEqual([scene["headline"][0].strip("*").replace(reel_formats.NBSP, " ") for scene in scenes[2:-1]], ["≈ 3 h", "38,3 %"])
+        self.assertEqual(lines[0], "📅 Alfa Pendular ou Intercidades · Aller simple 2026 — Alfa Pendular Turística : 35,70 €")
+        self.assertEqual(lines[3], "⏱️ ≈ 3 h de trajet en Alfa Pendular entre Santa Apolónia et Campanhã")
+        # The table is never laid over a photo that shows numbers of its own, even when it is the first one free.
+        display = ("train-afficheur", {"commonsTitle": "File:Display.jpg", "figures": True}, "L’afficheur d’une voiture : 220 km/h.")
+        scenes, _ = reel_formats.build("tableau", article, figures(pairs), [photos[0], display] + photos[1:], [], "Phrase d’ouverture.", "Portugal", "Portugal",
+                                       "Guide Portugal · sources du 24/10/2026", ["Lisbonne–Porto", "en train"], read)
+        self.assertNotEqual(scenes[1]["photo"], "train-afficheur")
+        self.assertEqual(scenes[1]["layout"], "table")
+        # A table that no leading columns can tell apart, or with nothing after them, is left alone.
+        twins = {**fares, "table": {"headers": ["Train", "Classe"], "rows": [["Alfa Pendular", "Turística"], ["Alfa Pendular", "Turística"], ["Intercidades", "2e classe"]]}}
+        self.assertIsNone(reel_formats.table_of({**article, "sections": [twins]}, read))
+
+    def test_the_first_caption_line_of_a_table_is_headed_only_by_a_heading_that_names_something(self):
+        rows = [["1 jour", "22 €"], ["2 jours", "34 €"]]
+        for header, first in (("Départ de Bangkok", "📅 Départ de Bangkok — 1 jour : 22 €"), ("Aller simple 2026", "📅 Aller simple 2026 — 1 jour : 22 €"),
+                              ("Jour A", "📅 1 jour : 22 €"), ("Étape", "📅 1 jour : 22 €"), ("Notre choix", "📅 1 jour : 22 €"), ("Prix", "📅 1 jour : 22 €")):
+            self.assertEqual(reel_formats.table_lines(header, rows), [first, "📅 2 jours : 34 €"], header)
+        # The name of the section, when the plan carries it, is part of what the heading names.
+        self.assertEqual(reel_formats.table_lines("Le train de nuit pour Chiang Mai · Prix", rows)[0], "📅 Le train de nuit pour Chiang Mai · Prix — 1 jour : 22 €")
+
+    def test_a_name_with_a_year_is_not_written_over_a_figure_of_another_year(self):
+        # Verification of 12/11/2026: "La ligne du Nord en 2026" stood over "38,3 % des Alfa Pendular à l'heure en 2025".
+        north = {"title": "La ligne du Nord en 2026 : prévoir de la marge"}
+        late = {"value": "38,3 %", "label": "des Alfa Pendular à l’heure (à 5 minutes près) en 2025", "short": "des Alfa Pendular à l’heure (à 5 minutes près) en 2025",
+                "shortExcerpt": "38,3 % des Alfa Pendular à l’heure (à 5 minutes près) en 2025", "excerpt": "38,3 % des Alfa Pendular à l’heure (à 5 minutes près) en 2025", "section": north}
+        media = lambda: reel_formats.Media([("train-interieur", {"commonsTitle": "File:Alfa Pendular interior.jpg"}, "L’intérieur d’une voiture Alfa Pendular."),
+                                            ("train-campanha", {"commonsTitle": "File:Campanha.jpg", "emblematic": True}, "La gare de Porto-Campanhã.")], [])
+        tag = "Guide Portugal · sources du 24/10/2026"
+        self.assertEqual(reel_formats.fact_plan(late, media(), "Portugal", tag)["kicker"], "Portugal")
+        # The same year, or no year on one side: the name of the section stays.
+        works = {**late, "label": "des Alfa Pendular à l’heure en 2026, travaux compris"}
+        self.assertEqual(reel_formats.fact_plan(works, media(), "Portugal", tag)["kicker"], "La ligne du Nord en 2026")
+        undated = {**late, "label": "des Alfa Pendular à l’heure, à 5 minutes près"}
+        self.assertEqual(reel_formats.fact_plan(undated, media(), "Portugal", tag)["kicker"], "La ligne du Nord en 2026")
+
+    def test_a_photo_post_whose_figures_all_belong_to_a_day_reads_day_after_day(self):
+        days = {number: {"title": f"Jour {number} — {name}"} for number, name in ((1, "La médina"), (2, "Le jardin Majorelle"), (3, "Sortir de la ville"))}
+        pairs = [("170 dh", "le jardin Majorelle en plein tarif", 2), ("100 dh", "l’entrée de la Bahia, des tombeaux saadiens ou d’El Badi", 1),
+                 ("3 h", "de car pour Essaouira : dès 100 dh chez Supratours", 3), ("150 km", "jusqu’aux cascades d’Ouzoud, soit 2 h 30 à 3 h de route", 3)]
+        photos = [self.MARRAKECH[0], self.MARRAKECH[1], self.MARRAKECH[2],
+                  ("marrakech-essaouira-port", {"commonsTitle": "File:Skala.jpg"}, "Des barques bleues au pied de la Skala du port, à Essaouira."),
+                  ("marrakech-ouzoud-cascades", {"commonsTitle": "File:Ouzoud.jpg"}, "Les cascades d’Ouzoud, dans le Moyen Atlas."),
+                  ("marrakech-koutoubia-bassin", {"commonsTitle": "File:Koutoubia.jpg", "emblematic": True}, "Le minaret de la Koutoubia, à Marrakech.")]
+        article = guide(slug="marrakech-3-jours", country="maroc", destination="Marrakech", shortTitle="Marrakech en 3 jours", sourcesCheckedOn="2026-11-12", sections=list(days.values()))
+        made = lambda chosen: a.scenes_for(article, a.Post("facebook", "carousel"), [{"value": value, "label": label, "excerpt": value + " " + label, "section": days.get(day)}
+                                                                                   for value, label, day in chosen], list(photos), "Phrase d’ouverture.", "Marrakech", "Maroc")
+        scenes = made(pairs)
+        self.assertEqual([(scene["kicker"], scene["headline"][0].strip("*"), scene["photo"]) for scene in scenes[1:-1]],
+                         [("Jour 1", "100 dh", "marrakech-bahia"), ("Jour 2", "170 dh", "marrakech-majorelle"),
+                          ("Jour 3", "3 h", "marrakech-essaouira-port"), ("Jour 3", "150 km", "marrakech-ouzoud-cascades")])
+        # One figure outside the days of the guide: the post keeps the order of the guide's figures.
+        loose = made(pairs[:3] + [("150 km", "jusqu’aux cascades d’Ouzoud, soit 2 h 30 à 3 h de route", None)])
+        self.assertEqual([scene["headline"][0].strip("*") for scene in loose[1:-1]], ["170 dh", "100 dh", "3 h", "150 km"])
 
     def test_a_file_found_by_the_search_never_opens_a_post(self):
         media = reel_formats.Media(list(self.MARRAKECH), [], reserve=2, cover="marrakech-place-jemaa-el-fna",
@@ -1375,6 +1579,21 @@ class RealGuideTests(unittest.TestCase):
                 self.assertEqual(redrawn(len(plans) - 1), stored(len(plans) - 1))
         if not compared:
             self.skipTest("this machine does not draw text as the one that rendered these reels")
+
+    def test_the_frame_never_slides_off_the_subject_of_a_panorama(self):
+        # Review of 12/11/2026: on the panorama of Tulum (2880 × 1328) the frame is a quarter of the photo wide, and a
+        # slide of 7 % of the photo carried the temple (0.59 to 0.70 of the width) out of it at the end of the plan.
+        size, focus = (2880, 1328), media_library.SITE_FOCUS["yucatan-tulum"]
+        closest = 1.0 + motion_render.ZOOM_RANGE + motion_render.PUNCH
+        for index in range(3):
+            for progress in (0.0, 0.25, 0.5, 0.75, 1.0):
+                slide = motion_render.drift_of(size, progress, index)
+                left, _, right, _ = motion_render.base.cover_box(size, motion_render.SIZE, closest, (focus[0] + slide, focus[1]))
+                self.assertTrue(left <= 0.59 * size[0] and 0.70 * size[0] <= right, (index, progress, left, right))
+            # An ordinary photo slides as it always did, and every plan still moves.
+            self.assertAlmostEqual(abs(motion_render.drift_of((3000, 2000), 1.0, index)), motion_render.DRIFT)
+            self.assertAlmostEqual(motion_render.drift_of(size, 0.0, index), -motion_render.drift_of(size, 1.0, index))
+            self.assertGreater(abs(motion_render.drift_of(size, 1.0, index)), 0.03)
 
     def test_a_panorama_as_high_as_the_frame_at_zoom_one_is_framed_inside_the_photo(self):
         # 2880 × 854: the rounding of the division put the top of the box a hair above the photo and stopped the render.

@@ -297,6 +297,69 @@
       "itemIds": [
         "vsd-production:tiktok:ig-yucatan-itineraire-10-jours-2026-11-20-2:photo-v1"
       ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-yucatan-itineraire-10-jours-2026-11-20-3-v1.json",
+      "fileSha256": "a615c6417b9363cab311d085a3f562835b7ee7ecef9330d04a2bb0e577ac00f4",
+      "batchId": "ig-yucatan-itineraire-10-jours-2026-11-20-3-v1",
+      "batchSha256": "14a3c57fc1b142a2a360498494ec308bb525d8a4d1c073dc984f6f911afdfada",
+      "itemIds": [
+        "vsd-production:instagram:ig-yucatan-itineraire-10-jours-2026-11-20-3:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-yucatan-itineraire-10-jours-2026-11-20-3-tiktok-v1.json",
+      "fileSha256": "cd850db607a55077312b20446b67a3333c325a71d5b29becc4dc3874d7e17dfb",
+      "batchId": "ig-yucatan-itineraire-10-jours-2026-11-20-3-tiktok-v1",
+      "batchSha256": "21ffe76cc414b1f62fc4040b0389cdd76a05c48e8c7fbc841779042a34e93f8c",
+      "itemIds": [
+        "vsd-production:tiktok:ig-yucatan-itineraire-10-jours-2026-11-20-3:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-thailande-itineraire-2-semaines-2026-12-02-2-v1.json",
+      "fileSha256": "422a37a94f85be05c52e674a08b63302d7594822a8d30694546ceba024dda09a",
+      "batchId": "ig-thailande-itineraire-2-semaines-2026-12-02-2-v1",
+      "batchSha256": "5d14c2c01588df6e7e3cafa6c7b92df0da2525c366b249183b59debb88a7ba1e",
+      "itemIds": [
+        "vsd-production:instagram:ig-thailande-itineraire-2-semaines-2026-12-02-2:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-thailande-itineraire-2-semaines-2026-12-02-2-tiktok-v1.json",
+      "fileSha256": "9e9396ac1caf4f2db0f0319422e22d6d37b3ebfd273cd7b034f3e77186437ddb",
+      "batchId": "ig-thailande-itineraire-2-semaines-2026-12-02-2-tiktok-v1",
+      "batchSha256": "bbf04f2271d071807e77d926a528db12767d849b20792afce69ee270ec5150b4",
+      "itemIds": [
+        "vsd-production:tiktok:ig-thailande-itineraire-2-semaines-2026-12-02-2:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/fb-marrakech-3-jours-2026-11-26-2-v1.json",
+      "fileSha256": "2029e689434053cf712770058680156e098ee2927762a2edb9295b8270629f7a",
+      "batchId": "fb-marrakech-3-jours-2026-11-26-2-v1",
+      "batchSha256": "a978ae309010d90364cca4ab6dfbc90291c0d749c77af8fabf74596fcb3fc1f0",
+      "itemIds": [
+        "vsd-production:facebook:fb-marrakech-3-jours-2026-11-26-2:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-lisbonne-porto-train-2026-11-18-v1.json",
+      "fileSha256": "1c361215ceb1f3c33a085fe6ed0d185b4930785f835a8394c32c3b196001a461",
+      "batchId": "ig-lisbonne-porto-train-2026-11-18-v1",
+      "batchSha256": "b29a6b2a91e4e7c1da730c72dd38909e793fbd7fe230e2d9ba7e96516717959a",
+      "itemIds": [
+        "vsd-production:instagram:ig-lisbonne-porto-train-2026-11-18:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-lisbonne-porto-train-2026-11-18-tiktok-v1.json",
+      "fileSha256": "027a853b484ca3cef1c11c56001e6079d5db4b34bb5829b9ac0fe2aa16c472d5",
+      "batchId": "ig-lisbonne-porto-train-2026-11-18-tiktok-v1",
+      "batchSha256": "d6f716ad4deb54cc6eb2c21219099379e79d892a65eba2a249bb90b80b5b3254",
+      "itemIds": [
+        "vsd-production:tiktok:ig-lisbonne-porto-train-2026-11-18:photo-v1"
+      ]
     }
   ],
   "retirements": [
@@ -359,6 +422,77 @@
       "reason": "too_little_content",
       "evidence": "Copie TikTok du reel Yucatán du 20/11/2026, retiré pour la même raison.",
       "replacedBy": "ig-yucatan-itineraire-10-jours-2026-11-20-2"
+    },
+    {
+      "batchId": "fb-marrakech-3-jours-2026-11-26-v1",
+      "batchSha256": "a4a7426ab4d074b189ec6376cbe10d41fd14575893d9a4d0d23acfaa5e5c9a4e",
+      "fileSha256": "984c97394ca296b33da7e2b5bd47d83fceea245d703e6a932a18cecf92c44185",
+      "itemIds": [
+        "vsd-production:facebook:fb-marrakech-3-jours-2026-11-26:photo-v1"
+      ],
+      "retiredAt": "2026-11-12T19:47:40Z",
+      "reason": "figure_no_longer_in_guide",
+      "evidence": "Relecture du 12/11/2026 : https://voyagesansdetour.fr/maroc/marrakech-3-jours/ ne donne plus 3 des 5 citations du post, chiffre compris. « 30 dh le bus 19 de l’aéroport à Jemaa el-Fna (50 dh l’aller-retour), toutes les 30 minutes de 7 h à 21 h 30 » (ne se lit plus : 50, 21) ; « 70 dh le prix attendu d’un petit taxi de l’aéroport à la médina ; une course à 400 dh a coûté leur licence à 46 chauffeurs » (ne se lit plus : 70, 400, 46) ; « 150 à 165 dh le jardin Majorelle selon les relevés 2023-2024, en billet daté vendu uniquement en ligne » (ne se lit plus : 165, 2023).",
+      "replacedBy": "fb-marrakech-3-jours-2026-11-26-2"
+    },
+    {
+      "batchId": "ig-thailande-itineraire-2-semaines-2026-12-02-v1",
+      "batchSha256": "6b05598d11ff61330590a91eb4541788b21e03ff24e33743df6970edb52602ba",
+      "fileSha256": "678f3beaa04d2ffd3adf0335700a842ccf69f13f220f4a14268c9a65bd09318a",
+      "itemIds": [
+        "vsd-production:instagram:ig-thailande-itineraire-2-semaines-2026-12-02:photo-v1"
+      ],
+      "retiredAt": "2026-11-12T19:47:40Z",
+      "reason": "figure_no_longer_in_guide",
+      "evidence": "Relecture du 12/11/2026 : https://voyagesansdetour.fr/thailande/thailande-itineraire-2-semaines/ ne donne plus 2 des 6 citations du post, chiffre compris. « 938 ฿ la couchette haute climatisée de 2e classe Bangkok–Chiang Mai (≈ 25 €, grille 2023) » (ne se lit plus : 2023) ; « 26 min de l’aéroport de Suvarnabhumi à Phaya Thai en Airport Rail Link, 45 bahts » (ne se lit plus : 26).",
+      "replacedBy": "ig-thailande-itineraire-2-semaines-2026-12-02-2"
+    },
+    {
+      "batchId": "ig-yucatan-itineraire-10-jours-2026-11-20-2-v1",
+      "batchSha256": "16813da58a706f9f807ad62ffa88b7bec346faef742a7b34079b55ff4639ba38",
+      "fileSha256": "11ed650bcfa68ec8e46ff72ac64412419ce7989952c4a3129ae01c397b4a6fed",
+      "itemIds": [
+        "vsd-production:instagram:ig-yucatan-itineraire-10-jours-2026-11-20-2:photo-v1"
+      ],
+      "retiredAt": "2026-11-12T19:47:40Z",
+      "reason": "figure_no_longer_in_guide",
+      "evidence": "Relecture du 12/11/2026 : https://voyagesansdetour.fr/mexique/yucatan-itineraire-10-jours/ ne donne plus 2 des 9 citations du post, chiffre compris. « 977,50 pesos le billet Mérida–Cancún aéroport en tarif touriste international » (ne se lit plus : 977,50) ; « 232 et 246 pesos Cancún–Playa del Carmen et Playa del Carmen–Tulum » (ne se lit plus : 232, 246).",
+      "replacedBy": "ig-yucatan-itineraire-10-jours-2026-11-20-3"
+    },
+    {
+      "batchId": "ig-yucatan-itineraire-10-jours-2026-11-20-2-tiktok-v1",
+      "batchSha256": "07f5a1da1759561f4b95c7cfe5b147f5ebf4c229b1e65053ed2f5bd480debc96",
+      "fileSha256": "a4410561668c1957bf62c2f20a4e65a1f8104c9baa59dce01c5ca0aca4237e0b",
+      "itemIds": [
+        "vsd-production:tiktok:ig-yucatan-itineraire-10-jours-2026-11-20-2:photo-v1"
+      ],
+      "retiredAt": "2026-11-12T19:47:40Z",
+      "reason": "figure_no_longer_in_guide",
+      "evidence": "Relecture du 12/11/2026 : https://voyagesansdetour.fr/mexique/yucatan-itineraire-10-jours/ ne donne plus 2 des 9 citations du post, chiffre compris. « 977,50 pesos le billet Mérida–Cancún aéroport en tarif touriste international » (ne se lit plus : 977,50) ; « 232 et 246 pesos Cancún–Playa del Carmen et Playa del Carmen–Tulum » (ne se lit plus : 232, 246).",
+      "replacedBy": "ig-yucatan-itineraire-10-jours-2026-11-20-3"
+    },
+    {
+      "batchId": "fb-belem-sans-voiture-2026-11-v1",
+      "batchSha256": "b32d1a864d80dd70c4a8cc4c404797e5e17e8378d66a06e9bb877572fe8d0934",
+      "fileSha256": "aef1b12a0f1d2baf5caccb8cc22129bfd3e5901cbbc999b9f0e4324462ad148c",
+      "itemIds": [
+        "vsd-production:facebook:fb-belem-sans-voiture-2026-11:photo-v1"
+      ],
+      "retiredAt": "2026-11-12T20:12:53Z",
+      "reason": "guide_contradicts_post",
+      "evidence": "Relecture du 12/11/2026 : aucune des 4 citations du post ne se lit plus dans https://voyagesansdetour.fr/portugal/lisbonne-3-jours-sans-voiture/. Le post conseille le tram 15E pour Belém ; le guide envoie désormais à Belém en train depuis Cais do Sodré (8 minutes) et prévient que le tram 15E est plein à toute heure. Retrait décidé à la main : la relecture quotidienne ne fait que signaler un post dont plus aucune citation n'est sur la page. Le créneau est rendu au générateur."
+    },
+    {
+      "batchId": "ig-lisbonne-porto-train-2026-11-v1",
+      "batchSha256": "d473c88febf923b78a2be0214f9d78fee3e04662f188f941863c07578709d0e3",
+      "fileSha256": "15cb76b12074398e820ae76eb29339af7f688641a33fb689c43ee00793242470",
+      "itemIds": [
+        "vsd-production:instagram:ig-lisbonne-porto-train-2026-11:photo-v1"
+      ],
+      "retiredAt": "2026-11-12T22:06:28Z",
+      "reason": "photos_of_another_place",
+      "evidence": "Relecture du 12/11/2026 : le plan 5 du reel écrit « Porto : descendez à Campanhã » sur la photo train-alfa-aqueduc, qui montre un Alfa Pendular en gare de Campolide, à Lisbonne (Wikimedia Commons, « CP AlfaPendular storming through Campolide railway station »). Ses plans 5 et 6 portent en outre « sources du 12/10/2026 » alors que le guide date ses relevés du 24/10/2026. Les chiffres de CP, eux, se lisent toujours mot pour mot le 12/11/2026 (10,50 €, −65 %, 60 jours, 15 min). Retrait décidé à la main (la relecture quotidienne ne compare que les chiffres) ; le post est refait au même créneau avec la gare de Porto-Campanhã à l’arrivée.",
+      "replacedBy": "ig-lisbonne-porto-train-2026-11-18"
     }
   ]
 }

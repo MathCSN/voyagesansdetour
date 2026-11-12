@@ -47,10 +47,25 @@ guide publié ──► rendu (production.py, reel_intake.py)
   pas encore envoyés passent « en attente » dans le registre et ne partent plus. Un post déjà programmé
   dans Buffer se supprime dans Buffer. Le panneau ne lit que `batchId` ; l'entrée garde aussi les
   empreintes du lot, la date, le motif (`photos_of_another_place`, `too_little_content`,
-  `duplicate_media_on_channel`) et, s'il est refait, `replacedBy`. Retirer aussi la copie TikTok
+  `duplicate_media_on_channel`, `figure_no_longer_in_guide`, `guide_contradicts_post`) et, s'il est refait, `replacedBy`. Retirer aussi la copie TikTok
   (`…-tiktok-v1`). Le générateur rend alors le créneau et le guide : le post refait prend
   l'identité suivie de `-2`. Les anciens garde-fous endormis du dépôt ne connaissent que le motif
   `duplicate_media_on_channel` : leurs jeux d'essai écartent les autres.
+- **Un guide corrigé retire ses posts en file** (depuis le 12/11/2026) : `vsd-render-content.yml`
+  lance `stale_lots.py --retire` avant de planifier. Chaque lot à venir est relu contre la page de son
+  guide publiée ce jour-là ; celui qui cite un chiffre que la page ne donne plus est retiré tout seul,
+  avec ses copies, et le générateur rend son créneau dans le même passage. Le résumé du passage liste
+  les lots retirés, ceux qui restent à traiter à la main (créneau à moins de 84 heures : le post est
+  peut-être déjà dans Buffer, où il faut le supprimer ; avertissement « Post en file périmé non
+  retiré ») et les citations seulement reformulées. Il liste aussi les lots dont un chiffre vient
+  d'une autre source que le site, avec la date de leur relevé : ceux-là ne sont pas relus par ce
+  passage (le 12/11/2026, `ig-lisbonne-porto-train-2026-11` : 10,50 €, −65 %, 60 jours et 15 min
+  pris sur cp.pt le 24/10, relus mot pour mot sur cp.pt le 12/11). Le 12/11/2026 la relecture a retiré quatre lots
+  (Yucatán et sa copie TikTok, Marrakech, Thaïlande) après la revérification de cinq guides.
+  Elle ne regarde que les chiffres : ce même lot Lisbonne–Porto a été retiré à la main le 12/11
+  (`photos_of_another_place` : « Porto : descendez à Campanhã » sur un Alfa Pendular en gare de
+  Campolide, à Lisbonne) et refait au même créneau, sans chiffre pris hors du site. Un ordinal ou
+  un numéro de ligne qui change (« 1er dimanche », « tram 15E ») est signalé, jamais retiré seul.
 - **Qui déclenche le moteur** (depuis le 11/11/2026) : le panneau lui-même, par la tâche planifiée du
   Worker (vsd-admin PR 4). À :22 il importe les lots relus encore programmables ; à :37 et :52 il
   programme les posts dus dans Buffer ; à :07 il relève les statistiques. Les passages planifiés de GitHub sont trop rares

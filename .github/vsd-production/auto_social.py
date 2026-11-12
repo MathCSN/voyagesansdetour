@@ -55,6 +55,7 @@ REVIEW_VALIDITY = dt.timedelta(days=30)
 REPOST_COOLDOWN = dt.timedelta(days=42)
 CROSS_CHANNEL_GAP = dt.timedelta(days=4)
 MAX_GUIDE_SOURCE_AGE = dt.timedelta(days=45)
+DAY_LABEL = re.compile(r"Jours? (\d+)")
 MAX_NEW_PER_RUN = 6                    # what one workflow run renders
 CAPTION_MAX = 1000                     # a short, lively caption: past this, detail lines are dropped (never under three)
 TITLE_WIDTHS = (34, 24, 18)            # characters per headline line, tried in turn until the layout fits
@@ -226,8 +227,25 @@ def significant(value: str) -> set[str]:
     return {w for w in re.findall(r"[\wÀ-ÿ]{5,}", destinations.ascii_fold(value).lower())}
 
 
+def whole_figure(value: str, text: str) -> bool:
+    """The figure read whole in this text: "4 pesos" is not in "604 pesos", "604 pesos" not in "1 604 pesos", nor "30 min"
+    in "30 minutes"."""
+    return re.search(r"(?<![\w,.])(?<!\d\s)" + re.escape(p.normalized(value)) + r"(?!\w)", text) is not None
+
+
+# Sections that sum the guide up: they give many figures and are about none of them.
+SUMMARY = re.compile(r"\b(?:comparatif|en bref|avant tout|coup d.oeil|recapitulatif|resume|essentiel|a retenir)\b")
+
+
 def section_of(value: str, label: str, sections: list[dict]) -> dict | None:
-    """The section that talks about this figure: most words shared with its label, the figure itself as a tie-break."""
+    """The section that talks about this figure: the only one that gives the figure itself when there is just one
+    ("604 pesos" is read under "Jours 4-6 : Mérida et Uxmal", nowhere else), unless it only sums the guide up ("Le
+    comparatif en un coup d'œil", "Avant tout": the time from the airport to Rossio belongs to "Baixa et Chiado");
+    otherwise the one that shares the most words with its label, the figure itself as a tie-break."""
+    holders = [section for section in sections if whole_figure(value, section_text(section))]
+    title = destinations.ascii_fold(re.sub(r"[’']", " ", holders[0].get("title", "").replace("œ", "oe"))).lower() if holders else ""
+    if len(holders) == 1 and not SUMMARY.search(title):
+        return holders[0]
     words, best, best_score = significant(label), None, 0
     for section in sections:
         text = section_text(section)
@@ -423,6 +441,10 @@ def scenes_for(article: dict, channel: Post, facts: list[dict], photos: list[tup
     if len(pictures) + 2 < channel.scenes[0]:
         raise Held("not_enough_figures_with_their_photo")
     facts = [offered[index] for index in sorted(pictures)]
+    # When every figure belongs to a day of the guide, the post reads day after day (Jour 1, Jour 2, Jour 3).
+    days = [DAY_LABEL.match(kicker_of(fact["section"], place)) for fact in facts]
+    if facts and all(days):
+        facts = [fact for _, _, fact in sorted(zip((int(day[1]) for day in days), range(len(facts)), facts))]
     pictures = {offered[index]["value"]: picture for index, picture in pictures.items()}
     # The guide's cover opens the post, unless a figure names what it shows: then the next photo of the guide does.
     opening_picture = media.opening(media.cover)
@@ -527,10 +549,13 @@ def build(root: Path, article: dict, channel: Post, slot: dt.datetime, now: dt.d
 
 
 def fitted_caption(scenario: dict, clips: dict) -> dict:
-    """The scenario with its written caption within CAPTION_MAX: detail lines are dropped from the end, never under three."""
-    lines = scenario["caption"]["lines"]
-    for count in range(len(lines), p.CAPTION_LINES[0] - 1, -1):
-        candidate = scenario if count == len(lines) else {**scenario, "caption": {**scenario["caption"], "lines": lines[:count]}}
+    """The scenario with its written caption within CAPTION_MAX. A caption too long first says each line shorter
+    (the stages of an itinerary, as their plans show them), then drops detail lines from the end, never under three."""
+    if len(p.caption(scenario, {"clips": clips})) <= CAPTION_MAX:
+        return scenario
+    shorter = [str(getattr(line, "short", line)) for line in scenario["caption"]["lines"]]
+    for count in range(len(shorter), p.CAPTION_LINES[0] - 1, -1):
+        candidate = {**scenario, "caption": {**scenario["caption"], "lines": shorter[:count]}}
         if len(p.caption(candidate, {"clips": clips})) <= CAPTION_MAX:
             return candidate
     raise Held("caption_too_long")
