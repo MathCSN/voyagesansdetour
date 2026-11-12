@@ -132,6 +132,24 @@
       "notBefore": "2026-11-12T14:07:10Z",
       "file": "scenarios/ig-yucatan-itineraire-10-jours-2026-11-20-2.json",
       "sha256": "6999717cf2c29d737ccac377110f183538c2f405860db582394a0a8f13ba26f3"
+    },
+    {
+      "contentId": "fb-marrakech-3-jours-2026-11-26-2",
+      "notBefore": "2026-11-12T19:57:40Z",
+      "file": "scenarios/fb-marrakech-3-jours-2026-11-26-2.json",
+      "sha256": "6abeb357df5580dccb667e7f79ad0782c91f39cbf153fd049fdf21d13262dc80"
+    },
+    {
+      "contentId": "ig-yucatan-itineraire-10-jours-2026-11-20-3",
+      "notBefore": "2026-11-12T19:57:40Z",
+      "file": "scenarios/ig-yucatan-itineraire-10-jours-2026-11-20-3.json",
+      "sha256": "64f7dda960def9c98fdcf5f8bd67958d434ce807831146d6b94bafd51d7db2bc"
+    },
+    {
+      "contentId": "ig-thailande-itineraire-2-semaines-2026-12-02-2",
+      "notBefore": "2026-11-12T20:01:53Z",
+      "file": "scenarios/ig-thailande-itineraire-2-semaines-2026-12-02-2.json",
+      "sha256": "d634875a7a58e6b4dd1b6b4f03ef363d68657f965d5470c946eea6ea3c82650b"
     }
   ]
 }

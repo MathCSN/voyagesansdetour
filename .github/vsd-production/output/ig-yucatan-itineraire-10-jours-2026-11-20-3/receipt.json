@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "contentId": "ig-yucatan-itineraire-10-jours-2026-11-20-3",
+  "status": "rendered_not_published",
+  "fingerprint": "63330057d923b6326f642a5d9e3ddf2bb631cfc797da095007454ba81ea9b8f6",
+  "createdAt": "2026-11-12T20:00:24.105001Z",
+  "renderFinishedAt": "2026-11-12T20:00:40.244450Z",
+  "rendererContractVersion": 4,
+  "rendererSha256": "53771f8977e744f7e898c21c13d02cd1f80ec9d9fcff06e28a9c095db57efd0a",
+  "drawingSha256": "b78990f497d03baf754e3b2b68a795a5e9d3b91a0b6a2f8dad2ebcd7fec2907c",
+  "motionSha256": "dd5608c3447e18a918c28e38fa6d664a31f4417591c1bbc60d7c07f269b40924",
+  "format": "itineraire",
+  "kind": "reel",
+  "channel": "instagram",
+  "publishAt": "2026-11-20T17:00:00Z",
+  "reviewValidUntil": "2026-12-12T19:57:40Z",
+  "sourceCheckedOn": "2026-11-12",
+  "targetUrl": "https://voyagesansdetour.fr/mexique/yucatan-itineraire-10-jours/",
+  "voice": null,
+  "presenter": null,
+  "sourceUrls": [
+    "https://voyagesansdetour.fr/mexique/yucatan-itineraire-10-jours/"
+  ],
+  "photos": {
+    "yucatan-cenote": {
+      "licence": "CC BY 2.0",
+      "author": "Shinya Suzuki",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Cenote_Ik_Kil,_Yucatan,_Dec_2011_-_06.jpg"
+    },
+    "yucatan-valladolid-calzada": {
+      "licence": "CC BY-SA 4.0",
+      "author": "DaLoetz",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Valladolid_(Yucatan)_Calzada_de_los_Frailes.jpg"
+    },
+    "yucatan-chichen-itza": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Diego Delso",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Templo_el_Castillo_-_Chichen_Itza-Yucatan-Mexico0222.jpg"
+    },
+    "yucatan-tulum": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Martin Falbisoner",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tulum_-_God_of_the_Winds_Temple_04.JPG"
+    },
+    "yucatan-uxmal-pyramide": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Ulrich Dus",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Archaeological_and_Cultural_Heritage_-_Pir%C3%A1mide_del_Adivino,_Uxmal,_Mexico.jpg"
+    }
+  },
+  "clips": {},
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "durationSeconds": 15.0,
+    "videoCodec": "h264",
+    "pixelFormat": "yuv420p",
+    "videoBitrateBps": 2955423,
+    "audioCodec": "aac",
+    "audioSampleRate": 48000,
+    "audioBitrateBps": 96333,
+    "fullDecodePassed": true,
+    "loudness": {
+      "integratedLufs": -16.1,
+      "truePeakDbfs": -1.3
+    }
+  },
+  "files": [
+    {
+      "file": "apercu.jpg",
+      "sha256": "34aefed226cb0408f484aedc1946e34b24f856f10502e2a7013cce103896563b",
+      "bytes": 209229
+    },
+    {
+      "file": "credits.txt",
+      "sha256": "51ec138cb1991247e36caba6bf0666e41f039429bb6558d72c71e616ffc230b9",
+      "bytes": 2731
+    },
+    {
+      "file": "dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "file": "encode.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "legende.txt",
+      "sha256": "d4c38b93f9d09264f49b417544d726b3d7bf24088c9a14772387a0875b582e7a",
+      "bytes": 966
+    },
+    {
+      "file": "notosans-OFL.txt",
+      "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a",
+      "bytes": 4396
+    },
+    {
+      "file": "playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    },
+    {
+      "file": "poster.jpg",
+      "sha256": "f268c26923e5730002c38e47c9a6318b47fdf4a9f335ffb7e8bdc8630b607f5a",
+      "bytes": 435457
+    },
+    {
+      "file": "reel.mp4",
+      "sha256": "193a0e93274c4cc13a316d0585cf007d6ca9122a6cf1df65389198a3406210b2",
+      "bytes": 5740218
+    },
+    {
+      "file": "scenario.json",
+      "sha256": "64f7dda960def9c98fdcf5f8bd67958d434ce807831146d6b94bafd51d7db2bc",
+      "bytes": 7428
+    },
+    {
+      "file": "scene-01.jpg",
+      "sha256": "59eaa80f1f526f5be565f3b9b743cfd1c0b0e89670ad039402d5bec59dbb90a2",
+      "bytes": 400795
+    },
+    {
+      "file": "scene-02.jpg",
+      "sha256": "a492af233c47926e0819728f9001d229a6f99f470e3cca5be90ed08b0b82296e",
+      "bytes": 322586
+    },
+    {
+      "file": "scene-03.jpg",
+      "sha256": "1061aab3bc234a96aa5bc00f35cf59a85db3887aa3113dd3f5a875a60333263b",
+      "bytes": 419088
+    },
+    {
+      "file": "scene-04.jpg",
+      "sha256": "abfb8ab10a5cc74e1f613a245c0fd566a2ffae725e910595b379fbcf9f7dac11",
+      "bytes": 310618
+    },
+    {
+      "file": "scene-05.jpg",
+      "sha256": "1a83083e8acbbfb7e9a2a9c0ac1f1e27768888f91e2986384a30f2928ec23d47",
+      "bytes": 437564
+    }
+  ],
+  "runtime": {
+    "wallSeconds": 15.983,
+    "encoderThreads": 2,
+    "pillowVersion": "11.3.0",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers"
+  },
+  "publication": {
+    "uploaded": false,
+    "scheduled": false,
+    "published": false,
+    "readyForAutomaticImport": false
+  },
+  "cost": {
+    "newPaidService": false,
+    "providerCalls": 0,
+    "monetarySpendEur": 0
+  }
+}

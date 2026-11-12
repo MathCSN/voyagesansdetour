@@ -1,0 +1,204 @@
+{
+  "schemaVersion": 2,
+  "id": "fb-marrakech-3-jours-2026-11-26-2",
+  "kind": "carousel",
+  "channel": "facebook",
+  "destination": "Marrakech",
+  "title": "Marrakech en 3 jours : 4 repères",
+  "targetUrl": "https://voyagesansdetour.fr/maroc/marrakech-3-jours/",
+  "publishAt": "2026-11-26T17:00:00Z",
+  "review": {
+    "status": "reviewed_for_render",
+    "checkedAt": "2026-11-12T19:57:40Z",
+    "validUntil": "2026-12-12T19:57:40Z",
+    "method": "Généré automatiquement (auto_social.py) depuis la page publiée du guide relevée le 12/11/2026 : chaque chiffre est cité mot pour mot ; photos réelles sous licence libre (Wikimedia Commons), aucune image générée par IA ; garde-fous de production.py passés avant la mise en file."
+  },
+  "sources": {
+    "file": "auto/fb-marrakech-3-jours-2026-11-26-2/sources.json",
+    "sha256": "8a213cf6266b7c0f13ccecd0bea7e62184edfe89e7dffd40ae3f90545716d10c"
+  },
+  "photos": {
+    "file": "auto/fb-marrakech-3-jours-2026-11-26-2/photos.json",
+    "sha256": "c70b6de6021c9321ae78f4a88e49088a69dee88fcbf1d78bc559894e7490176e"
+  },
+  "caption": {
+    "hook": "🗺️ Marrakech en 3 jours : médina, Majorelle, palais et une escapade, sans se faire plumer",
+    "lines": [
+      "📍 170 dh : le jardin Majorelle en plein tarif, billet daté vendu uniquement en ligne (330 dh avec les deux musées)",
+      "📍 100 dh : l’entrée de la Bahia, des tombeaux saadiens ou d’El Badi pour un adulte étranger, de 9 h à 17 h",
+      "⏱️ 3 h de car pour Essaouira : dès 100 dh chez Supratours (7 départs par jour), dès 105 dh chez CTM",
+      "📍 150 km jusqu’aux cascades d’Ouzoud, soit 2 h 30 à 3 h de route ; la vallée de l’Ourika est à environ 60 km"
+    ],
+    "cta": "🔗 Tous les prix, horaires et l’itinéraire dans le guide complet :",
+    "hashtags": [
+      "#Marrakech",
+      "#Maroc",
+      "#VoyageMaroc",
+      "#Itineraire",
+      "#VoyageSansDetour"
+    ]
+  },
+  "scenes": [
+    {
+      "photo": "marrakech-place-jemaa-el-fna",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Maroc · Marrakech",
+      "headline": [
+        "Marrakech en 3 jours",
+        "*4 chiffres* à connaître"
+      ],
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "Trois jours suffisent pour voir l’essentiel de Marrakech : la médina et ses souks, le jardin Majorelle, les palais de la Bahia et d’El Badi, puis une journée dans l’Atlas ou à Essaouira."
+        }
+      ],
+      "tag": "Guide Marrakech · sources du 12/11/2026",
+      "alt": "La place Jemaa el-Fna en fin de journée, entre parasols verts et étals, au cœur de la médina de Marrakech."
+    },
+    {
+      "photo": "marrakech-majorelle",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Jour 2",
+      "headline": [
+        "*170 dh*"
+      ],
+      "detail": "le jardin Majorelle en plein tarif, billet daté vendu uniquement en ligne (330 dh avec les deux musées)",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "170 dh le jardin Majorelle en plein tarif, billet daté vendu uniquement en ligne (330 dh avec les deux musées)"
+        }
+      ],
+      "tag": "Guide Marrakech · sources du 12/11/2026",
+      "alt": "La villa bleue du jardin Majorelle."
+    },
+    {
+      "photo": "marrakech-bahia",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Jour 1",
+      "headline": [
+        "*100 dh*"
+      ],
+      "detail": "l’entrée de la Bahia, des tombeaux saadiens ou d’El Badi pour un adulte étranger, de 9 h à 17 h",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "100 dh l’entrée de la Bahia, des tombeaux saadiens ou d’El Badi pour un adulte étranger, de 9 h à 17 h"
+        }
+      ],
+      "tag": "Guide Marrakech · sources du 12/11/2026",
+      "alt": "La grande cour carrelée de zelliges du palais de la Bahia, à Marrakech."
+    },
+    {
+      "photo": "marrakech-essaouira-port",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Jour 3",
+      "headline": [
+        "*3 h*"
+      ],
+      "detail": "de car pour Essaouira : dès 100 dh chez Supratours (7 départs par jour), dès 105 dh chez CTM",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "3 h de car pour Essaouira : dès 100 dh chez Supratours (7 départs par jour), dès 105 dh chez CTM"
+        }
+      ],
+      "tag": "Guide Marrakech · sources du 12/11/2026",
+      "alt": "Des barques bleues au pied de la Skala du port, à Essaouira."
+    },
+    {
+      "photo": "marrakech-ouzoud-cascades",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Jour 3",
+      "headline": [
+        "*150 km*"
+      ],
+      "detail": "jusqu’aux cascades d’Ouzoud, soit 2 h 30 à 3 h de route ; la vallée de l’Ourika est à environ 60 km",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "150 km jusqu’aux cascades d’Ouzoud, soit 2 h 30 à 3 h de route ; la vallée de l’Ourika est à environ 60 km"
+        }
+      ],
+      "tag": "Guide Marrakech · sources du 12/11/2026",
+      "alt": "Les cascades d’Ouzoud, dans le Moyen Atlas."
+    },
+    {
+      "photo": "marrakech-koutoubia-bassin",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Le guide complet",
+      "headline": [
+        "Marrakech en 3 jours"
+      ],
+      "detail": "Trois jours à Marrakech, entrées relevées en novembre 2026.",
+      "alt": "Le minaret de la Koutoubia se reflète dans un bassin de ses jardins, à Marrakech.",
+      "cta": true
+    }
+  ],
+  "assets": {
+    "regular": {
+      "file": "assets/dmsans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9"
+    },
+    "bold": {
+      "file": "assets/dmsans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211"
+    },
+    "serif": {
+      "file": "assets/playfair.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+      },
+      "sha256": "adefc53e7b3d483f1fa5e85edd82b7689ca79db25a1f6786bd7949cdcfeec601"
+    },
+    "fallbackRegular": {
+      "file": "assets/notosans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "478c558ea716033cd60c03438f628dfa75694dcf6b5f6d505a2f05fd2b4f3823"
+    },
+    "fallbackBold": {
+      "file": "assets/notosans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "1df075a380fc7cb898acf64c1f7b3b4dd780de3caa860178bf929de35817a913"
+    }
+  }
+}

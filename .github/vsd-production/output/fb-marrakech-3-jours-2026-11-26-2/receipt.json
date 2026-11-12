@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 1,
+  "contentId": "fb-marrakech-3-jours-2026-11-26-2",
+  "status": "rendered_not_published",
+  "fingerprint": "8879cb7148da01ef022505870ac3bd692637569d279a0509cde1d3a1f0831893",
+  "createdAt": "2026-11-12T20:00:22.778326Z",
+  "renderFinishedAt": "2026-11-12T20:00:23.986899Z",
+  "rendererContractVersion": 3,
+  "rendererSha256": "53771f8977e744f7e898c21c13d02cd1f80ec9d9fcff06e28a9c095db57efd0a",
+  "drawingSha256": "b78990f497d03baf754e3b2b68a795a5e9d3b91a0b6a2f8dad2ebcd7fec2907c",
+  "motionSha256": "dd5608c3447e18a918c28e38fa6d664a31f4417591c1bbc60d7c07f269b40924",
+  "format": null,
+  "kind": "carousel",
+  "channel": "facebook",
+  "publishAt": "2026-11-26T17:00:00Z",
+  "reviewValidUntil": "2026-12-12T19:57:40Z",
+  "sourceCheckedOn": "2026-11-12",
+  "targetUrl": "https://voyagesansdetour.fr/maroc/marrakech-3-jours/",
+  "voice": null,
+  "presenter": null,
+  "sourceUrls": [
+    "https://voyagesansdetour.fr/maroc/marrakech-3-jours/"
+  ],
+  "photos": {
+    "marrakech-place-jemaa-el-fna": {
+      "licence": "CC BY 4.0",
+      "author": "Jakub Hałun",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Jamaa_El_Fna,_Marrakesh,_Morocco,_20250124_1804_7017.jpg"
+    },
+    "marrakech-majorelle": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Viault",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Le_jardin_des_majorelle_16.JPG"
+    },
+    "marrakech-bahia": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Val Traveler",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Bahia_Palace_large_court.jpg"
+    },
+    "marrakech-essaouira-port": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Souad EL OUAFI",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Bateaux_%C3%A0_quai_dans_la_Skala_du_port_Essaouira.jpg"
+    },
+    "marrakech-ouzoud-cascades": {
+      "licence": "CC BY 4.0",
+      "author": "Jakub Hałun",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Ouzoud_Falls,_Morocco,_20250126_1354_7463.jpg"
+    },
+    "marrakech-koutoubia-bassin": {
+      "licence": "CC BY 4.0",
+      "author": "Jakub Hałun",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Kutubiyya_Mosque,_Marrakesh,_Morocco,_20250124_1838_7030.jpg"
+    }
+  },
+  "clips": {},
+  "video": null,
+  "files": [
+    {
+      "file": "apercu.jpg",
+      "sha256": "a7f4fc8e8db7ac5ad325475809a3a99433a7645396fb25b6368cbad2c97776e7",
+      "bytes": 188774
+    },
+    {
+      "file": "credits.txt",
+      "sha256": "92310a09d0c0872061898230e6e954ac05a5630b8f50500b0db4a2129473f759",
+      "bytes": 2580
+    },
+    {
+      "file": "dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "file": "legende.txt",
+      "sha256": "c31c5f5fd428b5f8ac26c1a12ba8e0816c701da5ebe76beb0cd5e0e87abeb34f",
+      "bytes": 898
+    },
+    {
+      "file": "notosans-OFL.txt",
+      "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a",
+      "bytes": 4396
+    },
+    {
+      "file": "playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    },
+    {
+      "file": "scenario.json",
+      "sha256": "6abeb357df5580dccb667e7f79ad0782c91f39cbf153fd049fdf21d13262dc80",
+      "bytes": 7353
+    },
+    {
+      "file": "scene-01.jpg",
+      "sha256": "ba00b243cc79b2b3be393cb99effe064ed009b2eb409571600da67287bd3b958",
+      "bytes": 250116
+    },
+    {
+      "file": "scene-02.jpg",
+      "sha256": "91781a2d38b2607f2d15b5a975189f4e18edc0fc3919cf172217e35eaa78f5ce",
+      "bytes": 300936
+    },
+    {
+      "file": "scene-03.jpg",
+      "sha256": "74a1e4913f6b54a3d378c556df66bd2cf8a66f390a6a7025bcb8b104fa835249",
+      "bytes": 328368
+    },
+    {
+      "file": "scene-04.jpg",
+      "sha256": "54387f5ad9873bca5503b6347f442f7eadaf77825f575cbed151c6452e4138f5",
+      "bytes": 186676
+    },
+    {
+      "file": "scene-05.jpg",
+      "sha256": "e002d2f4b60c9ed1a37b58084392b27cd316bd189d8199819d8bbbcc58123602",
+      "bytes": 417174
+    },
+    {
+      "file": "scene-06.jpg",
+      "sha256": "526551f21d9cfb05ff49ec1c70559201e09013d5da3a3e50dd396872bdb35640",
+      "bytes": 367142
+    }
+  ],
+  "runtime": {
+    "wallSeconds": 0.823,
+    "encoderThreads": 2,
+    "pillowVersion": "11.3.0",
+    "ffmpegVersion": null
+  },
+  "publication": {
+    "uploaded": false,
+    "scheduled": false,
+    "published": false,
+    "readyForAutomaticImport": false
+  },
+  "cost": {
+    "newPaidService": false,
+    "providerCalls": 0,
+    "monetarySpendEur": 0
+  }
+}

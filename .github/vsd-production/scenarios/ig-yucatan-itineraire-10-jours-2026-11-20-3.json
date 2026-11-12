@@ -1,0 +1,220 @@
+{
+  "schemaVersion": 3,
+  "id": "ig-yucatan-itineraire-10-jours-2026-11-20-3",
+  "kind": "reel",
+  "channel": "instagram",
+  "format": "itineraire",
+  "destination": "Yucatán",
+  "title": "Yucatán en 10 jours : les étapes clés",
+  "targetUrl": "https://voyagesansdetour.fr/mexique/yucatan-itineraire-10-jours/",
+  "publishAt": "2026-11-20T17:00:00Z",
+  "review": {
+    "status": "reviewed_for_render",
+    "checkedAt": "2026-11-12T19:57:40Z",
+    "validUntil": "2026-12-12T19:57:40Z",
+    "method": "Généré automatiquement (auto_social.py) depuis la page publiée du guide relevée le 12/11/2026 : chaque chiffre, étape ou ligne de tableau est cité mot pour mot ; photos et vidéos réelles sous licence libre, aucune image ni vidéo générée par IA ; garde-fous de production.py passés avant la mise en file."
+  },
+  "sources": {
+    "file": "auto/ig-yucatan-itineraire-10-jours-2026-11-20-3/sources.json",
+    "sha256": "092696c2d99289a6fe1da35d850fba6eda2e17160f3a3c2f27c7c4807789cba8"
+  },
+  "photos": {
+    "file": "auto/ig-yucatan-itineraire-10-jours-2026-11-20-3/photos.json",
+    "sha256": "ea85e6639ae1ce5f2d8844317658a7fab92c562a635588344b9756cb53b6c7c8"
+  },
+  "caption": {
+    "hook": "🗺️ Yucatán en 10 jours : Valladolid, Chichén Itzá, Mérida et Tulum, avec le Tren Maya",
+    "lines": [
+      "📍 Jours 1-2 : Valladolid · 1 h 43 de l’aéroport de Cancún à Valladolid en Tren Maya, 6 départs par jour, dès 539 pesos en tarif international",
+      "📍 Jour 3 : Chichén Itzá à l’ouverture · 697 pesos l’entrée de Chichén Itzá pour un étranger (105 pesos INAH + 592 pesos de l’État), de 8 h à 16 h",
+      "📍 Jour 7 : Mérida–Tulum en train direct · 5 h 16 le train direct Mérida Teya → Tulum de 7 h, arrivée 13 h 16 : 1 389,50 pesos en tarif touriste international"
+    ],
+    "cta": "📌 Enregistrez ce reel pour votre voyage. 🔗 Prix, horaires et détails : le guide complet est en lien dans la bio.",
+    "hashtags": [
+      "#Yucatan",
+      "#Mexique",
+      "#VoyageMexique",
+      "#Itineraire",
+      "#VoyageSansDetour"
+    ]
+  },
+  "scenes": [
+    {
+      "photo": "yucatan-cenote",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "hook",
+      "kicker": "Mexique · Yucatán",
+      "headline": [
+        "Yucatán en",
+        "10 jours",
+        "*3 étapes clés*"
+      ],
+      "seconds": 2.2,
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "Dix jours suffisent pour boucler le Yucatán : Valladolid et ses cenotes, Chichén Itzá, Mérida et Uxmal, puis Tulum sur la côte caraïbe."
+        }
+      ],
+      "tag": "Guide Yucatán · sources du 12/11/2026"
+    },
+    {
+      "photo": "yucatan-valladolid-calzada",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "fact",
+      "kicker": "Jours 1-2",
+      "headline": [
+        "Valladolid"
+      ],
+      "seconds": 3.5,
+      "detail": "*1 h 43* de l’aéroport de Cancún à Valladolid en Tren Maya",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "Jours 1-2 : Valladolid, la base de l’intérieur"
+        },
+        {
+          "source": "guide",
+          "excerpt": "1 h 43 de l’aéroport de Cancún à Valladolid en Tren Maya"
+        }
+      ],
+      "tag": "Guide Yucatán · sources du 12/11/2026"
+    },
+    {
+      "photo": "yucatan-chichen-itza",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "fact",
+      "kicker": "Jour 3",
+      "headline": [
+        "Chichén Itzá",
+        "à l’ouverture"
+      ],
+      "seconds": 3.3,
+      "detail": "*697 pesos* l’entrée de Chichén Itzá pour un étranger",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "Jour 3 : Chichén Itzá à l’ouverture, Ik Kil l’après-midi"
+        },
+        {
+          "source": "guide",
+          "excerpt": "697 pesos l’entrée de Chichén Itzá pour un étranger"
+        }
+      ],
+      "tag": "Guide Yucatán · sources du 12/11/2026"
+    },
+    {
+      "photo": "yucatan-tulum",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "fact",
+      "kicker": "Jour 7",
+      "headline": [
+        "Mérida–Tulum en",
+        "train direct"
+      ],
+      "seconds": 3.6,
+      "detail": "*5 h 16* le train direct Mérida Teya → Tulum de 7 h, arrivée 13 h 16",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "Jour 7 : Mérida–Tulum en train direct"
+        },
+        {
+          "source": "guide",
+          "excerpt": "5 h 16 le train direct Mérida Teya → Tulum de 7 h, arrivée 13 h 16"
+        }
+      ],
+      "tag": "Guide Yucatán · sources du 12/11/2026"
+    },
+    {
+      "photo": "yucatan-uxmal-pyramide",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "cta",
+      "kicker": "Le guide complet",
+      "headline": [
+        "Yucatán en",
+        "10 jours"
+      ],
+      "seconds": 2.4,
+      "note": "Enregistrez cette vidéo pour votre voyage",
+      "button": "voyagesansdetour.fr"
+    }
+  ],
+  "musicStart": 8,
+  "assets": {
+    "regular": {
+      "file": "assets/dmsans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9"
+    },
+    "bold": {
+      "file": "assets/dmsans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211"
+    },
+    "serif": {
+      "file": "assets/playfair.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+      },
+      "sha256": "adefc53e7b3d483f1fa5e85edd82b7689ca79db25a1f6786bd7949cdcfeec601"
+    },
+    "fallbackRegular": {
+      "file": "assets/notosans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "478c558ea716033cd60c03438f628dfa75694dcf6b5f6d505a2f05fd2b4f3823"
+    },
+    "fallbackBold": {
+      "file": "assets/notosans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "1df075a380fc7cb898acf64c1f7b3b4dd780de3caa860178bf929de35817a913"
+    },
+    "music": {
+      "file": "assets/happy-alley.mp3",
+      "sha256": "f598c8ee624f1db9a2cd38886524a40baff4ce730dcf999c0763791268fa8265",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "commercialUseAllowed": true,
+      "title": "Happy Alley",
+      "author": "Kevin MacLeod",
+      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100482",
+      "provenance": {
+        "file": "evidence/happy-alley-provenance.json",
+        "sha256": "5a2ba8f3dba28b0a748b00089d3854db1fde92213429823746f6d01805f904ac"
+      }
+    }
+  }
+}

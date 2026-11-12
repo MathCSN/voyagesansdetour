@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "contentId": "ig-thailande-itineraire-2-semaines-2026-12-02-2",
+  "status": "rendered_not_published",
+  "fingerprint": "d68e16b0968a7fa81e610f71bf1d64ff2474ad779a39ade03e15c65abc21944c",
+  "createdAt": "2026-11-12T20:01:56.482544Z",
+  "renderFinishedAt": "2026-11-12T20:02:14.838054Z",
+  "rendererContractVersion": 4,
+  "rendererSha256": "53771f8977e744f7e898c21c13d02cd1f80ec9d9fcff06e28a9c095db57efd0a",
+  "drawingSha256": "b78990f497d03baf754e3b2b68a795a5e9d3b91a0b6a2f8dad2ebcd7fec2907c",
+  "motionSha256": "dd5608c3447e18a918c28e38fa6d664a31f4417591c1bbc60d7c07f269b40924",
+  "format": "tableau",
+  "kind": "reel",
+  "channel": "instagram",
+  "publishAt": "2026-12-02T17:00:00Z",
+  "reviewValidUntil": "2026-12-12T20:01:53Z",
+  "sourceCheckedOn": "2026-11-12",
+  "targetUrl": "https://voyagesansdetour.fr/thailande/thailande-itineraire-2-semaines/",
+  "voice": null,
+  "presenter": null,
+  "sourceUrls": [
+    "https://voyagesansdetour.fr/thailande/thailande-itineraire-2-semaines/"
+  ],
+  "photos": {
+    "thailande-phi-phi": {
+      "licence": "CC BY-SA 3.0",
+      "author": "Diego Delso",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Isla_Ko_Phi_Phi_Don,_Tailandia,_2013-08-19,_DD_02.JPG"
+    },
+    "thailande-train-nuit": {
+      "licence": "CC BY-SA 2.0",
+      "author": "calflier001",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:THAI_RAILWAYS_NIGHT_SLEEPER_TRAIN_BUTTERWORTH(PENANG_SENTRAL)MALAYSIA_TO_BANGKOK_THAILAND_JAN_2012_(7189989612).jpg"
+    },
+    "thailande-bangkok-grand-palais": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Bjørn Erik Pedersen",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:A_roof_of_a_building_at_the_Grand_Palace,_Bangkok,_sunrise,_2017.jpg"
+    },
+    "thailande-railay": {
+      "licence": "CC BY-SA 3.0",
+      "author": "kallerna",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Railay_Beach_5.jpg"
+    },
+    "thailande-wat-arun": {
+      "licence": "CC BY-SA 3.0",
+      "author": "Diego Delso",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Templo_Wat_Arun,_Bangkok,_Tailandia,_2013-08-22,_DD_30.jpg"
+    }
+  },
+  "clips": {},
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "durationSeconds": 17.6,
+    "videoCodec": "h264",
+    "pixelFormat": "yuv420p",
+    "videoBitrateBps": 2482548,
+    "audioCodec": "aac",
+    "audioSampleRate": 48000,
+    "audioBitrateBps": 96209,
+    "fullDecodePassed": true,
+    "loudness": {
+      "integratedLufs": -16.0,
+      "truePeakDbfs": -2.4
+    }
+  },
+  "files": [
+    {
+      "file": "apercu.jpg",
+      "sha256": "6415e9a698db3ef75c0975423b09619b49abf3ae9855ff002d00c7c076851cc1",
+      "bytes": 179602
+    },
+    {
+      "file": "credits.txt",
+      "sha256": "201a79e60b1f8c95a71da21e4cfe4a61544d4b8cb53f4795a96354a58ccbead5",
+      "bytes": 2868
+    },
+    {
+      "file": "dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "file": "encode.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "legende.txt",
+      "sha256": "1bb275cc485ed9df308d11d28e5a4fe438da6b11808abaac9489bc0812988f1b",
+      "bytes": 743
+    },
+    {
+      "file": "notosans-OFL.txt",
+      "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a",
+      "bytes": 4396
+    },
+    {
+      "file": "playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    },
+    {
+      "file": "poster.jpg",
+      "sha256": "a8e672ab539e2c2f5b16a06067a7de58a43ad8ed9e79f576a6a22f93fb6fe617",
+      "bytes": 310418
+    },
+    {
+      "file": "reel.mp4",
+      "sha256": "eb458487df9206f1ae8f6030b3f0e3bd33fbc714bb26a00c41f6c70d94026803",
+      "bytes": 5694308
+    },
+    {
+      "file": "scenario.json",
+      "sha256": "d634875a7a58e6b4dd1b6b4f03ef363d68657f965d5470c946eea6ea3c82650b",
+      "bytes": 7353
+    },
+    {
+      "file": "scene-01.jpg",
+      "sha256": "bd152eca21e244814a8832c73a46295193c0e3690f6103517d01d382d2fae8b8",
+      "bytes": 282258
+    },
+    {
+      "file": "scene-02.jpg",
+      "sha256": "551c9333823afabd5dd49993f8548a5cbe50e3d7a839854f0562f28ed3e515a5",
+      "bytes": 358358
+    },
+    {
+      "file": "scene-03.jpg",
+      "sha256": "4009bf9a0dccc083a4b782c0d3e1f5d844fcf313e424c2f82013602639a7db33",
+      "bytes": 232274
+    },
+    {
+      "file": "scene-04.jpg",
+      "sha256": "7f639dc98790077e0e84cf377efd939b2698a851fb414f08128a47caadf598c0",
+      "bytes": 272066
+    },
+    {
+      "file": "scene-05.jpg",
+      "sha256": "5b8bb2dcd820a772c0f2dabd3c2d074de15d32711ee15549e2050333fc47ec9a",
+      "bytes": 450958
+    }
+  ],
+  "runtime": {
+    "wallSeconds": 17.966,
+    "encoderThreads": 2,
+    "pillowVersion": "11.3.0",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers"
+  },
+  "publication": {
+    "uploaded": false,
+    "scheduled": false,
+    "published": false,
+    "readyForAutomaticImport": false
+  },
+  "cost": {
+    "newPaidService": false,
+    "providerCalls": 0,
+    "monetarySpendEur": 0
+  }
+}

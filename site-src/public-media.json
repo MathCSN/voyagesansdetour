@@ -1230,6 +1230,120 @@
           "bytes": 4449
         }
       ]
+    },
+    {
+      "contentId": "fb-marrakech-3-jours-2026-11-26-2",
+      "kind": "photos",
+      "approved": true,
+      "files": [
+        {
+          "name": "scene-01.jpg",
+          "sha256": "ba00b243cc79b2b3be393cb99effe064ed009b2eb409571600da67287bd3b958",
+          "bytes": 250116
+        },
+        {
+          "name": "scene-02.jpg",
+          "sha256": "91781a2d38b2607f2d15b5a975189f4e18edc0fc3919cf172217e35eaa78f5ce",
+          "bytes": 300936
+        },
+        {
+          "name": "scene-03.jpg",
+          "sha256": "74a1e4913f6b54a3d378c556df66bd2cf8a66f390a6a7025bcb8b104fa835249",
+          "bytes": 328368
+        },
+        {
+          "name": "scene-04.jpg",
+          "sha256": "54387f5ad9873bca5503b6347f442f7eadaf77825f575cbed151c6452e4138f5",
+          "bytes": 186676
+        },
+        {
+          "name": "scene-05.jpg",
+          "sha256": "e002d2f4b60c9ed1a37b58084392b27cd316bd189d8199819d8bbbcc58123602",
+          "bytes": 417174
+        },
+        {
+          "name": "scene-06.jpg",
+          "sha256": "526551f21d9cfb05ff49ec1c70559201e09013d5da3a3e50dd396872bdb35640",
+          "bytes": 367142
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "92310a09d0c0872061898230e6e954ac05a5630b8f50500b0db4a2129473f759",
+          "bytes": 2580
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "ig-yucatan-itineraire-10-jours-2026-11-20-3",
+      "approved": true,
+      "files": [
+        {
+          "name": "reel.mp4",
+          "sha256": "193a0e93274c4cc13a316d0585cf007d6ca9122a6cf1df65389198a3406210b2",
+          "bytes": 5740218
+        },
+        {
+          "name": "poster.jpg",
+          "sha256": "f268c26923e5730002c38e47c9a6318b47fdf4a9f335ffb7e8bdc8630b607f5a",
+          "bytes": 435457
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "51ec138cb1991247e36caba6bf0666e41f039429bb6558d72c71e616ffc230b9",
+          "bytes": 2731
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "ig-thailande-itineraire-2-semaines-2026-12-02-2",
+      "approved": true,
+      "files": [
+        {
+          "name": "reel.mp4",
+          "sha256": "eb458487df9206f1ae8f6030b3f0e3bd33fbc714bb26a00c41f6c70d94026803",
+          "bytes": 5694308
+        },
+        {
+          "name": "poster.jpg",
+          "sha256": "a8e672ab539e2c2f5b16a06067a7de58a43ad8ed9e79f576a6a22f93fb6fe617",
+          "bytes": 310418
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "201a79e60b1f8c95a71da21e4cfe4a61544d4b8cb53f4795a96354a58ccbead5",
+          "bytes": 2868
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
     }
   ]
 }
