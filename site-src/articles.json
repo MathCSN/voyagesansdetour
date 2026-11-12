@@ -1039,18 +1039,18 @@
     "cover": "lisbonne-alfama-toits",
     "description": "Baixa, Chiado, Alfama, Mouraria, Cais do Sodré, Príncipe Real ou Saldanha : le prix d’une nuit relevé en novembre 2026, le métro depuis l’aéroport, les pentes et la taxe.",
     "readMinutes": 7,
-    "summary": "Pour un premier séjour sans voiture, dormez à la Baixa ou au Chiado : métro Baixa-Chiado (lignes bleue et verte), tout à pied. Saldanha est le plus rapide depuis l’aéroport, 19 minutes en ligne rouge, et le moins cher, dès 87 € fin novembre. Alfama a le charme des ruelles mais des pentes raides. Ajoutez la taxe de 4 € par nuit et par personne.",
+    "summary": "Pour un premier séjour sans voiture, dormez à la Baixa ou au Chiado : métro Baixa-Chiado (lignes bleue et verte), tout à pied. Saldanha est le plus rapide depuis l’aéroport, 18 minutes en ligne rouge, et le moins cher, dès 87 € fin novembre. Alfama a le charme des ruelles mais des pentes raides. Ajoutez la taxe de 4 € par nuit et par personne.",
     "keyFacts": [
       {
         "value": "130 €",
         "label": "le prix moyen d’une nuit en hôtel 4 étoiles à Lisbonne, janvier à septembre 2026 (105 € en 3 étoiles, 267 € en 5)"
       },
       {
-        "value": "87 à 182 €",
-        "label": "une nuit pour deux le 25 novembre 2026, de l’ibis Saldanha au Memmo Alfama (sites des hôtels)"
+        "value": "87 à 484,50 €",
+        "label": "une nuit pour deux le 25 novembre 2026, de l’ibis Saldanha au Bairro Alto Hotel (sites des hôtels)"
       },
       {
-        "value": "19 min",
+        "value": "18 min",
         "label": "de l’aéroport à Saldanha en ligne rouge directe, avec un train toutes les 6 à 7 min en journée"
       },
       {
@@ -1062,8 +1062,8 @@
         "label": "le billet Carris/Metro valable 60 min, sur la carte à 0,50 € ; le tram 28 payé à bord coûte 3,30 €"
       },
       {
-        "value": "26 min",
-        "label": "de l’aéroport à Rossio, au cœur de la Baixa, changement à Alameda ; 32 min jusqu’à Baixa-Chiado"
+        "value": "25 min",
+        "label": "de l’aéroport à Rossio, au cœur de la Baixa, changement à Alameda ; 31 min jusqu’à Baixa-Chiado"
       }
     ],
     "sections": [
@@ -1072,7 +1072,7 @@
         "title": "Baixa et Chiado : tout à pied, le métro sous la porte",
         "image": "lisbonne-santa-justa",
         "paragraphs": [
-          "La Baixa, quadrillée autour de la rua Augusta, est le quartier le plus plat du centre. Trois stations la desservent : Rossio (ligne verte), Baixa-Chiado (bleue et verte) et Terreiro do Paço (bleue), au bord du Tage. Depuis Santa Apolónia, la gare des trains pour Porto, il y a deux arrêts de ligne bleue ; depuis l’aéroport, 26 minutes jusqu’à Rossio et 32 jusqu’à Baixa-Chiado, avec un changement à Alameda.",
+          "La Baixa, quadrillée autour de la rua Augusta, est le quartier le plus plat du centre. Trois stations la desservent : Rossio (ligne verte), Baixa-Chiado (bleue et verte) et Terreiro do Paço (bleue), au bord du Tage. Depuis Santa Apolónia, la gare des trains pour Porto, il y a deux arrêts de ligne bleue ; depuis l’aéroport, 25 minutes jusqu’à Rossio et 31 jusqu’à Baixa-Chiado, avec un changement à Alameda.",
           "Juste au-dessus, le Chiado aligne cafés, librairies et théâtres, avec le tram 28 qui s’arrête place Luís de Camões. On y monte depuis la Baixa par les escalators de la station Baixa-Chiado plutôt que par les rues en pente, l’ascenseur de Santa Justa étant fermé. Pour un premier séjour de trois ou quatre nuits, c’est la base la plus simple : tout se fait à pied ou à un arrêt de métro.",
           "Pour la nuit du 25 novembre 2026, le Pestana CR7, rua do Comércio, affichait 159 € la chambre pour deux sans petit-déjeuner ; au Chiado, le Bairro Alto Hotel, un 5 étoiles de la place Luís de Camões, demandait 484,50 € petit-déjeuner compris."
         ]
@@ -1082,8 +1082,8 @@
         "title": "Alfama et Mouraria : le charme, avec des marches",
         "image": "lisbonne-alfama-tram",
         "paragraphs": [
-          "Alfama, c’est la Lisbonne des ruelles pavées, des cordes à linge et des maisons de fado, du miradouro de Santa Luzia aux Portas do Sol. Visit Lisboa parle de pentes raides et éprouvantes : il n’y a pas de métro au cœur du quartier, seulement Santa Apolónia en bas, à 36 minutes de l’aéroport, et les trams 12 et 28 en haut. Travessa das Merceeiras, le Memmo Alfama affichait 182 € la nuit du 25 novembre 2026 pour deux, petit-déjeuner compris.",
-          "La Mouraria voisine, que des historiens donnent pour berceau du fado, se rejoint par les stations Martim Moniz et Intendente (ligne verte), à 25 et 23 minutes de l’aéroport. C’est de la place Martim Moniz que partent les trams 28 et 12, et rua dos Lagares, le funiculaire de Graça monte tous les jours de 7 h à 21 h jusqu’au miradouro, pour 4,30 € les deux trajets payés à bord, ou gratuitement avec un abonnement navegante."
+          "Alfama, c’est la Lisbonne des ruelles pavées, des cordes à linge et des maisons de fado, du miradouro de Santa Luzia aux Portas do Sol. Visit Lisboa parle de pentes raides et éprouvantes : il n’y a pas de métro au cœur du quartier, seulement Santa Apolónia en bas, terminus de la ligne bleue, et les trams 12 et 28 en haut. Travessa das Merceeiras, le Memmo Alfama affichait 182 € la nuit du 25 novembre 2026 pour deux, petit-déjeuner compris.",
+          "La Mouraria voisine, que des historiens donnent pour berceau du fado, se rejoint par les stations Martim Moniz et Intendente, un et deux arrêts avant Rossio sur la ligne verte. C’est de la place Martim Moniz que partent les trams 28 et 12, et rua dos Lagares, le funiculaire de Graça monte tous les jours de 7 h à 21 h jusqu’au miradouro, pour 4,30 € les deux trajets payés à bord, ou gratuitement avec un abonnement navegante."
         ],
         "tip": "Avec une valise à roulettes, visez Mouraria ou le bas d’Alfama près de Santa Apolónia : vous profitez du quartier sans hisser vos bagages en haut des ruelles."
       },
@@ -1091,7 +1091,7 @@
         "id": "bairro-alto-cais-do-sodre",
         "title": "Bairro Alto et Cais do Sodré : pour vivre la nuit",
         "paragraphs": [
-          "Le Bairro Alto mêle boutiques de disques et d’art le jour et bars à chaque coin de rue le soir. Cais do Sodré, terminus de la ligne verte à 29 minutes de l’aéroport, du train de Cascais et du ferry de Cacilhas, a sa rua Nova do Carvalho peinte en rose et le Time Out Market (10 h–minuit) dans l’ancienne halle de la Ribeira, avenida 24 de Julho.",
+          "Le Bairro Alto mêle boutiques de disques et d’art le jour et bars à chaque coin de rue le soir. Cais do Sodré, terminus de la ligne verte à 35 minutes de l’aéroport, du train de Cascais et du ferry de Cacilhas, a sa rua Nova do Carvalho peinte en rose et le Time Out Market (10 h–minuit) dans l’ancienne halle de la Ribeira, avenida 24 de Julho.",
           "Les deux quartiers sont parfaits pour sortir, moins pour se coucher tôt : si vous y logez, demandez une chambre sur cour. Largo do Corpo Santo, le Corpo Santo Hotel, un 5 étoiles, affichait 355 € la nuit du 25 novembre 2026, petit-déjeuner compris."
         ]
       },
@@ -1099,15 +1099,15 @@
         "id": "principe-real-avenida",
         "title": "Príncipe Real, Avenida, Saldanha : le calme et l’aéroport",
         "paragraphs": [
-          "Príncipe Real, perché autour de sa place entre le miradouro de São Pedro de Alcântara et São Bento, aligne hôtels particuliers, antiquaires, kiosques et petits jardins. Le métro le plus proche est Rato, sur la ligne jaune, à 31 minutes de l’aéroport. C’est le quartier des séjours plus lents : rua D. Pedro V, le Memmo Príncipe Real affichait de 369 à 378 € la nuit du 25 novembre 2026.",
-          "L’Avenida da Liberdade (métro Avenida, ligne bleue) et Saldanha, Alameda ou Arroios plus au nord sont moins pittoresques, mais pratiques et moins chers. Saldanha et Alameda sont sur la ligne rouge, à 19 et 17 minutes de l’aéroport sans changement, avec un train toutes les 6 à 7 minutes en journée en semaine, et jusqu’à 9 min 45 tôt le matin et après 22 h 30. Pour la nuit du 25 novembre 2026, l’ibis Saldanha, avenida Casal Ribeiro, affichait 87 €, l’ibis Centro Liberdade, rua Barata Salgueiro, 108 €, et le Sofitel de l’avenue 268 €."
+          "Príncipe Real, perché autour de sa place entre le miradouro de São Pedro de Alcântara et São Bento, aligne hôtels particuliers, antiquaires, kiosques et petits jardins. Le métro le plus proche est Rato, sur la ligne jaune, avec un changement à Saldanha depuis l’aéroport. C’est le quartier des séjours plus lents : rua D. Pedro V, le Memmo Príncipe Real affichait de 369 à 378 € la nuit du 25 novembre 2026.",
+          "L’Avenida da Liberdade (métro Avenida, ligne bleue) et Saldanha, Alameda ou Arroios plus au nord sont moins pittoresques, mais pratiques et moins chers. Saldanha est sur la ligne rouge, à 18 minutes de l’aéroport sans changement, et Alameda juste avant, avec un train toutes les 6 à 7 minutes en journée en semaine, et jusqu’à 9 min 45 tôt le matin et après 22 h 30. Pour la nuit du 25 novembre 2026, l’ibis Saldanha, avenida Casal Ribeiro, affichait 87 €, l’ibis Centro Liberdade, rua Barata Salgueiro, 108 €, et le Sofitel de l’avenue, un 5 étoiles, 268 €."
         ]
       },
       {
         "id": "comparatif",
         "title": "Le comparatif en un coup d’œil",
         "paragraphs": [
-          "Les stations indiquées sont les plus proches du cœur de chaque quartier, avec le temps depuis l’aéroport donné par le planificateur du métro, changements compris. Les prix sont ceux affichés le 12 novembre 2026 sur le site de chaque hôtel pour la nuit du mercredi 25 novembre, deux adultes : un relevé ponctuel, pas une moyenne du quartier."
+          "Les temps depuis l’aéroport viennent de la page « Lisbonne en métro depuis l’aéroport » du métro, qui les donne pour approximatifs ; pour les stations qu’elle ne cite pas, le tableau donne la ligne et la correspondance. Les prix sont ceux affichés le 12 novembre 2026 sur le site de chaque hôtel pour la nuit du mercredi 25 novembre, deux adultes : un relevé ponctuel, pas une moyenne du quartier."
         ],
         "table": {
           "headers": [
@@ -1119,51 +1119,51 @@
           "rows": [
             [
               "Baixa / Rossio",
-              "Rossio, Baixa-Chiado (26 à 32 min)",
+              "Rossio (25 min), Baixa-Chiado (31 min)",
               "Plat",
               "159 € (Pestana CR7)"
             ],
             [
               "Chiado",
-              "Baixa-Chiado (32 min)",
+              "Baixa-Chiado (31 min)",
               "Pente modérée",
               "484,50 € (Bairro Alto Hotel, 5★)"
             ],
             [
               "Alfama",
-              "Santa Apolónia, en bas (36 min)",
+              "Santa Apolónia, en bas (ligne bleue)",
               "Très pentu",
               "182 € (Memmo Alfama)"
             ],
             [
               "Mouraria / Intendente",
-              "Martim Moniz, Intendente (23 à 25 min)",
+              "Martim Moniz, Intendente (ligne verte, avant Rossio)",
               "Pentu",
               "—"
             ],
             [
               "Bairro Alto",
-              "Baixa-Chiado (32 min)",
+              "Baixa-Chiado (31 min)",
               "Pentu",
               "—"
             ],
             [
               "Cais do Sodré",
-              "Cais do Sodré (29 min)",
+              "Cais do Sodré (35 min)",
               "Plat",
               "355 € (Corpo Santo, 5★)"
             ],
             [
               "Príncipe Real",
-              "Rato (31 min)",
+              "Rato (ligne jaune, changement à Saldanha)",
               "Pentu",
               "369 € (Memmo Príncipe Real)"
             ],
             [
               "Saldanha / Avenida",
-              "Saldanha (19 min), Avenida (32 min)",
+              "Saldanha (18 min), Marquês de Pombal (28 min)",
               "Plat",
-              "87 € à 268 €"
+              "87 € à 268 € (Sofitel, 5★)"
             ]
           ]
         }
@@ -1185,7 +1185,7 @@
       },
       {
         "question": "Où dormir près du métro de l’aéroport ?",
-        "answer": "Sur la ligne rouge : Alameda (17 minutes) ou Saldanha (19 minutes), sans changement. Le métro roule de 6 h 30 à 1 h, avec un train toutes les 6 à 7 minutes en journée en semaine."
+        "answer": "Sur la ligne rouge : Saldanha, à 18 minutes sans changement, ou Alameda, l’arrêt d’avant. Le métro roule de 6 h 30 à 1 h, avec un train toutes les 6 à 7 minutes en journée en semaine."
       },
       {
         "question": "Alfama est-il adapté avec des valises ?",
@@ -1193,7 +1193,7 @@
       },
       {
         "question": "Combien coûte une nuit d’hôtel à Lisbonne ?",
-        "answer": "En moyenne 105 € en 3 étoiles, 130 € en 4 étoiles et 267 € en 5 étoiles de janvier à septembre 2026 (Turismo de Lisboa). Pour la nuit du 25 novembre 2026, les sites des hôtels affichaient de 87 € à Saldanha à 182 € à Alfama, hors 5 étoiles."
+        "answer": "En moyenne 105 € en 3 étoiles, 130 € en 4 étoiles et 267 € en 5 étoiles de janvier à septembre 2026 (Turismo de Lisboa). Pour la nuit du 25 novembre 2026, les sites des hôtels affichaient de 87 € à Saldanha à 484,50 € au Chiado, dont 159 € dans la Baixa et 182 € à Alfama."
       },
       {
         "question": "Combien coûte la taxe touristique à Lisbonne ?",
@@ -1262,8 +1262,8 @@
         "url": "https://www.metrolisboa.pt/en/travel/timetables-and-frequency/"
       },
       {
-        "label": "Metro de Lisbonne — Planificateur d’itinéraire (temps depuis l’aéroport, 12/11/2026)",
-        "url": "https://www.metrolisboa.pt/en/travel/plan_a_journey/"
+        "label": "Metro de Lisbonne — Lisbonne en métro depuis l’aéroport (5 novembre 2026)",
+        "url": "https://www.metrolisboa.pt/lisboa-de-metro-desde-o-aeroporto/"
       },
       {
         "label": "Metro de Lisbonne — Tarifs 2026",
@@ -1519,8 +1519,8 @@
         "image": "porto-metro-aeroport",
         "paragraphs": [
           "CP équipe de casiers automatiques huit gares : Cais do Sodré, Oriente, Rossio, Sete Rios et Cascais pour Lisbonne et sa ligne, Porto-Campanhã, Porto-São Bento et Coimbra-B. Le dépôt y est limité à 24 heures, aux heures d’ouverture de la gare ; à Campanhã, les casiers sont dans le tunnel d’accès aux quais. Santa Apolónia ne figure pas dans la liste de CP.",
-          "Au-delà de 24 heures, City Lockers garde les bagages jusqu’à 7 jours : à Porto, 7 € les 24 h pour un petit casier, 8,50 € pour un moyen et 11 € pour un grand ; à Lisbonne, 7,50 €, 9 € et 11,50 € ; 2 € jusqu’à 2 heures. À Porto, ses casiers sont au niveau -1 de la station de métro Trindade, de 6 h à 1 h, payables en pièces, et une boutique ouvre rua dos Caldeireiros 7, à 3 minutes de São Bento. À Lisbonne, sa boutique de la rua Caminhos de Ferro 94 fait face à Santa Apolónia, de 8 h à 21 h.",
-          "À l’aéroport de Lisbonne, 234 casiers ouverts jour et nuit, devant les départs du terminal 1, gardent les valises 72 heures au plus, à partir de 3 € pour un petit casier selon la grille 2026 publiée par ANA, et se paient par carte. Pour une arrivée matinale, demandez aussi au logement s’il garde les valises avant l’heure d’entrée."
+          "Au-delà de 24 heures, City Lockers garde les bagages jusqu’à 7 jours : à Porto, 7 € les 24 h pour un petit casier, 8,50 € pour un moyen et 11 € pour un grand ; à Lisbonne, 7,50 €, 9 € et 11,50 € ; 2 € jusqu’à 2 heures. À Porto, ses casiers sont au niveau -1 de la station de métro Trindade, de 6 h à 1 h, payables en pièces, et une boutique ouvre rua dos Caldeireiros 7, à 3 minutes de São Bento. À Lisbonne, sa boutique de la rua Caminhos de Ferro 94 fait face à Santa Apolónia, de 8 h à 21 h, et ses casiers de la station de métro Rossio ouvrent de 6 h 30 à 1 h.",
+          "À l’aéroport de Lisbonne, 234 casiers ouverts jour et nuit, devant les départs du terminal 1, gardent les valises 72 heures au plus, pour 3 € la fermeture d’un petit casier jusqu’à 3 heures et 10 € pour 24 heures, selon la grille proposée par ANA pour 2026, et se paient par carte. Pour une arrivée matinale, demandez aussi au logement s’il garde les valises avant l’heure d’entrée."
         ],
         "table": {
           "headers": [
@@ -1546,7 +1546,7 @@
             ],
             [
               "Aéroport de Lisbonne (ANA)",
-              "Dès 3 € les 3 premières heures",
+              "10 €, 14 €, 22 €",
               "72 h"
             ]
           ]
@@ -3210,7 +3210,7 @@
     "cover": "thailande-phi-phi",
     "description": "Bangkok, Chiang Mai, Krabi et Phi Phi en 14 jours : couchette de train à 938 bahts, Grand Palais à 500 bahts, ferry de Phi Phi à 450 bahts, prix relevés en novembre 2026.",
     "readMinutes": 8,
-    "summary": "Trois nuits à Bangkok, le train de nuit jusqu’à Chiang Mai (trois nuits), puis la mer d’Andaman : Krabi, Railay et les îles Phi Phi. Le train 9 part à 18 h 40 et arrive à 7 h 15 ; la couchette climatisée de 2e classe coûte 938 ou 1 038 bahts au tarif des chemins de fer thaïlandais. Gardez les plages pour décembre à février : le Sud reste très arrosé en octobre et en novembre.",
+    "summary": "Deux nuits à Bangkok, une nuit dans le train jusqu’à Chiang Mai et trois sur place, puis la mer d’Andaman : Krabi, Railay et les îles Phi Phi. Le train 9 part à 18 h 40 et arrive à 7 h 15 ; la couchette climatisée de 2e classe coûte 938 ou 1 038 bahts au tarif des chemins de fer thaïlandais. Gardez les plages pour décembre à février : le Sud reste très arrosé en octobre et en novembre.",
     "keyFacts": [
       {
         "value": "12 h 35",
@@ -3230,7 +3230,7 @@
       },
       {
         "value": "450 bahts",
-        "label": "le ferry Krabi → Phi Phi, départs à 9 h et 13 h, 2 h environ (700 bahts depuis Phuket)"
+        "label": "le ferry Krabi → Phi Phi, départs à 9 h et 13 h, 2 h à 2 h 30 (700 bahts depuis Phuket)"
       },
       {
         "value": "30 jours",
@@ -3309,7 +3309,7 @@
         "paragraphs": [
           "Pour rejoindre la mer d’Andaman sans avion, reprenez l’autorail de jour n° 8 (Chiang Mai 7 h 30, Bangkok 17 h 40), puis le train de nuit n° 85 à 19 h 50, qui arrive à Surat Thani à 6 h 23 : la couchette climatisée de 2e classe coûte 714 bahts en haut et 804 bahts en bas. La gare est à Phun Phin, hors du centre ; les minibus Phantip partent de leur agence en ville à 9 h, 10 h 30, 12 h, 13 h 30, 15 h et 16 h 30, et arrivent à la gare routière de Krabi 3 heures plus tard, pour 330 bahts.",
           "Railay ne se rejoint qu’en bateau, la presqu’île étant fermée par la montagne : les bateaux à longue queue partent de la plage d’Ao Nang et de Krabi.",
-          "Andaman Wave Master relie Krabi, depuis l’embarcadère de Klong Jilad, aux îles Phi Phi à 9 h et 13 h, en 2 heures environ, pour 450 bahts, et Phuket, depuis Rassada, à 8 h 30 et 13 h 45 pour 700 bahts en classe standard. Maya Bay, la plage du film La Plage, ferme chaque année du 1er août au 30 septembre ; l’entrée du parc national se paie en plus, et elle est souvent comprise dans le prix des excursions."
+          "Andaman Wave Master relie Krabi, depuis l’embarcadère de Klong Jilad, aux îles Phi Phi à 9 h et 13 h, en 2 h le matin et 2 h 30 l’après-midi, pour 450 bahts, et Phuket, depuis Rassada, à 8 h 30 et 13 h 45 pour 700 bahts en classe standard. Maya Bay, la plage du film La Plage, ferme chaque année du 1er août au 30 septembre ; l’entrée du parc national se paie en plus, et elle est souvent comprise dans le prix des excursions."
         ],
         "tip": "Dormez une nuit sur Phi Phi plutôt que d’y aller à la journée : vous êtes à Maya Bay avant les bateaux des excursions organisées."
       },
@@ -3349,7 +3349,7 @@
       },
       {
         "question": "Combien coûte le ferry pour les îles Phi Phi ?",
-        "answer": "450 bahts depuis Krabi, avec des départs à 9 h et 13 h et 2 heures de traversée environ, et 700 bahts depuis Phuket en classe standard, chez Andaman Wave Master."
+        "answer": "450 bahts depuis Krabi, avec des départs à 9 h et 13 h et 2 h à 2 h 30 de traversée, et 700 bahts depuis Phuket en classe standard, chez Andaman Wave Master."
       },
       {
         "question": "Comment aller de l’aéroport au centre de Bangkok ?",
@@ -4881,7 +4881,7 @@
     "continent": "afrique",
     "category": "Itinéraires",
     "cover": "marrakech-place-jemaa-el-fna",
-    "description": "Majorelle à 170 dh en ligne, palais à 100 dh dès 9 h, taxi de l’aéroport au prix de sa zone, Essaouira à 3 h de car : trois jours à Marrakech, prix relevés en novembre 2026.",
+    "description": "Majorelle à 170 dh en ligne, palais à 100 dh dès 9 h, Essaouira à 3 h de car, taxi de l’aéroport par zone : trois jours à Marrakech, entrées relevées en novembre 2026.",
     "readMinutes": 7,
     "summary": "Trois jours suffisent pour voir l’essentiel de Marrakech : la médina et ses souks, le jardin Majorelle, les palais de la Bahia et d’El Badi, puis une journée dans l’Atlas ou à Essaouira. Trois règles évitent les mauvaises surprises : acheter Majorelle en ligne, payer le taxi de l’aéroport au prix de sa zone, négocier avant toute photo sur Jemaa el-Fna.",
     "keyFacts": [
@@ -4950,12 +4950,12 @@
       },
       {
         "id": "arriver",
-        "title": "Arriver : du bus 19 au riad sans se faire avoir",
+        "title": "Arriver : de l’aéroport au riad sans se faire avoir",
         "paragraphs": [
           "À la sortie du terminal de Marrakech-Ménara, les taxis partent d’un guichet unique qui fixe le prix par zone. Depuis janvier 2024, la préfecture découpe les destinations en 7 zones : 100 dh pour moins de 3 km, 110 dh de 3 à 5 km, 120 dh de 5 à 7 km, jusqu’à 160 dh pour 13 à 15 km, frais du guichet en plus. Petits et grands taxis appliquent la même grille : demandez la zone de votre riad au guichet et payez ce prix, pas un dirham de plus.",
           "Cette grille a suivi un scandale : en janvier 2023, alors que le trajet de l’aéroport au centre était fixé à 70 dh, un chauffeur en a réclamé 400 à un touriste, et les contrôles qui ont suivi ont valu à 46 chauffeurs une suspension de licence d’un à deux mois.",
           "Côté bus, le réseau urbain a changé de main : Supratours, filiale de l’ONCF, a remplacé Alsa le 14 décembre 2025, après 26 ans de gestion. Les tarifs et horaires de l’ancienne ligne 19 d’Alsa ne valent donc plus, et le nouvel exploitant n’en publie aucun en ligne pour la desserte de l’aéroport.",
-          "En ville, le petit taxi roule au compteur, et une course courte coûte normalement une dizaine de dirhams. En avril 2026, TelQuel racontait encore un chauffeur qui réclamait 40 dh sans compteur pour ce trajet : si le compteur est « en panne », descendez et prenez le suivant."
+          "En ville, le petit taxi roule au compteur : une course courte coûte normalement 10 dh, selon TelQuel. En avril 2026, le journal racontait encore un chauffeur qui réclamait 40 dh sans compteur pour ce trajet : si le compteur est « en panne », descendez et prenez le suivant."
         ],
         "tip": "La plupart des riads de la médina sont dans des ruelles inaccessibles aux voitures : demandez à votre hôte un point de rendez-vous à la porte la plus proche et un porteur, plutôt que de suivre un inconnu qui « connaît l’adresse »."
       },
@@ -5008,7 +5008,7 @@
         "title": "Le budget des entrées, prix relevés le 12 novembre 2026",
         "paragraphs": [
           "Pour les trois jours, les entrées coûtent 470 dh par adulte étranger : 170 dh pour le jardin Majorelle et 3 × 100 dh pour la Bahia, les tombeaux saadiens et El Badi. Avec le billet combiné du jardin et des deux musées, le total passe à 630 dh.",
-          "Les prix viennent de la billetterie officielle du jardin Majorelle et de celle du ministère de la Culture, relevées le 12 novembre 2026 ; le car pour Essaouira, des sites de Supratours et de CTM le même jour."
+          "Les prix viennent de la billetterie officielle du jardin Majorelle et de celle du ministère de la Culture, relevées le 12 novembre 2026 ; le car pour Essaouira, des sites de Supratours et de CTM le même jour ; la grille des taxis de l’aéroport date de janvier 2024, faute de grille plus récente publiée."
         ],
         "table": {
           "headers": [
@@ -5050,7 +5050,7 @@
             [
               "Taxi depuis l’aéroport",
               "100 à 160 dh + guichet",
-              "selon la zone"
+              "selon la zone (grille de janvier 2024)"
             ]
           ]
         }
@@ -5666,8 +5666,8 @@
         "label": "le train direct Mérida Teya → Tulum de 7 h, arrivée 13 h 16 : 1 389,50 pesos en tarif touriste international"
       },
       {
-        "value": "3 h 28",
-        "label": "Mérida Teya → aéroport de Cancún en Tren Maya, 6 trains par jour, 1 041,50 pesos en tarif international"
+        "value": "1 h 43",
+        "label": "de l’aéroport de Cancún à Valladolid en Tren Maya, 6 départs par jour, dès 539 pesos en tarif international"
       },
       {
         "value": "265 pesos",
@@ -5735,7 +5735,7 @@
         "id": "valladolid",
         "title": "Jours 1-2 : Valladolid, la base de l’intérieur",
         "paragraphs": [
-          "Valladolid est la ville tranquille où dormir avant Chichén Itzá. Depuis l’aéroport de Cancún, le Tren Maya y arrive en 1 h 43 pour 539 pesos en tarif touriste international, avec 6 départs par jour, le premier à 8 h et le dernier à 20 h 04.",
+          "Valladolid est la ville tranquille où dormir avant Chichén Itzá. Depuis l’aéroport de Cancún, le Tren Maya y arrive en 1 h 43, dès 539 pesos en tarif touriste international, avec 6 départs par jour, le premier à 8 h et le dernier à 20 h 04.",
           "En bus, ADO relie Cancún à Valladolid en 2 h 25 à 2 h 30, avec 6 bus par jour dès 402 pesos. Les cenotes, ces puits naturels aux eaux claires, sont la grande affaire de la région : le plus connu, Ik Kil, se visite le jour 3, à 3 km de Chichén Itzá."
         ],
         "tip": "Achetez vos billets de Tren Maya sur la billetterie officielle avec votre passeport : le tarif « Turista Internacional » est celui des voyageurs étrangers."
@@ -5746,7 +5746,7 @@
         "paragraphs": [
           "Depuis le 27 mars 2026, un billet unique remplace le double paiement fédéral et d’État : 697 pesos pour un étranger, dont 105 pour l’INAH et 592 pour l’État du Yucatán, et 310 pour un Mexicain, à régler au centre d’accueil des visiteurs. Le site ouvre tous les jours de 8 h à 16 h, dernier accès à 16 h.",
           "Pour arriver à l’ouverture, il faut un taxi ou un colectivo : le premier Tren Maya de Valladolid part à 8 h 45 et entre en gare de Chichén Itzá à 9 h 07, après 22 minutes et 148 pesos. Le site a déjà fermé cette année, du 19 mai au 1er juin 2026, pendant un conflit avec les artisans et vendeurs, avant de rouvrir aux mêmes horaires.",
-          "Gardez l’après-midi pour le cenote Ik Kil, à 3 km : un puits entouré de lianes, ouvert tous les jours de 9 h à 17 h, à 240 pesos l’entrée, gilet de sauvetage obligatoire et casier compris. Le soir, le train repart de Chichén Itzá vers Mérida Teya à 17 h 49, 19 h 39 et 21 h 13 : 1 h 19 de trajet, 440,50 pesos."
+          "Gardez l’après-midi pour le cenote Ik Kil, à 3 km : un puits entouré de lianes, ouvert tous les jours de 9 h à 17 h, à 240 pesos l’entrée, gilet de sauvetage obligatoire et casier compris. Le soir, le train repart de Chichén Itzá vers Mérida Teya à 17 h 49, 19 h 39 et 21 h 13 : 1 h 19 de trajet, dès 440,50 pesos."
         ],
         "tip": "Les soirs du spectacle Noches de Kukulkán, du mercredi au dimanche à 19 h (433 pesos), le dernier train pour Mérida part à 21 h 13.",
         "image": "yucatan-cenote"
@@ -5767,7 +5767,7 @@
         "title": "Jour 7 : Mérida–Tulum en train direct",
         "paragraphs": [
           "Le train 301 quitte Mérida Teya à 7 h et entre en gare de Tulum à 13 h 16, heure de Tulum, soit 5 h 16 et 9 arrêts sans changement : 1 389,50 pesos en tarif touriste international, 1 042 en tarif national (billetterie officielle, relevé du 12 novembre 2026).",
-          "Vers Cancún, six trains par jour relient Mérida Teya à l’aéroport, de 7 h à 16 h 28, en 3 h 28 : 1 041,50 pesos en tarif touriste international, 781 en tarif national et 1 250 en classe Premier, avec des arrêts à Tixkokob, Izamal, Chichén Itzá, Valladolid, Nuevo Xcán et Leona Vicario. Les billets se prennent sur la billetterie officielle ou en gare."
+          "Si vous repartez de Mérida, six trains par jour relient Mérida Teya à l’aéroport de Cancún, de 7 h à 16 h 28, en 3 h 28 : 1 041,50 pesos en tarif touriste international, 781 en tarif national et 1 250 en classe Premier, avec des arrêts à Tixkokob, Izamal, Chichén Itzá, Valladolid, Nuevo Xcán et Leona Vicario. Les billets se prennent sur la billetterie officielle ou en gare."
         ],
         "tip": "En bus, ADO relie Cancún à Mérida en 4 h 15 environ, dès 744 pesos."
       },
@@ -5777,7 +5777,7 @@
         "paragraphs": [
           "Avec Tulum, vous touchez le côté caraïbe du voyage. Les ruines ouvrent de 8 h à 17 h, dernier accès à 15 h 30, pour 265 pesos par étranger : un billet unifié qui comprend le parc du Jaguar, où se trouve le site, et la part de la CONANP, soit 100 pesos pour le parc et 165 pour la zone archéologique.",
           "Le parc du Jaguar ouvre de 6 h à 19 h pour la plage et le vélo, et ses services ferment à 17 h ; une navette électrique facultative coûte 20 pesos par adulte et 10 par enfant.",
-          "Au Quintana Roo, chaque touriste étranger doit la Visitax, 285 pesos en 2026, à payer en ligne sur visitax.gob.mx ; à l’aéroport de Cancún, certains se sont vu réclamer jusqu’à 550 pesos (Diario de Yucatán, 8 novembre 2026). Le dernier jour, le train relie Tulum à l’aéroport de Cancún en 1 h 37 pour 315,50 pesos."
+          "Au Quintana Roo, chaque touriste étranger doit la Visitax, 285 pesos en 2026, à payer en ligne sur visitax.gob.mx ; à l’aéroport de Cancún, certains se sont vu réclamer jusqu’à 550 pesos (Diario de Yucatán, 8 novembre 2026). Le dernier jour, le train relie Tulum à l’aéroport de Cancún en 1 h 37, pour 315,50 pesos au départ de 7 h 01 et 467 pesos à celui de 13 h 38 : le tarif varie selon le train."
         ],
         "tip": "Arrivez à Tulum à l’ouverture : c’est la lumière la plus douce sur la mer, et il y a moins de monde.",
         "image": "yucatan-tulum"
@@ -5786,7 +5786,7 @@
         "id": "budget",
         "title": "Les prix à garder en tête, relevés le 12 novembre 2026",
         "paragraphs": [
-          "Les entrées du voyage (Chichén Itzá, Ik Kil, Gran Museo, Uxmal et Tulum) coûtent 2 006 pesos par adulte étranger, et les cinq trajets en Tren Maya du parcours 2 832,50 pesos en tarif touriste international. Avec la Visitax, le total atteint 5 123,50 pesos par personne, hors hébergement et repas.",
+          "Les entrées du voyage (Chichén Itzá, Ik Kil, Gran Museo, Uxmal et Tulum) coûtent 2 006 pesos par adulte étranger, et les cinq trajets en Tren Maya du parcours au moins 2 832,50 pesos en tarif touriste international, aux départs les moins chers. Avec la Visitax, comptez au moins 5 123,50 pesos par personne, hors hébergement et repas.",
           "Les tarifs viennent des sites officiels (INAH, CULTUR, Gran Museo, cenote Ik Kil, billetterie du Tren Maya), relevés le 12 novembre 2026 ; seule la Visitax vient de la presse, faute de montant affiché par le site du Quintana Roo."
         ],
         "table": {
@@ -5823,12 +5823,12 @@
             ],
             [
               "Tren Maya : Cancún Aéroport–Valladolid, Valladolid–Chichén Itzá",
-              "539 + 148",
+              "539 + 148 (dès)",
               "Billetterie officielle"
             ],
             [
               "Tren Maya : Chichén Itzá–Mérida, Mérida–Tulum, Tulum–Cancún Aéroport",
-              "440,50 + 1 389,50 + 315,50",
+              "440,50 + 1 389,50 + 315,50 (dès)",
               "Billetterie officielle"
             ],
             [
@@ -5846,8 +5846,8 @@
         "answer": "697 pesos depuis le 27 mars 2026, dont 105 pour l’INAH et 592 pour l’État du Yucatán, en billet unique payé au centre d’accueil des visiteurs ; ouvert tous les jours de 8 h à 16 h."
       },
       {
-        "question": "Combien de temps dure le Tren Maya entre Mérida et Cancún ?",
-        "answer": "3 h 28 entre Mérida Teya et l’aéroport de Cancún, avec 6 trains par jour et un tarif touriste international de 1 041,50 pesos (billetterie officielle, relevé du 12 novembre 2026)."
+        "question": "Comment aller de l’aéroport de Cancún à Valladolid ?",
+        "answer": "En Tren Maya : 1 h 43 de trajet, 6 départs par jour de 8 h à 20 h 04, dès 539 pesos en tarif touriste international (billetterie officielle, relevé du 12 novembre 2026)."
       },
       {
         "question": "Dix jours suffisent-ils pour le Yucatán ?",

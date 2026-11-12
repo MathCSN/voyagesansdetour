@@ -18,10 +18,11 @@ def digest(value):
 BOILERPLATE=re.compile(r'\bpour les consignes présentées par\b',re.I)
 GLUED_PRICE=re.compile(r'\d€|€\d')
 # Function words of Italian, Portuguese, Spanish and English that French never writes.
-# Homographs French uses (il, la, de, a, en, on, y, las, nos, an, dos…) are left out.
+# Homographs French uses (il, la, de, a, en, on, y, las, nos, an…) are left out; « dos » counts
+# except after « à » (« sac à dos »).
 FOREIGN_WORDS=frozenset(
     'di della delle degli dei del gli nel nella nelle sul sulla alla alle agli al con per che e è lo uno una sono anche in '
-    'do da das os um às ao aos não com pelo pela em na nas o é el los por para muy es está '
+    'do da dos das os um às ao aos não com pelo pela em na nas o é el los por para muy es está '
     'the and of with to is are for from at by this that which will be it you your our'.split())
 # Common nouns the October and November updates left in Italian or Portuguese: each one counts
 # as a foreign word, so three of them in a sentence are refused even without a function word.
@@ -38,7 +39,7 @@ FRENCH_EVIDENCE=FRENCH_WORDS|frozenset(
     'lundi mardi mercredi jeudi vendredi samedi dimanche janvier février mars avril mai juin juillet août '
     'septembre octobre novembre décembre'.split())
 # Short words that stay inside a proper noun (« Top of the Rock », « Ruta de los Cenotes », « Paço dos Duques »).
-NAME_LINKS=FOREIGN_WORDS|{'de','la','le','des','du','y','a','à','l','dos'}
+NAME_LINKS=FOREIGN_WORDS|{'de','la','le','des','du','y','a','à','l'}
 MAX_FOREIGN_PER_SENTENCE=1
 MIN_FRENCH_SHARE=0.2
 MIN_WORDS_FOR_SHARE=8
@@ -46,7 +47,6 @@ QUOTED=re.compile(r'«[^»]*»|“[^”]*”|"[^"]*"')
 # A web address (« rockettes.com », « nlg.it ») is not a word of any language.
 DOMAIN=re.compile(r'[^\W_][\w-]*(?:\.[^\W\d_][\w-]*)+')
 SENTENCE=re.compile(r'(?<=[.!?;:])\s+')
-FULL_SENTENCE=re.compile(r'(?<=[.!?])\s+')
 TOKEN=re.compile(r"[^\W_]+(?:['’-][^\W_]+)*")
 ELISION=re.compile(r"^(?:[dlnmstcj]|qu|jusqu|lorsqu|puisqu)['’]",re.I)
 
@@ -57,10 +57,16 @@ def sentence_words(sentence):
     return [w for w in words if w]
 
 
-def borrowed_and(words,index):
-    """English « and » inside a borrowed lowercase phrase: « fish and chips », « bed and breakfast »."""
-    if words[index].lower()!='and' or not 0<index<len(words)-1:return False
-    return all(w[0].islower() and w.lower() not in FOREIGN_WORDS for w in (words[index-1],words[index+1]))
+# English phrases French borrows whole: their « and » is not a sign of an untranslated sentence.
+BORROWED_AND=frozenset({('fish','chips'),('bed','breakfast'),('rock','roll'),('rhythm','blues')})
+
+
+def borrowed(words,index):
+    """A foreign-looking word French uses: « sac à dos », « fish and chips », « bed and breakfast »."""
+    lower=words[index].lower()
+    if lower=='dos':return index>0 and words[index-1].lower()=='à'
+    if lower!='and' or not 0<index<len(words)-1:return False
+    return (words[index-1].lower(),words[index+1].lower()) in BORROWED_AND
 
 
 def foreign_words(words):
@@ -74,16 +80,17 @@ def foreign_words(words):
             continue
         else:
             in_name=False
-            if lower in FOREIGN_NOUNS or (lower in FOREIGN_WORDS and not borrowed_and(words,index)):found.append(lower)
+            if lower in FOREIGN_NOUNS or (lower in FOREIGN_WORDS and not borrowed(words,index)):found.append(lower)
     return found
 
 
 def without_french(sentence):
-    """A long sentence with no French function word, its first word included (« La patinoire ouvre… »)."""
-    words=sentence_words(sentence)
-    common=[w.lower() for w in words if w[0].islower()]
-    present={w.lower() for w in words[:1]}|set(common)
-    return len(common)>=MIN_WORDS_FOR_SHARE and not FRENCH_EVIDENCE.intersection(present)
+    """A long sentence or clause with no French function word, day or month.
+
+    A capitalised first word never counts: « La », « Il » or « Un » open Italian and
+    Spanish sentences too."""
+    common=[w.lower() for w in sentence_words(sentence) if w[0].islower()]
+    return len(common)>=MIN_WORDS_FOR_SHARE and not FRENCH_EVIDENCE.intersection(common)
 
 
 def language_defects(text):
@@ -93,13 +100,13 @@ def language_defects(text):
     or a place (« Museu do Douro ») may keep its language. Known limits, left to the
     model reviewer: a short foreign sentence (« Prossima fermata Vernazza. ») passes, and
     two foreign dishes in one sentence (« alle vongole », « di alici ») are refused."""
-    text=DOMAIN.sub(' ',QUOTED.sub(' ',text))
+    clauses=SENTENCE.split(DOMAIN.sub(' ',QUOTED.sub(' ',text)))
     defects=[]
-    if any(len(foreign_words(sentence_words(s)))>MAX_FOREIGN_PER_SENTENCE for s in SENTENCE.split(text)):
+    if any(len(foreign_words(sentence_words(s)))>MAX_FOREIGN_PER_SENTENCE for s in clauses):
         defects.append('update_untranslated')
-    common=[w.lower() for s in FULL_SENTENCE.split(text) for w in sentence_words(s) if w[0].islower()]
+    common=[w.lower() for s in clauses for w in sentence_words(s) if w[0].islower()]
     share=sum(w in FRENCH_EVIDENCE for w in common)/len(common) if common else 1
-    if any(without_french(s) for s in FULL_SENTENCE.split(text)) or (len(common)>=MIN_WORDS_FOR_SHARE and share<MIN_FRENCH_SHARE):
+    if any(without_french(s) for s in clauses) or (len(common)>=MIN_WORDS_FOR_SHARE and share<MIN_FRENCH_SHARE):
         defects.append('update_not_french')
     return defects
 
