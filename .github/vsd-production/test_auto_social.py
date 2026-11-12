@@ -104,7 +104,8 @@ class Fixture:
                 "commonsTitle": title, "sourcePage": "https://commons.wikimedia.org/wiki/" + title.replace(" ", "_"),
                 "author": "Auteur Commons", "licence": "CC BY-SA 4.0", "licenceUrl": photo_intake.LICENCES["CC BY-SA 4.0"],
                 "commonsSha1": hashlib.sha1(title.encode()).hexdigest(), "retrievedAt": p.stamp(NOW),
-                **({} if "no camera" in title else {"camera": "FUJIFILM X-T4"})}
+                **({} if "no camera" in title else {"camera": "FUJIFILM X-T4"}),
+                "categories": "Bonn|United Nations" if "elsewhere" in title else "Featured pictures of Japan|Kyoto"}
 
     def clip(self, clip_id, candidate):
         folder = self.root / clip_intake.CLIPS
@@ -691,11 +692,58 @@ class PlacePhotoTests(unittest.TestCase):
         self.assertEqual(len(asked), 3)
         self.assertFalse(any(word in query for query in asked for word in ("Santa", "Claus", "Village", "Rovaniemi")))
 
-    def test_the_country_is_searched_only_for_a_guide_of_the_whole_country(self):
+    def test_a_place_is_known_by_its_reviewed_names_only(self):
         self.assertEqual(media_library.place_names(guide(), {}), ["Kyoto"])
         self.assertEqual(media_library.place_names(guide(destination="Japon"), {}), ["Japon", "Japan"])
         self.assertEqual(media_library.place_names(guide(destination="Thaïlande", country="thailande"), {}), ["Thaïlande", "Thailand", "Tailandia"])
         self.assertEqual(media_library.place_names(guide(destination="Yucatán", country="mexique"), {}), ["Yucatán"])
+        self.assertEqual(media_library.country_names(guide(), {}), ["Japon", "Japan"])
+        self.assertEqual(media_library.country_names(guide(**LAPLAND), {}), ["Finlande", "Finland", "Finlandia"])
+        self.assertEqual(media_library.country_names(guide(country="portugal"), {"portugal": {"name": "Portugal"}}), ["Portugal"])
+
+    def test_a_whole_country_is_never_searched(self):
+        # "Portugal" or "Japon" in a title says nothing of what the picture shows: a sea squirt, a war photograph.
+        for article in (guide(destination="Portugal", country="portugal"), guide(destination="Japon"), guide(destination="Vietnam", country="vietnam")):
+            asked = []
+            hits = ["File:Piña de mar (Phallusia mammillata), Parque natural de la Arrábida, Portugal, 2020-07-21, DD 07.jpg", "File:Viet Cong soldier, Vietnam.jpg"]
+            found = media_library.featured_candidates(article, media_library.place_names(article, {}), "x", lambda query: asked.append(query) or hits,
+                                                      media_library.country_names(article, {}))
+            self.assertEqual((found, asked), ([], []))
+
+    def test_a_namesake_in_another_country_is_refused(self):
+        # The reviewer's cases of 12/11/2026: macaws of Chapada dos Guimarães (Brazil) under a Guimarães reel, and others.
+        tied = media_library.tied_to_country
+        portugal, finland = ["Portugal"], ["Finlande", "Finland", "Finlandia"]
+        macaws = {"commonsTitle": "File:189 Red-and-green macaw couple flying in Chapada dos Guimarães National Park Photo by Giles Laurent.jpg",
+                  "categories": "Featured pictures of Mato Grosso|Wiki Loves Earth 2025 in Brazil|Ara chloropterus in flight", "camera": "ILCE-1"}
+        church = {"commonsTitle": "File:Church of Our Lady of Consolation in Guimaraes (3).jpg",
+                  "categories": "Igreja de Nossa Senhora da Consolação e Santos Passos|Featured pictures of Portugal"}
+        self.assertFalse(tied(macaws, portugal))
+        self.assertTrue(tied(church, portugal))
+        self.assertFalse(tied({"commonsTitle": "File:Porto Alegre - Brazil Landscape-Night.jpg", "categories": "Porto Alegre at night|Featured pictures of Brazil"}, portugal))
+        self.assertTrue(tied({"commonsTitle": "File:Porto-Ponte Dom Luis I-14-2011-gje.jpg", "categories": "Ponte Luís I|Quality images of Portugal"}, portugal))
+        self.assertTrue(tied({"commonsTitle": "File:Ribeira, Porto, Portugal (2).jpg", "categories": ""}, portugal))
+        self.assertFalse(tied({"commonsTitle": "File:Abisko National Park, Swedish Lapland.jpg", "categories": "Abisko National Park|Featured pictures of Sweden"}, finland))
+        self.assertFalse(tied({"commonsTitle": "File:Sarek, Laponia World Heritage, Sweden.jpg", "categories": "Sarek National Park"}, finland))
+        self.assertTrue(tied({"commonsTitle": "File:Path to Pallastunturi, Muonio, Lapland, Finland, 2021 September.jpg", "categories": ""}, finland))
+        self.assertFalse(tied({"commonsTitle": "File:Kyoto.jpg"}, ["Japon", "Japan"]))  # nothing says where: in doubt, no photo
+        self.assertFalse(media_library.names_place("File:Castelo de Guimarães.jpg", ["Lisbonne", "Lisbon", "Lisboa"]))
+        guimaraes = guide(slug="guimaraes-une-journee-sans-voiture", destination="Guimarães", country="portugal")
+        found = media_library.featured_candidates(guimaraes, media_library.place_names(guimaraes, {}), "Portugal",
+                                                  lambda query: [macaws["commonsTitle"], church["commonsTitle"]], portugal)
+        self.assertEqual([candidate["countryNames"] for candidate in found], [portugal, portugal])
+
+    def test_the_generator_drops_a_found_photo_that_nothing_ties_to_the_country(self):
+        f = self.fixture(photos=5)
+        hits = ["File:Kyoto Protocol signing, elsewhere.jpg", "File:Kyoto Kinkaku-ji in autumn.jpg"]
+        result = f.run(limit=30, searcher=lambda query: hits if "Featured_pictures" in query else [])
+        records = [record for path in (f.root / a.AUTO).glob("*/photos.json") for record in json.loads(path.read_text())["photos"].values()]
+        used = {record["commonsTitle"] for record in records}
+        self.assertIn("File:Kyoto Protocol signing, elsewhere.jpg", f.downloads)
+        self.assertNotIn("File:Kyoto Protocol signing, elsewhere.jpg", used)
+        self.assertIn("File:Kyoto Kinkaku-ji in autumn.jpg", used)
+        self.assertEqual({path.name for path in (f.root / a.AUTO_PHOTOS).glob("*.jpg")}, {Path(record["file"]).name for record in records})
+        self.assertTrue(result["created"])
 
     def test_the_place_is_a_whole_word_of_the_file_title(self):
         named = media_library.names_place

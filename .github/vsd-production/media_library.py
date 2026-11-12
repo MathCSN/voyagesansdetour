@@ -79,9 +79,29 @@ def names_place(title: str, names: list[str]) -> bool:
     return any(f"-{slugged(name)}-" in words for name in names if slugged(name))
 
 
-def featured_candidates(article: dict, names: list[str], country: str, searcher) -> list[dict]:
+def country_names(article: dict, table: dict) -> list[str]:
+    """The guide's country as Commons writes it: its French name, then English and Spanish (destinations.EXONYMS)."""
+    slug = destinations.country_slug(article)
+    names = {}
+    for name in (destinations.name(slug, table), *destinations.EXONYMS.get(slug, ())):
+        names.setdefault(slugged(name), name)
+    return list(names.values())
+
+
+def tied_to_country(record: dict, names: list[str]) -> bool:
+    """A found file is of the guide's place only if its title or its Commons categories also name the guide's country:
+    "Chapada dos Guimarães" is in Brazil, "Swedish Lapland" is not Rovaniemi. Nothing said: no photo."""
+    categories = str(record.get("categories") or "").split("|")
+    return any(names_place(text, names) for text in [str(record.get("commonsTitle") or ""), *categories])
+
+
+def featured_candidates(article: dict, names: list[str], country: str, searcher, countries: list[str] | None = None) -> list[dict]:
     """Commons featured pictures whose title names the place. Found without a human eye: marked `automatic`,
-    they must also prove they left a camera (Photos.get)."""
+    they must also prove they left a camera and that they are in the guide's country (Photos.get).
+    A guide of a whole country is never searched: a country's name in a title says nothing of what the picture shows."""
+    countries = countries or []
+    if {slugged(name) for name in names} & {slugged(name) for name in countries}:
+        return []
     found = []
     for name in names:
         try:
@@ -94,7 +114,7 @@ def featured_candidates(article: dict, names: list[str], country: str, searcher)
                 continue
             label = re.sub(r"\s+", " ", re.sub(r"\.(jpe?g)$", "", title.removeprefix("File:"), flags=re.IGNORECASE)).strip()
             found.append({"id": slugged(article["destination"])[:40] + "-" + hashlib.sha1(title.encode()).hexdigest()[:8], "title": title,
-                          "alt": f"{article['destination']} ({country}) : {label}."[:300], "automatic": True})
+                          "alt": f"{article['destination']} ({country}) : {label}."[:300], "automatic": True, "countryNames": countries})
     return found
 
 
@@ -120,6 +140,14 @@ class Photos:
         self.created: list[Path] = []
         self.refused: set[str] = set()
 
+    @staticmethod
+    def acceptable(candidate: dict, record: dict, fetched: bool) -> bool:
+        """Nobody looked at a file found by the search: it must be a photograph (a camera in its own data when it is
+        fetched today, nothing in its record that says otherwise) and be tied to the guide's country."""
+        if photo_intake.unphotographic_record(record) or (fetched and not record.get("camera")):
+            return False
+        return tied_to_country(record, candidate.get("countryNames") or [])
+
     def _download(self, photo_id: str, title: str) -> dict:
         return photo_intake.photo_record(photo_id, title, self.now, self.root / AUTO_PHOTOS, AUTO_PHOTOS + "/")
 
@@ -128,8 +156,8 @@ class Photos:
         if title in self.refused:
             return None
         if title in self.known:
-            # A file fetched by an earlier search is used again only if nothing in its record says "not a photograph".
-            if candidate.get("automatic") and photo_intake.unphotographic_record(self.known[title][1]):
+            # A file fetched by an earlier search is used again only if its record still passes today's rules.
+            if candidate.get("automatic") and not self.acceptable(candidate, self.known[title][1], fetched=False):
                 return None
             return self.known[title]
         try:
@@ -137,8 +165,7 @@ class Photos:
         except (OSError, ValueError, KeyError):  # a refusal (photo_intake.Refused) is a ValueError
             self.refused.add(title)
             return None
-        if candidate.get("automatic") and not record.get("camera"):
-            # Nobody looked at this file: without the camera in its own data it is not clearly a photograph.
+        if candidate.get("automatic") and not self.acceptable(candidate, record, fetched=True):
             (self.root / record["file"]).unlink(missing_ok=True)
             self.refused.add(title)
             return None
@@ -168,7 +195,7 @@ def gather_photos(article: dict, needed: int, photos: Photos, site_photos: dict,
 
     take(photo_candidates(article, site_photos, country, photos.shared))
     if len(chosen) < needed:
-        take(featured_candidates(article, place_names(article, table or {}), country, searcher))
+        take(featured_candidates(article, place_names(article, table or {}), country, searcher, country_names(article, table or {})))
     return chosen
 
 
