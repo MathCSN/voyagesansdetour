@@ -77,6 +77,19 @@ jour sourcées des guides publiés. Les guides et mises à jour programmés vive
 `site-src/editorial-queue.json` et `site-src/editorial-candidates/` ; `build-pages.yml`
 (chaque jour 07:41 UTC) publie ceux dont l'heure est venue.
 
+**État réel au 12/11/2026.** Ce rédacteur automatique n'a encore admis aucun guide : 51 passages
+depuis le 12/10, tous retenus à la relecture. Les guides en ligne viennent des routines et des
+sessions, qui écrivent dans `articles.json`. Le rapport le dit (alerte « rédacteur automatique sans
+résultat »). Un jeton Workers AI refusé (HTTP 401 ou 403) fait désormais échouer le passage au lieu
+de le laisser vert. La découverte laisse de côté un guide de plus de 18 000 octets, trop long pour
+tenir dans une requête avec ses sources (statut `held_guide_too_large` s'il est demandé par son
+nom) : au 12/11, seul le guide du Costa Rica est dans ce cas.
+
+**Reprise d'un déploiement doublé.** Si un commit arrive sur `main` pendant une construction, le
+déploiement ne publie rien (le site ne revient jamais en arrière) et relance lui-même
+`build-pages.yml` sur le nouveau `main` (entrée `republish`). Avant, il échouait, et un commit hors
+de `site-src`, qui ne déclenche aucune construction, laissait le guide hors ligne.
+
 **Calendrier.** Un nouveau guide sort au plus tôt deux jours (calendrier de Paris) après la
 dernière publication, quelle qu'en soit l'origine (chaîne, routine cloud ou promotion). Il peut
 être rédigé la veille de son créneau. `calendar_full` est donc normal le jour d'une
@@ -146,7 +159,7 @@ des fichiers changés sont dans l'artefact `new-guide-proposal`.
 | `vsd-voice-production.yml` → `vsd-voice-adopt.yml` → `vsd-voice-review.yml` → `vsd-voice-promote.yml` | à la main seulement | Chaîne des reels voix de synthèse, en sommeil depuis le 24/10 (ancien format retiré) |
 | `vsd-promote-media.yml` | à la main seulement | Ancienne promotion des rendus relus, en sommeil depuis le 06/11 : les nouveaux posts passent par `vsd-render-content` et l'import quotidien de `vsd-cloud-control` |
 | `vsd-writing-discovery.yml` | chaque jour 09:37 | Mises à jour sourcées des guides ; une source injoignable est ignorée et notée, le passage continue |
-| `vsd-weekly-report.yml` | chaque jour 09:07 (rapport le lundi) | Rapport hebdomadaire et alerte de file vide |
+| `vsd-weekly-report.yml` | toutes les 6 heures (01:07, 07:07, 13:07, 19:07 ; rapport dès le dimanche midi) | Rapport hebdomadaire et issue d'alerte |
 
 `vsd-writing-guide` tourne seul deux fois par jour (rédaction des nouveaux guides).
 Lancés à la main seulement, pour qualifier un modèle : `vsd-writing-draft`, `-entailment`,
@@ -158,14 +171,38 @@ Secrets : `VSD_ADMIN_TICK_KEY` (appels signés du panneau privé), `CLOUDFLARE_W
 
 ## Surveillance
 
-- **Rapport hebdomadaire** : chaque lundi, une issue `rapport-hebdo` dans le dépôt
-  (publié cette semaine, file à venir, échecs de workflows, alertes, ce qui attend Mathis).
-  La précédente est fermée automatiquement.
-- **Alerte** : chaque jour, une issue `alerte-file` s'ouvre (ou se met à jour) si
-  Instagram ou Facebook n'a plus de post programmé à 14 jours, si aucun nouveau guide n'est prévu
-  à 28 jours, si un workflow échoue deux fois dans la semaine, ou à 60 jours de la date d'arrêt.
-  Elle se ferme seule quand tout est revenu dans l'ordre.
-- **Référencement** (`docs/seo.md`) : le rapport du lundi donne les clics et impressions Google sur
+- **Rapport hebdomadaire** : une issue `rapport-hebdo` par semaine, ouverte au premier passage
+  après le dimanche midi (UTC), pour exister avant les routines du lundi matin qui la lisent
+  (publié cette semaine, publication, référencement, sources des guides, file à venir, échecs de
+  workflows, alertes, ce qui attend Mathis). La précédente est fermée automatiquement. Si GitHub
+  saute un passage, le suivant ouvre le rapport de la semaine.
+- **Alerte** : toutes les six heures, une issue `alerte-file` s'ouvre ou se met à jour si
+  Instagram ou Facebook n'a plus de post programmé à 14 jours, si un workflow échoue deux fois dans
+  la semaine, ou à 60 jours de la date d'arrêt ; s'y ajoutent les alertes de publication, de
+  référencement et de guides décrites plus bas. Elle se ferme seule quand tout est revenu dans l'ordre.
+  - Son **titre** dit ce qui se passe (« ⚠️ Instagram coupé de Buffer et 2 autres alertes »).
+  - GitHub ne prévient personne quand le texte d'une issue change : chaque alerte **nouvelle** depuis
+    le passage précédent est donc annoncée par un **commentaire** qui la nomme et mentionne le
+    propriétaire du dépôt. Une alerte déjà ouverte qui **s'aggrave** est annoncée de la même façon :
+    un post retenu de plus, un post menacé de plus, un guide périmé de plus. Un nombre qui baisse ne
+    prévient pas. Les codes et les nombres des alertes en cours sont gardés dans le texte de l'issue
+    (`issue-plan.mjs`). Limite : si un post sort de la liste pendant qu'un autre y entre entre deux
+    passages, le nombre ne bouge pas et rien n'est annoncé.
+  - Une alerte que le passage **n'a pas pu relire** reste telle qu'elle était connue : elle n'est ni
+    levée, ni annoncée de nouveau, et l'issue ne se ferme pas. C'est le cas des alertes de
+    publication et de référencement quand le panneau ne répond pas, et de l'alerte sur le rédacteur
+    quand la recherche GitHub échoue. L'issue les range alors sous « Non relues à ce passage ». Pour
+    repartir de zéro, fermer l'issue à la main : le passage suivant en ouvre une neuve.
+- **Guides** (`guide-health.mjs`) :
+  - section « Sources des guides » du rapport : les guides dont `sourcesCheckedOn` aura plus de
+    45 jours dans les 10 jours, groupés par date. Au-delà de 45 jours, `auto_social.py` ne tire plus
+    de posts du guide ; l'alerte se lève quand un guide a dépassé la limite ;
+  - alerte si aucun guide n'a été publié depuis plus de 10 jours (`publishedOn` du catalogue). La
+    file `editorial-queue.json` n'est plus surveillée : les routines écrivent dans `articles.json` ;
+  - alerte si le rédacteur automatique (`vsd-writing-guide.yml`) tourne sans avoir admis de guide
+    depuis 14 jours. Elle tombe quand il admet un guide, ou quand il est mis en sommeil (aucun
+    passage dans la semaine).
+- **Référencement** (`docs/seo.md`) : le rapport de la semaine donne les clics et impressions Google sur
   28 jours, les requêtes en hausse et les pages indexées, lus dans le panneau privé par un appel
   signé en lecture seule. L'alerte se lève aussi si l'indexation recule sur 7 jours ou si les
   impressions sont divisées par deux. Après chaque déploiement, `indexnow.py` prévient Bing et
@@ -174,7 +211,12 @@ Secrets : `VSD_ADMIN_TICK_KEY` (appels signés du panneau privé), `CLOUDFLARE_W
   « Publication » du rapport : état de chaque canal Buffer, dernier passage, posts par état, posts
   retenus ou en échec, posts prêts dont le canal ne reçoit rien). L'alerte se lève aussi dans les
   cas ci-dessous et retombe d'elle-même quand la cause disparaît. Si le panneau ne répond pas ou
-  n'envoie pas encore ce bloc, le rapport le dit et aucune alerte de publication n'est levée.
+  n'envoie pas ce bloc, le rapport le dit ; au deuxième passage de suite sans lecture (plus de
+  4 heures), l'alerte « état du moteur illisible » se lève, car les autres alertes de publication
+  sont alors aveugles. La date de la première lecture manquée est gardée d'un passage à l'autre
+  dans le cache du workflow, enregistré juste après l'écriture du rapport, même si une étape
+  suivante échoue. Une mémoire perdue, ou vieille de plus de 9 heures (passage sauté, cache non
+  enregistré), ne compte pas : le délai repart, ce qui ne fait que retarder cette alerte d'un passage.
 
   | Alerte | Déclenchement | Quoi faire |
   | --- | --- | --- |
@@ -183,10 +225,16 @@ Secrets : `VSD_ADMIN_TICK_KEY` (appels signés du panneau privé), `CLOUDFLARE_W
   | Accès Buffer absent | Aucune clé Buffer enregistrée dans le panneau | Page Connexions du panneau. |
   | Posts bloqués | Un post retenu ou en échec depuis moins de 7 jours (un lot retiré du stock exprès ne compte pas) | Page Publication du panneau : lire le motif. Échéance dépassée : le post est perdu, corriger la cause (canal, clé) pour les suivants. L'alerte tombe 7 jours après le blocage. |
   | Posts menacés | Un post prêt à moins de 24 h de son échéance sur un canal qui ne reçoit rien | Rétablir le canal avant l'échéance, sinon le post sera retenu. |
+  | État du moteur illisible | Le panneau ne répond plus au rapport, ou répond sans le bloc « publication », depuis plus de 4 heures | Vérifier que le panneau est en ligne, puis que la version déployée est à jour (`npm run deploy` par Mathis). |
 
   Les posts TikTok ne lèvent aucune alerte tant que TikTok est absent de Buffer (réseau facultatif) :
   ils restent listés dans la section « Publication ». Non couvert : un post resté « à vérifier »
   (envoi au résultat incertain) ; il se lit dans les compteurs du registre.
+- Limite : le rapport ne sait pas si le panneau a importé un lot. Un lot refusé à l'import n'entre
+  pas au registre et reste invisible ici ; chaque post de la « file à venir » sort donc avec
+  « état cloud inconnu ». Il faudrait que le bloc « publication » du panneau donne le résultat de
+  son dernier import (date, lots importés, lots refusés avec leur code, lots reportés) et les
+  identifiants de lots présents au registre.
 - Limite : la preuve de publication Instagram/Facebook n'est pas lisible depuis GitHub
   (pas d'API publique). Le rapport liste les posts dont l'échéance est passée ; la preuve
   est dans le panneau privé et sur les profils.

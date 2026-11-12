@@ -3,6 +3,15 @@
 // post identifiers and unknown codes are only ever written inside a code span.
 const HOUR=36e5,DAY=24*HOUR;
 export const ENGINE_SILENCE_HOURS=6,POST_TROUBLE_DAYS=7;
+// The report runs every six hours: past this delay, the engine state has been missing at two runs in a row.
+const READING_GRACE_HOURS=4;
+// A memory older than this was not written by the previous run (a run was skipped, or its memory was not
+// saved): what the panel answered in between is unknown, so the delay starts again.
+const READING_MEMORY_MAX_HOURS=9;
+// Kinds of the alerts drawn from the engine state. When that state is missing, the report says so and the
+// alert issue keeps those it already had (issue-plan.mjs) instead of dropping them.
+export const PUBLICATION_KINDS=['publication_channel','publication_buffer_access','publication_engine_disabled','publication_engine_silent','publication_posts_blocked','publication_posts_at_risk'];
+export const READING_KIND='publication_reading_missing';
 const NAMED_IN_ALERT=5;
 // TikTok is optional: its absence from Buffer is a choice, not a fault.
 const REQUIRED_CHANNELS=['instagram','facebook'];
@@ -71,18 +80,42 @@ function postAlerts({channels,problems,problemsCount,atRisk,atRiskCount},now){
   const recent=problems.filter(post=>post.reason!==WITHDRAWN&&!leftOut(post.channel)&&now-Date.parse(post.at)<POST_TROUBLE_DAYS*DAY);
   const blocked=recent.length+Math.max(0,problemsCount-problems.length);
   if(blocked){
-    alerts.push({code:'publication_posts_blocked',message:`${blocked} ${blocked>1?'posts retenus':'post retenu'} ou en échec depuis moins de ${POST_TROUBLE_DAYS} jours : ${named(recent.map(post=>troubleText(post)+')'),blocked)}. Détail sur la page Publication du panneau ; l’alerte tombe d’elle-même ${POST_TROUBLE_DAYS} jours après le blocage.`});
+    alerts.push({code:'publication_posts_blocked',count:blocked,message:`${blocked} ${blocked>1?'posts retenus':'post retenu'} ou en échec depuis moins de ${POST_TROUBLE_DAYS} jours : ${named(recent.map(post=>troubleText(post)+')'),blocked)}. Détail sur la page Publication du panneau ; l’alerte tombe d’elle-même ${POST_TROUBLE_DAYS} jours après le blocage.`});
   }
   const threatened=atRisk.filter(post=>!leftOut(post.channel));
   const total=threatened.length+Math.max(0,atRiskCount-atRisk.length);
   if(total){
-    alerts.push({code:'publication_posts_at_risk',message:`${plural(total,['post prêt','posts prêts'])} à moins de 24 h de l’échéance sur un canal qui ne reçoit rien : ${named(threatened.map(riskText),total)}. Sans canal connecté avant l’échéance, le post sera retenu.`});
+    alerts.push({code:'publication_posts_at_risk',count:total,message:`${plural(total,['post prêt','posts prêts'])} à moins de 24 h de l’échéance sur un canal qui ne reçoit rien : ${named(threatened.map(riskText),total)}. Sans canal connecté avant l’échéance, le post sera retenu.`});
   }
   return alerts;
 }
 
-/** Every alert is recomputed from the current state: it disappears with its cause. No reading, no alert. */
-export function publicationAlerts(publication,now){
-  if(!publication)return [];
+/**
+ * What the report remembers from one run to the next: since when the panel has stopped giving the engine
+ * state. The panel has been deployed for long, so its silence is a fault, but one missed reading is not.
+ * `seenAt` dates the memory: a missed reading only continues the previous one when the memory was written
+ * by the run just before. A lost or stale memory can therefore delay the alert, never raise it.
+ */
+export function readingState(previous,seo,now){
+  const seenAt=new Date(now).toISOString();
+  if(seo?.publication)return {missingSince:null,seenAt};
+  const time=value=>typeof value==='string'?Date.parse(value):NaN;
+  const since=time(previous?.missingSince),seen=time(previous?.seenAt);
+  const follows=since<=now&&seen<=now&&now-seen<=READING_MEMORY_MAX_HOURS*HOUR;
+  return {missingSince:follows?new Date(since).toISOString():seenAt,reason:seo?'block_absent':'panel_unreadable',seenAt};
+}
+
+function readingAlerts(reading,now){
+  if(!reading?.missingSince||now-Date.parse(reading.missingSince)<=READING_GRACE_HOURS*HOUR)return [];
+  const what=reading.reason==='block_absent'?'répond sans l’état du moteur de publication (version en ligne trop ancienne, ou registre illisible)':'ne répond plus au rapport';
+  return [{code:READING_KIND,message:`Le panneau ${what} depuis le ${moment(reading.missingSince)} : les alertes sur les canaux Buffer, le moteur et les posts sont aveugles. Vérifier que le panneau est en ligne et déployé à jour.`}];
+}
+
+/**
+ * Every alert is recomputed from the current state: it disappears with its cause. Without the engine
+ * state, the only alert is the one saying the state has been missing for too long (`reading`).
+ */
+export function publicationAlerts(publication,now,reading=null){
+  if(!publication)return readingAlerts(reading,now);
   return [...channelAlerts(publication.channels),...engineAlerts(publication,now),...postAlerts(publication,now)];
 }

@@ -12,7 +12,7 @@ import http.client
 import urllib.error
 import urllib.parse
 import urllib.request
-from source_draft import call,require,HARD_STOP,source_fingerprint,check_review,REVIEW_INSTRUCTION
+from source_draft import call,require,HARD_STOP,source_fingerprint,check_review,REVIEW_INSTRUCTION,ProviderAccessError
 from discover_facts import partition_facts,attach_context,SameHostRedirect
 from entailment import assess
 from guide_review import assess_article, validate_metadata, fit_metadata, overlong, METADATA_LIMITS
@@ -408,9 +408,10 @@ def main():
             report['status']=proposal['status']
     except Exception as error:
         report.update(status='held_no_retry',errorType=type(error).__name__)
-        if isinstance(error,ValueError) and str(error).replace('_','').isalnum() and len(str(error))<60:report['reason']=str(error)
+        if isinstance(error,(ValueError,ProviderAccessError)) and str(error).replace('_','').isalnum() and len(str(error))<60:report['reason']=str(error)
         # A refused fact, a missing photo or an unreachable source holds this guide only: the
-        # next run tries again or another topic. A broken setup or an unexpected error fails.
+        # next run tries again or another topic. A broken setup, a token the model provider refuses
+        # (ProviderAccessError is no network error) or an unexpected error fails.
         editorial=isinstance(error,(ValueError,urllib.error.URLError,TimeoutError,ConnectionError,http.client.HTTPException))
         report['setupFailure']=not editorial or str(error) in SETUP_ERRORS or str(error).startswith('guide_topic')
     (out/'guide-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
