@@ -28,8 +28,9 @@ A post is one thing: its batch and its copies on other networks are withdrawn or
 the slot that comes first. A page that cannot be read says nothing: its batches are left alone and listed
 as unread. Quotes taken from another site (a carrier, a museum) are not read again here: the batches that
 carry such figures are listed with the day the source was read, for the daily report.
-No scenario, render or batch file is ever touched; identifiers and paths read in the index must stay
-inside the production folder.
+No scenario, render or batch file is ever touched. A name read in the index must be an identifier, and
+the source registry of a scenario is looked up among those of the production folder: nothing read in a
+file is opened as a path.
 """
 from __future__ import annotations
 
@@ -60,11 +61,15 @@ THOUSANDS = re.compile(r"(?<=\d) (?=\d{3}(?!\d))")
 # A number, never an ordinal: "2e classe", "1er dimanche" and "tram 15E" count nothing.
 NUMBER = re.compile(r"(?<![\d,])\d+(?:,\d+)?(?!\d|,\d)(?!(?:er|ere|re|e|eme|nd|nde)\b)")
 GROUPED = re.compile(r"(?<![\d,])\d{1,3}(?: \d{3})+(?:,\d+)?(?!\d|,\d)")
-UNIT = re.compile(r"\s?(?:" + reel_formats.UNIT + r"|bahts?\b|pesos?\b|euros?\b|dollars?\b|livres?\b|yens?\b)")
+# What makes a small number a figure: a price, a duration, a distance, a count of people, written short or in full.
+UNIT = re.compile(r"\s?(?:" + reel_formats.UNIT + r"|(?:bahts?|pesos?|euros?|dollars?|livres?|yens?|dirhams?|heures?|minutes?|secondes?"
+                  r"|kilom[eè]tres?|m[eè]tres?|semaines?|mois|ann[eé]es?|personnes?|adultes?|enfants?|[eé]toiles?|degr[eé]s?)\b)", re.IGNORECASE)
+MONEY_BEFORE = re.compile(r"[€$£¥₫฿]\s?\Z")
 DATES = (re.compile(r"\b(\d{1,2})/(\d{1,2})/(\d{2,4})\b"),
          re.compile(rf"\b(\d{{1,2}})(?:er)? (?:{reel_formats.MONTHS})\b(?: (\d{{4}}))?", re.IGNORECASE),
          re.compile(rf"\b(?:{reel_formats.MONTHS}) (\d{{4}})\b", re.IGNORECASE))
 UNREADABLE = (OSError, ValueError, LookupError, TypeError)
+REGISTRY_FOLDERS = ("auto", "sources")   # where scenarios keep their source registries (auto_social.py, hand-written posts)
 
 
 def folded(line: str) -> str:
@@ -81,14 +86,26 @@ def plain(text: str) -> str:
 
 def readings(excerpt: str) -> dict[str, tuple[str, ...]]:
     """Each number of a quote with the ways it may be written on the page. "15 200" is fifteen thousand two hundred, or
-    two cells of a table joined in one quote ("Ligne 15" and "200 ¥"): the number in one piece, else its pieces."""
+    two cells of a table joined in one quote ("Ligne 15" and "200 ¥"): the number in one piece, else its two pieces."""
     quote, found = folded(p.normalized(excerpt)), {}
     for group in GROUPED.finditer(quote):
         pieces = group[0].split(" ")
         # "20 000" is one number: a cell of a table does not begin with a zero.
-        found[group[0].replace(" ", "")] = () if any(piece.startswith("0") for piece in pieces[1:]) else tuple(pieces)
+        found[group[0].replace(" ", "")] = tuple(pieces) if len(pieces) == 2 and not pieces[1].startswith("0") else ()
     rest = GROUPED.sub(" ", quote)
     return {**{number: () for number in NUMBER.findall(rest)}, **found}
+
+
+def side_by_side(page: str) -> set[tuple[str, str]]:
+    """(a number of one element of the page, the number that opens the next element): two cells of one row of a table.
+    Only there can "15 200" in a quote be "Ligne 15" and "200 ¥"; "1 500 €" is not "1 nuit" and, further on, "500 €"."""
+    lines = [folded(p.normalized(line)) for line in page.split("\n")]
+    pairs = set()
+    for before, after in zip(lines, lines[1:]):
+        opening = NUMBER.match(after)
+        if opening:
+            pairs |= {(number, opening[0]) for number in NUMBER.findall(before)}
+    return pairs
 
 
 def whole(number: str) -> re.Pattern:
@@ -104,12 +121,13 @@ def numbers_gone(excerpt: str, page: str) -> list[str]:
     if not numbers:
         return []
     words = reel_formats.words_of(excerpt)
+    cells = side_by_side(page)
+    in_cells = {number for number, pieces in numbers.items() if pieces in cells}
     patterns = {number: whole(number) for number in {*numbers, *(piece for pieces in numbers.values() for piece in pieces)}}
     reach, best = len(folded(excerpt)) + AROUND, (0, 0, list(numbers))
     for at in sorted({match.start() for pattern in patterns.values() for match in pattern.finditer(text)}):
         passage = text[max(0, at - reach):at + reach]
-        given = lambda number: bool(patterns[number].search(passage))
-        missing = [number for number, pieces in numbers.items() if not (given(number) or (pieces and all(map(given, pieces))))]
+        missing = [number for number in numbers if number not in in_cells and not patterns[number].search(passage)]
         named = len(words & set(re.findall(r"[a-z0-9]{4,}", passage)))
         if not missing and 2 * named >= len(words):
             return []
@@ -122,7 +140,8 @@ def only_wording(numbers: list[str], excerpt: str) -> bool:
     ("7 départs par jour" may become "sept départs par jour"; "2 € la traversée" may not become anything else)."""
     quote = p.normalized(excerpt)
     dated = {part.lstrip("0") for pattern in DATES for match in pattern.finditer(quote) for part in match.groups() if part}
-    bare = {match[0] for match in re.finditer(r"(?<![\d,€$£¥])\b\d\b(?![\d,])", quote) if not UNIT.match(quote, match.end())}
+    bare = {match[0] for match in re.finditer(r"(?<![\d,])\b\d\b(?![\d,])", quote)
+            if not UNIT.match(quote, match.end()) and not MONEY_BEFORE.search(quote[:match.start()])}
     return all(number.lstrip("0") in dated or number in bare for number in numbers)
 
 
@@ -132,26 +151,25 @@ def scenario_id(batch_id: str) -> str:
     return next((name.removesuffix("-" + channel) for channel in social_stock.CROSSPOSTS if name.endswith("-" + channel)), name)
 
 
-def inside(root: Path, relative: str) -> Path:
-    """The file at this path of the production folder. A name read in the index or in a scenario never leads out."""
-    base, path = root.resolve(), (root / relative).resolve()
-    if not path.is_relative_to(base):
-        raise ValueError("Path outside the production folder: " + relative)
-    return path
-
-
 def stored(root: Path, folder: str, name: str) -> dict | None:
-    """The JSON file `<folder>/<name>.json`, None when there is none; the name is an identifier, nothing else."""
-    if not p.ID.match(str(name)):
+    """The JSON file `<folder>/<name>.json`, None when there is none. The name is read in the index: it must be an
+    identifier (letters, digits, dashes), so that it names a file of that folder and nothing else."""
+    if not isinstance(name, str) or not p.ID.match(name):
         raise ValueError("Not an identifier: " + str(name))
-    path = inside(root, f"{folder}/{name}.json")
+    path = root / folder / (name + ".json")
     return json.loads(path.read_text()) if path.is_file() else None
 
 
-def quotes_of(scenario: dict, root: Path) -> tuple[list[tuple[str, str]], list[dict]]:
+def registries(root: Path) -> dict[str, Path]:
+    """The source registries of the production folder, by the relative path the scenarios give them. A scenario's
+    registry is looked up in this list: a path written in a scenario is never opened as it is."""
+    return {path.relative_to(root).as_posix(): path for folder in REGISTRY_FOLDERS for path in (root / folder).glob("**/sources.json")}
+
+
+def quotes_of(scenario: dict, known: dict[str, Path]) -> tuple[list[tuple[str, str]], list[dict]]:
     """What the post quotes: (page, excerpt) for every quote taken from a page of the site, each once, in the order of
     the plans; and, for the figures taken from another site, that source with the day it was read."""
-    registry = json.loads(inside(root, str(scenario["sources"]["file"])).read_text())["sources"]
+    registry = json.loads(known[str(scenario["sources"]["file"])].read_text())["sources"]
     facts = [fact for scene in scenario["scenes"] for fact in scene.get("facts", []) if isinstance(fact.get("excerpt"), str)]
     ours = {name for name, record in registry.items() if urllib.parse.urlsplit(str(record.get("url", ""))).hostname == SITE_HOST}
     site = list(dict.fromkeys((registry[fact["source"]]["url"], fact["excerpt"]) for fact in facts if fact.get("source") in ours))
@@ -183,6 +201,7 @@ class Reader:
     def __init__(self, root: Path, now: dt.datetime, fetcher):
         self.root, self.now, self.fetcher = root, now, fetcher
         self.pages: dict[str, str | None] = {}
+        self.registries = registries(root)
 
     def text_of(self, url: str) -> str | None:
         if url not in self.pages:
@@ -202,7 +221,7 @@ class Reader:
         scenario = stored(self.root, "scenarios", row["scenario"])
         if not scenario:
             return {**row, "status": "unread", "why": "no_scenario"}
-        quotes, outside = quotes_of(scenario, self.root)
+        quotes, outside = quotes_of(scenario, self.registries)
         row = {**row, "external": outside} if outside else row
         texts = {url: self.text_of(url) for url in dict.fromkeys(url for url, _ in quotes)}
         if any(text is None for text in texts.values()):
@@ -212,7 +231,7 @@ class Reader:
 
 def examine(root: Path, now: dt.datetime, fetcher=a.fetch_page) -> list[dict]:
     """One row per batch still to come: how many of its quotes the site still gives, and which ones it lost."""
-    index = json.loads(inside(root, "reviewed-social/index.json").read_text())
+    index = json.loads((root / "reviewed-social" / "index.json").read_text())
     retired = {entry["batchId"] for entry in index.get("retirements", [])}
     reader, rows = Reader(root, now, fetcher), []
     for entry in index["items"]:
@@ -275,12 +294,14 @@ def retire(root: Path, rows: list[dict], now: dt.datetime) -> list[str]:
     chosen = {row["batchId"]: row for row in rows if row.get("action") == "retire"}
     if not chosen:
         return []
-    path = inside(root, "reviewed-social/index.json")
+    path = root / "reviewed-social" / "index.json"
     index = json.loads(path.read_text())
     entries = [{"batchId": entry["batchId"], "batchSha256": entry["batchSha256"], "fileSha256": entry["fileSha256"], "itemIds": entry["itemIds"],
                 "retiredAt": p.stamp(now), "reason": REASON, "evidence": evidence(chosen[entry["batchId"]], now)}
                for entry in index["items"] if entry["batchId"] in chosen]
-    path.write_text(json.dumps({**index, "retirements": index.get("retirements", []) + entries}, ensure_ascii=False, indent=2) + "\n")
+    text = json.dumps({**index, "retirements": index.get("retirements", []) + entries}, ensure_ascii=False, indent=2) + "\n"
+    with path.open("w", encoding="utf-8") as handle:   # the path is fixed; only the list of withdrawals grows
+        handle.write(text)
     return [entry["batchId"] for entry in entries]
 
 

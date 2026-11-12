@@ -175,9 +175,13 @@ class StaleLotsTests(unittest.TestCase):
                              ("le sapin s’illumine le 2 décembre 2026", "le sapin s’illumine début décembre")):
             lost = gone(quote, today)
             self.assertTrue(lost and wording(lost, quote), (quote, lost))
-        # A price, a duration, a distance or a larger number is a figure, whatever its size.
+        # A price, a duration, a distance or a larger number is a figure, whatever its size and however its unit is written.
         for quote, today in (("2 € la traversée du Tage en ferry", "3 € la traversée du Tage en ferry"), ("3 h de car pour Essaouira", "trois heures de car pour Essaouira"),
-                             ("le bus 19 de l’aéroport", "le bus L99 de l’aéroport"), ("0 $ la patinoire de Bryant Park", "la patinoire de Bryant Park est payante")):
+                             ("le bus 19 de l’aéroport", "le bus L99 de l’aéroport"), ("0 $ la patinoire de Bryant Park", "la patinoire de Bryant Park est payante"),
+                             ("3 heures de train depuis Séville", "4 heures de train depuis Séville"), ("5 minutes à pied de la gare", "8 minutes à pied de la gare"),
+                             ("7 kilomètres de sentier côtier", "9 kilomètres de sentier côtier"), ("2 semaines suffisent pour la boucle", "trois semaines suffisent pour la boucle"),
+                             ("la chambre pour 3 personnes", "la chambre pour 4 personnes"), ("le billet à € 5 en ligne", "le billet à € 6 en ligne"),
+                             ("4 trains directs seulement", "6 trains directs seulement")):
             lost = gone(quote, today)
             self.assertTrue(lost and not wording(lost, quote), (quote, lost))
         stock = self.stock()
@@ -196,6 +200,8 @@ class StaleLotsTests(unittest.TestCase):
         self.assertEqual(gone("Ligne 15 200 ¥", stale_lots.a.page_text(cells)), [])      # worded again, same numbers
         self.assertEqual(gone("Ligne 15 200 ¥", stale_lots.a.page_text(cells.replace("200 ¥", "230 ¥"))), ["15200"])
         self.assertEqual(gone("15 200 ¥ le billet", "le billet coûte 15 200 ¥"), [])      # a real number in the thousands
+        # A real number in the thousands that changed is not read in pieces: "1" and "500" are on the page, not side by side in a table.
+        self.assertEqual(gone("1 500 € la semaine en chambre double", "500 € la semaine en chambre double, pour 1 nuit offerte"), ["1500"])
 
     def test_figures_taken_from_another_site_are_listed_with_the_day_they_were_read(self):
         stock = self.stock()
@@ -211,7 +217,7 @@ class StaleLotsTests(unittest.TestCase):
         self.assertEqual(result["batches"][0]["external"], [{"url": "https://www.example.org/fares", "retrievedAt": "2026-10-24T08:00:00Z", "quotes": 1}])
         self.assertNotIn("external", result["batches"][1])
 
-    def test_a_name_read_in_the_index_never_leads_out_of_the_production_folder(self):
+    def test_nothing_read_in_a_file_is_opened_as_a_path(self):
         stock = self.stock()
         stock.post("ig-yucatan", [ENTRY])
         secret = stock.root.parent / "outside.json"
@@ -225,10 +231,13 @@ class StaleLotsTests(unittest.TestCase):
         self.assertEqual([(row["batchId"], row["status"], row.get("why")) for row in result["batches"]],
                          [("ig-yucatan-v1", "current", None), ("../outside", "unread", "unreadable_batch"), ("ig-escape-v1", "unread", "unreadable_batch")])
         self.assertFalse(secret.exists())
-        with self.assertRaises(ValueError):
-            stale_lots.inside(stock.root, "../outside.json")
-        with self.assertRaises(ValueError):
-            stale_lots.stored(stock.root, "scenarios", "../../x")
+        for name in ("../../x", "a/b", "A", "x.json", "", None):
+            with self.assertRaises(ValueError):
+                stale_lots.stored(stock.root, "scenarios", name)
+        # A registry is looked up among the files of the production folder, never opened from what a scenario says.
+        self.assertEqual(sorted(stale_lots.registries(stock.root)), ["auto/ig-escape/sources.json", "auto/ig-yucatan/sources.json"])
+        with self.assertRaises(KeyError):
+            stale_lots.quotes_of({"sources": {"file": "/etc/hosts"}, "scenes": []}, stale_lots.registries(stock.root))
 
     def test_a_page_that_cannot_be_read_or_that_changed_altogether_withdraws_nothing(self):
         stock = self.stock()

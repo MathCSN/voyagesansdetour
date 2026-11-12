@@ -1378,6 +1378,12 @@ class RealGuideTests(unittest.TestCase):
         self.assertIn("938 bahts la couchette haute climatisée de 2e classe du train 9", [fact["excerpt"] for fact in table["facts"]])
         self.assertEqual(lines[0], "🚆 938 bahts : la couchette haute climatisée de 2e classe du train 9 (≈ 25 €, tarif SRT de novembre 2026)")
         self.assertEqual([scene["headline"][0].strip("*").replace(reel_formats.NBSP, " ") for scene in scenes[2:-1]], ["500 bahts", "330 bahts"])  # not said twice
+        # A price the table already gives in a row is not written under it again.
+        rows = dict(trains, table={"headers": ["Train", "2e classe"], "rows": [["N° 7 (autorail de jour)", "558 bahts"], ["N° 9 (couchettes récentes)", "938 bahts"], ["N° 13 (couchettes)", "768 bahts"]]})
+        priced = p.normalized("2e classe " + " ".join(row[0] + " " + row[1] for row in rows["table"]["rows"]))
+        scenes, _ = reel_formats.build("tableau", {**article, "sections": [rows]}, figures(pairs), photos, [], "Phrase d’ouverture.", "Thaïlande", "Thaïlande",
+                                       "Guide Thaïlande · sources du 12/11/2026", ["La Thaïlande", "en 2 semaines"], priced)
+        self.assertNotIn("detail", scenes[1])
         # A price that another photo shows as well is not the table's own: it stays a plan of its own.
         twin = photos[:2] + [("thailande-gare", {"commonsTitle": "File:Station.jpg"}, "Un train en gare de Bangkok.")] + photos[2:]
         scenes, _ = reel_formats.build("tableau", article, figures(pairs), twin, [], "Phrase d’ouverture.", "Thaïlande", "Thaïlande",

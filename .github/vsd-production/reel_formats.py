@@ -561,17 +561,20 @@ def itinerary_reel(brief: Brief) -> tuple[dict, list[dict], list[str]]:
     return brief.hook(EVERY_DAY if every_day else f"*{len(body)} étapes clés*"), body, lines
 
 
-def under_table(brief: Brief, photo_id: str, rows: int) -> dict | None:
+def under_table(brief: Brief, photo_id: str, rows: list[list[str]]) -> dict | None:
     """The price the guide gives for what the table lists (the berth of the trains whose departures it gives): the
     first price that the table's own photo shows better than any other photo of the post. Only under a short table,
     in two lines, and only a figure dated like the rest of the plan."""
     photo = next((ph for ph in brief.media.all if ph[0] == photo_id), None)
-    if not photo or rows > UNDER_TABLE[0]:
+    if not photo or len(rows) > UNDER_TABLE[0]:
         return None
+    listed = set(re.findall(r"\d+(?:,\d+)?", " ".join(cell for row in rows for cell in row)))
     for fact in brief.numbered:
         target = brief.media.target(fact["label"])
         shown = brief.media.shared(photo, target)
-        if (is_price(fact) and len(fact["value"] + " " + fact["short"]) <= UNDER_TABLE[1] and dated_tag(fact, brief.tag) == brief.tag
+        # Never a price the table already gives in one of its rows: it would be said twice on one screen.
+        if (is_price(fact) and not listed & set(re.findall(r"\d+(?:,\d+)?", fact["value"]))
+                and len(fact["value"] + " " + fact["short"]) <= UNDER_TABLE[1] and dated_tag(fact, brief.tag) == brief.tag
                 and shown > max((brief.media.shared(ph, target) for ph in brief.media.all if ph is not photo), default=0)):
             return fact
     return None
@@ -588,7 +591,7 @@ def table_reel(brief: Brief) -> tuple[dict, list[dict], list[str]]:
     picture = brief.media.photo(section=table["section"])
     # The table is named by its section ("Le train de nuit pour Chiang Mai" above "Départ de Bangkok"), and the price
     # the guide gives for what it lists is written under it.
-    price = under_table(brief, picture[1], len(rows))
+    price = under_table(brief, picture[1], rows)
     quotes = [{"source": "guide", "excerpt": a + " " + b} for a, b in rows] + ([{"source": "guide", "excerpt": price["shortExcerpt"]}] if price else [])
     body = [plan("table", picture, kicker_of(table["section"], brief.place), table["title"], min(7.0, round(4.0 + 0.6 * len(rows), 1)),
                  detail="*" + unbreakable(price["value"]) + "* " + unbreakable(price["short"]) if price else None,
