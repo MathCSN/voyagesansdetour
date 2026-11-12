@@ -104,7 +104,7 @@ test('alerts fire when indexed pages or impressions fall',()=>{
 });
 
 const AT=Date.parse('2026-11-12T09:00:00Z');
-const PUBLICATION={enabled:true,channels:{instagram:'connected',facebook:'connected',tiktok:'absent'},lastPassAt:'2026-11-12T08:37:00.000Z',
+const PUBLICATION={enabled:true,channels:{instagram:'connected',facebook:'connected',tiktok:'absent'},channelsCheckedAt:'2026-11-12T08:02:00.000Z',lastPassAt:'2026-11-12T08:37:00.000Z',
   counts:{ready:4,submitting:0,scheduled:2,published:12,to_verify:0,held:0,failed:0},problems:[],problemsCount:0,atRisk:[],atRiskCount:0};
 const publicationAlerts=publication=>computeAlerts({...QUIET,now:AT,seo:{search:null,indexation:null,publication}});
 const held=(id,at,reason='overdue')=>({id,channel:'instagram',state:'held',reason,at});
@@ -114,7 +114,7 @@ test('the publication section gives the engine, the channels, the register and t
     problems:[held('ig:retenu','2026-11-10T17:00:00.000Z'),{id:'fb:echec',channel:'facebook',state:'failed',reason:'http_500',at:'2026-11-11T10:00:00.000Z'}],problemsCount:2,
     atRisk:[{id:'ig:pret',channel:'instagram',dueAt:'2026-11-12T17:00:00.000Z',channelState:'disconnected'}],atRiskCount:1}).join('\n');
   assert.ok(lines.includes('- Moteur du panneau : actif, dernier passage le 2026-11-12 à 09:37, heure de Paris.'),lines);
-  assert.ok(lines.includes('- Canaux Buffer : Instagram déconnecté de Buffer, Facebook connecté, TikTok absent de Buffer.'),lines);
+  assert.ok(lines.includes('- Canaux Buffer : Instagram déconnecté de Buffer, Facebook connecté, TikTok absent de Buffer ; relus par le panneau le 2026-11-12 à 09:02, heure de Paris.'),lines);
   assert.ok(lines.includes('- Registre : 4 prêts, 2 programmés dans Buffer, 12 publiés, 1 retenu, 1 en échec.'),lines);
   assert.ok(lines.includes('- Retenus ou en échec depuis 7 jours (2) : `ig:retenu` (Instagram, retenu, échéance dépassée, 2026-11-10) ; `fb:echec` (Facebook, en échec, code `http_500`, 2026-11-11).'),lines);
   assert.ok(lines.includes('- Prêts à moins de 24 h sur un canal qui ne reçoit rien (1) : `ig:pret` (Instagram déconnecté de Buffer, échéance le 2026-11-12 à 18:00, heure de Paris).'),lines);
@@ -127,6 +127,28 @@ test('a healthy or empty register is said in one line each',()=>{
   const lines=publicationLines({...PUBLICATION,enabled:false,channels:null,lastPassAt:null,counts:{ready:0,submitting:0,scheduled:0,published:0,to_verify:0,held:0,failed:0}});
   assert.deepEqual(lines,['- Moteur du panneau : désactivé, aucun passage enregistré.','- Canaux Buffer : aucun accès Buffer enregistré dans le panneau.','- Registre : vide.']);
   assert.equal(publicationLines(PUBLICATION).length,3);
+  // The panel gave no date for its last re-reading of the channels: said, not guessed.
+  assert.equal(publicationLines({...PUBLICATION,channelsCheckedAt:null})[1],'- Canaux Buffer : Instagram connecté, Facebook connecté, TikTok absent de Buffer ; date de leur dernière relecture non donnée par le panneau.');
+});
+
+test('channels the panel has not re-read for more than a day raise an alert, whatever the engine does',()=>{
+  const stale=publicationAlerts({...PUBLICATION,channelsCheckedAt:'2026-11-11T08:59:00.000Z'});
+  assert.deepEqual(stale.map(a=>a.code),['publication_channels_stale']);
+  assert.ok(stale[0].message.startsWith('Le panneau n’a pas relu les canaux Buffer depuis le 2026-11-11 à 09:59, heure de Paris (plus de 24 heures)'),stale[0].message);
+  assert.ok(stale[0].message.includes('page Connexions du panneau'),stale[0].message);
+  assert.equal(stale[0].count,undefined);
+  // The panel rewrites the date every six hours at most: a day is well beyond a late run. Exactly a day is not late yet.
+  assert.deepEqual(publicationAlerts({...PUBLICATION,channelsCheckedAt:'2026-11-11T09:00:00.000Z'}),[]);
+  // No date (an older panel, a key just saved) or a date ahead of the clock: unknown is not late.
+  assert.deepEqual(publicationAlerts({...PUBLICATION,channelsCheckedAt:null}),[]);
+  assert.deepEqual(publicationAlerts({...PUBLICATION,channelsCheckedAt:'2026-11-13T09:00:00.000Z'}),[]);
+  // Without a Buffer access there are no channels to re-read: only the missing access is said.
+  assert.deepEqual(publicationAlerts({...PUBLICATION,channels:null,channelsCheckedAt:'2026-11-01T09:00:00.000Z'}).map(a=>a.code),['publication_buffer_access']);
+  // The channel states shown are then old ones: said after the channel and the engine, before the posts.
+  const all=publicationAlerts({...PUBLICATION,channels:{instagram:'disconnected',facebook:'connected',tiktok:'absent'},channelsCheckedAt:'2026-11-10T09:00:00.000Z',lastPassAt:'2026-11-12T02:00:00.000Z',
+    problems:[held('ig:a','2026-11-10T17:00:00.000Z')],problemsCount:1});
+  assert.deepEqual(all.map(a=>a.code),['publication_channel:instagram','publication_engine_silent','publication_channels_stale','publication_posts_blocked']);
+  assert.deepEqual(publicationAlerts({...PUBLICATION,enabled:false,channelsCheckedAt:'2026-11-10T09:00:00.000Z'}).map(a=>a.code),['publication_engine_disabled','publication_channels_stale']);
 });
 
 test('a missing publication reading is said plainly in the report',()=>{
@@ -156,7 +178,7 @@ test('a panel that stops giving the engine state is an alert after a few hours, 
   assert.equal(absent.reason,'block_absent');
   assert.ok(alerts(noBlock,absent,AT+6*HOUR)[0].message.startsWith('Le panneau répond sans l’état du moteur de publication'));
   // A good reading clears the memory, and the alert with it.
-  const back={search:null,indexation:null,publication:{...PUBLICATION,lastPassAt:iso(AT+12*HOUR-20*6e4)}};
+  const back={search:null,indexation:null,publication:{...PUBLICATION,channelsCheckedAt:iso(AT+12*HOUR-HOUR),lastPassAt:iso(AT+12*HOUR-20*6e4)}};
   assert.deepEqual(readingState(second,back,AT+12*HOUR),{missingSince:null,seenAt:iso(AT+12*HOUR)});
   assert.deepEqual(alerts(back,readingState(second,back,AT+12*HOUR),AT+12*HOUR),[]);
   // A lost, malformed or future memory starts the delay again instead of alerting on its own.
@@ -198,7 +220,7 @@ test('the report says which alerts it could not re-read, so a missed reading nei
 });
 
 test('every alert drawn from the engine state has a kind the report can declare unread',()=>{
-  const troubled={...PUBLICATION,channels:{instagram:'disconnected',facebook:'connected',tiktok:'absent'},lastPassAt:'2026-11-12T02:00:00.000Z',
+  const troubled={...PUBLICATION,channels:{instagram:'disconnected',facebook:'connected',tiktok:'absent'},channelsCheckedAt:'2026-11-10T09:00:00.000Z',lastPassAt:'2026-11-12T02:00:00.000Z',
     problems:[held('ig:a','2026-11-10T17:00:00.000Z')],problemsCount:1,atRisk:[{id:'ig:b',channel:'instagram',dueAt:'2026-11-12T17:00:00.000Z',channelState:'disconnected'}],atRiskCount:1};
   const kinds=[troubled,{...PUBLICATION,channels:null},{...PUBLICATION,enabled:false}].flatMap(publicationAlerts).map(a=>a.code.split(':')[0]);
   assert.deepEqual([...new Set(kinds)].sort(),[...PUBLICATION_KINDS].sort());

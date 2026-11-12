@@ -17,6 +17,7 @@ const TITLES={
   publication_engine_disabled:()=>'moteur de publication désactivé',
   publication_engine_silent:()=>'moteur de publication silencieux',
   publication_reading_missing:()=>'état du moteur de publication illisible',
+  publication_channels_stale:()=>'canaux Buffer plus relus par le panneau',
   publication_posts_blocked:()=>'posts retenus ou en échec',
   publication_posts_at_risk:()=>'posts prêts menacés',
   social_queue_empty:name=>`file ${network(name)} vide`,
@@ -47,6 +48,32 @@ const ENTRY="[A-Za-z0-9%_.~!*'()-]+(?:=\\d{1,6})?";
 const MARKER=new RegExp(`<!-- vsd-alert-codes: (${ENTRY}(?:,${ENTRY})*)? ?-->`);
 const counted=alert=>Number.isInteger(alert.count)&&alert.count>=0;
 const entry=alert=>encodeURIComponent(alert.code)+(counted(alert)?'='+Math.min(alert.count,COUNT_MAX):'');
+// The wording of each alert is recorded too, percent-encoded and in the order of the codes: an alert kept
+// over a missed reading is then read from the record, not from the visible lines, which anyone allowed to
+// edit the issue may have changed.
+const TEXT="[A-Za-z0-9%_.~!*'()-]+";
+const TEXTS=new RegExp(`<!-- vsd-alert-texts: (${TEXT}(?:,${TEXT})*) -->`);
+// GitHub refuses an issue body beyond 65,536 characters: past this size the wordings are left out.
+const BODY_MAX=60000;
+const textsRecord=alerts=>{
+  try{return `<!-- vsd-alert-texts: ${alerts.map(alert=>encodeURIComponent(alert.message)).join(',')} -->`;}
+  catch{return null;}
+};
+
+/** Wordings of the alerts of a body, one per code; null when they cannot be told. */
+function wordings(body,count){
+  const recorded=TEXTS.exec(body)?.[1].split(',')??[];
+  if(recorded.length===count){
+    try{
+      const texts=recorded.map(decodeURIComponent);
+      if(texts.every(text=>!/[\r\n]/.test(text)))return texts;
+    }catch{/* A record that does not decode is not trusted: the lines below decide. */}
+  }
+  // An issue written before the wordings were recorded: one line per alert, in the order of the codes.
+  // The web page saves a body with Windows line ends.
+  const lines=body.split(/\r?\n/).filter(line=>line.startsWith('- ')).map(line=>line.slice(2));
+  return lines.length===count?lines:null;
+}
 
 /**
  * Alerts recorded by the previous run: code, number when it had one, and wording. null when there is no
@@ -60,9 +87,8 @@ function previousAlerts(body){
       const [code,count]=text.split('=');
       return {code:decodeURIComponent(code),count:count===undefined?null:Number(count)};
     });
-    // The body has one line per alert, in the order of the record. Otherwise the wording is unknown.
-    const lines=body.split('\n').filter(line=>line.startsWith('- ')).map(line=>line.slice(2));
-    return entries.map((alert,index)=>({...alert,message:lines.length===entries.length?lines[index]:null}));
+    const texts=wordings(body,entries.length);
+    return entries.map((alert,index)=>({...alert,message:texts?texts[index]:null}));
   }catch{return null;}
 }
 
@@ -93,9 +119,11 @@ export function planAlertIssue({alerts,unread=[],previousBody=null,today,runUrl,
   const others=all.length-1;
   const title=`⚠️ ${capital(alertTitle(lead.code))}`+(others>0?` et ${others} ${others>1?'autres alertes':'autre alerte'}`:'');
   const list=items=>items.map(alert=>'- '+alert.message).join('\n');
-  const body=[`Alertes au ${today} :`,list(alerts),carried.length?CARRIED_NOTE+'\n\n'+list(carried):'',
-    'Chaque alerte nouvelle, ou dont le nombre augmente, est annoncée par un commentaire sur cette issue. L’issue se ferme seule quand plus aucune alerte ne tient.',
+  const visible=[`Alertes au ${today} :`,list(alerts),carried.length?CARRIED_NOTE+'\n\n'+list(carried):'',
+    'Chaque alerte nouvelle, ou dont le nombre augmente, est annoncée par un commentaire sur cette issue. L’issue se ferme seule quand plus aucune alerte ne tient. Ce texte est récrit à chaque passage : une retouche à la main n’y reste pas.',
     `Rapport complet : ${runUrl}`,`<!-- vsd-alert-codes: ${all.map(entry).join(',')} -->`].filter(Boolean).join('\n\n');
+  const texts=textsRecord(all);
+  const body=texts&&visible.length+texts.length<BODY_MAX?visible+'\n'+texts:visible;
   // Opening an issue notifies by itself; a comment is only needed on an issue that is already open.
   if(previousBody===null||!(fresh.length+worse.length))return {title,body,comment:null,total:all.length};
   const mention=/^[A-Za-z0-9](?:[A-Za-z0-9-]{0,37}[A-Za-z0-9])?$/.test(owner)?'@'+owner:'';

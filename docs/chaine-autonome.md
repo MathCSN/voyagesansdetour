@@ -35,6 +35,14 @@ guide publié ──► rendu (production.py, reel_intake.py)
   et `tiktok/reel` (depuis le 11/11/2026). Les canaux Buffer sont relus à chaque passage : un canal
   déconnecté, verrouillé ou en pause fait attendre ses seuls posts. Bascule depuis l'ancien
   serveur ChatGPT Sites le 11/11/2026 (`docs/migration-panneau.md`) ; l'ancien n'est plus appelé.
+- **Changer un créneau** (`cadence.json`) : le plafond du panneau compte sur 7 jours exacts, en heure
+  de Paris, et le même créneau de la semaine précédente en sort tout juste. La grille remplit ce
+  plafond (Instagram 4 créneaux pour 4, Facebook 2 pour 2) : **avancer un créneau, même d'une heure,
+  fait donc retenir le premier post de la nouvelle grille**, placé moins de 7 jours après l'ancien
+  créneau. Sauter cette première occurrence, ou garder sept jours pleins entre le dernier post de
+  l'ancien créneau et le premier du nouveau. Reculer un créneau d'une heure ne retient rien (rejeu
+  du 12/11/2026 sur le moteur du panneau). Un post retenu de cette façon sort dans l'alerte
+  « Posts bloqués ».
 - **Retirer un lot** : l'ajouter à `retirements` de `index.json`. Au passage `stock` suivant, ses posts
   pas encore envoyés passent « en attente » dans le registre et ne partent plus. Un post déjà programmé
   dans Buffer se supprime dans Buffer. Le panneau ne lit que `batchId` ; l'entrée garde aussi les
@@ -202,6 +210,10 @@ Secrets : `VSD_ADMIN_TICK_KEY` (appels signés du panneau privé), `CLOUDFLARE_W
     publication et de référencement quand le panneau ne répond pas, et de l'alerte sur le rédacteur
     quand la recherche GitHub échoue. L'issue les range alors sous « Non relues à ce passage ». Pour
     repartir de zéro, fermer l'issue à la main : le passage suivant en ouvre une neuve.
+  - Le libellé de chaque alerte est gardé avec son code dans le texte de l'issue (deux commentaires
+    HTML invisibles, en fin de texte). Retoucher le texte visible à la main ne change donc rien : il
+    est récrit à chaque passage, et une alerte non relue garde son libellé d'origine. Supprimer ces
+    commentaires fait repartir de zéro : le passage suivant annonce toutes les alertes en cours.
 - **Guides** (`guide-health.mjs`) :
   - section « Sources des guides » du rapport : les guides dont `sourcesCheckedOn` aura plus de
     45 jours dans les 10 jours, groupés par date. Au-delà de 45 jours, `auto_social.py` ne tire plus
@@ -217,7 +229,8 @@ Secrets : `VSD_ADMIN_TICK_KEY` (appels signés du panneau privé), `CLOUDFLARE_W
   impressions sont divisées par deux. Après chaque déploiement, `indexnow.py` prévient Bing et
   Yandex des pages changées.
 - **Publication** : le même appel signé rapporte l'état du moteur du panneau (section
-  « Publication » du rapport : état de chaque canal Buffer, dernier passage, posts par état, posts
+  « Publication » du rapport : état de chaque canal Buffer et date de leur dernière relecture par
+  le panneau, dernier passage, posts par état, posts
   retenus ou en échec, posts prêts dont le canal ne reçoit rien). L'alerte se lève aussi dans les
   cas ci-dessous et retombe d'elle-même quand la cause disparaît. Si le panneau ne répond pas ou
   n'envoie pas ce bloc, le rapport le dit ; au deuxième passage de suite sans lecture (plus de
@@ -232,13 +245,16 @@ Secrets : `VSD_ADMIN_TICK_KEY` (appels signés du panneau privé), `CLOUDFLARE_W
   | Canal coupé | Instagram, Facebook ou TikTok déconnecté, verrouillé ou en pause dans Buffer (Instagram ou Facebook absent compte aussi ; TikTok absent non, il est facultatif) | Buffer, publish.buffer.com > Channels : reconnecter le canal, le déverrouiller ou relancer sa file. Le moteur relit les canaux à chaque passage : rien d'autre à faire. |
   | Moteur silencieux | Aucun passage du moteur depuis plus de 6 heures (il passe à :37 et :52 de chaque heure), ou moteur désactivé | Page Publication du panneau, puis logs du Worker. Causes habituelles : clé Buffer refusée (la recoller page Connexions), Buffer injoignable, tâche planifiée arrêtée. |
   | Accès Buffer absent | Aucune clé Buffer enregistrée dans le panneau | Page Connexions du panneau. |
+  | Canaux plus relus | La dernière relecture réussie des canaux Buffer par le panneau a plus de 24 heures (il les relit à chaque collecte et à chaque passage du moteur, et récrit cette date au plus toutes les 6 heures) | Page Connexions du panneau : vérifier la clé Buffer, la recoller si elle est refusée ; sinon logs du Worker (`buffer_channels_unreadable`). Tant que l'alerte tient, l'état des canaux donné par le rapport est celui de cette date : une coupure plus récente n'est pas vue. |
   | Posts bloqués | Un post retenu ou en échec depuis moins de 7 jours (un lot retiré du stock exprès ne compte pas) | Page Publication du panneau : lire le motif. Échéance dépassée : le post est perdu, corriger la cause (canal, clé) pour les suivants. L'alerte tombe 7 jours après le blocage. |
   | Posts menacés | Un post prêt à moins de 24 h de son échéance sur un canal qui ne reçoit rien | Rétablir le canal avant l'échéance, sinon le post sera retenu. |
   | État du moteur illisible | Le panneau ne répond plus au rapport, ou répond sans le bloc « publication », depuis plus de 4 heures | Vérifier que le panneau est en ligne, puis que la version déployée est à jour (`npm run deploy` par Mathis). |
 
   Les posts TikTok ne lèvent aucune alerte tant que TikTok est absent de Buffer (réseau facultatif) :
   ils restent listés dans la section « Publication ». Non couvert : un post resté « à vérifier »
-  (envoi au résultat incertain) ; il se lit dans les compteurs du registre.
+  (envoi au résultat incertain), qui se lit dans les compteurs du registre ; des canaux dont le
+  panneau ne donne aucune date de relecture (clé tout juste enregistrée, jamais relue depuis), ce
+  que la section « Publication » écrit sans lever d'alerte.
 - Limite : le rapport ne sait pas si le panneau a importé un lot. Un lot refusé à l'import n'entre
   pas au registre et reste invisible ici ; chaque post de la « file à venir » sort donc avec
   « état cloud inconnu ». Il faudrait que le bloc « publication » du panneau donne le résultat de
