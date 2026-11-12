@@ -88,6 +88,7 @@ DATES = (re.compile(r"\b(\d{1,2})/(\d{1,2})/(\d{2,4})\b"),
          re.compile(rf"\b(\d{{1,2}})(?:er)? (?:{reel_formats.MONTHS})\b(?: (\d{{4}}))?", re.IGNORECASE),
          re.compile(rf"\b(?:{reel_formats.MONTHS}) (\d{{4}})\b", re.IGNORECASE))
 UNREADABLE = (OSError, ValueError, LookupError, TypeError, AttributeError)
+STOCK = "reviewed-social"                 # the folder of the reviewed batches and of their index
 REGISTRY_FOLDERS = ("auto", "sources")   # where scenarios keep their source registries (auto_social.py, hand-written posts)
 
 
@@ -265,6 +266,11 @@ def scenario_id(batch_id: str) -> str:
     return next((name.removesuffix("-" + channel) for channel in social_stock.CROSSPOSTS if name.endswith("-" + channel)), name)
 
 
+def index_file(root: Path) -> Path:
+    """The index of the reviewed stock: its batches, and the list of those withdrawn."""
+    return root / STOCK / "index.json"
+
+
 def shelf(root: Path, folder: str) -> dict[str, Path]:
     """The JSON files of one folder of the production tree, by their name without ".json"; never a link to elsewhere."""
     return {path.stem: path for path in (root / folder).glob("*.json") if not path.is_symlink()}
@@ -327,7 +333,7 @@ class Reader:
         self.root, self.now, self.fetcher = root, now, fetcher
         self.pages: dict[str, str | None] = {}
         self.registries = registries(root)
-        self.batches, self.scenarios = shelf(root, "reviewed-social"), shelf(root, "scenarios")
+        self.batches, self.scenarios = shelf(root, STOCK), shelf(root, "scenarios")
 
     def text_of(self, url: str) -> str | None:
         if url not in self.pages:
@@ -360,7 +366,7 @@ class Reader:
 
 def examine(root: Path, now: dt.datetime, fetcher=a.fetch_page) -> list[dict]:
     """One row per batch still to come: how many of its quotes the site still gives, and which ones it lost."""
-    index = json.loads((root / "reviewed-social" / "index.json").read_text())
+    index = json.loads(index_file(root).read_text())
     retired = {entry["batchId"] for entry in index.get("retirements", [])}
     reader, rows = Reader(root, now, fetcher), []
     for entry in index["items"]:
@@ -427,7 +433,7 @@ def retire(root: Path, rows: list[dict], now: dt.datetime) -> list[str]:
     chosen = {row["batchId"]: row for row in rows if row.get("action") == "retire"}
     if not chosen:
         return []
-    path = root / "reviewed-social" / "index.json"
+    path = index_file(root)
     if path.is_symlink():
         raise ValueError("reviewed-social/index.json is a link: nothing is written through it")
     index = json.loads(path.read_text())
@@ -444,7 +450,7 @@ def run(root: Path = HERE, now: dt.datetime | None = None, *, fetcher=a.fetch_pa
     now = (now or p.utcnow()).astimezone(dt.timezone.utc).replace(microsecond=0)
     rows = decide(examine(Path(root), now, fetcher), now)
     # Nothing is written through an index that is a link: the stale batches are then reported, like without --retire.
-    withdraw = withdraw and not (Path(root) / "reviewed-social" / "index.json").is_symlink()
+    withdraw = withdraw and not index_file(Path(root)).is_symlink()
     retired = retire(Path(root), rows, now) if withdraw else []
     reported = [row["batchId"] for row in rows if row["action"] == "report" or (row["action"] == "retire" and not withdraw)]
     return {"status": "stale" if retired or reported else "current", "checked": sum(row["status"] != "unread" for row in rows),

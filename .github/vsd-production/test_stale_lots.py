@@ -292,12 +292,12 @@ class StaleLotsTests(unittest.TestCase):
             result = stock.run()
             said = result["retired"] + result["reported"]
             self.assertEqual((result["status"], sorted(said)), ("stale", ["ig-cas-tiktok-v1", "ig-cas-v1"]), quote)
-            self.assertEqual(stale_lots.quoted(quote, today)[0], False, quote)
+            self.assertFalse(stale_lots.quoted(quote, today)[0], quote)
         # A quote that ends on the number of a line, or on the unit of a duration, and that the page goes on with.
         for quote, today in (("Prenez le tram 28", "Prenez le tram 28E"), ("depuis la gare par le bus 19", "depuis la gare par le bus 19A"),
                              ("30 min de marche", "2 heures 30 min de marche"), ("30 min de marche", "1 heure et 30 min de marche"),
                              ("le trajet dure 2 h", "le trajet dure 2 h 30"), ("départ à 7 h", "départ à 7 h 15"), ("comptez 20 min", "comptez 20 min 30")):
-            self.assertEqual(stale_lots.quoted(quote, today)[0], False, quote)
+            self.assertFalse(stale_lots.quoted(quote, today)[0], quote)
             stale = stale_lots.reread([(GUIDE, quote)], {GUIDE: today})
             self.assertEqual((stale["status"], all(entry["wording"] for entry in stale["missing"])), ("stale", True), quote)   # reported
         self.assertEqual(stale_lots.reread([(GUIDE, "Prenez le tram 28")], {GUIDE: "Prenez le tram 28E"})["missing"][0]["numbers"], ["28e"])
