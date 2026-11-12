@@ -17,6 +17,7 @@ test('the title says what is wrong, the most urgent alert first',()=>{
   assert.equal(plan([queue,failures,channel]).title,'⚠️ File Facebook presque vide et 2 autres alertes');
   assert.equal(alertTitle('workflow_failures:Voyage Sans Detour cloud control'),'échecs répétés d’un workflow');
   assert.equal(alertTitle('un_code_inconnu'),'alerte');
+  assert.equal(plan([{code:'publication_channels_stale',message:'x'},queue]).title,'⚠️ Canaux Buffer plus relus par le panneau et 1 autre alerte');
 });
 
 test('a first issue carries the alerts and their codes, and needs no comment: opening it notifies',()=>{
@@ -57,7 +58,8 @@ test('a code with spaces, colons or accents survives the round trip, and a tampe
   const odd={code:'workflow_failures:Rédaction : guide, étape 2 -->',message:'x'};
   const body=plan([odd,channel]).body;
   assert.deepEqual(previousCodes(body),[odd.code,channel.code]);
-  assert.equal(body.split('-->').length,2);
+  // Two records, the codes and the wordings: nothing in a code or a message closes either of them early.
+  assert.equal(body.split('-->').length,3);
   assert.equal(previousCodes('<!-- vsd-alert-codes: %E0%A4%A -->'),null);
   assert.equal(previousCodes('<!-- vsd-alert-codes: <script> -->'),null);
   assert.deepEqual(previousCodes('texte\n<!-- vsd-alert-codes:  -->'),[]);
@@ -147,9 +149,65 @@ test('the alert saying the panel is unreadable is new; the alerts it blinds are 
   assert.equal(planWith([reading,queue],lost.body,UNREAD).comment,null);
 });
 
-test('a body whose lines no longer match its record carries nothing over',()=>{
-  const edited=plan([channel,queue]).body.replace('- '+channel.message+'\n','');
-  assert.deepEqual(previousCodes(planWith([queue],edited,UNREAD).body),[queue.code]);
+const withoutTexts=body=>body.replace(/\n<!-- vsd-alert-texts: [^\n]* -->/,'');
+
+test('a body someone edited by hand still carries its alerts over a missed reading, in their recorded wording',()=>{
+  const before=plan([channel,blocked(2),queue]).body;
+  assert.notEqual(withoutTexts(before),before);
+  const edits=[
+    body=>body.replace('- '+channel.message+'\n','- '+channel.message+'\n- vu, je regarde ce soir\n'),
+    body=>body.replace('- '+channel.message+'\n',''),
+    body=>body.replace(channel.message,'Instagram : à reconnecter'),
+    body=>body.replace('Alertes au','- [x] lu\n\nAlertes au').replaceAll('\n','\r\n'),
+  ];
+  for(const edit of edits){
+    const missed=planWith([queue],edit(before),UNREAD);
+    assert.equal(missed.comment,null);
+    assert.equal(missed.title,'⚠️ Instagram coupé de Buffer et 2 autres alertes');
+    assert.deepEqual(previousCodes(missed.body),[queue.code,channel.code,blocked(2).code]);
+    // The body is written again from the record: the hand-made lines are gone, the wording is the recorded one.
+    assert.ok(missed.body.includes('- '+channel.message+'\n- '+blocked(2).message),missed.body);
+    assert.ok(!missed.body.includes('je regarde')&&!missed.body.includes('à reconnecter'),missed.body);
+    // The reading is back, nothing has changed: still no « Nouvelle alerte ».
+    assert.equal(plan([channel,blocked(2),queue],missed.body).comment,null);
+  }
+});
+
+test('a wording with anything Markdown or a comment can read survives the record',()=>{
+  const odd={code:'publication_posts_blocked',count:1,message:'1 post retenu : `ig:a` (Instagram, « motif », 50 %) --> <!-- x --> [lien](https://example.org), fin.'};
+  const before=plan([odd,queue]).body;
+  assert.equal(before.split('<!--').length,4);
+  const missed=planWith([queue],before.replace('- '+queue.message+'\n',''),UNREAD);
+  assert.ok(missed.body.includes('\n\n- '+odd.message+'\n\n'),missed.body);
+});
+
+test('an issue written before the wordings were recorded, or whose record is damaged, falls back on its lines',()=>{
+  const before=plan([channel,queue]).body;
+  const older=withoutTexts(before);
+  assert.deepEqual(previousCodes(planWith([queue],older,UNREAD).body),[queue.code,channel.code]);
+  // The same older body saved from the web page, with Windows line ends: the wording is kept clean, and recorded.
+  const windows=planWith([queue],older.replaceAll('\n','\r\n'),UNREAD);
+  assert.ok(windows.body.includes('- '+channel.message+'\n')&&!windows.body.includes('\r'),JSON.stringify(windows.body));
+  assert.deepEqual(previousCodes(planWith([queue],windows.body.replace('- '+channel.message+'\n',''),UNREAD).body),[queue.code,channel.code]);
+  // Lines that no longer match the record, and no recorded wording: nothing can be carried over.
+  assert.deepEqual(previousCodes(planWith([queue],older.replace('- '+channel.message+'\n',''),UNREAD).body),[queue.code]);
+  // A record with a wording missing, undecodable or holding a line break is not trusted.
+  const damaged=[text=>text.replace(/(<!-- vsd-alert-texts: )[^,]*,/,'$1'),text=>text.replace('<!-- vsd-alert-texts: ','<!-- vsd-alert-texts: %E0%A4%A'),text=>text.replace('<!-- vsd-alert-texts: ','<!-- vsd-alert-texts: %0A')];
+  for(const damage of damaged){
+    assert.notEqual(damage(before),before);
+    const missed=planWith([queue],damage(before),UNREAD);
+    assert.deepEqual(previousCodes(missed.body),[queue.code,channel.code]);
+    assert.ok(missed.body.includes('- '+channel.message),missed.body);
+  }
+});
+
+test('the wordings are left out of the record rather than push the body past what GitHub accepts',()=>{
+  const many=Array.from({length:40},(_,index)=>({code:'workflow_failures:w'+index,message:'é'.repeat(700)+index}));
+  const body=plan(many).body;
+  assert.ok(body.length<65536,String(body.length));
+  assert.equal(withoutTexts(body),body);
+  assert.equal(previousCodes(body).length,40);
+  assert.notEqual(withoutTexts(plan(many.slice(0,3)).body),plan(many.slice(0,3)).body);
 });
 
 test('the command keeps the alert issue open on a missed reading and leaves no body once all is clear',async()=>{

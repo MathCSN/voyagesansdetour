@@ -83,6 +83,8 @@ function checkedPublication(publication) {
     enabled: publication.enabled,
     // null : aucun accès Buffer enregistré dans le panneau.
     channels: isRecord(publication.channels) ? Object.fromEntries(CHANNELS.map(channel => [channel, channelState(publication.channels[channel])])) : null,
+    // Dernière relecture réussie des canaux par le panneau ; null : jamais relus, ou panneau antérieur à ce champ.
+    channelsCheckedAt: instant(publication.channelsCheckedAt),
     lastPassAt: instant(publication.lastPassAt),
     counts: Object.fromEntries(JOB_STATES.map(state => [state, countOr(publication.counts[state], 0)])),
     problems, problemsCount: Math.max(problems.length, countOr(publication.problemsCount, 0)),

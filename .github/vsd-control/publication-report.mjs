@@ -10,7 +10,10 @@ const READING_GRACE_HOURS=4;
 const READING_MEMORY_MAX_HOURS=9;
 // Kinds of the alerts drawn from the engine state. When that state is missing, the report says so and the
 // alert issue keeps those it already had (issue-plan.mjs) instead of dropping them.
-export const PUBLICATION_KINDS=['publication_channel','publication_buffer_access','publication_engine_disabled','publication_engine_silent','publication_posts_blocked','publication_posts_at_risk'];
+export const PUBLICATION_KINDS=['publication_channel','publication_buffer_access','publication_engine_disabled','publication_engine_silent','publication_channels_stale','publication_posts_blocked','publication_posts_at_risk'];
+// The panel re-reads the Buffer channels at every collection and every engine pass, and rewrites the date of
+// its last successful re-reading every six hours at most: a day without one is a fault, not a late run.
+const CHANNELS_CHECK_MAX_HOURS=24;
 export const READING_KIND='publication_reading_missing';
 const NAMED_IN_ALERT=5;
 // TikTok is optional: its absence from Buffer is a choice, not a fault.
@@ -47,10 +50,11 @@ const named=(texts,total)=>{
 export function publicationLines(publication){
   if(!publication)return ['- État du moteur de publication indisponible (panneau privé injoignable ou pas encore à jour).'];
   const {channels,counts,problems,atRisk}=publication;
+  const checked=publication.channelsCheckedAt?`relus par le panneau le ${moment(publication.channelsCheckedAt)}`:'date de leur dernière relecture non donnée par le panneau';
   const register=Object.entries(JOB_STATE).filter(([state])=>counts[state]>0).map(([state,words])=>plural(counts[state],words));
   const lines=[
     `- Moteur du panneau : ${publication.enabled?'actif':'désactivé'}, ${publication.lastPassAt?'dernier passage le '+moment(publication.lastPassAt):'aucun passage enregistré'}.`,
-    `- Canaux Buffer : ${channels?Object.entries(channels).map(([channel,state])=>channelText(channel,state)).join(', '):'aucun accès Buffer enregistré dans le panneau'}.`,
+    `- Canaux Buffer : ${channels?Object.entries(channels).map(([channel,state])=>channelText(channel,state)).join(', ')+' ; '+checked:'aucun accès Buffer enregistré dans le panneau'}.`,
     `- Registre : ${register.length?register.join(', '):'vide'}.`];
   if(problems.length)lines.push(`- Retenus ou en échec depuis ${POST_TROUBLE_DAYS} jours (${publication.problemsCount}) : `+problems.map(post=>`${troubleText(post)}, ${post.at.slice(0,10)})`).join(' ; ')+'.');
   if(atRisk.length)lines.push(`- Prêts à moins de 24 h sur un canal qui ne reçoit rien (${publication.atRiskCount}) : `+atRisk.map(riskText).join(' ; ')+'.');
@@ -69,6 +73,13 @@ function engineAlerts({enabled,lastPassAt},now){
   if(lastPassAt&&now-Date.parse(lastPassAt)<=ENGINE_SILENCE_HOURS*HOUR)return [];
   const since=lastPassAt?`n’a fait aucun passage depuis le ${moment(lastPassAt)} (plus de ${ENGINE_SILENCE_HOURS} heures)`:'n’a encore enregistré aucun passage';
   return [{code:'publication_engine_silent',message:`Le moteur de publication ${since} : les posts ne sont plus programmés dans Buffer. Ouvrir la page Publication du panneau ; causes habituelles : clé Buffer refusée, Buffer injoignable ou tâche planifiée du panneau arrêtée.`}];
+}
+
+/** The channel states the other alerts rely on are those of the last re-reading: too old, they prove nothing. */
+function channelCheckAlerts({channels,channelsCheckedAt},now){
+  // No date (a key just saved, a panel older than this field): unknown is not late.
+  if(!channels||!channelsCheckedAt||now-Date.parse(channelsCheckedAt)<=CHANNELS_CHECK_MAX_HOURS*HOUR)return [];
+  return [{code:'publication_channels_stale',message:`Le panneau n’a pas relu les canaux Buffer depuis le ${moment(channelsCheckedAt)} (plus de ${CHANNELS_CHECK_MAX_HOURS} heures) : l’état des canaux donné ici date de ce moment, une coupure ou une reconnexion plus récente n’est pas vue. Vérifier la clé Buffer sur la page Connexions du panneau ; causes habituelles : clé Buffer refusée ou Buffer injoignable.`}];
 }
 
 function postAlerts({channels,problems,problemsCount,atRisk,atRiskCount},now){
@@ -117,5 +128,5 @@ function readingAlerts(reading,now){
  */
 export function publicationAlerts(publication,now,reading=null){
   if(!publication)return readingAlerts(reading,now);
-  return [...channelAlerts(publication.channels),...engineAlerts(publication,now),...postAlerts(publication,now)];
+  return [...channelAlerts(publication.channels),...engineAlerts(publication,now),...channelCheckAlerts(publication,now),...postAlerts(publication,now)];
 }
