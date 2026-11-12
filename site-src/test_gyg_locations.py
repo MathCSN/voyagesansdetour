@@ -101,6 +101,13 @@ class UpdateTest(unittest.TestCase):
 
 
 class RealCacheTest(unittest.TestCase):
+    def test_a_place_given_to_a_guide_by_the_partner_config_is_resolved_too(self):
+        # The place replaces the guide's destination for its links, even when the title never names it.
+        guide = {'slug': 'laponie-suedoise', 'title': 'La Laponie suédoise en hiver', 'destination': 'Laponie', 'country': 'suede', 'sections': []}
+        self.assertIn('kiruna|suede', gyg_locations.needed_keys([guide], {}, {'laponie-suedoise': 'Kiruna'}))
+        self.assertNotIn('kiruna|suede', gyg_locations.needed_keys([guide], {}, {}))
+        self.assertEqual(gyg_locations.guide_places()['laponie-budget-rovaniemi'], 'Rovaniemi')
+
     def test_committed_cache_covers_every_published_guide_place_with_matching_names(self):
         cache = gyg_locations.load(ROOT / 'getyourguide-locations.json')
         articles = editorial_queue.published_articles(ROOT)

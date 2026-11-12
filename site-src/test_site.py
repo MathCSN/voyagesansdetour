@@ -210,7 +210,7 @@ class PublicBuildTest(unittest.TestCase):
         home=read(self.out,'/')
         nav=re.search(r'<nav class="nav".*?</nav>',home).group(0)
         self.assertIn('<a href="/europe/">Europe</a>',nav)
-        self.assertIn('<a href="/destinations/">Destinations</a>',nav)
+        self.assertIn('<a class="nav-main" href="/destinations/">Destinations</a>',nav)
         self.assertNotIn('/portugal/',nav)
         for retired in ('Prenez le train','Zéro volant','0 VOITURE','EN TRAIN, EN FERRY'):
             self.assertNotIn(retired,home)
@@ -272,7 +272,7 @@ class PublicBuildTest(unittest.TestCase):
         """Pages listes (pays, continents, rubriques, tous les guides) et leur nombre de guides."""
         sizes={}
         for page in self.out.rglob('index.html'):
-            grid=re.search(r'<div class="grid" id="guide-grid">(.*?)</div><p class="empty"',page.read_text(),re.S)
+            grid=re.search(r'<div class="grid" id="guide-grid"[^>]*>(.*?)</div><p class="empty"',page.read_text(),re.S)
             if grid:sizes['/'+str(page.parent.relative_to(self.out))+'/']=grid.group(1).count('<a class="card"')
         return sizes
 
@@ -360,6 +360,78 @@ class PublicBuildTest(unittest.TestCase):
                 self.assertNotRegex(body.split('</main>')[1],r'<h[1-6]')
         self.assertIn('Guide préparé avec l’aide de l’IA à partir de ces sources.',read(self.out,'/portugal/lisbonne-3-jours-sans-voiture/'))
         self.assertIn('<h2>Le rôle de l’intelligence artificielle</h2>',read(self.out,'/methode/'))
+
+    def test_the_two_main_menu_links_come_first_on_a_phone_and_the_menu_shows_it_scrolls(self):
+        home=read(self.out,'/')
+        self.assertIn('<a class="nav-main" href="/guides/">Guides</a><a class="nav-main" href="/destinations/">Destinations</a></nav>',home)
+        css=(self.out/'style.css').read_text()
+        phone=css.split('.nav{flex-wrap:nowrap;overflow-x:auto;')[1].split('}')[0]
+        # Les liens de continent défilent ; Guides et Destinations passent devant, et le bord droit s'estompe.
+        self.assertIn('mask-image:linear-gradient(',phone)
+        self.assertIn('.nav .nav-main{order:-1}',css)
+
+    def test_the_table_of_contents_can_stick_and_long_section_links_wrap_on_a_phone(self):
+        css=(self.out/'style.css').read_text()
+        # overflow-x:hidden sur html et body faisait de body un conteneur de défilement : position:sticky n'avait plus d'effet.
+        self.assertIn('html,body{overflow-x:hidden;overflow-x:clip}',css)
+        self.assertIn('.section-head{align-items:start;flex-wrap:wrap}',css)
+        self.assertIn('.section-head .text-link{font-size:12px;white-space:normal;margin-top:8px}',css)
+
+    def test_a_sticky_table_of_contents_taller_than_the_window_scrolls_inside_itself(self):
+        css=(self.out/'style.css').read_text()
+        # Collé à 30 px du haut : sans hauteur maximale, la fin d'un long sommaire (« Sources », « Imprimer le guide ») restait sous l'écran.
+        sticky=css.split('.toc{position:sticky;')[1].split('}')[0]
+        self.assertIn('top:30px;',sticky)
+        self.assertIn('max-height:calc(100vh - 60px);overflow-y:auto',sticky)
+        # Jamais « overscroll-behavior:contain » ici : le sommaire reste collé pendant toute la lecture, et avec
+        # cette propriété la molette ne faisait plus défiler la page quand le pointeur était au-dessus de lui.
+        self.assertNotIn('overscroll-behavior',sticky)
+        # Un bloc qui défile rogne ce qui dépasse : la marge intérieure garde entier l'anneau de focus du bouton
+        # « Imprimer le guide », et la marge négative laisse le contenu à sa place.
+        self.assertIn('margin:0 -8px;padding:18px 8px 10px',sticky)
+        # Sur téléphone le sommaire n'est plus collé : il reprend toute sa hauteur, sans défilement interne.
+        self.assertIn('.toc{position:static;order:-1;max-height:none;overflow-y:visible;margin:0;padding:18px 0 0}',css)
+
+    def test_list_page_buttons_filter_on_exact_fields_and_agree_with_the_counts(self):
+        cards=lambda page:re.findall(r'<a class="card[^"]*"[^>]*>',re.search(r'<div class="grid" id="guide-grid"[^>]*>(.*?)</div><p class="empty"',page,re.S).group(1))
+        field=lambda card,name:html.unescape(re.search(name+r'="([^"]*)"',card).group(1))
+        buttons=lambda page:[html.unescape(b) for b in re.findall(r'data-filter="([^"]+)"',page) if b!='Tous']
+        portugal=read(self.out,'/portugal/')
+        self.assertIn('id="guide-grid" data-filter-by="destination"',portugal)
+        # « Portugal » ne garde que les guides sur le pays entier, pas les onze guides du pays.
+        by_destination=[field(card,'data-destination') for card in cards(portugal)]
+        self.assertGreater(len(by_destination),by_destination.count('Portugal'))
+        self.assertGreater(by_destination.count('Portugal'),0)
+        for route,by,values in (('/portugal/','destination',lambda card:[field(card,'data-destination')]),('/europe/','country',lambda card:[field(card,'data-country')]),
+                ('/guides/itineraires/','country',lambda card:[field(card,'data-country')]),('/guides/','theme',lambda card:field(card,'data-themes').split('|'))):
+            page=read(self.out,route)
+            with self.subTest(route=route):
+                self.assertIn(f'id="guide-grid" data-filter-by="{by}"',page)
+                for button in buttons(page):self.assertGreater(sum(button in values(card) for card in cards(page)),0,button)
+        # Le nombre écrit dans la pastille d'une rubrique est celui que donne son bouton.
+        guides=read(self.out,'/guides/')
+        for name,count in re.findall(r'<a class="chip" href="/guides/[a-z-]+/">([^<]+) <small>(\d+)</small>',guides):
+            self.assertEqual(sum(html.unescape(name) in field(card,'data-themes').split('|') for card in cards(guides)),int(count),name)
+        script=(self.out/'site.js').read_text()
+        self.assertNotIn('text.includes(normal(destination))',script)
+
+    def test_photos_declare_the_real_size_of_each_file(self):
+        def jpeg_width(path):
+            data=path.read_bytes();i=2
+            while i<len(data):
+                marker=data[i+1]
+                if marker in (0xC0,0xC1,0xC2):return int.from_bytes(data[i+7:i+9],'big')
+                i+=2+int.from_bytes(data[i+2:i+4],'big')
+        page=read(self.out,'/costa-rica/costa-rica-itineraire-2-semaines/')
+        cover=re.search(r'<img class="article-cover"[^>]*>',page).group(0)
+        source=re.search(r'src="/assets/([^"]+)"',cover).group(1)
+        real=jpeg_width(self.out/'assets'/source)
+        self.assertEqual(int(re.search(r' width="(\d+)"',cover).group(1)),real)
+        checked=0
+        for name,declared in re.findall(r'/assets/(\S+\.jpg) (\d+)w',cover):
+            self.assertEqual(jpeg_width(self.out/'assets'/name),int(declared),name);checked+=1
+        self.assertGreaterEqual(checked,2)
+        self.assertIn(f'<meta property="og:image:width" content="{real}">',page)
 
     def test_about_and_transparency_titles_say_what_the_pages_are(self):
         about=read(self.out,'/a-propos/');transparency=read(self.out,'/transparence/')
@@ -820,10 +892,11 @@ class LighterPhotoTest(TempDirTest):
         result,out=build(self.workdir,True,MENTIONS,source_root=source)
         self.assertEqual(result.returncode,0,result.stderr)
         japan=read(out,'/japon/japon-itineraire-2-semaines/')
-        self.assertIn('srcset="/assets/photos/japon-fuji-chureito-400.jpg 400w, /assets/photos/japon-fuji-chureito-800.jpg 800w, /assets/photos/japon-fuji-chureito-1200.jpg 1200w, /assets/photos/japon-fuji-chureito.jpg 1600w"',japan)
+        self.assertIn('srcset="/assets/photos/japon-fuji-chureito-400.jpg 400w, /assets/photos/japon-fuji-chureito-800.jpg 960w, /assets/photos/japon-fuji-chureito-1200.jpg 1200w, /assets/photos/japon-fuji-chureito.jpg 1920w"',japan)
         self.assertIn('src="/assets/photos/japon-fuji-chureito.jpg"',japan)
-        # Sans copie 1 200 px, une photo garde ses deux tailles du catalogue.
-        self.assertIn('srcset="/assets/photos/japon-shinkansen-800.jpg 800w, /assets/photos/japon-shinkansen.jpg 1600w"',japan)
+        # Sans copie 1 200 px, une photo garde ses deux fichiers, annoncés à leur largeur réelle
+        # (Wikimedia a rendu 960 et 1 920 px pour 800 et 1 600 demandés).
+        self.assertIn('srcset="/assets/photos/japon-shinkansen-800.jpg 960w, /assets/photos/japon-shinkansen.jpg 1920w"',japan)
         self.assertIn('srcset="/assets/lisbonne-800.jpg 800w, /assets/lisbonne-1200.jpg 1200w, /assets/lisbonne.jpg 1600w"',''.join(p.read_text() for p in (out/'portugal').rglob('index.html')))
 
 class PreviewBuildTest(TempDirTest):
@@ -862,10 +935,18 @@ class AnalyticsBuildTest(TempDirTest):
             # Le panneau est hors du contenu principal : son titre est un paragraphe en gras, toujours relié par aria-labelledby.
             self.assertIn('<section id="audience-choice" class="audience-choice" aria-labelledby="audience-title" hidden><p id="audience-title" class="audience-title"><strong>La mesure d’audience, à votre choix</strong></p>',body)
             self.assertNotRegex(body.split('</main>')[1],r'<h[1-6]')
+            # La durée du choix et le moyen de le retirer se lisent avant le clic sur tous les écrans :
+            # en entier sur ordinateur, en une ligne courte sur téléphone.
+            self.assertIn('<a href="/confidentialite/">Données, destinataires et durées</a><span class="audience-more"> · Choix conservé 180 jours. Retrait possible dans « Gérer la mesure d’audience » en bas de chaque page.</span><span class="audience-short"> · Choix gardé 180 jours, retrait en bas de chaque page.</span></p></section>',body)
             self.assertNotRegex(body,r'<(?:script|link)[^>]+(?:src|href)="https://(?:www\.)?(?:google|googletagmanager)')
             self.assertNotRegex(body,r'rel="(?:preconnect|dns-prefetch|prefetch)"')
         self.assertNotIn('data-vsd-analytics',(out/'404.html').read_text())
         self.assertTrue((out/'analytics.mjs').is_file())
+        css=(out/'style.css').read_text()
+        # Une seule des deux versions est affichée, jamais aucune.
+        self.assertIn('.audience-choice .audience-short{display:none}',css.split('@media(max-width:480px){.audience-choice{')[0])
+        phone=css.split('@media(max-width:480px){.audience-choice{')[1].split('@media')[0]
+        self.assertIn('.audience-choice .audience-more{display:none}.audience-choice .audience-short{display:inline}',phone)
         privacy=read(out,'/confidentialite/')
         self.assertIn('180 jours',privacy)
         self.assertIn('retirer votre accord',privacy)

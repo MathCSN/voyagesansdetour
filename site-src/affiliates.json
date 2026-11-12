@@ -1,6 +1,9 @@
 {
   "schema_version": 1,
   "max_links_per_guide": 3,
+  "places": {
+    "laponie-budget-rovaniemi": "Rovaniemi"
+  },
   "partners": [
     {
       "key": "stay22_hotels",

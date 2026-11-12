@@ -212,6 +212,25 @@ class SelectionTest(unittest.TestCase):
         self.assertIn(['Lisbonne, Portugal'], addresses)
         self.assertIn(['Porto, Portugal'], addresses)
 
+    def test_a_guide_about_one_town_of_a_region_sends_lodging_to_that_town(self):
+        # « Laponie » alone is geocoded in the middle of the region, 160 km from Rovaniemi.
+        lapland = article('laponie-budget-rovaniemi', 'Laponie', [section('Où dormir', 'Le centre de Rovaniemi ou le village.')],
+                          country='finlande', title='Laponie : le budget pour Rovaniemi')
+        config = affiliates.load_config(ROOT / 'affiliates.json')
+        self.assertEqual(config['places']['laponie-budget-rovaniemi'], 'Rovaniemi')
+        link = links(woven(active_site(config), lapland, [lapland]))[0]
+        self.assertEqual(parse_qs(urlparse(link['href']).query)['address'], ['Rovaniemi, Finlande'])
+        self.assertIn('Rovaniemi', link['aria-label'] if 'aria-label' in link else woven(active_site(config), lapland, [lapland]))
+        without = links(woven(active_site({**config, 'places': {}}), lapland, [lapland]))[0]
+        self.assertEqual(parse_qs(urlparse(without['href']).query)['address'], ['Laponie, Finlande'])
+
+    def test_the_table_of_places_is_optional_and_strictly_checked(self):
+        config = affiliates.load_config(ROOT / 'affiliates.json')
+        affiliates.validate_config({k: v for k, v in config.items() if k != 'places'})
+        for places in ('Rovaniemi', {'Slug Invalide': 'Rovaniemi'}, {'guide': ''}, {'guide': 'x' * 61}, {'guide': 'Ville <b>'}, {'guide': 42}):
+            with self.subTest(places=places), self.assertRaises(ValueError):
+                affiliates.validate_config({**config, 'places': places})
+
     def test_new_country_and_coordinates_need_no_code_change(self):
         tokyo = article('tokyo-5-jours', 'Tokyo', [section('Où dormir à Tokyo', 'Shinjuku ou Asakusa.')],
                         country='japon', geo={'lat': 35.6895, 'lng': 139.6917})
