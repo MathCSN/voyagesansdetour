@@ -1,11 +1,12 @@
 """Which fast reel a guide becomes, and its plans (scenario schema 3).
 
-Five formats, each taken from what already works for travel content (docs/strategie-videos.md):
-- "prix"       the price first ("6 jours pour 380 €"): budget guides;
+Four formats, each taken from what already works for travel content (docs/strategie-videos.md):
+- "prix"       the price first ("6 jours pour 380 €"): budget guides whose first figure is the budget itself;
 - "itineraire" day by day, one stage per plan: itineraries;
 - "tableau"    one screen to pause and save: "when to go" and any guide with a short table;
-- "liste"      a fast numbered list of figures to know before leaving: every guide;
-- "express"    two figures and out, under ten seconds: a guide's second or third reel.
+- "liste"      a fast numbered list of figures to know before leaving: every guide.
+("express", two figures and out, is no longer made: it left reels almost empty. The name stays valid for the one
+reel of that kind already in the catalogue.) Every reel says at least four different things (MIN_FACTS).
 Nothing is written here that the guide does not say: a figure, a stage or a table row is
 shown only when it is read word for word in the dated snapshot of the published page.
 """
@@ -20,6 +21,9 @@ import production as p
 NBSP = " "
 UNIT = r"(?:h|min|€|km|m|%|jours?|nuits?|trains?|marches|ans|cm|mm|°C|dh|\$|¥|£|₫|฿)(?!\w)"
 SHORT_LABEL = 64                       # characters read comfortably in three seconds
+STAGE_DETAIL = 80                      # under a stage of an itinerary: its price and what it pays for, on three lines at most
+DETAIL_MAX = 96                        # a label longer than three lines on screen is never shown; its figure stays in the guide
+SOFT_PAUSE = re.compile(r" (?=(?:depuis|selon|en tarif|avec|à partir)\b)")
 MIN_SHORT_LABEL = 18
 FIGURE_MAX = 16                        # longer values are shown on white boxes, in two lines if needed
 HOOK_SECONDS, CTA_SECONDS = 2.2, 2.4
@@ -30,6 +34,9 @@ TABLE_ROWS = (3, 5)
 FORMAT_LABELS = {"liste": "les chiffres à connaître", "prix": "combien ça coûte", "itineraire": "jour par jour",
                  "tableau": "le tableau à garder", "express": "l’essentiel"}
 PRICE = re.compile(r"€|\$|¥|£|₫|฿|\bCHF\b|\bdh\b|\bMAD\b")
+BUDGET = re.compile(r"\bbudget\b|\bau total\b|\ben tout\b|\bpar personne\b|\btout compris\b|\bhors vols?\b|\bsans le vol\b|"
+                    r"\bpour \d+ (?:jours|nuits|semaines)\b|\bpar jour\b", re.IGNORECASE)
+MIN_FACTS = 4                          # a reel that says fewer than four things is not worth a slot (audit of 12/11/2026)
 # One space at most between the parts: section titles are plain text, and nothing here can backtrack.
 DAY = re.compile(r"(Jours? \d+(?: ?(?:à|et|[-–]) ?\d+)?) ?[—–:,-] ?(\S.*)", re.IGNORECASE)
 SAVE_NOTE = "Enregistrez ce reel pour votre voyage"
@@ -80,16 +87,26 @@ def kicker_of(section: dict | None, fallback: str) -> str:
 
 
 def caption_emoji(value: str, label: str) -> str:
-    """Price, duration, train, boat, walk: the first that fits; a pin otherwise."""
+    """Price, duration, train, boat, walk: the first that fits; a pin otherwise. A distance alone is not a walk."""
     tests = (("💶", "€" in value), ("⏱️", re.search(r"\b(min|h|jours?)\b", value)), ("🚆", "train" in label.lower()),
-             ("⛴️", re.search(r"ferry|bateau|rabelo", label.lower())), ("🥾", re.search(r"marches|km|sentier", value + label)))
+             ("⛴️", re.search(r"ferry|bateau|rabelo", label.lower())), ("🥾", re.search(r"marches|sentier|randonn|à pied", value + label)))
     return next((emoji for emoji, fits in tests if fits), "📍")
 
 
 def caption_line(fact: dict) -> str:
+    """'59 € : la cabine du train de nuit', but '180 exposants au marché' and '120 km entre Mérida et la gare':
+    no colon when the label simply carries on from the figure (a bare number, or a label opening on a preposition)."""
     value, label = fact["value"], fact["label"]
-    joined = value + (" " if re.match(r"(?:de |d’|d')", label) else " : ") + label
-    return caption_emoji(value, label) + " " + joined
+    flows = re.fullmatch(r"[\d\s]+", value) or re.match(r"(?:de|d’|d'|entre|pour|par|sur|depuis|jusqu)\b", label)
+    return caption_emoji(value, label) + " " + value + (" " if flows else " : ") + label
+
+
+def in_enumeration(label: str, cut: int) -> bool:
+    """A comma between two short items with more to come ('Valladolid, Chichén Itzá, Mérida, Uxmal et Tulum'):
+    the middle of a list. A comma after a long clause ('…et 13 nuits (154 120 ¥), capsule ou dortoir') is a pause."""
+    before = re.split(r", | et | ou ", label[:cut])[-1]
+    after = re.split(r", | et | ou ", label[cut + 2:], maxsplit=1)
+    return len(before.split()) <= 3 and len(after) == 2 and len(after[0].split()) <= 3
 
 
 def short_label(label: str, limit: int = SHORT_LABEL) -> str:
@@ -97,8 +114,15 @@ def short_label(label: str, limit: int = SHORT_LABEL) -> str:
     if len(label) <= limit:
         return label
     # Never inside a parenthesis: "(Bahia, tombeaux saadiens, El Badi)" is dropped whole or kept whole.
-    cuts = [match.start() for match in re.finditer(r" \(| ; |, | : ", label) if label[:match.start()].count("(") == label[:match.start()].count(")")]
+    # Never inside a list: "Valladolid, Chichén Itzá, Mérida, Uxmal et Tulum" keeps all its places or is shown whole.
+    cuts = [match.start() for match in re.finditer(r" \(| ; |, | : ", label)
+            if label[:match.start()].count("(") == label[:match.start()].count(")")
+            and not (match.group() == ", " and in_enumeration(label, match.start()))]
     fitting = [cut for cut in cuts if MIN_SHORT_LABEL <= cut <= limit]
+    if not fitting:
+        # No punctuation in reach: stop before what only qualifies the figure ("… pour un étranger | depuis le 27 mars").
+        fitting = [match.start() for match in SOFT_PAUSE.finditer(label)
+                   if MIN_SHORT_LABEL <= match.start() <= limit and label[:match.start()].count("(") == label[:match.start()].count(")")]
     return label[:max(fitting)].rstrip() if fitting else label
 
 
@@ -110,6 +134,18 @@ def seconds_for(detail: str | None) -> float:
 
 def is_price(fact: dict) -> bool:
     return bool(PRICE.search(fact["value"]))
+
+
+def opens_on_budget(fact: dict) -> bool:
+    """A price that is the cost of the trip itself ('872 € : le budget serré pour 14 jours'), not the price of one
+    thing in it: 'Laponie : le budget — 59 €' would sell a train cabin as the budget of Lapland."""
+    return is_price(fact) and bool(BUDGET.search(fact["label"]))
+
+
+def repeats_title(fact: dict, article: dict) -> bool:
+    """'10 jours' under 'Yucatán en 10 jours': a plan that says the title again says nothing."""
+    value, title = (re.sub(r"[^a-z0-9]+", "-", destinations.ascii_fold(text).lower()).strip("-") for text in (fact["value"], article.get("shortTitle", "")))
+    return bool(value) and f"-{value}-" in f"-{title}-"
 
 
 def figure_lines(value: str) -> list[str] | None:
@@ -164,15 +200,16 @@ def applicable(article: dict, facts: list[dict], page: str) -> list[str]:
     """The formats this guide can fill, the one that suits its type first."""
     category = p.normalized(str(article.get("category", ""))).lower()
     formats = []
-    # Price first only where the guide's first figure is the cost of the trip itself: a budget guide.
-    if category == "budget" and facts and is_price(facts[0]):
+    # Price first only where the guide's first figure is the cost of the trip itself: a budget guide whose first figure says so.
+    if category == "budget" and facts and opens_on_budget(facts[0]):
         formats.append("prix")
     if len(stages(article, page, facts)) >= MIN_STAGES:
         formats.append("itineraire")
     if table_of(article, page):
         # "When to go" is a table before anything else; elsewhere the table comes after the guide's own format.
         formats.insert(0 if article.get("shortTitle", "").lower().startswith("quand partir") else len(formats), "tableau")
-    return formats + ["liste", "express"]
+    # No "express" any more: two figures in twelve seconds left a reel almost empty (Yucatán, 20/11/2026).
+    return formats + ["liste"]
 
 
 def ordered(formats: list[str], used: list[str]) -> list[str]:
@@ -184,7 +221,8 @@ def ordered(formats: list[str], used: list[str]) -> list[str]:
 # --- plans -------------------------------------------------------------------
 
 def words_of(value: str) -> set[str]:
-    return set(re.findall(r"[a-z0-9]{4,}", destinations.ascii_fold(value).lower()))
+    """Words of four letters and more; a dash separates two words ('Mérida–Cancún' names both towns)."""
+    return set(re.findall(r"[a-z0-9]{4,}", destinations.ascii_fold(re.sub(r"[^\w\s]", " ", value)).lower()))
 
 
 class Media:
@@ -197,17 +235,19 @@ class Media:
         return len(self.photos) + len(self.clips) - self.reserve
 
     def named(self, text: str, section: dict | None, keep_cover: bool = True) -> tuple | None:
-        """The section's own photo, else the photo whose id, caption or title shares the most words with `text`."""
+        """The photo that shows what `text` names: the one whose id, caption or title shares the most words with it.
+        The section's own photo wins when it shares as many, and stands in when no photo shares any; it gives way
+        when it shows something else ("Chichén Itzá à l'ouverture" is not shown by the cenote of that afternoon)."""
+        target = words_of(text)
+        shared = lambda ph: len(target & words_of(" ".join([ph[0].replace("-", " "), ph[2], str(ph[1].get("commonsTitle", ""))])))
         wanted = section.get("image") if section else None
         own = next((ph for ph in self.photos if ph[0] == wanted), None)
-        if own:
-            return own
-        target = words_of(text)
         # The cover is kept for the hook unless a stage of the itinerary is that very place.
         pool = [ph for ph in self.photos if not (keep_cover and ph[0] == self.cover)]
-        scored = [(len(target & words_of(" ".join([ph[0].replace("-", " "), ph[2], str(ph[1].get("commonsTitle", ""))]))), ph) for ph in pool]
-        best = max(scored, key=lambda pair: pair[0], default=(0, None))
-        return best[1] if best[0] else None
+        best = max(pool, key=shared, default=None)
+        if own and (best is None or shared(own) or not shared(best)):
+            return own
+        return best if best is not None and shared(best) else None
 
     def photo(self, text: str = "", section: dict | None = None, strict: bool = False) -> tuple[str, str]:
         """A photo for this text. `strict`: only a photo that shows what the text names (a stage of an itinerary)."""
@@ -243,12 +283,17 @@ def plan(layout: str, media: tuple[str, str], kicker: str, headline: list[str], 
     return {**scene, **{key: value for key, value in extra.items() if value}}
 
 
-def fact_plan(fact: dict, media: Media, place: str, tag: str, badge: str | None) -> dict:
+def fact_plan(fact: dict, media: Media, place: str, tag: str, badge: str | None = None) -> dict:
     headline = figure_lines(fact["value"])
     if not headline:
         raise Held("figure_too_long")
     detail = unbreakable(fact["short"])
-    return plan("fact", media.moving(fact["label"], fact["section"]), kicker_of(fact["section"], place), headline, seconds_for(detail), detail=detail,
+    picture = media.moving(fact["label"], fact["section"])
+    # The label above the figure is the section's name only over that section's own photo, or when the section has
+    # none: "Aurores boréales" is not written over a picture of the village.
+    own = fact["section"].get("image") if fact["section"] else None
+    kicker = kicker_of(fact["section"], place) if not own or picture[1] == own else place
+    return plan("fact", picture, kicker, headline, seconds_for(detail), detail=detail,
                 facts=[{"source": "guide", "excerpt": fact["shortExcerpt"]}], tag=tag, badge=badge)
 
 
@@ -267,27 +312,37 @@ class Brief:
 
     @property
     def numbered(self) -> list[dict]:
-        return [f for f in self.facts if figure_lines(f["value"])]
+        return [f for f in self.facts if figure_lines(f["value"]) and not repeats_title(f, self.article) and len(f["short"]) <= DETAIL_MAX]
 
     def hook(self, promise: str) -> dict:
-        return plan("hook", self.media.opening(self.article.get("cover")), self.kicker, self.title_lines + [promise], HOOK_SECONDS,
+        return plan("hook", self.media.opening(self.media.cover), self.kicker, self.title_lines + [promise], HOOK_SECONDS,
                     facts=[{"source": "guide", "excerpt": self.opening}], tag=self.tag)
 
 
 def figures_reel(fmt: str, brief: Brief) -> tuple[dict, list[dict], list[str]]:
     """"liste", "express" and "prix": one figure per plan; a budget opens on its first price."""
     chosen = brief.numbered
-    lead = chosen.pop(0) if fmt == "prix" and chosen and is_price(chosen[0]) and len(chosen[0]["value"]) <= FIGURE_MAX else None
+    lead = chosen.pop(0) if fmt == "prix" and chosen and opens_on_budget(chosen[0]) and len(chosen[0]["value"]) <= FIGURE_MAX else None
     if fmt == "prix":
         if not lead:
             raise Held("no_price_to_open_with")
         chosen = sorted(chosen, key=lambda f: not is_price(f))
-    chosen = chosen[:min(MAX_FACTS[fmt], brief.media.room())]
-    if len(chosen) < (2 if fmt == "express" else 3):
+    limit, plans = min(MAX_FACTS[fmt], brief.media.room()), {}
+    # A figure that a photo shows goes first (the price of the huskies over the huskies); a figure that no photo shows
+    # only fills the reel up to its four facts, and otherwise stays in the caption and the guide.
+    for index, fact in enumerate(chosen):
+        if len(plans) < limit and brief.media.named(fact["label"], fact["section"]):
+            plans[index] = fact_plan(fact, brief.media, brief.place, brief.tag)
+    for index, fact in enumerate(chosen):
+        if index not in plans and len(plans) < min(limit, MIN_FACTS - bool(lead)):
+            plans[index] = fact_plan(fact, brief.media, brief.place, brief.tag)
+    if len(plans) < 3:
         raise Held("not_enough_photos_or_figures")
-    body = [fact_plan(fact, brief.media, brief.place, brief.tag, f"{n}/{len(chosen)}") for n, fact in enumerate(chosen, 1)]
+    chosen, body = [chosen[index] for index in sorted(plans)], [plans[index] for index in sorted(plans)]
+    for number, scene in enumerate(body, 1):
+        scene["badge"] = f"{number}/{len(body)}"
     if lead:
-        hook = plan("hook", brief.media.opening(brief.article.get("cover")), "Combien ça coûte ?", brief.title_lines + ["*" + unbreakable(lead["value"]) + "*"],
+        hook = plan("hook", brief.media.opening(brief.media.cover), "Combien ça coûte ?", brief.title_lines + ["*" + unbreakable(lead["value"]) + "*"],
                     round(HOOK_SECONDS + 0.6, 1), detail=unbreakable(lead["short"]), facts=[{"source": "guide", "excerpt": lead["shortExcerpt"]}], tag=brief.tag)
         return hook, body, [caption_line(f) for f in [lead] + chosen]
     word = "chiffres" if all(re.search(r"\d", f["value"]) for f in chosen) else "repères"
@@ -297,10 +352,20 @@ def figures_reel(fmt: str, brief: Brief) -> tuple[dict, list[dict], list[str]]:
 
 def stage_plan(step: dict, picture: tuple[str, str], tag: str) -> dict:
     quotes, detail, fact = [{"source": "guide", "excerpt": step["title"]}], step["rest"], step["fact"]
-    if fact and len(fact["value"] + fact["short"]) <= 100:
-        detail = "*" + unbreakable(fact["value"]) + "* " + unbreakable(fact["short"])
-        quotes.append({"source": "guide", "excerpt": fact["shortExcerpt"]})
+    short = fact["short"] if fact else ""
+    if fact and len(fact["value"] + short) <= STAGE_DETAIL:
+        detail = "*" + unbreakable(fact["value"]) + "* " + unbreakable(short)
+        quotes.append({"source": "guide", "excerpt": fact["value"] + " " + short})
     return plan("fact", picture, step["kicker"], step["lines"], round(seconds_for(detail) - 0.4, 1), detail=detail, facts=quotes, tag=tag)
+
+
+def stage_line(step: dict, priced: bool) -> str:
+    """The stage in the caption, with the figure its plan shows and that figure's whole label when it fits (its date is there)."""
+    line = f"📍 {step['kicker']} : {' '.join(step['lines'])}"
+    if not priced:
+        return line
+    fact = step["fact"]
+    return next((text for text in (f"{line} · {fact['value']} {label}" for label in (fact["label"], fact["short"])) if len(text) <= 160), line)
 
 
 def itinerary_reel(brief: Brief) -> tuple[dict, list[dict], list[str]]:
@@ -309,12 +374,15 @@ def itinerary_reel(brief: Brief) -> tuple[dict, list[dict], list[str]]:
     for step in stages(brief.article, brief.page, brief.numbered):
         if brief.media.room() < 1:
             break
+        # The photo is chosen for what the plan will say (its name, its price), not for the whole title of the day.
+        shown = " ".join(step["lines"] + [step["fact"]["short"] if step["fact"] else step["rest"] or ""])
         try:
-            picture = brief.media.photo(step["title"], step["section"], strict=True)
+            picture = brief.media.photo(shown, step["section"], strict=True)
         except Held:
             continue
-        body.append(stage_plan(step, picture, brief.tag))
-        lines.append(f"📍 {step['kicker']} : {' '.join(step['lines'])}")
+        scene = stage_plan(step, picture, brief.tag)
+        body.append(scene)
+        lines.append(stage_line(step, priced=len(scene["facts"]) > 1))
     if len(body) < MIN_STAGES:
         raise Held("not_enough_stages_with_their_photo")
     return brief.hook("*jour par jour*"), body, lines
@@ -338,7 +406,9 @@ def build(fmt: str, article: dict, facts: list[dict], photos: list, clips: list,
           tag: str, title_lines: list[str], page: str) -> tuple[list[dict], list[str]]:
     """The plans of one reel and the useful lines of its caption. Raises Held when the guide cannot fill the format."""
     # The body takes the photos that show what it names; the hook and the call keep two, the cover first.
-    brief = Brief(article, facts, Media(photos, clips, reserve=2, cover=article.get("cover")), opening, place, kicker, tag, title_lines, page)
+    # The picture people see first: the guide's cover, or its first photo when the cover is too small for a reel.
+    cover = article.get("cover") if any(photo[0] == article.get("cover") for photo in photos) else (photos[0][0] if photos else None)
+    brief = Brief(article, facts, Media(photos, clips, reserve=2, cover=cover), opening, place, kicker, tag, title_lines, page)
     if fmt in ("liste", "express", "prix"):
         hook, body, lines = figures_reel(fmt, brief)
     elif fmt == "itineraire":
@@ -347,7 +417,17 @@ def build(fmt: str, article: dict, facts: list[dict], photos: list, clips: list,
         hook, body, lines = table_reel(brief)
     else:
         raise Held("unknown_format")
+    # At least four different things said, the hook's own promise aside: figures, stages or table rows.
+    said = {fact["excerpt"] for scene in [hook] + body for fact in scene.get("facts", [])} - {opening}
+    if len(said) < MIN_FACTS:
+        raise Held("fewer_than_four_facts")
     closing = plan("cta", brief.media.opening(None), "Le guide complet", title_lines, CTA_SECONDS, note=SAVE_NOTE)
+    # A photo reviewed by hand may say where its subject is (reviewed.json, "focus"): the vertical frame is cut around it.
+    records = {photo[0]: photo[1] for photo in photos}
+    for scene in [hook] + body + [closing]:
+        focus = records.get(scene.get("photo"), {}).get("focus")
+        if isinstance(focus, list) and len(focus) == 2:
+            scene["focus"] = focus
     # Three to five useful caption lines: the figures left unshown complete a short list.
     lines += [caption_line(f) for f in facts if caption_line(f) not in lines]
     lines = [line for line in lines if checked(line, 160)][:5]

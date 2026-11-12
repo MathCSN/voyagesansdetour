@@ -2,7 +2,11 @@
 """Add freely licensed Wikimedia Commons photos to the social photo catalogue.
 
 Each photo keeps its author, licence, source page and fingerprint. Only CC BY,
-CC BY-SA, CC0 and public-domain files are accepted; anything else is refused.
+CC BY-SA, CC0 and public-domain photographs are accepted; anything else is refused.
+Photos go to assets/photos/reviewed.json: looked at by a person, they complete the
+automatic posts of the same place (same id prefix as the guide's photos: "laponie-…").
+Add an "alt" line in French to each new record. catalogue.json is sealed by the
+hand-written scenarios and is left alone unless --sealed-catalogue is given.
 Usage: python3 photo_intake.py <photo-id> "File:Commons title.jpg" [...]
 """
 from __future__ import annotations
@@ -23,6 +27,7 @@ from PIL import Image
 HERE = Path(__file__).resolve().parent
 PHOTOS = HERE / "assets" / "photos"
 CATALOGUE = PHOTOS / "catalogue.json"
+REVIEWED = PHOTOS / "reviewed.json"
 API = "https://commons.wikimedia.org/w/api.php"
 USER_AGENT = {"User-Agent": "VoyageSansDetour-social/1.0 (contact@voyagesansdetour.fr)"}
 PHOTO_ID = re.compile(r"[a-z0-9][a-z0-9-]{2,63}\Z")
@@ -51,8 +56,39 @@ AI_MARKERS = re.compile(r"ai[- ]generated|generated (?:by|with) (?:an )?(?:ai|ar
                         r"\bai[- ]art\b|\bgenai\b|neural network generated", re.IGNORECASE)
 
 
+# Only photographs (CLAUDE.md): never a drawing, a poster, an advert, a reproduced artwork, a map or a scan.
+# Read in the file title and in its Commons categories; a work dated before 1950 is refused as well.
+NOT_A_PHOTO = re.compile(r"\b(?:illustrations?|illustrated|drawings?|engravings?|lithographs?|etchings?|woodcuts?|ukiyo-e|prints? (?:of|by|from)|"
+                         r"posters?|advertisements?|adverts?|ads?|caricatures?|cartoons?|comics?|postcards?|paintings? (?:by|of|from|in)|"
+                         r"oil on canvas|watercolou?rs?|frescos? by|maps? of|old maps|diagrams?|logos?|coats? of arms|book covers?|"
+                         r"magazine covers?|scans? (?:of|from)|scanned|pd-art|google art project|renderings?|3d models?|puck \(magazine\))\b", re.IGNORECASE)
+OLDEST_YEAR = 1950
+
+
 class Refused(ValueError):
     pass
+
+
+def not_a_photograph(title: str, meta: dict) -> bool:
+    """An illustration, a poster, an advert, a reproduced artwork, or anything made before 1950."""
+    fields = [title, plain_text(meta.get("Categories", {}).get("value", "")).replace("|", " | ")]
+    if any(NOT_A_PHOTO.search(field or "") for field in fields):
+        return True
+    made = re.search(r"(?<!\d)(1\d{3}|20\d{2})(?!\d)", plain_text(meta.get("DateTimeOriginal", {}).get("value", "")))
+    return bool(made) and int(made[1]) < OLDEST_YEAR
+
+
+def unphotographic_record(record: dict) -> bool:
+    """A catalogued file whose title or categories say it is not a photograph."""
+    return any(isinstance(record.get(key), str) and NOT_A_PHOTO.search(record[key].replace("_", " ").replace("|", " | "))
+               for key in ("commonsTitle", "categories"))
+
+
+def camera_of(info: dict) -> str | None:
+    """The camera named in the file's own data (EXIF): the plain sign that a file left a camera, not a scanner or a drawing table."""
+    fields = {str(row.get("name")): str(row.get("value") or "").strip() for row in info.get("commonmetadata") or [] if isinstance(row, dict)}
+    name = fields.get("Model") or fields.get("Make")
+    return name[:80] if name else None
 
 
 def ai_generated(title: str, meta: dict) -> bool:
@@ -112,7 +148,7 @@ def fetch_json(params: dict) -> dict:
 
 def commons_info(title: str) -> dict:
     data = fetch_json({"action": "query", "titles": title, "prop": "imageinfo",
-                       "iiprop": "url|size|extmetadata|mime|sha1|user", "iiurlwidth": STORED_LONG_SIDE_MAX})
+                       "iiprop": "url|size|extmetadata|mime|sha1|user|commonmetadata", "iiurlwidth": STORED_LONG_SIDE_MAX})
     pages = list(data.get("query", {}).get("pages", {}).values())
     if len(pages) != 1 or "imageinfo" not in pages[0]:
         raise Refused("Commons file not found: " + title)
@@ -121,6 +157,8 @@ def commons_info(title: str) -> dict:
         raise Refused("Photo too small or not a JPEG: " + title)
     if ai_generated(title, info.get("extmetadata", {})):
         raise Refused("AI-generated or not clearly photographic: " + title)
+    if not_a_photograph(title, info.get("extmetadata", {})):
+        raise Refused("Not a photograph (illustration, poster, artwork or old work): " + title)
     return info
 
 
@@ -140,10 +178,10 @@ def download(url: str) -> Image.Image:
     return image.convert("RGB")
 
 
-def load_catalogue() -> dict:
-    if not CATALOGUE.exists():
+def load_catalogue(path: Path = CATALOGUE) -> dict:
+    if not path.exists():
         return {"schemaVersion": 1, "photos": {}}
-    return json.loads(CATALOGUE.read_text())
+    return json.loads(path.read_text())
 
 
 def photo_record(photo_id: str, title: str, now: dt.datetime, folder: Path = PHOTOS, prefix: str = "assets/photos/") -> dict:
@@ -165,7 +203,9 @@ def photo_record(photo_id: str, title: str, now: dt.datetime, folder: Path = PHO
     path = folder / (photo_id + ".jpg")
     image.save(path, quality=JPEG_QUALITY, optimize=True, progressive=True)
     raw = path.read_bytes()
+    camera = camera_of(info)
     return {
+        **({"camera": camera} if camera else {}),
         "file": prefix + path.name,
         "sha256": hashlib.sha256(raw).hexdigest(),
         "width": size[0], "height": size[1],
@@ -198,20 +238,27 @@ def commons_search(query: str, limit: int = 20) -> list[str]:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("pairs", nargs="+", help="photo-id followed by its Commons title, repeated")
+    parser.add_argument("--sealed-catalogue", action="store_true",
+                        help="write to catalogue.json instead of reviewed.json: the hand-written scenarios seal that file by "
+                             "fingerprint, so every one of them must be sealed again afterwards (seal_scenarios.py)")
     args = parser.parse_args()
     if len(args.pairs) % 2:
         raise SystemExit("Provide pairs: photo-id title")
     PHOTOS.mkdir(parents=True, exist_ok=True)
-    catalogue = load_catalogue()
+    # reviewed.json: photos a person looked at, offered to the automatic posts of the same place (media_library.py).
+    target = CATALOGUE if args.sealed_catalogue else REVIEWED
+    catalogue, other = load_catalogue(target), load_catalogue(REVIEWED if args.sealed_catalogue else CATALOGUE)
     now = dt.datetime.now(dt.timezone.utc).replace(microsecond=0)
     for photo_id, title in zip(args.pairs[::2], args.pairs[1::2]):
         try:
+            if photo_id in other["photos"]:
+                raise Refused("Photo id already catalogued: " + photo_id)
             catalogue = add_photo(catalogue, photo_id, title, now)
             print("added", photo_id, catalogue["photos"][photo_id]["licence"])
         except Refused as error:
             print("refused", photo_id, error)
     ordered = {"schemaVersion": 1, "photos": dict(sorted(catalogue["photos"].items()))}
-    CATALOGUE.write_text(json.dumps(ordered, ensure_ascii=False, indent=2) + "\n")
+    target.write_text(json.dumps(ordered, ensure_ascii=False, indent=2) + "\n")
 
 
 if __name__ == "__main__":

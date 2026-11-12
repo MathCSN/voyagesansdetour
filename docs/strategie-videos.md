@@ -131,10 +131,49 @@ Chaque format existe dans le moteur (`reel_formats.py`) et se choisit seul selon
 | **Jour par jour** (`itineraire`) | n° 4, 16, 18, 30, 34, 46, 51 | Une étape par plan, le jour en étiquette, un prix ou une durée dessous | « Jours 3 à 5 · Ninh Bình · 300 000 ₫ la balade en barque » | Itinéraires dont les sections sont datées |
 | **Tableau à mettre en pause** (`tableau`) | n° 2, 5, 27, 33, 48, 54 | Un écran complet à garder, « faites pause pour tout lire » | Le tableau « votre envie, les meilleurs mois » du guide, entier | « Quand partir » et tout guide avec un tableau de 3 à 5 lignes |
 | **Liste rapide** (`liste`) | n° 1, 8, 15, 20, 22, 44, 45 | Le nombre dans l'accroche, une pastille « 2/5 », un chiffre par plan | « New York à Noël · 5 chiffres à connaître » | Tous les guides |
-| **Express** (`express`) | n° 3, 13, 14, 21 | Moins de dix secondes, deux chiffres, le reste en légende | Accroche, deux chiffres, appel à l'action | Second ou troisième reel d'un guide |
 | **Carrousel à enregistrer** | n° 48 ; données Buffer ci-dessous | Six images qu'on fait défiler et qu'on garde | Les six images du guide, un chiffre chacune | Instagram, une fois par semaine à la cadence cible |
 
-Un guide revient au bout de six semaines, dans un format qu'il n'a pas encore eu.
+Un guide revient au bout de six semaines, dans un format qu'il n'a pas encore eu, ou dans la
+même liste ouverte sur d'autres chiffres.
+
+**Le format « express » (deux chiffres, moins de dix secondes) est abandonné depuis le
+12/11/2026.** Le seul reel sorti sous cette forme (Yucatán, prévu le 20/11) disait deux choses en
+douze secondes, dont une qui répétait son titre : il a été retiré et refait jour par jour.
+Règles ajoutées ce jour-là (`reel_formats.py`) :
+
+- **un reel dit au moins quatre choses différentes** (chiffres, étapes ou lignes de tableau) ; il
+  lui faut donc six photos ou plans, sinon le guide attend d'en avoir ;
+- **un chiffre qui répète le titre est écarté** (« 10 jours » sous « Yucatán en 10 jours ») ;
+- **le prix n'ouvre un reel que s'il est le budget du voyage** (son libellé dit « budget », « par
+  personne », « pour 14 jours »…) : « Laponie : le budget, 59 € » annonçait le prix d'une cabine
+  de train ;
+- une énumération n'est jamais coupée avant ses derniers éléments ; un libellé sans ponctuation à
+  portée s'arrête avant ce qui ne fait que préciser le chiffre (« depuis… », « selon… ») ;
+- dans un itinéraire, chaque étape porte le prix que le guide lui donne.
+
+**Photos : seulement le lieu, seulement des photographies** (`media_library.py`,
+`photo_intake.py`). Le reel Laponie prévu le 27/11 montrait une rue des Canaries, deux
+illustrations et trois églises : la recherche prenait comme mot-clé tout mot à majuscule du titre
+des photos du guide (« Santa », de « Santa Claus Village »). Désormais :
+
+- sont cherchés, et exigés en mot entier dans le titre du fichier, le nom du lieu en français et
+  ses noms relus à la main dans `destinations.EXONYMS` (Lapland, London, Tailandia) ;
+- le nom ne suffit pas (« Chapada dos Guimarães » est au Brésil, la « Laponie suédoise » n'est pas
+  Rovaniemi) : une image trouvée n'est gardée que si son titre ou ses catégories Commons nomment
+  aussi le pays du guide. Rien ne le dit : pas de photo. Un guide de tout un pays ne lance aucune
+  recherche, le nom d'un pays dans un titre ne disant rien de ce que montre l'image ;
+- dans un reel de chiffres, ceux qu'une photo montre passent d'abord (le prix des huskies sur les
+  huskies) ; un chiffre qu'aucune photo ne montre ne sert qu'à atteindre quatre faits, sinon il
+  reste dans la légende ; dans un itinéraire, la photo est choisie pour ce que dit le plan, et la
+  ligne de légende de l'étape porte son prix ;
+- une illustration, une affiche, une publicité, une œuvre reproduite ou antérieure à 1950 est
+  refusée ; une image trouvée par la recherche doit en plus porter l'appareil photo dans ses
+  propres données ;
+- les photos ajoutées et regardées à la main (`photo_intake.py <identifiant> "File:…"`, qui les
+  range dans `assets/photos/reviewed.json` ; identifiant commençant comme ceux du guide :
+  `laponie-…` ; ajouter une ligne `alt` en français) complètent les guides du même lieu, avant
+  toute recherche. C'est la voie à prendre pour un guide qui manque de photos. L'ancien
+  `catalogue.json` est scellé par l'empreinte des scénarios écrits à la main : on n'y écrit plus.
 
 Règles communes à tous les reels (`motion_render.py`) :
 
@@ -207,9 +246,13 @@ des posts déjà en file ; un post n'est jamais placé à moins de 40 h d'un aut
 Simulation du 11/11 sur la file réelle : trois reels s'ajoutent les dimanches 15, 22 et 29
 novembre entre les reels du mercredi déjà programmés.
 
-**Instagram est à 4 posts par semaine depuis le 11/11/2026** (`weeklyLimit: 4`, créneaux du jeudi
+**Instagram est réglé sur 4 posts par semaine depuis le 11/11/2026** (`weeklyLimit: 4`, créneaux du jeudi
 9 h et du vendredi 18 h activés, `minGapHours: 30` puisque le jeudi 9 h tombe 38 heures après le
-mardi 19 h), une fois le premier reel publié par le nouveau panneau constaté en ligne. Historique :
+mardi 19 h), une fois le premier reel publié par le nouveau panneau constaté en ligne. **En
+pratique il reste à 3 posts par semaine jusqu'au 2/12** : les reels de l'ancienne cadence, déjà
+en file les mercredis 18/11, 25/11 et 2/12 à 18 h, sont à moins de 30 heures des créneaux du
+mardi 19 h et du jeudi 9 h. Le premier carrousel du jeudi sortira le 10/12 ; rien à corriger, le
+blocage disparaît de lui-même. Historique :
 le panneau `vsd-admin` refusait plus de 2 posts par réseau sur 7 jours glissants. Sa version du 11/11/2026
 ([vsd-admin, PR 2](https://github.com/MathCSN/vsd-admin/pull/2)) plafonne par réseau :
 Instagram 4, Facebook 2, TikTok 4 (`POLICY.weeklyLimit` dans `src/engine/plan.js`). C'est un

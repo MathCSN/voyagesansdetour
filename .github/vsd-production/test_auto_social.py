@@ -14,6 +14,7 @@ from PIL import Image
 import auto_social as a
 import clip_intake
 import destinations
+import media_library
 import motion_render
 import photo_intake
 import production as p
@@ -102,7 +103,9 @@ class Fixture:
         return {"file": f"{a.AUTO_PHOTOS}/{photo_id}.jpg", "sha256": hashlib.sha256(raw).hexdigest(), "width": 2400, "height": 1600,
                 "commonsTitle": title, "sourcePage": "https://commons.wikimedia.org/wiki/" + title.replace(" ", "_"),
                 "author": "Auteur Commons", "licence": "CC BY-SA 4.0", "licenceUrl": photo_intake.LICENCES["CC BY-SA 4.0"],
-                "commonsSha1": hashlib.sha1(title.encode()).hexdigest(), "retrievedAt": p.stamp(NOW)}
+                "commonsSha1": hashlib.sha1(title.encode()).hexdigest(), "retrievedAt": p.stamp(NOW),
+                **({} if "no camera" in title else {"camera": "FUJIFILM X-T4"}),
+                "categories": "Bonn|United Nations" if "elsewhere" in title else "Featured pictures of Japan|Kyoto"}
 
     def clip(self, clip_id, candidate):
         folder = self.root / clip_intake.CLIPS
@@ -327,11 +330,12 @@ class GeneratorTests(unittest.TestCase):
         self.assertEqual(result["created"], [])
         self.assertEqual(result["held"][0]["reason"], "guide_sources_older_than_45_days")
 
-    def test_too_few_photos_holds_the_photo_post_but_not_the_reel(self):
+    def test_too_few_photos_holds_the_photo_post_and_the_reel(self):
         f = self.fixture(photos=5)
         result = f.run(limit=30)
-        self.assertEqual({c["channel"] for c in result["created"]}, {"instagram"})
+        self.assertEqual(result["created"], [])
         self.assertIn({"slug": "kyoto-train", "channel": "facebook", "kind": "carousel", "reason": "not_enough_photos_or_figures"}, result["held"])
+        self.assertIn({"slug": "kyoto-train", "channel": "instagram", "kind": "reel", "reason": "fewer_than_four_facts"}, result["held"])
 
     def test_featured_pictures_complete_the_guide_photos_only_when_they_name_the_place(self):
         f = self.fixture(photos=5)
@@ -368,7 +372,10 @@ class GeneratorTests(unittest.TestCase):
         later = p.instant(first["publishAt"]) + a.REPOST_COOLDOWN - a.MIN_LEAD
         (f.site / "articles.json").write_text(json.dumps([guide(sourcesCheckedOn=later.date().isoformat())], ensure_ascii=False))
         second = reels(f.run(later))
-        self.assertEqual((first["format"], second[0]["format"]), ("liste", "express"))
+        # The two-figure "express" reel is gone (too thin): the guide comes back as a list that opens on other figures.
+        again = f.scenario(second[0]["id"])
+        self.assertEqual((first["format"], again["format"]), ("liste", "liste"))
+        self.assertNotEqual(first["scenes"][1]["headline"], again["scenes"][1]["headline"])
 
     def test_period_end(self):
         f = self.fixture()
@@ -393,7 +400,9 @@ class GeneratorTests(unittest.TestCase):
                          [("Jour 1", ["Kiyomizu-dera"], "kyoto-3"), ("Jour 2", ["Fushimi Inari", "et ses torii"], "kyoto-4"), ("Jour 3", ["Arashiyama"], "kyoto-5")])
         self.assertEqual(stages[0]["facts"][0]["excerpt"], "Jour 1 — Kiyomizu-dera, le temple sur pilotis")
         self.assertEqual(stages[0]["detail"], "*500 ¥* l’entrée du temple Kiyomizu-dera")
-        self.assertIn("📍 Jour 2 : Fushimi Inari et ses torii", reel["caption"]["lines"])
+        # The caption carries the figure each stage shows, with its whole label.
+        self.assertIn("📍 Jour 2 : Fushimi Inari et ses torii · 10 000 torii rouges sur la colline du Fushimi Inari", reel["caption"]["lines"])
+        self.assertIn("📍 Jour 3 : Arashiyama", reel["caption"]["lines"])
         self.assertNotIn("Osaka", json.dumps(reel["scenes"], ensure_ascii=False))  # no photo of Osaka in this guide
 
     def test_a_when_to_go_guide_becomes_a_table_to_pause(self):
@@ -636,6 +645,339 @@ class PhotoIntakeTests(unittest.TestCase):
         self.assertEqual(photo_intake.credited_author({"Artist": {"value": long_request}}), "Timothy A. Gonsalves")
         self.assertEqual(photo_intake.credited_author({"Artist": {"value": "x" * 300}, "Credit": {"value": "Own work"}}, "Tagooty"), "Tagooty")
         self.assertEqual(photo_intake.credited_author({"Artist": {"value": "Photo by Paolo Costa Baldi. License: GFDL/CC-BY-SA 3.0"}}), "Paolo Costa Baldi")
+
+    def test_an_illustration_a_poster_or_an_old_work_is_not_a_photograph(self):
+        refuse = photo_intake.not_a_photograph
+        self.assertTrue(refuse("File:Rose O'Neill - When We All Believe (Santa Claus and children illustration from the 1903 December 2 issue of Puck).jpg", {}))
+        self.assertTrue(refuse("File:Santa Claus - Sunkist Ad (1928).jpg", {}))
+        self.assertTrue(refuse("File:Kyoto.jpg", {"Categories": {"value": "Ukiyo-e|Woodcuts of Kyoto"}}))
+        self.assertTrue(refuse("File:Kyoto street.jpg", {"DateTimeOriginal": {"value": "<time datetime='1931-05-02'>2 May 1931</time>"}}))
+        self.assertTrue(refuse("File:Lapland.jpg", {"Categories": {"value": "Travel posters of Finland"}}))
+        recent = {"DateTimeOriginal": {"value": "2019-02-27 21:14:08"}, "Categories": {"value": "Aurora borealis in Finland|Featured pictures on Wikimedia Commons"}}
+        self.assertFalse(refuse("File:Aurora borealis over Saana fell.jpg", recent))
+        self.assertFalse(refuse("File:Santa Maria in Trastevere church in Rome (12).jpg", {"Categories": {"value": "Interior of Santa Maria in Trastevere"}}))
+        self.assertFalse(refuse("File:Lisbon Praça do Comércio BW 2018-10-03 13-29-10.jpg", {}))
+        self.assertTrue(photo_intake.unphotographic_record({"commonsTitle": "File:Santa Claus - Sunkist Ad (1928).jpg", "categories": "Sunkist advertisements"}))
+        self.assertFalse(photo_intake.unphotographic_record({"commonsTitle": "File:Teide Canadas.jpg", "categories": "Teide"}))
+
+    def test_the_camera_is_read_from_the_file_own_data(self):
+        info = {"commonmetadata": [{"name": "Make", "value": "NIKON CORPORATION"}, {"name": "Model", "value": "NIKON D850"}]}
+        self.assertEqual(photo_intake.camera_of(info), "NIKON D850")
+        self.assertEqual(photo_intake.camera_of({"commonmetadata": [{"name": "Make", "value": "Canon"}]}), "Canon")
+        self.assertIsNone(photo_intake.camera_of({"commonmetadata": [{"name": "Software", "value": "Adobe Photoshop"}]}))
+        self.assertIsNone(photo_intake.camera_of({}))
+
+
+LAPLAND = {"slug": "laponie-budget-rovaniemi", "country": "finlande", "destination": "Laponie", "shortTitle": "Laponie : le budget",
+           "title": "Combien coûte un voyage en Laponie ? Le budget de Rovaniemi", "category": "Budget"}
+
+
+class PlacePhotoTests(unittest.TestCase):
+    """A post shows the place it names: the audit of 12/11/2026 found a Lapland reel made of churches and old adverts."""
+
+    def fixture(self, articles=None, **kwargs):
+        fixture = Fixture(articles or [guide()], **kwargs)
+        self.addCleanup(fixture.cleanup)
+        return fixture
+
+    def test_only_the_place_and_its_known_names_are_searched_never_a_word_from_a_photo_title(self):
+        article = guide(**LAPLAND)
+        names = media_library.place_names(article, {})
+        self.assertEqual(names, ["Laponie", "Lapland", "Laponia"])
+        asked = []
+        hits = ["File:Santa Claus - Sunkist Ad (1928).jpg", "File:Dome of Cattedrale di Santa Maria del Fiore (Florence).jpg",
+                "File:Balcones de la Avenida Maritima - Santa Cruz de La Palma 14.jpg", "File:Reindeer in Finnish Lapland.jpg",
+                "File:Laplander dog.jpg"]
+        found = media_library.featured_candidates(article, names, "Finlande", lambda query: asked.append(query) or hits)
+        self.assertEqual({candidate["title"] for candidate in found}, {"File:Reindeer in Finnish Lapland.jpg"})
+        self.assertTrue(all(candidate["automatic"] for candidate in found))
+        self.assertEqual(len(asked), 3)
+        self.assertFalse(any(word in query for query in asked for word in ("Santa", "Claus", "Village", "Rovaniemi")))
+
+    def test_a_place_is_known_by_its_reviewed_names_only(self):
+        self.assertEqual(media_library.place_names(guide(), {}), ["Kyoto"])
+        self.assertEqual(media_library.place_names(guide(destination="Japon"), {}), ["Japon", "Japan"])
+        self.assertEqual(media_library.place_names(guide(destination="Thaïlande", country="thailande"), {}), ["Thaïlande", "Thailand", "Tailandia"])
+        self.assertEqual(media_library.place_names(guide(destination="Yucatán", country="mexique"), {}), ["Yucatán"])
+        self.assertEqual(media_library.country_names(guide(), {}), ["Japon", "Japan"])
+        self.assertEqual(media_library.country_names(guide(**LAPLAND), {}), ["Finlande", "Finland", "Finlandia"])
+        self.assertEqual(media_library.country_names(guide(country="portugal"), {"portugal": {"name": "Portugal"}}), ["Portugal"])
+
+    def test_a_whole_country_is_never_searched(self):
+        # "Portugal" or "Japon" in a title says nothing of what the picture shows: a sea squirt, a war photograph.
+        for article in (guide(destination="Portugal", country="portugal"), guide(destination="Japon"), guide(destination="Vietnam", country="vietnam")):
+            asked = []
+            hits = ["File:Piña de mar (Phallusia mammillata), Parque natural de la Arrábida, Portugal, 2020-07-21, DD 07.jpg", "File:Viet Cong soldier, Vietnam.jpg"]
+            found = media_library.featured_candidates(article, media_library.place_names(article, {}), "x", lambda query: asked.append(query) or hits,
+                                                      media_library.country_names(article, {}))
+            self.assertEqual((found, asked), ([], []))
+
+    def test_a_namesake_in_another_country_is_refused(self):
+        # The reviewer's cases of 12/11/2026: macaws of Chapada dos Guimarães (Brazil) under a Guimarães reel, and others.
+        tied = media_library.tied_to_country
+        portugal, finland = ["Portugal"], ["Finlande", "Finland", "Finlandia"]
+        macaws = {"commonsTitle": "File:189 Red-and-green macaw couple flying in Chapada dos Guimarães National Park Photo by Giles Laurent.jpg",
+                  "categories": "Featured pictures of Mato Grosso|Wiki Loves Earth 2025 in Brazil|Ara chloropterus in flight", "camera": "ILCE-1"}
+        church = {"commonsTitle": "File:Church of Our Lady of Consolation in Guimaraes (3).jpg",
+                  "categories": "Igreja de Nossa Senhora da Consolação e Santos Passos|Featured pictures of Portugal"}
+        self.assertFalse(tied(macaws, portugal))
+        self.assertTrue(tied(church, portugal))
+        self.assertFalse(tied({"commonsTitle": "File:Porto Alegre - Brazil Landscape-Night.jpg", "categories": "Porto Alegre at night|Featured pictures of Brazil"}, portugal))
+        self.assertTrue(tied({"commonsTitle": "File:Porto-Ponte Dom Luis I-14-2011-gje.jpg", "categories": "Ponte Luís I|Quality images of Portugal"}, portugal))
+        self.assertTrue(tied({"commonsTitle": "File:Ribeira, Porto, Portugal (2).jpg", "categories": ""}, portugal))
+        self.assertFalse(tied({"commonsTitle": "File:Abisko National Park, Swedish Lapland.jpg", "categories": "Abisko National Park|Featured pictures of Sweden"}, finland))
+        self.assertFalse(tied({"commonsTitle": "File:Sarek, Laponia World Heritage, Sweden.jpg", "categories": "Sarek National Park"}, finland))
+        self.assertTrue(tied({"commonsTitle": "File:Path to Pallastunturi, Muonio, Lapland, Finland, 2021 September.jpg", "categories": ""}, finland))
+        self.assertFalse(tied({"commonsTitle": "File:Kyoto.jpg"}, ["Japon", "Japan"]))  # nothing says where: in doubt, no photo
+        self.assertFalse(media_library.names_place("File:Castelo de Guimarães.jpg", ["Lisbonne", "Lisbon", "Lisboa"]))
+        guimaraes = guide(slug="guimaraes-une-journee-sans-voiture", destination="Guimarães", country="portugal")
+        found = media_library.featured_candidates(guimaraes, media_library.place_names(guimaraes, {}), "Portugal",
+                                                  lambda query: [macaws["commonsTitle"], church["commonsTitle"]], portugal)
+        self.assertEqual([candidate["countryNames"] for candidate in found], [portugal, portugal])
+
+    def test_the_generator_drops_a_found_photo_that_nothing_ties_to_the_country(self):
+        f = self.fixture(photos=5)
+        hits = ["File:Kyoto Protocol signing, elsewhere.jpg", "File:Kyoto Kinkaku-ji in autumn.jpg"]
+        result = f.run(limit=30, searcher=lambda query: hits if "Featured_pictures" in query else [])
+        records = [record for path in (f.root / a.AUTO).glob("*/photos.json") for record in json.loads(path.read_text())["photos"].values()]
+        used = {record["commonsTitle"] for record in records}
+        self.assertIn("File:Kyoto Protocol signing, elsewhere.jpg", f.downloads)
+        self.assertNotIn("File:Kyoto Protocol signing, elsewhere.jpg", used)
+        self.assertIn("File:Kyoto Kinkaku-ji in autumn.jpg", used)
+        self.assertEqual({path.name for path in (f.root / a.AUTO_PHOTOS).glob("*.jpg")}, {Path(record["file"]).name for record in records})
+        self.assertTrue(result["created"])
+
+    def test_the_place_is_a_whole_word_of_the_file_title(self):
+        named = media_library.names_place
+        self.assertTrue(named("File:Ribeira, Porto (2).jpg", ["Porto"]))
+        self.assertFalse(named("File:Portofino harbour.jpg", ["Porto"]))
+        self.assertTrue(named("File:Puente de la Torre, Londres, Inglaterra, 2014-08-11, DD 092.JPG", ["Londres"]))
+        self.assertTrue(named("File:194 White-nosed coati at the beach in Yucatán Photo by Giles Laurent.jpg", ["Yucatán"]))
+        self.assertTrue(named("File:Chichen Itza-Yucatan-Mexico0222.jpg", ["Yucatán"]))
+        self.assertFalse(named("File:Santa Cruz de La Palma.jpg", ["Laponie", "Lapland"]))
+
+    def test_an_automatic_find_without_a_camera_is_refused_and_leaves_no_file(self):
+        f = self.fixture(photos=5)
+        hits = ["File:Kyoto old print, no camera.jpg", "File:Kyoto Kinkaku-ji in autumn.jpg"]
+        result = f.run(limit=30, searcher=lambda query: hits if "Featured_pictures" in query else [])
+        self.assertIn("File:Kyoto old print, no camera.jpg", f.downloads)
+        used = {record["commonsTitle"] for path in (f.root / a.AUTO).glob("*/photos.json") for record in json.loads(path.read_text())["photos"].values()}
+        self.assertIn("File:Kyoto Kinkaku-ji in autumn.jpg", used)
+        self.assertNotIn("File:Kyoto old print, no camera.jpg", used)
+        kept = {path.name for path in (f.root / a.AUTO_PHOTOS).glob("*.jpg")}
+        self.assertEqual(len(kept), len(used))
+        self.assertTrue(result["created"])
+
+    def test_hand_reviewed_photos_complete_a_guide_and_the_sealed_catalogue_is_never_written(self):
+        sealed = HERE / "assets/photos/catalogue.json"
+        before = hashlib.sha256(sealed.read_bytes()).hexdigest()
+        with mock.patch.object(photo_intake, "add_photo", lambda catalogue, photo_id, title, now: {**catalogue, "photos": {**catalogue["photos"], photo_id: {"commonsTitle": title, "licence": "CC0"}}}), \
+                tempfile.TemporaryDirectory() as folder, mock.patch.object(photo_intake, "REVIEWED", Path(folder) / "reviewed.json"), \
+                mock.patch("sys.argv", ["photo_intake.py", "kyoto-gion", "File:Gion.jpg", "lisbonne-alfama-toits", "File:Deja.jpg"]), \
+                mock.patch("builtins.print"):
+            photo_intake.main()
+            written = json.loads((Path(folder) / "reviewed.json").read_text())["photos"]
+        self.assertEqual(list(written), ["kyoto-gion"])  # an id of the sealed catalogue is refused, not shadowed
+        self.assertEqual(hashlib.sha256(sealed.read_bytes()).hexdigest(), before)
+        self._guide_completed_from("reviewed.json")
+        self._guide_completed_from("catalogue.json")
+
+    def _guide_completed_from(self, catalogue_name):
+        f = self.fixture(photos=3)
+        records = {}
+        for name in ("gion", "fushimi", "arashiyama"):
+            Image.new("RGB", (2400, 1600), (40, 90, 140)).save(f.root / f"assets/photos/kyoto-{name}.jpg", quality=80)
+            raw = (f.root / f"assets/photos/kyoto-{name}.jpg").read_bytes()
+            records[f"kyoto-{name}"] = {"file": f"assets/photos/kyoto-{name}.jpg", "sha256": hashlib.sha256(raw).hexdigest(), "width": 2400, "height": 1600,
+                                        "commonsTitle": f"File:{name}.jpg", "sourcePage": f"https://commons.wikimedia.org/wiki/File:{name}.jpg",
+                                        "author": "Photographe", "licence": "CC BY 4.0", "licenceUrl": photo_intake.LICENCES["CC BY 4.0"],
+                                        "commonsSha1": hashlib.sha1(name.encode()).hexdigest(), "retrievedAt": p.stamp(NOW), "alt": f"Kyoto, {name}."}
+        records["osaka-chateau"] = {**records["kyoto-gion"], "commonsTitle": "File:Osaka.jpg"}
+        (f.root / "assets/photos" / catalogue_name).write_text(json.dumps({"schemaVersion": 1, "photos": records}))
+        made = [c for c in f.run(limit=30)["created"] if c["kind"] == "reel"]
+        self.assertTrue(made)
+        used = {scene["photo"] for scene in f.scenario(made[0]["id"])["scenes"]}
+        self.assertTrue(used & {"kyoto-gion", "kyoto-fushimi", "kyoto-arashiyama"})
+        self.assertNotIn("osaka-chateau", used)
+        self.assertEqual(f.downloads, [f"File:Kyoto {n}.jpg" for n in (1, 2, 3)])
+
+
+class DensityTests(unittest.TestCase):
+    """A reel says at least four things, never its own title again, and a retired post gives its slot back."""
+
+    def fixture(self, articles=None, **kwargs):
+        fixture = Fixture(articles or [guide()], **kwargs)
+        self.addCleanup(fixture.cleanup)
+        return fixture
+
+    def reels(self, result, f):
+        return [f.scenario(c["id"]) for c in result["created"] if c["kind"] == "reel"]
+
+    def test_a_reel_with_fewer_than_four_distinct_facts_is_not_made(self):
+        f = self.fixture(photos=5)  # five photos: a hook, a call and three figures at most
+        result = f.run(limit=30)
+        self.assertEqual(self.reels(result, f), [])
+        self.assertIn("fewer_than_four_facts", {row["reason"] for row in result["held"] if row.get("kind") == "reel"})
+        self.assertNotIn("express", reel_formats.applicable(guide(), a.usable_facts(guide(), page(guide()), f.root), ""))
+        g = self.fixture(photos=6)
+        made = self.reels(g.run(limit=30), g)[0]
+        self.assertEqual(len({fact["excerpt"] for scene in made["scenes"][1:-1] for fact in scene["facts"]}), 4)
+
+    def test_a_figure_that_repeats_the_title_is_left_out(self):
+        facts = [{"value": "7 jours", "label": "pour voir Kyoto, Nara et Osaka sans courir"}] + FACTS[:5]
+        f = self.fixture([guide(shortTitle="Kyoto en 7 jours", keyFacts=facts)])
+        reel = self.reels(f.run(limit=1), f)[0]
+        self.assertNotIn(["*7" + reel_formats.NBSP + "jours*"], [scene["headline"] for scene in reel["scenes"]])
+        self.assertEqual(reel["scenes"][1]["headline"], ["*4" + reel_formats.NBSP + "h" + reel_formats.NBSP + "10*"])
+
+    def test_a_budget_reel_opens_on_a_price_only_when_that_price_is_the_budget(self):
+        cabin = [{"value": "59 €", "label": "la cabine privative du train de nuit Helsinki–Rovaniemi"}] + FACTS
+        f = self.fixture([guide(category="Budget", shortTitle="Laponie : le budget", keyFacts=cabin)])
+        reel = self.reels(f.run(limit=1), f)[0]
+        self.assertEqual(reel["format"], "liste")
+        # Four figures, not five: only one of them is shown by a photo of this guide, the others just fill the reel.
+        self.assertEqual(reel["scenes"][0]["headline"][-1], "*4 chiffres à connaître*")
+        self.assertEqual(reel["title"], "Laponie : le budget — les chiffres à connaître")
+        self.assertTrue(reel_formats.opens_on_budget({"value": "872 €", "label": "le budget serré pour 14 jours et 13 nuits"}))
+        self.assertTrue(reel_formats.opens_on_budget({"value": "1 370 €", "label": "par personne, hors vol"}))
+        self.assertFalse(reel_formats.opens_on_budget({"value": "0 €", "label": "rencontrer le Père Noël dans son bureau"}))
+        self.assertFalse(reel_formats.opens_on_budget({"value": "10 jours", "label": "le budget temps du voyage"}))
+
+    def test_a_title_never_carries_two_colons(self):
+        self.assertEqual(a.joined_title("Laponie : le budget", "combien ça coûte"), "Laponie : le budget — combien ça coûte")
+        self.assertEqual(a.joined_title("Lisbonne ou Porto ?", "4 repères"), "Lisbonne ou Porto ? — 4 repères")
+        self.assertEqual(a.joined_title("Kyoto en train", "jour par jour"), "Kyoto en train : jour par jour")
+
+    def test_a_retired_post_gives_back_its_slot_and_its_guide_under_a_new_identity(self):
+        f = self.fixture()
+        first = f.run(limit=1)["created"][0]
+        before = (f.root / "scenarios" / f"{first['id']}.json").read_bytes()
+        batch = {"schemaVersion": 1, "batchId": first["id"] + "-v1", "items": [{"dueAt": first["publishAt"], "payload": {"channel": "instagram", "kind": "reel"},
+                                                                               "review": {"destination": {"url": first["guide"]}}}]}
+        (f.root / "reviewed-social" / (first["id"] + "-v1.json")).write_text(json.dumps(batch))
+        entry = {"batchId": first["id"] + "-v1", "path": f"x/{first['id']}-v1.json"}
+        (f.root / "reviewed-social/index.json").write_text(json.dumps({"schemaVersion": 1, "items": [entry]}))
+        self.assertNotIn(first["publishAt"], [c["publishAt"] for c in f.run(limit=1)["created"]])  # queued: its slot is taken
+        for path in (f.root / "scenarios").glob("*.json"):
+            if path.stem != first["id"]:
+                path.unlink()
+        catalogue = json.loads((f.root / "catalogue.json").read_text())
+        (f.root / "catalogue.json").write_text(json.dumps({**catalogue, "items": [i for i in catalogue["items"] if i["contentId"] == first["id"]]}))
+        (f.root / "reviewed-social/index.json").write_text(json.dumps({"schemaVersion": 1, "items": [entry], "retirements": [{"batchId": entry["batchId"]}]}))
+        again = f.run(limit=1)["created"][0]
+        self.assertEqual((again["publishAt"], again["id"], again["guide"]), (first["publishAt"], first["id"] + "-2", first["guide"]))
+        self.assertEqual((f.root / "scenarios" / f"{first['id']}.json").read_bytes(), before)
+
+    def test_a_when_to_go_guide_is_not_promised_prices_and_an_itinerary(self):
+        article = guide(category="Choisir", shortTitle="Quand partir à Kyoto", sections=[TABLE] + SECTIONS)
+        f = self.fixture([article])
+        posts = [f.scenario(c["id"]) for c in f.run(limit=30)["created"] if c["channel"] == "facebook"]
+        self.assertTrue(posts)
+        self.assertNotIn("itinéraire", posts[0]["caption"]["cta"])
+        self.assertIn("meilleure période", posts[0]["caption"]["cta"])
+        other = self.fixture()
+        plain = [other.scenario(c["id"]) for c in other.run(limit=30)["created"] if c["channel"] == "facebook"]
+        self.assertIn("prix, horaires", plain[0]["caption"]["cta"])
+
+
+class StageTests(unittest.TestCase):
+    def test_a_dash_separates_two_towns(self):
+        self.assertTrue({"merida", "cancun", "tren", "maya"} <= reel_formats.words_of("Jour 7 : Mérida–Cancún en Tren Maya"))
+
+    def test_a_stage_carries_its_price_with_what_it_pays_for(self):
+        label = "l’entrée de Chichén Itzá pour un étranger depuis le « boleto único » du 27 mars 2026 (105 pesos de tarif INAH inclus)"
+        fact = {"value": "697 pesos", "label": label, "short": reel_formats.short_label(label), "shortExcerpt": "697 pesos " + label}
+        step = {"kicker": "Jour 3", "lines": ["Chichén Itzá"], "title": "Jour 3 : Chichén Itzá à l’ouverture", "rest": "Ik Kil l’après-midi", "fact": fact}
+        # No punctuation within reach: the label stops before what only qualifies the figure, still the guide's own words.
+        shown = "l’entrée de Chichén Itzá pour un étranger"
+        self.assertEqual(fact["short"], shown)
+        fact["shortExcerpt"] = "697 pesos " + shown
+        scene = reel_formats.stage_plan(step, ("photo", "yucatan-cenote"), "Guide Yucatán")
+        self.assertEqual(scene["detail"], "*697 pesos* " + shown)
+        self.assertEqual(scene["facts"][1]["excerpt"], "697 pesos " + shown)
+        self.assertEqual(reel_formats.short_label("Cancún–Playa del Carmen et Playa del Carmen–Tulum en tarif touriste international (octobre 2026)"),
+                         "Cancún–Playa del Carmen et Playa del Carmen–Tulum")
+        too_long = {**fact, "short": "x" * 90}
+        self.assertEqual(reel_formats.stage_plan({**step, "fact": too_long}, ("photo", "yucatan-cenote"), "Guide")["detail"], "Ik Kil l’après-midi")
+
+    def test_the_first_photo_opens_the_reel_when_the_cover_is_too_small_for_it(self):
+        article = guide(cover="kyoto-absente")
+        facts = [{**fact, "short": fact["label"], "shortExcerpt": fact["value"] + " " + fact["label"], "excerpt": fact["value"] + " " + fact["label"], "section": None}
+                 for fact in FACTS]
+        photos = [(f"kyoto-{n}", {"commonsTitle": f"File:Kyoto {n}.jpg"}, f"Kyoto, vue {n}.") for n in range(1, 8)]
+        scenes, _ = reel_formats.build("liste", article, facts, photos, [], "Le Nozomi relie Tokyo à Kyoto.", "Kyoto", "Japon · Kyoto", "Guide Kyoto",
+                                       ["Kyoto en train"], "")
+        self.assertEqual(scenes[0]["photo"], "kyoto-1")
+        self.assertNotIn("kyoto-1", [scene["photo"] for scene in scenes[1:]])
+
+
+class ShownTests(unittest.TestCase):
+    """Each plan shows what its text names (review of 12/11/2026)."""
+
+    PHOTOS = [("lap-aurore", {"commonsTitle": "File:Aurora.jpg"}, "Une aurore boréale en Laponie."),
+              ("lap-bureau", {"commonsTitle": "File:Office.jpg"}, "Le bureau du Père Noël illuminé, à Rovaniemi."),
+              ("lap-cabane", {"commonsTitle": "File:Hut.jpg"}, "Une cabane sous la neige."),
+              ("lap-huskies", {"commonsTitle": "File:Dogs.jpg"}, "Un attelage de huskies."),
+              ("lap-train", {"commonsTitle": "File:Train.jpg"}, "Le train de nuit en gare de Rovaniemi."),
+              ("lap-traineau", {"commonsTitle": "File:Sleigh.jpg", "focus": [0.8, 0.55]}, "Une balade en traîneau tiré par un renne."),
+              ("lap-village", {"commonsTitle": "File:Village.jpg"}, "Le village sous la neige en décembre, à Rovaniemi."),
+              ("lap-pyramide", {"commonsTitle": "File:Balls.jpg"}, "Une pyramide de boules de neige.")]
+    FIGURES = [("59 €", "la cabine privative du train de nuit Helsinki–Rovaniemi"), ("0 €", "rencontrer le Père Noël dans son bureau"),
+               ("30 à 60 €", "une balade en traîneau à renne de 400 ou 800 m"), ("63 €", "la courte balade en huskies au village"),
+               ("42 €", "l’entrée adulte de SantaPark, ouvert du 31 octobre au 23 janvier"), ("−6 °C", "la maximale moyenne de décembre à Rovaniemi")]
+
+    def build(self, fmt="liste"):
+        facts = [{"value": value, "label": label, "short": label, "shortExcerpt": value + " " + label, "excerpt": value + " " + label, "section": None}
+                 for value, label in self.FIGURES]
+        article = guide(cover="absente", shortTitle="Laponie : le budget", destination="Laponie")
+        return reel_formats.build(fmt, article, facts, list(self.PHOTOS), [], "Phrase d’ouverture.", "Laponie", "Finlande · Laponie", "Guide Laponie",
+                                  ["Laponie :", "le budget"], "")
+
+    def test_a_figure_that_no_photo_shows_stays_out_of_the_reel(self):
+        scenes, lines = self.build()
+        shown = {scene["headline"][0].strip("*").replace(reel_formats.NBSP, " "): scene["photo"] for scene in scenes[1:-1]}
+        self.assertEqual(shown, {"59 €": "lap-train", "0 €": "lap-bureau", "30 à 60 €": "lap-traineau", "63 €": "lap-huskies", "−6 °C": "lap-village"})
+        self.assertNotIn("42 €", shown)  # no photo of SantaPark: its price is not put over a cabin in the woods
+        self.assertEqual([scene["badge"] for scene in scenes[1:-1]], [f"{n}/5" for n in range(1, 6)])
+        self.assertEqual(len(lines), 5)
+
+    def test_a_reviewed_photo_is_framed_around_its_subject(self):
+        scenes, _ = self.build()
+        frames = {scene["photo"]: scene["focus"] for scene in scenes}
+        self.assertEqual(frames["lap-traineau"], [0.8, 0.55])
+        self.assertEqual(frames["lap-train"], [0.5, 0.5])
+
+    def test_a_stage_takes_the_photo_of_what_it_says_and_its_caption_line_carries_its_price(self):
+        media = reel_formats.Media([("yuc-castillo", {"commonsTitle": "File:Templo el Castillo - Chichen Itza.jpg"}, "La pyramide de Chichén Itzá."),
+                                    ("yuc-cenote", {"commonsTitle": "File:Cenote Ik Kil.jpg"}, "Un cenote entouré de lianes.")], [], cover="yuc-castillo")
+        day = {"image": "yuc-cenote"}
+        # The guide gives the cenote to the whole day; the plan only says "Chichén Itzá à l'ouverture, 697 pesos l'entrée".
+        self.assertEqual(media.named("Chichén Itzá à l’ouverture l’entrée de Chichén Itzá pour un étranger", day, keep_cover=False)[0], "yuc-castillo")
+        self.assertEqual(media.named("Ik Kil l’après-midi", day, keep_cover=False)[0], "yuc-cenote")
+        self.assertEqual(media.named("Une journée sans rien de nommé", day, keep_cover=False)[0], "yuc-cenote")
+        fact = {"value": "697 pesos", "label": "l’entrée de Chichén Itzá pour un étranger depuis le 27 mars 2026", "short": "l’entrée de Chichén Itzá pour un étranger"}
+        step = {"kicker": "Jour 3", "lines": ["Chichén Itzá", "à l’ouverture"], "fact": fact}
+        self.assertEqual(reel_formats.stage_line(step, priced=True),
+                         "📍 Jour 3 : Chichén Itzá à l’ouverture · 697 pesos l’entrée de Chichén Itzá pour un étranger depuis le 27 mars 2026")
+        self.assertEqual(reel_formats.stage_line(step, priced=False), "📍 Jour 3 : Chichén Itzá à l’ouverture")
+        long = {**fact, "label": fact["label"] + " " + "x" * 120}
+        self.assertEqual(reel_formats.stage_line({**step, "fact": long}, priced=True), "📍 Jour 3 : Chichén Itzá à l’ouverture · 697 pesos l’entrée de Chichén Itzá pour un étranger")
+
+
+class CaptionTextTests(unittest.TestCase):
+    def test_an_enumeration_is_never_cut_before_its_last_items(self):
+        label = "pour enchaîner Valladolid, Chichén Itzá, Mérida, Uxmal et Tulum sans courir"
+        self.assertEqual(reel_formats.short_label(label), label)
+        self.assertEqual(reel_formats.short_label("le trajet en Tren Maya de Mérida à l’aéroport de Cancún, avec arrêts à Izamal, Chichén Itzá et Valladolid (Por Esto, juillet 2026)"),
+                         "le trajet en Tren Maya de Mérida à l’aéroport de Cancún")
+
+    def test_a_caption_line_reads_as_a_sentence(self):
+        line = reel_formats.caption_line
+        self.assertEqual(line({"value": "180", "label": "exposants et plus au marché de Noël de Bryant Park"}), "📍 180 exposants et plus au marché de Noël de Bryant Park")
+        self.assertEqual(line({"value": "120 km", "label": "entre Mérida et la gare de Chichén Itzá"}), "📍 120 km entre Mérida et la gare de Chichén Itzá")
+        self.assertEqual(line({"value": "59 €", "label": "la cabine privative du train de nuit"}), "💶 59 € : la cabine privative du train de nuit")
+        self.assertEqual(line({"value": "45 jours", "label": "de séjour sans visa"}), "⏱️ 45 jours de séjour sans visa")
+        self.assertEqual(line({"value": "287", "label": "marches jusqu’au sommet de la tour"}), "🥾 287 marches jusqu’au sommet de la tour")
 
 
 if __name__ == "__main__":

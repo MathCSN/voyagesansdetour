@@ -23,8 +23,6 @@ from reel_formats import checked
 AUTO = "auto"
 AUTO_PHOTOS = "assets/photos/auto"
 FEATURED = "incategory:Featured_pictures_on_Wikimedia_Commons"
-GENERIC_TITLE_WORDS = {"panorama", "view", "vista", "from", "with", "near", "jpeg", "italy", "italia", "spain", "espana",
-                       "portugal", "france", "photo", "picture", "image", "night", "sunset", "edit", "crop", "city"}
 
 
 def commons_title(source_page: str) -> str | None:
@@ -39,46 +37,84 @@ def guide_photo_ids(article: dict) -> list[str]:
     return list(dict.fromkeys(i for i in ids if i))
 
 
-def photo_candidates(article: dict, site_photos: dict, country: str) -> list[dict]:
-    """The guide's own photos first, then the site's other photos of the same place."""
+def photo_candidates(article: dict, site_photos: dict, country: str, shared: dict | None = None) -> list[dict]:
+    """The guide's own photos first, then the other hand-reviewed photos of the same place: the site's, then the social catalogue's."""
     own = guide_photo_ids(article)
     prefixes = {i.split("-", 1)[0] for i in own}
     related = [i for i in site_photos if i not in own and i.split("-", 1)[0] in prefixes]
+    fallback = f"{article['destination']} ({country})."
     candidates = []
     for photo_id in own + related:
         record = site_photos.get(photo_id) or {}
         title = commons_title(record.get("source_page", ""))
         if title:
-            candidates.append({"id": photo_id, "title": title, "alt": record.get("alt_fr") or f"{article['destination']} ({country}).",
-                               "author": record.get("author")})
+            candidates.append({"id": photo_id, "title": title, "alt": record.get("alt_fr") or fallback, "author": record.get("author")})
+    taken = {candidate["title"] for candidate in candidates}
+    for photo_id, record in (shared or {}).items():
+        title = record.get("commonsTitle")
+        if photo_id.split("-", 1)[0] in prefixes and isinstance(title, str) and title not in taken:
+            candidates.append({"id": photo_id, "title": title, "alt": record.get("alt") or fallback})
     return candidates
 
 
-def search_keywords(article: dict, candidates: list[dict]) -> list[str]:
-    """The place name, then the local place names found in the guide's own Commons titles (Manarola, Granada…)."""
-    words = [article["destination"]]
-    for candidate in candidates:
-        for word in re.findall(r"[A-ZÀ-Ý][\wÀ-ÿ’'-]{4,}", candidate["title"].removeprefix("File:")):
-            if destinations.ascii_fold(word).lower() not in GENERIC_TITLE_WORDS:
-                words.append(word)
-    return list(dict.fromkeys(words))[:6]
+def slugged(value: str) -> str:
+    """'Côte amalfitaine' → 'cote-amalfitaine': one spelling for comparing place names."""
+    return re.sub(r"[^a-z0-9]+", "-", destinations.ascii_fold(value).lower()).strip("-")
 
 
-def featured_candidates(article: dict, keywords: list[str], country: str, searcher) -> list[dict]:
+def place_names(article: dict, table: dict) -> list[str]:
+    """The only names a Commons search may use and a file title must carry: the guide's place in French, then the
+    names reviewed by hand in destinations.EXONYMS (Lapland, London). A country is named only when the guide covers
+    the whole country. Never a word taken from another photo's title: "Santa" (Claus Village) names half the world."""
+    place = article["destination"].strip()
+    names = {}
+    for name in (place, *destinations.EXONYMS.get(slugged(place), ())):
+        names.setdefault(slugged(name), name)
+    return list(names.values())
+
+
+def names_place(title: str, names: list[str]) -> bool:
+    """One of the names as whole words of the file title: "Porto" is not in "Portofino"."""
+    words = "-" + slugged(title.removeprefix("File:")) + "-"
+    return any(f"-{slugged(name)}-" in words for name in names if slugged(name))
+
+
+def country_names(article: dict, table: dict) -> list[str]:
+    """The guide's country as Commons writes it: its French name, then English and Spanish (destinations.EXONYMS)."""
+    slug = destinations.country_slug(article)
+    names = {}
+    for name in (destinations.name(slug, table), *destinations.EXONYMS.get(slug, ())):
+        names.setdefault(slugged(name), name)
+    return list(names.values())
+
+
+def tied_to_country(record: dict, names: list[str]) -> bool:
+    """A found file is of the guide's place only if its title or its Commons categories also name the guide's country:
+    "Chapada dos Guimarães" is in Brazil, "Swedish Lapland" is not Rovaniemi. Nothing said: no photo."""
+    categories = str(record.get("categories") or "").split("|")
+    return any(names_place(text, names) for text in [str(record.get("commonsTitle") or ""), *categories])
+
+
+def featured_candidates(article: dict, names: list[str], country: str, searcher, countries: list[str] | None = None) -> list[dict]:
+    """Commons featured pictures whose title names the place. Found without a human eye: marked `automatic`,
+    they must also prove they left a camera and that they are in the guide's country (Photos.get).
+    A guide of a whole country is never searched: a country's name in a title says nothing of what the picture shows."""
+    countries = countries or []
+    if {slugged(name) for name in names} & {slugged(name) for name in countries}:
+        return []
     found = []
-    for keyword in keywords:
+    for name in names:
         try:
-            titles = searcher(f'"{keyword}" {FEATURED}')
+            titles = searcher(f'"{name}" {FEATURED}')
         except (OSError, ValueError):
             continue
         for title in titles:
             # The place must be named in the file title: a search hit on the description alone is refused.
-            if destinations.ascii_fold(keyword).lower() not in destinations.ascii_fold(title).lower():
+            if not names_place(title, names):
                 continue
-            name = re.sub(r"\s+", " ", re.sub(r"\.(jpe?g)$", "", title.removeprefix("File:"), flags=re.IGNORECASE)).strip()
-            photo_id = re.sub(r"[^a-z0-9]+", "-", destinations.ascii_fold(article["destination"]).lower()).strip("-")[:40]
-            photo_id += "-" + hashlib.sha1(title.encode()).hexdigest()[:8]
-            found.append({"id": photo_id, "title": title, "alt": f"{article['destination']} ({country}) : {name}."[:300]})
+            label = re.sub(r"\s+", " ", re.sub(r"\.(jpe?g)$", "", title.removeprefix("File:"), flags=re.IGNORECASE)).strip()
+            found.append({"id": slugged(article["destination"])[:40] + "-" + hashlib.sha1(title.encode()).hexdigest()[:8], "title": title,
+                          "alt": f"{article['destination']} ({country}) : {label}."[:300], "automatic": True, "countryNames": countries})
     return found
 
 
@@ -89,9 +125,14 @@ class Photos:
         self.root, self.now = root, now
         self.download = downloader or self._download
         self.known: dict[str, tuple[str, dict]] = {}
-        shared = root / "assets" / "photos" / "catalogue.json"
-        catalogues = [shared] if shared.is_file() else []
-        catalogues += sorted((root / AUTO).glob("*/photos.json"))
+        # Photos added and looked at by hand (photo_intake.py), candidates for the guides of the same place: the catalogue of
+        # the hand-written scenarios (sealed by their fingerprints, only read here), then reviewed.json, which grows.
+        hand = [path for path in (root / "assets" / "photos" / name for name in ("catalogue.json", "reviewed.json")) if path.is_file()]
+        self.shared: dict[str, dict] = {}
+        for path in hand:
+            for photo_id, record in json.loads(path.read_text()).get("photos", {}).items():
+                self.shared.setdefault(photo_id, record)
+        catalogues = hand + sorted((root / AUTO).glob("*/photos.json"))
         for path in catalogues:
             for photo_id, record in json.loads(path.read_text()).get("photos", {}).items():
                 if (root / record.get("file", "")).is_file():
@@ -99,18 +140,33 @@ class Photos:
         self.created: list[Path] = []
         self.refused: set[str] = set()
 
+    @staticmethod
+    def acceptable(candidate: dict, record: dict, fetched: bool) -> bool:
+        """Nobody looked at a file found by the search: it must be a photograph (a camera in its own data when it is
+        fetched today, nothing in its record that says otherwise) and be tied to the guide's country."""
+        if photo_intake.unphotographic_record(record) or (fetched and not record.get("camera")):
+            return False
+        return tied_to_country(record, candidate.get("countryNames") or [])
+
     def _download(self, photo_id: str, title: str) -> dict:
         return photo_intake.photo_record(photo_id, title, self.now, self.root / AUTO_PHOTOS, AUTO_PHOTOS + "/")
 
     def get(self, candidate: dict) -> tuple[str, dict] | None:
         title = candidate["title"]
-        if title in self.known:
-            return self.known[title]
         if title in self.refused:
             return None
+        if title in self.known:
+            # A file fetched by an earlier search is used again only if its record still passes today's rules.
+            if candidate.get("automatic") and not self.acceptable(candidate, self.known[title][1], fetched=False):
+                return None
+            return self.known[title]
         try:
             record = self.download(candidate["id"], title)
         except (OSError, ValueError, KeyError):  # a refusal (photo_intake.Refused) is a ValueError
+            self.refused.add(title)
+            return None
+        if candidate.get("automatic") and not self.acceptable(candidate, record, fetched=True):
+            (self.root / record["file"]).unlink(missing_ok=True)
             self.refused.add(title)
             return None
         self.created.append(self.root / record["file"])
@@ -121,7 +177,8 @@ class Photos:
         return self.known[title]
 
 
-def gather_photos(article: dict, needed: int, photos: Photos, site_photos: dict, country: str, searcher) -> list[tuple[str, dict, str]]:
+def gather_photos(article: dict, needed: int, photos: Photos, site_photos: dict, country: str, searcher,
+                  table: dict | None = None) -> list[tuple[str, dict, str]]:
     """Up to `needed` distinct, freely licensed photographs of the place: (id, record, alt)."""
     chosen, seen = [], set()
 
@@ -136,10 +193,9 @@ def gather_photos(article: dict, needed: int, photos: Photos, site_photos: dict,
                 seen.add(got[0])
                 chosen.append((got[0], got[1], candidate["alt"]))
 
-    own = photo_candidates(article, site_photos, country)
-    take(own)
+    take(photo_candidates(article, site_photos, country, photos.shared))
     if len(chosen) < needed:
-        take(featured_candidates(article, search_keywords(article, own), country, searcher))
+        take(featured_candidates(article, place_names(article, table or {}), country, searcher, country_names(article, table or {})))
     return chosen
 
 

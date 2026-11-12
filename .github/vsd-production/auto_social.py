@@ -288,17 +288,24 @@ def call_detail(article: dict) -> str | None:
 # --- slots and history ----------------------------------------------------
 
 def history(root: Path) -> list[dict]:
-    """Every post already planned or queued: scenarios, then reviewed batches (older formats included)."""
+    """Every post already planned or queued: scenarios, then reviewed batches (older formats included).
+
+    A batch withdrawn from the stock (`retirements`) will never go out: neither it nor its scenario holds a slot
+    or counts as a post about its guide, so the guide can be posted again, under a new identity."""
+    index = root / "reviewed-social" / "index.json"
+    stock = json.loads(index.read_text()) if index.is_file() else {}
+    retired = {entry["batchId"] for entry in stock.get("retirements", [])}
     rows = []
     for path in sorted((root / "scenarios").glob("*.json")):
         scenario = json.loads(path.read_text())
+        if scenario["id"] + "-v1" in retired:
+            continue
         rows.append({"id": scenario["id"], "channel": scenario["channel"], "kind": scenario["kind"], "format": scenario.get("format"),
                      "url": scenario["targetUrl"], "dueAt": p.instant(scenario["publishAt"])})
-    index = root / "reviewed-social" / "index.json"
-    if index.is_file():
-        for entry in json.loads(index.read_text()).get("items", []):
+    if stock:
+        for entry in stock.get("items", []):
             path = root / "reviewed-social" / Path(entry["path"]).name
-            if not path.is_file():
+            if not path.is_file() or entry["batchId"] in retired:
                 continue
             for item in json.loads(path.read_text()).get("items", []):
                 url = (item.get("review", {}).get("destination") or {}).get("url")
@@ -442,6 +449,26 @@ def scenes_for(article: dict, channel: Post, facts: list[dict], photos: list[tup
     return scenes
 
 
+def joined_title(short: str, label: str) -> str:
+    """'Kyoto en train : jour par jour'; a short title that already carries a colon or ends a question takes a dash."""
+    return f"{short} — {label}" if ":" in short or short.rstrip().endswith(("?", "!")) else f"{short} : {label}"
+
+
+def free_identity(root: Path, base: str) -> str:
+    """The post's identity; a later post of the same guide on the same day (a withdrawn one redone) takes '-2', '-3'."""
+    for suffix in ("", *(f"-{n}" for n in range(2, 10))):
+        if not (root / "scenarios" / f"{base}{suffix}.json").exists() and not (root / AUTO / f"{base}{suffix}").exists():
+            return base + suffix
+    raise Held("identity_taken")
+
+
+def facebook_call(article: dict) -> str:
+    """The line above the guide's address: it promises only what that kind of guide holds."""
+    if article.get("shortTitle", "").lower().startswith("quand partir"):
+        return "🔗 La meilleure période pour partir, et pourquoi, dans le guide complet :"
+    return "🔗 Tous les prix, horaires et l’itinéraire dans le guide complet :"
+
+
 def build(root: Path, article: dict, channel: Post, slot: dt.datetime, now: dt.datetime, text: str,
           photos: list[tuple[str, dict, str]], variant: int, reel_number: int, table: dict, width: int = 34) -> tuple[dict, dict]:
     """The scenario and its frozen inputs (relative path → content)."""
@@ -451,7 +478,7 @@ def build(root: Path, article: dict, channel: Post, slot: dt.datetime, now: dt.d
     photos = rotate(photos, variant)
     scenes = scenes_for(article, channel, facts, photos, opening_sentence(article, text), place, country, width)
     used = scenes[1:-1]
-    identity = f"{channel.prefix}-{article['slug'][:70]}-{slot:%Y-%m-%d}"
+    identity = free_identity(root, f"{channel.prefix}-{article['slug'][:70]}-{slot:%Y-%m-%d}")
     folder = f"{AUTO}/{identity}"
     stamp = p.stamp(now)
     url = guide_url(article)
@@ -464,15 +491,16 @@ def build(root: Path, article: dict, channel: Post, slot: dt.datetime, now: dt.d
     inputs = {f"{folder}/guide.txt": text.encode(), f"{folder}/sources.json": json_bytes(registry), f"{folder}/photos.json": json_bytes(catalogue)}
     assets, start = sealed_assets(root, channel.kind, reel_number)
     emoji = CATEGORY_EMOJI.get(destinations.ascii_fold(article.get("category", "")).lower(), "✈️")
-    hook = next((h for h in (f"{emoji} {article['title']}", f"{emoji} {article['shortTitle']} : {len(used)} repères avant de partir.") if len(h) <= 150), f"{emoji} {article['shortTitle']}"[:150])
+    counted = joined_title(article["shortTitle"], f"{len(used)} repères")
+    hook = next((h for h in (f"{emoji} {article['title']}", f"{emoji} {counted} avant de partir.") if len(h) <= 150), f"{emoji} {article['shortTitle']}"[:150])
     if channel.name == "instagram":
         cta = "📌 Enregistrez ce carrousel pour votre voyage. 🔗 Prix, horaires et détails : le guide complet est en lien dans la bio."
     else:
-        cta = "🔗 Tous les prix, horaires et l’itinéraire dans le guide complet :"
+        cta = facebook_call(article)
     facts_used = [next(f for f in facts if "*" + f["value"] + "*" == s["headline"][0]) for s in used]
     scenario = {
         "schemaVersion": p.SCHEMA, "id": identity, "kind": channel.kind, "channel": channel.name,
-        "destination": place, "title": f"{article['shortTitle']} : {len(used)} repères"[:150], "targetUrl": url,
+        "destination": place, "title": counted[:150], "targetUrl": url,
         "publishAt": p.stamp(slot),
         "review": {"status": "reviewed_for_render", "checkedAt": stamp, "validUntil": p.stamp(now + REVIEW_VALIDITY),
                    "method": "Généré automatiquement (auto_social.py) depuis la page publiée du guide relevée le "
@@ -520,7 +548,7 @@ def build_reel(root: Path, article: dict, slot: dt.datetime, now: dt.datetime, t
     kicker = kicker if len(kicker) <= 32 else place[:32]
     scenes, lines = reel_formats.build(fmt, article, facts, rotate(photos, variant), clips, opening_sentence(article, text), place, kicker, tag,
                                        reel_title_lines(article, width), p.normalized(text))
-    identity = f"ig-{article['slug'][:70]}-{slot:%Y-%m-%d}"
+    identity = free_identity(root, f"ig-{article['slug'][:70]}-{slot:%Y-%m-%d}")
     folder = f"{AUTO}/{identity}"
     stamp = p.stamp(now)
     url = guide_url(article)
@@ -537,10 +565,11 @@ def build_reel(root: Path, article: dict, slot: dt.datetime, now: dt.datetime, t
     assets, start = sealed_assets(root, "reel", reel_number)
     emoji = CATEGORY_EMOJI.get(destinations.ascii_fold(article.get("category", "")).lower(), "✈️")
     label = reel_formats.FORMAT_LABELS[fmt]
-    hook = next((h for h in (f"{emoji} {article['title']}", f"{emoji} {article['shortTitle']} : {label}.") if len(h) <= 150), f"{emoji} {article['shortTitle']}"[:150])
+    named = joined_title(article["shortTitle"], label)
+    hook = next((h for h in (f"{emoji} {article['title']}", f"{emoji} {named}.") if len(h) <= 150), f"{emoji} {article['shortTitle']}"[:150])
     scenario = {
         "schemaVersion": p.MOTION_SCHEMA, "id": identity, "kind": "reel", "channel": "instagram", "format": fmt,
-        "destination": place, "title": f"{article['shortTitle']} : {label}"[:150], "targetUrl": url,
+        "destination": place, "title": named[:150], "targetUrl": url,
         "publishAt": p.stamp(slot),
         "review": {"status": "reviewed_for_render", "checkedAt": stamp, "validUntil": p.stamp(now + REVIEW_VALIDITY),
                    "method": "Généré automatiquement (auto_social.py) depuis la page publiée du guide relevée le "
@@ -665,7 +694,7 @@ def make_post(root, article, post, slot, now, rows, texts, photos, clips, site_p
     if len(usable_facts(article, text, root)) < 2:
         raise Held("not_enough_quotable_figures")
     country = destinations.name(destinations.country_slug(article), table)
-    chosen = gather_photos(article, post.scenes[1], photos, site_photos, country, searcher)
+    chosen = gather_photos(article, post.scenes[1], photos, site_photos, country, searcher, table)
     if post.kind == "reel":
         return make_reel(root, article, slot, now, rows, text, chosen, clips.gather(article), table)
     if len(usable_facts(article, text, root)) < post.scenes[0] - 2:

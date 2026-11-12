@@ -25,6 +25,24 @@ TYPE_HASHTAGS = {"itineraires": "#Itineraire", "itineraire": "#Itineraire", "tra
                  "excursions": "#Excursion", "quartiers": "#OuDormir", "ou dormir": "#OuDormir", "choisir": "#IdeeVoyage",
                  "preparer": "#ConseilsVoyage", "budget": "#VoyagePasCher", "quand partir": "#QuandPartir",
                  "road trip": "#RoadTrip", "road trips": "#RoadTrip", "que voir": "#QueVoir", "week-end": "#WeekEnd"}
+# The names Wikimedia Commons file titles use for a place or a country we write in French: English, then Spanish
+# (many featured pictures are titled in Spanish). Reviewed by hand; a place missing here is searched under its
+# French name only. Never a word that also names something else ("Turkey", "Jordan", "Nice"): every entry must
+# name that place and nothing else.
+EXONYMS = {
+    "japon": ("Japan", "Japón"), "thailande": ("Thailand", "Tailandia"), "vietnam": ("Viet Nam",), "mexique": ("Mexico", "México"),
+    "maroc": ("Morocco", "Marruecos"), "finlande": ("Finland", "Finlandia"), "espagne": ("Spain", "España"), "italie": ("Italy", "Italia"),
+    "grece": ("Greece", "Grecia"), "croatie": ("Croatia", "Croacia"), "islande": ("Iceland", "Islandia"), "norvege": ("Norway", "Noruega"),
+    "irlande": ("Ireland", "Irlanda"), "ecosse": ("Scotland", "Escocia"), "suisse": ("Switzerland", "Suiza"), "egypte": ("Egypt", "Egipto"),
+    "tunisie": ("Tunisia", "Túnez"), "cambodge": ("Cambodia", "Camboya"), "indonesie": ("Indonesia",), "perou": ("Peru",),
+    "bresil": ("Brazil", "Brasil"), "etats-unis": ("United States",), "royaume-uni": ("United Kingdom",),
+    "laponie": ("Lapland", "Laponia"), "londres": ("London",), "lisbonne": ("Lisbon", "Lisboa"), "seville": ("Seville", "Sevilla"),
+    "andalousie": ("Andalusia", "Andalucía"), "venise": ("Venice", "Venezia"), "sicile": ("Sicily", "Sicilia"),
+    "sardaigne": ("Sardinia", "Sardegna"), "toscane": ("Tuscany", "Toscana"), "cote-amalfitaine": ("Amalfi Coast", "Costiera amalfitana"),
+    "madere": ("Madeira",), "acores": ("Azores", "Açores"), "canaries": ("Canary Islands", "Canarias"), "crete": ("Crete", "Creta"),
+    "athenes": ("Athens", "Atenas"), "bruxelles": ("Brussels", "Bruselas"), "edimbourg": ("Edinburgh", "Edimburgo"),
+    "copenhague": ("Copenhagen",),
+}
 GENERIC_TYPE_HASHTAG = "#ConseilsVoyage"
 BRAND_HASHTAG = "#VoyageSansDetour"
 MAX_HASHTAGS = 5

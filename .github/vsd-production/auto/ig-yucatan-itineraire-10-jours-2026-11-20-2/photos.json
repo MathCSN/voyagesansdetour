@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "photos": {
+    "yucatan-cenote": {
+      "file": "assets/photos/auto/yucatan-cenote.jpg",
+      "sha256": "ba20053511431cb332befa91c18488288cfffef499ace2941642597acf7e0131",
+      "width": 2400,
+      "height": 1600,
+      "commonsTitle": "File:Cenote Ik Kil, Yucatan, Dec 2011 - 06.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Cenote_Ik_Kil,_Yucatan,_Dec_2011_-_06.jpg",
+      "author": "Shinya Suzuki",
+      "commonsCredit": "https://www.flickr.com/photos/shinyasuzuki/6625264201/",
+      "categories": "Ik Kil Cenote|Flickr images reviewed by FlickreviewR 2|December 2011 in Yucatán",
+      "licence": "CC BY 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "originalSize": [
+        2592,
+        1728
+      ],
+      "commonsSha1": "ee1048333f440677dac4f848577c01333cd8c33a",
+      "retrievedAt": "2026-11-11T17:17:36Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "yucatan-chichen-itza": {
+      "file": "assets/photos/auto/yucatan-chichen-itza.jpg",
+      "sha256": "a33ba2274660e27cc9addf872c48009e2d5b35de18857bb6da9ccf1da81944da",
+      "width": 2133,
+      "height": 1600,
+      "commonsTitle": "File:Templo el Castillo - Chichen Itza-Yucatan-Mexico0222.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Templo_el_Castillo_-_Chichen_Itza-Yucatan-Mexico0222.jpg",
+      "author": "Diego Delso",
+      "commonsCredit": "Own work",
+      "categories": "GFDL|License migration redundant|CC-BY-SA-4.0,3.0,2.5,2.0,1.0|Self-published work|Images by User:Poco a poco|Images of Mexico by User:Poco a poco|Chichen Itza - Castillo - southwest|Details of Castillo in Chichén Itzá|Images by User:Poco a poco taken in 2006",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        2464,
+        1848
+      ],
+      "commonsSha1": "c2f51d705cd6612b2b723d1e14803f5abcad8e69",
+      "retrievedAt": "2026-11-11T17:17:36Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "yucatan-merida-cathedrale": {
+      "camera": "NIKON Z 50",
+      "alt": "La cathédrale San Ildefonso de Mérida, au Yucatán.",
+      "file": "assets/photos/yucatan-merida-cathedrale.jpg",
+      "sha256": "9e3f1addc3590a86fa9d64f157df50c19fb03b26f310eda8dc584e8aa4f9c077",
+      "width": 1600,
+      "height": 2400,
+      "commonsTitle": "File:Mérida de Yucatán 2023 - 5.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:M%C3%A9rida_de_Yucat%C3%A1n_2023_-_5.jpg",
+      "author": "xiquinhosilva",
+      "commonsCredit": "https://www.flickr.com/photos/7138083@N04/53555559365/",
+      "categories": "Cathedral of Saint Ildephonsus in Mérida|Files with coordinates missing SDC location of creation|Flickr images reviewed by FlickreviewR 2|2023 in Mérida, Yucatán|Churches in Yucatán photographed in 2023|December 2023 in Yucatán|Photographs by Xiquinho Silva",
+      "licence": "CC BY 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "originalSize": [
+        2000,
+        3000
+      ],
+      "commonsSha1": "c08f53de6a70e8d4fc40654c3b4aacc6233a286b",
+      "retrievedAt": "2026-11-12T12:23:50Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "yucatan-tren-maya-merida": {
+      "camera": "NIKON Z fc",
+      "alt": "Une rame du Tren Maya entre en gare de Mérida Teya.",
+      "file": "assets/photos/yucatan-tren-maya-merida.jpg",
+      "sha256": "e2cf9ddad868c5cbb3bae981735831943995154024bb0567b17f9518c5790f95",
+      "width": 2400,
+      "height": 1600,
+      "commonsTitle": "File:Tren X'Trapolis Tsíimin K’áak arribando a la estación Mérida Teya.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tren_X%27Trapolis_Ts%C3%ADimin_K%E2%80%99%C3%A1ak_arribando_a_la_estaci%C3%B3n_M%C3%A9rida_Teya.jpg",
+      "author": "ProtoplasmaKid",
+      "commonsCredit": "Own work",
+      "categories": "Self-published work|Files with coordinates missing SDC location of creation|2024 in rail transport in Mexico|Teya Mérida railway station|Mexico photographs taken on 2024-06-24|June 2024 in Yucatán|X'Trapolis Tsíimin K’áak|Images of Yucatán by User:ProtoplasmaKid|2024 photographs by User:ProtoplasmaKid|Photographs of public transportation by User:ProtoplasmaKid",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        5568,
+        3712
+      ],
+      "commonsSha1": "9b302f6fb053f50b58341930199b3a5ddd07a6d5",
+      "retrievedAt": "2026-11-12T12:27:50Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "yucatan-tulum": {
+      "file": "assets/photos/auto/yucatan-tulum.jpg",
+      "sha256": "b7ea3d327715a7de85ba484c476f8d4eea7e85baca172258ada0f54b4576b8be",
+      "width": 2880,
+      "height": 1328,
+      "commonsTitle": "File:Tulum - God of the Winds Temple 04.JPG",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tulum_-_God_of_the_Winds_Temple_04.JPG",
+      "author": "Martin Falbisoner",
+      "commonsCredit": "Own work",
+      "categories": "Featured pictures of Mexico|Self-published work|Featured Pictures by Martin Falbisoner|Cultural heritage monuments in Mexico with known IDs|Files with coordinates missing SDC location of creation|Templo del Dios Viento|Mexico photographs taken on 2016-03-16|Cultural heritage monuments in Mexico missing SDC location of creation|Cultural heritage monuments in Mexico missing SDC depicts",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        5509,
+        2539
+      ],
+      "commonsSha1": "e6b52e680fd7c9cc742e35bcbd4aa9cfe6bbfe78",
+      "retrievedAt": "2026-11-11T17:17:36Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "yucatan-uxmal-pyramide": {
+      "camera": "X-T4",
+      "alt": "La pyramide du Devin à Uxmal, au sud de Mérida.",
+      "file": "assets/photos/yucatan-uxmal-pyramide.jpg",
+      "sha256": "6f9c4a7c821eecad09f036dda963e2e005dd439be9c9f8a51fcec9bbd3310723",
+      "width": 2400,
+      "height": 1600,
+      "commonsTitle": "File:Archaeological and Cultural Heritage - Pirámide del Adivino, Uxmal, Mexico.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Archaeological_and_Cultural_Heritage_-_Pir%C3%A1mide_del_Adivino,_Uxmal,_Mexico.jpg",
+      "author": "Ulrich Dus",
+      "commonsCredit": "Own work",
+      "categories": "Taken with Fujifilm X-T4|Pirámide del Adivino, Uxmal|Self-published work|Images from Ulrich Wolfgang Wirth|Uploaded via Campaign:Ulrich Wolfgang Wirth",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        6240,
+        4160
+      ],
+      "commonsSha1": "aa4452cf5b72b0b7a14f547c596acad2dfdb96a8",
+      "retrievedAt": "2026-11-12T12:23:50Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "yucatan-valladolid-calzada": {
+      "camera": "DSC-HX90V",
+      "alt": "La Calzada de los Frailes et ses façades colorées, à Valladolid.",
+      "file": "assets/photos/yucatan-valladolid-calzada.jpg",
+      "sha256": "b7b1d2349533c2d41a03034845f279ea63efa7355dce1d435a8e67a20a80976c",
+      "width": 2133,
+      "height": 1600,
+      "commonsTitle": "File:Valladolid (Yucatan) Calzada de los Frailes.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Valladolid_(Yucatan)_Calzada_de_los_Frailes.jpg",
+      "author": "DaLoetz",
+      "commonsCredit": "Own work",
+      "categories": "Self-published work|Files with coordinates missing SDC location of creation|November 2018 in Yucatán|2018 in Valladolid, Yucatán|Calzada de los Frailes, Valladolid, Yucatán|Street lights in Yucatán|Sidewalks in Valladolid, Yucatán",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        4896,
+        3672
+      ],
+      "commonsSha1": "13f9aac25ac18c947782fbc766231a58195d7a31",
+      "retrievedAt": "2026-11-12T12:23:50Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    }
+  }
+}

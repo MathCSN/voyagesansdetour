@@ -37,8 +37,12 @@ guide publié ──► rendu (production.py, reel_intake.py)
   serveur ChatGPT Sites le 11/11/2026 (`docs/migration-panneau.md`) ; l'ancien n'est plus appelé.
 - **Retirer un lot** : l'ajouter à `retirements` de `index.json`. Au passage `stock` suivant, ses posts
   pas encore envoyés passent « en attente » dans le registre et ne partent plus. Un post déjà programmé
-  dans Buffer se supprime dans Buffer. Les anciens garde-fous du dépôt n'admettent qu'un motif de
-  retrait, `duplicate_media_on_channel`.
+  dans Buffer se supprime dans Buffer. Le panneau ne lit que `batchId` ; l'entrée garde aussi les
+  empreintes du lot, la date, le motif (`photos_of_another_place`, `too_little_content`,
+  `duplicate_media_on_channel`) et, s'il est refait, `replacedBy`. Retirer aussi la copie TikTok
+  (`…-tiktok-v1`). Le générateur rend alors le créneau et le guide : le post refait prend
+  l'identité suivie de `-2`. Les anciens garde-fous endormis du dépôt ne connaissent que le motif
+  `duplicate_media_on_channel` : leurs jeux d'essai écartent les autres.
 - **Qui déclenche le moteur** (depuis le 11/11/2026) : le panneau lui-même, par la tâche planifiée du
   Worker (vsd-admin PR 4). À :22 il importe les lots relus encore programmables ; à :37 et :52 il
   programme les posts dus dans Buffer ; à :07 il relève les statistiques. Les passages planifiés de GitHub sont trop rares

@@ -1,0 +1,159 @@
+{
+  "schemaVersion": 1,
+  "photos": {
+    "laponie-aurore": {
+      "file": "assets/photos/auto/laponie-aurore.jpg",
+      "sha256": "75fcc0df3a767ab711f747155b9a7cbfe999dcbae0a313db3c25cf85ab4590b9",
+      "width": 2846,
+      "height": 1600,
+      "commonsTitle": "File:Aurora borealis over Saana fell.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Aurora_borealis_over_Saana_fell.jpg",
+      "author": "WikiLucas00",
+      "commonsCredit": "Own work",
+      "categories": "Saana|Taken with Canon PowerShot G7 X Mark II|Self-published work|March 2020 Finland photographs|Aurora in Lapland, Finland|Winter in Lapland, Finland",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        4574,
+        2572
+      ],
+      "commonsSha1": "f47a7d0bb56e19953e4099fc86d7ceb193b0a1e0",
+      "retrievedAt": "2026-11-11T17:17:36Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "laponie-bureau-pere-noel": {
+      "alt": "Le bureau du Père Noël illuminé sous la neige, à Rovaniemi.",
+      "file": "assets/photos/laponie-bureau-pere-noel.jpg",
+      "sha256": "9c27ac025e7865ec769a7df9a2c1ce34c5738fc5be776b33eb7a1e0d73886fbf",
+      "width": 2133,
+      "height": 1600,
+      "commonsTitle": "File:Santa Claus Village.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Santa_Claus_Village.jpg",
+      "author": "Floppyjb",
+      "commonsCredit": "Own work",
+      "categories": "Santa Park Rovaniemi|Self-published work|2023 in Rovaniemi",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        4032,
+        3024
+      ],
+      "commonsSha1": "9cca6fe6c54b642dfaceef36401934d6397baa48",
+      "retrievedAt": "2026-11-12T12:27:50Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "laponie-cabane-neige-rovaniemi": {
+      "camera": "COOLPIX P520",
+      "alt": "Une cabane sous la neige dans la forêt de Rovaniemi, en Laponie.",
+      "file": "assets/photos/laponie-cabane-neige-rovaniemi.jpg",
+      "sha256": "4a958a2bb475e2e900e19ceab234e316fda7ee5f285300341a976462ae850c7d",
+      "width": 1600,
+      "height": 2133,
+      "commonsTitle": "File:Schneebedeckte Hütte in Rovanimie, Lapland, Finland. 24.02.2019.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Schneebedeckte_H%C3%BCtte_in_Rovanimie,_Lapland,_Finland._24.02.2019.jpg",
+      "author": "Kim.schnackenberg",
+      "commonsCredit": "Own work",
+      "categories": "Doors in Finland|Self-published work|2019 in Rovaniemi|Snow-covered roofs in Finland|Winter in Lapland, Finland",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        3672,
+        4896
+      ],
+      "commonsSha1": "4bb77e6478624a0f3742182b0af1b8671c5ee87f",
+      "retrievedAt": "2026-11-12T12:23:50Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "laponie-huskies-rovaniemi": {
+      "camera": "NIKON D810",
+      "alt": "Un attelage de huskies sur une piste enneigée, à Rovaniemi.",
+      "file": "assets/photos/laponie-huskies-rovaniemi.jpg",
+      "sha256": "d3ffdbd56a326f2052879e17a4e9f0bffc3f6fa701f6c22718851d2f1454532b",
+      "width": 1600,
+      "height": 2397,
+      "commonsTitle": "File:Dog sledding in Rovaniemi (Unsplash).jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Dog_sledding_in_Rovaniemi_(Unsplash).jpg",
+      "author": "darkroomsg (Unsplash)",
+      "commonsCredit": "https://unsplash.com/photos/7fCnofuYKCQ archive copy at the Wayback Machine",
+      "categories": "Taken with Nikon D810|CC-Zero|Images uploaded by Fæ|Images from Unsplash|2017 in Rovaniemi|Dogsleds in Finland|Winter in Rovaniemi|January 2017 in Lapland, Finland",
+      "licence": "CC0",
+      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "originalSize": [
+        3783,
+        5668
+      ],
+      "commonsSha1": "02c700d14902948754e979e66d72d77abe997e09",
+      "retrievedAt": "2026-11-12T12:27:50Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "laponie-train-nuit-rovaniemi": {
+      "camera": "NIKON D500",
+      "alt": "Le train de nuit à voitures-lits en gare de Rovaniemi, un soir d’hiver.",
+      "file": "assets/photos/laponie-train-nuit-rovaniemi.jpg",
+      "sha256": "c094caf1ed5670bf32d2339bbcd57b7d11803b15418f382f58f3b9a90475d75a",
+      "width": 2560,
+      "height": 1600,
+      "commonsTitle": "File:Sleeper train in Rovaniemi railway station 20170201.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Sleeper_train_in_Rovaniemi_railway_station_20170201.jpg",
+      "author": "Tyg728",
+      "commonsCredit": "Own work",
+      "categories": "Taken with Nikon D500|VR Class Edm|InterCity (Finland)|Rovaniemi railway station|Self-published work|Winter 2016-2017 in Finland|2017 in Rovaniemi|2017 in rail transport in Finland|Finland photographs taken on 2017-02-01",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        2560,
+        1600
+      ],
+      "commonsSha1": "b5f8360533d924cb85be0eaa7e5dba67989ee2b5",
+      "retrievedAt": "2026-11-12T12:23:50Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "laponie-traineau-renne": {
+      "camera": "GT-I9500",
+      "alt": "Une balade en traîneau tiré par un renne sur la neige, en Laponie.",
+      "focus": [
+        0.78,
+        0.55
+      ],
+      "file": "assets/photos/laponie-traineau-renne.jpg",
+      "sha256": "a9567eacd67ece8dbe02ee3c8a6bdbda77cff138070b443afd432f99b7cf296f",
+      "width": 2844,
+      "height": 1600,
+      "commonsTitle": "File:Reindeer Sleigh Ride-Lapland.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Reindeer_Sleigh_Ride-Lapland.jpg",
+      "author": "Yair Haklai",
+      "commonsCredit": "Own work",
+      "categories": "Reindeer sleds|Self-published work",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        4128,
+        2322
+      ],
+      "commonsSha1": "9332a3ec41ef925bb3cdb88ef3b708d56d44ac03",
+      "retrievedAt": "2026-11-12T12:23:50Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "laponie-village-boules-neige": {
+      "alt": "Le village du Père Noël de Rovaniemi la nuit, avec sa pyramide de boules de neige éclairée.",
+      "file": "assets/photos/laponie-village-boules-neige.jpg",
+      "sha256": "a9901fab9100f9ef3a38810eeefc4ad3a441ee7be77eacc94f63c9bf2928aad5",
+      "width": 2135,
+      "height": 1600,
+      "commonsTitle": "File:Snowball pyramid at Santa Claus' Village Large.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Snowball_pyramid_at_Santa_Claus%27_Village_Large.jpg",
+      "author": "Samuli Lintula",
+      "commonsCredit": "File:Snowball_pyramid_at_Santa_Claus'_Village.jpg",
+      "categories": "Santa Claus' Village|Snowballs|Snow lanterns|Snow art|Blue snow|Pyramids of balls",
+      "licence": "CC BY-SA 2.5",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.5/",
+      "originalSize": [
+        3074,
+        2304
+      ],
+      "commonsSha1": "51be5c0f4946728f0e5baa7f2df1d30a950ab327",
+      "retrievedAt": "2026-11-12T12:23:50Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    }
+  }
+}
