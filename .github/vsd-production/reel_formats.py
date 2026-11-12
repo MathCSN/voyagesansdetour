@@ -29,12 +29,13 @@ FIGURE_MAX = 16                        # longer values are shown on white boxes,
 HOOK_SECONDS, CTA_SECONDS = 2.2, 2.4
 FACT_SECONDS = (2.4, 4.0)
 MAX_FACTS = {"liste": 5, "prix": 5, "tableau": 2, "express": 2}
-MAX_STAGES, MIN_STAGES = 6, 3
+MAX_STAGES, MIN_STAGES = 6, 4          # an itinerary shows four dated stages at least: each one is one thing said
+UNDER_TABLE = (4, 64)                  # a price under a table: in a table of four rows at most, in two lines at most
 TABLE_ROWS = (3, 5)
 FORMAT_LABELS = {"liste": "les chiffres à connaître", "prix": "combien ça coûte", "itineraire": "jour par jour",
                  "tableau": "le tableau à garder", "express": "l’essentiel"}
 EVERY_DAY = "*jour par jour*"          # the promise of an itinerary whose every day is shown
-PRICE = re.compile(r"€|\$|¥|£|₫|฿|\bCHF\b|\bdh\b|\bMAD\b")
+PRICE = re.compile(r"€|\$|¥|£|₫|฿|\bCHF\b|\bdh\b|\bMAD\b|\bbahts?\b|\bpesos?\b")
 BUDGET = re.compile(r"\bbudget\b|\bau total\b|\ben tout\b|\bpar personne\b|\btout compris\b|\bhors vols?\b|\bsans le vol\b|"
                     r"\bpour \d+ (?:jours|nuits|semaines)\b|\bpar jour\b", re.IGNORECASE)
 MIN_FACTS = 4                          # a reel that says fewer than four things is not worth a slot (audit of 12/11/2026)
@@ -354,18 +355,20 @@ class Media:
         last = next((wanted for wanted in self.emblematic if any(ph[0] == wanted for ph in self.photos)), None)
         return {self.cover, last} - {None}
 
-    def named(self, text: str, section: dict | None) -> tuple | None:
+    def named(self, text: str, section: dict | None, avoid: frozenset = frozenset(), also: str = "") -> tuple | None:
         """The photo that shows what `text` names: the one whose id, caption or title shares the most words with it.
         The section's own photo wins when it shares a word, and stands in when no photo shares any; it gives way
         when it shows something else ("Chichén Itzá à l'ouverture" is not shown by the cenote of that afternoon), or
         when another photo shares all it shares and more (the Grand Palace, not Wat Arun, for "le Grand Palais de
-        Bangkok": the two are in Bangkok)."""
-        target = self.target(text)
+        Bangkok": the two are in Bangkok). `avoid`: photos kept for a plan still to come. `also`: what else the plan
+        says, to choose between two photos that share as much with `text` (the train, not the cathedral, for "Mérida–
+        Tulum en train direct" and its "train direct Mérida Teya → Tulum")."""
+        target, wider = self.target(text), self.target(text + " " + also)
         shared = lambda ph: self.shared(ph, target)
         wanted = section.get("image") if section else None
-        pool = self.free()
+        pool = [ph for ph in self.free() if ph[0] not in avoid]
         own = next((ph for ph in pool if ph[0] == wanted), None)
-        best = max(pool, key=shared, default=None)
+        best = max(pool, key=lambda ph: (shared(ph), self.shared(ph, wider)), default=None)
         # The guide put its own photo beside this text: a kind of place the two share ("Le pont en métro" and the photo
         # of the bridge) is proof enough for that photo, and for no other.
         mine = words_shared(own, target, self.family, kinds=True) if own else set()
@@ -373,9 +376,10 @@ class Media:
             return own
         return best if best is not None and shared(best) else None
 
-    def photo(self, text: str = "", section: dict | None = None, strict: bool = False) -> tuple[str, str]:
+    def photo(self, text: str = "", section: dict | None = None, strict: bool = False, avoid: frozenset = frozenset(),
+              also: str = "") -> tuple[str, str]:
         """A photo for this text. `strict`: only a photo that shows what the text names (a stage of an itinerary)."""
-        pick = self.named(text, section)
+        pick = self.named(text, section, avoid, also)
         if not pick and (strict or len(self.photos) <= self.reserve):
             raise Held("no_photo_of_this_place" if strict else "not_enough_photos_or_figures")
         kept, free = self.kept(), self.free()
@@ -522,24 +526,30 @@ def stage_line(step: dict) -> str:
     return next((text for text in (f"{line} · {fact['value']} {label}" for label in (fact["label"], fact["short"])) if len(text) <= 160), line)
 
 
+def stage_photo(media: Media, step: dict, later: list[dict]) -> tuple[str, str] | None:
+    """The photo of one day, or None when no photo shows it. It is chosen for what the plan will say, not for the whole
+    title of the day: the place it names first ("Valladolid" over Valladolid, not over the train that goes there),
+    else what its figure names. A day keeps its own photo: an earlier one never takes the picture the guide put beside
+    a later day ("Mérida–Tulum en train" does not take the ruins of "Tulum et le retour")."""
+    kept = frozenset(other["section"].get("image") for other in later) - {step["section"].get("image"), None}
+    name, figure = " ".join(step["lines"]), step["fact"]["short"]
+    for said, also in ((name, figure), (name + " " + figure, "")):
+        try:
+            return media.photo(said, step["section"], strict=True, avoid=kept, also=also)
+        except Held:
+            continue
+    return None
+
+
 def itinerary_reel(brief: Brief) -> tuple[dict, list[dict], list[str]]:
     """"itineraire": one dated stage per plan, with its figure, shown only over a photo of that very place.
     A stage for which the guide gives no figure, or that no photo shows, stays in the guide."""
     body, lines = [], []
-    for step in stages(brief.article, brief.page, brief.numbered):
+    steps = [step for step in stages(brief.article, brief.page, brief.numbered) if step["fact"]]
+    for number, step in enumerate(steps):
         if brief.media.room() < 1:
             break
-        if not step["fact"]:
-            continue
-        # The photo is chosen for what the plan will say, not for the whole title of the day: the place it names first
-        # ("Valladolid" over Valladolid, not over the train that goes there), else what its figure names.
-        picture = None
-        for said in (step["lines"], step["lines"] + [step["fact"]["short"]]):
-            try:
-                picture = brief.media.photo(" ".join(said), step["section"], strict=True)
-                break
-            except Held:
-                continue
+        picture = stage_photo(brief.media, step, steps[number + 1:])
         if not picture:
             continue
         body.append(stage_plan(step, picture, brief.tag))
@@ -551,6 +561,22 @@ def itinerary_reel(brief: Brief) -> tuple[dict, list[dict], list[str]]:
     return brief.hook(EVERY_DAY if every_day else f"*{len(body)} étapes clés*"), body, lines
 
 
+def under_table(brief: Brief, photo_id: str, rows: int) -> dict | None:
+    """The price the guide gives for what the table lists (the berth of the trains whose departures it gives): the
+    first price that the table's own photo shows better than any other photo of the post. Only under a short table,
+    in two lines, and only a figure dated like the rest of the plan."""
+    photo = next((ph for ph in brief.media.all if ph[0] == photo_id), None)
+    if not photo or rows > UNDER_TABLE[0]:
+        return None
+    for fact in brief.numbered:
+        target = brief.media.target(fact["label"])
+        shown = brief.media.shared(photo, target)
+        if (is_price(fact) and len(fact["value"] + " " + fact["short"]) <= UNDER_TABLE[1] and dated_tag(fact, brief.tag) == brief.tag
+                and shown > max((brief.media.shared(ph, target) for ph in brief.media.all if ph is not photo), default=0)):
+            return fact
+    return None
+
+
 def table_reel(brief: Brief) -> tuple[dict, list[dict], list[str]]:
     """"tableau": the guide's short table, whole, on one screen to pause; then two figures at most."""
     table = table_of(brief.article, brief.page)
@@ -559,21 +585,37 @@ def table_reel(brief: Brief) -> tuple[dict, list[dict], list[str]]:
     if brief.media.room() < 1:
         raise Held("not_enough_photos_or_figures")
     rows = table["rows"]
-    body = [plan("table", brief.media.photo(section=table["section"]), brief.place, table["title"], min(7.0, round(4.0 + 0.6 * len(rows), 1)),
-                 rows=rows, facts=[{"source": "guide", "excerpt": a + " " + b} for a, b in rows], tag=brief.tag, note=PAUSE_NOTE)]
+    picture = brief.media.photo(section=table["section"])
+    # The table is named by its section ("Le train de nuit pour Chiang Mai" above "Départ de Bangkok"), and the price
+    # the guide gives for what it lists is written under it.
+    price = under_table(brief, picture[1], len(rows))
+    quotes = [{"source": "guide", "excerpt": a + " " + b} for a, b in rows] + ([{"source": "guide", "excerpt": price["shortExcerpt"]}] if price else [])
+    body = [plan("table", picture, kicker_of(table["section"], brief.place), table["title"], min(7.0, round(4.0 + 0.6 * len(rows), 1)),
+                 detail="*" + unbreakable(price["value"]) + "* " + unbreakable(price["short"]) if price else None,
+                 rows=rows, facts=quotes, tag=brief.tag, note=PAUSE_NOTE)]
     # Then its figures, chosen as in a list: the one a free photo shows first, and never a figure whose photo is taken
     # (the fare of the ferry stays in the table, over the ferry, rather than go over another village).
-    chosen, limit, plans = brief.numbered, min(MAX_FACTS["tableau"], brief.media.room()), {}
+    chosen, limit, plans = [fact for fact in brief.numbered if fact is not price], min(MAX_FACTS["tableau"], brief.media.room()), {}
     for index in placed(chosen, brief.media, limit, limit):
         plans[index] = fact_plan(chosen[index], brief.media, brief.place, brief.tag)
     body += [plans[index] for index in sorted(plans)]
-    return brief.hook("*le tableau à garder*"), body, [f"📅 {a} : {b}" for a, b in rows]
+    return brief.hook("*le tableau à garder*"), body, ([caption_line(price)] if price else []) + [f"📅 {a} : {b}" for a, b in rows]
 
 
 def label_of(fmt: str, scenes: list[dict]) -> str:
     """The format in the title of the post: no "jour par jour" for an itinerary that leaves days out."""
     partial = fmt == "itineraire" and scenes[0]["headline"][-1] != EVERY_DAY
     return "les étapes clés" if partial else FORMAT_LABELS[fmt]
+
+
+def said_by(hook: dict, body: list[dict], opening: str) -> set[str]:
+    """The different things a reel says, the hook's own promise aside: each row of a table, and one thing per other
+    plan, its figure (a stage also quotes the title of its day: that is not a second thing said)."""
+    said = {fact["excerpt"] for fact in hook.get("facts", [])} - {opening}
+    for scene in body:
+        quotes = [fact["excerpt"] for fact in scene.get("facts", [])]
+        said |= set(quotes if scene["layout"] == "table" else quotes[-1:])
+    return said
 
 
 def emblematic(photos: list) -> tuple[str, ...]:
@@ -601,9 +643,7 @@ def build(fmt: str, article: dict, facts: list[dict], photos: list, clips: list,
         hook, body, lines = table_reel(brief)
     else:
         raise Held("unknown_format")
-    # At least four different things said, the hook's own promise aside: figures, stages or table rows.
-    said = {fact["excerpt"] for scene in [hook] + body for fact in scene.get("facts", [])} - {opening}
-    if len(said) < MIN_FACTS:
+    if len(said_by(hook, body, opening)) < MIN_FACTS:
         raise Held("fewer_than_four_facts")
     # The button is written in the scenario: a reel sealed before 12/11/2026 has none and keeps the card it was given.
     closing = plan("cta", brief.media.closing(), "Le guide complet", title_lines, CTA_SECONDS, note=SAVE_NOTE, button=p.MOTION_BUTTON)

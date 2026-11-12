@@ -86,6 +86,9 @@ jobs:
               lines.append(f"- **à traiter à la main** : {batch} ({rows[batch]['dueAt'][:16]}, {rows[batch].get('why','')}) : {lost(batch)}")
               print(f"::warning title=Post en file périmé non retiré::{batch} cite un chiffre que son guide ne donne plus ({rows[batch].get('why','')}) : à retirer du stock, ou à supprimer dans Buffer s'il y est déjà.")
           lines+=[f"- reformulé dans le guide, nombres toujours présents : {row['batchId']} ({len(row['reworded'])} citations)" for row in result['batches'] if row.get('reworded')]
+          for row in result['batches']:
+              for source in row.get('external',[]):
+                  lines.append(f"- chiffres d'une autre source, non relus ici : {row['batchId']} ({str(row.get('dueAt'))[:16]}) : {source['quotes']} citation(s) de {source['url']}, relevée(s) le {str(source.get('retrievedAt'))[:10]}")
           if result['unread']:
               print('::warning title=Posts en file non relus::'+', '.join(result['unread'])+' : page du guide illisible ou scénario absent.')
           with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as output:output.write('\n'.join(lines)+'\n\n')

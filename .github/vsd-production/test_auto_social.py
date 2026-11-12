@@ -40,6 +40,8 @@ DAYS = [{"title": "Jour 1 — Kiyomizu-dera, le temple sur pilotis", "image": "k
         {"title": "Jour 2 — Fushimi Inari et ses torii", "image": "kyoto-4", "paragraphs": ["Des milliers de torii rouges."]},
         {"title": "Jour 3 — Arashiyama", "image": "kyoto-5", "paragraphs": ["La bambouseraie."]},
         {"title": "Jour 4 — Osaka", "paragraphs": ["Une ville sans photo dans ce guide."]}]
+GION = {"title": "Jour 6 — Gion et ses ruelles", "image": "kyoto-7", "paragraphs": ["Le quartier des maisons de thé."]}
+LANES = {"value": "30 min", "label": "de marche dans les ruelles de Gion"}
 TABLE = {"title": "En bref", "table": {"headers": ["Votre envie", "Les meilleurs mois", "À savoir"],
                                         "rows": [["Cerisiers en fleurs", "Fin mars à début avril", "Réservez tôt"],
                                                  ["Érables rouges", "Mi-novembre", "Temples illuminés le soir"],
@@ -396,13 +398,14 @@ class GeneratorTests(unittest.TestCase):
     def test_an_itinerary_goes_day_by_day_and_never_shows_a_stage_over_another_place(self):
         bamboo = {"value": "1 000 ¥", "label": "la traversée en barque de la rivière Hozu à Arashiyama"}
         nara = {"title": "Jour 5 — Nara", "image": "kyoto-6", "paragraphs": ["Les daims du parc."]}
-        reel = self.reel(self.fixture([guide(category="Itinéraires", sections=DAYS + [nara], keyFacts=FACTS + [bamboo])]))
+        reel = self.reel(self.fixture([guide(category="Itinéraires", sections=DAYS + [nara, GION], keyFacts=FACTS + [bamboo, LANES])]))
         stages = reel["scenes"][1:-1]
-        # Three days out of five are shown: the hook counts them instead of promising every day.
-        self.assertEqual((reel["format"], reel["scenes"][0]["headline"][-1]), ("itineraire", "*3 étapes clés*"))
+        # Four days out of six are shown: the hook counts them instead of promising every day.
+        self.assertEqual((reel["format"], reel["scenes"][0]["headline"][-1]), ("itineraire", "*4 étapes clés*"))
         self.assertEqual(reel["title"], "Kyoto en train : les étapes clés")
         self.assertEqual([(s["kicker"], s["headline"], s["photo"]) for s in stages],
-                         [("Jour 1", ["Kiyomizu-dera"], "kyoto-3"), ("Jour 2", ["Fushimi Inari", "et ses torii"], "kyoto-4"), ("Jour 3", ["Arashiyama"], "kyoto-5")])
+                         [("Jour 1", ["Kiyomizu-dera"], "kyoto-3"), ("Jour 2", ["Fushimi Inari", "et ses torii"], "kyoto-4"), ("Jour 3", ["Arashiyama"], "kyoto-5"),
+                          ("Jour 6", ["Gion et ses ruelles"], "kyoto-7")])
         self.assertEqual(stages[0]["facts"][0]["excerpt"], "Jour 1 — Kiyomizu-dera, le temple sur pilotis")
         self.assertEqual(stages[0]["detail"], "*500 ¥* l’entrée du temple Kiyomizu-dera")
         # Every stage shown carries a figure of the guide, on screen and in the caption with its whole label.
@@ -415,9 +418,12 @@ class GeneratorTests(unittest.TestCase):
 
     def test_day_by_day_is_promised_only_when_every_day_of_the_guide_is_shown(self):
         bamboo = {"value": "1 000 ¥", "label": "la traversée en barque de la rivière Hozu à Arashiyama"}
-        reel = self.reel(self.fixture([guide(category="Itinéraires", sections=DAYS[:3], keyFacts=FACTS + [bamboo])]))
+        reel = self.reel(self.fixture([guide(category="Itinéraires", sections=DAYS[:3] + [GION], keyFacts=FACTS + [bamboo, LANES])]))
         self.assertEqual((reel["format"], reel["scenes"][0]["headline"][-1]), ("itineraire", "*jour par jour*"))
-        self.assertEqual([s["kicker"] for s in reel["scenes"][1:-1]], ["Jour 1", "Jour 2", "Jour 3"])
+        self.assertEqual([s["kicker"] for s in reel["scenes"][1:-1]], ["Jour 1", "Jour 2", "Jour 3", "Jour 6"])
+        # Three days are three things said: an itinerary shows four stages at least, or the guide takes another format.
+        short = self.reel(self.fixture([guide(category="Itinéraires", sections=DAYS[:3], keyFacts=FACTS + [bamboo])]))
+        self.assertEqual(short["format"], "liste")
         self.assertEqual(reel["title"], "Kyoto en train : jour par jour")
 
     def test_an_itinerary_whose_days_have_no_figure_takes_another_format(self):
@@ -1319,22 +1325,83 @@ class RealGuideTests(unittest.TestCase):
 
     def test_a_stage_takes_the_photo_of_the_place_it_names_before_the_photo_of_what_its_figure_names(self):
         photos = [("yucatan-cenote", {"commonsTitle": "File:Cenote Ik Kil.jpg", "emblematic": True}, "Un cenote entouré de lianes."),
+                  ("yucatan-merida-cathedrale", {"commonsTitle": "File:Catedral.jpg"}, "La cathédrale de Mérida."),
                   ("yucatan-tren-maya-merida", {"commonsTitle": "File:Tren Maya.jpg"}, "Une rame du Tren Maya en gare de Mérida-Teya."),
                   ("yucatan-valladolid-calzada", {"commonsTitle": "File:Calzada de los Frailes.jpg"}, "La calzada de los Frailes, à Valladolid."),
                   ("yucatan-chichen-itza", {"commonsTitle": "File:El Castillo, Chichen Itza.jpg"}, "La pyramide d’El Castillo, à Chichén Itzá."),
                   ("yucatan-tulum", {"commonsTitle": "File:Tulum.jpg"}, "Les ruines de Tulum au-dessus de la mer."),
                   ("yucatan-uxmal-pyramide", {"commonsTitle": "File:Uxmal.jpg", "emblematic": True}, "La pyramide du Devin à Uxmal.")]
-        days = [{"title": "Jours 1-2 — Valladolid"}, {"title": "Jour 3 — Chichén Itzá à l’ouverture"}, {"title": "Jour 7 — Tulum"}]
+        days = [{"title": "Jours 1-2 — Valladolid"}, {"title": "Jour 3 — Chichén Itzá à l’ouverture", "image": "yucatan-cenote"},
+                {"title": "Jour 7 — Mérida–Tulum en train direct"}, {"title": "Jours 8-10 — Tulum et le retour", "image": "yucatan-tulum"}]
         pairs = [("1 h 43", "de l’aéroport de Cancún à Valladolid en Tren Maya"), ("697 pesos", "l’entrée de Chichén Itzá pour un étranger"),
-                 ("5 h 16", "le train direct Mérida Teya → Tulum de 7 h")]
+                 ("5 h 16", "le train direct Mérida Teya → Tulum de 7 h"), ("265 pesos", "les ruines de Tulum pour un étranger")]
         facts = figures(pairs, {value: day for (value, _), day in zip(pairs, days)})
         article = guide(slug="yucatan", country="mexique", cover="yucatan-cenote", destination="Yucatán", shortTitle="Yucatán en 10 jours", sections=days)
         read = p.normalized(" ".join(day["title"] for day in days))
         scenes, _ = reel_formats.build("itineraire", article, facts, photos, [], "Phrase d’ouverture.", "Yucatán", "Mexique · Yucatán",
                                        "Guide Yucatán · sources du 12/11/2026", ["Yucatán en", "10 jours"], read)
         # "Valladolid" is shown over Valladolid, though the train photo shares more words with the figure of that day.
+        # The train to Tulum takes the train, not the ruins the guide put beside the days in Tulum, nor the cathedral that
+        # shares "Mérida" as well: what the plan says of its figure decides between the two. Four stages, four figures.
         self.assertEqual([(scene["headline"], scene["photo"]) for scene in scenes[1:-1]],
-                         [(["Valladolid"], "yucatan-valladolid-calzada"), (["Chichén Itzá", "à l’ouverture"], "yucatan-chichen-itza"), (["Tulum"], "yucatan-tulum")])
+                         [(["Valladolid"], "yucatan-valladolid-calzada"), (["Chichén Itzá", "à l’ouverture"], "yucatan-chichen-itza"),
+                          (["Mérida–Tulum en", "train direct"], "yucatan-tren-maya-merida"), (["Tulum et le retour"], "yucatan-tulum")])
+        self.assertEqual(scenes[0]["headline"][-1], "*jour par jour*")
+        self.assertIn("*265 pesos*", scenes[4]["detail"])
+        # One thing said per stage: its figure. The title of the day it also quotes is not a second one.
+        self.assertEqual(len(reel_formats.said_by(scenes[0], scenes[1:-1], "Phrase d’ouverture.")), 4)
+        with self.assertRaisesRegex(reel_formats.Held, "not_enough_stages"):
+            reel_formats.build("itineraire", {**article, "sections": days[:3]}, facts[:3], photos, [], "Phrase d’ouverture.", "Yucatán", "Mexique · Yucatán",
+                               "Guide Yucatán · sources du 12/11/2026", ["Yucatán en", "10 jours"], read)
+
+    def test_a_table_is_named_by_its_section_and_carries_the_price_of_what_it_lists(self):
+        trains = {"title": "Le train de nuit pour Chiang Mai", "image": "thailande-train-nuit",
+                  "table": {"headers": ["Train", "Départ de Bangkok", "Arrivée à Chiang Mai", "2e classe"],
+                            "rows": [["N° 7 (autorail de jour)", "7 h 30", "17 h 50", "558 ฿ assis"], ["N° 9 (couchettes récentes)", "18 h 40", "7 h 15", "938 / 1 038 ฿"],
+                                     ["N° 13 (couchettes)", "20 h 05", "8 h 45", "768 / 838 ฿"], ["N° 51 (couchettes)", "22 h 30", "11 h 40", "728 / 798 ฿"]]}}
+        photos = [("thailande-phi-phi", {"commonsTitle": "File:Phi Phi.jpg", "emblematic": True}, "La plage de Ko Phi Phi Don."),
+                  ("thailande-train-nuit", {"commonsTitle": "File:Sleeper.jpg"}, "Une voiture-couchettes d’un train de nuit thaïlandais."),
+                  ("thailande-bangkok-grand-palais", {"commonsTitle": "File:Roof.jpg"}, "Les toits du Grand Palais de Bangkok au coucher du soleil."),
+                  ("thailande-railay", {"commonsTitle": "File:Railay.jpg"}, "La plage de Railay, près de Krabi."),
+                  ("thailande-wat-arun", {"commonsTitle": "File:Wat Arun.jpg", "emblematic": True}, "Le temple Wat Arun au bord du fleuve Chao Phraya.")]
+        pairs = [("938 bahts", "la couchette haute climatisée de 2e classe du train 9 (≈ 25 €, tarif SRT de novembre 2026)"),
+                 ("500 bahts", "le Grand Palais de Bangkok et le Wat Phra Kaew, de 8 h 30 à 16 h 30 (≈ 13 €)"),
+                 ("330 bahts", "le minibus Phantip de Surat Thani à Krabi, 6 départs de 9 h à 16 h 30, 3 h de route")]
+        article = guide(slug="thailande", country="thailande", cover="thailande-phi-phi", destination="Thaïlande", shortTitle="La Thaïlande en 2 semaines", sections=[trains])
+        read = p.normalized("Départ de Bangkok " + " ".join(row[0] + " " + row[1] for row in trains["table"]["rows"]))
+        scenes, lines = reel_formats.build("tableau", article, figures(pairs), photos, [], "Phrase d’ouverture.", "Thaïlande", "Thaïlande",
+                                           "Guide Thaïlande · sources du 12/11/2026", ["La Thaïlande", "en 2 semaines"], read)
+        table = scenes[1]
+        # The plan says where the trains go (its section) and what the berth costs (the price that its own photo shows).
+        self.assertEqual((table["layout"], table["kicker"], table["headline"], table["photo"]), ("table", "Le train de nuit pour Chiang Mai", ["Départ de Bangkok"], "thailande-train-nuit"))
+        self.assertEqual(table["detail"], "*938 bahts* la couchette haute climatisée de 2e classe du train 9")
+        self.assertIn("938 bahts la couchette haute climatisée de 2e classe du train 9", [fact["excerpt"] for fact in table["facts"]])
+        self.assertEqual(lines[0], "🚆 938 bahts : la couchette haute climatisée de 2e classe du train 9 (≈ 25 €, tarif SRT de novembre 2026)")
+        self.assertEqual([scene["headline"][0].strip("*").replace(reel_formats.NBSP, " ") for scene in scenes[2:-1]], ["500 bahts", "330 bahts"])  # not said twice
+        # A price that another photo shows as well is not the table's own: it stays a plan of its own.
+        twin = photos[:2] + [("thailande-gare", {"commonsTitle": "File:Station.jpg"}, "Un train en gare de Bangkok.")] + photos[2:]
+        scenes, _ = reel_formats.build("tableau", article, figures(pairs), twin, [], "Phrase d’ouverture.", "Thaïlande", "Thaïlande",
+                                       "Guide Thaïlande · sources du 12/11/2026", ["La Thaïlande", "en 2 semaines"], read)
+        self.assertNotIn("detail", scenes[1])
+
+    def test_a_photo_post_whose_figures_all_belong_to_a_day_reads_day_after_day(self):
+        days = {number: {"title": f"Jour {number} — {name}"} for number, name in ((1, "La médina"), (2, "Le jardin Majorelle"), (3, "Sortir de la ville"))}
+        pairs = [("170 dh", "le jardin Majorelle en plein tarif", 2), ("100 dh", "l’entrée de la Bahia, des tombeaux saadiens ou d’El Badi", 1),
+                 ("3 h", "de car pour Essaouira : dès 100 dh chez Supratours", 3), ("150 km", "jusqu’aux cascades d’Ouzoud, soit 2 h 30 à 3 h de route", 3)]
+        photos = [self.MARRAKECH[0], self.MARRAKECH[1], self.MARRAKECH[2],
+                  ("marrakech-essaouira-port", {"commonsTitle": "File:Skala.jpg"}, "Des barques bleues au pied de la Skala du port, à Essaouira."),
+                  ("marrakech-ouzoud-cascades", {"commonsTitle": "File:Ouzoud.jpg"}, "Les cascades d’Ouzoud, dans le Moyen Atlas."),
+                  ("marrakech-koutoubia-bassin", {"commonsTitle": "File:Koutoubia.jpg", "emblematic": True}, "Le minaret de la Koutoubia, à Marrakech.")]
+        article = guide(slug="marrakech-3-jours", country="maroc", destination="Marrakech", shortTitle="Marrakech en 3 jours", sourcesCheckedOn="2026-11-12", sections=list(days.values()))
+        made = lambda chosen: a.scenes_for(article, a.Post("facebook", "carousel"), [{"value": value, "label": label, "excerpt": value + " " + label, "section": days.get(day)}
+                                                                                   for value, label, day in chosen], list(photos), "Phrase d’ouverture.", "Marrakech", "Maroc")
+        scenes = made(pairs)
+        self.assertEqual([(scene["kicker"], scene["headline"][0].strip("*"), scene["photo"]) for scene in scenes[1:-1]],
+                         [("Jour 1", "100 dh", "marrakech-bahia"), ("Jour 2", "170 dh", "marrakech-majorelle"),
+                          ("Jour 3", "3 h", "marrakech-essaouira-port"), ("Jour 3", "150 km", "marrakech-ouzoud-cascades")])
+        # One figure outside the days of the guide: the post keeps the order of the guide's figures.
+        loose = made(pairs[:3] + [("150 km", "jusqu’aux cascades d’Ouzoud, soit 2 h 30 à 3 h de route", None)])
+        self.assertEqual([scene["headline"][0].strip("*") for scene in loose[1:-1]], ["170 dh", "100 dh", "3 h", "150 km"])
 
     def test_a_file_found_by_the_search_never_opens_a_post(self):
         media = reel_formats.Media(list(self.MARRAKECH), [], reserve=2, cover="marrakech-place-jemaa-el-fna",

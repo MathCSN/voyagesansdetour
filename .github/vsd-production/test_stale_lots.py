@@ -151,6 +151,85 @@ class StaleLotsTests(unittest.TestCase):
         self.assertEqual({row["why"] for row in result["batches"] if row["action"] == "report"}, {"may_already_be_in_buffer"})
         self.assertEqual([entry["batchId"] for entry in stock.retirements()], ["ig-late-v1"])
 
+    def test_a_reel_and_its_copy_are_one_post_decided_by_the_slot_that_comes_first(self):
+        # The reel is due in 83 h 30 and its copy in 84 h 30: withdrawing the copy alone would leave the reel in the
+        # queue with its slot taken, and nothing made again.
+        stock = self.stock()
+        stock.post("ig-yucatan", [FARE, ENTRY], due=NOW + dt.timedelta(hours=83, minutes=30), copies=("", "-tiktok"))
+        stock.post("ig-next", [FARE, ENTRY], due=NOW + dt.timedelta(hours=84, minutes=30), copies=("", "-tiktok"))
+        for name in ("fb-a", "fb-b", "fb-c", "fb-d", "fb-e"):
+            stock.post(name, [ENTRY])
+        stock.pages = {GUIDE: page(ENTRY)}
+        result = stock.run()
+        self.assertEqual(result["reported"], ["ig-yucatan-v1", "ig-yucatan-tiktok-v1"])
+        self.assertEqual(result["retired"], ["ig-next-v1", "ig-next-tiktok-v1"])
+
+    def test_an_ordinal_an_order_number_or_a_date_written_otherwise_is_reported_not_withdrawn(self):
+        gone, wording = stale_lots.numbers_gone, stale_lots.only_wording
+        # An ordinal is not a figure: "2e classe" may become "seconde classe", "1er dimanche" "premier dimanche".
+        self.assertEqual(gone("938 bahts la couchette haute de 2e classe du train 9", "938 bahts la couchette haute de seconde classe du train 9"), [])
+        self.assertEqual(gone("gratuit le 1er dimanche du mois", "gratuit le premier dimanche du mois"), [])
+        # A number under ten without a unit, or a piece of a date: lost, but only wording.
+        for quote, today in (("dès 100 dh chez Supratours, 7 départs par jour", "dès 100 dh chez Supratours, sept départs par jour"),
+                             ("les prix relevés le 12/11/2026 au guichet", "les prix relevés le 12 novembre 2026 au guichet"),
+                             ("le sapin s’illumine le 2 décembre 2026", "le sapin s’illumine début décembre")):
+            lost = gone(quote, today)
+            self.assertTrue(lost and wording(lost, quote), (quote, lost))
+        # A price, a duration, a distance or a larger number is a figure, whatever its size.
+        for quote, today in (("2 € la traversée du Tage en ferry", "3 € la traversée du Tage en ferry"), ("3 h de car pour Essaouira", "trois heures de car pour Essaouira"),
+                             ("le bus 19 de l’aéroport", "le bus L99 de l’aéroport"), ("0 $ la patinoire de Bryant Park", "la patinoire de Bryant Park est payante")):
+            lost = gone(quote, today)
+            self.assertTrue(lost and not wording(lost, quote), (quote, lost))
+        stock = self.stock()
+        stock.post("ig-marrakech", ["3 h de car pour Essaouira : dès 100 dh chez Supratours (7 départs par jour)", ENTRY])
+        for name in ("fb-a", "fb-b"):
+            stock.post(name, [ENTRY])
+        stock.pages = {GUIDE: page("3 h de car pour Essaouira : dès 100 dh chez Supratours (sept départs par jour)", ENTRY)}
+        result = stock.run()
+        self.assertEqual((result["retired"], result["reported"]), ([], ["ig-marrakech-v1"]))
+        self.assertEqual(result["batches"][0]["why"], "only_an_order_number_or_a_date_changed")
+        self.assertEqual(stock.retirements(), [])
+
+    def test_two_cells_of_a_table_joined_in_one_quote_are_not_a_number_in_the_thousands(self):
+        gone = stale_lots.numbers_gone
+        cells = "<table><tr><td>Ligne 15 (express)</td><td>200 ¥</td></tr></table>"
+        self.assertEqual(gone("Ligne 15 200 ¥", stale_lots.a.page_text(cells)), [])      # worded again, same numbers
+        self.assertEqual(gone("Ligne 15 200 ¥", stale_lots.a.page_text(cells.replace("200 ¥", "230 ¥"))), ["15200"])
+        self.assertEqual(gone("15 200 ¥ le billet", "le billet coûte 15 200 ¥"), [])      # a real number in the thousands
+
+    def test_figures_taken_from_another_site_are_listed_with_the_day_they_were_read(self):
+        stock = self.stock()
+        stock.post("ig-train", [ENTRY], other=["dès 10,50 € le billet promotionnel", "Une phrase sans chiffre."])
+        registry = stock.root / "auto" / "ig-train" / "sources.json"
+        sources = json.loads(registry.read_text())
+        sources["sources"]["rail"]["retrievedAt"] = "2026-10-24T08:00:00Z"
+        registry.write_text(json.dumps(sources))
+        stock.post("fb-guide", [ENTRY])
+        stock.pages = {GUIDE: page(ENTRY)}
+        result = stock.run()
+        self.assertEqual((result["status"], result["external"], result["retired"], result["reported"]), ("current", ["ig-train-v1"], [], []))
+        self.assertEqual(result["batches"][0]["external"], [{"url": "https://www.example.org/fares", "retrievedAt": "2026-10-24T08:00:00Z", "quotes": 1}])
+        self.assertNotIn("external", result["batches"][1])
+
+    def test_a_name_read_in_the_index_never_leads_out_of_the_production_folder(self):
+        stock = self.stock()
+        stock.post("ig-yucatan", [ENTRY])
+        secret = stock.root.parent / "outside.json"
+        stock.index["items"].append({"path": "x", "fileSha256": "f" * 64, "batchId": "../outside", "batchSha256": "b" * 64, "itemIds": ["x"]})
+        stock.save()
+        stock.post("ig-escape", [FARE])
+        scenario = stock.root / "scenarios" / "ig-escape.json"
+        scenario.write_text(json.dumps({**json.loads(scenario.read_text()), "sources": {"file": "../../../etc/hosts"}}))
+        stock.pages = {GUIDE: page(ENTRY)}
+        result = stock.run()
+        self.assertEqual([(row["batchId"], row["status"], row.get("why")) for row in result["batches"]],
+                         [("ig-yucatan-v1", "current", None), ("../outside", "unread", "unreadable_batch"), ("ig-escape-v1", "unread", "unreadable_batch")])
+        self.assertFalse(secret.exists())
+        with self.assertRaises(ValueError):
+            stale_lots.inside(stock.root, "../outside.json")
+        with self.assertRaises(ValueError):
+            stale_lots.stored(stock.root, "scenarios", "../../x")
+
     def test_a_page_that_cannot_be_read_or_that_changed_altogether_withdraws_nothing(self):
         stock = self.stock()
         stock.post("ig-yucatan", [FARE, ENTRY])

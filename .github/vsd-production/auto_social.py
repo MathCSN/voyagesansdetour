@@ -55,6 +55,7 @@ REVIEW_VALIDITY = dt.timedelta(days=30)
 REPOST_COOLDOWN = dt.timedelta(days=42)
 CROSS_CHANNEL_GAP = dt.timedelta(days=4)
 MAX_GUIDE_SOURCE_AGE = dt.timedelta(days=45)
+DAY_LABEL = re.compile(r"Jours? (\d+)")
 MAX_NEW_PER_RUN = 6                    # what one workflow run renders
 CAPTION_MAX = 1000                     # a short, lively caption: past this, detail lines are dropped (never under three)
 TITLE_WIDTHS = (34, 24, 18)            # characters per headline line, tried in turn until the layout fits
@@ -423,6 +424,10 @@ def scenes_for(article: dict, channel: Post, facts: list[dict], photos: list[tup
     if len(pictures) + 2 < channel.scenes[0]:
         raise Held("not_enough_figures_with_their_photo")
     facts = [offered[index] for index in sorted(pictures)]
+    # When every figure belongs to a day of the guide, the post reads day after day (Jour 1, Jour 2, Jour 3).
+    days = [DAY_LABEL.match(kicker_of(fact["section"], place)) for fact in facts]
+    if facts and all(days):
+        facts = [fact for _, _, fact in sorted(zip((int(day[1]) for day in days), range(len(facts)), facts))]
     pictures = {offered[index]["value"]: picture for index, picture in pictures.items()}
     # The guide's cover opens the post, unless a figure names what it shows: then the next photo of the guide does.
     opening_picture = media.opening(media.cover)
