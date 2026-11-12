@@ -9,6 +9,7 @@ import editorial_queue as q
 import editorial_update as u
 import editorial_model_review as review
 from autonomous_editorial import HARD_STOP, source_fingerprint
+from update_draft import addition_defects
 
 
 # A guide may be written up to this long before its release slot (its review stays valid 48 h).
@@ -52,6 +53,8 @@ def prepare(proposal,entailment,novelty,observed_at,article,now,fetcher=source_f
     q.require(len(targets)==1 and targets[0]['paragraphs'],'Admission target absent')
     claims=set(section['claims'])
     selected=[f for f in proposal['facts'] if f['id'] in claims]
+    defects=addition_defects(section['paragraph'],selected,article)
+    q.require(not defects,'Admission paragraph refused: '+', '.join(defects))
     urls=sorted({f['sourceContext']['url'] for f in selected})
     q.require(urls and set(urls)<={s['url'] for s in article['sources']},'Admission source outside article')
     sources=[]
