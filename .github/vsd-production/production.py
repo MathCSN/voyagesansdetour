@@ -277,7 +277,8 @@ def quoted_excerpts(scene, snapshots, last):
     """The plan's quotes, each read word for word in its dated snapshot: (source ids, normalised excerpts)."""
     facts = scene.get("facts", [])
     ensure(isinstance(facts, list) and (facts or last), "Each scene needs at least one sourced fact")
-    if facts:
+    # The label is drawn as it is: a plan with facts needs one, and any label must be plain text.
+    if facts or scene.get("tag") is not None:
         text(scene.get("tag"), 52)
     used, quoted = set(), []
     for fact in facts:
@@ -287,7 +288,8 @@ def quoted_excerpts(scene, snapshots, last):
         used.add(fact["source"])
         quoted.append(excerpt)
     # A date the label gives to the figure is the figure's own: it is read in what this very plan quotes.
-    dated = OWN_DATE_TAG.search(scene.get("tag") or "")
+    tag = scene.get("tag")
+    dated = OWN_DATE_TAG.search(tag) if isinstance(tag, str) else None
     ensure(not dated or any(normalized(dated[1]).lower() in excerpt.lower() for excerpt in quoted), "The label dates a figure that its plan does not quote with that date")
     return used, quoted
 

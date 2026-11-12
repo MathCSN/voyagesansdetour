@@ -100,7 +100,9 @@ NOT_THE_PLACE = re.compile(
     r"|insects?|insecta|arthropod[as]?|reptiles?|reptilia|amphibia(?:ns)?|butterfl(?:y|ies)|lepidoptera|dragonfl(?:y|ies)|odonata"
     r"|bees?|spiders?|mollus[ck]s?|mollusca|cephalopod[as]?|octopus(?:es)?|[a-z]+idae|underwater|in flight|zoo"
     r"|flowers?|tulips?|plantae|fungi|mushrooms?|sports?|football|matches)\b", re.IGNORECASE)
-SPECIES = re.compile(r"\([A-Z][a-z]+ [a-z]+\)")     # a Latin name in the title: "Tapaculo (Bothus podas), Tenerife"
+# A Latin name in the title: "Tapaculo (Bothus podas), Tenerife". The second word ends as species names do, so that
+# "Ribeira (Old town), Porto" stays a photo of the place.
+SPECIES = re.compile(r"\([A-Z][a-z]+ [a-z]+(?:us|a|as|is|um|i|ae|es|ens|or)\)")
 
 
 def shows_something_else(record: dict) -> bool:

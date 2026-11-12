@@ -165,7 +165,8 @@ def dated_tag(fact: dict, tag: str) -> str:
     """A figure that carries its own date is labelled with it: "sources du 11/11/2026" under a fare read in July
     would date the fare wrongly. Any other figure keeps the date the guide's sources were last read."""
     match = OWN_DATE.search(fact["label"])
-    if not match:
+    # "(mars, avril 2026)" names two months: a period, not the date the figure was read.
+    if not match or (match[2] and re.search(rf"\b(?:{MONTHS})\b", match[0][:match.start(2) - match.start()], re.IGNORECASE)):
         return tag
     date = (match[1] or match[2]).lower()
     own = "chiffre " + ("du " if date[0].isdigit() else "d’" if date[0] in "ao" else "de ") + date
@@ -188,6 +189,13 @@ def figure_lines(value: str) -> list[str] | None:
 
 
 # --- what the guide offers --------------------------------------------------
+
+def numbered(facts: list[dict], article: dict) -> list[dict]:
+    """The figures a plan may show: a number on screen (a plan of fact without a figure says too little), not the
+    title said again, and a label that fits."""
+    return [f for f in facts if re.search(r"\d", f["value"]) and figure_lines(f["value"])
+            and not repeats_title(f, article) and len(f["short"]) <= DETAIL_MAX]
+
 
 def stages(article: dict, page: str, facts: list[dict]) -> list[dict]:
     """The 'Jour 3 — …' sections, as quoted on the page: day marker, place, and the figure the guide gives for that
@@ -233,7 +241,7 @@ def applicable(article: dict, facts: list[dict], page: str) -> list[str]:
     # Price first only where the guide's first figure is the cost of the trip itself: a budget guide whose first figure says so.
     if category == "budget" and facts and opens_on_budget(facts[0]):
         formats.append("prix")
-    if sum(1 for step in stages(article, page, facts) if step["fact"]) >= MIN_STAGES:
+    if sum(1 for step in stages(article, page, numbered(facts, article)) if step["fact"]) >= MIN_STAGES:
         formats.append("itineraire")
     if table_of(article, page):
         # "When to go" is a table before anything else; elsewhere the table comes after the guide's own format.
@@ -281,8 +289,9 @@ class Media:
         return words_of(text) - self.everywhere
 
     def shown_elsewhere(self, text: str) -> bool:
-        """A photo of this post that another plan has taken shows what `text` names better than any photo still
-        free: over another picture, that figure would name one place and show another."""
+        """A photo of this post that another plan has taken, or that is kept for the call to action, shows what
+        `text` names better than any photo still free: over another picture, that figure would name one place while
+        the post shows it elsewhere. The figure stays in the guide."""
         target = self.target(text)
         free = self.free()
         return max((words_shown(ph, target) for ph in self.all), default=0) > max((words_shown(ph, target) for ph in free), default=0)
@@ -401,10 +410,7 @@ class Brief:
 
     @property
     def numbered(self) -> list[dict]:
-        """The figures a plan may show: a number on screen (a plan of fact without a figure says too little), not the
-        title said again, and a label that fits."""
-        return [f for f in self.facts if re.search(r"\d", f["value"]) and figure_lines(f["value"])
-                and not repeats_title(f, self.article) and len(f["short"]) <= DETAIL_MAX]
+        return numbered(self.facts, self.article)
 
     def hook(self, promise: str) -> dict:
         return plan("hook", self.media.opening(self.media.cover), self.kicker, self.title_lines + [promise], HOOK_SECONDS,

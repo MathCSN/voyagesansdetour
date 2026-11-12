@@ -538,6 +538,9 @@ class FastReelGuards(unittest.TestCase):
     def test_a_label_cannot_date_a_figure_with_a_date_its_plan_does_not_quote(self):
         self.refused("does not quote with that date", lambda s: s["scenes"][1].update(tag="Guide Kyoto · chiffre de juillet 2026"))
 
+    def test_a_label_that_is_not_text_is_refused_not_a_crash(self):
+        self.refused("", lambda s: s["scenes"][-1].update(tag=["Guide Kyoto · chiffre de juillet 2026"]))
+
     def test_the_hook_announces_only_the_plans_that_follow(self):
         self.refused("not quoted from this plan", lambda s: s["scenes"][0].update(headline=["Kyoto en train", "*9 chiffres à connaître*"]))
 
@@ -961,6 +964,19 @@ class ShownTests(unittest.TestCase):
         with self.assertRaisesRegex(reel_formats.Held, "no_emblematic_photo_for_the_call"):
             self.build(photos=plain)
 
+    def test_a_figure_that_names_the_photo_kept_for_the_call_stays_in_the_guide(self):
+        # One photo left that can close the post: no plan takes it, and the figure that names it is not put elsewhere.
+        photos = [("lap-aurore", {"commonsTitle": "File:Aurora.jpg", "emblematic": True}, "Une aurore boréale."),
+                  ("lap-village", {"commonsTitle": "File:Village.jpg", "emblematic": True}, "Le village sous la neige en décembre, à Rovaniemi."),
+                  ("lap-cabane", {"commonsTitle": "File:Hut.jpg"}, "Une cabane sous la neige.")]
+        media = reel_formats.Media(photos, [], reserve=2, cover="lap-aurore", emblematic=reel_formats.emblematic(photos))
+        self.assertEqual(media.spare(), "lap-village")
+        self.assertTrue(media.shown_elsewhere("la maximale moyenne de décembre à Rovaniemi"))
+        self.assertIsNone(media.named("la maximale moyenne de décembre à Rovaniemi", None))
+        self.assertFalse(media.shown_elsewhere("la cabine du train de nuit"))
+        self.assertEqual(media.photo("la cabine du train de nuit")[1], "lap-cabane")
+        self.assertEqual(media.closing()[1], "lap-village")
+
     def test_the_last_card_names_the_site_and_nothing_one_network_only_has(self):
         scenes, _ = self.build()
         self.assertEqual(scenes[-1]["note"], "Enregistrez cette vidéo pour votre voyage")
@@ -984,6 +1000,7 @@ class ShownTests(unittest.TestCase):
         for label in ("la Treno Card de deux jours, du 2 novembre au 31 décembre 2026", "la balade en barque, depuis janvier 2026 (≈ 10,70 €)",
                       "l’entrée pour un étranger depuis le « boleto único » du 27 mars 2026 (105 pesos de tarif INAH inclus)", "le billet en siège réservé"):
             self.assertEqual(dated(label), tag)
+        self.assertEqual(dated("la haute saison des baleines (mars, avril 2026)"), tag)  # two months: a period
         long = reel_formats.dated_tag({"label": "le forfait, relevé en septembre 2026"}, "Guide Parc national des Cinque Terre · sources du 11/11/2026")
         self.assertEqual(long, "Notre guide · chiffre de septembre 2026")
 
@@ -1057,6 +1074,7 @@ class FoundPhotoTests(unittest.TestCase):
         for title, categories in (
                 ("File:Vista de Garachico, Tenerife, España, 2012-12-13, DD 05.jpg", "Featured pictures of Tenerife"),
                 ("File:London Eye at Night (long exposure).JPG", "London Eye at night"),
+                ("File:Ribeira (Old town), Porto.jpg", "Featured pictures of Porto"),
                 ("File:Long Island City New York May 2015 panorama 3.jpg", "East River (New York)|Bird's-eye views of New York City"),
                 ("File:Lisbon (Lisboa) historic elevator Santa Justa.jpg", "Fishing boats in Lisbon|Featured pictures of Lisbon")):
             self.assertFalse(other({"commonsTitle": title, "categories": categories}), title)
