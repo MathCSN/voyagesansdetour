@@ -197,11 +197,78 @@ class StaleLotsTests(unittest.TestCase):
     def test_two_cells_of_a_table_joined_in_one_quote_are_not_a_number_in_the_thousands(self):
         gone = stale_lots.numbers_gone
         cells = "<table><tr><td>Ligne 15 (express)</td><td>200 ¥</td></tr></table>"
-        self.assertEqual(gone("Ligne 15 200 ¥", stale_lots.a.page_text(cells)), [])      # worded again, same numbers
+        # A row worded again whose two cells are still side by side: perhaps the same numbers, perhaps a price in the
+        # thousands that changed. The batch is not withdrawn, and it is not passed in silence either.
+        lost = gone("Ligne 15 200 ¥", stale_lots.a.page_text(cells))
+        self.assertEqual((lost, stale_lots.only_wording(lost, "Ligne 15 200 ¥")), (["15|200"], True))
         self.assertEqual(gone("Ligne 15 200 ¥", stale_lots.a.page_text(cells.replace("200 ¥", "230 ¥"))), ["15200"])
         self.assertEqual(gone("15 200 ¥ le billet", "le billet coûte 15 200 ¥"), [])      # a real number in the thousands
         # A real number in the thousands that changed is not read in pieces: "1" and "500" are on the page, not side by side in a table.
         self.assertEqual(gone("1 500 € la semaine en chambre double", "500 € la semaine en chambre double, pour 1 nuit offerte"), ["1500"])
+
+    def test_two_numbers_that_punctuation_parts_are_not_a_number_in_the_thousands(self):
+        gone = stale_lots.numbers_gone
+        # Worded again with the same numbers: nothing is lost, whatever stands between the two numbers in the quote.
+        for quote, today in (("768 / 838 ฿ la couchette du train N° 13", "N° 13 : 768 ou 838 bahts la couchette du train"),
+                             ("arrivée 13 h 16. 265 pesos les ruines de Tulum", "265 pesos les ruines de Tulum ; arrivée à 13 h 16"),
+                             ("300 ¥ (500 ¥ avec le musée) l’entrée du temple", "l’entrée du temple : 300 ¥, ou 500 ¥ avec le musée"),
+                             ("3 × 100 dh le trajet en taxi", "trois fois 100 dh le trajet en taxi, soit 3 billets"),
+                             ("150–300 bahts la course en tuk-tuk", "de 150 à 300 bahts la course en tuk-tuk"),
+                             ("N° 9 : 938 ฿ la couchette", "938 bahts la couchette du train N° 9"), ("18 h 40 · 938 ฿ le départ du train", "le départ du train à 18 h 40, 938 bahts"),
+                             ("le bus 19 (100 dh) depuis l’aéroport", "le bus 19 depuis l’aéroport coûte 100 dh"), ("100/200 dh le hammam", "le hammam : 100 ou 200 dh")):
+            self.assertEqual(gone(quote, today), [], quote)
+        self.assertEqual(sorted(stale_lots.readings("768 / 838 ฿, bus 19 (100 dh), 13 h 16. 265 pesos")[0]), ["100", "13", "16", "19", "265", "768", "838"])
+
+    def test_a_price_in_the_thousands_that_changed_is_never_read_as_two_cells(self):
+        gone = stale_lots.numbers_gone
+        # "1" and "500" follow each other elsewhere on the page, in two neighbouring elements: the figure still changed.
+        self.assertEqual(gone("1 500 bahts la nuit en bungalow", "1 800 bahts la nuit en bungalow\n1\n500 m de plage"), ["1500"])
+        self.assertEqual(gone("2 500 dh la nuit en riad", "3 000 dh la nuit en riad, à 2\n500 m de la place"), ["2500"])
+        self.assertEqual(gone("la nuit à 1 500 bahts en bungalow", "la nuit à 1 800 bahts en bungalow"), ["1500"])
+        # Independent review of 12/11/2026: a word before the number does not make a row, and "1", "500" anywhere near
+        # do not make two cells.
+        self.assertEqual(gone("Chambre à 1 500 € la nuit", "Chambre à 1 800 € la nuit, 1 lit, à 500 m de la plage"), ["1500"])
+        self.assertEqual(gone("Entrée 2 500 ¥", "Entrée 3 500 ¥ pour 2 adultes, à 500 m de la gare"), ["2500"])
+        # Even where the page puts "2" and "500" in two neighbouring cells, the batch is reported.
+        self.assertEqual(gone("Entrée 2 500 ¥", "Entrée 3 500 ¥ pour 2\n500 m plus loin"), ["2|500"])
+        self.assertEqual(stale_lots.readings("1 500 bahts la nuit")[1], {})                       # the figure that opens a quote is one number
+        self.assertEqual(stale_lots.readings("Chambre à 1 500 € la nuit")[1], {})                 # words after the number: not a row
+        self.assertEqual(stale_lots.readings("Ligne 15 200 ¥")[1], {"15200": ("15", "200")})     # a row: a label, then its cell and its unit
+
+    def test_an_ordinal_that_changed_is_reported_and_one_written_in_full_is_not(self):
+        gone, wording = stale_lots.numbers_gone, stale_lots.only_wording
+        for quote, today, lost in (("gratuit le 1er dimanche du mois", "gratuit le 2e dimanche du mois", ["1er"]), ("ouvert dès le 1er décembre", "ouvert dès le 3 décembre", ["1er"]),
+                                   ("la couchette de 2e classe du train 9", "la couchette de 1re classe du train 9", ["2e"]),
+                                   ("le tram 15E dessert Belém", "le tram 18E dessert Belém", ["15e"]), ("le 100e anniversaire du parc", "le 110e anniversaire du parc", ["100e"])):
+            self.assertEqual(gone(quote, today), lost, quote)
+            self.assertTrue(wording(lost, quote), quote)      # reported, never withdrawn on an ordinal alone
+        # "secondes" is a unit of time, not the rank of a class.
+        self.assertEqual(gone("2e classe sans réservation", "sans réservation, attendre 5 secondes au portillon"), ["2e"])
+        for quote, today in (("gratuit le 1er dimanche du mois", "gratuit le premier dimanche du mois"), ("la couchette de 2e classe du train 9", "la couchette de seconde classe du train 9"),
+                             ("la 3e station après la gare", "la troisième station après la gare"), ("le tram 15E dessert Belém", "Belém est desservi par le tram 15E")):
+            self.assertEqual(gone(quote, today), [], quote)
+        stock = self.stock()
+        stock.post("fb-lisbonne", ["Le tram 15E dessert Belém et le monastère.", ENTRY])
+        for name in ("fb-a", "fb-b"):
+            stock.post(name, [ENTRY])
+        stock.pages = {GUIDE: page("Le tram 18E dessert Belém et le monastère.", ENTRY)}
+        result = stock.run()
+        self.assertEqual((result["status"], result["retired"], result["reported"]), ("stale", [], ["fb-lisbonne-v1"]))
+        self.assertEqual((result["batches"][0]["why"], result["batches"][0]["missing"][0]["numbers"]), ("only_an_order_number_or_a_date_changed", ["15e"]))
+
+    def test_a_lost_number_is_wording_only_if_every_place_it_stands_in_is(self):
+        gone, wording = stale_lots.numbers_gone, stale_lots.only_wording
+        quote = "2 € la traversée, 2 départs par heure"
+        lost = gone(quote, "3 € la traversée, 4 départs par heure")
+        self.assertEqual((lost, wording(lost, quote)), (["2"], False))       # the same "2" is also a price
+        # A number the quote gives twice must be read twice: one of the two changed, the other does not hide it.
+        lost = gone(quote, "2 € la traversée, 4 départs par heure")
+        self.assertEqual((lost, wording(lost, quote)), (["2"], False))
+        self.assertEqual(gone(quote, "2 départs par heure, 2 € la traversée"), [])
+        for quote, today in (("5 kg de bagage en cabine", "8 kg de bagage en cabine"), ("le trajet coûte 9 EUR", "le trajet coûte 12 EUR"), ("5 MAD le thé", "8 MAD le thé"),
+                             ("8 THB le ferry", "9 THB le ferry"), ("7 USD la navette", "9 USD la navette"), ("5 mn de marche", "8 mn de marche"), ("3 k€ le séjour", "4 k€ le séjour")):
+            lost = gone(quote, today)
+            self.assertTrue(lost and not wording(lost, quote), quote)
 
     def test_figures_taken_from_another_site_are_listed_with_the_day_they_were_read(self):
         stock = self.stock()
@@ -241,6 +308,28 @@ class StaleLotsTests(unittest.TestCase):
         self.assertEqual(sorted(stale_lots.registries(stock.root)), ["auto/ig-escape/sources.json", "auto/ig-yucatan/sources.json"])
         with self.assertRaises(KeyError):
             stale_lots.quotes_of({"sources": {"file": "/etc/hosts"}, "scenes": []}, stale_lots.registries(stock.root))
+        # A link is not a file of the folder, wherever it leads.
+        outside = stock.root.parent / "outside-scenario.json"
+        outside.write_text("{}")
+        self.addCleanup(outside.unlink)
+        (stock.root / "scenarios" / "ig-link.json").symlink_to(outside)
+        (stock.root / "auto" / "ig-link").mkdir()
+        (stock.root / "auto" / "ig-link" / "sources.json").symlink_to(outside)
+        self.assertNotIn("ig-link", stale_lots.shelf(stock.root, "scenarios"))
+        self.assertNotIn("auto/ig-link/sources.json", stale_lots.registries(stock.root))
+
+    def test_a_scenario_oddly_made_never_keeps_the_others_from_being_read(self):
+        stock = self.stock()
+        stock.post("ig-yucatan", [ENTRY])
+        for name, scenario in (("ig-list", ["not", "a", "scenario"]), ("ig-scenes", {"sources": {"file": "auto/ig-scenes/sources.json"}, "scenes": [None, "x"]}),
+                               ("ig-sources", {"sources": "auto/ig-sources/sources.json", "scenes": []})):
+            stock.post(name, [FARE])
+            (stock.root / "scenarios" / f"{name}.json").write_text(json.dumps(scenario))
+        stock.pages = {GUIDE: page(ENTRY)}
+        result = stock.run()
+        self.assertEqual([(row["batchId"], row["status"]) for row in result["batches"]],
+                         [("ig-yucatan-v1", "current"), ("ig-list-v1", "unread"), ("ig-scenes-v1", "unread"), ("ig-sources-v1", "unread")])
+        self.assertEqual(result["retired"], [])
 
     def test_a_page_that_cannot_be_read_or_that_changed_altogether_withdraws_nothing(self):
         stock = self.stock()

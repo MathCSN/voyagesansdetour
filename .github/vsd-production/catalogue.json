@@ -134,22 +134,28 @@
       "sha256": "6999717cf2c29d737ccac377110f183538c2f405860db582394a0a8f13ba26f3"
     },
     {
-      "contentId": "fb-marrakech-3-jours-2026-11-26-2",
-      "notBefore": "2026-11-12T21:03:44Z",
-      "file": "scenarios/fb-marrakech-3-jours-2026-11-26-2.json",
-      "sha256": "25ba99f49ec8c04406d5ad2744e17a0e69a47e562723c255fb5e250880ee8def"
-    },
-    {
-      "contentId": "ig-thailande-itineraire-2-semaines-2026-12-02-2",
-      "notBefore": "2026-11-12T21:03:44Z",
-      "file": "scenarios/ig-thailande-itineraire-2-semaines-2026-12-02-2.json",
-      "sha256": "ab081416a7f4a96cdca584ec587d47f18b015e2ac675e7d6fe95b1e4ccec732d"
+      "contentId": "ig-lisbonne-porto-train-2026-11-18",
+      "notBefore": "2026-11-12T22:10:05Z",
+      "file": "scenarios/ig-lisbonne-porto-train-2026-11-18.json",
+      "sha256": "23b89eec4223478c3858f8939daf4abe50dc44a4443e553f661f2bce57c58a68"
     },
     {
       "contentId": "ig-yucatan-itineraire-10-jours-2026-11-20-3",
-      "notBefore": "2026-11-12T21:03:44Z",
+      "notBefore": "2026-11-12T22:14:44Z",
       "file": "scenarios/ig-yucatan-itineraire-10-jours-2026-11-20-3.json",
-      "sha256": "a02646f4b6644d014468d603241064a16c51ed1486de76d7e9202fd1bc323ba9"
+      "sha256": "a6ce9a29a49b491e3129fa029b1c3e2c692b261a5eb1015cb1eb1f95fae9e22d"
+    },
+    {
+      "contentId": "ig-thailande-itineraire-2-semaines-2026-12-02-2",
+      "notBefore": "2026-11-12T22:14:45Z",
+      "file": "scenarios/ig-thailande-itineraire-2-semaines-2026-12-02-2.json",
+      "sha256": "35cfd10c90d86f71a3a65682744659bf811b706dea1a83b2677b7a5c4acd6911"
+    },
+    {
+      "contentId": "fb-marrakech-3-jours-2026-11-26-2",
+      "notBefore": "2026-11-12T22:14:48Z",
+      "file": "scenarios/fb-marrakech-3-jours-2026-11-26-2.json",
+      "sha256": "320302da5ca0fa3b5f645c306071f685a947c3d7a82835bdb5fb26f660cdc435"
     }
   ]
 }

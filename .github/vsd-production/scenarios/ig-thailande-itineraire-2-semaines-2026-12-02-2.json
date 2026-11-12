@@ -10,23 +10,23 @@
   "publishAt": "2026-12-02T17:00:00Z",
   "review": {
     "status": "reviewed_for_render",
-    "checkedAt": "2026-11-12T21:03:44Z",
-    "validUntil": "2026-12-12T21:03:44Z",
+    "checkedAt": "2026-11-12T22:14:45Z",
+    "validUntil": "2026-12-12T22:14:45Z",
     "method": "Généré automatiquement (auto_social.py) depuis la page publiée du guide relevée le 12/11/2026 : chaque chiffre, étape ou ligne de tableau est cité mot pour mot ; photos et vidéos réelles sous licence libre, aucune image ni vidéo générée par IA ; garde-fous de production.py passés avant la mise en file."
   },
   "sources": {
     "file": "auto/ig-thailande-itineraire-2-semaines-2026-12-02-2/sources.json",
-    "sha256": "1fd47227e1885f967cdb77e5d837c19b739aa056c3dfada8b8512702a0e103cb"
+    "sha256": "9f2e27104b6a2c8b25ba5db4bf36ec34f1c2870b42fab066eba0af3e0f884216"
   },
   "photos": {
     "file": "auto/ig-thailande-itineraire-2-semaines-2026-12-02-2/photos.json",
-    "sha256": "f6e65fd1d4093fd0233e407236f533b78e583d216a48f7fafa8e07b07034193a"
+    "sha256": "91d73deed04da99571b636a751b676675fde76a748cc0e90eed502879c21585d"
   },
   "caption": {
     "hook": "🗺️ Thaïlande en 2 semaines : Bangkok, Chiang Mai en train de nuit et la mer d’Andaman (prix 2026)",
     "lines": [
       "🚆 938 bahts : la couchette haute climatisée de 2e classe du train 9 (≈ 25 €, tarif SRT de novembre 2026)",
-      "📅 N° 7 (autorail de jour) : 7 h 30",
+      "📅 Le train de nuit pour Chiang Mai · Départ de Bangkok — N° 7 (autorail de jour) : 7 h 30",
       "📅 N° 9 (couchettes récentes) : 18 h 40",
       "📅 N° 13 (couchettes) : 20 h 05",
       "📅 N° 51 (couchettes) : 22 h 30"
@@ -177,7 +177,7 @@
       "button": "voyagesansdetour.fr"
     }
   ],
-  "musicStart": 1,
+  "musicStart": 8,
   "assets": {
     "regular": {
       "file": "assets/dmsans-regular.ttf",
@@ -225,17 +225,17 @@
       "sha256": "1df075a380fc7cb898acf64c1f7b3b4dd780de3caa860178bf929de35817a913"
     },
     "music": {
-      "file": "assets/carefree.mp3",
-      "sha256": "8433b770a630d9b1594fd484442c677907ece899a4d149954cd2e74fd733e311",
+      "file": "assets/happy-alley.mp3",
+      "sha256": "f598c8ee624f1db9a2cd38886524a40baff4ce730dcf999c0763791268fa8265",
       "license": "CC-BY-4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
       "commercialUseAllowed": true,
-      "title": "Carefree",
+      "title": "Happy Alley",
       "author": "Kevin MacLeod",
-      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1400037",
+      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100482",
       "provenance": {
-        "file": "evidence/carefree-provenance.json",
-        "sha256": "96c196c39133db1dbc3a478eba28a25ff8d74ef86633b06647e733f8f23234a6"
+        "file": "evidence/happy-alley-provenance.json",
+        "sha256": "5a2ba8f3dba28b0a748b00089d3854db1fde92213429823746f6d01805f904ac"
       }
     }
   }

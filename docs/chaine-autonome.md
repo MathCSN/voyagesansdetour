@@ -62,6 +62,10 @@ guide publié ──► rendu (production.py, reel_intake.py)
   passage (le 12/11/2026, `ig-lisbonne-porto-train-2026-11` : 10,50 €, −65 %, 60 jours et 15 min
   pris sur cp.pt le 24/10, relus mot pour mot sur cp.pt le 12/11). Le 12/11/2026 la relecture a retiré quatre lots
   (Yucatán et sa copie TikTok, Marrakech, Thaïlande) après la revérification de cinq guides.
+  Elle ne regarde que les chiffres : ce même lot Lisbonne–Porto a été retiré à la main le 12/11
+  (`photos_of_another_place` : « Porto : descendez à Campanhã » sur un Alfa Pendular en gare de
+  Campolide, à Lisbonne) et refait au même créneau, sans chiffre pris hors du site. Un ordinal ou
+  un numéro de ligne qui change (« 1er dimanche », « tram 15E ») est signalé, jamais retiré seul.
 - **Qui déclenche le moteur** (depuis le 11/11/2026) : le panneau lui-même, par la tâche planifiée du
   Worker (vsd-admin PR 4). À :22 il importe les lots relus encore programmables ; à :37 et :52 il
   programme les posts dus dans Buffer ; à :07 il relève les statistiques. Les passages planifiés de GitHub sont trop rares

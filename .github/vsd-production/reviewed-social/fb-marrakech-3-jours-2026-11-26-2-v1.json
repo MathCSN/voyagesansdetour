@@ -56,8 +56,8 @@
         "schemaVersion": 1,
         "contentId": "vsd-production:facebook:fb-marrakech-3-jours-2026-11-26-2:photo-v1",
         "approved": true,
-        "reviewedAt": "2026-11-12T21:04:47Z",
-        "validUntil": "2026-12-12T21:03:44Z",
+        "reviewedAt": "2026-11-12T22:17:18Z",
+        "validUntil": "2026-12-12T22:14:48Z",
         "payloadRevision": "9f2a8507019e805909061fbfc9a0528d517c3120b8e5c891b40d6381e2aaa513",
         "checks": {
           "editorialApproved": true,
@@ -68,8 +68,8 @@
           "requiresPaidCall": false,
           "sources": {
             "status": "verified",
-            "observedAt": "2026-11-12T21:03:44Z",
-            "validUntil": "2026-12-12T21:03:44Z"
+            "observedAt": "2026-11-12T22:14:48Z",
+            "validUntil": "2026-12-12T22:14:48Z"
           },
           "syntheticPerson": false,
           "providerSyntheticSettingVerified": false
@@ -84,56 +84,56 @@
               "sha256": "ba00b243cc79b2b3be393cb99effe064ed009b2eb409571600da67287bd3b958",
               "mimeType": "image/jpeg",
               "status": "verified",
-              "observedAt": "2026-11-12T21:04:47Z",
-              "validUntil": "2026-12-12T21:03:44Z"
+              "observedAt": "2026-11-12T22:17:18Z",
+              "validUntil": "2026-12-12T22:14:48Z"
             },
             {
               "url": "https://voyagesansdetour.fr/social-media/production/fb-marrakech-3-jours-2026-11-26-2/scene-02.jpg",
               "sha256": "8be9c00673302e15ec0e564f7e760e64015f2d6a4fc13ceed44b82a1096659b9",
               "mimeType": "image/jpeg",
               "status": "verified",
-              "observedAt": "2026-11-12T21:04:47Z",
-              "validUntil": "2026-12-12T21:03:44Z"
+              "observedAt": "2026-11-12T22:17:18Z",
+              "validUntil": "2026-12-12T22:14:48Z"
             },
             {
               "url": "https://voyagesansdetour.fr/social-media/production/fb-marrakech-3-jours-2026-11-26-2/scene-03.jpg",
               "sha256": "c4f7754417ee74958d6ea46026b4ef301fbf88251352027df9b6a78ab3f4cb3b",
               "mimeType": "image/jpeg",
               "status": "verified",
-              "observedAt": "2026-11-12T21:04:47Z",
-              "validUntil": "2026-12-12T21:03:44Z"
+              "observedAt": "2026-11-12T22:17:18Z",
+              "validUntil": "2026-12-12T22:14:48Z"
             },
             {
               "url": "https://voyagesansdetour.fr/social-media/production/fb-marrakech-3-jours-2026-11-26-2/scene-04.jpg",
               "sha256": "54387f5ad9873bca5503b6347f442f7eadaf77825f575cbed151c6452e4138f5",
               "mimeType": "image/jpeg",
               "status": "verified",
-              "observedAt": "2026-11-12T21:04:47Z",
-              "validUntil": "2026-12-12T21:03:44Z"
+              "observedAt": "2026-11-12T22:17:18Z",
+              "validUntil": "2026-12-12T22:14:48Z"
             },
             {
               "url": "https://voyagesansdetour.fr/social-media/production/fb-marrakech-3-jours-2026-11-26-2/scene-05.jpg",
               "sha256": "e002d2f4b60c9ed1a37b58084392b27cd316bd189d8199819d8bbbcc58123602",
               "mimeType": "image/jpeg",
               "status": "verified",
-              "observedAt": "2026-11-12T21:04:47Z",
-              "validUntil": "2026-12-12T21:03:44Z"
+              "observedAt": "2026-11-12T22:17:18Z",
+              "validUntil": "2026-12-12T22:14:48Z"
             },
             {
               "url": "https://voyagesansdetour.fr/social-media/production/fb-marrakech-3-jours-2026-11-26-2/scene-06.jpg",
               "sha256": "526551f21d9cfb05ff49ec1c70559201e09013d5da3a3e50dd396872bdb35640",
               "mimeType": "image/jpeg",
               "status": "verified",
-              "observedAt": "2026-11-12T21:04:47Z",
-              "validUntil": "2026-12-12T21:03:44Z"
+              "observedAt": "2026-11-12T22:17:18Z",
+              "validUntil": "2026-12-12T22:14:48Z"
             }
           ]
         },
         "destination": {
           "url": "https://voyagesansdetour.fr/maroc/marrakech-3-jours/",
           "status": "verified",
-          "observedAt": "2026-11-12T21:04:47Z",
-          "validUntil": "2026-12-12T21:03:44Z"
+          "observedAt": "2026-11-12T22:17:18Z",
+          "validUntil": "2026-12-12T22:14:48Z"
         },
         "monetization": {
           "containsAffiliateLinks": false,
@@ -143,8 +143,8 @@
         },
         "formatCapability": {
           "status": "verified",
-          "observedAt": "2026-11-12T21:04:47Z",
-          "validUntil": "2026-12-12T21:03:44Z",
+          "observedAt": "2026-11-12T22:17:18Z",
+          "validUntil": "2026-12-12T22:14:48Z",
           "automaticPublishing": true,
           "verificationMethod": "official_documentation",
           "sourceUrls": [
@@ -157,8 +157,8 @@
           "status": "rendered_local_bytes_verified_public_deploy_pending",
           "format": "photo_carousel",
           "rendererContractVersion": 3,
-          "receiptSha256": "65b72d03145af95ea846c67688d039c302a5e110d6b62c0686ac96b5c6a71be1",
-          "scenarioFingerprint": "f82df76124bc92c423317bc7cb76c98c1f901576a2b397170de626304596a51f",
+          "receiptSha256": "e773b1de61b9052694652a07f8372e3850a19df15f5c7d3278df599c80de5551",
+          "scenarioFingerprint": "0e91dd10e6c2021a7707fc57f9504ec10891f98f4023627e03efe5473caa390d",
           "sourceCheckedOn": "2026-11-12",
           "sourceUrls": [
             "https://voyagesansdetour.fr/maroc/marrakech-3-jours/"

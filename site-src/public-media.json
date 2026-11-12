@@ -1232,6 +1232,99 @@
       ]
     },
     {
+      "contentId": "ig-lisbonne-porto-train-2026-11-18",
+      "approved": true,
+      "files": [
+        {
+          "name": "reel.mp4",
+          "sha256": "3afa44ece798f455185d54c12fa909d7b175a3d8e0631e829fa7e799b897bf6f",
+          "bytes": 5325706
+        },
+        {
+          "name": "poster.jpg",
+          "sha256": "584a22b39c2c0af9bb2d33a1d14efbbbbf4751cbf0821ca2977792b143880e03",
+          "bytes": 478788
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "cae6030deefbebc8b78cd37582f17fb31424dbc9aa14e20baa616f197f79bf63",
+          "bytes": 2729
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "ig-yucatan-itineraire-10-jours-2026-11-20-3",
+      "approved": true,
+      "files": [
+        {
+          "name": "reel.mp4",
+          "sha256": "d4bd7318af7d25b327e47c5a3d3ed312e58a6b95b8d45de9ff7bfde3eab775fb",
+          "bytes": 8406145
+        },
+        {
+          "name": "poster.jpg",
+          "sha256": "9a0c9fa95af7d149436638bab7c922126d2302e2de61f4837bd552830d5cabcf",
+          "bytes": 372141
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "813f79f389bba0cdae5963dba3173e1a96bb81fd3e60d18fe2180e2eccb663b6",
+          "bytes": 3437
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "ig-thailande-itineraire-2-semaines-2026-12-02-2",
+      "approved": true,
+      "files": [
+        {
+          "name": "reel.mp4",
+          "sha256": "1495869a458aec590997257508105acabc038c641c077e64283c4c352e07c214",
+          "bytes": 5710061
+        },
+        {
+          "name": "poster.jpg",
+          "sha256": "a8e672ab539e2c2f5b16a06067a7de58a43ad8ed9e79f576a6a22f93fb6fe617",
+          "bytes": 310418
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "a4e218c3bda7d874d8620dd201d0021fbffb6ac93d5872c86ede02ddfc66f703",
+          "bytes": 2871
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
       "contentId": "fb-marrakech-3-jours-2026-11-26-2",
       "kind": "photos",
       "approved": true,
@@ -1270,68 +1363,6 @@
           "name": "credits.txt",
           "sha256": "4376848a5754e534877f2323c5f6882ce4fea3345b69744b45e2c75cc2653723",
           "bytes": 2580
-        },
-        {
-          "name": "dmsans-OFL.txt",
-          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
-          "bytes": 4482
-        },
-        {
-          "name": "playfairdisplay-OFL.txt",
-          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
-          "bytes": 4449
-        }
-      ]
-    },
-    {
-      "contentId": "ig-thailande-itineraire-2-semaines-2026-12-02-2",
-      "approved": true,
-      "files": [
-        {
-          "name": "reel.mp4",
-          "sha256": "1f5696afe19d887bcccaa97bf55f5c9addb4193fdb4eb404bc9c3e6781029c0d",
-          "bytes": 5734697
-        },
-        {
-          "name": "poster.jpg",
-          "sha256": "a8e672ab539e2c2f5b16a06067a7de58a43ad8ed9e79f576a6a22f93fb6fe617",
-          "bytes": 310418
-        },
-        {
-          "name": "credits.txt",
-          "sha256": "201a79e60b1f8c95a71da21e4cfe4a61544d4b8cb53f4795a96354a58ccbead5",
-          "bytes": 2868
-        },
-        {
-          "name": "dmsans-OFL.txt",
-          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
-          "bytes": 4482
-        },
-        {
-          "name": "playfairdisplay-OFL.txt",
-          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
-          "bytes": 4449
-        }
-      ]
-    },
-    {
-      "contentId": "ig-yucatan-itineraire-10-jours-2026-11-20-3",
-      "approved": true,
-      "files": [
-        {
-          "name": "reel.mp4",
-          "sha256": "e4dec922d1ae39f0f3d858f19c89a8f634dc7fcc59f38010c58316d2cfd3a0a1",
-          "bytes": 7015092
-        },
-        {
-          "name": "poster.jpg",
-          "sha256": "3755706943c29c35b4e7dd5c1362febd6beaaabe7d4dbb14e347176117f36b4a",
-          "bytes": 435639
-        },
-        {
-          "name": "credits.txt",
-          "sha256": "bbde5738b19a9498c63fcdef07824575ece24de9b1f00d857d9e1235bc67573a",
-          "bytes": 3142
         },
         {
           "name": "dmsans-OFL.txt",

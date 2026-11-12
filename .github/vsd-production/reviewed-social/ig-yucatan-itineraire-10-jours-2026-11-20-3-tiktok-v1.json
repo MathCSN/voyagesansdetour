@@ -5,18 +5,18 @@
     {
       "contentId": "vsd-production:tiktok:ig-yucatan-itineraire-10-jours-2026-11-20-3:photo-v1",
       "deduplicationKey": "vsd-production:tiktok:ig-yucatan-itineraire-10-jours-2026-11-20-3:photo-v1",
-      "title": "Yucatán en 10 jours : les étapes clés",
+      "title": "Yucatán en 10 jours : jour par jour",
       "dueAt": "2026-11-20T18:00:00Z",
       "payload": {
         "schemaVersion": 1,
         "channel": "tiktok",
         "kind": "reel",
-        "text": "🗺️ Yucatán en 10 jours : Valladolid, Chichén Itzá, Mérida et Tulum, avec le Tren Maya\n\n📍 Jours 1-2 : Valladolid · 1 h 43 de l’aéroport de Cancún à Valladolid en Tren Maya, 6 départs par jour, dès 539 pesos en tarif international\n📍 Jour 3 : Chichén Itzá à l’ouverture · 697 pesos l’entrée de Chichén Itzá pour un étranger (105 pesos INAH + 592 pesos de l’État), de 8 h à 16 h\n📍 Jour 7 : Mérida–Tulum en train direct · 5 h 16 le train direct Mérida Teya → Tulum de 7 h, arrivée 13 h 16 : 1 389,50 pesos en tarif touriste international\n\n📌 Enregistrez cette vidéo pour votre voyage. 🔗 Prix, horaires et détails : le guide complet sur voyagesansdetour.fr\n\nPhotos libres (Wikimedia Commons) et musique de Kevin MacLeod (CC BY 4.0) — crédits : https://voyagesansdetour.fr/social-media/production/ig-yucatan-itineraire-10-jours-2026-11-20-3/credits.txt\n\n#Yucatan #Mexique #VoyageMexique #Itineraire #VoyageSansDetour\n",
+        "text": "🗺️ Yucatán en 10 jours : Valladolid, Chichén Itzá, Mérida et Tulum, avec le Tren Maya\n\n📍 Jours 1-2 : Valladolid · 1 h 43 de l’aéroport de Cancún à Valladolid en Tren Maya\n📍 Jour 3 : Chichén Itzá à l’ouverture · 697 pesos l’entrée de Chichén Itzá pour un étranger\n📍 Jours 4-6 : Mérida et Uxmal · 604 pesos l’entrée d’Uxmal pour un étranger, à 80 km de Mérida\n📍 Jour 7 : Mérida–Tulum en train direct · 5 h 16 le train direct Mérida Teya → Tulum de 7 h, arrivée 13 h 16\n📍 Jours 8-10 : Tulum et le retour · 265 pesos les ruines de Tulum pour un étranger, parc du Jaguar compris\n\n📌 Enregistrez cette vidéo pour votre voyage. 🔗 Prix, horaires et détails : le guide complet sur voyagesansdetour.fr\n\nPhotos libres (Wikimedia Commons) et musique de Kevin MacLeod (CC BY 4.0) — crédits : https://voyagesansdetour.fr/social-media/production/ig-yucatan-itineraire-10-jours-2026-11-20-3/credits.txt\n\n#Yucatan #Mexique #VoyageMexique #Itineraire #VoyageSansDetour\n",
         "aiGenerated": false,
         "assets": [
           {
             "url": "https://voyagesansdetour.fr/social-media/production/ig-yucatan-itineraire-10-jours-2026-11-20-3/reel.mp4",
-            "sha256": "e4dec922d1ae39f0f3d858f19c89a8f634dc7fcc59f38010c58316d2cfd3a0a1",
+            "sha256": "d4bd7318af7d25b327e47c5a3d3ed312e58a6b95b8d45de9ff7bfde3eab775fb",
             "mimeType": "video/mp4"
           }
         ]
@@ -25,9 +25,9 @@
         "schemaVersion": 1,
         "contentId": "vsd-production:tiktok:ig-yucatan-itineraire-10-jours-2026-11-20-3:photo-v1",
         "approved": true,
-        "reviewedAt": "2026-11-12T21:04:47Z",
-        "validUntil": "2026-12-12T21:03:44Z",
-        "payloadRevision": "4d16bc913a61e9c108869309ad93e017ad28952446e68bb0f7a7a5cc3fd44df7",
+        "reviewedAt": "2026-11-12T22:17:18Z",
+        "validUntil": "2026-12-12T22:14:44Z",
+        "payloadRevision": "5959735afd7ba51a66af05fae3a1390811052bf20b97f7385e52794534c3154a",
         "checks": {
           "editorialApproved": true,
           "rightsApproved": true,
@@ -37,8 +37,8 @@
           "requiresPaidCall": false,
           "sources": {
             "status": "verified",
-            "observedAt": "2026-11-12T21:03:44Z",
-            "validUntil": "2026-12-12T21:03:44Z"
+            "observedAt": "2026-11-12T22:14:44Z",
+            "validUntil": "2026-12-12T22:14:44Z"
           },
           "syntheticPerson": false,
           "providerSyntheticSettingVerified": false
@@ -46,17 +46,17 @@
         "media": {
           "url": "https://voyagesansdetour.fr/social-media/production/ig-yucatan-itineraire-10-jours-2026-11-20-3/reel.mp4",
           "mimeType": "video/mp4",
-          "sha256": "e4dec922d1ae39f0f3d858f19c89a8f634dc7fcc59f38010c58316d2cfd3a0a1",
+          "sha256": "d4bd7318af7d25b327e47c5a3d3ed312e58a6b95b8d45de9ff7bfde3eab775fb",
           "required": true,
           "status": "verified",
-          "observedAt": "2026-11-12T21:04:47Z",
-          "validUntil": "2026-12-12T21:03:44Z"
+          "observedAt": "2026-11-12T22:17:18Z",
+          "validUntil": "2026-12-12T22:14:44Z"
         },
         "destination": {
           "url": "https://voyagesansdetour.fr/mexique/yucatan-itineraire-10-jours/",
           "status": "verified",
-          "observedAt": "2026-11-12T21:04:47Z",
-          "validUntil": "2026-12-12T21:03:44Z"
+          "observedAt": "2026-11-12T22:17:18Z",
+          "validUntil": "2026-12-12T22:14:44Z"
         },
         "monetization": {
           "containsAffiliateLinks": false,
@@ -66,8 +66,8 @@
         },
         "formatCapability": {
           "status": "verified",
-          "observedAt": "2026-11-12T21:04:47Z",
-          "validUntil": "2026-12-12T21:03:44Z",
+          "observedAt": "2026-11-12T22:17:18Z",
+          "validUntil": "2026-12-12T22:14:44Z",
           "automaticPublishing": true,
           "verificationMethod": "official_documentation",
           "sourceUrls": [
@@ -80,15 +80,15 @@
           "status": "rendered_local_bytes_verified_public_deploy_pending",
           "format": "photo_reel",
           "rendererContractVersion": 4,
-          "receiptSha256": "2e0be9b38729d4ad111d1d4f84509898598e2f4e7af2c1e5315d693d26a3ab6d",
-          "scenarioFingerprint": "b1b4689c98387906aef7e7a0dc52c58f143baa19e6b8bce763b9f7636eb85d6b",
+          "receiptSha256": "e36b34138e2a3566286f17723bc0883734d4685b3beacb61292bf7ac808ba96d",
+          "scenarioFingerprint": "28ca7e61b82240a19b960fc8b165ee353d5cedf4e12d6d9ed33a8c8f62942b25",
           "sourceCheckedOn": "2026-11-12",
           "sourceUrls": [
             "https://voyagesansdetour.fr/mexique/yucatan-itineraire-10-jours/"
           ],
           "creditsUrl": "https://voyagesansdetour.fr/social-media/production/ig-yucatan-itineraire-10-jours-2026-11-20-3/credits.txt",
           "voice": null,
-          "music": "Happy Alley",
+          "music": "Carefree",
           "note": "Les octets publics sont à contrôler après déploiement avec social_stock.py --verify-public. Un créneau prévu n'est pas une réservation Buffer."
         }
       }

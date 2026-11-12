@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "contentId": "ig-lisbonne-porto-train-2026-11-18",
+  "status": "rendered_not_published",
+  "fingerprint": "5a8da2d89652dbb960affe35c41ba5bca6144ae23d82c5583d2cfc7bd2d9edf3",
+  "createdAt": "2026-11-12T22:15:14.008827Z",
+  "renderFinishedAt": "2026-11-12T22:15:33.139094Z",
+  "rendererContractVersion": 4,
+  "rendererSha256": "53771f8977e744f7e898c21c13d02cd1f80ec9d9fcff06e28a9c095db57efd0a",
+  "drawingSha256": "b78990f497d03baf754e3b2b68a795a5e9d3b91a0b6a2f8dad2ebcd7fec2907c",
+  "motionSha256": "97551f9095a5a66596521a599d328df19f4e28fbcfcf716ae1ee980ebdf47448",
+  "format": "tableau",
+  "kind": "reel",
+  "channel": "instagram",
+  "publishAt": "2026-11-18T17:00:00Z",
+  "reviewValidUntil": "2026-12-12T22:10:05Z",
+  "sourceCheckedOn": "2026-11-12",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/lisbonne-porto-train/",
+  "voice": null,
+  "presenter": null,
+  "sourceUrls": [
+    "https://voyagesansdetour.fr/portugal/lisbonne-porto-train/"
+  ],
+  "photos": {
+    "train-alfa-aqueduc": {
+      "licence": "CC BY 2.0",
+      "author": "Nicky Boogaard from Hardinxveld-Giessendam, Netherlands",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:CP_AlfaPendular_storming_through_Campolide_railway_station_(47548338771).jpg"
+    },
+    "train-alfa-220": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Sambasoccer27",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:%D8%A3%D9%84%D9%81%D8%A7_%D8%A8%D9%86%D8%AF%D9%84%D8%A7%D8%B1_220_%D9%83_%D8%B3.jpg"
+    },
+    "train-alfa-pendular": {
+      "licence": "CC0",
+      "author": "LuisFerreira4x4",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Alfa_Pendular_New_Livery.jpg"
+    },
+    "train-alfa-interieur": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Aleksi Kinnunen",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Alfa_Pendular_new_interior_1st_class.jpg"
+    },
+    "train-campanha": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Steven Lek",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Porto_Campanh%C3%A3_train_station_2017.jpg"
+    }
+  },
+  "clips": {},
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "durationSeconds": 18.2,
+    "videoCodec": "h264",
+    "pixelFormat": "yuv420p",
+    "videoBitrateBps": 2233614,
+    "audioCodec": "aac",
+    "audioSampleRate": 48000,
+    "audioBitrateBps": 97827,
+    "fullDecodePassed": true,
+    "loudness": {
+      "integratedLufs": -16.3,
+      "truePeakDbfs": -3.7
+    }
+  },
+  "files": [
+    {
+      "file": "apercu.jpg",
+      "sha256": "5e1ebea834794548eb722f068434d4e7878a89a358c8261f044c6bd32bbb5410",
+      "bytes": 204035
+    },
+    {
+      "file": "credits.txt",
+      "sha256": "cae6030deefbebc8b78cd37582f17fb31424dbc9aa14e20baa616f197f79bf63",
+      "bytes": 2729
+    },
+    {
+      "file": "dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "file": "encode.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "legende.txt",
+      "sha256": "7c6fcd3e0109f7ef693ae500bc9190106a0462e4ec37f1ac85bbc012ac05a2b5",
+      "bytes": 788
+    },
+    {
+      "file": "notosans-OFL.txt",
+      "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a",
+      "bytes": 4396
+    },
+    {
+      "file": "playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    },
+    {
+      "file": "poster.jpg",
+      "sha256": "584a22b39c2c0af9bb2d33a1d14efbbbbf4751cbf0821ca2977792b143880e03",
+      "bytes": 478788
+    },
+    {
+      "file": "reel.mp4",
+      "sha256": "3afa44ece798f455185d54c12fa909d7b175a3d8e0631e829fa7e799b897bf6f",
+      "bytes": 5325706
+    },
+    {
+      "file": "scenario.json",
+      "sha256": "23b89eec4223478c3858f8939daf4abe50dc44a4443e553f661f2bce57c58a68",
+      "bytes": 7361
+    },
+    {
+      "file": "scene-01.jpg",
+      "sha256": "d96dcc25a02fb248bab61e9e7ff91977c4adc90d99402aedc8a1f55817e9b49d",
+      "bytes": 438153
+    },
+    {
+      "file": "scene-02.jpg",
+      "sha256": "1d963b58419092ec90fa7d7f2e5b407ce1532f397906fc97667b595c2eabe454",
+      "bytes": 272405
+    },
+    {
+      "file": "scene-03.jpg",
+      "sha256": "462842487ac778ce78805197aee427c0944465065c9c35aa07c878ce207973d3",
+      "bytes": 360064
+    },
+    {
+      "file": "scene-04.jpg",
+      "sha256": "c9c192835f2407f052718c16c90dbe19311ff30ba168ceec722668682c53ff53",
+      "bytes": 344565
+    },
+    {
+      "file": "scene-05.jpg",
+      "sha256": "7550dfe78b701660ddb70f195fc0d10d9f511903d619dc37339eb1e41a77daa3",
+      "bytes": 308445
+    }
+  ],
+  "runtime": {
+    "wallSeconds": 18.755,
+    "encoderThreads": 2,
+    "pillowVersion": "11.3.0",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers"
+  },
+  "publication": {
+    "uploaded": false,
+    "scheduled": false,
+    "published": false,
+    "readyForAutomaticImport": false
+  },
+  "cost": {
+    "newPaidService": false,
+    "providerCalls": 0,
+    "monetarySpendEur": 0
+  }
+}

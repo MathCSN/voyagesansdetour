@@ -227,8 +227,19 @@ def significant(value: str) -> set[str]:
     return {w for w in re.findall(r"[\wÀ-ÿ]{5,}", destinations.ascii_fold(value).lower())}
 
 
+def whole_figure(value: str, text: str) -> bool:
+    """The figure read whole in this text: "4 pesos" is not in "604 pesos", "604 pesos" not in "1 604 pesos", nor "30 min"
+    in "30 minutes"."""
+    return re.search(r"(?<![\w,.])(?<!\d\s)" + re.escape(p.normalized(value)) + r"(?!\w)", text) is not None
+
+
 def section_of(value: str, label: str, sections: list[dict]) -> dict | None:
-    """The section that talks about this figure: most words shared with its label, the figure itself as a tie-break."""
+    """The section that talks about this figure: the only one that gives the figure itself when there is just one
+    ("604 pesos" is read under "Jours 4-6 : Mérida et Uxmal", nowhere else); otherwise the one that shares the most
+    words with its label, the figure itself as a tie-break."""
+    holders = [section for section in sections if whole_figure(value, section_text(section))]
+    if len(holders) == 1:
+        return holders[0]
     words, best, best_score = significant(label), None, 0
     for section in sections:
         text = section_text(section)
@@ -532,10 +543,13 @@ def build(root: Path, article: dict, channel: Post, slot: dt.datetime, now: dt.d
 
 
 def fitted_caption(scenario: dict, clips: dict) -> dict:
-    """The scenario with its written caption within CAPTION_MAX: detail lines are dropped from the end, never under three."""
-    lines = scenario["caption"]["lines"]
-    for count in range(len(lines), p.CAPTION_LINES[0] - 1, -1):
-        candidate = scenario if count == len(lines) else {**scenario, "caption": {**scenario["caption"], "lines": lines[:count]}}
+    """The scenario with its written caption within CAPTION_MAX. A caption too long first says each line shorter
+    (the stages of an itinerary, as their plans show them), then drops detail lines from the end, never under three."""
+    if len(p.caption(scenario, {"clips": clips})) <= CAPTION_MAX:
+        return scenario
+    shorter = [str(getattr(line, "short", line)) for line in scenario["caption"]["lines"]]
+    for count in range(len(shorter), p.CAPTION_LINES[0] - 1, -1):
+        candidate = {**scenario, "caption": {**scenario["caption"], "lines": shorter[:count]}}
         if len(p.caption(candidate, {"clips": clips})) <= CAPTION_MAX:
             return candidate
     raise Held("caption_too_long")

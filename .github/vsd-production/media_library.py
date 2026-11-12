@@ -37,7 +37,8 @@ NOT_A_CLOSING = frozenset({
 
 # Where the subject of a photo of the site is (x, y from 0 to 1), when a vertical frame cut around its middle misses it:
 # the gable of the Grand Palace stands on the right of its photo, under a wide evening sky.
-SITE_FOCUS = {"thailande-bangkok-grand-palais": [0.72, 0.7]}
+# The temple of Tulum stands right of the middle of a panorama: cut around the middle, the frame slid off it.
+SITE_FOCUS = {"thailande-bangkok-grand-palais": [0.72, 0.7], "yucatan-tulum": [0.645, 0.5]}
 
 
 def commons_title(source_page: str) -> str | None:

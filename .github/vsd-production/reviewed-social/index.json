@@ -299,48 +299,66 @@
       ]
     },
     {
-      "path": ".github/vsd-production/reviewed-social/fb-marrakech-3-jours-2026-11-26-2-v1.json",
-      "fileSha256": "75e090543010cd31f7a4787423012a63707e65d5bd9a0e43008a37ddb6ddcc3f",
-      "batchId": "fb-marrakech-3-jours-2026-11-26-2-v1",
-      "batchSha256": "723980728671031fe0fb8f6015104b3d9f39fe11a38d898f35ba3d31fb622548",
+      "path": ".github/vsd-production/reviewed-social/ig-lisbonne-porto-train-2026-11-18-v1.json",
+      "fileSha256": "9810ecc8730c437cd7bec65da9abdf6313e571ac50acc793cdbc6d6ee4ab7574",
+      "batchId": "ig-lisbonne-porto-train-2026-11-18-v1",
+      "batchSha256": "a548b4f161ed605f194ee87d2956d04f18f4c4acdef1de02d6ada2c2d762edc2",
       "itemIds": [
-        "vsd-production:facebook:fb-marrakech-3-jours-2026-11-26-2:photo-v1"
+        "vsd-production:instagram:ig-lisbonne-porto-train-2026-11-18:photo-v1"
       ]
     },
     {
-      "path": ".github/vsd-production/reviewed-social/ig-thailande-itineraire-2-semaines-2026-12-02-2-v1.json",
-      "fileSha256": "c770b96ecad85a837d31ea95d598bb3e59497a579b43bad2eb6bb9cce1223eb4",
-      "batchId": "ig-thailande-itineraire-2-semaines-2026-12-02-2-v1",
-      "batchSha256": "0ad22590886bafa1302dbd5e0c2c8781a00cf1be50ea5d5b7a4c4f9d573f1825",
+      "path": ".github/vsd-production/reviewed-social/ig-lisbonne-porto-train-2026-11-18-tiktok-v1.json",
+      "fileSha256": "4e871a14f40bdae0ebffa04185e4ac09ed3ad904a3412c86478ed2ee11594334",
+      "batchId": "ig-lisbonne-porto-train-2026-11-18-tiktok-v1",
+      "batchSha256": "3afd1f5315886b1d1c45c8151cb5a8d7d8c6f0aadbf721f64c4c37b5279c49b4",
       "itemIds": [
-        "vsd-production:instagram:ig-thailande-itineraire-2-semaines-2026-12-02-2:photo-v1"
-      ]
-    },
-    {
-      "path": ".github/vsd-production/reviewed-social/ig-thailande-itineraire-2-semaines-2026-12-02-2-tiktok-v1.json",
-      "fileSha256": "a7a4c60002dfc9039c8b9d7ff1521815940eff4aca7754f20b103bfcea1cd5b7",
-      "batchId": "ig-thailande-itineraire-2-semaines-2026-12-02-2-tiktok-v1",
-      "batchSha256": "df32bcb160da8c33e3d3b86706fff6456f893a1b71a07dc8b264feba9cf5f3a6",
-      "itemIds": [
-        "vsd-production:tiktok:ig-thailande-itineraire-2-semaines-2026-12-02-2:photo-v1"
+        "vsd-production:tiktok:ig-lisbonne-porto-train-2026-11-18:photo-v1"
       ]
     },
     {
       "path": ".github/vsd-production/reviewed-social/ig-yucatan-itineraire-10-jours-2026-11-20-3-v1.json",
-      "fileSha256": "a3a6073b5e68071ea5cbd234084c837a30bfd0b40e4050a503f63edb24d6d5b6",
+      "fileSha256": "a615c6417b9363cab311d085a3f562835b7ee7ecef9330d04a2bb0e577ac00f4",
       "batchId": "ig-yucatan-itineraire-10-jours-2026-11-20-3-v1",
-      "batchSha256": "258e7c0060e4cb7f41c6f5e0803e455a46803febf94ccea9f1cd867a25c2f603",
+      "batchSha256": "14a3c57fc1b142a2a360498494ec308bb525d8a4d1c073dc984f6f911afdfada",
       "itemIds": [
         "vsd-production:instagram:ig-yucatan-itineraire-10-jours-2026-11-20-3:photo-v1"
       ]
     },
     {
       "path": ".github/vsd-production/reviewed-social/ig-yucatan-itineraire-10-jours-2026-11-20-3-tiktok-v1.json",
-      "fileSha256": "147c3b7a1fab1ef50e7c5503cf565faf688df9ae0773a173e6c10099c1fb3958",
+      "fileSha256": "cd850db607a55077312b20446b67a3333c325a71d5b29becc4dc3874d7e17dfb",
       "batchId": "ig-yucatan-itineraire-10-jours-2026-11-20-3-tiktok-v1",
-      "batchSha256": "6f894e0978f0e85b86c2cc78679507e17d10d505648c095c8c75c89568a48361",
+      "batchSha256": "21ffe76cc414b1f62fc4040b0389cdd76a05c48e8c7fbc841779042a34e93f8c",
       "itemIds": [
         "vsd-production:tiktok:ig-yucatan-itineraire-10-jours-2026-11-20-3:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-thailande-itineraire-2-semaines-2026-12-02-2-v1.json",
+      "fileSha256": "422a37a94f85be05c52e674a08b63302d7594822a8d30694546ceba024dda09a",
+      "batchId": "ig-thailande-itineraire-2-semaines-2026-12-02-2-v1",
+      "batchSha256": "5d14c2c01588df6e7e3cafa6c7b92df0da2525c366b249183b59debb88a7ba1e",
+      "itemIds": [
+        "vsd-production:instagram:ig-thailande-itineraire-2-semaines-2026-12-02-2:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-thailande-itineraire-2-semaines-2026-12-02-2-tiktok-v1.json",
+      "fileSha256": "9e9396ac1caf4f2db0f0319422e22d6d37b3ebfd273cd7b034f3e77186437ddb",
+      "batchId": "ig-thailande-itineraire-2-semaines-2026-12-02-2-tiktok-v1",
+      "batchSha256": "bbf04f2271d071807e77d926a528db12767d849b20792afce69ee270ec5150b4",
+      "itemIds": [
+        "vsd-production:tiktok:ig-thailande-itineraire-2-semaines-2026-12-02-2:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/fb-marrakech-3-jours-2026-11-26-2-v1.json",
+      "fileSha256": "2029e689434053cf712770058680156e098ee2927762a2edb9295b8270629f7a",
+      "batchId": "fb-marrakech-3-jours-2026-11-26-2-v1",
+      "batchSha256": "a978ae309010d90364cca4ab6dfbc90291c0d749c77af8fabf74596fcb3fc1f0",
+      "itemIds": [
+        "vsd-production:facebook:fb-marrakech-3-jours-2026-11-26-2:photo-v1"
       ]
     }
   ],
@@ -463,6 +481,18 @@
       "retiredAt": "2026-11-12T20:12:53Z",
       "reason": "guide_contradicts_post",
       "evidence": "Relecture du 12/11/2026 : aucune des 4 citations du post ne se lit plus dans https://voyagesansdetour.fr/portugal/lisbonne-3-jours-sans-voiture/. Le post conseille le tram 15E pour Belém ; le guide envoie désormais à Belém en train depuis Cais do Sodré (8 minutes) et prévient que le tram 15E est plein à toute heure. Retrait décidé à la main : la relecture quotidienne ne fait que signaler un post dont plus aucune citation n'est sur la page. Le créneau est rendu au générateur."
+    },
+    {
+      "batchId": "ig-lisbonne-porto-train-2026-11-v1",
+      "batchSha256": "d473c88febf923b78a2be0214f9d78fee3e04662f188f941863c07578709d0e3",
+      "fileSha256": "15cb76b12074398e820ae76eb29339af7f688641a33fb689c43ee00793242470",
+      "itemIds": [
+        "vsd-production:instagram:ig-lisbonne-porto-train-2026-11:photo-v1"
+      ],
+      "retiredAt": "2026-11-12T22:06:28Z",
+      "reason": "photos_of_another_place",
+      "evidence": "Relecture du 12/11/2026 : le plan 5 du reel écrit « Porto : descendez à Campanhã » sur la photo train-alfa-aqueduc, qui montre un Alfa Pendular en gare de Campolide, à Lisbonne (Wikimedia Commons, « CP AlfaPendular storming through Campolide railway station »). Ses plans 5 et 6 portent en outre « sources du 12/10/2026 » alors que le guide date ses relevés du 24/10/2026. Les chiffres de CP, eux, se lisent toujours mot pour mot le 12/11/2026 (10,50 €, −65 %, 60 jours, 15 min). Retrait décidé à la main (la relecture quotidienne ne compare que les chiffres) ; le post est refait au même créneau avec la gare de Porto-Campanhã à l’arrivée.",
+      "replacedBy": "ig-lisbonne-porto-train-2026-11-18"
     }
   ]
 }

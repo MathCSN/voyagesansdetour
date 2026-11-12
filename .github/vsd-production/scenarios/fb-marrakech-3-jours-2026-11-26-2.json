@@ -9,13 +9,13 @@
   "publishAt": "2026-11-26T17:00:00Z",
   "review": {
     "status": "reviewed_for_render",
-    "checkedAt": "2026-11-12T21:03:44Z",
-    "validUntil": "2026-12-12T21:03:44Z",
+    "checkedAt": "2026-11-12T22:14:48Z",
+    "validUntil": "2026-12-12T22:14:48Z",
     "method": "Généré automatiquement (auto_social.py) depuis la page publiée du guide relevée le 12/11/2026 : chaque chiffre est cité mot pour mot ; photos réelles sous licence libre (Wikimedia Commons), aucune image générée par IA ; garde-fous de production.py passés avant la mise en file."
   },
   "sources": {
     "file": "auto/fb-marrakech-3-jours-2026-11-26-2/sources.json",
-    "sha256": "384b5869579d42cd8a996d7d7ffc7f555db5a4710fb45ac209eb812ecfee39d8"
+    "sha256": "f7e182f4e5df8ad08d04eeb907be32d2c6cf8f42752b5a20249d32c7d2abb842"
   },
   "photos": {
     "file": "auto/fb-marrakech-3-jours-2026-11-26-2/photos.json",

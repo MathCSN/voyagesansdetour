@@ -231,7 +231,9 @@ Salerne → Amalfi » sur Positano et s'ouvrait sur une photo trouvée par la re
   sombre, un train, un animal), regardées une à une le 12/11/2026. Une photo ajoutée au site
   depuis peut fermer un post tant qu'elle n'y est pas inscrite ;
 - **« jour par jour » n'est promis que si chaque jour du guide est montré** : sinon l'accroche et
-  le titre du post disent « 3 étapes clés » ;
+  le titre du post comptent les étapes (« 4 étapes clés »). Un itinéraire montre **au moins quatre
+  étapes chiffrées** (`MIN_STAGES`) : chaque étape est une seule chose dite, et un reel en dit au
+  moins quatre ; avec moins, le guide prend un autre format ;
 - **une date entre parenthèses postérieure à la relecture du guide n'est pas une date de relevé**
   (« ouverture prévue (décembre 2026) » dans un guide relu en novembre) ;
 - **le bouton du dernier plan est écrit dans le scénario** (`"button": "voyagesansdetour.fr"`) :
@@ -282,6 +284,28 @@ Salerne → Amalfi » sur Positano et s'ouvrait sur une photo trouvée par la re
   seule à le montrer (« 938 bahts la couchette… ») ; ce prix ouvre aussi la légende ;
 - **un carrousel dont tous les chiffres appartiennent à un jour du guide se lit jour après jour**
   (Jour 1, Jour 2, Jour 3), sinon dans l'ordre des chiffres du guide.
+
+**Vérification de la PR 47, même jour** (le temple de Tulum sortait du cadre, la légende du
+Yucatán donnait trois étapes sur quatre, celle de la Thaïlande quatre heures sans dire d'où) :
+
+- **le cadre ne quitte pas le sujet de la photo** : le glissement est borné à 19 % de la largeur
+  du cadre (`motion_render.drift_of`). Une photo 3:2 glisse comme avant ; un panorama, dont le
+  cadre vertical ne couvre qu'un quart, glisse moins. Une photo dont le sujet n'est pas au milieu
+  porte son point d'intérêt (`focus` dans `reviewed.json`, `SITE_FOCUS` pour une photo du site) ;
+- **une légende trop longue dit d'abord chaque étape plus court** (le libellé que montre le plan)
+  avant de retirer une ligne : la légende ne donne plus trois étapes quand l'écran en promet quatre ;
+- **la première ligne du tableau dit ce qu'il liste** (« Le train de nuit pour Chiang Mai · Départ
+  de Bangkok — N° 7 : 7 h 30 »), puis viennent les chiffres que le reel montre ensuite ;
+- **le tableau ne prend le nom de sa section que s'il nomme ce que montre sa photo** ; « En bref »,
+  « Arriver », « Le parcours » laissent le lieu au-dessus du tableau ;
+- **une ligne de tableau est nommée par les colonnes qui la distinguent** : « Alfa Pendular |
+  Turística | 35,70 € » donne « Alfa Pendular Turística : 35,70 € », pas « Alfa Pendular :
+  Turística » trois fois sans un prix. Un chiffre qu'une ligne donne déjà pour la même chose n'a
+  pas de plan à lui ; un en-tête qui porte un nombre (« Aller simple 2026 ») est cité comme tout
+  chiffre à l'écran ;
+- **un chiffre que le guide ne donne que dans une section appartient à cette section** (« 604
+  pesos l'entrée d'Uxmal » sous « Jours 4-6 : Mérida et Uxmal », pas sous « Jour 3 ») : le Yucatán
+  retrouve ses cinq étapes et son « jour par jour ».
 
 Ce qui reste, mesuré le 12/11/2026 sur les 26 guides : un chiffre qu'aucune photo ne montre
 complète encore un post, y compris sur une image trouvée par la recherche (Marrakech : « 3 h de

@@ -88,7 +88,7 @@ jobs:
           lines+=[f"- reformulé dans le guide, nombres toujours présents : {row['batchId']} ({len(row['reworded'])} citations)" for row in result['batches'] if row.get('reworded')]
           for row in result['batches']:
               for source in row.get('external',[]):
-                  lines.append(f"- chiffres d'une autre source, non relus ici : {row['batchId']} ({str(row.get('dueAt'))[:16]}) : {source['quotes']} citation(s) de {source['url']}, relevée(s) le {(source.get('retrievedAt') or 'date inconnue')[:10]}")
+                  lines.append(f"- chiffres d'une autre source, non relus ici : {row['batchId']} ({str(row.get('dueAt'))[:16]}) : {source['quotes']} citation(s) de {source['url']}, relevée(s) le {(source.get('retrievedAt') or '')[:10] or 'date inconnue'}")
           if result['unread']:
               print('::warning title=Posts en file non relus::'+', '.join(result['unread'])+' : page du guide illisible ou scénario absent.')
           with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as output:output.write('\n'.join(lines)+'\n\n')

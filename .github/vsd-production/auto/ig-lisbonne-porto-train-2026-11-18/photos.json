@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "photos": {
+    "train-alfa-220": {
+      "file": "assets/photos/train-alfa-220.jpg",
+      "sha256": "456dcc13b391297754b1eeefb52f1eac241585e50082356e06f553f960c6551b",
+      "width": 1600,
+      "height": 2133,
+      "commonsTitle": "File:ألفا بندلار 220 ك س.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:%D8%A3%D9%84%D9%81%D8%A7_%D8%A8%D9%86%D8%AF%D9%84%D8%A7%D8%B1_220_%D9%83_%D8%B3.jpg",
+      "author": "Sambasoccer27",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        2448,
+        3264
+      ],
+      "commonsSha1": "ff24a2f60f707e1af172ed2f6464d0e225b9c552",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "train-alfa-aqueduc": {
+      "file": "assets/photos/train-alfa-aqueduc.jpg",
+      "sha256": "81b64b10cdbe0bfb5233928986d099146426ebaa1a9e4dc19fb3cb005c1dde8f",
+      "width": 2844,
+      "height": 1600,
+      "commonsTitle": "File:CP AlfaPendular storming through Campolide railway station (47548338771).jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:CP_AlfaPendular_storming_through_Campolide_railway_station_(47548338771).jpg",
+      "author": "Nicky Boogaard from Hardinxveld-Giessendam, Netherlands",
+      "licence": "CC BY 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "originalSize": [
+        5472,
+        3078
+      ],
+      "commonsSha1": "1d24131608658363ad2b47d0478a4bfd366771e6",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "train-alfa-interieur": {
+      "file": "assets/photos/train-alfa-interieur.jpg",
+      "sha256": "93a215dcdf8c7ee820e512ba1b6225ccf63e19bccb8175cbb4c39273d8aeca04",
+      "width": 1600,
+      "height": 2133,
+      "commonsTitle": "File:Alfa Pendular new interior 1st class.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Alfa_Pendular_new_interior_1st_class.jpg",
+      "author": "Aleksi Kinnunen",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        3024,
+        4032
+      ],
+      "commonsSha1": "8c70e4b0164b19c6235b2dce48855066bee4b839",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "train-alfa-pendular": {
+      "camera": "ASUS_Z017D",
+      "file": "assets/photos/auto/train-alfa-pendular.jpg",
+      "sha256": "ff6d79a6f4c73be947099bb59ee5c1df37593c9763ad24ae44ba2d02cbfa595b",
+      "width": 2843,
+      "height": 1600,
+      "commonsTitle": "File:Alfa Pendular New Livery.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Alfa_Pendular_New_Livery.jpg",
+      "author": "LuisFerreira4x4",
+      "commonsCredit": "https://pixabay.com/photos/train-alfa-pendular-portugal-2246938/",
+      "categories": "CC-Zero|Images from Pixabay|Trains at Gare do Oriente|Portuguese train type 4000 in black and gray livery",
+      "licence": "CC0",
+      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "originalSize": [
+        4656,
+        2620
+      ],
+      "commonsSha1": "53dc8fe943795f990687c69e284aedba28e9c1a7",
+      "retrievedAt": "2026-11-12T22:10:05Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux.",
+      "emblematic": true
+    },
+    "train-campanha": {
+      "camera": "NIKON D7000",
+      "file": "assets/photos/auto/train-campanha.jpg",
+      "sha256": "41467a6fbd5f026d4bd2de269e54b7631ae96bac209aa86f994e3e32cfe2eb59",
+      "width": 2416,
+      "height": 1600,
+      "commonsTitle": "File:Porto Campanhã train station 2017.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Porto_Campanh%C3%A3_train_station_2017.jpg",
+      "author": "Steven Lek",
+      "commonsCredit": "Own work",
+      "categories": "Self-published work|2017 in rail transport in Portugal|January 2017 in Porto|Photographs by User:Tukka|Exterior of Porto Campanhã train station",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        4928,
+        3264
+      ],
+      "commonsSha1": "b45fbc1b5b44ddd2a9ffeea65d23fb10cb86650f",
+      "retrievedAt": "2026-11-12T22:10:05Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux.",
+      "emblematic": true
+    }
+  }
+}
