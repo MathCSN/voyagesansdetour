@@ -383,6 +383,9 @@ class PublicBuildTest(unittest.TestCase):
         sticky=css.split('.toc{position:sticky;')[1].split('}')[0]
         self.assertIn('top:30px;',sticky)
         self.assertIn('max-height:calc(100vh - 60px);overflow-y:auto',sticky)
+        # Jamais « overscroll-behavior:contain » ici : le sommaire reste collé pendant toute la lecture, et avec
+        # cette propriété la molette ne faisait plus défiler la page quand le pointeur était au-dessus de lui.
+        self.assertNotIn('overscroll-behavior',sticky)
         # Un bloc qui défile rogne ce qui dépasse : la marge intérieure garde entier l'anneau de focus du bouton
         # « Imprimer le guide », et la marge négative laisse le contenu à sa place.
         self.assertIn('margin:0 -8px;padding:18px 8px 10px',sticky)
