@@ -36,33 +36,73 @@ export function alertTitle(code){
   return Object.hasOwn(TITLES,kind)?TITLES[kind](subject.join(':')):'alerte';
 }
 
-// Codes are kept percent-encoded in an HTML comment: no code can close the comment or reach Markdown.
-const MARKER=/<!-- vsd-alert-codes: ([A-Za-z0-9%_.~!*'()-]+(?:,[A-Za-z0-9%_.~!*'()-]+)*)? ?-->/;
+const kindOf=code=>String(code).split(':')[0];
+// The table above goes from the most urgent kind to the least.
+const rank=code=>{const at=Object.keys(TITLES).indexOf(kindOf(code));return at<0?Infinity:at;};
+
+// The record is kept in an HTML comment. Each entry is a percent-encoded code, followed by `=number` when
+// the alert counts posts or guides: no code can close the comment or reach Markdown.
+const COUNT_MAX=999999;
+const ENTRY="[A-Za-z0-9%_.~!*'()-]+(?:=\\d{1,6})?";
+const MARKER=new RegExp(`<!-- vsd-alert-codes: (${ENTRY}(?:,${ENTRY})*)? ?-->`);
+const counted=alert=>Number.isInteger(alert.count)&&alert.count>=0;
+const entry=alert=>encodeURIComponent(alert.code)+(counted(alert)?'='+Math.min(alert.count,COUNT_MAX):'');
+
+/**
+ * Alerts recorded by the previous run: code, number when it had one, and wording. null when there is no
+ * record (no issue yet, an issue older than the record, a record that was tampered with).
+ */
+function previousAlerts(body){
+  const found=MARKER.exec(body??'');
+  if(!found)return null;
+  try{
+    const entries=(found[1]?found[1].split(','):[]).map(text=>{
+      const [code,count]=text.split('=');
+      return {code:decodeURIComponent(code),count:count===undefined?null:Number(count)};
+    });
+    // The body has one line per alert, in the order of the record. Otherwise the wording is unknown.
+    const lines=body.split('\n').filter(line=>line.startsWith('- ')).map(line=>line.slice(2));
+    return entries.map((alert,index)=>({...alert,message:lines.length===entries.length?lines[index]:null}));
+  }catch{return null;}
+}
 
 /** Codes recorded by the previous run; null when there is no issue yet or it predates the record. */
 export function previousCodes(body){
-  const found=MARKER.exec(body??'');
-  if(!found)return null;
-  try{return found[1]?found[1].split(',').map(decodeURIComponent):[];}catch{return null;}
+  return previousAlerts(body)?.map(alert=>alert.code)??null;
 }
 
-export function planAlertIssue({alerts,previousBody=null,today,runUrl,owner=''}){
-  const codes=alerts.map(alert=>alert.code);
-  const known=previousBody===null?null:previousCodes(previousBody);
-  const fresh=alerts.filter(alert=>!known?.includes(alert.code));
-  const gone=(known??[]).filter(code=>!codes.includes(code));
-  const others=alerts.length-1;
-  const title=`⚠️ ${capital(alertTitle(codes[0]))}`+(others>0?` et ${others} ${others>1?'autres alertes':'autre alerte'}`:'');
+const CARRIED_NOTE='Non relues à ce passage (panneau privé ou recherche GitHub illisible), gardées telles qu’au dernier relevé :';
+
+/**
+ * Title, body and comment of the alert issue; null when nothing is left, so the workflow closes it.
+ * `unread` lists the kinds of alerts this run could not re-read: those the previous run recorded stay as
+ * they were known, neither lifted nor announced again.
+ */
+export function planAlertIssue({alerts,unread=[],previousBody=null,today,runUrl,owner=''}){
+  const known=previousBody===null?null:previousAlerts(previousBody);
+  const before=new Map((known??[]).map(alert=>[alert.code,alert]));
+  const current=new Set(alerts.map(alert=>alert.code));
+  const carried=(known??[]).filter(alert=>alert.message!==null&&unread.includes(kindOf(alert.code))&&!current.has(alert.code));
+  const all=[...alerts,...carried];
+  if(!all.length)return null;
+  const fresh=alerts.filter(alert=>!before.has(alert.code));
+  // A number that grows is news; a number that falls is not. Without a recorded number, nothing can be said.
+  const worse=alerts.filter(alert=>counted(alert)&&Number.isInteger(before.get(alert.code)?.count)&&alert.count>before.get(alert.code).count);
+  const gone=(known??[]).filter(alert=>!all.some(kept=>kept.code===alert.code));
+  const lead=carried.reduce((best,alert)=>!best||rank(alert.code)<rank(best.code)?alert:best,alerts[0]);
+  const others=all.length-1;
+  const title=`⚠️ ${capital(alertTitle(lead.code))}`+(others>0?` et ${others} ${others>1?'autres alertes':'autre alerte'}`:'');
   const list=items=>items.map(alert=>'- '+alert.message).join('\n');
-  const body=[`Alertes au ${today} :`,list(alerts),
-    'Chaque alerte nouvelle est annoncée par un commentaire sur cette issue. L’issue se ferme seule quand plus aucune alerte ne tient.',
-    `Rapport complet : ${runUrl}`,`<!-- vsd-alert-codes: ${codes.map(encodeURIComponent).join(',')} -->`].join('\n\n');
+  const body=[`Alertes au ${today} :`,list(alerts),carried.length?CARRIED_NOTE+'\n\n'+list(carried):'',
+    'Chaque alerte nouvelle, ou dont le nombre augmente, est annoncée par un commentaire sur cette issue. L’issue se ferme seule quand plus aucune alerte ne tient.',
+    `Rapport complet : ${runUrl}`,`<!-- vsd-alert-codes: ${all.map(entry).join(',')} -->`].filter(Boolean).join('\n\n');
   // Opening an issue notifies by itself; a comment is only needed on an issue that is already open.
-  if(previousBody===null||!fresh.length)return {title,body,comment:null};
+  if(previousBody===null||!(fresh.length+worse.length))return {title,body,comment:null,total:all.length};
   const mention=/^[A-Za-z0-9](?:[A-Za-z0-9-]{0,37}[A-Za-z0-9])?$/.test(owner)?'@'+owner:'';
-  const comment=[fresh.length>1?'Nouvelles alertes :':'Nouvelle alerte :',list(fresh),
-    gone.length?`Levées depuis le passage précédent : ${gone.map(alertTitle).join(' ; ')}.`:'',mention].filter(Boolean).join('\n\n');
-  return {title,body,comment};
+  const section=(items,one,many)=>items.length?[items.length>1?many:one,list(items)]:[];
+  const comment=[...section(fresh,'Nouvelle alerte :','Nouvelles alertes :'),...section(worse,'Alerte aggravée :','Alertes aggravées :'),
+    gone.length?`Levées depuis le passage précédent : ${gone.map(alert=>alertTitle(alert.code)).join(' ; ')}.`:'',mention].filter(Boolean).join('\n\n');
+  return {title,body,comment,total:all.length};
 }
 
 /** Start of the current report week: the latest Sunday noon UTC that is not in the future. */
@@ -82,15 +122,18 @@ export async function main({env=process.env,now=Date.now()}={}){
   const out=env.VSD_REPORT_OUT;
   const alerts=JSON.parse(await readFile(join(out,'vsd-alerts.json'),'utf8'));
   await writeFile(join(out,'report-due.txt'),reportDue({now,lastReportAt:env.VSD_REPORT_LAST_ISSUE_AT??''})?'yes\n':'no\n');
-  if(!alerts.length)return {alerts:0,comment:false};
+  // Kinds of alerts the report could not re-read at this run (weekly-report.mjs); no file, nothing unread.
+  const unread=await readFile(join(out,'vsd-alerts-unread.json'),'utf8').then(JSON.parse).catch(()=>[]);
   // The body of the open alert issue, saved by the workflow; no file when no issue is open.
   const previousBody=env.VSD_ALERT_PREVIOUS?await readFile(env.VSD_ALERT_PREVIOUS,'utf8').catch(()=>null):null;
-  const plan=planAlertIssue({alerts,previousBody,today:new Date(now).toISOString().slice(0,10),
+  const plan=planAlertIssue({alerts,unread:Array.isArray(unread)?unread:[],previousBody,today:new Date(now).toISOString().slice(0,10),
     runUrl:`${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}/actions/runs/${env.GITHUB_RUN_ID}`,owner:env.GITHUB_REPOSITORY_OWNER??''});
+  // No body written: the workflow closes the alert issue, if one is open.
+  if(!plan)return {alerts:0,comment:false};
   await writeFile(join(out,'alert-title.txt'),plan.title+'\n');
   await writeFile(join(out,'alert-body.md'),plan.body+'\n');
   if(plan.comment)await writeFile(join(out,'alert-comment.md'),plan.comment+'\n');
-  return {alerts:alerts.length,comment:Boolean(plan.comment)};
+  return {alerts:plan.total,comment:Boolean(plan.comment)};
 }
 
 if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){

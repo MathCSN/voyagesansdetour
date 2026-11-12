@@ -38,12 +38,12 @@ jobs:
       - name: Test the report
         run: node --test .github/vsd-control/*.test.mjs
       # What the report remembers between two runs: since when the panel has stopped giving the engine state.
-      # One missed reading is not an alert; two runs in a row are. A lost memory only delays that alert.
+      # One missed reading is not an alert; two runs in a row are. A lost or stale memory only delays that alert.
       - name: Restore the memory of the previous run
-        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
+        uses: actions/cache/restore@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
         with:
           path: .vsd-report-state
-          key: vsd-report-state-${{ github.run_id }}
+          key: vsd-report-state-${{ github.run_id }}-${{ github.run_attempt }}
           restore-keys: vsd-report-state-
       # Clicks, impressions, indexed pages and the state of the publication engine come from the private panel,
       # which holds the read-only Google access and the Buffer channels. A panel that cannot be read leaves the
@@ -78,6 +78,14 @@ jobs:
         run: |
           node .github/vsd-control/weekly-report.mjs
           cat "$RUNNER_TEMP/vsd-report.md" >> "$GITHUB_STEP_SUMMARY"
+      # Saved here, whatever happens to the issue steps below, and again when the run is re-run: a failed
+      # comment or issue edit must not leave the next run with the memory of an older one.
+      - name: Save the memory for the next run
+        if: always() && hashFiles('.vsd-report-state/state.json') != ''
+        uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
+        with:
+          path: .vsd-report-state
+          key: vsd-report-state-${{ github.run_id }}-${{ github.run_attempt }}
       # Tested logic (issue-plan.mjs): is this week's report still to open, what the alert issue is called,
       # and which alerts are new since the previous run.
       - name: Decide what to do with the report and alert issues

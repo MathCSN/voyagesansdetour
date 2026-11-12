@@ -183,8 +183,16 @@ Secrets : `VSD_ADMIN_TICK_KEY` (appels signés du panneau privé), `CLOUDFLARE_W
   - Son **titre** dit ce qui se passe (« ⚠️ Instagram coupé de Buffer et 2 autres alertes »).
   - GitHub ne prévient personne quand le texte d'une issue change : chaque alerte **nouvelle** depuis
     le passage précédent est donc annoncée par un **commentaire** qui la nomme et mentionne le
-    propriétaire du dépôt. Les codes des alertes en cours sont gardés dans le texte de l'issue
-    (`issue-plan.mjs`).
+    propriétaire du dépôt. Une alerte déjà ouverte qui **s'aggrave** est annoncée de la même façon :
+    un post retenu de plus, un post menacé de plus, un guide périmé de plus. Un nombre qui baisse ne
+    prévient pas. Les codes et les nombres des alertes en cours sont gardés dans le texte de l'issue
+    (`issue-plan.mjs`). Limite : si un post sort de la liste pendant qu'un autre y entre entre deux
+    passages, le nombre ne bouge pas et rien n'est annoncé.
+  - Une alerte que le passage **n'a pas pu relire** reste telle qu'elle était connue : elle n'est ni
+    levée, ni annoncée de nouveau, et l'issue ne se ferme pas. C'est le cas des alertes de
+    publication et de référencement quand le panneau ne répond pas, et de l'alerte sur le rédacteur
+    quand la recherche GitHub échoue. L'issue les range alors sous « Non relues à ce passage ». Pour
+    repartir de zéro, fermer l'issue à la main : le passage suivant en ouvre une neuve.
 - **Guides** (`guide-health.mjs`) :
   - section « Sources des guides » du rapport : les guides dont `sourcesCheckedOn` aura plus de
     45 jours dans les 10 jours, groupés par date. Au-delà de 45 jours, `auto_social.py` ne tire plus
@@ -206,7 +214,9 @@ Secrets : `VSD_ADMIN_TICK_KEY` (appels signés du panneau privé), `CLOUDFLARE_W
   n'envoie pas ce bloc, le rapport le dit ; au deuxième passage de suite sans lecture (plus de
   4 heures), l'alerte « état du moteur illisible » se lève, car les autres alertes de publication
   sont alors aveugles. La date de la première lecture manquée est gardée d'un passage à l'autre
-  dans le cache du workflow ; un cache perdu ne fait que retarder cette alerte d'un passage.
+  dans le cache du workflow, enregistré juste après l'écriture du rapport, même si une étape
+  suivante échoue. Une mémoire perdue, ou vieille de plus de 9 heures (passage sauté, cache non
+  enregistré), ne compte pas : le délai repart, ce qui ne fait que retarder cette alerte d'un passage.
 
   | Alerte | Déclenchement | Quoi faire |
   | --- | --- | --- |

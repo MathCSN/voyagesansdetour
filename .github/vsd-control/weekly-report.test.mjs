@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {socialQueue,guideQueue,parsePinterestRss,summarizeRuns,computeAlerts,renderReport,seoLines} from './weekly-report.mjs';
-import {publicationLines,readingState} from './publication-report.mjs';
+import {socialQueue,guideQueue,parsePinterestRss,summarizeRuns,computeAlerts,renderReport,seoLines,unreadKinds} from './weekly-report.mjs';
+import {PUBLICATION_KINDS,publicationLines,readingState} from './publication-report.mjs';
 
 const NOW=Date.parse('2026-10-26T07:00:00Z');
 const batch=(batchId,channel,dueAt,title='Titre')=>({batchId,items:[{title,dueAt,payload:{channel,kind:'reel'}}]});
@@ -141,7 +141,7 @@ test('a panel that stops giving the engine state is an alert after a few hours, 
   const alerts=(seo,reading,now)=>computeAlerts({...QUIET,now,seo,reading});
   // First miss: remembered, no alert.
   const first=readingState(null,null,AT);
-  assert.deepEqual(first,{missingSince:iso(AT),reason:'panel_unreadable'});
+  assert.deepEqual(first,{missingSince:iso(AT),reason:'panel_unreadable',seenAt:iso(AT)});
   assert.deepEqual(alerts(null,first,AT),[]);
   // Still missing at the next run, six hours later: the alert says since when and why it matters.
   const second=readingState(first,null,AT+6*HOUR);
@@ -157,12 +157,59 @@ test('a panel that stops giving the engine state is an alert after a few hours, 
   assert.ok(alerts(noBlock,absent,AT+6*HOUR)[0].message.startsWith('Le panneau répond sans l’état du moteur de publication'));
   // A good reading clears the memory, and the alert with it.
   const back={search:null,indexation:null,publication:{...PUBLICATION,lastPassAt:iso(AT+12*HOUR-20*6e4)}};
-  assert.deepEqual(readingState(second,back,AT+12*HOUR),{missingSince:null});
+  assert.deepEqual(readingState(second,back,AT+12*HOUR),{missingSince:null,seenAt:iso(AT+12*HOUR)});
   assert.deepEqual(alerts(back,readingState(second,back,AT+12*HOUR),AT+12*HOUR),[]);
   // A lost, malformed or future memory starts the delay again instead of alerting on its own.
-  for(const previous of [undefined,{},{missingSince:'hier'},{missingSince:iso(AT+48*HOUR)},{missingSince:42}])assert.equal(readingState(previous,null,AT).missingSince,iso(AT));
+  for(const previous of [undefined,{},{missingSince:'hier',seenAt:iso(AT-6*HOUR)},{missingSince:iso(AT+48*HOUR),seenAt:iso(AT-6*HOUR)},{missingSince:42,seenAt:iso(AT-6*HOUR)}])assert.equal(readingState(previous,null,AT).missingSince,iso(AT));
   // Without any memory (an older caller), a missing reading stays silent.
   assert.deepEqual(computeAlerts({...QUIET,now:AT,seo:null}),[]);
+});
+
+test('a stale memory of a missed reading can only delay the alert, never raise it at a single miss',()=>{
+  const HOUR=36e5,iso=value=>new Date(value).toISOString();
+  const codes=(reading,now)=>computeAlerts({...QUIET,now,seo:null,reading}).map(a=>a.code);
+  // Run k misses and is saved; run k+1 reads the panel but its memory is not saved; run k+2 misses.
+  const k=readingState(null,null,AT);
+  assert.equal(k.seenAt,iso(AT));
+  const afterGap=readingState(k,null,AT+12*HOUR);
+  assert.deepEqual(afterGap,{missingSince:iso(AT+12*HOUR),reason:'panel_unreadable',seenAt:iso(AT+12*HOUR)});
+  assert.deepEqual(codes(afterGap,AT+12*HOUR),[]);
+  // The next run misses too, six hours later: two misses in a row, the alert is due.
+  const next=readingState(afterGap,null,AT+18*HOUR);
+  assert.equal(next.missingSince,iso(AT+12*HOUR));
+  assert.deepEqual(codes(next,AT+18*HOUR),['publication_reading_missing']);
+  // A run GitHub starts late still follows the previous one; a memory without its date does not count.
+  assert.equal(readingState(k,null,AT+7.5*HOUR).missingSince,iso(AT));
+  assert.equal(readingState({missingSince:iso(AT-6*HOUR)},null,AT).missingSince,iso(AT));
+  assert.equal(readingState({missingSince:iso(AT-6*HOUR),seenAt:iso(AT+HOUR)},null,AT).missingSince,iso(AT));
+});
+
+test('the report says which alerts it could not re-read, so a missed reading neither lifts nor announces them',()=>{
+  const read={...SEO,publication:PUBLICATION},writer={runsThisWeek:0,lastAdmissionAt:null};
+  assert.deepEqual(unreadKinds({seo:read,writer}),[]);
+  assert.deepEqual(unreadKinds({seo:null,writer:null}),[...PUBLICATION_KINDS,'publication_reading_missing','indexation_drop','search_impressions_drop','guide_writer_idle']);
+  // The panel answers without the publication block, or without one of the two search readings.
+  assert.deepEqual(unreadKinds({seo:{...read,publication:null},writer}),[...PUBLICATION_KINDS,'publication_reading_missing']);
+  assert.deepEqual(unreadKinds({seo:{...read,search:null},writer}),['search_impressions_drop']);
+  assert.deepEqual(unreadKinds({seo:{...read,indexation:{...SEO.indexation,trend:{status:'unknown'}}},writer}),['indexation_drop']);
+  assert.deepEqual(unreadKinds({seo:{...read,indexation:{...SEO.indexation,trend:{status:'drop',lost:8,reference:48,referenceDay:'2026-11-01'}}},writer}),[]);
+  // The search for the writer's last admission failed.
+  assert.deepEqual(unreadKinds({seo:read,writer:null}),['guide_writer_idle']);
+});
+
+test('every alert drawn from the engine state has a kind the report can declare unread',()=>{
+  const troubled={...PUBLICATION,channels:{instagram:'disconnected',facebook:'connected',tiktok:'absent'},lastPassAt:'2026-11-12T02:00:00.000Z',
+    problems:[held('ig:a','2026-11-10T17:00:00.000Z')],problemsCount:1,atRisk:[{id:'ig:b',channel:'instagram',dueAt:'2026-11-12T17:00:00.000Z',channelState:'disconnected'}],atRiskCount:1};
+  const kinds=[troubled,{...PUBLICATION,channels:null},{...PUBLICATION,enabled:false}].flatMap(publicationAlerts).map(a=>a.code.split(':')[0]);
+  assert.deepEqual([...new Set(kinds)].sort(),[...PUBLICATION_KINDS].sort());
+});
+
+test('alerts that count posts or guides carry their number, so a growing one can be announced',()=>{
+  const two=publicationAlerts({...PUBLICATION,problems:[held('ig:a','2026-11-10T17:00:00.000Z'),held('ig:b','2026-11-11T17:00:00.000Z')],problemsCount:4,
+    atRisk:[{id:'ig:c',channel:'instagram',dueAt:'2026-11-12T17:00:00.000Z',channelState:'disconnected'}],atRiskCount:1});
+  assert.deepEqual(two.map(a=>[a.code,a.count]),[['publication_posts_blocked',4],['publication_posts_at_risk',1]]);
+  const articles=['a','b'].map(slug=>({slug,title:'T',shortTitle:'T',destination:'Lieu',publishedOn:'2026-11-10',sourcesCheckedOn:'2026-09-20'}));
+  assert.deepEqual(computeAlerts({...QUIET,now:AT,articles}).map(a=>[a.code,a.count]),[['guide_sources_expired',2]]);
 });
 
 test('guide alerts join the others: stale sources, no publication, idle writer',()=>{

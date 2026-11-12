@@ -3,7 +3,7 @@ import {mkdir,readFile,readdir,writeFile} from 'node:fs/promises';
 import {dirname,join} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import {guideAlerts,sourceFreshness,sourceLines,writerActivity} from './guide-health.mjs';
-import {publicationAlerts,publicationLines,readingState} from './publication-report.mjs';
+import {PUBLICATION_KINDS,READING_KIND,publicationAlerts,publicationLines,readingState} from './publication-report.mjs';
 
 const DAY=864e5;
 export const STOP_AT='2027-09-14T21:59:59Z';
@@ -101,6 +101,22 @@ export function computeAlerts({social,runs,seo=null,articles=[],writer=null,read
   return alerts;
 }
 
+/**
+ * Kinds of alerts this run could not re-read, because their source did not answer. The alert issue keeps
+ * those it already had as they were known (issue-plan.mjs): a missed reading neither lifts nor announces.
+ */
+export function unreadKinds({seo,writer}){
+  const kinds=[];
+  // While the delay of the « unreadable » alert runs again, an alert already raised stays too.
+  if(!seo?.publication)kinds.push(...PUBLICATION_KINDS,READING_KIND);
+  // A trend the panel could not work out (« unknown ») says nothing: a drop already announced stays until
+  // the panel reads « stable » again.
+  if(!['stable','drop'].includes(seo?.indexation?.trend?.status))kinds.push('indexation_drop');
+  if(!seo?.search)kinds.push('search_impressions_drop');
+  if(!writer)kinds.push('guide_writer_idle');
+  return kinds;
+}
+
 export function renderReport({now,social,guides,pins,runs,alerts,waiting,seo=null,sources=[]}){
   const line=(items,format,empty)=>items.length?items.map(format).join('\n'):empty;
   return [`# Voyage Sans Détour — rapport du ${day(now)}`,
@@ -172,6 +188,7 @@ export async function main({root=process.cwd(),env=process.env,now=Date.now()}={
   const out=env.VSD_REPORT_OUT??root;
   await writeFile(join(out,'vsd-report.md'),report);
   await writeFile(join(out,'vsd-alerts.json'),JSON.stringify(alerts,null,2)+'\n');
+  await writeFile(join(out,'vsd-alerts-unread.json'),JSON.stringify(unreadKinds({seo,writer}))+'\n');
   return {alerts:alerts.length};
 }
 

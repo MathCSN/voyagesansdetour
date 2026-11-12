@@ -47,7 +47,7 @@ export function writerActivity(runs,lastAdmission,now){
 export function guideAlerts({articles,writer,now}){
   const alerts=[];
   const expired=sourceFreshness(articles,now).filter(guide=>guide.expired);
-  if(expired.length)alerts.push({code:'guide_sources_expired',message:`${expired.length>1?expired.length+' guides ont':'1 guide a'} des sources vérifiées il y a plus de ${SOURCES_MAX_AGE_DAYS} jours : la chaîne n’en tire plus de posts (${slugs(expired)}). Revérifier leurs sources, puis mettre à jour sourcesCheckedOn.`});
+  if(expired.length)alerts.push({code:'guide_sources_expired',count:expired.length,message:`${expired.length>1?expired.length+' guides ont':'1 guide a'} des sources vérifiées il y a plus de ${SOURCES_MAX_AGE_DAYS} jours : la chaîne n’en tire plus de posts (${slugs(expired)}). Revérifier leurs sources, puis mettre à jour sourcesCheckedOn.`});
   const published=articles.map(article=>article.publishedOn).filter(isDay).sort();
   const last=published.at(-1);
   // Whole days: a guide dated ten days ago does not alert, whatever the hour of the run.
