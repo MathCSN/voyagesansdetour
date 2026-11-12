@@ -51,8 +51,39 @@ AI_MARKERS = re.compile(r"ai[- ]generated|generated (?:by|with) (?:an )?(?:ai|ar
                         r"\bai[- ]art\b|\bgenai\b|neural network generated", re.IGNORECASE)
 
 
+# Only photographs (CLAUDE.md): never a drawing, a poster, an advert, a reproduced artwork, a map or a scan.
+# Read in the file title and in its Commons categories; a work dated before 1950 is refused as well.
+NOT_A_PHOTO = re.compile(r"\b(?:illustrations?|illustrated|drawings?|engravings?|lithographs?|etchings?|woodcuts?|ukiyo-e|prints? (?:of|by|from)|"
+                         r"posters?|advertisements?|adverts?|ads?|caricatures?|cartoons?|comics?|postcards?|paintings? (?:by|of|from|in)|"
+                         r"oil on canvas|watercolou?rs?|frescos? by|maps? of|old maps|diagrams?|logos?|coats? of arms|book covers?|"
+                         r"magazine covers?|scans? (?:of|from)|scanned|pd-art|google art project|renderings?|3d models?|puck \(magazine\))\b", re.IGNORECASE)
+OLDEST_YEAR = 1950
+
+
 class Refused(ValueError):
     pass
+
+
+def not_a_photograph(title: str, meta: dict) -> bool:
+    """An illustration, a poster, an advert, a reproduced artwork, or anything made before 1950."""
+    fields = [title, plain_text(meta.get("Categories", {}).get("value", "")).replace("|", " | ")]
+    if any(NOT_A_PHOTO.search(field or "") for field in fields):
+        return True
+    made = re.search(r"(?<!\d)(1\d{3}|20\d{2})(?!\d)", plain_text(meta.get("DateTimeOriginal", {}).get("value", "")))
+    return bool(made) and int(made[1]) < OLDEST_YEAR
+
+
+def unphotographic_record(record: dict) -> bool:
+    """A catalogued file whose title or categories say it is not a photograph."""
+    return any(isinstance(record.get(key), str) and NOT_A_PHOTO.search(record[key].replace("_", " ").replace("|", " | "))
+               for key in ("commonsTitle", "categories"))
+
+
+def camera_of(info: dict) -> str | None:
+    """The camera named in the file's own data (EXIF): the plain sign that a file left a camera, not a scanner or a drawing table."""
+    fields = {str(row.get("name")): str(row.get("value") or "").strip() for row in info.get("commonmetadata") or [] if isinstance(row, dict)}
+    name = fields.get("Model") or fields.get("Make")
+    return name[:80] if name else None
 
 
 def ai_generated(title: str, meta: dict) -> bool:
@@ -112,7 +143,7 @@ def fetch_json(params: dict) -> dict:
 
 def commons_info(title: str) -> dict:
     data = fetch_json({"action": "query", "titles": title, "prop": "imageinfo",
-                       "iiprop": "url|size|extmetadata|mime|sha1|user", "iiurlwidth": STORED_LONG_SIDE_MAX})
+                       "iiprop": "url|size|extmetadata|mime|sha1|user|commonmetadata", "iiurlwidth": STORED_LONG_SIDE_MAX})
     pages = list(data.get("query", {}).get("pages", {}).values())
     if len(pages) != 1 or "imageinfo" not in pages[0]:
         raise Refused("Commons file not found: " + title)
@@ -121,6 +152,8 @@ def commons_info(title: str) -> dict:
         raise Refused("Photo too small or not a JPEG: " + title)
     if ai_generated(title, info.get("extmetadata", {})):
         raise Refused("AI-generated or not clearly photographic: " + title)
+    if not_a_photograph(title, info.get("extmetadata", {})):
+        raise Refused("Not a photograph (illustration, poster, artwork or old work): " + title)
     return info
 
 
@@ -165,7 +198,9 @@ def photo_record(photo_id: str, title: str, now: dt.datetime, folder: Path = PHO
     path = folder / (photo_id + ".jpg")
     image.save(path, quality=JPEG_QUALITY, optimize=True, progressive=True)
     raw = path.read_bytes()
+    camera = camera_of(info)
     return {
+        **({"camera": camera} if camera else {}),
         "file": prefix + path.name,
         "sha256": hashlib.sha256(raw).hexdigest(),
         "width": size[0], "height": size[1],

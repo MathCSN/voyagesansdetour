@@ -275,6 +275,54 @@
       "reason": "duplicate_media_on_channel",
       "evidenceUrl": "https://github.com/MathCSN/voyagesansdetour/actions/runs/37560934633",
       "existingPublicationUrl": "https://www.facebook.com/122098398897493108/posts/122098397373493108"
+    },
+    {
+      "batchId": "ig-laponie-budget-rovaniemi-2026-11-27-v1",
+      "batchSha256": "861606e09299ca3ffcf95ba10bb02fabb3ef8a07cd0b718c238e167685dc5607",
+      "fileSha256": "b9091f32a4398e77b375d123df86fbf5a0b286af469f6c298850a34d33680841",
+      "itemIds": [
+        "vsd-production:instagram:ig-laponie-budget-rovaniemi-2026-11-27:photo-v1"
+      ],
+      "retiredAt": "2026-11-12T13:00:00Z",
+      "reason": "photos_of_another_place",
+      "evidence": "Audit du 12/11/2026 : six plans sur sept ne montrent pas la Laponie (rue de Santa Cruz de La Palma, illustration de 1903, publicité de 1928, coupole de Florence, église de Rome, cathédrale de Bruxelles), trouvés par une recherche sur le mot « Santa ».",
+      "replacedBy": "ig-laponie-budget-rovaniemi-2026-11-27-2"
+    },
+    {
+      "batchId": "ig-laponie-budget-rovaniemi-2026-11-27-tiktok-v1",
+      "batchSha256": "c3f11cfbe3536d800a391f31456e3de9f7b317ac93c5a4b4537b94db8d83e0af",
+      "fileSha256": "764e17ea506d30f26a33a2489c5b276feafffc348ebcb26ec1fdbe07060450ff",
+      "itemIds": [
+        "vsd-production:tiktok:ig-laponie-budget-rovaniemi-2026-11-27:photo-v1"
+      ],
+      "retiredAt": "2026-11-12T13:00:00Z",
+      "reason": "photos_of_another_place",
+      "evidence": "Copie TikTok du reel Laponie du 27/11/2026, retiré pour la même raison.",
+      "replacedBy": "ig-laponie-budget-rovaniemi-2026-11-27-2"
+    },
+    {
+      "batchId": "ig-yucatan-itineraire-10-jours-2026-11-20-v1",
+      "batchSha256": "b69de84ccdba29114afe2b16e08b964726a50ff6407fba935520ddd094de62a6",
+      "fileSha256": "b32bdbff646bcca3fe59a2e6d6eee7b2cefb1b9fdbdd8ec1f726de8e564cbbf7",
+      "itemIds": [
+        "vsd-production:instagram:ig-yucatan-itineraire-10-jours-2026-11-20:photo-v1"
+      ],
+      "retiredAt": "2026-11-12T13:00:00Z",
+      "reason": "too_little_content",
+      "evidence": "Audit du 12/11/2026 : deux chiffres en douze secondes, dont un qui répète le titre (« 10 jours ») sous une énumération coupée.",
+      "replacedBy": "ig-yucatan-itineraire-10-jours-2026-11-20-2"
+    },
+    {
+      "batchId": "ig-yucatan-itineraire-10-jours-2026-11-20-tiktok-v1",
+      "batchSha256": "5c6d41dc4daff5baca91a7d0bda41e90325fa3dde4d47f69599a1bc237df3efa",
+      "fileSha256": "f625e18ce854056de36da2729f1b9ae745f169292d74b1c0eb1b1eac4491c5b7",
+      "itemIds": [
+        "vsd-production:tiktok:ig-yucatan-itineraire-10-jours-2026-11-20:photo-v1"
+      ],
+      "retiredAt": "2026-11-12T13:00:00Z",
+      "reason": "too_little_content",
+      "evidence": "Copie TikTok du reel Yucatán du 20/11/2026, retiré pour la même raison.",
+      "replacedBy": "ig-yucatan-itineraire-10-jours-2026-11-20-2"
     }
   ]
 }
