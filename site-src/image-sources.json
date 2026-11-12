@@ -1181,6 +1181,42 @@
       "license_url": "https://creativecommons.org/licenses/by/3.0",
       "alt_fr": "Des barques de pêche sur la plage de Puerto Viejo de Talamanca, en fin de journée.",
       "credit_fr": "Letartean / Wikimedia Commons — CC BY 3.0."
+    },
+    {
+      "id": "thailande-railay",
+      "file": "photos/thailande-railay.jpg",
+      "width": 1600,
+      "height": 958,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Railay_Beach_5.jpg",
+      "author": "kallerna",
+      "license": "CC BY-SA 3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+      "alt_fr": "La plage de Railay et ses falaises calcaires, près de Krabi.",
+      "credit_fr": "kallerna / Wikimedia Commons — CC BY-SA 3.0."
+    },
+    {
+      "id": "thailande-koh-samui",
+      "file": "photos/thailande-koh-samui.jpg",
+      "width": 1600,
+      "height": 1067,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Koh_Samui,_Beach,_Thailand.jpg",
+      "author": "© Vyacheslav Argenberg",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0",
+      "alt_fr": "Une plage bordée de cocotiers à Koh Samui.",
+      "credit_fr": "© Vyacheslav Argenberg / Wikimedia Commons — CC BY 4.0."
+    },
+    {
+      "id": "thailande-bangkok-grand-palais",
+      "file": "photos/thailande-bangkok-grand-palais.jpg",
+      "width": 1600,
+      "height": 1064,
+      "source_page": "https://commons.wikimedia.org/wiki/File:A_roof_of_a_building_at_the_Grand_Palace,_Bangkok,_sunrise,_2017.jpg",
+      "author": "Bjørn Erik Pedersen",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "alt_fr": "Les toits dorés du Grand Palais de Bangkok.",
+      "credit_fr": "Bjørn Erik Pedersen / Wikimedia Commons — CC BY-SA 4.0."
     }
   ]
 }

@@ -138,6 +138,12 @@
       "path": null,
       "place": "Japon"
     },
+    "koh-samui|thailande": {
+      "checkedOn": "2026-11-12",
+      "country": "Thaïlande",
+      "path": null,
+      "place": "Koh Samui"
+    },
     "kyoto|japon": {
       "checkedOn": "2026-10-24",
       "country": "Japon",
@@ -221,6 +227,12 @@
       "country": "États-Unis",
       "path": null,
       "place": "Noël"
+    },
+    "nord|thailande": {
+      "checkedOn": "2026-11-12",
+      "country": "Thaïlande",
+      "path": null,
+      "place": "Nord"
     },
     "nord|vietnam": {
       "checkedOn": "2026-10-26",

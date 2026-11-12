@@ -302,6 +302,26 @@
           "answer": "697 pesos depuis le 27 mars 2026, dont 105 pour l’INAH et 592 pour l’État du Yucatán, en billet unique payé au centre d’accueil des visiteurs (INAH et CULTUR, relevé du 12 novembre 2026)."
         }
       ]
+    },
+    "thailande-quand-partir": {
+      "title": "Quand partir en Thaïlande : mois par mois et par côte",
+      "description": "Phuket reçoit 350 mm de pluie en septembre, Koh Samui 64 mm en février : le bon mois pour Bangkok, Chiang Mai, l’Andaman et le golfe, relevés 1991-2020.",
+      "faq": [
+        {
+          "question": "Quel est le meilleur mois pour visiter la Thaïlande ?",
+          "answer": "Janvier ou février : 24 mm de pluie à Bangkok en janvier, 10 mm à Chiang Mai en février et 24 mm à Phuket en février. Bangkok, le Nord et l’Andaman sont alors tous au sec."
+        },
+        {
+          "question": "Quel est le meilleur moment pour Phuket et Krabi ?",
+          "answer": "De décembre à mars : 24 mm de pluie en février à Phuket, 50 mm en janvier. Les îles Similan sont ouvertes de la mi-octobre à la mi-mai."
+        }
+      ],
+      "links": [
+        {
+          "phrase": "notre guide de la Thaïlande en 2 semaines",
+          "slug": "thailande-itineraire-2-semaines"
+        }
+      ]
     }
   }
 }

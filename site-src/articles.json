@@ -5944,5 +5944,318 @@
         "url": "https://en.wikivoyage.org/wiki/Yucat%C3%A1n_Peninsula"
       }
     ]
+  },
+  {
+    "related": [
+      "thailande-itineraire-2-semaines",
+      "vietnam-quand-partir",
+      "tenerife-quand-partir"
+    ],
+    "sourcesCheckedOn": "2026-11-12",
+    "publishedOn": "2026-11-12",
+    "updatedOn": "2026-11-12",
+    "slug": "thailande-quand-partir",
+    "title": "Quand partir en Thaïlande : le bon mois pour Bangkok, le Nord, l’Andaman et Koh Samui",
+    "shortTitle": "Quand partir en Thaïlande",
+    "destination": "Thaïlande",
+    "country": "thailande",
+    "continent": "asie",
+    "category": "Choisir",
+    "cover": "thailande-railay",
+    "description": "Phuket reçoit 350 mm de pluie en septembre, Koh Samui 64 mm en février : le bon mois pour Bangkok, Chiang Mai, la mer d’Andaman et le golfe, relevés 1991-2020.",
+    "readMinutes": 6,
+    "summary": "La Thaïlande n’a pas une saison des pluies mais deux côtes en miroir : l’Andaman est sec de décembre à mars, le golfe de Thaïlande (Koh Samui) de février à septembre. Pour Bangkok, le Nord et l’Andaman réunis, visez décembre à février.",
+    "keyFacts": [
+      {
+        "value": "Décembre à février",
+        "label": "la fenêtre où Bangkok, Chiang Mai et la mer d’Andaman sont tous au sec (12 à 24 mm à Bangkok, 10 à 14 mm à Chiang Mai)"
+      },
+      {
+        "value": "350 mm",
+        "label": "de pluie à Phuket en septembre, le mois le plus arrosé de l’Andaman (24 mm en février)"
+      },
+      {
+        "value": "445 mm",
+        "label": "de pluie à Koh Samui en novembre : le golfe est trempé quand l’Andaman sèche"
+      },
+      {
+        "value": "64 mm",
+        "label": "à Koh Samui en février ; moins de 135 mm par mois de février à septembre"
+      },
+      {
+        "value": "30,7 °C",
+        "label": "la température moyenne de Bangkok en avril, le mois le plus chaud ; 27,3 °C en décembre"
+      },
+      {
+        "value": "15 octobre",
+        "label": "la réouverture des îles Similan en 2026 ; la saison dure jusqu’à la mi-mai 2027"
+      }
+    ],
+    "sections": [
+      {
+        "id": "en-bref",
+        "title": "En bref : deux côtes en miroir",
+        "paragraphs": [
+          "La Thaïlande a une saison sèche et une saison des pluies, mais pas au même moment partout. Le Nord et Bangkok sont secs de novembre à février. Sur la mer d’Andaman (Phuket, Krabi, Phi Phi), la pluie s’installe de mai à octobre. Et le golfe de Thaïlande, avec Koh Samui, fonctionne à l’envers : il est au sec quand l’Andaman est trempé, et il prend sa pluie en octobre, novembre et décembre.",
+          "Pour un voyage qui enchaîne la capitale, le Nord et une plage sur l’Andaman, comme notre guide de la Thaïlande en 2 semaines, visez décembre à février. C’est la seule fenêtre où les trois sont au sec en même temps. Si vous partez en juillet ou en août, oubliez l’Andaman et filez à Koh Samui."
+        ],
+        "table": {
+          "headers": [
+            "Région",
+            "Les meilleurs mois",
+            "À éviter"
+          ],
+          "rows": [
+            [
+              "Bangkok",
+              "Novembre à février (12 à 51 mm de pluie par mois)",
+              "Mai à octobre, surtout septembre (336 mm)"
+            ],
+            [
+              "Nord (Chiang Mai)",
+              "Novembre à février (10 à 41 mm)",
+              "Août et septembre (207 à 223 mm)"
+            ],
+            [
+              "Mer d’Andaman (Phuket, Krabi)",
+              "Décembre à mars (24 à 82 mm)",
+              "Mai à octobre (237 à 350 mm)"
+            ],
+            [
+              "Golfe (Koh Samui)",
+              "Février à septembre (64 à 134 mm)",
+              "Octobre à décembre (263 à 445 mm)"
+            ]
+          ]
+        },
+        "tip": "Un seul mois possible pour tout le pays ? Prenez janvier ou février : 24 mm de pluie à Bangkok en janvier, 10 mm à Chiang Mai en février, 24 mm à Phuket en février."
+      },
+      {
+        "id": "bangkok",
+        "title": "Bangkok : sec de novembre à février, étouffant en avril",
+        "image": "thailande-bangkok-grand-palais",
+        "paragraphs": [
+          "À Bangkok, la pluie vous laisse tranquille de novembre à février : 45 mm en novembre, 12 mm en décembre, 24 mm en janvier et 21 mm en février. C’est le bon moment pour enchaîner le Grand Palais, le Wat Pho et les quartiers à pied sans fuir l’averse de l’après-midi.",
+          "La chaleur monte ensuite : 29,7 °C en moyenne en mars et 30,7 °C en avril, le mois le plus chaud. Puis la mousson s’installe en mai (217 mm) et culmine en septembre avec 336 mm, soit 18 jours de pluie sur 30. Octobre garde encore 289 mm.",
+          "Les relevés ne bougent presque pas en température : de 27,3 °C en décembre à 30,7 °C en avril, c’est la pluie, pas le thermomètre, qui décide du bon mois."
+        ],
+        "tip": "Ne comptez pas sur une journée « sauvée » en septembre : il pleut en moyenne 18 jours dans le mois à Bangkok. Gardez un plan en intérieur pour chaque après-midi."
+      },
+      {
+        "id": "nord",
+        "title": "Le Nord : Chiang Mai de novembre à février",
+        "image": "thailande-chiang-mai-doi-suthep",
+        "paragraphs": [
+          "Chiang Mai est la seule étape où l’on sent un hiver : 22,0 °C en moyenne en janvier et 22,2 °C en décembre, contre 29,5 °C en avril. C’est aussi le coin le plus sec du pays au cœur de la saison fraîche : 10 mm en février, 11 mm en janvier, 14 mm en décembre.",
+          "La pluie revient en mai (168 mm), reste soutenue de juillet à septembre et atteint 223 mm en août. Au total, la ville reçoit 1 139 mm par an, soit la moitié de ce que prend Phuket (2 272 mm).",
+          "Pour les temples, le Doi Suthep et les marchés du dimanche, novembre à février est la meilleure fenêtre. Mars reste sec (20 mm) mais déjà chaud, avec 27,3 °C en moyenne."
+        ]
+      },
+      {
+        "id": "andaman",
+        "title": "La mer d’Andaman : Phuket, Krabi, Phi Phi, de décembre à mars",
+        "paragraphs": [
+          "Phuket affiche le contraste le plus net du pays. Février est son mois le plus sec avec 24 mm, janvier 50 mm, mars 81 mm, décembre 82 mm. Puis tout bascule : 237 mm en mai, 308 mm en août, 350 mm en septembre et 336 mm en octobre. Novembre est une transition à 178 mm : la mer se calme, mais la pluie n’a pas fini.",
+          "L’Andaman a aussi ses fermetures. Les îles Similan rouvrent chaque année à la mi-octobre : en 2026, la saison a commencé le 15 octobre et court jusqu’à la mi-mai 2027. Maya Bay, à Phi Phi, ferme du 1er août au 30 septembre. Ces fermetures protègent les coraux pendant la mousson : ne comptez pas les visiter hors saison.",
+          "La température, elle, ne varie presque pas : 27,6 °C en octobre, 29,6 °C en avril. Ce qui change, c’est la pluie, pas le thermomètre."
+        ],
+        "tip": "Pour les îles Similan et le snorkeling, visez décembre à avril : c’est la période où le parc est ouvert et où la pluie est la plus faible à Phuket."
+      },
+      {
+        "id": "golfe",
+        "title": "Le golfe : Koh Samui, le plan B quand l’Andaman est trempé",
+        "image": "thailande-koh-samui",
+        "paragraphs": [
+          "Koh Samui est votre assurance d’été. De février à septembre, il ne tombe jamais plus de 134 mm par mois : 64 mm en février, 83 mm en avril, 102 mm en août. Pendant ce temps, Phuket dépasse 235 mm chaque mois de mai à octobre.",
+          "La pluie arrive tard, mais fort : 295 mm en octobre, 445 mm en novembre, le pic de l’année, et encore 263 mm en décembre. Janvier, avec 127 mm, est un mois de transition.",
+          "Résultat : les deux côtes se complètent presque parfaitement. Une plage sur l’Andaman de décembre à mars, une plage dans le golfe de février à septembre. En mars, les deux côtes font 28 à 29 °C ; seule la pluie change."
+        ]
+      },
+      {
+        "id": "songkran",
+        "title": "Songkran : l’eau et la chaleur d’avril",
+        "paragraphs": [
+          "Le Nouvel An thaïlandais, Songkran, tombe du 13 au 15 avril chaque année, en 2027 un mardi, un mercredi et un jeudi. Trois jours fériés nationaux : réservez transports et hébergements en avance.",
+          "Avril est le mois le plus chaud de Bangkok (30,7 °C en moyenne) et de Chiang Mai (29,5 °C), avec seulement 54 mm de pluie à Chiang Mai. Autrement dit : la fête se vit sous la chaleur."
+        ]
+      },
+      {
+        "id": "mois-par-mois",
+        "title": "Mois par mois : les chiffres des quatre régions",
+        "paragraphs": [
+          "Température moyenne et pluie du mois, relevés 1991-2020 des stations de Bangkok, Chiang Mai, Phuket et Koh Samui (Wikipédia, d’après l’OMM, la NOAA et le département météo thaïlandais). Les moyennes lissent les extrêmes : un gros orage ne s’y voit pas.",
+          "À lire : les températures varient peu (de 22 à 31 °C en moyenne), c’est la pluie qui fait le mois. Totaux annuels : 1 702 mm à Bangkok, 1 139 mm à Chiang Mai, 2 272 mm à Phuket, 1 994 mm à Koh Samui."
+        ],
+        "table": {
+          "headers": [
+            "Mois",
+            "Bangkok",
+            "Chiang Mai",
+            "Phuket",
+            "Koh Samui"
+          ],
+          "rows": [
+            [
+              "Janvier",
+              "27,4 °C / 24 mm",
+              "22,0 °C / 11 mm",
+              "28,3 °C / 50 mm",
+              "26,9 °C / 127 mm"
+            ],
+            [
+              "Février",
+              "28,6 °C / 21 mm",
+              "24,2 °C / 10 mm",
+              "29,0 °C / 24 mm",
+              "27,4 °C / 64 mm"
+            ],
+            [
+              "Mars",
+              "29,7 °C / 51 mm",
+              "27,3 °C / 20 mm",
+              "29,4 °C / 81 mm",
+              "28,2 °C / 116 mm"
+            ],
+            [
+              "Avril",
+              "30,7 °C / 93 mm",
+              "29,5 °C / 54 mm",
+              "29,6 °C / 135 mm",
+              "29,1 °C / 83 mm"
+            ],
+            [
+              "Mai",
+              "30,3 °C / 217 mm",
+              "28,6 °C / 168 mm",
+              "29,1 °C / 237 mm",
+              "29,2 °C / 132 mm"
+            ],
+            [
+              "Juin",
+              "29,7 °C / 198 mm",
+              "28,0 °C / 118 mm",
+              "28,7 °C / 249 mm",
+              "28,8 °C / 134 mm"
+            ],
+            [
+              "Juillet",
+              "29,2 °C / 190 mm",
+              "27,4 °C / 149 mm",
+              "28,4 °C / 240 mm",
+              "28,5 °C / 117 mm"
+            ],
+            [
+              "Août",
+              "29,2 °C / 227 mm",
+              "26,9 °C / 223 mm",
+              "28,3 °C / 309 mm",
+              "28,4 °C / 102 mm"
+            ],
+            [
+              "Septembre",
+              "28,6 °C / 336 mm",
+              "26,9 °C / 207 mm",
+              "27,8 °C / 350 mm",
+              "28,0 °C / 118 mm"
+            ],
+            [
+              "Octobre",
+              "28,4 °C / 289 mm",
+              "26,4 °C / 124 mm",
+              "27,6 °C / 336 mm",
+              "27,4 °C / 295 mm"
+            ],
+            [
+              "Novembre",
+              "28,4 °C / 45 mm",
+              "24,6 °C / 41 mm",
+              "28,0 °C / 178 mm",
+              "27,1 °C / 445 mm"
+            ],
+            [
+              "Décembre",
+              "27,3 °C / 12 mm",
+              "22,2 °C / 14 mm",
+              "27,9 °C / 82 mm",
+              "26,8 °C / 263 mm"
+            ]
+          ]
+        }
+      },
+      {
+        "id": "choisir",
+        "title": "Quel mois choisir selon votre voyage",
+        "paragraphs": [
+          "Bangkok, le Nord et une plage sur l’Andaman : décembre à février, avec janvier et février comme valeurs sûres.",
+          "Uniquement la plage, avec les îles Similan : décembre à avril sur l’Andaman. Au printemps et en été, prenez plutôt Koh Samui, de février à septembre.",
+          "Vacances d’été, en juillet ou en août : Koh Samui (117 mm en juillet, 102 mm en août) plutôt que Phuket (240 et 309 mm). Bangkok y est chaud et orageux mais les trajets restent possibles, avec 190 à 227 mm sur le mois.",
+          "Côté papiers : depuis le 15 septembre 2026, un Français peut séjourner en Thaïlande sans visa jusqu’à 30 jours, pour du tourisme seulement, et doit remplir la carte d’arrivée numérique TDAC en ligne, gratuitement, dans les trois jours qui précèdent l’arrivée. Le détail est dans notre guide de la Thaïlande en 2 semaines."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Quel est le meilleur mois pour visiter la Thaïlande ?",
+        "answer": "Janvier ou février : 24 mm de pluie à Bangkok en janvier, 10 mm à Chiang Mai en février et 24 mm à Phuket en février. Bangkok, le Nord et l’Andaman sont alors tous au sec."
+      },
+      {
+        "question": "Quand éviter la Thaïlande ?",
+        "answer": "De mai à octobre sur la mer d’Andaman (Phuket reçoit 237 à 350 mm par mois) et à Bangkok (septembre : 336 mm), et d’octobre à décembre à Koh Samui (263 à 445 mm)."
+      },
+      {
+        "question": "Quelle est la saison des pluies en Thaïlande ?",
+        "answer": "De mai à octobre à Bangkok, dans le Nord et sur l’Andaman, avec un pic en septembre. Le golfe de Thaïlande est décalé : sa pluie tombe d’octobre à décembre, avec 445 mm à Koh Samui en novembre."
+      },
+      {
+        "question": "Quel est le meilleur moment pour Phuket et Krabi ?",
+        "answer": "De décembre à mars : 24 mm de pluie en février à Phuket, 50 mm en janvier. Les îles Similan sont ouvertes de la mi-octobre à la mi-mai."
+      },
+      {
+        "question": "Où aller en Thaïlande en été ?",
+        "answer": "À Koh Samui : 117 mm de pluie en juillet et 102 mm en août, contre 240 et 309 mm à Phuket."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Wikipedia — Bangkok (relevés climatiques 1991-2020, OMM, NOAA, Thai Meteorological Department)",
+        "url": "https://en.wikipedia.org/wiki/Bangkok"
+      },
+      {
+        "label": "Wikipedia — Chiang Mai (relevés climatiques 1991-2020, OMM)",
+        "url": "https://en.wikipedia.org/wiki/Chiang_Mai"
+      },
+      {
+        "label": "Wikipedia — Phuket City (relevés climatiques 1991-2020, OMM)",
+        "url": "https://en.wikipedia.org/wiki/Phuket_City"
+      },
+      {
+        "label": "Wikipedia — Ko Samui (relevés climatiques 1991-2020, OMM)",
+        "url": "https://en.wikipedia.org/wiki/Ko_Samui"
+      },
+      {
+        "label": "Wikipedia — Climat de la Thaïlande (saisons)",
+        "url": "https://en.wikipedia.org/wiki/Climate_of_Thailand"
+      },
+      {
+        "label": "Pattaya Mail — Réouverture des îles Similan le 15 octobre 2026",
+        "url": "https://www.pattayamail.com/latestnews/news/similan-islands-welcome-1400-tourists-on-opening-day-with-coral-safe-sunscreen-campaign-568847"
+      },
+      {
+        "label": "ONEP — Fermeture annuelle de Maya Bay (1er août – 30 septembre)",
+        "url": "https://www.onep.go.th/?p=96041"
+      },
+      {
+        "label": "OfficeHolidays — Songkran 2027 (13 au 15 avril)",
+        "url": "https://www.officeholidays.com/holidays/thailand/songkran-festival"
+      },
+      {
+        "label": "France Diplomatie — Thaïlande, entrée et séjour (mise à jour du 7 octobre 2026)",
+        "url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/thailande/conseils-aux-voyageurs-entree-sejour"
+      },
+      {
+        "label": "Ambassade royale de Thaïlande — Thailand Digital Arrival Card (TDAC)",
+        "url": "https://dubai.thaiembassy.org/en/content/thailand-digital-arrival-card-tdac"
+      }
+    ]
   }
 ]
