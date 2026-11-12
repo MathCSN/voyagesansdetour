@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "contentId": "ig-lisbonne-porto-train-2026-11-18",
+  "status": "rendered_not_published",
+  "fingerprint": "568c2697e146dda73b9913b67d9a5d303b88345a63290e097903988bdb8f9f99",
+  "createdAt": "2026-11-12T23:12:52.758554Z",
+  "renderFinishedAt": "2026-11-12T23:13:11.193984Z",
+  "rendererContractVersion": 4,
+  "rendererSha256": "53771f8977e744f7e898c21c13d02cd1f80ec9d9fcff06e28a9c095db57efd0a",
+  "drawingSha256": "b78990f497d03baf754e3b2b68a795a5e9d3b91a0b6a2f8dad2ebcd7fec2907c",
+  "motionSha256": "97551f9095a5a66596521a599d328df19f4e28fbcfcf716ae1ee980ebdf47448",
+  "format": "tableau",
+  "kind": "reel",
+  "channel": "instagram",
+  "publishAt": "2026-11-18T17:00:00Z",
+  "reviewValidUntil": "2026-12-12T23:12:31Z",
+  "sourceCheckedOn": "2026-11-12",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/lisbonne-porto-train/",
+  "voice": null,
+  "presenter": null,
+  "sourceUrls": [
+    "https://voyagesansdetour.fr/portugal/lisbonne-porto-train/"
+  ],
+  "photos": {
+    "train-alfa-oriente": {
+      "licence": "CC0",
+      "author": "Bunks",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Alfa-Pendular_im_Gare_Oriente.jpg"
+    },
+    "train-alfa-aqueduc": {
+      "licence": "CC BY 2.0",
+      "author": "Nicky Boogaard from Hardinxveld-Giessendam, Netherlands",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:CP_AlfaPendular_storming_through_Campolide_railway_station_(47548338771).jpg"
+    },
+    "train-alfa-pendular": {
+      "licence": "CC0",
+      "author": "LuisFerreira4x4",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Alfa_Pendular_New_Livery.jpg"
+    },
+    "train-alfa-interieur": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Aleksi Kinnunen",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Alfa_Pendular_new_interior_1st_class.jpg"
+    },
+    "train-campanha": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Steven Lek",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Porto_Campanh%C3%A3_train_station_2017.jpg"
+    }
+  },
+  "clips": {},
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "durationSeconds": 18.2,
+    "videoCodec": "h264",
+    "pixelFormat": "yuv420p",
+    "videoBitrateBps": 2649303,
+    "audioCodec": "aac",
+    "audioSampleRate": 48000,
+    "audioBitrateBps": 97827,
+    "fullDecodePassed": true,
+    "loudness": {
+      "integratedLufs": -16.3,
+      "truePeakDbfs": -3.7
+    }
+  },
+  "files": [
+    {
+      "file": "apercu.jpg",
+      "sha256": "aba9a0f86db51a060565aec025ae9d3ef4924deea769495e673ae89e8deb9257",
+      "bytes": 221423
+    },
+    {
+      "file": "credits.txt",
+      "sha256": "3bdfc2631d604966cffd981a4d36d8a40ae64be196772b2e4699ca619947d3ff",
+      "bytes": 2663
+    },
+    {
+      "file": "dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "file": "encode.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "legende.txt",
+      "sha256": "7c6fcd3e0109f7ef693ae500bc9190106a0462e4ec37f1ac85bbc012ac05a2b5",
+      "bytes": 788
+    },
+    {
+      "file": "notosans-OFL.txt",
+      "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a",
+      "bytes": 4396
+    },
+    {
+      "file": "playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    },
+    {
+      "file": "poster.jpg",
+      "sha256": "eb54be362921d47fd3892b88ccb1365b1cff444c198c8cae94af9059789d4a79",
+      "bytes": 392898
+    },
+    {
+      "file": "reel.mp4",
+      "sha256": "7d23d6f1b34d445591bef8fe6ac700309be312459e889875299c7ec91781a42e",
+      "bytes": 6271398
+    },
+    {
+      "file": "scenario.json",
+      "sha256": "abf46fb42498b97ca849f67f7d98e908b2c9b4ad1a47709f005ccabc347b84f5",
+      "bytes": 7349
+    },
+    {
+      "file": "scene-01.jpg",
+      "sha256": "dee28c96bfff874b31f8043528781707f651b130f9a809282d96d22d9e9ed39f",
+      "bytes": 363818
+    },
+    {
+      "file": "scene-02.jpg",
+      "sha256": "d788d63b8b470335acab2d1603d518a3ddcaa0be1d607f10c5dca53df93085e7",
+      "bytes": 452521
+    },
+    {
+      "file": "scene-03.jpg",
+      "sha256": "462842487ac778ce78805197aee427c0944465065c9c35aa07c878ce207973d3",
+      "bytes": 360064
+    },
+    {
+      "file": "scene-04.jpg",
+      "sha256": "d7b4624e136d7eb3c20b353ef2c00aaf6df73e7a6b4a8e09ca3b029d9ca95026",
+      "bytes": 341055
+    },
+    {
+      "file": "scene-05.jpg",
+      "sha256": "7550dfe78b701660ddb70f195fc0d10d9f511903d619dc37339eb1e41a77daa3",
+      "bytes": 308445
+    }
+  ],
+  "runtime": {
+    "wallSeconds": 18.006,
+    "encoderThreads": 2,
+    "pillowVersion": "11.3.0",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers"
+  },
+  "publication": {
+    "uploaded": false,
+    "scheduled": false,
+    "published": false,
+    "readyForAutomaticImport": false
+  },
+  "cost": {
+    "newPaidService": false,
+    "providerCalls": 0,
+    "monetarySpendEur": 0
+  }
+}

@@ -35,6 +35,15 @@ NOT_A_CLOSING = frozenset({
     "douro-pinhao-azulejos", "seville-alcazar", "amalfi-ravello", "amalfi-ferry", "cinque-train", "thailande-train-nuit",
     "costa-rica-monteverde", "japon-shinkansen", "japon-nara-cerfs", "laponie-husky", "tenerife-adeje"})
 
+# Photos that show numbers of their own (a display, a board of fares): a table is never laid over them, its figures
+# would be read among theirs. `train-alfa-220` is the display of an Alfa Pendular carriage: "220 km/h · 10:22 · 21 °C".
+OWN_FIGURES = frozenset({"train-alfa-220"})
+
+# Where the subject of a photo of the site is (x, y from 0 to 1), when a vertical frame cut around its middle misses it:
+# the gable of the Grand Palace stands on the right of its photo, under a wide evening sky.
+# The temple of Tulum stands right of the middle of a panorama: cut around the middle, the frame slid off it.
+SITE_FOCUS = {"thailande-bangkok-grand-palais": [0.72, 0.7], "yucatan-tulum": [0.645, 0.5]}
+
 
 def commons_title(source_page: str) -> str | None:
     parsed = urllib.parse.urlsplit(source_page or "")
@@ -62,7 +71,7 @@ def photo_candidates(article: dict, site_photos: dict, country: str, shared: dic
             # A photo the site publishes for this place was chosen to stand for it: it may close a post, unless it only
             # illustrates one paragraph (NOT_A_CLOSING).
             candidates.append({"id": photo_id, "title": title, "alt": record.get("alt_fr") or fallback, "author": record.get("author"),
-                               "emblematic": photo_id not in NOT_A_CLOSING})
+                               "emblematic": photo_id not in NOT_A_CLOSING, **({"focus": SITE_FOCUS[photo_id]} if photo_id in SITE_FOCUS else {})})
     taken = {candidate["title"] for candidate in candidates}
     for photo_id, record in (shared or {}).items():
         title = record.get("commonsTitle")
@@ -239,25 +248,40 @@ def closing_mark(candidate: dict, record: dict) -> dict:
     return {key: value for key, value in record.items() if key != "automatic"}
 
 
+def new_photo(candidate: dict, photos: Photos, chosen: list) -> tuple[str, dict, str] | None:
+    """The candidate as a photo of the post, or None: no caption the charter accepts, no file, or a picture already there."""
+    got = photos.get(candidate) if checked(candidate["alt"], 300) else None
+    if not got or got[0] in {photo[0] for photo in chosen}:
+        return None
+    same = got[1].get("commonsSha1")
+    if same and same in {photo[1].get("commonsSha1") for photo in chosen}:
+        return None
+    record = {key: value for key, value in closing_mark(candidate, got[1]).items() if key != "figures"}
+    if got[0] in OWN_FIGURES:
+        record = {**record, "figures": True}
+    # A photo reviewed by hand carries its own "focus" (reviewed.json); a photo of the site takes it from SITE_FOCUS.
+    return (got[0], {**record, "focus": candidate["focus"]} if candidate.get("focus") else record, candidate["alt"])
+
+
+def taken(candidates: list[dict], needed: int, photos: Photos, chosen: list) -> list[tuple[str, dict, str]]:
+    """`chosen` completed with the candidates, in their order, up to `needed` photos."""
+    chosen = list(chosen)
+    for candidate in candidates:
+        if len(chosen) >= needed:
+            break
+        photo = new_photo(candidate, photos, chosen)
+        if photo:
+            chosen.append(photo)
+    return chosen
+
+
 def gather_photos(article: dict, needed: int, photos: Photos, site_photos: dict, country: str, searcher,
                   table: dict | None = None) -> list[tuple[str, dict, str]]:
     """Up to `needed` distinct, freely licensed photographs of the place: (id, record, alt)."""
-    chosen, seen = [], set()
-
-    def take(candidates):
-        for candidate in candidates:
-            if len(chosen) >= needed:
-                return
-            if not checked(candidate["alt"], 300):
-                continue
-            got = photos.get(candidate)
-            if got and got[0] not in seen and got[1].get("commonsSha1") not in {c[1].get("commonsSha1") for c in chosen if c[1].get("commonsSha1")}:
-                seen.add(got[0])
-                chosen.append((got[0], closing_mark(candidate, got[1]), candidate["alt"]))
-
-    take(photo_candidates(article, site_photos, country, photos.shared))
+    chosen = taken(photo_candidates(article, site_photos, country, photos.shared), needed, photos, [])
     if len(chosen) < needed:
-        take(featured_candidates(article, place_names(article, table or {}), country, searcher, country_names(article, table or {})))
+        found = featured_candidates(article, place_names(article, table or {}), country, searcher, country_names(article, table or {}))
+        chosen = taken(found, needed, photos, chosen)
     return chosen
 
 

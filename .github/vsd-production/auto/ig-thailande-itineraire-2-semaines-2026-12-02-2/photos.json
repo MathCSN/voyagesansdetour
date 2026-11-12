@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "photos": {
+    "thailande-bangkok-grand-palais": {
+      "camera": "PENTAX K-3 II",
+      "file": "assets/photos/auto/thailande-bangkok-grand-palais.jpg",
+      "sha256": "077a4b69c1b907af6bbd13dcbddc6ccb5eff155807dfbb5341b4ca7fb349d2a6",
+      "width": 2407,
+      "height": 1600,
+      "commonsTitle": "File:A roof of a building at the Grand Palace, Bangkok, sunrise, 2017.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:A_roof_of_a_building_at_the_Grand_Palace,_Bangkok,_sunrise,_2017.jpg",
+      "author": "Bjørn Erik Pedersen",
+      "commonsCredit": "Own work",
+      "categories": "Taken with Pentax K-3 II|Grand Palace, Bangkok|Self-published work|January 2017 Thailand photographs|January 2017 in Bangkok",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        5813,
+        3865
+      ],
+      "commonsSha1": "8a5c5d571cfd5979febe150c48f2d4a6be0620d2",
+      "retrievedAt": "2026-11-12T22:14:45Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux.",
+      "emblematic": true,
+      "focus": [
+        0.72,
+        0.7
+      ]
+    },
+    "thailande-phi-phi": {
+      "file": "assets/photos/auto/thailande-phi-phi.jpg",
+      "sha256": "9305a7dc6811981e6f9273494b4a471d3c69a92cea64294957c769675e09ae87",
+      "width": 2880,
+      "height": 1536,
+      "commonsTitle": "File:Isla Ko Phi Phi Don, Tailandia, 2013-08-19, DD 02.JPG",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Isla_Ko_Phi_Phi_Don,_Tailandia,_2013-08-19,_DD_02.JPG",
+      "author": "Diego Delso",
+      "commonsCredit": "Own work",
+      "categories": "Taken with Canon EOS 5D Mark II|Images by User:Poco a poco|Images of Thailand by User:Poco a poco|Thailand photographs taken on 2013-08-19|Beaches of Ko Phi Phi Don|Images by User:Poco a poco taken in 2013",
+      "licence": "CC BY-SA 3.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "originalSize": [
+        5616,
+        2995
+      ],
+      "commonsSha1": "b4d0513a0177aef6c502a735b9005091baab4398",
+      "retrievedAt": "2026-11-06T15:34:20Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux.",
+      "emblematic": true
+    },
+    "thailande-railay": {
+      "camera": "DSLR-A700",
+      "file": "assets/photos/auto/thailande-railay.jpg",
+      "sha256": "43f3e22cd6242515763dd48d58e6477630e817d0cd4475ac48317a85a2573aaa",
+      "width": 2674,
+      "height": 1600,
+      "commonsTitle": "File:Railay Beach 5.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Railay_Beach_5.jpg",
+      "author": "kallerna",
+      "commonsCredit": "Own work",
+      "categories": "Taken with Sony DSLR-A700|Self-published work|Files with coordinates missing SDC location of creation|West Rai Leh|Panoramics of beaches in Thailand",
+      "licence": "CC BY-SA 3.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "originalSize": [
+        4160,
+        2490
+      ],
+      "commonsSha1": "1339f813a18e344caa5522bbc7634d13c225e7fa",
+      "retrievedAt": "2026-11-12T22:14:45Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux.",
+      "emblematic": true
+    },
+    "thailande-train-nuit": {
+      "file": "assets/photos/auto/thailande-train-nuit.jpg",
+      "sha256": "05071e34c84d05510b77d54c125bcf7e6e61a43ac4b9a4911239963be36aa4a4",
+      "width": 2133,
+      "height": 1600,
+      "commonsTitle": "File:THAI RAILWAYS NIGHT SLEEPER TRAIN BUTTERWORTH(PENANG SENTRAL)MALAYSIA TO BANGKOK THAILAND JAN 2012 (7189989612).jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:THAI_RAILWAYS_NIGHT_SLEEPER_TRAIN_BUTTERWORTH(PENANG_SENTRAL)MALAYSIA_TO_BANGKOK_THAILAND_JAN_2012_(7189989612).jpg",
+      "author": "calflier001",
+      "commonsCredit": "THAI RAILWAYS NIGHT SLEEPER TRAIN BUTTERWORTH(PENANG SENTRAL)MALAYSIA TO BANGKOK THAILAND JAN 2012",
+      "categories": "Flickr images reviewed by File Upload Bot (Magnus Manske)|Train interiors in Thailand|Photographs by Stephen Mason",
+      "licence": "CC BY-SA 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "originalSize": [
+        3648,
+        2736
+      ],
+      "commonsSha1": "c9a86a9c7adde0b924c92cc83a184204bfd92ff4",
+      "retrievedAt": "2026-11-06T15:34:20Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "thailande-wat-arun": {
+      "file": "assets/photos/auto/thailande-wat-arun.jpg",
+      "sha256": "e6285cb454866d6ca5472c5009e50866312f3e40cfc4755cf8a9eeebfbbe743e",
+      "width": 2395,
+      "height": 1600,
+      "commonsTitle": "File:Templo Wat Arun, Bangkok, Tailandia, 2013-08-22, DD 30.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Templo_Wat_Arun,_Bangkok,_Tailandia,_2013-08-22,_DD_30.jpg",
+      "author": "Diego Delso",
+      "commonsCredit": "Own work",
+      "categories": "Taken with Canon EOS 5D Mark II|Featured pictures by User:Poco a poco|Images by User:Poco a poco|Images from Wiki Loves Monuments 2013|Cultural heritage monuments in Thailand with known IDs|Featured pictures from Wiki Loves Monuments 2013|Featured pictures of Thailand by User:Poco a poco|Images of Thailand by User:Poco a poco|Featured pictures from Wiki Loves Monuments by User:Poco a poco|Featured pictures on Commons by User:Poco a poco|Images from Wiki Loves Monuments by User:Poco a poco|Featured pictures of buildings by User:Poco a poco|August 2013 in Bangkok|Images from Wiki Loves Monuments 2013 in Thailand|Thailand photographs taken on 2013-08-22|Images from Wiki Loves Monuments missing SDC location of creation|Cultural heritage monuments in Thailand missing SDC location of creation|Featured pictures of Buddhist temples|Wat Arun, entrance to ordination hall|Images by User:Poco a poco taken in 2013|Featured pictures of temples in Bangkok",
+      "licence": "CC BY-SA 3.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "originalSize": [
+        4837,
+        3231
+      ],
+      "commonsSha1": "8d4c9373e27347a07e94355f7750759154b2bc3f",
+      "retrievedAt": "2026-11-06T15:34:20Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux.",
+      "emblematic": true
+    }
+  }
+}

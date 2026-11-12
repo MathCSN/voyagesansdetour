@@ -1230,6 +1230,151 @@
           "bytes": 4449
         }
       ]
+    },
+    {
+      "contentId": "ig-yucatan-itineraire-10-jours-2026-11-20-3",
+      "approved": true,
+      "files": [
+        {
+          "name": "reel.mp4",
+          "sha256": "d4bd7318af7d25b327e47c5a3d3ed312e58a6b95b8d45de9ff7bfde3eab775fb",
+          "bytes": 8406145
+        },
+        {
+          "name": "poster.jpg",
+          "sha256": "9a0c9fa95af7d149436638bab7c922126d2302e2de61f4837bd552830d5cabcf",
+          "bytes": 372141
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "813f79f389bba0cdae5963dba3173e1a96bb81fd3e60d18fe2180e2eccb663b6",
+          "bytes": 3437
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "ig-thailande-itineraire-2-semaines-2026-12-02-2",
+      "approved": true,
+      "files": [
+        {
+          "name": "reel.mp4",
+          "sha256": "1495869a458aec590997257508105acabc038c641c077e64283c4c352e07c214",
+          "bytes": 5710061
+        },
+        {
+          "name": "poster.jpg",
+          "sha256": "a8e672ab539e2c2f5b16a06067a7de58a43ad8ed9e79f576a6a22f93fb6fe617",
+          "bytes": 310418
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "a4e218c3bda7d874d8620dd201d0021fbffb6ac93d5872c86ede02ddfc66f703",
+          "bytes": 2871
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "fb-marrakech-3-jours-2026-11-26-2",
+      "kind": "photos",
+      "approved": true,
+      "files": [
+        {
+          "name": "scene-01.jpg",
+          "sha256": "ba00b243cc79b2b3be393cb99effe064ed009b2eb409571600da67287bd3b958",
+          "bytes": 250116
+        },
+        {
+          "name": "scene-02.jpg",
+          "sha256": "8be9c00673302e15ec0e564f7e760e64015f2d6a4fc13ceed44b82a1096659b9",
+          "bytes": 328402
+        },
+        {
+          "name": "scene-03.jpg",
+          "sha256": "c4f7754417ee74958d6ea46026b4ef301fbf88251352027df9b6a78ab3f4cb3b",
+          "bytes": 300928
+        },
+        {
+          "name": "scene-04.jpg",
+          "sha256": "54387f5ad9873bca5503b6347f442f7eadaf77825f575cbed151c6452e4138f5",
+          "bytes": 186676
+        },
+        {
+          "name": "scene-05.jpg",
+          "sha256": "e002d2f4b60c9ed1a37b58084392b27cd316bd189d8199819d8bbbcc58123602",
+          "bytes": 417174
+        },
+        {
+          "name": "scene-06.jpg",
+          "sha256": "526551f21d9cfb05ff49ec1c70559201e09013d5da3a3e50dd396872bdb35640",
+          "bytes": 367142
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "4376848a5754e534877f2323c5f6882ce4fea3345b69744b45e2c75cc2653723",
+          "bytes": 2580
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "ig-lisbonne-porto-train-2026-11-18",
+      "approved": true,
+      "files": [
+        {
+          "name": "reel.mp4",
+          "sha256": "7d23d6f1b34d445591bef8fe6ac700309be312459e889875299c7ec91781a42e",
+          "bytes": 6271398
+        },
+        {
+          "name": "poster.jpg",
+          "sha256": "eb54be362921d47fd3892b88ccb1365b1cff444c198c8cae94af9059789d4a79",
+          "bytes": 392898
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "3bdfc2631d604966cffd981a4d36d8a40ae64be196772b2e4699ca619947d3ff",
+          "bytes": 2663
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
     }
   ]
 }

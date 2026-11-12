@@ -91,7 +91,10 @@
     "laponie-traineau-renne": {
       "camera": "GT-I9500",
       "alt": "Une balade en traîneau tiré par un renne sur la neige, en Laponie.",
-      "focus": [0.78, 0.55],
+      "focus": [
+        0.78,
+        0.55
+      ],
       "file": "assets/photos/laponie-traineau-renne.jpg",
       "sha256": "a9567eacd67ece8dbe02ee3c8a6bdbda77cff138070b443afd432f99b7cf296f",
       "width": 2844,
@@ -154,6 +157,73 @@
       ],
       "commonsSha1": "dc0e904ffd220dfa9103a722dca881c19c214ae6",
       "retrievedAt": "2026-11-12T12:27:50Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "marrakech-essaouira-port": {
+      "camera": "NIKON D3200",
+      "alt": "Des barques bleues au pied de la Skala du port, à Essaouira.",
+      "file": "assets/photos/marrakech-essaouira-port.jpg",
+      "sha256": "f35b670820908b66f23cd7451d311d50089aafe170511bd031159b0c6ef0e598",
+      "width": 2407,
+      "height": 1600,
+      "commonsTitle": "File:Bateaux à quai dans la Skala du port Essaouira.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Bateaux_%C3%A0_quai_dans_la_Skala_du_port_Essaouira.jpg",
+      "author": "Souad EL OUAFI",
+      "commonsCredit": "Own work",
+      "categories": "Skala du Port, Essaouira|Self-published work|Images from Medina Stories 2020|MedinaStories 2020 Essaouira|Uploaded via Campaign:MedinaStories|Images from MedinaStories 2020 to check",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        6016,
+        4000
+      ],
+      "commonsSha1": "5200b1c3e929f4acd4b6e3d2b54e07e775f9bd1d",
+      "retrievedAt": "2026-11-12T19:49:44Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "marrakech-koutoubia-bassin": {
+      "camera": "NIKON D750",
+      "alt": "Le minaret de la Koutoubia se reflète dans un bassin de ses jardins, à Marrakech.",
+      "emblematic": true,
+      "file": "assets/photos/marrakech-koutoubia-bassin.jpg",
+      "sha256": "9249c809ccbad25d5ae6b87f6ddd99b0ade86911c1c4e16627285fe79022dcbb",
+      "width": 1600,
+      "height": 2396,
+      "commonsTitle": "File:Kutubiyya Mosque, Marrakesh, Morocco, 20250124 1838 7030.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Kutubiyya_Mosque,_Marrakesh,_Morocco,_20250124_1838_7030.jpg",
+      "author": "Jakub Hałun",
+      "commonsCredit": "Own work",
+      "categories": "Self-published work|Files with coordinates missing SDC location of creation|Golden hour in Morocco|Koutoubia Minaret|Reflections of buildings in Morocco",
+      "licence": "CC BY 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "originalSize": [
+        2850,
+        4268
+      ],
+      "commonsSha1": "107eadd5398361bbe243a6ae8bc48377c40dd703",
+      "retrievedAt": "2026-11-12T19:49:44Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "marrakech-ouzoud-cascades": {
+      "camera": "NIKON D750",
+      "alt": "Les cascades d’Ouzoud, dans le Moyen Atlas.",
+      "file": "assets/photos/marrakech-ouzoud-cascades.jpg",
+      "sha256": "6f31cb2b6c400a538004ee883927402e37c99f64970d18833db3cb22099a8112",
+      "width": 1600,
+      "height": 2397,
+      "commonsTitle": "File:Ouzoud Falls, Morocco, 20250126 1354 7463.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Ouzoud_Falls,_Morocco,_20250126_1354_7463.jpg",
+      "author": "Jakub Hałun",
+      "commonsCredit": "Own work",
+      "categories": "Ouzoud Falls|Self-published work|Files with coordinates missing SDC location of creation",
+      "licence": "CC BY 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "originalSize": [
+        4016,
+        6017
+      ],
+      "commonsSha1": "2a976461a80d3cbbb023c3c7453b538ef906ffd1",
+      "retrievedAt": "2026-11-12T19:49:44Z",
       "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
     },
     "yucatan-merida-cathedrale": {

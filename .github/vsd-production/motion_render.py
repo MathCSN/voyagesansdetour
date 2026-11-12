@@ -244,11 +244,24 @@ def chrome(serif: str) -> Image.Image:
     return layer
 
 
+DRIFT = 0.07           # how far the frame slides to each side of the photo's subject, as a share of the photo's width
+DRIFT_IN_FRAME = 0.19  # …and never further than this share of the frame's own width: the subject stays in the picture
+                       # (a 3:2 photo slides as it always did; only wider ones slide less)
+
+
+def drift_of(size: tuple[int, int], progress: float, index: int) -> float:
+    """The sideways slide of the frame at this moment of the plan. On a panorama the vertical frame is narrow: sliding
+    7 % of the photo's width carried its subject out of the picture (the temple of Tulum, 12/11/2026)."""
+    frame_share = min(1.0, (SIZE[0] / SIZE[1]) * (size[1] / size[0]))
+    reach = min(DRIFT, DRIFT_IN_FRAME * frame_share)
+    return (2 * progress - 1) * reach * (1 if index % 3 != 1 else -1)
+
+
 def photo_frame(path: str, focus, t: float, index: int, punched: bool) -> Image.Image:
     image = base.photo(path)
     progress = base.ease(t)
     zoom = 1.0 + ZOOM_RANGE * (progress if index % 2 == 0 else 1 - progress) + (PUNCH if punched else 0.0)
-    drift = (-0.07 + 0.14 * progress) if index % 3 != 1 else (0.07 - 0.14 * progress)
+    drift = drift_of(image.size, progress, index)
     return image.resize(SIZE, Image.Resampling.BILINEAR, box=base.cover_box(image.size, SIZE, zoom, (focus[0] + drift, focus[1])))
 
 

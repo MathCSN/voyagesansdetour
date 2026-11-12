@@ -1,0 +1,242 @@
+{
+  "schemaVersion": 3,
+  "id": "ig-thailande-itineraire-2-semaines-2026-12-02-2",
+  "kind": "reel",
+  "channel": "instagram",
+  "format": "tableau",
+  "destination": "Thaïlande",
+  "title": "La Thaïlande en 2 semaines : le tableau à garder",
+  "targetUrl": "https://voyagesansdetour.fr/thailande/thailande-itineraire-2-semaines/",
+  "publishAt": "2026-12-02T17:00:00Z",
+  "review": {
+    "status": "reviewed_for_render",
+    "checkedAt": "2026-11-12T22:14:45Z",
+    "validUntil": "2026-12-12T22:14:45Z",
+    "method": "Généré automatiquement (auto_social.py) depuis la page publiée du guide relevée le 12/11/2026 : chaque chiffre, étape ou ligne de tableau est cité mot pour mot ; photos et vidéos réelles sous licence libre, aucune image ni vidéo générée par IA ; garde-fous de production.py passés avant la mise en file."
+  },
+  "sources": {
+    "file": "auto/ig-thailande-itineraire-2-semaines-2026-12-02-2/sources.json",
+    "sha256": "9f2e27104b6a2c8b25ba5db4bf36ec34f1c2870b42fab066eba0af3e0f884216"
+  },
+  "photos": {
+    "file": "auto/ig-thailande-itineraire-2-semaines-2026-12-02-2/photos.json",
+    "sha256": "91d73deed04da99571b636a751b676675fde76a748cc0e90eed502879c21585d"
+  },
+  "caption": {
+    "hook": "🗺️ Thaïlande en 2 semaines : Bangkok, Chiang Mai en train de nuit et la mer d’Andaman (prix 2026)",
+    "lines": [
+      "🚆 938 bahts : la couchette haute climatisée de 2e classe du train 9 (≈ 25 €, tarif SRT de novembre 2026)",
+      "📅 Le train de nuit pour Chiang Mai · Départ de Bangkok — N° 7 (autorail de jour) : 7 h 30",
+      "📅 N° 9 (couchettes récentes) : 18 h 40",
+      "📅 N° 13 (couchettes) : 20 h 05",
+      "📅 N° 51 (couchettes) : 22 h 30"
+    ],
+    "cta": "📌 Enregistrez ce reel pour votre voyage. 🔗 Prix, horaires et détails : le guide complet est en lien dans la bio.",
+    "hashtags": [
+      "#Thailande",
+      "#VoyageThailande",
+      "#Itineraire",
+      "#VoyageSansDetour"
+    ]
+  },
+  "scenes": [
+    {
+      "photo": "thailande-phi-phi",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "hook",
+      "kicker": "Thaïlande",
+      "headline": [
+        "La Thaïlande",
+        "en 2 semaines",
+        "*le tableau à garder*"
+      ],
+      "seconds": 2.2,
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "Deux nuits à Bangkok, une nuit dans le train jusqu’à Chiang Mai et trois sur place, puis la mer d’Andaman : Krabi, Railay et les îles Phi Phi."
+        }
+      ],
+      "tag": "Guide Thaïlande · sources du 12/11/2026"
+    },
+    {
+      "photo": "thailande-train-nuit",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "table",
+      "kicker": "Le train de nuit pour Chiang Mai",
+      "headline": [
+        "Départ de Bangkok"
+      ],
+      "seconds": 6.4,
+      "detail": "*938 bahts* la couchette haute climatisée de 2e classe du train 9",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "N° 7 (autorail de jour) 7 h 30"
+        },
+        {
+          "source": "guide",
+          "excerpt": "N° 9 (couchettes récentes) 18 h 40"
+        },
+        {
+          "source": "guide",
+          "excerpt": "N° 13 (couchettes) 20 h 05"
+        },
+        {
+          "source": "guide",
+          "excerpt": "N° 51 (couchettes) 22 h 30"
+        },
+        {
+          "source": "guide",
+          "excerpt": "938 bahts la couchette haute climatisée de 2e classe du train 9"
+        }
+      ],
+      "tag": "Guide Thaïlande · sources du 12/11/2026",
+      "rows": [
+        [
+          "N° 7 (autorail de jour)",
+          "7 h 30"
+        ],
+        [
+          "N° 9 (couchettes récentes)",
+          "18 h 40"
+        ],
+        [
+          "N° 13 (couchettes)",
+          "20 h 05"
+        ],
+        [
+          "N° 51 (couchettes)",
+          "22 h 30"
+        ]
+      ],
+      "note": "Faites pause pour tout lire"
+    },
+    {
+      "photo": "thailande-bangkok-grand-palais",
+      "focus": [
+        0.72,
+        0.7
+      ],
+      "layout": "fact",
+      "kicker": "Thaïlande",
+      "headline": [
+        "*500 bahts*"
+      ],
+      "seconds": 3.4,
+      "detail": "le Grand Palais de Bangkok et le Wat Phra Kaew",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "500 bahts le Grand Palais de Bangkok et le Wat Phra Kaew"
+        }
+      ],
+      "tag": "Guide Thaïlande · sources du 12/11/2026"
+    },
+    {
+      "photo": "thailande-railay",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "fact",
+      "kicker": "Jours 7 à 13",
+      "headline": [
+        "*330 bahts*"
+      ],
+      "seconds": 3.2,
+      "detail": "le minibus Phantip de Surat Thani à Krabi",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "330 bahts le minibus Phantip de Surat Thani à Krabi"
+        }
+      ],
+      "tag": "Guide Thaïlande · sources du 12/11/2026"
+    },
+    {
+      "photo": "thailande-wat-arun",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "cta",
+      "kicker": "Le guide complet",
+      "headline": [
+        "La Thaïlande",
+        "en 2 semaines"
+      ],
+      "seconds": 2.4,
+      "note": "Enregistrez cette vidéo pour votre voyage",
+      "button": "voyagesansdetour.fr"
+    }
+  ],
+  "musicStart": 8,
+  "assets": {
+    "regular": {
+      "file": "assets/dmsans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9"
+    },
+    "bold": {
+      "file": "assets/dmsans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211"
+    },
+    "serif": {
+      "file": "assets/playfair.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+      },
+      "sha256": "adefc53e7b3d483f1fa5e85edd82b7689ca79db25a1f6786bd7949cdcfeec601"
+    },
+    "fallbackRegular": {
+      "file": "assets/notosans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "478c558ea716033cd60c03438f628dfa75694dcf6b5f6d505a2f05fd2b4f3823"
+    },
+    "fallbackBold": {
+      "file": "assets/notosans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "1df075a380fc7cb898acf64c1f7b3b4dd780de3caa860178bf929de35817a913"
+    },
+    "music": {
+      "file": "assets/happy-alley.mp3",
+      "sha256": "f598c8ee624f1db9a2cd38886524a40baff4ce730dcf999c0763791268fa8265",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "commercialUseAllowed": true,
+      "title": "Happy Alley",
+      "author": "Kevin MacLeod",
+      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100482",
+      "provenance": {
+        "file": "evidence/happy-alley-provenance.json",
+        "sha256": "5a2ba8f3dba28b0a748b00089d3854db1fde92213429823746f6d01805f904ac"
+      }
+    }
+  }
+}

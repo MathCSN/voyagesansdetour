@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "checkedOn": "2026-11-12",
+  "method": "Page publiée du guide relevée automatiquement ; texte visible conservé tel quel, première ligne = URL.",
+  "sources": {
+    "guide": {
+      "url": "https://voyagesansdetour.fr/portugal/lisbonne-porto-train/",
+      "publisher": "Voyage Sans Détour",
+      "title": "Lisbonne–Porto en train : 35,70 € en Alfa Pendular, jusqu’à −65 % en Promo",
+      "retrievedAt": "2026-11-12T23:12:31Z",
+      "snapshot": {
+        "file": "auto/ig-lisbonne-porto-train-2026-11-18/guide.txt",
+        "sha256": "77195752deb9a8a88c3d4cdc8e796ecd13b40f6ea94e1dd1b7464ddbb635cd96"
+      }
+    }
+  }
+}

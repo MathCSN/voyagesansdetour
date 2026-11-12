@@ -1,0 +1,233 @@
+{
+  "schemaVersion": 3,
+  "id": "ig-lisbonne-porto-train-2026-11-18",
+  "kind": "reel",
+  "channel": "instagram",
+  "format": "tableau",
+  "destination": "Portugal",
+  "title": "Lisbonne–Porto en train : le tableau à garder",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/lisbonne-porto-train/",
+  "publishAt": "2026-11-18T17:00:00Z",
+  "review": {
+    "status": "reviewed_for_render",
+    "checkedAt": "2026-11-12T23:12:31Z",
+    "validUntil": "2026-12-12T23:12:31Z",
+    "method": "Généré automatiquement (auto_social.py) depuis la page publiée du guide relevée le 12/11/2026 : chaque chiffre, étape ou ligne de tableau est cité mot pour mot ; photos et vidéos réelles sous licence libre, aucune image ni vidéo générée par IA ; garde-fous de production.py passés avant la mise en file."
+  },
+  "sources": {
+    "file": "auto/ig-lisbonne-porto-train-2026-11-18/sources.json",
+    "sha256": "5b4b22e20c58d4d719a1faa64796253aff044b86b97c1876e1774e79eae0fc8d"
+  },
+  "photos": {
+    "file": "auto/ig-lisbonne-porto-train-2026-11-18/photos.json",
+    "sha256": "1e070aa14174ecb7d357f4f84d4e63d62c2ef4f0487daa6afbd30839eed1d1c4"
+  },
+  "caption": {
+    "hook": "🚆 Lisbonne–Porto en train : 35,70 € en Alfa Pendular, jusqu’à −65 % en Promo",
+    "lines": [
+      "📅 Alfa Pendular ou Intercidades · Aller simple 2026 — Alfa Pendular Turística : 35,70 €",
+      "📅 Alfa Pendular Conforto : 49,90 €",
+      "📅 Intercidades 2e classe : 28,05 €",
+      "⏱️ ≈ 3 h de trajet en Alfa Pendular entre Santa Apolónia et Campanhã",
+      "📍 38,3 % : des Alfa Pendular à l’heure (à 5 minutes près) en 2025"
+    ],
+    "cta": "📌 Enregistrez ce reel pour votre voyage. 🔗 Prix, horaires et détails : le guide complet est en lien dans la bio.",
+    "hashtags": [
+      "#Portugal",
+      "#VoyagePortugal",
+      "#VoyageEnTrain",
+      "#VoyageSansDetour"
+    ]
+  },
+  "scenes": [
+    {
+      "photo": "train-alfa-oriente",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "hook",
+      "kicker": "Portugal",
+      "headline": [
+        "Lisbonne–Porto",
+        "en train",
+        "*le tableau à garder*"
+      ],
+      "seconds": 2.2,
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "Trois heures environ séparent Lisbonne de Porto en Alfa Pendular (35,70 € en classe Turística, prix 2026) et un peu plus en Intercidades (28,05 € en 2e classe)."
+        }
+      ],
+      "tag": "Guide Portugal · sources du 24/10/2026"
+    },
+    {
+      "photo": "train-alfa-aqueduc",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "table",
+      "kicker": "Alfa Pendular ou Intercidades",
+      "headline": [
+        "Aller simple 2026"
+      ],
+      "seconds": 5.8,
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "Alfa Pendular Turística 35,70 €"
+        },
+        {
+          "source": "guide",
+          "excerpt": "Alfa Pendular Conforto 49,90 €"
+        },
+        {
+          "source": "guide",
+          "excerpt": "Intercidades 2e classe 28,05 €"
+        },
+        {
+          "source": "guide",
+          "excerpt": "Aller simple 2026"
+        }
+      ],
+      "tag": "Guide Portugal · sources du 24/10/2026",
+      "rows": [
+        [
+          "Alfa Pendular Turística",
+          "35,70 €"
+        ],
+        [
+          "Alfa Pendular Conforto",
+          "49,90 €"
+        ],
+        [
+          "Intercidades 2e classe",
+          "28,05 €"
+        ]
+      ],
+      "note": "Faites pause pour tout lire"
+    },
+    {
+      "photo": "train-alfa-pendular",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "fact",
+      "kicker": "Portugal",
+      "headline": [
+        "*≈ 3 h*"
+      ],
+      "seconds": 4.0,
+      "detail": "de trajet en Alfa Pendular entre Santa Apolónia et Campanhã",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "≈ 3 h de trajet en Alfa Pendular entre Santa Apolónia et Campanhã"
+        }
+      ],
+      "tag": "Guide Portugal · sources du 24/10/2026"
+    },
+    {
+      "photo": "train-alfa-interieur",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "fact",
+      "kicker": "Portugal",
+      "headline": [
+        "*38,3 %*"
+      ],
+      "seconds": 3.8,
+      "detail": "des Alfa Pendular à l’heure (à 5 minutes près) en 2025",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "38,3 % des Alfa Pendular à l’heure (à 5 minutes près) en 2025"
+        }
+      ],
+      "tag": "Guide Portugal · sources du 24/10/2026"
+    },
+    {
+      "photo": "train-campanha",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "cta",
+      "kicker": "Le guide complet",
+      "headline": [
+        "Lisbonne–Porto",
+        "en train"
+      ],
+      "seconds": 2.4,
+      "note": "Enregistrez cette vidéo pour votre voyage",
+      "button": "voyagesansdetour.fr"
+    }
+  ],
+  "musicStart": 0,
+  "assets": {
+    "regular": {
+      "file": "assets/dmsans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9"
+    },
+    "bold": {
+      "file": "assets/dmsans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211"
+    },
+    "serif": {
+      "file": "assets/playfair.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+      },
+      "sha256": "adefc53e7b3d483f1fa5e85edd82b7689ca79db25a1f6786bd7949cdcfeec601"
+    },
+    "fallbackRegular": {
+      "file": "assets/notosans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "478c558ea716033cd60c03438f628dfa75694dcf6b5f6d505a2f05fd2b4f3823"
+    },
+    "fallbackBold": {
+      "file": "assets/notosans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "1df075a380fc7cb898acf64c1f7b3b4dd780de3caa860178bf929de35817a913"
+    },
+    "music": {
+      "file": "assets/almost-bliss.mp3",
+      "sha256": "731e191cef927e43d352bd099ac63cd6ea54a6a84deec3cba77fb59e6903754c",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "commercialUseAllowed": true,
+      "title": "Almost Bliss",
+      "author": "Kevin MacLeod",
+      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1900015",
+      "provenance": {
+        "file": "evidence/almost-bliss-provenance.json",
+        "sha256": "2d2303c1a70fed68560808853466c997870cd8156737d96ca287a4332a5cd04d"
+      }
+    }
+  }
+}
