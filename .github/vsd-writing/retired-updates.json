@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "note": "Paragraphes ajoutés automatiquement puis retirés à la main : ni eux ni les citations sur lesquelles ils reposent ne peuvent revenir.",
+  "retired": [
+    {
+      "patchId": "auto-9ae6e3fad9f7224cb01ef3a3",
+      "slug": "cinque-terre-sans-voiture",
+      "retiredOn": "2026-11-12",
+      "reason": "formule recopiée et italien non traduit",
+      "paragraphSha256": "01b4dd7ab505e00b44739c8fb51f87ff4f3e3798146836762108fd6e42d69ddc",
+      "quotes": [
+        "il sentiero n. 509, che conduce al santuario della Madonna di Soviore",
+        "è possibile partecipare gratuitamente (tra aprile e agosto) alle escursioni a tema naturalistico e letterario"
+      ]
+    },
+    {
+      "patchId": "auto-d23444808a9f02eea681bd67",
+      "slug": "douro-train-depuis-porto",
+      "retiredOn": "2026-11-12",
+      "reason": "formule recopiée, prix collés au signe €, mot portugais non traduit",
+      "paragraphSha256": "a9ddc879fa0beef207c9d130b88793d37b38b72492ee049008112ba389861022",
+      "quotes": [
+        "Pack MD1 – Visita ao Museu com prova de Vinho do Porto: 10,00€ por pessoa",
+        "Prova Douro (3 vinhos): 3 vinhos do Douro DOC (Rosé, Branco e Tinto): 12,50€ por pessoa"
+      ]
+    },
+    {
+      "patchId": "auto-23704ea99841fc4e556c61f4",
+      "slug": "londres-noel-marches",
+      "retiredOn": "2026-11-12",
+      "reason": "aucun chiffre, rien de concret",
+      "paragraphSha256": "2fa8515c5f1387162a24d9e6547d9e0736a956bb0cc89d62c85d6dde3edcc228",
+      "quotes": [
+        "There’ll also be dedicated sessions for wheelchair users and reduced-capacity relaxed sessions"
+      ]
+    }
+  ]
+}

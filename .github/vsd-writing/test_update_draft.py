@@ -1,12 +1,15 @@
 import copy
+import json
 import unittest
-from update_draft import create_update,digest,validate_additions,paragraph_defects
+from pathlib import Path
+from update_draft import (create_update,digest,validate_additions,paragraph_defects,addition_defects,
+                          new_figures,is_retired,retired_updates)
 
 class UpdateDraftTests(unittest.TestCase):
     def setUp(self):
         self.article={'slug':'sintra','title':'Visiter Sintra','sections':[{'id':'billets','title':'Existant','paragraphs':['Conserver ce contenu.']}]}
         self.facts=[{'id':'c1','fact':'Le créneau est celui du palais.','source':0,'quote':'The time corresponds to entry in the Palace.'}]
-        self.sections={'sections':[{'targetSectionId':'billets','title':'Comprendre le créneau','paragraph':'Le créneau indiqué sur le billet correspond à l’entrée au palais, et non à votre arrivée à l’entrée du parc.','claims':['c1']}]}
+        self.sections={'sections':[{'targetSectionId':'billets','title':'Comprendre le créneau','paragraph':'Le créneau de 9 h 30 indiqué sur le billet correspond à l’entrée au palais, et non à votre arrivée à l’entrée du parc.','claims':['c1']}]}
     def test_no_new_facts_never_calls_provider(self):
         def fail(*args):raise AssertionError('unexpected inference')
         self.assertEqual(create_update(self.article,[],'',fail)['status'],'no_update')
@@ -50,23 +53,78 @@ class UpdateDraftTests(unittest.TestCase):
         self.assertEqual(packet['draft']['sections'][0]['targetSectionId'],'billets')
 
 
+PATCHES=Path(__file__).resolve().parents[2]/'site-src'/'editorial-update-patches'
+RETIRED_IDS=('auto-9ae6e3fad9f7224cb01ef3a3','auto-d23444808a9f02eea681bd67','auto-23704ea99841fc4e556c61f4')
+CINQUE_TERRE_WITHOUT_BOSCO=('Le sentier n. 509 mène au santuario della Madonna di Soviore, à une altitude de 418 mètres, et permet de découvrir '
+    'un merveilleux bosco et cipressi. Selon Italia.it, la Cinque Terre Card permet également de participer à des escursioni a tema '
+    'naturalistico et letterario, entre avril et août, pour découvrir les lieux tels que Punta Mesco, La casa del Doganiere et Meriggiare pallido e assorto.')
+
+
+def retired_patch(identity):
+    return json.loads((PATCHES/(identity+'.json')).read_text(encoding='utf-8'))
+
+
 class ParagraphDefectTests(unittest.TestCase):
-    """The three automatic updates published in October and November 2026, and clean text."""
+    """The three automatic updates published in October and November 2026, the reviewer's cases, and clean French."""
     def test_the_copied_example_formula_is_refused(self):
         self.assertIn('update_boilerplate',paragraph_defects('Pour les consignes présentées par Italia.it, le sentier n. 509 mène au sanctuaire.'))
-    def test_untranslated_italian_or_portuguese_is_refused(self):
-        for text in ('Le sentier traverse un merveilleux bosco di lecci et cipressi.','Le pack MD2 ajoute un cadeau de cálice MD pour 15,00 €.'):
-            with self.subTest(text=text):self.assertIn('update_untranslated',paragraph_defects(text))
     def test_a_price_glued_to_the_euro_sign_is_refused(self):
         self.assertIn('update_glued_price',paragraph_defects('La dégustation coûte 10€ par personne.'))
-    def test_proper_nouns_and_french_y_stay_allowed(self):
-        for text in ('Le Museu do Douro propose une dégustation à 10 € ; on y va depuis la rua do Choupelo.',
+    def test_untranslated_italian_portuguese_or_english_is_refused(self):
+        for text in (CINQUE_TERRE_WITHOUT_BOSCO,
+                     'Le sentier traverse un merveilleux bosco di lecci, puis la casa del guardiano.',
+                     'Il sentiero porta al santuario in due ore e costa dieci euro.',
+                     'The trail leads to the sanctuary in two hours and costs ten euros.',
+                     'O comboio parte às sete e meia e chega ao Pinhão duas horas depois.'):
+            with self.subTest(text=text):self.assertIn('update_untranslated',paragraph_defects(text))
+    def test_a_sentence_without_french_words_is_refused(self):
+        self.assertIn('update_not_french',paragraph_defects('Sentiero panoramico, vista mozzafiato, costo dieci euro, durata due ore, partenza ogni mattina presto.'))
+    def test_french_with_foreign_names_dishes_and_homographs_stays_allowed(self):
+        for text in ('Après 3 km, on est las de monter : le bus 435 redescend pour 2 €.',
+                     'Goûtez les spaghetti alle vongole du port, à 14 € l’assiette.',
+                     'On y sert le bacalhau à brás à 9 € et la francesinha à 11 €.',
+                     'Le jamón ibérico se vend 8 € les 100 g au Mercado de San Miguel ; l’açaí, 15 reais.',
+                     'Depuis la Ponte da Arrábida, le bus 500 longe le Douro jusqu’à la Foz en 25 minutes.',
+                     'Le Museu do Douro propose une dégustation à 10 € ; on y va depuis la rua do Choupelo.',
                      'Le Paço dos Duques domine le Largo da Oliveira, et l’Alcázar de Séville ouvre à 9 h 30.',
-                     'Au Yucatán, la Ruta de los Cenotes relie Valladolid à Mérida ; le toucinho-do-céu coûte 2,40 €.'):
+                     'Au Yucatán, la Ruta de los Cenotes relie Valladolid à Mérida ; le toucinho-do-céu coûte 2,40 €.',
+                     'Le billet Top of the Rock coûte 49 $ ; le sapin se dresse entre les 49e et 50e Rues.',
+                     'Via dell’Amore, miradouro da Graça, Madonna di Soviore et Tren Maya gardent leur nom.',
+                     'Les bols de « bún chả » coûtent 50 000 dongs dans le Vieux Quartier.'):
             with self.subTest(text=text):self.assertEqual(paragraph_defects(text),[])
-    def test_a_defective_proposal_stops_before_the_critic(self):
-        article={'slug':'douro','title':'Douro','sections':[{'id':'regua','title':'Régua','paragraphs':['Conserver ce contenu.']}]}
-        facts=[{'id':'c1','fact':'Visite à 10 euros.','source':0,'quote':'10 euros.'}]
-        value={'sections':[{'targetSectionId':'regua','title':'Visites du musée','paragraph':'Pour les consignes présentées par le Museu do Douro, la visite guidée avec dégustation coûte 10 € par personne.','claims':['c1']}]}
-        with self.assertRaisesRegex(ValueError,'update_boilerplate'):validate_additions(value,facts,article)
+    def test_no_published_paragraph_is_refused(self):
+        articles=json.loads((PATCHES.parent/'articles.json').read_text(encoding='utf-8'))
+        flagged=[p for a in articles for s in a['sections'] for p in s.get('paragraphs',[]) if paragraph_defects(p)]
+        self.assertEqual(flagged,[])
 
+
+class AdditionDefectTests(unittest.TestCase):
+    def setUp(self):
+        self.article={'slug':'douro','title':'Douro','keyFacts':[{'value':'8 €','label':'le Museu do Douro'}],
+                      'sections':[{'id':'regua','title':'Régua','paragraphs':['Entrée 8 €, ouvert de 10 h à 17 h 30.']}]}
+    def test_a_paragraph_without_a_new_figure_is_refused(self):
+        for text in ('Le musée offre une expérience plus calme et accessible aux visiteurs.',
+                     'Au Museu do Douro, l’entrée coûte 8 € et le musée ouvre à 10 h.'):
+            with self.subTest(text=text):self.assertEqual(addition_defects(text,[],self.article,[]),['update_no_new_figure'])
+    def test_a_new_price_or_duration_is_accepted(self):
+        text='Au Museu do Douro, la visite guidée coûte 14 € et dure 45 minutes.'
+        self.assertEqual(new_figures(text,self.article),['14 €','45 minutes'])
+        self.assertEqual(addition_defects(text,[],self.article,[]),[])
+    def test_the_three_retired_paragraphs_never_come_back(self):
+        retired=retired_updates()
+        self.assertEqual({entry['patchId'] for entry in retired},set(RETIRED_IDS))
+        for identity in RETIRED_IDS:
+            patch=retired_patch(identity)
+            with self.subTest(identity=identity):
+                self.assertTrue(is_retired(patch['paragraph'],[],retired))
+                facts=[f for f in patch['reviewEvidence']['proposal']['facts'] if f['id'] in patch['reviewEvidence']['proposal']['additions'][0]['claims']]
+                self.assertTrue(is_retired('Un paragraphe entièrement récrit en français avec 12 € et 30 minutes.',facts,retired))
+    def test_the_london_paragraph_is_refused_even_reworded(self):
+        london=retired_patch('auto-23704ea99841fc4e556c61f4')
+        self.assertIn('update_no_new_figure',addition_defects(london['paragraph'],[],self.article,[]))
+        self.assertIn('update_retired',addition_defects(london['paragraph'].replace('désormais','maintenant'),
+            [{'quote':'There’ll also be dedicated sessions for wheelchair users and reduced-capacity relaxed sessions'}],self.article))
+    def test_a_defective_proposal_stops_before_the_critic(self):
+        facts=[{'id':'c1','fact':'Visite à 12 euros.','source':0,'quote':'12 euros.'}]
+        value={'sections':[{'targetSectionId':'regua','title':'Visites du musée','paragraph':'Pour les consignes présentées par le Museu do Douro, la visite guidée avec dégustation coûte 12 € par personne.','claims':['c1']}]}
+        with self.assertRaisesRegex(ValueError,'update_boilerplate'):validate_additions(value,facts,self.article)
