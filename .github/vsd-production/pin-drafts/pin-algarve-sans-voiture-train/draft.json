@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-algarve-sans-voiture-train",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "L’Algarve sans voiture : Faro, Tavira et Lagos en train, à partir de 1,60 €",
+  "pinTitle": "L’Algarve sans voiture : Faro, Tavira et Lagos en train, à partir de 1,60 €",
+  "variant": "a",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/algarve-sans-voiture-train/",
+  "articleSha256": "7ffd3450c73e91f5be9e9c31caec81e8371fc6da55174ba22c1fab29d56e53b2",
+  "imageSha256": "c1a112c589df731833b995ba7bd6dcd7d2e47beab7bff8198fa6fc73fbf04a4c",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "fdbf04a40b0bd104c5f381a47a9aa8aa30b6df590685a48e3ce4be0e6c3493b2",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "algarve-ponta-piedade",
+    "author": "Ana Rey from Sevilla, España",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Lagos_Ponta_da_Piedade_(50509745908).jpg",
+    "license": "CC BY-SA 2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0/"
+  }
+}

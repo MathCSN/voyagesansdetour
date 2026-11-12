@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-japon-budget-2-semaines-b",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Budget Japon 2 semaines : de 870 à 1 370 € sans le vol, poste par poste (prix 2026)",
+  "pinTitle": "Budget Japon, 2 semaines : combien ça coûte, poste par poste",
+  "variant": "b",
+  "targetUrl": "https://voyagesansdetour.fr/japon/japon-budget-2-semaines/",
+  "articleSha256": "edaa9594717c73426526ba4a166a363e21ac51b03b854196d3e794baaadadc37",
+  "imageSha256": "bcb54424ede6a9625e94b7f2dcc1c6f6d3fefb9b7786e276d07e0cc213ab913c",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "fdbf04a40b0bd104c5f381a47a9aa8aa30b6df590685a48e3ce4be0e6c3493b2",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "japon-nara-cerfs",
+    "author": "Daniel Lu ( User:dllu )",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Sika_deer_doe_and_fawn_Nara_2026_dllu.jpg",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  }
+}
