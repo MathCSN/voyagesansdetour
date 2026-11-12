@@ -12,7 +12,7 @@ class AdmissionTests(unittest.TestCase):
         self.text='Time limit - 24 hours. Opening hours vary by station.'
         self.article={'slug':'guide','publishedOn':'2026-10-12','sources':[{'url':self.url,'label':'CP'}],'sections':[{'id':'bagages','paragraphs':['Existing opening conditions.']}]}
         self.fact={'id':'c1','fact':'La durée maximale est de 24 heures.','quote':'Time limit - 24 hours.','source':0,'sourceContext':{'url':self.url,'label':'CP','excerpt':self.text}}
-        self.proposal={'schemaVersion':2,'status':'update_ready_for_pilot_review','publicationApproved':False,'guideSlug':'guide','baseArticleSha256':q.digest(self.article),'facts':[self.fact],'factsSha256':q.digest([self.fact]),'additions':[{'targetSectionId':'bagages','title':'Consignes CP','claims':['c1'],'paragraph':'Pour les consignes présentées par CP, la durée de dépôt est limitée à 24 heures.'}],'sourceManifest':[{'url':self.url,'normalizedSha256':u.source_digest(self.url,self.text)}],'review':{'supported':True,'issues':[],'checkedClaimIds':['c1']}}
+        self.proposal={'schemaVersion':2,'status':'update_ready_for_pilot_review','publicationApproved':False,'guideSlug':'guide','baseArticleSha256':q.digest(self.article),'facts':[self.fact],'factsSha256':q.digest([self.fact]),'additions':[{'targetSectionId':'bagages','title':'Consignes CP','claims':['c1'],'paragraph':'Chez CP, la durée de dépôt dans ces consignes est limitée à 24 heures.'}],'sourceManifest':[{'url':self.url,'normalizedSha256':u.source_digest(self.url,self.text)}],'review':{'supported':True,'issues':[],'checkedClaimIds':['c1']}}
         self.entailment={'checks':[{'id':'c1','entailed':True,'unsupportedDetails':[]}]}
         self.novelty={'decisions':[{'id':'c1','supported':True,'newInformation':True,'useful':True}]}
         self.queue={'drafts':[],'promotions':[]};self.ledger={'schemaVersion':1,'updates':[]}
@@ -64,3 +64,11 @@ class AdmissionTests(unittest.TestCase):
     def test_legacy_launch_article_without_date_is_supported(self):
         del self.article['publishedOn']
         self.assertTrue(a.cadence_open([self.article],self.queue,self.ledger,self.now))
+    def test_a_boilerplate_untranslated_or_glued_price_paragraph_is_never_admitted(self):
+        for paragraph in ('Pour les consignes présentées par CP, la durée de dépôt est limitée à 24 heures.',
+                          'La consigne coûte 5€ pour 24 heures dans la gare de Porto-Campanhã.',
+                          'Le sentier mène à un bosco di lecci au-dessus du village de Monterosso.'):
+            with self.subTest(paragraph=paragraph):
+                self.proposal['additions'][0]['paragraph']=paragraph
+                with self.assertRaisesRegex(ValueError,'Admission paragraph refused'):self.prepare()
+

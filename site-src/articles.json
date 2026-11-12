@@ -239,7 +239,7 @@
         "label": "de métro D au-dessus du Douro, entre São Bento et Jardim do Morro"
       },
       {
-        "value": "5 €",
+        "value": "10 €",
         "label": "la tour des Clérigos et son musée, billet de jour, ouverte tous les jours 9 h–19 h"
       },
       {
@@ -268,7 +268,7 @@
         "paragraphs": [
           "Entrez dans la gare São Bento : le hall est couvert de 20 000 azulejos bleus et blancs peints par Jorge Colaço, qui racontent l’histoire du Portugal et celle des transports. Montez ensuite à la cathédrale : un billet de 4 € ouvre la Sé, son cloître gothique aux azulejos baroques, le musée et la tour.",
           "Grimpez les marches de la tour des Clérigos, œuvre baroque de Nicolau Nasoni : 10 € le billet de jour, qui inclut le musée (la tour seule à 5 € n’existe que le soir, à certaines dates), gratuit jusqu’à 10 ans, ouverte tous les jours de 9 h à 19 h. La vue à 360° embrasse les toits rouges jusqu’au fleuve. Pour la Livraria Lello et son escalier cramoisi, réservez un créneau : le billet, valable 60 minutes après l’heure prévue, est déduit de l’achat d’un livre.",
-          "L’après-midi, descendez vers la Ribeira et les quais. Le Palácio da Bolsa se visite avec un guide en 30 minutes, pour son Salão Árabe ; il est fermé le 24 octobre, le 7 novembre et plusieurs jours de décembre. Un billet combiné Clérigos, Bolsa et musée MMIPO coûte 25 € à la billetterie des Clérigos."
+          "L’après-midi, descendez vers la Ribeira et les quais. Le Palácio da Bolsa se visite avec un guide en 30 minutes, pour son Salão Árabe ; il ferme les 5, 10, 21, 22 et 25 décembre, et sa dernière entrée a lieu à 13 h le 24 décembre et à 16 h le 31. Un billet combiné Clérigos, Bolsa et musée MMIPO coûte 25 € à la billetterie des Clérigos."
         ]
       },
       {
@@ -441,7 +441,7 @@
       "lisbonne-ou-porto"
     ],
     "sourcesCheckedOn": "2026-10-24",
-    "updatedOn": "2026-11-09"
+    "updatedOn": "2026-11-12"
   },
   {
     "slug": "sintra-depuis-lisbonne",
@@ -788,7 +788,7 @@
       },
       {
         "question": "Quelle ville est la moins chère ?",
-        "answer": "Porto, de peu : trajet urbain à 1,40 € contre 1,72 €, grande tour panoramique à 5 € contre 17 € pour le château de Lisbonne, taxe de séjour à 3 € contre 4 € par nuit."
+        "answer": "Porto, de peu : trajet urbain à 1,40 € contre 1,72 €, tour des Clérigos à 10 € contre 17 € pour le château de Lisbonne, taxe de séjour à 3 € contre 4 € par nuit."
       }
     ],
     "sources": [
@@ -847,7 +847,7 @@
       "lisbonne-3-jours-sans-voiture"
     ],
     "sourcesCheckedOn": "2026-10-24",
-    "updatedOn": "2026-11-09"
+    "updatedOn": "2026-11-12"
   },
   {
     "slug": "lisbonne-porto-train",
@@ -2262,15 +2262,15 @@
     "cover": "cinque-manarola",
     "description": "Cinque Terre Treno Card, trains de La Spezia à Levanto, Via dell’Amore, sentiers ouverts et ferries : les cinq villages en une ou deux journées, prix 2026.",
     "readMinutes": 4,
-    "summary": "Les cinq villages se relient en train en 2 à 4 minutes, environ toutes les 20 minutes, entre La Spezia et Levanto. La Cinque Terre Treno Card couvre trains, bus des villages, sentier côtier et Via dell’Amore : de 22 à 35 € la journée selon la catégorie du jour, et 17,30 € à partir du 2 novembre 2026. Commencez par le sud : la Via dell’Amore ne se parcourt que de Riomaggiore vers Manarola, sur réservation. Le tronçon Manarola–Corniglia du sentier côtier est fermé.",
+    "summary": "Les cinq villages se relient en train en 2 à 4 minutes, environ toutes les 20 minutes, entre La Spezia et Levanto. La Cinque Terre Treno Card couvre trains, bus des villages, sentier côtier et Via dell’Amore : 17,30 € la journée jusqu’au 31 décembre 2026, contre 22 à 35 € en pleine saison 2026. Commencez par le sud : la Via dell’Amore ne se parcourt que de Riomaggiore vers Manarola, sur réservation. Le tronçon Manarola–Corniglia du sentier côtier est fermé.",
     "keyFacts": [
       {
         "value": "2–4 min",
         "label": "de train entre deux villages, environ un train toutes les 20 minutes"
       },
       {
-        "value": "22 à 35 €",
-        "label": "la Treno Card d’une journée jusqu’au 1er novembre, selon le jour A, B ou C"
+        "value": "29 €",
+        "label": "la Treno Card de deux jours, du 2 novembre au 31 décembre 2026"
       },
       {
         "value": "17,30 €",
@@ -2303,7 +2303,7 @@
         "id": "card",
         "title": "La Cinque Terre Card : laquelle acheter",
         "paragraphs": [
-          "La Treno Card comprend les trains régionaux en 2e classe de La Spezia à Levanto, les bus des villages, le sentier côtier, la Via dell’Amore et les toilettes des gares. Son prix dépend de la catégorie du jour : 22 € un jour A, 29,50 € un jour B, 35 € un jour C, jusqu’au 1er novembre 2026 ; 36,50 à 61 € pour deux jours. Du 2 novembre au 31 décembre, elle tombe à 17,30 € la journée.",
+          "La Treno Card comprend les trains régionaux en 2e classe de La Spezia à Levanto, les bus des villages, le sentier côtier, la Via dell’Amore et les toilettes des gares. Du 2 novembre au 31 décembre 2026, elle coûte 17,30 € la journée et 29 € les deux jours, de 12 à 69 ans. En pleine saison, du 14 mars au 1er novembre 2026, son prix dépendait de la catégorie du jour : 22 € un jour A, 29,50 € un jour B, 35 € un jour C, et de 36,50 à 61 € pour deux jours.",
           "Elle est nominative, se présente avec une pièce d’identité, et sa date se change une fois, au moins 24 heures avant. Si vous marchez sans prendre le train, la Trekking Card coûte 10 € (15 € les jours d’affluence). Sans carte, le billet de train simple vaut 5, 8 ou 10 € selon le jour, et seulement 5 € après 19 h 30."
         ],
         "table": {
@@ -2337,6 +2337,12 @@
               "17,30 €",
               "17,30 €",
               "17,30 €"
+            ],
+            [
+              "2 jours, du 2 nov. au 31 déc.",
+              "29 €",
+              "29 €",
+              "29 €"
             ]
           ]
         },
@@ -2348,8 +2354,7 @@
         "image": "cinque-riomaggiore",
         "paragraphs": [
           "Rouverte en 2024 puis en février 2025 après un éboulement, la Via dell’Amore, taillée dans la falaise, se parcourt en une trentaine de minutes, uniquement de Riomaggiore vers Manarola. Il faut une Cinque Terre Card et un créneau réservé. À partir du 26 octobre 2026, elle ouvre de 9 h à 18 h, dernière entrée à 17 h 30.",
-          "Sur le sentier côtier, le Parc national indiquait le 23 octobre 2026 : Riomaggiore–Manarola en 25 minutes (facile), Manarola–Corniglia fermé, Corniglia–Vernazza en 1 h 30 et Vernazza–Monterosso en 2 heures, classés pour marcheurs expérimentés. Pour passer de Manarola à Corniglia, prenez le train : deux minutes.",
-          "Pour les consignes présentées par Italia.it, le sentier n. 509 mène au santuario della Madonna di Soviore, à une altitude de 418 mètres, et permet de découvrir un merveilleux bosco di lecci et cipressi. Selon Italia.it, la Cinque Terre Card permet également de participer à des escursioni a tema naturalistico et letterario, entre avril et août, pour découvrir les lieux tels que Punta Mesco, La casa del Doganiere et Meriggiare pallido e assorto."
+          "Sur le sentier côtier, le Parc national indiquait le 23 octobre 2026 : Riomaggiore–Manarola en 25 minutes (facile), Manarola–Corniglia fermé, Corniglia–Vernazza en 1 h 30 et Vernazza–Monterosso en 2 heures, classés pour marcheurs expérimentés. Pour passer de Manarola à Corniglia, prenez le train : deux minutes."
         ],
         "tip": "Commencez la journée par le sud (Riomaggiore), finissez par le nord (Monterosso) : vous suivez le sens de la Via dell’Amore et gardez la plage pour la fin."
       },
@@ -2375,7 +2380,7 @@
       },
       {
         "question": "La Cinque Terre Card est-elle rentable ?",
-        "answer": "La Treno Card d’un jour coûte 22 à 35 € jusqu’au 1er novembre 2026 (17,30 € ensuite) et inclut trains, bus, sentier et Via dell’Amore. Avec 4 trajets en train à 5–10 € et la Via dell’Amore, elle devient vite intéressante."
+        "answer": "La Treno Card d’un jour coûte 17,30 € jusqu’au 31 décembre 2026 (22 à 35 € en pleine saison 2026) et inclut trains, bus, sentier et Via dell’Amore. Avec 4 trajets en train à 5–10 € et la Via dell’Amore, elle devient vite intéressante."
       },
       {
         "question": "La Via dell’Amore est-elle ouverte ?",
@@ -2451,7 +2456,7 @@
     ],
     "sourcesCheckedOn": "2026-10-24",
     "publishedOn": "2026-10-24",
-    "updatedOn": "2026-10-31"
+    "updatedOn": "2026-11-12"
   },
   {
     "slug": "cote-amalfitaine-sans-voiture",
@@ -2506,7 +2511,7 @@
         "paragraphs": [
           "Italo relie Rome à Salerne en 1 h 39, dix fois par jour, à partir de 14,90 € (Rome–Naples : 55 minutes, 31 trains par jour, même prix d’appel). Les Frecciarossa de Trenitalia font Rome–Naples en un peu plus d’une heure. À Salerne, le ferry Travelmar part de Piazza Concordia, juste devant la gare : on passe du train au bateau en quelques minutes.",
           "Travelmar annonce un service toute l’année. Depuis le 1er octobre, les départs de Salerne vers Amalfi et Positano ont lieu à 8 h 40, 9 h 40, 10 h 40, 11 h 10, 11 h 40, 13 h 10, 14 h 10, 15 h 30 et 17 h 10. Un bagage cabine de 45 × 35 × 20 cm est compris ; une valise supplémentaire coûte 3 €.",
-          "Depuis Naples, les ferries NLG partent du Molo Beverello : 32 € pour Positano (la plupart des départs jusqu’au 3 novembre 2026), 18,50 € pour Sorrente."
+          "Depuis Naples, les ferries NLG partent du Molo Beverello pour Positano à 32 € l’aller. Du 5 novembre 2026 au 31 mars 2027, il ne reste qu’un départ le samedi à 9 h 15 et le dimanche à 10 h, avec un retour de Positano le samedi à 16 h 35 et le dimanche à 16 h 24."
         ],
         "table": {
           "headers": [
@@ -2588,7 +2593,7 @@
       },
       {
         "question": "Les ferries circulent-ils en hiver ?",
-        "answer": "Travelmar annonce un service toute l’année au départ de Salerne. Les ferries NLG depuis Naples vers Positano s’arrêtent pour la plupart le 3 novembre 2026."
+        "answer": "Travelmar annonce un service toute l’année au départ de Salerne. Depuis Naples, NLG ne garde cet hiver qu’un aller pour Positano le samedi à 9 h 15 et le dimanche à 10 h, jusqu’au 31 mars 2027."
       },
       {
         "question": "Combien coûte Pompéi ?",
@@ -2668,7 +2673,7 @@
     ],
     "sourcesCheckedOn": "2026-10-24",
     "publishedOn": "2026-10-24",
-    "updatedOn": "2026-10-24"
+    "updatedOn": "2026-11-12"
   },
   {
     "slug": "douro-train-depuis-porto",
@@ -2679,11 +2684,11 @@
     "cover": "douro-vallee",
     "description": "La ligne du Douro jusqu’à Pinhão, côté fenêtre, les azulejos de la gare, une heure de rabelo à 15 € et les travaux de l’hiver 2026-2027.",
     "readMinutes": 4,
-    "summary": "La ligne du Douro remonte le fleuve depuis Porto-Campanhã : Pinhão en 2 h 21, Pocinho en 3 h 20, assis à droite pour avoir le Douro sous la fenêtre. À Pinhão, la gare et ses 3 047 azulejos de 1937, un rabelo de 50 minutes pour 15 € et la Quinta do Bomfim à deux pas. Attention : du 3 novembre 2026 au 24 mars 2027, des bus remplacent les trains entre Marco de Canaveses et Régua, et seuls quatre trains par jour remontent de Régua à Pinhão.",
+    "summary": "La ligne du Douro remonte le fleuve depuis Porto-Campanhã : Pinhão en 4 h 01 cet hiver avec un car de remplacement (2 h 21 sans les travaux), assis à droite pour avoir le Douro sous la fenêtre. À Pinhão, la gare et ses 3 047 azulejos de 1937, un rabelo de 50 minutes pour 15 € et la Quinta do Bomfim à deux pas. Attention : du 3 novembre 2026 au 24 mars 2027, des bus remplacent les trains entre Marco de Canaveses et Régua, et seuls quatre trains par jour remontent de Régua à Pinhão.",
     "keyFacts": [
       {
-        "value": "2 h 21",
-        "label": "Porto-Campanhã → Pinhão (départ 7 h 30, arrivée 9 h 51)"
+        "value": "4 h 01",
+        "label": "Porto-Campanhã → Pinhão cet hiver : train de 7 h 30, car de remplacement jusqu’à Régua, train de 11 h 04, arrivée 11 h 31"
       },
       {
         "value": "À droite",
@@ -2712,7 +2717,7 @@
         "title": "Avant tout : les travaux de l’hiver 2026-2027",
         "paragraphs": [
           "CP a annoncé le 14 octobre 2026 la suspension des trains entre Marco de Canaveses et Régua du 3 novembre 2026 au 24 mars 2027. Des bus les remplacent, directs entre Caíde et Régua ou omnibus depuis Marco ; ils n’acceptent ni vélos, ni trottinettes, ni fauteuils roulants. Au-delà de Régua, quatre trains par jour continuent vers Pinhão et Pocinho, au départ de Régua à 11 h 04, 13 h, 16 h 49 et 19 h 45.",
-          "Jusqu’au 2 novembre inclus, le train fait tout le trajet. Pour un voyage cet hiver, prévoyez la journée plus longue et visez le train de 11 h 04 au départ de Régua pour arriver à Pinhão à 11 h 31."
+          "Depuis Porto, le train de 7 h 30 rejoint Caíde à 8 h 16, d’où le car de remplacement arrive à Régua avant le train de 11 h 04, qui entre en gare de Pinhão à 11 h 31 : 4 h 01 au total. Le départ de 9 h 30 suit le même chemin et arrive à Pinhão à 13 h 27."
         ]
       },
       {
@@ -2720,10 +2725,10 @@
         "title": "La ligne : 172 km au bord du fleuve",
         "image": "douro-train",
         "paragraphs": [
-          "La ligne du Douro relie Porto à Pocinho sur 172 kilomètres et 37 gares, en grande partie au ras de l’eau. Les InterRegional partent surtout de Porto-Campanhã (7 h 30, 9 h 30, 11 h 30, 13 h 30, 17 h 30…), plus rarement de São Bento. Avec le train de 7 h 30, vous êtes à Régua à 9 h 25, à Pinhão à 9 h 51 et à Pocinho à 10 h 50.",
+          "La ligne du Douro relie Porto à Pocinho sur 172 kilomètres et 37 gares, en grande partie au ras de l’eau. Cet hiver, les InterRegional partent de Porto-Campanhã à 7 h 30, 9 h 30, 13 h 30, 17 h 30 et 19 h 30. Avant les travaux, le train de 7 h 30 entrait en gare de Pinhão à 9 h 51 sans changement ; jusqu’au 24 mars 2027, le même départ y arrive à 11 h 31, après un car de remplacement.",
           "Après Régua, la voie suit la rive droite du fleuve : asseyez-vous à droite en montant, à gauche au retour. Défilent les écluses du barrage de Bagaúste, la petite gare de Covelinhas au bord de l’eau, puis les vignes en terrasses jusqu’à Pinhão et la confluence sauvage du Tua."
         ],
-        "tip": "Prenez le train de 7 h 30 : vous arrivez à Pinhão à 9 h 51, avant les excursions en car, et le retour de 16 h 41 vous laisse toute la journée (horaire valable jusqu’au 2 novembre 2026)."
+        "tip": "Prenez le train de 7 h 30 : avec le car de remplacement puis le train de 11 h 04 à Régua, vous êtes à Pinhão à 11 h 31. Pour rentrer, le train de 17 h 15 à Pinhão vous ramène à Porto-Campanhã à 20 h 20 ou 21 h 05 selon la correspondance (horaire d’hiver en vigueur depuis le 3 novembre 2026)."
       },
       {
         "id": "pinhao",
@@ -2745,15 +2750,14 @@
         "image": "douro-pinhao-gare",
         "paragraphs": [
           "À Régua, le Museu do Douro raconte le vin et le fleuve. Entrée 8 € (4 € seniors et étudiants, gratuit jusqu’à 12 ans), 10 € avec une dégustation de porto, ouvert tous les jours de 10 h à 17 h 30 du 1er novembre au 28 février. Aux guichets CP, un billet combiné « Cultura e Gastronomia » réunit le train régional et le musée, de 24 € à 38,50 €.",
-          "Le train historique du Douro, une locomotive diesel et cinq voitures du début du XXe siècle roulant à 50 km/h entre Régua et Tua, a terminé sa saison 2026 le 18 octobre (60 € l’adulte, 32 € de 4 à 12 ans). La saison 2027 n’est pas encore annoncée.",
-          "Le Museu do Douro propose désormais des visites guidées avec dégustation de vin de Porto à partir de 10€ par personne, ainsi que des dégustations de vin documentées à partir de 12,50€ par personne. Pour les consignes présentées par le Museu do Douro, les visiteurs peuvent choisir entre différents packs, tels que le Pack MD1 qui inclut une visite au musée et une dégustation de vin de Porto pour 10,00€ par personne, ou le Pack MD2 qui inclut une visite au musée, une dégustation de vin de Porto et un cadeau de cálice MD pour 15,00€ par personne. De plus, le musée propose des dégustations de vin documentées, telles que la Prova Douro qui comprend 3 vins du Douro DOC pour 12,50€ par personne."
+          "Le train historique du Douro, une locomotive diesel et cinq voitures du début du XXe siècle roulant à 50 km/h entre Régua et Tua, a terminé sa saison 2026 le 18 octobre (60 € l’adulte, 32 € de 4 à 12 ans). La saison 2027 n’est pas encore annoncée."
         ]
       }
     ],
     "faq": [
       {
         "question": "Peut-on visiter la vallée du Douro sans voiture ?",
-        "answer": "Oui : le train relie Porto-Campanhã à Pinhão en 2 h 21, et Pinhão concentre gare aux azulejos, bateaux rabelo et quinta accessible à pied. Du 3 novembre 2026 au 24 mars 2027, une partie du trajet se fait en bus."
+        "answer": "Oui : jusqu’au 24 mars 2027, Porto-Campanhã – Pinhão prend 4 h 01 avec le train de 7 h 30, un car de remplacement jusqu’à Régua et le train de 11 h 04. Pinhão concentre la gare aux azulejos, les bateaux rabelo et une quinta accessible à pied."
       },
       {
         "question": "De quel côté s’asseoir dans le train du Douro ?",
@@ -2817,7 +2821,7 @@
     ],
     "sourcesCheckedOn": "2026-10-24",
     "publishedOn": "2026-10-24",
-    "updatedOn": "2026-11-03"
+    "updatedOn": "2026-11-12"
   },
   {
     "slug": "japon-itineraire-2-semaines",
@@ -3377,7 +3381,7 @@
     ],
     "sourcesCheckedOn": "2026-10-24",
     "publishedOn": "2026-10-24",
-    "updatedOn": "2026-11-11",
+    "updatedOn": "2026-11-12",
     "slug": "londres-noel-marches",
     "title": "Londres en décembre 2026 : Winter Wonderland, patinoires et métro plafonné à 8,90 £",
     "shortTitle": "Londres en décembre",
@@ -3462,8 +3466,7 @@
         "title": "Patiner à Somerset House",
         "paragraphs": [
           "Chaque hiver, une patinoire s’installe dans la cour de Somerset House, l’Edmond J. Safra Fountain Court : c’est l’une des plus photogéniques de Londres. En 2026, elle ouvre du 11 novembre au 10 janvier. Les billets adultes coûtent de 15 à 28,50 £ selon le créneau, heures creuses ou de pointe, et 11 £ pour les enfants.",
-          "Les soirées Skate Lates reviennent cette année, avec des DJ aux platines pour patiner en musique.",
-          "La patinoire de Somerset House propose désormais des sessions de patinage pour les utilisateurs de fauteuil roulant et des sessions relaxées à capacité réduite, selon Time Out London. Ces sessions sont prévues pour accueillir les personnes à mobilité réduite et offrir une expérience de patinage plus calme et accessible."
+          "Les soirées Skate Lates reviennent cette année, avec des DJ aux platines pour patiner en musique."
         ]
       },
       {
