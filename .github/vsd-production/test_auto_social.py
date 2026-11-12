@@ -718,7 +718,21 @@ class PlacePhotoTests(unittest.TestCase):
         self.assertEqual(len(kept), len(used))
         self.assertTrue(result["created"])
 
-    def test_hand_reviewed_photos_of_the_shared_catalogue_complete_a_guide(self):
+    def test_hand_reviewed_photos_complete_a_guide_and_the_sealed_catalogue_is_never_written(self):
+        sealed = HERE / "assets/photos/catalogue.json"
+        before = hashlib.sha256(sealed.read_bytes()).hexdigest()
+        with mock.patch.object(photo_intake, "add_photo", lambda catalogue, photo_id, title, now: {**catalogue, "photos": {**catalogue["photos"], photo_id: {"commonsTitle": title, "licence": "CC0"}}}), \
+                tempfile.TemporaryDirectory() as folder, mock.patch.object(photo_intake, "REVIEWED", Path(folder) / "reviewed.json"), \
+                mock.patch("sys.argv", ["photo_intake.py", "kyoto-gion", "File:Gion.jpg", "lisbonne-alfama-toits", "File:Deja.jpg"]), \
+                mock.patch("builtins.print"):
+            photo_intake.main()
+            written = json.loads((Path(folder) / "reviewed.json").read_text())["photos"]
+        self.assertEqual(list(written), ["kyoto-gion"])  # an id of the sealed catalogue is refused, not shadowed
+        self.assertEqual(hashlib.sha256(sealed.read_bytes()).hexdigest(), before)
+        self._guide_completed_from("reviewed.json")
+        self._guide_completed_from("catalogue.json")
+
+    def _guide_completed_from(self, catalogue_name):
         f = self.fixture(photos=3)
         records = {}
         for name in ("gion", "fushimi", "arashiyama"):
@@ -729,7 +743,7 @@ class PlacePhotoTests(unittest.TestCase):
                                         "author": "Photographe", "licence": "CC BY 4.0", "licenceUrl": photo_intake.LICENCES["CC BY 4.0"],
                                         "commonsSha1": hashlib.sha1(name.encode()).hexdigest(), "retrievedAt": p.stamp(NOW), "alt": f"Kyoto, {name}."}
         records["osaka-chateau"] = {**records["kyoto-gion"], "commonsTitle": "File:Osaka.jpg"}
-        (f.root / "assets/photos/catalogue.json").write_text(json.dumps({"schemaVersion": 1, "photos": records}))
+        (f.root / "assets/photos" / catalogue_name).write_text(json.dumps({"schemaVersion": 1, "photos": records}))
         made = [c for c in f.run(limit=30)["created"] if c["kind"] == "reel"]
         self.assertTrue(made)
         used = {scene["photo"] for scene in f.scenario(made[0]["id"])["scenes"]}
@@ -813,6 +827,37 @@ class DensityTests(unittest.TestCase):
         other = self.fixture()
         plain = [other.scenario(c["id"]) for c in other.run(limit=30)["created"] if c["channel"] == "facebook"]
         self.assertIn("prix, horaires", plain[0]["caption"]["cta"])
+
+
+class StageTests(unittest.TestCase):
+    def test_a_dash_separates_two_towns(self):
+        self.assertTrue({"merida", "cancun", "tren", "maya"} <= reel_formats.words_of("Jour 7 : Mérida–Cancún en Tren Maya"))
+
+    def test_a_stage_carries_its_price_with_what_it_pays_for(self):
+        label = "l’entrée de Chichén Itzá pour un étranger depuis le « boleto único » du 27 mars 2026 (105 pesos de tarif INAH inclus)"
+        fact = {"value": "697 pesos", "label": label, "short": reel_formats.short_label(label), "shortExcerpt": "697 pesos " + label}
+        step = {"kicker": "Jour 3", "lines": ["Chichén Itzá"], "title": "Jour 3 : Chichén Itzá à l’ouverture", "rest": "Ik Kil l’après-midi", "fact": fact}
+        # No punctuation within reach: the label stops before what only qualifies the figure, still the guide's own words.
+        shown = "l’entrée de Chichén Itzá pour un étranger"
+        self.assertEqual(fact["short"], shown)
+        fact["shortExcerpt"] = "697 pesos " + shown
+        scene = reel_formats.stage_plan(step, ("photo", "yucatan-cenote"), "Guide Yucatán")
+        self.assertEqual(scene["detail"], "*697 pesos* " + shown)
+        self.assertEqual(scene["facts"][1]["excerpt"], "697 pesos " + shown)
+        self.assertEqual(reel_formats.short_label("Cancún–Playa del Carmen et Playa del Carmen–Tulum en tarif touriste international (octobre 2026)"),
+                         "Cancún–Playa del Carmen et Playa del Carmen–Tulum")
+        too_long = {**fact, "short": "x" * 90}
+        self.assertEqual(reel_formats.stage_plan({**step, "fact": too_long}, ("photo", "yucatan-cenote"), "Guide")["detail"], "Ik Kil l’après-midi")
+
+    def test_the_first_photo_opens_the_reel_when_the_cover_is_too_small_for_it(self):
+        article = guide(cover="kyoto-absente")
+        facts = [{**fact, "short": fact["label"], "shortExcerpt": fact["value"] + " " + fact["label"], "excerpt": fact["value"] + " " + fact["label"], "section": None}
+                 for fact in FACTS]
+        photos = [(f"kyoto-{n}", {"commonsTitle": f"File:Kyoto {n}.jpg"}, f"Kyoto, vue {n}.") for n in range(1, 8)]
+        scenes, _ = reel_formats.build("liste", article, facts, photos, [], "Le Nozomi relie Tokyo à Kyoto.", "Kyoto", "Japon · Kyoto", "Guide Kyoto",
+                                       ["Kyoto en train"], "")
+        self.assertEqual(scenes[0]["photo"], "kyoto-1")
+        self.assertNotIn("kyoto-1", [scene["photo"] for scene in scenes[1:]])
 
 
 class CaptionTextTests(unittest.TestCase):

@@ -120,6 +120,18 @@
       "notBefore": "2026-11-11T17:17:36Z",
       "file": "scenarios/ig-yucatan-itineraire-10-jours-2026-11-20.json",
       "sha256": "b68e38f01b84518b383f84003aa2eaffebf2db8d4c13b989bf21210cafac15aa"
+    },
+    {
+      "contentId": "ig-laponie-budget-rovaniemi-2026-11-27-2",
+      "notBefore": "2026-11-12T12:30:36Z",
+      "file": "scenarios/ig-laponie-budget-rovaniemi-2026-11-27-2.json",
+      "sha256": "c5bdb158c0a6fcc5407d51b5f6cd605b4d84689e4dbcf018116264b89ac84c14"
+    },
+    {
+      "contentId": "ig-yucatan-itineraire-10-jours-2026-11-20-2",
+      "notBefore": "2026-11-12T12:30:36Z",
+      "file": "scenarios/ig-yucatan-itineraire-10-jours-2026-11-20-2.json",
+      "sha256": "4c1d76d8ff6fa133d2ed467f11d247694c6b3dd31c8708abe54beb609b4d1952"
     }
   ]
 }

@@ -1,0 +1,183 @@
+{
+  "schemaVersion": 1,
+  "contentId": "ig-laponie-budget-rovaniemi-2026-11-27-2",
+  "status": "rendered_not_published",
+  "fingerprint": "062af2fb61befbb1935dfb0da586b2818027aeec6b1c6eec8a21497154f07904",
+  "createdAt": "2026-11-12T12:30:53.313852Z",
+  "renderFinishedAt": "2026-11-12T12:31:19.634453Z",
+  "rendererContractVersion": 4,
+  "rendererSha256": "2d337f981d604100e5bb89001e685106b0a2fa8aab05b9c4fe6eff0a448b6fe9",
+  "drawingSha256": "18fff20f2fc461191c57cdbfb620129502ac051e6b3719a239ac872df87e204a",
+  "motionSha256": "dd5608c3447e18a918c28e38fa6d664a31f4417591c1bbc60d7c07f269b40924",
+  "format": "liste",
+  "kind": "reel",
+  "channel": "instagram",
+  "publishAt": "2026-11-27T17:00:00Z",
+  "reviewValidUntil": "2026-12-12T12:30:36Z",
+  "sourceCheckedOn": "2026-11-12",
+  "targetUrl": "https://voyagesansdetour.fr/finlande/laponie-budget-rovaniemi/",
+  "voice": null,
+  "presenter": null,
+  "sourceUrls": [
+    "https://voyagesansdetour.fr/finlande/laponie-budget-rovaniemi/"
+  ],
+  "photos": {
+    "laponie-aurore": {
+      "licence": "CC BY-SA 4.0",
+      "author": "WikiLucas00",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Aurora_borealis_over_Saana_fell.jpg"
+    },
+    "laponie-train-nuit-rovaniemi": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Tyg728",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Sleeper_train_in_Rovaniemi_railway_station_20170201.jpg"
+    },
+    "laponie-bureau-pere-noel": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Floppyjb",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Santa_Claus_Village.jpg"
+    },
+    "laponie-traineau-renne": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Yair Haklai",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Reindeer_Sleigh_Ride-Lapland.jpg"
+    },
+    "laponie-huskies-rovaniemi": {
+      "licence": "CC0",
+      "author": "darkroomsg (Unsplash)",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Dog_sledding_in_Rovaniemi_(Unsplash).jpg"
+    },
+    "laponie-cabane-neige-rovaniemi": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Kim.schnackenberg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Schneebedeckte_H%C3%BCtte_in_Rovanimie,_Lapland,_Finland._24.02.2019.jpg"
+    },
+    "laponie-village-boules-neige": {
+      "licence": "CC BY-SA 2.5",
+      "author": "Samuli Lintula",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Snowball_pyramid_at_Santa_Claus%27_Village_Large.jpg"
+    }
+  },
+  "clips": {},
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "durationSeconds": 22.6,
+    "videoCodec": "h264",
+    "pixelFormat": "yuv420p",
+    "videoBitrateBps": 2386113,
+    "audioCodec": "aac",
+    "audioSampleRate": 48000,
+    "audioBitrateBps": 96343,
+    "fullDecodePassed": true,
+    "loudness": {
+      "integratedLufs": -16.0,
+      "truePeakDbfs": -2.4
+    }
+  },
+  "files": [
+    {
+      "file": "apercu.jpg",
+      "sha256": "b26719473fd80d7a9dcf02675aa3958b7da07df2449b618df6f6532f6ca270d4",
+      "bytes": 261962
+    },
+    {
+      "file": "credits.txt",
+      "sha256": "75e92bdf578638bbbae315aa71a35e88ca4bda48b0ab177509b7e09ae26e0660",
+      "bytes": 3297
+    },
+    {
+      "file": "dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "file": "encode.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "legende.txt",
+      "sha256": "6ac21b778d30973ae567c95d6a5a7792f09ba349c338c7a4c4d8f311ebec00d0",
+      "bytes": 923
+    },
+    {
+      "file": "notosans-OFL.txt",
+      "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a",
+      "bytes": 4396
+    },
+    {
+      "file": "playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    },
+    {
+      "file": "poster.jpg",
+      "sha256": "75fc4c41841641a556807946173b197712f8f07766bcc60672eeb9f0a0076597",
+      "bytes": 272745
+    },
+    {
+      "file": "reel.mp4",
+      "sha256": "6568251ff786c9ab2db1ff525df3b0467caf63055656521bd34052c96e1d244f",
+      "bytes": 7039439
+    },
+    {
+      "file": "scenario.json",
+      "sha256": "c5bdb158c0a6fcc5407d51b5f6cd605b4d84689e4dbcf018116264b89ac84c14",
+      "bytes": 8113
+    },
+    {
+      "file": "scene-01.jpg",
+      "sha256": "864d0087e802274dd53ee09b4c6682fa2becf2ed9c6fc28830039f136694bbc1",
+      "bytes": 249127
+    },
+    {
+      "file": "scene-02.jpg",
+      "sha256": "bd69355bc6c0f969964a15d05988b8828412df7478abcc5e079f75468df3f31c",
+      "bytes": 237720
+    },
+    {
+      "file": "scene-03.jpg",
+      "sha256": "8be1067fcb141c27679ae81fca3fed4d502ef731e401a3f3159cc7cb83ac8b51",
+      "bytes": 408322
+    },
+    {
+      "file": "scene-04.jpg",
+      "sha256": "bd456b10668f60d5de4357eb1b2f70795d18fc14abd5a394a44ffb7d45ad7a25",
+      "bytes": 398567
+    },
+    {
+      "file": "scene-05.jpg",
+      "sha256": "b071d190205b103339348aa11e36d14b411f04b398d0fb442e211dec80ad531b",
+      "bytes": 242947
+    },
+    {
+      "file": "scene-06.jpg",
+      "sha256": "3e6d2492966f312737a0c0a96dacb1db2f77650a7cf4551405973f3161f1b2c5",
+      "bytes": 395892
+    },
+    {
+      "file": "scene-07.jpg",
+      "sha256": "6ab3d44304c9711e194f5a0dac1b35e8be00de96081036a1760494bceb92ea0b",
+      "bytes": 238741
+    }
+  ],
+  "runtime": {
+    "wallSeconds": 24.978,
+    "encoderThreads": 2,
+    "pillowVersion": "11.3.0",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers"
+  },
+  "publication": {
+    "uploaded": false,
+    "scheduled": false,
+    "published": false,
+    "readyForAutomaticImport": false
+  },
+  "cost": {
+    "newPaidService": false,
+    "providerCalls": 0,
+    "monetarySpendEur": 0
+  }
+}

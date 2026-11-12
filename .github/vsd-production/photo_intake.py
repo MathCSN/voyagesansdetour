@@ -2,7 +2,11 @@
 """Add freely licensed Wikimedia Commons photos to the social photo catalogue.
 
 Each photo keeps its author, licence, source page and fingerprint. Only CC BY,
-CC BY-SA, CC0 and public-domain files are accepted; anything else is refused.
+CC BY-SA, CC0 and public-domain photographs are accepted; anything else is refused.
+Photos go to assets/photos/reviewed.json: looked at by a person, they complete the
+automatic posts of the same place (same id prefix as the guide's photos: "laponie-…").
+Add an "alt" line in French to each new record. catalogue.json is sealed by the
+hand-written scenarios and is left alone unless --sealed-catalogue is given.
 Usage: python3 photo_intake.py <photo-id> "File:Commons title.jpg" [...]
 """
 from __future__ import annotations
@@ -23,6 +27,7 @@ from PIL import Image
 HERE = Path(__file__).resolve().parent
 PHOTOS = HERE / "assets" / "photos"
 CATALOGUE = PHOTOS / "catalogue.json"
+REVIEWED = PHOTOS / "reviewed.json"
 API = "https://commons.wikimedia.org/w/api.php"
 USER_AGENT = {"User-Agent": "VoyageSansDetour-social/1.0 (contact@voyagesansdetour.fr)"}
 PHOTO_ID = re.compile(r"[a-z0-9][a-z0-9-]{2,63}\Z")
@@ -173,10 +178,10 @@ def download(url: str) -> Image.Image:
     return image.convert("RGB")
 
 
-def load_catalogue() -> dict:
-    if not CATALOGUE.exists():
+def load_catalogue(path: Path = CATALOGUE) -> dict:
+    if not path.exists():
         return {"schemaVersion": 1, "photos": {}}
-    return json.loads(CATALOGUE.read_text())
+    return json.loads(path.read_text())
 
 
 def photo_record(photo_id: str, title: str, now: dt.datetime, folder: Path = PHOTOS, prefix: str = "assets/photos/") -> dict:
@@ -233,20 +238,27 @@ def commons_search(query: str, limit: int = 20) -> list[str]:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("pairs", nargs="+", help="photo-id followed by its Commons title, repeated")
+    parser.add_argument("--sealed-catalogue", action="store_true",
+                        help="write to catalogue.json instead of reviewed.json: the hand-written scenarios seal that file by "
+                             "fingerprint, so every one of them must be sealed again afterwards (seal_scenarios.py)")
     args = parser.parse_args()
     if len(args.pairs) % 2:
         raise SystemExit("Provide pairs: photo-id title")
     PHOTOS.mkdir(parents=True, exist_ok=True)
-    catalogue = load_catalogue()
+    # reviewed.json: photos a person looked at, offered to the automatic posts of the same place (media_library.py).
+    target = CATALOGUE if args.sealed_catalogue else REVIEWED
+    catalogue, other = load_catalogue(target), load_catalogue(REVIEWED if args.sealed_catalogue else CATALOGUE)
     now = dt.datetime.now(dt.timezone.utc).replace(microsecond=0)
     for photo_id, title in zip(args.pairs[::2], args.pairs[1::2]):
         try:
+            if photo_id in other["photos"]:
+                raise Refused("Photo id already catalogued: " + photo_id)
             catalogue = add_photo(catalogue, photo_id, title, now)
             print("added", photo_id, catalogue["photos"][photo_id]["licence"])
         except Refused as error:
             print("refused", photo_id, error)
     ordered = {"schemaVersion": 1, "photos": dict(sorted(catalogue["photos"].items()))}
-    CATALOGUE.write_text(json.dumps(ordered, ensure_ascii=False, indent=2) + "\n")
+    target.write_text(json.dumps(ordered, ensure_ascii=False, indent=2) + "\n")
 
 
 if __name__ == "__main__":

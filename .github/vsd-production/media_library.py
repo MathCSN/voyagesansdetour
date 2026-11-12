@@ -105,11 +105,14 @@ class Photos:
         self.root, self.now = root, now
         self.download = downloader or self._download
         self.known: dict[str, tuple[str, dict]] = {}
-        shared = root / "assets" / "photos" / "catalogue.json"
-        # The social catalogue: photos added and looked at by hand (photo_intake.py), candidates for the guides of the same place.
-        self.shared: dict[str, dict] = json.loads(shared.read_text()).get("photos", {}) if shared.is_file() else {}
-        catalogues = [shared] if shared.is_file() else []
-        catalogues += sorted((root / AUTO).glob("*/photos.json"))
+        # Photos added and looked at by hand (photo_intake.py), candidates for the guides of the same place: the catalogue of
+        # the hand-written scenarios (sealed by their fingerprints, only read here), then reviewed.json, which grows.
+        hand = [path for path in (root / "assets" / "photos" / name for name in ("catalogue.json", "reviewed.json")) if path.is_file()]
+        self.shared: dict[str, dict] = {}
+        for path in hand:
+            for photo_id, record in json.loads(path.read_text()).get("photos", {}).items():
+                self.shared.setdefault(photo_id, record)
+        catalogues = hand + sorted((root / AUTO).glob("*/photos.json"))
         for path in catalogues:
             for photo_id, record in json.loads(path.read_text()).get("photos", {}).items():
                 if (root / record.get("file", "")).is_file():

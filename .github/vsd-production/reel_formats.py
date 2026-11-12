@@ -21,6 +21,9 @@ import production as p
 NBSP = " "
 UNIT = r"(?:h|min|€|km|m|%|jours?|nuits?|trains?|marches|ans|cm|mm|°C|dh|\$|¥|£|₫|฿)(?!\w)"
 SHORT_LABEL = 64                       # characters read comfortably in three seconds
+STAGE_DETAIL = 80                      # under a stage of an itinerary: its price and what it pays for, on three lines at most
+DETAIL_MAX = 96                        # a label longer than three lines on screen is never shown; its figure stays in the guide
+SOFT_PAUSE = re.compile(r" (?=(?:depuis|selon|en tarif|avec|à partir)\b)")
 MIN_SHORT_LABEL = 18
 FIGURE_MAX = 16                        # longer values are shown on white boxes, in two lines if needed
 HOOK_SECONDS, CTA_SECONDS = 2.2, 2.4
@@ -116,6 +119,10 @@ def short_label(label: str, limit: int = SHORT_LABEL) -> str:
             if label[:match.start()].count("(") == label[:match.start()].count(")")
             and not (match.group() == ", " and in_enumeration(label, match.start()))]
     fitting = [cut for cut in cuts if MIN_SHORT_LABEL <= cut <= limit]
+    if not fitting:
+        # No punctuation in reach: stop before what only qualifies the figure ("… pour un étranger | depuis le 27 mars").
+        fitting = [match.start() for match in SOFT_PAUSE.finditer(label)
+                   if MIN_SHORT_LABEL <= match.start() <= limit and label[:match.start()].count("(") == label[:match.start()].count(")")]
     return label[:max(fitting)].rstrip() if fitting else label
 
 
@@ -214,7 +221,8 @@ def ordered(formats: list[str], used: list[str]) -> list[str]:
 # --- plans -------------------------------------------------------------------
 
 def words_of(value: str) -> set[str]:
-    return set(re.findall(r"[a-z0-9]{4,}", destinations.ascii_fold(value).lower()))
+    """Words of four letters and more; a dash separates two words ('Mérida–Cancún' names both towns)."""
+    return set(re.findall(r"[a-z0-9]{4,}", destinations.ascii_fold(re.sub(r"[^\w\s]", " ", value)).lower()))
 
 
 class Media:
@@ -297,10 +305,10 @@ class Brief:
 
     @property
     def numbered(self) -> list[dict]:
-        return [f for f in self.facts if figure_lines(f["value"]) and not repeats_title(f, self.article)]
+        return [f for f in self.facts if figure_lines(f["value"]) and not repeats_title(f, self.article) and len(f["short"]) <= DETAIL_MAX]
 
     def hook(self, promise: str) -> dict:
-        return plan("hook", self.media.opening(self.article.get("cover")), self.kicker, self.title_lines + [promise], HOOK_SECONDS,
+        return plan("hook", self.media.opening(self.media.cover), self.kicker, self.title_lines + [promise], HOOK_SECONDS,
                     facts=[{"source": "guide", "excerpt": self.opening}], tag=self.tag)
 
 
@@ -317,7 +325,7 @@ def figures_reel(fmt: str, brief: Brief) -> tuple[dict, list[dict], list[str]]:
         raise Held("not_enough_photos_or_figures")
     body = [fact_plan(fact, brief.media, brief.place, brief.tag, f"{n}/{len(chosen)}") for n, fact in enumerate(chosen, 1)]
     if lead:
-        hook = plan("hook", brief.media.opening(brief.article.get("cover")), "Combien ça coûte ?", brief.title_lines + ["*" + unbreakable(lead["value"]) + "*"],
+        hook = plan("hook", brief.media.opening(brief.media.cover), "Combien ça coûte ?", brief.title_lines + ["*" + unbreakable(lead["value"]) + "*"],
                     round(HOOK_SECONDS + 0.6, 1), detail=unbreakable(lead["short"]), facts=[{"source": "guide", "excerpt": lead["shortExcerpt"]}], tag=brief.tag)
         return hook, body, [caption_line(f) for f in [lead] + chosen]
     word = "chiffres" if all(re.search(r"\d", f["value"]) for f in chosen) else "repères"
@@ -327,9 +335,10 @@ def figures_reel(fmt: str, brief: Brief) -> tuple[dict, list[dict], list[str]]:
 
 def stage_plan(step: dict, picture: tuple[str, str], tag: str) -> dict:
     quotes, detail, fact = [{"source": "guide", "excerpt": step["title"]}], step["rest"], step["fact"]
-    if fact and len(fact["value"] + fact["short"]) <= 100:
-        detail = "*" + unbreakable(fact["value"]) + "* " + unbreakable(fact["short"])
-        quotes.append({"source": "guide", "excerpt": fact["shortExcerpt"]})
+    short = fact["short"] if fact else ""
+    if fact and len(fact["value"] + short) <= STAGE_DETAIL:
+        detail = "*" + unbreakable(fact["value"]) + "* " + unbreakable(short)
+        quotes.append({"source": "guide", "excerpt": fact["value"] + " " + short})
     return plan("fact", picture, step["kicker"], step["lines"], round(seconds_for(detail) - 0.4, 1), detail=detail, facts=quotes, tag=tag)
 
 
@@ -368,7 +377,9 @@ def build(fmt: str, article: dict, facts: list[dict], photos: list, clips: list,
           tag: str, title_lines: list[str], page: str) -> tuple[list[dict], list[str]]:
     """The plans of one reel and the useful lines of its caption. Raises Held when the guide cannot fill the format."""
     # The body takes the photos that show what it names; the hook and the call keep two, the cover first.
-    brief = Brief(article, facts, Media(photos, clips, reserve=2, cover=article.get("cover")), opening, place, kicker, tag, title_lines, page)
+    # The picture people see first: the guide's cover, or its first photo when the cover is too small for a reel.
+    cover = article.get("cover") if any(photo[0] == article.get("cover") for photo in photos) else (photos[0][0] if photos else None)
+    brief = Brief(article, facts, Media(photos, clips, reserve=2, cover=cover), opening, place, kicker, tag, title_lines, page)
     if fmt in ("liste", "express", "prix"):
         hook, body, lines = figures_reel(fmt, brief)
     elif fmt == "itineraire":

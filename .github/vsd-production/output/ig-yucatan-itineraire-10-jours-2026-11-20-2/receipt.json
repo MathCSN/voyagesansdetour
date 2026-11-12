@@ -1,0 +1,183 @@
+{
+  "schemaVersion": 1,
+  "contentId": "ig-yucatan-itineraire-10-jours-2026-11-20-2",
+  "status": "rendered_not_published",
+  "fingerprint": "e42320f51a8ca5c238e671b5dc53d6e64a8fec8da8c0305166b160a18448dfe4",
+  "createdAt": "2026-11-12T12:31:19.808834Z",
+  "renderFinishedAt": "2026-11-12T12:31:42.322423Z",
+  "rendererContractVersion": 4,
+  "rendererSha256": "2d337f981d604100e5bb89001e685106b0a2fa8aab05b9c4fe6eff0a448b6fe9",
+  "drawingSha256": "18fff20f2fc461191c57cdbfb620129502ac051e6b3719a239ac872df87e204a",
+  "motionSha256": "dd5608c3447e18a918c28e38fa6d664a31f4417591c1bbc60d7c07f269b40924",
+  "format": "itineraire",
+  "kind": "reel",
+  "channel": "instagram",
+  "publishAt": "2026-11-20T17:00:00Z",
+  "reviewValidUntil": "2026-12-12T12:30:36Z",
+  "sourceCheckedOn": "2026-11-12",
+  "targetUrl": "https://voyagesansdetour.fr/mexique/yucatan-itineraire-10-jours/",
+  "voice": null,
+  "presenter": null,
+  "sourceUrls": [
+    "https://voyagesansdetour.fr/mexique/yucatan-itineraire-10-jours/"
+  ],
+  "photos": {
+    "yucatan-chichen-itza": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Diego Delso",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Templo_el_Castillo_-_Chichen_Itza-Yucatan-Mexico0222.jpg"
+    },
+    "yucatan-valladolid-calzada": {
+      "licence": "CC BY-SA 4.0",
+      "author": "DaLoetz",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Valladolid_(Yucatan)_Calzada_de_los_Frailes.jpg"
+    },
+    "yucatan-cenote": {
+      "licence": "CC BY 2.0",
+      "author": "Shinya Suzuki",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Cenote_Ik_Kil,_Yucatan,_Dec_2011_-_06.jpg"
+    },
+    "yucatan-uxmal-pyramide": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Ulrich Dus",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Archaeological_and_Cultural_Heritage_-_Pir%C3%A1mide_del_Adivino,_Uxmal,_Mexico.jpg"
+    },
+    "yucatan-tren-maya-merida": {
+      "licence": "CC BY-SA 4.0",
+      "author": "ProtoplasmaKid",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tren_X%27Trapolis_Ts%C3%ADimin_K%E2%80%99%C3%A1ak_arribando_a_la_estaci%C3%B3n_M%C3%A9rida_Teya.jpg"
+    },
+    "yucatan-tulum": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Martin Falbisoner",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tulum_-_God_of_the_Winds_Temple_04.JPG"
+    },
+    "yucatan-merida-cathedrale": {
+      "licence": "CC BY 2.0",
+      "author": "xiquinhosilva",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:M%C3%A9rida_de_Yucat%C3%A1n_2023_-_5.jpg"
+    }
+  },
+  "clips": {},
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "durationSeconds": 19.1,
+    "videoCodec": "h264",
+    "pixelFormat": "yuv420p",
+    "videoBitrateBps": 2949465,
+    "audioCodec": "aac",
+    "audioSampleRate": 48000,
+    "audioBitrateBps": 96422,
+    "fullDecodePassed": true,
+    "loudness": {
+      "integratedLufs": -16.1,
+      "truePeakDbfs": -1.3
+    }
+  },
+  "files": [
+    {
+      "file": "apercu.jpg",
+      "sha256": "781fdde9a802aa1350fd5c418d1a4707d3131ffc093de9bf347478eee8b38564",
+      "bytes": 276796
+    },
+    {
+      "file": "credits.txt",
+      "sha256": "a7477ce2b5f87e9affaeb4aa63c2a11d4633b49507e1d9945cf6a97873466bd2",
+      "bytes": 3440
+    },
+    {
+      "file": "dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "file": "encode.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "legende.txt",
+      "sha256": "777df099f53a4fab833206e733eee020b40205bd9a97570bb899372c91b5c066",
+      "bytes": 669
+    },
+    {
+      "file": "notosans-OFL.txt",
+      "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a",
+      "bytes": 4396
+    },
+    {
+      "file": "playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    },
+    {
+      "file": "poster.jpg",
+      "sha256": "c6b5203d74b0fef69557440cbb5cbbdff90535e40e89fcbada4c06295648d713",
+      "bytes": 446851
+    },
+    {
+      "file": "reel.mp4",
+      "sha256": "8d1250e2d6c19aa873d4e45eed8126f3a38fc6fac6e3ed6ef48b2e8b453dcbdb",
+      "bytes": 7294737
+    },
+    {
+      "file": "scenario.json",
+      "sha256": "4c1d76d8ff6fa133d2ed467f11d247694c6b3dd31c8708abe54beb609b4d1952",
+      "bytes": 8017
+    },
+    {
+      "file": "scene-01.jpg",
+      "sha256": "a8e60c81eea31182787847526348590ca40b6263cffa33ba4631a08f89145559",
+      "bytes": 411020
+    },
+    {
+      "file": "scene-02.jpg",
+      "sha256": "0f390f2f2c2f8f1a93d2aa0225f82fd079aa5ee9bba54ce3d2997d9b24831756",
+      "bytes": 321917
+    },
+    {
+      "file": "scene-03.jpg",
+      "sha256": "8fb92d322578ff33cd1a78942396ec2769472958f7a6f729554c2adb5f842e8d",
+      "bytes": 419369
+    },
+    {
+      "file": "scene-04.jpg",
+      "sha256": "2ee59380e8fe5d9b9a7dd120bb356ae3f841551bff8e9790f029dd19258f9383",
+      "bytes": 440381
+    },
+    {
+      "file": "scene-05.jpg",
+      "sha256": "c290af9fe1133da0cb1c1899b1aa3c3e96b105f61b586339b31a70681c4c7953",
+      "bytes": 412537
+    },
+    {
+      "file": "scene-06.jpg",
+      "sha256": "b7775daab4b38031c491e376aec96cef5778bb100b4d8a0452a8f0e5e591a563",
+      "bytes": 310319
+    },
+    {
+      "file": "scene-07.jpg",
+      "sha256": "272262190f1baba780e04ca7995e0e26c2d43e06980d6ac7853f1d313e5b4e0b",
+      "bytes": 352386
+    }
+  ],
+  "runtime": {
+    "wallSeconds": 22.108,
+    "encoderThreads": 2,
+    "pillowVersion": "11.3.0",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers"
+  },
+  "publication": {
+    "uploaded": false,
+    "scheduled": false,
+    "published": false,
+    "readyForAutomaticImport": false
+  },
+  "cost": {
+    "newPaidService": false,
+    "providerCalls": 0,
+    "monetarySpendEur": 0
+  }
+}
