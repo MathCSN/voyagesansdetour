@@ -118,8 +118,10 @@ class ProductionGuards(unittest.TestCase):
         self.assertGreaterEqual((slots[-1] - slots[0]).days, 21)
         # The publication panel counts posts per network over any seven days: the queue never asks for more than cadence.json allows.
         limits = {name: entry["weeklyLimit"] for name, entry in json.loads((p.HERE / "cadence.json").read_text())["channels"].items()}
+        # A post withdrawn from the stock will never go out: the post made again for its slot does not count twice.
+        retired = {entry["batchId"] for entry in json.loads((p.HERE / "reviewed-social" / "index.json").read_text()).get("retirements", [])}
         for channel, limit in limits.items():
-            due = sorted(p.instant(s["publishAt"]) for _, _, s in p.catalogue_entries(self.root) if s["channel"] == channel)
+            due = sorted(p.instant(s["publishAt"]) for _, _, s in p.catalogue_entries(self.root) if s["channel"] == channel and s["id"] + "-v1" not in retired)
             for moment in due:
                 self.assertLessEqual(sum(moment - dt.timedelta(days=7) < other <= moment for other in due), limit, channel)
 

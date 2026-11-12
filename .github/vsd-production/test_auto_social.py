@@ -1133,6 +1133,12 @@ class FoundPhotoTests(unittest.TestCase):
                 for photo_id in ("japon-fuji-chureito", "japon-shinkansen", "japon-tokyo-shibuya")}
         marks = {c["id"]: c["emblematic"] for c in media_library.photo_candidates(article, site, "Japon")}
         self.assertEqual(marks, {"japon-fuji-chureito": True, "japon-shinkansen": False, "japon-tokyo-shibuya": True})
+        # A photo of the site whose subject is off centre says where it is: the vertical frame is cut around it.
+        palace = {"thailande-bangkok-grand-palais": {"source_page": "https://commons.wikimedia.org/wiki/File:Palace.jpg", "alt_fr": "Le Grand Palais de Bangkok."}}
+        thai = guide(slug="thailande", cover="thailande-bangkok-grand-palais", sections=[])
+        self.assertEqual(media_library.photo_candidates(thai, palace, "Thaïlande")[0]["focus"], [0.72, 0.7])
+        got = media_library.gather_photos(thai, 1, mock.Mock(shared={}, get=lambda candidate: ("thailande-bangkok-grand-palais", {"file": "a.jpg"})), palace, "Thaïlande", lambda query: [])
+        self.assertEqual(got[0][1], {"file": "a.jpg", "emblematic": True, "focus": [0.72, 0.7]})
         published = {photo["id"] for photo in json.loads((HERE.parents[1] / "site-src" / "image-sources.json").read_text())["photos"]}
         self.assertEqual(media_library.NOT_A_CLOSING - published, set())  # every listed photo is one the site publishes
         f = Fixture([guide()], photos=5)
@@ -1299,9 +1305,36 @@ class RealGuideTests(unittest.TestCase):
         crossing = "Le pont en métro de métro D au-dessus du Douro"
         self.assertEqual(reel_formats.Media(days, [], everywhere="Portugal · Porto").named(crossing, {"image": "porto-ponte-luis"})[0], "porto-ponte-luis")
         self.assertNotEqual(reel_formats.Media(days, [], everywhere="Portugal · Porto").named(crossing, None)[0], "porto-ponte-luis")
+        # The section's photo gives way to one that shares all it shares and more: the Grand Palace, not Wat Arun, for
+        # the fee of the Grand Palace (both are in Bangkok); it keeps a text another photo only half shares.
+        bangkok = [("thailande-wat-arun", {"commonsTitle": "File:Wat Arun.jpg"}, "Le temple Wat Arun au bord du fleuve Chao Phraya, à Bangkok."),
+                   ("thailande-bangkok-grand-palais", {"commonsTitle": "File:Roof.jpg"}, "Les toits du Grand Palais de Bangkok au coucher du soleil."),
+                   ("thailande-ferry", {"commonsTitle": "File:Ferry.jpg"}, "Un ferry sur le fleuve Chao Phraya.")]
+        thai = lambda: reel_formats.Media(bangkok, [], everywhere="Thaïlande")
+        self.assertEqual(thai().named("le Grand Palais de Bangkok et le Wat Phra Kaew", {"image": "thailande-wat-arun"})[0], "thailande-bangkok-grand-palais")
+        self.assertEqual(thai().named("la traversée du fleuve en ferry depuis Bangkok", {"image": "thailande-wat-arun"})[0], "thailande-wat-arun")
         villa = ("amalfi-ravello", {"commonsTitle": "File:Villa Cimbrone Ravello 12.JPG"}, "Les jardins de la villa Cimbrone, à Ravello.")
         self.assertEqual(reel_formats.words_shown(villa, reel_formats.words_of("Pompéi (25 € avec la villa des Mystères)")), 0)
         self.assertEqual(reel_formats.words_shown(villa, reel_formats.words_of("la villa Cimbrone et ses jardins")), 3)
+
+    def test_a_stage_takes_the_photo_of_the_place_it_names_before_the_photo_of_what_its_figure_names(self):
+        photos = [("yucatan-cenote", {"commonsTitle": "File:Cenote Ik Kil.jpg", "emblematic": True}, "Un cenote entouré de lianes."),
+                  ("yucatan-tren-maya-merida", {"commonsTitle": "File:Tren Maya.jpg"}, "Une rame du Tren Maya en gare de Mérida-Teya."),
+                  ("yucatan-valladolid-calzada", {"commonsTitle": "File:Calzada de los Frailes.jpg"}, "La calzada de los Frailes, à Valladolid."),
+                  ("yucatan-chichen-itza", {"commonsTitle": "File:El Castillo, Chichen Itza.jpg"}, "La pyramide d’El Castillo, à Chichén Itzá."),
+                  ("yucatan-tulum", {"commonsTitle": "File:Tulum.jpg"}, "Les ruines de Tulum au-dessus de la mer."),
+                  ("yucatan-uxmal-pyramide", {"commonsTitle": "File:Uxmal.jpg", "emblematic": True}, "La pyramide du Devin à Uxmal.")]
+        days = [{"title": "Jours 1-2 — Valladolid"}, {"title": "Jour 3 — Chichén Itzá à l’ouverture"}, {"title": "Jour 7 — Tulum"}]
+        pairs = [("1 h 43", "de l’aéroport de Cancún à Valladolid en Tren Maya"), ("697 pesos", "l’entrée de Chichén Itzá pour un étranger"),
+                 ("5 h 16", "le train direct Mérida Teya → Tulum de 7 h")]
+        facts = figures(pairs, {value: day for (value, _), day in zip(pairs, days)})
+        article = guide(slug="yucatan", country="mexique", cover="yucatan-cenote", destination="Yucatán", shortTitle="Yucatán en 10 jours", sections=days)
+        read = p.normalized(" ".join(day["title"] for day in days))
+        scenes, _ = reel_formats.build("itineraire", article, facts, photos, [], "Phrase d’ouverture.", "Yucatán", "Mexique · Yucatán",
+                                       "Guide Yucatán · sources du 12/11/2026", ["Yucatán en", "10 jours"], read)
+        # "Valladolid" is shown over Valladolid, though the train photo shares more words with the figure of that day.
+        self.assertEqual([(scene["headline"], scene["photo"]) for scene in scenes[1:-1]],
+                         [(["Valladolid"], "yucatan-valladolid-calzada"), (["Chichén Itzá", "à l’ouverture"], "yucatan-chichen-itza"), (["Tulum"], "yucatan-tulum")])
 
     def test_a_file_found_by_the_search_never_opens_a_post(self):
         media = reel_formats.Media(list(self.MARRAKECH), [], reserve=2, cover="marrakech-place-jemaa-el-fna",

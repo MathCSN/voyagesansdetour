@@ -291,14 +291,18 @@ PLACE_KINDS = frozenset("tour tours villa villas ville villes village villages m
                         "quartier quartiers gare gares port ports centre monument monuments".split())
 
 
-def words_shown(photo: tuple, target: set[str], family: str | None = None, kinds: bool = False) -> int:
-    """How many of these words the photo's caption, its Commons title and its identifier carry. `family`: the prefix
+def words_shared(photo: tuple, target: set[str], family: str | None = None, kinds: bool = False) -> set[str]:
+    """Which of these words the photo's caption, its Commons title and its identifier carry. `family`: the prefix
     all the photos of the post share says nothing of what one of them shows ("amalfi-positano" is a photo of Positano).
     `kinds`: a kind of place shared alone counts too (for the photo the guide itself put beside that text)."""
     prefix, _, rest = photo[0].partition("-")
     described = " ".join([(rest if prefix == family else photo[0]).replace("-", " "), photo[2], str(photo[1].get("commonsTitle", ""))])
     shared = target & words_of(described)
-    return len(shared) if kinds or shared - PLACE_KINDS else 0
+    return shared if kinds or shared - PLACE_KINDS else set()
+
+
+def words_shown(photo: tuple, target: set[str], family: str | None = None, kinds: bool = False) -> int:
+    return len(words_shared(photo, target, family, kinds))
 
 
 class Media:
@@ -352,8 +356,10 @@ class Media:
 
     def named(self, text: str, section: dict | None) -> tuple | None:
         """The photo that shows what `text` names: the one whose id, caption or title shares the most words with it.
-        The section's own photo wins when it shares as many, and stands in when no photo shares any; it gives way
-        when it shows something else ("Chichén Itzá à l'ouverture" is not shown by the cenote of that afternoon)."""
+        The section's own photo wins when it shares a word, and stands in when no photo shares any; it gives way
+        when it shows something else ("Chichén Itzá à l'ouverture" is not shown by the cenote of that afternoon), or
+        when another photo shares all it shares and more (the Grand Palace, not Wat Arun, for "le Grand Palais de
+        Bangkok": the two are in Bangkok)."""
         target = self.target(text)
         shared = lambda ph: self.shared(ph, target)
         wanted = section.get("image") if section else None
@@ -362,7 +368,8 @@ class Media:
         best = max(pool, key=shared, default=None)
         # The guide put its own photo beside this text: a kind of place the two share ("Le pont en métro" and the photo
         # of the bridge) is proof enough for that photo, and for no other.
-        if own and (best is None or words_shown(own, target, self.family, kinds=True) or not shared(best)):
+        mine = words_shared(own, target, self.family, kinds=True) if own else set()
+        if own and (best is None or not shared(best) or (mine and not any(mine < words_shared(ph, target, self.family) for ph in pool))):
             return own
         return best if best is not None and shared(best) else None
 
@@ -524,10 +531,16 @@ def itinerary_reel(brief: Brief) -> tuple[dict, list[dict], list[str]]:
             break
         if not step["fact"]:
             continue
-        # The photo is chosen for what the plan will say (its name, its price), not for the whole title of the day.
-        try:
-            picture = brief.media.photo(" ".join(step["lines"] + [step["fact"]["short"]]), step["section"], strict=True)
-        except Held:
+        # The photo is chosen for what the plan will say, not for the whole title of the day: the place it names first
+        # ("Valladolid" over Valladolid, not over the train that goes there), else what its figure names.
+        picture = None
+        for said in (step["lines"], step["lines"] + [step["fact"]["short"]]):
+            try:
+                picture = brief.media.photo(" ".join(said), step["section"], strict=True)
+                break
+            except Held:
+                continue
+        if not picture:
             continue
         body.append(stage_plan(step, picture, brief.tag))
         lines.append(stage_line(step))

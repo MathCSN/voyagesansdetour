@@ -254,6 +254,20 @@ Salerne → Amalfi » sur Positano et s'ouvrait sur une photo trouvée par la re
   panorama de 2880 × 854 ; `social_render.cover_box` ramène le cadre dans la photo, sans changer
   les cadrages valides.
 
+**Posts refaits le 12/11/2026 après la revérification des guides** (Yucatán, Marrakech, Thaïlande) :
+
+- **une étape d'itinéraire prend d'abord la photo du lieu qu'elle nomme** (« Valladolid » sur
+  Valladolid, pas sur la rame qui y mène), et seulement à défaut la photo de ce que son chiffre
+  nomme ;
+- **la photo de la section cède à celle qui partage tout ce qu'elle partage et davantage** : le
+  prix du Grand Palais va sur le Grand Palais, pas sur le Wat Arun que le guide montre pour ces
+  jours-là (les deux sont « à Bangkok ») ;
+- **une photo du site dont le sujet est décentré le dit** (`media_library.SITE_FOCUS`) : le cadre
+  vertical est coupé autour du pignon du Grand Palais, pas autour du ciel ;
+- **un guide qui manque de photos en reçoit de relues** plutôt qu'un chiffre posé sur une autre
+  vue : Marrakech a reçu la Koutoubia (dernière image), le port d'Essaouira et les cascades
+  d'Ouzoud (`photo_intake.py`, `reviewed.json`).
+
 Ce qui reste, mesuré le 12/11/2026 sur les 26 guides : un chiffre qu'aucune photo ne montre
 complète encore un post, y compris sur une image trouvée par la recherche (Marrakech : « 3 h de
 car pour Essaouira » sur un lampiste de la médina). L'interdire partout ferait passer les guides

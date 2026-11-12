@@ -35,6 +35,10 @@ NOT_A_CLOSING = frozenset({
     "douro-pinhao-azulejos", "seville-alcazar", "amalfi-ravello", "amalfi-ferry", "cinque-train", "thailande-train-nuit",
     "costa-rica-monteverde", "japon-shinkansen", "japon-nara-cerfs", "laponie-husky", "tenerife-adeje"})
 
+# Where the subject of a photo of the site is (x, y from 0 to 1), when a vertical frame cut around its middle misses it:
+# the gable of the Grand Palace stands on the right of its photo, under a wide evening sky.
+SITE_FOCUS = {"thailande-bangkok-grand-palais": [0.72, 0.7]}
+
 
 def commons_title(source_page: str) -> str | None:
     parsed = urllib.parse.urlsplit(source_page or "")
@@ -62,7 +66,7 @@ def photo_candidates(article: dict, site_photos: dict, country: str, shared: dic
             # A photo the site publishes for this place was chosen to stand for it: it may close a post, unless it only
             # illustrates one paragraph (NOT_A_CLOSING).
             candidates.append({"id": photo_id, "title": title, "alt": record.get("alt_fr") or fallback, "author": record.get("author"),
-                               "emblematic": photo_id not in NOT_A_CLOSING})
+                               "emblematic": photo_id not in NOT_A_CLOSING, **({"focus": SITE_FOCUS[photo_id]} if photo_id in SITE_FOCUS else {})})
     taken = {candidate["title"] for candidate in candidates}
     for photo_id, record in (shared or {}).items():
         title = record.get("commonsTitle")
@@ -253,7 +257,9 @@ def gather_photos(article: dict, needed: int, photos: Photos, site_photos: dict,
             got = photos.get(candidate)
             if got and got[0] not in seen and got[1].get("commonsSha1") not in {c[1].get("commonsSha1") for c in chosen if c[1].get("commonsSha1")}:
                 seen.add(got[0])
-                chosen.append((got[0], closing_mark(candidate, got[1]), candidate["alt"]))
+                record = closing_mark(candidate, got[1])
+                # A photo reviewed by hand carries its own "focus" (reviewed.json); a photo of the site takes it from SITE_FOCUS.
+                chosen.append((got[0], {**record, "focus": candidate["focus"]} if candidate.get("focus") else record, candidate["alt"]))
 
     take(photo_candidates(article, site_photos, country, photos.shared))
     if len(chosen) < needed:
