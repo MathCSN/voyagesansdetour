@@ -276,6 +276,12 @@
       "path": null,
       "place": "Rockefeller Center"
     },
+    "rockettes|etats-unis": {
+      "checkedOn": "2026-11-12",
+      "country": "États-Unis",
+      "path": null,
+      "place": "Rockettes"
+    },
     "rovaniemi|finlande": {
       "checkedOn": "2026-10-24",
       "country": "Finlande",

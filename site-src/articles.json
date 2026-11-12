@@ -3211,40 +3211,44 @@
       "laponie-budget-rovaniemi",
       "japon-itineraire-2-semaines"
     ],
-    "sourcesCheckedOn": "2026-10-24",
+    "sourcesCheckedOn": "2026-11-12",
     "publishedOn": "2026-10-24",
-    "updatedOn": "2026-10-24",
+    "updatedOn": "2026-11-12",
     "slug": "new-york-noel",
-    "title": "New York à Noël 2026 : le sapin du Rockefeller Center le 2 décembre, patinoires et boutiques de Noël",
+    "title": "New York à Noël 2026 : le sapin du Rockefeller Center le 2 décembre, patinoires dès 0 $, Rockettes et prix",
     "shortTitle": "New York à Noël",
     "destination": "New York",
     "country": "etats-unis",
     "continent": "amerique-du-nord",
     "category": "Que faire",
     "cover": "new-york-rockefeller-noel",
-    "description": "Les dates de Noël 2026 à New York : sapin allumé le 2 décembre, Winter Village gratuit à Bryant Park jusqu’au 28 février, métro à 3 $ et 7 °C l’après-midi.",
+    "description": "Noël 2026 à New York : sapin allumé le 2 décembre, patinoire gratuite à Bryant Park, Rockefeller dès 22 $, Rockettes dès 50 $ et métro à 3 $.",
     "readMinutes": 4,
-    "summary": "Le sapin du Rockefeller Center arrive le 7 novembre et s’illumine le mercredi 2 décembre 2026. À Bryant Park, le Winter Village ouvre le 28 octobre avec la seule patinoire gratuite de la ville (jusqu’au 28 février 2027) et plus de 180 boutiques de Noël jusqu’au 3 janvier. Le métro coûte 3 $ le trajet, et décembre affiche en moyenne 7 °C l’après-midi et 1 °C la nuit.",
+    "summary": "Le sapin du Rockefeller Center, un épicéa de Norvège de 76 pieds (23 m), est arrivé le 7 novembre et s’illumine le mercredi 2 décembre 2026, de 19 h à 22 h, sous plus de 50 000 LED. On patine gratuitement à Bryant Park (location de patins dès 18,72 $) ou dès 22 $ au pied du sapin, et le Christmas Spectacular des Rockettes se joue jusqu’au 4 janvier, de 50 à plus de 250 $ la place. Le métro coûte 3 $ le trajet.",
     "keyFacts": [
       {
         "value": "2 déc. 2026",
-        "label": "l’allumage du sapin du Rockefeller Center, arrivé le 7 novembre"
+        "label": "l’allumage du sapin du Rockefeller Center, de 19 h à 22 h, visible ensuite jusqu’à la mi-janvier 2027"
       },
       {
         "value": "0 $",
-        "label": "la patinoire de Bryant Park, la seule à entrée gratuite de New York, jusqu’au 28 février 2027"
+        "label": "l’entrée de la patinoire de Bryant Park, jusqu’au 28 février 2027 ; location de patins de 18,72 à 64,48 $"
       },
       {
-        "value": "180",
-        "label": "exposants et plus au marché de Noël de Bryant Park, du 28 octobre au 3 janvier"
+        "value": "22 $",
+        "label": "la session de 60 minutes sur la patinoire du Rockefeller Center, au pied du sapin (prix d’appel)"
+      },
+      {
+        "value": "50 à 250 $",
+        "label": "une place pour le Christmas Spectacular des Rockettes, frais inclus, jusqu’au 4 janvier"
+      },
+      {
+        "value": "49 $",
+        "label": "Top of the Rock version fêtes : la vue à 360° et l’accès au sapin au plus près"
       },
       {
         "value": "3 $",
         "label": "le trajet en métro ou en bus local (≈ 2,70 €), 7,25 $ en bus express"
-      },
-      {
-        "value": "6,9 °C",
-        "label": "la maximale moyenne de décembre à Central Park, 1,1 °C la nuit"
       }
     ],
     "sections": [
@@ -3252,7 +3256,8 @@
         "id": "calendrier",
         "title": "Le calendrier des fêtes 2026",
         "paragraphs": [
-          "Les fêtes commencent tôt à New York. La patinoire du Rockefeller Center ouvre dès le 10 octobre, et le Winter Village de Bryant Park le 28 octobre, pour sa 25e saison. Le sapin, un épicéa de Norvège, arrive au Rockefeller Center le samedi 7 novembre ; les équipes de décoration le préparent ensuite pendant plusieurs semaines, jusqu’à l’allumage du mercredi 2 décembre."
+          "Les fêtes ont commencé tôt cette année. La patinoire du Rockefeller Center a rouvert pour la saison 2026-2027 et le Winter Village de Bryant Park a ouvert le 28 octobre, pour sa 25e saison. Le sapin est arrivé au Rockefeller Center le samedi 7 novembre ; les équipes le préparent jusqu’à l’allumage du mercredi 2 décembre, puis il reste illuminé jusqu’à la mi-janvier 2027.",
+          "Du 19 novembre au 3 janvier, la patinoire de Bryant Park reste ouverte jusqu’à minuit, et le Christmas Spectacular des Rockettes joue plusieurs fois par jour au Radio City Music Hall jusqu’au 4 janvier : la deuxième quinzaine de décembre concentre tout."
         ],
         "table": {
           "headers": [
@@ -3261,24 +3266,32 @@
           ],
           "rows": [
             [
-              "10 octobre",
-              "Ouverture de la patinoire du Rockefeller Center"
-            ],
-            [
               "28 octobre",
-              "Ouverture du Winter Village de Bryant Park et de ses boutiques"
+              "Ouverture du Winter Village de Bryant Park, patinoire gratuite et boutiques"
             ],
             [
               "7 novembre",
               "Arrivée du sapin au Rockefeller Center"
             ],
             [
-              "2 décembre",
-              "Allumage du sapin"
+              "19 novembre – 3 janvier",
+              "Patinoire de Bryant Park ouverte de 8 h à minuit"
+            ],
+            [
+              "2 décembre, 19 h – 22 h",
+              "Cérémonie d’allumage du sapin"
             ],
             [
               "3 janvier 2027",
               "Fermeture des boutiques de Bryant Park"
+            ],
+            [
+              "4 janvier 2027",
+              "Dernière du Christmas Spectacular des Rockettes"
+            ],
+            [
+              "Mi-janvier 2027",
+              "Fin de l’exposition du sapin"
             ],
             [
               "28 février 2027",
@@ -3290,18 +3303,21 @@
       {
         "id": "sapin",
         "title": "Le sapin du Rockefeller Center",
+        "image": "new-york-rockefeller-noel",
         "paragraphs": [
-          "Au sommet, l’étoile Swarovski pèse environ 900 livres, soit un peu plus de 400 kg, et compte près de 3 millions de cristaux. La cérémonie du 2 décembre attire la foule, mais il n’est pas nécessaire d’y assister : le sapin reste illuminé après le 2 décembre, avec des horaires de visite annoncés plus tard dans la saison.",
-          "Au pied du sapin, la patinoire du Rockefeller Center est ouverte depuis le 10 octobre : à partir de décembre, on patine avec le sapin illuminé en toile de fond."
+          "Le sapin 2026 est un épicéa de Norvège de 76 pieds, environ 23 mètres, venu de West Edmeston, dans l’État de New York. Le mercredi 2 décembre, de 19 h à 22 h, la cérémonie allume ses plus de 50 000 LED multicolores sous l’étoile Swarovski, qui pèse environ 900 livres, un peu plus de 400 kg, et compte près de 3 millions de cristaux.",
+          "Le sapin se dresse sur Center Plaza, entre la Cinquième et la Sixième Avenue et entre les 49e et 50e Rues. Le voir depuis les espaces publics du Rockefeller Center est gratuit. Pour le voir d’en haut, le billet Top of the Rock version fêtes coûte à partir de 49 $ avec un créneau horaire, 82 $ en coupe-file, et donne accès au sapin au plus près en plus de la vue à 360° depuis le 70e étage.",
+          "Au pied du sapin, la patinoire du Rockefeller Center ouvre tous les jours de 9 h à minuit. La session de 60 minutes coûte à partir de 22 $, et la formule VIP, avec entrée prioritaire et salon chauffé, à partir de 131 $. Tout le monde entre avec un billet, accompagnateurs compris ; l’entrée des patineurs se trouve sous le 30 Rock, côté 49e Rue. On apporte ses patins ou on les loue sur place."
         ],
-        "tip": "Venez voir le sapin un soir de semaine après le 2 décembre : il brille autant que le soir de la cérémonie, sans la foule des grands soirs."
+        "tip": "Le soir de l’allumage, le 2 décembre, les abords du sapin sont pris d’assaut : revenez un soir de semaine suivant, pour la même lumière sans la foule."
       },
       {
         "id": "bryant-park",
         "title": "Patiner gratuitement à Bryant Park",
         "paragraphs": [
-          "Le Winter Village de Bryant Park ouvre du 28 octobre 2026 au 28 février 2027. Sa patinoire reste la seule de la ville à entrée gratuite ; seules les expériences premium se réservent avec un billet.",
-          "Autour de la glace, les Holiday Shops d’Urbanspace réunissent plus de 180 exposants du 28 octobre au 3 janvier : bougies artisanales, gourmandises et cadeaux de dernière minute, pour un après-midi de flânerie au chaud entre deux tours de patinoire."
+          "La patinoire de Bryant Park, 17 000 pieds carrés de glace, est la seule de la ville à entrée gratuite. Elle ouvre tous les jours du 28 octobre 2026 au 28 février 2027, de 8 h à 22 h, et jusqu’à minuit du 19 novembre au 3 janvier. Des spectacles de patinage gratuits s’y tiennent au fil de la saison.",
+          "Seuls les patins se paient : de 18,72 à 64,48 $ la location selon le jour et l’heure, hors taxes, moins cher aux heures creuses ; le casque est prêté gratuitement. La file express, avec patins, coûte 87,52 $, et l’expérience premium, avec conciergerie, collation et salon chauffé, de 156 à 182 $. Payer en ligne avec une carte Bank of America donne 10 % de remise sur la location.",
+          "Autour de la glace, les Holiday Shops d’Urbanspace réunissent plus de 180 exposants jusqu’au 3 janvier : bougies artisanales, gourmandises et cadeaux, pour un après-midi au chaud entre deux tours de patinoire."
         ]
       },
       {
@@ -3309,17 +3325,56 @@
         "title": "Le Christmas Spectacular des Rockettes au Radio City Music Hall",
         "image": "new-york-skyline",
         "paragraphs": [
-          "Le spectacle de Noël des Rockettes revient au Radio City Music Hall du 4 novembre 2026 au 4 janvier 2027, avec 230 représentations : un record depuis sa création, en 1933. Pour cette édition, une scène inédite rejoint la revue, qui compte désormais dix numéros des Rockettes.",
-          "Les billets sont en vente sur le site officiel des Rockettes. Avec 230 dates sur deux mois, il y a des représentations en semaine comme le week-end, de quoi caler le spectacle entre deux visites."
+          "Le spectacle de Noël des Rockettes se joue au Radio City Music Hall jusqu’au 4 janvier 2027, avec 230 représentations, un record depuis sa création en 1933. Cette édition ajoute « Ring », un nouveau numéro de claquettes contemporain. Le spectacle dure 90 minutes, sans entracte.",
+          "Les places coûtent de 50 à plus de 250 $, frais de service de 5 à 27,50 $ et plus compris en ligne ; au guichet du Radio City Music Hall, ouvert du lundi au samedi de 12 h à 18 h, il n’y a aucun frais. À partir de la fin novembre, les jours de semaine comptent souvent quatre représentations, à 11 h, 14 h, 17 h et 20 h, et les jours les plus chargés jusqu’à cinq, de 10 h à 22 h. Le 2 décembre, soir de l’allumage, seules celles de 11 h et 14 h ont lieu."
         ],
-        "tip": "Le Radio City Music Hall fait partie du Rockefeller Center : enchaînez le spectacle et le sapin dans la même soirée."
+        "tip": "Le Radio City Music Hall fait partie du Rockefeller Center : enchaînez le spectacle de 17 h et le sapin illuminé dans la même soirée."
+      },
+      {
+        "id": "budget",
+        "title": "Le budget d’une journée de fêtes",
+        "paragraphs": [
+          "Une journée qui réunit les trois grands moments de Noël revient à partir d’environ 151 $ par personne, soit environ 136 € au taux de la Banque centrale européenne du 11 novembre 2026. Le sapin et la patinoire de Bryant Park restent gratuits pour qui apporte ses patins."
+        ],
+        "table": {
+          "headers": [
+            "Poste",
+            "À partir de"
+          ],
+          "rows": [
+            [
+              "Christmas Spectacular des Rockettes",
+              "50 $"
+            ],
+            [
+              "Top of the Rock version fêtes",
+              "49 $"
+            ],
+            [
+              "Patinoire du Rockefeller Center, 60 minutes",
+              "22 $"
+            ],
+            [
+              "Location de patins à Bryant Park (hors taxes)",
+              "18,72 $"
+            ],
+            [
+              "4 trajets en métro",
+              "12 $"
+            ],
+            [
+              "Total par personne",
+              "151,72 $"
+            ]
+          ]
+        }
       },
       {
         "id": "pratique",
         "title": "Se déplacer et affronter le froid",
         "image": "new-york-central-park-hiver",
         "paragraphs": [
-          "Le trajet en métro ou en bus local coûte 3 $ pour la plupart des voyageurs, soit environ 2,70 € au taux du 23 octobre 2026, et 7,25 $ en bus express.",
+          "Le trajet en métro ou en bus local coûte 3 $ pour la plupart des voyageurs, soit environ 2,70 €, et 7,25 $ en bus express. On paie en approchant sa carte bancaire sans contact, son téléphone ou une carte OMNY du lecteur.",
           "Décembre est frais mais rarement glacial : selon les normales 1991-2020 du service météorologique américain, Central Park affiche en moyenne 44,4 °F l’après-midi (6,9 °C) et 33,9 °F la nuit (1,1 °C). Bonnet et gants suffisent en journée ; gardez une couche de plus pour patiner le soir."
         ]
       }
@@ -3327,48 +3382,72 @@
     "faq": [
       {
         "question": "Quand le sapin du Rockefeller Center est-il allumé en 2026 ?",
-        "answer": "Le mercredi 2 décembre 2026. Le sapin arrive le samedi 7 novembre et reste illuminé après la cérémonie."
+        "answer": "Le mercredi 2 décembre 2026, de 19 h à 22 h. Arrivé le 7 novembre, il reste illuminé jusqu’à la mi-janvier 2027, et le voir depuis l’esplanade est gratuit."
+      },
+      {
+        "question": "Combien coûte la patinoire du Rockefeller Center ?",
+        "answer": "À partir de 22 $ la session de 60 minutes, 131 $ en formule VIP. Elle ouvre tous les jours de 9 h à minuit, et tout le monde entre avec un billet."
       },
       {
         "question": "La patinoire de Bryant Park est-elle gratuite ?",
-        "answer": "Oui, l’entrée est gratuite du 28 octobre 2026 au 28 février 2027 ; seules les expériences premium sont payantes."
+        "answer": "Oui, l’entrée est gratuite jusqu’au 28 février 2027 ; la location de patins coûte de 18,72 à 64,48 $ hors taxes selon le jour et l’heure."
+      },
+      {
+        "question": "Combien coûte le spectacle des Rockettes ?",
+        "answer": "De 50 à plus de 250 $ la place, frais compris en ligne, sans frais au guichet du Radio City Music Hall. Le spectacle dure 90 minutes et se joue jusqu’au 4 janvier 2027."
       },
       {
         "question": "Combien coûte le métro à New York ?",
-        "answer": "3 $ le trajet en métro ou en bus local, 7,25 $ en bus express."
-      },
-      {
-        "question": "Quel temps fait-il à New York en décembre ?",
-        "answer": "En moyenne 6,9 °C l’après-midi et 1,1 °C la nuit à Central Park, selon les normales 1991-2020."
+        "answer": "3 $ le trajet en métro ou en bus local, 7,25 $ en bus express, en payant sans contact au lecteur."
       }
     ],
     "sources": [
       {
-        "label": "Time Out New York — 2026 Rockefeller Center tree lighting (29 septembre 2026)",
-        "url": "https://www.timeout.com/newyork/news/the-2026-rockefeller-center-christmas-tree-lighting-has-officially-been-announced-and-its-happening-earlier-than-you-think-092926"
+        "label": "Rockefeller Center — le sapin 2026 : arrivée, allumage, exposition, Top of the Rock (lu le 12/11/2026)",
+        "url": "https://www.rockefellercenter.com/holidays/rockefeller-center-christmas-tree/"
       },
       {
-        "label": "Time Out New York — Bryant Park Winter Village 2026",
+        "label": "Rockefeller Center — la patinoire : horaires, billets, règles (lu le 12/11/2026)",
+        "url": "https://www.rockefellercenter.com/tickets/the-rink-at-rockefeller-center/"
+      },
+      {
+        "label": "Bryant Park — la patinoire : dates, horaires et tarifs de la saison 2026-2027 (lu le 12/11/2026)",
+        "url": "https://bryantpark.org/activities/the-rink"
+      },
+      {
+        "label": "Time Out New York — le Winter Village de Bryant Park et ses 180 exposants (septembre 2026)",
         "url": "https://www.timeout.com/newyork/news/nycs-most-famous-winter-village-is-making-its-festive-return-next-month-with-free-skating-and-180-vendors-091926"
       },
       {
-        "label": "Radio City Rockettes — The Christmas Spectacular 2026",
+        "label": "Time Out New York — date de l’allumage du sapin 2026",
+        "url": "https://www.timeout.com/newyork/news/the-2026-rockefeller-center-christmas-tree-lighting-has-officially-been-announced-and-its-happening-earlier-than-you-think-092926"
+      },
+      {
+        "label": "The Rockettes — Christmas Spectacular : dates, nouveau numéro, guichet (lu le 12/11/2026)",
+        "url": "https://www.rockettes.com/christmas/"
+      },
+      {
+        "label": "The Rockettes — calendrier des représentations et fourchette de prix (lu le 12/11/2026)",
+        "url": "https://www.rockettes.com/christmas/calendar/"
+      },
+      {
+        "label": "The Rockettes — 230 représentations en 2026",
         "url": "https://www.rockettes.com/blog/the-christmas-spectacular-just-got-even-more-spectacular/"
       },
       {
-        "label": "MTA — Fares",
+        "label": "MTA — tarifs du métro et des bus (lu le 12/11/2026)",
         "url": "https://www.mta.info/fares"
       },
       {
-        "label": "National Weather Service — Central Park, normales des maximales quotidiennes",
+        "label": "National Weather Service — normales 1991-2020 de Central Park (maximales)",
         "url": "https://www.weather.gov/media/okx/Climate/CentralPark/DailyMaxTNormals.pdf"
       },
       {
-        "label": "National Weather Service — Central Park, normales des minimales quotidiennes",
+        "label": "National Weather Service — normales 1991-2020 de Central Park (minimales)",
         "url": "https://www.weather.gov/media/okx/Climate/CentralPark/DailyMinTNormals.pdf"
       },
       {
-        "label": "Banque centrale européenne — Taux de référence du 23 octobre 2026",
+        "label": "Banque centrale européenne — taux de référence du 11 novembre 2026 (1 € = 1,1127 $) (lu le 12/11/2026)",
         "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html"
       }
     ]
