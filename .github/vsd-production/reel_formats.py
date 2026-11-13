@@ -401,6 +401,22 @@ class Media:
         l'entrée de SantaPark" over huskies (13/11/2026): such a fact stays in the caption and in the guide."""
         return [] if self.located(text) else [ph for ph in self.free() if ph[0] not in avoid]
 
+    def above(self, section: dict | None, photo_id: str, place: str) -> str:
+        """The label written above a figure: the name of its section over that section's own photo; over another
+        photo, or when the section has none, that name only if it says no place and no part of the destination
+        the photo is not of ("Le Nord" is not written over the Grand Palace of Bangkok, nor "Le Sud" over Tràng An,
+        "Aurores boréales" over a picture of the village); the place otherwise."""
+        label = kicker_of(section, place)
+        own = section.get("image") if section else None
+        if own:
+            return label if photo_id == own else place
+        photo = next((ph for ph in self.all if ph[0] == photo_id), None)
+        # A title begins with a capital by grammar ("Budget", "Aurores boréales"): its first word alone is no place.
+        named, region = place_names.proper(label, self.country, sentence=True), place_names.region(label)
+        if not photo or not (named or region):
+            return label
+        return label if (named and named & self.described(photo)) or (region and not named and region & place_names.words(photo[2])) else place
+
     def spare(self) -> str | None:
         """The last photo left that can close the post: no plan takes it, whatever it names."""
         left = [wanted for wanted in self.emblematic if any(ph[0] == wanted for ph in self.photos)]
@@ -580,8 +596,7 @@ def fact_plan(fact: dict, media: Media, place: str, tag: str, badge: str | None 
     picture = media.moving(fact["label"], fact["section"])
     # The label above the figure is the section's name only over that section's own photo, or when the section has
     # none: "Aurores boréales" is not written over a picture of the village.
-    own = fact["section"].get("image") if fact["section"] else None
-    kicker = kicker_of(fact["section"], place) if not own or picture[1] == own else place
+    kicker = media.above(fact["section"], picture[1], place)
     # …and a name that carries a year is not written over a figure of another year ("La ligne du Nord en 2026" over
     # "38,3 % des Alfa Pendular à l'heure en 2025").
     years, dated = set(YEAR.findall(kicker)), set(YEAR.findall(fact["label"]))
@@ -843,7 +858,10 @@ def build(fmt: str, article: dict, facts: list[dict], photos: list, clips: list,
         # The caption of each photo goes with its plan: production.py reads it to refuse a photo of another place.
         if scene.get("photo") in captions:
             scene["alt"] = captions[scene["photo"]]
-        focus = records.get(scene.get("photo"), {}).get("focus")
+        # …and may give another point for this narrow frame ("focusVertical": the doe of Nara, whose head a point good
+        # for a 4:5 slide left out of the frame for half the plan).
+        record = records.get(scene.get("photo"), {})
+        focus = record.get("focusVertical") or record.get("focus")
         if isinstance(focus, list) and len(focus) == 2:
             scene["focus"] = focus
     # Three to five useful caption lines: the figures left unshown complete a short list.

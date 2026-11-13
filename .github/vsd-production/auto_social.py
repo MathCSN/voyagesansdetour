@@ -246,15 +246,19 @@ def section_of(value: str, label: str, sections: list[dict]) -> dict | None:
     ("604 pesos" is read under "Jours 4-6 : Mérida et Uxmal", nowhere else), unless it only sums the guide up ("Le
     comparatif en un coup d'œil", "Avant tout": the time from the airport to Rossio belongs to "Baixa et Chiado");
     otherwise the one that shares the most words with its label, the figure itself as a tie-break."""
+    sums_up = lambda section: bool(SUMMARY.search(folded_title(section)))
     holders = [section for section in sections if whole_figure(value, section_text(section))]
-    if len(holders) == 1 and not SUMMARY.search(folded_title(holders[0])):
+    if len(holders) == 1 and not sums_up(holders[0]):
         return holders[0]
+    # A figure is taken from the section that sums the guide up only when another section gives the figure itself:
+    # "872 € le budget serré" is given by "En bref" alone and stays there, it is not a figure of "Où dormir" because
+    # the two share a word (review of 13/11/2026: 13 figures out of 161 had changed section).
+    given_elsewhere = any(not sums_up(section) for section in holders)
     words, best, best_score, summed = significant(label), None, 0, None
     for section in sections:
         text = section_text(section)
         score = 2 * len(words & significant(text)) + (p.normalized(value) in text)
-        # A section that sums the guide up shares words with every figure: it only stands in when no other shares any.
-        if SUMMARY.search(folded_title(section)):
+        if given_elsewhere and sums_up(section):
             summed = summed or (section if score else None)
         elif score > best_score:
             best, best_score = section, score
@@ -482,8 +486,7 @@ def scenes_for(article: dict, channel: Post, facts: list[dict], photos: list[tup
     for fact in facts:
         # As in a reel, the name of the section stands above the figure only over that section's own photo, or when
         # the section has none: "Le Nord" is not written over the Grand Palace of Bangkok.
-        own = (fact["section"] or {}).get("image")
-        named = kicker_of(fact["section"], place) if not own or pictures[fact["value"]][1] == own else place
+        named = media.above(fact["section"], pictures[fact["value"]][1], place)
         scenes.append(scene(pictures[fact["value"]], named, ["*" + fact["value"] + "*"],
                             unbreakable(fact["label"]), 4, [{"source": "guide", "excerpt": fact["excerpt"]}],
                             label=reel_formats.dated_tag(fact, tag)))

@@ -205,6 +205,7 @@ def journey(text: str) -> bool:
 
 CARDINAL = frozenset("nord sud ouest".split())
 EAST_AFTER = frozenset("cote rive versant facade".split())
+NAMED_AFTER_CARDINAL = frozenset("ligne gare station autoroute route".split())
 
 
 def region(text: str) -> set[str]:
@@ -212,7 +213,9 @@ def region(text: str) -> set[str]:
     nord", "sur la côte est". Nothing for the whole of it ("un voyage nord-sud")."""
     said = folded(text)
     east = lambda index: said[index] == "est" and index and (said[index - 1] in EAST_AFTER or (said[index - 1] == "l" and index > 1 and said[index - 2] in ("a", "de", "dans", "vers")))
-    found = [index for index, word in enumerate(said) if word in CARDINAL or east(index)]
+    # "la ligne du Nord", "la gare du Nord" are names of a line and of a station, not a part of the destination.
+    named = lambda index: bool(NAMED_AFTER_CARDINAL & set(said[max(0, index - 2):index]))
+    found = [index for index, word in enumerate(said) if (word in CARDINAL or east(index)) and not named(index)]
     # The first one is what the fact is about ("222 h au sud, contre 150 h dans le nord"); two side by side are the
     # whole of the place ("un voyage nord-sud").
     if not found or (len(found) > 1 and found[1] == found[0] + 1):

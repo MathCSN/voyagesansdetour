@@ -54,6 +54,17 @@ OWN_FIGURES = frozenset({"train-alfa-220"})
 # 9:16 frame of a reel is narrower than she is long and slides: it shows her head for part of the plan only.
 SITE_FOCUS = {"thailande-bangkok-grand-palais": [0.72, 0.7], "yucatan-tulum": [0.645, 0.5], "thailande-koh-samui": [0.72, 0.5],
               "japon-nara-cerfs": [0.68, 0.5]}
+# Where the subject is for the 9:16 frame of a reel, when the point that suits a 4:5 slide does not: that frame is a
+# third of a landscape photo wide and slides 7 % of it. Around 0.68 it showed the doe's head for part of the plan
+# only; around 0.81 her head (0.76 to 0.865 of the width) stays in it from the first image to the last.
+SITE_FOCUS_VERTICAL = {"japon-nara-cerfs": [0.81, 0.5]}
+
+
+def focus_marks(photo_id: str, record: dict | None = None) -> dict:
+    """The points of interest of a photo: its own (reviewed.json: "focus", "focusVertical"), else those of the site."""
+    marks = {"focus": (record or {}).get("focus") or SITE_FOCUS.get(photo_id),
+             "focusVertical": (record or {}).get("focusVertical") or SITE_FOCUS_VERTICAL.get(photo_id)}
+    return {key: value for key, value in marks.items() if isinstance(value, list) and len(value) == 2}
 
 
 def commons_title(source_page: str) -> str | None:
@@ -82,7 +93,7 @@ def photo_candidates(article: dict, site_photos: dict, country: str, shared: dic
             # A photo the site publishes for this place was chosen to stand for it: it may close a post, unless it only
             # illustrates one paragraph (NOT_A_CLOSING).
             candidates.append({"id": photo_id, "title": title, "alt": record.get("alt_fr") or fallback, "author": record.get("author"),
-                               "emblematic": photo_id not in NOT_A_CLOSING, **({"focus": SITE_FOCUS[photo_id]} if photo_id in SITE_FOCUS else {})})
+                               "emblematic": photo_id not in NOT_A_CLOSING, **focus_marks(photo_id)})
     taken = {candidate["title"] for candidate in candidates}
     for photo_id, record in (shared or {}).items():
         title = record.get("commonsTitle")
@@ -271,7 +282,8 @@ def new_photo(candidate: dict, photos: Photos, chosen: list) -> tuple[str, dict,
     if got[0] in OWN_FIGURES:
         record = {**record, "figures": True}
     # A photo reviewed by hand carries its own "focus" (reviewed.json); a photo of the site takes it from SITE_FOCUS.
-    return (got[0], {**record, "focus": candidate["focus"]} if candidate.get("focus") else record, candidate["alt"])
+    marks = {key: candidate[key] for key in ("focus", "focusVertical") if candidate.get(key)}
+    return (got[0], {**record, **marks}, candidate["alt"])
 
 
 def taken(candidates: list[dict], needed: int, photos: Photos, chosen: list) -> list[tuple[str, dict, str]]:
