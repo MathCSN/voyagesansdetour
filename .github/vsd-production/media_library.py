@@ -49,7 +49,11 @@ OWN_FIGURES = frozenset({"train-alfa-220"})
 # The temple of Tulum stands right of the middle of a panorama: cut around the middle, the frame slid off it.
 # On the beach of Koh Samui a bather stands in the left third, cut by the edge of a centred frame: the sea, the
 # jet-skis and the hill are on the right.
-SITE_FOCUS = {"thailande-bangkok-grand-palais": [0.72, 0.7], "yucatan-tulum": [0.645, 0.5], "thailande-koh-samui": [0.72, 0.5]}
+# The doe of Nara stands in the right half, her head at 85 % of the width: a centred frame kept her body and cut her
+# neck (audit of 13/11/2026, on a reel and on a carousel). At 0.68 the 4:5 frame of a carousel holds her whole. The
+# 9:16 frame of a reel is narrower than she is long and slides: it shows her head for part of the plan only.
+SITE_FOCUS = {"thailande-bangkok-grand-palais": [0.72, 0.7], "yucatan-tulum": [0.645, 0.5], "thailande-koh-samui": [0.72, 0.5],
+              "japon-nara-cerfs": [0.68, 0.5]}
 
 
 def commons_title(source_page: str) -> str | None:

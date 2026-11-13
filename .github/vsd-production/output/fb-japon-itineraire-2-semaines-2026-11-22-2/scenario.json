@@ -9,17 +9,17 @@
   "publishAt": "2026-11-22T17:00:00Z",
   "review": {
     "status": "reviewed_for_render",
-    "checkedAt": "2026-11-13T05:08:13Z",
-    "validUntil": "2026-12-13T05:08:13Z",
+    "checkedAt": "2026-11-13T06:53:15Z",
+    "validUntil": "2026-12-13T06:53:15Z",
     "method": "Généré automatiquement (auto_social.py) depuis la page publiée du guide relevée le 13/11/2026 : chaque chiffre est cité mot pour mot ; photos réelles sous licence libre (Wikimedia Commons), aucune image générée par IA ; garde-fous de production.py passés avant la mise en file."
   },
   "sources": {
     "file": "auto/fb-japon-itineraire-2-semaines-2026-11-22-2/sources.json",
-    "sha256": "16289112e11e9dfa212434c61a7b31a3c65e9ba1c2bb16e3f78fb30fd42a1806"
+    "sha256": "68643a8ca7421ecb83486c8f0ecc3ccb990f3047f8349e418a66c95498292718"
   },
   "photos": {
     "file": "auto/fb-japon-itineraire-2-semaines-2026-11-22-2/photos.json",
-    "sha256": "d97c58759240da7d64885721bec85cd0bdfa75a43108cac6b39297bfc118e0e2"
+    "sha256": "313d2c2f7d24a4e41dad650560895c6b790278bc753d7dd23360a76f0e47b57a"
   },
   "caption": {
     "hook": "🗺️ Japon en 2 semaines : l’itinéraire en train de Tokyo à Kyoto, Nara et Hiroshima (prix 2026)",
@@ -102,7 +102,7 @@
     {
       "photo": "japon-nara-cerfs",
       "focus": [
-        0.5,
+        0.68,
         0.5
       ],
       "kicker": "Japon",

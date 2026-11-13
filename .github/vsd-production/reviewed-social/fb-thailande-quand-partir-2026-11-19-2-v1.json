@@ -56,7 +56,7 @@
         "schemaVersion": 1,
         "contentId": "vsd-production:facebook:fb-thailande-quand-partir-2026-11-19-2:photo-v1",
         "approved": true,
-        "reviewedAt": "2026-11-13T05:05:22Z",
+        "reviewedAt": "2026-11-13T06:53:43Z",
         "validUntil": "2026-12-13T05:05:17Z",
         "payloadRevision": "6c405174816403154945907ac478431026754ec533f5f3e704827d2f1f1e6a42",
         "checks": {
@@ -84,7 +84,7 @@
               "sha256": "19c09cae851c683f7460357fdf7fe1c5ca4dff73753de3c97e72b23085e5784e",
               "mimeType": "image/jpeg",
               "status": "verified",
-              "observedAt": "2026-11-13T05:05:22Z",
+              "observedAt": "2026-11-13T06:53:43Z",
               "validUntil": "2026-12-13T05:05:17Z"
             },
             {
@@ -92,7 +92,7 @@
               "sha256": "a8ac98806b528b93302d5db097dcb01e01a77ef8c71533bd7a520b584203f9ea",
               "mimeType": "image/jpeg",
               "status": "verified",
-              "observedAt": "2026-11-13T05:05:22Z",
+              "observedAt": "2026-11-13T06:53:43Z",
               "validUntil": "2026-12-13T05:05:17Z"
             },
             {
@@ -100,7 +100,7 @@
               "sha256": "5158a5b2c064050d73cae9a901cde80970a471409b9513d6a60310fd22e6a667",
               "mimeType": "image/jpeg",
               "status": "verified",
-              "observedAt": "2026-11-13T05:05:22Z",
+              "observedAt": "2026-11-13T06:53:43Z",
               "validUntil": "2026-12-13T05:05:17Z"
             },
             {
@@ -108,7 +108,7 @@
               "sha256": "e07585d59c1e6bf578935281e7aab022b25c56c3cf54e8c9aeaac6ff2a9b2243",
               "mimeType": "image/jpeg",
               "status": "verified",
-              "observedAt": "2026-11-13T05:05:22Z",
+              "observedAt": "2026-11-13T06:53:43Z",
               "validUntil": "2026-12-13T05:05:17Z"
             },
             {
@@ -116,7 +116,7 @@
               "sha256": "151d745e88447a5d9701ae771621fac5fa3be025c6f7386dcd24d5ea841d9822",
               "mimeType": "image/jpeg",
               "status": "verified",
-              "observedAt": "2026-11-13T05:05:22Z",
+              "observedAt": "2026-11-13T06:53:43Z",
               "validUntil": "2026-12-13T05:05:17Z"
             },
             {
@@ -124,7 +124,7 @@
               "sha256": "5e07d420f6530e7b1f9fd5664a8dac6206411e68cd90cdb2ad4126f2ccd0a5ad",
               "mimeType": "image/jpeg",
               "status": "verified",
-              "observedAt": "2026-11-13T05:05:22Z",
+              "observedAt": "2026-11-13T06:53:43Z",
               "validUntil": "2026-12-13T05:05:17Z"
             }
           ]
@@ -132,7 +132,7 @@
         "destination": {
           "url": "https://voyagesansdetour.fr/thailande/thailande-quand-partir/",
           "status": "verified",
-          "observedAt": "2026-11-13T05:05:22Z",
+          "observedAt": "2026-11-13T06:53:43Z",
           "validUntil": "2026-12-13T05:05:17Z"
         },
         "monetization": {
@@ -143,7 +143,7 @@
         },
         "formatCapability": {
           "status": "verified",
-          "observedAt": "2026-11-13T05:05:22Z",
+          "observedAt": "2026-11-13T06:53:43Z",
           "validUntil": "2026-12-13T05:05:17Z",
           "automaticPublishing": true,
           "verificationMethod": "official_documentation",
@@ -157,7 +157,7 @@
           "status": "rendered_local_bytes_verified_public_deploy_pending",
           "format": "photo_carousel",
           "rendererContractVersion": 3,
-          "receiptSha256": "76e9a40c49e8970406291e86fa9757a134267161b123658c4d9aeb57acd8d42f",
+          "receiptSha256": "c431591f9b3d9424e6475d278cc6bb3fd277b060a7dca65c8b4e3e1d354efef7",
           "scenarioFingerprint": "f3aad65512578fa16ab2c6751a9b86e0dc14ddb004dc9da5a4214624dcb05ca0",
           "sourceCheckedOn": "2026-11-13",
           "sourceUrls": [

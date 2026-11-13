@@ -3,10 +3,10 @@
   "contentId": "fb-thailande-quand-partir-2026-11-19-2",
   "status": "rendered_not_published",
   "fingerprint": "f3aad65512578fa16ab2c6751a9b86e0dc14ddb004dc9da5a4214624dcb05ca0",
-  "createdAt": "2026-11-13T05:05:19.564848Z",
-  "renderFinishedAt": "2026-11-13T05:05:22.045539Z",
+  "createdAt": "2026-11-13T06:53:36.075206Z",
+  "renderFinishedAt": "2026-11-13T06:53:37.286142Z",
   "rendererContractVersion": 3,
-  "rendererSha256": "076db1bed20211d9f06e2840414ecaa349a618b212b107b33b87b52d64541322",
+  "rendererSha256": "9b3756ba7096ddb268f23952897be96907088ecb190f32e19a3906052cb3c2e8",
   "drawingSha256": "b78990f497d03baf754e3b2b68a795a5e9d3b91a0b6a2f8dad2ebcd7fec2907c",
   "motionSha256": "97551f9095a5a66596521a599d328df19f4e28fbcfcf716ae1ee980ebdf47448",
   "format": null,
@@ -123,7 +123,7 @@
     }
   ],
   "runtime": {
-    "wallSeconds": 1.613,
+    "wallSeconds": 0.782,
     "encoderThreads": 2,
     "pillowVersion": "11.3.0",
     "ffmpegVersion": null

@@ -263,6 +263,24 @@ class GeneratorTests(unittest.TestCase):
         self.assertIn("bio", carousel["caption"]["cta"])
         self.assertIn("fallbackBold", carousel["assets"])  # no empty box on a slide either
 
+    def test_a_cadence_with_every_slot_switched_off_stops_the_generator_without_an_error(self):
+        # 13/11/2026: the generator is stopped this way until its choice of photos is fixed; the rest of the daily run goes on.
+        slots = [{"weekday": "thursday", "time": "09:00", "kind": "carousel", "enabled": False}, {"weekday": "friday", "time": "18:00", "kind": "reel", "enabled": False}]
+        cadence = {"schemaVersion": 1, "timezone": "Europe/Paris", "channels": {
+            "instagram": {"weeklyLimit": 4, "minGapHours": 20, "slots": slots},
+            "facebook": {"weeklyLimit": 2, "minGapHours": 60, "slots": [{"weekday": "sunday", "time": "18:00", "kind": "carousel", "enabled": False}]}}}
+        f = self.fixture(cadence=cadence)
+        result = f.run(limit=20)
+        self.assertEqual((result["status"], result["created"], result["shortChannels"]), ("queue_covered", [], []))
+        self.assertEqual(result["coveredUntil"], {"instagram": None, "facebook": None})
+        self.assertEqual(list((f.root / "scenarios").glob("*.json")), [])
+
+    def test_the_doe_of_nara_keeps_her_head_on_a_slide(self):
+        # Audit of 13/11/2026: a centred 4:5 frame cut her at the neck (her muzzle ends at 86 % of a 2521 × 1600 photo).
+        size, focus = (2521, 1600), media_library.SITE_FOCUS["japon-nara-cerfs"]
+        left, _, right, _ = p.draw.cover_box(size, p.draw.SLIDE_SIZE, 1.0 + p.draw.ZOOM_RANGE / 2, tuple(focus))
+        self.assertTrue(left <= 0.45 * size[0] and 0.87 * size[0] <= right, (left, right))
+
     def test_a_covered_queue_creates_nothing_and_existing_posts_are_never_rewritten(self):
         f = self.fixture([guide(f"guide-{n}", title=f"Guide {n} : Kyoto") for n in range(14)])
         first = f.run(limit=30)

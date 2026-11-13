@@ -381,18 +381,18 @@
     },
     {
       "path": ".github/vsd-production/reviewed-social/fb-thailande-quand-partir-2026-11-19-2-v1.json",
-      "fileSha256": "f4ab158d9c949f4b53fc36e65681ff836f558c4084afedbdf194a8540c7db0aa",
+      "fileSha256": "3009ecc9a313c01344f1b10b5e0a71a3792d55cb2657e04c6edd3ec3fda5bc9c",
       "batchId": "fb-thailande-quand-partir-2026-11-19-2-v1",
-      "batchSha256": "0470011cd5c6a3a218a0ba59d8530ca6a25b0b1ea6a32d489e1f630141801b75",
+      "batchSha256": "27299dba3224aa6efff4100d107e649b4f90c19b43a9e727ba4db63147f654a5",
       "itemIds": [
         "vsd-production:facebook:fb-thailande-quand-partir-2026-11-19-2:photo-v1"
       ]
     },
     {
       "path": ".github/vsd-production/reviewed-social/fb-japon-itineraire-2-semaines-2026-11-22-2-v1.json",
-      "fileSha256": "dd3273e7f3d422a415e8f5a4ec24ebd4f47532ec91d9246c7a710700ea05b1fc",
+      "fileSha256": "587803c16c8291a9c7c856fc35259110a3172248c5017a8082327850c21ccb73",
       "batchId": "fb-japon-itineraire-2-semaines-2026-11-22-2-v1",
-      "batchSha256": "67c73c795c30ae1dd443ce20dd3d2445f647ef23d47c7870959574a886f18106",
+      "batchSha256": "da9dc8f91d97a5a056cd34d28d48ca47cf18d1ea916f12d90d9e835744a6bf65",
       "itemIds": [
         "vsd-production:facebook:fb-japon-itineraire-2-semaines-2026-11-22-2:photo-v1"
       ]
@@ -652,28 +652,6 @@
       "retiredAt": "2026-11-13T05:17:50Z",
       "reason": "photos_of_another_place",
       "evidence": "Audit à l’image du 13/11/2026 (fiches Wikimedia Commons et images extraites, revue contradictoire) : les 1,1 °C de l’observatoire d’Izaña sont posés, sous l’étiquette « Le Teide », sur une vue du village côtier de Garachico."
-    },
-    {
-      "batchId": "ig-japon-budget-2-semaines-2026-11-15-v1",
-      "batchSha256": "64e4371aa91e4930d36ad5d7fbbaf64e3f766092e885bf2a2325706e53d69517",
-      "fileSha256": "6d1e0906f1f2b5ec50ca5fb4298234ce81a7b51e8db970a6353fb6c9669e14f8",
-      "itemIds": [
-        "vsd-production:instagram:ig-japon-budget-2-semaines-2026-11-15:photo-v1"
-      ],
-      "retiredAt": "2026-11-13T05:17:50Z",
-      "reason": "photos_of_another_place",
-      "evidence": "Audit à l’image du 13/11/2026 (fiches Wikimedia Commons et images extraites, revue contradictoire) : le prix du train Tokyo–Kyoto–Hiroshima est posé sur le néon « DOTONBORI » d’Osaka, le prix du ramen sur le panneau « Shin-Fuji / Shizuoka », et le carton final dit « lien en bio ». Ce lot et sa copie TikTok étaient déjà programmés dans Buffer (15/11 à 20:00 et 21:00 UTC) au moment du retrait : le panneau ne retire pas un post déjà programmé, la suppression dans Buffer est traitée à part ; le post n’est pas refait ici."
-    },
-    {
-      "batchId": "ig-japon-budget-2-semaines-2026-11-15-tiktok-v1",
-      "batchSha256": "f530ac7f1addbd37a77495333e88615bae167e36a82f970dc432f608abed41e3",
-      "fileSha256": "9ec986a5d588f542c06fb2c98a9ebcccc2ef9f012efd1644a3a53f6147e8619b",
-      "itemIds": [
-        "vsd-production:tiktok:ig-japon-budget-2-semaines-2026-11-15:photo-v1"
-      ],
-      "retiredAt": "2026-11-13T05:17:50Z",
-      "reason": "photos_of_another_place",
-      "evidence": "Audit à l’image du 13/11/2026 (fiches Wikimedia Commons et images extraites, revue contradictoire) : le prix du train Tokyo–Kyoto–Hiroshima est posé sur le néon « DOTONBORI » d’Osaka, le prix du ramen sur le panneau « Shin-Fuji / Shizuoka », et le carton final dit « lien en bio ». Ce lot et sa copie TikTok étaient déjà programmés dans Buffer (15/11 à 20:00 et 21:00 UTC) au moment du retrait : le panneau ne retire pas un post déjà programmé, la suppression dans Buffer est traitée à part ; le post n’est pas refait ici."
     }
   ]
 }

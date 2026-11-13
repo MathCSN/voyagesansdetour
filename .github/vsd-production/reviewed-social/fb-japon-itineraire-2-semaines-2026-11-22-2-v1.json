@@ -34,7 +34,7 @@
           },
           {
             "url": "https://voyagesansdetour.fr/social-media/production/fb-japon-itineraire-2-semaines-2026-11-22-2/scene-04.jpg",
-            "sha256": "fe8d57966c982a27642178c7469f5fb32acf31cbccb32e5b9062edd59b017884",
+            "sha256": "3e6f7064d63aa62c2344e1202c0ac7ac99d0df77f477e9884c5f5098a36023bf",
             "mimeType": "image/jpeg",
             "altText": "Des cerfs en liberté dans le parc de Nara."
           },
@@ -56,9 +56,9 @@
         "schemaVersion": 1,
         "contentId": "vsd-production:facebook:fb-japon-itineraire-2-semaines-2026-11-22-2:photo-v1",
         "approved": true,
-        "reviewedAt": "2026-11-13T05:08:16Z",
-        "validUntil": "2026-12-13T05:08:13Z",
-        "payloadRevision": "c442b18d5b8f68f371eef39911f998d8792e58a930dbc67bc9e59308fe59e52f",
+        "reviewedAt": "2026-11-13T06:53:43Z",
+        "validUntil": "2026-12-13T06:53:15Z",
+        "payloadRevision": "a05d168a86239a2015a0317905123ecc728cfcf8405ba6ab8398913932db1fe4",
         "checks": {
           "editorialApproved": true,
           "rightsApproved": true,
@@ -68,8 +68,8 @@
           "requiresPaidCall": false,
           "sources": {
             "status": "verified",
-            "observedAt": "2026-11-13T05:08:13Z",
-            "validUntil": "2026-12-13T05:08:13Z"
+            "observedAt": "2026-11-13T06:53:15Z",
+            "validUntil": "2026-12-13T06:53:15Z"
           },
           "syntheticPerson": false,
           "providerSyntheticSettingVerified": false
@@ -84,56 +84,56 @@
               "sha256": "fc2f1e6ca7c41fa2ef46b1781569cc7e61efc574b58ffcdfc185e28e469e4417",
               "mimeType": "image/jpeg",
               "status": "verified",
-              "observedAt": "2026-11-13T05:08:16Z",
-              "validUntil": "2026-12-13T05:08:13Z"
+              "observedAt": "2026-11-13T06:53:43Z",
+              "validUntil": "2026-12-13T06:53:15Z"
             },
             {
               "url": "https://voyagesansdetour.fr/social-media/production/fb-japon-itineraire-2-semaines-2026-11-22-2/scene-02.jpg",
               "sha256": "2a39cdc67bb0a76eaf9a399dbe59452e5955e823d99f7af21d4594cb90dc3bcc",
               "mimeType": "image/jpeg",
               "status": "verified",
-              "observedAt": "2026-11-13T05:08:16Z",
-              "validUntil": "2026-12-13T05:08:13Z"
+              "observedAt": "2026-11-13T06:53:43Z",
+              "validUntil": "2026-12-13T06:53:15Z"
             },
             {
               "url": "https://voyagesansdetour.fr/social-media/production/fb-japon-itineraire-2-semaines-2026-11-22-2/scene-03.jpg",
               "sha256": "418ad62d1197d025d9318c7a4c2b55cf367f3c2ce2ba87b585f2cd1058efd924",
               "mimeType": "image/jpeg",
               "status": "verified",
-              "observedAt": "2026-11-13T05:08:16Z",
-              "validUntil": "2026-12-13T05:08:13Z"
+              "observedAt": "2026-11-13T06:53:43Z",
+              "validUntil": "2026-12-13T06:53:15Z"
             },
             {
               "url": "https://voyagesansdetour.fr/social-media/production/fb-japon-itineraire-2-semaines-2026-11-22-2/scene-04.jpg",
-              "sha256": "fe8d57966c982a27642178c7469f5fb32acf31cbccb32e5b9062edd59b017884",
+              "sha256": "3e6f7064d63aa62c2344e1202c0ac7ac99d0df77f477e9884c5f5098a36023bf",
               "mimeType": "image/jpeg",
               "status": "verified",
-              "observedAt": "2026-11-13T05:08:16Z",
-              "validUntil": "2026-12-13T05:08:13Z"
+              "observedAt": "2026-11-13T06:53:43Z",
+              "validUntil": "2026-12-13T06:53:15Z"
             },
             {
               "url": "https://voyagesansdetour.fr/social-media/production/fb-japon-itineraire-2-semaines-2026-11-22-2/scene-05.jpg",
               "sha256": "600fe04c954e858d25d2e91dc2200b45fb00a570593e3827976b3e1ff6c320d4",
               "mimeType": "image/jpeg",
               "status": "verified",
-              "observedAt": "2026-11-13T05:08:16Z",
-              "validUntil": "2026-12-13T05:08:13Z"
+              "observedAt": "2026-11-13T06:53:43Z",
+              "validUntil": "2026-12-13T06:53:15Z"
             },
             {
               "url": "https://voyagesansdetour.fr/social-media/production/fb-japon-itineraire-2-semaines-2026-11-22-2/scene-06.jpg",
               "sha256": "20b598c596e210ce2321d7bb5380ffeabf722aaf4a18087769b1ef3733e4af73",
               "mimeType": "image/jpeg",
               "status": "verified",
-              "observedAt": "2026-11-13T05:08:16Z",
-              "validUntil": "2026-12-13T05:08:13Z"
+              "observedAt": "2026-11-13T06:53:43Z",
+              "validUntil": "2026-12-13T06:53:15Z"
             }
           ]
         },
         "destination": {
           "url": "https://voyagesansdetour.fr/japon/japon-itineraire-2-semaines/",
           "status": "verified",
-          "observedAt": "2026-11-13T05:08:16Z",
-          "validUntil": "2026-12-13T05:08:13Z"
+          "observedAt": "2026-11-13T06:53:43Z",
+          "validUntil": "2026-12-13T06:53:15Z"
         },
         "monetization": {
           "containsAffiliateLinks": false,
@@ -143,8 +143,8 @@
         },
         "formatCapability": {
           "status": "verified",
-          "observedAt": "2026-11-13T05:08:16Z",
-          "validUntil": "2026-12-13T05:08:13Z",
+          "observedAt": "2026-11-13T06:53:43Z",
+          "validUntil": "2026-12-13T06:53:15Z",
           "automaticPublishing": true,
           "verificationMethod": "official_documentation",
           "sourceUrls": [
@@ -157,8 +157,8 @@
           "status": "rendered_local_bytes_verified_public_deploy_pending",
           "format": "photo_carousel",
           "rendererContractVersion": 3,
-          "receiptSha256": "23a10551363ed748e003958e73768533c2bdc97224241982d60381b0259fd990",
-          "scenarioFingerprint": "465b8d5582b016864e1f8c53fa1a5bf5e2d7f9fc3746b6c1208e6c7f7bd6ea34",
+          "receiptSha256": "e6d5019915ecdd8be1c2697ba7f53d8f1c240112329b00022142eea4c5ca0d32",
+          "scenarioFingerprint": "4ed5709b5ee10c40b977c9bdae9fa715dd011f64e45aae3fa7c780ddd80055a4",
           "sourceCheckedOn": "2026-11-13",
           "sourceUrls": [
             "https://voyagesansdetour.fr/japon/japon-itineraire-2-semaines/"

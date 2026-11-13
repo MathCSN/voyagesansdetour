@@ -47,10 +47,32 @@ guide publié ──► rendu (production.py, reel_intake.py)
   pas encore envoyés passent « en attente » dans le registre et ne partent plus. Un post déjà programmé
   dans Buffer se supprime dans Buffer. Le panneau ne lit que `batchId` ; l'entrée garde aussi les
   empreintes du lot, la date, le motif (`photos_of_another_place`, `too_little_content`,
-  `duplicate_media_on_channel`, `figure_no_longer_in_guide`, `guide_contradicts_post`) et, s'il est refait, `replacedBy`. Retirer aussi la copie TikTok
+  `duplicate_media_on_channel`, `figure_no_longer_in_guide`, `guide_contradicts_post`,
+  `retouched_image` : une image retouchée ou prolongée par génération, qui n'est plus la photo telle
+  qu'elle a été prise) et, s'il est refait, `replacedBy`. Retirer aussi la copie TikTok
   (`…-tiktok-v1`). Le générateur rend alors le créneau et le guide : le post refait prend
   l'identité suivie de `-2`. Les anciens garde-fous endormis du dépôt ne connaissent que le motif
   `duplicate_media_on_channel` : leurs jeux d'essai écartent les autres.
+- **Un lot déjà remis à Buffer ne s'inscrit dans `retirements` qu'une fois décidé de le supprimer.**
+  Il n'existe pas de retrait « pour la trace » : dès qu'un lot est dans `retirements`, le générateur
+  rend son créneau et son guide (un autre post est fabriqué pour la même heure, puis un second post
+  du même guide), `stale_lots.py` ne le relit plus contre son guide, le rapport le dit « retiré » et
+  le panneau, une fois capable de retirer dans Buffer, supprime le post programmé. Tant que la
+  suppression n'est pas décidée, le constat se note ici et le lot reste hors de `retirements`.
+  Cas du 13/11/2026 : `ig-japon-budget-2-semaines-2026-11-15` et sa copie TikTok, programmés dans
+  Buffer pour le 15/11 à 20:00 et 21:00 UTC. L'audit à l'image du 13/11 y relève le prix du train
+  Tokyo–Kyoto–Hiroshima posé sur le néon « DOTONBORI » d'Osaka, le prix du ramen sur le panneau de
+  la gare de Shin-Fuji, la biche de Nara cadrée sans tête, et un carton final qui dit « lien en
+  bio ». La décision de le laisser partir ou de le supprimer dans Buffer revient à Mathis ; le lot
+  n'est ni retiré ni refait.
+- **Mettre le générateur à l'arrêt** : `"enabled": false` sur chaque créneau de `cadence.json`.
+  `auto_social.py` ne fabrique alors plus aucun post ; le reste du passage quotidien continue
+  (relecture des lots contre leurs guides, rendu des scénarios déjà en file, stock, épingles). Les
+  créneaux se vident au fil des jours et un lot retiré n'est plus remplacé : le rapport lève « File
+  … presque vide » dès que le dernier post d'un réseau est à moins de 14 jours, puis « File … vide ».
+  Le passage quotidien, lui, répond `queue_covered` sans avertissement. À l'arrêt depuis le
+  13/11/2026 (derniers posts en file : Facebook 26/11, Instagram et TikTok 02/12), jusqu'à la PR qui
+  corrige le choix des photos (trajets, second tour, faits localisés sans nom propre).
 - **Un guide corrigé retire ses posts en file** (depuis le 12/11/2026) : `vsd-render-content.yml`
   lance `stale_lots.py --retire` avant de planifier. Chaque lot à venir est relu contre la page de son
   guide publiée ce jour-là ; celui qui cite un chiffre que la page ne donne plus est retiré tout seul,

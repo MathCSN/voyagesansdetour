@@ -82,7 +82,11 @@
       ],
       "commonsSha1": "59b5725432c811a63cfdba7706f4c20ccc2b2430",
       "retrievedAt": "2026-11-11T02:39:00Z",
-      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux.",
+      "focus": [
+        0.68,
+        0.5
+      ]
     },
     "japon-shinkansen": {
       "file": "assets/photos/auto/japon-shinkansen.jpg",
