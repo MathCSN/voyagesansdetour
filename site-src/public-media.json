@@ -1479,6 +1479,110 @@
           "bytes": 4449
         }
       ]
+    },
+    {
+      "contentId": "fb-thailande-quand-partir-2026-11-19-2",
+      "kind": "photos",
+      "approved": true,
+      "files": [
+        {
+          "name": "scene-01.jpg",
+          "sha256": "19c09cae851c683f7460357fdf7fe1c5ca4dff73753de3c97e72b23085e5784e",
+          "bytes": 207995
+        },
+        {
+          "name": "scene-02.jpg",
+          "sha256": "a8ac98806b528b93302d5db097dcb01e01a77ef8c71533bd7a520b584203f9ea",
+          "bytes": 185589
+        },
+        {
+          "name": "scene-03.jpg",
+          "sha256": "5158a5b2c064050d73cae9a901cde80970a471409b9513d6a60310fd22e6a667",
+          "bytes": 210870
+        },
+        {
+          "name": "scene-04.jpg",
+          "sha256": "e07585d59c1e6bf578935281e7aab022b25c56c3cf54e8c9aeaac6ff2a9b2243",
+          "bytes": 318116
+        },
+        {
+          "name": "scene-05.jpg",
+          "sha256": "151d745e88447a5d9701ae771621fac5fa3be025c6f7386dcd24d5ea841d9822",
+          "bytes": 335694
+        },
+        {
+          "name": "scene-06.jpg",
+          "sha256": "5e07d420f6530e7b1f9fd5664a8dac6206411e68cd90cdb2ad4126f2ccd0a5ad",
+          "bytes": 261946
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "76c0764f897dfd1f98c852790482d6b7c37ae11570f1f54b210f2c1fd87ea757",
+          "bytes": 2578
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "fb-japon-itineraire-2-semaines-2026-11-22-2",
+      "kind": "photos",
+      "approved": true,
+      "files": [
+        {
+          "name": "scene-01.jpg",
+          "sha256": "fc2f1e6ca7c41fa2ef46b1781569cc7e61efc574b58ffcdfc185e28e469e4417",
+          "bytes": 258484
+        },
+        {
+          "name": "scene-02.jpg",
+          "sha256": "2a39cdc67bb0a76eaf9a399dbe59452e5955e823d99f7af21d4594cb90dc3bcc",
+          "bytes": 203120
+        },
+        {
+          "name": "scene-03.jpg",
+          "sha256": "418ad62d1197d025d9318c7a4c2b55cf367f3c2ce2ba87b585f2cd1058efd924",
+          "bytes": 467933
+        },
+        {
+          "name": "scene-04.jpg",
+          "sha256": "3e6f7064d63aa62c2344e1202c0ac7ac99d0df77f477e9884c5f5098a36023bf",
+          "bytes": 205891
+        },
+        {
+          "name": "scene-05.jpg",
+          "sha256": "600fe04c954e858d25d2e91dc2200b45fb00a570593e3827976b3e1ff6c320d4",
+          "bytes": 266091
+        },
+        {
+          "name": "scene-06.jpg",
+          "sha256": "20b598c596e210ce2321d7bb5380ffeabf722aaf4a18087769b1ef3733e4af73",
+          "bytes": 409131
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "d64f701884815c6a60f1a437144eaaceed3055912370f7d3c527546f40bd704a",
+          "bytes": 2761
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
     }
   ]
 }

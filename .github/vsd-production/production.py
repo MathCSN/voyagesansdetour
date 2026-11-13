@@ -27,6 +27,7 @@ from PIL import __version__ as pillow_version
 
 import clip_intake
 import motion_render as motion
+import place_names
 import social_render as draw
 from photo_intake import AI_MARKERS, LICENCES, ai_record
 
@@ -66,6 +67,7 @@ REEL_BUTTON = {"instagram": "Le guide complet → lien en bio", "facebook": "Le 
 # network only ("lien en bio" was false on TikTok). The last plan of a scenario carries that button; a reel sealed
 # before 12/11/2026 carries none and is drawn with the button it was given, so that it is redrawn as it was.
 MOTION_BUTTON = "voyagesansdetour.fr"
+PLACES_FROM = "2026-11-13T04:00:00Z"   # scenarios reviewed from then on are refused a photo of another place than a plan names
 MOTION_BUTTON_BEFORE = "voyagesansdetour.fr → lien en bio"
 # The small label of a plan may give the figure's own date ("chiffre de juillet 2026"): then the plan quotes it.
 OWN_DATE_TAG = re.compile(r" · chiffre (?:de |du |d’)(.+)\Z")
@@ -262,6 +264,8 @@ def check_motion_shape(scene, layout):
             text(scene[key], maximum)
     ensure(all(line.count("*") % 2 == 0 for line in scene["headline"] + [scene.get("detail") or ""]), UNBALANCED)
     ensure("button" not in scene or (layout == "cta" and scene["button"] == MOTION_BUTTON), "Only the last plan carries the button, and only the site's name")
+    if scene.get("alt") is not None:
+        text(scene["alt"], 300)   # the caption of the photo, kept with the plan: the guard on places reads it
     focus = scene.get("focus", [0.5, 0.5])
     ensure(isinstance(focus, list) and len(focus) == 2 and all(type(v) in (int, float) and 0 <= v <= 1 for v in focus), "Invalid photo focus")
     seconds = scene.get("seconds")
@@ -417,6 +421,11 @@ def validate_scenario(scenario, root, now):
         else:
             records[scene["photo"]] = check_photo(photos, scene["photo"], root)
     ensure(used, "No sourced fact in this post")
+    # A post made since this guard exists never shows a fact over a photo of another place; the posts sealed before
+    # it are audited by hand (two of them were withdrawn for it on 13/11/2026), not refused here.
+    if checked >= instant(PLACES_FROM):
+        misplaced = photos_of_another_place(scenario, photos)
+        ensure(not misplaced, "Photo of another place than its plan names: " + " ; ".join(misplaced))
     duration = sum(scene.get("seconds", 0) for scene in scenes)
     if scenario["kind"] == "reel":
         bounds = MOTION_REEL_SECONDS if fast else REEL_SECONDS
@@ -424,6 +433,61 @@ def validate_scenario(scenario, root, now):
     sources = {source_id: snapshots[source_id][0] for source_id in sorted(used)}
     checked_on = min(instant(record["retrievedAt"]) for record in sources.values()).date()
     return {"duration": duration, "sources": sources, "photos": records, "clips": clip_records, "sourceCheckedOn": str(checked_on)}
+
+
+def photos_of_another_place(scenario, photos) -> list[str]:
+    """The plans of a post that name a precise place (a proper noun: Similan, Kinkaku-ji) of which the record of
+    their photo says nothing, while that record names another one: "la réouverture des îles Similan" over "les îles
+    Phi Phi", "le pavillon d'Or du Kinkaku-ji" over the platform of Shin-Fuji. The record is what a photo post
+    carries with each photo (its caption), the Commons title and categories, and the identifier. A journey over a
+    train is no such plan ("Tokyo → Kyoto en Nozomi" over a shinkansen), nor is the opening, the call to action or
+    a table."""
+    scenes = scenario["scenes"]
+    everywhere = place_names.words(str(scenario.get("destination", "")) + " " + str(scenes[0].get("kicker", "")))
+    found = [(number, another_place(scene, photos, everywhere)) for number, scene in enumerate(scenes[1:-1], 2)]
+    return [f"plan {number} {told}" for number, told in found if told]
+
+
+def record_of(scene, photos) -> tuple[str, str]:
+    """What the record of a plan's photo says it shows: its caption or, without one, its Commons title, both without
+    where the view is taken from; and its categories, those of a viewpoint aside ("Views from Rockefeller Center")."""
+    record = photos.get(scene["photo"]) or {}
+    title = str(record.get("commonsTitle", "")).removeprefix("File:").rsplit(".", 1)[0]
+    told = place_names.subject(str(scene.get("alt") or "") or title)
+    filed = " ".join(category for category in str(record.get("categories", "")).split("|") if not place_names.VIEWPOINT.search(category))
+    return told, filed
+
+
+def about_of(scene, said, places, everywhere) -> tuple[list[str], set[str]]:
+    """The first place a plan is about, and all of them. The places a fact is about are the first it names and those
+    it lists with it: a photo of Kyoto is not a photo of "le Grand Bouddha du Tōdai-ji, à Nara, à 45 minutes de
+    Kyoto". The name written above the plan counts too ("Choisissez Porto" over the Ribeira of Porto), unless it is
+    only the destination of the whole post, which every photo of it shares. Three letters at least tie a photo to a
+    place: "Tràng An" and "Hội An" share "An"."""
+    subjects = place_names.subjects(said, everywhere) or places
+    above = str(scene.get("kicker") or "")
+    labelled = set() if place_names.words(above) <= everywhere else place_names.proper(above, sentence=True)
+    return subjects[:1], {place for place in set(subjects) | labelled if len(place) >= 3}
+
+
+def another_place(scene, photos, everywhere) -> str | None:
+    """What one plan names and what its photo names instead, None when the photo is a photo of what the plan says."""
+    if scene.get("layout") == "table" or "photo" not in scene:
+        return None
+    said = draw.plain(" ".join(scene.get("headline") or []) + " " + str(scene.get("detail") or ""))
+    places = place_names.named(said, everywhere)
+    told, filed = record_of(scene, photos)
+    shown = place_names.words(" ".join([scene["photo"], told, filed]))
+    journey = place_names.journey(said) and place_names.ride(shown, str(scene.get("detail") or said))
+    if not places or journey or place_names.shows(said, shown, places):
+        return None
+    others = place_names.proper(told, everywhere, sentence=bool(scene.get("alt"))) - place_names.words(said)
+    first, about = about_of(scene, said, places, everywhere)
+    # The first place counts wherever the record names it; another one only in the caption, the title or a category,
+    # not in the identifier the photo is filed under ("japon-hiroshima-miyajima" is a photo of Miyajima).
+    if set(first) & shown or about & place_names.words(told + " " + filed) or not others:
+        return None
+    return f"names {', '.join(places)} over {scene['photo']} ({', '.join(sorted(others))})"
 
 
 def contract_of(scenario):

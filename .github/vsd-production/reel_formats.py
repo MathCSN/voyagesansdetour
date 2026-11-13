@@ -16,6 +16,7 @@ from dataclasses import dataclass
 import re
 
 import destinations
+import place_names
 import production as p
 
 NBSP = " "
@@ -110,9 +111,13 @@ class Line(str):
 
 
 def caption_emoji(value: str, label: str) -> str:
-    """Price, duration, train, boat, walk: the first that fits; a pin otherwise. A distance alone is not a walk."""
-    tests = (("💶", "€" in value), ("⏱️", re.search(r"\b(min|h|jours?)\b", value)), ("🚆", "train" in label.lower()),
-             ("⛴️", re.search(r"ferry|bateau|rabelo", label.lower())), ("🥾", re.search(r"marches|sentier|randonn|à pied", value + label)))
+    """Price, duration, boat, journey, ticket, walk: the first that fits; a pin otherwise. A distance alone is not a
+    walk, and a line is a journey by what it opens on: "le Grand Bouddha du Tōdai-ji, …, à 45 minutes par le train"
+    is the fee of a temple, not a train."""
+    opening = " ".join(place_names.folded(label)[:place_names.OPENING_WORDS])
+    tests = (("💶", "€" in value), ("⏱️", re.search(r"\b(min|h|jours?)\b", value)),
+             ("⛴️", re.search(r"\b(?:ferry|bateau|rabelo)", opening)), ("🚆", place_names.journey(label)),
+             ("🎟️", re.match(r"(?:l )?entree\b", opening)), ("🥾", re.search(r"marches|sentier|randonn|à pied", value + label)))
     return next((emoji for emoji, fits in tests if fits), "📍")
 
 
@@ -313,7 +318,7 @@ def words_of(value: str) -> set[str]:
 # to a photo; beside a name the two share, it counts.
 PLACE_KINDS = frozenset("tour tours villa villas ville villes village villages medina place places pont ponts palais jardin jardins "
                         "musee musees temple temples eglise eglises cathedrale chateau plage plages marche marches parc parcs "
-                        "quartier quartiers gare gares port ports centre monument monuments".split())
+                        "quartier quartiers gare gares port ports centre monument monuments".split()) | (place_names.GENERIC - {"train", "trains"})
 
 
 def words_shared(photo: tuple, target: set[str], family: str | None = None, kinds: bool = False) -> set[str]:
@@ -344,7 +349,7 @@ class Media:
         prefixes = {photo[0].partition("-")[0] for photo in photos if photo[0] not in self.found}
         self.family = prefixes.pop() if len(prefixes) == 1 else None
         # The name of the place and of its country is in every caption: sharing it says nothing of what a photo shows.
-        self.everywhere = words_of(everywhere)
+        self.everywhere, self.country = words_of(everywhere), place_names.words(everywhere)
 
     def target(self, text: str) -> set[str]:
         return words_of(text) - self.everywhere
@@ -358,6 +363,37 @@ class Media:
 
     def shared(self, photo: tuple, target: set[str]) -> int:
         return words_shown(photo, target, self.family)
+
+    def described(self, photo: tuple) -> set[str]:
+        """The words of what says what a photo shows: its caption, its Commons title and its identifier."""
+        prefix, _, rest = photo[0].partition("-")
+        return place_names.words(" ".join([(rest if prefix == self.family else photo[0]).replace("-", " "), photo[2], str(photo[1].get("commonsTitle", ""))]))
+
+    def places(self, text: str) -> set[str]:
+        """The precise places a fact names (Similan, Kinkaku-ji, Uxmal), the destination of the whole post aside."""
+        return place_names.proper(text, self.country)
+
+    def elsewhere(self, photo: tuple, places: set[str]) -> bool:
+        """The caption of this photo names a precise place that is none of those of the fact."""
+        return bool(place_names.elsewhere(photo[2], places, self.country))
+
+    def beside(self, own: tuple, text: str, target: set[str]) -> set[str]:
+        """What the photo the guide put beside this text shows of what the text says: the words the two share, were
+        it a kind of place ("Le pont en métro" and the photo of the bridge). Not a kind of which the text names
+        another one: "les îles Similan" beside a photo of "les îles Phi Phi" is not that photo's place."""
+        places = self.places(text)
+        shared = words_shared(own, target, self.family, kinds=True) - places   # a place it names is weighed with the others
+        described = self.described(own)
+        # When the text names a precise place, only a kind of place ties it to this photo ("le pont"): any other word
+        # the two share ("ticket") is no proof that the photo is of that place.
+        return {word for word in shared if (word not in PLACE_KINDS and not places) or (word in PLACE_KINDS and place_names.named_after(text, word) <= described)}
+
+    def left_for(self, text: str, avoid: frozenset = frozenset()) -> list:
+        """The free photos a fact that none of them shows may still take. A fact that names a precise place only
+        takes a photo that names no other one: "le pavillon d'Or du Kinkaku-ji" went over the sign of Shin-Fuji
+        station (13/11/2026)."""
+        places = self.places(text)
+        return [ph for ph in self.free() if ph[0] not in avoid and not (places and self.elsewhere(ph, places))]
 
     def spare(self) -> str | None:
         """The last photo left that can close the post: no plan takes it, whatever it names."""
@@ -379,6 +415,63 @@ class Media:
         last = next((wanted for wanted in self.emblematic if any(ph[0] == wanted for ph in self.photos)), None)
         return {self.cover, last} - {None}
 
+    def beside_or_ride(self, text: str, pool: list, own: tuple | None, target: set[str], wider: set[str]) -> tuple | None:
+        """The guide's own photo for this text, when it shows what the text says, unless another photo shows all of
+        that and more (the Grand Palace, not Wat Arun, for "le Grand Palais de Bangkok": the two are in Bangkok).
+        Then, for a journey ("Tokyo → Kyoto en Nozomi"), a train of the guide before a town it names: the guide's
+        own photo of the ride, else the one that names the most places of the journey; and a ride of the same kind
+        as the one the text opens on (never a shinkansen for "Le bus 205 pour le Kinkaku-ji")."""
+        beside = self.beside(own, text, target) if own else set()
+        if beside and not any(beside < words_shared(ph, target, self.family) for ph in pool):
+            return own
+        if not place_names.journey(text):
+            return None
+        places = self.places(text)
+        rides = [ph for ph in pool if place_names.ride(self.described(ph), text)]
+        if not rides:
+            return None
+        return own if own in rides else max(rides, key=lambda ph: (len(places & self.described(ph)), self.shared(ph, target), self.shared(ph, wider)))
+
+    def of_the_place(self, text: str, places: list[str], pool: list, own: tuple | None, target: set[str], wider: set[str]) -> tuple | None:
+        """The photo that names the place a fact names, None when none does. The first place a fact names is the one it
+        is about: "le Grand Bouddha du Tōdai-ji, à Nara, à 45 minutes de Kyoto" goes over Nara before Kyoto. A place
+        the fact names without a capital ("les tombeaux saadiens") is named by the photo that does (four letters at
+        least: "Chiang Mai" is not named by "la mi-mai")."""
+        # (Three letters at least to tie a photo to a place: "Tràng An" and "Hội An" share "An".)
+        about = [place for place in place_names.subjects(text, self.country) or places if len(place) >= 3]
+        said = {word for word in place_names.words(text) if len(word) >= 4} - set(places)
+        echoed = lambda ph: bool(place_names.proper(ph[2], self.country) & said)
+        naming = lambda ph: 2 * sum(len(about) - rank for rank, place in enumerate(about) if place in self.described(ph)) + echoed(ph)
+        # A photo names the place of a fact when it names the first place the fact names, or one of its places and no
+        # other, or when the fact says the place the photo names. The torii of Miyajima, filed under "hiroshima", is
+        # not the photo of "le musée du Mémorial pour la paix d'Hiroshima".
+        # A place the fact only names to situate itself ("à 45 minutes de Kyoto") makes no photo its photo.
+        # The first place is enough wherever the photo names it; another one only when the photo itself says so, in
+        # its caption or its title: the torii of Miyajima, filed "hiroshima", is not "le musée du Mémorial pour la paix
+        # d'Hiroshima".
+        told = lambda ph: place_names.words(ph[2] + " " + str(ph[1].get("commonsTitle", "")))
+        fits = lambda ph: about[:1] and about[0] in self.described(ph) or bool(set(about) & told(ph)) or echoed(ph)
+        named = [ph for ph in pool if naming(ph) and fits(ph)]
+        if not named:
+            return None
+        # Between two photos that name it as well, the one that shares more with the fact, a kind of place included
+        # ("le Grand Palais de Bangkok": the palace, not another temple of Bangkok); then the guide's own.
+        close = lambda ph: (naming(ph), len(words_shared(ph, target, self.family, kinds=True)))
+        best = max(named, key=lambda ph: (close(ph), self.shared(ph, wider)))
+        return own if own in named and close(own) >= close(best) else best
+
+    def sharing(self, pool: list, own: tuple | None, target: set[str], wider: set[str]) -> tuple | None:
+        """The photo that shares the most words with a text, None when none shares any. The guide's own photo for that
+        text wins when it shares a word, and stands in when no photo shares any."""
+        shared = lambda ph: self.shared(ph, target)
+        best = max(pool, key=lambda ph: (shared(ph), self.shared(ph, wider)), default=None)
+        # The guide put its own photo beside this text: a kind of place the two share ("Le pont en métro" and the photo
+        # of the bridge) is proof enough for that photo, and for no other.
+        mine = words_shared(own, target, self.family, kinds=True) if own else set()
+        if own and (best is None or not shared(best) or (mine and not any(mine < words_shared(ph, target, self.family) for ph in pool))):
+            return own
+        return best if best is not None and shared(best) else None
+
     def named(self, text: str, section: dict | None, avoid: frozenset = frozenset(), also: str = "") -> tuple | None:
         """The photo that shows what `text` names: the one whose id, caption or title shares the most words with it.
         The section's own photo wins when it shares a word, and stands in when no photo shares any; it gives way
@@ -388,17 +481,22 @@ class Media:
         says, to choose between two photos that share as much with `text` (the train, not the cathedral, for "Mérida–
         Tulum en train direct" and its "train direct Mérida Teya → Tulum")."""
         target, wider = self.target(text), self.target(text + " " + also)
-        shared = lambda ph: self.shared(ph, target)
         wanted = section.get("image") if section else None
         pool = [ph for ph in self.free() if ph[0] not in avoid]
         own = next((ph for ph in pool if ph[0] == wanted), None)
-        best = max(pool, key=lambda ph: (shared(ph), self.shared(ph, wider)), default=None)
-        # The guide put its own photo beside this text: a kind of place the two share ("Le pont en métro" and the photo
-        # of the bridge) is proof enough for that photo, and for no other.
-        mine = words_shared(own, target, self.family, kinds=True) if own else set()
-        if own and (best is None or not shared(best) or (mine and not any(mine < words_shared(ph, target, self.family) for ph in pool))):
-            return own
-        return best if best is not None and shared(best) else None
+        pick = self.beside_or_ride(text, pool, own, target, wider)
+        if pick:
+            return pick
+        # A fact that names a precise place goes over a photo that names that place: a word they share ("îles") is
+        # not enough. When none does, the guide's own photo for this text stands in only if it names no other place.
+        places = place_names.named(text, self.country)
+        if places:
+            pick = self.of_the_place(text, places, pool, own, target, wider)
+            if pick:
+                return pick
+            pool = [ph for ph in pool if not self.elsewhere(ph, set(places))]
+            own = own if own in pool else None
+        return self.sharing(pool, own, target, wider)
 
     def photo(self, text: str = "", section: dict | None = None, strict: bool = False, avoid: frozenset = frozenset(),
               also: str = "") -> tuple[str, str]:
@@ -406,7 +504,7 @@ class Media:
         pick = self.named(text, section, avoid, also)
         if not pick and (strict or len(self.photos) <= self.reserve):
             raise Held("no_photo_of_this_place" if strict else "not_enough_photos_or_figures")
-        kept, free = self.kept(), [ph for ph in self.free() if ph[0] not in avoid]
+        kept, free = self.kept(), self.left_for(text, avoid)
         pick = pick or next((ph for ph in free if ph[0] not in kept), free[0] if free else None)
         if not pick:
             raise Held("not_enough_photos_or_figures")
@@ -509,7 +607,8 @@ def placed(facts: list[dict], media: Media, limit: int, least: int):
         for index, fact in enumerate(facts):
             if index in done or len(done) >= most or media.shown_elsewhere(fact["label"]):
                 continue
-            if not wanted or media.named(fact["label"], fact["section"]):
+            # In the second round a figure takes a photo that does not show it: never one that shows another place.
+            if media.named(fact["label"], fact["section"]) if wanted else media.left_for(fact["label"]):
                 done.add(index)
                 yield index
 
@@ -724,8 +823,11 @@ def build(fmt: str, article: dict, facts: list[dict], photos: list, clips: list,
     # The button is written in the scenario: a reel sealed before 12/11/2026 has none and keeps the card it was given.
     closing = plan("cta", brief.media.closing(), "Le guide complet", title_lines, CTA_SECONDS, note=SAVE_NOTE, button=p.MOTION_BUTTON)
     # A photo reviewed by hand may say where its subject is (reviewed.json, "focus"): the vertical frame is cut around it.
-    records = {photo[0]: photo[1] for photo in photos}
+    records, captions = {photo[0]: photo[1] for photo in photos}, {photo[0]: photo[2] for photo in photos if photo[2]}
     for scene in [hook] + body + [closing]:
+        # The caption of each photo goes with its plan: production.py reads it to refuse a photo of another place.
+        if scene.get("photo") in captions:
+            scene["alt"] = captions[scene["photo"]]
         focus = records.get(scene.get("photo"), {}).get("focus")
         if isinstance(focus, list) and len(focus) == 2:
             scene["focus"] = focus
