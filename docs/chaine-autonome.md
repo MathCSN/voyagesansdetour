@@ -117,6 +117,22 @@ Le lien de l'épingle suit le pays du guide (`/portugal/`, `/espagne/`, `/italie
 les épingles Espagne et Italie attendent leur tableau. Un guide dont la page est indisponible ou
 qui ne se dessine pas est mis en attente (`held`) sans bloquer les suivants.
 
+**Admission en pause depuis le 13/11/2026** (`"pins": {"enabled": false}` dans `cadence.json`) :
+`pin_promotion.py` répond `admission_switched_off` et ne touche à rien ; `pin_intake.py` continue de
+dessiner les brouillons. Les 28 épingles ont été regardées à l'image ce jour-là avec les exigences
+des posts. Une épingle a une seule photo, celle du guide, et un ou trois chiffres : dès que le
+chiffre nomme un lieu précis qui n'est pas celui de la photo, l'épingle est fausse à l'œil. Neuf des
+dix-sept brouillons en file sont dans ce cas (« Faro → Tavira » sur la Ponta da Piedade de Lagos,
+« Bangkok → Chiang Mai » sur Ko Phi Phi, « le jardin Majorelle » sur la place Jemaa el-Fna, la
+navette de San José sur le volcan Arenal, les variantes « b » à trois chiffres du Vietnam, de
+Marrakech, du Yucatán et du Japon), et un dixième coupe sa phrase (« …(12 à 24 mm à Bangkok, »).
+Dans les flux, quatre épingles sur onze ont le défaut de lieu (Andalousie : Séville → Cordoue sur
+l'Alhambra ; Tenerife : Tenerife Sud et La Laguna sur le Teide ; côte amalfitaine : Rome → Salerne
+sur Positano ; Japon : Tokyo → Kyoto sur la pagode Chureito) et une coupe sa phrase (Japon budget,
+« …hors vol — ») : elles restent en ligne, la décision de les retirer de Pinterest revient à Mathis.
+À rallumer quand le choix de la photo d'une épingle suivra les règles des posts et que les
+brouillons auront été redessinés et regardés.
+
 ## Le trajet d'un guide
 
 **Les nouveaux guides viennent des routines cloud** (rédaction le lundi et le jeudi à 9 h, veille le
