@@ -71,8 +71,9 @@ guide publié ──► rendu (production.py, reel_intake.py)
   créneaux se vident au fil des jours et un lot retiré n'est plus remplacé : le rapport lève « File
   … presque vide » dès que le dernier post d'un réseau est à moins de 14 jours, puis « File … vide ».
   Le passage quotidien, lui, répond `queue_covered` sans avertissement. À l'arrêt depuis le
-  13/11/2026 (derniers posts en file : Facebook 26/11, Instagram et TikTok 02/12), jusqu'à la PR qui
-  corrige le choix des photos (trajets, second tour, faits localisés sans nom propre).
+  13/11/2026 (derniers posts en file : Facebook 26/11, Instagram et TikTok 02/12 ; l'alerte Facebook
+  est donc levée dès le 13/11, celle d'Instagram à partir du 18/11), jusqu'à la PR qui corrige le
+  choix des photos (trajets, second tour, faits localisés sans nom propre).
 - **Un guide corrigé retire ses posts en file** (depuis le 12/11/2026) : `vsd-render-content.yml`
   lance `stale_lots.py --retire` avant de planifier. Chaque lot à venir est relu contre la page de son
   guide publiée ce jour-là ; celui qui cite un chiffre que la page ne donne plus est retiré tout seul,
