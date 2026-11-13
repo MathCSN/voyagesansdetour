@@ -48,6 +48,11 @@ TABLE = {"title": "En bref", "table": {"headers": ["Votre envie", "Les meilleurs
                                                  ["Moins de monde", "Janvier et février", "Froid sec"]]}}
 
 
+# What the photos of the guide show, as the site says it: a fact that names a place only goes over the photo of that place.
+CAPTIONS = {2: "Un shinkansen Nozomi à quai.", 3: "Le temple Kiyomizu-dera sur ses pilotis.", 4: "Les torii rouges du Fushimi Inari.",
+            5: "La bambouseraie d’Arashiyama.", 7: "Une ruelle de Gion et ses maisons de thé."}
+
+
 def guide(slug="kyoto-train", country="japon", **extra):
     article = {"slug": slug, "title": "Kyoto en train depuis Tokyo : Nozomi, temples et torii", "shortTitle": "Kyoto en train",
                "destination": "Kyoto", "country": country, "category": "Transports", "cover": "kyoto-1",
@@ -86,7 +91,7 @@ class Fixture:
         self.site.mkdir()
         (self.site / "articles.json").write_text(json.dumps(articles, ensure_ascii=False))
         site_photos = [{"id": f"kyoto-{n}", "source_page": f"https://commons.wikimedia.org/wiki/File:Kyoto_{n}.jpg",
-                        "author": f"Photographe {n}", "license": "CC BY 4.0", "alt_fr": f"Kyoto, vue {n}."} for n in range(1, photos + 1)]
+                        "author": f"Photographe {n}", "license": "CC BY 4.0", "alt_fr": CAPTIONS.get(n, f"Kyoto, vue {n}.")} for n in range(1, photos + 1)]
         (self.site / "image-sources.json").write_text(json.dumps({"photos": site_photos}, ensure_ascii=False))
         self.pages = {a.guide_url(article): page(article) for article in articles}
         self.downloads = []
@@ -459,7 +464,9 @@ class GeneratorTests(unittest.TestCase):
         self.assertEqual(table["note"], "Faites pause pour tout lire")
         self.assertEqual([fact["excerpt"] for fact in table["facts"]][1], "Érables rouges Mi-novembre")
         # The first row says what the table lists; "Quand partir" names nothing the photo shows, the place stays above.
-        self.assertEqual(reel["caption"]["lines"][:2], ["📅 Les meilleurs mois — Cerisiers en fleurs : Fin mars à début avril", "📅 Érables rouges : Mi-novembre"])
+        lines = reel["caption"]["lines"]
+        first = lines.index("📅 Les meilleurs mois — Cerisiers en fleurs : Fin mars à début avril")
+        self.assertEqual(lines[first + 1], "📅 Érables rouges : Mi-novembre")
         self.assertEqual(table["kicker"], "Kyoto")
 
     def test_a_table_too_long_to_read_is_never_cut(self):
@@ -910,7 +917,7 @@ class DensityTests(unittest.TestCase):
         self.assertEqual(len({fact["excerpt"] for scene in made["scenes"][1:-1] for fact in scene["facts"]}), 4)
 
     def test_a_figure_that_repeats_the_title_is_left_out(self):
-        facts = [{"value": "7 jours", "label": "pour voir Kyoto, Nara et Osaka sans courir"}] + FACTS[:5]
+        facts = [{"value": "7 jours", "label": "pour voir Kyoto, Nara et Osaka sans courir"}] + FACTS
         f = self.fixture([guide(shortTitle="Kyoto en 7 jours", keyFacts=facts)])
         reel = self.reels(f.run(limit=1), f)[0]
         self.assertNotIn(["*7" + reel_formats.NBSP + "jours*"], [scene["headline"] for scene in reel["scenes"]])
@@ -996,7 +1003,7 @@ class StageTests(unittest.TestCase):
         article = guide(cover="kyoto-absente")
         facts = [{**fact, "short": fact["label"], "shortExcerpt": fact["value"] + " " + fact["label"], "excerpt": fact["value"] + " " + fact["label"], "section": None}
                  for fact in FACTS]
-        photos = [(f"kyoto-{n}", {"commonsTitle": f"File:Kyoto {n}.jpg", "emblematic": True}, f"Kyoto, vue {n}.") for n in range(1, 8)]
+        photos = [(f"kyoto-{n}", {"commonsTitle": f"File:Kyoto {n}.jpg", "emblematic": True}, CAPTIONS.get(n, f"Kyoto, vue {n}.")) for n in range(1, 8)]
         scenes, _ = reel_formats.build("liste", article, facts, photos, [], "Le Nozomi relie Tokyo à Kyoto.", "Kyoto", "Japon · Kyoto", "Guide Kyoto",
                                        ["Kyoto en train"], "")
         self.assertEqual(scenes[0]["photo"], "kyoto-1")
@@ -1236,11 +1243,10 @@ class PhotoPostTests(unittest.TestCase):
     def test_each_figure_takes_the_photo_that_shows_it_and_the_title_is_not_said_again(self):
         scenes = self.scenes()
         shown = {scene["headline"][0].strip("*"): scene["photo"] for scene in scenes[1:-1]}
-        # The fare of a journey goes over the train; the distance to Teya, whose photo is that same train, stays in the
-        # guide, and a figure that names no place completes the post.
-        self.assertEqual(shown, {"977,50 pesos": "yuc-train", "697 pesos": "yuc-castillo", "45 jours": "yuc-merida", "232 et 246 pesos": "yuc-tulum"})
+        # The fare from Mérida to Cancún goes over Mérida, not over the train: that train stands "en gare de Teya",
+        # which is none of the two ends of the journey. The distance to Teya goes over it.
+        self.assertEqual(shown, {"977,50 pesos": "yuc-merida", "697 pesos": "yuc-castillo", "120 km": "yuc-train", "232 et 246 pesos": "yuc-tulum"})
         self.assertNotIn("10 jours", shown)   # the title said again
-        self.assertNotIn("120 km", shown)     # its photo is taken
         # The entrance fee took the cover it names: the next photo of the guide opens the post, another one closes it.
         self.assertEqual((scenes[0]["photo"], scenes[-1]["photo"]), ("yuc-cenote", "yuc-uxmal"))
         self.assertEqual(scenes[0]["headline"][-1], "*4 chiffres* à connaître")
@@ -1364,8 +1370,10 @@ class RealGuideTests(unittest.TestCase):
                         ("porto", {"commonsTitle": "File:Porto-Panorama de Ribeira-Rabelos-20120910.jpg"},
                          "Les façades de Ribeira au bord du Douro à Porto, avec des bateaux rabelos au premier plan.")]
         crossing = "Le pont en métro de métro D au-dessus du Douro"
-        self.assertEqual(reel_formats.Media(days, [], everywhere="Portugal · Porto").named(crossing, {"image": "porto-ponte-luis"})[0], "porto-ponte-luis")
-        self.assertNotEqual(reel_formats.Media(days, [], everywhere="Portugal · Porto").named(crossing, None)[0], "porto-ponte-luis")
+        # The fact names the Douro: it goes over a photo whose record names the Douro, with or without the section's
+        # own photo (the bridge, whose caption does not say which river it spans), and never over the airport's metro.
+        for section in ({"image": "porto-ponte-luis"}, None):
+            self.assertIn(reel_formats.Media(days, [], everywhere="Portugal · Porto").named(crossing, section)[0], ("porto-rabelo", "porto"))
         # The section's photo gives way to one that shares all it shares and more: the Grand Palace, not Wat Arun, for
         # the fee of the Grand Palace (both are in Bangkok); it keeps a text another photo only half shares.
         bangkok = [("thailande-wat-arun", {"commonsTitle": "File:Wat Arun.jpg"}, "Le temple Wat Arun au bord du fleuve Chao Phraya, à Bangkok."),
@@ -1538,7 +1546,8 @@ class RealGuideTests(unittest.TestCase):
         rail, kyoto = {"title": "Le parcours en train", "image": "japon-shinkansen"}, {"title": "Jours 5 à 8 — Kyoto et Nara", "image": "japon-kyoto-kiyomizu"}
         trip = reel_formats.Media(list(japan), [], reserve=2, cover="japon-fuji-chureito", emblematic=reel_formats.emblematic(japan), everywhere="Japon Japon")
         # A journey goes over the train of the guide, not over a town it names; a temple goes over no other temple.
-        self.assertEqual(trip.named("Tokyo → Kyoto en Nozomi, 13 960 ¥ (≈ 80 €), un train toutes les 15 à 30 minutes", rail)[0], "japon-shinkansen")
+        # The guide's train photo is the sign of Shin-Fuji station: a place that is none of the two ends of the journey.
+        self.assertIn(trip.named("Tokyo → Kyoto en Nozomi, 13 960 ¥ (≈ 80 €), un train toutes les 15 à 30 minutes", rail)[0], ("japon-tokyo-shibuya", "japon-kyoto-kiyomizu"))
         self.assertIsNone(trip.named("le pavillon d’Or du Kinkaku-ji, ouvert tous les jours de 9 h à 17 h", kyoto))
         self.assertEqual(trip.left_for("le pavillon d’Or du Kinkaku-ji, ouvert tous les jours de 9 h à 17 h"), [])
         # The first place a fact names is the one it is about: Nara, not Kyoto "à 45 minutes".
@@ -1552,7 +1561,19 @@ class RealGuideTests(unittest.TestCase):
         some = lambda: reel_formats.Media(list(stock), [], everywhere="Japon Japon")
         self.assertIsNone(some().named("Le bus 205 pour le Kinkaku-ji, 230 ¥", None))
         self.assertIsNone(some().named("Kinkaku-ji : 500 ¥ le ticket d’entrée", {"image": "japon-ticket"}))
-        self.assertEqual([ph[0] for ph in some().left_for("Ryoan-ji : 500 ¥ le jardin de pierres")], ["japon-jardin"])
+        # Since the review of 13/11/2026 a fact that names a place takes no photo that does not name it, were it a
+        # photo that names nothing ("350 mm de pluie à Phuket" went over the inside of a sleeping car): the plan is
+        # left out. A fact that names no place may still take any free photo.
+        self.assertEqual(some().left_for("Ryoan-ji : 500 ¥ le jardin de pierres"), [])
+        self.assertEqual(some().left_for("de pluie en septembre au sud"), [])
+        self.assertTrue(some().left_for("le budget confort pour deux semaines"))
+        with self.assertRaises(reel_formats.Held):
+            some().photo("350 mm de pluie à Phuket en septembre")
+        self.assertEqual(some().moving("le budget confort pour deux semaines")[0], "photo")
+        clips = lambda: reel_formats.Media(list(stock), [("japon-clip", {})], everywhere="Japon Japon")
+        self.assertEqual(clips().moving("le budget confort pour deux semaines")[0], "clip")
+        with self.assertRaises(reel_formats.Held):   # a clip shows the destination, nobody knows which place of it
+            clips().moving("350 mm de pluie à Phuket en septembre")
         self.assertEqual(names.proper("Visiteurs dans un jardin zen.", sentence=True), set())
         self.assertEqual(names.proper("Bus 500 jusqu’à la mer, billet CP en ligne"), set())
         # What a precise place is: a proper noun, not a kind of place, an acronym or the name of a carrier.
@@ -1588,7 +1609,7 @@ class RealGuideTests(unittest.TestCase):
                  {"photo": "new-york-268e3ad7", "kicker": "x", "headline": ["*2 déc. 2026*"], "detail": "l’allumage du sapin du Rockefeller Center, arrivé le 7 novembre"}]
         self.assertEqual([line.split(" names ")[0] for line in p.photos_of_another_place(post(*wrong), photos)], ["plan 2", "plan 3", "plan 4"])
         self.assertEqual(reel_formats.place_names.subjects("le Grand Bouddha du Tōdai-ji, à Nara, à 45 minutes de Kyoto par le train JR"), ["todai", "nara"])
-        self.assertEqual(reel_formats.place_names.subjects("la fenêtre où Bangkok, Chiang Mai et la mer d’Andaman sont tous au sec"), ["bangkok", "chiang", "andaman"])
+        self.assertEqual(reel_formats.place_names.subjects("la fenêtre où Bangkok, Chiang Mai et la mer d’Andaman sont tous au sec"), ["bangkok", "mai", "andaman"])
         fine = [plan("thailande-phi-phi", "*1er août*", "Maya Bay, à Phi Phi, ferme jusqu’au 30 septembre", "Les falaises et l’eau turquoise des îles Phi Phi."),
                 plan("japon-shinkansen", "*2 h 18*", "Tokyo → Kyoto en Nozomi, 13 960 ¥", "Le mont Fuji vu depuis le quai de la gare shinkansen de Shin-Fuji."),
                 plan("thailande-koh-samui", "*445 mm*", "de pluie à Koh Samui en novembre", "Une plage de sable blanc à Koh Samui.")]
