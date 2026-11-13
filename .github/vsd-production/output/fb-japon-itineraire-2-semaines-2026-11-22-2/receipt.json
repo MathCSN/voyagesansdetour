@@ -2,18 +2,18 @@
   "schemaVersion": 1,
   "contentId": "fb-japon-itineraire-2-semaines-2026-11-22-2",
   "status": "rendered_not_published",
-  "fingerprint": "5762cbf56979e6e477fe690598f2c87661f0d9d10f0e022b449c0f03fe64006c",
-  "createdAt": "2026-11-13T04:44:49.866074Z",
-  "renderFinishedAt": "2026-11-13T04:44:51.309301Z",
+  "fingerprint": "465b8d5582b016864e1f8c53fa1a5bf5e2d7f9fc3746b6c1208e6c7f7bd6ea34",
+  "createdAt": "2026-11-13T05:08:14.638013Z",
+  "renderFinishedAt": "2026-11-13T05:08:16.266532Z",
   "rendererContractVersion": 3,
-  "rendererSha256": "de222ed6a2f52e9e9e8c42183aa18b4c943517bf0da75d59d528bd1de224a761",
+  "rendererSha256": "076db1bed20211d9f06e2840414ecaa349a618b212b107b33b87b52d64541322",
   "drawingSha256": "b78990f497d03baf754e3b2b68a795a5e9d3b91a0b6a2f8dad2ebcd7fec2907c",
   "motionSha256": "97551f9095a5a66596521a599d328df19f4e28fbcfcf716ae1ee980ebdf47448",
   "format": null,
   "kind": "carousel",
   "channel": "facebook",
   "publishAt": "2026-11-22T17:00:00Z",
-  "reviewValidUntil": "2026-12-13T04:44:31Z",
+  "reviewValidUntil": "2026-12-13T05:08:13Z",
   "sourceCheckedOn": "2026-11-13",
   "targetUrl": "https://voyagesansdetour.fr/japon/japon-itineraire-2-semaines/",
   "voice": null,
@@ -58,8 +58,8 @@
   "files": [
     {
       "file": "apercu.jpg",
-      "sha256": "6fe4e178a2f7192d5599058dd3ccfb16a22f239b54da5102bf8d2cc090bae611",
-      "bytes": 193560
+      "sha256": "3f87c14158f3679b751cdebf0213509dccacc3dd8b532b20b005e6ffa990e485",
+      "bytes": 193009
     },
     {
       "file": "credits.txt",
@@ -88,8 +88,8 @@
     },
     {
       "file": "scenario.json",
-      "sha256": "f70be41dae3a6fd5034813db16d2ce0901919468cebaede17e27331eb48d967f",
-      "bytes": 7156
+      "sha256": "e95003c6b1eccef831025fc3aab40bceb39766f2bbd0895b1f27d3ff9d4c54fd",
+      "bytes": 7134
     },
     {
       "file": "scene-01.jpg",
@@ -103,13 +103,13 @@
     },
     {
       "file": "scene-03.jpg",
-      "sha256": "e60c5a18f03c6691f4ee85e17f4d6d42e7d8b05ceb9729d577d06a9cd32bf2c3",
-      "bytes": 471401
+      "sha256": "418ad62d1197d025d9318c7a4c2b55cf367f3c2ce2ba87b585f2cd1058efd924",
+      "bytes": 467933
     },
     {
       "file": "scene-04.jpg",
-      "sha256": "c842be874efb13a35e344dd6c2a9c3e72b33538801706d4443cc24b5c244e683",
-      "bytes": 203947
+      "sha256": "fe8d57966c982a27642178c7469f5fb32acf31cbccb32e5b9062edd59b017884",
+      "bytes": 202057
     },
     {
       "file": "scene-05.jpg",
@@ -123,7 +123,7 @@
     }
   ],
   "runtime": {
-    "wallSeconds": 0.961,
+    "wallSeconds": 1.132,
     "encoderThreads": 2,
     "pillowVersion": "11.3.0",
     "ffmpegVersion": null

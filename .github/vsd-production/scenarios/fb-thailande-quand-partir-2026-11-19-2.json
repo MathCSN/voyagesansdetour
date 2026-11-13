@@ -9,13 +9,13 @@
   "publishAt": "2026-11-19T17:00:00Z",
   "review": {
     "status": "reviewed_for_render",
-    "checkedAt": "2026-11-13T04:44:32Z",
-    "validUntil": "2026-12-13T04:44:32Z",
+    "checkedAt": "2026-11-13T05:05:17Z",
+    "validUntil": "2026-12-13T05:05:17Z",
     "method": "Généré automatiquement (auto_social.py) depuis la page publiée du guide relevée le 13/11/2026 : chaque chiffre est cité mot pour mot ; photos réelles sous licence libre (Wikimedia Commons), aucune image générée par IA ; garde-fous de production.py passés avant la mise en file."
   },
   "sources": {
     "file": "auto/fb-thailande-quand-partir-2026-11-19-2/sources.json",
-    "sha256": "8a1bb380c4438b63594aae8128a235dc00dc27db246d6218431d75573de75179"
+    "sha256": "1f915d3d887d703a3f822e083b6b735ad5aa07675a080b8a926532cacf25d9c5"
   },
   "photos": {
     "file": "auto/fb-thailande-quand-partir-2026-11-19-2/photos.json",
@@ -59,12 +59,12 @@
       "alt": "La plage de Railay et ses falaises calcaires, près de Krabi."
     },
     {
-      "photo": "thailande-chiang-mai-doi-suthep",
+      "photo": "thailande-bangkok-grand-palais",
       "focus": [
-        0.5,
-        0.5
+        0.72,
+        0.7
       ],
-      "kicker": "Le Nord",
+      "kicker": "Thaïlande",
       "headline": [
         "*Décembre à février*"
       ],
@@ -76,7 +76,7 @@
         }
       ],
       "tag": "Guide Thaïlande · sources du 12/11/2026",
-      "alt": "Le temple doré du Doi Suthep, au-dessus de Chiang Mai."
+      "alt": "Un toit du Grand Palais de Bangkok en contre-jour, au lever du soleil."
     },
     {
       "photo": "thailande-koh-samui",
@@ -99,12 +99,12 @@
       "alt": "Une plage de sable blanc à Koh Samui."
     },
     {
-      "photo": "thailande-bangkok-grand-palais",
+      "photo": "thailande-wat-arun",
       "focus": [
-        0.72,
-        0.7
+        0.5,
+        0.5
       ],
-      "kicker": "Bangkok",
+      "kicker": "Thaïlande",
       "headline": [
         "*30,7 °C*"
       ],
@@ -116,7 +116,7 @@
         }
       ],
       "tag": "Guide Thaïlande · sources du 12/11/2026",
-      "alt": "Un toit du Grand Palais de Bangkok en contre-jour, au lever du soleil."
+      "alt": "Le pavillon d’entrée de la salle d’ordination du Wat Arun et son géant gardien, à Bangkok."
     },
     {
       "photo": "thailande-iles-similan",
@@ -139,7 +139,7 @@
       "alt": "La plage et l’eau turquoise de la baie de Donald Duck, sur Ko Similan, dans les îles Similan."
     },
     {
-      "photo": "thailande-wat-arun",
+      "photo": "thailande-chiang-mai-doi-suthep",
       "focus": [
         0.5,
         0.5
@@ -149,7 +149,7 @@
         "Quand partir en Thaïlande"
       ],
       "detail": "Le bon mois pour Bangkok, Chiang Mai, la mer d’Andaman et le golfe, relevés 1991-2020.",
-      "alt": "Le pavillon d’entrée de la salle d’ordination du Wat Arun et son géant gardien, à Bangkok.",
+      "alt": "Le temple doré du Doi Suthep, au-dessus de Chiang Mai.",
       "cta": true
     }
   ],

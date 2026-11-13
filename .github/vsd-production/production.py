@@ -423,7 +423,7 @@ def validate_scenario(scenario, root, now):
     ensure(used, "No sourced fact in this post")
     # A post made since this guard exists never shows a fact over a photo of another place; the posts sealed before
     # it are audited by hand (two of them were withdrawn for it on 13/11/2026), not refused here.
-    if scenario["review"]["checkedAt"] >= PLACES_FROM:
+    if checked >= instant(PLACES_FROM):
         misplaced = photos_of_another_place(scenario, photos)
         ensure(not misplaced, "Photo of another place than its plan names: " + " ; ".join(misplaced))
     duration = sum(scene.get("seconds", 0) for scene in scenes)
@@ -454,9 +454,9 @@ def photos_of_another_place(scenario, photos) -> list[str]:
         title = str(record.get("commonsTitle", "")).removeprefix("File:").rsplit(".", 1)[0]
         caption = str(scene.get("alt") or "")
         shown = place_names.words(" ".join([scene["photo"], caption, title, str(record.get("categories", ""))]))
-        if not places or places & shown or (place_names.journey(said) and place_names.ride(shown)) or place_names.shows(said, shown):
+        if not places or places & shown or (place_names.journey(said) and place_names.ride(shown, str(scene.get("detail") or said))) or place_names.shows(said, shown):
             continue
-        others = place_names.proper(caption or title, everywhere) - place_names.words(said)
+        others = place_names.proper(caption or title, everywhere, sentence=bool(caption)) - place_names.words(said)
         if others:
             misplaced.append(f"plan {number} names {', '.join(sorted(places))} over {scene['photo']} ({', '.join(sorted(others))})")
     return misplaced

@@ -9,13 +9,13 @@
   "publishAt": "2026-11-22T17:00:00Z",
   "review": {
     "status": "reviewed_for_render",
-    "checkedAt": "2026-11-13T04:44:31Z",
-    "validUntil": "2026-12-13T04:44:31Z",
+    "checkedAt": "2026-11-13T05:08:13Z",
+    "validUntil": "2026-12-13T05:08:13Z",
     "method": "Généré automatiquement (auto_social.py) depuis la page publiée du guide relevée le 13/11/2026 : chaque chiffre est cité mot pour mot ; photos réelles sous licence libre (Wikimedia Commons), aucune image générée par IA ; garde-fous de production.py passés avant la mise en file."
   },
   "sources": {
     "file": "auto/fb-japon-itineraire-2-semaines-2026-11-22-2/sources.json",
-    "sha256": "9c1a738817958f3e3a6ab3590d46134a31ed0b20cfa1cee8c4e45ebb2dbf4e7d"
+    "sha256": "16289112e11e9dfa212434c61a7b31a3c65e9ba1c2bb16e3f78fb30fd42a1806"
   },
   "photos": {
     "file": "auto/fb-japon-itineraire-2-semaines-2026-11-22-2/photos.json",
@@ -85,7 +85,7 @@
         0.5,
         0.5
       ],
-      "kicker": "Le parcours en train",
+      "kicker": "Japon",
       "headline": [
         "*44 620 ¥*"
       ],
@@ -105,7 +105,7 @@
         0.5,
         0.5
       ],
-      "kicker": "Jours 5 à 8",
+      "kicker": "Japon",
       "headline": [
         "*800 ¥*"
       ],

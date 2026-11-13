@@ -480,7 +480,11 @@ def scenes_for(article: dict, channel: Post, facts: list[dict], photos: list[tup
     scenes = [scene(opening_picture, hook_kicker, title_lines + [f"*{len(facts)} {word}* à connaître"],
                     unbreakable(opening) if len(opening) <= 120 else None, 3.5, [{"source": "guide", "excerpt": opening}])]
     for fact in facts:
-        scenes.append(scene(pictures[fact["value"]], kicker_of(fact["section"], place), ["*" + fact["value"] + "*"],
+        # As in a reel, the name of the section stands above the figure only over that section's own photo, or when
+        # the section has none: "Le Nord" is not written over the Grand Palace of Bangkok.
+        own = (fact["section"] or {}).get("image")
+        named = kicker_of(fact["section"], place) if not own or pictures[fact["value"]][1] == own else place
+        scenes.append(scene(pictures[fact["value"]], named, ["*" + fact["value"] + "*"],
                             unbreakable(fact["label"]), 4, [{"source": "guide", "excerpt": fact["excerpt"]}],
                             label=reel_formats.dated_tag(fact, tag)))
     scenes.append(scene(media.closing(required=False), "Le guide complet", title_lines, call_detail(article), 4.5, cta=True))

@@ -27,13 +27,16 @@ GENERIC = frozenset("""
     janvier fevrier mars avril mai juin juillet aout septembre octobre novembre decembre
     lundi mardi mercredi jeudi vendredi samedi dimanche""".split())
 # What a journey is made by, as a fact says it; and what a photo of it shows.
-TRANSPORT = frozenset("train trains shinkansen tgv couchette couchettes ferry ferries bateau bateaux bus tram tramway metro rame billet billets".split())
-RIDES = TRANSPORT | frozenset("gare gares quai quais railway sleeper locomotive wagon".split())
+WAYS = {"rail": frozenset("train trains shinkansen tgv couchette couchettes rame railway sleeper locomotive wagon".split()),
+        "urban": frozenset("metro tram tramway".split()), "road": frozenset(["bus"]),
+        "water": frozenset("ferry ferries bateau bateaux".split())}
+RIDES = frozenset().union(*WAYS.values())   # never a station alone: it is a place
+TRANSPORT = RIDES | frozenset("billet billets".split())
 CARRIED_BY = frozenset("en chez bus ferry train trains ligne compagnie avec".split())   # "en Nozomi", "chez Supratours"
 LEADING = frozenset("le la les un une des du de ce cette ces au aux".split())
 CAPITALISED = re.compile(r"[A-ZÀ-ÖØ-Þ][\w’'-]*")
 # "Mérida–Tulum", "Tokyo–Kyoto–Hiroshima–Tokyo": two names joined by a dash are the two ends of a journey.
-LINKED = re.compile(r"[A-ZÀ-ÖØ-Þ][\w’']*\s?[–—]\s?[A-ZÀ-ÖØ-Þ]")
+LINKED = re.compile(r"[A-ZÀ-ÖØ-Þ][\w’']{0,40}\s?[–—]\s?[A-ZÀ-ÖØ-Þ]")
 OPENERS = TRANSPORT | frozenset("trajet trajets".split())   # "de trajet en Alfa Pendular entre Santa Apolónia et Campanhã"
 # Words of four letters and more that two texts share without being about the same thing.
 HOLLOW = frozenset("pour entre dans avec sans sous vers chez depuis selon plus moins tout tous toute toutes cette leur leurs dont comme "
@@ -50,25 +53,30 @@ def words(text: str) -> set[str]:
     return set(folded(text))
 
 
-def named(text: str, everywhere: frozenset | set = frozenset()) -> list[str]:
+def named(text: str, everywhere: frozenset | set = frozenset(), sentence: bool = False) -> list[str]:
     """The precise places a text names, in the order it names them: its words written with a capital, three letters
     and more, that are neither a kind of place, nor an article opening the sentence, nor the name of the destination
     of the whole post (`everywhere`: every photo of a guide of Thailand is "in Thailand"). An acronym ("SITA", "JR")
     and the name of a carrier or of a train ("en Nozomi", "chez Supratours", "bus SITA", "Alfa Pendular" after "en")
-    are no places."""
+    are no places; nor is a means of transport ("Bus 500", "Billet CP"). `sentence`: the text is a sentence, a caption:
+    its first word has a capital by grammar ("Visiteurs dans un jardin zen."), unless a name follows it at once."""
     found, carrier, end = [], False, -1
     for match in CAPITALISED.finditer(text):
+        if sentence and not text[:match.start()].strip("«“\" ") and not CAPITALISED.match(text[match.end():].lstrip(" ")):
+            end = match.end()
+            continue
         before = folded(text[:match.start()])[-1:]
         carrier = (carrier and text[end:match.start()] == " ") or bool(before and before[0] in CARRIED_BY and text[match.start() - 1:match.start()] == " ")
         end = match.end()
         if carrier or (len(match[0]) > 1 and match[0].isupper()):
             continue
-        found += [piece for piece in folded(match[0]) if len(piece) >= 3 and piece not in GENERIC and piece not in LEADING and piece not in everywhere]
+        found += [piece for piece in folded(match[0])
+                  if len(piece) >= 3 and piece not in GENERIC and piece not in LEADING and piece not in OPENERS and piece not in everywhere]
     return list(dict.fromkeys(found))
 
 
-def proper(text: str, everywhere: frozenset | set = frozenset()) -> set[str]:
-    return set(named(text, everywhere))
+def proper(text: str, everywhere: frozenset | set = frozenset(), sentence: bool = False) -> set[str]:
+    return set(named(text, everywhere, sentence))
 
 
 def named_after(text: str, kind: str) -> set[str]:
@@ -96,12 +104,19 @@ def shows(said: str, shown: set[str]) -> bool:
     return any(word not in GENERIC or named_after(said, word) <= shown for word in shared)
 
 
-def ride(described: set[str]) -> bool:
-    """A photo of a means of transport, by the words of its caption, title and identifier."""
-    return bool(RIDES & described)
+def ways(words_said: set[str] | list[str]) -> set[str]:
+    """By what one travels in these words: "rail", "urban", "road", "water"."""
+    return {way for way, names in WAYS.items() if names & set(words_said)}
+
+
+def ride(described: set[str], text: str = "") -> bool:
+    """A photo of a means of transport, by the words of its caption, title and identifier; of the one the text opens
+    on when it names one ("Le bus 205 pour…" does not go over a shinkansen)."""
+    wanted = ways(folded(text)[:OPENING_WORDS])
+    return bool(ways(described) & wanted) if wanted else bool(RIDES & described)
 
 
 def elsewhere(caption: str, places: set[str], everywhere: frozenset | set = frozenset()) -> set[str]:
     """The precise places a photo's caption names that are none of those the fact names: over such a photo, the fact
     would be read as a fact about that other place."""
-    return proper(caption, everywhere) - places
+    return proper(caption, everywhere, sentence=True) - places

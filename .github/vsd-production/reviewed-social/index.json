@@ -380,21 +380,21 @@
       ]
     },
     {
-      "path": ".github/vsd-production/reviewed-social/fb-japon-itineraire-2-semaines-2026-11-22-2-v1.json",
-      "fileSha256": "bb0f28995ac349325740e763efcf9eac23e493bfcba8d0414f0e509b7340d6f1",
-      "batchId": "fb-japon-itineraire-2-semaines-2026-11-22-2-v1",
-      "batchSha256": "94c05be9ed2758d1abf3d196b39e7e8a72dd330ed2ad0a8c2c36d94c02215688",
+      "path": ".github/vsd-production/reviewed-social/fb-thailande-quand-partir-2026-11-19-2-v1.json",
+      "fileSha256": "f4ab158d9c949f4b53fc36e65681ff836f558c4084afedbdf194a8540c7db0aa",
+      "batchId": "fb-thailande-quand-partir-2026-11-19-2-v1",
+      "batchSha256": "0470011cd5c6a3a218a0ba59d8530ca6a25b0b1ea6a32d489e1f630141801b75",
       "itemIds": [
-        "vsd-production:facebook:fb-japon-itineraire-2-semaines-2026-11-22-2:photo-v1"
+        "vsd-production:facebook:fb-thailande-quand-partir-2026-11-19-2:photo-v1"
       ]
     },
     {
-      "path": ".github/vsd-production/reviewed-social/fb-thailande-quand-partir-2026-11-19-2-v1.json",
-      "fileSha256": "d1857db3ed0e1c2060464f2a5ce56cf4226948aceb5a41aacedd622c9f3bcf0b",
-      "batchId": "fb-thailande-quand-partir-2026-11-19-2-v1",
-      "batchSha256": "b23d0e607446eee71995ba324dc823716e5d2aedd70c560b4f84b725aa95651f",
+      "path": ".github/vsd-production/reviewed-social/fb-japon-itineraire-2-semaines-2026-11-22-2-v1.json",
+      "fileSha256": "dd3273e7f3d422a415e8f5a4ec24ebd4f47532ec91d9246c7a710700ea05b1fc",
+      "batchId": "fb-japon-itineraire-2-semaines-2026-11-22-2-v1",
+      "batchSha256": "67c73c795c30ae1dd443ce20dd3d2445f647ef23d47c7870959574a886f18106",
       "itemIds": [
-        "vsd-production:facebook:fb-thailande-quand-partir-2026-11-19-2:photo-v1"
+        "vsd-production:facebook:fb-japon-itineraire-2-semaines-2026-11-22-2:photo-v1"
       ]
     }
   ],

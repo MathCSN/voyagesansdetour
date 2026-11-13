@@ -1498,6 +1498,7 @@ class RealGuideTests(unittest.TestCase):
     def test_a_fact_that_names_a_place_never_goes_over_a_photo_of_another_one(self):
         # Review of 13/11/2026, two photo posts of the night: "la réouverture des îles Similan" over Ko Phi Phi (the two
         # shared "îles"), "le pavillon d'Or du Kinkaku-ji" over the sign of Shin-Fuji station.
+        names = reel_formats.place_names
         thai = [("thailande-railay", {"commonsTitle": "File:Railay Beach 5.jpg", "emblematic": True}, "La plage de Railay et ses falaises calcaires, près de Krabi."),
                 ("thailande-phi-phi", {"commonsTitle": "File:Isla Ko Phi Phi Don, Tailandia.JPG"}, "Les falaises et l’eau turquoise des îles Phi Phi."),
                 ("thailande-koh-samui", {"commonsTitle": "File:Koh Samui, Beach, Thailand.jpg"}, "Une plage de sable blanc à Koh Samui."),
@@ -1524,8 +1525,19 @@ class RealGuideTests(unittest.TestCase):
         self.assertEqual(trip.left_for("le pavillon d’Or du Kinkaku-ji, ouvert tous les jours de 9 h à 17 h"), [])
         # The first place a fact names is the one it is about: Nara, not Kyoto "à 45 minutes".
         self.assertEqual(trip.named("le Grand Bouddha du Tōdai-ji, à Nara, à 45 minutes de Kyoto par le train JR", kyoto)[0], "japon-nara-cerfs")
+        # Independent review of 13/11/2026: a journey only goes over a ride of its own kind, a word like "ticket" ties
+        # no photo to a place, and the first word of a caption is no place.
+        stock = [("japon-quai", {"commonsTitle": "File:Platform.jpg"}, "Le quai shinkansen de Shin-Fuji, au pied du mont."),
+                 ("japon-ticket", {"commonsTitle": "File:Machine.jpg"}, "Un distributeur de tickets à Shin-Fuji."),
+                 ("japon-jardin", {"commonsTitle": "File:Garden.jpg"}, "Visiteurs dans un jardin zen."),
+                 ("japon-fin", {"commonsTitle": "File:Fuji.jpg", "emblematic": True}, "Le mont Fuji.")]
+        some = lambda: reel_formats.Media(list(stock), [], everywhere="Japon Japon")
+        self.assertIsNone(some().named("Le bus 205 pour le Kinkaku-ji, 230 ¥", None))
+        self.assertIsNone(some().named("Kinkaku-ji : 500 ¥ le ticket d’entrée", {"image": "japon-ticket"}))
+        self.assertEqual([ph[0] for ph in some().left_for("Ryoan-ji : 500 ¥ le jardin de pierres")], ["japon-jardin"])
+        self.assertEqual(names.proper("Visiteurs dans un jardin zen.", sentence=True), set())
+        self.assertEqual(names.proper("Bus 500 jusqu’à la mer, billet CP en ligne"), set())
         # What a precise place is: a proper noun, not a kind of place, an acronym or the name of a carrier.
-        names = reel_formats.place_names
         self.assertEqual(names.named("le ticket bus SITA COSTIERASITA, illimité pendant 24 h"), [])
         self.assertEqual(names.named("de car pour Essaouira : dès 100 dh chez Supratours, dès 105 dh chez CTM"), ["essaouira"])
         self.assertEqual(names.named("Tokyo → Kyoto en Nozomi"), ["tokyo", "kyoto"])
