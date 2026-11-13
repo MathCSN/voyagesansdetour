@@ -553,6 +553,127 @@
       "reason": "photos_of_another_place",
       "evidence": "Revue à l’image du 13/11/2026 : le plan 4 du carrousel écrit « 500 ¥ · le pavillon d’Or du Kinkaku-ji » (Kyoto) sur la photo japon-shinkansen (Wikimedia Commons, « Shin-Fuji Station Shinkansen platform view of Mt.Fuji »), où le panneau « Shin-Fuji / Shizuoka » se lit en grand ; le plan « 2 h 18 · Tokyo → Kyoto en Nozomi » est, lui, sur la porte du Kiyomizu-dera. Les chiffres sont conformes au guide ; c’est la photo qui montre un autre lieu. Retrait décidé à la main ; le post est refait au même créneau.",
       "replacedBy": "fb-japon-itineraire-2-semaines-2026-11-22-2"
+    },
+    {
+      "batchId": "ig-new-york-noel-2026-11-22-v1",
+      "batchSha256": "a67db8f0852d9b2e6f78b9a49648642c1c79af89a61610b2aaa8cb2b1100367c",
+      "fileSha256": "6c4ef2a7119c3e9a897f73e1f3ab782253c73a36a347043e0ec3b6b53561392d",
+      "itemIds": [
+        "vsd-production:instagram:ig-new-york-noel-2026-11-22:photo-v1"
+      ],
+      "retiredAt": "2026-11-13T05:17:50Z",
+      "reason": "photos_of_another_place",
+      "evidence": "Audit à l’image du 13/11/2026 (fiches Wikimedia Commons et images extraites, revue contradictoire) : le sapin du Rockefeller Center est posé sur l’Empire State Building éclairé en vert (septembre 2021), la patinoire de Bryant Park sur Central Park enneigé, le marché de Bryant Park sur le dessous du pont de Brooklyn (logo « verizon » lisible), et la température de Central Park sur la 45e Rue une nuit d’août sous l’étiquette « Se déplacer ». Les chiffres sont ceux du guide ; ce sont les photos qui montrent d’autres lieux."
+    },
+    {
+      "batchId": "ig-new-york-noel-2026-11-22-tiktok-v1",
+      "batchSha256": "4dc21fa5f42ce4ee25bb9132be905683f4297cc4ba07e9af844f0d9e2c03e7f0",
+      "fileSha256": "16b5a648142b779904d08b81a65677dde846363bb6e22a3f3460ba06032aa04b",
+      "itemIds": [
+        "vsd-production:tiktok:ig-new-york-noel-2026-11-22:photo-v1"
+      ],
+      "retiredAt": "2026-11-13T05:17:50Z",
+      "reason": "photos_of_another_place",
+      "evidence": "Audit à l’image du 13/11/2026 (fiches Wikimedia Commons et images extraites, revue contradictoire) : le sapin du Rockefeller Center est posé sur l’Empire State Building éclairé en vert (septembre 2021), la patinoire de Bryant Park sur Central Park enneigé, le marché de Bryant Park sur le dessous du pont de Brooklyn (logo « verizon » lisible), et la température de Central Park sur la 45e Rue une nuit d’août sous l’étiquette « Se déplacer ». Les chiffres sont ceux du guide ; ce sont les photos qui montrent d’autres lieux."
+    },
+    {
+      "batchId": "ig-vietnam-itineraire-15-jours-2026-11-25-v1",
+      "batchSha256": "47c3b1d57253eab2c430f745c5cf802cf8e5558ae1cd4687dc6dfc2a4d441f32",
+      "fileSha256": "2c3a31e82fe13560bd8e323383add635ee525a4c5a6171c8c63d76230bdad218",
+      "itemIds": [
+        "vsd-production:instagram:ig-vietnam-itineraire-15-jours-2026-11-25:photo-v1"
+      ],
+      "retiredAt": "2026-11-13T05:17:50Z",
+      "reason": "photos_of_another_place",
+      "evidence": "Audit à l’image du 13/11/2026 (fiches Wikimedia Commons et images extraites, revue contradictoire) : le train Hué → Đà Nẵng est posé sur une jonque de la baie d’Along (« Lan Phuong Junks » lisible), la barque de Tràng An sur un musée de Hội An, la cité impériale de Hué sur les rizières de Sapa ; « ₫ » et « ộ » sortent en carré vide (« 300 000 □ », « H□i An »)."
+    },
+    {
+      "batchId": "ig-laponie-budget-rovaniemi-2026-11-27-2-v1",
+      "batchSha256": "7a6930b0b1c438f5bf195663d489f475cba710fcc18b6e158a09ee169bf8b44c",
+      "fileSha256": "d4687de9097164bc3d5484ed9cd5cf1b41b0413a74c94554aa40a65334e554d0",
+      "itemIds": [
+        "vsd-production:instagram:ig-laponie-budget-rovaniemi-2026-11-27-2:photo-v1"
+      ],
+      "retiredAt": "2026-11-13T05:17:50Z",
+      "reason": "retouched_image",
+      "evidence": "Audit à l’image du 13/11/2026 (fiches Wikimedia Commons et images extraites, revue contradictoire) : la photo laponie-village-boules-neige est « Snowball pyramid at Santa Claus' Village Large.jpg », version paysage 3074×2304 déposée en 2024 par un compte tiers à partir d’un original portrait 1536×2048 de Samuli Lintula (CC BY 2.5) : ses marges ont été fabriquées. Une image retouchée par génération est interdite (règle de Mathis : uniquement de vraies photos)."
+    },
+    {
+      "batchId": "ig-laponie-budget-rovaniemi-2026-11-27-2-tiktok-v1",
+      "batchSha256": "2c0657254f8eb434d6676c2d91ee1e8dc5e78ffc14f46bd01b516a40f7d1518f",
+      "fileSha256": "ef99d86819e53954fb0d46c5fbc6f8f626a3f725f152860346c90560c540d4f2",
+      "itemIds": [
+        "vsd-production:tiktok:ig-laponie-budget-rovaniemi-2026-11-27-2:photo-v1"
+      ],
+      "retiredAt": "2026-11-13T05:17:50Z",
+      "reason": "retouched_image",
+      "evidence": "Audit à l’image du 13/11/2026 (fiches Wikimedia Commons et images extraites, revue contradictoire) : la photo laponie-village-boules-neige est « Snowball pyramid at Santa Claus' Village Large.jpg », version paysage 3074×2304 déposée en 2024 par un compte tiers à partir d’un original portrait 1536×2048 de Samuli Lintula (CC BY 2.5) : ses marges ont été fabriquées. Une image retouchée par génération est interdite (règle de Mathis : uniquement de vraies photos)."
+    },
+    {
+      "batchId": "fb-vietnam-quand-partir-2026-11-29-v1",
+      "batchSha256": "000a1ebca66fd18deba8a363c79380fdc9c78d56347596906e0e188caadd159c",
+      "fileSha256": "80039d8fc7609feae5c9191fa9fc84e235d0bb9ad984a00f6ec1a053a35a8ea5",
+      "itemIds": [
+        "vsd-production:facebook:fb-vietnam-quand-partir-2026-11-29:photo-v1"
+      ],
+      "retiredAt": "2026-11-13T05:17:50Z",
+      "reason": "photos_of_another_place",
+      "evidence": "Audit à l’image du 13/11/2026 (fiches Wikimedia Commons et images extraites, revue contradictoire) : la pluie de Hô-Chi-Minh-Ville est posée sur la cité impériale de Hué, la pluie de Hué sur une maison de Hội An ; « H□i An » s’affiche avec un carré vide en couverture."
+    },
+    {
+      "batchId": "ig-londres-noel-marches-2026-11-29-v1",
+      "batchSha256": "b3be5055bdc8e263755e51b45b44bcdf0daed72fde21c1b1ed39f3b0cf5c2ae9",
+      "fileSha256": "7941bf09effee11711ccc70e92664eb2392b33d27f56774fac9c9cee8fe24458",
+      "itemIds": [
+        "vsd-production:instagram:ig-londres-noel-marches-2026-11-29:photo-v1"
+      ],
+      "retiredAt": "2026-11-13T05:17:50Z",
+      "reason": "photos_of_another_place",
+      "evidence": "Audit à l’image du 13/11/2026 (fiches Wikimedia Commons et images extraites, revue contradictoire) : Winter Wonderland est posé sur le squelette de baleine du Natural History Museum puis sur une coupole de la National Gallery, la patinoire de Somerset House sur une autre coupole de la National Gallery ; « 1 £ » est affiché sans sa condition « aux heures creuses »."
+    },
+    {
+      "batchId": "ig-londres-noel-marches-2026-11-29-tiktok-v1",
+      "batchSha256": "614b2a1a792b7c9040e4161e597d54d1df6ee4cf6001ea45077be83f5abe61d8",
+      "fileSha256": "a5526de4edb959883d4fc2d0623d6d2bd2be78aec00beb70ccae8829f7f5030b",
+      "itemIds": [
+        "vsd-production:tiktok:ig-londres-noel-marches-2026-11-29:photo-v1"
+      ],
+      "retiredAt": "2026-11-13T05:17:50Z",
+      "reason": "photos_of_another_place",
+      "evidence": "Audit à l’image du 13/11/2026 (fiches Wikimedia Commons et images extraites, revue contradictoire) : Winter Wonderland est posé sur le squelette de baleine du Natural History Museum puis sur une coupole de la National Gallery, la patinoire de Somerset House sur une autre coupole de la National Gallery ; « 1 £ » est affiché sans sa condition « aux heures creuses »."
+    },
+    {
+      "batchId": "fb-tenerife-quand-partir-2026-12-03-v1",
+      "batchSha256": "c6b7dbbfc549e17998f4b24c56f4f6d48b74e275bed8149a92ac873a024ad748",
+      "fileSha256": "d001d6e7c2fde0c5c3edb2aa7ea41a9f60f483cc79fb914719ac20ac91b3b1aa",
+      "itemIds": [
+        "vsd-production:facebook:fb-tenerife-quand-partir-2026-12-03:photo-v1"
+      ],
+      "retiredAt": "2026-11-13T05:17:50Z",
+      "reason": "photos_of_another_place",
+      "evidence": "Audit à l’image du 13/11/2026 (fiches Wikimedia Commons et images extraites, revue contradictoire) : les 1,1 °C de l’observatoire d’Izaña sont posés, sous l’étiquette « Le Teide », sur une vue du village côtier de Garachico."
+    },
+    {
+      "batchId": "ig-japon-budget-2-semaines-2026-11-15-v1",
+      "batchSha256": "64e4371aa91e4930d36ad5d7fbbaf64e3f766092e885bf2a2325706e53d69517",
+      "fileSha256": "6d1e0906f1f2b5ec50ca5fb4298234ce81a7b51e8db970a6353fb6c9669e14f8",
+      "itemIds": [
+        "vsd-production:instagram:ig-japon-budget-2-semaines-2026-11-15:photo-v1"
+      ],
+      "retiredAt": "2026-11-13T05:17:50Z",
+      "reason": "photos_of_another_place",
+      "evidence": "Audit à l’image du 13/11/2026 (fiches Wikimedia Commons et images extraites, revue contradictoire) : le prix du train Tokyo–Kyoto–Hiroshima est posé sur le néon « DOTONBORI » d’Osaka, le prix du ramen sur le panneau « Shin-Fuji / Shizuoka », et le carton final dit « lien en bio ». Ce lot et sa copie TikTok étaient déjà programmés dans Buffer (15/11 à 20:00 et 21:00 UTC) au moment du retrait : le panneau ne retire pas un post déjà programmé, la suppression dans Buffer est traitée à part ; le post n’est pas refait ici."
+    },
+    {
+      "batchId": "ig-japon-budget-2-semaines-2026-11-15-tiktok-v1",
+      "batchSha256": "f530ac7f1addbd37a77495333e88615bae167e36a82f970dc432f608abed41e3",
+      "fileSha256": "9ec986a5d588f542c06fb2c98a9ebcccc2ef9f012efd1644a3a53f6147e8619b",
+      "itemIds": [
+        "vsd-production:tiktok:ig-japon-budget-2-semaines-2026-11-15:photo-v1"
+      ],
+      "retiredAt": "2026-11-13T05:17:50Z",
+      "reason": "photos_of_another_place",
+      "evidence": "Audit à l’image du 13/11/2026 (fiches Wikimedia Commons et images extraites, revue contradictoire) : le prix du train Tokyo–Kyoto–Hiroshima est posé sur le néon « DOTONBORI » d’Osaka, le prix du ramen sur le panneau « Shin-Fuji / Shizuoka », et le carton final dit « lien en bio ». Ce lot et sa copie TikTok étaient déjà programmés dans Buffer (15/11 à 20:00 et 21:00 UTC) au moment du retrait : le panneau ne retire pas un post déjà programmé, la suppression dans Buffer est traitée à part ; le post n’est pas refait ici."
     }
   ]
 }
