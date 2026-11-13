@@ -1,0 +1,67 @@
+# On every pull request that touches the production chain, the site or the control scripts: the suites the daily
+# workflows run before they produce or publish anything, on the runner's Python (3.12) and the pinned Pillow.
+# Until 13/11/2026 no check of a pull request ran them: a review depended on the reviewer's own machine (Python 3.9).
+# Read-only: nothing is produced, committed, published or sent.
+name: Voyage Sans Detour pull request suites
+
+on:
+  pull_request:
+    paths:
+      - '.github/vsd-production/**'
+      - '.github/vsd-control/**'
+      - 'site-src/**'
+      - '.github/workflows/vsd-python-checks.yml'
+
+permissions: {}
+concurrency:
+  group: vsd-pull-request-suites-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  suites:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout the pull request
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Python 3.12
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.12'
+      - name: Prerequisites of the daily render (ffmpeg, pinned Pillow)
+        working-directory: .github/vsd-production
+        run: |
+          set -euo pipefail
+          if ! command -v ffmpeg >/dev/null || ! command -v ffprobe >/dev/null; then
+            sudo apt-get update -qq
+            sudo apt-get install --yes --no-install-recommends ffmpeg
+          fi
+          # The wheel is checked against its published fingerprint (requirements-checks.txt), not only its version.
+          python -m pip install --disable-pip-version-check --only-binary :all: --require-hashes -r requirements-checks.txt
+      # The very command of vsd-render-content.yml: if it fails here, the daily run would stop before producing anything.
+      - name: Production guards, as the daily render runs them
+        working-directory: .github/vsd-production
+        run: python -m unittest -q test_production test_auto_social test_stale_lots test_pin_draft test_pin_intake test_pin_promotion
+      - name: Every Python test of the production chain
+        working-directory: .github/vsd-production
+        run: python -m unittest discover -q
+      - name: Queued scenarios still pass the guards
+        working-directory: .github/vsd-production
+        run: python production.py --validate
+      # The very command of build-pages.yml, then every test of the site.
+      - name: Site, as the deployment runs it
+        working-directory: site-src
+        run: python -m unittest -q test_site test_stay22 test_affiliates test_gyg_locations test_editorial_queue test_public_media test_autonomous_editorial test_autonomous_candidate test_cloud_source_changes test_editorial_update test_pin_feed_status test_indexnow test_photo_variants
+      - name: Every Python test of the site
+        working-directory: site-src
+        run: python -m unittest discover -q
+      - name: Node suites (analytics consent, control scripts, stock control)
+        run: |
+          set -euo pipefail
+          (cd site-src && node --test test_analytics.mjs)
+          node --test .github/vsd-control/*.test.mjs
+          node --test .github/vsd-production/*.test.mjs

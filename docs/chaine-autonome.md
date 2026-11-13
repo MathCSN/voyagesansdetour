@@ -70,7 +70,9 @@ guide publié ──► rendu (production.py, reel_intake.py)
   (relecture des lots contre leurs guides, rendu des scénarios déjà en file, stock, épingles). Les
   créneaux se vident au fil des jours et un lot retiré n'est plus remplacé : le rapport lève « File
   … presque vide » dès que le dernier post d'un réseau est à moins de 14 jours, puis « File … vide ».
-  Le passage quotidien, lui, répond `queue_covered` sans avertissement. À l'arrêt depuis le
+  Le passage quotidien, lui, répond `queue_covered` sans avertissement à l'étape du générateur ; l'étape du
+  rendu garde son avertissement « Catalogue vidéo épuisé » (aucun nouveau scénario à rendre), attendu
+  pendant tout l'arrêt. À l'arrêt depuis le
   13/11/2026 (derniers posts en file : Facebook 26/11, Instagram et TikTok 02/12 ; l'alerte Facebook
   est donc levée dès le 13/11, celle d'Instagram à partir du 18/11), jusqu'à la PR qui corrige le
   choix des photos (trajets, second tour, faits localisés sans nom propre).
