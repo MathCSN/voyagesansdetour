@@ -444,22 +444,25 @@ def photos_of_another_place(scenario, photos) -> list[str]:
     a table."""
     scenes = scenario["scenes"]
     everywhere = place_names.words(str(scenario.get("destination", "")) + " " + str(scenes[0].get("kicker", "")))
-    misplaced = []
-    for number, scene in enumerate(scenes[1:-1], 2):
-        if scene.get("layout") == "table" or "photo" not in scene:
-            continue
-        said = draw.plain(" ".join(scene.get("headline") or []) + " " + str(scene.get("detail") or ""))
-        places = place_names.proper(said, everywhere)
-        record = photos.get(scene["photo"]) or {}
-        title = str(record.get("commonsTitle", "")).removeprefix("File:").rsplit(".", 1)[0]
-        caption = str(scene.get("alt") or "")
-        shown = place_names.words(" ".join([scene["photo"], caption, title, str(record.get("categories", ""))]))
-        if not places or places & shown or (place_names.journey(said) and place_names.ride(shown, str(scene.get("detail") or said))) or place_names.shows(said, shown):
-            continue
-        others = place_names.proper(caption or title, everywhere, sentence=bool(caption)) - place_names.words(said)
-        if others:
-            misplaced.append(f"plan {number} names {', '.join(sorted(places))} over {scene['photo']} ({', '.join(sorted(others))})")
-    return misplaced
+    found = [(number, another_place(scene, photos, everywhere)) for number, scene in enumerate(scenes[1:-1], 2)]
+    return [f"plan {number} {told}" for number, told in found if told]
+
+
+def another_place(scene, photos, everywhere) -> str | None:
+    """What one plan names and what its photo names instead, None when the photo is a photo of what the plan says."""
+    if scene.get("layout") == "table" or "photo" not in scene:
+        return None
+    said = draw.plain(" ".join(scene.get("headline") or []) + " " + str(scene.get("detail") or ""))
+    places = place_names.proper(said, everywhere)
+    record = photos.get(scene["photo"]) or {}
+    title = str(record.get("commonsTitle", "")).removeprefix("File:").rsplit(".", 1)[0]
+    caption = str(scene.get("alt") or "")
+    shown = place_names.words(" ".join([scene["photo"], caption, title, str(record.get("categories", ""))]))
+    journey = place_names.journey(said) and place_names.ride(shown, str(scene.get("detail") or said))
+    if not places or places & shown or journey or place_names.shows(said, shown):
+        return None
+    others = place_names.proper(caption or title, everywhere, sentence=bool(caption)) - place_names.words(said)
+    return f"names {', '.join(sorted(places))} over {scene['photo']} ({', '.join(sorted(others))})" if others else None
 
 
 def contract_of(scenario):

@@ -453,6 +453,18 @@ class Media:
         best = max(named, key=lambda ph: (close(ph), self.shared(ph, wider)))
         return own if own in named and close(own) >= close(best) else best
 
+    def sharing(self, pool: list, own: tuple | None, target: set[str], wider: set[str]) -> tuple | None:
+        """The photo that shares the most words with a text, None when none shares any. The guide's own photo for that
+        text wins when it shares a word, and stands in when no photo shares any."""
+        shared = lambda ph: self.shared(ph, target)
+        best = max(pool, key=lambda ph: (shared(ph), self.shared(ph, wider)), default=None)
+        # The guide put its own photo beside this text: a kind of place the two share ("Le pont en métro" and the photo
+        # of the bridge) is proof enough for that photo, and for no other.
+        mine = words_shared(own, target, self.family, kinds=True) if own else set()
+        if own and (best is None or not shared(best) or (mine and not any(mine < words_shared(ph, target, self.family) for ph in pool))):
+            return own
+        return best if best is not None and shared(best) else None
+
     def named(self, text: str, section: dict | None, avoid: frozenset = frozenset(), also: str = "") -> tuple | None:
         """The photo that shows what `text` names: the one whose id, caption or title shares the most words with it.
         The section's own photo wins when it shares a word, and stands in when no photo shares any; it gives way
@@ -462,7 +474,6 @@ class Media:
         says, to choose between two photos that share as much with `text` (the train, not the cathedral, for "Mérida–
         Tulum en train direct" and its "train direct Mérida Teya → Tulum")."""
         target, wider = self.target(text), self.target(text + " " + also)
-        shared = lambda ph: self.shared(ph, target)
         wanted = section.get("image") if section else None
         pool = [ph for ph in self.free() if ph[0] not in avoid]
         own = next((ph for ph in pool if ph[0] == wanted), None)
@@ -478,13 +489,7 @@ class Media:
                 return pick
             pool = [ph for ph in pool if not self.elsewhere(ph, set(places))]
             own = own if own in pool else None
-        best = max(pool, key=lambda ph: (shared(ph), self.shared(ph, wider)), default=None)
-        # The guide put its own photo beside this text: a kind of place the two share ("Le pont en métro" and the photo
-        # of the bridge) is proof enough for that photo, and for no other.
-        mine = words_shared(own, target, self.family, kinds=True) if own else set()
-        if own and (best is None or not shared(best) or (mine and not any(mine < words_shared(ph, target, self.family) for ph in pool))):
-            return own
-        return best if best is not None and shared(best) else None
+        return self.sharing(pool, own, target, wider)
 
     def photo(self, text: str = "", section: dict | None = None, strict: bool = False, avoid: frozenset = frozenset(),
               also: str = "") -> tuple[str, str]:
