@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 1,
+  "contentId": "fb-thailande-quand-partir-2026-11-19",
+  "status": "rendered_not_published",
+  "fingerprint": "260c761a710898c20ae97bcd8e89e227afe0a3a2303866d60af95c3d669fcce7",
+  "createdAt": "2026-11-13T00:00:40.590917Z",
+  "renderFinishedAt": "2026-11-13T00:00:42.079089Z",
+  "rendererContractVersion": 3,
+  "rendererSha256": "53771f8977e744f7e898c21c13d02cd1f80ec9d9fcff06e28a9c095db57efd0a",
+  "drawingSha256": "b78990f497d03baf754e3b2b68a795a5e9d3b91a0b6a2f8dad2ebcd7fec2907c",
+  "motionSha256": "97551f9095a5a66596521a599d328df19f4e28fbcfcf716ae1ee980ebdf47448",
+  "format": null,
+  "kind": "carousel",
+  "channel": "facebook",
+  "publishAt": "2026-11-19T17:00:00Z",
+  "reviewValidUntil": "2026-12-13T00:00:36Z",
+  "sourceCheckedOn": "2026-11-13",
+  "targetUrl": "https://voyagesansdetour.fr/thailande/thailande-quand-partir/",
+  "voice": null,
+  "presenter": null,
+  "sourceUrls": [
+    "https://voyagesansdetour.fr/thailande/thailande-quand-partir/"
+  ],
+  "photos": {
+    "thailande-railay": {
+      "licence": "CC BY-SA 3.0",
+      "author": "kallerna",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Railay_Beach_5.jpg"
+    },
+    "thailande-bangkok-grand-palais": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Bjørn Erik Pedersen",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:A_roof_of_a_building_at_the_Grand_Palace,_Bangkok,_sunrise,_2017.jpg"
+    },
+    "thailande-koh-samui": {
+      "licence": "CC BY 4.0",
+      "author": "© Vyacheslav Argenberg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Koh_Samui,_Beach,_Thailand.jpg"
+    },
+    "thailande-wat-arun": {
+      "licence": "CC BY-SA 3.0",
+      "author": "Diego Delso",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Templo_Wat_Arun,_Bangkok,_Tailandia,_2013-08-22,_DD_30.jpg"
+    },
+    "thailande-phi-phi": {
+      "licence": "CC BY-SA 3.0",
+      "author": "Diego Delso",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Isla_Ko_Phi_Phi_Don,_Tailandia,_2013-08-19,_DD_02.JPG"
+    },
+    "thailande-chiang-mai-doi-suthep": {
+      "licence": "CC BY 4.0",
+      "author": "Philip Nalangan",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Doi_Suthep_Temple_Chiang_Mai_Thailand.jpg"
+    }
+  },
+  "clips": {},
+  "video": null,
+  "files": [
+    {
+      "file": "apercu.jpg",
+      "sha256": "2718c44f89480960e79e17703cb73b087ce329096dd470b817b5b0fa5ea34997",
+      "bytes": 155236
+    },
+    {
+      "file": "credits.txt",
+      "sha256": "7a8212000d46af5c710b93c3535743e49b495398bed0522853daf8e52692e2f3",
+      "bytes": 2623
+    },
+    {
+      "file": "dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "file": "legende.txt",
+      "sha256": "9f1b33bae68de9e86fd190c953594690214ddae51da7cd7ec1244b33b93a1c2f",
+      "bytes": 905
+    },
+    {
+      "file": "notosans-OFL.txt",
+      "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a",
+      "bytes": 4396
+    },
+    {
+      "file": "playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    },
+    {
+      "file": "scenario.json",
+      "sha256": "10a7f64eb19309c0cf6d1d7b8b41374ac300d83f8035ec754b7af5fb4762bf1a",
+      "bytes": 7285
+    },
+    {
+      "file": "scene-01.jpg",
+      "sha256": "9d3e78251e65579ba19db54fa0049b6438a140c48137763246b7cc8978cd1020",
+      "bytes": 207700
+    },
+    {
+      "file": "scene-02.jpg",
+      "sha256": "dda14054425b013b63aff9b69e3843e464e9b78216bf96d2e68d57bf963b94cf",
+      "bytes": 192689
+    },
+    {
+      "file": "scene-03.jpg",
+      "sha256": "e0fcd9c5f281a604078b88ba48be8b6b491031ecc17f036a63c31c39083bb0ec",
+      "bytes": 224031
+    },
+    {
+      "file": "scene-04.jpg",
+      "sha256": "30956e37f37231a27cc271611368ab0b7e251621f1519ea5eea80dc72b1bb5f4",
+      "bytes": 318202
+    },
+    {
+      "file": "scene-05.jpg",
+      "sha256": "189cec9a7abd8906471249bdeebeefeb0fd429b038c9dcdfb4d6b9fbbdfe0d31",
+      "bytes": 225441
+    },
+    {
+      "file": "scene-06.jpg",
+      "sha256": "cee075d56a7a7083ad4be26943aff2f1708f4a9012a09266c1a5eb11e53d52ef",
+      "bytes": 261823
+    }
+  ],
+  "runtime": {
+    "wallSeconds": 1.284,
+    "encoderThreads": 2,
+    "pillowVersion": "11.3.0",
+    "ffmpegVersion": null
+  },
+  "publication": {
+    "uploaded": false,
+    "scheduled": false,
+    "published": false,
+    "readyForAutomaticImport": false
+  },
+  "cost": {
+    "newPaidService": false,
+    "providerCalls": 0,
+    "monetarySpendEur": 0
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-thailande-quand-partir",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Quand partir en Thaïlande : le bon mois pour Bangkok, le Nord, l’Andaman et Koh Samui",
+  "pinTitle": "Quand partir en Thaïlande : le bon mois pour Bangkok, le Nord, l’Andaman et Koh Samui",
+  "variant": "a",
+  "targetUrl": "https://voyagesansdetour.fr/thailande/thailande-quand-partir/",
+  "articleSha256": "b18e6dadd7dfa0c1c80fd2768d05c800819af05182f67356a25dd699ab23ebdd",
+  "imageSha256": "f1412a6a70eaddefb25dd0d9da5e19512766cbc8b21c3149929c98e36023206a",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "fdbf04a40b0bd104c5f381a47a9aa8aa30b6df590685a48e3ce4be0e6c3493b2",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "thailande-railay",
+    "author": "kallerna",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Railay_Beach_5.jpg",
+    "license": "CC BY-SA 3.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0"
+  }
+}
