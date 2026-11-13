@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {socialQueue,guideQueue,parsePinterestRss,summarizeRuns,computeAlerts,renderReport,seoLines,unreadKinds,runNumber} from './weekly-report.mjs';
+import {socialQueue,guideQueue,parsePinterestRss,summarizeRuns,computeAlerts,renderReport,seoLines,unreadKinds,runNumber,memoryWarning} from './weekly-report.mjs';
 import {PUBLICATION_KINDS,publicationLines,readingState} from './publication-report.mjs';
 
 const NOW=Date.parse('2026-10-26T07:00:00Z');
@@ -210,19 +210,64 @@ test('the run before is known by its number, however late GitHub starts the runs
   const close=readingState(k,null,AT+10*6e4,8);
   assert.equal(close.missingSince,iso(AT));
   assert.deepEqual(codes(close,AT+10*6e4),[]);
-  // A memory from another run than the one before, or without a usable number, does not count.
-  for(const run of [5,9,'7',7.5,null,undefined])assert.equal(readingState({...k,run},null,AT+6*HOUR,8).missingSince,iso(AT+6*HOUR),String(run));
+  // A memory from a run older than the one before, or without a usable number, does not count.
+  for(const run of [5,6,'7',7.5,null,undefined])assert.equal(readingState({...k,run},null,AT+6*HOUR,8).missingSince,iso(AT+6*HOUR),String(run));
+  // An earlier run started again after a later one reads the panel after it: the memory is not set back,
+  // and keeps the number of the latest run so that the next one still follows.
+  const nine={missingSince:iso(AT),reason:'panel_unreadable',run:9};
+  const again=readingState(nine,null,AT+5*HOUR,7);
+  assert.deepEqual(again,{missingSince:iso(AT),reason:'panel_unreadable',run:9});
+  assert.deepEqual(codes(again,AT+5*HOUR),['publication_reading_missing']);
+  assert.equal(readingState(again,null,AT+11*HOUR,10).missingSince,iso(AT));
+  // Run 9 had read the panel; run 7 started again misses: a first miss, which run 10 then follows.
+  const fresh=readingState({missingSince:null,run:9},null,AT+5*HOUR,7);
+  assert.deepEqual(fresh,{missingSince:iso(AT+5*HOUR),reason:'panel_unreadable',run:9});
+  assert.deepEqual(codes(fresh,AT+5*HOUR),[]);
+  assert.equal(readingState(fresh,null,AT+11*HOUR,10).missingSince,iso(AT+5*HOUR));
+  // Started again and the panel answers: the outage is over, whatever the number of the run.
+  assert.deepEqual(readingState(nine,{search:null,indexation:null,publication:PUBLICATION},AT+5*HOUR,7),{missingSince:null,run:9});
   // No run number at all (a run outside GitHub Actions): nothing follows, the delay starts again each time.
   assert.deepEqual(readingState(k,null,AT+6*HOUR),{missingSince:iso(AT+6*HOUR),reason:'panel_unreadable',run:null});
   assert.equal(readingState({missingSince:iso(AT),reason:'panel_unreadable',run:null},null,AT+6*HOUR,null).missingSince,iso(AT+6*HOUR));
 });
 
-test('the run number comes from the workflow, and anything else is no number',async()=>{
+test('the run number comes from the workflow, and anything else is no number',()=>{
   assert.equal(runNumber({VSD_REPORT_RUN:'412'}),412);
   for(const value of [undefined,'','0','-3','1.5','12abc','1e3',' 7'])assert.equal(runNumber({VSD_REPORT_RUN:value}),null,String(value));
-  // Without this line in the workflow the alert on a mute panel would never be raised.
+});
+
+/** Variables of the `env` block of the one step that runs the report; a commented line is not a variable. */
+function reportStepEnv(workflow){
+  const runsReport=line=>/^(?:- )?(?:run: )?node \.github\/vsd-control\/weekly-report\.mjs(?:\s|$)/.test(line.trim());
+  const steps=workflow.split(/\r?\n(?=      - )/).map(step=>step.split(/\r?\n/)).filter(lines=>lines.some(runsReport));
+  assert.equal(steps.length,1,'one step runs the report');
+  const lines=steps[0],at=lines.findIndex(line=>/^ +env: *$/.test(line));
+  if(at<0)return [];
+  const inside=line=>!line.trim()||line.search(/\S/)>lines[at].search(/\S/);
+  const end=lines.findIndex((line,index)=>index>at&&!inside(line));
+  return lines.slice(at+1,end<0?undefined:end).map(line=>line.trim()).filter(Boolean);
+}
+
+test('the workflow gives the run number to the step that writes the report, and a missing number is said in the log',async()=>{
+  // Without this variable the alert on a mute panel would never be raised.
+  const line='VSD_REPORT_RUN: ${{ github.run_number }}';
   const workflow=await readFile(new URL('../workflows/vsd-weekly-report.yml',import.meta.url),'utf8');
-  assert.ok(workflow.includes('VSD_REPORT_RUN: ${{ github.run_number }}'),'run number not passed to the report');
+  assert.ok(reportStepEnv(workflow).includes(line),'run number not passed to the step that writes the report');
+  assert.ok(reportStepEnv(workflow).includes('VSD_REPORT_STATE: .vsd-report-state/state.json'));
+  // The guard itself: the line commented out, or moved to another step, is not seen as passed.
+  assert.ok(!reportStepEnv(workflow.replace(line,'# '+line)).includes(line));
+  const moved=workflow.replace('          '+line+'\n','').replace('          VSD_ALERT_PREVIOUS:','          '+line+'\n          VSD_ALERT_PREVIOUS:');
+  assert.ok(moved.includes(line)&&!reportStepEnv(moved).includes(line));
+  // Windows line ends change nothing; a step whose command is only a comment does not run the report.
+  assert.ok(reportStepEnv(workflow.replaceAll('\n','\r\n')).includes(line));
+  assert.throws(()=>reportStepEnv(workflow.replace('          node .github/vsd-control/weekly-report.mjs','          # node .github/vsd-control/weekly-report.mjs')),/one step runs the report/);
+  // A memory kept without a run number can never raise that alert: the report says so, as a GitHub warning.
+  const warning=memoryWarning({VSD_REPORT_STATE:'.vsd-report-state/state.json'});
+  assert.ok(warning.startsWith('::warning::')&&warning.includes('VSD_REPORT_RUN')&&!warning.includes('\n'),warning);
+  assert.equal(memoryWarning({VSD_REPORT_STATE:'.vsd-report-state/state.json',VSD_REPORT_RUN:'abc'}),warning);
+  assert.equal(memoryWarning({VSD_REPORT_STATE:'.vsd-report-state/state.json',VSD_REPORT_RUN:'412'}),null);
+  // No memory asked for (a run by hand, outside the workflow): nothing to warn about.
+  assert.equal(memoryWarning({}),null);
 });
 
 test('the report says which alerts it could not re-read, so a missed reading neither lifts nor announces them',()=>{

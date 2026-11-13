@@ -6,9 +6,10 @@
 name: Voyage Sans Detour weekly report
 on:
   schedule:
-    # Four runs a day are asked for. GitHub starts the scheduled runs of this repository hours late (7 to 11
-    # hours, measured from 2026-11-08 to 2026-11-12) and skips some: an alert can wait half a day, and what a
-    # skipped run would have done is done by the next. Publication does not wait: the panel runs on its own clock.
+    # Four runs a day are asked for. GitHub starts the scheduled runs of this repository hours late (6 h 48 to
+    # 10 h 37 at the four scheduled starts of this report from 2026-11-08 to 2026-11-11) and skips some: an
+    # alert can wait half a day, and what a skipped run would have done is done by the next. Publication does
+    # not wait: the panel runs on its own clock.
     - cron: '7 1,7,13,19 * * *'
   workflow_dispatch:
     inputs:

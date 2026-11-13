@@ -213,12 +213,16 @@ Secrets : `VSD_ADMIN_TICK_KEY` (appels signés du panneau privé), `CLOUDFLARE_W
   la semaine, ou à 60 jours de la date d'arrêt ; s'y ajoutent les alertes de publication, de
   référencement et de guides décrites plus bas. Elle se ferme seule quand tout est revenu dans l'ordre.
   - **Délai réel** : le rapport est planifié quatre fois par jour, mais GitHub démarre les passages
-    planifiés de ce dépôt avec plusieurs heures de retard et en saute. Constaté du 08/11 au
-    12/11/2026 : le rapport, alors planifié à 09:07 UTC, a démarré entre 15:55 et 19:44 UTC ;
-    `vsd-cloud-control`, planifié 49 fois par jour, a démarré 4 à 6 fois par jour. Une alerte peut
-    donc attendre une demi-journée. La publication n'en dépend pas : le panneau est le seul à
-    publier à l'heure, par sa propre tâche planifiée. Pour ne pas attendre, lancer
-    `vsd-weekly-report.yml` à la main.
+    planifiés de ce dépôt avec plusieurs heures de retard et en saute. Constaté sur les quatre
+    démarrages planifiés du 08/11 au 11/11/2026 : le rapport, alors planifié à 09:07 UTC, a
+    démarré à 15:55 le 08/11, 19:44 le 09/11, 16:58 le 10/11 et 17:03 le 11/11 (6 h 48 à 10 h 37
+    de retard) ; `vsd-cloud-control`, planifié 49 fois par jour, a démarré 6, 5, 6 et 4 fois ces
+    quatre jours. Une alerte peut donc attendre une demi-journée. La publication n'en dépend
+    pas : le panneau est le seul à publier à l'heure, par sa propre tâche planifiée. Pour ne pas
+    attendre, lancer `vsd-weekly-report.yml` à la main **en décochant `publish_report`** : coché
+    (valeur par défaut), le lancement ouvre un nouveau rapport hebdomadaire et ferme le précédent.
+    Si le numéro de passage n'arrive pas au rapport, le journal du passage porte un avertissement
+    « Mémoire du rapport sans numéro de passage ».
   - Son **titre** dit ce qui se passe (« ⚠️ Instagram coupé de Buffer et 2 autres alertes »).
   - GitHub ne prévient personne quand le texte d'une issue change : chaque alerte **nouvelle** depuis
     le passage précédent est donc annoncée par un **commentaire** qui la nomme et mentionne le
@@ -261,9 +265,11 @@ Secrets : `VSD_ADMIN_TICK_KEY` (appels signés du panneau privé), `CLOUDFLARE_W
   dans le cache du workflow, enregistré juste après l'écriture du rapport, même si une étape
   suivante échoue. Le passage d'avant est reconnu à son numéro (`github.run_number`), pas à une
   durée : deux lectures manquées de suite (deux passages qui se suivent, ou un même passage
-  relancé) lèvent l'alerte même si GitHub a démarré le second passage un jour plus tard. Une mémoire perdue, ou laissée par un autre passage que celui d'avant
-  (cache non enregistré, passage arrêté avant d'écrire le rapport), ne compte pas : le délai
-  repart, ce qui ne fait que retarder cette alerte d'un passage.
+  relancé) lèvent l'alerte même si GitHub a démarré le second passage un jour plus tard. Un ancien
+  passage relancé après un plus récent ne remet pas la mémoire en arrière. Une mémoire perdue, ou
+  laissée par un passage plus ancien que celui d'avant (cache non enregistré, passage arrêté avant
+  d'écrire le rapport), ne compte pas : le délai repart, ce qui ne fait que retarder cette alerte
+  d'un passage.
 
   | Alerte | Déclenchement | Quoi faire |
   | --- | --- | --- |

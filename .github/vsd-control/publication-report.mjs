@@ -106,13 +106,17 @@ function postAlerts({channels,problems,problemsCount,atRisk,atRiskCount},now){
  * one when the memory comes from the run just before, or from this same run started again. The time between
  * two runs says nothing: GitHub starts the scheduled runs hours late and skips some. A lost memory, a run
  * that left none, or no run number can therefore delay the alert, never raise it.
+ * An earlier run started again after a later one reads the panel after it: it follows the later memory, and
+ * the memory keeps the later number, so that the next run still finds the run before it.
  */
 export function readingState(previous,seo,now,run=null){
   const number=Number.isInteger(run)&&run>0?run:null;
-  if(seo?.publication)return {missingSince:null,run:number};
+  const later=number!==null&&Number.isInteger(previous?.run)&&previous.run>number;
+  const stamp=later?previous.run:number;
+  if(seo?.publication)return {missingSince:null,run:stamp};
   const since=typeof previous?.missingSince==='string'?Date.parse(previous.missingSince):NaN;
-  const follows=since<=now&&number!==null&&(previous.run===number||previous.run===number-1);
-  return {missingSince:new Date(follows?since:now).toISOString(),reason:seo?'block_absent':'panel_unreadable',run:number};
+  const follows=since<=now&&number!==null&&(later||previous.run===number||previous.run===number-1);
+  return {missingSince:new Date(follows?since:now).toISOString(),reason:seo?'block_absent':'panel_unreadable',run:stamp};
 }
 
 function readingAlerts(reading,now){

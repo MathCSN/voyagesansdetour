@@ -123,6 +123,15 @@ export function runNumber(env){
   return typeof value==='string'&&/^[1-9]\d{0,8}$/.test(value)?Number(value):null;
 }
 
+/**
+ * A memory kept without a run number never follows another, so the alert on a mute panel could not be raised.
+ * Said as a GitHub warning in the log of the run, instead of failing in silence. null when all is in order.
+ */
+export function memoryWarning(env){
+  if(!env.VSD_REPORT_STATE||runNumber(env)!==null)return null;
+  return '::warning::Mémoire du rapport sans numéro de passage (VSD_REPORT_RUN absent ou illisible) : l’alerte « état du moteur de publication illisible » ne peut pas se lever.';
+}
+
 export function renderReport({now,social,guides,pins,runs,alerts,waiting,seo=null,sources=[]}){
   const line=(items,format,empty)=>items.length?items.map(format).join('\n'):empty;
   return [`# Voyage Sans Détour — rapport du ${day(now)}`,
@@ -196,10 +205,14 @@ export async function main({root=process.cwd(),env=process.env,now=Date.now()}={
   await writeFile(join(out,'vsd-report.md'),report);
   await writeFile(join(out,'vsd-alerts.json'),JSON.stringify(alerts,null,2)+'\n');
   await writeFile(join(out,'vsd-alerts-unread.json'),JSON.stringify(unreadKinds({seo,writer}))+'\n');
-  return {alerts:alerts.length};
+  return {alerts:alerts.length,warning:memoryWarning(env)};
 }
 
 if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
-  try{const result=await main();console.log(`Rapport écrit ; ${result.alerts} alerte(s).`);}
+  try{
+    const result=await main();
+    if(result.warning)console.log(result.warning);
+    console.log(`Rapport écrit ; ${result.alerts} alerte(s).`);
+  }
   catch(error){console.error('Rapport non produit : '+(error?.code??error?.name??'erreur'));process.exitCode=1;}
 }
