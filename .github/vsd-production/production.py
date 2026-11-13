@@ -27,6 +27,7 @@ from PIL import __version__ as pillow_version
 
 import clip_intake
 import motion_render as motion
+import place_names
 import social_render as draw
 from photo_intake import AI_MARKERS, LICENCES, ai_record
 
@@ -66,6 +67,7 @@ REEL_BUTTON = {"instagram": "Le guide complet → lien en bio", "facebook": "Le 
 # network only ("lien en bio" was false on TikTok). The last plan of a scenario carries that button; a reel sealed
 # before 12/11/2026 carries none and is drawn with the button it was given, so that it is redrawn as it was.
 MOTION_BUTTON = "voyagesansdetour.fr"
+PLACES_FROM = "2026-11-13T04:00:00Z"   # scenarios reviewed from then on are refused a photo of another place than a plan names
 MOTION_BUTTON_BEFORE = "voyagesansdetour.fr → lien en bio"
 # The small label of a plan may give the figure's own date ("chiffre de juillet 2026"): then the plan quotes it.
 OWN_DATE_TAG = re.compile(r" · chiffre (?:de |du |d’)(.+)\Z")
@@ -262,6 +264,8 @@ def check_motion_shape(scene, layout):
             text(scene[key], maximum)
     ensure(all(line.count("*") % 2 == 0 for line in scene["headline"] + [scene.get("detail") or ""]), UNBALANCED)
     ensure("button" not in scene or (layout == "cta" and scene["button"] == MOTION_BUTTON), "Only the last plan carries the button, and only the site's name")
+    if scene.get("alt") is not None:
+        text(scene["alt"], 300)   # the caption of the photo, kept with the plan: the guard on places reads it
     focus = scene.get("focus", [0.5, 0.5])
     ensure(isinstance(focus, list) and len(focus) == 2 and all(type(v) in (int, float) and 0 <= v <= 1 for v in focus), "Invalid photo focus")
     seconds = scene.get("seconds")
@@ -417,6 +421,11 @@ def validate_scenario(scenario, root, now):
         else:
             records[scene["photo"]] = check_photo(photos, scene["photo"], root)
     ensure(used, "No sourced fact in this post")
+    # A post made since this guard exists never shows a fact over a photo of another place; the posts sealed before
+    # it are audited by hand (two of them were withdrawn for it on 13/11/2026), not refused here.
+    if scenario["review"]["checkedAt"] >= PLACES_FROM:
+        misplaced = photos_of_another_place(scenario, photos)
+        ensure(not misplaced, "Photo of another place than its plan names: " + " ; ".join(misplaced))
     duration = sum(scene.get("seconds", 0) for scene in scenes)
     if scenario["kind"] == "reel":
         bounds = MOTION_REEL_SECONDS if fast else REEL_SECONDS
@@ -424,6 +433,33 @@ def validate_scenario(scenario, root, now):
     sources = {source_id: snapshots[source_id][0] for source_id in sorted(used)}
     checked_on = min(instant(record["retrievedAt"]) for record in sources.values()).date()
     return {"duration": duration, "sources": sources, "photos": records, "clips": clip_records, "sourceCheckedOn": str(checked_on)}
+
+
+def photos_of_another_place(scenario, photos) -> list[str]:
+    """The plans of a post that name a precise place (a proper noun: Similan, Kinkaku-ji) of which the record of
+    their photo says nothing, while that record names another one: "la réouverture des îles Similan" over "les îles
+    Phi Phi", "le pavillon d'Or du Kinkaku-ji" over the platform of Shin-Fuji. The record is what a photo post
+    carries with each photo (its caption), the Commons title and categories, and the identifier. A journey over a
+    train is no such plan ("Tokyo → Kyoto en Nozomi" over a shinkansen), nor is the opening, the call to action or
+    a table."""
+    scenes = scenario["scenes"]
+    everywhere = place_names.words(str(scenario.get("destination", "")) + " " + str(scenes[0].get("kicker", "")))
+    misplaced = []
+    for number, scene in enumerate(scenes[1:-1], 2):
+        if scene.get("layout") == "table" or "photo" not in scene:
+            continue
+        said = draw.plain(" ".join(scene.get("headline") or []) + " " + str(scene.get("detail") or ""))
+        places = place_names.proper(said, everywhere)
+        record = photos.get(scene["photo"]) or {}
+        title = str(record.get("commonsTitle", "")).removeprefix("File:").rsplit(".", 1)[0]
+        caption = str(scene.get("alt") or "")
+        shown = place_names.words(" ".join([scene["photo"], caption, title, str(record.get("categories", ""))]))
+        if not places or places & shown or (place_names.journey(said) and place_names.ride(shown)) or place_names.shows(said, shown):
+            continue
+        others = place_names.proper(caption or title, everywhere) - place_names.words(said)
+        if others:
+            misplaced.append(f"plan {number} names {', '.join(sorted(places))} over {scene['photo']} ({', '.join(sorted(others))})")
+    return misplaced
 
 
 def contract_of(scenario):

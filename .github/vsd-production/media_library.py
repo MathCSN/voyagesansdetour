@@ -42,7 +42,9 @@ OWN_FIGURES = frozenset({"train-alfa-220"})
 # Where the subject of a photo of the site is (x, y from 0 to 1), when a vertical frame cut around its middle misses it:
 # the gable of the Grand Palace stands on the right of its photo, under a wide evening sky.
 # The temple of Tulum stands right of the middle of a panorama: cut around the middle, the frame slid off it.
-SITE_FOCUS = {"thailande-bangkok-grand-palais": [0.72, 0.7], "yucatan-tulum": [0.645, 0.5]}
+# On the beach of Koh Samui a bather stands in the left third, cut by the edge of a centred frame: the sea, the
+# jet-skis and the hill are on the right.
+SITE_FOCUS = {"thailande-bangkok-grand-palais": [0.72, 0.7], "yucatan-tulum": [0.645, 0.5], "thailande-koh-samui": [0.72, 0.5]}
 
 
 def commons_title(source_page: str) -> str | None:

@@ -237,22 +237,28 @@ def whole_figure(value: str, text: str) -> bool:
 SUMMARY = re.compile(r"\b(?:comparatif|en bref|avant tout|coup d.oeil|recapitulatif|resume|essentiel|a retenir)\b")
 
 
+def folded_title(section: dict) -> str:
+    return destinations.ascii_fold(re.sub(r"[’']", " ", section.get("title", "").replace("œ", "oe"))).lower()
+
+
 def section_of(value: str, label: str, sections: list[dict]) -> dict | None:
     """The section that talks about this figure: the only one that gives the figure itself when there is just one
     ("604 pesos" is read under "Jours 4-6 : Mérida et Uxmal", nowhere else), unless it only sums the guide up ("Le
     comparatif en un coup d'œil", "Avant tout": the time from the airport to Rossio belongs to "Baixa et Chiado");
     otherwise the one that shares the most words with its label, the figure itself as a tie-break."""
     holders = [section for section in sections if whole_figure(value, section_text(section))]
-    title = destinations.ascii_fold(re.sub(r"[’']", " ", holders[0].get("title", "").replace("œ", "oe"))).lower() if holders else ""
-    if len(holders) == 1 and not SUMMARY.search(title):
+    if len(holders) == 1 and not SUMMARY.search(folded_title(holders[0])):
         return holders[0]
-    words, best, best_score = significant(label), None, 0
+    words, best, best_score, summed = significant(label), None, 0, None
     for section in sections:
         text = section_text(section)
         score = 2 * len(words & significant(text)) + (p.normalized(value) in text)
-        if score > best_score:
+        # A section that sums the guide up shares words with every figure: it only stands in when no other shares any.
+        if SUMMARY.search(folded_title(section)):
+            summed = summed or (section if score else None)
+        elif score > best_score:
             best, best_score = section, score
-    return best
+    return best or summed
 
 
 def drawable(root: Path, value: str) -> bool:
@@ -453,7 +459,9 @@ def scenes_for(article: dict, channel: Post, facts: list[dict], photos: list[tup
 
     def scene(picture, kicker, headline, detail, seconds, facts_=None, label=tag, cta=False):
         photo = by_id[picture[1]]
-        value = {"photo": photo[0], "focus": [0.5, 0.5], "kicker": kicker, "headline": headline}
+        # A photo that says where its subject is (reviewed.json, SITE_FOCUS) is cut around it, as in a reel.
+        focus = photo[1].get("focus")
+        value = {"photo": photo[0], "focus": focus if isinstance(focus, list) and len(focus) == 2 else [0.5, 0.5], "kicker": kicker, "headline": headline}
         if detail:
             value["detail"] = detail
         if facts_:

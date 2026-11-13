@@ -640,6 +640,11 @@ class TextTests(unittest.TestCase):
         # Given by both, or by none: the words of its label decide, as before.
         both = [sections[0], {**sections[1], "paragraphs": ["Le site est à 80 km : 697 pesos aussi."]}]
         self.assertEqual(a.section_of("697 pesos", "l’entrée de Chichén Itzá pour un étranger", both)["title"], "Jour 3 : Chichén Itzá à l’ouverture")
+        # …even when other sections give the figure too: "445 mm" belongs to "Le golfe", not to "En bref".
+        thai = [{"title": "En bref : deux côtes en miroir", "paragraphs": ["Le golfe de Koh Samui prend sa pluie en novembre : octobre à décembre (263 à 445 mm)."]},
+                {"title": "Le golfe : Koh Samui, Koh Phangan", "paragraphs": ["445 mm en novembre, le pic de l’année."]},
+                {"title": "Mois par mois", "table": {"headers": ["Mois", "Koh Samui"], "rows": [["Novembre", "445 mm"]]}}]
+        self.assertEqual(a.section_of("445 mm", "de pluie à Koh Samui en novembre : le golfe est trempé quand l’Andaman sèche", thai)["title"], "Le golfe : Koh Samui, Koh Phangan")
         # A section that only sums the guide up is about none of its figures: the district keeps its own.
         for title in ("Le comparatif en un coup d’œil", "Avant tout", "En bref", "L’essentiel"):
             districts = [{"title": "Baixa et Chiado", "paragraphs": ["De l’aéroport à Rossio, comptez une petite demi-heure en métro."]},
@@ -1213,9 +1218,11 @@ class PhotoPostTests(unittest.TestCase):
     def test_each_figure_takes_the_photo_that_shows_it_and_the_title_is_not_said_again(self):
         scenes = self.scenes()
         shown = {scene["headline"][0].strip("*"): scene["photo"] for scene in scenes[1:-1]}
-        self.assertEqual(shown, {"977,50 pesos": "yuc-merida", "697 pesos": "yuc-castillo", "120 km": "yuc-train", "232 et 246 pesos": "yuc-tulum"})
+        # The fare of a journey goes over the train; the distance to Teya, whose photo is that same train, stays in the
+        # guide, and a figure that names no place completes the post.
+        self.assertEqual(shown, {"977,50 pesos": "yuc-train", "697 pesos": "yuc-castillo", "45 jours": "yuc-merida", "232 et 246 pesos": "yuc-tulum"})
         self.assertNotIn("10 jours", shown)   # the title said again
-        self.assertNotIn("45 jours", shown)   # no photo shows it, and four figures have theirs
+        self.assertNotIn("120 km", shown)     # its photo is taken
         # The entrance fee took the cover it names: the next photo of the guide opens the post, another one closes it.
         self.assertEqual((scenes[0]["photo"], scenes[-1]["photo"]), ("yuc-cenote", "yuc-uxmal"))
         self.assertEqual(scenes[0]["headline"][-1], "*4 chiffres* à connaître")
@@ -1487,6 +1494,63 @@ class RealGuideTests(unittest.TestCase):
         self.assertEqual(reel_formats.fact_plan(works, media(), "Portugal", tag)["kicker"], "La ligne du Nord en 2026")
         undated = {**late, "label": "des Alfa Pendular à l’heure, à 5 minutes près"}
         self.assertEqual(reel_formats.fact_plan(undated, media(), "Portugal", tag)["kicker"], "La ligne du Nord en 2026")
+
+    def test_a_fact_that_names_a_place_never_goes_over_a_photo_of_another_one(self):
+        # Review of 13/11/2026, two photo posts of the night: "la réouverture des îles Similan" over Ko Phi Phi (the two
+        # shared "îles"), "le pavillon d'Or du Kinkaku-ji" over the sign of Shin-Fuji station.
+        thai = [("thailande-railay", {"commonsTitle": "File:Railay Beach 5.jpg", "emblematic": True}, "La plage de Railay et ses falaises calcaires, près de Krabi."),
+                ("thailande-phi-phi", {"commonsTitle": "File:Isla Ko Phi Phi Don, Tailandia.JPG"}, "Les falaises et l’eau turquoise des îles Phi Phi."),
+                ("thailande-koh-samui", {"commonsTitle": "File:Koh Samui, Beach, Thailand.jpg"}, "Une plage de sable blanc à Koh Samui."),
+                ("thailande-wat-arun", {"commonsTitle": "File:Wat Arun.jpg", "emblematic": True}, "Le pavillon d’entrée du Wat Arun, à Bangkok.")]
+        sea = {"title": "La mer d’Andaman : Phuket, Krabi, Koh Phi Phi", "image": "thailande-phi-phi"}
+        similan = "la réouverture des îles Similan en 2026 ; la saison dure jusqu’à la mi-mai 2027"
+        media = lambda: reel_formats.Media(list(thai), [], reserve=2, cover="thailande-railay", emblematic=reel_formats.emblematic(thai), everywhere="Thaïlande Thaïlande")
+        self.assertIsNone(media().named(similan, sea))          # not the guide's own photo of that section: it names Phi Phi
+        self.assertEqual(media().left_for(similan), [])         # nor any other photo: each names another place
+        self.assertEqual(media().named("Maya Bay, à Phi Phi, ferme du 1er août au 30 septembre", sea)[0], "thailande-phi-phi")
+        self.assertEqual(media().named("de pluie à Koh Samui en novembre : le golfe est trempé", None)[0], "thailande-koh-samui")
+        facts = figures([("15 octobre", similan), ("445 mm", "de pluie à Koh Samui en novembre")], {"15 octobre": sea})
+        self.assertEqual(list(reel_formats.placed(facts, media(), 2, 2)), [1])   # the plan about the Similan islands is left out
+        japan = [("japon-fuji-chureito", {"commonsTitle": "File:Chureito.jpg", "emblematic": True}, "La pagode de Chureito et le mont Fuji."),
+                 ("japon-shinkansen", {"commonsTitle": "File:Shin-Fuji Station Shinkansen platform view of Mt.Fuji.jpg"}, "Le mont Fuji vu depuis le quai de la gare shinkansen de Shin-Fuji."),
+                 ("japon-kyoto-kiyomizu", {"commonsTitle": "File:Kiyomizu.jpg"}, "Des promeneuses en yukata devant la porte nord du Kiyomizu-dera, à Kyoto."),
+                 ("japon-nara-cerfs", {"commonsTitle": "File:Nara deer.jpg"}, "Des cerfs en liberté dans le parc de Nara."),
+                 ("japon-tokyo-shibuya", {"commonsTitle": "File:Shibuya.jpg", "emblematic": True}, "Le carrefour de Shibuya, à Tokyo.")]
+        rail, kyoto = {"title": "Le parcours en train", "image": "japon-shinkansen"}, {"title": "Jours 5 à 8 — Kyoto et Nara", "image": "japon-kyoto-kiyomizu"}
+        trip = reel_formats.Media(list(japan), [], reserve=2, cover="japon-fuji-chureito", emblematic=reel_formats.emblematic(japan), everywhere="Japon Japon")
+        # A journey goes over the train of the guide, not over a town it names; a temple goes over no other temple.
+        self.assertEqual(trip.named("Tokyo → Kyoto en Nozomi, 13 960 ¥ (≈ 80 €), un train toutes les 15 à 30 minutes", rail)[0], "japon-shinkansen")
+        self.assertIsNone(trip.named("le pavillon d’Or du Kinkaku-ji, ouvert tous les jours de 9 h à 17 h", kyoto))
+        self.assertEqual(trip.left_for("le pavillon d’Or du Kinkaku-ji, ouvert tous les jours de 9 h à 17 h"), [])
+        # The first place a fact names is the one it is about: Nara, not Kyoto "à 45 minutes".
+        self.assertEqual(trip.named("le Grand Bouddha du Tōdai-ji, à Nara, à 45 minutes de Kyoto par le train JR", kyoto)[0], "japon-nara-cerfs")
+        # What a precise place is: a proper noun, not a kind of place, an acronym or the name of a carrier.
+        names = reel_formats.place_names
+        self.assertEqual(names.named("le ticket bus SITA COSTIERASITA, illimité pendant 24 h"), [])
+        self.assertEqual(names.named("de car pour Essaouira : dès 100 dh chez Supratours, dès 105 dh chez CTM"), ["essaouira"])
+        self.assertEqual(names.named("Tokyo → Kyoto en Nozomi"), ["tokyo", "kyoto"])
+        self.assertEqual(names.named("le Grand Palais de Bangkok et le Wat Phra Kaew", {"bangkok"}), ["phra", "kaew"])
+        # The pictogram of a caption line follows what the line opens on.
+        self.assertEqual(reel_formats.caption_emoji("800 ¥", "le Grand Bouddha du Tōdai-ji, à Nara, à 45 minutes de Kyoto par le train JR"), "📍")
+        self.assertEqual(reel_formats.caption_emoji("44 620 ¥", "Tokyo–Kyoto–Hiroshima–Tokyo en billets à l’unité"), "🚆")
+        self.assertEqual(reel_formats.caption_emoji("697 pesos", "l’entrée de Chichén Itzá pour un étranger"), "🎟️")
+        self.assertEqual(reel_formats.caption_emoji("12 €", "le ferry Travelmar Salerne → Amalfi, 35 minutes"), "💶")
+
+    def test_the_guard_refuses_a_plan_over_a_photo_of_another_place(self):
+        photos = {"thailande-phi-phi": {"commonsTitle": "File:Isla Ko Phi Phi Don, Tailandia, 2013-08-19, DD 02.JPG", "categories": "Beaches of Ko Phi Phi Don"},
+                  "japon-shinkansen": {"commonsTitle": "File:Shin-Fuji Station Shinkansen platform view of Mt.Fuji.jpg", "categories": "Shin-Fuji Station (Shizuoka)"},
+                  "thailande-koh-samui": {"commonsTitle": "File:Koh Samui, Beach, Thailand.jpg"}}
+        plan = lambda photo, headline, detail, alt: {"photo": photo, "kicker": "x", "headline": [headline], "detail": detail, "alt": alt}
+        edge = {"photo": "thailande-koh-samui", "kicker": "Thaïlande", "headline": ["Titre"]}
+        post = lambda *plans: {"destination": "Thaïlande", "scenes": [edge, *plans, edge]}
+        similan = plan("thailande-phi-phi", "*15 octobre*", "la réouverture des îles Similan en 2026", "Les falaises et l’eau turquoise des îles Phi Phi.")
+        kinkaku = plan("japon-shinkansen", "*500 ¥*", "le pavillon d’Or du Kinkaku-ji, ouvert tous les jours de 9 h à 17 h", "Le mont Fuji vu depuis le quai de la gare shinkansen de Shin-Fuji.")
+        self.assertEqual(p.photos_of_another_place(post(similan, kinkaku), photos),
+                         ["plan 2 names similan over thailande-phi-phi (phi)", "plan 3 names kinkaku over japon-shinkansen (fuji, shin)"])
+        fine = [plan("thailande-phi-phi", "*1er août*", "Maya Bay, à Phi Phi, ferme jusqu’au 30 septembre", "Les falaises et l’eau turquoise des îles Phi Phi."),
+                plan("japon-shinkansen", "*2 h 18*", "Tokyo → Kyoto en Nozomi, 13 960 ¥", "Le mont Fuji vu depuis le quai de la gare shinkansen de Shin-Fuji."),
+                plan("thailande-koh-samui", "*445 mm*", "de pluie à Koh Samui en novembre", "Une plage de sable blanc à Koh Samui.")]
+        self.assertEqual(p.photos_of_another_place(post(*fine), photos), [])
 
     def test_a_photo_post_whose_figures_all_belong_to_a_day_reads_day_after_day(self):
         days = {number: {"title": f"Jour {number} — {name}"} for number, name in ((1, "La médina"), (2, "Le jardin Majorelle"), (3, "Sortir de la ville"))}
