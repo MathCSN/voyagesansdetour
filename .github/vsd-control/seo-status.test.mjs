@@ -67,6 +67,13 @@ const PUBLICATION = {
   counts: { ready: 4, submitting: 0, scheduled: 2, published: 12, to_verify: 0, held: 1, failed: 0 },
   problems: [{ id: 'reviewed-social:instagram:reel:vietnam_2026-11-25.v1', channel: 'instagram', state: 'held', reason: 'overdue', at: '2026-11-10T17:00:00.000Z' }], problemsCount: 1,
   atRisk: [{ id: 'ig:pret', channel: 'instagram', dueAt: '2026-11-12T17:00:00.000Z', channelState: 'disconnected' }], atRiskCount: 1,
+  retiredInBuffer: [{ id: 'vsd-production:instagram:japon-a', channel: 'instagram', dueAt: '2026-11-15T20:00:00.000Z', reason: 'buffer_delete_mutation_error', replacementWaiting: true }],
+  retiredInBufferCount: 1,
+  retiredPublished: [{ id: 'vsd-production:tiktok:japon-a', channel: 'tiktok', dueAt: '2026-11-11T21:00:00.000Z', at: '2026-11-11T21:07:00.000Z' }], retiredPublishedCount: 1,
+  bufferQuota: { observedAt: '2026-11-12T08:37:00.000Z', windows: [{ name: '600-in-1day', remaining: 540, limit: 600, windowSeconds: 86400, resetAt: '2026-11-13T00:00:00.000Z' },
+    { name: '3000-in-30days', remaining: 2100, limit: 3000, windowSeconds: 2592000, resetAt: '2026-12-01T00:00:00.000Z' }], lowestRatio: 0.7, pausedUntil: null },
+  lastFailure: { at: '2026-11-12T08:22:00.000Z', code: 'quota_epuise' },
+  readyStalled: [{ id: 'ig:pret', channel: 'instagram', dueAt: '2026-11-12T17:00:00.000Z' }], readyStalledCount: 1,
 };
 
 test('the publication block keeps channel states, the last engine pass, counts and the short post lists', () => {
@@ -112,7 +119,46 @@ test('nothing Markdown can read survives in the publication block', () => {
     counts: { ready: 0, submitting: 0, scheduled: 0, published: 0, to_verify: 0, held: 0, failed: 2 },
     problems: [{ id: 'ok:1', channel: 'instagram', state: 'failed', reason: 'autre', at }], problemsCount: 1,
     atRisk: [{ id: 'ok:5', channel: 'tiktok', dueAt: '2026-11-12T11:00:00.000Z', channelState: 'unknown' }], atRiskCount: 1,
+    retiredInBuffer: [], retiredInBufferCount: 0, retiredPublished: [], retiredPublishedCount: 0, bufferQuota: null,
+    lastFailure: null, readyStalled: [], readyStalledCount: 0,
   });
+});
+
+test('withdrawn posts and the Buffer quota keep a closed shape: codes, ISO dates, counts, nothing Markdown can read', () => {
+  const at = '2026-11-11T10:00:00.000Z';
+  const publication = checkedSeo({ ...reply, publication: { ...PUBLICATION,
+    retiredInBuffer: [
+      { id: 'ok:1', channel: 'instagram', dueAt: at, reason: 'Supprimer [ici](https://evil.example) @mathis', replacementWaiting: 'oui' },
+      { id: 'mauvais `id`', channel: 'instagram', dueAt: at, reason: 'trop_tard' },
+      { id: 'ok:2', channel: 'x.com', dueAt: at, reason: 'trop_tard' },
+      { id: 'ok:3', channel: 'facebook', dueAt: 'demain', reason: 'trop_tard' },
+    ],
+    retiredInBufferCount: 'beaucoup',
+    retiredPublished: [{ id: 'ok:4', channel: 'facebook', dueAt: at, at: 'hier' }, { id: 'ok:5', channel: 'facebook', dueAt: at, at }],
+    retiredPublishedCount: 3,
+    bufferQuota: { observedAt: at, lowestRatio: 0.99, pausedUntil: 'demain', windows: [{ name: '[x](y)', remaining: 1, limit: 100 }, { name: 42, remaining: 0, limit: 1 },
+      { name: '3000-in-30d', remaining: 120, limit: 3000, windowSeconds: '30 jours', resetAt: '[lien](x)' }, { name: 'trop', remaining: 5, limit: 1e12 }] },
+    lastFailure: { at, code: 'Voir [ici](https://evil.example)' },
+    readyStalled: [{ id: 'ok:6', channel: 'facebook', dueAt: at }, { id: 'ok:7', channel: 'x.com', dueAt: at }],
+    readyStalledCount: 1e12,
+  } }).publication;
+  assert.deepEqual(publication.retiredInBuffer, [{ id: 'ok:1', channel: 'instagram', dueAt: at, reason: 'autre', replacementWaiting: false }]);
+  assert.equal(publication.retiredInBufferCount, 1);
+  assert.deepEqual(publication.retiredPublished, [{ id: 'ok:5', channel: 'facebook', dueAt: at, at }]);
+  assert.equal(publication.retiredPublishedCount, 3);
+  // The share left is recomputed from the counts, never taken from the panel.
+  // Names that are not strings, counts out of bounds, dates that are not ISO: dropped.
+  assert.deepEqual(publication.bufferQuota, { observedAt: at, windows: [{ name: '3000-in-30d', remaining: 120, limit: 3000, windowSeconds: null, resetAt: null },
+    { name: 'trop', remaining: 5, limit: null, windowSeconds: null, resetAt: null }], lowestRatio: 0.04, pausedUntil: null });
+  assert.deepEqual(publication.lastFailure, { at, code: 'autre' });
+  assert.deepEqual([publication.readyStalled, publication.readyStalledCount], [[{ id: 'ok:6', channel: 'facebook', dueAt: at }], 1]);
+  // A window at zero is exhausted even without its quota; a pause alone is enough to report.
+  assert.equal(checkedSeo({ ...reply, publication: { ...PUBLICATION, bufferQuota: { observedAt: at, windows: [{ name: 'a', remaining: 0 }] } } }).publication.bufferQuota.lowestRatio, 0);
+  assert.deepEqual(checkedSeo({ ...reply, publication: { ...PUBLICATION, bufferQuota: { observedAt: null, windows: [], pausedUntil: at } } }).publication.bufferQuota,
+    { observedAt: null, windows: [], lowestRatio: 0, pausedUntil: at });
+  for (const bufferQuota of [null, 'bas', { observedAt: 'hier', windows: [{ name: 'a', remaining: 1, limit: 2 }] }, { observedAt: at, windows: [{ name: 'a', remaining: 1 }] }]) {
+    assert.equal(checkedSeo({ ...reply, publication: { ...PUBLICATION, bufferQuota } }).publication.bufferQuota, null, JSON.stringify(bufferQuota));
+  }
 });
 
 test('the post lists are bounded and their totals never fall below what is listed', () => {

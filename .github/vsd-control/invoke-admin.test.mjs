@@ -14,6 +14,12 @@ test('une publication confirmée passe, une seule requête', async () => {
 test('un moteur resté désactivé après la bascule fait échouer le workflow', async () => {
   await assert.rejects(invoke({ env: env('publications'), fetcher: reply({ kind: 'publications', status: 'disabled' }), clock, log: () => {} }), { code: 'task_attention_required' });
 });
+test('statut « attention » ou « quota_epuise » du panneau : le workflow de secours échoue, exprès', async () => {
+  for (const status of ['attention', 'quota_epuise']) {
+    await assert.rejects(invoke({ env: env('publications'), fetcher: reply({ kind: 'publications', status }), clock, log: () => {} }), { code: 'task_attention_required' }, status);
+  }
+  assert.ok((await invoke({ env: env('publications'), fetcher: reply({ kind: 'publications', status: 'busy_or_recent' }), clock, log: () => {} })).status === 'confirmed');
+});
 test('configuration incomplète ou origine inattendue : aucun appel', async () => {
   let called = false;
   const fetcher = async () => { called = true; };

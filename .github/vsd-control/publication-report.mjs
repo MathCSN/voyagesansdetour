@@ -8,9 +8,10 @@ export const ENGINE_SILENCE_HOURS=6,POST_TROUBLE_DAYS=7;
 const READING_GRACE_HOURS=4;
 // Kinds of the alerts drawn from the engine state. When that state is missing, the report says so and the
 // alert issue keeps those it already had (issue-plan.mjs) instead of dropping them.
-export const PUBLICATION_KINDS=['publication_channel','publication_buffer_access','publication_engine_disabled','publication_engine_silent','publication_channels_stale','publication_posts_blocked','publication_posts_at_risk'];
-// The panel re-reads the Buffer channels at every collection and every engine pass, and rewrites the date of
-// its last successful re-reading every six hours at most: a day without one is a fault, not a late run.
+export const PUBLICATION_KINDS=['publication_channel','publication_buffer_access','publication_engine_disabled','publication_engine_silent','publication_channels_stale','publication_posts_blocked','publication_posts_at_risk',
+  'publication_retired_published','publication_retired_in_buffer','publication_buffer_quota','publication_posts_stalled'];
+// The panel re-reads the Buffer channels at every engine pass, in the same request as the posts, and rewrites the
+// date of its last successful re-reading every six hours at most: a day without one is a fault, not a late run.
 const CHANNELS_CHECK_MAX_HOURS=24;
 export const READING_KIND='publication_reading_missing';
 const NAMED_IN_ALERT=5;
@@ -27,7 +28,25 @@ const CHANNEL_FIX={
 const JOB_STATE={ready:['prêt','prêts'],submitting:['en cours d’envoi','en cours d’envoi'],scheduled:['programmé dans Buffer','programmés dans Buffer'],
   published:['publié','publiés'],to_verify:['à vérifier','à vérifier'],held:['retenu','retenus'],failed:['en échec','en échec']};
 const REASON={overdue:'échéance dépassée',max_attempts:'trop de tentatives',buffer_post_removed:'post retiré de Buffer',retired:'retiré du stock',
-  buffer_mutation_error:'refusé par Buffer',refused:'accès refusé par Buffer',rate_limited:'quota Buffer atteint',inconnu:'motif inconnu',autre:'motif non reconnu'};
+  buffer_mutation_error:'refusé par Buffer',refused:'accès refusé par Buffer',rate_limited:'quota Buffer atteint',inconnu:'motif inconnu',autre:'motif non reconnu',
+  suppression_en_attente:'suppression au prochain passage',trop_tard:'trop près de l’échéance pour être supprimé',reseau_different:'réseau différent dans Buffer',
+  envoi_en_cours:'en cours d’envoi',post_partage:'post aussi tenu par un autre post',envoi_a_verifier:'envoi incertain, à vérifier dans Buffer',
+  buffer_post_not_found:'Buffer dit ne plus le connaître, à vérifier dans Buffer',
+  buffer_delete_mutation_error:'suppression refusée par Buffer',buffer_delete_refused:'clé refusée par Buffer',buffer_delete_rate_limited:'quota Buffer atteint',
+  erreur_buffer:'en erreur dans Buffer',statut_inconnu:'statut inconnu dans Buffer',buffer_delete_network:'Buffer injoignable pendant la suppression',
+  buffer_delete_timeout:'Buffer trop lent à répondre pendant la suppression',buffer_delete_graphql_error:'réponse d’erreur de Buffer sans motif',
+  buffer_delete_unreadable:'réponse de Buffer illisible',buffer_delete_forbidden:'suppression interdite par Buffer',buffer_delete_unauthorized:'clé refusée par Buffer',
+  buffer_delete_unexpected:'erreur interne de Buffer',nouvel_essai_espace:'suppression refusée, nouvel essai dans l’heure',lecture_buffer_incomplete:'lecture Buffer incomplète',
+  withdraw_unexpected:'erreur du panneau pendant la suppression',buffer_unexpected_error:'erreur interne de Buffer',quota_epuise:'quota de l’API Buffer épuisé',
+  buffer_read_invalid:'réponse de Buffer illisible',buffer_channel_missing:'canal obligatoire absent de Buffer',timeout:'Buffer trop lent à répondre',network:'Buffer injoignable'};
+// A post of a withdrawn batch still in Buffer is normally deleted by the panel at its next engine pass. It is an
+// alert only when that will not happen by itself (a deletion failed or is impossible), or when its slot is near:
+// the report runs about once a day, so « near » is the three days in which the panel schedules posts.
+const RETIRED_PENDING='suppression_en_attente',RETIRED_NEAR_HOURS=72;
+// A quota reading older than this no longer says anything about the quota left.
+const QUOTA_STALE_HOURS=24;
+// The panel alerts below this share of a Buffer API quota window (QUOTA_ALERT_RATIO of the panel).
+export const QUOTA_ALERT_RATIO=0.1;
 // A batch withdrawn from the reviewed stock is held on purpose: listed in the report, never an alert.
 const WITHDRAWN='retired';
 
@@ -35,9 +54,41 @@ const PARIS=new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Paris',year:'numer
 const moment=value=>PARIS.format(new Date(value)).replace(' ',' à ')+', heure de Paris';
 const plural=(count,[one,many])=>`${count} ${count>1?many:one}`;
 const channelText=(channel,state)=>`${NETWORK[channel]} ${CHANNEL_STATE[state]}`;
-const reasonText=reason=>REASON[reason]??'code `'+reason+'`';
+// Any code the table does not know still gets a readable sentence; the code itself is only shown inside a code span.
+const reasonText=reason=>{
+  if(Object.hasOwn(REASON,reason))return REASON[reason];
+  const http=/^(?:buffer_delete_)?http_(\d{3})$/.exec(reason);
+  if(http)return http[1].startsWith('5')?`Buffer en panne (erreur HTTP ${http[1]})`:`requête refusée par Buffer (erreur HTTP ${http[1]})`;
+  return 'erreur technique non détaillée (code `'+reason+'`)';
+};
 const troubleText=post=>`\`${post.id}\` (${NETWORK[post.channel]}, ${JOB_STATE[post.state][0]}, ${reasonText(post.reason)}`;
 const riskText=post=>`\`${post.id}\` (${channelText(post.channel,post.channelState)}, échéance le ${moment(post.dueAt)})`;
+const retiredText=post=>`\`${post.id}\` (${NETWORK[post.channel]}, échéance le ${moment(post.dueAt)}, ${reasonText(post.reason)}${post.replacementWaiting?', son remplaçant attend':''})`;
+const retiredPublishedText=post=>`\`${post.id}\` (${NETWORK[post.channel]}, publié vers le ${moment(post.at)})`;
+const thousands=value=>String(value).replace(/\B(?=(\d{3})+(?!\d))/g,' ');
+const UNITS=[[86400,'jour','jours'],[3600,'heure','heures'],[60,'minute','minutes']];
+// The window is named from its length, never from the name Buffer gives it.
+const windowLength=seconds=>{
+  const unit=Number.isInteger(seconds)&&seconds>0?UNITS.find(([size])=>seconds%size===0):null;
+  if(!unit)return 'fenêtre de durée inconnue';
+  const count=seconds/unit[0];
+  return `fenêtre de ${count} ${count>1?unit[2]:unit[1]}`;
+};
+const ratioOf=w=>w.remaining===0?0:w.limit>0&&w.remaining!==null?w.remaining/w.limit:Infinity;
+/** The window closest to exhaustion, in words: « 270 requêtes restantes sur 3 000 (fenêtre de 30 jours) ». */
+const lowWindowText=quota=>{
+  const w=[...quota.windows].sort((a,b)=>ratioOf(a)-ratioOf(b))[0];
+  const reset=w?.resetAt?`, remise à zéro le ${moment(w.resetAt)}`:'';
+  const paused=quota.pausedUntil?`, panneau en pause jusqu’au ${moment(quota.pausedUntil)}`:'';
+  if(!w)return `quota épuisé${paused}`;
+  const left=w.remaining===0?'épuisé':`${thousands(w.remaining)} ${w.remaining>1?'requêtes restantes':'requête restante'}${w.limit?` sur ${thousands(w.limit)}`:''}`;
+  return `${left} (${windowLength(w.windowSeconds)}${reset})${paused}`;
+};
+const quotaLow=quota=>quota!==null&&quota!==undefined&&(quota.lowestRatio<QUOTA_ALERT_RATIO||Boolean(quota.pausedUntil));
+const quotaStale=(quota,now)=>!quota?.observedAt||now-Date.parse(quota.observedAt)>QUOTA_STALE_HOURS*HOUR;
+/** The last engine pass was cut short and no complete pass came after it. */
+const failing=({lastFailure,lastPassAt})=>Boolean(lastFailure)&&(!lastPassAt||Date.parse(lastFailure.at)>Date.parse(lastPassAt));
+const stalledText=post=>`\`${post.id}\` (${NETWORK[post.channel]}, échéance le ${moment(post.dueAt)})`;
 const named=(texts,total)=>{
   const shown=texts.slice(0,NAMED_IN_ALERT),rest=total-shown.length;
   if(!shown.length)return 'non détaillés ici, au-delà de la liste courte envoyée par le panneau';
@@ -45,7 +96,7 @@ const named=(texts,total)=>{
 };
 
 /** Lines of the « Publication » section; null when the panel could not be read or does not send the block yet. */
-export function publicationLines(publication){
+export function publicationLines(publication,now=Date.now()){
   if(!publication)return ['- État du moteur de publication indisponible (panneau privé injoignable ou pas encore à jour).'];
   const {channels,counts,problems,atRisk}=publication;
   const checked=publication.channelsCheckedAt?`relus par le panneau le ${moment(publication.channelsCheckedAt)}`:'date de leur dernière relecture non donnée par le panneau';
@@ -56,6 +107,16 @@ export function publicationLines(publication){
     `- Registre : ${register.length?register.join(', '):'vide'}.`];
   if(problems.length)lines.push(`- Retenus ou en échec depuis ${POST_TROUBLE_DAYS} jours (${publication.problemsCount}) : `+problems.map(post=>`${troubleText(post)}, ${post.at.slice(0,10)})`).join(' ; ')+'.');
   if(atRisk.length)lines.push(`- Prêts à moins de 24 h sur un canal qui ne reçoit rien (${publication.atRiskCount}) : `+atRisk.map(riskText).join(' ; ')+'.');
+  const retired=publication.retiredInBuffer??[],retiredPublished=publication.retiredPublished??[];
+  if(publication.retiredInBufferCount)lines.push(`- Lots retirés dont le post est encore dans Buffer (${publication.retiredInBufferCount}) : `+(retired.length?retired.map(retiredText).join(' ; '):'non détaillés')+'.');
+  if(publication.retiredPublishedCount)lines.push(`- Lots retirés publiés malgré tout depuis ${POST_TROUBLE_DAYS} jours (${publication.retiredPublishedCount}) : `+(retiredPublished.length?retiredPublished.map(retiredPublishedText).join(' ; '):'non détaillés')+'.');
+  const quota=publication.bufferQuota;
+  if(quota){
+    const when=quota.observedAt?`relevé le ${moment(quota.observedAt)}${quotaStale(quota,now)?`, relevé périmé (plus de ${QUOTA_STALE_HOURS} heures)`:''}`:'aucun relevé récent';
+    lines.push(`- Quota de l’API Buffer (${when}) : ${lowWindowText(quota)}${quotaLow(quota)?', moins de 10 % restants':''}.`);
+  }
+  if(failing(publication))lines.push(`- Dernier passage du moteur interrompu le ${moment(publication.lastFailure.at)} : ${reasonText(publication.lastFailure.code)}.`
+    +(publication.readyStalledCount?` Posts prêts dus dans les 3 jours (${publication.readyStalledCount}) : ${(publication.readyStalled??[]).map(stalledText).join(' ; ')||'non détaillés'}.`:''));
   return lines;
 }
 
@@ -99,6 +160,36 @@ function postAlerts({channels,problems,problemsCount,atRisk,atRiskCount},now){
   return alerts;
 }
 
+/** Withdrawn batches: a post that went out anyway, one still in Buffer that will not be deleted by itself or is near. */
+function retiredAlerts({retiredInBuffer=[],retiredInBufferCount=0,retiredPublished=[],retiredPublishedCount=0},now){
+  const alerts=[];
+  const published=Math.max(retiredPublished.length,retiredPublishedCount);
+  if(published){
+    alerts.push({code:'publication_retired_published',count:published,message:`${plural(published,['post d’un lot retiré a','posts de lots retirés ont'])} été ${published>1?'publiés':'publié'} malgré le retrait : ${named(retiredPublished.map(retiredPublishedText),published)}. Le retirer à la main du réseau s’il ne doit pas rester en ligne ; l’alerte tombe d’elle-même ${POST_TROUBLE_DAYS} jours après.`});
+  }
+  // Entries beyond the short list are unknown here: counted, never assumed harmless.
+  const stuck=retiredInBuffer.filter(post=>post.reason!==RETIRED_PENDING||Date.parse(post.dueAt)-now<RETIRED_NEAR_HOURS*HOUR);
+  const total=stuck.length+Math.max(0,retiredInBufferCount-retiredInBuffer.length);
+  if(total){
+    alerts.push({code:'publication_retired_in_buffer',count:total,message:`${plural(total,['post d’un lot retiré est','posts de lots retirés sont'])} encore ${total>1?'programmés':'programmé'} dans Buffer sans suppression assurée avant l’échéance : ${named(stuck.map(retiredText),total)}. ${total>1?'Les':'Le'} supprimer à la main dans Buffer (publish.buffer.com) avant l’échéance ; détail sur la page Publication du panneau.`});
+  }
+  return alerts;
+}
+
+/** Below a tenth of any Buffer API quota window, reading and scheduling are about to stop for every key of the account. */
+function quotaAlerts({bufferQuota}){
+  if(!quotaLow(bufferQuota))return [];
+  const exhausted=bufferQuota.lowestRatio===0||Boolean(bufferQuota.pausedUntil);
+  return [{code:'publication_buffer_quota',message:`Quota de l’API Buffer ${exhausted?'épuisé':'presque épuisé'} : ${lowWindowText(bufferQuota)}. ${exhausted?'Le panneau ne lit ni ne programme plus rien jusqu’à la remise à zéro.':'Une fois la fenêtre épuisée, le panneau ne lira ni ne programmera plus rien jusqu’à sa remise à zéro.'} Vérifier l’usage sur publish.buffer.com/settings/api ; toutes les clés du compte partagent ce quota.`}];
+}
+
+/** The engine passes are failing: the ready posts due in the next three days will miss their slot unless it resumes. */
+function stalledAlerts(publication){
+  const total=Math.max((publication.readyStalled??[]).length,publication.readyStalledCount??0);
+  if(!failing(publication)||!total)return [];
+  return [{code:'publication_posts_stalled',count:total,message:`Le dernier passage du moteur a été interrompu le ${moment(publication.lastFailure.at)} (${reasonText(publication.lastFailure.code)}) : ${plural(total,['post prêt dû','posts prêts dus'])} dans les 3 jours ne ${total>1?'seront':'sera'} pas ${total>1?'programmés':'programmé'} tant que les passages échouent : ${named((publication.readyStalled??[]).map(stalledText),total)}. Ouvrir la page Publication du panneau.`}];
+}
+
 /**
  * What the report remembers from one run to the next: since when the panel has stopped giving the engine
  * state. The panel has been deployed for long, so its silence is a fault, but one missed reading is not.
@@ -131,5 +222,7 @@ function readingAlerts(reading,now){
  */
 export function publicationAlerts(publication,now,reading=null){
   if(!publication)return readingAlerts(reading,now);
-  return [...channelAlerts(publication.channels),...engineAlerts(publication,now),...channelCheckAlerts(publication,now),...postAlerts(publication,now)];
+  // Withdrawn posts, the quota and stalled posts come before the posts held or at risk: they need a hand in Buffer soonest.
+  return [...channelAlerts(publication.channels),...engineAlerts(publication,now),...channelCheckAlerts(publication,now),
+    ...retiredAlerts(publication,now),...quotaAlerts(publication),...stalledAlerts(publication),...postAlerts(publication,now)];
 }
