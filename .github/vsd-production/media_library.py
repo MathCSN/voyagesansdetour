@@ -35,6 +35,11 @@ NOT_A_CLOSING = frozenset({
     "douro-pinhao-azulejos", "seville-alcazar", "amalfi-ravello", "amalfi-ferry", "cinque-train", "thailande-train-nuit",
     "costa-rica-monteverde", "japon-shinkansen", "japon-nara-cerfs", "laponie-husky", "tenerife-adeje"})
 
+# Files of Wikimedia Commons that are not the photograph as it was taken, never to be used whatever lists them: this
+# one is a landscape version (3074 × 2304) uploaded in 2024 by another account from a portrait original (1536 × 2048)
+# by Samuli Lintula; its margins were made up. Mathis's rule: real photographs only, no generated or extended image.
+NOT_A_PHOTOGRAPH_AS_TAKEN = frozenset({"File:Snowball pyramid at Santa Claus' Village Large.jpg"})
+
 # Photos that show numbers of their own (a display, a board of fares): a table is never laid over them, its figures
 # would be read among theirs. `train-alfa-220` is the display of an Alfa Pendular carriage: "220 km/h · 10:22 · 21 °C".
 OWN_FIGURES = frozenset({"train-alfa-220"})
@@ -213,7 +218,7 @@ class Photos:
 
     def get(self, candidate: dict) -> tuple[str, dict] | None:
         title = candidate["title"]
-        if title in self.refused:
+        if title in self.refused or title in NOT_A_PHOTOGRAPH_AS_TAKEN:
             return None
         if title in self.known:
             # A file fetched by an earlier search is used again only if its record still passes today's rules.

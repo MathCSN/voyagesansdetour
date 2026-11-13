@@ -1558,7 +1558,19 @@ class RealGuideTests(unittest.TestCase):
         similan = plan("thailande-phi-phi", "*15 octobre*", "la réouverture des îles Similan en 2026", "Les falaises et l’eau turquoise des îles Phi Phi.")
         kinkaku = plan("japon-shinkansen", "*500 ¥*", "le pavillon d’Or du Kinkaku-ji, ouvert tous les jours de 9 h à 17 h", "Le mont Fuji vu depuis le quai de la gare shinkansen de Shin-Fuji.")
         self.assertEqual(p.photos_of_another_place(post(similan, kinkaku), photos),
-                         ["plan 2 names similan over thailande-phi-phi (phi)", "plan 3 names kinkaku over japon-shinkansen (fuji, shin)"])
+                         ["plan 2 names similan over thailande-phi-phi (phi)", "plan 3 names kinkaku over japon-shinkansen (fuji)"])
+        # Review of the pull request: the place a fact is about is not one it only situates itself by (a photo of Kyoto
+        # for "le Tōdai-ji, à Nara, à 45 minutes de Kyoto"), a kind of place shared without its name proves nothing
+        # (two pavilions), and a title names what is seen, not where from ("View of … from Rockefeller Center").
+        photos = {**photos, "japon-kyoto-kiyomizu": {"commonsTitle": "File:North Gate of Kiyomizu-dera temple Kyoto Japan.jpg"},
+                  "thailande-wat-arun": {"commonsTitle": "File:Wat Arun.jpg"},
+                  "new-york-268e3ad7": {"commonsTitle": "File:View of Empire State Building from Rockefeller Center New York City.jpg", "categories": "Empire State Building|Views from Rockefeller Center"}}
+        wrong = [plan("japon-kyoto-kiyomizu", "*800 ¥*", "le Grand Bouddha du Tōdai-ji, à Nara, à 45 minutes de Kyoto par le train JR", "Des promeneuses en yukata devant la porte nord du Kiyomizu-dera, à Kyoto."),
+                 plan("thailande-wat-arun", "*500 ¥*", "le pavillon d’Or du Kinkaku-ji, ouvert tous les jours", "Le pavillon d’entrée de la salle d’ordination du Wat Arun, à Bangkok."),
+                 {"photo": "new-york-268e3ad7", "kicker": "x", "headline": ["*2 déc. 2026*"], "detail": "l’allumage du sapin du Rockefeller Center, arrivé le 7 novembre"}]
+        self.assertEqual([line.split(" names ")[0] for line in p.photos_of_another_place(post(*wrong), photos)], ["plan 2", "plan 3", "plan 4"])
+        self.assertEqual(reel_formats.place_names.subjects("le Grand Bouddha du Tōdai-ji, à Nara, à 45 minutes de Kyoto par le train JR"), ["todai", "nara"])
+        self.assertEqual(reel_formats.place_names.subjects("la fenêtre où Bangkok, Chiang Mai et la mer d’Andaman sont tous au sec"), ["bangkok", "chiang", "andaman"])
         fine = [plan("thailande-phi-phi", "*1er août*", "Maya Bay, à Phi Phi, ferme jusqu’au 30 septembre", "Les falaises et l’eau turquoise des îles Phi Phi."),
                 plan("japon-shinkansen", "*2 h 18*", "Tokyo → Kyoto en Nozomi, 13 960 ¥", "Le mont Fuji vu depuis le quai de la gare shinkansen de Shin-Fuji."),
                 plan("thailande-koh-samui", "*445 mm*", "de pluie à Koh Samui en novembre", "Une plage de sable blanc à Koh Samui.")]

@@ -437,13 +437,20 @@ class Media:
         is about: "le Grand Bouddha du Tōdai-ji, à Nara, à 45 minutes de Kyoto" goes over Nara before Kyoto. A place
         the fact names without a capital ("les tombeaux saadiens") is named by the photo that does (four letters at
         least: "Chiang Mai" is not named by "la mi-mai")."""
-        said = {word for word in place_names.words(text) if len(word) >= 4}
+        # (Three letters at least to tie a photo to a place: "Tràng An" and "Hội An" share "An".)
+        about = [place for place in place_names.subjects(text, self.country) or places if len(place) >= 3]
+        said = {word for word in place_names.words(text) if len(word) >= 4} - set(places)
         echoed = lambda ph: bool(place_names.proper(ph[2], self.country) & said)
-        naming = lambda ph: 2 * sum(len(places) - rank for rank, place in enumerate(places) if place in self.described(ph)) + echoed(ph)
+        naming = lambda ph: 2 * sum(len(about) - rank for rank, place in enumerate(about) if place in self.described(ph)) + echoed(ph)
         # A photo names the place of a fact when it names the first place the fact names, or one of its places and no
         # other, or when the fact says the place the photo names. The torii of Miyajima, filed under "hiroshima", is
         # not the photo of "le musée du Mémorial pour la paix d'Hiroshima".
-        fits = lambda ph: places[0] in self.described(ph) or not self.elsewhere(ph, set(places)) or echoed(ph)
+        # A place the fact only names to situate itself ("à 45 minutes de Kyoto") makes no photo its photo.
+        # The first place is enough wherever the photo names it; another one only when the photo itself says so, in
+        # its caption or its title: the torii of Miyajima, filed "hiroshima", is not "le musée du Mémorial pour la paix
+        # d'Hiroshima".
+        told = lambda ph: place_names.words(ph[2] + " " + str(ph[1].get("commonsTitle", "")))
+        fits = lambda ph: about[:1] and about[0] in self.described(ph) or bool(set(about) & told(ph)) or echoed(ph)
         named = [ph for ph in pool if naming(ph) and fits(ph)]
         if not named:
             return None

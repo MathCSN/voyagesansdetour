@@ -453,16 +453,31 @@ def another_place(scene, photos, everywhere) -> str | None:
     if scene.get("layout") == "table" or "photo" not in scene:
         return None
     said = draw.plain(" ".join(scene.get("headline") or []) + " " + str(scene.get("detail") or ""))
-    places = place_names.proper(said, everywhere)
+    places = place_names.named(said, everywhere)
     record = photos.get(scene["photo"]) or {}
-    title = str(record.get("commonsTitle", "")).removeprefix("File:").rsplit(".", 1)[0]
-    caption = str(scene.get("alt") or "")
-    shown = place_names.words(" ".join([scene["photo"], caption, title, str(record.get("categories", ""))]))
-    journey = place_names.journey(said) and place_names.ride(shown, str(scene.get("detail") or said))
-    if not places or places & shown or journey or place_names.shows(said, shown):
+    # What the photo shows: its caption or, without one, its Commons title, both without where the view is taken from;
+    # its identifier; its categories, those of a viewpoint aside ("Views from Rockefeller Center").
+    told = place_names.subject(str(scene.get("alt") or "") or str(record.get("commonsTitle", "")).removeprefix("File:").rsplit(".", 1)[0])
+    filed = " ".join(category for category in str(record.get("categories", "")).split("|") if not place_names.VIEWPOINT.search(category))
+    shown = place_names.words(" ".join([scene["photo"], told, filed]))
+    if not places or (place_names.journey(said) and place_names.ride(shown, str(scene.get("detail") or said))) or place_names.shows(said, shown, places):
         return None
-    others = place_names.proper(caption or title, everywhere, sentence=bool(caption)) - place_names.words(said)
-    return f"names {', '.join(sorted(places))} over {scene['photo']} ({', '.join(sorted(others))})" if others else None
+    others = place_names.proper(told, everywhere, sentence=bool(scene.get("alt"))) - place_names.words(said)
+    # The places a fact is about are the first it names and those it lists with it: a photo of Kyoto is not a photo of
+    # "le Grand Bouddha du Tōdai-ji, à Nara, à 45 minutes de Kyoto". The name written above the plan counts too
+    # ("Choisissez Porto" over the Ribeira of Porto).
+    above = str(scene.get("kicker") or "")
+    # …unless that name is only the destination of the whole post, which every photo of it shares.
+    labelled = set() if place_names.words(above) <= everywhere else place_names.proper(above, sentence=True)
+    about = set(place_names.subjects(said, everywhere) or places) | labelled
+    # (Three letters at least to tie a photo to a place: "Tràng An" and "Hội An" share "An".)
+    # The first place counts wherever the record names it; another one only in the caption, the title or a category,
+    # not in the identifier the photo is filed under ("japon-hiroshima-miyajima" is a photo of Miyajima).
+    first = (place_names.subjects(said, everywhere) or places)[:1]
+    said_by_the_photo = place_names.words(told + " " + filed)
+    if set(first) & shown or {place for place in about if len(place) >= 3} & said_by_the_photo or not others:
+        return None
+    return f"names {', '.join(places)} over {scene['photo']} ({', '.join(sorted(others))})"
 
 
 def contract_of(scenario):
