@@ -123,22 +123,28 @@ def spans(text: str, everywhere: frozenset | set = frozenset(), sentence: bool =
     found, carrier, end = [], False, -1
     for match in CAPITALISED.finditer(text):
         first = sentence and not text[:match.start()].strip("«“\" ")
+        adjacent = end >= 0 and text[end:match.start()] == " "
+        end = match.end()
         if first and not CAPITALISED.match(text[match.end():].lstrip(" ")) and not set(folded(match[0])) & set(known):
-            end = match.end()
             continue
         before = folded(text[:match.start()])[-1:]
-        adjacent = end >= 0 and text[end:match.start()] == " "
         carrier = (carrier and adjacent) or bool(before and before[0] in CARRIED_BY and text[match.start() - 1:match.start()] == " ")
-        end = match.end()
         if len(match[0]) > 1 and match[0].isupper():
             carrier = False   # the acronym is the carrier's whole name: "le bus MEPE Puerto Viejo – San José"
-            continue
-        if carrier:
-            continue
-        found += [(piece, match.start(), match.end()) for piece in folded(match[0])
-                  if len(piece) >= 2 and (piece not in GENERIC or (piece in MONTHS and adjacent and not first)) and piece not in LEADING
-                  and piece not in OPENERS and piece not in TRANSPORT and piece not in SHORT and piece not in NOT_PLACES and piece not in everywhere]
+        elif not carrier:
+            found += [(piece, match.start(), match.end()) for piece in folded(match[0]) if names_a_place(piece, everywhere, adjacent and not first)]
     return found
+
+
+UNNAMED = GENERIC | LEADING | OPENERS | TRANSPORT | SHORT | NOT_PLACES
+
+
+def names_a_place(piece: str, everywhere: frozenset | set, after_a_name: bool) -> bool:
+    """One word of a capitalised name: two letters and more, no kind of place, no article, no means of transport, no
+    name that is not a place, not the destination itself; a month only right after another capitalised word."""
+    if len(piece) < 2 or piece in everywhere:
+        return False
+    return piece not in UNNAMED or (piece in MONTHS and after_a_name)
 
 
 def named(text: str, everywhere: frozenset | set = frozenset(), sentence: bool = False, known: frozenset | set = frozenset()) -> list[str]:

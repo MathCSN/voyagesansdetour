@@ -1659,13 +1659,15 @@ class RealGuideTests(unittest.TestCase):
         self.assertEqual(some().left_for("Ryoan-ji : 500 ¥ le jardin de pierres"), [])
         self.assertEqual(some().left_for("de pluie en septembre au sud"), [])
         self.assertTrue(some().left_for("le budget confort pour deux semaines"))
+        stock_only = some()
         with self.assertRaises(reel_formats.Held):
-            some().photo("350 mm de pluie à Phuket en septembre")
+            stock_only.photo("350 mm de pluie à Phuket en septembre")
         self.assertEqual(some().moving("le budget confort pour deux semaines")[0], "photo")
         clips = lambda: reel_formats.Media(list(stock), [("japon-clip", {})], everywhere="Japon Japon")
         self.assertEqual(clips().moving("le budget confort pour deux semaines")[0], "clip")
+        with_clip = clips()
         with self.assertRaises(reel_formats.Held):   # a clip shows the destination, nobody knows which place of it
-            clips().moving("350 mm de pluie à Phuket en septembre")
+            with_clip.moving("350 mm de pluie à Phuket en septembre")
         self.assertEqual(names.proper("Visiteurs dans un jardin zen.", sentence=True), set())
         self.assertEqual(names.proper("Bus 500 jusqu’à la mer, billet CP en ligne"), set())
         # What a precise place is: a proper noun, not a kind of place, an acronym or the name of a carrier.

@@ -476,22 +476,25 @@ def another_place(scene, photos, everywhere) -> str | None:
         return None
     above = str(scene.get("kicker") or "")
     if places:
-        # The first place a fact names counts wherever the record names it; another one it is about, or the one
-        # written above the plan ("Choisissez Porto"), only in the caption or the title, not in the identifier the
-        # photo is filed under ("japon-hiroshima-miyajima" is a photo of Miyajima). A place the fact says without a
-        # capital is named by the photo that does ("les tombeaux saadiens").
-        first = {place for place in place_names.first_name(said, everywhere) if len(place) >= 3} or set(places[:1])
-        labelled = set() if place_names.words(above) <= everywhere else place_names.proper(above, sentence=True)
-        about = {place for place in set(place_names.subjects(said, everywhere) or places) | labelled if len(place) >= 3}
-        echoed = place_names.proper(caption, everywhere, sentence=True) & ({word for word in place_names.words(said) if len(word) >= 4} - set(places))
-        if first & shown or about & place_names.pictured("", caption, title, everywhere) or echoed:
-            return None
-        return f"names {', '.join(places)} over {photo} ({', '.join(sorted(recorded)) or 'no place in its record'})"
+        return None if names_it(said, above, places, photo, caption, title, everywhere) else \
+            f"names {', '.join(places)} over {photo} ({', '.join(sorted(recorded)) or 'no place in its record'})"
     region = place_names.region(said)
     # The name of a section stands above a plan only over that section's own photo: it says which part this photo is of.
     if region and recorded and not region & place_names.words(caption + " " + above):
         return f"names the {', '.join(sorted(region))} over {photo} ({', '.join(sorted(recorded))})"
     return None
+
+
+def names_it(said, above, places, photo, caption, title, everywhere) -> bool:
+    """The record of a photo names the place a plan is about. The first place a fact names counts wherever the record
+    names it; another one it is about, or the one written above the plan ("Choisissez Porto"), only in the caption or
+    the title, not in the identifier the photo is filed under ("japon-hiroshima-miyajima" is a photo of Miyajima). A
+    place the fact says without a capital is named by the photo that does ("les tombeaux saadiens")."""
+    first = {place for place in place_names.first_name(said, everywhere) if len(place) >= 3} or set(places[:1])
+    labelled = set() if place_names.words(above) <= everywhere else place_names.proper(above, sentence=True)
+    about = {place for place in set(place_names.subjects(said, everywhere) or places) | labelled if len(place) >= 3}
+    echoed = place_names.proper(caption, everywhere, sentence=True) & ({word for word in place_names.words(said) if len(word) >= 4} - set(places))
+    return bool(first & place_names.pictured(photo, caption, title, everywhere) or about & place_names.pictured("", caption, title, everywhere) or echoed)
 
 
 def contract_of(scenario):

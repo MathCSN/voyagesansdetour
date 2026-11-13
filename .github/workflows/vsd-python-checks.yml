@@ -40,7 +40,8 @@ jobs:
             sudo apt-get update -qq
             sudo apt-get install --yes --no-install-recommends ffmpeg
           fi
-          python -m pip install --disable-pip-version-check --only-binary :all: -r requirements.txt
+          # The wheel is checked against its published fingerprint (requirements-checks.txt), not only its version.
+          python -m pip install --disable-pip-version-check --only-binary :all: --require-hashes -r requirements-checks.txt
       # The very command of vsd-render-content.yml: if it fails here, the daily run would stop before producing anything.
       - name: Production guards, as the daily render runs them
         working-directory: .github/vsd-production

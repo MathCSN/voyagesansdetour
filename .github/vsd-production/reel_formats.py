@@ -453,7 +453,7 @@ class Media:
             return None
         return own if own in rides else max(rides, key=lambda ph: (len(places & self.described(ph)), self.shared(ph, target), self.shared(ph, wider)))
 
-    def of_the_region(self, text: str, region: set[str], pool: list, own: tuple | None, section: dict | None) -> tuple | None:
+    def of_the_region(self, region: set[str], pool: list, own: tuple | None, section: dict | None) -> tuple | None:
         """The photo of the part of the destination a fact is about ("222 h de soleil au sud" went over Garachico, on
         the north coast): the photo of its own section when that section is about that part ("Le sud : Costa Adeje"),
         else a photo whose caption says that part, else one that names no precise place. None otherwise."""
@@ -526,7 +526,7 @@ class Media:
             return self.of_the_place(text, places, pool, own, target, wider)
         region = place_names.region(text)
         if region:
-            return self.of_the_region(text, region, pool, own, section)
+            return self.of_the_region(region, pool, own, section)
         beside = self.beside(own, text, target) if own else set()
         if beside and not any(beside < words_shared(ph, target, self.family) for ph in pool):
             return own
@@ -835,6 +835,21 @@ def emblematic(photos: list) -> tuple[str, ...]:
     return tuple(photo[0] for photo in photos if photo[1].get("emblematic") is True)
 
 
+def marked(scenes: list[dict], photos: list) -> None:
+    """Each plan of a reel is given what its photo's record says: its caption (production.py reads it to refuse a photo
+    of another place) and where its subject is. A photo reviewed by hand may say so (reviewed.json, "focus"), and may
+    give another point for this narrow frame ("focusVertical": the doe of Nara, whose head a point good for a 4:5
+    slide left out of the frame for half the plan)."""
+    records, captions = {photo[0]: photo[1] for photo in photos}, {photo[0]: photo[2] for photo in photos if photo[2]}
+    for scene in scenes:
+        if scene.get("photo") in captions:
+            scene["alt"] = captions[scene["photo"]]
+        record = records.get(scene.get("photo"), {})
+        focus = record.get("focusVertical") or record.get("focus")
+        if isinstance(focus, list) and len(focus) == 2:
+            scene["focus"] = focus
+
+
 def build(fmt: str, article: dict, facts: list[dict], photos: list, clips: list, opening: str, place: str, kicker: str,
           tag: str, title_lines: list[str], page: str) -> tuple[list[dict], list[str]]:
     """The plans of one reel and the useful lines of its caption. Raises Held when the guide cannot fill the format."""
@@ -857,18 +872,7 @@ def build(fmt: str, article: dict, facts: list[dict], photos: list, clips: list,
         raise Held("fewer_than_four_facts")
     # The button is written in the scenario: a reel sealed before 12/11/2026 has none and keeps the card it was given.
     closing = plan("cta", brief.media.closing(), "Le guide complet", title_lines, CTA_SECONDS, note=SAVE_NOTE, button=p.MOTION_BUTTON)
-    # A photo reviewed by hand may say where its subject is (reviewed.json, "focus"): the vertical frame is cut around it.
-    records, captions = {photo[0]: photo[1] for photo in photos}, {photo[0]: photo[2] for photo in photos if photo[2]}
-    for scene in [hook] + body + [closing]:
-        # The caption of each photo goes with its plan: production.py reads it to refuse a photo of another place.
-        if scene.get("photo") in captions:
-            scene["alt"] = captions[scene["photo"]]
-        # …and may give another point for this narrow frame ("focusVertical": the doe of Nara, whose head a point good
-        # for a 4:5 slide left out of the frame for half the plan).
-        record = records.get(scene.get("photo"), {})
-        focus = record.get("focusVertical") or record.get("focus")
-        if isinstance(focus, list) and len(focus) == 2:
-            scene["focus"] = focus
+    marked([hook] + body + [closing], photos)
     # Three to five useful caption lines: the figures left unshown complete a short list.
     lines += [caption_line(f) for f in facts if caption_line(f) not in lines]
     lines = [line for line in lines if checked(line, CAPTION_LINE)][:5]
