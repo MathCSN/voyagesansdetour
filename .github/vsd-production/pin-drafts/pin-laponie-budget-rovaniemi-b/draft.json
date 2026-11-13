@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-laponie-budget-rovaniemi-b",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Combien coûte un voyage en Laponie ? Le budget de Rovaniemi 2026-2027, poste par poste",
+  "pinTitle": "Laponie : le budget : combien ça coûte, poste par poste",
+  "variant": "b",
+  "targetUrl": "https://voyagesansdetour.fr/finlande/laponie-budget-rovaniemi/",
+  "articleSha256": "0b543df4472cb0da25dde806d8878fde9fb27e5b74b0aad7ea81ef575f3db0bc",
+  "imageSha256": "6eebc8fb73193f5522f32e65f06264b31d6f536a1356717c5eecda40bfde1343",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "fdbf04a40b0bd104c5f381a47a9aa8aa30b6df590685a48e3ce4be0e6c3493b2",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "laponie-husky",
+    "author": "Letizia Barbi",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Sled_dogs_in_Lapland,_Finland.jpg",
+    "license": "CC BY-SA 2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0"
+  }
+}

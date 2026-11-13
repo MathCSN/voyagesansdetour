@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-japon-itineraire-2-semaines-b",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Japon en 2 semaines : l’itinéraire en train de Tokyo à Kyoto, Nara et Hiroshima (prix 2026)",
+  "pinTitle": "Le Japon en 2 semaines : itinéraire jour par jour, prix et conseils",
+  "variant": "b",
+  "targetUrl": "https://voyagesansdetour.fr/japon/japon-itineraire-2-semaines/",
+  "articleSha256": "e476f4f7964258b18c6de3e0231ccd622b3c5a11cbf7063dad32977f1ec62dbb",
+  "imageSha256": "1348f6b3281098bad2566a03e66b022c00b7d69f41aa252d3558d991f7abe8d9",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "fdbf04a40b0bd104c5f381a47a9aa8aa30b6df590685a48e3ce4be0e6c3493b2",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "japon-shinkansen",
+    "author": "Dr.yellow",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Shin-Fuji_Station_Shinkansen_platform_view_of_Mt.Fuji.jpg",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  }
+}

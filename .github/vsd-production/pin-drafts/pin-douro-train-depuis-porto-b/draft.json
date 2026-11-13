@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-douro-train-depuis-porto-b",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "La vallée du Douro en train depuis Porto : Pinhão, rabelo et quintas sans voiture",
+  "pinTitle": "Le Douro en train : l’excursion à la journée, pas à pas",
+  "variant": "b",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/douro-train-depuis-porto/",
+  "articleSha256": "b3ef4e88d55e1c310de0b5ce250c58095ada53ade9ac2651522409b3a6c1edaa",
+  "imageSha256": "8539c54330ea7fa3f375020d35ea086bf230e948b97bed895ad16382e4b35e0e",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "fdbf04a40b0bd104c5f381a47a9aa8aa30b6df590685a48e3ce4be0e6c3493b2",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "douro-train",
+    "author": "Nelso Silva",
+    "source_page": "https://commons.wikimedia.org/wiki/File:CP_1415_(34804306396).jpg",
+    "license": "CC BY-SA 2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0/"
+  }
+}
