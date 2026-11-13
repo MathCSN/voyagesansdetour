@@ -117,6 +117,21 @@ export function unreadKinds({seo,writer}){
   return kinds;
 }
 
+/** Number GitHub gives this run of the workflow (`github.run_number`, passed by the workflow); null elsewhere. */
+export function runNumber(env){
+  const value=env.VSD_REPORT_RUN;
+  return typeof value==='string'&&/^[1-9]\d{0,8}$/.test(value)?Number(value):null;
+}
+
+/**
+ * A memory kept without a run number never follows another, so the alert on a mute panel could not be raised.
+ * Said as a GitHub warning in the log of the run, instead of failing in silence. null when all is in order.
+ */
+export function memoryWarning(env){
+  if(!env.VSD_REPORT_STATE||runNumber(env)!==null)return null;
+  return '::warning::Mémoire du rapport sans numéro de passage (VSD_REPORT_RUN absent ou illisible) : l’alerte « état du moteur de publication illisible » ne peut pas se lever.';
+}
+
 export function renderReport({now,social,guides,pins,runs,alerts,waiting,seo=null,sources=[]}){
   const line=(items,format,empty)=>items.length?items.map(format).join('\n'):empty;
   return [`# Voyage Sans Détour — rapport du ${day(now)}`,
@@ -175,9 +190,10 @@ export async function main({root=process.cwd(),env=process.env,now=Date.now()}={
   const writer=env.VSD_REPORT_LAST_ADMISSION?writerActivity(allRuns,await readFile(env.VSD_REPORT_LAST_ADMISSION,'utf8').catch(()=>'unknown'),now):null;
   // Written by seo-status.mjs just before; absent when the private panel could not be read.
   const seo=env.VSD_REPORT_SEO?await readJson(env.VSD_REPORT_SEO).catch(()=>null):null;
-  // Kept by the workflow from one run to the next: a single missed reading of the panel is not an alert.
+  // Kept by the workflow from one run to the next, with the number of the run: a single missed reading of
+  // the panel is not an alert, two runs in a row are.
   const statePath=env.VSD_REPORT_STATE;
-  const reading=statePath?readingState((await readJson(statePath).catch(()=>null))?.publicationReading,seo,now):null;
+  const reading=statePath?readingState((await readJson(statePath).catch(()=>null))?.publicationReading,seo,now,runNumber(env)):null;
   const alerts=computeAlerts({social:queue,guides,runs,seo,articles,writer,reading,now});
   const waiting=(await readJson(join(root,'.github/vsd-control/attente-mathis.json'))).items;
   const report=renderReport({now,social:queue,guides,pins:await fetchPinterest(now-7*DAY),runs,alerts,waiting,seo,sources:sourceFreshness(articles,now)});
@@ -189,10 +205,14 @@ export async function main({root=process.cwd(),env=process.env,now=Date.now()}={
   await writeFile(join(out,'vsd-report.md'),report);
   await writeFile(join(out,'vsd-alerts.json'),JSON.stringify(alerts,null,2)+'\n');
   await writeFile(join(out,'vsd-alerts-unread.json'),JSON.stringify(unreadKinds({seo,writer}))+'\n');
-  return {alerts:alerts.length};
+  return {alerts:alerts.length,warning:memoryWarning(env)};
 }
 
 if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
-  try{const result=await main();console.log(`Rapport écrit ; ${result.alerts} alerte(s).`);}
+  try{
+    const result=await main();
+    if(result.warning)console.log(result.warning);
+    console.log(`Rapport écrit ; ${result.alerts} alerte(s).`);
+  }
   catch(error){console.error('Rapport non produit : '+(error?.code??error?.name??'erreur'));process.exitCode=1;}
 }
