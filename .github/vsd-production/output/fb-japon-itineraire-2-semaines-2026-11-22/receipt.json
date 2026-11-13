@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 1,
+  "contentId": "fb-japon-itineraire-2-semaines-2026-11-22",
+  "status": "rendered_not_published",
+  "fingerprint": "e14f6ee26a5f627ab155a0f7b6ad2c319f7ddab64f65a9ccfc630992cfbe4f05",
+  "createdAt": "2026-11-13T00:00:38.966799Z",
+  "renderFinishedAt": "2026-11-13T00:00:40.475950Z",
+  "rendererContractVersion": 3,
+  "rendererSha256": "53771f8977e744f7e898c21c13d02cd1f80ec9d9fcff06e28a9c095db57efd0a",
+  "drawingSha256": "b78990f497d03baf754e3b2b68a795a5e9d3b91a0b6a2f8dad2ebcd7fec2907c",
+  "motionSha256": "97551f9095a5a66596521a599d328df19f4e28fbcfcf716ae1ee980ebdf47448",
+  "format": null,
+  "kind": "carousel",
+  "channel": "facebook",
+  "publishAt": "2026-11-22T17:00:00Z",
+  "reviewValidUntil": "2026-12-13T00:00:36Z",
+  "sourceCheckedOn": "2026-11-13",
+  "targetUrl": "https://voyagesansdetour.fr/japon/japon-itineraire-2-semaines/",
+  "voice": null,
+  "presenter": null,
+  "sourceUrls": [
+    "https://voyagesansdetour.fr/japon/japon-itineraire-2-semaines/"
+  ],
+  "photos": {
+    "japon-fuji-chureito": {
+      "licence": "CC BY 4.0",
+      "author": "Stjepko Krehula",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Chureito_Pagoda_and_Mount_Fuji_2023-03-07.jpg"
+    },
+    "japon-kyoto-kiyomizu": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Basile Morin",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Four_ladies_wearing_a_yukata_in_front_of_the_North_Gate_of_Kiyomizu-dera_temple_Kyoto_Japan.jpg"
+    },
+    "japon-hiroshima-miyajima": {
+      "licence": "CC BY 4.0",
+      "author": "Jakub Hałun",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Itsukushima-jinja_torii_at_sunset,_Miyajima,_Japan,_20240816_1812_4144.jpg"
+    },
+    "japon-shinkansen": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Dr.yellow",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Shin-Fuji_Station_Shinkansen_platform_view_of_Mt.Fuji.jpg"
+    },
+    "japon-nara-cerfs": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Daniel Lu ( User:dllu )",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Sika_deer_doe_and_fawn_Nara_2026_dllu.jpg"
+    },
+    "japon-tokyo-shibuya": {
+      "licence": "CC BY 4.0",
+      "author": "David Kernan",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Shibuya_Crossing,_Aerial.jpg"
+    }
+  },
+  "clips": {},
+  "video": null,
+  "files": [
+    {
+      "file": "apercu.jpg",
+      "sha256": "075b8feff571d765193190b56138d4a1d73619b7ea4b93fbbc13a27150766d08",
+      "bytes": 193362
+    },
+    {
+      "file": "credits.txt",
+      "sha256": "897addfc7898827671bd88395849150b3f49347a17fed716ce0bf48e8c12b2ba",
+      "bytes": 2761
+    },
+    {
+      "file": "dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "file": "legende.txt",
+      "sha256": "19fa57ebb2917c73e3a94a5c9ba770efbfb7a85a0fa368c5631e29e78e212298",
+      "bytes": 848
+    },
+    {
+      "file": "notosans-OFL.txt",
+      "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a",
+      "bytes": 4396
+    },
+    {
+      "file": "playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    },
+    {
+      "file": "scenario.json",
+      "sha256": "5b1848d5b459a0d4bba392346274d8044ae5957e6407ccaab0ff571412c5d68b",
+      "bytes": 7199
+    },
+    {
+      "file": "scene-01.jpg",
+      "sha256": "5a4c4a72da06eb41b3f56ef39b42ab543845823530c3e1e1f30e75a8c185eb92",
+      "bytes": 258730
+    },
+    {
+      "file": "scene-02.jpg",
+      "sha256": "73559ae3803002dff75e4e0d95f72b564e8b49d12301d649fb87cccd5a3aa579",
+      "bytes": 397423
+    },
+    {
+      "file": "scene-03.jpg",
+      "sha256": "b1329abb051d367e503dad93e1a13be22ec6b90d3cdbca35b30d8b7a8e794263",
+      "bytes": 273326
+    },
+    {
+      "file": "scene-04.jpg",
+      "sha256": "7d18ac2971945bc00e780e5e95d2cee4ca07998eddb2f89d3f4c57f0843af67a",
+      "bytes": 194684
+    },
+    {
+      "file": "scene-05.jpg",
+      "sha256": "d8890fe8fe601568eb5784e48a3dba29a3c2d3ef926f4faf713279d7596c8a25",
+      "bytes": 203576
+    },
+    {
+      "file": "scene-06.jpg",
+      "sha256": "3adeb67e587f89d42ce598d9b5d9ebe28d24da1e5bf9950c979c2c141b156b56",
+      "bytes": 481838
+    }
+  ],
+  "runtime": {
+    "wallSeconds": 1.308,
+    "encoderThreads": 2,
+    "pillowVersion": "11.3.0",
+    "ffmpegVersion": null
+  },
+  "publication": {
+    "uploaded": false,
+    "scheduled": false,
+    "published": false,
+    "readyForAutomaticImport": false
+  },
+  "cost": {
+    "newPaidService": false,
+    "providerCalls": 0,
+    "monetarySpendEur": 0
+  }
+}

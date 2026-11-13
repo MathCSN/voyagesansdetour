@@ -360,6 +360,24 @@
       "itemIds": [
         "vsd-production:tiktok:ig-lisbonne-porto-train-2026-11-18:photo-v1"
       ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/fb-japon-itineraire-2-semaines-2026-11-22-v1.json",
+      "fileSha256": "9c9687c8f4729559de38477a4399d53a2e8b9d4df8984e8a0165b76d1cb22c87",
+      "batchId": "fb-japon-itineraire-2-semaines-2026-11-22-v1",
+      "batchSha256": "2d09f463b3c7ac98eeec5a04413f54bdddb4ebdd3b8e7a17687b7b33d9e2134e",
+      "itemIds": [
+        "vsd-production:facebook:fb-japon-itineraire-2-semaines-2026-11-22:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/fb-thailande-quand-partir-2026-11-19-v1.json",
+      "fileSha256": "60270e561a878e831fd95796b4213eda12f1aee6d2b54dbecf5a9cca0bebd5d2",
+      "batchId": "fb-thailande-quand-partir-2026-11-19-v1",
+      "batchSha256": "40f23ead651982d133b2096d0d4b91abb384997c4fd5c3de32652f18a42947a8",
+      "itemIds": [
+        "vsd-production:facebook:fb-thailande-quand-partir-2026-11-19:photo-v1"
+      ]
     }
   ],
   "retirements": [

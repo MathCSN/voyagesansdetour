@@ -156,6 +156,18 @@
       "notBefore": "2026-11-12T23:12:31Z",
       "file": "scenarios/ig-lisbonne-porto-train-2026-11-18.json",
       "sha256": "abf46fb42498b97ca849f67f7d98e908b2c9b4ad1a47709f005ccabc347b84f5"
+    },
+    {
+      "contentId": "fb-japon-itineraire-2-semaines-2026-11-22",
+      "notBefore": "2026-11-13T00:00:36Z",
+      "file": "scenarios/fb-japon-itineraire-2-semaines-2026-11-22.json",
+      "sha256": "5b1848d5b459a0d4bba392346274d8044ae5957e6407ccaab0ff571412c5d68b"
+    },
+    {
+      "contentId": "fb-thailande-quand-partir-2026-11-19",
+      "notBefore": "2026-11-13T00:00:36Z",
+      "file": "scenarios/fb-thailande-quand-partir-2026-11-19.json",
+      "sha256": "10a7f64eb19309c0cf6d1d7b8b41374ac300d83f8035ec754b7af5fb4762bf1a"
     }
   ]
 }
