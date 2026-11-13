@@ -448,34 +448,44 @@ def photos_of_another_place(scenario, photos) -> list[str]:
     return [f"plan {number} {told}" for number, told in found if told]
 
 
+def record_of(scene, photos) -> tuple[str, str]:
+    """What the record of a plan's photo says it shows: its caption or, without one, its Commons title, both without
+    where the view is taken from; and its categories, those of a viewpoint aside ("Views from Rockefeller Center")."""
+    record = photos.get(scene["photo"]) or {}
+    title = str(record.get("commonsTitle", "")).removeprefix("File:").rsplit(".", 1)[0]
+    told = place_names.subject(str(scene.get("alt") or "") or title)
+    filed = " ".join(category for category in str(record.get("categories", "")).split("|") if not place_names.VIEWPOINT.search(category))
+    return told, filed
+
+
+def about_of(scene, said, places, everywhere) -> tuple[list[str], set[str]]:
+    """The first place a plan is about, and all of them. The places a fact is about are the first it names and those
+    it lists with it: a photo of Kyoto is not a photo of "le Grand Bouddha du Tōdai-ji, à Nara, à 45 minutes de
+    Kyoto". The name written above the plan counts too ("Choisissez Porto" over the Ribeira of Porto), unless it is
+    only the destination of the whole post, which every photo of it shares. Three letters at least tie a photo to a
+    place: "Tràng An" and "Hội An" share "An"."""
+    subjects = place_names.subjects(said, everywhere) or places
+    above = str(scene.get("kicker") or "")
+    labelled = set() if place_names.words(above) <= everywhere else place_names.proper(above, sentence=True)
+    return subjects[:1], {place for place in set(subjects) | labelled if len(place) >= 3}
+
+
 def another_place(scene, photos, everywhere) -> str | None:
     """What one plan names and what its photo names instead, None when the photo is a photo of what the plan says."""
     if scene.get("layout") == "table" or "photo" not in scene:
         return None
     said = draw.plain(" ".join(scene.get("headline") or []) + " " + str(scene.get("detail") or ""))
     places = place_names.named(said, everywhere)
-    record = photos.get(scene["photo"]) or {}
-    # What the photo shows: its caption or, without one, its Commons title, both without where the view is taken from;
-    # its identifier; its categories, those of a viewpoint aside ("Views from Rockefeller Center").
-    told = place_names.subject(str(scene.get("alt") or "") or str(record.get("commonsTitle", "")).removeprefix("File:").rsplit(".", 1)[0])
-    filed = " ".join(category for category in str(record.get("categories", "")).split("|") if not place_names.VIEWPOINT.search(category))
+    told, filed = record_of(scene, photos)
     shown = place_names.words(" ".join([scene["photo"], told, filed]))
-    if not places or (place_names.journey(said) and place_names.ride(shown, str(scene.get("detail") or said))) or place_names.shows(said, shown, places):
+    journey = place_names.journey(said) and place_names.ride(shown, str(scene.get("detail") or said))
+    if not places or journey or place_names.shows(said, shown, places):
         return None
     others = place_names.proper(told, everywhere, sentence=bool(scene.get("alt"))) - place_names.words(said)
-    # The places a fact is about are the first it names and those it lists with it: a photo of Kyoto is not a photo of
-    # "le Grand Bouddha du Tōdai-ji, à Nara, à 45 minutes de Kyoto". The name written above the plan counts too
-    # ("Choisissez Porto" over the Ribeira of Porto).
-    above = str(scene.get("kicker") or "")
-    # …unless that name is only the destination of the whole post, which every photo of it shares.
-    labelled = set() if place_names.words(above) <= everywhere else place_names.proper(above, sentence=True)
-    about = set(place_names.subjects(said, everywhere) or places) | labelled
-    # (Three letters at least to tie a photo to a place: "Tràng An" and "Hội An" share "An".)
+    first, about = about_of(scene, said, places, everywhere)
     # The first place counts wherever the record names it; another one only in the caption, the title or a category,
     # not in the identifier the photo is filed under ("japon-hiroshima-miyajima" is a photo of Miyajima).
-    first = (place_names.subjects(said, everywhere) or places)[:1]
-    said_by_the_photo = place_names.words(told + " " + filed)
-    if set(first) & shown or {place for place in about if len(place) >= 3} & said_by_the_photo or not others:
+    if set(first) & shown or about & place_names.words(told + " " + filed) or not others:
         return None
     return f"names {', '.join(places)} over {scene['photo']} ({', '.join(sorted(others))})"
 
