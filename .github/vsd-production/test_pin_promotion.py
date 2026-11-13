@@ -90,6 +90,21 @@ class PinAdmissionTests(unittest.TestCase):
         render(article,production/'pin-drafts')
         for path,value in [(site/'articles.json',[article]),(site/'public-media.json',{'schemaVersion':1,'items':[]}),(site/'pinterest-rss.json',{'items':[]}),(site/'pinterest-additions.json',{'schemaVersion':1,'feeds':[{'file':'preparer-portugal.xml','title':'Préparation','items':[]}]}),(production/'pin-admissions.json',{'schemaVersion':1,'items':[]})]:path.write_text(json.dumps(value))
         return production,site
+    def test_admission_switched_off_in_the_cadence_file_admits_nothing_and_changes_no_file(self):
+        # 13/11/2026: Pins in the queue put a figure of one place over the photo of another; admission waits for their review.
+        from pin_promotion import run_many
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);production,site=self.fixture(root)
+            watched=[site/'pinterest-additions.json',site/'public-media.json',production/'pin-admissions.json']
+            before=[path.read_bytes() for path in watched]
+            (production/'cadence.json').write_text(json.dumps({'schemaVersion':1,'channels':{},'pins':{'enabled':False}}))
+            result=run_many(root,NOW,lambda *a: self.fail('Must not fetch while switched off'))
+            self.assertEqual((result['status'],result['changed'],result['ids'],result['publicationConfirmed']),('admission_switched_off',False,[],False))
+            self.assertEqual([path.read_bytes() for path in watched],before)
+            self.assertFalse((site/'social-media/production/pin-test-guide').exists())
+            # Switched on again, or with no word about Pins in the file, the same draft goes out.
+            (production/'cadence.json').write_text(json.dumps({'schemaVersion':1,'channels':{}}))
+            self.assertEqual(run_many(root,NOW,lambda url,title:'a'*64)['ids'],['pin-test-guide'])
     def test_admission_persists_bound_media_feed_and_receipt_without_second_send(self):
         from pin_promotion import run
         with tempfile.TemporaryDirectory() as temp:

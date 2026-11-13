@@ -199,8 +199,16 @@ def run(root=HERE.parents[1], now=None, fetcher=verify_target):
     return {'status': 'admitted_to_feed_not_published', 'changed': True, 'id': identity, 'publicationConfirmed': False, 'held': held}
 
 
+def switched_off(root):
+    """Admission waits when cadence.json says so ("pins": {"enabled": false}); drafts are still drawn, none joins a feed."""
+    path = Path(root) / '.github/vsd-production/cadence.json'
+    return path.is_file() and json.loads(path.read_text()).get('pins', {}).get('enabled') is False
+
+
 def run_many(root=HERE.parents[1], now=None, fetcher=verify_target, limit=MAX_PER_RUN):
     """Up to `limit` Pins in one run, each on a different board (the board cadence sees the Pin just admitted)."""
+    if switched_off(root):
+        return {'status': 'admission_switched_off', 'changed': False, 'ids': [], 'publicationConfirmed': False, 'held': []}
     results = []
     for _ in range(limit):
         results.append(run(root, now, fetcher))
