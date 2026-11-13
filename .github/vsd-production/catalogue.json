@@ -168,6 +168,18 @@
       "notBefore": "2026-11-13T00:00:36Z",
       "file": "scenarios/fb-thailande-quand-partir-2026-11-19.json",
       "sha256": "10a7f64eb19309c0cf6d1d7b8b41374ac300d83f8035ec754b7af5fb4762bf1a"
+    },
+    {
+      "contentId": "fb-japon-itineraire-2-semaines-2026-11-22-2",
+      "notBefore": "2026-11-13T04:44:31Z",
+      "file": "scenarios/fb-japon-itineraire-2-semaines-2026-11-22-2.json",
+      "sha256": "f70be41dae3a6fd5034813db16d2ce0901919468cebaede17e27331eb48d967f"
+    },
+    {
+      "contentId": "fb-thailande-quand-partir-2026-11-19-2",
+      "notBefore": "2026-11-13T04:44:32Z",
+      "file": "scenarios/fb-thailande-quand-partir-2026-11-19-2.json",
+      "sha256": "e6bfa4f5f880e1c36e58da7db912124d3291127f558f7943fab919de72d05ddd"
     }
   ]
 }

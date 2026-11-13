@@ -378,6 +378,24 @@
       "itemIds": [
         "vsd-production:facebook:fb-thailande-quand-partir-2026-11-19:photo-v1"
       ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/fb-japon-itineraire-2-semaines-2026-11-22-2-v1.json",
+      "fileSha256": "bb0f28995ac349325740e763efcf9eac23e493bfcba8d0414f0e509b7340d6f1",
+      "batchId": "fb-japon-itineraire-2-semaines-2026-11-22-2-v1",
+      "batchSha256": "94c05be9ed2758d1abf3d196b39e7e8a72dd330ed2ad0a8c2c36d94c02215688",
+      "itemIds": [
+        "vsd-production:facebook:fb-japon-itineraire-2-semaines-2026-11-22-2:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/fb-thailande-quand-partir-2026-11-19-2-v1.json",
+      "fileSha256": "d1857db3ed0e1c2060464f2a5ce56cf4226948aceb5a41aacedd622c9f3bcf0b",
+      "batchId": "fb-thailande-quand-partir-2026-11-19-2-v1",
+      "batchSha256": "b23d0e607446eee71995ba324dc823716e5d2aedd70c560b4f84b725aa95651f",
+      "itemIds": [
+        "vsd-production:facebook:fb-thailande-quand-partir-2026-11-19-2:photo-v1"
+      ]
     }
   ],
   "retirements": [
@@ -521,7 +539,8 @@
       ],
       "retiredAt": "2026-11-13T04:02:59Z",
       "reason": "photos_of_another_place",
-      "evidence": "Revue à l’image du 13/11/2026 : le plan 5 du carrousel écrit « 15 octobre · la réouverture des îles Similan en 2026 » sur la photo thailande-phi-phi (Wikimedia Commons, « Isla Ko Phi Phi Don, Tailandia, 2013-08-19, DD 02 » : Ko Phi Phi Don, province de Krabi), un autre archipel de la mer d’Andaman. Le chiffre est conforme au guide ; c’est la photo qui montre un autre lieu. Cause : le seul mot commun entre le fait et la photo était « îles ». Retrait décidé à la main (la relecture quotidienne ne compare que les chiffres) ; le post est refait au même créneau."
+      "evidence": "Revue à l’image du 13/11/2026 : le plan 5 du carrousel écrit « 15 octobre · la réouverture des îles Similan en 2026 » sur la photo thailande-phi-phi (Wikimedia Commons, « Isla Ko Phi Phi Don, Tailandia, 2013-08-19, DD 02 » : Ko Phi Phi Don, province de Krabi), un autre archipel de la mer d’Andaman. Le chiffre est conforme au guide ; c’est la photo qui montre un autre lieu. Cause : le seul mot commun entre le fait et la photo était « îles ». Retrait décidé à la main (la relecture quotidienne ne compare que les chiffres) ; le post est refait au même créneau.",
+      "replacedBy": "fb-thailande-quand-partir-2026-11-19-2"
     },
     {
       "batchId": "fb-japon-itineraire-2-semaines-2026-11-22-v1",
@@ -532,7 +551,8 @@
       ],
       "retiredAt": "2026-11-13T04:02:59Z",
       "reason": "photos_of_another_place",
-      "evidence": "Revue à l’image du 13/11/2026 : le plan 4 du carrousel écrit « 500 ¥ · le pavillon d’Or du Kinkaku-ji » (Kyoto) sur la photo japon-shinkansen (Wikimedia Commons, « Shin-Fuji Station Shinkansen platform view of Mt.Fuji »), où le panneau « Shin-Fuji / Shizuoka » se lit en grand ; le plan « 2 h 18 · Tokyo → Kyoto en Nozomi » est, lui, sur la porte du Kiyomizu-dera. Les chiffres sont conformes au guide ; c’est la photo qui montre un autre lieu. Retrait décidé à la main ; le post est refait au même créneau."
+      "evidence": "Revue à l’image du 13/11/2026 : le plan 4 du carrousel écrit « 500 ¥ · le pavillon d’Or du Kinkaku-ji » (Kyoto) sur la photo japon-shinkansen (Wikimedia Commons, « Shin-Fuji Station Shinkansen platform view of Mt.Fuji »), où le panneau « Shin-Fuji / Shizuoka » se lit en grand ; le plan « 2 h 18 · Tokyo → Kyoto en Nozomi » est, lui, sur la porte du Kiyomizu-dera. Les chiffres sont conformes au guide ; c’est la photo qui montre un autre lieu. Retrait décidé à la main ; le post est refait au même créneau.",
+      "replacedBy": "fb-japon-itineraire-2-semaines-2026-11-22-2"
     }
   ]
 }

@@ -1,0 +1,203 @@
+{
+  "schemaVersion": 2,
+  "id": "fb-thailande-quand-partir-2026-11-19-2",
+  "kind": "carousel",
+  "channel": "facebook",
+  "destination": "Thaïlande",
+  "title": "Quand partir en Thaïlande : 4 repères",
+  "targetUrl": "https://voyagesansdetour.fr/thailande/thailande-quand-partir/",
+  "publishAt": "2026-11-19T17:00:00Z",
+  "review": {
+    "status": "reviewed_for_render",
+    "checkedAt": "2026-11-13T04:44:32Z",
+    "validUntil": "2026-12-13T04:44:32Z",
+    "method": "Généré automatiquement (auto_social.py) depuis la page publiée du guide relevée le 13/11/2026 : chaque chiffre est cité mot pour mot ; photos réelles sous licence libre (Wikimedia Commons), aucune image générée par IA ; garde-fous de production.py passés avant la mise en file."
+  },
+  "sources": {
+    "file": "auto/fb-thailande-quand-partir-2026-11-19-2/sources.json",
+    "sha256": "8a1bb380c4438b63594aae8128a235dc00dc27db246d6218431d75573de75179"
+  },
+  "photos": {
+    "file": "auto/fb-thailande-quand-partir-2026-11-19-2/photos.json",
+    "sha256": "ca42c027f460fa1573cabf7fca7c2339fdf2bc57da8d1ac0dfec7dbb7c055b48"
+  },
+  "caption": {
+    "hook": "🤔 Quand partir en Thaïlande : le bon mois pour Bangkok, le Nord, l’Andaman et Koh Samui",
+    "lines": [
+      "📍 Décembre à février : la fenêtre où Bangkok, Chiang Mai et la mer d’Andaman sont tous au sec (12 à 24 mm à Bangkok, 10 à 14 mm à Chiang Mai)",
+      "📍 445 mm de pluie à Koh Samui en novembre : le golfe est trempé quand l’Andaman sèche",
+      "📍 30,7 °C : la température moyenne de Bangkok en avril, le mois le plus chaud ; 27,3 °C en décembre",
+      "📍 15 octobre : la réouverture des îles Similan en 2026 ; la saison dure jusqu’à la mi-mai 2027"
+    ],
+    "cta": "🔗 La meilleure période pour partir, et pourquoi, dans le guide complet :",
+    "hashtags": [
+      "#Thailande",
+      "#VoyageThailande",
+      "#IdeeVoyage",
+      "#VoyageSansDetour"
+    ]
+  },
+  "scenes": [
+    {
+      "photo": "thailande-railay",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Thaïlande",
+      "headline": [
+        "Quand partir en Thaïlande",
+        "*4 repères* à connaître"
+      ],
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "La Thaïlande n’a pas une saison des pluies mais deux côtes en miroir : l’Andaman est sec de décembre à mars, le golfe de Thaïlande (Koh Samui) de février à septembre."
+        }
+      ],
+      "tag": "Guide Thaïlande · sources du 12/11/2026",
+      "alt": "La plage de Railay et ses falaises calcaires, près de Krabi."
+    },
+    {
+      "photo": "thailande-chiang-mai-doi-suthep",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Le Nord",
+      "headline": [
+        "*Décembre à février*"
+      ],
+      "detail": "la fenêtre où Bangkok, Chiang Mai et la mer d’Andaman sont tous au sec (12 à 24 mm à Bangkok, 10 à 14 mm à Chiang Mai)",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "Décembre à février la fenêtre où Bangkok, Chiang Mai et la mer d’Andaman sont tous au sec (12 à 24 mm à Bangkok, 10 à 14 mm à Chiang Mai)"
+        }
+      ],
+      "tag": "Guide Thaïlande · sources du 12/11/2026",
+      "alt": "Le temple doré du Doi Suthep, au-dessus de Chiang Mai."
+    },
+    {
+      "photo": "thailande-koh-samui",
+      "focus": [
+        0.72,
+        0.5
+      ],
+      "kicker": "Le golfe",
+      "headline": [
+        "*445 mm*"
+      ],
+      "detail": "de pluie à Koh Samui en novembre : le golfe est trempé quand l’Andaman sèche",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "445 mm de pluie à Koh Samui en novembre : le golfe est trempé quand l’Andaman sèche"
+        }
+      ],
+      "tag": "Guide Thaïlande · sources du 12/11/2026",
+      "alt": "Une plage de sable blanc à Koh Samui."
+    },
+    {
+      "photo": "thailande-bangkok-grand-palais",
+      "focus": [
+        0.72,
+        0.7
+      ],
+      "kicker": "Bangkok",
+      "headline": [
+        "*30,7 °C*"
+      ],
+      "detail": "la température moyenne de Bangkok en avril, le mois le plus chaud ; 27,3 °C en décembre",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "30,7 °C la température moyenne de Bangkok en avril, le mois le plus chaud ; 27,3 °C en décembre"
+        }
+      ],
+      "tag": "Guide Thaïlande · sources du 12/11/2026",
+      "alt": "Un toit du Grand Palais de Bangkok en contre-jour, au lever du soleil."
+    },
+    {
+      "photo": "thailande-iles-similan",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "La mer d’Andaman",
+      "headline": [
+        "*15 octobre*"
+      ],
+      "detail": "la réouverture des îles Similan en 2026 ; la saison dure jusqu’à la mi-mai 2027",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "15 octobre la réouverture des îles Similan en 2026 ; la saison dure jusqu’à la mi-mai 2027"
+        }
+      ],
+      "tag": "Guide Thaïlande · sources du 12/11/2026",
+      "alt": "La plage et l’eau turquoise de la baie de Donald Duck, sur Ko Similan, dans les îles Similan."
+    },
+    {
+      "photo": "thailande-wat-arun",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Le guide complet",
+      "headline": [
+        "Quand partir en Thaïlande"
+      ],
+      "detail": "Le bon mois pour Bangkok, Chiang Mai, la mer d’Andaman et le golfe, relevés 1991-2020.",
+      "alt": "Le pavillon d’entrée de la salle d’ordination du Wat Arun et son géant gardien, à Bangkok.",
+      "cta": true
+    }
+  ],
+  "assets": {
+    "regular": {
+      "file": "assets/dmsans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9"
+    },
+    "bold": {
+      "file": "assets/dmsans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211"
+    },
+    "serif": {
+      "file": "assets/playfair.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+      },
+      "sha256": "adefc53e7b3d483f1fa5e85edd82b7689ca79db25a1f6786bd7949cdcfeec601"
+    },
+    "fallbackRegular": {
+      "file": "assets/notosans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "478c558ea716033cd60c03438f628dfa75694dcf6b5f6d505a2f05fd2b4f3823"
+    },
+    "fallbackBold": {
+      "file": "assets/notosans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "1df075a380fc7cb898acf64c1f7b3b4dd780de3caa860178bf929de35817a913"
+    }
+  }
+}

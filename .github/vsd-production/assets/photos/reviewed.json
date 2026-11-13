@@ -226,6 +226,27 @@
       "retrievedAt": "2026-11-12T19:49:44Z",
       "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
     },
+    "thailande-iles-similan": {
+      "alt": "La plage et l’eau turquoise de la baie de Donald Duck, sur Ko Similan, dans les îles Similan.",
+      "file": "assets/photos/thailande-iles-similan.jpg",
+      "sha256": "6b9586b2403175ceaf7b8e28fc9c490a58c3b0e5a85105d0e330f7a55cad358f",
+      "width": 1600,
+      "height": 1600,
+      "commonsTitle": "File:Donald Duck bay, similan islands.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Donald_Duck_bay,_similan_islands.jpg",
+      "author": "Sgroey",
+      "commonsCredit": "Own work",
+      "categories": "Phang Nga Province|Similan Islands|Self-published work|Files with coordinates missing SDC location of creation|Beaches of Ko Similan",
+      "licence": "CC BY 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "originalSize": [
+        2160,
+        2160
+      ],
+      "commonsSha1": "a21c3eb3d145bfc9729288a55c493df531eea690",
+      "retrievedAt": "2026-11-13T04:43:52Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
     "yucatan-merida-cathedrale": {
       "camera": "NIKON Z 50",
       "alt": "La cathédrale San Ildefonso de Mérida, au Yucatán.",

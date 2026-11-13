@@ -23,7 +23,9 @@ GENERIC = frozenset("""
     place places palais jardin jardins musee musees eglise eglises cathedrale chateau parc parcs quartier quartiers centre
     monument monuments pagode sanctuaire statue porte pavillon bouddha cite vallee desert
     koh wat doi dera saint sainte san santa sao grand grande grands petit petite vieux vieille nouveau nouvelle
-    nord sud est ouest haut haute bas basse jour jours pass""".split())
+    nord sud est ouest haut haute bas basse jour jours pass
+    janvier fevrier mars avril mai juin juillet aout septembre octobre novembre decembre
+    lundi mardi mercredi jeudi vendredi samedi dimanche""".split())
 # What a journey is made by, as a fact says it; and what a photo of it shows.
 TRANSPORT = frozenset("train trains shinkansen tgv couchette couchettes ferry ferries bateau bateaux bus tram tramway metro rame billet billets".split())
 RIDES = TRANSPORT | frozenset("gare gares quai quais railway sleeper locomotive wagon".split())

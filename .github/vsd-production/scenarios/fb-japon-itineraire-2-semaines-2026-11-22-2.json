@@ -1,0 +1,204 @@
+{
+  "schemaVersion": 2,
+  "id": "fb-japon-itineraire-2-semaines-2026-11-22-2",
+  "kind": "carousel",
+  "channel": "facebook",
+  "destination": "Japon",
+  "title": "Le Japon en 2 semaines : 4 repères",
+  "targetUrl": "https://voyagesansdetour.fr/japon/japon-itineraire-2-semaines/",
+  "publishAt": "2026-11-22T17:00:00Z",
+  "review": {
+    "status": "reviewed_for_render",
+    "checkedAt": "2026-11-13T04:44:31Z",
+    "validUntil": "2026-12-13T04:44:31Z",
+    "method": "Généré automatiquement (auto_social.py) depuis la page publiée du guide relevée le 13/11/2026 : chaque chiffre est cité mot pour mot ; photos réelles sous licence libre (Wikimedia Commons), aucune image générée par IA ; garde-fous de production.py passés avant la mise en file."
+  },
+  "sources": {
+    "file": "auto/fb-japon-itineraire-2-semaines-2026-11-22-2/sources.json",
+    "sha256": "9c1a738817958f3e3a6ab3590d46134a31ed0b20cfa1cee8c4e45ebb2dbf4e7d"
+  },
+  "photos": {
+    "file": "auto/fb-japon-itineraire-2-semaines-2026-11-22-2/photos.json",
+    "sha256": "d97c58759240da7d64885721bec85cd0bdfa75a43108cac6b39297bfc118e0e2"
+  },
+  "caption": {
+    "hook": "🗺️ Japon en 2 semaines : l’itinéraire en train de Tokyo à Kyoto, Nara et Hiroshima (prix 2026)",
+    "lines": [
+      "⏱️ 2 h 18 : Tokyo → Kyoto en Nozomi, 13 960 ¥ (≈ 80 €), un train toutes les 15 à 30 minutes",
+      "🚆 44 620 ¥ : Tokyo–Kyoto–Hiroshima–Tokyo en billets à l’unité, moins que le JR Pass 7 jours (50 000 ¥)",
+      "📍 800 ¥ : le Grand Bouddha du Tōdai-ji, à Nara, à 45 minutes de Kyoto par le train JR",
+      "📍 100 ¥ : la taxe des visiteurs de Miyajima, en plus du ferry JR"
+    ],
+    "cta": "🔗 Tous les prix, horaires et l’itinéraire dans le guide complet :",
+    "hashtags": [
+      "#Japon",
+      "#VoyageJapon",
+      "#Itineraire",
+      "#VoyageSansDetour"
+    ]
+  },
+  "scenes": [
+    {
+      "photo": "japon-fuji-chureito",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Japon",
+      "headline": [
+        "Le Japon en 2 semaines",
+        "*4 chiffres* à connaître"
+      ],
+      "detail": "Quatre nuits à Tokyo, quatre à Kyoto avec Nara en excursion, deux à Hiroshima pour Miyajima, puis retour à Tokyo.",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "Quatre nuits à Tokyo, quatre à Kyoto avec Nara en excursion, deux à Hiroshima pour Miyajima, puis retour à Tokyo."
+        }
+      ],
+      "tag": "Guide Japon · sources du 24/10/2026",
+      "alt": "La pagode de Chureito et le mont Fuji au-dessus de Fujiyoshida."
+    },
+    {
+      "photo": "japon-shinkansen",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Le parcours en train",
+      "headline": [
+        "*2 h 18*"
+      ],
+      "detail": "Tokyo → Kyoto en Nozomi, 13 960 ¥ (≈ 80 €), un train toutes les 15 à 30 minutes",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "2 h 18 Tokyo → Kyoto en Nozomi, 13 960 ¥ (≈ 80 €), un train toutes les 15 à 30 minutes"
+        }
+      ],
+      "tag": "Guide Japon · sources du 24/10/2026",
+      "alt": "Le mont Fuji vu depuis le quai de la gare shinkansen de Shin-Fuji."
+    },
+    {
+      "photo": "japon-tokyo-shibuya",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Le parcours en train",
+      "headline": [
+        "*44 620 ¥*"
+      ],
+      "detail": "Tokyo–Kyoto–Hiroshima–Tokyo en billets à l’unité, moins que le JR Pass 7 jours (50 000 ¥)",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "44 620 ¥ Tokyo–Kyoto–Hiroshima–Tokyo en billets à l’unité, moins que le JR Pass 7 jours (50 000 ¥)"
+        }
+      ],
+      "tag": "Guide Japon · sources du 24/10/2026",
+      "alt": "Le carrefour de Shibuya, à Tokyo."
+    },
+    {
+      "photo": "japon-nara-cerfs",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Jours 5 à 8",
+      "headline": [
+        "*800 ¥*"
+      ],
+      "detail": "le Grand Bouddha du Tōdai-ji, à Nara, à 45 minutes de Kyoto par le train JR",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "800 ¥ le Grand Bouddha du Tōdai-ji, à Nara, à 45 minutes de Kyoto par le train JR"
+        }
+      ],
+      "tag": "Guide Japon · sources du 24/10/2026",
+      "alt": "Des cerfs en liberté dans le parc de Nara."
+    },
+    {
+      "photo": "japon-hiroshima-miyajima",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Jours 9 et 10",
+      "headline": [
+        "*100 ¥*"
+      ],
+      "detail": "la taxe des visiteurs de Miyajima, en plus du ferry JR",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "100 ¥ la taxe des visiteurs de Miyajima, en plus du ferry JR"
+        }
+      ],
+      "tag": "Guide Japon · sources du 24/10/2026",
+      "alt": "Le grand torii flottant d’Itsukushima, sur l’île de Miyajima."
+    },
+    {
+      "photo": "japon-kyoto-kiyomizu",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Le guide complet",
+      "headline": [
+        "Le Japon en 2 semaines"
+      ],
+      "detail": "Shinkansen à 13 960 ¥, JR Pass ou billets à l’unité, entrées des temples relevées en octobre 2026.",
+      "alt": "Des promeneuses en yukata devant la porte nord du Kiyomizu-dera, à Kyoto.",
+      "cta": true
+    }
+  ],
+  "assets": {
+    "regular": {
+      "file": "assets/dmsans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9"
+    },
+    "bold": {
+      "file": "assets/dmsans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211"
+    },
+    "serif": {
+      "file": "assets/playfair.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+      },
+      "sha256": "adefc53e7b3d483f1fa5e85edd82b7689ca79db25a1f6786bd7949cdcfeec601"
+    },
+    "fallbackRegular": {
+      "file": "assets/notosans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "478c558ea716033cd60c03438f628dfa75694dcf6b5f6d505a2f05fd2b4f3823"
+    },
+    "fallbackBold": {
+      "file": "assets/notosans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "1df075a380fc7cb898acf64c1f7b3b4dd780de3caa860178bf929de35817a913"
+    }
+  }
+}

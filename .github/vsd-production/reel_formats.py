@@ -442,10 +442,15 @@ class Media:
             # The first place a fact names is the one it is about: "le Grand Bouddha du Tōdai-ji, à Nara, à 45 minutes
             # de Kyoto" goes over Nara before Kyoto.
             # …and a place the fact names without a capital ("les tombeaux saadiens") is named by the photo that does.
-            said = place_names.words(text)
-            naming = lambda ph: (2 * sum(len(places) - rank for rank, place in enumerate(places) if place in self.described(ph))
-                                 + bool(place_names.proper(ph[2], self.country) & said))
-            named = [ph for ph in pool if naming(ph)]
+            # (Four letters at least: "Chiang Mai" is not named by "la mi-mai".)
+            said = {word for word in place_names.words(text) if len(word) >= 4}
+            echoed = lambda ph: bool(place_names.proper(ph[2], self.country) & said)
+            naming = lambda ph: 2 * sum(len(places) - rank for rank, place in enumerate(places) if place in self.described(ph)) + echoed(ph)
+            # A photo names the place of a fact when it names the first place the fact names, or one of its places and
+            # no other, or when the fact says the place the photo names. The torii of Miyajima, filed under
+            # "hiroshima", is not the photo of "le musée du Mémorial pour la paix d'Hiroshima".
+            fits = lambda ph: places[0] in self.described(ph) or not self.elsewhere(ph, set(places)) or echoed(ph)
+            named = [ph for ph in pool if naming(ph) and fits(ph)]
             if named:
                 # Between two photos that name it as well, the one that shares more with the fact, a kind of place
                 # included ("le Grand Palais de Bangkok": the palace, not another temple of Bangkok); then the guide's own.
