@@ -3,6 +3,8 @@ import { createHash, createHmac, randomUUID } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
 const STOP = Date.parse('2027-09-14T21:59:59Z');
 const ORIGIN = 'https://vsd-admin.kartier.workers.dev';
+// Tout autre statut fait échouer le workflow, exprès : « attention » (suppression d'un lot retiré en échec) ou
+// « quota_epuise » (quota de l'API Buffer) doivent se voir dans GitHub, pas passer pour un passage normal.
 const allowed = { health: ['healthy'], metrics: ['finished'], publications: ['idle', 'busy_or_recent', 'dispatched', 'reconciled'], stock: ['stock_imported', 'stock_settled'] };
 export class ControlError extends Error {
   constructor(code, httpStatus) { super(code); this.code = code; this.httpStatus = httpStatus; }

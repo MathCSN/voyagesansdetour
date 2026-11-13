@@ -21,6 +21,7 @@ const TITLES={
   publication_retired_published:()=>'post d’un lot retiré publié',
   publication_retired_in_buffer:()=>'post d’un lot retiré encore dans Buffer',
   publication_buffer_quota:()=>'quota de l’API Buffer presque épuisé',
+  publication_posts_stalled:()=>'posts prêts bloqués par un moteur en échec',
   publication_posts_blocked:()=>'posts retenus ou en échec',
   publication_posts_at_risk:()=>'posts prêts menacés',
   social_queue_empty:name=>`file ${network(name)} vide`,

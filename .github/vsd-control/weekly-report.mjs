@@ -141,7 +141,7 @@ export function renderReport({now,social,guides,pins,runs,alerts,waiting,seo=nul
     pins===null?'- Pinterest : flux public illisible cette semaine, vérifier le profil.':line(pins,p=>`- Pinterest · ${day(p.publishedAt)} · [${p.title.slice(0,90)}](${p.url})`,`- Pinterest : aucune nouvelle épingle ([profil](${PROFILES.pinterest})).`),
     line(guides.published,g=>`- Guide · ${g.publishedOn} · ${g.title}`,'- Aucun nouveau guide publié.'),
     '## Publication',
-    publicationLines(seo?.publication??null).join('\n'),
+    publicationLines(seo?.publication??null,now).join('\n'),
     '## Référencement Google',
     seoLines(seo).join('\n'),
     '## Sources des guides',

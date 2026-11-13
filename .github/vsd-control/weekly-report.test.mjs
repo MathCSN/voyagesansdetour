@@ -117,7 +117,7 @@ test('the publication section gives the engine, the channels, the register and t
   assert.ok(lines.includes('- Moteur du panneau : actif, dernier passage le 2026-11-12 à 09:37, heure de Paris.'),lines);
   assert.ok(lines.includes('- Canaux Buffer : Instagram déconnecté de Buffer, Facebook connecté, TikTok absent de Buffer ; relus par le panneau le 2026-11-12 à 09:02, heure de Paris.'),lines);
   assert.ok(lines.includes('- Registre : 4 prêts, 2 programmés dans Buffer, 12 publiés, 1 retenu, 1 en échec.'),lines);
-  assert.ok(lines.includes('- Retenus ou en échec depuis 7 jours (2) : `ig:retenu` (Instagram, retenu, échéance dépassée, 2026-11-10) ; `fb:echec` (Facebook, en échec, code `http_500`, 2026-11-11).'),lines);
+  assert.ok(lines.includes('- Retenus ou en échec depuis 7 jours (2) : `ig:retenu` (Instagram, retenu, échéance dépassée, 2026-11-10) ; `fb:echec` (Facebook, en échec, Buffer en panne (erreur HTTP 500), 2026-11-11).'),lines);
   assert.ok(lines.includes('- Prêts à moins de 24 h sur un canal qui ne reçoit rien (1) : `ig:pret` (Instagram déconnecté de Buffer, échéance le 2026-11-12 à 18:00, heure de Paris).'),lines);
   const md=renderReport({now:AT,social:{items:[],horizon:{},lastWeek:[]},guides:{published:[],upcomingGuides:[],upcomingUpdates:[],nextGuideAt:null},pins:[],runs:[],alerts:[],waiting:[],seo:{search:null,indexation:null,publication:PUBLICATION}});
   assert.ok(md.indexOf('## Publié cette semaine')<md.indexOf('## Publication')&&md.indexOf('## Publication')<md.indexOf('## Référencement Google'));
@@ -285,12 +285,14 @@ test('the report says which alerts it could not re-read, so a missed reading nei
 
 const RETIRED={id:'ig:japon',channel:'instagram',dueAt:'2026-11-15T20:00:00.000Z',reason:'buffer_delete_mutation_error',replacementWaiting:false};
 const RETIRED_OUT={id:'tk:japon',channel:'tiktok',dueAt:'2026-11-11T21:00:00.000Z',at:'2026-11-11T21:07:00.000Z'};
-const quota=ratio=>({observedAt:'2026-11-12T08:37:00.000Z',windows:[{name:'3000-in-30d',remaining:Math.floor(3000*ratio),limit:3000,windowSeconds:2592000}],lowestRatio:ratio});
+const quota=ratio=>({observedAt:'2026-11-12T08:37:00.000Z',windows:[{name:'600-in-1day',remaining:540,limit:600,windowSeconds:86400,resetAt:'2026-11-13T00:00:00.000Z'},
+  {name:'3000-in-30days',remaining:Math.floor(3000*ratio),limit:3000,windowSeconds:2592000,resetAt:'2026-12-01T00:00:00.000Z'}],lowestRatio:ratio,pausedUntil:null});
+const STALLED={lastFailure:{at:'2026-11-12T08:52:00.000Z',code:'quota_epuise'},readyStalled:[{id:'ig:pret',channel:'instagram',dueAt:'2026-11-13T17:00:00.000Z'}],readyStalledCount:1};
 
 test('every alert drawn from the engine state has a kind the report can declare unread',()=>{
   const troubled={...PUBLICATION,channels:{instagram:'disconnected',facebook:'connected',tiktok:'absent'},channelsCheckedAt:'2026-11-10T09:00:00.000Z',lastPassAt:'2026-11-12T02:00:00.000Z',
     problems:[held('ig:a','2026-11-10T17:00:00.000Z')],problemsCount:1,atRisk:[{id:'ig:b',channel:'instagram',dueAt:'2026-11-12T17:00:00.000Z',channelState:'disconnected'}],atRiskCount:1,
-    retiredInBuffer:[RETIRED],retiredInBufferCount:1,retiredPublished:[RETIRED_OUT],retiredPublishedCount:1,bufferQuota:quota(0.05)};
+    retiredInBuffer:[RETIRED],retiredInBufferCount:1,retiredPublished:[RETIRED_OUT],retiredPublishedCount:1,bufferQuota:quota(0.05),...STALLED};
   const kinds=[troubled,{...PUBLICATION,channels:null},{...PUBLICATION,enabled:false}].flatMap(publicationAlerts).map(a=>a.code.split(':')[0]);
   assert.deepEqual([...new Set(kinds)].sort(),[...PUBLICATION_KINDS].sort());
 });
@@ -396,10 +398,10 @@ test('publication alerts come first and leave the other alerts untouched',()=>{
 
 test('withdrawn batches: a post still in Buffer alerts only when its deletion is not assured, a post that went out always does',()=>{
   const at=AT;
-  // Deleted at the next engine pass, slot more than a day away: listed, no alert.
+  // Deleted at the next engine pass, slot more than three days away: listed, no alert.
   const pending={...RETIRED,reason:'suppression_en_attente',dueAt:'2026-11-15T20:00:00.000Z'};
   assert.deepEqual(publicationAlerts({...PUBLICATION,retiredInBuffer:[pending],retiredInBufferCount:1}),[]);
-  // Same post, slot within a day: alert.
+  // Same post, slot within three days: alert.
   const near=publicationAlerts({...PUBLICATION,retiredInBuffer:[{...pending,dueAt:new Date(at+20*36e5).toISOString()}],retiredInBufferCount:1});
   assert.deepEqual(near.map(a=>[a.code,a.count]),[['publication_retired_in_buffer',1]]);
   // A failed or impossible deletion alerts at once, with its reason; entries beyond the short list are counted.
@@ -422,7 +424,44 @@ test('Buffer API quota: listed in the report, alert below a tenth of any window'
   assert.deepEqual(publicationAlerts({...PUBLICATION,bufferQuota:quota(0.1)}),[]);
   const low=publicationAlerts({...PUBLICATION,bufferQuota:quota(0.099)});
   assert.deepEqual(low.map(a=>a.code),['publication_buffer_quota']);
-  assert.ok(low[0].message.includes('`3000-in-30d` 297 sur 3000'),low[0].message);
-  const lines=publicationLines({...PUBLICATION,bufferQuota:quota(0.05)}).join('\n');
-  assert.ok(lines.includes('- Quota de l’API Buffer relevé le 2026-11-12 à 09:37, heure de Paris : `3000-in-30d` 150 sur 3000 (moins de 10 % sur une fenêtre).'),lines);
+  // Words a non-technician reads: only the low window, named from its length, with its reset date.
+  assert.ok(low[0].message.startsWith('Quota de l’API Buffer presque épuisé : 297 requêtes restantes sur 3 000 (fenêtre de 30 jours, remise à zéro le 2026-12-01 à 01:00, heure de Paris).'),low[0].message);
+  assert.ok(!low[0].message.includes('600'),low[0].message);
+  const empty=publicationAlerts({...PUBLICATION,bufferQuota:{...quota(0),pausedUntil:'2026-11-20T00:00:00.000Z'}});
+  assert.ok(empty[0].message.startsWith('Quota de l’API Buffer épuisé : épuisé (fenêtre de 30 jours, remise à zéro le 2026-12-01 à 01:00, heure de Paris), panneau en pause jusqu’au 2026-11-20 à 01:00, heure de Paris.'),empty[0].message);
+  const lines=publicationLines({...PUBLICATION,bufferQuota:quota(0.05)},AT).join('\n');
+  assert.ok(lines.includes('- Quota de l’API Buffer (relevé le 2026-11-12 à 09:37, heure de Paris) : 150 requêtes restantes sur 3 000 (fenêtre de 30 jours, remise à zéro le 2026-12-01 à 01:00, heure de Paris), moins de 10 % restants.'),lines);
+  // A reading older than a day is said to be stale.
+  const stale=publicationLines({...PUBLICATION,bufferQuota:quota(0.7)},AT+2*864e5).join('\n');
+  assert.ok(stale.includes('relevé périmé (plus de 24 heures)'),stale);
+});
+
+test('a failing engine names the ready posts due within three days; a later complete pass clears it',()=>{
+  const failing={...PUBLICATION,lastPassAt:'2026-11-12T08:37:00.000Z',...STALLED};
+  const alerts=publicationAlerts(failing);
+  assert.deepEqual(alerts.map(a=>[a.code,a.count]),[['publication_posts_stalled',1]]);
+  assert.ok(alerts[0].message.includes('(quota de l’API Buffer épuisé) : 1 post prêt dû dans les 3 jours ne sera pas programmé tant que les passages échouent : `ig:pret` (Instagram, échéance le 2026-11-13 à 18:00, heure de Paris)'),alerts[0].message);
+  assert.ok(publicationLines(failing,AT).join('\n').includes('- Dernier passage du moteur interrompu le 2026-11-12 à 09:52, heure de Paris : quota de l’API Buffer épuisé. Posts prêts dus dans les 3 jours (1) : `ig:pret`'));
+  assert.deepEqual(publicationAlerts({...failing,lastPassAt:'2026-11-12T09:07:00.000Z'}),[]);
+  assert.deepEqual(publicationLines({...failing,lastPassAt:'2026-11-12T09:07:00.000Z'},AT).filter(line=>line.includes('interrompu')),[]);
+});
+
+test('every code the panel may send reads as words; an unknown code gets a sentence, the code in a code span',()=>{
+  const reasons=['erreur_buffer','statut_inconnu','buffer_delete_network','buffer_delete_timeout','buffer_delete_graphql_error','buffer_delete_unreadable','buffer_delete_http_503','http_502','envoi_a_verifier','buffer_post_not_found','zzz_inconnu'];
+  const lines=publicationLines({...PUBLICATION,retiredInBuffer:reasons.map((reason,i)=>({...RETIRED,id:'r:'+i,reason})),retiredInBufferCount:reasons.length},AT).join('\n');
+  for(const raw of reasons.slice(0,-1))assert.ok(!lines.includes('`'+raw+'`'),raw);
+  assert.ok(lines.includes('Buffer en panne (erreur HTTP 503)'),lines);
+  assert.ok(lines.includes('envoi incertain, à vérifier dans Buffer'),lines);
+  assert.ok(lines.includes('Buffer dit ne plus le connaître, à vérifier dans Buffer'),lines);
+  assert.ok(lines.includes('erreur technique non détaillée (code `zzz_inconnu`)'),lines);
+});
+
+test('withdrawn posts and the quota come before the posts held: the head alert of the issue is the one to act on first',()=>{
+  const alerts=publicationAlerts({...PUBLICATION,problems:[held('ig:a','2026-11-11T17:00:00.000Z')],problemsCount:1,retiredInBuffer:[RETIRED],retiredInBufferCount:2,bufferQuota:quota(0.05)});
+  assert.deepEqual(alerts.map(a=>a.code),['publication_retired_in_buffer','publication_buffer_quota','publication_posts_blocked']);
+  // Plural agreement when several posts are named.
+  assert.ok(alerts[0].message.includes('Les supprimer à la main dans Buffer'),alerts[0].message);
+  // Three days ahead, a post simply waiting for its deletion at the next pass already alerts.
+  const pending={...RETIRED,reason:'suppression_en_attente',dueAt:new Date(AT+60*36e5).toISOString()};
+  assert.deepEqual(publicationAlerts({...PUBLICATION,retiredInBuffer:[pending],retiredInBufferCount:1}).map(a=>a.code),['publication_retired_in_buffer']);
 });
