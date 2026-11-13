@@ -283,9 +283,14 @@ test('the report says which alerts it could not re-read, so a missed reading nei
   assert.deepEqual(unreadKinds({seo:read,writer:null}),['guide_writer_idle']);
 });
 
+const RETIRED={id:'ig:japon',channel:'instagram',dueAt:'2026-11-15T20:00:00.000Z',reason:'buffer_delete_mutation_error',replacementWaiting:false};
+const RETIRED_OUT={id:'tk:japon',channel:'tiktok',dueAt:'2026-11-11T21:00:00.000Z',at:'2026-11-11T21:07:00.000Z'};
+const quota=ratio=>({observedAt:'2026-11-12T08:37:00.000Z',windows:[{name:'3000-in-30d',remaining:Math.floor(3000*ratio),limit:3000,windowSeconds:2592000}],lowestRatio:ratio});
+
 test('every alert drawn from the engine state has a kind the report can declare unread',()=>{
   const troubled={...PUBLICATION,channels:{instagram:'disconnected',facebook:'connected',tiktok:'absent'},channelsCheckedAt:'2026-11-10T09:00:00.000Z',lastPassAt:'2026-11-12T02:00:00.000Z',
-    problems:[held('ig:a','2026-11-10T17:00:00.000Z')],problemsCount:1,atRisk:[{id:'ig:b',channel:'instagram',dueAt:'2026-11-12T17:00:00.000Z',channelState:'disconnected'}],atRiskCount:1};
+    problems:[held('ig:a','2026-11-10T17:00:00.000Z')],problemsCount:1,atRisk:[{id:'ig:b',channel:'instagram',dueAt:'2026-11-12T17:00:00.000Z',channelState:'disconnected'}],atRiskCount:1,
+    retiredInBuffer:[RETIRED],retiredInBufferCount:1,retiredPublished:[RETIRED_OUT],retiredPublishedCount:1,bufferQuota:quota(0.05)};
   const kinds=[troubled,{...PUBLICATION,channels:null},{...PUBLICATION,enabled:false}].flatMap(publicationAlerts).map(a=>a.code.split(':')[0]);
   assert.deepEqual([...new Set(kinds)].sort(),[...PUBLICATION_KINDS].sort());
 });
@@ -388,3 +393,36 @@ test('publication alerts come first and leave the other alerts untouched',()=>{
   for(const alert of publicationAlerts({...PUBLICATION,channels:null,enabled:false,problems:[held('a','2026-11-11T10:00:00.000Z')],atRisk:[{id:'b',channel:'facebook',dueAt:'2026-11-12T11:00:00.000Z',channelState:'unknown'}]}))assert.doesNotMatch(alert.message,/[@\[\]<#!]|https?:/,alert.message);
 });
 
+
+test('withdrawn batches: a post still in Buffer alerts only when its deletion is not assured, a post that went out always does',()=>{
+  const at=AT;
+  // Deleted at the next engine pass, slot more than a day away: listed, no alert.
+  const pending={...RETIRED,reason:'suppression_en_attente',dueAt:'2026-11-15T20:00:00.000Z'};
+  assert.deepEqual(publicationAlerts({...PUBLICATION,retiredInBuffer:[pending],retiredInBufferCount:1}),[]);
+  // Same post, slot within a day: alert.
+  const near=publicationAlerts({...PUBLICATION,retiredInBuffer:[{...pending,dueAt:new Date(at+20*36e5).toISOString()}],retiredInBufferCount:1});
+  assert.deepEqual(near.map(a=>[a.code,a.count]),[['publication_retired_in_buffer',1]]);
+  // A failed or impossible deletion alerts at once, with its reason; entries beyond the short list are counted.
+  const stuck=publicationAlerts({...PUBLICATION,retiredInBuffer:[{...RETIRED,replacementWaiting:true}],retiredInBufferCount:3});
+  assert.deepEqual(stuck.map(a=>[a.code,a.count]),[['publication_retired_in_buffer',3]]);
+  assert.ok(stuck[0].message.includes('`ig:japon` (Instagram, échéance le 2026-11-15 à 21:00, heure de Paris, suppression refusée par Buffer, son remplaçant attend)'),stuck[0].message);
+  assert.ok(stuck[0].message.includes('et 2 autres'),stuck[0].message);
+  const out=publicationAlerts({...PUBLICATION,retiredPublished:[RETIRED_OUT],retiredPublishedCount:1});
+  assert.deepEqual(out.map(a=>[a.code,a.count]),[['publication_retired_published',1]]);
+  assert.ok(out[0].message.includes('`tk:japon` (TikTok, publié vers le 2026-11-11 à 22:07, heure de Paris)'),out[0].message);
+  const lines=publicationLines({...PUBLICATION,retiredInBuffer:[RETIRED],retiredInBufferCount:1,retiredPublished:[RETIRED_OUT],retiredPublishedCount:1}).join('\n');
+  assert.ok(lines.includes('- Lots retirés dont le post est encore dans Buffer (1) : `ig:japon`'),lines);
+  assert.ok(lines.includes('- Lots retirés publiés malgré tout depuis 7 jours (1) : `tk:japon`'),lines);
+  // A panel older than these fields sends none: nothing is listed, nothing alerts.
+  assert.deepEqual(publicationLines(PUBLICATION).filter(line=>line.includes('retirés')),[]);
+});
+
+test('Buffer API quota: listed in the report, alert below a tenth of any window',()=>{
+  assert.deepEqual(publicationAlerts({...PUBLICATION,bufferQuota:quota(0.7)}),[]);
+  assert.deepEqual(publicationAlerts({...PUBLICATION,bufferQuota:quota(0.1)}),[]);
+  const low=publicationAlerts({...PUBLICATION,bufferQuota:quota(0.099)});
+  assert.deepEqual(low.map(a=>a.code),['publication_buffer_quota']);
+  assert.ok(low[0].message.includes('`3000-in-30d` 297 sur 3000'),low[0].message);
+  const lines=publicationLines({...PUBLICATION,bufferQuota:quota(0.05)}).join('\n');
+  assert.ok(lines.includes('- Quota de l’API Buffer relevé le 2026-11-12 à 09:37, heure de Paris : `3000-in-30d` 150 sur 3000 (moins de 10 % sur une fenêtre).'),lines);
+});

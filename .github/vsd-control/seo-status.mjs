@@ -75,10 +75,39 @@ function riskPost(post) {
   return { id, channel: post.channel, dueAt, channelState: channelState(post.channelState) };
 }
 
+// Posts d'un lot retiré du stock peut-être encore dans Buffer (le panneau les supprime de lui-même) : motif
+// en code court, et `replacementWaiting` quand un post de remplacement attend le même créneau.
+function retiredPost(post) {
+  const id = postId(post.id), dueAt = instant(post.dueAt);
+  if (!id || !dueAt || !CHANNELS.includes(post.channel)) return null;
+  return { id, channel: post.channel, dueAt, reason: reasonCode(post.reason), replacementWaiting: post.replacementWaiting === true };
+}
+
+// Posts d'un lot retiré que Buffer a publiés malgré tout.
+function retiredPublishedPost(post) {
+  const id = postId(post.id), dueAt = instant(post.dueAt), at = instant(post.at);
+  if (!id || !dueAt || !at || !CHANNELS.includes(post.channel)) return null;
+  return { id, channel: post.channel, dueAt, at };
+}
+
+// Quota de l'API Buffer relevé par le panneau dans les en-têtes RateLimit : noms de fenêtre courts, compteurs.
+// La part restante est recalculée ici à partir des compteurs, sans reprendre celle du panneau.
+const WINDOW_NAME = /^[A-Za-z0-9_-]{1,32}$/;
+function checkedQuota(quota) {
+  if (!isRecord(quota)) return null;
+  const observedAt = instant(quota.observedAt);
+  const windows = list(quota.windows, 5).filter(w => isRecord(w) && WINDOW_NAME.test(w.name ?? ''))
+    .map(w => ({ name: w.name, remaining: countOr(w.remaining, null), limit: countOr(w.limit, null), windowSeconds: countOr(w.windowSeconds, null) }));
+  const ratios = windows.filter(w => w.remaining !== null && w.limit > 0).map(w => w.remaining / w.limit);
+  if (!observedAt || !ratios.length) return null;
+  return { observedAt, windows, lowestRatio: Math.floor(Math.min(...ratios) * 1000) / 1000 };
+}
+
 /** null tant que le panneau n'envoie pas ce bloc (version antérieure) ou l'envoie mal formé. */
 function checkedPublication(publication) {
   if (!isRecord(publication) || typeof publication.enabled !== 'boolean' || !isRecord(publication.counts)) return null;
   const problems = posts(publication.problems, troublePost), atRisk = posts(publication.atRisk, riskPost);
+  const retiredInBuffer = posts(publication.retiredInBuffer, retiredPost), retiredPublished = posts(publication.retiredPublished, retiredPublishedPost);
   return {
     enabled: publication.enabled,
     // null : aucun accès Buffer enregistré dans le panneau.
@@ -89,6 +118,10 @@ function checkedPublication(publication) {
     counts: Object.fromEntries(JOB_STATES.map(state => [state, countOr(publication.counts[state], 0)])),
     problems, problemsCount: Math.max(problems.length, countOr(publication.problemsCount, 0)),
     atRisk, atRiskCount: Math.max(atRisk.length, countOr(publication.atRiskCount, 0)),
+    // Absents d'un panneau antérieur à ces champs : listes vides, compteurs à zéro, quota null.
+    retiredInBuffer, retiredInBufferCount: Math.max(retiredInBuffer.length, countOr(publication.retiredInBufferCount, 0)),
+    retiredPublished, retiredPublishedCount: Math.max(retiredPublished.length, countOr(publication.retiredPublishedCount, 0)),
+    bufferQuota: checkedQuota(publication.bufferQuota),
   };
 }
 
