@@ -338,7 +338,7 @@ class GeneratorTests(unittest.TestCase):
         # At render: a scenario reviewed since the rule whose catalogue files such a photo is refused.
         later = dt.datetime(2026, 11, 16, 5, 17, tzinfo=dt.timezone.utc)
         scenario = f.scenario(f.run(now=later, limit=1)["created"][0]["id"])
-        with mock.patch.object(p, "derived_record", lambda record: True):
+        with mock.patch.object(p, "derived_record", return_value=True):
             with self.assertRaisesRegex(p.Invalid, "Not the photograph as taken"):
                 p.validate_scenario(scenario, f.root, later)
 
