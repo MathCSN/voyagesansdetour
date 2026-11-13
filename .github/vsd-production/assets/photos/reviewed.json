@@ -1,6 +1,54 @@
 {
   "schemaVersion": 1,
   "photos": {
+    "japon-nara-todaiji-bouddha": {
+      "alt": "Le Grand Bouddha de bronze du Tōdai-ji, à Nara.",
+      "focus": [
+        0.5,
+        0.38
+      ],
+      "camera": "Canon EOS 5D Mark III",
+      "file": "assets/photos/japon-nara-todaiji-bouddha.jpg",
+      "sha256": "a13608e9eba1b3a9bc7747250ea5f5a82ae7d21f84fcc82b77554f9e33312200",
+      "width": 1600,
+      "height": 1825,
+      "commonsTitle": "File:20190121 Tōdai-ji Great Buddha-2.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:20190121_T%C5%8Ddai-ji_Great_Buddha-2.jpg",
+      "author": "Balon Greyjoy",
+      "commonsCredit": "Own work",
+      "categories": "CC-Zero|Self-published work|Files with coordinates missing SDC location of creation|Japan photographs taken on 2019-01-21|January 2019 in Nara|Front views of the Todaiji Daibutsu",
+      "licence": "CC0",
+      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "originalSize": [
+        3806,
+        4342
+      ],
+      "commonsSha1": "e32c0e6dacdaef3363658da091c24ef8b7f66454",
+      "retrievedAt": "2026-11-13T09:20:27Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "japon-shinkansen-n700s-fuji": {
+      "alt": "Un shinkansen N700S devant le mont Fuji, sur la ligne Tōkaidō entre Tokyo et Kyoto.",
+      "camera": "NIKON Z 7_2",
+      "file": "assets/photos/japon-shinkansen-n700s-fuji.jpg",
+      "sha256": "49e0993d9d4a3daefa3ce745845163395c7eedf8b3e9537ca5b3581727dcc24d",
+      "width": 2400,
+      "height": 1600,
+      "commonsTitle": "File:Shinkansen N700S series photographed at Higashi-Tagonoura with Mount Fuji in the background, 10 April 2023.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Shinkansen_N700S_series_photographed_at_Higashi-Tagonoura_with_Mount_Fuji_in_the_background,_10_April_2023.jpg",
+      "author": "Takeshi Aida",
+      "commonsCredit": "https://www.flickr.com/photos/aidatakeshi/54551802904/",
+      "categories": "Flickr images reviewed by FlickreviewR 2|April 2023 in rail transport in Shizuoka prefecture|Tōkaidō Shinkansen with Mount Fuji in Fuji, Shizuoka|Shinkansen N700S on Tōkaidō Shinkansen|Photographs by Takeshi Aida",
+      "licence": "CC BY-SA 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "originalSize": [
+        7366,
+        4911
+      ],
+      "commonsSha1": "00071801dceb00556cfaea45fa999814b6aecbfb",
+      "retrievedAt": "2026-11-13T09:20:27Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
     "laponie-bureau-pere-noel": {
       "alt": "Le bureau du Père Noël illuminé sous la neige, à Rovaniemi.",
       "file": "assets/photos/laponie-bureau-pere-noel.jpg",
@@ -159,6 +207,58 @@
       "retrievedAt": "2026-11-12T12:27:50Z",
       "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
     },
+    "londres-somerset-house-patinoire": {
+      "alt": "La patinoire de Somerset House et sa façade illuminée, un soir d’hiver.",
+      "focus": [
+        0.62,
+        0.5
+      ],
+      "camera": "Canon EOS REBEL T5i",
+      "file": "assets/photos/londres-somerset-house-patinoire.jpg",
+      "sha256": "94bfbd682ceecc511de67a68acfcdf8b3476f47da2d549afdb5171532ce71c76",
+      "width": 2400,
+      "height": 1600,
+      "commonsTitle": "File:Skating Rink In Fountain Court at Somerset House, London (15980203534).jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Skating_Rink_In_Fountain_Court_at_Somerset_House,_London_(15980203534).jpg",
+      "author": "traveljunction",
+      "commonsCredit": "Skating Rink In Fountain Court at Somerset House, London",
+      "categories": "Flickr images reviewed by FlickreviewR 2|Ice skating at Somerset House|Somerset House at night",
+      "licence": "CC BY-SA 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "originalSize": [
+        5184,
+        3456
+      ],
+      "commonsSha1": "b474997d5ce4e1257dc69a7040fa31aabd0d21aa",
+      "retrievedAt": "2026-11-13T09:20:27Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "londres-winter-wonderland": {
+      "alt": "La grande roue et les chalets illuminés de Winter Wonderland, à Hyde Park.",
+      "focus": [
+        0.62,
+        0.55
+      ],
+      "camera": "HTC U Play",
+      "file": "assets/photos/londres-winter-wonderland.jpg",
+      "sha256": "cb65818afef571959abd6d578ba742bf6fffc5f9d139a2c6fc319feb5038a0f8",
+      "width": 2133,
+      "height": 1600,
+      "commonsTitle": "File:Various attractions in Hyde Park Winter Wonderland 2017.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Various_attractions_in_Hyde_Park_Winter_Wonderland_2017.jpg",
+      "author": "Simeon87",
+      "commonsCredit": "Own work",
+      "categories": "Taken with HTC U Play|Self-published work|Hyde Park Winter Wonderland 2017",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        4672,
+        3504
+      ],
+      "commonsSha1": "575d5e5db469535230226002a422cb23931d2929",
+      "retrievedAt": "2026-11-13T09:20:27Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
     "marrakech-essaouira-port": {
       "camera": "NIKON D3200",
       "alt": "Des barques bleues au pied de la Skala du port, à Essaouira.",
@@ -226,6 +326,59 @@
       "retrievedAt": "2026-11-12T19:49:44Z",
       "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
     },
+    "new-york-bryant-park-patinoire": {
+      "alt": "La patinoire de Bryant Park au pied des tours de verre, à New York.",
+      "focus": [
+        0.5,
+        0.6
+      ],
+      "camera": "DSC-HX400V",
+      "file": "assets/photos/new-york-bryant-park-patinoire.jpg",
+      "sha256": "1af97a1541071ba91b6df6c033978aa7fa544a62a8a85081506e87e9f28368f9",
+      "width": 1600,
+      "height": 2133,
+      "commonsTitle": "File:Winter Skating in Bryant Park - Manhattan - New York City - USA (24401986064).jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Winter_Skating_in_Bryant_Park_-_Manhattan_-_New_York_City_-_USA_(24401986064).jpg",
+      "author": "Adam Jones from Kelowna, BC, Canada",
+      "commonsCredit": "Winter Skating in Bryant Park - Manhattan - New York City - USA",
+      "categories": "1095 Avenue of the Americas|Bank of America Tower (Manhattan)|Photographs by Adam Jones|Flickr images reviewed by FlickreviewR 2|Bryant Park in 2016|Bryant Park ice rink",
+      "licence": "CC BY-SA 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "originalSize": [
+        2736,
+        3648
+      ],
+      "commonsSha1": "a6b106a71997c035374ad28526836d235e8ee101",
+      "retrievedAt": "2026-11-13T09:20:27Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "tenerife-costa-adeje-torviscas": {
+      "alt": "La plage de Torviscas et ses parasols de paille, à Costa Adeje, dans le sud de Tenerife.",
+      "focus": [
+        0.35,
+        0.55
+      ],
+      "emblematic": true,
+      "camera": "Canon EOS 6D Mark II",
+      "file": "assets/photos/tenerife-costa-adeje-torviscas.jpg",
+      "sha256": "d63881876868994e5a20a6a9622212d2392d96bacb3d7124617a0e96bc69a776",
+      "width": 2405,
+      "height": 1600,
+      "commonsTitle": "File:Aerial view of Playa de Torviscas beach in Costa Adeje on Tenerife, Spain (48225530037).jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Aerial_view_of_Playa_de_Torviscas_beach_in_Costa_Adeje_on_Tenerife,_Spain_(48225530037).jpg",
+      "author": "dronepicr",
+      "commonsCredit": "Aerial view of Playa de Torviscas beach in Costa Adeje on Tenerife, Spain",
+      "categories": "Costa Adeje|Spain photographs taken on 2019-04-23|Files with coordinates missing SDC location of creation|Flickr images reviewed by FlickreviewR 2|Files from dronepicr Flickr stream",
+      "licence": "CC BY 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "originalSize": [
+        4160,
+        2768
+      ],
+      "commonsSha1": "ff8fed6cbfb0c54e985f3da4a5365d096575a896",
+      "retrievedAt": "2026-11-13T09:20:27Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
     "thailande-iles-similan": {
       "alt": "La plage et l’eau turquoise de la baie de Donald Duck, sur Ko Similan, dans les îles Similan.",
       "file": "assets/photos/thailande-iles-similan.jpg",
@@ -245,6 +398,82 @@
       ],
       "commonsSha1": "a21c3eb3d145bfc9729288a55c493df531eea690",
       "retrievedAt": "2026-11-13T04:43:52Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "thailande-koh-samui-coral-cove": {
+      "alt": "La crique de Coral Cove, ses rochers et ses cocotiers, à Koh Samui.",
+      "focus": [
+        0.42,
+        0.5
+      ],
+      "emblematic": true,
+      "camera": "DSC-H70",
+      "file": "assets/photos/thailande-koh-samui-coral-cove.jpg",
+      "sha256": "335b25429f0ad6217ec9a7e73bdeffdd5e1626729a88477c204b5f2570ef6214",
+      "width": 2133,
+      "height": 1600,
+      "commonsTitle": "File:Koh Samui, Coral Cove Beach (6217274045).jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Koh_Samui,_Coral_Cove_Beach_(6217274045).jpg",
+      "author": "Fabio Achilli from Milano, Italy",
+      "commonsCredit": "Koh Samui, Coral Cove Beach",
+      "categories": "2013 in Thailand|Flickr images reviewed by FlickreviewR 2|Files uploaded by Orizan|Photographs by Fabio Achilli",
+      "licence": "CC BY 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "originalSize": [
+        4608,
+        3456
+      ],
+      "commonsSha1": "6b11245a297f04d080bd299d3cfca47d5a74fc9a",
+      "retrievedAt": "2026-11-13T09:20:27Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "thailande-phuket-promthep": {
+      "alt": "Le cap Promthep et ses palmiers, à la pointe sud de Phuket.",
+      "focus": [
+        0.5,
+        0.6
+      ],
+      "emblematic": true,
+      "camera": "NIKON D40",
+      "file": "assets/photos/thailande-phuket-promthep.jpg",
+      "sha256": "b05fbed02b2ad074a62c50f57cb8a8dfc5c69af8d5d0276f593a89b5931abaf7",
+      "width": 1600,
+      "height": 2407,
+      "commonsTitle": "File:Laem Phromthep in Phuket (5733631022).jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Laem_Phromthep_in_Phuket_(5733631022).jpg",
+      "author": "edwin.11",
+      "commonsCredit": "Laem Phromthep in Phuket",
+      "categories": "Taken with Nikon D40|Promthep cape|Flickr images reviewed by File Upload Bot (Magnus Manske)|Media needing category review as of 22 December 2022|Files with coordinates missing SDC location of creation|Thailand photographs taken on 2011-05-16|Files from Edwin Lee Flickr stream",
+      "licence": "CC BY 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "originalSize": [
+        2000,
+        3008
+      ],
+      "commonsSha1": "7368db0ef3e4a18f1a32c1cdc8a915692f187e78",
+      "retrievedAt": "2026-11-13T09:20:27Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "yucatan-el-castillo": {
+      "alt": "La pyramide d’El Castillo, à Chichén Itzá, sous un ciel sans nuage.",
+      "camera": "X-S20",
+      "file": "assets/photos/yucatan-el-castillo.jpg",
+      "sha256": "7b999db6b48816b86d570b6230e6c060ce2d95fc20a25c9c3d6907f5b606f83d",
+      "width": 2400,
+      "height": 1600,
+      "commonsTitle": "File:Kukulcan, Chichen Itza.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Kukulcan,_Chichen_Itza.jpg",
+      "author": "C13m3n7",
+      "commonsCredit": "Own work",
+      "categories": "Self-published work|Files with coordinates missing SDC location of creation|Chichen Itza - Castillo in the 2020s|February 2024 in Yucatán|Chichen Itza - Castillo - north side",
+      "licence": "CC BY 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "originalSize": [
+        6240,
+        4160
+      ],
+      "commonsSha1": "34f241b00bd42323c5632bcbf7aa1803eb7e4104",
+      "retrievedAt": "2026-11-13T09:20:27Z",
       "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
     },
     "yucatan-merida-cathedrale": {

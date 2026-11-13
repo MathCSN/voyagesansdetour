@@ -66,8 +66,35 @@ NOT_A_PHOTO = re.compile(r"\b(?:illustrations?|illustrated|drawings?|engravings?
 OLDEST_YEAR = 1950
 
 
+# Only the photograph as it was taken (Mathis's rule: no generated nor extended image). A file that Commons files as
+# retouched, cut out of or made from another file is not it, nor one whose title says "edit" or "cropped", nor one
+# whose source is another Commons file. On 13/11/2026 a reel was withdrawn for such a file (a landscape version of a
+# portrait photo, its margins made up), and a search returned two "edit" files filed under "Retouched pictures".
+# ("Images with extracted images" files the original other images were cut out of: it is the photograph as taken.)
+DERIVED = re.compile(r"retouched (?:pictures?|images?|photographs?)|derivative (?:works?|versions?)|(?<!with )extracted (?:images?|from)|images? extracted|"
+                     r"cropp?ed (?:images?|versions?|from)|digitally (?:altered|manipulated|modified)|photomontages?|upscaled|"
+                     r"(?:in|out)painted|generative fill|images? with borders? removed", re.IGNORECASE)
+DERIVED_TITLE = re.compile(r"\b(?:edit|edited|cropped|retouched|derivative|upscaled)\b|\((?:crop|cropped|edit|edited|retouched)[^)]*\)", re.IGNORECASE)
+ANOTHER_FILE = re.compile(r"\bFile:\S|\bderived from\b|\bderivative of\b|\bextracted from\b|\bcropped from\b|\bthis file was derived\b", re.IGNORECASE)
+
+
 class Refused(ValueError):
     pass
+
+
+def derived(title: str, categories: str, source: str) -> bool:
+    """Not the photograph as taken, by its title, its Commons categories or its source (another Commons file)."""
+    name = title.removeprefix("File:").rsplit(".", 1)[0].replace("_", " ")
+    return bool(DERIVED_TITLE.search(name) or DERIVED.search(categories.replace("_", " ").replace("|", " | ")) or ANOTHER_FILE.search(source))
+
+
+def derived_file(title: str, meta: dict) -> bool:
+    return derived(title, plain_text(meta.get("Categories", {}).get("value", "")), plain_text(meta.get("Credit", {}).get("value", "")))
+
+
+def derived_record(record: dict) -> bool:
+    """A catalogued file whose title, categories or source say it is not the photograph as it was taken."""
+    return derived(str(record.get("commonsTitle") or ""), str(record.get("categories") or ""), str(record.get("commonsCredit") or ""))
 
 
 def not_a_photograph(title: str, meta: dict) -> bool:
@@ -160,6 +187,8 @@ def commons_info(title: str) -> dict:
         raise Refused("AI-generated or not clearly photographic: " + title)
     if not_a_photograph(title, info.get("extmetadata", {})):
         raise Refused("Not a photograph (illustration, poster, artwork or old work): " + title)
+    if derived_file(title, info.get("extmetadata", {})):
+        raise Refused("Not the photograph as taken (retouched, cropped or made from another file): " + title)
     return info
 
 

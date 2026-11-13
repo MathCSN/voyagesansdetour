@@ -29,7 +29,7 @@ import clip_intake
 import motion_render as motion
 import place_names
 import social_render as draw
-from photo_intake import AI_MARKERS, LICENCES, ai_record
+from photo_intake import AI_MARKERS, LICENCES, ai_record, derived_record
 
 HERE = Path(__file__).resolve().parent
 W, H = draw.REEL_SIZE
@@ -427,6 +427,10 @@ def validate_scenario(scenario, root, now):
     # A post made since this guard exists never shows a fact over a photo of another place; the posts sealed before
     # it are audited by hand (two of them were withdrawn for it on 13/11/2026), not refused here.
     if checked >= instant(PLACES_FROM):
+        # Since the same review: only the photograph as it was taken (photo_intake.derived_record). Posts sealed before
+        # keep their receipts; the two that used such a file were withdrawn by hand.
+        altered = sorted(photo_id for photo_id, record in records.items() if derived_record(record))
+        ensure(not altered, "Not the photograph as taken (retouched, cropped or made from another file): " + ", ".join(altered))
         misplaced = photos_of_another_place(scenario, photos)
         ensure(not misplaced, "Photo of another place than its plan names: " + " ; ".join(misplaced))
     duration = sum(scene.get("seconds", 0) for scene in scenes)
@@ -454,9 +458,8 @@ def photos_of_another_place(scenario, photos) -> list[str]:
 
 
 def on_the_route(said, shown, recorded, places) -> bool:
-    """A journey over a ride of its kind, whose record names no place that is none of the journey's."""
-    return (place_names.journey(said) and place_names.ride(shown, said)
-            and all(place_names.widened({named}) & set(places) for named in recorded))
+    """A journey over a ride of its kind that does not stand elsewhere: its record names a place of the journey, or none."""
+    return place_names.journey(said) and place_names.ride(shown, said) and place_names.on_the_way(recorded, places)
 
 
 def another_place(scene, photos, everywhere) -> str | None:

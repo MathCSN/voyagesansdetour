@@ -358,6 +358,10 @@ class Media:
         """A photo of this post that another plan has taken, or that is kept for the call to action, shows what
         `text` names better than any photo still free: over another picture, that figure would name one place while
         the post shows it elsewhere. The figure stays in the guide."""
+        # A fact that names a place is not concerned: its photo is chosen by that place alone, and any free photo of it
+        # will do ("44 620 ¥ Tokyo–Kyoto–Hiroshima" over Shibuya once the shinkansen is taken).
+        if self.located(text):
+            return False
         target = self.target(text)
         return max((self.shared(ph, target) for ph in self.all), default=0) > max((self.shared(ph, target) for ph in self.free()), default=0)
 
@@ -440,10 +444,11 @@ class Media:
     def ride(self, text: str, pool: list, own: tuple | None, target: set[str], wider: set[str]) -> tuple | None:
         """For a journey ("Tokyo → Kyoto en Nozomi"), a photo of the ride before a town it names: the guide's own
         photo of it, else the one that names the most places of the journey; a ride of the same kind as the one the
-        text opens on (never a shinkansen for "Le bus 205 pour le Kinkaku-ji"), and never one whose record names a
-        place that is none of the journey's ("Hué → Đà Nẵng en train" went over the train street of Hanoi)."""
+        text opens on (never a shinkansen for "Le bus 205 pour le Kinkaku-ji"), and never one that stands somewhere
+        else: its record names one of the places of the journey, or no place at all ("Hué → Đà Nẵng en train" went
+        over the train street of Hanoi, "Tokyo → Kyoto" over the sign of Shin-Fuji station)."""
         places = self.places(text)
-        rides = [ph for ph in pool if place_names.ride(self.described(ph), text) and not self.elsewhere(ph, places)]
+        rides = [ph for ph in pool if place_names.ride(self.described(ph), text) and place_names.on_the_way(self.recorded(ph), places)]
         if not rides:
             return None
         return own if own in rides else max(rides, key=lambda ph: (len(places & self.described(ph)), self.shared(ph, target), self.shared(ph, wider)))

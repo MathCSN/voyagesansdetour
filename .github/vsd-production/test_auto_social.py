@@ -314,6 +314,34 @@ class GeneratorTests(unittest.TestCase):
         photos.known[banned] = ("laponie-village-boules-neige", {"commonsTitle": banned, "file": "assets/photos/x.jpg"})
         self.assertIsNone(photos.get({"id": "laponie-village-boules-neige", "title": banned, "alt": "Une pyramide de boules de neige."}))
 
+    def test_a_file_made_from_another_one_is_refused_at_intake_at_reuse_and_at_render(self):
+        derived = photo_intake.derived
+        self.assertTrue(derived("File:Snowball pyramid at Santa Claus' Village Large.jpg", "Rovaniemi", "File:Snowball_pyramid_at_Santa_Claus'_Village.jpg"))
+        self.assertTrue(derived("File:Kinkaku-ji (edit).jpg", "Kyoto", "Own work"))
+        self.assertTrue(derived("File:Tokyo Tower cropped.jpg", "", "Own work"))
+        self.assertTrue(derived("File:Fuji.jpg", "Mount Fuji|Retouched pictures", "Own work"))
+        self.assertTrue(derived("File:Fuji.jpg", "Extracted images", "Own work"))
+        # The original other images were cut out of, a word that only looks like one, a photo sharing service: all fine.
+        for title, categories, source in (("File:Playa Maya, Ko Phi Phi.JPG", "Images with extracted images|Ko Phi Phi Le", "Own work"),
+                                          ("File:Rice crop in Sapa.jpg", "Sa Pa", "Travail personnel"), ("File:Edith Piaf street.jpg", "", "own work"),
+                                          ("File:Lisboa (38916561925).jpg", "Lisbon", "https://www.flickr.com/photos/x/38916561925/")):
+            self.assertFalse(derived(title, categories, source), title)
+        with mock.patch.object(photo_intake, "fetch_json", return_value={"query": {"pages": {"1": {"imageinfo": [{
+                "mime": "image/jpeg", "width": 4000, "height": 3000, "extmetadata": {"Categories": {"value": "Retouched pictures|Kyoto"}}}]}}}}):
+            with self.assertRaisesRegex(photo_intake.Refused, "Not the photograph as taken"):
+                photo_intake.commons_info("File:Kyoto 9.jpg")
+        f = self.fixture()
+        photos = media_library.Photos(f.root, NOW, lambda *args: self.fail("a derived file must not be downloaded"))
+        self.assertIsNone(photos.get({"id": "kyoto-9", "title": "File:Kyoto temple (cropped).jpg", "alt": "Un temple."}))
+        photos.known["File:Kyoto 9.jpg"] = ("kyoto-9", {"commonsTitle": "File:Kyoto 9.jpg", "categories": "Retouched pictures", "file": "assets/photos/x.jpg"})
+        self.assertIsNone(photos.get({"id": "kyoto-9", "title": "File:Kyoto 9.jpg", "alt": "Un temple."}))
+        # At render: a scenario reviewed since the rule whose catalogue files such a photo is refused.
+        later = dt.datetime(2026, 11, 16, 5, 17, tzinfo=dt.timezone.utc)
+        scenario = f.scenario(f.run(now=later, limit=1)["created"][0]["id"])
+        with mock.patch.object(p, "derived_record", lambda record: True):
+            with self.assertRaisesRegex(p.Invalid, "Not the photograph as taken"):
+                p.validate_scenario(scenario, f.root, later)
+
     def test_a_photo_keeps_its_point_of_interest_from_the_generator_to_the_scenario_in_each_format(self):
         # The doe of Nara: 0.68 holds her whole on a 4:5 slide; the 9:16 frame of a reel needs its own point.
         with mock.patch.dict(media_library.SITE_FOCUS, {"kyoto-3": [0.68, 0.5]}), mock.patch.dict(media_library.SITE_FOCUS_VERTICAL, {"kyoto-3": [0.81, 0.5]}):
@@ -1110,8 +1138,9 @@ class ShownTests(unittest.TestCase):
                   ("lap-cabane", {"commonsTitle": "File:Hut.jpg"}, "Une cabane sous la neige.")]
         media = reel_formats.Media(photos, [], reserve=2, cover="lap-aurore", emblematic=reel_formats.emblematic(photos))
         self.assertEqual(media.spare(), "lap-village")
-        self.assertTrue(media.shown_elsewhere("la maximale moyenne de décembre à Rovaniemi"))
+        # It names a place: no free photo names it, so it gets no plan at all, neither in the first round nor after.
         self.assertIsNone(media.named("la maximale moyenne de décembre à Rovaniemi", None))
+        self.assertEqual(media.left_for("la maximale moyenne de décembre à Rovaniemi"), [])
         self.assertFalse(media.shown_elsewhere("la cabine du train de nuit"))
         self.assertEqual(media.photo("la cabine du train de nuit")[1], "lap-cabane")
         self.assertEqual(media.closing()[1], "lap-village")
@@ -1787,7 +1816,7 @@ class RealGuideTests(unittest.TestCase):
         # The post leans on found files: its cover is kept for the opening, and the fare that names it stays in the guide.
         bus = "le bus 19 de l’aéroport à Jemaa el-Fna (50 dh l’aller-retour)"
         self.assertIsNone(media.named(bus, None))
-        self.assertTrue(media.shown_elsewhere(bus))
+        self.assertEqual(media.left_for(bus), [])
         self.assertEqual(media.photo("le jardin Majorelle selon les relevés 2023-2024")[1], "marrakech-majorelle")
         self.assertEqual(media.opening(media.cover)[1], "marrakech-place-jemaa-el-fna")
         self.assertEqual(media.closing()[1], "marrakech-bahia")

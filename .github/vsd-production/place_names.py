@@ -292,6 +292,11 @@ def ride(described: set[str], text: str = "") -> bool:
     return bool(ways(described) & wanted) if wanted else bool(RIDES & described)
 
 
+def on_the_way(recorded: set[str], places: set[str] | list[str]) -> bool:
+    """The record of a ride names one of the places of a journey, or names no place: it does not stand elsewhere."""
+    return not recorded or any(widened({named}) & set(places) for named in recorded)
+
+
 def elsewhere(caption: str, places: set[str], everywhere: frozenset | set = frozenset()) -> set[str]:
     """The precise places a photo's caption names that are none of those the fact names: over such a photo, the fact
     would be read as a fact about that other place."""
