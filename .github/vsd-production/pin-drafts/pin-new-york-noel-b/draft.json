@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-new-york-noel-b",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "New York à Noël 2026 : le sapin du Rockefeller Center le 2 décembre, patinoires dès 0 $, Rockettes et prix",
+  "pinTitle": "New York à Noël : que faire et que voir, avec les prix",
+  "variant": "b",
+  "targetUrl": "https://voyagesansdetour.fr/etats-unis/new-york-noel/",
+  "articleSha256": "5c8608e9c5d4f149d711512526374f084ee7fd036323418dce70f8ce20a9c9df",
+  "imageSha256": "f7a3363661da9d3df35f40f733464bc8e390f59b7e90c993551f65ec99a9ed48",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "fdbf04a40b0bd104c5f381a47a9aa8aa30b6df590685a48e3ce4be0e6c3493b2",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "new-york-skyline",
+    "author": "Christian David",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Lower_Manhattan_skyline_from_under_the_Brooklyn_Bridge_deck,_New_York_City.jpg",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  }
+}

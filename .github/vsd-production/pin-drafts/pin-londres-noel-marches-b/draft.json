@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-londres-noel-marches-b",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Londres en décembre 2026 : Winter Wonderland, patinoires et métro plafonné à 8,90 £",
+  "pinTitle": "Londres en décembre : que faire et que voir, avec les prix",
+  "variant": "b",
+  "targetUrl": "https://voyagesansdetour.fr/royaume-uni/londres-noel-marches/",
+  "articleSha256": "9eae4bfd75626c44daba6e8f86e7dfb482b671a3ad0e89234d87b03767cdd96f",
+  "imageSha256": "8a16f570569528d9951b5d18bcc28c9bd7938c7448a5078ed05a32bde91d6fa7",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "fdbf04a40b0bd104c5f381a47a9aa8aa30b6df590685a48e3ce4be0e6c3493b2",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "londres-covent-garden",
+    "author": "Dietmar Rabich",
+    "source_page": "https://commons.wikimedia.org/wiki/File:London,_Covent_Garden_--_2016_--_4878.jpg",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-thailande-quand-partir-b",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Quand partir en Thaïlande : le bon mois pour Bangkok, le Nord, l’Andaman et Koh Samui",
+  "pinTitle": "Quand partir en Thaïlande : la meilleure période, mois par mois",
+  "variant": "b",
+  "targetUrl": "https://voyagesansdetour.fr/thailande/thailande-quand-partir/",
+  "articleSha256": "b18e6dadd7dfa0c1c80fd2768d05c800819af05182f67356a25dd699ab23ebdd",
+  "imageSha256": "2ec66307299832f158389cb306b95f21177b11dd07527f19d5ca071e5edcb85e",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "fdbf04a40b0bd104c5f381a47a9aa8aa30b6df590685a48e3ce4be0e6c3493b2",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "thailande-bangkok-grand-palais",
+    "author": "Bjørn Erik Pedersen",
+    "source_page": "https://commons.wikimedia.org/wiki/File:A_roof_of_a_building_at_the_Grand_Palace,_Bangkok,_sunrise,_2017.jpg",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  }
+}
