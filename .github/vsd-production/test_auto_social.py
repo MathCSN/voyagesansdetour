@@ -1610,10 +1610,35 @@ class RealGuideTests(unittest.TestCase):
         self.assertEqual([line.split(" names ")[0] for line in p.photos_of_another_place(post(*wrong), photos)], ["plan 2", "plan 3", "plan 4"])
         self.assertEqual(reel_formats.place_names.subjects("le Grand Bouddha du Tōdai-ji, à Nara, à 45 minutes de Kyoto par le train JR"), ["todai", "nara"])
         self.assertEqual(reel_formats.place_names.subjects("la fenêtre où Bangkok, Chiang Mai et la mer d’Andaman sont tous au sec"), ["bangkok", "mai", "andaman"])
+        photos = {**photos, "japon-n700": {"commonsTitle": "File:N700 Series Shinkansen.jpg"}, "thailande-train-nuit": {"commonsTitle": "File:THAI RAILWAYS NIGHT SLEEPER TRAIN.jpg"},
+                  "vietnam-train-hanoi": {"commonsTitle": "File:Hanoi train street with coffee.jpg"}, "tenerife-garachico": {"commonsTitle": "File:Vista de Garachico.jpg"},
+                  "tenerife-adeje": {"commonsTitle": "File:Tenerife Playa El Duque R01.jpg"}}
         fine = [plan("thailande-phi-phi", "*1er août*", "Maya Bay, à Phi Phi, ferme jusqu’au 30 septembre", "Les falaises et l’eau turquoise des îles Phi Phi."),
-                plan("japon-shinkansen", "*2 h 18*", "Tokyo → Kyoto en Nozomi, 13 960 ¥", "Le mont Fuji vu depuis le quai de la gare shinkansen de Shin-Fuji."),
-                plan("thailande-koh-samui", "*445 mm*", "de pluie à Koh Samui en novembre", "Une plage de sable blanc à Koh Samui.")]
+                plan("japon-n700", "*2 h 18*", "Tokyo → Kyoto en Nozomi, 13 960 ¥", "Un shinkansen N700 en pleine voie."),
+                plan("thailande-train-nuit", "*12 h 35*", "Bangkok → Chiang Mai par le train de nuit n° 9", "L’intérieur d’une voiture-couchettes de deuxième classe."),
+                plan("thailande-koh-samui", "*445 mm*", "de pluie à Koh Samui en novembre", "Une plage de sable blanc à Koh Samui."),
+                plan("tenerife-adeje", "*222 h*", "de soleil en janvier au sud (aéroport Tenerife Sud), contre 150 h dans le nord", "La plage du Duque à Costa Adeje, dans le sud de l’île."),
+                plan("thailande-koh-samui", "*1 367 €*", "le budget confort en business hôtel à deux", "Une plage de sable blanc à Koh Samui.")]
         self.assertEqual(p.photos_of_another_place(post(*fine), photos), [])
+        # Review of 13/11/2026, cases replayed with the generator of that morning, all accepted by the first guard:
+        # a journey over a ride at another place, a place the record does not name at all, a part of the destination
+        # over a precise place of another part, a ticket taken for a journey, two hours taken for the ends of a journey.
+        astray = [plan("japon-shinkansen", "*2 h 18*", "Tokyo → Kyoto en Nozomi, 13 960 ¥", "Le mont Fuji vu depuis le quai de la gare shinkansen de Shin-Fuji."),
+                  plan("vietnam-train-hanoi", "*2 h 32*", "de Hué à Đà Nẵng en train de jour (SE1, 9 h 40 → 12 h 12), porte d’entrée de Hội An à 35 km", "Une rue de Hanoï longée par la voie ferrée."),
+                  plan("thailande-train-nuit", "*350 mm*", "de pluie à Phuket en septembre", "L’intérieur d’une voiture-couchettes de deuxième classe."),
+                  plan("vietnam-train-hanoi", "*120 000 ₫*", "le billet de la vieille ville de Hội An, cinq sites au choix", "Une rue de Hanoï longée par la voie ferrée."),
+                  plan("thailande-phi-phi", "*15 octobre*", "la réouverture des îles Similan", "Les îles Phi Phi, plus au sud que les Similan.")]
+        self.assertEqual([line.split(" names ")[0] for line in p.photos_of_another_place(post(*astray), photos)], [f"plan {n}" for n in range(2, 7)])
+        sun = "de soleil en janvier au sud (aéroport Tenerife Sud), contre 150 h dans le nord"
+        island = lambda photo, alt, kicker="Tenerife": {"destination": "Tenerife", "scenes": [edge, {**plan(photo, "*222 h*", sun, alt), "kicker": kicker}, edge]}
+        self.assertEqual(p.photos_of_another_place(island("tenerife-garachico", "Le village de Garachico et sa côte de lave."), photos),
+                         ["plan 2 names the sud over tenerife-garachico (garachico)"])
+        self.assertEqual(p.photos_of_another_place(island("tenerife-adeje", "La plage du Duque à Costa Adeje, dans le sud de l’île."), photos), [])
+        # The name of its own section above a photo says which part of the island it is of.
+        self.assertEqual(p.photos_of_another_place(island("tenerife-adeje", "La plage du Duque, à Costa Adeje.", "Le sud"), photos), [])
+        self.assertEqual(len(p.photos_of_another_place(island("tenerife-adeje", "La plage du Duque, à Costa Adeje."), photos)), 1)
+        names = reel_formats.place_names
+        self.assertEqual((names.linked("9 h 40 → 12 h 12"), names.linked("Tokyo → Kyoto"), names.journey("le billet de la vieille ville de Hội An")), (False, True, False))
 
     def test_a_photo_post_whose_figures_all_belong_to_a_day_reads_day_after_day(self):
         days = {number: {"title": f"Jour {number} — {name}"} for number, name in ((1, "La médina"), (2, "Le jardin Majorelle"), (3, "Sortir de la ville"))}

@@ -28,20 +28,24 @@ GENERIC = frozenset("""
     janvier fevrier mars avril mai juin juillet aout septembre octobre novembre decembre
     lundi mardi mercredi jeudi vendredi samedi dimanche noel paques
     park center centre square street bridge tower beach island islands lake mount river market museum garden gardens
-    palace church house hall city bay view""".split())
+    palace church house hall city bay view station railway castle cathedral temple old town
+    ponte praia praca rua igreja torre castelo palacio estacao mosteiro cais largo miradouro jardim catedral plaza puente""".split())
 # What a journey is made by, as a fact says it; and what a photo of it shows.
 WAYS = {"rail": frozenset("train trains shinkansen tgv couchette couchettes rame railway sleeper locomotive wagon".split()),
         "urban": frozenset("metro tram tramway".split()), "road": frozenset(["bus"]),
         "water": frozenset("ferry ferries bateau bateaux".split())}
 RIDES = frozenset().union(*WAYS.values())   # never a station alone: it is a place
 TRANSPORT = RIDES | frozenset("billet billets".split())
-CARRIED_BY = frozenset("chez bus ferry train trains ligne compagnie".split())   # "chez Supratours", "bus Phantip"; not "en": "en Alentejo"
+# "chez Supratours", "ligne Yamanote". Not "en" ("en Alentejo") nor "train" or "bus" ("le train Rossio–Sintra"): a
+# carrier read as a place leaves a plan out, a place read as a carrier would let its fact go over any photo.
+CARRIED_BY = frozenset("chez ligne compagnie".split())
 # Names written with a capital that are no places: tickets, cards, operators, trains, brands, peoples. Reviewed by
 # hand, like GENERIC: "16,55 € l'Andante Tour 3" names no place, nor does "un casier City Lockers", "pour les Français"
 # or "le Père Noël" (13/11/2026: three posts were refused, and a locker of Porto went over a tram of Lisbon).
 NOT_PLACES = frozenset("""
     andante navegante viva viagem zapping carris metro cp alfa pendular alfapendular intercidades interregional regional promo urbano
     renfe ave avlo ouigo iryo trenitalia italo frecciarossa sita mepe interbus ado tren maya nozomi hikari kodama sakura
+    turistica conforto classe azul phantip supratours ctm travelmar alilauro flixbus alsa rede expressos
     jr japan rail pass suica pasmo icoca oyster tfl contactless grab bolt uber city lockers locker bounce nannybag luggage
     pere noel claus santa inah unesco covid wifi
     francais francaise francaises europeen europeens europeenne portugais portugaise espagnol espagnole italien italienne
@@ -247,7 +251,7 @@ def recorded(identifier: str, caption: str, title: str = "", everywhere: frozens
     prefix, _, rest = identifier.partition("-")
     own = words((rest if prefix == family else identifier).replace("-", " "))
     title = title.removeprefix("File:").rsplit(".", 1)[0] if title else ""
-    places = set(named(caption, everywhere, sentence=True, known=own | words(title)))
+    places = set(named(subject(caption), everywhere, sentence=True, known=own | words(title)))
     if places or not words(caption) <= set(everywhere) | GENERIC:
         return places
     return set(named(subject(title), everywhere))
