@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-cinque-terre-sans-voiture-b",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Les Cinque Terre sans voiture : train toutes les 20 minutes, Via dell’Amore et carte à 17,30 €",
+  "pinTitle": "Les Cinque Terre en train : itinéraire jour par jour, prix et conseils",
+  "variant": "b",
+  "targetUrl": "https://voyagesansdetour.fr/italie/cinque-terre-sans-voiture/",
+  "articleSha256": "00739442f623e5c4d8667295ec447000e40f276c91af42fd7a9153e4e133f493",
+  "imageSha256": "8e85263440d079a79d5b48dbe2454e9c577389c9695d4a39efb05d1793613fd9",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "fdbf04a40b0bd104c5f381a47a9aa8aa30b6df590685a48e3ce4be0e6c3493b2",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "cinque-train",
+    "author": "Timothy A. Gonsalves",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Train_Station_Corniglia_View_Manarola_Sep23_A7C_06890.jpg",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+  }
+}
