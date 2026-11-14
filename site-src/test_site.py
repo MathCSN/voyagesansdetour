@@ -528,7 +528,7 @@ class PublicBuildTest(unittest.TestCase):
     def test_an_updated_guide_shows_its_update_date(self):
         page=read(self.out,'/portugal/aeroport-porto-centre-ville/')
         self.assertRegex(page,r'Publié le 27 septembre 2026 · Mis à jour le \d+ \w+ 2026')
-        self.assertNotIn('Mis à jour le',read(self.out,'/japon/japon-itineraire-2-semaines/').split('class="byline"')[1].split('</div>')[0])
+        self.assertNotIn('Mis à jour le',read(self.out,'/japon/japon-budget-2-semaines/').split('class="byline"')[1].split('</div>')[0])
 
     def test_fonts_are_served_as_woff2_and_never_ahead_of_the_first_photo(self):
         self.assertEqual(sorted(p.name for p in (self.out/'assets').glob('font-*')),[f'font-{i}.woff2' for i in range(7)])
