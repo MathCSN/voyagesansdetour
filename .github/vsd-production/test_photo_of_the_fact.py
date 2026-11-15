@@ -473,5 +473,306 @@ class FollowUpOfPullRequest54(unittest.TestCase):
         self.assertEqual(names.vehicle("vietnam-trang-an", "Des barques sur la rivière de Tràng An.", "File:Trang An boats.jpg"), {"water"})
 
 
+class OpeningAndSubject(unittest.TestCase):
+    """Review of PR 56, points 6 and 7."""
+
+    MARRAKECH = {"sections": [{"title": "Jour 3 — Sortir de la ville : Ouzoud, Essaouira ou l’Ourika"}]}
+
+    def test_a_post_opens_on_its_destination_not_on_an_outing(self):
+        port = photo("marrakech-essaouira-port", "File:Skala.jpg", "Des barques bleues au pied de la Skala du port, à Essaouira.")
+        majorelle = photo("marrakech-majorelle", "File:Majorelle.jpg", "La villa bleue du jardin Majorelle.")
+        koutoubia = photo("marrakech-koutoubia", "File:Koutoubia.jpg", "Le minaret de la Koutoubia, à Marrakech.", emblematic=True)
+        outings = names.outings(self.MARRAKECH, names.words("Maroc Marrakech"))
+        self.assertEqual(outings, (("ouzoud",), ("essaouira",), ("ourika",)))
+        media = reel_formats.Media([port, majorelle, koutoubia], [], cover="marrakech-place-jemaa-el-fna",
+                                   emblematic=("marrakech-koutoubia",), everywhere="Maroc Marrakech", outings=outings)
+        self.assertTrue(media.excursion(port))
+        self.assertFalse(media.excursion(koutoubia))
+        self.assertEqual(media.opening("marrakech-place-jemaa-el-fna")[1], "marrakech-majorelle")
+        # Only an outing left to open with (the Koutoubia kept for the call to action): the post waits.
+        alone = reel_formats.Media([port, koutoubia], [], emblematic=("marrakech-koutoubia",), everywhere="Maroc Marrakech", outings=outings)
+        with self.assertRaises(reel_formats.Held):
+            alone.opening(None)
+
+    def test_a_carousel_opens_on_the_guide_s_cover_when_no_plan_took_it(self):
+        # Review of PR 57: the carousels opened on the photo their rotation put first; the guide's cover now comes first.
+        jemaa = photo("marrakech-place-jemaa-el-fna", "File:Jemaa.jpg", "La place Jemaa el-Fna en fin de journée.", emblematic=True)
+        bahia = photo("marrakech-bahia", "File:Bahia.jpg", "La grande cour du palais de la Bahia, à Marrakech.", emblematic=True)
+        media = reel_formats.Media([bahia, jemaa], [], cover="marrakech-bahia", reserved="marrakech-place-jemaa-el-fna", everywhere="Maroc Marrakech")
+        self.assertEqual(media.opening(media.cover)[1], "marrakech-place-jemaa-el-fna")
+
+    def test_only_the_places_a_section_sends_the_reader_to_are_outings(self):
+        # Review of PR 57: "place != country" took Gaia, Guéliz or Brooklyn for outings and the guides of a region for
+        # guides of a town (Yucatán opened on the cathedral of Mérida, Laponie lost its village). Only a section that
+        # says it. Counter-review of PR 57: "Kyoto, et Nara en excursion" makes Nara a stage of the trip, not an outing.
+        japan = {"sections": [{"title": "Jours 5 à 8 — Kyoto, et Nara en excursion"}, {"title": "Jours 1 à 4 — Tokyo"}]}
+        self.assertEqual(names.outings(japan, names.words("Japon")), ())
+        for guide, caption in (({"sections": [{"title": "Jour 2 — Le pont en métro, Gaia et ses caves"}]}, "Le pont Luís I et la Ribeira vus depuis la Serra do Pilar, à Gaia."),
+                               ({"sections": [{"title": "Jours 4-6 : Mérida et Uxmal"}]}, "La pyramide d’El Castillo, à Chichén Itzá."),
+                               ({"sections": [{"title": "Ce qui est gratuit au village du Père Noël"}]}, "Le village du Père Noël sous la neige, à Rovaniemi.")):
+            self.assertEqual(names.outings(guide, names.words("Portugal Porto")), ())
+            self.assertFalse(names.on_an_outing(caption, "", names.outings(guide)))
+        # The guard reads the same outings in the site's articles and refuses an opening on one of them.
+        scene = {"photo": "marrakech-essaouira-port", "alt": "Des barques bleues au pied de la Skala du port, à Essaouira."}
+        self.assertIsNotNone(p.opening_on_an_outing(scene, {"marrakech-essaouira-port": {"commonsTitle": "File:Skala.jpg"}},
+                                                    names.outings(self.MARRAKECH), names.words("Marrakech")))
+
+    def test_never_the_same_subject_twice_in_a_post(self):
+        north = photo("yucatan-el-castillo", "File:Kukulcan, Chichen Itza.jpg", "La pyramide d’El Castillo, à Chichén Itzá, sous un ciel sans nuage.")
+        south = photo("yucatan-chichen-itza", "File:Templo el Castillo - Chichen Itza-Yucatan-Mexico0222.jpg", "La pyramide d’El Castillo, à Chichén Itzá.")
+        cenote = photo("yucatan-cenote", "File:Cenote Ik Kil.jpg", "Un cenote entouré de lianes.")
+        media = reel_formats.Media([north, south, cenote], [], cover="yucatan-el-castillo", everywhere="Mexique Yucatán")
+        self.assertTrue(media.subjects(north) & media.subjects(south))
+        self.assertEqual(media.opening("yucatan-el-castillo")[1], "yucatan-el-castillo")
+        self.assertNotIn("yucatan-chichen-itza", [ph[0] for ph in media.free()])
+        self.assertIsNone(media.named("697 pesos l’entrée de Chichén Itzá pour un étranger", None))
+        # Two photos of one town are not one subject: a hut and a dog team, both at Rovaniemi.
+        hut = photo("lap-cabane", "File:Hut.jpg", "Une cabane sous la neige, à Rovaniemi.")
+        dogs = photo("lap-huskies", "File:Dogs.jpg", "Un attelage de huskies sur une piste enneigée, à Rovaniemi.")
+        lapland = reel_formats.Media([hut, dogs], [], everywhere="Finlande Laponie")
+        lapland.photos.remove(hut)
+        self.assertIn("lap-huskies", [ph[0] for ph in lapland.free()])
+
+    def test_one_name_of_a_monument_is_enough_for_one_subject(self):
+        # Review of PR 57: the arch of the rua Augusta came back as « l'arc de la rue Augusta, sur la place du
+        # Commerce »; the village of Santa Claus twice; Ponta da Piedade then the cliffs near Lagos, one coast.
+        for first, second in ((("L’arc de la rua Augusta et la statue équestre de la Praça do Comércio.", "File:Lisbon Praça do Comércio.jpg"),
+                               ("Un tram vert devant l’arc de la rue Augusta, sur la place du Commerce, à Lisbonne.", "File:Lisbon BW.jpg")),
+                              (("Le village du Père Noël sous la neige, à Rovaniemi.", "File:Santa_Claus_Village_(5307460482).jpg"),
+                               ("Le village du Père Noël de Rovaniemi sous la neige, en décembre.", "File:Rovaniemi pajakyla.jpg")),
+                              (("Les arches de roche dorée et l’eau claire de Ponta da Piedade, près de Lagos.", "File:Lagos Ponta da Piedade.jpg"),
+                               ("Les falaises ocre et les criques près de Lagos.", "File:Portugal - Algarve - cliffs near Lagos.jpg")),
+                              (("Tower Bridge au-dessus de la Tamise.", "File:London, Tower Bridge.jpg"), ("Tower Bridge ouvert, au crépuscule.", "File:TB.jpg"))):
+            self.assertTrue(names.photo_subjects(*first) & names.photo_subjects(*second), first[0])
+        self.assertFalse(names.photo_subjects("La tour de Belém au bord du Tage.") & names.photo_subjects("Le monastère des Jerónimos, à Belém."))
+
+    def test_the_counter_review_widens_the_table_and_reads_the_categories_of_commons(self):
+        # The office of Santa Claus shows the village; the Ribeira and its rabelos twice; Mount Fuji twice.
+        for first, second in ((("Le bureau du Père Noël illuminé sous la neige, à Rovaniemi.", "File:Santa Claus Village.jpg"),
+                               ("Le village du Père Noël de Rovaniemi sous la neige, en décembre.", "File:Rovaniemi pajakyla.jpg")),
+                              (("Les façades de Ribeira au bord du Douro à Porto.", ""), ("Un bateau rabelo sur le Douro, face aux façades de la Ribeira.", "")),
+                              (("La pagode de Chureito et le mont Fuji au-dessus de Fujiyoshida.", ""), ("Un shinkansen N700S devant le mont Fuji.", ""))):
+            self.assertTrue(names.photo_subjects(*first) & names.photo_subjects(*second), first[0])
+        # Narrower: a photo of Lagos is not Ponta da Piedade, and Tulum has its own Castillo.
+        self.assertFalse(names.photo_subjects("Le port de Lagos.") & names.photo_subjects("Les arches de Ponta da Piedade, près de Lagos."))
+        self.assertTrue(names.photo_subjects("Les falaises ocre.", "File:Portugal - Algarve - cliffs near Lagos.jpg") & names.photo_subjects("Ponta da Piedade."))
+        self.assertFalse(names.photo_subjects("El Castillo de Tulum au-dessus de la mer.") & names.photo_subjects("La pyramide de Kukulcán, à Chichén Itzá."))
+        # One Commons category of a place shared: one subject. Never a town, a country, a date, a tool or the sky.
+        shared = "Rabelos in Cais de Gaia with Ribeira"
+        self.assertTrue(names.photo_subjects("Un quai.", "", names.words("Porto"), "Taken with Nikon|" + shared)
+                        & names.photo_subjects("Un autre quai.", "", names.words("Porto"), "Self-published work|" + shared))
+        self.assertEqual(names.place_categories("Porto|May 2012 in Porto|Blue sky in Portugal|Taken with Canon EOS|Cultural heritage monuments in Portugal with known IDs",
+                                                names.words("Porto Portugal")), set())
+        # The guard refuses it in a post made since the review.
+        scenes = [{"photo": "a", "alt": "L’arc de la rua Augusta et la statue équestre de la Praça do Comércio."}, {"photo": "b", "alt": "Un tram vert devant l’arc de la rue Augusta, sur la place du Commerce, à Lisbonne."}]
+        self.assertEqual([number for number, _ in p.subjects_repeated(scenes, {"a": {}, "b": {}}, names.words("Lisbonne"))], [2])
+
+
+class RideToAnotherPlace(unittest.TestCase):
+    """Review of PR 56, point 4, the narrow rule: a fact that names its means of transport and another place than the
+    photo's goes over a photo of that means; a fare taken in the town stays over a photo of the town."""
+
+    ALFAMA = photo("lisbonne-alfama", "File:Alfama.jpg", "Les toits et l’église de São Vicente, dans l’Alfama, à Lisbonne.")
+    FERRY = photo("lisbonne-cacilhas-ferry", "File:Cacilhas ferry.jpg", "Un ferry de la Transtejo sur le Tage, vers Cacilhas.")
+    EVERYWHERE = "Portugal Lisbonne"
+
+    def shown(self, record: tuple) -> set[str]:
+        return reel_formats.Media([record], [], everywhere=self.EVERYWHERE).described(record)
+
+    def test_a_ride_to_another_place_needs_its_means(self):
+        alfama, everywhere = self.shown(self.ALFAMA), names.words(self.EVERYWHERE)
+        for text in ("2 € la traversée du Tage en ferry vers Cacilhas", "35,70 € l’Alfa Pendular entre les deux villes",
+                     "4,50 € le bus pour Sintra depuis Lisbonne"):
+            self.assertTrue(names.ride_needed(text, alfama, everywhere), text)
+
+    def test_a_fare_inside_the_town_stays_over_the_town(self):
+        alfama, everywhere = self.shown(self.ALFAMA), names.words(self.EVERYWHERE)
+        for text in ("16 à 23 € le taxi depuis l’aéroport de Lisbonne", "8,90 € le plafond quotidien du métro", "10 € la tour de Belém"):
+            self.assertFalse(names.ride_needed(text, alfama, everywhere), text)
+
+    def test_a_ticket_of_the_town_goes_over_its_metro_tram_bus_or_train(self):
+        # Review of PR 57: "1,90 € ticket Carris/Metro" went over the roofs of Alfama.
+        alfama, everywhere = self.shown(self.ALFAMA), names.words(self.EVERYWHERE)
+        tram = photo("lisbonne-tram28", "File:Tram 28.jpg", "Un tram jaune de la ligne 28 dans une rue pavée de Lisbonne.")
+        for text in ("1,90 € ticket Carris/Metro", "16,55 € l’Andante Tour 3 : métro, bus et trains urbains pendant 72 h"):
+            self.assertTrue(names.ride_needed(text, alfama, everywhere), text)
+            self.assertEqual(names.wanted_ways(text), {"metro", "tram", "road", "rail"})
+        media = reel_formats.Media([self.ALFAMA, tram], [], everywhere=self.EVERYWHERE)
+        self.assertTrue(media.misleads("1,90 € ticket Carris/Metro", self.ALFAMA))
+        self.assertEqual(media.photo("1,90 € ticket Carris/Metro")[1], "lisbonne-tram28")
+        # Not in a post of the queue, made before the review.
+        self.assertFalse(names.ride_needed("1,90 € ticket Carris/Metro", alfama, everywhere, tickets=False))
+
+    def test_a_ticket_of_the_town_leaves_its_only_ride_to_the_journey_that_needs_it(self):
+        # Porto: "l'Andante Tour 3 : métro, bus et trains" took the metro on the bridge, "2 min de métro D" had none.
+        metro = photo("porto-metro-luis-tablier", "File:Metro.jpg", "Le métro de Porto sur le tablier supérieur du pont Luís I, au-dessus du Douro.")
+        tram = photo("porto-tram-historique", "File:Tram.jpg", "Un tram historique de Porto.")
+        facts = [{"value": "16,55 €", "label": "l’Andante Tour 3 : métro, bus et trains urbains pendant 72 h", "section": None},
+                 {"value": "2 min", "label": "de métro D au-dessus du Douro, entre São Bento et Jardim do Morro", "section": None}]
+        media = reel_formats.Media([metro, tram], [], everywhere="Portugal Porto")
+        taken = {facts[index]["value"]: media.photo(media.about(facts[index]))[1] for index in reel_formats.placed(facts, media, 2, 2)}
+        self.assertEqual(taken, {"2 min": "porto-metro-luis-tablier", "16,55 €": "porto-tram-historique"})
+
+    def test_the_generator_puts_the_ride_over_its_means_or_leaves_it_in_the_guide(self):
+        ferry = "2 € la traversée du Tage en ferry vers Cacilhas"
+        media = reel_formats.Media([self.ALFAMA, self.FERRY], [], everywhere=self.EVERYWHERE)
+        self.assertTrue(media.misleads(ferry, self.ALFAMA))
+        self.assertFalse(media.misleads(ferry, self.FERRY))
+        self.assertEqual(media.photo(ferry)[1], "lisbonne-cacilhas-ferry")
+        alone = reel_formats.Media([self.ALFAMA], [], everywhere=self.EVERYWHERE)
+        self.assertEqual(alone.takeable(ferry), [])
+
+    def test_the_guard_refuses_it_only_in_posts_made_after_the_rule(self):
+        # "Entre les deux villes" names no place: only the rule on rides refuses it over a church of Alfama.
+        scene = {"photo": "lisbonne-alfama", "headline": ["*35,70 €*"], "detail": "l’Alfa Pendular entre les deux villes",
+                 "alt": self.ALFAMA[2]}
+        records, everywhere = {"lisbonne-alfama": self.ALFAMA[1]}, names.words(self.EVERYWHERE)
+        self.assertIn("ride to another place", p.another_place(scene, records, everywhere))
+        # A post sealed before the rule stays valid in the queue: the guard reads it as it was made. The rule starts
+        # with the guard on places (review of PR 57: a later date let the posts of 16/11 escape it).
+        self.assertIsNone(p.another_place(scene, records, everywhere, rides=False))
+        self.assertEqual(p.RIDES_FROM, p.PLACES_FROM)
+        self.assertLess(p.instant(p.REVIEW_57_FROM), p.instant("2026-11-15T12:00:00Z"))
+
+    def test_a_photo_of_a_train_belongs_to_the_train_not_to_the_guide(self):
+        # « Lisbonne ou Porto ? » names the Alfa Pendular and had no train of its own; the stock holds several, filed
+        # under "train-". Offered to any guide that names that train, never a station, never to open or close its posts.
+        import media_library
+        site = {"train-alfa-pendular": {"source_page": "https://commons.wikimedia.org/wiki/File:Alfa_Pendular_New_Livery.jpg",
+                                        "alt_fr": "Un train Alfa Pendular de CP à quai."},
+                "train-campanha": {"source_page": "https://commons.wikimedia.org/wiki/File:Campanha.jpg",
+                                   "alt_fr": "La façade de la gare de Porto-Campanhã, desservie par l’Alfa Pendular."},
+                "lisbonne-alfama": {"source_page": "https://commons.wikimedia.org/wiki/File:Alfama.jpg", "alt_fr": self.ALFAMA[2]}}
+        guide = {"title": "Lisbonne ou Porto ?", "keyFacts": [{"value": "35,70 €", "label": "l’Alfa Pendular entre les deux villes"}]}
+        offered = media_library.vehicle_candidates(guide, site)
+        self.assertEqual([candidate["id"] for candidate in offered], ["train-alfa-pendular"])
+        self.assertIs(offered[0]["emblematic"], False)
+        self.assertEqual(offered[0]["borrowedFor"], ["alfa pendular"])
+        self.assertEqual(media_library.closing_mark(offered[0], {"file": "a.jpg"})["borrowedFor"], ["alfa pendular"])
+        self.assertEqual(media_library.vehicle_candidates({"title": "Lisbonne en 3 jours", "keyFacts": [{"label": "le tram 28"}]}, site), [])
+
+    def test_a_borrowed_train_goes_only_under_the_fact_that_names_it_and_once_per_post(self):
+        # Review of PR 57: « 2,55 € le train de Lisbonne à Sintra » went over an Alfa Pendular (it does not go to
+        # Sintra), the luggage of the international trains over another, and two Alfa stood in one post.
+        alfa = photo("train-alfa-pendular", "File:Alfa Pendular New Livery.jpg", "Un train Alfa Pendular de CP à quai.", borrowedFor=["alfa pendular"])
+        oriente = photo("train-oriente", "File:Oriente.jpg", "Un Alfa Pendular à quai en gare de Lisboa Oriente.", borrowedFor=["alfa pendular"])
+        media = reel_formats.Media([self.ALFAMA, alfa, oriente], [], everywhere=self.EVERYWHERE)
+        self.assertTrue(media.misleads("2,55 € le train de Lisbonne à Sintra", alfa))
+        self.assertTrue(media.misleads("85×55×35 cm la valise des trains internationaux CP", alfa))
+        self.assertFalse(media.misleads("35,70 € l’Alfa Pendular entre les deux villes", alfa))
+        media.photo("35,70 € l’Alfa Pendular entre les deux villes")
+        self.assertEqual([ph[0] for ph in media.free()], ["lisbonne-alfama"])
+        # A borrowed train never closes a post.
+        with self.assertRaises(reel_formats.Held):
+            media.closing()
+        # The guard: under a fact of another train, or a second one.
+        everywhere = names.words(self.EVERYWHERE)
+        records = {"train-alfa-pendular": alfa[1], "train-oriente": oriente[1]}
+        scenes = [{"photo": "train-alfa-pendular", "headline": ["*2,55 €*"], "detail": "le train de Lisbonne à Sintra"},
+                  {"photo": "train-oriente", "headline": ["*35,70 €*"], "detail": "l’Alfa Pendular entre les deux villes"}]
+        self.assertEqual([number for number, _ in p.borrowed_elsewhere(scenes, records, everywhere)], [1, 2])
+
+    def test_a_fact_of_trains_with_no_place_goes_over_a_train_and_a_borrowed_one_never_joins_its_own(self):
+        # Counter-review of PR 57, « Portugal bagages »: « 85×55×35 cm … trains internationaux CP » went over the roofs of
+        # Alfama; a borrowed Alfa Pendular stood beside the guide's own.
+        own = photo("train-alfa-pendular", "File:Alfa Pendular New Livery.jpg", "Un train Alfa Pendular de CP à quai.")
+        lent = photo("train-alfa-aqueduc", "File:Aqueduc.jpg", "Un Alfa Pendular passe sous l’aqueduc des Eaux Libres.", borrowedFor=["alfa pendular"])
+        media = reel_formats.Media([own, lent, self.ALFAMA], [], everywhere=self.EVERYWHERE)
+        luggage = "85×55×35 cm la taille maximale des bagages sur les trains internationaux CP"
+        self.assertTrue(media.misleads(luggage, self.ALFAMA))
+        self.assertFalse(media.misleads(luggage, own))
+        self.assertTrue(media.misleads(luggage, lent))   # a borrowed train only for the fact that names it
+        self.assertEqual(names.wanted_ways("60 jours la vente sur le site CP"), {"rail"})
+        media.photo("6,50 € par bagage en trop à bord de l’Alfa Pendular")
+        self.assertNotIn("train-alfa-aqueduc", [ph[0] for ph in media.free()])
+        everywhere = names.words(self.EVERYWHERE)
+        scenes = [{"photo": "x", "alt": "Une rue de Lisbonne."},
+                  {"photo": "lisbonne-alfama", "alt": self.ALFAMA[2], "headline": ["*85×55×35 cm*"], "detail": "les bagages sur les trains internationaux CP"},
+                  {"photo": "train-alfa-pendular", "alt": own[2], "headline": ["*6,50 €*"], "detail": "par bagage en trop à bord de l’Alfa Pendular"},
+                  {"photo": "train-alfa-aqueduc", "alt": lent[2], "headline": ["*6,50 €*"], "detail": "par bagage en trop à bord de l’Alfa Pendular"},
+                  {"photo": "y", "alt": "Les toits de Lisbonne."}]
+        records = {"train-alfa-pendular": own[1], "train-alfa-aqueduc": lent[1], "lisbonne-alfama": self.ALFAMA[1], "x": {}, "y": {}}
+        reasons = dict(p.borrowed_elsewhere(scenes, records, everywhere))
+        self.assertIn("shows no train", reasons[2])
+        self.assertIn("already shows", reasons[4])
+
+    def test_a_station_is_no_train(self):
+        # "Estación de tren São Bento": the hall of azulejos took "l'Alfa Pendular entre les deux villes".
+        hall = photo("porto-sao-bento", "File:Estación de tren São Bento, Oporto, Portugal, 2012-05-09, DD 07.JPG",
+                     "Les panneaux d’azulejos bleus du hall de la gare de São Bento.")
+        self.assertEqual(names.vehicle(hall[0], hall[2], hall[1]["commonsTitle"]), set())
+        self.assertEqual(names.vehicle("porto-metro", "La station de métro Aeroporto, à Porto.", "File:Porto airport metro station.jpg"), set())
+        self.assertEqual(names.vehicle("lap-train", "Un train de nuit en gare de Rovaniemi.", "File:Rovaniemi railway station.jpg"), {"rail"})
+        # A train named by its brand alone is a train (review of PR 57).
+        self.assertEqual(names.vehicle("train-oriente", "Un Alfa Pendular à quai en gare de Lisboa Oriente.", "File:Oriente.jpg"), {"rail"})
+        media = reel_formats.Media([hall], [], everywhere="Portugal Porto")
+        self.assertTrue(media.misleads("35,70 € l’Alfa Pendular entre les deux villes", hall))
+
+
+class OpeningAndEndingReservedFirst(unittest.TestCase):
+    """Review of PR 56: the opening and the ending are reserved before the figures. "100 à 160 dh le taxi au départ de
+    l'aéroport" took Jemaa el-Fna, and the posts of Marrakech had only Essaouira left to open on."""
+
+    JEMAA = photo("marrakech-place-jemaa-el-fna", "File:Jamaa El Fna.jpg", "La place Jemaa el-Fna en fin de journée.", emblematic=True)
+    KOUTOUBIA = photo("marrakech-koutoubia", "File:Koutoubia.jpg", "Le minaret de la Koutoubia, à Marrakech.", emblematic=True)
+    PORT = photo("marrakech-essaouira-port", "File:Skala.jpg", "Des barques bleues au pied de la Skala du port, à Essaouira.")
+    TAXI = "le taxi au départ de l’aéroport selon la zone"   # the label of "100 à 160 dh", as Media.about reads it
+
+    def media(self, *more: tuple) -> reel_formats.Media:
+        photos = [self.JEMAA, self.KOUTOUBIA, self.PORT, *more]
+        return reel_formats.Media(photos, [], reserve=2, cover=self.JEMAA[0], emblematic=reel_formats.emblematic(photos),
+                                  everywhere="Maroc Marrakech", outings=(("essaouira",),))
+
+    def test_a_figure_of_no_place_never_takes_the_cover_nor_the_ending(self):
+        media = self.media()
+        self.assertEqual(media.kept(), {self.JEMAA[0], self.KOUTOUBIA[0]})
+        # Only the boats of Essaouira are left: no photo for a taxi, the figure stays in the guide.
+        with self.assertRaises(reel_formats.Held):
+            media.photo(self.TAXI)
+        self.assertEqual(media.opening(self.JEMAA[0])[1], self.JEMAA[0])
+
+    def test_a_fare_of_the_town_takes_a_photo_of_the_town_left_free(self):
+        souk = photo("marrakech-souk", "File:Souk.jpg", "Une ruelle des souks de la médina, à Marrakech.")
+        media = self.media(souk)
+        self.assertEqual(media.photo(self.TAXI)[1], "marrakech-souk")
+        self.assertEqual(media.opening(self.JEMAA[0])[1], self.JEMAA[0])
+        self.assertEqual(media.closing()[1], self.KOUTOUBIA[0])
+
+    def test_a_photo_added_for_the_posts_is_offered_before_the_old_catalogue(self):
+        # The metro on the bridge Luís I came after seventeen photos of the old catalogue and was never offered.
+        import datetime as dt
+        import json
+        import tempfile
+        from pathlib import Path
+        import media_library
+        with tempfile.TemporaryDirectory() as folder:
+            photos = Path(folder) / "assets" / "photos"
+            photos.mkdir(parents=True)
+            old = {f"porto-old-{n:02}": {"commonsTitle": f"File:Old {n}.jpg"} for n in range(17)}
+            (photos / "catalogue.json").write_text(json.dumps({"schemaVersion": 1, "photos": old}))
+            (photos / "reviewed.json").write_text(json.dumps({"schemaVersion": 1, "photos": {"porto-metro-luis-tablier": {"commonsTitle": "File:Metro.jpg"}}}))
+            shared = media_library.Photos(Path(folder), dt.datetime(2026, 11, 16, tzinfo=dt.timezone.utc)).shared
+        self.assertEqual(next(iter(shared)), "porto-metro-luis-tablier")
+        self.assertEqual(len(shared), 18)
+
+    def test_a_town_stays_a_town_when_its_kicker_is_shortened(self):
+        # Codex, review of PR 57: "Maroc · Marrakech" read the town from its separator, and a kicker longer than 32
+        # letters is cut to the place alone. The outings are now read in the guide's sections, whatever the kicker.
+        from unittest import mock
+
+        class Seen(Exception):
+            pass
+
+        def media(*args, **kwargs):
+            raise Seen(kwargs["outings"])
+
+        article = {"sections": [{"title": "Jour 3 — Sortir de la ville : Ouzoud, Essaouira ou l’Ourika"}]}
+        with mock.patch.object(reel_formats, "Media", side_effect=media):
+            for kicker in ("Maroc · Marrakech", "Marrakech"):
+                with self.assertRaises(Seen) as seen:
+                    reel_formats.build("liste", article, [], [self.JEMAA], [], "", "Marrakech", kicker, "", [], "")
+                self.assertIn(("essaouira",), seen.exception.args[0], kicker)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -18,6 +18,7 @@ import urllib.parse
 import clip_intake
 import destinations
 import photo_intake
+import place_names as place_names_module   # media_library.place_names is the function below
 from reel_formats import checked
 
 AUTO = "auto"
@@ -105,6 +106,29 @@ def photo_candidates(article: dict, site_photos: dict, country: str, shared: dic
         title = record.get("commonsTitle")
         if photo_id.split("-", 1)[0] in prefixes and isinstance(title, str) and title not in taken:
             candidates.append({"id": photo_id, "title": title, "alt": record.get("alt") or CAPTIONS.get(photo_id) or fallback})
+    return candidates
+
+
+def vehicle_candidates(article: dict, site_photos: dict, shared: dict | None = None) -> list[dict]:
+    """The hand-reviewed photos of a train the guide names, whatever guide they are filed under: a photo of a vehicle
+    belongs to the vehicle ("l'Alfa Pendular entre les deux villes" in « Lisbonne ou Porto ? » had no train of its own
+    while the stock holds several Alfa Pendular: review of PR 57). A photo that shows the train, never a station."""
+    said = " ".join([article.get("title", "")] + [str(fact.get("label", "")) for fact in article.get("keyFacts") or [] if isinstance(fact, dict)])
+    named = place_names_module.brands(place_names_module.words(said))
+    if not named:
+        return []
+    records = [(photo_id, commons_title(record.get("source_page", "")), record.get("alt_fr")) for photo_id, record in site_photos.items()]
+    records += [(photo_id, record.get("commonsTitle"), record.get("alt") or CAPTIONS.get(photo_id)) for photo_id, record in (shared or {}).items()]
+    candidates, seen = [], set()
+    for photo_id, title, alt in records:
+        if not (isinstance(title, str) and alt) or title in seen:
+            continue
+        shown = place_names_module.words(" ".join([photo_id.replace("-", " "), alt, place_names_module.readable(title)]))
+        trains = place_names_module.brands(shown) & named
+        if trains and place_names_module.vehicle(photo_id, alt, title):
+            seen.add(title)
+            # Borrowed for the facts that name its train only (Media.misleads), one per post, never to open or close it.
+            candidates.append({"id": photo_id, "title": title, "alt": alt, "emblematic": False, "borrowedFor": sorted(trains)})
     return candidates
 
 
@@ -210,9 +234,12 @@ class Photos:
         self.root, self.now = root, now
         self.download = downloader or self._download
         self.known: dict[str, tuple[str, dict]] = {}
-        # Photos added and looked at by hand (photo_intake.py), candidates for the guides of the same place: the catalogue of
-        # the hand-written scenarios (sealed by their fingerprints, only read here), then reviewed.json, which grows.
-        hand = [path for path in (root / "assets" / "photos" / name for name in ("catalogue.json", "reviewed.json")) if path.is_file()]
+        # Photos added and looked at by hand (photo_intake.py), candidates for the guides of the same place: reviewed.json,
+        # which grows with the photos added for the posts, then the catalogue of the hand-written scenarios (sealed by
+        # their fingerprints, only read here). A post is offered a limited number of them (HAND_EXTRA): the metro on
+        # the bridge Luís I, added for "2 min de métro D au-dessus du Douro", came after seventeen photos of the old
+        # catalogue and was never offered (review of PR 56).
+        hand = [path for path in (root / "assets" / "photos" / name for name in ("reviewed.json", "catalogue.json")) if path.is_file()]
         self.shared: dict[str, dict] = {}
         for path in hand:
             for photo_id, record in json.loads(path.read_text()).get("photos", {}).items():
@@ -272,12 +299,14 @@ def closing_mark(candidate: dict, record: dict) -> dict:
     the site may close a post (`emblematic`) unless it is listed in NOT_A_CLOSING; a file found by the search never
     closes nor opens one (`automatic`: nobody looked at it); a photo added by hand keeps what its reviewer wrote in
     reviewed.json."""
-    plain = {key: value for key, value in record.items() if key not in ("automatic", "emblematic")}
+    plain = {key: value for key, value in record.items() if key not in ("automatic", "emblematic", "borrowedFor")}
+    if candidate.get("borrowedFor"):
+        return {**plain, "borrowedFor": list(candidate["borrowedFor"])}
     if candidate.get("automatic"):
         return {**plain, "automatic": True}
     if "emblematic" in candidate:
         return {**plain, "emblematic": True} if candidate["emblematic"] else plain
-    return {key: value for key, value in record.items() if key != "automatic"}
+    return {key: value for key, value in record.items() if key not in ("automatic", "borrowedFor")}
 
 
 def new_photo(candidate: dict, photos: Photos, chosen: list) -> tuple[str, dict, str] | None:
@@ -317,6 +346,9 @@ def gather_photos(article: dict, needed: int, photos: Photos, site_photos: dict,
     # Every photo a person looked at is offered, beyond `needed`: a fact only goes over the photo of its own place, so
     # the Great Buddha or a shinkansen added by hand must not be left out because the guide has eight photos already.
     chosen = taken(photo_candidates(article, site_photos, country, photos.shared), needed + HAND_EXTRA, photos, [])
+    # Beyond them, the trains the guide names: each is offered to the one fact that names it, never in place of the guide's.
+    vehicles = vehicle_candidates(article, site_photos, photos.shared)
+    chosen = taken(vehicles, len(chosen) + len(vehicles), photos, chosen)
     if len(chosen) < needed:
         found = featured_candidates(article, place_names(article, table or {}), country, searcher, country_names(article, table or {}))
         chosen = taken(found, needed, photos, chosen)

@@ -315,7 +315,8 @@ class GeneratorTests(unittest.TestCase):
             f = self.fixture()
             result = f.run(limit=4)
         self.assertEqual(result["created"], [])
-        self.assertEqual({(row["kind"], row["reason"]) for row in result["held"]}, {("reel", "fewer_than_four_facts"), ("carousel", "not_enough_figures_with_their_photo")})
+        # No photo of a train either: the figures of trains stay in the guide (counter-review of PR 57).
+        self.assertEqual({(row["kind"], row["reason"]) for row in result["held"]}, {("reel", "not_enough_photos_or_figures"), ("carousel", "not_enough_figures_with_their_photo")})
         self.assertEqual(list((f.root / "scenarios").glob("*.json")), [])
 
     def test_a_file_that_is_not_the_photograph_as_taken_is_never_fetched_nor_reused(self):
@@ -990,7 +991,9 @@ class PlacePhotoTests(unittest.TestCase):
 
     # A name is shown whole: "Fushimi Inari", not "fushimi" alone (review of 13/11/2026).
     def _guide_completed_from(self, catalogue_name):
-        f = self.fixture(photos=3)
+        # Four photos of the site: since the counter-review of PR 57 "2 min entre deux trains" has no train left and
+        # stays in the guide, and the temple is the last photo that can close the post.
+        f = self.fixture(photos=4)
         records = {}
         for name in ("gion", "fushimi", "arashiyama"):
             Image.new("RGB", (2400, 1600), (40, 90, 140)).save(f.root / f"assets/photos/kyoto-{name}.jpg", quality=80)
@@ -1006,7 +1009,7 @@ class PlacePhotoTests(unittest.TestCase):
         used = {scene["photo"] for scene in f.scenario(made[0]["id"])["scenes"]}
         self.assertTrue(used & {"kyoto-gion", "kyoto-fushimi", "kyoto-arashiyama"})
         self.assertNotIn("osaka-chateau", used)
-        self.assertEqual(f.downloads, [f"File:Kyoto {n}.jpg" for n in (1, 2, 3)])
+        self.assertEqual(f.downloads, [f"File:Kyoto {n}.jpg" for n in (1, 2, 3, 4)])
 
 
 HAND_CAPTIONS = {"gion": "Une ruelle de Gion, à Kyoto.", "fushimi": "Les torii du Fushimi Inari, à Kyoto.",
@@ -1035,7 +1038,10 @@ class DensityTests(unittest.TestCase):
         self.assertEqual(len({fact["excerpt"] for scene in made["scenes"][1:-1] for fact in scene["facts"]}), 4)
 
     def test_a_figure_that_repeats_the_title_is_left_out(self):
-        facts = [{"value": "7 jours", "label": "pour voir Kyoto, Nara et Osaka sans courir"}] + FACTS
+        # Since the counter-review of PR 57 "2 min entre deux trains" goes over a train or stays in the guide: the
+        # bamboo grove keeps four figures in the reel.
+        facts = [{"value": "7 jours", "label": "pour voir Kyoto, Nara et Osaka sans courir"}] + FACTS + [
+            {"value": "400 ¥", "label": "l’entrée de la bambouseraie d’Arashiyama"}]
         f = self.fixture([guide(shortTitle="Kyoto en 7 jours", keyFacts=facts)])
         reel = self.reels(f.run(limit=1), f)[0]
         self.assertNotIn(["*7" + reel_formats.NBSP + "jours*"], [scene["headline"] for scene in reel["scenes"]])
@@ -1200,8 +1206,9 @@ class ShownTests(unittest.TestCase):
         # It names a place: no free photo names it, so it gets no plan at all, neither in the first round nor after.
         self.assertIsNone(media.named("la maximale moyenne de décembre à Rovaniemi", None))
         self.assertEqual(media.left_for("la maximale moyenne de décembre à Rovaniemi"), [])
-        self.assertFalse(media.shown_elsewhere("la cabine du train de nuit"))
-        self.assertEqual(media.photo("la cabine du train de nuit")[1], "lap-cabane")
+        # A figure of trains with no place goes over a train (counter-review of PR 57): another figure takes the hut.
+        self.assertFalse(media.shown_elsewhere("la nuit dans une cabane chauffée"))
+        self.assertEqual(media.photo("la nuit dans une cabane chauffée")[1], "lap-cabane")
         self.assertEqual(media.closing()[1], "lap-village")
 
     def test_the_last_card_names_the_site_and_nothing_one_network_only_has(self):
@@ -1270,7 +1277,7 @@ class ShownTests(unittest.TestCase):
 
     def test_a_stage_takes_the_photo_of_what_it_says_and_its_caption_line_carries_its_price(self):
         media = reel_formats.Media([("yuc-castillo", {"commonsTitle": "File:Templo el Castillo - Chichen Itza.jpg"}, "La pyramide de Chichén Itzá."),
-                                    ("yuc-cenote", {"commonsTitle": "File:Cenote Ik Kil.jpg"}, "Un cenote entouré de lianes.")], [], cover="yuc-castillo")
+                                    ("yuc-cenote", {"commonsTitle": "File:Cenote Ik Kil.jpg"}, "Un cenote entouré de lianes.")], [])
         day = {"image": "yuc-cenote"}
         # The guide gives the cenote to the whole day; the plan only says "Chichén Itzá à l'ouverture, 697 pesos l'entrée".
         self.assertEqual(media.named("Chichén Itzá à l’ouverture l’entrée de Chichén Itzá pour un étranger", day)[0], "yuc-castillo")
@@ -1387,7 +1394,8 @@ class PhotoPostTests(unittest.TestCase):
                ("232 et 246 pesos", "Cancún–Playa del Carmen et Playa del Carmen–Tulum (octobre 2026)")]
 
     def scenes(self, figures=None, photos=None):
-        article = guide(shortTitle="Yucatán en 10 jours", destination="Yucatán", country="mexique", sourcesCheckedOn="2026-11-11", sections=[])
+        article = guide(shortTitle="Yucatán en 10 jours", destination="Yucatán", country="mexique", sourcesCheckedOn="2026-11-11", sections=[],
+                        cover="yuc-castillo")
         facts = [{"value": value, "label": label, "excerpt": value + " " + label, "section": None} for value, label in figures or self.FIGURES]
         return a.scenes_for(article, a.Post("facebook", "carousel"), facts, list(photos or self.PHOTOS), "Phrase d’ouverture.", "Yucatán", "Mexique")
 
@@ -1519,7 +1527,8 @@ class RealGuideTests(unittest.TestCase):
                  ("porto-metro-aeroport", {"commonsTitle": "File:Aeroporto metro station (Porto) - 3.jpg"}, "La station de métro Aeroporto, terminus de la ligne E à Porto."),
                  ("porto-rabelo", {"commonsTitle": "File:View of Ribeira (21).jpg"}, "Un bateau rabelo sur le Douro, face aux façades de la Ribeira.")]
         city = reel_formats.Media(porto, [], everywhere="Portugal · Porto")
-        self.assertEqual(city.named("l’Andante Tour 3 : métro, bus et trains urbains pendant 72 h", None)[0], "porto-metro-aeroport")
+        # A town's ticket goes over its metro, tram, bus or train: a metro station is none of them (review of PR 57).
+        self.assertIsNone(city.named("l’Andante Tour 3 : métro, bus et trains urbains pendant 72 h", None))
         self.assertEqual(city.named("la tour des Clérigos et son musée, billet de jour", None)[0], "porto-vue-clerigos")
         # The photo the guide put beside a day is that day's photo when the two share a kind of place: "Le pont en
         # métro" goes over the bridge, not over the quays that share "Douro" with it.
