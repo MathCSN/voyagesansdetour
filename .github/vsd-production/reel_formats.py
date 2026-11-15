@@ -443,12 +443,13 @@ def section_place(section: dict | None, country: frozenset | set) -> str:
 
 
 # The town a caption sets its photo in, at its end: "…, à Essaouira.", "…, près de Ninh Bình."
-SET_IN = re.compile(r",\s*(?:à|en|près de|près d’)\s+([^,.;()]+?)\.?\s*$")
+# Read on the caption without its final full stop: no lazy group, no backtracking (SonarCloud S8786).
+SET_IN = re.compile(r",\s*(?:à|en|près de|près d’)\s+([^\s,.;()][^,.;()]*)$")
 
 
 def set_elsewhere(caption: str, country: frozenset | set) -> bool:
     """The caption sets its photo in another town than the destination ("…, à Essaouira" in a guide of Marrakech)."""
-    where = SET_IN.search(caption)
+    where = SET_IN.search(caption.rstrip(". "))
     if not where:
         return False
     # A quarter of the town is the town ("…, à Belém" in a guide of Lisbon).
@@ -1135,7 +1136,9 @@ def build(fmt: str, article: dict, facts: list[dict], photos: list, clips: list,
     captions = {photo[0]: photo[2] for photo in photos}
     local = " · " in kicker if local is None else local
     home = [photo_id for photo_id in seen if not (local and set_elsewhere(captions.get(photo_id, ""), place_names.words(kicker)))]
-    cover = article.get("cover") if article.get("cover") in seen else ((home or seen)[0] if seen else None)
+    cover = article.get("cover") if article.get("cover") in seen else None
+    if cover is None and seen:
+        cover = (home or seen)[0]
     brief = Brief(article, facts, Media(photos, clips, reserve=2, cover=cover, emblematic=emblematic(photos), everywhere=kicker, local=local),
                   opening, place, kicker, tag, title_lines, page)
     if fmt in ("liste", "express", "prix"):

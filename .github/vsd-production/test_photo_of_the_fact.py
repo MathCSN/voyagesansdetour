@@ -655,8 +655,8 @@ class OpeningAndEndingReservedFirst(unittest.TestCase):
         with mock.patch.object(reel_formats, "build", side_effect=lambda *args, **kwargs: (_ for _ in ()).throw(Seen(kwargs.get("local")))), \
                 mock.patch.object(destinations, "name", return_value="République dominicaine"), \
                 mock.patch.object(a, "opening_sentence", return_value="Phrase d’ouverture."):
+            now = dt.datetime(2026, 11, 16, tzinfo=dt.timezone.utc)
             with self.assertRaises(Seen) as seen:
-                now = dt.datetime(2026, 11, 16, tzinfo=dt.timezone.utc)
                 a.build_reel(Path(a.__file__).parent, article, now, now, "", [], [], "liste", 0, 0, table, 34)
         self.assertIs(seen.exception.args[0], True)
 
