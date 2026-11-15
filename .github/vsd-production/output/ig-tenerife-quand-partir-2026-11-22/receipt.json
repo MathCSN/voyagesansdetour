@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "contentId": "ig-tenerife-quand-partir-2026-11-22",
+  "status": "rendered_not_published",
+  "fingerprint": "d9c3276a5803feb6bb69267ee174812e9c015bdd792fb3a5ee26a7bd818df657",
+  "createdAt": "2026-11-15T09:45:28.030723Z",
+  "renderFinishedAt": "2026-11-15T09:45:49.261544Z",
+  "rendererContractVersion": 4,
+  "rendererSha256": "534a47e62b5b85ce56b26d49d9bbc783e5811dbbc355e3b265f7c83e882e620a",
+  "drawingSha256": "b78990f497d03baf754e3b2b68a795a5e9d3b91a0b6a2f8dad2ebcd7fec2907c",
+  "motionSha256": "e7456dc883109dfd1f238028827ef85bfa4253c225a50f1035a9c1d069f953c4",
+  "format": "tableau",
+  "kind": "reel",
+  "channel": "instagram",
+  "publishAt": "2026-11-22T20:00:00Z",
+  "reviewValidUntil": "2026-12-15T09:38:06Z",
+  "sourceCheckedOn": "2026-11-15",
+  "targetUrl": "https://voyagesansdetour.fr/espagne/tenerife-quand-partir/",
+  "voice": null,
+  "presenter": null,
+  "sourceUrls": [
+    "https://voyagesansdetour.fr/espagne/tenerife-quand-partir/"
+  ],
+  "photos": {
+    "tenerife-teide": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Ingo Mehling",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Teide_Canadas.jpg"
+    },
+    "tenerife-costa-adeje-torviscas": {
+      "licence": "CC BY 2.0",
+      "author": "dronepicr",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Aerial_view_of_Playa_de_Torviscas_beach_in_Costa_Adeje_on_Tenerife,_Spain_(48225530037).jpg"
+    },
+    "tenerife-adeje": {
+      "licence": "CC BY 3.0",
+      "author": "Marc Ryckaert ( MJJR )",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tenerife_Playa_El_Duque_R01.jpg"
+    },
+    "tenerife-143c0261": {
+      "licence": "CC BY-SA 3.0",
+      "author": "Diego Delso",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Vista_de_Garachico,_Tenerife,_Espa%C3%B1a,_2012-12-13,_DD_05.jpg"
+    },
+    "tenerife-masca": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Marc Ryckaert",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tenerife_Masca_R01.jpg"
+    }
+  },
+  "clips": {},
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "durationSeconds": 18.9,
+    "videoCodec": "h264",
+    "pixelFormat": "yuv420p",
+    "videoBitrateBps": 2823703,
+    "audioCodec": "aac",
+    "audioSampleRate": 48000,
+    "audioBitrateBps": 96345,
+    "fullDecodePassed": true,
+    "loudness": {
+      "integratedLufs": -16.1,
+      "truePeakDbfs": -1.3
+    }
+  },
+  "files": [
+    {
+      "file": "apercu.jpg",
+      "sha256": "05d30b718761567201619fd384a3283d28c8206f8adeb5243411e8fca9743485",
+      "bytes": 256170
+    },
+    {
+      "file": "credits.txt",
+      "sha256": "7930e5945c93cf96a8fede485afdd55a286b49c20883cebf9be7083e0fcdcbbc",
+      "bytes": 2722
+    },
+    {
+      "file": "dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "file": "encode.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "legende.txt",
+      "sha256": "88205692743cf258a8b3bf59a75daae3f74a6c00fdea02b0bdc749325184f9d5",
+      "bytes": 771
+    },
+    {
+      "file": "notosans-OFL.txt",
+      "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a",
+      "bytes": 4396
+    },
+    {
+      "file": "playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    },
+    {
+      "file": "poster.jpg",
+      "sha256": "50863587a69f7812963a763c5db76d530ada3f808061b89a39543481758ae5a4",
+      "bytes": 515110
+    },
+    {
+      "file": "reel.mp4",
+      "sha256": "55d23e75e327535df74a36baba77a5bc50135779bad1c40a55df48bfc5d91903",
+      "bytes": 6921049
+    },
+    {
+      "file": "scenario.json",
+      "sha256": "6e228cc6b841cbb7f347213e8f6b422709878a4dcc130873a21c03306f714cbd",
+      "bytes": 8151
+    },
+    {
+      "file": "scene-01.jpg",
+      "sha256": "4db97a833d1394a7157b536c98b278ce779433a115082c77e17b643540082f89",
+      "bytes": 470436
+    },
+    {
+      "file": "scene-02.jpg",
+      "sha256": "eb1d0bc0a52b8d862d86614b5d981fc731fcae5c3d72dec614745a140a5f642b",
+      "bytes": 391181
+    },
+    {
+      "file": "scene-03.jpg",
+      "sha256": "545196199054821a8ca71bf1a90556df6c864cff3132e3a3d3901145f2a7abd7",
+      "bytes": 314764
+    },
+    {
+      "file": "scene-04.jpg",
+      "sha256": "72eebf5ce6e50a343b523e230bed5e38ff0311db8b1f9dffbcbc5f493076c871",
+      "bytes": 624903
+    },
+    {
+      "file": "scene-05.jpg",
+      "sha256": "44f46666fd9b4e16b1f5afc72cdd45ce46d127f6bff3380da8c36defb073eb88",
+      "bytes": 594461
+    }
+  ],
+  "runtime": {
+    "wallSeconds": 20.685,
+    "encoderThreads": 2,
+    "pillowVersion": "11.3.0",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers"
+  },
+  "publication": {
+    "uploaded": false,
+    "scheduled": false,
+    "published": false,
+    "readyForAutomaticImport": false
+  },
+  "cost": {
+    "newPaidService": false,
+    "providerCalls": 0,
+    "monetarySpendEur": 0
+  }
+}

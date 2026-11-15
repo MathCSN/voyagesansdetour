@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "checkedOn": "2026-11-15",
+  "method": "Page publiée du guide relevée automatiquement ; texte visible conservé tel quel, première ligne = URL.",
+  "sources": {
+    "guide": {
+      "url": "https://voyagesansdetour.fr/portugal/portugal-sans-voiture-bagages/",
+      "publisher": "Voyage Sans Détour",
+      "title": "Bagages au Portugal sans voiture : 1 valise gratuite dans le train, des pavés partout",
+      "retrievedAt": "2026-11-15T09:38:06Z",
+      "snapshot": {
+        "file": "auto/fb-portugal-sans-voiture-bagages-2026-11-29/guide.txt",
+        "sha256": "250ec46b699b9178da8164c1e297973b61a502627db523257f7fdb584a19778b"
+      }
+    }
+  }
+}

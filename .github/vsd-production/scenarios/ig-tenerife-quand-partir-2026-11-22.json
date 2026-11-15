@@ -1,0 +1,252 @@
+{
+  "schemaVersion": 3,
+  "id": "ig-tenerife-quand-partir-2026-11-22",
+  "kind": "reel",
+  "channel": "instagram",
+  "format": "tableau",
+  "destination": "Tenerife",
+  "title": "Quand partir à Tenerife : le tableau à garder",
+  "targetUrl": "https://voyagesansdetour.fr/espagne/tenerife-quand-partir/",
+  "publishAt": "2026-11-22T20:00:00Z",
+  "review": {
+    "status": "reviewed_for_render",
+    "checkedAt": "2026-11-15T09:38:06Z",
+    "validUntil": "2026-12-15T09:38:06Z",
+    "method": "Généré automatiquement (auto_social.py) depuis la page publiée du guide relevée le 15/11/2026 : chaque chiffre, étape ou ligne de tableau est cité mot pour mot ; photos et vidéos réelles sous licence libre, aucune image ni vidéo générée par IA ; garde-fous de production.py passés avant la mise en file."
+  },
+  "sources": {
+    "file": "auto/ig-tenerife-quand-partir-2026-11-22/sources.json",
+    "sha256": "1e7299a7dff4be61318260906e36857b65b0a1a0584138127730e6965cfc238c"
+  },
+  "photos": {
+    "file": "auto/ig-tenerife-quand-partir-2026-11-22/photos.json",
+    "sha256": "b49b396d1ad3380e6597c3a3229347974b9425fb960022f133ee8451c2e1e3a2"
+  },
+  "caption": {
+    "hook": "🤔 Quand partir à Tenerife : 22 °C en janvier au sud, 16 °C au nord, et le bon mois pour chaque côte",
+    "lines": [
+      "📅 Les meilleurs mois — Plage et soleil d’hiver (sud) : Novembre à avril",
+      "📅 Nager dans une mer tiède : Septembre à novembre",
+      "📅 Randonnées au nord (Masca, Anaga) : Avril-mai, octobre",
+      "📅 Teide et ciel étoilé : Avril à octobre",
+      "📅 Carnaval de Santa Cruz : Février 2027"
+    ],
+    "cta": "📌 Enregistrez ce reel pour votre voyage. 🔗 Prix, horaires et détails : le guide complet est en lien dans la bio.",
+    "hashtags": [
+      "#Tenerife",
+      "#Espagne",
+      "#VoyageEspagne",
+      "#IdeeVoyage",
+      "#VoyageSansDetour"
+    ]
+  },
+  "scenes": [
+    {
+      "photo": "tenerife-teide",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "hook",
+      "kicker": "Espagne · Tenerife",
+      "headline": [
+        "Quand partir",
+        "à Tenerife",
+        "*le tableau à garder*"
+      ],
+      "seconds": 2.2,
+      "detail": "22 °C en janvier au sud, 16 °C au nord, et le bon mois pour chaque côte",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "Quand partir à Tenerife : 22 °C en janvier au sud, 16 °C au nord, et le bon mois pour chaque côte"
+        }
+      ],
+      "tag": "Guide Tenerife · sources du 09/11/2026",
+      "alt": "Le volcan du Teide, point culminant de Tenerife."
+    },
+    {
+      "photo": "tenerife-costa-adeje-torviscas",
+      "focus": [
+        0.35,
+        0.55
+      ],
+      "layout": "table",
+      "kicker": "Tenerife",
+      "headline": [
+        "Les meilleurs mois"
+      ],
+      "seconds": 7.0,
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "Plage et soleil d’hiver (sud) Novembre à avril"
+        },
+        {
+          "source": "guide",
+          "excerpt": "Nager dans une mer tiède Septembre à novembre"
+        },
+        {
+          "source": "guide",
+          "excerpt": "Randonnées au nord (Masca, Anaga) Avril-mai, octobre"
+        },
+        {
+          "source": "guide",
+          "excerpt": "Teide et ciel étoilé Avril à octobre"
+        },
+        {
+          "source": "guide",
+          "excerpt": "Carnaval de Santa Cruz Février 2027"
+        }
+      ],
+      "tag": "Guide Tenerife · sources du 09/11/2026",
+      "rows": [
+        [
+          "Plage et soleil d’hiver (sud)",
+          "Novembre à avril"
+        ],
+        [
+          "Nager dans une mer tiède",
+          "Septembre à novembre"
+        ],
+        [
+          "Randonnées au nord (Masca, Anaga)",
+          "Avril-mai, octobre"
+        ],
+        [
+          "Teide et ciel étoilé",
+          "Avril à octobre"
+        ],
+        [
+          "Carnaval de Santa Cruz",
+          "Février 2027"
+        ]
+      ],
+      "note": "Faites pause pour tout lire",
+      "alt": "La plage de Torviscas et ses parasols de paille, à Costa Adeje, dans le sud de Tenerife."
+    },
+    {
+      "photo": "tenerife-adeje",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "fact",
+      "kicker": "Mois par mois",
+      "headline": [
+        "*222 h*"
+      ],
+      "seconds": 3.6,
+      "detail": "de soleil en janvier au sud (aéroport Tenerife Sud)",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "222 h de soleil en janvier au sud (aéroport Tenerife Sud)"
+        }
+      ],
+      "tag": "Guide Tenerife · sources du 09/11/2026",
+      "alt": "La plage El Duque, à Costa Adeje, au crépuscule : la côte sud de Tenerife."
+    },
+    {
+      "photo": "tenerife-143c0261",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "fact",
+      "kicker": "Mois par mois",
+      "headline": [
+        "*19 à 24 °C*"
+      ],
+      "seconds": 3.7,
+      "detail": "la température de la mer, au plus bas en février-mars",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "19 à 24 °C la température de la mer, au plus bas en février-mars"
+        }
+      ],
+      "tag": "Guide Tenerife · sources du 09/11/2026",
+      "alt": "Tenerife (Espagne)."
+    },
+    {
+      "photo": "tenerife-masca",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "cta",
+      "kicker": "Le guide complet",
+      "headline": [
+        "Quand partir",
+        "à Tenerife"
+      ],
+      "seconds": 2.4,
+      "note": "Enregistrez cette vidéo pour votre voyage",
+      "button": "voyagesansdetour.fr",
+      "alt": "La route de Masca et les pentes du massif de Teno, au nord-ouest de Tenerife."
+    }
+  ],
+  "musicStart": 8,
+  "assets": {
+    "regular": {
+      "file": "assets/dmsans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9"
+    },
+    "bold": {
+      "file": "assets/dmsans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211"
+    },
+    "serif": {
+      "file": "assets/playfair.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+      },
+      "sha256": "adefc53e7b3d483f1fa5e85edd82b7689ca79db25a1f6786bd7949cdcfeec601"
+    },
+    "fallbackRegular": {
+      "file": "assets/notosans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "478c558ea716033cd60c03438f628dfa75694dcf6b5f6d505a2f05fd2b4f3823"
+    },
+    "fallbackBold": {
+      "file": "assets/notosans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "1df075a380fc7cb898acf64c1f7b3b4dd780de3caa860178bf929de35817a913"
+    },
+    "music": {
+      "file": "assets/happy-alley.mp3",
+      "sha256": "f598c8ee624f1db9a2cd38886524a40baff4ce730dcf999c0763791268fa8265",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "commercialUseAllowed": true,
+      "title": "Happy Alley",
+      "author": "Kevin MacLeod",
+      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100482",
+      "provenance": {
+        "file": "evidence/happy-alley-provenance.json",
+        "sha256": "5a2ba8f3dba28b0a748b00089d3854db1fde92213429823746f6d01805f904ac"
+      }
+    }
+  }
+}

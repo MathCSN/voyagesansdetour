@@ -1583,6 +1583,317 @@
           "bytes": 4449
         }
       ]
+    },
+    {
+      "contentId": "fb-portugal-sans-voiture-bagages-2026-11-29",
+      "kind": "photos",
+      "approved": true,
+      "files": [
+        {
+          "name": "scene-01.jpg",
+          "sha256": "3e56446d720572210bad6069df2a070d0013091af34fd3a8198ed32ce005b884",
+          "bytes": 292038
+        },
+        {
+          "name": "scene-02.jpg",
+          "sha256": "b52b3ff8f6a9e8935e51083ddfaadc4554e84152ad23c7598142c77b15d04b9e",
+          "bytes": 278392
+        },
+        {
+          "name": "scene-03.jpg",
+          "sha256": "e9a73e7494b9da9609cf843d1eb4845b07ab29263e630e627924cca2f1f00047",
+          "bytes": 286141
+        },
+        {
+          "name": "scene-04.jpg",
+          "sha256": "d1c33661f9671abe0d4dff7d810291299a5747fa1f5cb699f912d383dd1964a3",
+          "bytes": 316958
+        },
+        {
+          "name": "scene-05.jpg",
+          "sha256": "95610cb1fe9adc70f0ba5655f47b1c6562aec18f0cdcf52a782161eb43fa5d6b",
+          "bytes": 335758
+        },
+        {
+          "name": "scene-06.jpg",
+          "sha256": "72442b9fb8a10b2c5f687120cbd87e81b60ff980169709ebaaafd3dcefda0d3d",
+          "bytes": 341971
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "cde09af4af698dee84e6c32c8e8a7f3404731262cb4d153496b298295085040c",
+          "bytes": 2694
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "ig-costa-rica-itineraire-2-semaines-2026-12-04",
+      "approved": true,
+      "files": [
+        {
+          "name": "reel.mp4",
+          "sha256": "654d6e1b06894ee756f74ba26e02c3d4c311c1f50f34237e8179b0a030bc790c",
+          "bytes": 5308897
+        },
+        {
+          "name": "poster.jpg",
+          "sha256": "742eb946794590c8baf0c37bed40ca94ce9f7cda82eecb737035e2ae2fcb02fc",
+          "bytes": 462353
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "3c8012fe9d80f89173fbbab7a3d3036efa93e26b6f6a2e8ba9500da100f2863d",
+          "bytes": 2354
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "ig-laponie-budget-rovaniemi-2026-11-29",
+      "approved": true,
+      "files": [
+        {
+          "name": "reel.mp4",
+          "sha256": "60fb7f585cf43b39c49c922dba3cf85e2575d13ed032238913f78279ba6b8e0b",
+          "bytes": 7193356
+        },
+        {
+          "name": "poster.jpg",
+          "sha256": "75fc4c41841641a556807946173b197712f8f07766bcc60672eeb9f0a0076597",
+          "bytes": 272745
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "97cc6619ac65793bc49f2f3ede50aa788fb321227d52db4b869fc47901cce22b",
+          "bytes": 3306
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "ig-londres-noel-marches-2026-11-27",
+      "approved": true,
+      "files": [
+        {
+          "name": "reel.mp4",
+          "sha256": "fac7bad94462d5ff161f2cc6e53145fc5f6dc6e416d902497591a0ac57cf08cb",
+          "bytes": 8172001
+        },
+        {
+          "name": "poster.jpg",
+          "sha256": "bcd3b718f87315d2f0661c1f5600e320eb8a828870f2fff4c64969fb259cb3ea",
+          "bytes": 485359
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "3c20fbc6b15b1516e20091bc02d9213e533050e4a1ef61160e47556968f0c390",
+          "bytes": 3288
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "ig-tenerife-quand-partir-2026-11-22",
+      "approved": true,
+      "files": [
+        {
+          "name": "reel.mp4",
+          "sha256": "55d23e75e327535df74a36baba77a5bc50135779bad1c40a55df48bfc5d91903",
+          "bytes": 6921049
+        },
+        {
+          "name": "poster.jpg",
+          "sha256": "50863587a69f7812963a763c5db76d530ada3f808061b89a39543481758ae5a4",
+          "bytes": 515110
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "7930e5945c93cf96a8fede485afdd55a286b49c20883cebf9be7083e0fcdcbbc",
+          "bytes": 2722
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "ig-vietnam-quand-partir-2026-11-24",
+      "approved": true,
+      "files": [
+        {
+          "name": "reel.mp4",
+          "sha256": "6dec3accfa69ae68aea4991068da777c61abc967b613eec4ad6d8c7679eaf392",
+          "bytes": 7151478
+        },
+        {
+          "name": "poster.jpg",
+          "sha256": "698c6e10085eb32dc62a5072ac6cbb820c49f8a2e5cf45369a4d9722fdc59af5",
+          "bytes": 471755
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "1c31680528a9ee0382d0602d07220c79bef01f18dbc5b0ba2a807bb562840f39",
+          "bytes": 2857
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "igc-vietnam-itineraire-15-jours-2026-11-26",
+      "kind": "photos",
+      "approved": true,
+      "files": [
+        {
+          "name": "scene-01.jpg",
+          "sha256": "d94408d296c134d58c8c2bd2a160016549f173125f41d4819a6ff7c454dc0314",
+          "bytes": 378055
+        },
+        {
+          "name": "scene-02.jpg",
+          "sha256": "6a75548986a028f245589752a046ede4fd4333e25fe206855582f42c3702b59a",
+          "bytes": 358137
+        },
+        {
+          "name": "scene-03.jpg",
+          "sha256": "c3d10ebf6f919e7de71516fa872fcdec8130bb977fd8cbf6900abd7192762564",
+          "bytes": 488671
+        },
+        {
+          "name": "scene-04.jpg",
+          "sha256": "d901a8ca40ce0b7563c689ac1d67d6d9e2555327d26949521a6aedd11dcc6543",
+          "bytes": 350072
+        },
+        {
+          "name": "scene-05.jpg",
+          "sha256": "37a7641afe4c8edd5b1578463c253c3de43a0cda530dea1a592b0f05fe5f3b9e",
+          "bytes": 284517
+        },
+        {
+          "name": "scene-06.jpg",
+          "sha256": "50b33e52423ba4003ec94de1cc49ae5c4af310a7db1beb79623076a4d9582f67",
+          "bytes": 429465
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "4a27e7be8591220b2ff33577eeb3e8c215688a72d3890047ecf5cbd8b0df7552",
+          "bytes": 2913
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "fb-yucatan-itineraire-10-jours-2026-12-03",
+      "kind": "photos",
+      "approved": true,
+      "files": [
+        {
+          "name": "scene-01.jpg",
+          "sha256": "613502acafec30b5337cbd4ee1bcb24fe60256db38db0c196bcf1738c70688a2",
+          "bytes": 270219
+        },
+        {
+          "name": "scene-02.jpg",
+          "sha256": "9979845799c068304077d054be713a1b20c05b1a6e33eeb363dae99c092a49b6",
+          "bytes": 320553
+        },
+        {
+          "name": "scene-03.jpg",
+          "sha256": "72096b7c7a17ca37707bb611ba49f66e7a33477e08fcc4a456bb9dc97376693f",
+          "bytes": 335815
+        },
+        {
+          "name": "scene-04.jpg",
+          "sha256": "dc4d95be58aaef1619427b0654152020054edc29ffc1a87e19d674b5d9bc9a0f",
+          "bytes": 279612
+        },
+        {
+          "name": "scene-05.jpg",
+          "sha256": "018893df6d8f6fa1b1cea19431c9b4f873aaa94bcd6deee6991f55a8286a2d0a",
+          "bytes": 271883
+        },
+        {
+          "name": "scene-06.jpg",
+          "sha256": "1da5876c46d4941cb71464ca365c7e2f33c9a47a30c12dcccb8399ff0db63701",
+          "bytes": 295864
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "2a82ac892a26caa5ba2f940d605c2eb86c88b811b8e79c2123d78baea9a14c2b",
+          "bytes": 2787
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
     }
   ]
 }

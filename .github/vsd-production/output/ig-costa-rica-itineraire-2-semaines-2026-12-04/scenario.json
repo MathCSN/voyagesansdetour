@@ -1,0 +1,228 @@
+{
+  "schemaVersion": 3,
+  "id": "ig-costa-rica-itineraire-2-semaines-2026-12-04",
+  "kind": "reel",
+  "channel": "instagram",
+  "format": "tableau",
+  "destination": "Costa Rica",
+  "title": "Le Costa Rica en 2 semaines : le tableau à garder",
+  "targetUrl": "https://voyagesansdetour.fr/costa-rica/costa-rica-itineraire-2-semaines/",
+  "publishAt": "2026-12-04T17:00:00Z",
+  "review": {
+    "status": "reviewed_for_render",
+    "checkedAt": "2026-11-15T09:38:06Z",
+    "validUntil": "2026-12-15T09:38:06Z",
+    "method": "Généré automatiquement (auto_social.py) depuis la page publiée du guide relevée le 15/11/2026 : chaque chiffre, étape ou ligne de tableau est cité mot pour mot ; photos et vidéos réelles sous licence libre, aucune image ni vidéo générée par IA ; garde-fous de production.py passés avant la mise en file."
+  },
+  "sources": {
+    "file": "auto/ig-costa-rica-itineraire-2-semaines-2026-12-04/sources.json",
+    "sha256": "aad08f2c63b998cd206a84d95051040b42d694f0719e9e9f671cfbfe3fbec3a2"
+  },
+  "photos": {
+    "file": "auto/ig-costa-rica-itineraire-2-semaines-2026-12-04/photos.json",
+    "sha256": "112029805ab9e38403c08810ae0ac700aaa3a8f79dfc9bf4fe3fcc03d4867fd8"
+  },
+  "caption": {
+    "hook": "🗺️ Costa Rica en 2 semaines sans voiture : Manuel Antonio, Monteverde, Arenal et Puerto Viejo, navettes et prix 2026",
+    "lines": [
+      "📅 1 à 3 : Manuel Antonio",
+      "📅 4 et 5 : Monteverde",
+      "📅 6 à 8 : La Fortuna (Arenal)",
+      "📅 9 à 12 : Puerto Viejo et Cahuita",
+      "📅 13 et 14 : San José, puis l’avion"
+    ],
+    "cta": "📌 Enregistrez ce reel pour votre voyage. 🔗 Prix, horaires et détails : le guide complet est en lien dans la bio.",
+    "hashtags": [
+      "#CostaRica",
+      "#VoyageCostaRica",
+      "#Itineraire",
+      "#VoyageSansDetour"
+    ]
+  },
+  "scenes": [
+    {
+      "photo": "costa-rica-arenal",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "hook",
+      "kicker": "Costa Rica",
+      "headline": [
+        "Le Costa Rica",
+        "en 2 semaines",
+        "*le tableau à garder*"
+      ],
+      "seconds": 2.2,
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "Quatorze jours, quatre étapes et aucune voiture : trois nuits à Manuel Antonio, deux à Monteverde, trois à La Fortuna sous l’Arenal, quatre à Puerto Viejo sur la côte caraïbe, puis une à San José."
+        }
+      ],
+      "tag": "Guide Costa Rica · sources du 11/11/2026",
+      "alt": "Le volcan Arenal au-dessus de la forêt."
+    },
+    {
+      "photo": "costa-rica-puerto-viejo",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "table",
+      "kicker": "Costa Rica",
+      "headline": [
+        "Étape"
+      ],
+      "seconds": 7.0,
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "1 à 3 Manuel Antonio"
+        },
+        {
+          "source": "guide",
+          "excerpt": "4 et 5 Monteverde"
+        },
+        {
+          "source": "guide",
+          "excerpt": "6 à 8 La Fortuna (Arenal)"
+        },
+        {
+          "source": "guide",
+          "excerpt": "9 à 12 Puerto Viejo et Cahuita"
+        },
+        {
+          "source": "guide",
+          "excerpt": "13 et 14 San José, puis l’avion"
+        }
+      ],
+      "tag": "Guide Costa Rica · sources du 11/11/2026",
+      "rows": [
+        [
+          "1 à 3",
+          "Manuel Antonio"
+        ],
+        [
+          "4 et 5",
+          "Monteverde"
+        ],
+        [
+          "6 à 8",
+          "La Fortuna (Arenal)"
+        ],
+        [
+          "9 à 12",
+          "Puerto Viejo et Cahuita"
+        ],
+        [
+          "13 et 14",
+          "San José, puis l’avion"
+        ]
+      ],
+      "note": "Faites pause pour tout lire",
+      "alt": "Des barques de pêche sur la plage de Puerto Viejo de Talamanca, en fin de journée."
+    },
+    {
+      "photo": "costa-rica-monteverde",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "fact",
+      "kicker": "Jours 4 et 5",
+      "headline": [
+        "*49 $*"
+      ],
+      "seconds": 3.5,
+      "detail": "les 8 ponts suspendus de Selvatura à Monteverde",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "49 $ les 8 ponts suspendus de Selvatura à Monteverde"
+        }
+      ],
+      "tag": "Guide Costa Rica · sources du 11/11/2026",
+      "alt": "La végétation dense de la forêt de nuages de Monteverde."
+    },
+    {
+      "photo": "costa-rica-manuel-antonio",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "cta",
+      "kicker": "Le guide complet",
+      "headline": [
+        "Le Costa Rica",
+        "en 2 semaines"
+      ],
+      "seconds": 2.4,
+      "note": "Enregistrez cette vidéo pour votre voyage",
+      "button": "voyagesansdetour.fr",
+      "alt": "Une plage du parc national Manuel Antonio."
+    }
+  ],
+  "musicStart": 8,
+  "assets": {
+    "regular": {
+      "file": "assets/dmsans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9"
+    },
+    "bold": {
+      "file": "assets/dmsans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211"
+    },
+    "serif": {
+      "file": "assets/playfair.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+      },
+      "sha256": "adefc53e7b3d483f1fa5e85edd82b7689ca79db25a1f6786bd7949cdcfeec601"
+    },
+    "fallbackRegular": {
+      "file": "assets/notosans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "478c558ea716033cd60c03438f628dfa75694dcf6b5f6d505a2f05fd2b4f3823"
+    },
+    "fallbackBold": {
+      "file": "assets/notosans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "1df075a380fc7cb898acf64c1f7b3b4dd780de3caa860178bf929de35817a913"
+    },
+    "music": {
+      "file": "assets/happy-alley.mp3",
+      "sha256": "f598c8ee624f1db9a2cd38886524a40baff4ce730dcf999c0763791268fa8265",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "commercialUseAllowed": true,
+      "title": "Happy Alley",
+      "author": "Kevin MacLeod",
+      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100482",
+      "provenance": {
+        "file": "evidence/happy-alley-provenance.json",
+        "sha256": "5a2ba8f3dba28b0a748b00089d3854db1fde92213429823746f6d01805f904ac"
+      }
+    }
+  }
+}

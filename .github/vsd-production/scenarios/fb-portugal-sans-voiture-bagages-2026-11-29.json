@@ -1,0 +1,203 @@
+{
+  "schemaVersion": 2,
+  "id": "fb-portugal-sans-voiture-bagages-2026-11-29",
+  "kind": "carousel",
+  "channel": "facebook",
+  "destination": "Portugal",
+  "title": "Voyager léger au Portugal : 4 repères",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/portugal-sans-voiture-bagages/",
+  "publishAt": "2026-11-29T17:00:00Z",
+  "review": {
+    "status": "reviewed_for_render",
+    "checkedAt": "2026-11-15T09:38:06Z",
+    "validUntil": "2026-12-15T09:38:06Z",
+    "method": "Généré automatiquement (auto_social.py) depuis la page publiée du guide relevée le 15/11/2026 : chaque chiffre est cité mot pour mot ; photos réelles sous licence libre (Wikimedia Commons), aucune image générée par IA ; garde-fous de production.py passés avant la mise en file."
+  },
+  "sources": {
+    "file": "auto/fb-portugal-sans-voiture-bagages-2026-11-29/sources.json",
+    "sha256": "9e3e13f9d40da395d7a395ce72d9ce25ade34fd7a53fea6b9954022633f6ec60"
+  },
+  "photos": {
+    "file": "auto/fb-portugal-sans-voiture-bagages-2026-11-29/photos.json",
+    "sha256": "46bfef63fe494a34ef5a65b4cf783fcf75b48562785414197efce6e05e62f1fa"
+  },
+  "caption": {
+    "hook": "🎒 Bagages au Portugal sans voiture : 1 valise gratuite dans le train, des pavés partout",
+    "lines": [
+      "💶 6,50 € par bagage en trop à bord de l’Alfa Pendular et de l’Intercidades ; un bagage à main reste gratuit",
+      "📍 85×55×35 cm : la taille maximale de chacun des 3 bagages admis sur les trains internationaux CP",
+      "📍 55×40×20 cm : la valise maximale dans les bus et les trams Carris de Lisbonne : une valise cabine, pas plus",
+      "💶 16 à 23 € : le taxi à prix fixe depuis l’aéroport de Lisbonne selon la zone et l’heure, bagages compris"
+    ],
+    "cta": "🔗 Tous les prix, horaires et l’itinéraire dans le guide complet :",
+    "hashtags": [
+      "#Portugal",
+      "#VoyagePortugal",
+      "#ConseilsVoyage",
+      "#VoyageSansDetour"
+    ]
+  },
+  "scenes": [
+    {
+      "photo": "porto",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Portugal",
+      "headline": [
+        "Voyager léger au Portugal",
+        "*4 chiffres* à connaître"
+      ],
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "Dans les trains nationaux CP, un bagage à main est gratuit par voyageur ; au-delà, l’Alfa Pendular et l’Intercidades facturent 6,50 € par bagage en trop."
+        }
+      ],
+      "tag": "Guide Portugal · sources du 12/11/2026",
+      "alt": "Les façades de Ribeira au bord du Douro à Porto, avec des bateaux rabelos au premier plan."
+    },
+    {
+      "photo": "train-alfa-pendular",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Dans le train",
+      "headline": [
+        "*6,50 €*"
+      ],
+      "detail": "par bagage en trop à bord de l’Alfa Pendular et de l’Intercidades ; un bagage à main reste gratuit",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "6,50 € par bagage en trop à bord de l’Alfa Pendular et de l’Intercidades ; un bagage à main reste gratuit"
+        }
+      ],
+      "tag": "Guide Portugal · sources du 12/11/2026",
+      "alt": "Un train Alfa Pendular de CP à quai."
+    },
+    {
+      "photo": "lisbonne-alfama-toits",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Portugal",
+      "headline": [
+        "*85×55×35 cm*"
+      ],
+      "detail": "la taille maximale de chacun des 3 bagages admis sur les trains internationaux CP",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "85×55×35 cm la taille maximale de chacun des 3 bagages admis sur les trains internationaux CP"
+        }
+      ],
+      "tag": "Guide Portugal · sources du 12/11/2026",
+      "alt": "Les toits d’Alfama et le monastère de São Vicente de Fora vus depuis le château São Jorge."
+    },
+    {
+      "photo": "lisbonne",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Portugal",
+      "headline": [
+        "*55×40×20 cm*"
+      ],
+      "detail": "la valise maximale dans les bus et les trams Carris de Lisbonne : une valise cabine, pas plus",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "55×40×20 cm la valise maximale dans les bus et les trams Carris de Lisbonne : une valise cabine, pas plus"
+        }
+      ],
+      "tag": "Guide Portugal · sources du 12/11/2026",
+      "alt": "Les toits de Lisbonne, le château São Jorge et le pont du 25 Avril sous un ciel bleu."
+    },
+    {
+      "photo": "lisbonne-miradouro",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Portugal",
+      "headline": [
+        "*16 à 23 €*"
+      ],
+      "detail": "le taxi à prix fixe depuis l’aéroport de Lisbonne selon la zone et l’heure, bagages compris",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "16 à 23 € le taxi à prix fixe depuis l’aéroport de Lisbonne selon la zone et l’heure, bagages compris"
+        }
+      ],
+      "tag": "Guide Portugal · sources du 12/11/2026",
+      "alt": "Les pins parasols et le kiosque du miradouro da Senhora do Monte, au-dessus de Lisbonne."
+    },
+    {
+      "photo": "lisbonne-tram28-rue",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Le guide complet",
+      "headline": [
+        "Voyager léger au Portugal"
+      ],
+      "detail": "Voyager léger au Portugal sans voiture.",
+      "alt": "Un tram jaune de la ligne 28 dans une rue pavée et pentue de Lisbonne.",
+      "cta": true
+    }
+  ],
+  "assets": {
+    "regular": {
+      "file": "assets/dmsans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9"
+    },
+    "bold": {
+      "file": "assets/dmsans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211"
+    },
+    "serif": {
+      "file": "assets/playfair.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+      },
+      "sha256": "adefc53e7b3d483f1fa5e85edd82b7689ca79db25a1f6786bd7949cdcfeec601"
+    },
+    "fallbackRegular": {
+      "file": "assets/notosans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "478c558ea716033cd60c03438f628dfa75694dcf6b5f6d505a2f05fd2b4f3823"
+    },
+    "fallbackBold": {
+      "file": "assets/notosans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "1df075a380fc7cb898acf64c1f7b3b4dd780de3caa860178bf929de35817a913"
+    }
+  }
+}

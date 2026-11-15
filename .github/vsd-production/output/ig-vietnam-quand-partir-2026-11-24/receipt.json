@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "contentId": "ig-vietnam-quand-partir-2026-11-24",
+  "status": "rendered_not_published",
+  "fingerprint": "a10e85fbb0c4daefda9d9dd36001fb42ca6fea04744b9de7f799e7fb63afabb8",
+  "createdAt": "2026-11-15T09:45:49.953928Z",
+  "renderFinishedAt": "2026-11-15T09:46:10.118813Z",
+  "rendererContractVersion": 4,
+  "rendererSha256": "534a47e62b5b85ce56b26d49d9bbc783e5811dbbc355e3b265f7c83e882e620a",
+  "drawingSha256": "b78990f497d03baf754e3b2b68a795a5e9d3b91a0b6a2f8dad2ebcd7fec2907c",
+  "motionSha256": "e7456dc883109dfd1f238028827ef85bfa4253c225a50f1035a9c1d069f953c4",
+  "format": "liste",
+  "kind": "reel",
+  "channel": "instagram",
+  "publishAt": "2026-11-24T18:00:00Z",
+  "reviewValidUntil": "2026-12-15T09:38:06Z",
+  "sourceCheckedOn": "2026-11-15",
+  "targetUrl": "https://voyagesansdetour.fr/vietnam/vietnam-quand-partir/",
+  "voice": null,
+  "presenter": null,
+  "sourceUrls": [
+    "https://voyagesansdetour.fr/vietnam/vietnam-quand-partir/"
+  ],
+  "photos": {
+    "vietnam-halong": {
+      "licence": "CC BY-SA 2.0",
+      "author": "Romain Pontida",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Traditional_junk,_Halong_Bay,_Quang_Ninh,_Vietnam_-_V%E1%BB%8Bnh_H%E1%BA%A1_Long,_Qu%E1%BA%A3ng_Ninh,_Vi%E1%BB%87t_Nam_(10226220073).jpg"
+    },
+    "vietnam-hue-citadelle": {
+      "licence": "CC BY 4.0",
+      "author": "Supanut Arunoprayote",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Gate_in_Imperial_City,_Hu%E1%BA%BF_(III).jpg"
+    },
+    "vietnam-train-hanoi": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Newone",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Newone_-_Hanoi_train_street_with_coffee_01.jpg"
+    },
+    "vietnam-hoi-an": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Steffen Schmitz (Carschten)",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:H%E1%BB%99i_An,_Museum_of_Trade_Ceramics,_2020-01_CN-02.jpg"
+    },
+    "vietnam-rizieres-sapa": {
+      "licence": "CC0",
+      "author": "Eerin25",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Rice_terraces_in_Sapa,_Vietnam.jpg"
+    }
+  },
+  "clips": {},
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "durationSeconds": 15.3,
+    "videoCodec": "h264",
+    "pixelFormat": "yuv420p",
+    "videoBitrateBps": 3633505,
+    "audioCodec": "aac",
+    "audioSampleRate": 48000,
+    "audioBitrateBps": 96152,
+    "fullDecodePassed": true,
+    "loudness": {
+      "integratedLufs": -15.9,
+      "truePeakDbfs": -2.4
+    }
+  },
+  "files": [
+    {
+      "file": "apercu.jpg",
+      "sha256": "92837a3746b8ab09760ffb733a0afbe103a614982328d0bbddbff9c480c87172",
+      "bytes": 272968
+    },
+    {
+      "file": "credits.txt",
+      "sha256": "1c31680528a9ee0382d0602d07220c79bef01f18dbc5b0ba2a807bb562840f39",
+      "bytes": 2857
+    },
+    {
+      "file": "dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "file": "encode.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "legende.txt",
+      "sha256": "d56d71b852cd9976cfe2ed4a367fe0846fc19402672825080f63654ecd19a286",
+      "bytes": 973
+    },
+    {
+      "file": "notosans-OFL.txt",
+      "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a",
+      "bytes": 4396
+    },
+    {
+      "file": "playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    },
+    {
+      "file": "poster.jpg",
+      "sha256": "698c6e10085eb32dc62a5072ac6cbb820c49f8a2e5cf45369a4d9722fdc59af5",
+      "bytes": 471755
+    },
+    {
+      "file": "reel.mp4",
+      "sha256": "6dec3accfa69ae68aea4991068da777c61abc967b613eec4ad6d8c7679eaf392",
+      "bytes": 7151478
+    },
+    {
+      "file": "scenario.json",
+      "sha256": "871a4d46f377ade8eb988d8d8b6eb93e998f6074706dae1eec2161ff66755754",
+      "bytes": 7423
+    },
+    {
+      "file": "scene-01.jpg",
+      "sha256": "69a00f2f0f78d83b2abb4f62a16c52acff9611c92263f5cd67f4ae466be977df",
+      "bytes": 433606
+    },
+    {
+      "file": "scene-02.jpg",
+      "sha256": "94d251c0f22f312949a08187e015f63c5ed4c8db5bdda4548e287a378a2c1892",
+      "bytes": 479434
+    },
+    {
+      "file": "scene-03.jpg",
+      "sha256": "46bf1566ffcfcd3b1e16fbf67adf6ed74ca9ce77868a6c838464bac6a519d085",
+      "bytes": 493988
+    },
+    {
+      "file": "scene-04.jpg",
+      "sha256": "fbd93bd9af194d80820bc79a835294557ebabc4b6867a043fbff6143e44ca810",
+      "bytes": 378031
+    },
+    {
+      "file": "scene-05.jpg",
+      "sha256": "e0d34ea9105cf79df6042d897a092e7d7b52fdc857d7007d4ee8f375f68cb532",
+      "bytes": 588361
+    }
+  ],
+  "runtime": {
+    "wallSeconds": 19.636,
+    "encoderThreads": 2,
+    "pillowVersion": "11.3.0",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers"
+  },
+  "publication": {
+    "uploaded": false,
+    "scheduled": false,
+    "published": false,
+    "readyForAutomaticImport": false
+  },
+  "cost": {
+    "newPaidService": false,
+    "providerCalls": 0,
+    "monetarySpendEur": 0
+  }
+}

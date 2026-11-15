@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 1,
+  "batchId": "igc-vietnam-itineraire-15-jours-2026-11-26-v1",
+  "items": [
+    {
+      "contentId": "vsd-production:instagram:igc-vietnam-itineraire-15-jours-2026-11-26:photo-v1",
+      "deduplicationKey": "vsd-production:instagram:igc-vietnam-itineraire-15-jours-2026-11-26:photo-v1",
+      "title": "Le Vietnam en 15 jours : 4 repères",
+      "dueAt": "2026-11-26T08:00:00Z",
+      "payload": {
+        "schemaVersion": 1,
+        "channel": "instagram",
+        "kind": "carousel",
+        "text": "🗺️ Vietnam en 15 jours : de Hanoï à Hô-Chi-Minh-Ville en train, étape par étape (itinéraire 2026)\n\n⏱️ 45 jours de séjour sans visa pour les Français (e-visa à 25 $ au-delà, jusqu’à 90 jours)\n💶 300 000 ₫ : la balade en barque de Tràng An à Ninh Bình, depuis janvier 2026 (≈ 10,70 €)\n💶 200 000 ₫ : la cité impériale de Hué (≈ 7 €) ; les tombeaux coûtent 150 000 ₫ chacun\n💶 120 000 ₫ : le billet de la vieille ville de Hội An, valable pour 5 sites sur 22 (≈ 4,30 €)\n\n📌 Enregistrez ce carrousel pour votre voyage. 🔗 Prix, horaires et détails : le guide complet est en lien dans la bio.\n\nPhotos libres (Wikimedia Commons) — crédits : https://voyagesansdetour.fr/social-media/production/igc-vietnam-itineraire-15-jours-2026-11-26/credits.txt\n\n#Vietnam #VoyageVietnam #Itineraire #VoyageSansDetour\n",
+        "aiGenerated": false,
+        "assets": [
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/igc-vietnam-itineraire-15-jours-2026-11-26/scene-01.jpg",
+            "sha256": "d94408d296c134d58c8c2bd2a160016549f173125f41d4819a6ff7c454dc0314",
+            "mimeType": "image/jpeg",
+            "altText": "Une rue de Hanoï longée par la voie ferrée."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/igc-vietnam-itineraire-15-jours-2026-11-26/scene-02.jpg",
+            "sha256": "6a75548986a028f245589752a046ede4fd4333e25fe206855582f42c3702b59a",
+            "mimeType": "image/jpeg",
+            "altText": "Une jonque aux voiles brunes entre les pitons calcaires couverts de forêt de la baie d’Ha Long."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/igc-vietnam-itineraire-15-jours-2026-11-26/scene-03.jpg",
+            "sha256": "c3d10ebf6f919e7de71516fa872fcdec8130bb977fd8cbf6900abd7192762564",
+            "mimeType": "image/jpeg",
+            "altText": "Les barques de Tràng An entre les pitons de Ninh Bình."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/igc-vietnam-itineraire-15-jours-2026-11-26/scene-04.jpg",
+            "sha256": "d901a8ca40ce0b7563c689ac1d67d6d9e2555327d26949521a6aedd11dcc6543",
+            "mimeType": "image/jpeg",
+            "altText": "La cité impériale de Huế."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/igc-vietnam-itineraire-15-jours-2026-11-26/scene-05.jpg",
+            "sha256": "37a7641afe4c8edd5b1578463c253c3de43a0cda530dea1a592b0f05fe5f3b9e",
+            "mimeType": "image/jpeg",
+            "altText": "Une maison de bois de la vieille ville de Hội An, ornée de lanternes rouges et d’un bandeau de Nouvel An."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/igc-vietnam-itineraire-15-jours-2026-11-26/scene-06.jpg",
+            "sha256": "50b33e52423ba4003ec94de1cc49ae5c4af310a7db1beb79623076a4d9582f67",
+            "mimeType": "image/jpeg",
+            "altText": "Les rizières en terrasses autour de Sa Pa, dans le Nord."
+          }
+        ]
+      },
+      "review": {
+        "schemaVersion": 1,
+        "contentId": "vsd-production:instagram:igc-vietnam-itineraire-15-jours-2026-11-26:photo-v1",
+        "approved": true,
+        "reviewedAt": "2026-11-15T09:50:01Z",
+        "validUntil": "2026-12-15T09:38:06Z",
+        "payloadRevision": "03484f59ff115204acbd7d3b8569aafa753841537ee80cafa56d3a6a2f2d4d99",
+        "checks": {
+          "editorialApproved": true,
+          "rightsApproved": true,
+          "creditsPreserved": true,
+          "disclosurePreserved": true,
+          "formatRequirementsVerified": true,
+          "requiresPaidCall": false,
+          "sources": {
+            "status": "verified",
+            "observedAt": "2026-11-15T09:38:06Z",
+            "validUntil": "2026-12-15T09:38:06Z"
+          },
+          "syntheticPerson": false,
+          "providerSyntheticSettingVerified": false
+        },
+        "media": {
+          "required": true,
+          "url": null,
+          "sha256": null,
+          "items": [
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/igc-vietnam-itineraire-15-jours-2026-11-26/scene-01.jpg",
+              "sha256": "d94408d296c134d58c8c2bd2a160016549f173125f41d4819a6ff7c454dc0314",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-15T09:50:01Z",
+              "validUntil": "2026-12-15T09:38:06Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/igc-vietnam-itineraire-15-jours-2026-11-26/scene-02.jpg",
+              "sha256": "6a75548986a028f245589752a046ede4fd4333e25fe206855582f42c3702b59a",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-15T09:50:01Z",
+              "validUntil": "2026-12-15T09:38:06Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/igc-vietnam-itineraire-15-jours-2026-11-26/scene-03.jpg",
+              "sha256": "c3d10ebf6f919e7de71516fa872fcdec8130bb977fd8cbf6900abd7192762564",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-15T09:50:01Z",
+              "validUntil": "2026-12-15T09:38:06Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/igc-vietnam-itineraire-15-jours-2026-11-26/scene-04.jpg",
+              "sha256": "d901a8ca40ce0b7563c689ac1d67d6d9e2555327d26949521a6aedd11dcc6543",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-15T09:50:01Z",
+              "validUntil": "2026-12-15T09:38:06Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/igc-vietnam-itineraire-15-jours-2026-11-26/scene-05.jpg",
+              "sha256": "37a7641afe4c8edd5b1578463c253c3de43a0cda530dea1a592b0f05fe5f3b9e",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-15T09:50:01Z",
+              "validUntil": "2026-12-15T09:38:06Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/igc-vietnam-itineraire-15-jours-2026-11-26/scene-06.jpg",
+              "sha256": "50b33e52423ba4003ec94de1cc49ae5c4af310a7db1beb79623076a4d9582f67",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-15T09:50:01Z",
+              "validUntil": "2026-12-15T09:38:06Z"
+            }
+          ]
+        },
+        "destination": {
+          "url": "https://voyagesansdetour.fr/vietnam/vietnam-itineraire-15-jours/",
+          "status": "verified",
+          "observedAt": "2026-11-15T09:50:01Z",
+          "validUntil": "2026-12-15T09:38:06Z"
+        },
+        "monetization": {
+          "containsAffiliateLinks": false,
+          "partnerApproved": false,
+          "linksVerified": false,
+          "disclosurePreserved": false
+        },
+        "formatCapability": {
+          "status": "verified",
+          "observedAt": "2026-11-15T09:50:01Z",
+          "validUntil": "2026-12-15T09:38:06Z",
+          "automaticPublishing": true,
+          "verificationMethod": "official_documentation",
+          "sourceUrls": [
+            "https://support.buffer.com/en-us/articles/sharing-videos-through-buffer-LOe2p2rnAI",
+            "https://developers.buffer.com/types/InstagramPostMetadataInput.html",
+            "https://developers.buffer.com/guides/posts-and-scheduling.html"
+          ]
+        },
+        "evidence": {
+          "status": "rendered_local_bytes_verified_public_deploy_pending",
+          "format": "photo_carousel",
+          "rendererContractVersion": 3,
+          "receiptSha256": "9bce6ba40a3e94138fbead0589969a91630cde0b9e4d2e663a2e0a77ac8ce636",
+          "scenarioFingerprint": "72c7c72a9fb07aa84e053871e9762ff579dfda8a39a69336ffaeb9af020f4d33",
+          "sourceCheckedOn": "2026-11-15",
+          "sourceUrls": [
+            "https://voyagesansdetour.fr/vietnam/vietnam-itineraire-15-jours/"
+          ],
+          "creditsUrl": "https://voyagesansdetour.fr/social-media/production/igc-vietnam-itineraire-15-jours-2026-11-26/credits.txt",
+          "voice": null,
+          "music": null,
+          "note": "Les octets publics sont à contrôler après déploiement avec social_stock.py --verify-public. Un créneau prévu n'est pas une réservation Buffer."
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "checkedOn": "2026-11-15",
+  "method": "Page publiée du guide relevée automatiquement ; texte visible conservé tel quel, première ligne = URL.",
+  "sources": {
+    "guide": {
+      "url": "https://voyagesansdetour.fr/costa-rica/costa-rica-itineraire-2-semaines/",
+      "publisher": "Voyage Sans Détour",
+      "title": "Costa Rica en 2 semaines sans voiture : Manuel Antonio, Monteverde, Arenal et Puerto Viejo, navettes et prix 2026",
+      "retrievedAt": "2026-11-15T09:38:06Z",
+      "snapshot": {
+        "file": "auto/ig-costa-rica-itineraire-2-semaines-2026-12-04/guide.txt",
+        "sha256": "fca7d1e2a8ee80875cc05d5fb56e0e9372f228fd3e29c3a3330bd0b7a0c95612"
+      }
+    }
+  }
+}

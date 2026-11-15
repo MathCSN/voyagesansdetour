@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 1,
+  "batchId": "fb-yucatan-itineraire-10-jours-2026-12-03-v1",
+  "items": [
+    {
+      "contentId": "vsd-production:facebook:fb-yucatan-itineraire-10-jours-2026-12-03:photo-v1",
+      "deduplicationKey": "vsd-production:facebook:fb-yucatan-itineraire-10-jours-2026-12-03:photo-v1",
+      "title": "Yucatán en 10 jours : 4 repères",
+      "dueAt": "2026-12-03T17:00:00Z",
+      "payload": {
+        "schemaVersion": 1,
+        "channel": "facebook",
+        "kind": "photos",
+        "text": "🗺️ Yucatán en 10 jours : Valladolid, Chichén Itzá, Mérida et Tulum, avec le Tren Maya\n\n💶 697 pesos : l’entrée de Chichén Itzá pour un étranger (105 pesos INAH + 592 pesos de l’État), de 8 h à 16 h\n💶 240 pesos : le cenote Ik Kil, à 3 km de Chichén Itzá, gilet compris, ouvert tous les jours de 9 h à 17 h\n⏱️ 5 h 16 : le train direct Mérida Teya → Tulum de 7 h, arrivée 13 h 16 : 1 389,50 pesos en tarif touriste international\n💶 265 pesos : les ruines de Tulum pour un étranger, parc du Jaguar compris, de 8 h à 17 h (dernier accès 15 h 30)\n\n🔗 Tous les prix, horaires et l’itinéraire dans le guide complet :\nhttps://voyagesansdetour.fr/mexique/yucatan-itineraire-10-jours/\n\nPhotos libres (Wikimedia Commons) — crédits : https://voyagesansdetour.fr/social-media/production/fb-yucatan-itineraire-10-jours-2026-12-03/credits.txt\n\n#Yucatan #Mexique #VoyageMexique #Itineraire #VoyageSansDetour\n",
+        "aiGenerated": false,
+        "assets": [
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-yucatan-itineraire-10-jours-2026-12-03/scene-01.jpg",
+            "sha256": "613502acafec30b5337cbd4ee1bcb24fe60256db38db0c196bcf1738c70688a2",
+            "mimeType": "image/jpeg",
+            "altText": "La pyramide d’El Castillo, à Chichén Itzá, sous un ciel sans nuage."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-yucatan-itineraire-10-jours-2026-12-03/scene-02.jpg",
+            "sha256": "9979845799c068304077d054be713a1b20c05b1a6e33eeb363dae99c092a49b6",
+            "mimeType": "image/jpeg",
+            "altText": "La pyramide d’El Castillo, à Chichén Itzá."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-yucatan-itineraire-10-jours-2026-12-03/scene-03.jpg",
+            "sha256": "72096b7c7a17ca37707bb611ba49f66e7a33477e08fcc4a456bb9dc97376693f",
+            "mimeType": "image/jpeg",
+            "altText": "Un cenote entouré de lianes, dans le Yucatán."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-yucatan-itineraire-10-jours-2026-12-03/scene-04.jpg",
+            "sha256": "dc4d95be58aaef1619427b0654152020054edc29ffc1a87e19d674b5d9bc9a0f",
+            "mimeType": "image/jpeg",
+            "altText": "Une rame du Tren Maya entre en gare de Mérida Teya."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-yucatan-itineraire-10-jours-2026-12-03/scene-05.jpg",
+            "sha256": "018893df6d8f6fa1b1cea19431c9b4f873aaa94bcd6deee6991f55a8286a2d0a",
+            "mimeType": "image/jpeg",
+            "altText": "Les ruines de Tulum au-dessus de la mer des Caraïbes."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-yucatan-itineraire-10-jours-2026-12-03/scene-06.jpg",
+            "sha256": "1da5876c46d4941cb71464ca365c7e2f33c9a47a30c12dcccb8399ff0db63701",
+            "mimeType": "image/jpeg",
+            "altText": "La pyramide du Devin à Uxmal, au sud de Mérida."
+          }
+        ]
+      },
+      "review": {
+        "schemaVersion": 1,
+        "contentId": "vsd-production:facebook:fb-yucatan-itineraire-10-jours-2026-12-03:photo-v1",
+        "approved": true,
+        "reviewedAt": "2026-11-15T09:50:01Z",
+        "validUntil": "2026-12-15T09:42:58Z",
+        "payloadRevision": "684c441ba4b05f587dcaaa7a6d7929bc3e28b452168c1fdeb994f70df447acdf",
+        "checks": {
+          "editorialApproved": true,
+          "rightsApproved": true,
+          "creditsPreserved": true,
+          "disclosurePreserved": true,
+          "formatRequirementsVerified": true,
+          "requiresPaidCall": false,
+          "sources": {
+            "status": "verified",
+            "observedAt": "2026-11-15T09:42:58Z",
+            "validUntil": "2026-12-15T09:42:58Z"
+          },
+          "syntheticPerson": false,
+          "providerSyntheticSettingVerified": false
+        },
+        "media": {
+          "required": true,
+          "url": null,
+          "sha256": null,
+          "items": [
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-yucatan-itineraire-10-jours-2026-12-03/scene-01.jpg",
+              "sha256": "613502acafec30b5337cbd4ee1bcb24fe60256db38db0c196bcf1738c70688a2",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-15T09:50:01Z",
+              "validUntil": "2026-12-15T09:42:58Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-yucatan-itineraire-10-jours-2026-12-03/scene-02.jpg",
+              "sha256": "9979845799c068304077d054be713a1b20c05b1a6e33eeb363dae99c092a49b6",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-15T09:50:01Z",
+              "validUntil": "2026-12-15T09:42:58Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-yucatan-itineraire-10-jours-2026-12-03/scene-03.jpg",
+              "sha256": "72096b7c7a17ca37707bb611ba49f66e7a33477e08fcc4a456bb9dc97376693f",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-15T09:50:01Z",
+              "validUntil": "2026-12-15T09:42:58Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-yucatan-itineraire-10-jours-2026-12-03/scene-04.jpg",
+              "sha256": "dc4d95be58aaef1619427b0654152020054edc29ffc1a87e19d674b5d9bc9a0f",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-15T09:50:01Z",
+              "validUntil": "2026-12-15T09:42:58Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-yucatan-itineraire-10-jours-2026-12-03/scene-05.jpg",
+              "sha256": "018893df6d8f6fa1b1cea19431c9b4f873aaa94bcd6deee6991f55a8286a2d0a",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-15T09:50:01Z",
+              "validUntil": "2026-12-15T09:42:58Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-yucatan-itineraire-10-jours-2026-12-03/scene-06.jpg",
+              "sha256": "1da5876c46d4941cb71464ca365c7e2f33c9a47a30c12dcccb8399ff0db63701",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-15T09:50:01Z",
+              "validUntil": "2026-12-15T09:42:58Z"
+            }
+          ]
+        },
+        "destination": {
+          "url": "https://voyagesansdetour.fr/mexique/yucatan-itineraire-10-jours/",
+          "status": "verified",
+          "observedAt": "2026-11-15T09:50:01Z",
+          "validUntil": "2026-12-15T09:42:58Z"
+        },
+        "monetization": {
+          "containsAffiliateLinks": false,
+          "partnerApproved": false,
+          "linksVerified": false,
+          "disclosurePreserved": false
+        },
+        "formatCapability": {
+          "status": "verified",
+          "observedAt": "2026-11-15T09:50:01Z",
+          "validUntil": "2026-12-15T09:42:58Z",
+          "automaticPublishing": true,
+          "verificationMethod": "official_documentation",
+          "sourceUrls": [
+            "https://support.buffer.com/en-us/articles/using-facebook-with-buffer-jY1AM9fz2G",
+            "https://developers.buffer.com/types/FacebookPostMetadataInput.html",
+            "https://developers.buffer.com/guides/posts-and-scheduling.html"
+          ]
+        },
+        "evidence": {
+          "status": "rendered_local_bytes_verified_public_deploy_pending",
+          "format": "photo_carousel",
+          "rendererContractVersion": 3,
+          "receiptSha256": "082f4dddc168d3ab4a03cbb4b226e600fc2d0577b156987cee2a48eef0909c6f",
+          "scenarioFingerprint": "e3eacf4b56cd5c4b1b6990d7656812a6bc8195bf90996cf1399712e3046f15c2",
+          "sourceCheckedOn": "2026-11-15",
+          "sourceUrls": [
+            "https://voyagesansdetour.fr/mexique/yucatan-itineraire-10-jours/"
+          ],
+          "creditsUrl": "https://voyagesansdetour.fr/social-media/production/fb-yucatan-itineraire-10-jours-2026-12-03/credits.txt",
+          "voice": null,
+          "music": null,
+          "note": "Les octets publics sont à contrôler après déploiement avec social_stock.py --verify-public. Un créneau prévu n'est pas une réservation Buffer."
+        }
+      }
+    }
+  ]
+}

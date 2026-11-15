@@ -180,6 +180,54 @@
       "notBefore": "2026-11-13T06:53:15Z",
       "file": "scenarios/fb-japon-itineraire-2-semaines-2026-11-22-2.json",
       "sha256": "c0d90a493142496364ff30820da940a0f18b7181e960a33cc9d703adbba2e09c"
+    },
+    {
+      "contentId": "fb-portugal-sans-voiture-bagages-2026-11-29",
+      "notBefore": "2026-11-15T09:38:06Z",
+      "file": "scenarios/fb-portugal-sans-voiture-bagages-2026-11-29.json",
+      "sha256": "e42cbbc9f0908d7057c320fb04823a83ba2a62974299f8d09a8b2d1473a93367"
+    },
+    {
+      "contentId": "ig-costa-rica-itineraire-2-semaines-2026-12-04",
+      "notBefore": "2026-11-15T09:38:06Z",
+      "file": "scenarios/ig-costa-rica-itineraire-2-semaines-2026-12-04.json",
+      "sha256": "237d9a24628ad63c4227f06eb31ec3de696fc592fabb50adcdb9a34ccd13455d"
+    },
+    {
+      "contentId": "ig-laponie-budget-rovaniemi-2026-11-29",
+      "notBefore": "2026-11-15T09:38:06Z",
+      "file": "scenarios/ig-laponie-budget-rovaniemi-2026-11-29.json",
+      "sha256": "c9cc244c445a339ff9e27101cfda337af9e663da90702c10e3447e1a498045cf"
+    },
+    {
+      "contentId": "ig-londres-noel-marches-2026-11-27",
+      "notBefore": "2026-11-15T09:38:06Z",
+      "file": "scenarios/ig-londres-noel-marches-2026-11-27.json",
+      "sha256": "10a5296eff74ffc76c3e44c96bca0d509001c1eb6d91ea4e60c53ed71f7ccab2"
+    },
+    {
+      "contentId": "ig-tenerife-quand-partir-2026-11-22",
+      "notBefore": "2026-11-15T09:38:06Z",
+      "file": "scenarios/ig-tenerife-quand-partir-2026-11-22.json",
+      "sha256": "6e228cc6b841cbb7f347213e8f6b422709878a4dcc130873a21c03306f714cbd"
+    },
+    {
+      "contentId": "ig-vietnam-quand-partir-2026-11-24",
+      "notBefore": "2026-11-15T09:38:06Z",
+      "file": "scenarios/ig-vietnam-quand-partir-2026-11-24.json",
+      "sha256": "871a4d46f377ade8eb988d8d8b6eb93e998f6074706dae1eec2161ff66755754"
+    },
+    {
+      "contentId": "igc-vietnam-itineraire-15-jours-2026-11-26",
+      "notBefore": "2026-11-15T09:38:06Z",
+      "file": "scenarios/igc-vietnam-itineraire-15-jours-2026-11-26.json",
+      "sha256": "988ab66e4a556274e682f22f89ecff404772d949530fb2b2595ce6ca422311eb"
+    },
+    {
+      "contentId": "fb-yucatan-itineraire-10-jours-2026-12-03",
+      "notBefore": "2026-11-15T09:42:58Z",
+      "file": "scenarios/fb-yucatan-itineraire-10-jours-2026-12-03.json",
+      "sha256": "7c16f41a8ec94b02a9bac1a14bca0759d58b439e3755b434c61a9f64a67528a4"
     }
   ]
 }

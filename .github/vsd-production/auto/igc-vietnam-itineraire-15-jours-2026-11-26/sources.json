@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "checkedOn": "2026-11-15",
+  "method": "Page publiée du guide relevée automatiquement ; texte visible conservé tel quel, première ligne = URL.",
+  "sources": {
+    "guide": {
+      "url": "https://voyagesansdetour.fr/vietnam/vietnam-itineraire-15-jours/",
+      "publisher": "Voyage Sans Détour",
+      "title": "Vietnam en 15 jours : de Hanoï à Hô-Chi-Minh-Ville en train, étape par étape (itinéraire 2026)",
+      "retrievedAt": "2026-11-15T09:38:06Z",
+      "snapshot": {
+        "file": "auto/igc-vietnam-itineraire-15-jours-2026-11-26/guide.txt",
+        "sha256": "1b8055f870a46c2e2850e7c241b9ffa38e4f8b5865592455235a96dbd4ef9e1b"
+      }
+    }
+  }
+}

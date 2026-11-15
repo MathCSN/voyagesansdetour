@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "photos": {
+    "lisbonne": {
+      "camera": "X-T20",
+      "file": "assets/photos/auto/lisbonne.jpg",
+      "sha256": "81d42d97450d6e3ede1cce2f2c856a4083429eb961c0417172534a21e359dd4c",
+      "width": 2400,
+      "height": 1600,
+      "commonsTitle": "File:City view of Lisbon with Castelo de São Jorge.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:City_view_of_Lisbon_with_Castelo_de_S%C3%A3o_Jorge.jpg",
+      "author": "SIryn",
+      "commonsCredit": "own work by the original uploader",
+      "categories": "Castelo de São Jorge|Uploaded with pattypan|September 2018 in Lisbon",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        6000,
+        4000
+      ],
+      "commonsSha1": "d5b9709fadc645c18110e6f1503a06379fe518fb",
+      "retrievedAt": "2026-11-15T09:38:06Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux.",
+      "emblematic": true
+    },
+    "lisbonne-alfama-toits": {
+      "camera": "NIKON D750",
+      "file": "assets/photos/auto/lisbonne-alfama-toits.jpg",
+      "sha256": "3e15c6f8b6e17ff8417c0602acbe315cf051fde636f91962eb73edb5c502b279",
+      "width": 2397,
+      "height": 1600,
+      "commonsTitle": "File:Lisbon Alfama Sao Vicente Pantheon from Sao Jorge Castle, 20250604 1714 9404.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Lisbon_Alfama_Sao_Vicente_Pantheon_from_Sao_Jorge_Castle,_20250604_1714_9404.jpg",
+      "author": "Jakub Hałun",
+      "commonsCredit": "Own work",
+      "categories": "Self-published work|Files with coordinates missing SDC location of creation|Mosteiro de São Vicente de Fora from Castelo de São Jorge",
+      "licence": "CC BY 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "originalSize": [
+        5923,
+        3954
+      ],
+      "commonsSha1": "672dd1e71f5d42200487c11d40a477aeb0f6abb5",
+      "retrievedAt": "2026-11-15T09:38:06Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux.",
+      "emblematic": true
+    },
+    "lisbonne-miradouro": {
+      "camera": "KODAK Z740 ZOOM DIGITAL CAMERA",
+      "file": "assets/photos/auto/lisbonne-miradouro.jpg",
+      "sha256": "bc900038a9718b28e22d18a7e20f4a89b01d634bb4511b404905c78262866cb8",
+      "width": 2133,
+      "height": 1600,
+      "commonsTitle": "File:Miradouro Nossa Senhora do Monte II.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Miradouro_Nossa_Senhora_do_Monte_II.jpg",
+      "author": "Filipe Rocha",
+      "commonsCredit": "Own work",
+      "categories": "Taken with Kodak EasyShare Z740|Miradouro da Senhora do Monte|Nossa Senhora do Monte|Statues of Virgin Mary in Portugal|Statues in Lisbon|Wayside shrines in Lisbon (district)",
+      "licence": "CC BY-SA 3.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "originalSize": [
+        2576,
+        1932
+      ],
+      "commonsSha1": "0ebc464ee81d02e3849a4397feb2e3276f58c284",
+      "retrievedAt": "2026-11-15T09:38:06Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "lisbonne-tram28-rue": {
+      "file": "assets/photos/lisbonne-tram28-rue.jpg",
+      "sha256": "3bbd629e7b78cc6233c85ae7011d19203f61c72385cb112a378e6779bf0d6d3c",
+      "width": 2400,
+      "height": 1600,
+      "commonsTitle": "File:Tram 28 (34791358090).jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tram_28_(34791358090).jpg",
+      "author": "Shadowgate from Novara, ITALY",
+      "licence": "CC BY 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "originalSize": [
+        4272,
+        2848
+      ],
+      "commonsSha1": "f38a38c41298bf38dd98d87ad696b178b6469be1",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux.",
+      "emblematic": true
+    },
+    "porto": {
+      "camera": "Canon EOS 70D",
+      "file": "assets/photos/auto/porto.jpg",
+      "sha256": "f72054fac351afbf5ceb0c98aea97aa87788928f372f7c3ffda60559872bb44d",
+      "width": 2880,
+      "height": 854,
+      "commonsTitle": "File:Porto-Panorama de Ribeira-Rabelos-20120910.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Porto-Panorama_de_Ribeira-Rabelos-20120910.jpg",
+      "author": "Daniel VILLAFRUELA",
+      "commonsCredit": "Own work",
+      "categories": "Taken with Canon EOS 70D|Views of Morro da Vitória and Ribeira from Gaia|Self-published work|Files with coordinates missing SDC location of creation|Portugal photographs taken on 2014-09-10|September 2014 in Porto|Panoramas of Porto|Rabelos in Cais de Gaia with Ribeira",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        12981,
+        3848
+      ],
+      "commonsSha1": "dc561c7988c9308bcb60346f79fb7c671f374386",
+      "retrievedAt": "2026-11-15T09:38:06Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux.",
+      "emblematic": true
+    },
+    "train-alfa-pendular": {
+      "camera": "ASUS_Z017D",
+      "file": "assets/photos/auto/train-alfa-pendular.jpg",
+      "sha256": "ff6d79a6f4c73be947099bb59ee5c1df37593c9763ad24ae44ba2d02cbfa595b",
+      "width": 2843,
+      "height": 1600,
+      "commonsTitle": "File:Alfa Pendular New Livery.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Alfa_Pendular_New_Livery.jpg",
+      "author": "LuisFerreira4x4",
+      "commonsCredit": "https://pixabay.com/photos/train-alfa-pendular-portugal-2246938/",
+      "categories": "CC-Zero|Images from Pixabay|Trains at Gare do Oriente|Portuguese train type 4000 in black and gray livery",
+      "licence": "CC0",
+      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "originalSize": [
+        4656,
+        2620
+      ],
+      "commonsSha1": "53dc8fe943795f990687c69e284aedba28e9c1a7",
+      "retrievedAt": "2026-11-12T23:12:31Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux.",
+      "emblematic": true
+    }
+  }
+}
