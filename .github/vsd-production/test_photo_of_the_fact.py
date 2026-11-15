@@ -502,8 +502,9 @@ class OpeningAndSubject(unittest.TestCase):
         outings = names.outings(self.MARRAKECH, names.words("Maroc Marrakech"))
         media = reel_formats.Media([port, souk], [], everywhere="Maroc Marrakech", outings=outings)
         self.assertEqual(media.closing()[1], "marrakech-souk")
+        alone = reel_formats.Media([port], [], everywhere="Maroc Marrakech", outings=outings)
         with self.assertRaisesRegex(reel_formats.Held, "no_photo_left_for_the_call"):
-            reel_formats.Media([port], [], everywhere="Maroc Marrakech", outings=outings).closing()
+            alone.closing()
 
     def test_a_carousel_opens_on_the_guide_s_cover_when_no_plan_took_it(self):
         # Review of PR 57: the carousels opened on the photo their rotation put first; the guide's cover now comes first.
