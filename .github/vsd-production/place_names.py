@@ -34,7 +34,8 @@ GENERIC = frozenset("""
     ponte praia praca rua igreja torre castelo palacio estacao mosteiro cais largo miradouro jardim catedral plaza puente
     real via""".split())
 # What a journey is made by, as a fact says it; and what a photo of it shows.
-WAYS = {"rail": frozenset("train trains shinkansen tgv couchette couchettes rame railway sleeper locomotive wagon".split()),
+WAYS = {"rail": frozenset("train trains shinkansen tgv couchette couchettes rame railway sleeper locomotive wagon "
+                          "tren trenes comboio comboios treno treni".split()),
         "metro": frozenset("metro metros".split()), "tram": frozenset("tram trams tramway eletrico".split()),
         "road": frozenset("bus minibus navette autocar".split()),
         "water": frozenset("ferry ferries bateau bateaux barque barques sampan sampans boat boats".split())}

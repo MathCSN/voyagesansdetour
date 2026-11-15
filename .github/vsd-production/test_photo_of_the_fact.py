@@ -179,6 +179,10 @@ class JourneysSaidFurtherOn(unittest.TestCase):
         scene = {"photo": "cordoue-mezquita", "headline": ["*10 trains*"], "detail": fact["label"], "alt": mezquita[2]}
         self.assertIn("no ride", p.another_place(scene, {"cordoue-mezquita": mezquita[1]}, names.words("Espagne Andalousie")))
 
+    def test_a_train_named_in_its_own_language_is_a_train(self):
+        self.assertTrue(names.strict_journey("de l’aéroport de Cancún à Valladolid en Tren Maya, 6 départs par jour"))
+        self.assertEqual(names.wanted_ways("en Tren Maya de Mérida à Cancún"), {"rail"})
+
     def test_a_taxi_never_goes_over_a_tram(self):
         taxi = "le taxi à prix fixe depuis l’aéroport de Lisbonne selon la zone et l’heure, bagages compris"
         tram = names.vehicle("lisbonne-tram28-rue", "Un tram jaune de la ligne 28 dans une rue pavée et pentue de Lisbonne.", "File:Tram 28.jpg")
