@@ -433,6 +433,8 @@ def wanted_ways(text: str) -> set[str]:
     if brands(set(said)) or TRAIN_NUMBER.search(text):
         return {"rail"}
     # "le taxi à prix fixe depuis l'aéroport": a means no photo of a train, a tram or a bus shows.
+    if "pied" in said[:OPENING_WORDS]:
+        return {"walk"}   # "à pied": no vehicle, and never over one (review of PR 55)
     return {"other"} if OTHER_MEANS & set(said[:OPENING_WORDS]) else set()
 
 
@@ -441,7 +443,7 @@ def strict_journey(text: str) -> bool:
     AVE"): it goes over a photo of that means of transport, or stays in the guide. Over the gate of the imperial city
     of Hué, the photo said nothing of the train (review of PR 53). A ticket or a fare that names one place at most ("le
     ticket bus SITA", "le plafond quotidien du métro") is no such journey."""
-    return journey(text) and (linked(text) or travelled(text)) and bool(wanted_ways(text))
+    return journey(text) and (linked(text) or travelled(text)) and bool(wanted_ways(text) - {"walk"})
 
 
 def vehicle(identifier: str, caption: str, title: str) -> set[str]:
@@ -454,7 +456,8 @@ def other_ride(shown_ways: set[str], text: str) -> bool:
     """A journey over a photo of another means of transport than its own (`shown_ways`, see `vehicle`): "de nuit entre
     Ninh Bình (SE3…) et Hué" went over the boats of Tràng An. A photo of no means at all is not concerned."""
     wanted = wanted_ways(text)
-    concerned = journey(text) or "other" in wanted   # "16 à 23 € le taxi…" went over a tram of Lisbon
+    # "16 à 23 € le taxi…" went over a tram of Lisbon; a walk never goes over a vehicle either.
+    concerned = journey(text) or bool({"other", "walk"} & wanted)
     return bool(concerned and shown_ways and wanted and not shown_ways & wanted)
 
 

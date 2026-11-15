@@ -4,15 +4,15 @@
   "status": "draft_requires_review",
   "publicationApproved": false,
   "title": "Londres en décembre 2026 : Winter Wonderland, patinoires et métro plafonné à 8,90 £",
-  "pinTitle": "Londres en décembre : les chiffres à connaître avant de partir",
+  "pinTitle": "Londres en décembre : le palais de Westminster et la tour Elizabeth au bord de la Tamise",
   "variant": "c",
   "targetUrl": "https://voyagesansdetour.fr/royaume-uni/londres-noel-marches/",
   "articleSha256": "9eae4bfd75626c44daba6e8f86e7dfb482b671a3ad0e89234d87b03767cdd96f",
-  "imageSha256": "502564289ca4c3c9c37386dd6cb71ceb7e6767f821a42a1282453c1f3ba366a6",
+  "imageSha256": "bb9ba809942035697d7e15b0e6301fa9ab7fe64421774c8ecb43f01fd24245e8",
   "width": 1000,
   "height": 1500,
   "templateVersion": 2,
-  "rendererSha256": "693b82a5423a7d939e4c6c3aaa8c1b5d305ae39d6fa095e55f96b591dfc9b24f",
+  "rendererSha256": "4e84395c3b1cf33bb7d679eee617155a0feb7db06078590a7bcefadb2e60ff2e",
   "originalComposition": true,
   "externalPhotographs": true,
   "limitations": [
@@ -23,6 +23,7 @@
     "author": "Domob",
     "source_page": "https://commons.wikimedia.org/wiki/File:Palace_of_Westminster_and_Elizabeth_Tower_20250522.jpg",
     "license": "CC BY-SA 4.0",
-    "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "alt_fr": "Le palais de Westminster et la tour Elizabeth au bord de la Tamise."
   }
 }

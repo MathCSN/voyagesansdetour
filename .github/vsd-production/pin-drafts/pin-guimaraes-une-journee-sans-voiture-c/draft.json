@@ -4,15 +4,15 @@
   "status": "draft_requires_review",
   "publicationApproved": false,
   "title": "Guimarães en une journée depuis Porto : train à 3,60 €, Paço des ducs, château et téléphérique de la Penha",
-  "pinTitle": "Guimarães en une journée : les chiffres à connaître avant de partir",
+  "pinTitle": "Guimarães en une journée : la rua de Santa Maria",
   "variant": "c",
   "targetUrl": "https://voyagesansdetour.fr/portugal/guimaraes-une-journee-sans-voiture/",
   "articleSha256": "d28c4b2ff496dd9632a9f3f33adc9781e004fb2200626eacc2b07f8043fa13ed",
-  "imageSha256": "bbb0c8c5f5e71dc1fb47828ccf6f86bd62727f6d0694d6ab4cb06d03e835361b",
+  "imageSha256": "b1e3a4d1d0ed622e288f894f665a4a7a214cbe8db2ee2a32df92c74e354dfb2c",
   "width": 1000,
   "height": 1500,
   "templateVersion": 2,
-  "rendererSha256": "693b82a5423a7d939e4c6c3aaa8c1b5d305ae39d6fa095e55f96b591dfc9b24f",
+  "rendererSha256": "4e84395c3b1cf33bb7d679eee617155a0feb7db06078590a7bcefadb2e60ff2e",
   "originalComposition": true,
   "externalPhotographs": true,
   "limitations": [
@@ -23,6 +23,7 @@
     "author": "Krzysztof Golik",
     "source_page": "https://commons.wikimedia.org/wiki/File:Rua_de_Santa_Maria_in_Guimaraes_(2).jpg",
     "license": "CC BY-SA 4.0",
-    "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "alt_fr": "La rua de Santa Maria, rue piétonne pavée aux maisons de pierre du centre historique de Guimarães."
   }
 }

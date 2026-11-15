@@ -554,12 +554,10 @@ if PUBLIC:
     allowed_pins={
         'pin-01-lisbonne-3-jours':('/portugal/lisbonne-3-jours-sans-voiture/',
                                     '/social-media/lancement-2026-09/pin-01-lisbonne-3-jours.jpg'),
-        'pin-05-sintra-trois-temps':('/portugal/sintra-depuis-lisbonne/',
-                                    '/social-media/production/sintra-facebook-2026-10/scene-01.jpg'),
         'pin-03-ou-dormir-lisbonne':('/portugal/ou-dormir-lisbonne-quartiers/',
                                     '/social-media/lancement-2026-09/pin-03-ou-dormir-lisbonne.jpg'),
     }
-    if config.get('schema_version')!=1 or not isinstance(pins,list) or [p.get('id') for p in pins]!=['pin-01-lisbonne-3-jours','pin-03-ou-dormir-lisbonne','pin-05-sintra-trois-temps']:
+    if config.get('schema_version')!=1 or not isinstance(pins,list) or [p.get('id') for p in pins]!=['pin-01-lisbonne-3-jours','pin-03-ou-dormir-lisbonne']:
         sys.exit('Flux Pinterest refusé : les éléments revus sont requis dans leur ordre exact.')
     media_ns='http://search.yahoo.com/mrss/'
     ET.register_namespace('media',media_ns)
@@ -582,7 +580,7 @@ if PUBLIC:
         ET.SubElement(item,'guid',{'isPermaLink':'false'}).text='urn:vsd:pinterest:'+pin['id']
         image_url=ORIGIN+pin['image_path']
         ET.SubElement(item,'enclosure',{'url':image_url,'length':str(image_file.stat().st_size),'type':'image/jpeg'})
-        ET.SubElement(item,'{'+media_ns+'}content',{'url':image_url,'type':'image/jpeg','medium':'image','width':('1080' if pin['id']=='pin-05-sintra-trois-temps' else '1000'),'height':('1920' if pin['id']=='pin-05-sintra-trois-temps' else '1500')})
+        ET.SubElement(item,'{'+media_ns+'}content',{'url':image_url,'type':'image/jpeg','medium':'image','width':'1000','height':'1500'})
     target=OUT/'pinterest/lisbonne.xml'
     target.parent.mkdir(parents=True,exist_ok=True)
     ET.indent(rss)

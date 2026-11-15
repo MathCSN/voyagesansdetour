@@ -12,7 +12,7 @@
   "width": 1000,
   "height": 1500,
   "templateVersion": 2,
-  "rendererSha256": "693b82a5423a7d939e4c6c3aaa8c1b5d305ae39d6fa095e55f96b591dfc9b24f",
+  "rendererSha256": "4e84395c3b1cf33bb7d679eee617155a0feb7db06078590a7bcefadb2e60ff2e",
   "originalComposition": true,
   "externalPhotographs": true,
   "limitations": [
@@ -23,6 +23,7 @@
     "author": "Romain Pontida",
     "source_page": "https://commons.wikimedia.org/wiki/File:Traditional_junk,_Halong_Bay,_Quang_Ninh,_Vietnam_-_V%E1%BB%8Bnh_H%E1%BA%A1_Long,_Qu%E1%BA%A3ng_Ninh,_Vi%E1%BB%87t_Nam_(10226220073).jpg",
     "license": "CC BY-SA 2.0",
-    "license_url": "https://creativecommons.org/licenses/by-sa/2.0"
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0",
+    "alt_fr": "Une jonque aux voiles brunes entre les pitons calcaires couverts de forêt de la baie d’Ha Long."
   }
 }

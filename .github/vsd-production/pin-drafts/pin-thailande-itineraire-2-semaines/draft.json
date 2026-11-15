@@ -8,11 +8,11 @@
   "variant": "a",
   "targetUrl": "https://voyagesansdetour.fr/thailande/thailande-itineraire-2-semaines/",
   "articleSha256": "b9d47f78bd1cdb29b7214823827758ad4b69b2c50b1582149b10e491b098d9cf",
-  "imageSha256": "1161f7ed226e6f3060df9a2518f0829f9922e3a0729834eaa5aaaaf309c0a007",
+  "imageSha256": "3358a26b0eb98992e4bd276bc276d84d56a37095395c01af2fd9cd39fa6e0b55",
   "width": 1000,
   "height": 1500,
   "templateVersion": 2,
-  "rendererSha256": "693b82a5423a7d939e4c6c3aaa8c1b5d305ae39d6fa095e55f96b591dfc9b24f",
+  "rendererSha256": "4e84395c3b1cf33bb7d679eee617155a0feb7db06078590a7bcefadb2e60ff2e",
   "originalComposition": true,
   "externalPhotographs": true,
   "limitations": [
@@ -23,6 +23,7 @@
     "author": "Diego Delso",
     "source_page": "https://commons.wikimedia.org/wiki/File:Isla_Ko_Phi_Phi_Don,_Tailandia,_2013-08-19,_DD_02.JPG",
     "license": "CC BY-SA 3.0",
-    "license_url": "https://creativecommons.org/licenses/by-sa/3.0"
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+    "alt_fr": "Les falaises et l’eau turquoise des îles Phi Phi."
   }
 }

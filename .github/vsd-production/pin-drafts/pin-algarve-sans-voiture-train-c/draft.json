@@ -4,15 +4,15 @@
   "status": "draft_requires_review",
   "publicationApproved": false,
   "title": "L’Algarve sans voiture : Faro, Tavira et Lagos en train, à partir de 1,60 €",
-  "pinTitle": "L’Algarve en train : les chiffres à connaître avant de partir",
+  "pinTitle": "L’Algarve en train : le vieux pont sur le Gilão et les maisons blanches de Tavira",
   "variant": "c",
   "targetUrl": "https://voyagesansdetour.fr/portugal/algarve-sans-voiture-train/",
   "articleSha256": "7ffd3450c73e91f5be9e9c31caec81e8371fc6da55174ba22c1fab29d56e53b2",
-  "imageSha256": "a2584fce6b5e53cdc360c9971d902e39f1c5a2208db290f56f9766b3d0b71f5e",
+  "imageSha256": "f5f02ea2b51adb90b8dc681911e60478b26f84b91c51527dfa50ac331b2222db",
   "width": 1000,
   "height": 1500,
   "templateVersion": 2,
-  "rendererSha256": "693b82a5423a7d939e4c6c3aaa8c1b5d305ae39d6fa095e55f96b591dfc9b24f",
+  "rendererSha256": "4e84395c3b1cf33bb7d679eee617155a0feb7db06078590a7bcefadb2e60ff2e",
   "originalComposition": true,
   "externalPhotographs": true,
   "limitations": [
@@ -23,6 +23,7 @@
     "author": "Dmitry Tonkonog",
     "source_page": "https://commons.wikimedia.org/wiki/File:Tavira_river_bank_02.jpg",
     "license": "CC BY-SA 3.0",
-    "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "alt_fr": "Le vieux pont sur le Gilão et les maisons blanches de Tavira."
   }
 }

@@ -80,7 +80,14 @@ def intake(articles, reserved, output, now, renderer=render, admitted=()):
         folder.rename(backup)
         try:
             target = draw(renderer, by_slug[slug], output, variant)
-        except (ValueError, OSError, KeyError):
+        except ValueError:
+            # The rules no longer draw it (no three figures its photo carries, no photo of its own): the old draft,
+            # with what the rules now refuse, is withdrawn rather than kept forever (review of PR 55).
+            if folder.exists():
+                shutil.rmtree(folder)
+            shutil.rmtree(backup)
+            continue
+        except (OSError, KeyError):
             if folder.exists():
                 shutil.rmtree(folder)
             backup.rename(folder)

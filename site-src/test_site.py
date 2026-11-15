@@ -103,23 +103,34 @@ class PublicBuildTest(unittest.TestCase):
         for name in expected:
             self.assertEqual((folder/name).read_bytes(),(ROOT/'social-media'/'lancement-2026-09'/name).read_bytes())
 
-    def test_preparation_feed_contains_reviewed_baggage_pin(self):
+    def test_preparation_feed_keeps_its_reviewed_pins_and_never_a_withdrawn_one(self):
+        # 15/11/2026: the baggage Pin (a flat image marked "assistée par IA") and six others were withdrawn after review;
+        # they stay listed under "withdrawn" so that they never come back, and the feed keeps its other Pins.
+        config=json.loads((ROOT/'pinterest-additions.json').read_text())
+        withdrawn={'urn:vsd:pinterest:'+item['id'] for item in config['withdrawn']}
+        self.assertIn('urn:vsd:pinterest:pin-portugal-sans-voiture-bagages',withdrawn)
+        for feed in config['feeds']:
+            rss=ET.parse(self.out/'pinterest'/feed['file']).getroot()
+            guids={item.findtext('guid') for item in rss.findall('channel/item')}
+            self.assertFalse(guids&withdrawn,feed['file'])
         rss=ET.parse(self.out/'pinterest/preparer-portugal.xml').getroot()
-        # New Pins join this feed every week: the reviewed baggage Pin must stay, not stay alone.
-        items={item.findtext('guid'):item for item in rss.findall('channel/item')}
-        pin=items['urn:vsd:pinterest:pin-portugal-sans-voiture-bagages']
-        self.assertEqual(pin.findtext('link'),ORIGIN+'/portugal/portugal-sans-voiture-bagages/')
-        self.assertIn('assistée par IA',pin.findtext('description'))
-        media=pin.find('{http://search.yahoo.com/mrss/}content')
-        self.assertEqual((media.get('width'),media.get('height')),('1000','1500'))
-        self.assertTrue((self.out/media.get('url').removeprefix(ORIGIN+'/')).is_file())
+        items=rss.findall('channel/item')
+        self.assertTrue(items)
+        for item in items:
+            media=item.find('{http://search.yahoo.com/mrss/}content')
+            self.assertEqual((media.get('width'),media.get('height')),('1000','1500'))
+            self.assertTrue((self.out/media.get('url').removeprefix(ORIGIN+'/')).is_file())
 
-    def test_pinterest_rss_preserves_published_pins_and_adds_reviewed_sintra(self):
+    def test_pinterest_rss_preserves_published_pins_and_never_the_withdrawn_sintra(self):
         rss=ET.parse(self.out/'pinterest/lisbonne.xml').getroot()
         self.assertEqual(rss.tag,'rss')
         self.assertEqual(rss.get('version'),'2.0')
         items=rss.findall('channel/item')
-        self.assertEqual(len(items),3)
+        # 15/11/2026: pin-05 (a flat blue image "assisté par IA") left this feed; it is listed as withdrawn.
+        self.assertEqual(len(items),2)
+        self.assertNotIn('urn:vsd:pinterest:pin-05-sintra-trois-temps',{item.findtext('guid') for item in items})
+        withdrawn={item['id'] for item in json.loads((ROOT/'pinterest-additions.json').read_text())['withdrawn']}
+        self.assertIn('pin-05-sintra-trois-temps',withdrawn)
         self.assertIsNone(rss.find('channel/lastBuildDate'))
         expected=(
             ('pin-01-lisbonne-3-jours','Lisbonne en 3 jours sans voiture : un quartier par jour',
@@ -129,7 +140,6 @@ class PublicBuildTest(unittest.TestCase):
              '/portugal/ou-dormir-lisbonne-quartiers/',
              '/social-media/lancement-2026-09/pin-03-ou-dormir-lisbonne.jpg'),
         )
-        expected += (('pin-05-sintra-trois-temps','Sintra depuis Lisbonne sans voiture : préparer la visite de Pena','/portugal/sintra-depuis-lisbonne/','/social-media/production/sintra-facebook-2026-10/scene-01.jpg'),)
         for item,(id,title,link,image_path) in zip(items,expected):
             self.assertEqual(item.findtext('title'),title)
             self.assertEqual(item.findtext('link'),ORIGIN+link)
@@ -138,8 +148,8 @@ class PublicBuildTest(unittest.TestCase):
             self.assertIsNone(item.find('pubDate'))
             description=item.findtext('description')
             self.assertLessEqual(len(description),500)
-            for credit in (() if id=='pin-05-sintra-trois-temps' else ('SIryn / Wikimedia Commons','Recadrage et composition','CC BY-SA 4.0',
-                           'https://creativecommons.org/licenses/by-sa/4.0/',ORIGIN+'/credits/')):
+            for credit in ('SIryn / Wikimedia Commons','Recadrage et composition','CC BY-SA 4.0',
+                           'https://creativecommons.org/licenses/by-sa/4.0/',ORIGIN+'/credits/'):
                 self.assertIn(credit,description)
             if id=='pin-03-ou-dormir-lisbonne':
                 self.assertIn('Baixa, Chiado, Alfama ou Cais do Sodré ?',description)
@@ -149,10 +159,7 @@ class PublicBuildTest(unittest.TestCase):
                 self.assertEqual(node.get('url'),ORIGIN+image_path)
                 self.assertEqual(node.get('type'),'image/jpeg')
             self.assertEqual(int(enclosure.get('length')),(self.out/image_path.lstrip('/')).stat().st_size)
-            self.assertEqual((media.get('width'),media.get('height')),('1080','1920') if id=='pin-05-sintra-trois-temps' else ('1000','1500'))
-            if id=='pin-05-sintra-trois-temps':
-                self.assertIn('Composition typographique originale',description)
-                self.assertIn('/sintra-facebook-2026-10/credits.txt',description)
+            self.assertEqual((media.get('width'),media.get('height')),('1000','1500'))
         self.assertEqual(len(ET.parse(self.out/'feed.xml').findall('channel/item')),len(json.loads((ROOT/'articles.json').read_text())))
 
     def test_guides_keep_their_publication_date_and_show_their_review_date(self):

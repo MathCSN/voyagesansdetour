@@ -4,15 +4,15 @@
   "status": "draft_requires_review",
   "publicationApproved": false,
   "title": "Lisbonne–Porto en train : 35,70 € en Alfa Pendular, jusqu’à −65 % en Promo",
-  "pinTitle": "Lisbonne–Porto en train : les chiffres à connaître avant de partir",
+  "pinTitle": "Lisbonne–Porto en train : la façade de la gare de Porto-Campanhã",
   "variant": "c",
   "targetUrl": "https://voyagesansdetour.fr/portugal/lisbonne-porto-train/",
   "articleSha256": "f89e6e6dcb5ac46ac80e03e92e768b969b3abcfaf50ced10afd058136428dc3f",
-  "imageSha256": "b16877e80cc706d54f4be6771e69bb8adfc4a5c97a8599a8cf73a6ed41c5db7d",
+  "imageSha256": "d50cf129b86cb2ca63857f1654395fb6812302ab458052f25fb3c3d44aff302d",
   "width": 1000,
   "height": 1500,
   "templateVersion": 2,
-  "rendererSha256": "693b82a5423a7d939e4c6c3aaa8c1b5d305ae39d6fa095e55f96b591dfc9b24f",
+  "rendererSha256": "4e84395c3b1cf33bb7d679eee617155a0feb7db06078590a7bcefadb2e60ff2e",
   "originalComposition": true,
   "externalPhotographs": true,
   "limitations": [
@@ -23,6 +23,7 @@
     "author": "Steven Lek",
     "source_page": "https://commons.wikimedia.org/wiki/File:Porto_Campanh%C3%A3_train_station_2017.jpg",
     "license": "CC BY-SA 4.0",
-    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "alt_fr": "La façade de la gare de Porto-Campanhã."
   }
 }
