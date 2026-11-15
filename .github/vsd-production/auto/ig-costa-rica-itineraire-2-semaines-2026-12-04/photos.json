@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "photos": {
+    "costa-rica-arenal": {
+      "camera": "E-M5MarkII",
+      "file": "assets/photos/auto/costa-rica-arenal.jpg",
+      "sha256": "325d191a0b40e66e287a6953a3f5e1cfb258cbce912b4f642b82768d4f879f1c",
+      "width": 2880,
+      "height": 1207,
+      "commonsTitle": "File:Arenal volcano (70785p).jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Arenal_volcano_(70785p).jpg",
+      "author": "Rhododendrites",
+      "commonsCredit": "Own work",
+      "categories": "Arenal Volcano|Arenal Hanging Bridges|Self-published work|Featured pictures of Costa Rica|Images with extracted images|Files uploaded by Rhododendrites (all)|Featured pictures by Rhododendrites|Files with coordinates missing SDC location of creation|2024 in Costa Rica|Featured pictures of volcanoes|Files by Rhododendrites - 2024-12|Photographs taken by Rhododendrites - Costa Rica",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        7409,
+        3105
+      ],
+      "commonsSha1": "77e06f8ca452e02f35b8b3d99b3b12043bfab4e4",
+      "retrievedAt": "2026-11-15T09:38:06Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux.",
+      "emblematic": true
+    },
+    "costa-rica-manuel-antonio": {
+      "camera": "SM-G781W",
+      "file": "assets/photos/auto/costa-rica-manuel-antonio.jpg",
+      "sha256": "e89c16b00c75efa88fae126afbdf854ef1dd611252eb20a72bf812f95ea6cedc",
+      "width": 2549,
+      "height": 1600,
+      "commonsTitle": "File:Parque Nacional Manuel Antonio 02.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Parque_Nacional_Manuel_Antonio_02.jpg",
+      "author": "Bernard Gagnon",
+      "commonsCredit": "Own work",
+      "categories": "CC-Zero|Self-published work|Files with coordinates missing SDC location of creation|Beaches of Puntarenas Province|Beaches of Manuel Antonio National Park",
+      "licence": "CC0",
+      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "originalSize": [
+        3613,
+        2268
+      ],
+      "commonsSha1": "e6dafcb6546eca03a8ab2328eb7b24849d966c80",
+      "retrievedAt": "2026-11-15T09:38:06Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux.",
+      "emblematic": true
+    },
+    "costa-rica-monteverde": {
+      "camera": "Canon EOS 6D",
+      "file": "assets/photos/auto/costa-rica-monteverde.jpg",
+      "sha256": "1c5d890bd64b757aa11ff589dedc841c7f9010146d76f1606cd8729fb208b194",
+      "width": 2400,
+      "height": 1600,
+      "commonsTitle": "File:Monteverde Cloud Forest 01.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Monteverde_Cloud_Forest_01.jpg",
+      "author": "Cephas",
+      "commonsCredit": "Own work",
+      "categories": "Monteverde Cloud Forest Reserve|Self-published work|Files with coordinates missing SDC location of creation|Rainforest canopy",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        5472,
+        3648
+      ],
+      "commonsSha1": "7518ac8b577851c29a0f582090c8a1a93cdf3b19",
+      "retrievedAt": "2026-11-15T09:38:06Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "costa-rica-puerto-viejo": {
+      "camera": "NIKON D7000",
+      "file": "assets/photos/auto/costa-rica-puerto-viejo.jpg",
+      "sha256": "0a0f20b911fbaf54b5ed9b9c2ba3fc4ad56c70c98cbaa152c36d8ab117f61c20",
+      "width": 2416,
+      "height": 1600,
+      "commonsTitle": "File:Puerto Viejo de Talamanca, Costa Rica 2012.JPG",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Puerto_Viejo_de_Talamanca,_Costa_Rica_2012.JPG",
+      "author": "Letartean",
+      "commonsCredit": "Own work",
+      "categories": "Taken with Nikon D7000|Puerto Viejo de Talamanca|Images by Letartean",
+      "licence": "CC BY 3.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "originalSize": [
+        4831,
+        3199
+      ],
+      "commonsSha1": "c0df2e2c40043c05d7775311e4d7a6634ba8542e",
+      "retrievedAt": "2026-11-15T09:38:06Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux.",
+      "emblematic": true
+    }
+  }
+}

@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 1,
+  "contentId": "ig-londres-noel-marches-2026-11-27",
+  "status": "rendered_not_published",
+  "fingerprint": "ef5a2c33f29092737586d2a80be48312410c888acd2151faeba1fa5e53c5694a",
+  "createdAt": "2026-11-15T10:39:50.156620Z",
+  "renderFinishedAt": "2026-11-15T10:40:11.970453Z",
+  "rendererContractVersion": 4,
+  "rendererSha256": "2c6618fdcc537af1f1e25f2f5f6cb3e5591e2cdd61801c49f7c762caeaa2f691",
+  "drawingSha256": "b78990f497d03baf754e3b2b68a795a5e9d3b91a0b6a2f8dad2ebcd7fec2907c",
+  "motionSha256": "9029b7f552929c69dcdcea595e65d9cc3bc8b872113b850e5a74010252289f08",
+  "format": "liste",
+  "kind": "reel",
+  "channel": "instagram",
+  "publishAt": "2026-11-27T17:00:00Z",
+  "reviewValidUntil": "2026-12-15T10:39:33Z",
+  "sourceCheckedOn": "2026-11-15",
+  "targetUrl": "https://voyagesansdetour.fr/royaume-uni/londres-noel-marches/",
+  "voice": null,
+  "presenter": null,
+  "sourceUrls": [
+    "https://voyagesansdetour.fr/royaume-uni/londres-noel-marches/"
+  ],
+  "photos": {
+    "londres-tower-bridge": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Dietmar Rabich",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:London,_Tower_Bridge_--_2016_--_4676.jpg"
+    },
+    "londres-covent-garden": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Dietmar Rabich",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:London,_Covent_Garden_--_2016_--_4878.jpg"
+    },
+    "londres-e2d58373": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Diego Delso",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:B%C3%B3veda_de_la_sala_de_entrada,_Galer%C3%ADa_Nacional,_Londres,_Inglaterra,_2014-08-11,_DD_170-172_HDR.JPG"
+    },
+    "londres-winter-wonderland": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Simeon87",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Various_attractions_in_Hyde_Park_Winter_Wonderland_2017.jpg"
+    },
+    "londres-somerset-house-patinoire": {
+      "licence": "CC BY-SA 2.0",
+      "author": "traveljunction (Image by www.traveljunction.com)",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Skating_Rink_In_Fountain_Court_at_Somerset_House,_London_(15980203534).jpg"
+    },
+    "londres-big-ben": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Domob",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Palace_of_Westminster_and_Elizabeth_Tower_20250522.jpg"
+    }
+  },
+  "clips": {},
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "durationSeconds": 19.2,
+    "videoCodec": "h264",
+    "pixelFormat": "yuv420p",
+    "videoBitrateBps": 3297781,
+    "audioCodec": "aac",
+    "audioSampleRate": 48000,
+    "audioBitrateBps": 96425,
+    "fullDecodePassed": true,
+    "loudness": {
+      "integratedLufs": -16.1,
+      "truePeakDbfs": -1.3
+    }
+  },
+  "files": [
+    {
+      "file": "apercu.jpg",
+      "sha256": "d1379aa4e51bd178d1874df0536e708de8d2336e159b7e24a359a1b9e0a56d7b",
+      "bytes": 287811
+    },
+    {
+      "file": "credits.txt",
+      "sha256": "512ba46e9200ef094381ac3aeb0ccb06255f17c52b9a63485ddc5b5c67fb62d5",
+      "bytes": 3287
+    },
+    {
+      "file": "dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "file": "encode.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "legende.txt",
+      "sha256": "5be267af977ab74b621d614d2644bb1da244617d3181c74feae03dfd4016ff27",
+      "bytes": 919
+    },
+    {
+      "file": "notosans-OFL.txt",
+      "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a",
+      "bytes": 4396
+    },
+    {
+      "file": "playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    },
+    {
+      "file": "poster.jpg",
+      "sha256": "bcd3b718f87315d2f0661c1f5600e320eb8a828870f2fff4c64969fb259cb3ea",
+      "bytes": 485359
+    },
+    {
+      "file": "reel.mp4",
+      "sha256": "fc19760fb668f664b913a23d1735a8175222c8db02d9378f9e93af8d6831f559",
+      "bytes": 8168898
+    },
+    {
+      "file": "scenario.json",
+      "sha256": "26f5bda7e4204ecd313f6900e4c9908cdc84cf910b34855796882b9fac176b9c",
+      "bytes": 8026
+    },
+    {
+      "file": "scene-01.jpg",
+      "sha256": "6d08b483361af320874666ad2f468cca5ac1e2359ab7a8f1207775d930bc1a79",
+      "bytes": 442932
+    },
+    {
+      "file": "scene-02.jpg",
+      "sha256": "fd19210e76fe4a2b7b2dc53efba66cb247ebc3a200201cf1839a1b0d1b059c70",
+      "bytes": 581415
+    },
+    {
+      "file": "scene-03.jpg",
+      "sha256": "5dc4d1c541bbf95915b852944d376ca9062b5f18cdafa057ef37f9d7bba7f55d",
+      "bytes": 447590
+    },
+    {
+      "file": "scene-04.jpg",
+      "sha256": "bfdcaf96d2a9e44887de85ed542af7d467251d6f15c593f5b7fec5176ede0224",
+      "bytes": 469111
+    },
+    {
+      "file": "scene-05.jpg",
+      "sha256": "677d90d0eb9775f41488011a00e7e95d566ad1784805c19b110485b4a35a2bd5",
+      "bytes": 341537
+    },
+    {
+      "file": "scene-06.jpg",
+      "sha256": "b3a503e8e74ed01132a4c3ccd56aa2102bcbba3b5cfe3418e3efebe078d1b5f5",
+      "bytes": 308979
+    }
+  ],
+  "runtime": {
+    "wallSeconds": 21.273,
+    "encoderThreads": 2,
+    "pillowVersion": "11.3.0",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers"
+  },
+  "publication": {
+    "uploaded": false,
+    "scheduled": false,
+    "published": false,
+    "readyForAutomaticImport": false
+  },
+  "cost": {
+    "newPaidService": false,
+    "providerCalls": 0,
+    "monetarySpendEur": 0
+  }
+}

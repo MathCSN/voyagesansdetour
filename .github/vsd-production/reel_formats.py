@@ -42,6 +42,7 @@ BUDGET = re.compile(r"\bbudget\b|\bau total\b|\ben tout\b|\bpar personne\b|\btou
                     r"\bpour \d+ (?:jours|nuits|semaines)\b|\bpar jour\b", re.IGNORECASE)
 MIN_FACTS = 4                          # a reel that says fewer than four things is not worth a slot (audit of 12/11/2026)
 # One space at most between the parts: section titles are plain text, and nothing here can backtrack.
+DAY_HEAD = re.compile(r"Jours? \d", re.IGNORECASE)
 DAY = re.compile(r"(Jours? \d+(?: ?(?:à|et|[-–]) ?\d+)?) ?[—–:,-] ?(\S.*)", re.IGNORECASE)
 # The same file goes to Instagram and TikTok: "cette vidéo", never "ce reel".
 SAVE_NOTE = "Enregistrez cette vidéo pour votre voyage"
@@ -85,7 +86,27 @@ def lines_of(value: str, width: int = 34, most: int = 2) -> list[str] | None:
     fitting = [pair for pair in splits if max(map(len, pair)) <= width]
     if most < 2 or not fitting:
         return None
-    return list(min(fitting, key=lambda pair: (max(map(len, pair)), -len(pair[0]))))
+    # Never a line that ends on an article, a preposition or a number ("…pour Bangkok, le / Nord", "Le Japon en 2 /
+    # semaines"), nor a cut inside a name ("Les Cinque / Terre en train").
+    spans = [(start, end) for _, start, end in place_names.names(value, sentence=True)]
+    cut_name = lambda pair: any(start < len(pair[0]) < end for start, end in spans)
+    return list(min(fitting, key=lambda pair: (dangling(pair[0]) or cut_name(pair) or cut_number(pair), max(map(len, pair)), -len(pair[0]))))
+
+
+def cut_number(pair: tuple[str, str]) -> bool:
+    """A number at the end of a line, cut from what it counts ("Le Japon en 2 / semaines"); a year before a preposition
+    is not ("du 28 octobre 2026 / au 3 janvier 2027")."""
+    last, following = pair[0].split()[-1], pair[1].split()[0].lower()
+    return last.isdigit() and following not in DANGLING
+
+
+# Small words that open what follows: a line never ends on one of them.
+DANGLING = frozenset("le la les l’ l' un une des du de d’ d' à au aux en et ou pour par sur dans chez vers sans".split())
+
+
+def dangling(line: str) -> bool:
+    last = line.split()[-1].lower() if line.split() else ""
+    return last in DANGLING or last.endswith(("’", "'"))
 
 
 def kicker_of(section: dict | None, fallback: str) -> str:
@@ -119,7 +140,7 @@ def caption_emoji(value: str, label: str) -> str:
     # The pictogram of a journey is the one of the means of transport its line names: a bus is not a train ("le
     # minibus Phantip", "bus de remplacement"), and a ticket for a town is no journey at all.
     ride = ride_emoji(first, ways, label)
-    tests = (("💶", "€" in value), ("⏱️", re.search(r"\b(min|h|jours?)\b", value)), (ride, ride),
+    tests = (("💶", is_money(value)), ("⏱️", re.search(r"\b(min|h|jours?)\b", value)), (ride, ride),
              ("🎟️", re.match(r"(?:l )?entree\b", opening)), ("🥾", re.search(r"marches|sentier|randonn|à pied", value + label)))
     return next((emoji for emoji, fits in tests if fits), "📍")
 
@@ -129,7 +150,7 @@ def ride_emoji(first: list[str], ways: set[str], label: str) -> str | None:
         return "⛴️"
     if "road" in ways:
         return "🚌"
-    if "urban" in ways:
+    if "metro" in ways or "tram" in ways:
         return "🚇"
     if "rail" in ways or place_names.journey(label):
         return "🚆"
@@ -144,11 +165,22 @@ def when_to_go(article: dict) -> bool:
     return article.get("shortTitle", "").lower().startswith(WHEN_TO_GO)
 
 
+# A price in any currency the guides give: the yen and the dong are prices too ("176 ¥" went under a pin).
+CURRENCY_SIGNS = frozenset("€¥₫£$฿")
+CURRENCY_WORDS = frozenset("baht bahts dirham dirhams dh peso pesos yen yens dong dongs couronne couronnes "
+                           "nok sek dkk mxn thb vnd jpy mad".split())
+
+
+def is_money(value: str) -> bool:
+    return bool(CURRENCY_SIGNS & set(value) or CURRENCY_WORDS & set(place_names.folded(value)))
+
+
 def caption_line(fact: dict) -> str:
     """'59 € : la cabine du train de nuit', but '180 exposants au marché' and '120 km entre Mérida et la gare':
     no colon when the label simply carries on from the figure (a bare number, or a label opening on a preposition)."""
     value, label = fact["value"], fact["label"]
-    flows = re.fullmatch(r"[\d\s]+", value) or re.match(r"(?:de|d’|d'|entre|pour|par|sur|depuis|jusqu)\b", label)
+    # "64 mm à Koh Samui", not "64 mm : à Koh Samui": a colon never stands before a preposition.
+    flows = re.fullmatch(r"[\d\s]+", value) or re.match(r"(?:de|d’|d'|du|des|entre|pour|par|sur|depuis|jusqu|à|au|aux|en|dans|chez|vers|avant|après)(?!\w)", label)
     return caption_emoji(value, label) + " " + value + (" " if flows else " : ") + label
 
 
@@ -300,6 +332,13 @@ def naming_columns(rows: list[list]) -> int | None:
     return None
 
 
+def prices_in_several_columns(headers: list, rows: list[list], named: int) -> bool:
+    """Prices in several columns ("Jour A", "Jour B", "Jour C" of the Treno Card): the first alone would say the
+    cheapest is the price. Such a table stays in the guide."""
+    priced = [column for column in range(named, len(headers)) if all(is_money(str(row[column])) for row in rows if len(row) > column)]
+    return len(priced) > 1
+
+
 def table_of(article: dict, page: str) -> dict | None:
     """A whole short table of the guide (three to five rows): the columns that name each row, then the next one, every
     row read on the page. "Alfa Pendular : Turística" three times told nothing; the fare is in the column after."""
@@ -309,14 +348,20 @@ def table_of(article: dict, page: str) -> dict | None:
         if len(headers) < 2 or not TABLE_ROWS[0] <= len(rows) <= TABLE_ROWS[1] or any(len(row) < 2 for row in rows):
             continue
         named = naming_columns(rows)
-        if not named or named >= len(headers):
+        if not named or named >= len(headers) or prices_in_several_columns(headers, rows, named):
             continue
         cells = [[" ".join(str(cell).strip() for cell in row[:named]), str(row[named]).strip()] for row in rows]
         quoted = all(checked(a, 60) and checked(b, 60) and p.normalized(a + " " + b) in page for a, b in cells)
         title = lines_of(str(headers[named]).strip(), 22)
-        if quoted and title and all(checked(line, 34) for line in title) and p.normalized(str(headers[named])) in page:
+        fits = p.motion.table_fits(cells, TABLE_FONTS)
+        if quoted and fits and title and all(checked(line, 34) for line in title) and p.normalized(str(headers[named])) in page:
             return {"rows": cells, "title": title, "header": str(headers[named]).strip(), "section": section}
     return None
+
+
+# The type a reel's table is drawn in (production.MOTION_FONTS): a table is chosen only when its rows hold in it.
+TABLE_FONTS = p.motion.Fonts(*(str(p.HERE / "assets" / name) for name in (
+    "dmsans-regular.ttf", "dmsans-bold.ttf", "playfair.ttf", "notosans-regular.ttf", "notosans-bold.ttf")))
 
 
 def applicable(article: dict, facts: list[dict], page: str) -> list[str]:
@@ -353,9 +398,12 @@ EMPTY_WORDS = frozenset("pour entre dans avec sans sous vers chez depuis selon p
                         "dont comme aussi tres deux trois quatre jour jours nuit nuits prix tarif euros pesos".split())
 
 
-def words_of(value: str) -> set[str]:
-    """Words of four letters and more that name something; a dash separates two words ('Mérida–Cancún' names both towns)."""
-    return set(re.findall(r"[a-z0-9]{4,}", destinations.ascii_fold(re.sub(r"[^\w\s]", " ", value)).lower())) - EMPTY_WORDS
+def words_of(value: str, numbers: bool = False) -> set[str]:
+    """Words of four letters and more that name something; a dash separates two words ('Mérida–Cancún' names both towns).
+    A number names nothing: "2026" in a Commons title does not make a photo of the rate of the euro on 6 November 2026.
+    `numbers`: keep them (stale_lots.py counts the words of a quote beside its numbers)."""
+    found = re.findall(r"[a-z0-9]{4,}", destinations.ascii_fold(re.sub(r"[^\w\s]", " ", value)).lower())
+    return {word for word in found if numbers or not word.isdigit()} - EMPTY_WORDS
 
 
 # Kinds of places: "la tour des Clérigos" and "l’Andante Tour 3", "la villa des Mystères" and the villa Cimbrone, "un
@@ -378,6 +426,15 @@ def words_shared(photo: tuple, target: set[str], family: str | None = None, kind
 
 def words_shown(photo: tuple, target: set[str], family: str | None = None, kinds: bool = False) -> int:
     return len(words_shared(photo, target, family, kinds))
+
+
+def section_place(section: dict | None, country: frozenset | set) -> str:
+    """The stretch of a section's title that names its places ("Jours 6 et 7 — Hué" → "Hué", "Jours 5 à 8 — Kyoto
+    et Nara" → "Kyoto et Nara"); "" when it names none, or when the section sums the guide up."""
+    title = str((section or {}).get("title") or "")
+    if not title or SUMMED_UP.search(destinations.ascii_fold(title).lower()):
+        return ""
+    return place_names.titled(title, country)
 
 
 class Media:
@@ -431,6 +488,25 @@ class Media:
         """The fact is about one place or one part of the destination: only a photo of it will do."""
         return bool(place_names.names(text, self.country) or place_names.region(text))
 
+    def opens_on(self, text: str, photo_id: str, title: str) -> bool:
+        """The opening may say this over that photo (place_names.opening_fits, as production.py reads it)."""
+        photo = next((ph for ph in self.all if ph[0] == photo_id), None)
+        return not photo or place_names.opening_fits(text, title, self.described(photo), self.country)
+
+    def where(self, fact: dict) -> str:
+        """The places a fact that names none is about: those its section's title names ("les tombeaux coûtent 150 000 ₫
+        chacun" in "Jours 6 et 7 — Hué" is about Hué, and went over Ha Long once the photo of Hué was taken)."""
+        if self.located(fact["label"]):
+            return ""
+        return section_place(fact.get("section"), self.country)
+
+    def about(self, fact: dict) -> str:
+        """What a photo is chosen for: the fact, and the places of its section when it names none itself."""
+        # The figure with its label: "*10 trains* directs par jour entre Cordoue et Grenade" is a journey by train.
+        said = f"{fact['value']} {fact['label']}" if re.search(r"[^\W\d_]{3,}", fact["value"]) else fact["label"]
+        where = self.where(fact)
+        return f"{said} ({where})" if where else said
+
     def recorded(self, photo: tuple) -> list:
         """The precise places the record of a photo names, whole (place_names.record)."""
         return place_names.record(photo[0], photo[2], str(photo[1].get("commonsTitle", "")), self.country, self.family)
@@ -448,9 +524,14 @@ class Media:
         """The free photos a fact that none of them shows may still take: none when the fact names a precise place or
         a part of the destination. "350 mm de pluie à Phuket" went over the inside of a sleeping car, and "42 €
         l'entrée de SantaPark" over huskies (13/11/2026): such a fact stays in the caption and in the guide."""
-        if self.located(text):
+        if self.located(text) or place_names.strict_journey(text):
             return []
-        return [ph for ph in self.free() if ph[0] not in avoid and not place_names.brand_clash(text, self.described(ph))]
+        return [ph for ph in self.free() if ph[0] not in avoid and not self.misleads(text, ph)]
+
+    def misleads(self, text: str, photo: tuple) -> bool:
+        """The photo shows another train than the one the fact names, or another means of transport than its journey's."""
+        on = place_names.vehicle(photo[0], photo[2], str(photo[1].get("commonsTitle", "")))
+        return place_names.brand_clash(text, self.described(photo)) or place_names.other_ride(on, text)
 
     def above(self, section: dict | None, photo_id: str, place: str, label: str = "") -> str:
         """The label written above a figure: the name of its section over that section's own photo; over another
@@ -459,8 +540,7 @@ class Media:
         Sud" over Tràng An, nor "Dans le métro" over a taxi); the place otherwise. Never the name of a section that
         sums the guide up ("En bref" says nothing), nor a name with a year over a figure of another year."""
         name = kicker_of(section, place)
-        years, dated = set(YEAR.findall(name)), set(YEAR.findall(label))
-        if name != place and (SUMMED_UP.search(destinations.ascii_fold(name).lower()) or (years and dated and not years & dated)):
+        if name != place and not self.says_of(name, label, photo_id):
             return place
         own = section.get("image") if section else None
         if own:
@@ -478,6 +558,24 @@ class Media:
             return place
         ways = place_names.ways(place_names.folded(name))
         return place if ways and not ways & place_names.ways(shown) else name
+
+    def says_of(self, name: str, label: str, photo_id: str) -> bool:
+        """A section's name may stand above this figure: it sums nothing up, carries no other year than the figure's,
+        and speaks of the figure (announces)."""
+        years, dated = set(YEAR.findall(name)), set(YEAR.findall(label))
+        if SUMMED_UP.search(destinations.ascii_fold(name).lower()) or (years and dated and not years & dated):
+            return False
+        return not label or self.announces(name, label, photo_id)
+
+    def announces(self, name: str, label: str, photo_id: str) -> bool:
+        """The section's name speaks of this figure: a day of the itinerary ("Jours 3 à 5"), or a word the figure or
+        its photo shares with it ("Dans le train" over a train). "Quand partir" over "45 jours sans visa", "Le
+        calendrier de l'hiver 2026" over the cap of the Tube said nothing of the figure (review of PR 54)."""
+        if DAY_HEAD.match(name):
+            return True
+        photo = next((ph for ph in self.all if ph[0] == photo_id), None)
+        record = " ".join([photo[0].replace("-", " "), photo[2], str(photo[1].get("commonsTitle", ""))]) if photo else ""
+        return bool(words_of(name) & (words_of(label) | words_of(record)))
 
     def spare(self) -> str | None:
         """The last photo left that can close the post: no plan takes it, whatever it names."""
@@ -568,11 +666,12 @@ class Media:
         target, wider = self.target(text), self.target(text + " " + also)
         wanted = section.get("image") if section else None
         # Never a photo of another train than the one the fact names ("Intercidades" over an Alfa Pendular).
-        pool = [ph for ph in self.free() if ph[0] not in avoid and not place_names.brand_clash(text, self.described(ph))]
+        # …nor of another means of transport than the one of a journey (the boats of Tràng An for the night train).
+        pool = [ph for ph in self.free() if ph[0] not in avoid and not self.misleads(text, ph)]
         own = next((ph for ph in pool if ph[0] == wanted), None)
         if place_names.journey(text):
             pick = self.ride(text, pool, own, target, wider)
-            if pick:
+            if pick or place_names.strict_journey(text):
                 return pick
         # A fact that names a precise place goes over a photo that names that place, or over none: a word they share
         # ("îles") is not enough, and a photo that names nothing is not a photo of that place either.
@@ -659,15 +758,25 @@ def fact_plan(fact: dict, media: Media, place: str, tag: str, badge: str | None 
     if not headline:
         raise Held("figure_too_long")
     detail = unbreakable(fact["short"])
-    picture = media.moving(fact["label"], fact["section"])
+    picture = media.moving(media.about(fact), fact["section"])
     # The label above the figure is the section's name only over that section's own photo, or when the section has
     # none: "Aurores boréales" is not written over a picture of the village.
     # …and a name that carries a year is not written over a figure of another year ("La ligne du Nord en 2026" over
     # "38,3 % des Alfa Pendular à l'heure en 2025").
     kicker = media.above(fact["section"], picture[1], place, fact["label"])
     excerpt, label = quoted(fact, tag)
-    return plan("fact", picture, kicker, headline, seconds_for(detail), detail=detail,
-                facts=[{"source": "guide", "excerpt": excerpt}], tag=label, badge=badge)
+    where, facts = located_by_section(fact, media, excerpt)
+    return plan("fact", picture, kicker, headline, seconds_for(detail), detail=detail, facts=facts, tag=label, badge=badge, where=where)
+
+
+def located_by_section(fact: dict, media: Media, excerpt: str) -> tuple[str | None, list[dict]]:
+    """The plan's quotes and, for a fact that names no place in a section about one, the title of that section: quoted
+    like the figure, it tells the guard on places (production.py) which place the plan is about."""
+    heading = fact.get("heading")
+    quotes = [{"source": "guide", "excerpt": excerpt}]
+    if not heading or not media.where(fact):
+        return None, quotes
+    return heading, [{"source": "guide", "excerpt": heading}] + quotes
 
 
 @dataclass(frozen=True)
@@ -691,10 +800,14 @@ class Brief:
         # A "quand partir" guide promises a moment, not "4 chiffres": the hook says what its own title promises
         # ("Le bon mois pour Bangkok, le Nord, l'Andaman et Koh Samui"), quoted from the guide (review of 13/11/2026).
         told = promise_of(self.article) if when_to_go(self.article) else None
+        picture = self.media.opening(self.media.cover)
+        # Under the title, a promise that names places only over a photo of one of them (review of PR 53).
+        if told and not self.media.opens_on(told, picture[1], self.article.get("shortTitle", "")):
+            told = None
         if told:
-            return plan("hook", self.media.opening(self.media.cover), self.kicker, self.title_lines + [promise], HOOK_SECONDS,
+            return plan("hook", picture, self.kicker, self.title_lines + [promise], HOOK_SECONDS,
                         detail=unbreakable(told), facts=[{"source": "guide", "excerpt": self.article["title"]}], tag=self.tag)
-        return plan("hook", self.media.opening(self.media.cover), self.kicker, self.title_lines + [promise], HOOK_SECONDS,
+        return plan("hook", picture, self.kicker, self.title_lines + [promise], HOOK_SECONDS,
                     facts=[{"source": "guide", "excerpt": self.opening}], tag=self.tag)
 
 
@@ -704,10 +817,11 @@ def placed(facts: list[dict], media: Media, limit: int, least: int):
     done = set()
     for wanted, most in ((True, limit), (False, least)):
         for index, fact in enumerate(facts):
-            if index in done or len(done) >= most or media.shown_elsewhere(fact["label"]):
+            about = media.about(fact)
+            if index in done or len(done) >= most or media.shown_elsewhere(about):
                 continue
             # In the second round a figure takes a photo that does not show it: never one that shows another place.
-            if media.named(fact["label"], fact["section"]) if wanted else media.left_for(fact["label"]):
+            if media.named(about, fact["section"]) if wanted else media.left_for(about):
                 done.add(index)
                 yield index
 
@@ -800,8 +914,9 @@ def table_lines(heading: str, rows: list[list[str]]) -> list[str]:
     Mai · Départ de Bangkok — N° 9 : 18 h 40"): four times alone, with nothing to say where they leave from, tell
     nothing (review of 12/11/2026). Only where that heading names something, two words that count at least: "Jour A
     — 1 jour : 22 €" or "Étape — 1 à 3 : Manuel Antonio" says less than the bare row."""
-    lines = [f"📅 {label} : {value}" for label, value in rows]
-    named = f"📅 {heading} — {rows[0][0]} : {rows[0][1]}"
+    mark = lambda value: "💶" if is_money(value) else "📅"
+    lines = [f"{mark(value)} {label} : {value}" for label, value in rows]
+    named = f"{mark(rows[0][1])} {heading} — {rows[0][0]} : {rows[0][1]}"
     telling = len(words_of(heading) - HOLLOW_HEADING) >= 2
     return [named if telling and len(named) <= CAPTION_LINE else lines[0]] + lines[1:]
 
@@ -812,7 +927,23 @@ def table_kicker(brief: Brief, section: dict, photo_id: str) -> str:
     label = kicker_of(section, brief.place)
     photo = next((ph for ph in brief.media.all if ph[0] == photo_id), None)
     named = photo and words_shared(photo, brief.media.target(label), brief.media.family, kinds=True)
+    # "Alfa Pendular ou Intercidades" over the inside of an Alfa: the label would name a train the photo is not.
+    if named and place_names.label_clash(label, brief.media.described(photo)):
+        return brief.place
     return label if named else brief.place
+
+
+def caption_heading(brief: Brief, section: dict, kicker: str) -> str:
+    """The name the caption gives the table: the plan's label, else the section's name when it says something."""
+    if kicker != brief.place:
+        return kicker
+    named = kicker_of(section, brief.place)
+    return named if named != brief.place and table_kicker_names(brief, named) else brief.place
+
+
+def table_kicker_names(brief: Brief, label: str) -> bool:
+    """The section's name says something of the table (it is no summary nor a bare "Arriver")."""
+    return any(words_shared(photo, brief.media.target(label), brief.media.family, kinds=True) for photo in brief.media.all)
 
 
 def under_table(brief: Brief, photo_id: str, rows: list[list[str]]) -> dict | None:
@@ -868,7 +999,9 @@ def table_reel(brief: Brief) -> tuple[dict, list[dict], list[str]]:
     for index in placed(chosen, brief.media, limit, limit):
         plans[index] = fact_plan(chosen[index], brief.media, brief.place, brief.tag)
     body += [plans[index] for index in sorted(plans)]
-    heading = " ".join(table["title"]) if kicker == brief.place else kicker + " · " + " ".join(table["title"])
+    # The caption is no photo: it keeps the section's name ("Alfa Pendular ou Intercidades") when the plan could not.
+    told = caption_heading(brief, table["section"], kicker)
+    heading = " ".join(table["title"]) if told == brief.place else told + " · " + " ".join(table["title"])
     # The caption gives the table, then the figures the reel shows after it, before any figure left unshown.
     shown = [caption_line(chosen[index]) for index in sorted(plans)]
     return brief.hook("*le tableau à garder*"), body, ([caption_line(price)] if price else []) + table_lines(heading, rows) + shown

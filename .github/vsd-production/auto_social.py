@@ -291,8 +291,15 @@ def usable_facts(article: dict, text: str, root: Path = HERE) -> list[dict]:
         values.add(value.lower())
         # Reels show the label up to its first natural pause: a prefix of the quote, so still the page's own words.
         short = reel_formats.short_label(label)
-        facts.append({"value": value, "label": label, "excerpt": excerpt, "section": section, "short": short, "shortExcerpt": value + " " + short})
+        facts.append({"value": value, "label": label, "excerpt": excerpt, "section": section, "short": short,
+                      "shortExcerpt": value + " " + short, "heading": quotable_heading(section, page)})
     return facts
+
+
+def quotable_heading(section: dict | None, page: str) -> str | None:
+    """The section's title, when the page gives it word for word: a plan may quote it to say which place it is about."""
+    title = str((section or {}).get("title") or "").strip()
+    return title if title and p.normalized(title) in page and checked(title, 120) else None
 
 
 def opening_sentence(article: dict, text: str) -> str:
@@ -449,7 +456,7 @@ def scenes_for(article: dict, channel: Post, facts: list[dict], photos: list[tup
     # As in a reel: a figure that a photo shows comes first and takes that photo (the fare over the train); a figure
     # that no photo shows only completes the post; a figure whose photo is already taken stays in the guide, never
     # over another place. Then the post reads in the guide's order.
-    pictures = {index: media.photo(offered[index]["label"], offered[index]["section"])
+    pictures = {index: media.photo(media.about(offered[index]), offered[index]["section"])
                 for index in reel_formats.placed(offered, media, count - 2, count - 2)}
     if len(pictures) + 2 < channel.scenes[0]:
         raise Held("not_enough_figures_with_their_photo")
@@ -464,7 +471,7 @@ def scenes_for(article: dict, channel: Post, facts: list[dict], photos: list[tup
     tag = reel_formats.source_tag(article, french_date(article["sourcesCheckedOn"]))
     word = "chiffres" if all(re.search(r"\d", fact["value"]) for fact in facts) else "repères"
 
-    def scene(picture, kicker, headline, detail, seconds, facts_=None, label=tag, cta=False):
+    def scene(picture, kicker, headline, detail, seconds, facts_=None, label=tag, cta=False, where=None):
         photo = by_id[picture[1]]
         # A photo that says where its subject is (reviewed.json, SITE_FOCUS) is cut around it, as in a reel.
         focus = photo[1].get("focus")
@@ -480,6 +487,8 @@ def scenes_for(article: dict, channel: Post, facts: list[dict], photos: list[tup
             value["alt"] = photo[2]
         if cta:
             value["cta"] = True
+        if where:
+            value["where"] = where
         return value
 
     hook_kicker = place if country.lower() == place.lower() else f"{country} · {place}"
@@ -488,20 +497,26 @@ def scenes_for(article: dict, channel: Post, facts: list[dict], photos: list[tup
     # "4 repères à connaître" (review of 13/11/2026): the title is quoted like any other line of the guide.
     promise = reel_formats.promise_of(article) if word == "repères" or reel_formats.when_to_go(article) else None
     promised = lines_of(promise, width, 3) if promise else None
+    short_title = article.get("shortTitle", "")
+    # What the opening says beyond the title, its photo shows (review of PR 53: "parfait à Saïgon et inondé à Hội
+    # An" over the bay of Ha Long): otherwise the line is left out, and a promise of other places too.
+    under = unbreakable(opening) if len(opening) <= 120 and media.opens_on(opening, opening_picture[1], short_title) else None
+    if promised and not media.opens_on(promise, opening_picture[1], short_title):
+        promised = None
     if promised:
         # The promise is the headline, the place above it, the guide's opening under it: three lines quoted from the guide.
-        scenes = [scene(opening_picture, hook_kicker, promised, unbreakable(opening) if len(opening) <= 120 else None, 3.5,
+        scenes = [scene(opening_picture, hook_kicker, promised, under, 3.5,
                         [{"source": "guide", "excerpt": article["title"]}, {"source": "guide", "excerpt": opening}])]
     else:
         scenes = [scene(opening_picture, hook_kicker, title_lines + [f"*{len(facts)} {word}* à connaître"],
-                        unbreakable(opening) if len(opening) <= 120 else None, 3.5, [{"source": "guide", "excerpt": opening}])]
+                        under, 3.5, [{"source": "guide", "excerpt": opening}])]
     for fact in facts:
         # As in a reel, the name of the section stands above the figure only over that section's own photo, or when
         # the section has none: "Le Nord" is not written over the Grand Palace of Bangkok.
         named = media.above(fact["section"], pictures[fact["value"]][1], place, fact["label"])
+        where, quotes = reel_formats.located_by_section(fact, media, fact["excerpt"])
         scenes.append(scene(pictures[fact["value"]], named, ["*" + fact["value"] + "*"],
-                            unbreakable(fact["label"]), 4, [{"source": "guide", "excerpt": fact["excerpt"]}],
-                            label=reel_formats.dated_tag(fact, tag)))
+                            unbreakable(fact["label"]), 4, quotes, label=reel_formats.dated_tag(fact, tag), where=where))
     scenes.append(scene(media.closing(required=False), "Le guide complet", title_lines, call_detail(article), 4.5, cta=True))
     return scenes
 

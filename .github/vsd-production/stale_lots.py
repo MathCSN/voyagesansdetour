@@ -216,7 +216,7 @@ def numbers_gone(excerpt: str, page: str) -> list[str]:
     (counts, rows), ranks, text, quote = readings(excerpt), ordinals(excerpt), plain(page), said(excerpt)
     if not counts and not ranks:
         return []
-    words = reel_formats.words_of(excerpt)
+    words = reel_formats.words_of(excerpt, numbers=True)
     patterns = {**{number: whole(number) for number in counts}, **{rank: ordinal(rank) for rank in ranks}}
     cells = {"|".join(pieces): in_cells(*pieces) for pieces in rows.values()}
     told = {number: "|".join(pieces) for number, pieces in rows.items()}

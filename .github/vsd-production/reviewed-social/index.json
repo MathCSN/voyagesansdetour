@@ -396,6 +396,123 @@
       "itemIds": [
         "vsd-production:facebook:fb-japon-itineraire-2-semaines-2026-11-22-2:photo-v1"
       ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/fb-portugal-sans-voiture-bagages-2026-11-29-v1.json",
+      "fileSha256": "a639356333f37b9c1ef154d279d7f65c1b10fec8b36a9d68ffafe54788cecaaf",
+      "batchId": "fb-portugal-sans-voiture-bagages-2026-11-29-v1",
+      "batchSha256": "2c4f8cddd92ed4501bb225fcbd29c53069f53ba7cca7bb550fd16aeb7f0dbeed",
+      "itemIds": [
+        "vsd-production:facebook:fb-portugal-sans-voiture-bagages-2026-11-29:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-costa-rica-itineraire-2-semaines-2026-12-04-v1.json",
+      "fileSha256": "690b96f0aa7781ade24ba43caee65c6b18a185e93aac4d56a64399bc905c256f",
+      "batchId": "ig-costa-rica-itineraire-2-semaines-2026-12-04-v1",
+      "batchSha256": "ea2307c34a722fff3cc82b53a3ff71af4f0f720a0e220562aacbed15e1e342e6",
+      "itemIds": [
+        "vsd-production:instagram:ig-costa-rica-itineraire-2-semaines-2026-12-04:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-costa-rica-itineraire-2-semaines-2026-12-04-tiktok-v1.json",
+      "fileSha256": "1bf7458c8ea581b889682a4e2a3b9110c638b51c0ce38557b5e8cb184fbf4b41",
+      "batchId": "ig-costa-rica-itineraire-2-semaines-2026-12-04-tiktok-v1",
+      "batchSha256": "545c8a68808a6ddc30d3438ba42177795df2cb72267d740df3a86d5e5f21b723",
+      "itemIds": [
+        "vsd-production:tiktok:ig-costa-rica-itineraire-2-semaines-2026-12-04:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-laponie-budget-rovaniemi-2026-11-29-v1.json",
+      "fileSha256": "2a17b5aecc0a9ca8b8851795fbe2f6ed84e308bd420d6eb7cffa7882892b973d",
+      "batchId": "ig-laponie-budget-rovaniemi-2026-11-29-v1",
+      "batchSha256": "5bee101b32bba8d5b415f2a2ee068ca2336cbe14665f9876f0ebacbde6de09bc",
+      "itemIds": [
+        "vsd-production:instagram:ig-laponie-budget-rovaniemi-2026-11-29:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-laponie-budget-rovaniemi-2026-11-29-tiktok-v1.json",
+      "fileSha256": "02a725a33b5a64c15f2c095012277c44fd59b95ea67a7ae10d8b9da31300fc41",
+      "batchId": "ig-laponie-budget-rovaniemi-2026-11-29-tiktok-v1",
+      "batchSha256": "ca6e4b6c828b0b65957e50a470a72d103e4c3f102032b7bedadfd5e21398ff9b",
+      "itemIds": [
+        "vsd-production:tiktok:ig-laponie-budget-rovaniemi-2026-11-29:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-tenerife-quand-partir-2026-11-22-v1.json",
+      "fileSha256": "ccd190418febd33afc9ea2528bf1a5f1aad7b80ef6fd71beb22419180ea3f0c5",
+      "batchId": "ig-tenerife-quand-partir-2026-11-22-v1",
+      "batchSha256": "621284ecda04af323be792fcb98d014e1d67c8a8446508627aef7702a556cdd1",
+      "itemIds": [
+        "vsd-production:instagram:ig-tenerife-quand-partir-2026-11-22:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-tenerife-quand-partir-2026-11-22-tiktok-v1.json",
+      "fileSha256": "32856aed6a7d429ebd7ba8c7c50f44ee069868ecf5173d71d4e61e7d0c158892",
+      "batchId": "ig-tenerife-quand-partir-2026-11-22-tiktok-v1",
+      "batchSha256": "0cd5c5d5c3fd0d524084841a266c5f038faf8fe0103aca2ff424247d3ad75b70",
+      "itemIds": [
+        "vsd-production:tiktok:ig-tenerife-quand-partir-2026-11-22:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-vietnam-quand-partir-2026-11-24-v1.json",
+      "fileSha256": "83e79887e701998650a450633938420962f7a6b59f767e70cfb70246fdd41c09",
+      "batchId": "ig-vietnam-quand-partir-2026-11-24-v1",
+      "batchSha256": "099ae86ac054e147735d877be2dda8ae4e5eb8065d6bcc4a87154a432a56c311",
+      "itemIds": [
+        "vsd-production:instagram:ig-vietnam-quand-partir-2026-11-24:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-vietnam-quand-partir-2026-11-24-tiktok-v1.json",
+      "fileSha256": "f068be962ec8fe380ea85fa82d18033e8733b942e59157789e175bae1161cac9",
+      "batchId": "ig-vietnam-quand-partir-2026-11-24-tiktok-v1",
+      "batchSha256": "d2ee939b02b0fb643abec3bf63e0f3f0b543ff0b78036964575cbe11f79fd812",
+      "itemIds": [
+        "vsd-production:tiktok:ig-vietnam-quand-partir-2026-11-24:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/fb-yucatan-itineraire-10-jours-2026-12-03-v1.json",
+      "fileSha256": "403729ff75265b5e43ca22cb17dbe88c67a6ac475b06ca7a3e5c08803635a27b",
+      "batchId": "fb-yucatan-itineraire-10-jours-2026-12-03-v1",
+      "batchSha256": "5578ed91fd7023f5e59f1409d98ed40cdb2de98b1b7bc6a22212f57edcdbcfbc",
+      "itemIds": [
+        "vsd-production:facebook:fb-yucatan-itineraire-10-jours-2026-12-03:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-londres-noel-marches-2026-11-27-v1.json",
+      "fileSha256": "d9daecb7db1ac26b611c424d569f6894af99ab2944274e20defb897d55ae21ee",
+      "batchId": "ig-londres-noel-marches-2026-11-27-v1",
+      "batchSha256": "85d503b2edf93547270f9e783286e7c4c5695c2245f479eb6028636f2fe917a7",
+      "itemIds": [
+        "vsd-production:instagram:ig-londres-noel-marches-2026-11-27:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-londres-noel-marches-2026-11-27-tiktok-v1.json",
+      "fileSha256": "60be28c504a0c108ffa4879d449f95a3912f5be01f6a8a0b4484fae87ebd4f29",
+      "batchId": "ig-londres-noel-marches-2026-11-27-tiktok-v1",
+      "batchSha256": "4ce6f2278137e0c647b65ac9a2073938d8944dd9a5cd001a568188a191e51e89",
+      "itemIds": [
+        "vsd-production:tiktok:ig-londres-noel-marches-2026-11-27:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/igc-vietnam-itineraire-15-jours-2026-11-26-v1.json",
+      "fileSha256": "688964ae484dec0c5362b358b6d15c0cb8c30862545ee74531b93811b5bee4ab",
+      "batchId": "igc-vietnam-itineraire-15-jours-2026-11-26-v1",
+      "batchSha256": "36348e0f734f4beff2c63b3ccda815b338511ee4219d71f3b8f445d39fd066fd",
+      "itemIds": [
+        "vsd-production:instagram:igc-vietnam-itineraire-15-jours-2026-11-26:photo-v1"
+      ]
     }
   ],
   "retirements": [

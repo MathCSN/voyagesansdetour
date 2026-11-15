@@ -90,7 +90,16 @@ NOT_A_PHOTOGRAPH_AS_TAKEN = frozenset({"File:Snowball pyramid at Santa Claus' Vi
                                        # No camera in the file's own data: its origin is not shown to be a photograph
                                        # (the 57 files of the old catalogue read again on Commons on 15/11/2026).
                                        "File:Miradouro de Santa Luzia View over Alfama, Lisbon (54733651122).jpg",
-                                       "File:Porto - Ponte Dom Luís I (8238600477).jpg"})
+                                       "File:Porto - Ponte Dom Luís I (8238600477).jpg",
+                                       # Three views made into one (HDR) whose file history says "slight cloning": parts of
+                                       # the picture were painted over (review of the Pins, 15/11/2026). It went out in the
+                                       # carousel fb-porto-3-jours-2026-11.
+                                       "File:Puente de Don Luis I, Oporto, Portugal, 2019-06-02, DD 29-31 HDR.jpg"})
+# What an uploader writes when parts of a picture were painted over or removed: in the comments of the file's versions
+# ("Highlights, slight cloning") or in its description.
+RETOUCHED = re.compile(r"\b(?:clon(?:e|ed|ing)|retouch\w*|photoshop(?:ped)?|content[- ]aware|airbrush\w*|"
+                       r"removed? (?:a |an |the |some )?(?:person|people|car|cars|object|objects|sign|signs|wires?|tourists?)|"
+                       r"(?:person|people|cars?|objects?|signs?|wires?|tourists?) (?:was |were |have been |has been )?removed)\b", re.IGNORECASE)
 # Read here, at intake, at reuse and at render (production.check_photo): the old catalogue keeps no Commons categories.
 
 
@@ -210,9 +219,33 @@ def commons_info(title: str) -> dict:
         raise Refused("AI-generated or not clearly photographic: " + title)
     if not_a_photograph(title, info.get("extmetadata", {})):
         raise Refused("Not a photograph (illustration, poster, artwork or old work): " + title)
-    if derived_file(title, info.get("extmetadata", {})):
+    if derived_file(title, info.get("extmetadata", {})) or retouched(title, info.get("extmetadata", {})):
         raise Refused("Not the photograph as taken (retouched, cropped or made from another file): " + title)
     return info
+
+
+HISTORY_PAGES = 40   # 2 000 versions at most: no Commons photograph has that many
+
+
+def history_comments(title: str) -> list[str]:
+    """The comments of every version of a Commons file, the latest first, page after page (a retouch older than the
+    50 newest versions is read too)."""
+    comments, params = [], {"action": "query", "titles": title, "prop": "imageinfo", "iiprop": "comment", "iilimit": 50}
+    for _ in range(HISTORY_PAGES):
+        data = fetch_json(params)
+        pages = list(data.get("query", {}).get("pages", {}).values())
+        comments += [str(version.get("comment") or "") for page in pages for version in page.get("imageinfo", [])]
+        following = (data.get("continue") or {}).get("iistart") or (data.get("continue") or {}).get("iicontinue")
+        if not following:
+            return comments
+        params = {**params, **data["continue"]}
+    raise Refused("Commons history too long to read: " + title)
+
+
+def retouched(title: str, meta: dict) -> bool:
+    """The file's description or the history of its versions says parts of it were painted over or removed."""
+    description = plain_text(meta.get("ImageDescription", {}).get("value", ""))
+    return any(RETOUCHED.search(text) for text in [description, *history_comments(title)])
 
 
 def stored_size(width: int, height: int) -> tuple[int, int]:

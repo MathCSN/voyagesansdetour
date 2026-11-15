@@ -1,0 +1,216 @@
+{
+  "schemaVersion": 3,
+  "id": "ig-vietnam-quand-partir-2026-11-24",
+  "kind": "reel",
+  "channel": "instagram",
+  "format": "liste",
+  "destination": "Vietnam",
+  "title": "Quand partir au Vietnam : les chiffres à connaître",
+  "targetUrl": "https://voyagesansdetour.fr/vietnam/vietnam-quand-partir/",
+  "publishAt": "2026-11-24T18:00:00Z",
+  "review": {
+    "status": "reviewed_for_render",
+    "checkedAt": "2026-11-15T09:38:06Z",
+    "validUntil": "2026-12-15T09:38:06Z",
+    "method": "Généré automatiquement (auto_social.py) depuis la page publiée du guide relevée le 15/11/2026 : chaque chiffre, étape ou ligne de tableau est cité mot pour mot ; photos et vidéos réelles sous licence libre, aucune image ni vidéo générée par IA ; garde-fous de production.py passés avant la mise en file."
+  },
+  "sources": {
+    "file": "auto/ig-vietnam-quand-partir-2026-11-24/sources.json",
+    "sha256": "e527e9b7428cc2e79d0c25ce75128201e130c5154cd96388a1de8de5284d36f0"
+  },
+  "photos": {
+    "file": "auto/ig-vietnam-quand-partir-2026-11-24/photos.json",
+    "sha256": "88110c74de6d035cb85693975a58a983526b720d58cc7f559449d9d39006e575"
+  },
+  "caption": {
+    "hook": "🤔 Quand partir au Vietnam : le bon mois pour le Nord, le Centre et le Sud",
+    "lines": [
+      "📍 757 mm de pluie à Hué en octobre, le mois le plus arrosé du Centre (contre 43 mm en mars)",
+      "📍 16,4 °C : la température moyenne de Hanoï en janvier ; 29,2 °C en juillet",
+      "📍 6 février 2027 : le Tết, le Nouvel An lunaire : transports saturés et grandes villes vidées autour de cette date",
+      "📍 Février à avril : la meilleure fenêtre pour un voyage nord-sud : Centre au plus sec, Sud en saison sèche, Nord doux",
+      "📍 4 mm de pluie à Hô-Chi-Minh-Ville en février, le mois le plus sec du Sud (307 mm en juillet)"
+    ],
+    "cta": "📌 Enregistrez ce reel pour votre voyage. 🔗 Prix, horaires et détails : le guide complet est en lien dans la bio.",
+    "hashtags": [
+      "#Vietnam",
+      "#VoyageVietnam",
+      "#IdeeVoyage",
+      "#VoyageSansDetour"
+    ]
+  },
+  "scenes": [
+    {
+      "photo": "vietnam-halong",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "hook",
+      "kicker": "Vietnam",
+      "headline": [
+        "Quand partir",
+        "au Vietnam",
+        "*3 chiffres à connaître*"
+      ],
+      "seconds": 2.2,
+      "detail": "Le bon mois pour le Nord, le Centre et le Sud",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "Quand partir au Vietnam : le bon mois pour le Nord, le Centre et le Sud"
+        }
+      ],
+      "tag": "Guide Vietnam · sources du 26/10/2026",
+      "alt": "Une jonque aux voiles brunes entre les pitons calcaires couverts de forêt de la baie d’Ha Long."
+    },
+    {
+      "photo": "vietnam-hue-citadelle",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "fact",
+      "kicker": "Vietnam",
+      "headline": [
+        "*757 mm*"
+      ],
+      "seconds": 4.0,
+      "detail": "de pluie à Hué en octobre, le mois le plus arrosé du Centre",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "757 mm de pluie à Hué en octobre, le mois le plus arrosé du Centre"
+        }
+      ],
+      "tag": "Guide Vietnam · sources du 26/10/2026",
+      "badge": "1/3",
+      "alt": "La cité impériale de Huế."
+    },
+    {
+      "photo": "vietnam-train-hanoi",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "fact",
+      "kicker": "Vietnam",
+      "headline": [
+        "*16,4 °C*"
+      ],
+      "seconds": 4.0,
+      "detail": "la température moyenne de Hanoï en janvier ; 29,2 °C en juillet",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "16,4 °C la température moyenne de Hanoï en janvier ; 29,2 °C en juillet"
+        }
+      ],
+      "tag": "Guide Vietnam · sources du 26/10/2026",
+      "badge": "2/3",
+      "alt": "Une rue de Hanoï longée par la voie ferrée."
+    },
+    {
+      "photo": "vietnam-hoi-an",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "fact",
+      "kicker": "Vietnam",
+      "headline": [
+        "*6 février 2027*"
+      ],
+      "seconds": 2.7,
+      "detail": "le Tết, le Nouvel An lunaire",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "6 février 2027 le Tết, le Nouvel An lunaire"
+        }
+      ],
+      "tag": "Guide Vietnam · sources du 26/10/2026",
+      "badge": "3/3",
+      "alt": "Une maison de bois de la vieille ville de Hội An, ornée de lanternes rouges et d’un bandeau de Nouvel An."
+    },
+    {
+      "photo": "vietnam-rizieres-sapa",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "cta",
+      "kicker": "Le guide complet",
+      "headline": [
+        "Quand partir",
+        "au Vietnam"
+      ],
+      "seconds": 2.4,
+      "note": "Enregistrez cette vidéo pour votre voyage",
+      "button": "voyagesansdetour.fr",
+      "alt": "Les rizières en terrasses autour de Sa Pa, dans le Nord."
+    }
+  ],
+  "musicStart": 1,
+  "assets": {
+    "regular": {
+      "file": "assets/dmsans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9"
+    },
+    "bold": {
+      "file": "assets/dmsans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211"
+    },
+    "serif": {
+      "file": "assets/playfair.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+      },
+      "sha256": "adefc53e7b3d483f1fa5e85edd82b7689ca79db25a1f6786bd7949cdcfeec601"
+    },
+    "fallbackRegular": {
+      "file": "assets/notosans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "478c558ea716033cd60c03438f628dfa75694dcf6b5f6d505a2f05fd2b4f3823"
+    },
+    "fallbackBold": {
+      "file": "assets/notosans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "1df075a380fc7cb898acf64c1f7b3b4dd780de3caa860178bf929de35817a913"
+    },
+    "music": {
+      "file": "assets/carefree.mp3",
+      "sha256": "8433b770a630d9b1594fd484442c677907ece899a4d149954cd2e74fd733e311",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "commercialUseAllowed": true,
+      "title": "Carefree",
+      "author": "Kevin MacLeod",
+      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1400037",
+      "provenance": {
+        "file": "evidence/carefree-provenance.json",
+        "sha256": "96c196c39133db1dbc3a478eba28a25ff8d74ef86633b06647e733f8f23234a6"
+      }
+    }
+  }
+}

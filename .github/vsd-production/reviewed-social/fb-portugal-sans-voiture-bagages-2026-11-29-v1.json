@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 1,
+  "batchId": "fb-portugal-sans-voiture-bagages-2026-11-29-v1",
+  "items": [
+    {
+      "contentId": "vsd-production:facebook:fb-portugal-sans-voiture-bagages-2026-11-29:photo-v1",
+      "deduplicationKey": "vsd-production:facebook:fb-portugal-sans-voiture-bagages-2026-11-29:photo-v1",
+      "title": "Voyager léger au Portugal : 4 repères",
+      "dueAt": "2026-11-29T17:00:00Z",
+      "payload": {
+        "schemaVersion": 1,
+        "channel": "facebook",
+        "kind": "photos",
+        "text": "🎒 Bagages au Portugal sans voiture : 1 valise gratuite dans le train, des pavés partout\n\n💶 6,50 € par bagage en trop à bord de l’Alfa Pendular et de l’Intercidades ; un bagage à main reste gratuit\n📍 85×55×35 cm : la taille maximale de chacun des 3 bagages admis sur les trains internationaux CP\n📍 55×40×20 cm : la valise maximale dans les bus et les trams Carris de Lisbonne : une valise cabine, pas plus\n💶 16 à 23 € : le taxi à prix fixe depuis l’aéroport de Lisbonne selon la zone et l’heure, bagages compris\n\n🔗 Tous les prix, horaires et l’itinéraire dans le guide complet :\nhttps://voyagesansdetour.fr/portugal/portugal-sans-voiture-bagages/\n\nPhotos libres (Wikimedia Commons) — crédits : https://voyagesansdetour.fr/social-media/production/fb-portugal-sans-voiture-bagages-2026-11-29/credits.txt\n\n#Portugal #VoyagePortugal #ConseilsVoyage #VoyageSansDetour\n",
+        "aiGenerated": false,
+        "assets": [
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-portugal-sans-voiture-bagages-2026-11-29/scene-01.jpg",
+            "sha256": "3e56446d720572210bad6069df2a070d0013091af34fd3a8198ed32ce005b884",
+            "mimeType": "image/jpeg",
+            "altText": "Les façades de Ribeira au bord du Douro à Porto, avec des bateaux rabelos au premier plan."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-portugal-sans-voiture-bagages-2026-11-29/scene-02.jpg",
+            "sha256": "b52b3ff8f6a9e8935e51083ddfaadc4554e84152ad23c7598142c77b15d04b9e",
+            "mimeType": "image/jpeg",
+            "altText": "Un train Alfa Pendular de CP à quai."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-portugal-sans-voiture-bagages-2026-11-29/scene-03.jpg",
+            "sha256": "e9a73e7494b9da9609cf843d1eb4845b07ab29263e630e627924cca2f1f00047",
+            "mimeType": "image/jpeg",
+            "altText": "Les toits d’Alfama et le monastère de São Vicente de Fora vus depuis le château São Jorge."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-portugal-sans-voiture-bagages-2026-11-29/scene-04.jpg",
+            "sha256": "d1c33661f9671abe0d4dff7d810291299a5747fa1f5cb699f912d383dd1964a3",
+            "mimeType": "image/jpeg",
+            "altText": "Les toits de Lisbonne, le château São Jorge et le pont du 25 Avril sous un ciel bleu."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-portugal-sans-voiture-bagages-2026-11-29/scene-05.jpg",
+            "sha256": "95610cb1fe9adc70f0ba5655f47b1c6562aec18f0cdcf52a782161eb43fa5d6b",
+            "mimeType": "image/jpeg",
+            "altText": "Les pins parasols et le kiosque du miradouro da Senhora do Monte, au-dessus de Lisbonne."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-portugal-sans-voiture-bagages-2026-11-29/scene-06.jpg",
+            "sha256": "72442b9fb8a10b2c5f687120cbd87e81b60ff980169709ebaaafd3dcefda0d3d",
+            "mimeType": "image/jpeg",
+            "altText": "Un tram jaune de la ligne 28 dans une rue pavée et pentue de Lisbonne."
+          }
+        ]
+      },
+      "review": {
+        "schemaVersion": 1,
+        "contentId": "vsd-production:facebook:fb-portugal-sans-voiture-bagages-2026-11-29:photo-v1",
+        "approved": true,
+        "reviewedAt": "2026-11-15T09:50:01Z",
+        "validUntil": "2026-12-15T09:38:06Z",
+        "payloadRevision": "5f2d61ce383b67d9f40837ecb790280949d7fa6c60c24aa1dcc612d304c5b5ac",
+        "checks": {
+          "editorialApproved": true,
+          "rightsApproved": true,
+          "creditsPreserved": true,
+          "disclosurePreserved": true,
+          "formatRequirementsVerified": true,
+          "requiresPaidCall": false,
+          "sources": {
+            "status": "verified",
+            "observedAt": "2026-11-15T09:38:06Z",
+            "validUntil": "2026-12-15T09:38:06Z"
+          },
+          "syntheticPerson": false,
+          "providerSyntheticSettingVerified": false
+        },
+        "media": {
+          "required": true,
+          "url": null,
+          "sha256": null,
+          "items": [
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-portugal-sans-voiture-bagages-2026-11-29/scene-01.jpg",
+              "sha256": "3e56446d720572210bad6069df2a070d0013091af34fd3a8198ed32ce005b884",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-15T09:50:01Z",
+              "validUntil": "2026-12-15T09:38:06Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-portugal-sans-voiture-bagages-2026-11-29/scene-02.jpg",
+              "sha256": "b52b3ff8f6a9e8935e51083ddfaadc4554e84152ad23c7598142c77b15d04b9e",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-15T09:50:01Z",
+              "validUntil": "2026-12-15T09:38:06Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-portugal-sans-voiture-bagages-2026-11-29/scene-03.jpg",
+              "sha256": "e9a73e7494b9da9609cf843d1eb4845b07ab29263e630e627924cca2f1f00047",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-15T09:50:01Z",
+              "validUntil": "2026-12-15T09:38:06Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-portugal-sans-voiture-bagages-2026-11-29/scene-04.jpg",
+              "sha256": "d1c33661f9671abe0d4dff7d810291299a5747fa1f5cb699f912d383dd1964a3",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-15T09:50:01Z",
+              "validUntil": "2026-12-15T09:38:06Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-portugal-sans-voiture-bagages-2026-11-29/scene-05.jpg",
+              "sha256": "95610cb1fe9adc70f0ba5655f47b1c6562aec18f0cdcf52a782161eb43fa5d6b",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-15T09:50:01Z",
+              "validUntil": "2026-12-15T09:38:06Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-portugal-sans-voiture-bagages-2026-11-29/scene-06.jpg",
+              "sha256": "72442b9fb8a10b2c5f687120cbd87e81b60ff980169709ebaaafd3dcefda0d3d",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-15T09:50:01Z",
+              "validUntil": "2026-12-15T09:38:06Z"
+            }
+          ]
+        },
+        "destination": {
+          "url": "https://voyagesansdetour.fr/portugal/portugal-sans-voiture-bagages/",
+          "status": "verified",
+          "observedAt": "2026-11-15T09:50:01Z",
+          "validUntil": "2026-12-15T09:38:06Z"
+        },
+        "monetization": {
+          "containsAffiliateLinks": false,
+          "partnerApproved": false,
+          "linksVerified": false,
+          "disclosurePreserved": false
+        },
+        "formatCapability": {
+          "status": "verified",
+          "observedAt": "2026-11-15T09:50:01Z",
+          "validUntil": "2026-12-15T09:38:06Z",
+          "automaticPublishing": true,
+          "verificationMethod": "official_documentation",
+          "sourceUrls": [
+            "https://support.buffer.com/en-us/articles/using-facebook-with-buffer-jY1AM9fz2G",
+            "https://developers.buffer.com/types/FacebookPostMetadataInput.html",
+            "https://developers.buffer.com/guides/posts-and-scheduling.html"
+          ]
+        },
+        "evidence": {
+          "status": "rendered_local_bytes_verified_public_deploy_pending",
+          "format": "photo_carousel",
+          "rendererContractVersion": 3,
+          "receiptSha256": "be4803ea4ad3fabecc792d674059f76bcd738853c7513d97fcbf6bb5446d0a4c",
+          "scenarioFingerprint": "257c0751bf5bcdf44e12050a1b7b6454739ed9b6a7b50f35c4e54269c4d5ffbc",
+          "sourceCheckedOn": "2026-11-15",
+          "sourceUrls": [
+            "https://voyagesansdetour.fr/portugal/portugal-sans-voiture-bagages/"
+          ],
+          "creditsUrl": "https://voyagesansdetour.fr/social-media/production/fb-portugal-sans-voiture-bagages-2026-11-29/credits.txt",
+          "voice": null,
+          "music": null,
+          "note": "Les octets publics sont à contrôler après déploiement avec social_stock.py --verify-public. Un créneau prévu n'est pas une réservation Buffer."
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "photos": {
+    "tenerife-143c0261": {
+      "file": "assets/photos/auto/tenerife-143c0261.jpg",
+      "sha256": "6a21675289ee2fff48675df5c76abcf42e94042144f5a3584a3269b32c439dab",
+      "width": 2711,
+      "height": 1600,
+      "commonsTitle": "File:Vista de Garachico, Tenerife, España, 2012-12-13, DD 05.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Vista_de_Garachico,_Tenerife,_Espa%C3%B1a,_2012-12-13,_DD_05.jpg",
+      "author": "Diego Delso",
+      "commonsCredit": "Own work",
+      "categories": "Taken with Canon EOS 5D Mark II|Featured pictures of Tenerife|Images with extracted images|Images of Spain by User:Poco a poco|Featured pictures of the Atlantic Ocean|Featured pictures on Wikipedia, Vietnamese|Featured pictures by User:Poco a poco|Images by User:Poco a poco|2012 in Tenerife|Featured pictures of Spain by User:Poco a poco|Featured pictures on Commons by User:Poco a poco|Featured pictures of buildings by User:Poco a poco|Files with coordinates missing SDC location of creation|Volcanic landforms of the Canary Islands|Bird's-eye views of Garachico|Images by User:Poco a poco taken in 2012|Volcanic plugs in Tenerife|Lava deltas in Tenerife|VI candidates by User:Poco a poco|Featured pictures in Vietnamese language Wikipedia by User:Poco a poco",
+      "licence": "CC BY-SA 3.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "originalSize": [
+        4159,
+        2454
+      ],
+      "commonsSha1": "96fc62dc0cffba9516da4019b26ca6a03e11d48d",
+      "retrievedAt": "2026-11-09T14:00:08Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux.",
+      "automatic": true
+    },
+    "tenerife-adeje": {
+      "file": "assets/photos/auto/tenerife-adeje.jpg",
+      "sha256": "79e20d6495268e1a3235cbf9dfff30ab2b2bc2fc84ff139dc3b6cea47cdb3bdc",
+      "width": 2409,
+      "height": 1600,
+      "commonsTitle": "File:Tenerife Playa El Duque R01.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tenerife_Playa_El_Duque_R01.jpg",
+      "author": "Marc Ryckaert ( MJJR )",
+      "commonsCredit": "Own work",
+      "categories": "Taken with Nikon D90|Potted plants|Beaches of Tenerife|Restaurants in Costa Adeje|Self-published work|Images by MJJR|November 2010 in the Canary Islands|2010 in Tenerife|Files with coordinates missing SDC location of creation|Square-shaped lanterns",
+      "licence": "CC BY 3.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/3.0/",
+      "originalSize": [
+        3094,
+        2055
+      ],
+      "commonsSha1": "b867e96840480f584c71bed972b799e308446f4b",
+      "retrievedAt": "2026-11-09T14:00:08Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "tenerife-costa-adeje-torviscas": {
+      "alt": "La plage de Torviscas et ses parasols de paille, à Costa Adeje, dans le sud de Tenerife.",
+      "focus": [
+        0.35,
+        0.55
+      ],
+      "emblematic": true,
+      "camera": "Canon EOS 6D Mark II",
+      "file": "assets/photos/tenerife-costa-adeje-torviscas.jpg",
+      "sha256": "d63881876868994e5a20a6a9622212d2392d96bacb3d7124617a0e96bc69a776",
+      "width": 2405,
+      "height": 1600,
+      "commonsTitle": "File:Aerial view of Playa de Torviscas beach in Costa Adeje on Tenerife, Spain (48225530037).jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Aerial_view_of_Playa_de_Torviscas_beach_in_Costa_Adeje_on_Tenerife,_Spain_(48225530037).jpg",
+      "author": "dronepicr",
+      "commonsCredit": "Aerial view of Playa de Torviscas beach in Costa Adeje on Tenerife, Spain",
+      "categories": "Costa Adeje|Spain photographs taken on 2019-04-23|Files with coordinates missing SDC location of creation|Flickr images reviewed by FlickreviewR 2|Files from dronepicr Flickr stream",
+      "licence": "CC BY 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "originalSize": [
+        4160,
+        2768
+      ],
+      "commonsSha1": "ff8fed6cbfb0c54e985f3da4a5365d096575a896",
+      "retrievedAt": "2026-11-13T09:20:27Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "tenerife-masca": {
+      "file": "assets/photos/auto/tenerife-masca.jpg",
+      "sha256": "1e34247129fbea1bd001203568fc07c11119c72d423544fbb1703b097ff1e42c",
+      "width": 2408,
+      "height": 1600,
+      "commonsTitle": "File:Tenerife Masca R01.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tenerife_Masca_R01.jpg",
+      "author": "Marc Ryckaert",
+      "commonsCredit": "Own work",
+      "categories": "Taken with Nikon D90|Masca|Self-published work|Images by MJJR",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        3842,
+        2552
+      ],
+      "commonsSha1": "405c85c691eb40cb00b9763c232a7eee79160adc",
+      "retrievedAt": "2026-11-09T14:00:08Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux.",
+      "emblematic": true
+    },
+    "tenerife-teide": {
+      "file": "assets/photos/auto/tenerife-teide.jpg",
+      "sha256": "2b6196b27bf74a3b7341b4b0a5591da0768726c2daabfa8223a7b0c73493ab7a",
+      "width": 2880,
+      "height": 1244,
+      "commonsTitle": "File:Teide Canadas.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Teide_Canadas.jpg",
+      "author": "Ingo Mehling",
+      "commonsCredit": "Own work",
+      "categories": "Caldera de las Cañadas|Images with annotations|Parque nacional del Teide|Featured pictures of Tenerife|Self-published work|Pictures by Ingo Mehling / 2021 Tenerife|Blue sky in the Canary Islands|Files with coordinates missing SDC location of creation|Spain photographs taken on 2021-03-20|Featured pictures by Ingo Mehling|Images from Wiki Loves Earth 2021|Images from Wiki Loves Earth 2021 in Spain|Featured pictures from Wiki Loves Earth 2021 in Spain|Teide in 2021|Special Areas of Conservation in Spain with known IDs|Panoramics of Teide|Featured pictures of volcanoes|Images from Wiki Loves Earth missing SDC location of creation|Landscapes of Tenerife|All media supported by Wikimedia España in 2021|Roques de García in 2021",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        8111,
+        3504
+      ],
+      "commonsSha1": "3d54d09d33f3a17e6fde618507dbdb0a9123077b",
+      "retrievedAt": "2026-11-09T14:00:08Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux.",
+      "emblematic": true
+    }
+  }
+}

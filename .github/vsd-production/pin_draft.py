@@ -124,10 +124,13 @@ def fact_fits_photo(fact, photo, everywhere):
     caption, title = photo.get('alt_fr') or '', commons_title_of(photo)
     shown = place_names.pictured(photo['id'], caption, title, everywhere)
     found = place_names.record(photo['id'], caption, title, everywhere)
-    if place_names.brand_clash(text, shown):
+    # Never another train, nor another means of transport than the journey's (review of PR 53), as in a post.
+    if place_names.brand_clash(text, shown) or place_names.other_ride(place_names.vehicle(photo['id'], caption, title), fact['label']):
         return False
     if place_names.journey(fact['label']) and place_names.ride(shown, fact['label']):
         return place_names.on_the_way(found, place_names.read(fact['label'], everywhere))
+    if place_names.strict_journey(fact['label']):
+        return False   # "de Hué à Đà Nẵng en train" over no train, as in a post
     reading = place_names.read(text, everywhere)
     if reading.all:
         return bool(place_names.fits(reading, shown, place_names.pictured('', caption, title, everywhere), found))

@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "contentId": "ig-costa-rica-itineraire-2-semaines-2026-12-04",
+  "status": "rendered_not_published",
+  "fingerprint": "a0d8ec84ebbd9863f299dee36b99a9f0654881017a951bd64ab159531699294c",
+  "createdAt": "2026-11-15T09:43:48.614171Z",
+  "renderFinishedAt": "2026-11-15T09:44:13.484399Z",
+  "rendererContractVersion": 4,
+  "rendererSha256": "534a47e62b5b85ce56b26d49d9bbc783e5811dbbc355e3b265f7c83e882e620a",
+  "drawingSha256": "b78990f497d03baf754e3b2b68a795a5e9d3b91a0b6a2f8dad2ebcd7fec2907c",
+  "motionSha256": "e7456dc883109dfd1f238028827ef85bfa4253c225a50f1035a9c1d069f953c4",
+  "format": "tableau",
+  "kind": "reel",
+  "channel": "instagram",
+  "publishAt": "2026-12-04T17:00:00Z",
+  "reviewValidUntil": "2026-12-15T09:38:06Z",
+  "sourceCheckedOn": "2026-11-15",
+  "targetUrl": "https://voyagesansdetour.fr/costa-rica/costa-rica-itineraire-2-semaines/",
+  "voice": null,
+  "presenter": null,
+  "sourceUrls": [
+    "https://voyagesansdetour.fr/costa-rica/costa-rica-itineraire-2-semaines/"
+  ],
+  "photos": {
+    "costa-rica-arenal": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Rhododendrites",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Arenal_volcano_(70785p).jpg"
+    },
+    "costa-rica-puerto-viejo": {
+      "licence": "CC BY 3.0",
+      "author": "Letartean",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Puerto_Viejo_de_Talamanca,_Costa_Rica_2012.JPG"
+    },
+    "costa-rica-monteverde": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Cephas",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Monteverde_Cloud_Forest_01.jpg"
+    },
+    "costa-rica-manuel-antonio": {
+      "licence": "CC0",
+      "author": "Bernard Gagnon",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Parque_Nacional_Manuel_Antonio_02.jpg"
+    }
+  },
+  "clips": {},
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "durationSeconds": 15.1,
+    "videoCodec": "h264",
+    "pixelFormat": "yuv420p",
+    "videoBitrateBps": 2706654,
+    "audioCodec": "aac",
+    "audioSampleRate": 48000,
+    "audioBitrateBps": 96326,
+    "fullDecodePassed": true,
+    "loudness": {
+      "integratedLufs": -16.2,
+      "truePeakDbfs": -1.3
+    }
+  },
+  "files": [
+    {
+      "file": "apercu.jpg",
+      "sha256": "689c3c29ce821a42f4f0d46ccb28f1ea448397cbe41a6af643b68d49eb5563b8",
+      "bytes": 193315
+    },
+    {
+      "file": "credits.txt",
+      "sha256": "3c8012fe9d80f89173fbbab7a3d3036efa93e26b6f6a2e8ba9500da100f2863d",
+      "bytes": 2354
+    },
+    {
+      "file": "dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "file": "encode.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "legende.txt",
+      "sha256": "d6472e713efab04cb0fee005edeedaf09d22cf8b13d44d9726124bc0b6e3d1ef",
+      "bytes": 673
+    },
+    {
+      "file": "notosans-OFL.txt",
+      "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a",
+      "bytes": 4396
+    },
+    {
+      "file": "playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    },
+    {
+      "file": "poster.jpg",
+      "sha256": "742eb946794590c8baf0c37bed40ca94ce9f7cda82eecb737035e2ae2fcb02fc",
+      "bytes": 462353
+    },
+    {
+      "file": "reel.mp4",
+      "sha256": "654d6e1b06894ee756f74ba26e02c3d4c311c1f50f34237e8179b0a030bc790c",
+      "bytes": 5308897
+    },
+    {
+      "file": "scenario.json",
+      "sha256": "237d9a24628ad63c4227f06eb31ec3de696fc592fabb50adcdb9a34ccd13455d",
+      "bytes": 7266
+    },
+    {
+      "file": "scene-01.jpg",
+      "sha256": "3e21e0dd656f8bad5d40a2299f2c36c0e988f3672d23f1878570f064e922e70c",
+      "bytes": 421739
+    },
+    {
+      "file": "scene-02.jpg",
+      "sha256": "905bdd7e64c0f71358ffb6c5a92f4537f6a7e25e7858054ad7226a7945ab3a5c",
+      "bytes": 286538
+    },
+    {
+      "file": "scene-03.jpg",
+      "sha256": "39a51d9537e027bc6aaa9d460d5ac2ab6b421261edaec46337897d5d83858c4d",
+      "bytes": 779586
+    },
+    {
+      "file": "scene-04.jpg",
+      "sha256": "7e37c0eb7ba8adb2c474c35746c8c28f959c8667a9608fcb5d0d86eddc31579c",
+      "bytes": 463142
+    }
+  ],
+  "runtime": {
+    "wallSeconds": 24.663,
+    "encoderThreads": 2,
+    "pillowVersion": "11.3.0",
+    "ffmpegVersion": "ffmpeg version 8.1.1 Copyright (c) 2000-2026 the FFmpeg developers"
+  },
+  "publication": {
+    "uploaded": false,
+    "scheduled": false,
+    "published": false,
+    "readyForAutomaticImport": false
+  },
+  "cost": {
+    "newPaidService": false,
+    "providerCalls": 0,
+    "monetarySpendEur": 0
+  }
+}
