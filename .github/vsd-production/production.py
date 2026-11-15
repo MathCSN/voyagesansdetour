@@ -472,17 +472,30 @@ def another_place(scene, photos, everywhere) -> str | None:
     listed = ", ".join(" ".join(name) for name in found) or "no place in its record"
     if place_names.brand_clash(said, shown):
         return f"names a train over {photo}, another train ({listed})"
-    reading = place_names.read(said, everywhere)
-    if place_names.journey(detail) and place_names.ride(shown, detail) and place_names.on_the_way(found, place_names.read(detail, everywhere)):
+    if journey_shown(detail, shown, found, everywhere):
         return None
-    if reading.all:
-        if place_names.fits(reading, shown, place_names.pictured("", caption, title, everywhere), found):
-            return None
-        return f"names {', '.join(' '.join(name) for name in reading.all)} over {photo} ({listed})"
-    region = place_names.region(said)
-    if region and found and not region <= place_names.words(caption):
-        return f"names the {'-'.join(sorted(region))} over {photo} ({listed})"
-    return None
+    reading = place_names.read(said, everywhere)
+    if not reading.all:
+        region = place_names.region(said)
+        missing = region and found and not region <= place_names.words(caption)
+        return f"names the {'-'.join(sorted(region))} over {photo} ({listed})" if missing else None
+    if place_names.fits(reading, shown, place_names.pictured("", caption, title, everywhere), found):
+        return None
+    return f"names {', '.join(' '.join(name) for name in reading.all)} over {photo} ({listed})"
+
+
+def journey_shown(detail, shown, found, everywhere) -> bool:
+    """A journey over a photo of its means of transport, taken on its way."""
+    return bool(place_names.journey(detail) and place_names.ride(shown, detail)
+                and place_names.on_the_way(found, place_names.read(detail, everywhere)))
+
+
+def tight_brackets(text: str) -> str:
+    """"Daniel Lu ( User:dllu )" → "Daniel Lu (User:dllu)", without a regular expression."""
+    opened = text.split("(")
+    text = "(".join([opened[0]] + [part.lstrip() for part in opened[1:]])
+    shut = text.split(")")
+    return ")".join([part.rstrip() for part in shut[:-1]] + [shut[-1]])
 
 
 def contract_of(scenario):
@@ -525,7 +538,7 @@ def credits_text(scenario, info):
         photo = info["photos"][scene["photo"]]
         share_alike |= "SA" in photo["licence"]
         # "Daniel Lu ( User:dllu )": Commons' own spacing inside brackets is not kept.
-        author = re.sub(r"\(\s+", "(", re.sub(r"\s+\)", ")", photo["author"]))
+        author = tight_brackets(photo["author"])
         lines.append(f"{n}. {author} — « {photo['commonsTitle'].removeprefix('File:')} », Wikimedia Commons, {photo['sourcePage']}")
         lines.append(f"   Licence {photo['licence']} : {photo['licenceUrl']}. Modifications : recadrage, "
                      + ("mouvement lent, " if scenario["kind"] == "reel" else "") + "dégradé et texte ajoutés.")

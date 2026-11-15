@@ -118,11 +118,30 @@ def caption_emoji(value: str, label: str) -> str:
     opening, ways = " ".join(first), place_names.ways(first)
     # The pictogram of a journey is the one of the means of transport its line names: a bus is not a train ("le
     # minibus Phantip", "bus de remplacement"), and a ticket for a town is no journey at all.
-    ride = ("⛴️" if "water" in ways or "rabelo" in first else "🚌" if "road" in ways
-            else "🚇" if "urban" in ways else "🚆" if "rail" in ways or place_names.journey(label) else None)
+    ride = ride_emoji(first, ways, label)
     tests = (("💶", "€" in value), ("⏱️", re.search(r"\b(min|h|jours?)\b", value)), (ride, ride),
              ("🎟️", re.match(r"(?:l )?entree\b", opening)), ("🥾", re.search(r"marches|sentier|randonn|à pied", value + label)))
     return next((emoji for emoji, fits in tests if fits), "📍")
+
+
+def ride_emoji(first: list[str], ways: set[str], label: str) -> str | None:
+    if "water" in ways or "rabelo" in first:
+        return "⛴️"
+    if "road" in ways:
+        return "🚌"
+    if "urban" in ways:
+        return "🚇"
+    if "rail" in ways or place_names.journey(label):
+        return "🚆"
+    return None
+
+
+WHEN_TO_GO = "quand partir"
+
+
+def when_to_go(article: dict) -> bool:
+    """A guide that says when to go: its title promises a moment, not figures."""
+    return article.get("shortTitle", "").lower().startswith(WHEN_TO_GO)
 
 
 def caption_line(fact: dict) -> str:
@@ -311,7 +330,7 @@ def applicable(article: dict, facts: list[dict], page: str) -> list[str]:
         formats.append("itineraire")
     if table_of(article, page):
         # "When to go" is a table before anything else; elsewhere the table comes after the guide's own format.
-        formats.insert(0 if article.get("shortTitle", "").lower().startswith("quand partir") else len(formats), "tableau")
+        formats.insert(0 if when_to_go(article) else len(formats), "tableau")
     # No "express" any more: two figures in twelve seconds left a reel almost empty (Yucatán, 20/11/2026).
     return formats + ["liste"]
 
@@ -671,7 +690,7 @@ class Brief:
     def hook(self, promise: str) -> dict:
         # A "quand partir" guide promises a moment, not "4 chiffres": the hook says what its own title promises
         # ("Le bon mois pour Bangkok, le Nord, l'Andaman et Koh Samui"), quoted from the guide (review of 13/11/2026).
-        told = promise_of(self.article) if self.article.get("shortTitle", "").lower().startswith("quand partir") else None
+        told = promise_of(self.article) if when_to_go(self.article) else None
         if told:
             return plan("hook", self.media.opening(self.media.cover), self.kicker, self.title_lines + [promise], HOOK_SECONDS,
                         detail=unbreakable(told), facts=[{"source": "guide", "excerpt": self.article["title"]}], tag=self.tag)

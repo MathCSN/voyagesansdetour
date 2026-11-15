@@ -145,46 +145,59 @@ def names(text: str, everywhere: frozenset | set = frozenset(), sentence: bool =
     word has a capital by grammar ("Visiteurs dans un jardin zen."), unless a name follows it at once or `known` (the
     words of the photo's identifier and title) says it is the place ("Vernazza et son port")."""
     found, run, carrier, end = [], None, False, -1
-
-    def close(run):
-        if run and run[0]:
-            found.append((tuple(dict.fromkeys(run[0])), run[2], run[3]))
-        elif run and len(run[1]) >= 2 and set(run[1]) & KINDS and not set(run[1]) & HARD:
-            found.append((tuple(dict.fromkeys(run[1])), run[2], run[3]))
-
     for match in CAPITALISED.finditer(text):
         first = sentence and not text[:match.start()].strip("«“\" ")
         adjacent = end >= 0 and text[end:match.start()] == " "
         end = match.end()
         if not adjacent:
-            close(run)
-            run = None
-        if first and not CAPITALISED.match(text[match.end():].lstrip(" ")) and not set(folded(match[0])) & set(known):
+            found, run = found + closed(run), None
+        if first and grammar_capital(text, match, known):
             continue
         if set(folded(match[0])) <= SMALL:
-            close(run)   # "Malaysia To Bangkok": two names
-            run = None
+            found, run = found + closed(run), None   # "Malaysia To Bangkok": two names
             continue
-        before = folded(text[:match.start()])[-1:]
-        carrier = (carrier and adjacent) or bool(before and before[0] in CARRIED_BY and text[match.start() - 1:match.start()] == " ")
+        # The acronym is the carrier's whole name: "le bus MEPE Puerto Viejo – San José".
         acronym = len(match[0]) > 1 and match[0].isupper()
-        if acronym:
-            carrier = False   # the acronym is the carrier's whole name: "le bus MEPE Puerto Viejo – San José"
+        carrier = not acronym and ((carrier and adjacent) or after_carrier(text, match))
         if carrier:
-            close(run)
-            run = None
+            found, run = found + closed(run), None
             continue
-        pieces = [] if acronym else [piece for piece in folded(match[0]) if names_a_place(piece, everywhere, adjacent and not first)]
-        # "Chiang Mai", "Chiang Rai", "Khao Sok": the head of the name is kept, or "mai" alone would be any May.
-        if pieces and run and not run[0] and run[1][-1:] and run[1][-1] in NAME_HEADS:
-            pieces = run[1][-1:] + pieces
-        raw = [] if acronym else [piece for piece in folded(match[0]) if piece not in LEADING and piece not in everywhere]
-        run = run or [[], [], match.start(), match.end()]
-        run[0] += pieces
-        run[1] += raw
-        run[3] = match.end()
-    close(run)
-    return found
+        run = extended(run, match, [] if acronym else folded(match[0]), everywhere, adjacent and not first)
+    return found + closed(run)
+
+
+def grammar_capital(text: str, match: re.Match, known: frozenset | set) -> bool:
+    """The first word of a caption, written with a capital by grammar: no name follows it, and it is not the place."""
+    return not CAPITALISED.match(text[match.end():].lstrip(" ")) and not set(folded(match[0])) & set(known)
+
+
+def after_carrier(text: str, match: re.Match) -> bool:
+    """A capitalised word right after "chez", "ligne"…: the name of a carrier, not of a place."""
+    before = folded(text[:match.start()])[-1:]
+    return bool(before and before[0] in CARRIED_BY and text[match.start() - 1:match.start()] == " ")
+
+
+def closed(run: list | None) -> list[tuple[Name, int, int]]:
+    """The name a run of capitalised words makes: its place-words, or, when it has none, its words when they hold a
+    kind of place and no ticket ("Maya Bay"); nothing otherwise."""
+    if not run:
+        return []
+    if run[0]:
+        return [(tuple(dict.fromkeys(run[0])), run[2], run[3])]
+    if len(run[1]) >= 2 and set(run[1]) & KINDS and not set(run[1]) & HARD:
+        return [(tuple(dict.fromkeys(run[1])), run[2], run[3])]
+    return []
+
+
+def extended(run: list | None, match: re.Match, pieces: list[str], everywhere: frozenset | set, after_a_name: bool) -> list:
+    """The run of capitalised words with one more: [place-words, words, start, end]."""
+    placed = [piece for piece in pieces if names_a_place(piece, everywhere, after_a_name)]
+    # "Chiang Mai", "Chiang Rai", "Khao Sok": the head of the name is kept, or "mai" alone would be any May.
+    if placed and run and not run[0] and run[1][-1:] and run[1][-1] in NAME_HEADS:
+        placed = run[1][-1:] + placed
+    raw = [piece for piece in pieces if piece not in LEADING and piece not in everywhere]
+    start = run[2] if run else match.start()
+    return [(run[0] if run else []) + placed, (run[1] if run else []) + raw, start, match.end()]
 
 
 NAME_HEADS = frozenset("chiang khao".split())
@@ -211,7 +224,7 @@ def proper(text: str, everywhere: frozenset | set = frozenset(), sentence: bool 
 SUBJECT_GAP = 4   # words at most between two places a fact is about: "Bangkok, Chiang Mai et la mer d'Andaman"
 # What sets a place off as where the first one stands, not as another place the fact is about: "le Grand Bouddha du
 # Tōdai-ji, à Nara", "Maya Bay, à Phi Phi", "le Real Alcázar de Séville", "le château São Jorge à Lisbonne".
-SITUATING = re.compile(r"^\s*(?:[,(]\s*)?(?:à|a|au|aux|en|dans|sur|près d[eu’']?|pres d|de|du|des|d’|d')\s*$", re.IGNORECASE)
+SITUATING = re.compile(r"^\s*(?:[,(]\s*)?(?:à|a(?:ux?)?|en|dans|sur|près d[eu’']?|pres d|d[eu’']|des)\s*$", re.IGNORECASE)
 SITUATING_AFTER_COMMA = re.compile(r"^\s*[,(]\s*(?:à|a|au|aux|en|dans|sur|près d|pres d)\b", re.IGNORECASE)
 
 
@@ -226,6 +239,15 @@ class Reading:
     said: frozenset
 
 
+def word_before(text: str, start: int) -> str:
+    return "".join(folded(text[:start])[-1:])
+
+
+def beyond_subject(gap: str) -> bool:
+    """A figure or a long stretch of words between two places: the second only situates the fact."""
+    return bool(re.search(r"\d", gap)) or len(folded(gap)) > SUBJECT_GAP
+
+
 def read(text: str, everywhere: frozenset | set = frozenset()) -> Reading:
     """The places a fact is about: the first one it names, and those it lists with it ("Mérida et Uxmal", "de Surat
     Thani à Krabi", "Bangkok, Chiang Mai et la mer d'Andaman"); the places it situates the first one in ("…, à Nara");
@@ -235,15 +257,15 @@ def read(text: str, everywhere: frozenset | set = frozenset()) -> Reading:
     first, listed, situating, end, origins = None, [], [], None, []
     journeying = journey(text)
     for name, start, stop in found:
-        if folded(text[:start])[-1:] in (["depuis"], ["from"]):
+        if word_before(text, start) in ("depuis", "from"):
             origins.append(name)
             continue
         if first is None:
             first, end = name, stop
-            journeying = journeying or folded(text[:start])[-1:] in (["de"], ["d"], ["entre"])
+            journeying = journeying or word_before(text, start) in ("de", "d", "entre")
             continue
         gap = text[end:start] if start >= end else ""
-        if re.search(r"\d", gap) or len(folded(gap)) > SUBJECT_GAP:
+        if beyond_subject(gap):
             break
         situated = SITUATING_AFTER_COMMA.match(gap) or (not journeying and SITUATING.match(gap))
         (situating if situated else listed).append(name)
@@ -301,44 +323,65 @@ def region(text: str) -> set[str]:
     name ("Corée du Sud", "le cap Nord", "l'Asie du Sud-Est"), nor for the verb ("la côte est magnifique"). Written
     with a capital after a name ("Tenerife Sud"), it is part of that name; "centre" only with its capital ("le Centre",
     not "le centre historique")."""
+    compound = compound_part(text)
+    if compound:
+        return compound
     raw = [match[0] for match in re.finditer(r"[^\W\d_]+", text.translate(PLAIN))]
     said = [destinations.ascii_fold(word).lower() for word in raw]
-    # "le sud-ouest", "Le Nord-Est": one part, both words; "l'Asie du Sud-Est", "le Sud-Est asiatique": a name.
+    found = [index for index in range(len(said)) if is_part(raw, said, index)]
+    if not found:
+        return set()
+    if len(found) > 1 and whole(said, found[0], found[1]):
+        return set()
+    return {said[found[0]]}
+
+
+def compound_part(text: str) -> set[str]:
+    """"le sud-ouest", "Le Nord-Est": one part, both words; "l'Asie du Sud-Est", "le Sud-Est asiatique": a name."""
     compound = re.search(r"\b(nord|sud)-(est|ouest)\b(?!\s+(?:asiatique|americain|europeen|africain))", destinations.ascii_fold(text), re.IGNORECASE)
     if compound and not NAME_BEFORE_CARDINAL & set(folded(text[:compound.start()])[-2:]):
         return {compound[1].lower(), compound[2].lower()}
+    return set()
 
-    def counts(index: int) -> bool:
-        word, before = said[index], said[max(0, index - 2):index]
-        if word == "centre" and not raw[index][0].isupper():
-            return False
-        if word == "est":
-            after = said[index + 1:index + 2]
-            if not (before[-1:] and before[-1] in EAST_AFTER or before[-2:] in (["a", "l"], ["de", "l"], ["dans", "l"], ["vers", "l"])):
-                return False   # "Le Sud est plus chaud": the verb
-            if after and after[0] not in ("de", "du", "des", "d", "l", "et"):
-                return False   # "la côte est magnifique"
-        elif word not in CARDINAL:
-            return False
-        if NAMED_AFTER_CARDINAL & set(before) or NAME_BEFORE_CARDINAL & set(before):
-            return False
-        if raw[index][0].isupper() and index and raw[index - 1][0].isupper() and said[index - 1] not in LEADING:
-            return False   # "Tenerife Sud", "Sud-Est"
-        if said[index + 1:index + 2] in (["asiatique"], ["americain"], ["europeen"], ["africain"]) or \
-                (said[index + 1:index + 2] in (["est"], ["ouest"]) and said[index + 2:index + 3] in (["asiatique"], ["americain"], ["europeen"])):
-            return False
-        return True
 
-    found = [index for index in range(len(said)) if counts(index)]
-    if not found:
-        return set()
-    if len(found) > 1 and {said[found[0]], said[found[1]]} in OPPOSITE:
-        # "nord-sud", "du nord au sud", "le Nord et le Sud": the whole of the place. Not a comparison of two parts:
-        # "222 h au sud, contre 150 h dans le nord" is about the south.
-        between = set(said[found[0] + 1:found[1]])
-        if not between & {"contre", "que", "plutot", "mais", "alors"}:
-            return set()
-    return {said[found[0]]}
+def is_part(raw: list[str], said: list[str], index: int) -> bool:
+    """One word of a fact names a part of the destination: a cardinal point, "est" only as one, "centre" only with its
+    capital; not inside a name ("Tenerife Sud", "la ligne Nord", "Corée du Sud", "Sud-Est asiatique")."""
+    word, before = said[index], said[max(0, index - 2):index]
+    if word == "centre" and not raw[index][0].isupper():
+        return False
+    if word == "est" and not east(said, before, index):
+        return False
+    if word != "est" and word not in CARDINAL:
+        return False
+    if NAMED_AFTER_CARDINAL & set(before) or NAME_BEFORE_CARDINAL & set(before):
+        return False
+    if raw[index][0].isupper() and index and raw[index - 1][0].isupper() and said[index - 1] not in LEADING:
+        return False   # "Tenerife Sud", "Sud-Est"
+    return not adjective_after(said, index)
+
+
+def east(said: list[str], before: list[str], index: int) -> bool:
+    """"est" as the east, not the verb: "Le Sud est plus chaud", "la côte est magnifique"."""
+    after = said[index + 1:index + 2]
+    if not (before[-1:] and before[-1] in EAST_AFTER or before[-2:] in (["a", "l"], ["de", "l"], ["dans", "l"], ["vers", "l"])):
+        return False
+    return not (after and after[0] not in ("de", "du", "des", "d", "l", "et"))
+
+
+def adjective_after(said: list[str], index: int) -> bool:
+    """"Sud asiatique", "Sud-Est asiatique": the name of a region of the world."""
+    after, then = said[index + 1:index + 2], said[index + 2:index + 3]
+    return after in (["asiatique"], ["americain"], ["europeen"], ["africain"]) or \
+        (after in (["est"], ["ouest"]) and then in (["asiatique"], ["americain"], ["europeen"]))
+
+
+def whole(said: list[str], one: int, other: int) -> bool:
+    """"nord-sud", "du nord au sud", "le Nord et le Sud": the whole of the place. Not a comparison of two parts:
+    "222 h au sud, contre 150 h dans le nord" is about the south."""
+    if {said[one], said[other]} not in OPPOSITE:
+        return False
+    return not set(said[one + 1:other]) & {"contre", "que", "plutot", "mais", "alors"}
 
 
 def widened(said: set[str]) -> set[str]:

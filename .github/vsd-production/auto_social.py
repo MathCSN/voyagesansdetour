@@ -74,7 +74,7 @@ FALLBACK_FONT_ASSETS = {
 # Upbeat CC BY 4.0 tracks already qualified (provenance in evidence/), with the second the extract starts at.
 MUSIC = (("happy-alley", 8), ("carefree", 1), ("almost-bliss", 0), ("ascending-the-vale", 0))
 CATEGORY_EMOJI = {"itineraires": "🗺️", "transports": "🚆", "excursions": "🌄", "quartiers": "🏘️", "choisir": "🤔",
-                  "preparer": "🎒", "budget": "💶", "quand partir": "📅", "road trip": "🚗", "road trips": "🚗"}
+                  "preparer": "🎒", "budget": "💶", reel_formats.WHEN_TO_GO: "📅", "road trip": "🚗", "road trips": "🚗"}
 
 
 WEEKDAYS = ("monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday")
@@ -486,7 +486,7 @@ def scenes_for(article: dict, channel: Post, facts: list[dict], photos: list[tup
     hook_kicker = hook_kicker if len(hook_kicker) <= 32 else place[:32]
     # A post that opens on no figure ("Quand partir en Thaïlande") promises what the guide's own title promises, not
     # "4 repères à connaître" (review of 13/11/2026): the title is quoted like any other line of the guide.
-    promise = reel_formats.promise_of(article) if word == "repères" or article.get("shortTitle", "").lower().startswith("quand partir") else None
+    promise = reel_formats.promise_of(article) if word == "repères" or reel_formats.when_to_go(article) else None
     promised = lines_of(promise, width, 3) if promise else None
     if promised:
         # The promise is the headline, the place above it, the guide's opening under it: three lines quoted from the guide.
@@ -521,7 +521,7 @@ def free_identity(root: Path, base: str) -> str:
 
 def facebook_call(article: dict) -> str:
     """The line above the guide's address: it promises only what that kind of guide holds."""
-    if article.get("shortTitle", "").lower().startswith("quand partir"):
+    if reel_formats.when_to_go(article):
         return "🔗 La meilleure période pour partir, et pourquoi, dans le guide complet :"
     return "🔗 Tous les prix, horaires et l’itinéraire dans le guide complet :"
 
