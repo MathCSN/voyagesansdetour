@@ -22,7 +22,7 @@
           },
           {
             "url": "https://voyagesansdetour.fr/social-media/production/igc-vietnam-itineraire-15-jours-2026-11-26/scene-02.jpg",
-            "sha256": "6a75548986a028f245589752a046ede4fd4333e25fe206855582f42c3702b59a",
+            "sha256": "52ebd2f08e3639083f349c32290508de4aa67845291bd79b30651c293d55461d",
             "mimeType": "image/jpeg",
             "altText": "Une jonque aux voiles brunes entre les pitons calcaires couverts de forêt de la baie d’Ha Long."
           },
@@ -56,9 +56,9 @@
         "schemaVersion": 1,
         "contentId": "vsd-production:instagram:igc-vietnam-itineraire-15-jours-2026-11-26:photo-v1",
         "approved": true,
-        "reviewedAt": "2026-11-15T09:50:01Z",
-        "validUntil": "2026-12-15T09:38:06Z",
-        "payloadRevision": "03484f59ff115204acbd7d3b8569aafa753841537ee80cafa56d3a6a2f2d4d99",
+        "reviewedAt": "2026-11-15T10:40:15Z",
+        "validUntil": "2026-12-15T10:39:33Z",
+        "payloadRevision": "76d61c3d33fd7b4824e8db80cbf6ab99c98e369e05b1dea191f318d0601d8062",
         "checks": {
           "editorialApproved": true,
           "rightsApproved": true,
@@ -68,8 +68,8 @@
           "requiresPaidCall": false,
           "sources": {
             "status": "verified",
-            "observedAt": "2026-11-15T09:38:06Z",
-            "validUntil": "2026-12-15T09:38:06Z"
+            "observedAt": "2026-11-15T10:39:33Z",
+            "validUntil": "2026-12-15T10:39:33Z"
           },
           "syntheticPerson": false,
           "providerSyntheticSettingVerified": false
@@ -84,56 +84,56 @@
               "sha256": "d94408d296c134d58c8c2bd2a160016549f173125f41d4819a6ff7c454dc0314",
               "mimeType": "image/jpeg",
               "status": "verified",
-              "observedAt": "2026-11-15T09:50:01Z",
-              "validUntil": "2026-12-15T09:38:06Z"
+              "observedAt": "2026-11-15T10:40:15Z",
+              "validUntil": "2026-12-15T10:39:33Z"
             },
             {
               "url": "https://voyagesansdetour.fr/social-media/production/igc-vietnam-itineraire-15-jours-2026-11-26/scene-02.jpg",
-              "sha256": "6a75548986a028f245589752a046ede4fd4333e25fe206855582f42c3702b59a",
+              "sha256": "52ebd2f08e3639083f349c32290508de4aa67845291bd79b30651c293d55461d",
               "mimeType": "image/jpeg",
               "status": "verified",
-              "observedAt": "2026-11-15T09:50:01Z",
-              "validUntil": "2026-12-15T09:38:06Z"
+              "observedAt": "2026-11-15T10:40:15Z",
+              "validUntil": "2026-12-15T10:39:33Z"
             },
             {
               "url": "https://voyagesansdetour.fr/social-media/production/igc-vietnam-itineraire-15-jours-2026-11-26/scene-03.jpg",
               "sha256": "c3d10ebf6f919e7de71516fa872fcdec8130bb977fd8cbf6900abd7192762564",
               "mimeType": "image/jpeg",
               "status": "verified",
-              "observedAt": "2026-11-15T09:50:01Z",
-              "validUntil": "2026-12-15T09:38:06Z"
+              "observedAt": "2026-11-15T10:40:15Z",
+              "validUntil": "2026-12-15T10:39:33Z"
             },
             {
               "url": "https://voyagesansdetour.fr/social-media/production/igc-vietnam-itineraire-15-jours-2026-11-26/scene-04.jpg",
               "sha256": "d901a8ca40ce0b7563c689ac1d67d6d9e2555327d26949521a6aedd11dcc6543",
               "mimeType": "image/jpeg",
               "status": "verified",
-              "observedAt": "2026-11-15T09:50:01Z",
-              "validUntil": "2026-12-15T09:38:06Z"
+              "observedAt": "2026-11-15T10:40:15Z",
+              "validUntil": "2026-12-15T10:39:33Z"
             },
             {
               "url": "https://voyagesansdetour.fr/social-media/production/igc-vietnam-itineraire-15-jours-2026-11-26/scene-05.jpg",
               "sha256": "37a7641afe4c8edd5b1578463c253c3de43a0cda530dea1a592b0f05fe5f3b9e",
               "mimeType": "image/jpeg",
               "status": "verified",
-              "observedAt": "2026-11-15T09:50:01Z",
-              "validUntil": "2026-12-15T09:38:06Z"
+              "observedAt": "2026-11-15T10:40:15Z",
+              "validUntil": "2026-12-15T10:39:33Z"
             },
             {
               "url": "https://voyagesansdetour.fr/social-media/production/igc-vietnam-itineraire-15-jours-2026-11-26/scene-06.jpg",
               "sha256": "50b33e52423ba4003ec94de1cc49ae5c4af310a7db1beb79623076a4d9582f67",
               "mimeType": "image/jpeg",
               "status": "verified",
-              "observedAt": "2026-11-15T09:50:01Z",
-              "validUntil": "2026-12-15T09:38:06Z"
+              "observedAt": "2026-11-15T10:40:15Z",
+              "validUntil": "2026-12-15T10:39:33Z"
             }
           ]
         },
         "destination": {
           "url": "https://voyagesansdetour.fr/vietnam/vietnam-itineraire-15-jours/",
           "status": "verified",
-          "observedAt": "2026-11-15T09:50:01Z",
-          "validUntil": "2026-12-15T09:38:06Z"
+          "observedAt": "2026-11-15T10:40:15Z",
+          "validUntil": "2026-12-15T10:39:33Z"
         },
         "monetization": {
           "containsAffiliateLinks": false,
@@ -143,8 +143,8 @@
         },
         "formatCapability": {
           "status": "verified",
-          "observedAt": "2026-11-15T09:50:01Z",
-          "validUntil": "2026-12-15T09:38:06Z",
+          "observedAt": "2026-11-15T10:40:15Z",
+          "validUntil": "2026-12-15T10:39:33Z",
           "automaticPublishing": true,
           "verificationMethod": "official_documentation",
           "sourceUrls": [
@@ -157,8 +157,8 @@
           "status": "rendered_local_bytes_verified_public_deploy_pending",
           "format": "photo_carousel",
           "rendererContractVersion": 3,
-          "receiptSha256": "9bce6ba40a3e94138fbead0589969a91630cde0b9e4d2e663a2e0a77ac8ce636",
-          "scenarioFingerprint": "72c7c72a9fb07aa84e053871e9762ff579dfda8a39a69336ffaeb9af020f4d33",
+          "receiptSha256": "9d4cd8db7b25b7e51bc65c93728bcbf1076ac2162b370a0f642ba4e8c6145f49",
+          "scenarioFingerprint": "168de151d4dca551feaf7d458b338eec85e7188c106056a6081c5274d9ce5b22",
           "sourceCheckedOn": "2026-11-15",
           "sourceUrls": [
             "https://voyagesansdetour.fr/vietnam/vietnam-itineraire-15-jours/"

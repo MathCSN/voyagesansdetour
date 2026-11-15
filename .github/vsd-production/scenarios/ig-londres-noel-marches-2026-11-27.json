@@ -10,13 +10,13 @@
   "publishAt": "2026-11-27T17:00:00Z",
   "review": {
     "status": "reviewed_for_render",
-    "checkedAt": "2026-11-15T09:38:06Z",
-    "validUntil": "2026-12-15T09:38:06Z",
+    "checkedAt": "2026-11-15T10:39:33Z",
+    "validUntil": "2026-12-15T10:39:33Z",
     "method": "Généré automatiquement (auto_social.py) depuis la page publiée du guide relevée le 15/11/2026 : chaque chiffre, étape ou ligne de tableau est cité mot pour mot ; photos et vidéos réelles sous licence libre, aucune image ni vidéo générée par IA ; garde-fous de production.py passés avant la mise en file."
   },
   "sources": {
     "file": "auto/ig-londres-noel-marches-2026-11-27/sources.json",
-    "sha256": "3d9ab4ae5bd87b8c2993c68bddf773b93d04b53cf4230afe5b4555d5b116dcec"
+    "sha256": "0ee64f7a9db1c1e775b1b6c0b7628c55dd72542686dc66a94fce9e8adb3abaf7"
   },
   "photos": {
     "file": "auto/ig-londres-noel-marches-2026-11-27/photos.json",
@@ -71,7 +71,7 @@
         0.5
       ],
       "layout": "fact",
-      "kicker": "Le calendrier de l’hiver 2026",
+      "kicker": "Londres",
       "headline": [
         "*8,90 £*"
       ],
@@ -174,7 +174,7 @@
       "alt": "Le palais de Westminster et la tour Elizabeth au bord de la Tamise."
     }
   ],
-  "musicStart": 0,
+  "musicStart": 8,
   "assets": {
     "regular": {
       "file": "assets/dmsans-regular.ttf",
@@ -222,17 +222,17 @@
       "sha256": "1df075a380fc7cb898acf64c1f7b3b4dd780de3caa860178bf929de35817a913"
     },
     "music": {
-      "file": "assets/almost-bliss.mp3",
-      "sha256": "731e191cef927e43d352bd099ac63cd6ea54a6a84deec3cba77fb59e6903754c",
+      "file": "assets/happy-alley.mp3",
+      "sha256": "f598c8ee624f1db9a2cd38886524a40baff4ce730dcf999c0763791268fa8265",
       "license": "CC-BY-4.0",
       "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
       "commercialUseAllowed": true,
-      "title": "Almost Bliss",
+      "title": "Happy Alley",
       "author": "Kevin MacLeod",
-      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1900015",
+      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100482",
       "provenance": {
-        "file": "evidence/almost-bliss-provenance.json",
-        "sha256": "2d2303c1a70fed68560808853466c997870cd8156737d96ca287a4332a5cd04d"
+        "file": "evidence/happy-alley-provenance.json",
+        "sha256": "5a2ba8f3dba28b0a748b00089d3854db1fde92213429823746f6d01805f904ac"
       }
     }
   }

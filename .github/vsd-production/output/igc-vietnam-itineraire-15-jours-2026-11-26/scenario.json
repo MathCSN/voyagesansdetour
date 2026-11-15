@@ -9,13 +9,13 @@
   "publishAt": "2026-11-26T08:00:00Z",
   "review": {
     "status": "reviewed_for_render",
-    "checkedAt": "2026-11-15T09:38:06Z",
-    "validUntil": "2026-12-15T09:38:06Z",
+    "checkedAt": "2026-11-15T10:39:33Z",
+    "validUntil": "2026-12-15T10:39:33Z",
     "method": "Généré automatiquement (auto_social.py) depuis la page publiée du guide relevée le 15/11/2026 : chaque chiffre est cité mot pour mot ; photos réelles sous licence libre (Wikimedia Commons), aucune image générée par IA ; garde-fous de production.py passés avant la mise en file."
   },
   "sources": {
     "file": "auto/igc-vietnam-itineraire-15-jours-2026-11-26/sources.json",
-    "sha256": "23e9f3ee9540da92aff8c82324c1cf5c9be017b41632dc67a10ee650b98a1248"
+    "sha256": "742e7d425047f0a7239e3c823a62a94c8666981389fc3989371bcbd6d04666ec"
   },
   "photos": {
     "file": "auto/igc-vietnam-itineraire-15-jours-2026-11-26/photos.json",
@@ -64,7 +64,7 @@
         0.5,
         0.5
       ],
-      "kicker": "Quand partir",
+      "kicker": "Vietnam",
       "headline": [
         "*45 jours*"
       ],
