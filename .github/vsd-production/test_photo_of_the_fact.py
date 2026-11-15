@@ -262,5 +262,36 @@ class TheFinish(unittest.TestCase):
         self.assertIsNone(p.another_place({**table, "kicker": "Lisbonne → Porto"}, photos, names.words("Portugal")))
 
 
+class RetouchedPhotos(unittest.TestCase):
+    """Review of the Pins (15/11/2026): a file whose history says "slight cloning" is no photograph as taken."""
+
+    def answer(self, comments, description="View of the bridge at night"):
+        def fetch(params):
+            if params.get("iiprop") == "comment":
+                return {"query": {"pages": {"1": {"imageinfo": [{"comment": text} for text in comments]}}}}
+            return {"query": {"pages": {"1": {"imageinfo": [{"mime": "image/jpeg", "width": 4000, "height": 3000, "extmetadata": {
+                "ImageDescription": {"value": description}, "Categories": {"value": "Luiz I bridge"},
+                "Model": {"value": "Canon EOS 5DS R"}}}]}}}}
+        return fetch
+
+    def test_a_history_that_admits_cloning_refuses_the_file(self):
+        import photo_intake
+        from unittest import mock
+        title = "File:Some bridge at night.jpg"
+        with mock.patch.object(photo_intake, "fetch_json", self.answer(["Curves", "Highlights, slight cloning", "HDR artifacts"])):
+            with self.assertRaises(photo_intake.Refused):
+                photo_intake.commons_info(title)
+        with mock.patch.object(photo_intake, "fetch_json", self.answer(["Curves"], "A tourist removed from the square")):
+            with self.assertRaises(photo_intake.Refused):
+                photo_intake.commons_info(title)
+        with mock.patch.object(photo_intake, "fetch_json", self.answer(["Curves", "Perspective correction"])):
+            self.assertEqual(photo_intake.commons_info(title)["width"], 4000)
+
+    def test_the_retouched_bridge_of_porto_is_named(self):
+        import photo_intake
+        self.assertIn("File:Puente de Don Luis I, Oporto, Portugal, 2019-06-02, DD 29-31 HDR.jpg", photo_intake.NOT_A_PHOTOGRAPH_AS_TAKEN)
+        self.assertTrue(photo_intake.derived_record({"commonsTitle": "File:Puente de Don Luis I, Oporto, Portugal, 2019-06-02, DD 29-31 HDR.jpg"}))
+
+
 if __name__ == "__main__":
     unittest.main()
