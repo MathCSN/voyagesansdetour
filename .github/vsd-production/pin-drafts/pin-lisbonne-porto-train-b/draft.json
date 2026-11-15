@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-lisbonne-porto-train-b",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Lisbonne–Porto en train : 35,70 € en Alfa Pendular, jusqu’à −65 % en Promo",
+  "pinTitle": "Lisbonne–Porto en train : trajets, horaires et prix",
+  "variant": "b",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/lisbonne-porto-train/",
+  "articleSha256": "f89e6e6dcb5ac46ac80e03e92e768b969b3abcfaf50ced10afd058136428dc3f",
+  "imageSha256": "be36abd714b9c7401a0bf1e072a538cb63fc678c23b3e24f400d489a91e65fa4",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "aa0d10481ca94e76950c0d95f74dbd75124b0ba4c8a6ed6b7e589d4b38b73301",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "train-oriente",
+    "author": "_morgado",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Alfa_Pendular_(38916561925).jpg",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/"
+  }
+}

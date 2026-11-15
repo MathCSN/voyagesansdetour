@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-portugal-sans-voiture-bagages-c",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Bagages au Portugal sans voiture : 1 valise gratuite dans le train, des pavés partout",
+  "pinTitle": "Voyager léger au Portugal : les chiffres à connaître avant de partir",
+  "variant": "c",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/portugal-sans-voiture-bagages/",
+  "articleSha256": "6fd171b1a79971374714684b7e1943a0bd242e317d0fba9ac3416aad9c94d311",
+  "imageSha256": "f6de2836aa6da05ddbb2cb9e9beb5e216fa183621653567d9b3bd0c3fb2b4c69",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "aa0d10481ca94e76950c0d95f74dbd75124b0ba4c8a6ed6b7e589d4b38b73301",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "lisbonne-alfama-tram",
+    "author": "Ingo Mehling",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Lissabon_-_Alfama_-_Largo_Santa_Luzia_-_Streetcar_-_1.jpg",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+  }
+}

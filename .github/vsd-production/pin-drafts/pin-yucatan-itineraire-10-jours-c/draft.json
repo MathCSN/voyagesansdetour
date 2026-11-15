@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-yucatan-itineraire-10-jours-c",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Yucatán en 10 jours : Valladolid, Chichén Itzá, Mérida et Tulum, avec le Tren Maya",
+  "pinTitle": "Yucatán en 10 jours : les chiffres à connaître avant de partir",
+  "variant": "c",
+  "targetUrl": "https://voyagesansdetour.fr/mexique/yucatan-itineraire-10-jours/",
+  "articleSha256": "e5a103bf55efcb92ff9183716192100ce236d2d97384d39d5446a1010ea7df6b",
+  "imageSha256": "59a2bb8e09afba2e1a24440e3310f7fbd6ae167bc67e18415f7b98840650176d",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "aa0d10481ca94e76950c0d95f74dbd75124b0ba4c8a6ed6b7e589d4b38b73301",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "yucatan-tulum",
+    "author": "Martin Falbisoner",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Tulum_-_God_of_the_Winds_Temple_04.JPG",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  }
+}

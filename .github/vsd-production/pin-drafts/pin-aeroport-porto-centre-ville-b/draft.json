@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-aeroport-porto-centre-ville-b",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Aéroport de Porto au centre-ville : métro E en 30 minutes pour 2,30 €",
+  "pinTitle": "Aéroport de Porto → centre : trajets, horaires et prix",
+  "variant": "b",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/aeroport-porto-centre-ville/",
+  "articleSha256": "ebfe85487d84c53a5e4922d5b0f2f7a9f36c40f49d745b6de000ddef6fc7ae41",
+  "imageSha256": "72164cbd92ede5351a43eb567e3758c383edaa8ae81fffba2812703c53a0db0b",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "aa0d10481ca94e76950c0d95f74dbd75124b0ba4c8a6ed6b7e589d4b38b73301",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "porto-sao-bento",
+    "author": "Diego Delso",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Estaci%C3%B3n_de_tren_S%C3%A3o_Bento,_Oporto,_Portugal,_2012-05-09,_DD_07.JPG",
+    "license": "CC BY-SA 3.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
+  }
+}

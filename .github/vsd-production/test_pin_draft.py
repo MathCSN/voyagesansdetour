@@ -49,6 +49,11 @@ class PinDraftTests(unittest.TestCase):
         (self.site/'image-sources.json').write_text(json.dumps({'photos':photos}))
         guide=dict(GUIDE,category='Itinéraires',sections=[{'image':'grenade-albaicin'},{'image':'grenade-alhambra'},{'image':'seville-plaza'}],
                    keyFacts=[{'value':'40 min','label':'Séville → Cordoue en AVE'},{'value':'19 €','label':'l’Alhambra'},{'value':'300 000 ₫','label':'un prix en dongs'}])
+        # Review of 13/11/2026: the memo "b" carries three figures on one photo; "Séville → Cordoue" and "l’Alhambra" name
+        # places the Albaicín photo is not of, so no memo is drawn on it.
+        with self.assertRaisesRegex(ValueError,'not_enough_key_facts'):
+            render(guide,self.output,site=self.site,variant='b')
+        guide=dict(guide,keyFacts=[{'value':'40 min','label':'de train entre deux villes'},{'value':'19 €','label':'une entrée de monument'},{'value':'300 000 ₫','label':'un prix en dongs'}])
         manifests={v:json.loads((render(guide,self.output,site=self.site,variant=v)/'draft.json').read_text()) for v in ('a','b','c')}
         self.assertEqual([m['id'] for m in manifests.values()],['pin-andalousie','pin-andalousie-b','pin-andalousie-c'])
         self.assertEqual([m['photo']['id'] for m in manifests.values()],['grenade-alhambra','grenade-albaicin','seville-plaza'])
@@ -57,6 +62,27 @@ class PinDraftTests(unittest.TestCase):
         self.assertEqual(manifests['b']['pinTitle'],'L’Andalousie en train : itinéraire jour par jour, prix et conseils')
         self.assertEqual(manifests['c']['pinTitle'],'L’Andalousie en train : les chiffres à connaître avant de partir')
         self.assertTrue(all(len(m['pinTitle'])<=100 for m in manifests.values()))
+
+    def test_a_figure_goes_on_a_pin_only_over_a_photo_of_the_place_it_names_and_is_never_cut_mid_sentence(self):
+        from pin_draft import fact_fits_photo, fitted_label, font, FONTS
+        from PIL import ImageDraw
+        lagos={'id':'algarve-ponta-piedade','alt_fr':'Les falaises de la Ponta da Piedade, à Lagos.','source_page':'https://commons.wikimedia.org/wiki/File:Ponta_da_Piedade.jpg'}
+        tavira={'id':'algarve-tavira','alt_fr':'Le pont romain de Tavira.','source_page':'https://commons.wikimedia.org/wiki/File:Tavira.jpg'}
+        everywhere={'algarve','portugal'}
+        fare={'value':'3,60 €','label':'Faro → Tavira en train régional, 33 minutes'}
+        self.assertFalse(fact_fits_photo(fare,lagos,everywhere))   # review of 13/11/2026
+        self.assertTrue(fact_fits_photo({'value':'8,30 €','label':'Faro → Lagos, 1 h 35'},lagos,everywhere))
+        self.assertTrue(fact_fits_photo({'value':'1,60 €','label':'le billet le moins cher de la ligne'},tavira,everywhere))
+        draw=ImageDraw.Draw(Image.new('RGB',(10,10)))
+        face=font(FONTS['regular'],34)
+        cut=fitted_label(draw,'le budget serré pour 14 jours et 13 nuits (154 120 ¥), capsule ou dortoir, repas à 1 000 ¥, hors vol — estimation',face,860)
+        self.assertFalse(cut.endswith((',','—','(','-')))
+        self.assertEqual(cut,'le budget serré pour 14 jours et 13 nuits (154 120 ¥), capsule ou dortoir, repas à 1 000 ¥, hors vol')
+        window='la fenêtre où Bangkok, Chiang Mai et la mer d’Andaman sont tous au sec (12 à 24 mm à Bangkok, 0 à 13 mm à Chiang Mai)'
+        self.assertEqual(fitted_label(draw,window,face,860),'la fenêtre où Bangkok, Chiang Mai et la mer d’Andaman sont tous au sec')
+        costa='par personne à deux pour 14 jours : navettes, bus, parcs et 13 nuits en chambre 1-2 étoiles, hors repas et vols'
+        self.assertNotEqual(fitted_label(draw,costa,face,860),'par personne à deux pour 14 jours : navettes, bus')
+        self.assertIsNone(fitted_label(draw,'le plafond quotidien du métro en zones 1-2 en sans contact pour un trajet en heure pleine, aux heures creuses seulement le week-end',face,860,most=1))
 
     def test_a_variant_without_a_photo_of_its_own_is_not_drawn(self):
         with self.assertRaisesRegex(ValueError,'no_distinct_photo'):render(GUIDE,self.output,site=self.site,variant='b')

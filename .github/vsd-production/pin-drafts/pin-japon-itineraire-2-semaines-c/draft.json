@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-japon-itineraire-2-semaines-c",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Japon en 2 semaines : l’itinéraire en train de Tokyo à Kyoto, Nara et Hiroshima (prix 2026)",
+  "pinTitle": "Le Japon en 2 semaines : les chiffres à connaître avant de partir",
+  "variant": "c",
+  "targetUrl": "https://voyagesansdetour.fr/japon/japon-itineraire-2-semaines/",
+  "articleSha256": "4f9ebd0c35f985ca89bd84ffa4af3342754ca3ed5150e98857b09a56e533e7c7",
+  "imageSha256": "73939dae38b0625153bc1b070dd8d76c45528d2391a8bc6b0eaa88f40b7282ed",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "aa0d10481ca94e76950c0d95f74dbd75124b0ba4c8a6ed6b7e589d4b38b73301",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "japon-kyoto-kiyomizu",
+    "author": "Basile Morin",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Four_ladies_wearing_a_yukata_in_front_of_the_North_Gate_of_Kiyomizu-dera_temple_Kyoto_Japan.jpg",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-lisbonne-ou-porto-b",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Lisbonne ou Porto : laquelle choisir pour un premier séjour sans voiture ?",
+  "pinTitle": "Lisbonne ou Porto ? : comment choisir, chiffres à l’appui",
+  "variant": "b",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/lisbonne-ou-porto/",
+  "articleSha256": "404f0ce9ef39a589b338b8266b52a7a7c13276586d845255b5e96f7e89aefd64",
+  "imageSha256": "a8e2db171c2112631b63c520b2b40b7f00480a685049d6c1cd16ef1579bddfd7",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "aa0d10481ca94e76950c0d95f74dbd75124b0ba4c8a6ed6b7e589d4b38b73301",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "porto-rabelo",
+    "author": "Krzysztof Golik",
+    "source_page": "https://commons.wikimedia.org/wiki/File:View_of_Ribeira_(21).jpg",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+  }
+}

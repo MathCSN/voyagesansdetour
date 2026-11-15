@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-new-york-noel-c",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "New York à Noël 2026 : le sapin du Rockefeller Center le 2 décembre, patinoires dès 0 $, Rockettes et prix",
+  "pinTitle": "New York à Noël : les chiffres à connaître avant de partir",
+  "variant": "c",
+  "targetUrl": "https://voyagesansdetour.fr/etats-unis/new-york-noel/",
+  "articleSha256": "5c8608e9c5d4f149d711512526374f084ee7fd036323418dce70f8ce20a9c9df",
+  "imageSha256": "56a78d5e5a8a7258a8bbc686e5f1316d7ad175139b19cd08f6d06dcec1ba5084",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "aa0d10481ca94e76950c0d95f74dbd75124b0ba4c8a6ed6b7e589d4b38b73301",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "new-york-central-park-hiver",
+    "author": "King of Hearts",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Central_Park_New_York_January_2016_001.jpg",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  }
+}

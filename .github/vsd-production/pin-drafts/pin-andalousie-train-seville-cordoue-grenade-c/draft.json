@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-andalousie-train-seville-cordoue-grenade-c",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "L’Andalousie en train : Séville, Cordoue et Grenade sans voiture, en 5 jours",
+  "pinTitle": "L’Andalousie en train : les chiffres à connaître avant de partir",
+  "variant": "c",
+  "targetUrl": "https://voyagesansdetour.fr/espagne/andalousie-train-seville-cordoue-grenade/",
+  "articleSha256": "aeccd08d7e58bf87af71d92a603a055809039f94b4b4e11931ee8d13bd2d81ff",
+  "imageSha256": "48f457833c5b7ca1c49a385f032aae96c5ef7ea49b6a36df5d0493fc1193f2b9",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "aa0d10481ca94e76950c0d95f74dbd75124b0ba4c8a6ed6b7e589d4b38b73301",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "cordoue-mezquita-arcs",
+    "author": "CEphoto, Uwe Aranas",
+    "source_page": "https://commons.wikimedia.org/wiki/File:C%C3%B3rdoba_Spain_Mezquita-Catedral-de-C%C3%B3rdoba-01.jpg",
+    "license": "CC BY-SA 3.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
+  }
+}

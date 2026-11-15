@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-vietnam-quand-partir-c",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Quand partir au Vietnam : le bon mois pour le Nord, le Centre et le Sud",
+  "pinTitle": "Quand partir au Vietnam : les chiffres à connaître avant de partir",
+  "variant": "c",
+  "targetUrl": "https://voyagesansdetour.fr/vietnam/vietnam-quand-partir/",
+  "articleSha256": "649e1c101b99a9d55870e417874dcd3a7b313f957cb05880ea4471853cfff128",
+  "imageSha256": "88dc02a1d4a5ff0a4bdfbac029d443f057d4285b484e53cc4c1ecf3d4c4c9cea",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "aa0d10481ca94e76950c0d95f74dbd75124b0ba4c8a6ed6b7e589d4b38b73301",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "vietnam-hoi-an",
+    "author": "Steffen Schmitz (Carschten)",
+    "source_page": "https://commons.wikimedia.org/wiki/File:H%E1%BB%99i_An,_Museum_of_Trade_Ceramics,_2020-01_CN-02.jpg",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+  }
+}

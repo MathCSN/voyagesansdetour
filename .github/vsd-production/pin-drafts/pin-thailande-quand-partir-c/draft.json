@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-thailande-quand-partir-c",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Quand partir en Thaïlande : le bon mois pour Bangkok, le Nord, l’Andaman et Koh Samui",
+  "pinTitle": "Quand partir en Thaïlande : les chiffres à connaître avant de partir",
+  "variant": "c",
+  "targetUrl": "https://voyagesansdetour.fr/thailande/thailande-quand-partir/",
+  "articleSha256": "b18e6dadd7dfa0c1c80fd2768d05c800819af05182f67356a25dd699ab23ebdd",
+  "imageSha256": "5c3a5bc532acd774cd8c78c0e6c230498e485fdd1f35e51162ebabc7dfea4391",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "aa0d10481ca94e76950c0d95f74dbd75124b0ba4c8a6ed6b7e589d4b38b73301",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "thailande-chiang-mai-doi-suthep",
+    "author": "Philip Nalangan",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Doi_Suthep_Temple_Chiang_Mai_Thailand.jpg",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0"
+  }
+}

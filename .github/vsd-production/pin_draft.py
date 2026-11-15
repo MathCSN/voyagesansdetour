@@ -19,6 +19,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 import destinations
 from photo_intake import ai_record
+import place_names
 import social_render as base
 
 HERE = Path(__file__).resolve().parent
@@ -100,6 +101,65 @@ def key_facts(article):
 def key_fact(article):
     facts = article.get('keyFacts') or []
     return facts[0] if facts and facts[0].get('value') and facts[0].get('label') else None
+
+
+def everywhere_of(article, site=SITE):
+    """The words every photo of the guide shares: its destination and its country."""
+    country = destinations.name(destinations.country_slug(article), destinations.load(site))
+    return place_names.words((article.get('destination') or '') + ' ' + country)
+
+
+def commons_title_of(photo):
+    page = photo.get('source_page') or ''
+    return re.sub(r'_', ' ', page.rsplit('/wiki/', 1)[-1]) if '/wiki/' in page else ''
+
+
+def fact_fits_photo(fact, photo, everywhere):
+    """A Pin has one photo: a figure goes on it only when it names no place but the photo's own (the same reading as
+    a post, place_names.fits). "Faro → Tavira" stood over the Ponta da Piedade of Lagos, "Séville → Cordoue" over the
+    Alhambra (review of 13/11/2026)."""
+    text = fact['value'] + ' ' + fact['label']
+    caption, title = photo.get('alt_fr') or '', commons_title_of(photo)
+    shown = place_names.pictured(photo['id'], caption, title, everywhere)
+    found = place_names.record(photo['id'], caption, title, everywhere)
+    if place_names.brand_clash(text, shown):
+        return False
+    if place_names.journey(fact['label']) and place_names.ride(shown, fact['label']):
+        return place_names.on_the_way(found, place_names.read(fact['label'], everywhere))
+    reading = place_names.read(text, everywhere)
+    if reading.all:
+        return bool(place_names.fits(reading, shown, place_names.pictured('', caption, title, everywhere), found))
+    region = place_names.region(text)
+    return not (region and found and not region <= place_names.words(caption))
+
+
+def facts_for(article, photo, site=SITE, count=1):
+    """The first key figures of the guide that this photo can carry, in the guide's order, at most `count`."""
+    everywhere = everywhere_of(article, site)
+    return [fact for fact in key_facts(article) if fact_fits_photo(fact, photo, everywhere)][:count]
+
+
+# What a figure holds under: a line is never cut before it ("aux heures creuses", "dès 14 ans").
+CONDITION = re.compile(r'\(?(?:aux? heures? (?:creuses|de pointe)|hors |en (?:semaine|basse saison|haute saison)|le week-end|'
+                       r'sur réservation|sous conditions?|à partir de |dès |uniquement|seulement|sauf |pour les moins de |avant \d|après \d)', re.IGNORECASE)
+
+
+def fitted_label(draw, label, face, width, most=2):
+    """The label in `most` lines at most: whole, or cut at a pause into a full phrase. Never a line that ends on a
+    comma, a dash or an open bracket ("…hors vol —", "…(12 à 24 mm à Bangkok,"), never before a condition of the
+    figure. None when no such cut exists: the figure is not shown."""
+    if len(wrap(draw, label, face, width)) <= most:
+        return label
+    cuts = sorted({match.start() for match in re.finditer(r' \(| ; |, | — | : ', label)}, reverse=True)
+    for cut in cuts:
+        head, rest = label[:cut].rstrip(' ,;:—-'), label[cut:].lstrip(' ,;:—-(')
+        # Never inside a list after a colon ("…pour 14 jours : navettes, bus" left out the parks and the nights), and
+        # never what drops a condition further on ("…, hors repas et vols").
+        listed = label[cut:cut + 2] == ', ' and ' : ' in label[:cut]
+        if (len(head) >= 18 and head.count('(') == head.count(')') and not listed and not CONDITION.search(rest)
+                and len(wrap(draw, head, face, width)) <= most):
+            return head
+    return None
 
 
 def place_label(article, site=SITE):
@@ -217,22 +277,27 @@ def draw_photo_pin(article, photo, path, site=SITE):
     draw = ImageDraw.Draw(image)
     label_pill(draw, 70, 70, place_label(article, site))
     heading, size, lines = fit(draw, article.get('shortTitle') or article['title'], (96, 88, 80, 72, 64), 860, 420, 16)
-    fact = key_fact(article)
+    label_face = font(FONTS['regular'], 34)
+    shown = [(fact, fitted_label(draw, fact['label'], label_face, 860)) for fact in facts_for(article, photo, site, len(key_facts(article)))]
+    fact, label = next(((fact, label) for fact, label in shown if label), (None, None))
     y = 1010 - len(lines) * (size + 16) - (0 if fact else -150)
     for line in lines:
         write(draw, (70, y), line, heading, 'white')
         y += size + 16
     if fact:
         write(draw, (70, y + 30), fact['value'], font(FONTS['bold'], 84), YELLOW)
-        for i, line in enumerate(wrap(draw, fact['label'], font(FONTS['regular'], 34), 860)[:2]):
-            write(draw, (70, y + 135 + i * 46), line, font(FONTS['regular'], 34), 'white')
+        for i, line in enumerate(wrap(draw, label, label_face, 860)):
+            write(draw, (70, y + 135 + i * 46), line, label_face, 'white')
     footer(draw, photo)
     return image
 
 
 def draw_figures_pin(article, photo, path, site=SITE):
     """Variant "b": a memo to save. The title, then three key figures with what they measure."""
-    facts = key_facts(article)[:3]
+    # Three figures this photo can carry, each said whole in two lines: else no memo is drawn on this photo.
+    probe = ImageDraw.Draw(Image.new('RGB', (10, 10)))
+    facts = [(fact, fitted_label(probe, fact['label'], font(FONTS['regular'], 32), 860)) for fact in facts_for(article, photo, site, len(key_facts(article)))]
+    facts = [(fact, label) for fact, label in facts if label][:3]
     if len(facts) < 3:
         raise ValueError('not_enough_key_facts')
     # A veil over the whole photo first: the title sits at the top, where a gradient alone would leave it on bright sky.
@@ -246,12 +311,12 @@ def draw_figures_pin(article, photo, path, site=SITE):
         y += size + 14
     y = max(y + 40, 560)
     value_face, label_face = font(FONTS['bold'], 76), font(FONTS['regular'], 32)
-    for fact in facts:
+    for fact, label in facts:
         draw.line((70, y, 930, y), fill=YELLOW, width=3)
         if width_of(draw, fact['value'], value_face) > 860:
             raise ValueError('figure_overflow')
         write(draw, (70, y + 22), fact['value'], value_face, YELLOW)
-        for i, line in enumerate(wrap(draw, fact['label'], label_face, 860)[:2]):
+        for i, line in enumerate(wrap(draw, label, label_face, 860)):
             write(draw, (70, y + 122 + i * 42), line, label_face, 'white')
         y += 250
     footer(draw, photo)
