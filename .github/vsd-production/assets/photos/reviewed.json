@@ -353,6 +353,28 @@
       "retrievedAt": "2026-11-12T19:49:44Z",
       "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
     },
+    "marrakech-souks-medina": {
+      "camera": "Canon PowerShot G11",
+      "file": "assets/photos/marrakech-souks-medina.jpg",
+      "sha256": "ac5c34acdc88efc85bb157e6521cd0a99609971d4ee1ae759e7c648b1bafdd24",
+      "width": 2133,
+      "height": 1600,
+      "commonsTitle": "File:Souks Marrakesh.jpeg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Souks_Marrakesh.jpeg",
+      "author": "Dan Lundberg",
+      "commonsCredit": "20151129_Morocco_3320 Marrakesh sRGB",
+      "categories": "Marrakech|Files with coordinates missing SDC location of creation|Flickr images reviewed by FlickreviewR 2",
+      "licence": "CC BY-SA 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "originalSize": [
+        3648,
+        2736
+      ],
+      "commonsSha1": "a19f13bf6b24b60afaa88f987d02eeff780eda71",
+      "retrievedAt": "2026-11-15T12:57:32Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux.",
+      "alt": "Une ruelle couverte des souks de la médina de Marrakech, entre étals de cuir, de tissus et de lanternes."
+    },
     "new-york-bryant-park-patinoire": {
       "alt": "La patinoire de Bryant Park au pied des tours de verre, à New York.",
       "focus": [
@@ -378,6 +400,28 @@
       "commonsSha1": "a6b106a71997c035374ad28526836d235e8ee101",
       "retrievedAt": "2026-11-13T09:20:27Z",
       "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "porto-metro-luis-tablier": {
+      "camera": "iPhone 14 Pro",
+      "file": "assets/photos/porto-metro-luis-tablier.jpg",
+      "sha256": "a22c98e01b2e9c2d7ad0c141cebe5f20ff2e91eb33f8062f939ee9e5ba339edd",
+      "width": 2134,
+      "height": 1600,
+      "commonsTitle": "File:A Porto Metro tram is going over the Dom Luís I Bridge with the view of the Ribeira, Vila Nova de Gaia, Porto, Portugal, April 2023 (52797525379).jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:A_Porto_Metro_tram_is_going_over_the_Dom_Lu%C3%ADs_I_Bridge_with_the_view_of_the_Ribeira,_Vila_Nova_de_Gaia,_Porto,_Portugal,_April_2023_(52797525379).jpg",
+      "author": "Sergei Gussev",
+      "commonsCredit": "A Porto Metro tram is going over the Dom Luís I Bridge with the view of the Ribeira, Vila Nova de Gaia, Porto, Portugal, April 2023",
+      "categories": "Files with coordinates missing SDC location of creation|Flickr images reviewed by FlickreviewR 2|Porto Metro rolling stock in 2023|Eurotram on Luiz I bridge from Serra do Pilar|Luiz I bridge in 2023|1 bridge in Porto|April 2023 in Porto, Photographs by Sergei Gussev",
+      "licence": "CC BY 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "originalSize": [
+        3659,
+        2744
+      ],
+      "commonsSha1": "23fbc7d185d875690c7bb44ce482e4ab89554486",
+      "retrievedAt": "2026-11-15T12:57:32Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux.",
+      "alt": "Le métro de Porto sur le tablier supérieur du pont Luís I, au-dessus du Douro et de la Ribeira."
     },
     "tenerife-costa-adeje-torviscas": {
       "alt": "La plage de Torviscas et ses parasols de paille, à Costa Adeje, dans le sud de Tenerife.",

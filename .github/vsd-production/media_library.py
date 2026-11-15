@@ -210,9 +210,12 @@ class Photos:
         self.root, self.now = root, now
         self.download = downloader or self._download
         self.known: dict[str, tuple[str, dict]] = {}
-        # Photos added and looked at by hand (photo_intake.py), candidates for the guides of the same place: the catalogue of
-        # the hand-written scenarios (sealed by their fingerprints, only read here), then reviewed.json, which grows.
-        hand = [path for path in (root / "assets" / "photos" / name for name in ("catalogue.json", "reviewed.json")) if path.is_file()]
+        # Photos added and looked at by hand (photo_intake.py), candidates for the guides of the same place: reviewed.json,
+        # which grows with the photos added for the posts, then the catalogue of the hand-written scenarios (sealed by
+        # their fingerprints, only read here). A post is offered a limited number of them (HAND_EXTRA): the metro on
+        # the bridge Luís I, added for "2 min de métro D au-dessus du Douro", came after seventeen photos of the old
+        # catalogue and was never offered (review of PR 56).
+        hand = [path for path in (root / "assets" / "photos" / name for name in ("reviewed.json", "catalogue.json")) if path.is_file()]
         self.shared: dict[str, dict] = {}
         for path in hand:
             for photo_id, record in json.loads(path.read_text()).get("photos", {}).items():

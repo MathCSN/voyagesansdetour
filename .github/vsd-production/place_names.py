@@ -461,7 +461,20 @@ def vehicle(identifier: str, caption: str, title: str) -> set[str]:
     """The means of transport a photo is of: the one its caption opens on, or its title names ("Des barques sur la
     rivière de Tràng An", "Trang An boats"); not boats "au premier plan" of a view of the Ribeira, nor the identifier it
     is filed under ("train-campanha" is the façade of a station, no train). `identifier` is kept for the callers."""
-    return ways(folded(caption)[:OPENING_WORDS]) | ways(folded(readable(title)))
+    return ways(folded(unstationed(caption))[:OPENING_WORDS]) | ways(folded(readable(title)))
+
+
+# A station is a place, not the vehicle it serves: "Estación de tren São Bento" is the hall of azulejos, "la station
+# de métro Aeroporto" a platform. Its means of transport says what station it is, not that the photo shows a ride.
+STATION_OF = re.compile(r"\b(gares?|stations?|estaci[oó]n|esta[cç][aã]o|stazione|bahnhof)(?:\s+(?:de|du|des|do|da|di|del|dei))?"
+                        r"\s+(?:tren|trenes|trains?|comboios?|treni?|m[eé]tros?|tram|trams|tramway|bus|autocars?|ferry|ferries)\b",
+                        re.IGNORECASE)
+MEANS_STATION = re.compile(r"\b(?:trains?|railway|rail|m[eé]tro|subway|tram|bus|coach|ferry)\s+(stations?|stop|terminal)\b", re.IGNORECASE)
+
+
+def unstationed(text: str) -> str:
+    """`text` without the means of transport that only names a station ("Estación de tren" → "Estación")."""
+    return MEANS_STATION.sub(r"\1", STATION_OF.sub(r"\1", text))
 
 
 def journeys_table(rows: list[list[str]], said: str = "") -> set[str]:
@@ -471,6 +484,25 @@ def journeys_table(rows: list[list[str]], said: str = "") -> set[str]:
     if not rows or 2 * linked_rows < len(rows):
         return set()
     return wanted_ways(" ".join(" ".join(map(str, row)) for row in rows) + " " + said)
+
+
+# "l'Alfa Pendular entre les deux villes": the two ends of a journey, unnamed.
+BETWEEN_TOWNS = re.compile(r"\bentre (?:les )?deux (?:villes|gares|îles|iles|rives)\b", re.IGNORECASE)
+
+
+def ride_needed(text: str, shown: set[str], everywhere: frozenset | set = frozenset()) -> bool:
+    """A fact that names its means of transport and another place than the photo's (where it goes or where it comes
+    from: "la traversée du Tage en ferry vers Cacilhas", "le bus pour Sintra", "l'Alfa Pendular entre les deux villes")
+    goes over a photo of that means, or stays in the guide. A fare or a time inside the town ("le taxi depuis
+    l'aéroport de Lisbonne", "le plafond du métro") may go over a photo of the town with no other vehicle (review of
+    PR 56: the wider rule cost a fifth of the posts)."""
+    wanted = wanted_ways(text) - {"walk"}
+    said = folded(text)
+    if not wanted or not (journey(text) or brands(set(said)) or ways(said[:OPENING_WORDS])):
+        return False
+    if BETWEEN_TOWNS.search(text):
+        return True
+    return any(not shows(name, widened(shown)) for name in read(text, everywhere).all)
 
 
 def other_ride(shown_ways: set[str], text: str) -> bool:
@@ -578,7 +610,7 @@ def subject(text: str) -> str:
 
 def readable(title: str) -> str:
     """A Commons title without its prefix and extension, in ordinary case when it is written in capitals."""
-    return ordinary(title.removeprefix("File:").rsplit(".", 1)[0] if title else "")
+    return unstationed(ordinary(title.removeprefix("File:").rsplit(".", 1)[0] if title else ""))
 
 
 def compared(text: str, everywhere: frozenset | set = frozenset(), known: frozenset | set = frozenset()) -> list[Name]:
@@ -597,7 +629,7 @@ def pictured(identifier: str, caption: str, title: str = "", everywhere: frozens
     de Florence"), and not a town whose name is part of the name the record gives (Porto for "Porto Covo")."""
     own = words(identifier.replace("-", " "))
     title = readable(title)
-    told = subject(caption) + " " + subject(title)
+    told = subject(unstationed(caption)) + " " + subject(title)
     aside = {piece for name in compared(caption, everywhere, own | words(title)) for piece in name}
     shown = (own | words(told)) - aside
     flat = " " + " ".join(folded(caption + " " + title)) + " "

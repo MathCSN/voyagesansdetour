@@ -550,10 +550,19 @@ class Media:
             return []
         return [ph for ph in self.free() if ph[0] not in avoid and not self.misleads(text, ph)]
 
+    def takeable(self, text: str, avoid: frozenset = frozenset()) -> list:
+        """The photos a figure that none of them shows may take, the plainest first: not the two reserved ones."""
+        kept = self.kept()
+        return sorted((ph for ph in self.left_for(text, avoid) if ph[0] not in kept), key=self.plain)
+
     def misleads(self, text: str, photo: tuple) -> bool:
         """The photo shows another train than the one the fact names, or another means of transport than its journey's."""
         on = place_names.vehicle(photo[0], photo[2], str(photo[1].get("commonsTitle", "")))
-        return place_names.brand_clash(text, self.described(photo)) or place_names.other_ride(on, text)
+        if place_names.brand_clash(text, self.described(photo)) or place_names.other_ride(on, text):
+            return True
+        # "2 € la traversée du Tage en ferry vers Cacilhas" over a church of Alfama: a ride to another place goes over
+        # that ride (review of PR 56).
+        return place_names.ride_needed(text, self.described(photo), self.country) and not place_names.ride(self.told(photo), text)
 
     def above(self, section: dict | None, photo_id: str, place: str, label: str = "") -> str:
         """The label written above a figure: the name of its section over that section's own photo; over another
@@ -734,8 +743,10 @@ class Media:
         located = self.located(text)
         if not pick and (strict or located or len(self.photos) <= self.reserve):
             raise Held("no_photo_of_this_place" if strict or located else "not_enough_photos_or_figures")
-        kept, free = self.kept(), sorted(self.left_for(text, avoid), key=self.plain)
-        pick = pick or next((ph for ph in free if ph[0] not in kept), free[0] if free else None)
+        # The opening and the ending are reserved before the figures: a figure that no photo shows takes a photo left
+        # free, never the cover nor the photo kept for the call to action. "100 à 160 dh le taxi au départ de
+        # l'aéroport" took Jemaa el-Fna and the reels of Marrakech had only Essaouira left to open on (review of PR 56).
+        pick = pick or next(iter(self.takeable(text, avoid)), None)
         if not pick:
             raise Held("not_enough_photos_or_figures")
         self.photos.remove(pick)
@@ -870,7 +881,7 @@ def placed(facts: list[dict], media: Media, limit: int, least: int):
             if index in done or len(done) >= most or media.shown_elsewhere(about):
                 continue
             # In the second round a figure takes a photo that does not show it: never one that shows another place.
-            if media.named(about, fact["section"]) if wanted else media.left_for(about):
+            if media.named(about, fact["section"]) if wanted else media.takeable(about):
                 done.add(index)
                 yield index
 
