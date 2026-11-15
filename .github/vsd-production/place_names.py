@@ -410,7 +410,7 @@ def wanted_ways(text: str) -> set[str]:
     if brands(set(said)) or TRAIN_NUMBER.search(text):
         return {"rail"}
     # "le taxi à prix fixe depuis l'aéroport": a means no photo of a train, a tram or a bus shows.
-    return {"other"} if OTHER_MEANS & set(said[:OPENING_WORDS]) else set()
+    return {"other"} if (OTHER_MEANS - {"pied"}) & set(said[:OPENING_WORDS]) else set()   # a walk is no vehicle
 
 
 def strict_journey(text: str) -> bool:

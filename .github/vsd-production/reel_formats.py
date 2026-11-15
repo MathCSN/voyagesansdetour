@@ -98,6 +98,11 @@ def dangling(line: str) -> bool:
     return last in DANGLING or last.endswith(("’", "'"))
 
 
+def joined_title(short: str, label: str) -> str:
+    """'Kyoto en train : jour par jour'; a short title that already carries a colon or ends a question takes a dash."""
+    return f"{short} — {label}" if ":" in short or short.rstrip().endswith(("?", "!")) else f"{short} : {label}"
+
+
 def kicker_of(section: dict | None, fallback: str) -> str:
     """'Jour 3 — Belém en train' → 'Jour 3'; 'Le train : cinq villages' → 'Le train'."""
     if section:

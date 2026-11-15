@@ -21,6 +21,7 @@ from PIL import Image, ImageDraw, ImageFont
 import destinations
 from photo_intake import ai_record
 import place_names
+import production
 import reel_formats
 import social_render as base
 
@@ -69,9 +70,20 @@ def width_of(draw, text, face):
     return base.text_width(draw, text, face)
 
 
+# What a line never begins with, and what is never cut from what it measures: "Lisbonne ou Porto ?", "22 h", "9 h 51".
+GLUED = ((re.compile(r' ([:;?!»])'), '\u00a0\\1'), (re.compile(r'(\d) (?=[^\s\d]{1,3}(?:\s|$))'), '\\1\u00a0'),
+         (re.compile(r'\b([hH]) (?=\d)'), '\\1\u00a0'))
+
+
+def glued(text):
+    for pattern, replacement in GLUED:
+        text = pattern.sub(replacement, text)
+    return text
+
+
 def wrap(draw, text, face, width):
     lines, line = [], ''
-    for word in text.split():
+    for word in (w for w in re.split(r'[ \t\n]+', glued(text)) if w):
         candidate = (line + ' ' + word).strip()
         if width_of(draw, word, face) > width:
             raise ValueError('word_overflow')
@@ -116,32 +128,40 @@ def commons_title_of(photo):
     return urllib.parse.unquote(page.rsplit('/wiki/', 1)[-1]).replace('_', ' ') if '/wiki/' in page else ''
 
 
-def fact_fits_photo(fact, photo, everywhere):
+def fact_fits_photo(fact, photo, everywhere, cover=False):
     """A Pin has one photo: a figure goes on it only when it names no place but the photo's own (the same reading as
     a post, place_names.fits). "Faro → Tavira" stood over the Ponta da Piedade of Lagos, "Séville → Cordoue" over the
-    Alhambra (review of 13/11/2026)."""
+    Alhambra (review of 13/11/2026). A journey goes over its means of transport or not at all, a taxi included: the
+    night train over the village of Santa Claus, "Rome → Salerne en Italo" over a ferry (review of the Pins,
+    15/11/2026). A figure that names nothing goes on the guide's cover, or on a photo of what it measures: no price of a
+    reindeer ride over huskies."""
     text = fact['value'] + ' ' + fact['label']
     caption, title = photo.get('alt_fr') or '', commons_title_of(photo)
     shown = place_names.pictured(photo['id'], caption, title, everywhere)
     found = place_names.record(photo['id'], caption, title, everywhere)
-    # Never another train, nor another means of transport than the journey's (review of PR 53), as in a post.
-    if place_names.brand_clash(text, shown) or place_names.other_ride(place_names.vehicle(photo['id'], caption, title), fact['label']):
+    on = place_names.vehicle(photo['id'], caption, title)
+    if place_names.brand_clash(text, shown) or place_names.other_ride(on, text):
         return False
-    if place_names.journey(fact['label']) and place_names.ride(shown, fact['label']):
-        return place_names.on_the_way(found, place_names.read(fact['label'], everywhere))
-    if place_names.strict_journey(fact['label']):
-        return False   # "de Hué à Đà Nẵng en train" over no train, as in a post
+    # The means read in the label as it opens ("le taxi au départ de l'aéroport"), else with its figure ("10 trains").
+    wanted = place_names.wanted_ways(fact['label']) or place_names.wanted_ways(text)
+    if wanted and (place_names.journey(fact['label']) or place_names.journey(text) or 'other' in wanted):
+        return place_names.ride(shown, text) and place_names.on_the_way(found, place_names.read(fact['label'], everywhere))
     reading = place_names.read(text, everywhere)
     if reading.all:
         return bool(place_names.fits(reading, shown, place_names.pictured('', caption, title, everywhere), found))
     region = place_names.region(text)
-    return not (region and found and not region <= place_names.words(caption))
+    if region:
+        return not (found and not region <= place_names.words(caption))
+    described = ' '.join([photo['id'].replace('-', ' '), caption, place_names.readable(title)])
+    shared = reel_formats.words_of(fact['label']) & reel_formats.words_of(described) - set(everywhere)
+    return cover or bool(shared - reel_formats.PLACE_KINDS)
 
 
 def facts_for(article, photo, site=SITE, count=1):
     """The first key figures of the guide that this photo can carry, in the guide's order, at most `count`."""
     everywhere = everywhere_of(article, site)
-    return [fact for fact in key_facts(article) if fact_fits_photo(fact, photo, everywhere)][:count]
+    cover = photo.get('id') == article.get('cover')
+    return [fact for fact in key_facts(article) if fact_fits_photo(fact, photo, everywhere, cover)][:count]
 
 
 # What a figure holds under: a line is never cut before it (the same list as the posts').
@@ -175,18 +195,36 @@ def place_label(article, site=SITE):
 
 
 def search_title(article):
-    """The short title, then the words people add when they search this kind of guide."""
+    """The short title, then the words people add when they search this kind of guide: joined as a post's title is
+    ("Laponie : le budget — combien ça coûte…", never two colons), without what the short title already says ("Où
+    dormir à Lisbonne — quartier par quartier"), and "jour par jour" only for a guide told day by day."""
     short = (article.get('shortTitle') or article['title']).strip()
     category = destinations.ascii_fold(str(article.get('category', ''))).lower().strip()
     ending = WHEN_TO_GO if short.lower().startswith('quand partir') else TITLE_ENDINGS.get(category, DEFAULT_ENDING)
-    return short + ' : ' + ending
+    if 'jour par jour' in ending and not told_by_day(article):
+        ending = ending.replace('itinéraire jour par jour', 'itinéraire')
+    return reel_formats.joined_title(short, not_said(short, ending))
+
+
+def told_by_day(article):
+    return any(reel_formats.DAY.fullmatch(str(section.get('title', '')).strip()) for section in article.get('sections') or [])
+
+
+def not_said(short, ending):
+    """The ending without its clauses that the short title already says ("où dormir" after "Où dormir à Lisbonne")."""
+    said = set(place_names.folded(short))
+    clauses = ending.split(', ')
+    while len(clauses) > 1 and {word for word in place_names.folded(clauses[0]) if len(word) >= 3} <= said:
+        clauses = clauses[1:]
+    return ', '.join(clauses)
 
 
 def pin_title(article, variant='a'):
     """The Pin's own title, 100 characters at most: the guide's title, or its search-style variants."""
     title, short = article['title'].strip(), (article.get('shortTitle') or article['title']).strip()
-    choices = {'a': [title, search_title(article)], 'b': [search_title(article), short + ' : ' + DEFAULT_ENDING],
-               'c': [short + ' : les chiffres à connaître avant de partir', short + ' : le guide pratique']}[variant]
+    # Variant "c" shows no figure: its title promises none (review of the Pins, 15/11/2026).
+    choices = {'a': [title, search_title(article)], 'b': [search_title(article), reel_formats.joined_title(short, DEFAULT_ENDING)],
+               'c': [reel_formats.joined_title(short, 'le guide pratique')]}[variant]
     for choice in choices + [short]:
         if 1 <= len(choice) <= TITLE_MAX:
             return choice
@@ -223,12 +261,30 @@ def cover_photo(article, site):
     return checked_photo(photos[cover], site)
 
 
+# Photos a Pin never takes, though the guide shows them: read on the image (review of the Pins, 15/11/2026).
+LEFT_OUT = {'lisbonne-santa-justa': "l'ascenseur de Santa Justa, fermé selon le guide « Où dormir à Lisbonne »"}
+
+
+def taken_by_other_pins(slug, drafts=None):
+    """The photos the Pins of other guides already show: two Pins never share their picture (the tram of Alfama was on
+    "Où dormir à Lisbonne" and on "Voyager léger au Portugal")."""
+    folder = Path(drafts) if drafts else HERE / 'pin-drafts'
+    taken = set()
+    for manifest in folder.glob('*/draft.json'):
+        draft = json.loads(manifest.read_text())
+        # A draft of an older renderer is to be redrawn, and may change its picture: it holds none.
+        current = draft.get('rendererSha256') == hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
+        if current and not draft['id'].removeprefix('pin-').startswith(slug):
+            taken.add((draft.get('photo') or {}).get('id'))
+    return taken - {None}
+
+
 def guide_photos(article, site):
     """The guide's photos in reading order, cover first, each once, only those that pass every check."""
     photos = catalogue(site)
     ids = [article.get('cover')] + [section.get('image') for section in article.get('sections') or []]
     found = []
-    for identity in dict.fromkeys(i for i in ids if i):
+    for identity in dict.fromkeys(i for i in ids if i and i not in LEFT_OUT):
         try:
             found.append(checked_photo(photos[identity], site))
         except (KeyError, ValueError):
@@ -236,9 +292,10 @@ def guide_photos(article, site):
     return found
 
 
-def variant_photo(article, site, variant):
+def variant_photo(article, site, variant, drafts=None):
     """Variant "b" takes the guide's second photo, "c" its third: a fresh Pin is a different picture."""
-    photos = guide_photos(article, site)
+    taken = taken_by_other_pins(article['slug'], drafts)
+    photos = [found for found in guide_photos(article, site) if found[0]['id'] == article.get('cover') or found[0]['id'] not in taken]
     index = VARIANTS.index(variant)
     if not article.get('cover') or len(photos) <= index:
         raise ValueError('no_distinct_photo')
@@ -270,9 +327,23 @@ def label_pill(draw, x, y, label):
     write(draw, (x + 20, y + 12), label, small, INK)
 
 
+def credit_line(draw, y, photo, sizes=(22, 20, 18)):
+    """'Photo : author — licence', within the Pin's width: smaller, then on two lines, never cut at the edge
+    ("laponie" lost the end of its licence)."""
+    text = 'Photo : ' + production.tight_brackets(photo['author']) + ' — ' + photo['license']
+    for size in sizes:
+        face = font(FONTS['regular'], size)
+        if width_of(draw, text, face) <= 860:
+            write(draw, (70, y), text, face, '#D8DEE8')
+            return
+    face = font(FONTS['regular'], sizes[-1])
+    for i, line in enumerate(wrap(draw, text, face, 860)[:2]):
+        write(draw, (70, y - 12 + i * (sizes[-1] + 4)), line, face, '#D8DEE8')
+
+
 def footer(draw, photo):
     write(draw, (70, 1385), 'voyagesansdetour.fr', font(FONTS['bold'], 38), 'white')
-    write(draw, (70, 1440), 'Photo : ' + photo['author'] + ' — ' + photo['license'], font(FONTS['regular'], 22), '#D8DEE8')
+    credit_line(draw, 1440, photo)
 
 
 def draw_photo_pin(article, photo, path, site=SITE):
@@ -341,7 +412,7 @@ def draw_title_pin(article, photo, path, site=SITE):
     draw.rounded_rectangle((70, 1318, 640, 1392), radius=37, fill=YELLOW)
     write(draw, (100, 1334), 'Le guide complet sur le blog', font(FONTS['bold'], 34), INK)
     write(draw, (70, 1418), 'voyagesansdetour.fr', font(FONTS['bold'], 30), 'white')
-    write(draw, (70, 1458), 'Photo : ' + photo['author'] + ' — ' + photo['license'], font(FONTS['regular'], 20), '#D8DEE8')
+    credit_line(draw, 1458, photo, (20, 18))
     return image
 
 
@@ -377,7 +448,7 @@ def credits(photo):
     fonts = 'Polices DM Sans, Playfair Display et Noto Sans : licences OFL jointes.'
     if not photo:
         return 'Composition typographique Voyage Sans Détour, assistée par IA. ' + fonts + '\n'
-    return ('Photo : ' + photo['author'] + ', ' + photo['source_page'] + ' — ' + photo['license'] + ' (' + photo['license_url'] + ').\n'
+    return ('Photo : ' + production.tight_brackets(photo['author']) + ', ' + photo['source_page'] + ' — ' + photo['license'] + ' (' + photo['license_url'] + ').\n'
             'Recadrage, dégradé et texte ajoutés par Voyage Sans Détour ; épingle diffusée sous la même licence. ' + fonts + '\n')
 
 
@@ -396,7 +467,7 @@ def render(article, output, site=SITE, variant='a'):
     if target.exists():
         raise ValueError('existing_draft_preserved')
     base.use_fallbacks({str(HERE / 'assets' / brand): str(HERE / 'assets' / other) for brand, other in FALLBACKS.items()})
-    found = cover_photo(article, site) if variant == 'a' else variant_photo(article, site, variant)
+    found = cover_photo(article, site) if variant == 'a' else variant_photo(article, site, variant, output)
     photo = found[0] if found else None
     image = DRAWERS[variant](article, *found, site=site) if found else draw_typographic_pin(article)
     headline = pin_title(article, variant)
