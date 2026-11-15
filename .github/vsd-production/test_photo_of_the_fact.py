@@ -158,6 +158,25 @@ class JourneysSaidFurtherOn(unittest.TestCase):
         self.assertEqual(media.left_for(self.NIGHT), [])
         self.assertEqual(reel_formats.Media([self.BOATS, self.TRAIN], [], everywhere=VIETNAM).named(self.NIGHT, None)[0], "vietnam-train")
 
+    def test_a_journey_with_its_two_ends_and_its_means_goes_over_that_means_or_stays_in_the_guide(self):
+        gate = photo("vietnam-hue", "File:Hue citadel gate.jpg", "La porte de la cité impériale de Hué.")
+        self.assertTrue(names.strict_journey(self.DAY))
+        self.assertTrue(names.strict_journey("Séville → Cordoue en AVE ; Ouigo dès 9 €"))
+        self.assertFalse(names.strict_journey("le ticket bus SITA COSTIERASITA, illimité pendant 24 h"))
+        self.assertFalse(names.strict_journey("le plafond quotidien du métro en zones 1-2 en sans contact"))
+        self.assertIsNone(reel_formats.Media([gate], [], everywhere=VIETNAM).named(self.DAY, None))
+        self.assertEqual(reel_formats.Media([gate], [], everywhere=VIETNAM).left_for(self.DAY), [])
+        self.assertEqual(reel_formats.Media([gate, self.TRAIN], [], everywhere=VIETNAM).named(self.DAY, None)[0], "vietnam-train")
+        scene = {"photo": "vietnam-hue", "headline": ["*2 h 32*"], "detail": self.DAY, "alt": gate[2]}
+        self.assertIn("no ride", p.another_place(scene, {"vietnam-hue": gate[1]}, names.words(VIETNAM)))
+
+    def test_a_taxi_never_goes_over_a_tram(self):
+        taxi = "le taxi à prix fixe depuis l’aéroport de Lisbonne selon la zone et l’heure, bagages compris"
+        tram = names.vehicle("lisbonne-tram28-rue", "Un tram jaune de la ligne 28 dans une rue pavée et pentue de Lisbonne.", "File:Tram 28.jpg")
+        self.assertEqual(names.wanted_ways(taxi), {"other"})
+        self.assertTrue(names.other_ride(tram, taxi))
+        self.assertFalse(names.other_ride(names.vehicle("lisbonne", "Les toits de Lisbonne.", "File:Lisboa.jpg"), taxi))
+
     def test_the_guard_refuses_a_journey_over_another_means(self):
         scene = {"photo": "vietnam-trang-an", "headline": ["*10 h 24*"], "detail": self.NIGHT, "alt": self.BOATS[2]}
         photos = {"vietnam-trang-an": self.BOATS[1]}

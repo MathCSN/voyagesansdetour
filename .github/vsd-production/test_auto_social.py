@@ -1697,7 +1697,9 @@ class RealGuideTests(unittest.TestCase):
         trip = reel_formats.Media(list(japan), [], reserve=2, cover="japon-fuji-chureito", emblematic=reel_formats.emblematic(japan), everywhere="Japon Japon")
         # A journey goes over the train of the guide, not over a town it names; a temple goes over no other temple.
         # The guide's train photo is the sign of Shin-Fuji station: a place that is none of the two ends of the journey.
-        self.assertIn(trip.named("Tokyo → Kyoto en Nozomi, 13 960 ¥ (≈ 80 €), un train toutes les 15 à 30 minutes", rail)[0], ("japon-tokyo-shibuya", "japon-kyoto-kiyomizu"))
+        # Since the review of PR 53 a journey that names its two ends and its train goes over that train or stays in
+        # the guide: the crossing of Shibuya says nothing of the Nozomi.
+        self.assertIsNone(trip.named("Tokyo → Kyoto en Nozomi, 13 960 ¥ (≈ 80 €), un train toutes les 15 à 30 minutes", rail))
         self.assertIsNone(trip.named("le pavillon d’Or du Kinkaku-ji, ouvert tous les jours de 9 h à 17 h", kyoto))
         self.assertEqual(trip.left_for("le pavillon d’Or du Kinkaku-ji, ouvert tous les jours de 9 h à 17 h"), [])
         # The first place a fact names is the one it is about: Nara, not Kyoto "à 45 minutes".

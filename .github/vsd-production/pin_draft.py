@@ -129,6 +129,8 @@ def fact_fits_photo(fact, photo, everywhere):
         return False
     if place_names.journey(fact['label']) and place_names.ride(shown, fact['label']):
         return place_names.on_the_way(found, place_names.read(fact['label'], everywhere))
+    if place_names.strict_journey(fact['label']):
+        return False   # "de Hué à Đà Nẵng en train" over no train, as in a post
     reading = place_names.read(text, everywhere)
     if reading.all:
         return bool(place_names.fits(reading, shown, place_names.pictured('', caption, title, everywhere), found))

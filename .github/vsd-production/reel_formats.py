@@ -498,7 +498,7 @@ class Media:
         """The free photos a fact that none of them shows may still take: none when the fact names a precise place or
         a part of the destination. "350 mm de pluie à Phuket" went over the inside of a sleeping car, and "42 €
         l'entrée de SantaPark" over huskies (13/11/2026): such a fact stays in the caption and in the guide."""
-        if self.located(text):
+        if self.located(text) or place_names.strict_journey(text):
             return []
         return [ph for ph in self.free() if ph[0] not in avoid and not self.misleads(text, ph)]
 
@@ -628,7 +628,7 @@ class Media:
         own = next((ph for ph in pool if ph[0] == wanted), None)
         if place_names.journey(text):
             pick = self.ride(text, pool, own, target, wider)
-            if pick:
+            if pick or place_names.strict_journey(text):
                 return pick
         # A fact that names a precise place goes over a photo that names that place, or over none: a word they share
         # ("îles") is not enough, and a photo that names nothing is not a photo of that place either.
