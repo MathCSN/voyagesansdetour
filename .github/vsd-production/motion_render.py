@@ -12,6 +12,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from functools import lru_cache
+import re
 import subprocess
 
 from PIL import Image, ImageDraw, ImageFilter
@@ -94,13 +95,26 @@ def wrap(draw: ImageDraw.ImageDraw, text: str, path: str, size: int, fonts: Font
     # Ordinary spaces only: a non-breaking space keeps "1 h 37" or "9 €" on one line.
     lines, current = [], ""
     for word in (w for w in text.replace("\t", " ").replace("\n", " ").split(" ") if w):
-        candidate = (current + " " + word).strip()
-        if current and width_of(draw, candidate, path, size, fonts) > width:
-            lines.append(current)
-            current = word
-        else:
-            current = candidate
+        # The pieces of one word cut after its dashes follow each other without a space.
+        for index, piece in enumerate(dashed(draw, word, path, size, fonts, width)):
+            candidate = current + ("" if index else " ") + piece if current else piece
+            if current and width_of(draw, candidate, path, size, fonts) > width:
+                lines.append(current)
+                current = piece
+            else:
+                current = candidate
     return lines + [current] if current else lines
+
+
+DASHES = ("-", "–", "—")
+
+
+def dashed(draw: ImageDraw.ImageDraw, word: str, path: str, size: int, fonts: Fonts, width: int) -> list[str]:
+    """A word wider than the line, cut after its dashes ("Salerne–Positano–Amalfi–Salerne", "Octobre-novembre"): each
+    piece keeps its dash and the next one follows it without a space, on the same line when it fits."""
+    if width_of(draw, word, path, size, fonts) <= width or not any(dash in word[:-1] for dash in DASHES):
+        return [word]
+    return [piece for piece in re.split(r"(?<=[-–—])(?=.)", word) if piece]
 
 
 def fit(draw: ImageDraw.ImageDraw, lines: list[str], path: str, sizes: tuple[int, int], fonts: Fonts, width: int) -> int:
@@ -165,6 +179,11 @@ def table(draw, paint: bool, y, rows, fonts) -> int:
         right = wrap(draw, row[1], fonts.bold, ROW_SIZE, fonts, right_width)
         if len(left) > 2 or len(right) > 2:
             raise LayoutError("Table cell longer than two lines: " + " | ".join(row))
+        # A word wider than its column would run over the next one or off the frame ("Octobre-novembre").
+        too_wide = [line for lines, width in ((left, left_width), (right, right_width)) for line in lines
+                    if width_of(draw, line, fonts.bold, ROW_SIZE, fonts) > width]
+        if too_wide:
+            raise LayoutError("Table cell wider than its column: " + too_wide[0])
         height = step * max(len(left), len(right)) + 36
         if paint:
             top = y + total
@@ -175,6 +194,16 @@ def table(draw, paint: bool, y, rows, fonts) -> int:
                 draw_text(draw, (LEFT + left_width + 2 * pad, top + 18 + n * step), line, fonts.bold, ROW_SIZE, fonts, ACCENT)
         total += height + gap
     return total - gap
+
+
+def table_fits(rows: list[list[str]], fonts: Fonts) -> bool:
+    """The rows of a table hold in the plan: two lines a cell at most, no word wider than its column (the generator
+    asks before it chooses a table: the "quand partir" tables of Vietnam and Thailand were refused at render)."""
+    try:
+        table(ImageDraw.Draw(Image.new("RGBA", (8, 8))), False, 0, rows, fonts)
+    except LayoutError:
+        return False
+    return True
 
 
 def text_layer(scene: dict, fonts: Fonts, button: str | None, solo: bool = False) -> Image.Image:

@@ -200,6 +200,25 @@ class TheFinish(unittest.TestCase):
         for value in ("176,77 ¥", "150 000 ₫", "938 bahts", "45 £"):
             self.assertEqual(reel_formats.caption_emoji(value, "le billet d'entrée"), "💶", value)
 
+    def test_a_table_that_would_run_over_its_columns_is_never_chosen(self):
+        vietnam = [["Nord (Hanoï, Ninh Bình, Sa Pa)", "Octobre-novembre et avril à juin (21 à 28 °C)"],
+                   ["Centre (Hué, Hội An, Đà Nẵng)", "Février à mai"], ["Sud (Saïgon, delta du Mékong)", "Décembre à avril"]]
+        self.assertFalse(p.motion.table_fits(vietnam, reel_formats.TABLE_FONTS))
+        self.assertFalse(p.motion.table_fits([["Golfe", "Llanfairpwllgwyngyll"]] * 3, reel_formats.TABLE_FONTS))   # one word too wide
+        # A word too wide with dashes is cut after them, each piece keeping its dash.
+        self.assertTrue(p.motion.table_fits([["Golfe", "Octobre-novembre"]] * 3, reel_formats.TABLE_FONTS))
+        self.assertTrue(p.motion.table_fits([["Alfa Pendular Turística", "35,70 €"], ["Intercidades 2e classe", "28,05 €"],
+                                             ["Alfa Pendular Conforto", "49,90 €"]], reel_formats.TABLE_FONTS))
+
+    def test_a_word_too_wide_is_cut_after_its_dashes_and_a_lone_dash_keeps_its_spaces(self):
+        from PIL import Image, ImageDraw
+        draw, fonts, size = ImageDraw.Draw(Image.new("RGBA", (8, 8))), reel_formats.TABLE_FONTS, p.motion.ROW_SIZE
+        self.assertEqual(p.motion.wrap(draw, "Boucle Salerne–Positano–Amalfi–Salerne", fonts.bold, size, fonts, 440),
+                         ["Boucle Salerne–", "Positano–Amalfi–", "Salerne"])
+        # Three lines: that table is not chosen (it ran over its column in the reel of 04/12 generated before this rule).
+        self.assertFalse(p.motion.table_fits([["Boucle Salerne–Positano–Amalfi–Salerne", "39 €"]] * 3, fonts))
+        self.assertEqual(p.motion.wrap(draw, "Lisbonne – Porto en train", fonts.bold, size, fonts, 366), ["Lisbonne – Porto", "en train"])
+
     def test_a_table_label_never_names_another_train(self):
         alfa = names.words("L’intérieur d’une voiture Alfa Pendular. Alfa Pendular interior")
         self.assertTrue(names.label_clash("Alfa Pendular ou Intercidades", alfa))

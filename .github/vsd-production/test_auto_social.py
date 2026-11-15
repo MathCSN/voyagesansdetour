@@ -1458,12 +1458,19 @@ class RealGuideTests(unittest.TestCase):
                  ("marrakech-85ffbf38", {"commonsTitle": "File:Lamp maker, Medina of Marrakech.jpg", "automatic": True}, "Marrakech (Maroc) : Lamp maker, Medina of Marrakech."),
                  ("marrakech-fecfeec6", {"commonsTitle": "File:Maroc Marrakech Saadiens Luc Viatour 5.jpg", "automatic": True}, "Marrakech (Maroc) : Maroc Marrakech Saadiens Luc Viatour 5.")]
 
-    def amalfi_table_reel(self):
+    def amalfi_table_reel(self, rows=4):
+        # Since the review of PR 53 the guide's whole table is no reel: its loop "Salerne–Positano–Amalfi–Salerne" takes
+        # three lines in its column (test_a_table_too_wide_for_the_reel_is_not_chosen). Its first four rows hold.
+        ferries = {**self.FERRIES, "table": {**self.FERRIES["table"], "rows": self.FERRIES["table"]["rows"][:rows]}}
         article = guide(slug="cote-amalfitaine-sans-voiture", country="italie", cover="amalfi-positano", destination="Côte amalfitaine",
-                        shortTitle="La côte amalfitaine sans voiture", category="Itinéraires", sections=[self.FERRIES])
-        read = p.normalized("Prix " + " ".join(row[0] + " " + row[1] for row in self.FERRIES["table"]["rows"]))
+                        shortTitle="La côte amalfitaine sans voiture", category="Itinéraires", sections=[ferries])
+        read = p.normalized("Prix " + " ".join(row[0] + " " + row[1] for row in ferries["table"]["rows"]))
         return reel_formats.build("tableau", article, figures(self.AMALFI_FIGURES), list(self.AMALFI), [], "Phrase d’ouverture.", "Côte amalfitaine",
                                   "Italie · Côte amalfitaine", "Guide Côte amalfitaine · sources du 24/10/2026", ["La côte amalfitaine", "sans voiture"], read)
+
+    def test_a_table_too_wide_for_the_reel_is_not_chosen(self):
+        with self.assertRaises(reel_formats.Held):
+            self.amalfi_table_reel(rows=5)
 
     def test_the_amalfi_coast_table_reel_opens_on_its_cover_and_puts_no_amalfi_fare_over_positano(self):
         scenes, _ = self.amalfi_table_reel()

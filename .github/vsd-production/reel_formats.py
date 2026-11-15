@@ -329,9 +329,15 @@ def table_of(article: dict, page: str) -> dict | None:
         cells = [[" ".join(str(cell).strip() for cell in row[:named]), str(row[named]).strip()] for row in rows]
         quoted = all(checked(a, 60) and checked(b, 60) and p.normalized(a + " " + b) in page for a, b in cells)
         title = lines_of(str(headers[named]).strip(), 22)
-        if quoted and title and all(checked(line, 34) for line in title) and p.normalized(str(headers[named])) in page:
+        fits = p.motion.table_fits(cells, TABLE_FONTS)
+        if quoted and fits and title and all(checked(line, 34) for line in title) and p.normalized(str(headers[named])) in page:
             return {"rows": cells, "title": title, "header": str(headers[named]).strip(), "section": section}
     return None
+
+
+# The type a reel's table is drawn in (production.MOTION_FONTS): a table is chosen only when its rows hold in it.
+TABLE_FONTS = p.motion.Fonts(*(str(p.HERE / "assets" / name) for name in (
+    "dmsans-regular.ttf", "dmsans-bold.ttf", "playfair.ttf", "notosans-regular.ttf", "notosans-bold.ttf")))
 
 
 def applicable(article: dict, facts: list[dict], page: str) -> list[str]:
