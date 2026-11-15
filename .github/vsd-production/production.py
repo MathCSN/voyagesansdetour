@@ -457,44 +457,32 @@ def photos_of_another_place(scenario, photos) -> list[str]:
     return [f"plan {number} {told}" for number, told in found if told]
 
 
-def on_the_route(said, shown, recorded, places) -> bool:
-    """A journey over a ride of its kind that does not stand elsewhere: its record names a place of the journey, or none."""
-    return place_names.journey(said) and place_names.ride(shown, said) and place_names.on_the_way(recorded, places)
-
-
 def another_place(scene, photos, everywhere) -> str | None:
-    """What one plan names and why its photo is not a photo of it; None when it is."""
+    """What one plan names and why its photo is not a photo of it; None when it is. Read as the generator reads it
+    (place_names): whole names, the same rules for a journey, a part of the destination and a train; never on the
+    word of the label written above the plan ("Le sud : Costa Adeje" does not make a photo of Masca one of the south)."""
     if scene.get("layout") == "table" or "photo" not in scene:
         return None
     said = draw.plain(" ".join(scene.get("headline") or []) + " " + str(scene.get("detail") or ""))
+    detail = str(scene.get("detail") or said)
     photo, caption = scene["photo"], str(scene.get("alt") or "")
     title = str((photos.get(photo) or {}).get("commonsTitle", ""))
     shown = place_names.pictured(photo, caption, title, everywhere)
-    recorded = place_names.recorded(photo, caption, title, everywhere)
-    places = place_names.named(said, everywhere)
-    if on_the_route(str(scene.get("detail") or said), shown, recorded, places):
+    found = place_names.record(photo, caption, title, everywhere)
+    listed = ", ".join(" ".join(name) for name in found) or "no place in its record"
+    if place_names.brand_clash(said, shown):
+        return f"names a train over {photo}, another train ({listed})"
+    reading = place_names.read(said, everywhere)
+    if place_names.journey(detail) and place_names.ride(shown, detail) and place_names.on_the_way(found, place_names.read(detail, everywhere)):
         return None
-    above = str(scene.get("kicker") or "")
-    if places:
-        return None if names_it(said, above, places, photo, caption, title, everywhere) else \
-            f"names {', '.join(places)} over {photo} ({', '.join(sorted(recorded)) or 'no place in its record'})"
+    if reading.all:
+        if place_names.fits(reading, shown, place_names.pictured("", caption, title, everywhere), found):
+            return None
+        return f"names {', '.join(' '.join(name) for name in reading.all)} over {photo} ({listed})"
     region = place_names.region(said)
-    # The name of a section stands above a plan only over that section's own photo: it says which part this photo is of.
-    if region and recorded and not region & place_names.words(caption + " " + above):
-        return f"names the {', '.join(sorted(region))} over {photo} ({', '.join(sorted(recorded))})"
+    if region and found and not region <= place_names.words(caption):
+        return f"names the {'-'.join(sorted(region))} over {photo} ({listed})"
     return None
-
-
-def names_it(said, above, places, photo, caption, title, everywhere) -> bool:
-    """The record of a photo names the place a plan is about. The first place a fact names counts wherever the record
-    names it; another one it is about, or the one written above the plan ("Choisissez Porto"), only in the caption or
-    the title, not in the identifier the photo is filed under ("japon-hiroshima-miyajima" is a photo of Miyajima). A
-    place the fact says without a capital is named by the photo that does ("les tombeaux saadiens")."""
-    first = {place for place in place_names.first_name(said, everywhere) if len(place) >= 3} or set(places[:1])
-    labelled = set() if place_names.words(above) <= everywhere else place_names.proper(above, sentence=True)
-    about = {place for place in set(place_names.subjects(said, everywhere) or places) | labelled if len(place) >= 3}
-    echoed = place_names.proper(caption, everywhere, sentence=True) & ({word for word in place_names.words(said) if len(word) >= 4} - set(places))
-    return bool(first & place_names.pictured(photo, caption, title, everywhere) or about & place_names.pictured("", caption, title, everywhere) or echoed)
 
 
 def contract_of(scenario):

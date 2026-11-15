@@ -35,15 +35,8 @@ NOT_A_CLOSING = frozenset({
     "douro-pinhao-azulejos", "seville-alcazar", "amalfi-ravello", "amalfi-ferry", "cinque-train", "thailande-train-nuit",
     "costa-rica-monteverde", "japon-shinkansen", "japon-nara-cerfs", "laponie-husky", "tenerife-adeje"})
 
-# Files of Wikimedia Commons that are not the photograph as it was taken, never to be used whatever lists them: this
-# one is a landscape version (3074 × 2304) uploaded in 2024 by another account from a portrait original (1536 × 2048)
-# by Samuli Lintula; its margins were made up. Mathis's rule: real photographs only, no generated or extended image.
-# The whole stock was read again on Commons on 13/11/2026 (197 files) against photo_intake.derived: one more file fell,
-# an arch of Lisbon filed under "Retouched pictures" and "Digitally manipulated photographs". Its record in the old
-# catalogue carries no category, so the rule cannot see it there: it is named here. (It went out once, in the photo
-# post « Où dormir à Lisbonne » of 12/11/2026.)
-NOT_A_PHOTOGRAPH_AS_TAKEN = frozenset({"File:Snowball pyramid at Santa Claus' Village Large.jpg",
-                                       "File:Empty Arco da Rua Augusta during the COVID-19 lockdown, Lisbon, Portugal julesvernex2.jpg"})
+# Files of Wikimedia Commons that are not the photograph as it was taken: photo_intake.NOT_A_PHOTOGRAPH_AS_TAKEN.
+NOT_A_PHOTOGRAPH_AS_TAKEN = photo_intake.NOT_A_PHOTOGRAPH_AS_TAKEN
 
 # Photos that show numbers of their own (a display, a board of fares): a table is never laid over them, its figures
 # would be read among theirs. `train-alfa-220` is the display of an Alfa Pendular carriage: "220 km/h · 10:22 · 21 °C".

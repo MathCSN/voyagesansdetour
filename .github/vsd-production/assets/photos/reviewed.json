@@ -47,7 +47,11 @@
       ],
       "commonsSha1": "00071801dceb00556cfaea45fa999814b6aecbfb",
       "retrievedAt": "2026-11-13T09:20:27Z",
-      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux.",
+      "focusVertical": [
+        0.36,
+        0.5
+      ]
     },
     "laponie-bureau-pere-noel": {
       "alt": "Le bureau du Père Noël illuminé sous la neige, à Rovaniemi.",
@@ -220,7 +224,7 @@
       "height": 1600,
       "commonsTitle": "File:Skating Rink In Fountain Court at Somerset House, London (15980203534).jpg",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Skating_Rink_In_Fountain_Court_at_Somerset_House,_London_(15980203534).jpg",
-      "author": "traveljunction",
+      "author": "traveljunction (Image by www.traveljunction.com)",
       "commonsCredit": "Skating Rink In Fountain Court at Somerset House, London",
       "categories": "Flickr images reviewed by FlickreviewR 2|Ice skating at Somerset House|Somerset House at night",
       "licence": "CC BY-SA 2.0",

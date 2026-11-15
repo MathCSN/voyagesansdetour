@@ -250,6 +250,9 @@ def section_of(value: str, label: str, sections: list[dict]) -> dict | None:
     holders = [section for section in sections if whole_figure(value, section_text(section))]
     if len(holders) == 1 and not sums_up(holders[0]):
         return holders[0]
+    # Only sections that sum the guide up give it: the first of them, not a section that only shares a word with it.
+    if holders and all(sums_up(section) for section in holders):
+        return holders[0]
     # A figure is taken from the section that sums the guide up only when another section gives the figure itself:
     # "872 € le budget serré" is given by "En bref" alone and stays there, it is not a figure of "Où dormir" because
     # the two share a word (review of 13/11/2026: 13 figures out of 161 had changed section).
@@ -486,7 +489,7 @@ def scenes_for(article: dict, channel: Post, facts: list[dict], photos: list[tup
     for fact in facts:
         # As in a reel, the name of the section stands above the figure only over that section's own photo, or when
         # the section has none: "Le Nord" is not written over the Grand Palace of Bangkok.
-        named = media.above(fact["section"], pictures[fact["value"]][1], place)
+        named = media.above(fact["section"], pictures[fact["value"]][1], place, fact["label"])
         scenes.append(scene(pictures[fact["value"]], named, ["*" + fact["value"] + "*"],
                             unbreakable(fact["label"]), 4, [{"source": "guide", "excerpt": fact["excerpt"]}],
                             label=reel_formats.dated_tag(fact, tag)))
