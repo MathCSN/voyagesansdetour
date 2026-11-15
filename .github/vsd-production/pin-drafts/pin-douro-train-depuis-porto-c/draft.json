@@ -4,15 +4,15 @@
   "status": "draft_requires_review",
   "publicationApproved": false,
   "title": "La vallée du Douro en train depuis Porto : Pinhão, rabelo et quintas sans voiture",
-  "pinTitle": "Le Douro en train : les chiffres à connaître avant de partir",
+  "pinTitle": "Le Douro en train : un panneau d’azulejos de la gare de Pinhão représentant la vallée du Douro",
   "variant": "c",
   "targetUrl": "https://voyagesansdetour.fr/portugal/douro-train-depuis-porto/",
   "articleSha256": "b3ef4e88d55e1c310de0b5ce250c58095ada53ade9ac2651522409b3a6c1edaa",
-  "imageSha256": "0e9abea51912f7d1af57b8cc793d31d165afddb40434002cc3c2ee04ffc876d8",
+  "imageSha256": "8066b10f9c744df4a908e0e7849f39220d3dfb37014ea070123a2be3b1265ddb",
   "width": 1000,
   "height": 1500,
   "templateVersion": 2,
-  "rendererSha256": "693b82a5423a7d939e4c6c3aaa8c1b5d305ae39d6fa095e55f96b591dfc9b24f",
+  "rendererSha256": "4e84395c3b1cf33bb7d679eee617155a0feb7db06078590a7bcefadb2e60ff2e",
   "originalComposition": true,
   "externalPhotographs": true,
   "limitations": [
@@ -23,6 +23,7 @@
     "author": "Dinu from Bucuresti, Romania",
     "source_page": "https://commons.wikimedia.org/wiki/File:Pinhao_-_azulejos_15.jpg",
     "license": "CC BY 2.0",
-    "license_url": "https://creativecommons.org/licenses/by/2.0/"
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "alt_fr": "Un panneau d’azulejos de la gare de Pinhão représentant la vallée du Douro."
   }
 }

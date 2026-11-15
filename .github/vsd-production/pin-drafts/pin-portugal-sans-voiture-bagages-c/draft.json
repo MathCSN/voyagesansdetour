@@ -4,15 +4,15 @@
   "status": "draft_requires_review",
   "publicationApproved": false,
   "title": "Bagages au Portugal sans voiture : 1 valise gratuite dans le train, des pavés partout",
-  "pinTitle": "Voyager léger au Portugal : les chiffres à connaître avant de partir",
+  "pinTitle": "Voyager léger au Portugal : un tram jaune passe devant les façades colorées d’Alfama",
   "variant": "c",
   "targetUrl": "https://voyagesansdetour.fr/portugal/portugal-sans-voiture-bagages/",
   "articleSha256": "6fd171b1a79971374714684b7e1943a0bd242e317d0fba9ac3416aad9c94d311",
-  "imageSha256": "f6de2836aa6da05ddbb2cb9e9beb5e216fa183621653567d9b3bd0c3fb2b4c69",
+  "imageSha256": "8948a6ea34be81840fb1d00de42261ee6f63067709101a9bbf31a1c32c68a56a",
   "width": 1000,
   "height": 1500,
   "templateVersion": 2,
-  "rendererSha256": "693b82a5423a7d939e4c6c3aaa8c1b5d305ae39d6fa095e55f96b591dfc9b24f",
+  "rendererSha256": "4e84395c3b1cf33bb7d679eee617155a0feb7db06078590a7bcefadb2e60ff2e",
   "originalComposition": true,
   "externalPhotographs": true,
   "limitations": [
@@ -23,6 +23,7 @@
     "author": "Ingo Mehling",
     "source_page": "https://commons.wikimedia.org/wiki/File:Lissabon_-_Alfama_-_Largo_Santa_Luzia_-_Streetcar_-_1.jpg",
     "license": "CC BY-SA 4.0",
-    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "alt_fr": "Un tram jaune passe devant les façades colorées d’Alfama."
   }
 }

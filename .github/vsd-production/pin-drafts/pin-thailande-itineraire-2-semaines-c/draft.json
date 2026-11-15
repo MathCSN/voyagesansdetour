@@ -4,15 +4,15 @@
   "status": "draft_requires_review",
   "publicationApproved": false,
   "title": "Thaïlande en 2 semaines : Bangkok, Chiang Mai en train de nuit et la mer d’Andaman (prix 2026)",
-  "pinTitle": "La Thaïlande en 2 semaines : les chiffres à connaître avant de partir",
+  "pinTitle": "La Thaïlande en 2 semaines : l’intérieur d’une voiture-couchettes de deuxième classe",
   "variant": "c",
   "targetUrl": "https://voyagesansdetour.fr/thailande/thailande-itineraire-2-semaines/",
   "articleSha256": "b9d47f78bd1cdb29b7214823827758ad4b69b2c50b1582149b10e491b098d9cf",
-  "imageSha256": "0f137dcb4a01e935f307e97b01fb158beefea9cf75a9e3d00d0ca8784180e180",
+  "imageSha256": "727f686f7a39d186944754c78a3ff0d12a859f1f40472545030263acbaedfe52",
   "width": 1000,
   "height": 1500,
   "templateVersion": 2,
-  "rendererSha256": "693b82a5423a7d939e4c6c3aaa8c1b5d305ae39d6fa095e55f96b591dfc9b24f",
+  "rendererSha256": "4e84395c3b1cf33bb7d679eee617155a0feb7db06078590a7bcefadb2e60ff2e",
   "originalComposition": true,
   "externalPhotographs": true,
   "limitations": [
@@ -23,6 +23,7 @@
     "author": "calflier001",
     "source_page": "https://commons.wikimedia.org/wiki/File:THAI_RAILWAYS_NIGHT_SLEEPER_TRAIN_BUTTERWORTH(PENANG_SENTRAL)MALAYSIA_TO_BANGKOK_THAILAND_JAN_2012_(7189989612).jpg",
     "license": "CC BY-SA 2.0",
-    "license_url": "https://creativecommons.org/licenses/by-sa/2.0"
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0",
+    "alt_fr": "L’intérieur d’une voiture-couchettes de deuxième classe, banquettes en position jour."
   }
 }

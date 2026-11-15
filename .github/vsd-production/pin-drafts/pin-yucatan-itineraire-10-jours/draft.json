@@ -8,11 +8,11 @@
   "variant": "a",
   "targetUrl": "https://voyagesansdetour.fr/mexique/yucatan-itineraire-10-jours/",
   "articleSha256": "e5a103bf55efcb92ff9183716192100ce236d2d97384d39d5446a1010ea7df6b",
-  "imageSha256": "232649c386e6fafbb2bbb686ff8a40a01ada22e1b865070257e50682235c05af",
+  "imageSha256": "08b49151bcb11b51f90b4c544de7174e5663e22fb29f2884dc37685554b42cf4",
   "width": 1000,
   "height": 1500,
   "templateVersion": 2,
-  "rendererSha256": "693b82a5423a7d939e4c6c3aaa8c1b5d305ae39d6fa095e55f96b591dfc9b24f",
+  "rendererSha256": "4e84395c3b1cf33bb7d679eee617155a0feb7db06078590a7bcefadb2e60ff2e",
   "originalComposition": true,
   "externalPhotographs": true,
   "limitations": [
@@ -23,6 +23,7 @@
     "author": "Diego Delso",
     "source_page": "https://commons.wikimedia.org/wiki/File:Templo_el_Castillo_-_Chichen_Itza-Yucatan-Mexico0222.jpg",
     "license": "CC BY-SA 4.0",
-    "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "alt_fr": "La pyramide d’El Castillo, à Chichén Itzá."
   }
 }

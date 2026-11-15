@@ -8,11 +8,11 @@
   "variant": "b",
   "targetUrl": "https://voyagesansdetour.fr/portugal/lisbonne-porto-train/",
   "articleSha256": "f89e6e6dcb5ac46ac80e03e92e768b969b3abcfaf50ced10afd058136428dc3f",
-  "imageSha256": "be36abd714b9c7401a0bf1e072a538cb63fc678c23b3e24f400d489a91e65fa4",
+  "imageSha256": "c82efdf92bc8bbc38bb138515b1cd096430411f72e094bd9a427f15184e7794d",
   "width": 1000,
   "height": 1500,
   "templateVersion": 2,
-  "rendererSha256": "693b82a5423a7d939e4c6c3aaa8c1b5d305ae39d6fa095e55f96b591dfc9b24f",
+  "rendererSha256": "4e84395c3b1cf33bb7d679eee617155a0feb7db06078590a7bcefadb2e60ff2e",
   "originalComposition": true,
   "externalPhotographs": true,
   "limitations": [
@@ -23,6 +23,7 @@
     "author": "_morgado",
     "source_page": "https://commons.wikimedia.org/wiki/File:Alfa_Pendular_(38916561925).jpg",
     "license": "CC BY 2.0",
-    "license_url": "https://creativecommons.org/licenses/by/2.0/"
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "alt_fr": "Un train Alfa Pendular de CP en gare."
   }
 }

@@ -4,15 +4,15 @@
   "status": "draft_requires_review",
   "publicationApproved": false,
   "title": "Yucatán en 10 jours : Valladolid, Chichén Itzá, Mérida et Tulum, avec le Tren Maya",
-  "pinTitle": "Yucatán en 10 jours : les chiffres à connaître avant de partir",
+  "pinTitle": "Yucatán en 10 jours : les ruines de Tulum au-dessus de la mer des Caraïbes",
   "variant": "c",
   "targetUrl": "https://voyagesansdetour.fr/mexique/yucatan-itineraire-10-jours/",
   "articleSha256": "e5a103bf55efcb92ff9183716192100ce236d2d97384d39d5446a1010ea7df6b",
-  "imageSha256": "59a2bb8e09afba2e1a24440e3310f7fbd6ae167bc67e18415f7b98840650176d",
+  "imageSha256": "eb02e40a88cdabd8f65d0c0dd10eabd2cbea37b3f0933618cada2122ab46a432",
   "width": 1000,
   "height": 1500,
   "templateVersion": 2,
-  "rendererSha256": "693b82a5423a7d939e4c6c3aaa8c1b5d305ae39d6fa095e55f96b591dfc9b24f",
+  "rendererSha256": "4e84395c3b1cf33bb7d679eee617155a0feb7db06078590a7bcefadb2e60ff2e",
   "originalComposition": true,
   "externalPhotographs": true,
   "limitations": [
@@ -23,6 +23,7 @@
     "author": "Martin Falbisoner",
     "source_page": "https://commons.wikimedia.org/wiki/File:Tulum_-_God_of_the_Winds_Temple_04.JPG",
     "license": "CC BY-SA 4.0",
-    "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "alt_fr": "Les ruines de Tulum au-dessus de la mer des Caraïbes."
   }
 }

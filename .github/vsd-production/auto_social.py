@@ -530,9 +530,7 @@ def scenes_for(article: dict, channel: Post, facts: list[dict], photos: list[tup
     return scenes
 
 
-def joined_title(short: str, label: str) -> str:
-    """'Kyoto en train : jour par jour'; a short title that already carries a colon or ends a question takes a dash."""
-    return f"{short} — {label}" if ":" in short or short.rstrip().endswith(("?", "!")) else f"{short} : {label}"
+joined_title = reel_formats.joined_title
 
 
 def free_identity(root: Path, base: str) -> str:

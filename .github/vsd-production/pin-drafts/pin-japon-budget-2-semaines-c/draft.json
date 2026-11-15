@@ -4,15 +4,15 @@
   "status": "draft_requires_review",
   "publicationApproved": false,
   "title": "Budget Japon 2 semaines : de 870 à 1 370 € sans le vol, poste par poste (prix 2026)",
-  "pinTitle": "Budget Japon, 2 semaines : les chiffres à connaître avant de partir",
+  "pinTitle": "Budget Japon, 2 semaines : les enseignes lumineuses du canal de Dotonbori, à Osaka",
   "variant": "c",
   "targetUrl": "https://voyagesansdetour.fr/japon/japon-budget-2-semaines/",
   "articleSha256": "edaa9594717c73426526ba4a166a363e21ac51b03b854196d3e794baaadadc37",
-  "imageSha256": "1e877382c70f2f6db8d6c9e7459c48f4e1fa7dbf89ab752e3ac2ce68a19a28c9",
+  "imageSha256": "495b1f032d6a86daaf796f43842c8da0c5ea715a88dc0fc45cb60028e4631fc1",
   "width": 1000,
   "height": 1500,
   "templateVersion": 2,
-  "rendererSha256": "693b82a5423a7d939e4c6c3aaa8c1b5d305ae39d6fa095e55f96b591dfc9b24f",
+  "rendererSha256": "4e84395c3b1cf33bb7d679eee617155a0feb7db06078590a7bcefadb2e60ff2e",
   "originalComposition": true,
   "externalPhotographs": true,
   "limitations": [
@@ -23,6 +23,7 @@
     "author": "DXR",
     "source_page": "https://commons.wikimedia.org/wiki/File:Dotonbori_Neon_Sign,_Osaka_20190415_1.jpg",
     "license": "CC BY-SA 4.0",
-    "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "alt_fr": "Les enseignes lumineuses du canal de Dotonbori, à Osaka."
   }
 }

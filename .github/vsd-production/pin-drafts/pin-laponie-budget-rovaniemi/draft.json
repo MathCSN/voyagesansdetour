@@ -8,11 +8,11 @@
   "variant": "a",
   "targetUrl": "https://voyagesansdetour.fr/finlande/laponie-budget-rovaniemi/",
   "articleSha256": "0b543df4472cb0da25dde806d8878fde9fb27e5b74b0aad7ea81ef575f3db0bc",
-  "imageSha256": "03d6ec6ca3c90e683593e536df78a709f3b07f5b61b5ec4b7f990ab778a9b936",
+  "imageSha256": "37a309898f0f53cf9caaf8f6303b51207e88ce00b15d13ac6fe2737353fe1184",
   "width": 1000,
   "height": 1500,
   "templateVersion": 2,
-  "rendererSha256": "693b82a5423a7d939e4c6c3aaa8c1b5d305ae39d6fa095e55f96b591dfc9b24f",
+  "rendererSha256": "4e84395c3b1cf33bb7d679eee617155a0feb7db06078590a7bcefadb2e60ff2e",
   "originalComposition": true,
   "externalPhotographs": true,
   "limitations": [
@@ -23,6 +23,7 @@
     "author": "Timo Newton-Syms from Helsinki, Finland and Chalfont St Giles, Bucks, UK",
     "source_page": "https://commons.wikimedia.org/wiki/File:Santa_Claus_Village_(5307460482).jpg",
     "license": "CC BY-SA 2.0",
-    "license_url": "https://creativecommons.org/licenses/by-sa/2.0"
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0",
+    "alt_fr": "Le village du Père Noël sous la neige, à Rovaniemi."
   }
 }
