@@ -18,6 +18,7 @@ import urllib.parse
 import clip_intake
 import destinations
 import photo_intake
+import place_names as place_names_module   # media_library.place_names is the function below
 from reel_formats import checked
 
 AUTO = "auto"
@@ -105,6 +106,28 @@ def photo_candidates(article: dict, site_photos: dict, country: str, shared: dic
         title = record.get("commonsTitle")
         if photo_id.split("-", 1)[0] in prefixes and isinstance(title, str) and title not in taken:
             candidates.append({"id": photo_id, "title": title, "alt": record.get("alt") or CAPTIONS.get(photo_id) or fallback})
+    return candidates
+
+
+def vehicle_candidates(article: dict, site_photos: dict, shared: dict | None = None) -> list[dict]:
+    """The hand-reviewed photos of a train the guide names, whatever guide they are filed under: a photo of a vehicle
+    belongs to the vehicle ("l'Alfa Pendular entre les deux villes" in « Lisbonne ou Porto ? » had no train of its own
+    while the stock holds several Alfa Pendular: review of PR 57). A photo that shows the train, never a station."""
+    said = " ".join([article.get("title", "")] + [str(fact.get("label", "")) for fact in article.get("keyFacts") or [] if isinstance(fact, dict)])
+    named = place_names_module.brands(place_names_module.words(said))
+    if not named:
+        return []
+    records = [(photo_id, commons_title(record.get("source_page", "")), record.get("alt_fr")) for photo_id, record in site_photos.items()]
+    records += [(photo_id, record.get("commonsTitle"), record.get("alt") or CAPTIONS.get(photo_id)) for photo_id, record in (shared or {}).items()]
+    candidates, seen = [], set()
+    for photo_id, title, alt in records:
+        if not (isinstance(title, str) and alt) or title in seen:
+            continue
+        shown = place_names_module.words(" ".join([photo_id.replace("-", " "), alt, place_names_module.readable(title)]))
+        if place_names_module.brands(shown) & named and place_names_module.vehicle(photo_id, alt, title):
+            seen.add(title)
+            # Borrowed for one fact, it never opens nor closes this guide's posts.
+            candidates.append({"id": photo_id, "title": title, "alt": alt, "emblematic": False})
     return candidates
 
 
@@ -320,6 +343,9 @@ def gather_photos(article: dict, needed: int, photos: Photos, site_photos: dict,
     # Every photo a person looked at is offered, beyond `needed`: a fact only goes over the photo of its own place, so
     # the Great Buddha or a shinkansen added by hand must not be left out because the guide has eight photos already.
     chosen = taken(photo_candidates(article, site_photos, country, photos.shared), needed + HAND_EXTRA, photos, [])
+    # Beyond them, the trains the guide names: each is offered to the one fact that names it, never in place of the guide's.
+    vehicles = vehicle_candidates(article, site_photos, photos.shared)
+    chosen = taken(vehicles, len(chosen) + len(vehicles), photos, chosen)
     if len(chosen) < needed:
         found = featured_candidates(article, place_names(article, table or {}), country, searcher, country_names(article, table or {}))
         chosen = taken(found, needed, photos, chosen)

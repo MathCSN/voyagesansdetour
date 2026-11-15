@@ -556,6 +556,21 @@ class RideToAnotherPlace(unittest.TestCase):
         self.assertIsNone(p.another_place(scene, records, everywhere, rides=False))
         self.assertGreater(p.instant(p.RIDES_FROM), p.instant(p.PLACES_FROM))
 
+    def test_a_photo_of_a_train_belongs_to_the_train_not_to_the_guide(self):
+        # « Lisbonne ou Porto ? » names the Alfa Pendular and had no train of its own; the stock holds several, filed
+        # under "train-". Offered to any guide that names that train, never a station, never to open or close its posts.
+        import media_library
+        site = {"train-alfa-pendular": {"source_page": "https://commons.wikimedia.org/wiki/File:Alfa_Pendular_New_Livery.jpg",
+                                        "alt_fr": "Un train Alfa Pendular de CP à quai."},
+                "train-campanha": {"source_page": "https://commons.wikimedia.org/wiki/File:Campanha.jpg",
+                                   "alt_fr": "La façade de la gare de Porto-Campanhã, desservie par l’Alfa Pendular."},
+                "lisbonne-alfama": {"source_page": "https://commons.wikimedia.org/wiki/File:Alfama.jpg", "alt_fr": self.ALFAMA[2]}}
+        guide = {"title": "Lisbonne ou Porto ?", "keyFacts": [{"value": "35,70 €", "label": "l’Alfa Pendular entre les deux villes"}]}
+        offered = media_library.vehicle_candidates(guide, site)
+        self.assertEqual([candidate["id"] for candidate in offered], ["train-alfa-pendular"])
+        self.assertIs(offered[0]["emblematic"], False)
+        self.assertEqual(media_library.vehicle_candidates({"title": "Lisbonne en 3 jours", "keyFacts": [{"label": "le tram 28"}]}, site), [])
+
     def test_a_station_is_no_train(self):
         # "Estación de tren São Bento": the hall of azulejos took "l'Alfa Pendular entre les deux villes".
         hall = photo("porto-sao-bento", "File:Estación de tren São Bento, Oporto, Portugal, 2012-05-09, DD 07.JPG",
