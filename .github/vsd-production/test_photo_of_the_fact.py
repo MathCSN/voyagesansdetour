@@ -613,6 +613,38 @@ class OpeningAndEndingReservedFirst(unittest.TestCase):
         self.assertEqual(next(iter(shared)), "porto-metro-luis-tablier")
         self.assertEqual(len(shared), 18)
 
+    def test_a_town_stays_a_town_when_its_kicker_is_shortened(self):
+        # Review of PR 57 (Codex): "Maroc · Marrakech" read the town from its separator; a kicker longer than 32 letters
+        # is cut to the place alone, and the reel of a town could open on an outing again.
+        import datetime as dt
+        from pathlib import Path
+        from unittest import mock
+        import auto_social as a
+        import destinations
+
+        class Seen(Exception):
+            pass
+
+        def media(*args, **kwargs):
+            raise Seen(kwargs["local"])
+
+        with mock.patch.object(reel_formats, "Media", side_effect=media):
+            for kicker, local, expected in (("Maroc · Marrakech", None, True), ("Marrakech", None, False), ("Marrakech", True, True)):
+                with self.assertRaises(Seen) as seen:
+                    reel_formats.build("liste", {}, [], [self.JEMAA], [], "", "Marrakech", kicker, "", [], "", local=local)
+                self.assertIs(seen.exception.args[0], expected, kicker)
+        # build_reel says it whatever the length of the kicker.
+        table = destinations.load(Path(a.__file__).resolve().parents[2] / "site-src")
+        article = {"slug": "x", "country": "republique-dominicaine", "destination": "Punta Cana et Bávaro", "sourcesCheckedOn": "2026-11-01",
+                   "title": "Punta Cana et Bávaro en 5 jours", "shortTitle": "Punta Cana en 5 jours"}
+        with mock.patch.object(reel_formats, "build", side_effect=lambda *args, **kwargs: (_ for _ in ()).throw(Seen(kwargs.get("local")))), \
+                mock.patch.object(destinations, "name", return_value="République dominicaine"), \
+                mock.patch.object(a, "opening_sentence", return_value="Phrase d’ouverture."):
+            with self.assertRaises(Seen) as seen:
+                now = dt.datetime(2026, 11, 16, tzinfo=dt.timezone.utc)
+                a.build_reel(Path(a.__file__).parent, article, now, now, "", [], [], "liste", 0, 0, table, 34)
+        self.assertIs(seen.exception.args[0], True)
+
 
 if __name__ == "__main__":
     unittest.main()

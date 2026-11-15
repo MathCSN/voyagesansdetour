@@ -627,7 +627,7 @@ def build_reel(root: Path, article: dict, slot: dt.datetime, now: dt.datetime, t
     kicker = place if country.lower() == place.lower() else f"{country} · {place}"
     kicker = kicker if len(kicker) <= 32 else place[:32]
     scenes, lines = reel_formats.build(fmt, article, facts, rotate(photos, variant), clips, opening_sentence(article, text), place, kicker, tag,
-                                       reel_title_lines(article, width), p.normalized(text))
+                                       reel_title_lines(article, width), p.normalized(text), local=place.lower() != country.lower())
     identity = free_identity(root, f"ig-{article['slug'][:70]}-{slot:%Y-%m-%d}")
     folder = f"{AUTO}/{identity}"
     stamp = p.stamp(now)

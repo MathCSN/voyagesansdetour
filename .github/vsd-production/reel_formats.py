@@ -1123,14 +1123,17 @@ def marked(scenes: list[dict], photos: list) -> None:
 
 
 def build(fmt: str, article: dict, facts: list[dict], photos: list, clips: list, opening: str, place: str, kicker: str,
-          tag: str, title_lines: list[str], page: str) -> tuple[list[dict], list[str]]:
-    """The plans of one reel and the useful lines of its caption. Raises Held when the guide cannot fill the format."""
+          tag: str, title_lines: list[str], page: str, local: bool | None = None) -> tuple[list[dict], list[str]]:
+    """The plans of one reel and the useful lines of its caption. Raises Held when the guide cannot fill the format.
+    `local`: a guide of one town (Marrakech), not of a country; read from the kicker "Maroc · Marrakech" when not
+    given, but a long kicker is shortened to the place alone, so the caller says it (review of PR 57)."""
     # The body takes the photos that show what it names; the hook and the call keep two, the cover first.
     # The picture people see first: the guide's cover, or its first photo when the cover is too small for a reel.
     # Never a file found by the search: nobody looked at it.
     seen = [photo[0] for photo in photos if photo[1].get("automatic") is not True]
     # Never an outing in its place ("Des barques bleues… à Essaouira" opened the reels of Marrakech: review of PR 56).
-    captions, local = {photo[0]: photo[2] for photo in photos}, " · " in kicker
+    captions = {photo[0]: photo[2] for photo in photos}
+    local = " · " in kicker if local is None else local
     home = [photo_id for photo_id in seen if not (local and set_elsewhere(captions.get(photo_id, ""), place_names.words(kicker)))]
     cover = article.get("cover") if article.get("cover") in seen else ((home or seen)[0] if seen else None)
     brief = Brief(article, facts, Media(photos, clips, reserve=2, cover=cover, emblematic=emblematic(photos), everywhere=kicker, local=local),
