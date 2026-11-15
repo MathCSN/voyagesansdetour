@@ -36,7 +36,7 @@ GENERIC = frozenset("""
 # What a journey is made by, as a fact says it; and what a photo of it shows.
 WAYS = {"rail": frozenset("train trains shinkansen tgv couchette couchettes rame railway sleeper locomotive wagon".split()),
         "urban": frozenset("metro tram tramway".split()), "road": frozenset("bus minibus navette autocar".split()),
-        "water": frozenset("ferry ferries bateau bateaux".split())}
+        "water": frozenset("ferry ferries bateau bateaux barque barques sampan sampans boat boats".split())}
 RIDES = frozenset().union(*WAYS.values())   # never a station alone: it is a place
 TRANSPORT = RIDES | frozenset("billet billets".split())
 # "chez Supratours", "ligne Yamanote". Not "en" ("en Alentejo") nor "train" or "bus" ("le train Rossio–Sintra"): a
@@ -144,10 +144,11 @@ def names(text: str, everywhere: frozenset | set = frozenset(), sentence: bool =
     and no ticket ("Maya Bay", "Santa Claus Village", "Grand Palace"). `sentence`: the text is a caption; its first
     word has a capital by grammar ("Visiteurs dans un jardin zen."), unless a name follows it at once or `known` (the
     words of the photo's identifier and title) says it is the place ("Vernazza et son port")."""
+    text = ordinary(text)
     found, run, carrier, end = [], None, False, -1
     for match in CAPITALISED.finditer(text):
         first = sentence and not text[:match.start()].strip("«“\" ")
-        adjacent = end >= 0 and text[end:match.start()] == " "
+        adjacent = end >= 0 and joined(run, text[end:match.start()])
         end = match.end()
         if not adjacent:
             found, run = found + closed(run), None
@@ -185,14 +186,46 @@ def after_carrier(text: str, match: re.Match) -> bool:
     return bool(before and before[0] in CARRIED_BY and text[match.start() - 1:match.start()] == " ")
 
 
+def ordinary(text: str) -> str:
+    """A text written mostly in capitals, in ordinary case ("LISBONNE", "HÔ-CHI-MINH-VILLE"): each word then reads as a
+    name, as in a Commons title (readable). The same length, so what is found stands at the same place."""
+    letters = sum(c.isalpha() for c in text)
+    titled_text = text.title()
+    if sum(c.isupper() for c in text) > 0.6 * max(1, letters) and len(titled_text) == len(text):
+        return titled_text
+    return text
+
+
+# Between two capitalised words, what keeps them one name: a space of any kind, a line break ("Ninh Bình" with a
+# non-breaking space); and after a word that begins a name, its particles ("Puerto de la Cruz", "Vila do Conde").
+SPACES = frozenset("   \n")
+PARTICLES = re.compile(r"[  ](?:de la|del|de|do|da|dos|das|di)[  ]")
+# Words that name no place alone but are part of a longer name: "Santa Cruz" is not "Puerto de la Cruz", "Đà Nẵng" is
+# not Ao Nang, "Mai Châu" is not Châu Đốc. Not the kinds of places that change with the language of the record ("Tour
+# Eiffel", "Eiffel Tower"; "mont Fuji", "Mount Fuji"): those stay out of the name.
+# Not "real" either: "le Real Alcázar" and a photo titled "Alcázar of Seville" are one place.
+IN_NAMES = frozenset("saint sainte san santa sao los las puerto costa vila monte cabo punta rio chiang khao da do di el".split()) | MONTHS
+
+
+def joined(run: list | None, gap: str) -> bool:
+    if gap and set(gap) <= SPACES:
+        return True
+    starts_a_name = bool(run) and not run[0] and len(run[1]) == 1 and run[1][0] in IN_NAMES
+    return starts_a_name and bool(PARTICLES.fullmatch(gap))
+
+
 def closed(run: list | None) -> list[tuple[Name, int, int]]:
-    """The name a run of capitalised words makes: its place-words, or, when it has none, its words when they hold a
-    kind of place and no ticket ("Maya Bay"); nothing otherwise."""
+    """The name a run of capitalised words makes: its place-words and those of its words that belong to a longer name
+    (IN_NAMES: "Santa Cruz", "Đà Nẵng"); or, when it has no place-word, its words when they hold a kind of place or
+    are all generic and one of them begins a name, and no ticket ("Maya Bay", "Vila Real"); nothing otherwise."""
     if not run:
         return []
     if run[0]:
-        return [(tuple(dict.fromkeys(run[0])), run[2], run[3])]
-    if len(run[1]) >= 2 and set(run[1]) & KINDS and not set(run[1]) & HARD:
+        whole = [word for word in run[1] if word in run[0] or word in IN_NAMES]
+        return [(tuple(dict.fromkeys(whole or run[0])), run[2], run[3])]
+    # All generic, one of them the beginning of a name: "Vila Real". Not "Grand Bouddha", "Old Town".
+    all_generic = set(run[1]) <= GENERIC and bool(set(run[1]) & IN_NAMES)
+    if len(run[1]) >= 2 and (set(run[1]) & KINDS or all_generic) and not set(run[1]) & HARD:
         return [(tuple(dict.fromkeys(run[1])), run[2], run[3])]
     return []
 
@@ -295,6 +328,13 @@ def read(text: str, everywhere: frozenset | set = frozenset()) -> Reading:
     return Reading(first, tuple(listed), tuple(situating), tuple(name for name, _, _ in found), frozenset(words(text)))
 
 
+def titled(title: str, everywhere: frozenset | set = frozenset()) -> str:
+    """The stretch of a title that names its places ("Jours 6 et 7 — Hué" → "Hué", "Jours 5 à 8 — Kyoto et Nara" →
+    "Kyoto et Nara"), the destination aside; "" when it names none. Read the same by the generator and the guard."""
+    found = names(title, everywhere, sentence=True)
+    return title[found[0][1]:found[-1][2]] if found else ""
+
+
 def subjects(text: str, everywhere: frozenset | set = frozenset()) -> list[str]:
     """The words of the places a fact is about: its first place and those it lists with it (see `read`)."""
     reading = read(text, everywhere)
@@ -325,7 +365,38 @@ def linked(text: str) -> bool:
 
 def journey(text: str) -> bool:
     """A fact about a journey: an arrow or a dash between two names, or a means of transport in its first words."""
-    return linked(text) or bool(OPENERS & set(folded(text)[:OPENING_WORDS]))
+    return linked(text) or bool(OPENERS & set(folded(text)[:OPENING_WORDS])) or travelled(text)
+
+
+# "SE3", "SE1": the trains of the Reunification line, named by their number.
+TRAIN_NUMBER = re.compile(r"\bSE\d{1,2}\b")
+FROM_TO = re.compile(r"\b(?:de|d[’']|entre|depuis)\s*$", re.IGNORECASE)
+AND_TO = re.compile(r"(?:^|\s)(?:à|a|et|jusqu[’']à)\s*$", re.IGNORECASE)
+HOURS = re.compile(r"\d+\s?h\b")
+
+
+def travelled(text: str) -> bool:
+    """A journey that says its means further on: from one place to another ("de Hué à Đà Nẵng en train de jour", "entre
+    Ninh Bình (SE3, 21 h 35) et Hué"), with a means of transport, a train or an hour."""
+    found = names(text)
+    ends = any(FROM_TO.search(text[:one[1]]) and AND_TO.search(text[one[2]:other[1]])
+               for one, other in zip(found, found[1:]))
+    return ends and bool(RIDES & set(folded(text)) or TRAIN_NUMBER.search(text) or HOURS.search(text))
+
+
+def wanted_ways(text: str) -> set[str]:
+    """The means of transport a journey is made by: the one it opens on, else the one it names further on; a train
+    when it names one by its brand or its number ("Nozomi", "SE3")."""
+    said = folded(text)
+    found = ways(said[:OPENING_WORDS]) or ways(said)
+    return found or ({"rail"} if brands(set(said)) or TRAIN_NUMBER.search(text) else set())
+
+
+def other_ride(described: set[str], text: str) -> bool:
+    """A journey over a photo of another means of transport than its own: "de nuit entre Ninh Bình (SE3…) et Hué"
+    went over the boats of Tràng An. A photo of no means at all is not concerned."""
+    shown, wanted = ways(described), wanted_ways(text)
+    return bool(journey(text) and shown and wanted and not shown & wanted)
 
 
 CARDINAL = frozenset("nord sud ouest centre".split())
@@ -424,8 +495,7 @@ def subject(text: str) -> str:
 
 def readable(title: str) -> str:
     """A Commons title without its prefix and extension, in ordinary case when it is written in capitals."""
-    title = title.removeprefix("File:").rsplit(".", 1)[0] if title else ""
-    return title.title() if sum(c.isupper() for c in title) > 0.6 * max(1, sum(c.isalpha() for c in title)) else title
+    return ordinary(title.removeprefix("File:").rsplit(".", 1)[0] if title else "")
 
 
 def compared(text: str, everywhere: frozenset | set = frozenset(), known: frozenset | set = frozenset()) -> list[Name]:
@@ -522,7 +592,7 @@ def ride(described: set[str], text: str = "") -> bool:
     """A photo of a means of transport, by the words of its caption, title and identifier; of the one the text opens
     on when it names one ("Le bus 205 pour…" does not go over a shinkansen)."""
     # The means a line opens on; else the one it names further on ("la traversée du Tage en ferry": a ferry, not a tram).
-    wanted = ways(folded(text)[:OPENING_WORDS]) or ways(folded(text))
+    wanted = wanted_ways(text)
     if not wanted and OTHER_MEANS & set(folded(text)):
         return False   # "Hanoï → Hô-Chi-Minh-Ville en avion": no photo of a train
     return bool(ways(described) & wanted) if wanted else bool(RIDES & described)

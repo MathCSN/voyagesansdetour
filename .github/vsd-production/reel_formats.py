@@ -353,9 +353,12 @@ EMPTY_WORDS = frozenset("pour entre dans avec sans sous vers chez depuis selon p
                         "dont comme aussi tres deux trois quatre jour jours nuit nuits prix tarif euros pesos".split())
 
 
-def words_of(value: str) -> set[str]:
-    """Words of four letters and more that name something; a dash separates two words ('Mérida–Cancún' names both towns)."""
-    return set(re.findall(r"[a-z0-9]{4,}", destinations.ascii_fold(re.sub(r"[^\w\s]", " ", value)).lower())) - EMPTY_WORDS
+def words_of(value: str, numbers: bool = False) -> set[str]:
+    """Words of four letters and more that name something; a dash separates two words ('Mérida–Cancún' names both towns).
+    A number names nothing: "2026" in a Commons title does not make a photo of the rate of the euro on 6 November 2026.
+    `numbers`: keep them (stale_lots.py counts the words of a quote beside its numbers)."""
+    found = re.findall(r"[a-z0-9]{4,}", destinations.ascii_fold(re.sub(r"[^\w\s]", " ", value)).lower())
+    return {word for word in found if numbers or not word.isdigit()} - EMPTY_WORDS
 
 
 # Kinds of places: "la tour des Clérigos" and "l’Andante Tour 3", "la villa des Mystères" and the villa Cimbrone, "un
@@ -378,6 +381,15 @@ def words_shared(photo: tuple, target: set[str], family: str | None = None, kind
 
 def words_shown(photo: tuple, target: set[str], family: str | None = None, kinds: bool = False) -> int:
     return len(words_shared(photo, target, family, kinds))
+
+
+def section_place(section: dict | None, country: frozenset | set) -> str:
+    """The stretch of a section's title that names its places ("Jours 6 et 7 — Hué" → "Hué", "Jours 5 à 8 — Kyoto
+    et Nara" → "Kyoto et Nara"); "" when it names none, or when the section sums the guide up."""
+    title = str((section or {}).get("title") or "")
+    if not title or SUMMED_UP.search(destinations.ascii_fold(title).lower()):
+        return ""
+    return place_names.titled(title, country)
 
 
 class Media:
@@ -431,6 +443,18 @@ class Media:
         """The fact is about one place or one part of the destination: only a photo of it will do."""
         return bool(place_names.names(text, self.country) or place_names.region(text))
 
+    def where(self, fact: dict) -> str:
+        """The places a fact that names none is about: those its section's title names ("les tombeaux coûtent 150 000 ₫
+        chacun" in "Jours 6 et 7 — Hué" is about Hué, and went over Ha Long once the photo of Hué was taken)."""
+        if self.located(fact["label"]):
+            return ""
+        return section_place(fact.get("section"), self.country)
+
+    def about(self, fact: dict) -> str:
+        """What a photo is chosen for: the fact, and the places of its section when it names none itself."""
+        where = self.where(fact)
+        return f"{fact['label']} ({where})" if where else fact["label"]
+
     def recorded(self, photo: tuple) -> list:
         """The precise places the record of a photo names, whole (place_names.record)."""
         return place_names.record(photo[0], photo[2], str(photo[1].get("commonsTitle", "")), self.country, self.family)
@@ -450,7 +474,12 @@ class Media:
         l'entrée de SantaPark" over huskies (13/11/2026): such a fact stays in the caption and in the guide."""
         if self.located(text):
             return []
-        return [ph for ph in self.free() if ph[0] not in avoid and not place_names.brand_clash(text, self.described(ph))]
+        return [ph for ph in self.free() if ph[0] not in avoid and not self.misleads(text, ph)]
+
+    def misleads(self, text: str, photo: tuple) -> bool:
+        """The photo shows another train than the one the fact names, or another means of transport than its journey's."""
+        shown = self.described(photo)
+        return place_names.brand_clash(text, shown) or place_names.other_ride(shown, text)
 
     def above(self, section: dict | None, photo_id: str, place: str, label: str = "") -> str:
         """The label written above a figure: the name of its section over that section's own photo; over another
@@ -568,7 +597,8 @@ class Media:
         target, wider = self.target(text), self.target(text + " " + also)
         wanted = section.get("image") if section else None
         # Never a photo of another train than the one the fact names ("Intercidades" over an Alfa Pendular).
-        pool = [ph for ph in self.free() if ph[0] not in avoid and not place_names.brand_clash(text, self.described(ph))]
+        # …nor of another means of transport than the one of a journey (the boats of Tràng An for the night train).
+        pool = [ph for ph in self.free() if ph[0] not in avoid and not self.misleads(text, ph)]
         own = next((ph for ph in pool if ph[0] == wanted), None)
         if place_names.journey(text):
             pick = self.ride(text, pool, own, target, wider)
@@ -659,15 +689,25 @@ def fact_plan(fact: dict, media: Media, place: str, tag: str, badge: str | None 
     if not headline:
         raise Held("figure_too_long")
     detail = unbreakable(fact["short"])
-    picture = media.moving(fact["label"], fact["section"])
+    picture = media.moving(media.about(fact), fact["section"])
     # The label above the figure is the section's name only over that section's own photo, or when the section has
     # none: "Aurores boréales" is not written over a picture of the village.
     # …and a name that carries a year is not written over a figure of another year ("La ligne du Nord en 2026" over
     # "38,3 % des Alfa Pendular à l'heure en 2025").
     kicker = media.above(fact["section"], picture[1], place, fact["label"])
     excerpt, label = quoted(fact, tag)
-    return plan("fact", picture, kicker, headline, seconds_for(detail), detail=detail,
-                facts=[{"source": "guide", "excerpt": excerpt}], tag=label, badge=badge)
+    where, facts = located_by_section(fact, media, excerpt)
+    return plan("fact", picture, kicker, headline, seconds_for(detail), detail=detail, facts=facts, tag=label, badge=badge, where=where)
+
+
+def located_by_section(fact: dict, media: Media, excerpt: str) -> tuple[str | None, list[dict]]:
+    """The plan's quotes and, for a fact that names no place in a section about one, the title of that section: quoted
+    like the figure, it tells the guard on places (production.py) which place the plan is about."""
+    heading = fact.get("heading")
+    quotes = [{"source": "guide", "excerpt": excerpt}]
+    if not heading or not media.where(fact):
+        return None, quotes
+    return heading, [{"source": "guide", "excerpt": heading}] + quotes
 
 
 @dataclass(frozen=True)
@@ -704,10 +744,11 @@ def placed(facts: list[dict], media: Media, limit: int, least: int):
     done = set()
     for wanted, most in ((True, limit), (False, least)):
         for index, fact in enumerate(facts):
-            if index in done or len(done) >= most or media.shown_elsewhere(fact["label"]):
+            about = media.about(fact)
+            if index in done or len(done) >= most or media.shown_elsewhere(about):
                 continue
             # In the second round a figure takes a photo that does not show it: never one that shows another place.
-            if media.named(fact["label"], fact["section"]) if wanted else media.left_for(fact["label"]):
+            if media.named(about, fact["section"]) if wanted else media.left_for(about):
                 done.add(index)
                 yield index
 

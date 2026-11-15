@@ -301,6 +301,9 @@ def quoted_excerpts(scene, snapshots, last):
     tag = scene.get("tag")
     dated = OWN_DATE_TAG.search(tag) if isinstance(tag, str) else None
     ensure(not dated or any(normalized(dated[1]).lower() in excerpt.lower() for excerpt in quoted), "The label dates a figure that its plan does not quote with that date")
+    # The section a plan says it is about is one the plan quotes from the guide.
+    if scene.get("where") is not None:
+        ensure(normalized(text(scene["where"], 120)) in quoted, "The section a plan is about is not quoted by that plan")
     return used, quoted
 
 
@@ -465,6 +468,10 @@ def another_place(scene, photos, everywhere) -> str | None:
         return None
     said = draw.plain(" ".join(scene.get("headline") or []) + " " + str(scene.get("detail") or ""))
     detail = str(scene.get("detail") or said)
+    # A fact that names no place, quoted from a section about one ("Jours 6 et 7 — Hué"), is about that place.
+    where = place_names.titled(str(scene.get("where") or ""), everywhere)
+    if where and not place_names.names(said, everywhere) and not place_names.region(said):
+        said = f"{said} ({where})"
     photo, caption = scene["photo"], str(scene.get("alt") or "")
     title = str((photos.get(photo) or {}).get("commonsTitle", ""))
     shown = place_names.pictured(photo, caption, title, everywhere)
@@ -472,6 +479,8 @@ def another_place(scene, photos, everywhere) -> str | None:
     listed = ", ".join(" ".join(name) for name in found) or "no place in its record"
     if place_names.brand_clash(said, shown):
         return f"names a train over {photo}, another train ({listed})"
+    if place_names.other_ride(shown, detail):
+        return f"names a journey over {photo}, another means of transport ({listed})"
     if journey_shown(detail, shown, found, everywhere):
         return None
     reading = place_names.read(said, everywhere)

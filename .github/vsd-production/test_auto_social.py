@@ -1789,11 +1789,12 @@ class RealGuideTests(unittest.TestCase):
         for text in ("l’Andante Tour 3 : métro, bus et trains urbains pendant 72 h", "le ticket Carris/Metro sur carte Navegante",
                      "de séjour sans visa pour les Français", "une balade en traîneau au village du Père Noël", "Intercidades en 2e classe"):
             self.assertEqual(names.named(text), [], text)
-        self.assertEqual(names.named("le bus MEPE Puerto Viejo – San José, environ 4 h 30"), ["viejo", "jose"])
+        # Since the review of PR 53 (16/11/2026) a name keeps the words that begin it: "Puerto Viejo" is not any "Viejo".
+        self.assertEqual(names.named("le bus MEPE Puerto Viejo – San José, environ 4 h 30"), ["puerto", "viejo", "san", "jose"])
         self.assertEqual(names.subjects("un petit casier City Lockers pour 24 h à Porto-Trindade (7,50 € à Lisbonne), jusqu’à 7 jours"), ["porto", "trindade"])
         self.assertEqual(names.named("le billet de train Rossio–Sintra (tarif CP 4 zones 2026)"), ["rossio", "sintra"])
         # Capitals of any alphabet, and letters no accent rule folds.
-        self.assertEqual(names.named("de Hué à Đà Nẵng puis Đà Lạt, Šibenik et Łódź"), ["hue", "nang", "lat", "sibenik", "lodz"])
+        self.assertEqual(names.named("de Hué à Đà Nẵng puis Đà Lạt, Šibenik et Łódź"), ["hue", "da", "nang", "lat", "sibenik", "lodz"])
         # Two names that begin alike are two places; a month is part of a name after another one.
         self.assertEqual((names.named("la nuit à Chiang Rai"), names.named("le temple de Chiang Mai"), names.named("de mai à octobre, en Mai")), (["chiang", "rai"], ["chiang", "mai"], []))
         # The first word of a caption is its place when the photo's identifier or title says so.
