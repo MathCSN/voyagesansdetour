@@ -151,19 +151,27 @@ def names(text: str, everywhere: frozenset | set = frozenset(), sentence: bool =
         end = match.end()
         if not adjacent:
             found, run = found + closed(run), None
-        if first and grammar_capital(text, match, known):
-            continue
-        if set(folded(match[0])) <= SMALL:
-            found, run = found + closed(run), None   # "Malaysia To Bangkok": two names
-            continue
-        # The acronym is the carrier's whole name: "le bus MEPE Puerto Viejo – San José".
-        acronym = len(match[0]) > 1 and match[0].isupper()
-        carrier = not acronym and ((carrier and adjacent) or after_carrier(text, match))
-        if carrier:
+        role, carrier = role_of(text, match, carrier, adjacent, first, known)
+        if role == "break":
             found, run = found + closed(run), None
-            continue
-        run = extended(run, match, [] if acronym else folded(match[0]), everywhere, adjacent and not first)
+        elif role != "skip":
+            run = extended(run, match, folded(match[0]) if role == "word" else [], everywhere, adjacent and not first)
     return found + closed(run)
+
+
+def role_of(text: str, match: re.Match, carrier: bool, adjacent: bool, first: bool, known: frozenset | set) -> tuple[str, bool]:
+    """What one capitalised word does to the name being read ("skip", "break", "acronym" or "word"), and whether the
+    name of a carrier runs on after it."""
+    if first and grammar_capital(text, match, known):
+        return "skip", carrier
+    if set(folded(match[0])) <= SMALL:
+        return "break", carrier   # "Malaysia To Bangkok": two names
+    # The acronym is the carrier's whole name: "le bus MEPE Puerto Viejo – San José".
+    acronym = len(match[0]) > 1 and match[0].isupper()
+    carrier = not acronym and ((carrier and adjacent) or after_carrier(text, match))
+    if carrier:
+        return "break", carrier
+    return ("acronym" if acronym else "word"), carrier
 
 
 def grammar_capital(text: str, match: re.Match, known: frozenset | set) -> bool:
@@ -224,7 +232,19 @@ def proper(text: str, everywhere: frozenset | set = frozenset(), sentence: bool 
 SUBJECT_GAP = 4   # words at most between two places a fact is about: "Bangkok, Chiang Mai et la mer d'Andaman"
 # What sets a place off as where the first one stands, not as another place the fact is about: "le Grand Bouddha du
 # Tōdai-ji, à Nara", "Maya Bay, à Phi Phi", "le Real Alcázar de Séville", "le château São Jorge à Lisbonne".
-SITUATING = re.compile(r"^\s*(?:[,(]\s*)?(?:à|a(?:ux?)?|en|dans|sur|près d[eu’']?|pres d|d[eu’']|des)\s*$", re.IGNORECASE)
+SITUATING = frozenset(["à", "a", "au", "aux", "en", "dans", "sur", "de", "du", "des", "d’", "d'",
+                       "près d", "près de", "près du", "près d’", "près d'", "pres d"])
+
+
+def situates(gap: str, journeying: bool) -> bool:
+    """The words between two places set the second off as where the first one stands: after a comma, always ("…, à
+    Nara"); right after it ("le Real Alcázar de Séville"), only when the fact is no journey ("de Hanoï à Hué")."""
+    if SITUATING_AFTER_COMMA.match(gap):
+        return True
+    word = gap.strip()
+    if word[:1] in (",", "("):
+        word = word[1:].strip()
+    return not journeying and word.lower() in SITUATING
 SITUATING_AFTER_COMMA = re.compile(r"^\s*[,(]\s*(?:à|a|au|aux|en|dans|sur|près d|pres d)\b", re.IGNORECASE)
 
 
@@ -267,8 +287,7 @@ def read(text: str, everywhere: frozenset | set = frozenset()) -> Reading:
         gap = text[end:start] if start >= end else ""
         if beyond_subject(gap):
             break
-        situated = SITUATING_AFTER_COMMA.match(gap) or (not journeying and SITUATING.match(gap))
-        (situating if situated else listed).append(name)
+        (situating if situates(gap, journeying) else listed).append(name)
         end = stop
     if first is None and origins:
         # "la traversée du fleuve en ferry depuis Bangkok": no other place, the fact is about where it starts.
