@@ -499,8 +499,8 @@ def opening_on_an_outing(scene, photos, outings, everywhere) -> str | None:
 
 def borrowed_elsewhere(scenes, photos, everywhere) -> list:
     """A train borrowed from another guide's photos (media_library.vehicle_candidates) under a fact that does not name
-    it, two of them in one post, or one beside a photo of the same train; and a photo of a train of one brand under a
-    fact of trains that names none (« 85×55×35 cm … sur les trains internationaux CP » over an Alfa Pendular)."""
+    it, two of them in one post, or one beside a photo of the same train; and a fact of trains that names no place
+    over a photo of no train (« 85×55×35 cm … sur les trains internationaux CP » over the roofs of Alfama)."""
     found, seen, shown = [], 0, []
     for number, scene in enumerate(scenes, 1):
         record = photos.get(scene.get("photo")) or {}
@@ -508,7 +508,8 @@ def borrowed_elsewhere(scenes, photos, everywhere) -> list:
         borrowed = set(record.get("borrowedFor") or ())
         shown.append((number, trains, bool(borrowed)))
         seen += bool(borrowed)
-        told = train_told(scene, number, len(scenes), trains, borrowed, seen, everywhere)
+        on = place_names.vehicle(str(scene.get("photo")), str(scene.get("alt") or ""), str(record.get("commonsTitle", "")))
+        told = train_told(scene, (number, len(scenes)), on, borrowed, seen, everywhere)
         if told:
             found.append((number, told))
     found += [(number, "borrows a train the post already shows") for number, trains, lent in shown
@@ -516,12 +517,14 @@ def borrowed_elsewhere(scenes, photos, everywhere) -> list:
     return found
 
 
-def train_told(scene, number, count, trains, borrowed, seen, everywhere) -> str | None:
-    """Why one plan's train is wrong (borrowed_elsewhere), None when it is not."""
-    said = said_by(scene, everywhere)
+def train_told(scene, place, on, borrowed, seen, everywhere) -> str | None:
+    """Why one plan's train is wrong (borrowed_elsewhere), None when it is not. `place`: the plan's number and the
+    post's count of plans; `on`: the means of transport its photo shows (place_names.vehicle)."""
+    said, (number, count) = said_by(scene, everywhere), place
     named = place_names.brands(place_names.words(said))
-    if 1 < number < count and trains and not named and "rail" in place_names.wanted_ways(said):
-        return f"shows a train of a brand over a fact of trains that names none ({scene['photo']})"
+    located = place_names.names(said, everywhere) or place_names.region(said)
+    if 1 < number < count and place_names.ways(place_names.folded(said)) == {"rail"} and not located and "rail" not in on:
+        return f"names trains and no place over {scene['photo']}, which shows no train"
     if borrowed and not borrowed & named:
         return f"borrows {scene['photo']} for a fact of another train"
     if borrowed and seen > 1:
@@ -538,7 +541,8 @@ def subjects_repeated(scenes, photos, everywhere) -> list:
         if not photo:
             continue
         record = photos.get(photo) or {}
-        for subject in place_names.photo_subjects(str(scene.get("alt") or ""), str(record.get("commonsTitle", "")), everywhere):
+        for subject in place_names.photo_subjects(str(scene.get("alt") or ""), str(record.get("commonsTitle", "")), everywhere,
+                                                  str(record.get("categories", ""))):
             other = first.setdefault(subject, (number, photo))
             if other[1] != photo:
                 found.append((number, f"shows the subject of plan {other[0]} again over {photo}"))

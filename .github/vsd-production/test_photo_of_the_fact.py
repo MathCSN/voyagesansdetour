@@ -504,9 +504,9 @@ class OpeningAndSubject(unittest.TestCase):
     def test_only_the_places_a_section_sends_the_reader_to_are_outings(self):
         # Review of PR 57: "place != country" took Gaia, Guéliz or Brooklyn for outings and the guides of a region for
         # guides of a town (Yucatán opened on the cathedral of Mérida, Laponie lost its village). Only a section that
-        # says it: "Kyoto, et Nara en excursion" makes Nara one, never Kyoto.
+        # says it. Counter-review of PR 57: "Kyoto, et Nara en excursion" makes Nara a stage of the trip, not an outing.
         japan = {"sections": [{"title": "Jours 5 à 8 — Kyoto, et Nara en excursion"}, {"title": "Jours 1 à 4 — Tokyo"}]}
-        self.assertEqual(names.outings(japan, names.words("Japon")), (("nara",),))
+        self.assertEqual(names.outings(japan, names.words("Japon")), ())
         for guide, caption in (({"sections": [{"title": "Jour 2 — Le pont en métro, Gaia et ses caves"}]}, "Le pont Luís I et la Ribeira vus depuis la Serra do Pilar, à Gaia."),
                                ({"sections": [{"title": "Jours 4-6 : Mérida et Uxmal"}]}, "La pyramide d’El Castillo, à Chichén Itzá."),
                                ({"sections": [{"title": "Ce qui est gratuit au village du Père Noël"}]}, "Le village du Père Noël sous la neige, à Rovaniemi.")):
@@ -545,6 +545,24 @@ class OpeningAndSubject(unittest.TestCase):
                               (("Tower Bridge au-dessus de la Tamise.", "File:London, Tower Bridge.jpg"), ("Tower Bridge ouvert, au crépuscule.", "File:TB.jpg"))):
             self.assertTrue(names.photo_subjects(*first) & names.photo_subjects(*second), first[0])
         self.assertFalse(names.photo_subjects("La tour de Belém au bord du Tage.") & names.photo_subjects("Le monastère des Jerónimos, à Belém."))
+
+    def test_the_counter_review_widens_the_table_and_reads_the_categories_of_commons(self):
+        # The office of Santa Claus shows the village; the Ribeira and its rabelos twice; Mount Fuji twice.
+        for first, second in ((("Le bureau du Père Noël illuminé sous la neige, à Rovaniemi.", "File:Santa Claus Village.jpg"),
+                               ("Le village du Père Noël de Rovaniemi sous la neige, en décembre.", "File:Rovaniemi pajakyla.jpg")),
+                              (("Les façades de Ribeira au bord du Douro à Porto.", ""), ("Un bateau rabelo sur le Douro, face aux façades de la Ribeira.", "")),
+                              (("La pagode de Chureito et le mont Fuji au-dessus de Fujiyoshida.", ""), ("Un shinkansen N700S devant le mont Fuji.", ""))):
+            self.assertTrue(names.photo_subjects(*first) & names.photo_subjects(*second), first[0])
+        # Narrower: a photo of Lagos is not Ponta da Piedade, and Tulum has its own Castillo.
+        self.assertFalse(names.photo_subjects("Le port de Lagos.") & names.photo_subjects("Les arches de Ponta da Piedade, près de Lagos."))
+        self.assertTrue(names.photo_subjects("Les falaises ocre.", "File:Portugal - Algarve - cliffs near Lagos.jpg") & names.photo_subjects("Ponta da Piedade."))
+        self.assertFalse(names.photo_subjects("El Castillo de Tulum au-dessus de la mer.") & names.photo_subjects("La pyramide de Kukulcán, à Chichén Itzá."))
+        # One Commons category of a place shared: one subject. Never a town, a country, a date, a tool or the sky.
+        shared = "Rabelos in Cais de Gaia with Ribeira"
+        self.assertTrue(names.photo_subjects("Un quai.", "", names.words("Porto"), "Taken with Nikon|" + shared)
+                        & names.photo_subjects("Un autre quai.", "", names.words("Porto"), "Self-published work|" + shared))
+        self.assertEqual(names.place_categories("Porto|May 2012 in Porto|Blue sky in Portugal|Taken with Canon EOS|Cultural heritage monuments in Portugal with known IDs",
+                                                names.words("Porto Portugal")), set())
         # The guard refuses it in a post made since the review.
         scenes = [{"photo": "a", "alt": "L’arc de la rua Augusta et la statue équestre de la Praça do Comércio."}, {"photo": "b", "alt": "Un tram vert devant l’arc de la rue Augusta, sur la place du Commerce, à Lisbonne."}]
         self.assertEqual([number for number, _ in p.subjects_repeated(scenes, {"a": {}, "b": {}}, names.words("Lisbonne"))], [2])
@@ -654,25 +672,29 @@ class RideToAnotherPlace(unittest.TestCase):
                   {"photo": "train-oriente", "headline": ["*35,70 €*"], "detail": "l’Alfa Pendular entre les deux villes"}]
         self.assertEqual([number for number, _ in p.borrowed_elsewhere(scenes, records, everywhere)], [1, 2])
 
-    def test_a_train_of_one_brand_never_stands_for_other_trains_nor_twice_in_a_post(self):
-        # Review of PR 57, « Portugal bagages »: the luggage of the international trains of CP over the guide's own Alfa
-        # Pendular, and a borrowed Alfa beside it.
+    def test_a_fact_of_trains_with_no_place_goes_over_a_train_and_a_borrowed_one_never_joins_its_own(self):
+        # Counter-review of PR 57, « Portugal bagages »: « 85×55×35 cm … trains internationaux CP » went over the roofs of
+        # Alfama; a borrowed Alfa Pendular stood beside the guide's own.
         own = photo("train-alfa-pendular", "File:Alfa Pendular New Livery.jpg", "Un train Alfa Pendular de CP à quai.")
         lent = photo("train-alfa-aqueduc", "File:Aqueduc.jpg", "Un Alfa Pendular passe sous l’aqueduc des Eaux Libres.", borrowedFor=["alfa pendular"])
         media = reel_formats.Media([own, lent, self.ALFAMA], [], everywhere=self.EVERYWHERE)
-        self.assertTrue(media.misleads("85×55×35 cm la taille maximale des bagages sur les trains internationaux CP", own))
-        self.assertFalse(media.misleads("6,50 € par bagage en trop à bord de l’Alfa Pendular", own))
+        luggage = "85×55×35 cm la taille maximale des bagages sur les trains internationaux CP"
+        self.assertTrue(media.misleads(luggage, self.ALFAMA))
+        self.assertFalse(media.misleads(luggage, own))
+        self.assertTrue(media.misleads(luggage, lent))   # a borrowed train only for the fact that names it
+        self.assertEqual(names.wanted_ways("60 jours la vente sur le site CP"), {"rail"})
         media.photo("6,50 € par bagage en trop à bord de l’Alfa Pendular")
         self.assertNotIn("train-alfa-aqueduc", [ph[0] for ph in media.free()])
         everywhere = names.words(self.EVERYWHERE)
         scenes = [{"photo": "x", "alt": "Une rue de Lisbonne."},
-                  {"photo": "train-alfa-pendular", "alt": own[2], "headline": ["*85×55×35 cm*"], "detail": "les bagages sur les trains internationaux CP"},
+                  {"photo": "lisbonne-alfama", "alt": self.ALFAMA[2], "headline": ["*85×55×35 cm*"], "detail": "les bagages sur les trains internationaux CP"},
+                  {"photo": "train-alfa-pendular", "alt": own[2], "headline": ["*6,50 €*"], "detail": "par bagage en trop à bord de l’Alfa Pendular"},
                   {"photo": "train-alfa-aqueduc", "alt": lent[2], "headline": ["*6,50 €*"], "detail": "par bagage en trop à bord de l’Alfa Pendular"},
                   {"photo": "y", "alt": "Les toits de Lisbonne."}]
-        records = {"train-alfa-pendular": own[1], "train-alfa-aqueduc": lent[1], "x": {}, "y": {}}
+        records = {"train-alfa-pendular": own[1], "train-alfa-aqueduc": lent[1], "lisbonne-alfama": self.ALFAMA[1], "x": {}, "y": {}}
         reasons = dict(p.borrowed_elsewhere(scenes, records, everywhere))
-        self.assertIn("names none", reasons[2])
-        self.assertIn("already shows", reasons[3])
+        self.assertIn("shows no train", reasons[2])
+        self.assertIn("already shows", reasons[4])
 
     def test_a_station_is_no_train(self):
         # "Estación de tren São Bento": the hall of azulejos took "l'Alfa Pendular entre les deux villes".

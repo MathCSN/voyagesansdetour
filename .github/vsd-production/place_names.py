@@ -35,7 +35,7 @@ GENERIC = frozenset("""
     real via""".split())
 # What a journey is made by, as a fact says it; and what a photo of it shows.
 WAYS = {"rail": frozenset("train trains shinkansen tgv couchette couchettes rame railway sleeper locomotive wagon "
-                          "tren trenes comboio comboios treno treni".split()),
+                          "tren trenes comboio comboios treno treni cp".split()),
         "metro": frozenset("metro metros".split()), "tram": frozenset("tram trams tramway eletrico".split()),
         "road": frozenset("bus minibus navette autocar".split()),
         "water": frozenset("ferry ferries bateau bateaux barque barques sampan sampans boat boats".split())}
@@ -474,10 +474,14 @@ def vehicle(identifier: str, caption: str, title: str) -> set[str]:
 # Commerce" and "la statue équestre de la Praça do Comércio" are the same square).
 SUBJECTS = {
     "arc-rua-augusta": ("rua augusta", "rue augusta", "praca do comercio", "place du commerce", "arco da victoria", "terreiro do paco"),
-    # The office of Santa Claus is filed on Commons as "Santa Claus Village.jpg" but shows the office: the caption decides.
-    "village-pere-noel": ("village du pere noel", "rovaniemi pajakyla"),
-    "ponta-da-piedade": ("ponta da piedade", "pres de lagos", "near lagos"),
-    "chichen-itza": ("el castillo", "kukulcan", "chichen itza"),
+    # The office of Santa Claus stands in the village and shows it, snow and spire (counter-review of PR 57).
+    "village-pere-noel": ("village du pere noel", "rovaniemi pajakyla", "bureau du pere noel", "santa claus village", "santa claus office"),
+    # One coast: Ponta da Piedade and the cliffs filed as "cliffs near Lagos"; not every photo of Lagos.
+    "ponta-da-piedade": ("ponta da piedade", "cliffs near lagos"),
+    # Not "el castillo": Tulum has one too.
+    "chichen-itza": ("kukulcan", "chichen itza"),
+    "ribeira": ("ribeira",),
+    "mont-fuji": ("mont fuji", "mount fuji", "mt fuji"),
     "mezquita": ("mezquita",),
     "alhambra": ("alhambra", "cour des myrtes", "patio de los arrayanes"),
     "tower-bridge": ("tower bridge",),
@@ -488,19 +492,45 @@ SUBJECTS = {
 }
 
 
-def photo_subjects(caption: str, title: str = "", everywhere: frozenset | set = frozenset()) -> set:
-    """What a photo is of, when one of its names says it: the keys of SUBJECTS it names, and the places its caption
-    names whole when it names two at least (a site and where it stands: "La pyramide d'El Castillo, à Chichén Itzá").
-    A town alone ("…, à Rovaniemi") is no subject: many photos of one post are taken in it."""
+# Commons categories that say nothing of the place a photo shows: tools, authors, dates, licences, quality marks, the
+# sky or the season, and the registers of monuments.
+NOT_A_PLACE_CATEGORY = re.compile(
+    r"taken with|self-published|files? with|flickr|images? (?:by|of|from|uploaded)|photographs? (?:by|taken)|pictures? by|photos? by|"
+    r"quality images|featured|valued|commons|wikipedia|wiki loves|cc-|gfdl|pd-|licen[cs]e|uploaded|stream|template|known ids|"
+    r"\b(?:19|20)\d\d\b|\b(?:january|february|march|april|may|june|july|august|september|october|november|december)\b|"
+    r"\b(?:winter|summer|spring|autumn|sky|sunset|sunrise|night)\b|panoramio|unsplash|pexels|sdc|location of creation|"
+    r"desktop backgrounds|media needing|rolling stock|undiscernible|livery|advertisements", re.IGNORECASE)
+TOWNS_OF_COMMONS = frozenset("in of the de do da lisbon lisboa oporto porto portugal japan mexico morocco finland lapland thailand "
+                             "vietnam london england italy spain andalusia".split())
+
+
+def place_categories(categories: str, everywhere: frozenset | set = frozenset()) -> set[str]:
+    """The Commons categories of a photo that name what it shows ("Rabelos in Cais de Gaia with Ribeira", "1 bridge in
+    Porto"), never a town or a country alone (counter-review of PR 57). The old catalogue's records carry none."""
+    kept = set()
+    for category in str(categories or "").split("|"):
+        category = category.strip()
+        if category and not NOT_A_PLACE_CATEGORY.search(category) and not set(folded(category)) <= set(everywhere) | TOWNS_OF_COMMONS:
+            kept.add("category:" + " ".join(folded(category)))
+    return kept
+
+
+def photo_subjects(caption: str, title: str = "", everywhere: frozenset | set = frozenset(), categories: str = "") -> set:
+    """What a photo is of, when one of its names says it: the keys of SUBJECTS it names, the places its caption names
+    whole when it names two at least (a site and where it stands: "La pyramide d'El Castillo, à Chichén Itzá"), and
+    its Commons categories of a place. A town alone ("…, à Rovaniemi") is no subject: many photos of one post are
+    taken in it."""
     flat = " " + " ".join(folded(caption + " " + readable(title))) + " "
     found = {key for key, aliases in SUBJECTS.items() if any(" " + alias + " " in flat for alias in aliases)}
     named = frozenset(name for name, _, _ in names(caption, everywhere, sentence=True))
-    return found | ({named} if len(named) >= 2 else set())
+    return found | ({named} if len(named) >= 2 else set()) | place_categories(categories, everywhere)
 
 
 # A section that takes the reader out of the destination: "Jour 3 — Sortir de la ville : Ouzoud, Essaouira ou
 # l'Ourika", "Kyoto, et Nara en excursion".
-OUTING = re.compile(r"sortir de la ville|excursions?|escapades?|day trips?|aux alentours|aux environs", re.IGNORECASE)
+# Not "en excursion": "Jours 5 à 8 — Kyoto, et Nara en excursion" makes Nara a stage of the trip, which may open a post
+# (counter-review of PR 57).
+OUTING = re.compile(r"sortir de la ville|escapades?|day trips?|aux alentours|aux environs", re.IGNORECASE)
 
 
 def outings(article: dict, everywhere: frozenset | set = frozenset()) -> tuple:

@@ -557,11 +557,11 @@ class Media:
         named = place_names.brands(place_names.words(text))
         if borrowed and not borrowed & named:
             return True
-        # A train of one brand never stands for trains the fact does not name: « 85×55×35 cm … sur les trains
-        # internationaux CP » went over an Alfa Pendular (review of PR 57).
-        if not named and "rail" in place_names.wanted_ways(text) and self.brands_shown(photo):
-            return True
         on = place_names.vehicle(photo[0], photo[2], str(photo[1].get("commonsTitle", "")))
+        # A fact of trains that names no place goes over a train, else it stays in the guide: « 85×55×35 cm … sur les
+        # trains internationaux CP » went over the roofs of Alfama (counter-review of PR 57).
+        if place_names.ways(place_names.folded(text)) == {"rail"} and not self.located(text) and "rail" not in on:
+            return True
         if place_names.brand_clash(text, self.described(photo)) or place_names.other_ride(on, text):
             return True
         # "2 € la traversée du Tage en ferry vers Cacilhas" over a church of Alfama: a ride to another place goes over
@@ -649,7 +649,7 @@ class Media:
     def subjects(self, photo: tuple) -> set:
         """What a photo is of (place_names.photo_subjects): a monument of the table reviewed by hand, or the places its
         caption names when it names two at least."""
-        return place_names.photo_subjects(photo[2], str(photo[1].get("commonsTitle", "")), self.country)
+        return place_names.photo_subjects(photo[2], str(photo[1].get("commonsTitle", "")), self.country, str(photo[1].get("categories", "")))
 
     def subjects_shown(self) -> set:
         """The subjects of the photos this post has already taken."""
