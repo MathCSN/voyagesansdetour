@@ -134,7 +134,7 @@ def caption_emoji(value: str, label: str) -> str:
     # The pictogram of a journey is the one of the means of transport its line names: a bus is not a train ("le
     # minibus Phantip", "bus de remplacement"), and a ticket for a town is no journey at all.
     ride = ride_emoji(first, ways, label)
-    tests = (("💶", MONEY.search(value)), ("⏱️", re.search(r"\b(min|h|jours?)\b", value)), (ride, ride),
+    tests = (("💶", is_money(value)), ("⏱️", re.search(r"\b(min|h|jours?)\b", value)), (ride, ride),
              ("🎟️", re.match(r"(?:l )?entree\b", opening)), ("🥾", re.search(r"marches|sentier|randonn|à pied", value + label)))
     return next((emoji for emoji, fits in tests if fits), "📍")
 
@@ -160,7 +160,13 @@ def when_to_go(article: dict) -> bool:
 
 
 # A price in any currency the guides give: the yen and the dong are prices too ("176 ¥" went under a pin).
-MONEY = re.compile(r"[€¥₫£$฿]|\b(?:bahts?|dirhams?|dh|pesos?|yens?|dongs?|couronnes?|NOK|SEK|DKK|MXN|THB|VND|JPY|MAD)\b", re.IGNORECASE)
+CURRENCY_SIGNS = frozenset("€¥₫£$฿")
+CURRENCY_WORDS = frozenset("baht bahts dirham dirhams dh peso pesos yen yens dong dongs couronne couronnes "
+                           "nok sek dkk mxn thb vnd jpy mad".split())
+
+
+def is_money(value: str) -> bool:
+    return bool(CURRENCY_SIGNS & set(value) or CURRENCY_WORDS & set(place_names.folded(value)))
 
 
 def caption_line(fact: dict) -> str:
@@ -896,6 +902,14 @@ def table_kicker(brief: Brief, section: dict, photo_id: str) -> str:
     return label if named else brief.place
 
 
+def caption_heading(brief: Brief, section: dict, kicker: str) -> str:
+    """The name the caption gives the table: the plan's label, else the section's name when it says something."""
+    if kicker != brief.place:
+        return kicker
+    named = kicker_of(section, brief.place)
+    return named if named != brief.place and table_kicker_names(brief, named) else brief.place
+
+
 def table_kicker_names(brief: Brief, label: str) -> bool:
     """The section's name says something of the table (it is no summary nor a bare "Arriver")."""
     return any(words_shared(photo, brief.media.target(label), brief.media.family, kinds=True) for photo in brief.media.all)
@@ -955,8 +969,7 @@ def table_reel(brief: Brief) -> tuple[dict, list[dict], list[str]]:
         plans[index] = fact_plan(chosen[index], brief.media, brief.place, brief.tag)
     body += [plans[index] for index in sorted(plans)]
     # The caption is no photo: it keeps the section's name ("Alfa Pendular ou Intercidades") when the plan could not.
-    named = kicker_of(table["section"], brief.place)
-    told = kicker if kicker != brief.place else (named if named != brief.place and table_kicker_names(brief, named) else brief.place)
+    told = caption_heading(brief, table["section"], kicker)
     heading = " ".join(table["title"]) if told == brief.place else told + " · " + " ".join(table["title"])
     # The caption gives the table, then the figures the reel shows after it, before any figure left unshown.
     shown = [caption_line(chosen[index]) for index in sorted(plans)]
