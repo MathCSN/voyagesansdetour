@@ -85,7 +85,7 @@ def select(articles, drafts, known, last, now, skip=frozenset(), feeds=DEFAULT_F
         if item['articleSha256'] != digest(article) or item.get('rendererSha256') != renderer_sha256() or item['targetUrl'] != ORIGIN + article_path(article):
             continue
         headline = item.get('pinTitle') or item['title']
-        require(item['title'] == article['title'] and headline == pin_title(article, variant) and 1 <= len(headline) <= TITLE_MAX, 'title_changed_or_too_long')
+        require(item['title'] == article['title'] and headline == pin_title(article, variant, item.get('photo')) and 1 <= len(headline) <= TITLE_MAX, 'title_changed_or_too_long')
         require(item['status'] == 'draft_requires_review' and item['publicationApproved'] is False, 'draft_state')
         require(item.get('templateVersion') in (1, 2), 'unqualified_renderer')
         # Version 2 carries one of the guide's photos, accepted only with a free licence recorded in the draft.

@@ -144,17 +144,31 @@ def fact_fits_photo(fact, photo, everywhere, cover=False):
     # The means read in the label as it opens ("le taxi au départ de l'aéroport"), else with its figure ("10 trains"). A
     # journey goes over a ride of that very means: never over another one (a train over boats), nor over none.
     wanted = place_names.wanted_ways(fact['label']) or place_names.wanted_ways(text)
+    # A walk never over a vehicle; it is no journey to show a vehicle for either.
+    if 'walk' in wanted:
+        return not place_names.vehicle(photo['id'], caption, title)
     if wanted and (place_names.journey(fact['label']) or place_names.journey(text) or 'other' in wanted):
         return place_names.ride(shown, text) and place_names.on_the_way(found, place_names.read(fact['label'], everywhere))
+    # A fare of the town's transport with no means named ("le trajet en ville : Andante Z2 à Porto, zapping à
+    # Lisbonne") goes over a ride, never over a rabelo of Porto (review of PR 55).
+    if TRANSIT & set(place_names.folded(text)):
+        town_rides = place_names.ways(shown) & {'metro', 'tram', 'road', 'rail'}
+        return bool(town_rides) and place_names.on_the_way(found, place_names.read(fact['label'], everywhere))
     reading = place_names.read(text, everywhere)
     if reading.all:
-        return bool(place_names.fits(reading, shown, place_names.pictured('', caption, title, everywhere), found))
+        # A Pin has one photo: every place the figure names is on it ("100 km² pour Lisbonne" is no figure for Porto).
+        every = all(place_names.shows(name, place_names.widened(shown)) for name in reading.all)
+        return every and bool(place_names.fits(reading, shown, place_names.pictured('', caption, title, everywhere), found))
     region = place_names.region(text)
     if region:
         return not (found and not region <= place_names.words(caption))
     described = ' '.join([photo['id'].replace('-', ' '), caption, place_names.readable(title)])
     shared = reel_formats.words_of(fact['label']) & reel_formats.words_of(described) - set(everywhere)
     return cover or bool(shared - reel_formats.PLACE_KINDS)
+
+
+# The words of a town's transport tickets: a figure that says them is about getting around.
+TRANSIT = frozenset("trajet trajets andante zapping navegante viagem carris oyster suica pasmo".split())
 
 
 def facts_for(article, photo, site=SITE, count=1):
@@ -219,12 +233,12 @@ def not_said(short, ending):
     return ', '.join(clauses)
 
 
-def pin_title(article, variant='a'):
-    """The Pin's own title, 100 characters at most: the guide's title, or its search-style variants."""
+def pin_title(article, variant='a', photo=None):
+    """The Pin's own title, 100 characters at most: the guide's title, or its search-style variants. Variant "c" shows a
+    photo and no figure: its title says what the photo shows, and promises no figure (review of PR 55)."""
     title, short = article['title'].strip(), (article.get('shortTitle') or article['title']).strip()
-    # Variant "c" shows no figure: its title promises none (review of the Pins, 15/11/2026).
     choices = {'a': [title, search_title(article)], 'b': [search_title(article), reel_formats.joined_title(short, DEFAULT_ENDING)],
-               'c': [reel_formats.joined_title(short, 'le guide pratique')]}[variant]
+               'c': photo_titles(short, photo)}[variant]
     for choice in choices + [short]:
         if 1 <= len(choice) <= TITLE_MAX:
             return choice
@@ -232,6 +246,19 @@ def pin_title(article, variant='a'):
 
 
 # --- photos ----------------------------------------------------------------
+
+LOWER_FIRST = frozenset("le la les un une des l’ l'".split())
+
+
+def photo_titles(short, photo):
+    """"Le Vietnam en 15 jours : les rizières en terrasses de Sa Pa": the short title, then the photo's caption, whole or
+    to its first comma."""
+    caption = str((photo or {}).get('alt_fr') or '').strip().rstrip('.')
+    first = caption.split(' ')[0].lower() if caption else ''
+    if first in LOWER_FIRST or first[:2] in ("l’", "l'"):
+        caption = caption[:1].lower() + caption[1:]
+    return [reel_formats.joined_title(short, part) for part in dict.fromkeys((caption, caption.split(',')[0].strip())) if part]
+
 
 def catalogue(site):
     return {photo['id']: photo for photo in json.loads((Path(site) / 'image-sources.json').read_text())['photos']}
@@ -410,7 +437,7 @@ def draw_title_pin(article, photo, path, site=SITE):
     image.paste(cropped(path, (1000, 860)), (0, 0))
     draw = ImageDraw.Draw(image)
     label_pill(draw, 70, 832, place_label(article, site))
-    heading, size, lines = fit(draw, pin_title(article, 'b'), (72, 66, 60, 54, 48), 860, 380, 14)
+    heading, size, lines = fit(draw, pin_title(article, 'c', photo), (72, 66, 60, 54, 48), 860, 380, 14)
     y = 930
     for line in lines:
         write(draw, (70, y), line, heading, 'white')
@@ -476,7 +503,7 @@ def render(article, output, site=SITE, variant='a'):
     found = cover_photo(article, site) if variant == 'a' else variant_photo(article, site, variant, output)
     photo = found[0] if found else None
     image = DRAWERS[variant](article, *found, site=site) if found else draw_typographic_pin(article)
-    headline = pin_title(article, variant)
+    headline = pin_title(article, variant, photo)
     target.mkdir(parents=True)
     image.save(target / 'pin.jpg', quality=92)
     raw = json.dumps(article, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode()
@@ -489,6 +516,7 @@ def render(article, output, site=SITE, variant='a'):
                 'limitations': ['Draft only; target publication, board, caption, duplicate registry and rendered layout require review.']}
     if photo:
         manifest['photo'] = {k: photo[k] for k in ('id', 'author', 'source_page', 'license', 'license_url')}
+        manifest['photo']['alt_fr'] = photo.get('alt_fr') or ''
     (target / 'draft.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
     for name in ('dmsans-OFL.txt', 'playfairdisplay-OFL.txt'):
         (target / name).write_bytes((HERE / 'assets' / name).read_bytes())

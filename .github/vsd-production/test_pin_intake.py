@@ -38,17 +38,20 @@ class PinIntakeTests(unittest.TestCase):
             result=intake([article],[],folder,dt.datetime(2026,10,19,tzinfo=dt.timezone.utc))
             self.assertEqual(result['status'],'draft_refreshed_not_published')
             self.assertNotEqual(json.loads(p.read_text())['rendererSha256'],'0'*64)
-    def test_failed_redraw_keeps_the_old_draft_and_moves_on(self):
-        with tempfile.TemporaryDirectory() as folder:
-            now=dt.datetime(2026,10,19,tzinfo=dt.timezone.utc)
-            render({'slug':'guide','title':'Ancien titre'},folder)
-            def renderer(article,output):
-                if article['slug']=='guide':raise ValueError('title_overflow')
-                return render(article,output)
-            result=intake([{'slug':'guide','title':'Titre trop long'},{'slug':'autre','title':'Un autre guide'}],[],folder,now,renderer)
-            self.assertEqual(result['id'],'pin-autre')
-            self.assertEqual(json.loads((Path(folder)/'pin-guide/draft.json').read_text())['title'],'Ancien titre')
-            self.assertEqual(sorted(p.name for p in Path(folder).iterdir()),['pin-autre','pin-guide'])
+    def test_a_draft_the_rules_no_longer_draw_is_withdrawn_and_a_passing_failure_keeps_it(self):
+        # Review of PR 55: nine drafts the rules no longer drew were put back at each failure, with their defects.
+        for error, kept in ((ValueError('not_enough_key_facts'), False), (OSError('photo unreachable'), True)):
+            with self.subTest(error=type(error).__name__), tempfile.TemporaryDirectory() as folder:
+                now=dt.datetime(2026,10,19,tzinfo=dt.timezone.utc)
+                render({'slug':'guide','title':'Ancien titre'},folder)
+                def renderer(article,output,error=error):
+                    if article['slug']=='guide':raise error
+                    return render(article,output)
+                result=intake([{'slug':'guide','title':'Titre trop long'},{'slug':'autre','title':'Un autre guide'}],[],folder,now,renderer)
+                self.assertEqual(result['id'],'pin-autre')
+                self.assertEqual((Path(folder)/'pin-guide').exists(),kept)
+                if kept:
+                    self.assertEqual(json.loads((Path(folder)/'pin-guide/draft.json').read_text())['title'],'Ancien titre')
     def test_admitted_draft_is_never_rendered_again(self):
         with tempfile.TemporaryDirectory() as folder:
             render({'slug':'guide','title':'Ancien titre'},folder)

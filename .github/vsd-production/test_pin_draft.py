@@ -63,7 +63,7 @@ class PinDraftTests(unittest.TestCase):
         self.assertEqual(manifests['a']['pinTitle'],GUIDE['title'])
         # No day in the guide: no « jour par jour » (review of the Pins); « c » shows no figure, its title promises none.
         self.assertEqual(manifests['b']['pinTitle'],'L’Andalousie en train : itinéraire, prix et conseils')
-        self.assertEqual(manifests['c']['pinTitle'],'L’Andalousie en train : le guide pratique')
+        self.assertEqual(manifests['c']['pinTitle'],'L’Andalousie en train')   # a photo with no caption: the short title
         self.assertTrue(all(len(m['pinTitle'])<=100 for m in manifests.values()))
 
     def test_a_figure_goes_on_a_pin_only_over_a_photo_of_the_place_it_names_and_is_never_cut_mid_sentence(self):
@@ -74,7 +74,9 @@ class PinDraftTests(unittest.TestCase):
         everywhere={'algarve','portugal'}
         fare={'value':'3,60 €','label':'Faro → Tavira en train régional, 33 minutes'}
         self.assertFalse(fact_fits_photo(fare,lagos,everywhere))   # review of 13/11/2026
-        self.assertTrue(fact_fits_photo({'value':'8,30 €','label':'Faro → Lagos, 1 h 35'},lagos,everywhere))
+        # Since the review of PR 55 a Pin's photo shows every place its figure names: Faro is not on the cliffs of Lagos.
+        self.assertFalse(fact_fits_photo({'value':'8,30 €','label':'Faro → Lagos, 1 h 35'},lagos,everywhere))
+        self.assertTrue(fact_fits_photo({'value':'182','label':'marches jusqu’au pied des falaises de Lagos'},lagos,everywhere))
         # A figure that names nothing: on the guide's cover, or on a photo of what it measures (review of the Pins).
         self.assertTrue(fact_fits_photo({'value':'1,60 €','label':'le billet le moins cher de la ligne'},tavira,everywhere,cover=True))
         self.assertFalse(fact_fits_photo({'value':'1,60 €','label':'le billet le moins cher de la ligne'},tavira,everywhere))
@@ -123,7 +125,11 @@ class PinReviewOfTheFifteenth(unittest.TestCase):
         days={'shortTitle':'Le Vietnam en 15 jours','title':'x','category':'Itinéraires','sections':[{'title':'Jours 1 à 3 — Hanoï'}]}
         self.assertEqual(search_title(days),'Le Vietnam en 15 jours : itinéraire jour par jour, prix et conseils')
         # « c » shows no figure: its title promises none.
-        self.assertEqual(pin_title({'shortTitle':'Le Japon en 2 semaines','title':'x'},'c'),'Le Japon en 2 semaines : le guide pratique')
+        # Review of PR 55: « c » says what its photo shows, never « le guide pratique » nor a promise of figures.
+        self.assertEqual(pin_title({'shortTitle':'Le Japon en 2 semaines','title':'x'},'c',{'alt_fr':'La pagode Chureito et le mont Fuji.'}),
+                         'Le Japon en 2 semaines : la pagode Chureito et le mont Fuji')
+        self.assertEqual(pin_title({'shortTitle':'Lisbonne ou Porto ?','title':'x'},'c',{'alt_fr':'Tower Bridge au-dessus de la Tamise.'}),
+                         'Lisbonne ou Porto ? — Tower Bridge au-dessus de la Tamise')
 
     def test_a_line_never_begins_with_a_colon_and_a_figure_keeps_its_unit(self):
         from pin_draft import wrap, font, FONTS
@@ -180,5 +186,31 @@ class PinReviewOfTheFifteenth(unittest.TestCase):
             self.assertIn('porto-ribeira',taken_by_other_pins('porto',temp))
             self.assertNotIn('porto-ribeira',taken_by_other_pins('porto-weekend',temp))
         self.assertIn('lisbonne-santa-justa',LEFT_OUT)
+
+
+class PinReviewOfPullRequest55(unittest.TestCase):
+    """Review of PR 55 (15/11/2026)."""
+
+    def test_a_figure_that_names_another_place_than_the_photo_is_refused(self):
+        from pin_draft import fact_fits_photo
+        porto={'id':'porto-rabelo','alt_fr':'Un bateau rabelo sur le Douro, face aux façades de la Ribeira, à Porto.','source_page':'https://commons.wikimedia.org/wiki/File:Rabelo.jpg'}
+        everywhere={'portugal'}
+        for value,label in (('41 km²','la commune de Porto, contre 100 km² pour Lisbonne'),('3 € / 4 €','la taxe touristique par nuit : Porto / Lisbonne'),
+                            ('1,40 € / 1,72 €','le trajet en ville : Andante Z2 à Porto, zapping à Lisbonne')):
+            self.assertFalse(fact_fits_photo({'value':value,'label':label},porto,everywhere,cover=True),label)
+        self.assertFalse(fact_fits_photo({'value':'1,40 €','label':'le trajet en ville avec la carte Andante'},porto,everywhere,cover=True))
+        self.assertTrue(fact_fits_photo({'value':'41 km²','label':'la commune de Porto'},porto,everywhere,cover=True))
+
+    def test_a_walk_never_goes_over_a_vehicle(self):
+        from pin_draft import fact_fits_photo
+        import place_names
+        tram={'id':'lisbonne-tram28','alt_fr':'Un tram jaune de la ligne 28 dans une rue de Lisbonne.','source_page':'https://commons.wikimedia.org/wiki/File:Tram.jpg'}
+        alfama={'id':'lisbonne-alfama','alt_fr':'Les toits de l’Alfama, à Lisbonne.','source_page':'https://commons.wikimedia.org/wiki/File:Alfama.jpg'}
+        walk={'value':'20 min','label':'à pied de la Baixa à l’Alfama, en montée'}
+        self.assertEqual(place_names.wanted_ways(walk['label']),{'walk'})
+        self.assertFalse(fact_fits_photo(walk,tram,{'portugal','lisbonne'},cover=True))
+        self.assertTrue(fact_fits_photo(walk,alfama,{'portugal','lisbonne'},cover=True))
+        self.assertFalse(place_names.strict_journey('20 min à pied de la Baixa à l’Alfama'))
+        self.assertTrue(place_names.other_ride(place_names.vehicle('lisbonne-tram28',tram['alt_fr'],'File:Tram.jpg'),walk['label']))
 
 if __name__=='__main__':unittest.main()
