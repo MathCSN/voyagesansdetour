@@ -139,10 +139,10 @@ def fact_fits_photo(fact, photo, everywhere, cover=False):
     caption, title = photo.get('alt_fr') or '', commons_title_of(photo)
     shown = place_names.pictured(photo['id'], caption, title, everywhere)
     found = place_names.record(photo['id'], caption, title, everywhere)
-    on = place_names.vehicle(photo['id'], caption, title)
-    if place_names.brand_clash(text, shown) or place_names.other_ride(on, text):
+    if place_names.brand_clash(text, shown):
         return False
-    # The means read in the label as it opens ("le taxi au départ de l'aéroport"), else with its figure ("10 trains").
+    # The means read in the label as it opens ("le taxi au départ de l'aéroport"), else with its figure ("10 trains"). A
+    # journey goes over a ride of that very means: never over another one (a train over boats), nor over none.
     wanted = place_names.wanted_ways(fact['label']) or place_names.wanted_ways(text)
     if wanted and (place_names.journey(fact['label']) or place_names.journey(text) or 'other' in wanted):
         return place_names.ride(shown, text) and place_names.on_the_way(found, place_names.read(fact['label'], everywhere))
