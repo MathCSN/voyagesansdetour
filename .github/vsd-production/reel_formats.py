@@ -437,12 +437,29 @@ def section_place(section: dict | None, country: frozenset | set) -> str:
     return place_names.titled(title, country)
 
 
+# The town a caption sets its photo in, at its end: "…, à Essaouira.", "…, près de Ninh Bình."
+SET_IN = re.compile(r",\s*(?:à|en|près de|près d’)\s+([^,.;()]+?)\.?\s*$")
+
+
+def set_elsewhere(caption: str, country: frozenset | set) -> bool:
+    """The caption sets its photo in another town than the destination ("…, à Essaouira" in a guide of Marrakech)."""
+    where = SET_IN.search(caption)
+    if not where:
+        return False
+    # A quarter of the town is the town ("…, à Belém" in a guide of Lisbon).
+    named = [name for name, _, _ in place_names.names(where[1], country) if not place_names.widened(set(name)) & set(country)]
+    return bool(named)
+
+
 class Media:
     """Photos and clips still unused in this reel: a photo is never shown twice, and never under another place's name."""
 
     def __init__(self, photos: list[tuple[str, dict, str]], clips: list[tuple[str, dict]], reserve: int = 0, cover: str | None = None,
-                 emblematic: tuple[str, ...] = (), everywhere: str = ""):
+                 emblematic: tuple[str, ...] = (), everywhere: str = "", local: bool = False):
         self.photos, self.clips, self.reserve, self.cover = list(photos), list(clips), reserve, cover
+        # A guide of one town (Marrakech, Lisbon): a photo set in another town is an outing. A guide of a country
+        # (Japon, Vietnam) has its stages in many towns: none of them is an outing.
+        self.local = local
         self.all = list(photos)
         # The pictures that can stand for the whole place under the call to action, the best first.
         self.emblematic = [photo_id for photo_id in emblematic if photo_id != cover]
@@ -586,7 +603,26 @@ class Media:
         """The photos a plan may take when it names what they show: all but the last one that can close the post. In a
         post completed by files found by the search, the cover too is kept: such a file never opens a post."""
         held = {self.spare(), self.cover if self.found else None}
-        return [ph for ph in self.photos if ph[0] not in held]
+        shown = self.subjects_shown()
+        # Never the same subject twice in one post: El Castillo opened the carousel of Yucatán and came back on a plan
+        # under another file name (review of PR 56).
+        return [ph for ph in self.photos if ph[0] not in held and not (self.subject(ph) and self.subject(ph) in shown)]
+
+    def subject(self, photo: tuple) -> frozenset:
+        """What a photo is of, when its caption says it whole: a site and where it stands, two places at least ("La
+        pyramide d'El Castillo, à Chichén Itzá"). A town alone ("…en gare de Rovaniemi") is no subject: many photos of
+        one post are taken in it."""
+        named = frozenset(name for name, _, _ in place_names.names(photo[2], self.country, sentence=True))
+        return named if len(named) >= 2 else frozenset()
+
+    def subjects_shown(self) -> set[frozenset]:
+        """The subjects of the photos this post has already taken."""
+        return {self.subject(ph) for ph in self.all if ph not in self.photos and self.subject(ph)}
+
+    def excursion(self, photo: tuple) -> bool:
+        """A photo its caption sets in another town than the destination ("Des barques bleues au pied de la Skala du
+        port, à Essaouira" in a guide of Marrakech): an outing, not the place the post opens on (review of PR 56)."""
+        return self.local and set_elsewhere(photo[2], self.country)
 
     def room(self) -> int:
         return len(self.photos) + len(self.clips) - self.reserve
@@ -712,8 +748,10 @@ class Media:
         or one the guide itself shows. Never a detail kept for one plan (a hut, a dog team): `required`, the post
         waits for such a photo; otherwise any photo a person looked at will do (a carousel). Never a file found by
         the search."""
-        pick = next((ph for wanted in self.emblematic for ph in self.photos if ph[0] == wanted), None)
-        seen = [ph for ph in self.photos if ph[0] not in self.found]
+        shown = self.subjects_shown()
+        fresh = [ph for ph in self.photos if not (self.subject(ph) and self.subject(ph) in shown)]
+        pick = next((ph for wanted in self.emblematic for ph in fresh if ph[0] == wanted), None)
+        seen = [ph for ph in fresh if ph[0] not in self.found]
         if not pick and (required or not seen):
             raise Held("no_emblematic_photo_for_the_call")
         pick = pick or seen[0]
@@ -733,10 +771,15 @@ class Media:
         call to action, and never a file found by the search: the post waits rather than open on it."""
         self.reserve = max(0, self.reserve - 1)
         spare = self.spare()
-        seen = [ph for ph in self.photos if ph[0] not in self.found]
+        shown = self.subjects_shown()
+        seen = [ph for ph in self.photos if ph[0] not in self.found and not (self.subject(ph) and self.subject(ph) in shown)]
         left = [ph for ph in seen if ph[0] != spare]
         # A photo that shows numbers of its own (a display, a board of fares) opens a post only when no other can.
         left = [ph for ph in left if not ph[1].get("figures")] or left
+        # The post opens on the destination, never on an outing ("…, à Essaouira" opened the reels of Marrakech once a
+        # figure had taken Jemaa el-Fna): with only outings left, the post waits (review of PR 56).
+        left = [ph for ph in left if not self.excursion(ph)]
+        seen = [ph for ph in seen if not self.excursion(ph)]
         pick = (next((ph for ph in seen if ph[0] == cover), None) or next((ph for ph in left if ph[0] in self.emblematic), None)
                 or (left[0] if left else None))
         if not pick:
@@ -1070,8 +1113,11 @@ def build(fmt: str, article: dict, facts: list[dict], photos: list, clips: list,
     # The picture people see first: the guide's cover, or its first photo when the cover is too small for a reel.
     # Never a file found by the search: nobody looked at it.
     seen = [photo[0] for photo in photos if photo[1].get("automatic") is not True]
-    cover = article.get("cover") if article.get("cover") in seen else (seen[0] if seen else None)
-    brief = Brief(article, facts, Media(photos, clips, reserve=2, cover=cover, emblematic=emblematic(photos), everywhere=kicker),
+    # Never an outing in its place ("Des barques bleues… à Essaouira" opened the reels of Marrakech: review of PR 56).
+    captions, local = {photo[0]: photo[2] for photo in photos}, " · " in kicker
+    home = [photo_id for photo_id in seen if not (local and set_elsewhere(captions.get(photo_id, ""), place_names.words(kicker)))]
+    cover = article.get("cover") if article.get("cover") in seen else ((home or seen)[0] if seen else None)
+    brief = Brief(article, facts, Media(photos, clips, reserve=2, cover=cover, emblematic=emblematic(photos), everywhere=kicker, local=local),
                   opening, place, kicker, tag, title_lines, page)
     if fmt in ("liste", "express", "prix"):
         hook, body, lines = figures_reel(fmt, brief)

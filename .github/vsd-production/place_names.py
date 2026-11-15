@@ -401,6 +401,7 @@ HOURS = re.compile(r"\d\s?h\b")
 
 # "le car pour Essaouira", "3 h de car": the coach, never the conjunction ("car il pleut").
 CAR = re.compile(r"\b(?:de|en|le|du|un|au|par)\s+car\b", re.IGNORECASE)
+TOWN_TICKETS = frozenset("andante zapping navegante viagem carris oyster suica pasmo icoca".split())
 PARTICLE_WORDS = frozenset("do da dos das del della di du".split())
 
 
@@ -437,6 +438,9 @@ def wanted_ways(text: str) -> set[str]:
         return found
     if CAR.search(text):
         return {"road"}
+    # A town's ticket ("le trajet Andante Z2", "zapping à Lisbonne"): its metro, tram, bus or train, never a boat.
+    if TOWN_TICKETS & set(said):
+        return {"metro", "tram", "road", "rail"}
     if brands(set(said)) or TRAIN_NUMBER.search(text):
         return {"rail"}
     # "le taxi à prix fixe depuis l'aéroport": a means no photo of a train, a tram or a bus shows.

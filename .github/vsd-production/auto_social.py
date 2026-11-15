@@ -460,6 +460,7 @@ def scenes_for(article: dict, channel: Post, facts: list[dict], photos: list[tup
         raise Held("short_title_too_long")
     by_id = {photo[0]: photo for photo in photos}
     media = reel_formats.Media(photos, [], reserve=2, cover=photos[0][0], emblematic=reel_formats.emblematic(photos),
+                               local=place.lower() != country.lower(),
                                everywhere=place + " " + country)
     # As in a reel: a figure that a photo shows comes first and takes that photo (the fare over the train); a figure
     # that no photo shows only completes the post; a figure whose photo is already taken stays in the guide, never

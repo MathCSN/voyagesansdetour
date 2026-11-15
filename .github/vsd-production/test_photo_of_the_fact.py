@@ -473,5 +473,46 @@ class FollowUpOfPullRequest54(unittest.TestCase):
         self.assertEqual(names.vehicle("vietnam-trang-an", "Des barques sur la rivière de Tràng An.", "File:Trang An boats.jpg"), {"water"})
 
 
+class OpeningAndSubject(unittest.TestCase):
+    """Review of PR 56, points 6 and 7."""
+
+    def test_a_post_opens_on_its_destination_not_on_an_outing(self):
+        port = photo("marrakech-essaouira-port", "File:Skala.jpg", "Des barques bleues au pied de la Skala du port, à Essaouira.")
+        majorelle = photo("marrakech-majorelle", "File:Majorelle.jpg", "La villa bleue du jardin Majorelle.")
+        koutoubia = photo("marrakech-koutoubia", "File:Koutoubia.jpg", "Le minaret de la Koutoubia, à Marrakech.", emblematic=True)
+        media = reel_formats.Media([port, majorelle, koutoubia], [], cover="marrakech-place-jemaa-el-fna",
+                                   emblematic=("marrakech-koutoubia",), everywhere="Maroc Marrakech", local=True)
+        self.assertTrue(media.excursion(port))
+        self.assertFalse(media.excursion(koutoubia))
+        self.assertEqual(media.opening("marrakech-place-jemaa-el-fna")[1], "marrakech-majorelle")
+        # Only an outing left to open with (the Koutoubia kept for the call to action): the post waits.
+        alone = reel_formats.Media([port, koutoubia], [], emblematic=("marrakech-koutoubia",), everywhere="Maroc Marrakech", local=True)
+        with self.assertRaises(reel_formats.Held):
+            alone.opening(None)
+        # A guide of a country has its stages in many towns: "…, à Kyoto" is no outing there.
+        kyoto = photo("japon-kyoto", "File:Kiyomizu.jpg", "Le temple Kiyomizu-dera, à Kyoto.")
+        japan = reel_formats.Media([kyoto], [], everywhere="Japon Japon", local=False)
+        self.assertFalse(japan.excursion(kyoto))
+        # A quarter of the town is the town: "…, à Belém" in a guide of Lisbon.
+        belem = photo("lisbonne-jeronimos", "File:Jeronimos.jpg", "La façade sculptée du monastère des Jerónimos, à Belém.")
+        self.assertFalse(reel_formats.Media([belem], [], everywhere="Portugal Lisbonne", local=True).excursion(belem))
+
+    def test_never_the_same_subject_twice_in_a_post(self):
+        north = photo("yucatan-el-castillo", "File:Kukulcan, Chichen Itza.jpg", "La pyramide d’El Castillo, à Chichén Itzá, sous un ciel sans nuage.")
+        south = photo("yucatan-chichen-itza", "File:Templo el Castillo - Chichen Itza-Yucatan-Mexico0222.jpg", "La pyramide d’El Castillo, à Chichén Itzá.")
+        cenote = photo("yucatan-cenote", "File:Cenote Ik Kil.jpg", "Un cenote entouré de lianes.")
+        media = reel_formats.Media([north, south, cenote], [], cover="yucatan-el-castillo", everywhere="Mexique Yucatán")
+        self.assertEqual(media.subject(north), media.subject(south))
+        self.assertEqual(media.opening("yucatan-el-castillo")[1], "yucatan-el-castillo")
+        self.assertNotIn("yucatan-chichen-itza", [ph[0] for ph in media.free()])
+        self.assertIsNone(media.named("697 pesos l’entrée de Chichén Itzá pour un étranger", None))
+        # Two photos of one town are not one subject: the village and the office of Santa Claus, both at Rovaniemi.
+        village = photo("lap-village", "File:Village.jpg", "Le village sous la neige en décembre, à Rovaniemi.")
+        office = photo("lap-bureau", "File:Office.jpg", "Le bureau du Père Noël illuminé, à Rovaniemi.")
+        lapland = reel_formats.Media([village, office], [], everywhere="Finlande Laponie")
+        lapland.photos.remove(village)
+        self.assertIn("lap-bureau", [ph[0] for ph in lapland.free()])
+
+
 if __name__ == "__main__":
     unittest.main()
