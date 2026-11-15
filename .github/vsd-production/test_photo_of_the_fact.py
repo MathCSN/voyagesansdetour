@@ -447,8 +447,29 @@ class FollowUpOfPullRequest54(unittest.TestCase):
         self.assertIsNone(p.another_place({**tombs, "alt": photos[1][2]}, records, names.words("Vietnam")))
         self.assertIsNotNone(p.another_place({**tombs, "photo": "vietnam-halong", "alt": photos[2][2]}, records, names.words("Vietnam")))
 
+    def test_a_figure_that_points_back_to_another_sentence_is_left_in_the_guide(self):
+        import auto_social as a
+        for label in ("le même trajet en tram si vous payez à bord", "la même entrée le dimanche", "ce billet pour deux jours",
+                      "celui-ci en haute saison"):
+            self.assertTrue(a.REPRISE.match(label), label)
+        self.assertFalse(a.REPRISE.match("le trajet en tram de la Baixa à Belém"))
+        self.assertFalse(a.REPRISE.match("certains jours, l’entrée est gratuite"))
+        article = {"keyFacts": [{"value": "3,30 €", "label": "le même trajet en tram si vous payez à bord"},
+                                {"value": "1,90 €", "label": "le ticket Carris sur carte Navegante"}]}
+        page = "3,30 € le même trajet en tram si vous payez à bord. 1,90 € le ticket Carris sur carte Navegante."
+        self.assertEqual([fact["value"] for fact in a.usable_facts(article, page)], ["1,90 €"])
+
     def test_the_facade_of_a_station_is_no_train(self):
         self.assertEqual(names.vehicle("train-campanha", "La façade de la gare de Porto-Campanhã.", "File:Campanha.jpg"), set())
+        # Review of PR 56: nor for a ride, at the choice and at the guard.
+        facade = photo("train-campanha", "File:Campanha.jpg", "La façade de la gare de Porto-Campanhã.")
+        alfa = "Alfa Pendular Lisbonne → Porto-Campanhã en Turística"
+        self.assertIsNone(reel_formats.Media([facade], [], everywhere="Portugal Portugal").named(alfa, None))
+        scene = {"photo": "train-campanha", "headline": ["*35,70 €*"], "detail": alfa, "alt": facade[2]}
+        self.assertIsNotNone(p.another_place(scene, {"train-campanha": facade[1]}, names.words("Portugal")))
+        rows = [["Lisbonne → Porto (Alfa Pendular)", "2 h 58"], ["Lisbonne → Coimbra (Alfa Pendular)", "1 h 40"], ["Porto → Braga (Urbano)", "1 h"]]
+        table = {"photo": "train-campanha", "layout": "table", "kicker": "Portugal", "headline": ["Durée en train"], "rows": rows, "alt": facade[2]}
+        self.assertIn("no ride", p.another_place(table, {"train-campanha": facade[1]}, names.words("Portugal")))
         self.assertEqual(names.vehicle("vietnam-trang-an", "Des barques sur la rivière de Tràng An.", "File:Trang An boats.jpg"), {"water"})
 
 

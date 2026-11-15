@@ -275,12 +275,16 @@ def drawable(root: Path, value: str) -> bool:
     return all(any(motion_render.has_glyph(font, char) for font in fonts) for char in value)
 
 
+# A label that points back to a sentence the post does not show ("3,30 € le même trajet en tram…"): left in the guide.
+REPRISE = re.compile(r"(?:le même|la même|les mêmes|ce|cet|cette|ces|celui-ci|celle-ci|ceux-ci|celles-ci|idem)(?![\w-])", re.IGNORECASE)
+
+
 def usable_facts(article: dict, text: str, root: Path = HERE) -> list[dict]:
     """Key figures quoted word for word from the snapshot; one headline value each, never twice."""
     page, facts, values = p.normalized(text), [], set()
     for fact in (f for f in article.get("keyFacts") or [] if isinstance(f, dict)):
         value, label = str(fact.get("value", "")).strip(), str(fact.get("label", "")).strip()
-        if not value or not label or value.lower() in values or "*" in value + label:
+        if not value or not label or value.lower() in values or "*" in value + label or REPRISE.match(label):
             continue
         if not (checked("*" + value + "*", 34) and checked(label, 120) and drawable(root, value + label)):
             continue
@@ -388,7 +392,7 @@ def covered_until(name: str, rows: list[dict]) -> dt.datetime | None:
     return max((row["dueAt"] for row in rows if row["channel"] == name), default=None)
 
 
-def guide_order(articles: list[dict], post: Post, rows: list[dict], slot: dt.datetime) -> list[dict]:
+def guide_order(articles: list[dict], post: Post, rows: list[dict], slot: dt.datetime, network_gap: bool = True) -> list[dict]:
     """Guides never posted anywhere first, then never in this form on this network (newest first each), then the longest unposted after a cooldown."""
     def posts(article, mine=False):
         url = guide_url(article)
@@ -399,7 +403,7 @@ def guide_order(articles: list[dict], post: Post, rows: list[dict], slot: dt.dat
         everywhere = posts(article)
         mine = posts(article, mine=True)
         # A reel and a carousel of one guide on Instagram five days apart: the same guide twice to the same people.
-        if any(row["channel"] == post.name and abs(row["dueAt"] - slot) < NETWORK_GAP for row in everywhere):
+        if network_gap and any(row["channel"] == post.name and abs(row["dueAt"] - slot) < NETWORK_GAP for row in everywhere):
             continue
         if not mine:
             fresh.append((bool(everywhere), article))
@@ -813,7 +817,8 @@ def generate(root: Path = HERE, site: Path = SITE, now: dt.datetime | None = Non
             if kind in exhausted:
                 continue
             post, made = Post(channel.name, kind), None
-            for article in guide_order(articles, post, rows, slot):
+            ordered = guide_order(articles, post, rows, slot)
+            for article in ordered:
                 try:
                     made = make_post(root, article, post, slot, now, rows, texts, photos, clips, site_photos, table, fetcher, searcher)
                     break
@@ -824,7 +829,10 @@ def generate(root: Path = HERE, site: Path = SITE, now: dt.datetime | None = Non
                     held.append({"slug": article["slug"], "channel": channel.name, "kind": kind,
                                  "reason": "error: " + type(error).__name__ + ": " + str(error)[:120]})
             if not made:
-                exhausted.add(kind)
+                # A guide set aside by the two weeks between two posts on one network is free for a later slot: the kind
+                # is exhausted only when no guide waits for that (review of PR 56).
+                if len(guide_order(articles, post, rows, slot, network_gap=False)) == len(ordered):
+                    exhausted.add(kind)
                 short.append(channel.name)
                 continue
             rows.append({"id": made["id"], "channel": channel.name, "kind": kind, "format": made.get("format"), "url": made["targetUrl"], "dueAt": slot})

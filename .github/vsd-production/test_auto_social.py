@@ -268,6 +268,17 @@ class GeneratorTests(unittest.TestCase):
         self.assertIn("bio", carousel["caption"]["cta"])
         self.assertIn("fallbackBold", carousel["assets"])  # no empty box on a slide either
 
+    def test_a_slot_lost_to_the_two_weeks_between_posts_does_not_exhaust_its_kind(self):
+        # Review of PR 56: the reel of the first Friday is refused (the carousel of the day before is the same guide on the
+        # same network); the reel of the third Friday, two weeks later, is still made in the same run.
+        cadence = {"schemaVersion": 1, "timezone": "Europe/Paris", "channels": {"instagram": {"weeklyLimit": 4, "minGapHours": 20, "slots": [
+            {"weekday": "thursday", "time": "09:00", "kind": "carousel"}, {"weekday": "friday", "time": "18:00", "kind": "reel"}]}}}
+        f = self.fixture(cadence=cadence)
+        created = f.run(limit=6)["created"]
+        kinds = [(c["kind"], p.instant(c["publishAt"])) for c in created]
+        self.assertEqual([kind for kind, _ in kinds], ["carousel", "reel"])
+        self.assertGreaterEqual(kinds[1][1] - kinds[0][1], a.NETWORK_GAP)
+
     def test_what_the_generator_builds_passes_the_guard_on_places_and_a_faulty_plan_is_refused(self):
         # Review of 13/11/2026: five mutations of the wiring survived the suite (the date gate replaced by False, a date
         # in 2027, plans without their caption, the fallback photo). Every test ran before the gate: none met the guard.
@@ -1560,6 +1571,16 @@ class RealGuideTests(unittest.TestCase):
                           (["Mérida–Tulum", "en train direct"], "yucatan-tren-maya-merida"), (["Tulum et le retour"], "yucatan-tulum")])
         self.assertEqual(scenes[0]["headline"][-1], "*jour par jour*")
         self.assertIn("*265 pesos*", scenes[4]["detail"])
+        # With the real stock (review of PR 56: no train at Valladolid, only the one of Mérida Teya), the first days
+        # have no photo of their journey: they stay in the guide, never over the street of Valladolid, and the hook no
+        # longer promises every day.
+        stock = [photo for photo in photos if photo[0] != "yucatan-tren-maya-valladolid"]
+        steps = reel_formats.stages(article, read, reel_formats.numbered(facts, article))
+        self.assertIsNone(reel_formats.stage_photo(reel_formats.Media(list(stock), [], everywhere="Mexique · Yucatán"), steps[0], steps[1:]))
+        # Here three days are left of four: no itinerary reel at all, rather than one over the street of Valladolid.
+        with self.assertRaises(reel_formats.Held):
+            reel_formats.build("itineraire", article, facts, stock, [], "Phrase d’ouverture.", "Yucatán", "Mexique · Yucatán",
+                               "Guide Yucatán · sources du 12/11/2026", ["Yucatán en", "10 jours"], read)
         # One thing said per stage: its figure. The title of the day it also quotes is not a second one.
         self.assertEqual(len(reel_formats.said_by(scenes[0], scenes[1:-1], "Phrase d’ouverture.")), 4)
         with self.assertRaisesRegex(reel_formats.Held, "not_enough_stages"):

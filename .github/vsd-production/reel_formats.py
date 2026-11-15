@@ -604,7 +604,8 @@ class Media:
         else: its record names one of the places of the journey, whole, or no place at all ("Hué → Đà Nẵng en
         train" went over the train street of Hanoi, "Tokyo → Kyoto" over the sign of Shin-Fuji station)."""
         reading = place_names.read(text, self.country)
-        rides = [ph for ph in pool if place_names.ride(self.described(ph), text) and place_names.on_the_way(self.recorded(ph), reading)]
+        # A ride by what its caption and title show, never by the identifier it is filed under ("train-campanha").
+        rides = [ph for ph in pool if place_names.ride(self.told(ph), text) and place_names.on_the_way(self.recorded(ph), reading)]
         if not rides:
             return None
         places = self.places(text)
