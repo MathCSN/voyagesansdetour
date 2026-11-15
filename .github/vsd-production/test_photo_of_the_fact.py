@@ -417,8 +417,9 @@ class FollowUpOfPullRequest54(unittest.TestCase):
         self.assertIsNone(p.another_place(ave, {"andalousie-ave": {"commonsTitle": "File:AVE Cordoba.jpg"}}, everywhere))
         mezquita = photo("cordoue-mezquita", "File:Mezquita.jpg", "Les arcs de la Mezquita de Cordoue.")
         brief_table = {"rows": rows, "header": "Durée en direct", "section": {"title": "Les trains : la boucle Séville, Cordoue, Grenade"}}
+        media, ride = reel_formats.Media([mezquita], [], everywhere="Espagne Andalousie"), reel_formats.table_ride(brief_table)
         with self.assertRaises(reel_formats.Held):
-            reel_formats.Media([mezquita], [], everywhere="Espagne Andalousie").photo(reel_formats.table_ride(brief_table), brief_table["section"], strict=True)
+            media.photo(ride, brief_table["section"], strict=True)
 
     def test_the_section_a_figure_comes_from_goes_from_the_generator_to_the_guard(self):
         import auto_social as a
