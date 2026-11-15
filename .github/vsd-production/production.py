@@ -520,7 +520,10 @@ def ride_elsewhere(said, detail, record, shown, found, everywhere) -> str | None
         return f"names a train over {photo}, another train"
     if place_names.other_ride(place_names.vehicle(photo, caption, title), detail):
         return f"names a journey over {photo}, another means of transport"
-    if journey_shown(detail, shown, found, everywhere):
+    # The means of transport a photo shows is read in its caption and its title, never in the identifier it is filed
+    # under ("train-campanha" is the façade of a station: review of PR 56).
+    told = place_names.pictured("", caption, title, everywhere)
+    if journey_shown(detail, told, found, everywhere):
         return ""
     if place_names.strict_journey(said):
         return f"names a journey over {photo}, which shows no ride of it"
@@ -534,6 +537,13 @@ def table_elsewhere(scene, photos, everywhere) -> str | None:
     shown = place_names.pictured(photo, caption, str((photos.get(photo) or {}).get("commonsTitle", "")), everywhere)
     if place_names.label_clash(str(scene.get("kicker") or ""), shown):
         return f"labels a train over {photo}, another train"
+    rows = scene.get("rows") or []
+    said = " ".join([str(scene.get("kicker") or "")] + list(scene.get("headline") or []))
+    wanted = place_names.journeys_table(rows, said)
+    text = said + " " + " ".join(" ".join(map(str, row)) for row in rows)
+    told = place_names.pictured("", caption, str((photos.get(photo) or {}).get("commonsTitle", "")), everywhere)
+    if wanted and not place_names.ride(told, text):
+        return f"lists journeys by {', '.join(sorted(wanted))} over {photo}, which shows no ride of them"
     return None
 
 

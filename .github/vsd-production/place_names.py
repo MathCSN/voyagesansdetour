@@ -51,7 +51,7 @@ NOT_PLACES = frozenset("""
     andante navegante viva viagem zapping carris metro cp alfa pendular alfapendular intercidades interregional regional promo urbano
     renfe ave avlo ouigo iryo trenitalia italo frecciarossa sita mepe interbus ado tren maya nozomi hikari kodama sakura
     turistica conforto classe azul phantip supratours ctm travelmar alilauro flixbus alsa rede expressos
-    jr japan rail pass suica pasmo icoca oyster tfl contactless grab bolt uber city lockers locker bounce nannybag luggage
+    jr japan rail pass card cards suica pasmo icoca oyster tfl contactless grab bolt uber city lockers locker bounce nannybag luggage
     pere noel claus santa inah unesco covid wifi
     francais francaise francaises europeen europeens europeenne portugais portugaise espagnol espagnole italien italienne
     japonais japonaise thailandais thailandaise vietnamien vietnamienne mexicain mexicaine marocain marocaine finlandais
@@ -334,7 +334,14 @@ def titled(title: str, everywhere: frozenset | set = frozenset()) -> str:
     """The stretch of a title that names its places ("Jours 6 et 7 — Hué" → "Hué", "Jours 5 à 8 — Kyoto et Nara" →
     "Kyoto et Nara"), the destination aside; "" when it names none. Read the same by the generator and the guard."""
     found = names(title, everywhere, sentence=True)
-    return title[found[0][1]:found[-1][2]] if found else ""
+    if not found:
+        return ""
+    stretch = title[found[0][1]:found[-1][2]]
+    # "Mer d'Andaman (Phuket, Krabi)": the stretch ends inside the brackets; it takes them whole, or none of them.
+    if stretch.count("(") > stretch.count(")"):
+        closing = title.find(")", found[-1][2])
+        stretch = title[found[0][1]:closing + 1] if closing >= 0 else stretch.replace("(", "")
+    return stretch.strip()
 
 
 def beyond(text: str, title: str, everywhere: frozenset | set = frozenset()) -> list[Name]:
@@ -447,9 +454,19 @@ def strict_journey(text: str) -> bool:
 
 
 def vehicle(identifier: str, caption: str, title: str) -> set[str]:
-    """The means of transport a photo is of: the one its caption opens on, or its title or identifier names ("Des
-    barques sur la rivière de Tràng An", "Trang An boats"); not boats "au premier plan" of a view of the Ribeira."""
-    return ways(folded(caption)[:OPENING_WORDS]) | ways(folded(identifier.replace("-", " ") + " " + readable(title)))
+    """The means of transport a photo is of: the one its caption opens on, or its title names ("Des barques sur la
+    rivière de Tràng An", "Trang An boats"); not boats "au premier plan" of a view of the Ribeira, nor the identifier it
+    is filed under ("train-campanha" is the façade of a station, no train). `identifier` is kept for the callers."""
+    return ways(folded(caption)[:OPENING_WORDS]) | ways(folded(readable(title)))
+
+
+def journeys_table(rows: list[list[str]], said: str = "") -> set[str]:
+    """The means of transport of a table that lists journeys ("Séville → Cordoue (AVE, Avant) | 40 à 48 min"): most of
+    its rows join two places, and it says by what; nothing otherwise."""
+    linked_rows = sum(1 for row in rows if linked(str(row[0])))
+    if not rows or 2 * linked_rows < len(rows):
+        return set()
+    return wanted_ways(" ".join(" ".join(map(str, row)) for row in rows) + " " + said)
 
 
 def other_ride(shown_ways: set[str], text: str) -> bool:
