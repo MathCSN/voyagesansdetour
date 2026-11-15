@@ -86,7 +86,11 @@ ANOTHER_FILE = re.compile(r"\bFile:\S|\bderived from\b|\bderivative of\b|\bextra
 # catalogue carries no category, so the rule cannot see it there: it is named here. (It went out once, in the photo
 # post « Où dormir à Lisbonne » of 12/11/2026.)
 NOT_A_PHOTOGRAPH_AS_TAKEN = frozenset({"File:Snowball pyramid at Santa Claus' Village Large.jpg",
-                                       "File:Empty Arco da Rua Augusta during the COVID-19 lockdown, Lisbon, Portugal julesvernex2.jpg"})
+                                       "File:Empty Arco da Rua Augusta during the COVID-19 lockdown, Lisbon, Portugal julesvernex2.jpg",
+                                       # No camera in the file's own data: its origin is not shown to be a photograph
+                                       # (the 57 files of the old catalogue read again on Commons on 15/11/2026).
+                                       "File:Miradouro de Santa Luzia View over Alfama, Lisbon (54733651122).jpg",
+                                       "File:Porto - Ponte Dom Luís I (8238600477).jpg"})
 # Read here, at intake, at reuse and at render (production.check_photo): the old catalogue keeps no Commons categories.
 
 

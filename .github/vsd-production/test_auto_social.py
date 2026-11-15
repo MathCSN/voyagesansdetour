@@ -1914,6 +1914,20 @@ class RealGuideTests(unittest.TestCase):
         # Review of the diff M2: a capital that begins no word never stops the reading.
         self.assertEqual(names.names("Ⓐbc à Lisbonne"), [(("lisbonne",), 6, 14)])
 
+    def test_every_photo_of_the_old_catalogue_has_a_french_caption_that_names_its_place(self):
+        # Review of 13/11/2026: the 57 photos of the old catalogue all read "Sintra (Portugal).": the Cruz Alta went over
+        # the castle of the Moors. Their captions live beside the sealed catalogue, which never changes.
+        catalogue = json.loads((HERE / "assets/photos/catalogue.json").read_text())["photos"]
+        self.assertEqual(set(media_library.CAPTIONS), set(catalogue))
+        for photo_id, caption in media_library.CAPTIONS.items():
+            self.assertTrue(caption.endswith(".") and 20 <= len(caption) <= 160 and "File:" not in caption, photo_id)
+        names = reel_formats.place_names
+        self.assertIn(("maures",), names.record("sintra-mouros-remparts", media_library.CAPTIONS["sintra-mouros-remparts"], "", {"sintra", "portugal"}, "sintra"))
+        castle = [("sintra-mouros-remparts", {"commonsTitle": catalogue["sintra-mouros-remparts"]["commonsTitle"]}, media_library.CAPTIONS["sintra-mouros-remparts"])]
+        self.assertIsNone(reel_formats.Media(castle, [], everywhere="Portugal Sintra").named("529 m l’altitude de la Cruz Alta, point culminant de la serra", None))
+        # The tram said "à Graça" stands on the largo de Santa Luzia (Commons category).
+        self.assertIn("Santa Luzia", media_library.CAPTIONS["lisbonne-tram28-graca"])
+
     def test_a_figure_only_the_summary_gives_stays_in_the_summary_and_a_label_never_names_another_part(self):
         brief = {"title": "En bref", "paragraphs": ["Comptez 872 € pour le budget serré de 14 jours, 500 ¥ l’entrée d’un temple."]}
         sleep = {"title": "Où dormir", "paragraphs": ["Un budget serré dort en capsule ou en dortoir pendant 14 jours."]}

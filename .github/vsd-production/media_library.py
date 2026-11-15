@@ -65,6 +65,14 @@ def focus_marks(photo_id: str, record: dict | None = None) -> dict:
     return {key: value for key, value in marks.items() if isinstance(value, list) and len(value) == 2}
 
 
+def load_captions(path: Path = Path(__file__).resolve().parent / "assets" / "photos" / "captions.json") -> dict:
+    """French captions of the photos of the old catalogue, which is sealed and keeps none (captions.json)."""
+    return json.loads(path.read_text())["captions"] if path.is_file() else {}
+
+
+CAPTIONS = load_captions()
+
+
 def commons_title(source_page: str) -> str | None:
     parsed = urllib.parse.urlsplit(source_page or "")
     if parsed.hostname != "commons.wikimedia.org" or not parsed.path.startswith("/wiki/"):
@@ -96,7 +104,7 @@ def photo_candidates(article: dict, site_photos: dict, country: str, shared: dic
     for photo_id, record in (shared or {}).items():
         title = record.get("commonsTitle")
         if photo_id.split("-", 1)[0] in prefixes and isinstance(title, str) and title not in taken:
-            candidates.append({"id": photo_id, "title": title, "alt": record.get("alt") or fallback})
+            candidates.append({"id": photo_id, "title": title, "alt": record.get("alt") or CAPTIONS.get(photo_id) or fallback})
     return candidates
 
 
