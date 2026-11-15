@@ -139,7 +139,7 @@ def ride_emoji(first: list[str], ways: set[str], label: str) -> str | None:
         return "⛴️"
     if "road" in ways:
         return "🚌"
-    if "urban" in ways:
+    if "metro" in ways or "tram" in ways:
         return "🚇"
     if "rail" in ways or place_names.journey(label):
         return "🚆"
@@ -883,6 +883,11 @@ def table_kicker(brief: Brief, section: dict, photo_id: str) -> str:
     return label if named else brief.place
 
 
+def table_kicker_names(brief: Brief, label: str) -> bool:
+    """The section's name says something of the table (it is no summary nor a bare "Arriver")."""
+    return any(words_shared(photo, brief.media.target(label), brief.media.family, kinds=True) for photo in brief.media.all)
+
+
 def under_table(brief: Brief, photo_id: str, rows: list[list[str]]) -> dict | None:
     """The price the guide gives for what the table lists (the berth of the trains whose departures it gives): the
     first price that the table's own photo shows better than any other photo of the post. Only under a short table,
@@ -936,7 +941,10 @@ def table_reel(brief: Brief) -> tuple[dict, list[dict], list[str]]:
     for index in placed(chosen, brief.media, limit, limit):
         plans[index] = fact_plan(chosen[index], brief.media, brief.place, brief.tag)
     body += [plans[index] for index in sorted(plans)]
-    heading = " ".join(table["title"]) if kicker == brief.place else kicker + " · " + " ".join(table["title"])
+    # The caption is no photo: it keeps the section's name ("Alfa Pendular ou Intercidades") when the plan could not.
+    named = kicker_of(table["section"], brief.place)
+    told = kicker if kicker != brief.place else (named if named != brief.place and table_kicker_names(brief, named) else brief.place)
+    heading = " ".join(table["title"]) if told == brief.place else told + " · " + " ".join(table["title"])
     # The caption gives the table, then the figures the reel shows after it, before any figure left unshown.
     shown = [caption_line(chosen[index]) for index in sorted(plans)]
     return brief.hook("*le tableau à garder*"), body, ([caption_line(price)] if price else []) + table_lines(heading, rows) + shown

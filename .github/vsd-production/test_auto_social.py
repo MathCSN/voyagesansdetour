@@ -1628,6 +1628,8 @@ class RealGuideTests(unittest.TestCase):
         # The fares the table gives get no plan of their own; the caption gives the table, then what the reel shows next.
         self.assertEqual([scene["headline"][0].strip("*").replace(reel_formats.NBSP, " ") for scene in scenes[2:-1]], ["≈ 3 h", "38,3 %"])
         self.assertEqual(lines[0], "📅 Alfa Pendular ou Intercidades · Aller simple 2026 — Alfa Pendular Turística : 35,70 €")
+        # Review of PR 53: over the inside of an Alfa, the plan's label is not "Alfa Pendular ou Intercidades".
+        self.assertEqual(plan["kicker"], "Portugal")
         self.assertEqual(lines[3], "⏱️ ≈ 3 h de trajet en Alfa Pendular entre Santa Apolónia et Campanhã")
         # The table is never laid over a photo that shows numbers of its own, even when it is the first one free.
         display = ("train-afficheur", {"commonsTitle": "File:Display.jpg", "figures": True}, "L’afficheur d’une voiture : 220 km/h.")

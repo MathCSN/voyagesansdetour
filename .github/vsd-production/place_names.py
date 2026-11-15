@@ -35,7 +35,8 @@ GENERIC = frozenset("""
     real via""".split())
 # What a journey is made by, as a fact says it; and what a photo of it shows.
 WAYS = {"rail": frozenset("train trains shinkansen tgv couchette couchettes rame railway sleeper locomotive wagon".split()),
-        "urban": frozenset("metro tram tramway".split()), "road": frozenset("bus minibus navette autocar".split()),
+        "metro": frozenset("metro metros".split()), "tram": frozenset("tram trams tramway eletrico".split()),
+        "road": frozenset("bus minibus navette autocar".split()),
         "water": frozenset("ferry ferries bateau bateaux barque barques sampan sampans boat boats".split())}
 RIDES = frozenset().union(*WAYS.values())   # never a station alone: it is a place
 TRANSPORT = RIDES | frozenset("billet billets".split())
@@ -611,7 +612,7 @@ def fits(reading: Reading, shown: set[str], told: set[str], recorded_names: list
 
 
 def ways(words_said: set[str] | list[str]) -> set[str]:
-    """By what one travels in these words: "rail", "urban", "road", "water"."""
+    """By what one travels in these words: "rail", "metro", "tram", "road", "water"."""
     return {way for way, names_ in WAYS.items() if names_ & set(words_said)}
 
 
