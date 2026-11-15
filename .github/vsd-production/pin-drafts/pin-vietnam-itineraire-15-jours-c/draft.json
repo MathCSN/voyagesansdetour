@@ -4,15 +4,15 @@
   "status": "draft_requires_review",
   "publicationApproved": false,
   "title": "Vietnam en 15 jours : de Hanoï à Hô-Chi-Minh-Ville en train, étape par étape (itinéraire 2026)",
-  "pinTitle": "Le Vietnam en 15 jours : le guide pratique",
+  "pinTitle": "Le Vietnam en 15 jours : la cité impériale de Huế",
   "variant": "c",
   "targetUrl": "https://voyagesansdetour.fr/vietnam/vietnam-itineraire-15-jours/",
   "articleSha256": "f0db54e88dab516bd578c19abb3f892e65610c053c4922e79586d1ad20ef5de7",
-  "imageSha256": "f1495348a72d8d9788141eaa1d8d03b5d9b356f5915f5420786ef08d318c8f51",
+  "imageSha256": "aa1293c0e8c3d8151cb7d88fb6e452825e46c4c08266203a80c58435e85ecc33",
   "width": 1000,
   "height": 1500,
   "templateVersion": 2,
-  "rendererSha256": "c74c3ad8816c8e4ef68d16770198918133f7638116b10e459c466530d8b9a09e",
+  "rendererSha256": "4e84395c3b1cf33bb7d679eee617155a0feb7db06078590a7bcefadb2e60ff2e",
   "originalComposition": true,
   "externalPhotographs": true,
   "limitations": [
@@ -23,6 +23,7 @@
     "author": "Supanut Arunoprayote",
     "source_page": "https://commons.wikimedia.org/wiki/File:Gate_in_Imperial_City,_Hu%E1%BA%BF_(III).jpg",
     "license": "CC BY 4.0",
-    "license_url": "https://creativecommons.org/licenses/by/4.0"
+    "license_url": "https://creativecommons.org/licenses/by/4.0",
+    "alt_fr": "La cité impériale de Huế."
   }
 }

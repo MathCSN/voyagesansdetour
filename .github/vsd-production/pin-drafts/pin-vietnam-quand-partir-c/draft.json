@@ -4,15 +4,15 @@
   "status": "draft_requires_review",
   "publicationApproved": false,
   "title": "Quand partir au Vietnam : le bon mois pour le Nord, le Centre et le Sud",
-  "pinTitle": "Quand partir au Vietnam : le guide pratique",
+  "pinTitle": "Quand partir au Vietnam : une maison de bois de la vieille ville de Hội An",
   "variant": "c",
   "targetUrl": "https://voyagesansdetour.fr/vietnam/vietnam-quand-partir/",
   "articleSha256": "649e1c101b99a9d55870e417874dcd3a7b313f957cb05880ea4471853cfff128",
-  "imageSha256": "77b217899e210e9dfcfd5ff8f7fc4fc8607c56152d329f03c9d371f9dde90daf",
+  "imageSha256": "994f9c6ebbe3dda8c039d1436d3cdb96b27ed767f5de9aaa20c705f06e97bba7",
   "width": 1000,
   "height": 1500,
   "templateVersion": 2,
-  "rendererSha256": "c74c3ad8816c8e4ef68d16770198918133f7638116b10e459c466530d8b9a09e",
+  "rendererSha256": "4e84395c3b1cf33bb7d679eee617155a0feb7db06078590a7bcefadb2e60ff2e",
   "originalComposition": true,
   "externalPhotographs": true,
   "limitations": [
@@ -23,6 +23,7 @@
     "author": "Steffen Schmitz (Carschten)",
     "source_page": "https://commons.wikimedia.org/wiki/File:H%E1%BB%99i_An,_Museum_of_Trade_Ceramics,_2020-01_CN-02.jpg",
     "license": "CC BY-SA 4.0",
-    "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "alt_fr": "Une maison de bois de la vieille ville de Hội An, ornée de lanternes rouges et d’un bandeau de Nouvel An."
   }
 }

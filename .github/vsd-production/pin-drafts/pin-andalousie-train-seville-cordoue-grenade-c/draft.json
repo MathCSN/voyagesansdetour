@@ -4,15 +4,15 @@
   "status": "draft_requires_review",
   "publicationApproved": false,
   "title": "L’Andalousie en train : Séville, Cordoue et Grenade sans voiture, en 5 jours",
-  "pinTitle": "L’Andalousie en train : le guide pratique",
+  "pinTitle": "L’Andalousie en train : la forêt d’arcs rouges et blancs de la Mezquita de Cordoue",
   "variant": "c",
   "targetUrl": "https://voyagesansdetour.fr/espagne/andalousie-train-seville-cordoue-grenade/",
   "articleSha256": "aeccd08d7e58bf87af71d92a603a055809039f94b4b4e11931ee8d13bd2d81ff",
-  "imageSha256": "48f457833c5b7ca1c49a385f032aae96c5ef7ea49b6a36df5d0493fc1193f2b9",
+  "imageSha256": "52a6023ed62a9e04b4c479ada5cd3c6b219cc8e3cce527a3417c9848288e88a8",
   "width": 1000,
   "height": 1500,
   "templateVersion": 2,
-  "rendererSha256": "c74c3ad8816c8e4ef68d16770198918133f7638116b10e459c466530d8b9a09e",
+  "rendererSha256": "4e84395c3b1cf33bb7d679eee617155a0feb7db06078590a7bcefadb2e60ff2e",
   "originalComposition": true,
   "externalPhotographs": true,
   "limitations": [
@@ -23,6 +23,7 @@
     "author": "CEphoto, Uwe Aranas",
     "source_page": "https://commons.wikimedia.org/wiki/File:C%C3%B3rdoba_Spain_Mezquita-Catedral-de-C%C3%B3rdoba-01.jpg",
     "license": "CC BY-SA 3.0",
-    "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "alt_fr": "La forêt d’arcs rouges et blancs de la Mezquita de Cordoue."
   }
 }

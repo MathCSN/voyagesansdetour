@@ -4,15 +4,15 @@
   "status": "draft_requires_review",
   "publicationApproved": false,
   "title": "Les Cinque Terre sans voiture : train toutes les 20 minutes, Via dell’Amore et carte à 17,30 €",
-  "pinTitle": "Les Cinque Terre en train : le guide pratique",
+  "pinTitle": "Les Cinque Terre en train : les façades rouges et ocre de Riomaggiore au-dessus du port",
   "variant": "c",
   "targetUrl": "https://voyagesansdetour.fr/italie/cinque-terre-sans-voiture/",
   "articleSha256": "00739442f623e5c4d8667295ec447000e40f276c91af42fd7a9153e4e133f493",
-  "imageSha256": "f28156119c02becc09a10d80c341671a6500ac21d7557192d66c92b42078033d",
+  "imageSha256": "24edcb6971f341adfd197211bcd97e45136c496b78105676056619c14ea8080b",
   "width": 1000,
   "height": 1500,
   "templateVersion": 2,
-  "rendererSha256": "c74c3ad8816c8e4ef68d16770198918133f7638116b10e459c466530d8b9a09e",
+  "rendererSha256": "4e84395c3b1cf33bb7d679eee617155a0feb7db06078590a7bcefadb2e60ff2e",
   "originalComposition": true,
   "externalPhotographs": true,
   "limitations": [
@@ -23,6 +23,7 @@
     "author": "Timothy A. Gonsalves",
     "source_page": "https://commons.wikimedia.org/wiki/File:Riomaggiore_SE_Wide_Cinque_Terre_Italy_Sep23_A7C_07305.jpg",
     "license": "CC BY-SA 4.0",
-    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "alt_fr": "Les façades rouges et ocre de Riomaggiore au-dessus du port."
   }
 }

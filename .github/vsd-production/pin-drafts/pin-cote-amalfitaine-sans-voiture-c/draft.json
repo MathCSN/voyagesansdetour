@@ -4,15 +4,15 @@
   "status": "draft_requires_review",
   "publicationApproved": false,
   "title": "La côte amalfitaine sans voiture : ferry de Salerne à 12 €, bus SITA et sentier des Dieux",
-  "pinTitle": "La côte amalfitaine sans voiture : le guide pratique",
+  "pinTitle": "La côte amalfitaine sans voiture : les jardins de la villa Cimbrone, à Ravello",
   "variant": "c",
   "targetUrl": "https://voyagesansdetour.fr/italie/cote-amalfitaine-sans-voiture/",
   "articleSha256": "3bc19b255a1102b957a9d8bf6c2aa2fa9db3447ef1e856514d687b172256b2d6",
-  "imageSha256": "8d280f569f32cad1f30e8b09f59875b540c5e8d6b8da4fbffc84882a59a58721",
+  "imageSha256": "9d052b0ef6e445085552a731b4f687a779534bdb2571ce960c5485173600639c",
   "width": 1000,
   "height": 1500,
   "templateVersion": 2,
-  "rendererSha256": "c74c3ad8816c8e4ef68d16770198918133f7638116b10e459c466530d8b9a09e",
+  "rendererSha256": "4e84395c3b1cf33bb7d679eee617155a0feb7db06078590a7bcefadb2e60ff2e",
   "originalComposition": true,
   "externalPhotographs": true,
   "limitations": [
@@ -23,6 +23,7 @@
     "author": "Mentnafunangann",
     "source_page": "https://commons.wikimedia.org/wiki/File:Villa_Cimbrone_Ravello_12.JPG",
     "license": "CC BY-SA 3.0",
-    "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "alt_fr": "Les jardins de la villa Cimbrone, à Ravello."
   }
 }

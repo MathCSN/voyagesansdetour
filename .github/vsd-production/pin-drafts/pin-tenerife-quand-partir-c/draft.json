@@ -4,15 +4,15 @@
   "status": "draft_requires_review",
   "publicationApproved": false,
   "title": "Quand partir à Tenerife : 22 °C en janvier au sud, 16 °C au nord, et le bon mois pour chaque côte",
-  "pinTitle": "Quand partir à Tenerife : le guide pratique",
+  "pinTitle": "Quand partir à Tenerife : la route de Masca et les pentes du massif de Teno",
   "variant": "c",
   "targetUrl": "https://voyagesansdetour.fr/espagne/tenerife-quand-partir/",
   "articleSha256": "a18f007d62d094b95a1aff5fe16737690e9bec02b1052ad08ce65f2336049c0a",
-  "imageSha256": "229243eda9767cad0a7e0bcca067c0d542f8625eb5c079b6b4d1182db202e56a",
+  "imageSha256": "9ff387923779dfc85da31cfa82cf3abb671ad49baff551076eb239afc198014a",
   "width": 1000,
   "height": 1500,
   "templateVersion": 2,
-  "rendererSha256": "c74c3ad8816c8e4ef68d16770198918133f7638116b10e459c466530d8b9a09e",
+  "rendererSha256": "4e84395c3b1cf33bb7d679eee617155a0feb7db06078590a7bcefadb2e60ff2e",
   "originalComposition": true,
   "externalPhotographs": true,
   "limitations": [
@@ -23,6 +23,7 @@
     "author": "Marc Ryckaert",
     "source_page": "https://commons.wikimedia.org/wiki/File:Tenerife_Masca_R01.jpg",
     "license": "CC BY-SA 4.0",
-    "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "alt_fr": "La route de Masca et les pentes du massif de Teno, au nord-ouest de Tenerife."
   }
 }

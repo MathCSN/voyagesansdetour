@@ -4,15 +4,15 @@
   "status": "draft_requires_review",
   "publicationApproved": false,
   "title": "Combien coûte un voyage en Laponie ? Le budget de Rovaniemi 2026-2027, poste par poste",
-  "pinTitle": "Laponie : le budget — le guide pratique",
+  "pinTitle": "Laponie : le budget — une aurore boréale au-dessus du mont Saana, en Laponie finlandaise",
   "variant": "c",
   "targetUrl": "https://voyagesansdetour.fr/finlande/laponie-budget-rovaniemi/",
   "articleSha256": "0b543df4472cb0da25dde806d8878fde9fb27e5b74b0aad7ea81ef575f3db0bc",
-  "imageSha256": "28ba2b36e7942b0543182c2ac4d37c5d7a5555cdb675677f113243f7d5dec854",
+  "imageSha256": "f1f3dee80d27a728b40a6e1458abf12a3ea74424c8c24af924db3fa2a3eaa901",
   "width": 1000,
   "height": 1500,
   "templateVersion": 2,
-  "rendererSha256": "c74c3ad8816c8e4ef68d16770198918133f7638116b10e459c466530d8b9a09e",
+  "rendererSha256": "4e84395c3b1cf33bb7d679eee617155a0feb7db06078590a7bcefadb2e60ff2e",
   "originalComposition": true,
   "externalPhotographs": true,
   "limitations": [
@@ -23,6 +23,7 @@
     "author": "WikiLucas00",
     "source_page": "https://commons.wikimedia.org/wiki/File:Aurora_borealis_over_Saana_fell.jpg",
     "license": "CC BY-SA 4.0",
-    "license_url": "https://creativecommons.org/licenses/by-sa/4.0"
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "alt_fr": "Une aurore boréale au-dessus du mont Saana, en Laponie finlandaise."
   }
 }

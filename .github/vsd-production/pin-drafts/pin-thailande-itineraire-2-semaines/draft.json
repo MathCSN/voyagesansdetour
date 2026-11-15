@@ -12,7 +12,7 @@
   "width": 1000,
   "height": 1500,
   "templateVersion": 2,
-  "rendererSha256": "c74c3ad8816c8e4ef68d16770198918133f7638116b10e459c466530d8b9a09e",
+  "rendererSha256": "4e84395c3b1cf33bb7d679eee617155a0feb7db06078590a7bcefadb2e60ff2e",
   "originalComposition": true,
   "externalPhotographs": true,
   "limitations": [
@@ -23,6 +23,7 @@
     "author": "Diego Delso",
     "source_page": "https://commons.wikimedia.org/wiki/File:Isla_Ko_Phi_Phi_Don,_Tailandia,_2013-08-19,_DD_02.JPG",
     "license": "CC BY-SA 3.0",
-    "license_url": "https://creativecommons.org/licenses/by-sa/3.0"
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+    "alt_fr": "Les falaises et l’eau turquoise des îles Phi Phi."
   }
 }

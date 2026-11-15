@@ -12,7 +12,7 @@
   "width": 1000,
   "height": 1500,
   "templateVersion": 2,
-  "rendererSha256": "c74c3ad8816c8e4ef68d16770198918133f7638116b10e459c466530d8b9a09e",
+  "rendererSha256": "4e84395c3b1cf33bb7d679eee617155a0feb7db06078590a7bcefadb2e60ff2e",
   "originalComposition": true,
   "externalPhotographs": true,
   "limitations": [
@@ -23,6 +23,7 @@
     "author": "Ana Rey from Sevilla, España",
     "source_page": "https://commons.wikimedia.org/wiki/File:Lagos_Ponta_da_Piedade_(50509745908).jpg",
     "license": "CC BY-SA 2.0",
-    "license_url": "https://creativecommons.org/licenses/by-sa/2.0/"
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "alt_fr": "Les arches de roche dorée et l’eau claire de Ponta da Piedade, près de Lagos."
   }
 }
