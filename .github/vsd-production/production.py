@@ -482,25 +482,16 @@ def another_place(scene, photos, everywhere) -> str | None:
         return None
     if scene.get("layout") == "table":
         return table_elsewhere(scene, photos, everywhere)
-    said = draw.plain(" ".join(scene.get("headline") or []) + " " + str(scene.get("detail") or ""))
+    said = said_by(scene, everywhere)
     detail = str(scene.get("detail") or said)
-    # A fact that names no place, quoted from a section about one ("Jours 6 et 7 — Hué"), is about that place.
-    where = place_names.titled(str(scene.get("where") or ""), everywhere)
-    if where and not place_names.names(said, everywhere) and not place_names.region(said):
-        said = f"{said} ({where})"
     photo, caption = scene["photo"], str(scene.get("alt") or "")
     title = str((photos.get(photo) or {}).get("commonsTitle", ""))
     shown = place_names.pictured(photo, caption, title, everywhere)
     found = place_names.record(photo, caption, title, everywhere)
     listed = ", ".join(" ".join(name) for name in found) or "no place in its record"
-    if place_names.brand_clash(said, shown):
-        return f"names a train over {photo}, another train ({listed})"
-    if place_names.other_ride(place_names.vehicle(photo, caption, title), detail):
-        return f"names a journey over {photo}, another means of transport ({listed})"
-    if journey_shown(detail, shown, found, everywhere):
-        return None
-    if place_names.strict_journey(said):
-        return f"names a journey over {photo}, which shows no ride of it ({listed})"
+    ride = ride_elsewhere(said, detail, (photo, caption, title), shown, found, everywhere)
+    if ride is not None:
+        return f"{ride} ({listed})" if ride else None
     reading = place_names.read(said, everywhere)
     if not reading.all:
         region = place_names.region(said)
@@ -509,6 +500,31 @@ def another_place(scene, photos, everywhere) -> str | None:
     if place_names.fits(reading, shown, place_names.pictured("", caption, title, everywhere), found):
         return None
     return f"names {', '.join(' '.join(name) for name in reading.all)} over {photo} ({listed})"
+
+
+def said_by(scene, everywhere) -> str:
+    """What a plan says; a fact that names no place, quoted from a section about one ("Jours 6 et 7 — Hué"), is about
+    that place."""
+    said = draw.plain(" ".join(scene.get("headline") or []) + " " + str(scene.get("detail") or ""))
+    where = place_names.titled(str(scene.get("where") or ""), everywhere)
+    if where and not place_names.names(said, everywhere) and not place_names.region(said):
+        said = f"{said} ({where})"
+    return said
+
+
+def ride_elsewhere(said, detail, record, shown, found, everywhere) -> str | None:
+    """For a train or a journey: why its photo is not one of it (a reason), that it is ("" : nothing more to read), or
+    None when the plan is no such thing and is read for its places."""
+    photo, caption, title = record
+    if place_names.brand_clash(said, shown):
+        return f"names a train over {photo}, another train"
+    if place_names.other_ride(place_names.vehicle(photo, caption, title), detail):
+        return f"names a journey over {photo}, another means of transport"
+    if journey_shown(detail, shown, found, everywhere):
+        return ""
+    if place_names.strict_journey(said):
+        return f"names a journey over {photo}, which shows no ride of it"
+    return None
 
 
 def table_elsewhere(scene, photos, everywhere) -> str | None:

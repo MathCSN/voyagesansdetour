@@ -291,12 +291,15 @@ def usable_facts(article: dict, text: str, root: Path = HERE) -> list[dict]:
         values.add(value.lower())
         # Reels show the label up to its first natural pause: a prefix of the quote, so still the page's own words.
         short = reel_formats.short_label(label)
-        # The section's title, when the page gives it word for word: a plan may quote it to say which place it is about.
-        title = str((section or {}).get("title") or "").strip()
-        heading = title if title and p.normalized(title) in page and checked(title, 120) else None
         facts.append({"value": value, "label": label, "excerpt": excerpt, "section": section, "short": short,
-                      "shortExcerpt": value + " " + short, "heading": heading})
+                      "shortExcerpt": value + " " + short, "heading": quotable_heading(section, page)})
     return facts
+
+
+def quotable_heading(section: dict | None, page: str) -> str | None:
+    """The section's title, when the page gives it word for word: a plan may quote it to say which place it is about."""
+    title = str((section or {}).get("title") or "").strip()
+    return title if title and p.normalized(title) in page and checked(title, 120) else None
 
 
 def opening_sentence(article: dict, text: str) -> str:

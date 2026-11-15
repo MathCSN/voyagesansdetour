@@ -97,13 +97,19 @@ def wrap(draw: ImageDraw.ImageDraw, text: str, path: str, size: int, fonts: Font
     for word in (w for w in text.replace("\t", " ").replace("\n", " ").split(" ") if w):
         # The pieces of one word cut after its dashes follow each other without a space.
         for index, piece in enumerate(dashed(draw, word, path, size, fonts, width)):
-            candidate = current + ("" if index else " ") + piece if current else piece
+            candidate = joined(current, piece, index)
             if current and width_of(draw, candidate, path, size, fonts) > width:
                 lines.append(current)
                 current = piece
             else:
                 current = candidate
     return lines + [current] if current else lines
+
+
+def joined(current: str, piece: str, index: int) -> str:
+    if not current:
+        return piece
+    return current + piece if index else current + " " + piece
 
 
 DASHES = ("-", "–", "—")
@@ -169,10 +175,17 @@ def panel(draw, paint: bool, y, lines, fonts) -> int:
     return height
 
 
-def table(draw, paint: bool, y, rows, fonts) -> int:
+# A cell measured on one machine at exactly its column measures a hair wider on another (macOS and the Linux runner:
+# "Randonnées au nord" is 440 px here, a little more there): the plan draws within this slack, and the generator only
+# chooses a table that holds TABLE_MARGIN px inside its columns.
+TABLE_SLACK, TABLE_MARGIN = 2, 8
+
+
+def table(draw, paint: bool, y, rows, fonts, slack: int = TABLE_SLACK) -> int:
     """Two columns: what you want on the left, the answer in yellow on the right."""
-    pad, gap, left_width = 24, 12, 440
-    right_width = TEXT_WIDTH - left_width - 3 * pad
+    pad, gap = 24, 12
+    left_width = 440 + slack
+    right_width = TEXT_WIDTH - 440 - 3 * pad + slack
     step, total = int(ROW_SIZE * 1.22), 0
     for row in rows:
         left = wrap(draw, row[0], fonts.bold, ROW_SIZE, fonts, left_width)
@@ -191,7 +204,7 @@ def table(draw, paint: bool, y, rows, fonts) -> int:
             for n, line in enumerate(left):
                 draw_text(draw, (LEFT + pad, top + 18 + n * step), line, fonts.bold, ROW_SIZE, fonts, WHITE)
             for n, line in enumerate(right):
-                draw_text(draw, (LEFT + left_width + 2 * pad, top + 18 + n * step), line, fonts.bold, ROW_SIZE, fonts, ACCENT)
+                draw_text(draw, (LEFT + 440 + 2 * pad, top + 18 + n * step), line, fonts.bold, ROW_SIZE, fonts, ACCENT)
         total += height + gap
     return total - gap
 
@@ -200,7 +213,7 @@ def table_fits(rows: list[list[str]], fonts: Fonts) -> bool:
     """The rows of a table hold in the plan: two lines a cell at most, no word wider than its column (the generator
     asks before it chooses a table: the "quand partir" tables of Vietnam and Thailand were refused at render)."""
     try:
-        table(ImageDraw.Draw(Image.new("RGBA", (8, 8))), False, 0, rows, fonts)
+        table(ImageDraw.Draw(Image.new("RGBA", (8, 8))), False, 0, rows, fonts, slack=-TABLE_MARGIN)
     except LayoutError:
         return False
     return True

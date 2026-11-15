@@ -224,11 +224,22 @@ def commons_info(title: str) -> dict:
     return info
 
 
+HISTORY_PAGES = 40   # 2 000 versions at most: no Commons photograph has that many
+
+
 def history_comments(title: str) -> list[str]:
-    """The comments of every version of a Commons file, the latest first."""
-    data = fetch_json({"action": "query", "titles": title, "prop": "imageinfo", "iiprop": "comment", "iilimit": 50})
-    pages = list(data.get("query", {}).get("pages", {}).values())
-    return [str(version.get("comment") or "") for page in pages for version in page.get("imageinfo", [])]
+    """The comments of every version of a Commons file, the latest first, page after page (a retouch older than the
+    50 newest versions is read too)."""
+    comments, params = [], {"action": "query", "titles": title, "prop": "imageinfo", "iiprop": "comment", "iilimit": 50}
+    for _ in range(HISTORY_PAGES):
+        data = fetch_json(params)
+        pages = list(data.get("query", {}).get("pages", {}).values())
+        comments += [str(version.get("comment") or "") for page in pages for version in page.get("imageinfo", [])]
+        following = (data.get("continue") or {}).get("iistart") or (data.get("continue") or {}).get("iicontinue")
+        if not following:
+            return comments
+        params = {**params, **data["continue"]}
+    raise Refused("Commons history too long to read: " + title)
 
 
 def retouched(title: str, meta: dict) -> bool:

@@ -242,6 +242,15 @@ class TheFinish(unittest.TestCase):
         self.assertTrue(p.motion.table_fits([["Alfa Pendular Turística", "35,70 €"], ["Intercidades 2e classe", "28,05 €"],
                                              ["Alfa Pendular Conforto", "49,90 €"]], reel_formats.TABLE_FONTS))
 
+    def test_a_table_at_the_edge_of_its_column_is_drawn_but_never_chosen(self):
+        # "Randonnées au nord" measures 440 px here and a hair more on the Linux runner: the plan rendered on 15/11 still
+        # lays out (slack), and the generator chooses no table that close to its columns (margin).
+        from PIL import Image, ImageDraw
+        rows = [["Randonnées au nord (Masca, Anaga)", "Avril-mai, octobre"], ["Nager dans une mer tiède", "Septembre à novembre"],
+                ["Teide et ciel étoilé", "Avril à octobre"]]
+        self.assertGreater(p.motion.table(ImageDraw.Draw(Image.new("RGBA", (8, 8))), False, 0, rows, reel_formats.TABLE_FONTS), 0)
+        self.assertFalse(p.motion.table_fits(rows, reel_formats.TABLE_FONTS))
+
     def test_a_word_too_wide_is_cut_after_its_dashes_and_a_lone_dash_keeps_its_spaces(self):
         from PIL import Image, ImageDraw
         draw, fonts, size = ImageDraw.Draw(Image.new("RGBA", (8, 8))), reel_formats.TABLE_FONTS, p.motion.ROW_SIZE
@@ -286,6 +295,21 @@ class RetouchedPhotos(unittest.TestCase):
                 photo_intake.commons_info(title)
         with mock.patch.object(photo_intake, "fetch_json", self.answer(["Curves", "Perspective correction"])):
             self.assertEqual(photo_intake.commons_info(title)["width"], 4000)
+
+    def test_the_whole_history_is_read_page_after_page(self):
+        import photo_intake
+        from unittest import mock
+        def fetch(params):
+            if params.get("iiprop") != "comment":
+                return self.answer([])(params)
+            if "iistart" not in params:
+                return {"continue": {"iistart": "2019-06-02T10:00:00Z", "continue": "||"},
+                        "query": {"pages": {"1": {"imageinfo": [{"comment": "Curves"}] * 50}}}}
+            return {"query": {"pages": {"1": {"imageinfo": [{"comment": "Highlights, slight cloning"}]}}}}
+        with mock.patch.object(photo_intake, "fetch_json", fetch):
+            self.assertEqual(len(photo_intake.history_comments("File:X.jpg")), 51)
+            with self.assertRaises(photo_intake.Refused):
+                photo_intake.commons_info("File:X.jpg")
 
     def test_the_retouched_bridge_of_porto_is_named(self):
         import photo_intake

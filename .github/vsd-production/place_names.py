@@ -388,7 +388,7 @@ def journey(text: str) -> bool:
 TRAIN_NUMBER = re.compile(r"\bSE\d{1,2}\b")
 FROM_TO = re.compile(r"\b(?:de|d[’']|entre|depuis)\s*$", re.IGNORECASE)
 AND_TO = re.compile(r"(?:^|\s)(?:à|a|et|jusqu[’']à)\s*$", re.IGNORECASE)
-HOURS = re.compile(r"\d+\s?h\b")
+HOURS = re.compile(r"\d\s?h\b")
 
 
 def travelled(text: str) -> bool:
