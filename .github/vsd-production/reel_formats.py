@@ -114,9 +114,13 @@ def caption_emoji(value: str, label: str) -> str:
     """Price, duration, boat, journey, ticket, walk: the first that fits; a pin otherwise. A distance alone is not a
     walk, and a line is a journey by what it opens on: "le Grand Bouddha du Tōdai-ji, …, à 45 minutes par le train"
     is the fee of a temple, not a train."""
-    opening = " ".join(place_names.folded(label)[:place_names.OPENING_WORDS])
-    tests = (("💶", "€" in value), ("⏱️", re.search(r"\b(min|h|jours?)\b", value)),
-             ("⛴️", re.search(r"\b(?:ferry|bateau|rabelo)", opening)), ("🚆", place_names.journey(label)),
+    first = place_names.folded(label)[:place_names.OPENING_WORDS]
+    opening, ways = " ".join(first), place_names.ways(first)
+    # The pictogram of a journey is the one of the means of transport its line names: a bus is not a train ("le
+    # minibus Phantip", "bus de remplacement"), and a ticket for a town is no journey at all.
+    ride = ("⛴️" if "water" in ways or "rabelo" in first else "🚌" if "road" in ways
+            else "🚇" if "urban" in ways else "🚆" if "rail" in ways or place_names.journey(label) else None)
+    tests = (("💶", "€" in value), ("⏱️", re.search(r"\b(min|h|jours?)\b", value)), (ride, ride),
              ("🎟️", re.match(r"(?:l )?entree\b", opening)), ("🥾", re.search(r"marches|sentier|randonn|à pied", value + label)))
     return next((emoji for emoji, fits in tests if fits), "📍")
 
@@ -127,6 +131,11 @@ def caption_line(fact: dict) -> str:
     value, label = fact["value"], fact["label"]
     flows = re.fullmatch(r"[\d\s]+", value) or re.match(r"(?:de|d’|d'|entre|pour|par|sur|depuis|jusqu)\b", label)
     return caption_emoji(value, label) + " " + value + (" " if flows else " : ") + label
+
+
+# What a figure holds under: left out, the figure would be promised to everyone, all day, all year.
+CONDITION = re.compile(r"\(?(?:aux? heures? (?:creuses|de pointe)|hors |en (?:semaine|basse saison|haute saison|prévente)|le week-end|"
+                       r"sur réservation|sous conditions?|à partir de |dès |uniquement|seulement|sauf |pour les moins de |avant \d|après \d)", re.IGNORECASE)
 
 
 def in_enumeration(label: str, cut: int) -> bool:
@@ -146,15 +155,27 @@ def short_label(label: str, limit: int = SHORT_LABEL) -> str:
         return label
     # Never inside a parenthesis: "(Bahia, tombeaux saadiens, El Badi)" is dropped whole or kept whole.
     # Never inside a list: "Valladolid, Chichén Itzá, Mérida, Uxmal et Tulum" keeps all its places or is shown whole.
+    # Never before what a price depends on: "le plafond du métro en zones 1-2, aux heures creuses" cut at its comma
+    # would promise that fare all day.
     cuts = [match.start() for match in re.finditer(r" \(| ; |, | : ", label)
             if label[:match.start()].count("(") == label[:match.start()].count(")")
-            and not (match.group() == ", " and in_enumeration(label, match.start()))]
+            and not (match.group() == ", " and in_enumeration(label, match.start()))
+            and not CONDITION.match(label[match.end():])]
     fitting = [cut for cut in cuts if MIN_SHORT_LABEL <= cut <= limit]
     if not fitting:
         # No punctuation in reach: stop before what only qualifies the figure ("… pour un étranger | depuis le 27 mars").
         fitting = [match.start() for match in SOFT_PAUSE.finditer(label)
                    if MIN_SHORT_LABEL <= match.start() <= limit and label[:match.start()].count("(") == label[:match.start()].count(")")]
     return label[:max(fitting)].rstrip() if fitting else label
+
+
+def promise_of(article: dict) -> str | None:
+    """What the guide's own title promises after its colon ("Quand partir en Thaïlande : le bon mois pour Bangkok, le
+    Nord, l'Andaman et Koh Samui"): the precise hook of a post that has no figure to open on."""
+    title = article.get("title", "")
+    promise = title.split(" : ", 1)[1].strip() if " : " in title else ""
+    promise = promise[:1].upper() + promise[1:]
+    return promise if 20 <= len(promise) <= 90 and checked(promise, 120) else None
 
 
 def seconds_for(detail: str | None) -> float:
@@ -646,6 +667,12 @@ class Brief:
         return numbered(self.facts, self.article)
 
     def hook(self, promise: str) -> dict:
+        # A "quand partir" guide promises a moment, not "4 chiffres": the hook says what its own title promises
+        # ("Le bon mois pour Bangkok, le Nord, l'Andaman et Koh Samui"), quoted from the guide (review of 13/11/2026).
+        told = promise_of(self.article) if self.article.get("shortTitle", "").lower().startswith("quand partir") else None
+        if told:
+            return plan("hook", self.media.opening(self.media.cover), self.kicker, self.title_lines + [promise], HOOK_SECONDS,
+                        detail=unbreakable(told), facts=[{"source": "guide", "excerpt": self.article["title"]}], tag=self.tag)
         return plan("hook", self.media.opening(self.media.cover), self.kicker, self.title_lines + [promise], HOOK_SECONDS,
                     facts=[{"source": "guide", "excerpt": self.opening}], tag=self.tag)
 

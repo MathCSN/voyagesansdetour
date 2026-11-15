@@ -186,9 +186,11 @@ def featured_candidates(article: dict, names: list[str], country: str, searcher,
             # And it must be that place: "Porto Covo" names another town of the same country.
             if not names_place(title, names) or names_place(title, others):
                 continue
-            label = re.sub(r"\s+", " ", re.sub(r"\.(jpe?g)$", "", title.removeprefix("File:"), flags=re.IGNORECASE)).strip()
+            # Never a raw Commons file name as the text read out for a photo ("Lamp maker, Medina of Marrakech",
+            # "Maroc Marrakech Saadiens Luc Viatour 5"): its place only; the title stays in the record, where the
+            # choice of photo and production.py still read it.
             found.append({"id": slugged(article["destination"])[:40] + "-" + hashlib.sha1(title.encode()).hexdigest()[:8], "title": title,
-                          "alt": f"{article['destination']} ({country}) : {label}."[:300], "automatic": True, "countryNames": countries,
+                          "alt": f"{article['destination']} ({country}).", "automatic": True, "countryNames": countries,
                           "homonyms": others})
     return found
 

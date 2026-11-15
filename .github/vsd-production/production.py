@@ -524,7 +524,9 @@ def credits_text(scenario, info):
             continue
         photo = info["photos"][scene["photo"]]
         share_alike |= "SA" in photo["licence"]
-        lines.append(f"{n}. {photo['author']} — « {photo['commonsTitle'].removeprefix('File:')} », Wikimedia Commons, {photo['sourcePage']}")
+        # "Daniel Lu ( User:dllu )": Commons' own spacing inside brackets is not kept.
+        author = re.sub(r"\(\s+", "(", re.sub(r"\s+\)", ")", photo["author"]))
+        lines.append(f"{n}. {author} — « {photo['commonsTitle'].removeprefix('File:')} », Wikimedia Commons, {photo['sourcePage']}")
         lines.append(f"   Licence {photo['licence']} : {photo['licenceUrl']}. Modifications : recadrage, "
                      + ("mouvement lent, " if scenario["kind"] == "reel" else "") + "dégradé et texte ajoutés.")
     if share_alike:
@@ -533,12 +535,14 @@ def credits_text(scenario, info):
         music = scenario["assets"]["music"]
         lines += ["", "MUSIQUE", f"« {music['title']} » — {music['author']} (incompetech.com), {music['sourceUrl']}",
                   f"Licence CC BY 4.0 : {music['licenseUrl']}. Modifications : extrait, fondus, niveau ajusté. Aucune voix."]
-    families = "DM Sans, Playfair Display et Noto Sans" if "fallbackRegular" in scenario["assets"] else "DM Sans et Playfair Display"
-    lines += ["", "POLICES", families + " — SIL Open Font License 1.1 (notices jointes).", "",
-              f"SOURCES (relevées le {info['sourceCheckedOn']})"]
+    # Only the notices published beside this file are said to be joined: Noto Sans's is not (public_media.py).
+    fonts = ["DM Sans et Playfair Display — SIL Open Font License 1.1 (notices jointes)."]
+    if "fallbackRegular" in scenario["assets"]:
+        fonts.append("Noto Sans — SIL Open Font License 1.1 : https://openfontlicense.org")
+    lines += ["", "POLICES", *fonts, "", f"SOURCES (relevées le {info['sourceCheckedOn']})"]
     for record in info["sources"].values():
         lines.append(f"- {record['publisher']} — {record['title']} : {record['url']} (relevé le {record['retrievedAt'][:10]})")
-    lines += ["", "Montage : Voyage Sans Détour, préparé avec l’aide d’outils d’IA ; faits relevés sur les pages officielles citées."]
+    lines += ["", "Montage : Voyage Sans Détour, préparé avec l’aide d’outils d’IA ; faits relevés dans les sources citées ci-dessus."]
     return "\n".join(lines) + "\n"
 
 

@@ -1062,6 +1062,35 @@ class DensityTests(unittest.TestCase):
         self.assertEqual((again["publishAt"], again["id"], again["guide"]), (first["publishAt"], first["id"] + "-2", first["guide"]))
         self.assertEqual((f.root / "scenarios" / f"{first['id']}.json").read_bytes(), before)
 
+    def test_a_when_to_go_guide_opens_on_what_its_title_promises_and_the_finish_of_the_review(self):
+        # Review of 13/11/2026: "Quand partir en Thaïlande / 4 repères à connaître" promised nothing.
+        article = guide(category="Choisir", shortTitle="Quand partir à Kyoto", title="Quand partir à Kyoto : le bon mois pour les temples et les érables",
+                        sections=[TABLE] + SECTIONS)
+        f = self.fixture([article])
+        made = {c["kind"]: f.scenario(c["id"]) for c in f.run(limit=30)["created"]}
+        self.assertEqual(" ".join(made["carousel"]["scenes"][0]["headline"]), "Le bon mois pour les temples et les érables")
+        self.assertIn("Quand partir à Kyoto : le bon mois pour les temples et les érables", [fact["excerpt"] for fact in made["carousel"]["scenes"][0]["facts"]])
+        self.assertEqual(made["reel"]["scenes"][0]["detail"].replace(reel_formats.NBSP, " "), "Le bon mois pour les temples et les érables")
+        # A label is never cut before what its price depends on.
+        cap = "le plafond quotidien du métro en zones 1-2 en sans contact, aux heures creuses, depuis mars 2026 selon TfL"
+        self.assertIn("aux heures creuses", reel_formats.short_label(cap))
+        self.assertIn("à partir de 14 ans", reel_formats.short_label("l’aller simple Faro–Lagos en train régional, à partir de 14 ans, billet en gare ou en ligne chez CP"))
+        # The pictogram is the means the line names: a minibus is no train, a ticket for a town no journey.
+        self.assertEqual(reel_formats.caption_emoji("350 bahts", "le minibus Phantip de Surat Thani à Krabi"), "🚌")
+        self.assertEqual(reel_formats.caption_emoji("120 000 ₫", "le billet de la vieille ville de Hội An"), "📍")
+        self.assertEqual(reel_formats.caption_emoji("2 min", "de métro D au-dessus du Douro"), "⏱️")
+        self.assertEqual(reel_formats.caption_emoji("6 975 ₡", "le bus MEPE Puerto Viejo – San José"), "🚌")
+        # Credits: Commons' spaces inside brackets dropped, Noto Sans not said joined, sources not called official.
+        carousel = made["carousel"]
+        info = p.validate_scenario(carousel, f.root, p.instant(carousel["review"]["checkedAt"]))
+        first = carousel["scenes"][1]["photo"]
+        info["photos"][first] = {**info["photos"][first], "author": "Daniel Lu ( User:dllu )"}
+        text = p.credits_text({**carousel, "assets": {**carousel["assets"], "fallbackRegular": carousel["assets"].get("fallbackRegular", "x")}}, info)
+        self.assertIn("Daniel Lu (User:dllu)", text)
+        self.assertIn("DM Sans et Playfair Display — SIL Open Font License 1.1 (notices jointes).", text)
+        self.assertIn("Noto Sans — SIL Open Font License 1.1 : https://openfontlicense.org", text)
+        self.assertNotIn("pages officielles", text)
+
     def test_a_when_to_go_guide_is_not_promised_prices_and_an_itinerary(self):
         article = guide(category="Choisir", shortTitle="Quand partir à Kyoto", sections=[TABLE] + SECTIONS)
         f = self.fixture([article])
