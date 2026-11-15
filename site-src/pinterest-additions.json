@@ -42,17 +42,7 @@
       "countries": [
         "italie"
       ],
-      "items": [
-        {
-          "id": "pin-cinque-terre-sans-voiture",
-          "title": "Les Cinque Terre sans voiture : train toutes les 20 minutes, Via dell’Amore et carte à 17,30 €",
-          "description": "📌 Retrouvez le guide et ses sources pour préparer votre voyage en Italie. Photo : Timothy A. Gonsalves — CC BY-SA 4.0. Crédits : https://voyagesansdetour.fr/social-media/production/pin-cinque-terre-sans-voiture/credits.txt",
-          "linkPath": "/italie/cinque-terre-sans-voiture/",
-          "mediaId": "pin-cinque-terre-sans-voiture",
-          "width": 1000,
-          "height": 1500
-        }
-      ]
+      "items": []
     },
     {
       "file": "inspirations-voyage.xml",
@@ -60,24 +50,24 @@
       "countries": [
         "*"
       ],
-      "items": [
-        {
-          "id": "pin-londres-noel-marches",
-          "title": "Londres en décembre 2026 : Winter Wonderland, patinoires et métro plafonné à 8,90 £",
-          "description": "Les dates de l’hiver 2026 à Londres : Winter Wonderland du 19 novembre au 3 janvier, Somerset House dès 15 £, métro plafonné à 8,90 £ par jour, pas de métro le 25. 📌 Enregistrez ce guide pour préparer votre voyage au Royaume-Uni. Photo : Dietmar Rabich — CC BY-SA 4.0. Crédits : https://voyagesansdetour.fr/social-media/production/pin-londres-noel-marches/credits.txt",
-          "linkPath": "/royaume-uni/londres-noel-marches/",
-          "mediaId": "pin-londres-noel-marches",
-          "width": 1000,
-          "height": 1500
-        }
-      ]
+      "items": []
     }
   ],
   "withdrawn": [
     {
+      "id": "pin-05-sintra-trois-temps",
+      "withdrawnOn": "2026-11-15",
+      "reason": "aplat bleu, pastilles vides, mention « montage assisté par IA · sans récit vécu » ; retirée de lisbonne.xml (relecture du 15/11/2026)"
+    },
+    {
       "id": "pin-andalousie-train-seville-cordoue-grenade",
       "withdrawnOn": "2026-11-15",
       "reason": "chiffre de trajet sur la photo d'un autre lieu (relecture du 13/11/2026)"
+    },
+    {
+      "id": "pin-cinque-terre-sans-voiture",
+      "withdrawnOn": "2026-11-15",
+      "reason": "« 2–4 min de train entre deux villages » sur Manarola sans train (relecture du 15/11/2026)"
     },
     {
       "id": "pin-cote-amalfitaine-sans-voiture",
@@ -98,6 +88,11 @@
       "id": "pin-japon-itineraire-2-semaines",
       "withdrawnOn": "2026-11-15",
       "reason": "chiffre d'un lieu sur la photo d'un autre (relecture du 13/11/2026)"
+    },
+    {
+      "id": "pin-londres-noel-marches",
+      "withdrawnOn": "2026-11-15",
+      "reason": "« 8,90 £ plafond du métro » sur Tower Bridge (relecture du 15/11/2026)"
     },
     {
       "id": "pin-portugal-sans-voiture-bagages",
