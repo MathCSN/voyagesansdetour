@@ -769,6 +769,50 @@
       "retiredAt": "2026-11-13T05:17:50Z",
       "reason": "photos_of_another_place",
       "evidence": "Audit à l’image du 13/11/2026 (fiches Wikimedia Commons et images extraites, revue contradictoire) : les 1,1 °C de l’observatoire d’Izaña sont posés, sous l’étiquette « Le Teide », sur une vue du village côtier de Garachico."
+    },
+    {
+      "batchId": "fb-portugal-sans-voiture-bagages-2026-11-29-v1",
+      "batchSha256": "2c4f8cddd92ed4501bb225fcbd29c53069f53ba7cca7bb550fd16aeb7f0dbeed",
+      "fileSha256": "a639356333f37b9c1ef154d279d7f65c1b10fec8b36a9d68ffafe54788cecaaf",
+      "itemIds": [
+        "vsd-production:facebook:fb-portugal-sans-voiture-bagages-2026-11-29:photo-v1"
+      ],
+      "retiredAt": "2026-11-15T14:48:08Z",
+      "reason": "review_of_pull_request_57",
+      "evidence": "Relecture de la PR 57 (15/11/2026), garde-fou production.photos_of_another_place avec les contrôles REVIEW_57_FROM : « plan 4 names a ride to another place over lisbonne, which shows no ride of it » ; « plan 3 names trains and no place over lisbonne-alfama-toits, which shows no train ». « 55×40×20 cm la valise maximale dans les bus et les trams Carris de Lisbonne » (ticket de ville Carris) est posé sur une vue des toits de Lisbonne, sans bus ni tram, et « 85×55×35 cm … sur les trains internationaux CP » sur les toits d'Alfama, sans train : un ticket de ville va sur un métro, un tram, un bus ou un train, un fait de trains sans lieu sur un train, sinon ils restent dans le guide."
+    },
+    {
+      "batchId": "fb-yucatan-itineraire-10-jours-2026-12-03-v1",
+      "batchSha256": "5578ed91fd7023f5e59f1409d98ed40cdb2de98b1b7bc6a22212f57edcdbcfbc",
+      "fileSha256": "403729ff75265b5e43ca22cb17dbe88c67a6ac475b06ca7a3e5c08803635a27b",
+      "itemIds": [
+        "vsd-production:facebook:fb-yucatan-itineraire-10-jours-2026-12-03:photo-v1"
+      ],
+      "retiredAt": "2026-11-15T14:48:08Z",
+      "reason": "review_of_pull_request_57",
+      "evidence": "Relecture de la PR 57 (15/11/2026), garde-fou production.photos_of_another_place avec les contrôles REVIEW_57_FROM : « plan 2 shows the subject of plan 1 again over yucatan-chichen-itza ». Le carrousel s'ouvre sur la pyramide d'El Castillo (yucatan-el-castillo) et la remontre au plan 2 (yucatan-chichen-itza, « La pyramide d'El Castillo, à Chichén Itzá ») : un même sujet deux fois dans un post."
+    },
+    {
+      "batchId": "ig-laponie-budget-rovaniemi-2026-11-29-v1",
+      "batchSha256": "5bee101b32bba8d5b415f2a2ee068ca2336cbe14665f9876f0ebacbde6de09bc",
+      "fileSha256": "2a17b5aecc0a9ca8b8851795fbe2f6ed84e308bd420d6eb7cffa7882892b973d",
+      "itemIds": [
+        "vsd-production:instagram:ig-laponie-budget-rovaniemi-2026-11-29:photo-v1"
+      ],
+      "retiredAt": "2026-11-15T15:20:34Z",
+      "reason": "review_of_pull_request_57",
+      "evidence": "Contre-relecture de la PR 57 (15/11/2026), garde-fou production.photos_of_another_place avec les contrôles REVIEW_57_FROM : « plan 7 shows the subject of plan 3 again over laponie-village-pere-noel-hiver ». Le bureau du Père Noël (plan 3, Commons « Santa Claus Village.jpg ») et le village du Père Noël sous la neige (fin) montrent le même village, même flèche du bureau : un même sujet deux fois dans un post."
+    },
+    {
+      "batchId": "ig-laponie-budget-rovaniemi-2026-11-29-tiktok-v1",
+      "batchSha256": "ca6e4b6c828b0b65957e50a470a72d103e4c3f102032b7bedadfd5e21398ff9b",
+      "fileSha256": "02a725a33b5a64c15f2c095012277c44fd59b95ea67a7ae10d8b9da31300fc41",
+      "itemIds": [
+        "vsd-production:tiktok:ig-laponie-budget-rovaniemi-2026-11-29:photo-v1"
+      ],
+      "retiredAt": "2026-11-15T15:20:34Z",
+      "reason": "review_of_pull_request_57",
+      "evidence": "Contre-relecture de la PR 57 (15/11/2026), garde-fou production.photos_of_another_place avec les contrôles REVIEW_57_FROM : « plan 7 shows the subject of plan 3 again over laponie-village-pere-noel-hiver ». Le bureau du Père Noël (plan 3, Commons « Santa Claus Village.jpg ») et le village du Père Noël sous la neige (fin) montrent le même village, même flèche du bureau : un même sujet deux fois dans un post."
     }
   ]
 }
