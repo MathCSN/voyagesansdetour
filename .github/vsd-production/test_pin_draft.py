@@ -142,7 +142,7 @@ class PinReviewOfTheFifteenth(unittest.TestCase):
         photo={'author':'Daniel Lu ( User:dllu )','source_page':'https://commons.wikimedia.org/wiki/File:X.jpg','license':'CC BY-SA 4.0','license_url':'https://creativecommons.org/licenses/by-sa/4.0/'}
         self.assertIn('Daniel Lu (User:dllu)',credits(photo))
         image=Image.new('RGB',(1000,1500),'black');credit_line(ImageDraw.Draw(image),1440,{**photo,'author':'Un auteur au nom très long '*4})
-        self.assertEqual(image.crop((935,1400,1000,1500)).getbbox(),None)   # nothing drawn past the right margin
+        self.assertIsNone(image.crop((935,1400,1000,1500)).getbbox())   # nothing drawn past the right margin
 
     def test_a_journey_goes_over_its_means_of_transport_or_not_at_all(self):
         from pin_draft import fact_fits_photo
@@ -172,9 +172,13 @@ class PinReviewOfTheFifteenth(unittest.TestCase):
         import hashlib, pin_draft
         renderer=hashlib.sha256(Path(pin_draft.__file__).read_bytes()).hexdigest()
         with tempfile.TemporaryDirectory() as temp:
-            for identity, photo in (('pin-portugal-sans-voiture-bagages-c','lisbonne-alfama-tram'),('pin-ou-dormir-lisbonne-quartiers-b','lisbonne-x')):
-                (Path(temp)/identity).mkdir();(Path(temp)/identity/'draft.json').write_text(json.dumps({'id':identity,'photo':{'id':photo},'rendererSha256':renderer}))
-            self.assertEqual(taken_by_other_pins('ou-dormir-lisbonne-quartiers',temp),{'lisbonne-alfama-tram'})
+            for identity, variant, photo in (('pin-portugal-sans-voiture-bagages-c','c','lisbonne-alfama-tram'),('pin-ou-dormir-lisbonne-quartiers-b','b','lisbonne-x'),
+                                             ('pin-porto-weekend-b','b','porto-ribeira')):
+                (Path(temp)/identity).mkdir();(Path(temp)/identity/'draft.json').write_text(json.dumps({'id':identity,'variant':variant,'photo':{'id':photo},'rendererSha256':renderer}))
+            self.assertEqual(taken_by_other_pins('ou-dormir-lisbonne-quartiers',temp),{'lisbonne-alfama-tram','porto-ribeira'})
+            # A guide whose slug begins another one's ("porto", "porto-weekend") does not take that guide's photos.
+            self.assertIn('porto-ribeira',taken_by_other_pins('porto',temp))
+            self.assertNotIn('porto-ribeira',taken_by_other_pins('porto-weekend',temp))
         self.assertIn('lisbonne-santa-justa',LEFT_OUT)
 
 if __name__=='__main__':unittest.main()

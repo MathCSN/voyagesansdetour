@@ -274,9 +274,15 @@ def taken_by_other_pins(slug, drafts=None):
         draft = json.loads(manifest.read_text())
         # A draft of an older renderer is to be redrawn, and may change its picture: it holds none.
         current = draft.get('rendererSha256') == hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
-        if current and not draft['id'].removeprefix('pin-').startswith(slug):
+        if current and draft_slug(draft) != slug:
             taken.add((draft.get('photo') or {}).get('id'))
     return taken - {None}
+
+
+def draft_slug(draft):
+    """The guide of a draft, whole: "pin-porto-weekend-b" is a Pin of porto-weekend, never of porto."""
+    identity, variant = draft['id'].removeprefix('pin-'), draft.get('variant', 'a')
+    return identity if variant == 'a' else identity.removesuffix('-' + variant)
 
 
 def guide_photos(article, site):
