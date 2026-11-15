@@ -781,17 +781,18 @@ class Media:
         detail = bool((place_names.RIDES | STOPS) & self.described(photo))
         return (not photo[1].get("emblematic"), detail, bool(self.recorded(photo)))
 
-    def closing(self, required: bool = True) -> tuple[str, str]:
+    def closing(self) -> tuple[str, str]:
         """The picture under the call to action: one that stands for the place, a photo marked `emblematic` by hand
-        or one the guide itself shows. Never a detail kept for one plan (a hut, a dog team): `required`, the post
-        waits for such a photo; otherwise any photo a person looked at will do (a carousel). Never a file found by
-        the search."""
+        or one the guide itself shows; else any photo of the destination the post has not shown, the plainest first,
+        that repeats none of its subjects (a reel of Porto, of the Japan budget or of Lapland waited for an emblematic
+        photo the subjects had all used: review of PR 57). Never a file found by the search, a train borrowed from
+        another guide or an outing."""
         shown = self.subjects_shown()
         fresh = [ph for ph in self.photos if not self.subjects(ph) & shown and not self.borrowed(ph)]
         pick = next((ph for wanted in self.emblematic for ph in fresh if ph[0] == wanted), None)
-        seen = [ph for ph in fresh if ph[0] not in self.found]
-        if not pick and (required or not seen):
-            raise Held("no_emblematic_photo_for_the_call")
+        seen = sorted((ph for ph in fresh if ph[0] not in self.found and not self.excursion(ph)), key=self.plain)
+        if not pick and not seen:
+            raise Held("no_photo_left_for_the_call")
         pick = pick or seen[0]
         self.photos.remove(pick)
         return ("photo", pick[0])

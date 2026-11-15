@@ -528,7 +528,7 @@ def scenes_for(article: dict, channel: Post, facts: list[dict], photos: list[tup
         where, quotes = reel_formats.located_by_section(fact, media, fact["excerpt"])
         scenes.append(scene(pictures[fact["value"]], named, ["*" + fact["value"] + "*"],
                             unbreakable(fact["label"]), 4, quotes, label=reel_formats.dated_tag(fact, tag), where=where))
-    scenes.append(scene(media.closing(required=False), "Le guide complet", title_lines, call_detail(article), 4.5, cta=True))
+    scenes.append(scene(media.closing(), "Le guide complet", title_lines, call_detail(article), 4.5, cta=True))
     return scenes
 
 
