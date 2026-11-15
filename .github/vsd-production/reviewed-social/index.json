@@ -769,6 +769,28 @@
       "retiredAt": "2026-11-13T05:17:50Z",
       "reason": "photos_of_another_place",
       "evidence": "Audit à l’image du 13/11/2026 (fiches Wikimedia Commons et images extraites, revue contradictoire) : les 1,1 °C de l’observatoire d’Izaña sont posés, sous l’étiquette « Le Teide », sur une vue du village côtier de Garachico."
+    },
+    {
+      "batchId": "fb-portugal-sans-voiture-bagages-2026-11-29-v1",
+      "batchSha256": "2c4f8cddd92ed4501bb225fcbd29c53069f53ba7cca7bb550fd16aeb7f0dbeed",
+      "fileSha256": "a639356333f37b9c1ef154d279d7f65c1b10fec8b36a9d68ffafe54788cecaaf",
+      "itemIds": [
+        "vsd-production:facebook:fb-portugal-sans-voiture-bagages-2026-11-29:photo-v1"
+      ],
+      "retiredAt": "2026-11-15T14:48:08Z",
+      "reason": "review_of_pull_request_57",
+      "evidence": "Relecture de la PR 57 (15/11/2026), garde-fou production.photos_of_another_place avec les contrôles REVIEW_57_FROM : « plan 4 names a ride to another place over lisbonne, which shows no ride of it ». « 55×40×20 cm la valise maximale dans les bus et les trams Carris de Lisbonne » (ticket de ville Carris) est posé sur une vue des toits de Lisbonne, sans bus ni tram ; un ticket de ville va sur un métro, un tram, un bus ou un train, sinon il reste dans le guide."
+    },
+    {
+      "batchId": "fb-yucatan-itineraire-10-jours-2026-12-03-v1",
+      "batchSha256": "5578ed91fd7023f5e59f1409d98ed40cdb2de98b1b7bc6a22212f57edcdbcfbc",
+      "fileSha256": "403729ff75265b5e43ca22cb17dbe88c67a6ac475b06ca7a3e5c08803635a27b",
+      "itemIds": [
+        "vsd-production:facebook:fb-yucatan-itineraire-10-jours-2026-12-03:photo-v1"
+      ],
+      "retiredAt": "2026-11-15T14:48:08Z",
+      "reason": "review_of_pull_request_57",
+      "evidence": "Relecture de la PR 57 (15/11/2026), garde-fou production.photos_of_another_place avec les contrôles REVIEW_57_FROM : « plan 2 shows the subject of plan 1 again over yucatan-chichen-itza ». Le carrousel s'ouvre sur la pyramide d'El Castillo (yucatan-el-castillo) et la remontre au plan 2 (yucatan-chichen-itza, « La pyramide d'El Castillo, à Chichén Itzá ») : un même sujet deux fois dans un post."
     }
   ]
 }
