@@ -47,8 +47,8 @@
     }
   },
   "pins": {
-    "note": "Admission des épingles au flux Pinterest (pin_promotion.py). EN PAUSE depuis le 13/11/2026 : regardées à l'image, les épingles en file posent, pour neuf des dix-sept, le chiffre d'un lieu sur la photo d'un autre (Faro → Tavira sur la Ponta da Piedade, Bangkok → Chiang Mai sur Ko Phi Phi, le jardin Majorelle sur la place Jemaa el-Fna) et une coupe sa phrase. pin_intake.py continue de dessiner les brouillons ; aucun ne rejoint un flux. À rallumer (\"enabled\": true) quand le choix de la photo d'une épingle suivra les règles des posts et que les brouillons auront été redessinés et regardés.",
-    "enabled": false
+    "note": "Admission des épingles au flux Pinterest (pin_promotion.py), une par passage quotidien au plus. Rallumée le 16/11/2026 (PR des épingles, relue avant fusion) après sa pause du 13/11 : le choix de la photo d'une épingle suit les règles des posts (PR 55) et les brouillons ont été redessinés et regardés. Remettre \"enabled\": false pour la suspendre ; pin_intake.py continue alors de dessiner les brouillons, aucun ne rejoint un flux.",
+    "enabled": true
   },
   "clips": {
     "providers": [
