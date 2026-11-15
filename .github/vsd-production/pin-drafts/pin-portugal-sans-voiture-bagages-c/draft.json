@@ -4,26 +4,26 @@
   "status": "draft_requires_review",
   "publicationApproved": false,
   "title": "Bagages au Portugal sans voiture : 1 valise gratuite dans le train, des pavés partout",
-  "pinTitle": "Voyager léger au Portugal : un tram jaune passe devant les façades colorées d’Alfama",
+  "pinTitle": "Voyager léger au Portugal : un tram jaune de la ligne 28 dans une rue pavée et pentue de Lisbonne",
   "variant": "c",
   "targetUrl": "https://voyagesansdetour.fr/portugal/portugal-sans-voiture-bagages/",
   "articleSha256": "6fd171b1a79971374714684b7e1943a0bd242e317d0fba9ac3416aad9c94d311",
-  "imageSha256": "8948a6ea34be81840fb1d00de42261ee6f63067709101a9bbf31a1c32c68a56a",
+  "imageSha256": "796f04f8c945664c85210ec814d8fd2f3060c12ecd0995f90b84c6ce64dc990d",
   "width": 1000,
   "height": 1500,
   "templateVersion": 2,
-  "rendererSha256": "4e84395c3b1cf33bb7d679eee617155a0feb7db06078590a7bcefadb2e60ff2e",
+  "rendererSha256": "3a4397aab03be6d6cf764ab6d64b65bad2bb527586711f656ecf633b6bcd48f7",
   "originalComposition": true,
   "externalPhotographs": true,
   "limitations": [
     "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
   ],
   "photo": {
-    "id": "lisbonne-alfama-tram",
-    "author": "Ingo Mehling",
-    "source_page": "https://commons.wikimedia.org/wiki/File:Lissabon_-_Alfama_-_Largo_Santa_Luzia_-_Streetcar_-_1.jpg",
-    "license": "CC BY-SA 4.0",
-    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
-    "alt_fr": "Un tram jaune passe devant les façades colorées d’Alfama."
+    "id": "lisbonne-tram-28",
+    "author": "Shadowgate from Novara, ITALY",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Tram_28_(34791358090).jpg",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "alt_fr": "Un tram jaune de la ligne 28 dans une rue pavée et pentue de Lisbonne."
   }
 }

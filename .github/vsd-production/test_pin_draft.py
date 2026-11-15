@@ -213,4 +213,15 @@ class PinReviewOfPullRequest55(unittest.TestCase):
         self.assertFalse(place_names.strict_journey('20 min à pied de la Baixa à l’Alfama'))
         self.assertTrue(place_names.other_ride(place_names.vehicle('lisbonne-tram28',tram['alt_fr'],'File:Tram.jpg'),walk['label']))
 
+    def test_the_tram_with_an_advertisement_for_a_cryptocurrency_gives_way_to_the_tram_28(self):
+        # « LISBOA: SILICOIN VALLEY » on the tram of Alfama (bagages-c): the Pin takes the tram of line 28 in its place.
+        from pin_draft import guide_photos
+        with tempfile.TemporaryDirectory() as temp:
+            site=Path(temp);(site/'dist/assets/photos').mkdir(parents=True)
+            photos=[dict(PHOTO,id=name,file='photos/'+name+'.jpg',alt_fr=name) for name in ('lisbonne-bica','lisbonne-alfama-tram','lisbonne-tram-28')]
+            for photo in photos:Image.new('RGB',(1600,1067),'#7a9cc6').save(site/'dist/assets'/photo['file'])
+            (site/'image-sources.json').write_text(json.dumps({'photos':photos}))
+            guide=dict(GUIDE,cover='lisbonne-bica',sections=[{'image':'lisbonne-alfama-tram'}])
+            self.assertEqual([found[0]['id'] for found in guide_photos(guide,site)],['lisbonne-bica','lisbonne-tram-28'])
+
 if __name__=='__main__':unittest.main()

@@ -290,6 +290,9 @@ def cover_photo(article, site):
 
 # Photos a Pin never takes, though the guide shows them: read on the image (review of the Pins, 15/11/2026).
 LEFT_OUT = {'lisbonne-santa-justa': "l'ascenseur de Santa Justa, fermé selon le guide « Où dormir à Lisbonne »"}
+# Photos a Pin shows in the place of the guide's own, same subject: the tram of Alfama carries an advertisement for a
+# cryptocurrency (« LISBOA: SILICOIN VALLEY », review of PR 55); the tram of line 28 stands for it.
+INSTEAD = {'lisbonne-alfama-tram': 'lisbonne-tram-28'}
 
 
 def taken_by_other_pins(slug, drafts=None):
@@ -315,7 +318,7 @@ def draft_slug(draft):
 def guide_photos(article, site):
     """The guide's photos in reading order, cover first, each once, only those that pass every check."""
     photos = catalogue(site)
-    ids = [article.get('cover')] + [section.get('image') for section in article.get('sections') or []]
+    ids = [INSTEAD.get(i, i) for i in [article.get('cover')] + [section.get('image') for section in article.get('sections') or []]]
     found = []
     for identity in dict.fromkeys(i for i in ids if i and i not in LEFT_OUT):
         try:
