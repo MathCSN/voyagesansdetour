@@ -103,16 +103,23 @@ class PublicBuildTest(unittest.TestCase):
         for name in expected:
             self.assertEqual((folder/name).read_bytes(),(ROOT/'social-media'/'lancement-2026-09'/name).read_bytes())
 
-    def test_preparation_feed_contains_reviewed_baggage_pin(self):
+    def test_preparation_feed_keeps_its_reviewed_pins_and_never_a_withdrawn_one(self):
+        # 15/11/2026: the baggage Pin (a flat image marked "assistée par IA") and six others were withdrawn after review;
+        # they stay listed under "withdrawn" so that they never come back, and the feed keeps its other Pins.
+        config=json.loads((ROOT/'pinterest-additions.json').read_text())
+        withdrawn={'urn:vsd:pinterest:'+item['id'] for item in config['withdrawn']}
+        self.assertIn('urn:vsd:pinterest:pin-portugal-sans-voiture-bagages',withdrawn)
+        for feed in config['feeds']:
+            rss=ET.parse(self.out/'pinterest'/feed['file']).getroot()
+            guids={item.findtext('guid') for item in rss.findall('channel/item')}
+            self.assertFalse(guids&withdrawn,feed['file'])
         rss=ET.parse(self.out/'pinterest/preparer-portugal.xml').getroot()
-        # New Pins join this feed every week: the reviewed baggage Pin must stay, not stay alone.
-        items={item.findtext('guid'):item for item in rss.findall('channel/item')}
-        pin=items['urn:vsd:pinterest:pin-portugal-sans-voiture-bagages']
-        self.assertEqual(pin.findtext('link'),ORIGIN+'/portugal/portugal-sans-voiture-bagages/')
-        self.assertIn('assistée par IA',pin.findtext('description'))
-        media=pin.find('{http://search.yahoo.com/mrss/}content')
-        self.assertEqual((media.get('width'),media.get('height')),('1000','1500'))
-        self.assertTrue((self.out/media.get('url').removeprefix(ORIGIN+'/')).is_file())
+        items=rss.findall('channel/item')
+        self.assertTrue(items)
+        for item in items:
+            media=item.find('{http://search.yahoo.com/mrss/}content')
+            self.assertEqual((media.get('width'),media.get('height')),('1000','1500'))
+            self.assertTrue((self.out/media.get('url').removeprefix(ORIGIN+'/')).is_file())
 
     def test_pinterest_rss_preserves_published_pins_and_adds_reviewed_sintra(self):
         rss=ET.parse(self.out/'pinterest/lisbonne.xml').getroot()

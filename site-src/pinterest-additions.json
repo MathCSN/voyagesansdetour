@@ -9,15 +9,6 @@
       ],
       "items": [
         {
-          "id": "pin-portugal-sans-voiture-bagages",
-          "title": "Portugal sans voiture : préparer un bagage facile à transporter",
-          "description": "🧳 Sac ou valise, trajet jusqu’au logement et heures sans chambre : retrouvez nos conseils pour préparer vos bagages au Portugal. 📌 Enregistrez le guide pour votre départ. Composition originale Voyage Sans Détour, assistée par IA. Crédits : https://voyagesansdetour.fr/social-media/production/pin-portugal-sans-voiture-bagages/credits.txt",
-          "linkPath": "/portugal/portugal-sans-voiture-bagages/",
-          "mediaId": "pin-portugal-sans-voiture-bagages",
-          "width": 1000,
-          "height": 1500
-        },
-        {
           "id": "pin-aeroport-porto-centre-ville",
           "title": "Aéroport de Porto au centre-ville : métro E en 30 minutes pour 2,30 €",
           "description": "📌 Retrouvez le guide et ses sources pour préparer votre voyage au Portugal. Photo : Thomas Dahlstrøm Nielsen — CC BY-SA 4.0. Crédits : https://voyagesansdetour.fr/social-media/production/pin-aeroport-porto-centre-ville/credits.txt",
@@ -34,15 +25,6 @@
           "mediaId": "pin-lisbonne-porto-train",
           "width": 1000,
           "height": 1500
-        },
-        {
-          "id": "pin-douro-train-depuis-porto",
-          "title": "La vallée du Douro en train depuis Porto : Pinhão, rabelo et quintas sans voiture",
-          "description": "La ligne du Douro jusqu’à Pinhão, côté fenêtre, les azulejos de la gare, une heure de rabelo à 15 € et les travaux de l’hiver 2026-2027. 📌 Enregistrez ce guide pour préparer votre voyage au Portugal. Photo : Rosino — CC BY-SA 2.0. Crédits : https://voyagesansdetour.fr/social-media/production/pin-douro-train-depuis-porto/credits.txt",
-          "linkPath": "/portugal/douro-train-depuis-porto/",
-          "mediaId": "pin-douro-train-depuis-porto",
-          "width": 1000,
-          "height": 1500
         }
       ]
     },
@@ -52,26 +34,7 @@
       "countries": [
         "espagne"
       ],
-      "items": [
-        {
-          "id": "pin-andalousie-train-seville-cordoue-grenade",
-          "title": "L’Andalousie en train : Séville, Cordoue et Grenade sans voiture, en 5 jours",
-          "description": "📌 Retrouvez le guide et ses sources pour préparer votre voyage en Espagne. Photo : Jebulon — CC0. Crédits : https://voyagesansdetour.fr/social-media/production/pin-andalousie-train-seville-cordoue-grenade/credits.txt",
-          "linkPath": "/espagne/andalousie-train-seville-cordoue-grenade/",
-          "mediaId": "pin-andalousie-train-seville-cordoue-grenade",
-          "width": 1000,
-          "height": 1500
-        },
-        {
-          "id": "pin-tenerife-quand-partir",
-          "title": "Quand partir à Tenerife : 22 °C en janvier au sud, 16 °C au nord, et le bon mois pour chaque côte",
-          "description": "22,8 °C et 222 h de soleil en janvier à Tenerife Sud, 16 °C et 80 mm de pluie au nord : le bon mois pour la plage, le Teide et Masca, avec la mer, la calima et le Carnaval 2027. 📌 Enregistrez ce guide pour préparer votre voyage en Espagne. Photo : Ingo Mehling — CC BY-SA 4.0. Crédits : https://voyagesansdetour.fr/social-media/production/pin-tenerife-quand-partir/credits.txt",
-          "linkPath": "/espagne/tenerife-quand-partir/",
-          "mediaId": "pin-tenerife-quand-partir",
-          "width": 1000,
-          "height": 1500
-        }
-      ]
+      "items": []
     },
     {
       "file": "preparer-italie.xml",
@@ -88,15 +51,6 @@
           "mediaId": "pin-cinque-terre-sans-voiture",
           "width": 1000,
           "height": 1500
-        },
-        {
-          "id": "pin-cote-amalfitaine-sans-voiture",
-          "title": "La côte amalfitaine sans voiture : ferry de Salerne à 12 €, bus SITA et sentier des Dieux",
-          "description": "📌 Retrouvez le guide et ses sources pour préparer votre voyage en Italie. Photo : Bernard Gagnon — CC BY 4.0. Crédits : https://voyagesansdetour.fr/social-media/production/pin-cote-amalfitaine-sans-voiture/credits.txt",
-          "linkPath": "/italie/cote-amalfitaine-sans-voiture/",
-          "mediaId": "pin-cote-amalfitaine-sans-voiture",
-          "width": 1000,
-          "height": 1500
         }
       ]
     },
@@ -108,24 +62,6 @@
       ],
       "items": [
         {
-          "id": "pin-japon-itineraire-2-semaines",
-          "title": "Japon en 2 semaines : l’itinéraire en train de Tokyo à Kyoto, Nara et Hiroshima (prix 2026)",
-          "description": "📌 Retrouvez le guide et ses sources pour préparer votre voyage au Japon. Photo : Stjepko Krehula — CC BY 4.0. Crédits : https://voyagesansdetour.fr/social-media/production/pin-japon-itineraire-2-semaines/credits.txt",
-          "linkPath": "/japon/japon-itineraire-2-semaines/",
-          "mediaId": "pin-japon-itineraire-2-semaines",
-          "width": 1000,
-          "height": 1500
-        },
-        {
-          "id": "pin-japon-budget-2-semaines",
-          "title": "Budget Japon 2 semaines : de 870 à 1 370 € sans le vol, poste par poste (prix 2026)",
-          "description": "📌 Retrouvez le guide et ses sources pour préparer votre voyage au Japon. Photo : David Kernan — CC BY 4.0. Crédits : https://voyagesansdetour.fr/social-media/production/pin-japon-budget-2-semaines/credits.txt",
-          "linkPath": "/japon/japon-budget-2-semaines/",
-          "mediaId": "pin-japon-budget-2-semaines",
-          "width": 1000,
-          "height": 1500
-        },
-        {
           "id": "pin-londres-noel-marches",
           "title": "Londres en décembre 2026 : Winter Wonderland, patinoires et métro plafonné à 8,90 £",
           "description": "Les dates de l’hiver 2026 à Londres : Winter Wonderland du 19 novembre au 3 janvier, Somerset House dès 15 £, métro plafonné à 8,90 £ par jour, pas de métro le 25. 📌 Enregistrez ce guide pour préparer votre voyage au Royaume-Uni. Photo : Dietmar Rabich — CC BY-SA 4.0. Crédits : https://voyagesansdetour.fr/social-media/production/pin-londres-noel-marches/credits.txt",
@@ -135,6 +71,43 @@
           "height": 1500
         }
       ]
+    }
+  ],
+  "withdrawn": [
+    {
+      "id": "pin-andalousie-train-seville-cordoue-grenade",
+      "withdrawnOn": "2026-11-15",
+      "reason": "chiffre de trajet sur la photo d'un autre lieu (relecture du 13/11/2026)"
+    },
+    {
+      "id": "pin-cote-amalfitaine-sans-voiture",
+      "withdrawnOn": "2026-11-15",
+      "reason": "chiffre d'un lieu sur la photo d'un autre (relecture du 13/11/2026)"
+    },
+    {
+      "id": "pin-douro-train-depuis-porto",
+      "withdrawnOn": "2026-11-15",
+      "reason": "2 h 21 : durée d'avant travaux, le guide donne 4 h 01 jusqu'au 24/03/2027 ; heure coupée (relecture du 15/11/2026)"
+    },
+    {
+      "id": "pin-japon-budget-2-semaines",
+      "withdrawnOn": "2026-11-15",
+      "reason": "taux de change sur une photo sans rapport, crédit mal espacé (relecture du 13/11/2026)"
+    },
+    {
+      "id": "pin-japon-itineraire-2-semaines",
+      "withdrawnOn": "2026-11-15",
+      "reason": "chiffre d'un lieu sur la photo d'un autre (relecture du 13/11/2026)"
+    },
+    {
+      "id": "pin-portugal-sans-voiture-bagages",
+      "withdrawnOn": "2026-11-15",
+      "reason": "aplat sans photo, mention « assistée par IA » (relecture du 15/11/2026)"
+    },
+    {
+      "id": "pin-tenerife-quand-partir",
+      "withdrawnOn": "2026-11-15",
+      "reason": "chiffre d'un lieu sur la photo d'un autre (relecture du 13/11/2026)"
     }
   ]
 }

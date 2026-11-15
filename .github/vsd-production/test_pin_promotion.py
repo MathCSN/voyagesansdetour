@@ -76,7 +76,8 @@ class PinPromotionTests(unittest.TestCase):
         self.assertEqual(select([self.article],self.root,set(),None,NOW,guide_last=recent)[1],'cadence_hold')
         self.assertEqual(select([self.article],self.root,set(),None,NOW,guide_last={'test-guide':NOW-dt.timedelta(days=14)})[1],'eligible')
     def test_a_guide_title_too_long_for_pinterest_gets_its_search_style_title_instead_of_blocking(self):
-        long_guide={'slug':'long','title':'Un titre de guide très détaillé '+'et encore plus précis '*4,'shortTitle':'Porto en 3 jours','category':'Itinéraires'}
+        long_guide={'slug':'long','title':'Un titre de guide très détaillé '+'et encore plus précis '*4,'shortTitle':'Porto en 3 jours','category':'Itinéraires',
+                    'sections':[{'title':'Jour 1 — Ribeira'},{'title':'Jour 2 — Gaia'}]}   # told day by day: « jour par jour » holds
         folder=render(long_guide,self.root)
         self.assertEqual(json.loads((folder/'draft.json').read_text())['pinTitle'],'Porto en 3 jours : itinéraire jour par jour, prix et conseils')
         chosen,status=select([long_guide],self.root,{'pin-test-guide'},None,NOW)
@@ -176,12 +177,25 @@ class PinAdmissionTests(unittest.TestCase):
             self.assertIn('Photo : Jane Doe — CC BY-SA 4.0.',text)
             long_text=describe({**guide,'description':'Première phrase utile. '+'Une phrase de plus qui allonge le texte. '*20},None,'pin-tenerife',site)
             self.assertLessEqual(len(long_text),500);self.assertTrue(long_text.startswith('Première phrase utile.'))
+    def test_a_withdrawn_pin_is_never_admitted_again(self):
+        from pin_promotion import run
+        with tempfile.TemporaryDirectory() as temp:
+            root=Path(temp);production,site=self.fixture(root)
+            guide={'slug':'grenade','title':'Grenade sans voiture','shortTitle':'Grenade sans voiture','country':'portugal','cover':'grenade-alhambra'}
+            render(guide,production/'pin-drafts')
+            (site/'articles.json').write_text(json.dumps([guide]))
+            config=json.loads((site/'pinterest-additions.json').read_text())
+            config['withdrawn']=[{'id':'pin-grenade','withdrawnOn':'2026-11-15','reason':'test'}]
+            (site/'pinterest-additions.json').write_text(json.dumps(config))
+            self.assertEqual(run(root,NOW,lambda url,title:'a'*64)['status'],'no_eligible_new_draft')
+
     def test_variants_of_a_guide_join_the_feed_with_their_own_picture_title_and_campaign_tag(self):
         from pin_promotion import run,run_many
         with tempfile.TemporaryDirectory() as temp:
             root=Path(temp);production,site=self.fixture(root)
             guide={'slug':'grenade','title':'Grenade sans voiture','shortTitle':'Grenade sans voiture','country':'portugal','category':'Itinéraires','cover':'grenade-alhambra',
-                   'sections':[{'image':'grenade-albaicin'}],'keyFacts':[{'value':'19 €','label':'l’Alhambra'},{'value':'3 h','label':'la visite'},{'value':'1,60 €','label':'le bus C30'}]}
+                   'sections':[{'title':'Jour 1 — l’Albaicín','image':'grenade-albaicin'}],
+                   'keyFacts':[{'value':'19 €','label':'la nuit dans l’Albaicín'},{'value':'3 h','label':'à pied dans l’Albaicín'},{'value':'7','label':'miradors dans l’Albaicín'}]}
             for variant in ('a','b'):render(guide,production/'pin-drafts',variant=variant)
             (site/'articles.json').write_text(json.dumps([guide]))
             first=run_many(root,NOW,lambda url,title:'a'*64)

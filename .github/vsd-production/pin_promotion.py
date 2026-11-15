@@ -144,7 +144,8 @@ def run(root=HERE.parents[1], now=None, fetcher=verify_target):
     config = json.loads((site / 'pinterest-additions.json').read_text())
     media = json.loads((site / 'public-media.json').read_text())
     legacy = json.loads((site / 'pinterest-rss.json').read_text())['items']
-    known = {i['id'] for f in config['feeds'] for i in f['items']} | {i['id'] for i in legacy}
+    # A Pin taken out of the feeds (withdrawn: a figure over another place, a flat image) never comes back under its id.
+    known = {i['id'] for f in config['feeds'] for i in f['items']} | {i['id'] for i in legacy} | {i['id'] for i in config.get('withdrawn', [])}
     articles = json.loads((site / 'articles.json').read_text())
     feeds, held, last, guide_last = config['feeds'], [], {}, {}
     slug_by_id = {pin_id(a['slug'], variant): a['slug'] for a in articles for variant in ('a', 'b', 'c')}
