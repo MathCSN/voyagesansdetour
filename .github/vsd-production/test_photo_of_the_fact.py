@@ -145,10 +145,14 @@ class JourneysSaidFurtherOn(unittest.TestCase):
         self.assertFalse(names.journey("les hôtels entre Lisbonne et Porto coûtent plus cher en août"))
 
     def test_a_journey_by_train_never_goes_over_boats(self):
-        boats = names.words("Des barques sur la rivière de Tràng An, près de Ninh Bình. Trang An boats")
+        boats = names.vehicle(*self.BOATS[0:1], self.BOATS[2], self.BOATS[1]["commonsTitle"])
+        self.assertEqual(boats, {"water"})
         self.assertTrue(names.other_ride(boats, self.NIGHT))
-        self.assertFalse(names.other_ride(names.words("Le train de la Réunification"), self.NIGHT))
-        self.assertFalse(names.other_ride(names.words("La porte de la cité impériale de Hué"), self.DAY))
+        self.assertFalse(names.other_ride(names.vehicle("vietnam-train", self.TRAIN[2], "File:SE3 train.jpg"), self.NIGHT))
+        self.assertFalse(names.other_ride(names.vehicle("vietnam-hue", "La porte de la cité impériale de Hué.", "File:Hue.jpg"), self.DAY))
+        # Boats in the foreground of a view are not what the photo is of.
+        self.assertEqual(names.vehicle("porto", "Les façades de Ribeira au bord du Douro à Porto, avec des bateaux rabelos au premier plan.",
+                                       "File:Porto-Panorama de Ribeira-Rabelos.jpg"), set())
         media = reel_formats.Media([self.BOATS], [], everywhere=VIETNAM)
         self.assertIsNone(media.named(self.NIGHT, None))
         self.assertEqual(media.left_for(self.NIGHT), [])
@@ -158,6 +162,53 @@ class JourneysSaidFurtherOn(unittest.TestCase):
         scene = {"photo": "vietnam-trang-an", "headline": ["*10 h 24*"], "detail": self.NIGHT, "alt": self.BOATS[2]}
         photos = {"vietnam-trang-an": self.BOATS[1]}
         self.assertIn("another means of transport", p.another_place(scene, photos, names.words(VIETNAM)))
+
+
+class TheFinish(unittest.TestCase):
+    """BAS 9: the opening read by the guard, a line never cut after an article, no colon before a preposition, a
+    price in any currency, and no train named by a table's label over another train."""
+
+    HALONG = photo("vietnam-halong", "File:Ha Long Bay.jpg", "Des jonques dans la baie d'Ha Long.")
+    OPENING = "Le Vietnam a trois climats : un même mois peut être parfait à Saïgon et inondé à Hội An."
+
+    def test_the_guard_reads_the_opening(self):
+        scenario = {"destination": "Vietnam", "title": "Quand partir au Vietnam : 4 repères",
+                    "scenes": [{"photo": "vietnam-halong", "kicker": "Vietnam", "headline": ["Quand partir au Vietnam", "*4 repères* à connaître"],
+                                "detail": self.OPENING, "alt": self.HALONG[2]},
+                               {"photo": "vietnam-halong", "kicker": "Le guide complet", "headline": ["Quand partir au Vietnam"], "cta": True}]}
+        photos = {"vietnam-halong": self.HALONG[1]}
+        self.assertEqual(len(p.photos_of_another_place(scenario, photos)), 1)
+        scenario["scenes"][0]["detail"] = "Le bon mois pour chaque région, de la baie d'Ha Long au delta du Mékong."
+        self.assertEqual(p.photos_of_another_place(scenario, photos), [])
+        del scenario["scenes"][0]["detail"]
+        self.assertEqual(p.photos_of_another_place(scenario, photos), [])
+
+    def test_the_generator_leaves_out_an_opening_its_photo_does_not_show(self):
+        media = reel_formats.Media([self.HALONG], [], everywhere=VIETNAM)
+        self.assertFalse(media.opens_on(self.OPENING, "vietnam-halong", "Quand partir au Vietnam"))
+        self.assertTrue(media.opens_on("Le Vietnam a trois climats.", "vietnam-halong", "Quand partir au Vietnam"))
+
+    def test_a_line_never_ends_on_an_article(self):
+        lines = reel_formats.lines_of("Le bon mois pour Bangkok, le Nord, l’Andaman et Koh Samui", 34)
+        self.assertFalse(any(reel_formats.dangling(line) for line in lines[:-1]), lines)
+
+    def test_no_colon_before_a_preposition(self):
+        self.assertEqual(reel_formats.caption_line({"value": "64 mm", "label": "à Koh Samui en novembre"}), "📍 64 mm à Koh Samui en novembre")
+        self.assertIn("59 € : la cabine", reel_formats.caption_line({"value": "59 €", "label": "la cabine du train de nuit"}))
+
+    def test_a_price_in_yen_or_dong_is_a_price(self):
+        for value in ("176,77 ¥", "150 000 ₫", "938 bahts", "45 £"):
+            self.assertEqual(reel_formats.caption_emoji(value, "le billet d'entrée"), "💶", value)
+
+    def test_a_table_label_never_names_another_train(self):
+        alfa = names.words("L’intérieur d’une voiture Alfa Pendular. Alfa Pendular interior")
+        self.assertTrue(names.label_clash("Alfa Pendular ou Intercidades", alfa))
+        self.assertFalse(names.label_clash("Le train Alfa Pendular", alfa))
+        table = {"photo": "train-interieur", "layout": "table", "kicker": "Alfa Pendular ou Intercidades", "headline": ["Lisbonne → Porto"],
+                 "alt": "L’intérieur d’une voiture Alfa Pendular."}
+        photos = {"train-interieur": {"commonsTitle": "File:Alfa Pendular interior.jpg"}}
+        self.assertIn("another train", p.another_place(table, photos, names.words("Portugal")))
+        self.assertIsNone(p.another_place({**table, "kicker": "Lisbonne → Porto"}, photos, names.words("Portugal")))
 
 
 if __name__ == "__main__":

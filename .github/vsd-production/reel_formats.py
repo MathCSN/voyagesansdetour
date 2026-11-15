@@ -85,7 +85,17 @@ def lines_of(value: str, width: int = 34, most: int = 2) -> list[str] | None:
     fitting = [pair for pair in splits if max(map(len, pair)) <= width]
     if most < 2 or not fitting:
         return None
-    return list(min(fitting, key=lambda pair: (max(map(len, pair)), -len(pair[0]))))
+    # Never a line that ends on an article or a preposition: "…pour Bangkok, le / Nord" cut a name in two.
+    return list(min(fitting, key=lambda pair: (dangling(pair[0]), max(map(len, pair)), -len(pair[0]))))
+
+
+# Small words that open what follows: a line never ends on one of them.
+DANGLING = frozenset("le la les l’ l' un une des du de d’ d' à au aux en et ou pour par sur dans chez vers sans".split())
+
+
+def dangling(line: str) -> bool:
+    last = line.split()[-1].lower() if line.split() else ""
+    return last in DANGLING or last.endswith(("’", "'"))
 
 
 def kicker_of(section: dict | None, fallback: str) -> str:
@@ -119,7 +129,7 @@ def caption_emoji(value: str, label: str) -> str:
     # The pictogram of a journey is the one of the means of transport its line names: a bus is not a train ("le
     # minibus Phantip", "bus de remplacement"), and a ticket for a town is no journey at all.
     ride = ride_emoji(first, ways, label)
-    tests = (("💶", "€" in value), ("⏱️", re.search(r"\b(min|h|jours?)\b", value)), (ride, ride),
+    tests = (("💶", MONEY.search(value)), ("⏱️", re.search(r"\b(min|h|jours?)\b", value)), (ride, ride),
              ("🎟️", re.match(r"(?:l )?entree\b", opening)), ("🥾", re.search(r"marches|sentier|randonn|à pied", value + label)))
     return next((emoji for emoji, fits in tests if fits), "📍")
 
@@ -144,11 +154,16 @@ def when_to_go(article: dict) -> bool:
     return article.get("shortTitle", "").lower().startswith(WHEN_TO_GO)
 
 
+# A price in any currency the guides give: the yen and the dong are prices too ("176 ¥" went under a pin).
+MONEY = re.compile(r"[€¥₫£$฿]|\b(?:bahts?|dirhams?|dh|pesos?|yens?|dongs?|couronnes?|NOK|SEK|DKK|MXN|THB|VND|JPY|MAD)\b", re.IGNORECASE)
+
+
 def caption_line(fact: dict) -> str:
     """'59 € : la cabine du train de nuit', but '180 exposants au marché' and '120 km entre Mérida et la gare':
     no colon when the label simply carries on from the figure (a bare number, or a label opening on a preposition)."""
     value, label = fact["value"], fact["label"]
-    flows = re.fullmatch(r"[\d\s]+", value) or re.match(r"(?:de|d’|d'|entre|pour|par|sur|depuis|jusqu)\b", label)
+    # "64 mm à Koh Samui", not "64 mm : à Koh Samui": a colon never stands before a preposition.
+    flows = re.fullmatch(r"[\d\s]+", value) or re.match(r"(?:de|d’|d'|du|des|entre|pour|par|sur|depuis|jusqu|à|au|aux|en|dans|chez|vers|avant|après)(?!\w)", label)
     return caption_emoji(value, label) + " " + value + (" " if flows else " : ") + label
 
 
@@ -443,6 +458,11 @@ class Media:
         """The fact is about one place or one part of the destination: only a photo of it will do."""
         return bool(place_names.names(text, self.country) or place_names.region(text))
 
+    def opens_on(self, text: str, photo_id: str, title: str) -> bool:
+        """The opening may say this over that photo (place_names.opening_fits, as production.py reads it)."""
+        photo = next((ph for ph in self.all if ph[0] == photo_id), None)
+        return not photo or place_names.opening_fits(text, title, self.described(photo), self.country)
+
     def where(self, fact: dict) -> str:
         """The places a fact that names none is about: those its section's title names ("les tombeaux coûtent 150 000 ₫
         chacun" in "Jours 6 et 7 — Hué" is about Hué, and went over Ha Long once the photo of Hué was taken)."""
@@ -478,8 +498,8 @@ class Media:
 
     def misleads(self, text: str, photo: tuple) -> bool:
         """The photo shows another train than the one the fact names, or another means of transport than its journey's."""
-        shown = self.described(photo)
-        return place_names.brand_clash(text, shown) or place_names.other_ride(shown, text)
+        on = place_names.vehicle(photo[0], photo[2], str(photo[1].get("commonsTitle", "")))
+        return place_names.brand_clash(text, self.described(photo)) or place_names.other_ride(on, text)
 
     def above(self, section: dict | None, photo_id: str, place: str, label: str = "") -> str:
         """The label written above a figure: the name of its section over that section's own photo; over another
@@ -731,10 +751,14 @@ class Brief:
         # A "quand partir" guide promises a moment, not "4 chiffres": the hook says what its own title promises
         # ("Le bon mois pour Bangkok, le Nord, l'Andaman et Koh Samui"), quoted from the guide (review of 13/11/2026).
         told = promise_of(self.article) if when_to_go(self.article) else None
+        picture = self.media.opening(self.media.cover)
+        # Under the title, a promise that names places only over a photo of one of them (review of PR 53).
+        if told and not self.media.opens_on(told, picture[1], self.article.get("shortTitle", "")):
+            told = None
         if told:
-            return plan("hook", self.media.opening(self.media.cover), self.kicker, self.title_lines + [promise], HOOK_SECONDS,
+            return plan("hook", picture, self.kicker, self.title_lines + [promise], HOOK_SECONDS,
                         detail=unbreakable(told), facts=[{"source": "guide", "excerpt": self.article["title"]}], tag=self.tag)
-        return plan("hook", self.media.opening(self.media.cover), self.kicker, self.title_lines + [promise], HOOK_SECONDS,
+        return plan("hook", picture, self.kicker, self.title_lines + [promise], HOOK_SECONDS,
                     facts=[{"source": "guide", "excerpt": self.opening}], tag=self.tag)
 
 
@@ -853,6 +877,9 @@ def table_kicker(brief: Brief, section: dict, photo_id: str) -> str:
     label = kicker_of(section, brief.place)
     photo = next((ph for ph in brief.media.all if ph[0] == photo_id), None)
     named = photo and words_shared(photo, brief.media.target(label), brief.media.family, kinds=True)
+    # "Alfa Pendular ou Intercidades" over the inside of an Alfa: the label would name a train the photo is not.
+    if named and place_names.label_clash(label, brief.media.described(photo)):
+        return brief.place
     return label if named else brief.place
 
 

@@ -494,13 +494,19 @@ def scenes_for(article: dict, channel: Post, facts: list[dict], photos: list[tup
     # "4 repères à connaître" (review of 13/11/2026): the title is quoted like any other line of the guide.
     promise = reel_formats.promise_of(article) if word == "repères" or reel_formats.when_to_go(article) else None
     promised = lines_of(promise, width, 3) if promise else None
+    short_title = article.get("shortTitle", "")
+    # What the opening says beyond the title, its photo shows (review of PR 53: "parfait à Saïgon et inondé à Hội
+    # An" over the bay of Ha Long): otherwise the line is left out, and a promise of other places too.
+    under = unbreakable(opening) if len(opening) <= 120 and media.opens_on(opening, opening_picture[1], short_title) else None
+    if promised and not media.opens_on(promise, opening_picture[1], short_title):
+        promised = None
     if promised:
         # The promise is the headline, the place above it, the guide's opening under it: three lines quoted from the guide.
-        scenes = [scene(opening_picture, hook_kicker, promised, unbreakable(opening) if len(opening) <= 120 else None, 3.5,
+        scenes = [scene(opening_picture, hook_kicker, promised, under, 3.5,
                         [{"source": "guide", "excerpt": article["title"]}, {"source": "guide", "excerpt": opening}])]
     else:
         scenes = [scene(opening_picture, hook_kicker, title_lines + [f"*{len(facts)} {word}* à connaître"],
-                        unbreakable(opening) if len(opening) <= 120 else None, 3.5, [{"source": "guide", "excerpt": opening}])]
+                        under, 3.5, [{"source": "guide", "excerpt": opening}])]
     for fact in facts:
         # As in a reel, the name of the section stands above the figure only over that section's own photo, or when
         # the section has none: "Le Nord" is not written over the Grand Palace of Bangkok.

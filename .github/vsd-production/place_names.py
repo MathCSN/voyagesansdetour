@@ -335,6 +335,20 @@ def titled(title: str, everywhere: frozenset | set = frozenset()) -> str:
     return title[found[0][1]:found[-1][2]] if found else ""
 
 
+def beyond(text: str, title: str, everywhere: frozenset | set = frozenset()) -> list[Name]:
+    """The places a text names that a title does not name."""
+    told = [name for name, _, _ in names(title, everywhere, sentence=True)]
+    return [name for name, _, _ in names(text, everywhere, sentence=True) if not any(same(name, other) for other in told)]
+
+
+def opening_fits(text: str, title: str, shown: set[str], everywhere: frozenset | set = frozenset()) -> bool:
+    """The opening of a post over its first photo: what it names beyond the guide's title, the photo shows one of
+    ("un même mois peut être parfait à Saïgon et inondé à Hội An" went over the bay of Ha Long). A promise that
+    lists the guide's places ("pour Bangkok, le Nord, l'Andaman et Koh Samui") holds with a photo of one of them."""
+    named = [name for line in re.split(r"\n|(?<=[.!?:])\s+", text) for name in beyond(line, title, everywhere)]
+    return not named or any(shows(name, widened(shown)) for name in named)
+
+
 def subjects(text: str, everywhere: frozenset | set = frozenset()) -> list[str]:
     """The words of the places a fact is about: its first place and those it lists with it (see `read`)."""
     reading = read(text, everywhere)
@@ -392,11 +406,17 @@ def wanted_ways(text: str) -> set[str]:
     return found or ({"rail"} if brands(set(said)) or TRAIN_NUMBER.search(text) else set())
 
 
-def other_ride(described: set[str], text: str) -> bool:
-    """A journey over a photo of another means of transport than its own: "de nuit entre Ninh Bình (SE3…) et Hué"
-    went over the boats of Tràng An. A photo of no means at all is not concerned."""
-    shown, wanted = ways(described), wanted_ways(text)
-    return bool(journey(text) and shown and wanted and not shown & wanted)
+def vehicle(identifier: str, caption: str, title: str) -> set[str]:
+    """The means of transport a photo is of: the one its caption opens on, or its title or identifier names ("Des
+    barques sur la rivière de Tràng An", "Trang An boats"); not boats "au premier plan" of a view of the Ribeira."""
+    return ways(folded(caption)[:OPENING_WORDS]) | ways(folded(identifier.replace("-", " ") + " " + readable(title)))
+
+
+def other_ride(shown_ways: set[str], text: str) -> bool:
+    """A journey over a photo of another means of transport than its own (`shown_ways`, see `vehicle`): "de nuit entre
+    Ninh Bình (SE3…) et Hué" went over the boats of Tràng An. A photo of no means at all is not concerned."""
+    wanted = wanted_ways(text)
+    return bool(journey(text) and shown_ways and wanted and not shown_ways & wanted)
 
 
 CARDINAL = frozenset("nord sud ouest centre".split())
@@ -551,6 +571,13 @@ def brand_clash(text: str, shown: set[str]) -> bool:
     Pendular)."""
     wanted, seen = brands(words(text)), brands(shown)
     return bool(wanted and seen and not wanted & seen)
+
+
+def label_clash(label: str, shown: set[str]) -> bool:
+    """A label names a train the photo is not, while the photo shows a train: "Alfa Pendular ou Intercidades" over the
+    inside of an Alfa Pendular says the photo could be either."""
+    wanted, seen = brands(words(label)), brands(shown)
+    return bool(seen and wanted - seen)
 
 
 def fits(reading: Reading, shown: set[str], told: set[str], recorded_names: list[Name]) -> int:

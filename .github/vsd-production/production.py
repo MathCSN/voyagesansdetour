@@ -453,19 +453,35 @@ def photos_of_another_place(scenario, photos) -> list[str]:
     a ride whose record names a place that is none of the journey's ("Hué → Đà Nẵng en train" over the train street
     of Hanoi); a plan about one part of the destination ("222 h de soleil au sud") over a photo of a precise place
     that does not say that part. The record is the photo's caption, its Commons title and its identifier. The
-    opening, the call to action and a table are no such plans."""
+    call to action and a table are no such plans; the opening is read for what it names beyond the guide's title."""
     scenes = scenario["scenes"]
     everywhere = place_names.words(str(scenario.get("destination", "")) + " " + str(scenes[0].get("kicker", "")))
     found = [(number, another_place(scene, photos, everywhere)) for number, scene in enumerate(scenes[1:-1], 2)]
+    found.insert(0, (1, opening_elsewhere(scenes[0], photos, str(scenario.get("title", "")), everywhere)))
     return [f"plan {number} {told}" for number, told in found if told]
+
+
+def opening_elsewhere(scene, photos, title, everywhere) -> str | None:
+    """The opening names, beyond the guide's title, places its photo shows none of (place_names.opening_fits)."""
+    if "photo" not in scene:
+        return None
+    # Each line read on its own: its first word has a capital by grammar.
+    said = draw.plain("\n".join(list(scene.get("headline") or []) + [str(scene.get("detail") or "")]))
+    photo, caption = scene["photo"], str(scene.get("alt") or "")
+    shown = place_names.pictured(photo, caption, str((photos.get(photo) or {}).get("commonsTitle", "")), everywhere)
+    if place_names.opening_fits(said, title, shown, everywhere):
+        return None
+    return f"opens on {', '.join(' '.join(name) for name in place_names.beyond(said, title, everywhere))} over {photo}"
 
 
 def another_place(scene, photos, everywhere) -> str | None:
     """What one plan names and why its photo is not a photo of it; None when it is. Read as the generator reads it
     (place_names): whole names, the same rules for a journey, a part of the destination and a train; never on the
     word of the label written above the plan ("Le sud : Costa Adeje" does not make a photo of Masca one of the south)."""
-    if scene.get("layout") == "table" or "photo" not in scene:
+    if "photo" not in scene:
         return None
+    if scene.get("layout") == "table":
+        return table_elsewhere(scene, photos, everywhere)
     said = draw.plain(" ".join(scene.get("headline") or []) + " " + str(scene.get("detail") or ""))
     detail = str(scene.get("detail") or said)
     # A fact that names no place, quoted from a section about one ("Jours 6 et 7 — Hué"), is about that place.
@@ -479,7 +495,7 @@ def another_place(scene, photos, everywhere) -> str | None:
     listed = ", ".join(" ".join(name) for name in found) or "no place in its record"
     if place_names.brand_clash(said, shown):
         return f"names a train over {photo}, another train ({listed})"
-    if place_names.other_ride(shown, detail):
+    if place_names.other_ride(place_names.vehicle(photo, caption, title), detail):
         return f"names a journey over {photo}, another means of transport ({listed})"
     if journey_shown(detail, shown, found, everywhere):
         return None
@@ -491,6 +507,16 @@ def another_place(scene, photos, everywhere) -> str | None:
     if place_names.fits(reading, shown, place_names.pictured("", caption, title, everywhere), found):
         return None
     return f"names {', '.join(' '.join(name) for name in reading.all)} over {photo} ({listed})"
+
+
+def table_elsewhere(scene, photos, everywhere) -> str | None:
+    """A table names many places; its label names a train the photo is not ("Alfa Pendular ou Intercidades" over the
+    inside of an Alfa Pendular)."""
+    photo, caption = scene["photo"], str(scene.get("alt") or "")
+    shown = place_names.pictured(photo, caption, str((photos.get(photo) or {}).get("commonsTitle", "")), everywhere)
+    if place_names.label_clash(str(scene.get("kicker") or ""), shown):
+        return f"labels a train over {photo}, another train"
+    return None
 
 
 def journey_shown(detail, shown, found, everywhere) -> bool:

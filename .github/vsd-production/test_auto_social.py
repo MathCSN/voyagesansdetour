@@ -1082,8 +1082,11 @@ class DensityTests(unittest.TestCase):
         self.assertIn("aux heures creuses", reel_formats.short_label(cap))
         self.assertIn("à partir de 14 ans", reel_formats.short_label("l’aller simple Faro–Lagos en train régional, à partir de 14 ans, billet en gare ou en ligne chez CP"))
         # The pictogram is the means the line names: a minibus is no train, a ticket for a town no journey.
-        self.assertEqual(reel_formats.caption_emoji("350 bahts", "le minibus Phantip de Surat Thani à Krabi"), "🚌")
-        self.assertEqual(reel_formats.caption_emoji("120 000 ₫", "le billet de la vieille ville de Hội An"), "📍")
+        # Since the review of PR 53 a price in any currency is a price first (💶): bahts, dongs, yens as euros.
+        self.assertEqual(reel_formats.caption_emoji("350 bahts", "le minibus Phantip de Surat Thani à Krabi"), "💶")
+        self.assertEqual(reel_formats.caption_emoji("2 h", "le minibus Phantip de Surat Thani à Krabi"), "⏱️")
+        self.assertEqual(reel_formats.caption_emoji("Phantip", "le minibus de Surat Thani à Krabi"), "🚌")
+        self.assertEqual(reel_formats.caption_emoji("120 000 ₫", "le billet de la vieille ville de Hội An"), "💶")
         self.assertEqual(reel_formats.caption_emoji("2 min", "de métro D au-dessus du Douro"), "⏱️")
         self.assertEqual(reel_formats.caption_emoji("6 975 ₡", "le bus MEPE Puerto Viejo – San José"), "🚌")
         # Credits: Commons' spaces inside brackets dropped, Noto Sans not said joined, sources not called official.
@@ -1545,7 +1548,7 @@ class RealGuideTests(unittest.TestCase):
         # shares "Mérida" as well: what the plan says of its figure decides between the two. Four stages, four figures.
         self.assertEqual([(scene["headline"], scene["photo"]) for scene in scenes[1:-1]],
                          [(["Valladolid"], "yucatan-valladolid-calzada"), (["Chichén Itzá", "à l’ouverture"], "yucatan-chichen-itza"),
-                          (["Mérida–Tulum en", "train direct"], "yucatan-tren-maya-merida"), (["Tulum et le retour"], "yucatan-tulum")])
+                          (["Mérida–Tulum", "en train direct"], "yucatan-tren-maya-merida"), (["Tulum et le retour"], "yucatan-tulum")])
         self.assertEqual(scenes[0]["headline"][-1], "*jour par jour*")
         self.assertIn("*265 pesos*", scenes[4]["detail"])
         # One thing said per stage: its figure. The title of the day it also quotes is not a second one.
@@ -1576,7 +1579,7 @@ class RealGuideTests(unittest.TestCase):
         self.assertEqual((table["layout"], table["kicker"], table["headline"], table["photo"]), ("table", "Le train de nuit pour Chiang Mai", ["Départ de Bangkok"], "thailande-train-nuit"))
         self.assertEqual(table["detail"], "*938 bahts* la couchette haute climatisée de 2e classe du train 9")
         self.assertIn("938 bahts la couchette haute climatisée de 2e classe du train 9", [fact["excerpt"] for fact in table["facts"]])
-        self.assertEqual(lines[0], "🚆 938 bahts : la couchette haute climatisée de 2e classe du train 9 (≈ 25 €, tarif SRT de novembre 2026)")
+        self.assertEqual(lines[0], "💶 938 bahts : la couchette haute climatisée de 2e classe du train 9 (≈ 25 €, tarif SRT de novembre 2026)")
         # The caption says what the four times are: departures from Bangkok of the trains for Chiang Mai.
         self.assertEqual(lines[1:3], ["📅 Le train de nuit pour Chiang Mai · Départ de Bangkok — N° 7 (autorail de jour) : 7 h 30", "📅 N° 9 (couchettes récentes) : 18 h 40"])
         # A section whose title names nothing the photo shows ("Arriver", "En bref", "Le parcours") leaves the place above the table.
@@ -1723,9 +1726,11 @@ class RealGuideTests(unittest.TestCase):
         # A name of kinds of places only is a name ("Grand Palais", "Maya Bay"): a fact about it needs its photo.
         self.assertEqual(names.named("le Grand Palais de Bangkok et le Wat Phra Kaew", {"bangkok"}), ["grand", "palais", "phra", "kaew"])
         # The pictogram of a caption line follows what the line opens on.
-        self.assertEqual(reel_formats.caption_emoji("800 ¥", "le Grand Bouddha du Tōdai-ji, à Nara, à 45 minutes de Kyoto par le train JR"), "📍")
-        self.assertEqual(reel_formats.caption_emoji("44 620 ¥", "Tokyo–Kyoto–Hiroshima–Tokyo en billets à l’unité"), "🚆")
-        self.assertEqual(reel_formats.caption_emoji("697 pesos", "l’entrée de Chichén Itzá pour un étranger"), "🎟️")
+        # Since the review of PR 53 a price in yen is a price (💶), as one in euros.
+        self.assertEqual(reel_formats.caption_emoji("800 ¥", "le Grand Bouddha du Tōdai-ji, à Nara, à 45 minutes de Kyoto par le train JR"), "💶")
+        self.assertEqual(reel_formats.caption_emoji("44 620 ¥", "Tokyo–Kyoto–Hiroshima–Tokyo en billets à l’unité"), "💶")
+        self.assertEqual(reel_formats.caption_emoji("697 pesos", "l’entrée de Chichén Itzá pour un étranger"), "💶")
+        self.assertEqual(reel_formats.caption_emoji("gratuite", "l’entrée de Chichén Itzá le dimanche"), "🎟️")
         self.assertEqual(reel_formats.caption_emoji("12 €", "le ferry Travelmar Salerne → Amalfi, 35 minutes"), "💶")
 
     def test_the_guard_refuses_a_plan_over_a_photo_of_another_place(self):
