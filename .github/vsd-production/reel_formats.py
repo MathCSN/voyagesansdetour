@@ -332,6 +332,13 @@ def naming_columns(rows: list[list]) -> int | None:
     return None
 
 
+def prices_in_several_columns(headers: list, rows: list[list], named: int) -> bool:
+    """Prices in several columns ("Jour A", "Jour B", "Jour C" of the Treno Card): the first alone would say the
+    cheapest is the price. Such a table stays in the guide."""
+    priced = [column for column in range(named, len(headers)) if all(is_money(str(row[column])) for row in rows if len(row) > column)]
+    return len(priced) > 1
+
+
 def table_of(article: dict, page: str) -> dict | None:
     """A whole short table of the guide (three to five rows): the columns that name each row, then the next one, every
     row read on the page. "Alfa Pendular : Turística" three times told nothing; the fare is in the column after."""
@@ -341,12 +348,7 @@ def table_of(article: dict, page: str) -> dict | None:
         if len(headers) < 2 or not TABLE_ROWS[0] <= len(rows) <= TABLE_ROWS[1] or any(len(row) < 2 for row in rows):
             continue
         named = naming_columns(rows)
-        if not named or named >= len(headers):
-            continue
-        # Prices in several columns ("Jour A", "Jour B", "Jour C" of the Treno Card): the first alone would say the
-        # cheapest is the price. Such a table stays in the guide.
-        priced = [column for column in range(named, len(headers)) if all(is_money(str(row[column])) for row in rows if len(row) > column)]
-        if len(priced) > 1:
+        if not named or named >= len(headers) or prices_in_several_columns(headers, rows, named):
             continue
         cells = [[" ".join(str(cell).strip() for cell in row[:named]), str(row[named]).strip()] for row in rows]
         quoted = all(checked(a, 60) and checked(b, 60) and p.normalized(a + " " + b) in page for a, b in cells)
@@ -538,10 +540,7 @@ class Media:
         Sud" over Tràng An, nor "Dans le métro" over a taxi); the place otherwise. Never the name of a section that
         sums the guide up ("En bref" says nothing), nor a name with a year over a figure of another year."""
         name = kicker_of(section, place)
-        years, dated = set(YEAR.findall(name)), set(YEAR.findall(label))
-        if name != place and (SUMMED_UP.search(destinations.ascii_fold(name).lower()) or (years and dated and not years & dated)):
-            return place
-        if name != place and label and not self.announces(name, label, photo_id):
+        if name != place and not self.says_of(name, label, photo_id):
             return place
         own = section.get("image") if section else None
         if own:
@@ -559,6 +558,14 @@ class Media:
             return place
         ways = place_names.ways(place_names.folded(name))
         return place if ways and not ways & place_names.ways(shown) else name
+
+    def says_of(self, name: str, label: str, photo_id: str) -> bool:
+        """A section's name may stand above this figure: it sums nothing up, carries no other year than the figure's,
+        and speaks of the figure (announces)."""
+        years, dated = set(YEAR.findall(name)), set(YEAR.findall(label))
+        if SUMMED_UP.search(destinations.ascii_fold(name).lower()) or (years and dated and not years & dated):
+            return False
+        return not label or self.announces(name, label, photo_id)
 
     def announces(self, name: str, label: str, photo_id: str) -> bool:
         """The section's name speaks of this figure: a day of the itinerary ("Jours 3 à 5"), or a word the figure or
