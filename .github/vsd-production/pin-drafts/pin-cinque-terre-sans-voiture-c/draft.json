@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-cinque-terre-sans-voiture-c",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Les Cinque Terre sans voiture : train toutes les 20 minutes, Via dell’Amore et carte à 17,30 €",
+  "pinTitle": "Les Cinque Terre en train : les chiffres à connaître avant de partir",
+  "variant": "c",
+  "targetUrl": "https://voyagesansdetour.fr/italie/cinque-terre-sans-voiture/",
+  "articleSha256": "00739442f623e5c4d8667295ec447000e40f276c91af42fd7a9153e4e133f493",
+  "imageSha256": "2582a9b2479fa3df7b7cad031453c7ad84de991f7aeb485f96f3bc4fc206fef0",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "693b82a5423a7d939e4c6c3aaa8c1b5d305ae39d6fa095e55f96b591dfc9b24f",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "cinque-riomaggiore",
+    "author": "Timothy A. Gonsalves",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Riomaggiore_SE_Wide_Cinque_Terre_Italy_Sep23_A7C_07305.jpg",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+  }
+}

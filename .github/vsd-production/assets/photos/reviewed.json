@@ -47,7 +47,11 @@
       ],
       "commonsSha1": "00071801dceb00556cfaea45fa999814b6aecbfb",
       "retrievedAt": "2026-11-13T09:20:27Z",
-      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux.",
+      "focusVertical": [
+        0.36,
+        0.5
+      ]
     },
     "laponie-bureau-pere-noel": {
       "alt": "Le bureau du Père Noël illuminé sous la neige, à Rovaniemi.",
@@ -207,6 +211,29 @@
       "retrievedAt": "2026-11-12T12:27:50Z",
       "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
     },
+    "lisbonne-arc-rua-augusta-vide": {
+      "camera": "RICOH GR III",
+      "file": "assets/photos/lisbonne-arc-rua-augusta-vide.jpg",
+      "sha256": "a324f925c363e9ca9ba15a8bb7aa50edf6de0832a3a9274681aa53ae7447b621",
+      "width": 1600,
+      "height": 1777,
+      "commonsTitle": "File:Empty Arco da Rua Augusta during the COVID-19 lockdown, Lisbon, Portugal julesvernex2-2.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Empty_Arco_da_Rua_Augusta_during_the_COVID-19_lockdown,_Lisbon,_Portugal_julesvernex2-2.jpg",
+      "author": "Jules Verne Times Two",
+      "commonsCredit": "Own work http://julesvernex2.com",
+      "categories": "Taken with Ricoh GR III|Uploaded with LrMediaWiki|Files with coordinates missing SDC location of creation|Images by User:Julesvernex2|Arco Triunfal da Rua Augusta from Praça do Comércio|COVID-19 pandemic in Lisbon|Portugal images by Julesvernex2|PPL1 images by Julesvernex2|Favourite images by Julesvernex2|Architecture images by Julesvernex2|Lisbon collection by Julesvernex2|Ricoh GR III images by Julesvernex2|Ricoh GR III 18.3mm f2.8 (fixed lens) images by Julesvernex2|Early runs collection by Julesvernex2|COVID-19 collection by Julesvernex2",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        3550,
+        3943
+      ],
+      "commonsSha1": "95818982dba10c73dce42b2247e2927eae41d6c6",
+      "retrievedAt": "2026-11-15T07:00:24Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux.",
+      "alt": "L’arc de la rue Augusta sur la place du Commerce déserte, au petit matin, à Lisbonne.",
+      "emblematic": true
+    },
     "londres-somerset-house-patinoire": {
       "alt": "La patinoire de Somerset House et sa façade illuminée, un soir d’hiver.",
       "focus": [
@@ -220,7 +247,7 @@
       "height": 1600,
       "commonsTitle": "File:Skating Rink In Fountain Court at Somerset House, London (15980203534).jpg",
       "sourcePage": "https://commons.wikimedia.org/wiki/File:Skating_Rink_In_Fountain_Court_at_Somerset_House,_London_(15980203534).jpg",
-      "author": "traveljunction",
+      "author": "traveljunction (Image by www.traveljunction.com)",
       "commonsCredit": "Skating Rink In Fountain Court at Somerset House, London",
       "categories": "Flickr images reviewed by FlickreviewR 2|Ice skating at Somerset House|Somerset House at night",
       "licence": "CC BY-SA 2.0",

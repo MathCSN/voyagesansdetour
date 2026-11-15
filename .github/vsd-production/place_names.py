@@ -6,10 +6,12 @@ pavillon d'Or du Kinkaku-ji" over the sign of Shin-Fuji station. This module say
 noun: Similan, Kinkaku-ji, Uxmal, Campanhã), which words never tie a figure to a photo (kinds of places: île, plage,
 temple, gare, train…), and what a journey is ("Tokyo → Kyoto en Nozomi" goes over a train first).
 
-Used by reel_formats.py (to choose the photo) and by production.py (to refuse a scenario that got it wrong).
+Used by reel_formats.py (to choose the photo), by pin_draft.py (the figures of a Pin) and by production.py (to
+refuse a scenario that got it wrong): one reading for the three.
 """
 from __future__ import annotations
 
+from dataclasses import dataclass
 import re
 
 import destinations
@@ -28,11 +30,12 @@ GENERIC = frozenset("""
     janvier fevrier mars avril mai juin juillet aout septembre octobre novembre decembre
     lundi mardi mercredi jeudi vendredi samedi dimanche noel paques
     park center centre square street bridge tower beach island islands lake mount river market museum garden gardens
-    palace church house hall city bay view station railway castle cathedral temple old town
-    ponte praia praca rua igreja torre castelo palacio estacao mosteiro cais largo miradouro jardim catedral plaza puente""".split())
+    palace church house hall city bay view station railway railways castle cathedral temple old town night day
+    ponte praia praca rua igreja torre castelo palacio estacao mosteiro cais largo miradouro jardim catedral plaza puente
+    real via""".split())
 # What a journey is made by, as a fact says it; and what a photo of it shows.
 WAYS = {"rail": frozenset("train trains shinkansen tgv couchette couchettes rame railway sleeper locomotive wagon".split()),
-        "urban": frozenset("metro tram tramway".split()), "road": frozenset(["bus"]),
+        "urban": frozenset("metro tram tramway".split()), "road": frozenset("bus minibus navette autocar".split()),
         "water": frozenset("ferry ferries bateau bateaux".split())}
 RIDES = frozenset().union(*WAYS.values())   # never a station alone: it is a place
 TRANSPORT = RIDES | frozenset("billet billets".split())
@@ -50,25 +53,44 @@ NOT_PLACES = frozenset("""
     pere noel claus santa inah unesco covid wifi
     francais francaise francaises europeen europeens europeenne portugais portugaise espagnol espagnole italien italienne
     japonais japonaise thailandais thailandaise vietnamien vietnamienne mexicain mexicaine marocain marocaine finlandais
-    finlandaise britannique britanniques anglais anglaise americain americaine americains suisse suisses belge belges
+    finlandaise britannique britanniques anglais anglaise americain americaine americains suisse suisses belge belges thai
     """.split())
-# Two spellings or two names of one place, and a quarter inside its town: a record that says the first says the others.
-# Reviewed by hand: "Kinkakuji" is the Kinkaku-ji, Saigon is Hô-Chi-Minh-Ville, Belém and Alfama are in Lisbon.
-IMPLIES = {"kinkakuji": ("kinkaku",), "kinkaku": ("kinkakuji",), "saigon": ("ho", "chi", "minh"), "minh": ("saigon",),
-           "sapa": ("sa", "pa"), "pa": ("sapa",), "danang": ("da", "nang"), "nang": ("danang",), "hanoi": ("ha", "noi"),
-           "belem": ("lisbonne",), "alfama": ("lisbonne",), "shibuya": ("tokyo",)}
+# Words of NOT_PLACES that also make up names of places ("Maya Bay", "Santa Claus Village", "City Hall"): alone they
+# name no place, in a name with a kind of place (KINDS) they do. The others never make a place (HARD).
+SHARED_WITH_PLACES = frozenset("maya santa claus city japan regional metro viva bolt".split())
+HARD = NOT_PLACES - SHARED_WITH_PLACES
+# Kinds of places that make a name of words that are otherwise no place: "Maya Bay", "Santa Claus Village", "Tower
+# Bridge", "Grand Palace" (review of 13/11/2026: "Maya Bay : 400 bahts" took any free photo). Not "tour" (l'Andante Tour).
+KINDS = frozenset("bay baie village palace palais bridge park parc square tower market garden gardens beach island islands "
+                  "lake castle cathedral church hall museum cove lagoon falls canal plaza".split())
+# Small English words of a Commons title written in capitals ("… TRAIN BUTTERWORTH TO BANGKOK"): never a place.
+SMALL = frozenset("to of the and in at on by for with from near".split())
+# Two spellings or two names of one place: a record that gives one gives the other. Whole names, never a part of one
+# ("Minh Mang" is not Hô-Chi-Minh-Ville, "Pa Sak" is not Sapa). Reviewed by hand.
+ALIASES = {("kinkakuji",): (("kinkaku",),), ("kinkaku",): (("kinkakuji",),), ("saigon",): (("ho", "chi", "minh"),),
+           ("ho", "chi", "minh"): (("saigon",),), ("sapa",): (("sa", "pa"),), ("sa", "pa"): (("sapa",),),
+           ("danang",): (("da", "nang"),), ("da", "nang"): (("danang",),), ("hanoi",): (("ha", "noi"),), ("ha", "noi"): (("hanoi",),),
+           ("santa", "claus", "village"): (("village", "pere", "noel"),)}
+# A quarter and the town it is in: a photo of Belém is a photo of Lisbon for a fact that is first about Lisbon, never
+# for a fact about another place of Lisbon ("le château São Jorge" went over the tower of Belém). Reviewed by hand.
+INSIDE = {"belem": "lisbonne", "alfama": "lisbonne", "baixa": "lisbonne", "chiado": "lisbonne", "graca": "lisbonne",
+          "ribeira": "porto", "shibuya": "tokyo", "shinjuku": "tokyo", "asakusa": "tokyo", "gion": "kyoto", "arashiyama": "kyoto"}
+# Trains a fact may name: a fact about one is never shown over another ("28,05 € Intercidades" over an Alfa Pendular).
+BRANDS = {"alfa pendular": {"alfa", "pendular", "alfapendular"}, "intercidades": {"intercidades"}, "nozomi": {"nozomi"},
+          "hikari": {"hikari"}, "kodama": {"kodama"}, "ave": {"ave"}, "ouigo": {"ouigo"}, "avlo": {"avlo"}, "iryo": {"iryo"},
+          "frecciarossa": {"frecciarossa"}, "italo": {"italo"}}
 MONTHS = frozenset("janvier fevrier mars avril mai juin juillet aout septembre octobre novembre decembre".split())
 # Letters that no accent rule folds to ASCII: "Đà Lạt" was read "à Lạt".
 PLAIN = str.maketrans({"Đ": "D", "đ": "d", "Ł": "L", "ł": "l", "Ø": "O", "ø": "o", "İ": "I", "ı": "i", "ß": "ss", "œ": "oe", "Œ": "Oe", "æ": "ae", "Æ": "Ae"})
 SHORT = frozenset("el or st mt da do di al ii iii iv ji ko".split())   # two letters with a capital that name no place alone ("Sa Pa" does)
-LEADING = frozenset("le la les un une des du de ce cette ces au aux".split())
+LEADING = frozenset("le la les un une des du de ce cette ces au aux dell della dello degli delle".split())
 WORD = re.compile(r"[^\W\d_][\w’'-]*")
 # "Mérida–Tulum", "Tokyo → Kyoto", "Tokyo–Kyoto–Hiroshima–Tokyo": two names joined by an arrow or a dash are the two
 # ends of a journey. Not two hours ("9 h 40 → 12 h 12"), nor a clause set off by a long dash.
 LINKED = re.compile(r"([^\W\d_][\w’']{0,40})\s?[→–]\s?([^\W\d_])")
 # What opens a fact about a journey: "de trajet en Alfa Pendular entre Santa Apolónia et Campanhã". A ticket alone
 # does not ("le billet de la vieille ville de Hội An" went over a train): it opens a journey with its means of transport.
-OPENERS = RIDES | frozenset("trajet trajets minibus navette".split())
+OPENERS = RIDES | frozenset("trajet trajets traversee minibus navette".split())
 
 
 class _Capitalised:
@@ -79,8 +101,8 @@ class _Capitalised:
     def finditer(text: str):
         position = 0
         while position < len(text):
-            if text[position].isupper():
-                match = WORD.match(text, position)
+            match = WORD.match(text, position) if text[position].isupper() else None
+            if match:
                 yield match
                 position = match.end()
             else:
@@ -96,9 +118,6 @@ class _Capitalised:
 
 
 CAPITALISED = _Capitalised
-# Words of four letters and more that two texts share without being about the same thing.
-HOLLOW = frozenset("pour entre dans avec sans sous vers chez depuis selon plus moins tout tous toute toutes cette leur leurs dont comme "
-                   "aussi tres deux trois quatre nuit nuits prix tarif euros pesos entree ouvert ouverte jours".split())
 OPENING_WORDS = 5   # a fact is about a journey when it says so at once: "le train direct…", not "…, à 45 minutes par le train"
 
 
@@ -111,32 +130,86 @@ def words(text: str) -> set[str]:
     return set(folded(text))
 
 
-def spans(text: str, everywhere: frozenset | set = frozenset(), sentence: bool = False, known: frozenset | set = frozenset()) -> list[tuple[str, int, int]]:
-    """The precise places a text names, in the order it names them: its words written with a capital, two letters
-    and more, that are neither a kind of place, nor an article opening the sentence, nor the name of the destination
-    of the whole post (`everywhere`: every photo of a guide of Thailand is "in Thailand"). An acronym ("SITA", "JR"),
-    a ticket, a card, an operator, a train, a brand or a people (NOT_PLACES) and what follows "chez", "bus", "ligne"
-    ("chez Supratours", "bus Phantip") are no places. A month is part of a name after another one ("Chiang Mai").
-    `sentence`: the text is a caption; its first word has a capital by grammar ("Visiteurs dans un jardin zen."),
-    unless a name follows it at once or `known` (the words of the photo's identifier and title) says it is the place
-    ("Vernazza et son port", "L'Alhambra et la Sierra Nevada" for "grenade-alhambra")."""
-    found, carrier, end = [], False, -1
+Name = tuple   # the place-words of one name, in order: ("trang", "an"), ("ho", "chi", "minh"), ("maya", "bay")
+
+
+def names(text: str, everywhere: frozenset | set = frozenset(), sentence: bool = False,
+          known: frozenset | set = frozenset()) -> list[tuple[Name, int, int]]:
+    """The precise places a text names, whole, in the order it names them, with where each stands in the text. A name
+    is a run of words written with a capital and separated by a space ("Tràng An", "Ninh Bình", "Porto-Trindade");
+    its place-words are those that are neither a kind of place, nor an article, nor the destination of the whole post
+    (`everywhere`), nor a ticket, a card, an operator, a train, a brand or a people (NOT_PLACES). An acronym ("SITA",
+    "MEPE") and what follows "chez", "ligne" ("chez Supratours") name no place. A month is part of a name after
+    another word ("Chiang Mai"). A run of words that are otherwise no place is a name when it holds a kind of place
+    and no ticket ("Maya Bay", "Santa Claus Village", "Grand Palace"). `sentence`: the text is a caption; its first
+    word has a capital by grammar ("Visiteurs dans un jardin zen."), unless a name follows it at once or `known` (the
+    words of the photo's identifier and title) says it is the place ("Vernazza et son port")."""
+    found, run, carrier, end = [], None, False, -1
     for match in CAPITALISED.finditer(text):
         first = sentence and not text[:match.start()].strip("«“\" ")
         adjacent = end >= 0 and text[end:match.start()] == " "
         end = match.end()
-        if first and not CAPITALISED.match(text[match.end():].lstrip(" ")) and not set(folded(match[0])) & set(known):
-            continue
-        before = folded(text[:match.start()])[-1:]
-        carrier = (carrier and adjacent) or bool(before and before[0] in CARRIED_BY and text[match.start() - 1:match.start()] == " ")
-        if len(match[0]) > 1 and match[0].isupper():
-            carrier = False   # the acronym is the carrier's whole name: "le bus MEPE Puerto Viejo – San José"
-        elif not carrier:
-            found += [(piece, match.start(), match.end()) for piece in folded(match[0]) if names_a_place(piece, everywhere, adjacent and not first)]
-    return found
+        if not adjacent:
+            found, run = found + closed(run), None
+        role, carrier = role_of(text, match, carrier, adjacent, first, known)
+        if role == "break":
+            found, run = found + closed(run), None
+        elif role != "skip":
+            run = extended(run, match, folded(match[0]) if role == "word" else [], everywhere, adjacent and not first)
+    return found + closed(run)
 
 
-UNNAMED = GENERIC | LEADING | OPENERS | TRANSPORT | SHORT | NOT_PLACES
+def role_of(text: str, match: re.Match, carrier: bool, adjacent: bool, first: bool, known: frozenset | set) -> tuple[str, bool]:
+    """What one capitalised word does to the name being read ("skip", "break", "acronym" or "word"), and whether the
+    name of a carrier runs on after it."""
+    if first and grammar_capital(text, match, known):
+        return "skip", carrier
+    if set(folded(match[0])) <= SMALL:
+        return "break", carrier   # "Malaysia To Bangkok": two names
+    # The acronym is the carrier's whole name: "le bus MEPE Puerto Viejo – San José".
+    acronym = len(match[0]) > 1 and match[0].isupper()
+    carrier = not acronym and ((carrier and adjacent) or after_carrier(text, match))
+    if carrier:
+        return "break", carrier
+    return ("acronym" if acronym else "word"), carrier
+
+
+def grammar_capital(text: str, match: re.Match, known: frozenset | set) -> bool:
+    """The first word of a caption, written with a capital by grammar: no name follows it, and it is not the place."""
+    return not CAPITALISED.match(text[match.end():].lstrip(" ")) and not set(folded(match[0])) & set(known)
+
+
+def after_carrier(text: str, match: re.Match) -> bool:
+    """A capitalised word right after "chez", "ligne"…: the name of a carrier, not of a place."""
+    before = folded(text[:match.start()])[-1:]
+    return bool(before and before[0] in CARRIED_BY and text[match.start() - 1:match.start()] == " ")
+
+
+def closed(run: list | None) -> list[tuple[Name, int, int]]:
+    """The name a run of capitalised words makes: its place-words, or, when it has none, its words when they hold a
+    kind of place and no ticket ("Maya Bay"); nothing otherwise."""
+    if not run:
+        return []
+    if run[0]:
+        return [(tuple(dict.fromkeys(run[0])), run[2], run[3])]
+    if len(run[1]) >= 2 and set(run[1]) & KINDS and not set(run[1]) & HARD:
+        return [(tuple(dict.fromkeys(run[1])), run[2], run[3])]
+    return []
+
+
+def extended(run: list | None, match: re.Match, pieces: list[str], everywhere: frozenset | set, after_a_name: bool) -> list:
+    """The run of capitalised words with one more: [place-words, words, start, end]."""
+    placed = [piece for piece in pieces if names_a_place(piece, everywhere, after_a_name)]
+    # "Chiang Mai", "Chiang Rai", "Khao Sok": the head of the name is kept, or "mai" alone would be any May.
+    if placed and run and not run[0] and run[1][-1:] and run[1][-1] in NAME_HEADS:
+        placed = run[1][-1:] + placed
+    raw = [piece for piece in pieces if piece not in LEADING and piece not in everywhere]
+    start = run[2] if run else match.start()
+    return [(run[0] if run else []) + placed, (run[1] if run else []) + raw, start, match.end()]
+
+
+NAME_HEADS = frozenset("chiang khao".split())
+UNNAMED = GENERIC | LEADING | OPENERS | TRANSPORT | SHORT | NOT_PLACES | SMALL
 
 
 def names_a_place(piece: str, everywhere: frozenset | set, after_a_name: bool) -> bool:
@@ -148,60 +221,106 @@ def names_a_place(piece: str, everywhere: frozenset | set, after_a_name: bool) -
 
 
 def named(text: str, everywhere: frozenset | set = frozenset(), sentence: bool = False, known: frozenset | set = frozenset()) -> list[str]:
-    """The precise places a text names, in the order it names them (see `spans`)."""
-    return list(dict.fromkeys(piece for piece, _, _ in spans(text, everywhere, sentence, known)))
-
-
-SUBJECT_GAP = 4   # words at most between two places a fact is about: "Bahia, des tombeaux saadiens ou d'El Badi"
-
-
-def subjects(text: str, everywhere: frozenset | set = frozenset(), sentence: bool = False, known: frozenset | set = frozenset()) -> list[str]:
-    """The places a fact is about, among those it names: the first one, and those it lists with it ("Mérida et Uxmal",
-    "de Surat Thani à Krabi", "Bangkok, Chiang Mai et la mer d'Andaman"). A place named further on, after a figure or
-    a long stretch of words, only situates the fact: "le Grand Bouddha du Tōdai-ji, à Nara, à 45 minutes de Kyoto"
-    is about the Tōdai-ji and Nara, not about Kyoto. A place one only comes from is no subject either: "depuis Kyoto
-    pour voir le Grand Bouddha du Tōdai-ji, à Nara"."""
-    about, end = [], None
-    for piece, start, stop in spans(text, everywhere, sentence, known):
-        gap = text[end:start] if end is not None and start >= end else ""
-        if end is not None and (re.search(r"\d", gap) or len(folded(gap)) > SUBJECT_GAP):
-            break
-        if folded(text[:start])[-1:] in (["depuis"], ["from"]):
-            continue
-        about, end = about + [piece], stop
-    return list(dict.fromkeys(about))
-
-
-def first_name(text: str, everywhere: frozenset | set = frozenset()) -> list[str]:
-    """The words of the first place a fact names: "le Real Alcázar de Séville" is first about the Real Alcázar, "un
-    casier à Porto-Trindade" about Porto-Trindade, "de Surat Thani à Krabi" about Surat Thani."""
-    name, end = [], None
-    for piece, start, stop in spans(text, everywhere):
-        if end is not None and start >= end and text[end:start] != " ":
-            break
-        name, end = name + [piece], stop
-    return list(dict.fromkeys(name))
+    """The words of the precise places a text names, in the order it names them (see `names`)."""
+    return list(dict.fromkeys(piece for name, _, _ in names(text, everywhere, sentence, known) for piece in name))
 
 
 def proper(text: str, everywhere: frozenset | set = frozenset(), sentence: bool = False) -> set[str]:
     return set(named(text, everywhere, sentence))
 
 
-def named_after(text: str, kind: str) -> set[str]:
-    """The names a text gives to a kind of place: {"similan"} for "îles" in "la réouverture des îles Similan"; nothing
-    for "pont" in "Le pont en métro"."""
-    pieces, found = re.findall(r"[\w’'-]+", text), set()
-    for index, piece in enumerate(pieces):
-        if folded(piece)[-1:] == [kind]:
-            after = [word for word in pieces[index + 1:index + 4] if folded(word) and folded(word)[0] not in LEADING and word not in ("d", "l")]
-            if after and CAPITALISED.fullmatch(after[0]):
-                found |= {part for part in folded(after[0]) if len(part) >= 3}
-    return found - GENERIC
+SUBJECT_GAP = 4   # words at most between two places a fact is about: "Bangkok, Chiang Mai et la mer d'Andaman"
+# What sets a place off as where the first one stands, not as another place the fact is about: "le Grand Bouddha du
+# Tōdai-ji, à Nara", "Maya Bay, à Phi Phi", "le Real Alcázar de Séville", "le château São Jorge à Lisbonne".
+SITUATING = frozenset(["à", "a", "au", "aux", "en", "dans", "sur", "de", "du", "des", "d’", "d'",
+                       "près d", "près de", "près du", "près d’", "près d'", "pres d"])
+
+
+def situates(gap: str, journeying: bool) -> bool:
+    """The words between two places set the second off as where the first one stands: after a comma, always ("…, à
+    Nara"); right after it ("le Real Alcázar de Séville"), only when the fact is no journey ("de Hanoï à Hué")."""
+    if SITUATING_AFTER_COMMA.match(gap):
+        return True
+    word = gap.strip()
+    if word[:1] in (",", "("):
+        word = word[1:].strip()
+    return not journeying and word.lower() in SITUATING
+SITUATING_AFTER_COMMA = re.compile(r"^\s*[,(]\s*(?:à|a|au|aux|en|dans|sur|près d|pres d)\b", re.IGNORECASE)
+
+
+@dataclass(frozen=True)
+class Reading:
+    """What a fact says of places: the one it is first about, the others it lists with it, those it only situates
+    the first one in, and every name it says."""
+    first: Name | None
+    listed: tuple
+    situating: tuple
+    all: tuple
+    said: frozenset
+
+
+def word_before(text: str, start: int) -> str:
+    return "".join(folded(text[:start])[-1:])
+
+
+def beyond_subject(gap: str) -> bool:
+    """A figure or a long stretch of words between two places: the second only situates the fact."""
+    return bool(re.search(r"\d", gap)) or len(folded(gap)) > SUBJECT_GAP
+
+
+def read(text: str, everywhere: frozenset | set = frozenset()) -> Reading:
+    """The places a fact is about: the first one it names, and those it lists with it ("Mérida et Uxmal", "de Surat
+    Thani à Krabi", "Bangkok, Chiang Mai et la mer d'Andaman"); the places it situates the first one in ("…, à Nara");
+    a place named further on, after a figure or a long stretch of words, only situates the fact and is none of these
+    ("…, à 45 minutes de Kyoto"); nor is a place one only comes from ("depuis Kyoto pour voir…")."""
+    found = names(text, everywhere)
+    first, listed, situating, end, origins = None, [], [], None, []
+    journeying = journey(text)
+    for name, start, stop in found:
+        if word_before(text, start) in ("depuis", "from"):
+            origins.append(name)
+            continue
+        if first is None:
+            first, end = name, stop
+            journeying = journeying or word_before(text, start) in ("de", "d", "entre")
+            continue
+        gap = text[end:start] if start >= end else ""
+        if beyond_subject(gap):
+            break
+        (situating if situates(gap, journeying) else listed).append(name)
+        end = stop
+    if first is None and origins:
+        # "la traversée du fleuve en ferry depuis Bangkok": no other place, the fact is about where it starts.
+        first, listed = origins[0], origins[1:]
+    return Reading(first, tuple(listed), tuple(situating), tuple(name for name, _, _ in found), frozenset(words(text)))
+
+
+def subjects(text: str, everywhere: frozenset | set = frozenset()) -> list[str]:
+    """The words of the places a fact is about: its first place and those it lists with it (see `read`)."""
+    reading = read(text, everywhere)
+    return list(dict.fromkeys(piece for name in ((reading.first,) if reading.first else ()) + reading.listed for piece in name))
+
+
+def variants(name: Name) -> tuple:
+    return (name,) + ALIASES.get(tuple(name), ())
+
+
+def shows(name: Name, shown: set[str]) -> bool:
+    """The words of a record hold this whole name, or another name of the same place: "Tràng An" is not shown by a
+    record that says "Quảng Ninh" for "Ninh Bình"."""
+    return any(set(variant) <= shown for variant in variants(name))
+
+
+def same(one: Name, other: Name) -> bool:
+    return any(set(a) == set(b) for a in variants(one) for b in variants(other))
 
 
 def linked(text: str) -> bool:
-    """Two names joined by an arrow or a dash: "Tokyo → Kyoto", "Mérida–Tulum"; not "9 h 40 → 12 h 12"."""
-    return any(match[1][0].isupper() and match[2].isupper() for match in LINKED.finditer(text))
+    """Two names joined by an arrow or a dash: "Tokyo → Kyoto", "Mérida–Tulum"; not "9 h 40 → 12 h 12", nor two
+    months ("Novembre–Avril")."""
+    return any(match[1][0].isupper() and match[2].isupper() and not (folded(match[1])[-1:] and folded(match[1])[-1] in MONTHS
+                                                                      and set(folded(text[match.end(2) - 1:])[:1]) & MONTHS)
+               for match in LINKED.finditer(text))
 
 
 def journey(text: str) -> bool:
@@ -209,64 +328,92 @@ def journey(text: str) -> bool:
     return linked(text) or bool(OPENERS & set(folded(text)[:OPENING_WORDS]))
 
 
-CARDINAL = frozenset("nord sud ouest".split())
+CARDINAL = frozenset("nord sud ouest centre".split())
 EAST_AFTER = frozenset("cote rive versant facade".split())
 NAMED_AFTER_CARDINAL = frozenset("ligne gare station autoroute route".split())
+# "Corée du Sud", "Afrique du Sud", "la mer du Nord", "le cap Nord", "le pôle Sud": names, not parts of the destination.
+NAME_BEFORE_CARDINAL = frozenset("coree afrique amerique soudan irlande ossetie caroline dakota mer cap pole asie".split())
+OPPOSITE = ({"nord", "sud"}, {"est", "ouest"})
 
 
 def region(text: str) -> set[str]:
     """The part of the destination a fact is about when it names no place: "au sud (aéroport Tenerife Sud)", "dans le
-    nord", "sur la côte est". Nothing for the whole of it ("un voyage nord-sud")."""
-    said = folded(text)
-    east = lambda index: said[index] == "est" and index and (said[index - 1] in EAST_AFTER or (said[index - 1] == "l" and index > 1 and said[index - 2] in ("a", "de", "dans", "vers")))
-    # "la ligne du Nord", "la gare du Nord" are names of a line and of a station, not a part of the destination.
-    named = lambda index: bool(NAMED_AFTER_CARDINAL & set(said[max(0, index - 2):index]))
-    found = [index for index, word in enumerate(said) if (word in CARDINAL or east(index)) and not named(index)]
-    # The first one is what the fact is about ("222 h au sud, contre 150 h dans le nord"); two side by side are the
-    # whole of the place ("un voyage nord-sud").
-    if not found or (len(found) > 1 and found[1] == found[0] + 1):
+    nord", "sur la côte est", "le Centre", "le sud-ouest". Nothing for the whole of it ("un voyage nord-sud"), for a
+    name ("Corée du Sud", "le cap Nord", "l'Asie du Sud-Est"), nor for the verb ("la côte est magnifique"). Written
+    with a capital after a name ("Tenerife Sud"), it is part of that name; "centre" only with its capital ("le Centre",
+    not "le centre historique")."""
+    compound = compound_part(text)
+    if compound:
+        return compound
+    raw = [match[0] for match in re.finditer(r"[^\W\d_]+", text.translate(PLAIN))]
+    said = [destinations.ascii_fold(word).lower() for word in raw]
+    found = [index for index in range(len(said)) if is_part(raw, said, index)]
+    if not found:
+        return set()
+    if len(found) > 1 and whole(said, found[0], found[1]):
         return set()
     return {said[found[0]]}
 
 
+def compound_part(text: str) -> set[str]:
+    """"le sud-ouest", "Le Nord-Est": one part, both words; "l'Asie du Sud-Est", "le Sud-Est asiatique": a name."""
+    compound = re.search(r"\b(nord|sud)-(est|ouest)\b(?!\s+(?:asiatique|americain|europeen|africain))", destinations.ascii_fold(text), re.IGNORECASE)
+    if compound and not NAME_BEFORE_CARDINAL & set(folded(text[:compound.start()])[-2:]):
+        return {compound[1].lower(), compound[2].lower()}
+    return set()
+
+
+def is_part(raw: list[str], said: list[str], index: int) -> bool:
+    """One word of a fact names a part of the destination: a cardinal point, "est" only as one, "centre" only with its
+    capital; not inside a name ("Tenerife Sud", "la ligne Nord", "Corée du Sud", "Sud-Est asiatique")."""
+    word, before = said[index], said[max(0, index - 2):index]
+    if word == "centre" and not raw[index][0].isupper():
+        return False
+    if word == "est" and not east(said, before, index):
+        return False
+    if word != "est" and word not in CARDINAL:
+        return False
+    if NAMED_AFTER_CARDINAL & set(before) or NAME_BEFORE_CARDINAL & set(before):
+        return False
+    if raw[index][0].isupper() and index and raw[index - 1][0].isupper() and said[index - 1] not in LEADING:
+        return False   # "Tenerife Sud", "Sud-Est"
+    return not adjective_after(said, index)
+
+
+def east(said: list[str], before: list[str], index: int) -> bool:
+    """"est" as the east, not the verb: "Le Sud est plus chaud", "la côte est magnifique"."""
+    after = said[index + 1:index + 2]
+    if not (before[-1:] and before[-1] in EAST_AFTER or before[-2:] in (["a", "l"], ["de", "l"], ["dans", "l"], ["vers", "l"])):
+        return False
+    return not (after and after[0] not in ("de", "du", "des", "d", "l", "et"))
+
+
+def adjective_after(said: list[str], index: int) -> bool:
+    """"Sud asiatique", "Sud-Est asiatique": the name of a region of the world."""
+    after, then = said[index + 1:index + 2], said[index + 2:index + 3]
+    return after in (["asiatique"], ["americain"], ["europeen"], ["africain"]) or \
+        (after in (["est"], ["ouest"]) and then in (["asiatique"], ["americain"], ["europeen"]))
+
+
+def whole(said: list[str], one: int, other: int) -> bool:
+    """"nord-sud", "du nord au sud", "le Nord et le Sud": the whole of the place. Not a comparison of two parts:
+    "222 h au sud, contre 150 h dans le nord" is about the south."""
+    if {said[one], said[other]} not in OPPOSITE:
+        return False
+    return not set(said[one + 1:other]) & {"contre", "que", "plutot", "mais", "alors"}
+
+
 def widened(said: set[str]) -> set[str]:
-    """These words and what they imply (IMPLIES): another spelling, another name, the town a quarter is in."""
-    return said | {other for word in said for other in IMPLIES.get(word, ())}
-
-
-def pictured(identifier: str, caption: str, title: str = "", everywhere: frozenset | set = frozenset()) -> set[str]:
-    """The words that say what a photo shows: its identifier, its caption and its Commons title. Not where it is
-    taken from ("View of Empire State Building from Rockefeller Center", "… behind Bryant Park trees"), not a place
-    its caption only compares with ("Les îles Phi Phi, plus au sud que les Similan."), and not a town whose name is
-    part of the name the record gives (Porto for "Porto Covo": destinations.HOMONYMS)."""
-    own = words(identifier.replace("-", " "))
-    title = title.removeprefix("File:").rsplit(".", 1)[0] if title else ""
-    told = subject(caption) + " " + subject(title)
-    known = own | words(title)
-    aside = set(named(caption, everywhere, sentence=True, known=known)) - set(subjects(caption, everywhere, sentence=True, known=known))
-    shown = widened((own | words(told)) - aside)
-    flat = " " + " ".join(folded(caption + " " + title)) + " "
-    for place, others in destinations.HOMONYMS.items():
-        if place in shown and any(" " + " ".join(folded(other)) + " " in flat for other in others):
-            shown = shown - {place}
-    return shown
-
-
-def recorded(identifier: str, caption: str, title: str = "", everywhere: frozenset | set = frozenset(), family: str | None = None) -> set[str]:
-    """The precise places the record of a photo names: those of its caption; when the caption only says the
-    destination (a photo of the old catalogue has none of its own: "Sintra (Portugal)."), those of its Commons title
-    ("Castelo dos Mouros in Sintra" for "sintra-mouros-remparts"). Its identifier is in lower case: it cannot tell a
-    place ("mouros") from a thing ("interieur", "viaduc")."""
-    prefix, _, rest = identifier.partition("-")
-    own = words((rest if prefix == family else identifier).replace("-", " "))
-    title = title.removeprefix("File:").rsplit(".", 1)[0] if title else ""
-    places = set(named(subject(caption), everywhere, sentence=True, known=own | words(title)))
-    if places or not words(caption) <= set(everywhere) | GENERIC:
-        return places
-    return set(named(subject(title), everywhere))
+    """These words and the towns of the quarters they name (INSIDE): Belém is in Lisbon."""
+    return said | {INSIDE[word] for word in said if word in INSIDE}
 
 
 VIEWPOINT = re.compile(r"\b(?:from|depuis|behind|derrière|vue?s? (?:de|du|des|d’|d'))\b", re.IGNORECASE)
+# What sets a place off as a neighbour or a comparison, not as what the photo shows: "Pise, près de Florence", "Kyoto,
+# plus au sud que Tokyo", "Les îles Phi Phi, plus au sud que les Similan".
+COMPARED = re.compile(r"\b(?:près d[eu’']?|pres d[eu]?|à côté d[eu’']?|a cote d[eu]?|non loin d[eu’']?|loin d[eu’']?|near|next to|"
+                      r"close to|au (?:nord|sud|large|pied)(?:-(?:est|ouest))? d[eu’']?|à l[’'](?:est|ouest) d[eu’']?|en face d[eu’']?|"
+                      r"face à|que|than|comme|like|vers|towards?|to(?=\s)|à destination d[eu’']?|à \d[\d\s,]* ?km d[eu’']?)", re.IGNORECASE)
 
 
 def subject(text: str) -> str:
@@ -275,35 +422,120 @@ def subject(text: str) -> str:
     return VIEWPOINT.split(text, 1)[0]
 
 
-def shows(said: str, shown: set[str], places: set[str] | list[str] = ()) -> bool:
-    """The record of a photo says something of what a text says. When the text names no precise place: a word of
-    four letters and more that names something. A kind of place counts only with its name: "le pavillon d'Or du
-    Kinkaku-ji" and another pavilion share "pavillon" and nothing else; "les îles Similan" are not "les îles Phi
-    Phi"."""
-    shared = {word for word in words(said) & shown if len(word) >= 4 and word not in HOLLOW}
-    if not places:
-        return any(word not in GENERIC or named_after(said, word) <= shown for word in shared)
-    return any(word in GENERIC and named_after(said, word) and named_after(said, word) <= shown for word in shared)
+def readable(title: str) -> str:
+    """A Commons title without its prefix and extension, in ordinary case when it is written in capitals."""
+    title = title.removeprefix("File:").rsplit(".", 1)[0] if title else ""
+    return title.title() if sum(c.isupper() for c in title) > 0.6 * max(1, sum(c.isalpha() for c in title)) else title
+
+
+def compared(text: str, everywhere: frozenset | set = frozenset(), known: frozenset | set = frozenset()) -> list[Name]:
+    """The names a caption only compares the photo's place with, or sets it beside."""
+    zones = []
+    for match in COMPARED.finditer(text):
+        stop = re.search(r"[,.;()]", text[match.end():])
+        zones.append((match.end(), match.end() + stop.start() if stop else len(text)))
+    return [name for name, start, _ in names(text, everywhere, sentence=True, known=known) if any(a <= start < b for a, b in zones)]
+
+
+def pictured(identifier: str, caption: str, title: str = "", everywhere: frozenset | set = frozenset()) -> set[str]:
+    """The words that say what a photo shows: its identifier, its caption and its Commons title. Not where it is
+    taken from ("View of Empire State Building from Rockefeller Center", "… behind Bryant Park trees"), not a place
+    its caption only compares with or sets it beside ("Les îles Phi Phi, plus au sud que les Similan.", "Pise, près
+    de Florence"), and not a town whose name is part of the name the record gives (Porto for "Porto Covo")."""
+    own = words(identifier.replace("-", " "))
+    title = readable(title)
+    told = subject(caption) + " " + subject(title)
+    aside = {piece for name in compared(caption, everywhere, own | words(title)) for piece in name}
+    shown = (own | words(told)) - aside
+    flat = " " + " ".join(folded(caption + " " + title)) + " "
+    for place, others in destinations.HOMONYMS.items():
+        if place in shown and any(" " + " ".join(folded(other)) + " " in flat for other in others):
+            shown = shown - {place}
+    return shown
+
+
+def record(identifier: str, caption: str, title: str = "", everywhere: frozenset | set = frozenset(), family: str | None = None) -> list[Name]:
+    """The precise places the record of a photo names, whole: those of its caption, neighbours included;
+    when the caption only says the destination (a photo of the old catalogue has none of its own: "Sintra
+    (Portugal)."), those of its Commons title ("Castelo dos Mouros in Sintra" for "sintra-mouros-remparts"). Its
+    identifier is in lower case: it cannot tell a place ("mouros") from a thing ("interieur", "viaduc")."""
+    prefix, _, rest = identifier.partition("-")
+    own = words((rest if prefix == family else identifier).replace("-", " "))
+    title = readable(title)
+    known = own | words(title)
+    # A neighbour the caption names is kept here: a photo "de Porto près de la station des Guindais" stands at the
+    # Guindais, and a place too many only ever refuses a photo (what it shows, `pictured`, leaves neighbours out).
+    found = [name for name, _, _ in names(subject(caption), everywhere, sentence=True, known=known)]
+    if found or not words(caption) <= set(everywhere) | GENERIC:
+        return list(dict.fromkeys(found))
+    return list(dict.fromkeys(name for name, _, _ in names(subject(title), everywhere)))
+
+
+def brands(said: set[str]) -> set[str]:
+    """The trains these words name, by any word of their name ("alfa" in "train-alfa-220")."""
+    return {brand for brand, pieces in BRANDS.items() if pieces & said}
+
+
+def brand_clash(text: str, shown: set[str]) -> bool:
+    """The fact names a train the photo does not show, while the photo shows another one ("Intercidades" over an Alfa
+    Pendular)."""
+    wanted, seen = brands(words(text)), brands(shown)
+    return bool(wanted and seen and not wanted & seen)
+
+
+def fits(reading: Reading, shown: set[str], told: set[str], recorded_names: list[Name]) -> int:
+    """How well a photo is a photo of what a fact is about, 0 when it is not. 3: it shows the first place the fact
+    names, wherever the record says so (its identifier included; a quarter shows its town when the fact lists no
+    other place: Belém is no photo of "de l'aéroport de Lisbonne à Baixa-Chiado"). 2: its caption or title
+    shows another place the fact lists. 1: it shows a place the fact only situates the first one in, and its record
+    names no other place ("le Grand Bouddha du Tōdai-ji, à Nara" over deer of Nara, never over the tower of Belém for
+    "le château São Jorge, à Lisbonne"); or the fact says, without a capital, the very place the record names ("les
+    tombeaux saadiens")."""
+    # A quarter shows its town only when the record names no other town ("l'église de Graça, à Faro" is no photo of Lisbon).
+    quarters = set(INSIDE) | set(INSIDE.values())
+    inside = not reading.listed and all(set(name) <= quarters for name in recorded_names)
+    if reading.first and shows(reading.first, widened(shown) if inside else shown):
+        return 3
+    if any(shows(name, told) for name in reading.listed):
+        return 2
+    # A place the fact only situates itself in: the photo's own record must name it, and nothing else (a record that
+    # names nothing is no proof: "…TO BANGKOK" in a title is where a train goes, not where the photo is).
+    alone = bool(recorded_names) and all(any(same(name, other) for other in reading.all) for name in recorded_names)
+    if alone and any(shows(name, shown) for name in reading.situating):
+        return 1
+    # A word of four letters and more that the fact says without a capital, and that a name of the record holds:
+    # "les tombeaux saadiens" over "Maroc Marrakech Saadiens Luc Viatour" (a name of the record may carry its author).
+    capitalised = {piece for name in reading.all for piece in name}
+    # Only a word that names a place: "Grand" or "Palais" said by the fact is no echo of the record's "Grand Palais".
+    if any(len(piece) >= 4 and piece in reading.said and piece not in capitalised and piece not in UNNAMED
+           for name in recorded_names for piece in name):
+        return 1
+    return 0
 
 
 def ways(words_said: set[str] | list[str]) -> set[str]:
     """By what one travels in these words: "rail", "urban", "road", "water"."""
-    return {way for way, names in WAYS.items() if names & set(words_said)}
+    return {way for way, names_ in WAYS.items() if names_ & set(words_said)}
 
 
 def ride(described: set[str], text: str = "") -> bool:
     """A photo of a means of transport, by the words of its caption, title and identifier; of the one the text opens
     on when it names one ("Le bus 205 pour…" does not go over a shinkansen)."""
-    wanted = ways(folded(text)[:OPENING_WORDS])
+    # The means a line opens on; else the one it names further on ("la traversée du Tage en ferry": a ferry, not a tram).
+    wanted = ways(folded(text)[:OPENING_WORDS]) or ways(folded(text))
+    if not wanted and OTHER_MEANS & set(folded(text)):
+        return False   # "Hanoï → Hô-Chi-Minh-Ville en avion": no photo of a train
     return bool(ways(described) & wanted) if wanted else bool(RIDES & described)
 
 
-def on_the_way(recorded: set[str], places: set[str] | list[str]) -> bool:
-    """The record of a ride names one of the places of a journey, or names no place: it does not stand elsewhere."""
-    return not recorded or any(widened({named}) & set(places) for named in recorded)
+OTHER_MEANS = frozenset("avion avions vol vols taxi taxis voiture voitures velo pied".split())
 
 
-def elsewhere(caption: str, places: set[str], everywhere: frozenset | set = frozenset()) -> set[str]:
-    """The precise places a photo's caption names that are none of those the fact names: over such a photo, the fact
-    would be read as a fact about that other place."""
-    return proper(caption, everywhere, sentence=True) - places
+def on_the_way(recorded_names: list[Name], reading: Reading) -> bool:
+    """The record of a ride names one of the places of a journey, whole, or names no place: it does not stand elsewhere."""
+    return not recorded_names or any(within(name, other) for name in recorded_names for other in reading.all)
+
+
+def within(name: Name, other: Name) -> bool:
+    """`name` is `other`, or a place of it whose name holds it whole ("Mérida Teya", the station of Mérida)."""
+    return any(set(b) <= set(a) for a in variants(name) for b in variants(other))

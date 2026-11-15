@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-ou-dormir-lisbonne-quartiers-c",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Où dormir à Lisbonne sans voiture : 7 quartiers, leur métro et leurs pentes",
+  "pinTitle": "Où dormir à Lisbonne : les chiffres à connaître avant de partir",
+  "variant": "c",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/ou-dormir-lisbonne-quartiers/",
+  "articleSha256": "c388a975785c03ee7c57a1b8df8a573cb331e70aa2d04c2332bc8d182d18c75c",
+  "imageSha256": "8f7c20a7905d6eb4dac9a1fb4d41e9fd4c760b5d95d52502d93b50028143f1ec",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "693b82a5423a7d939e4c6c3aaa8c1b5d305ae39d6fa095e55f96b591dfc9b24f",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "lisbonne-alfama-tram",
+    "author": "Ingo Mehling",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Lissabon_-_Alfama_-_Largo_Santa_Luzia_-_Streetcar_-_1.jpg",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+  }
+}

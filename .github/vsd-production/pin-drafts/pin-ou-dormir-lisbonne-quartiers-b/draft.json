@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-ou-dormir-lisbonne-quartiers-b",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Où dormir à Lisbonne sans voiture : 7 quartiers, leur métro et leurs pentes",
+  "pinTitle": "Où dormir à Lisbonne : où dormir, quartier par quartier",
+  "variant": "b",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/ou-dormir-lisbonne-quartiers/",
+  "articleSha256": "c388a975785c03ee7c57a1b8df8a573cb331e70aa2d04c2332bc8d182d18c75c",
+  "imageSha256": "f69ce85b3ce19ea72eb1b38de85a9b0ad3612d3f9419b74e1a03fe874766ce69",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "693b82a5423a7d939e4c6c3aaa8c1b5d305ae39d6fa095e55f96b591dfc9b24f",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "lisbonne-santa-justa",
+    "author": "Diego Delso",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Elevador_de_Santa_Justa_desde_el_castillo_de_San_Jorge,_Lisboa,_Portugal,_2022-07-24,_DD_28.jpg",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+  }
+}

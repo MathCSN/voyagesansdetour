@@ -74,7 +74,7 @@ FALLBACK_FONT_ASSETS = {
 # Upbeat CC BY 4.0 tracks already qualified (provenance in evidence/), with the second the extract starts at.
 MUSIC = (("happy-alley", 8), ("carefree", 1), ("almost-bliss", 0), ("ascending-the-vale", 0))
 CATEGORY_EMOJI = {"itineraires": "🗺️", "transports": "🚆", "excursions": "🌄", "quartiers": "🏘️", "choisir": "🤔",
-                  "preparer": "🎒", "budget": "💶", "quand partir": "📅", "road trip": "🚗", "road trips": "🚗"}
+                  "preparer": "🎒", "budget": "💶", reel_formats.WHEN_TO_GO: "📅", "road trip": "🚗", "road trips": "🚗"}
 
 
 WEEKDAYS = ("monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday")
@@ -249,6 +249,9 @@ def section_of(value: str, label: str, sections: list[dict]) -> dict | None:
     sums_up = lambda section: bool(SUMMARY.search(folded_title(section)))
     holders = [section for section in sections if whole_figure(value, section_text(section))]
     if len(holders) == 1 and not sums_up(holders[0]):
+        return holders[0]
+    # Only sections that sum the guide up give it: the first of them, not a section that only shares a word with it.
+    if holders and all(sums_up(section) for section in holders):
         return holders[0]
     # A figure is taken from the section that sums the guide up only when another section gives the figure itself:
     # "872 € le budget serré" is given by "En bref" alone and stays there, it is not a figure of "Où dormir" because
@@ -481,12 +484,21 @@ def scenes_for(article: dict, channel: Post, facts: list[dict], photos: list[tup
 
     hook_kicker = place if country.lower() == place.lower() else f"{country} · {place}"
     hook_kicker = hook_kicker if len(hook_kicker) <= 32 else place[:32]
-    scenes = [scene(opening_picture, hook_kicker, title_lines + [f"*{len(facts)} {word}* à connaître"],
-                    unbreakable(opening) if len(opening) <= 120 else None, 3.5, [{"source": "guide", "excerpt": opening}])]
+    # A post that opens on no figure ("Quand partir en Thaïlande") promises what the guide's own title promises, not
+    # "4 repères à connaître" (review of 13/11/2026): the title is quoted like any other line of the guide.
+    promise = reel_formats.promise_of(article) if word == "repères" or reel_formats.when_to_go(article) else None
+    promised = lines_of(promise, width, 3) if promise else None
+    if promised:
+        # The promise is the headline, the place above it, the guide's opening under it: three lines quoted from the guide.
+        scenes = [scene(opening_picture, hook_kicker, promised, unbreakable(opening) if len(opening) <= 120 else None, 3.5,
+                        [{"source": "guide", "excerpt": article["title"]}, {"source": "guide", "excerpt": opening}])]
+    else:
+        scenes = [scene(opening_picture, hook_kicker, title_lines + [f"*{len(facts)} {word}* à connaître"],
+                        unbreakable(opening) if len(opening) <= 120 else None, 3.5, [{"source": "guide", "excerpt": opening}])]
     for fact in facts:
         # As in a reel, the name of the section stands above the figure only over that section's own photo, or when
         # the section has none: "Le Nord" is not written over the Grand Palace of Bangkok.
-        named = media.above(fact["section"], pictures[fact["value"]][1], place)
+        named = media.above(fact["section"], pictures[fact["value"]][1], place, fact["label"])
         scenes.append(scene(pictures[fact["value"]], named, ["*" + fact["value"] + "*"],
                             unbreakable(fact["label"]), 4, [{"source": "guide", "excerpt": fact["excerpt"]}],
                             label=reel_formats.dated_tag(fact, tag)))
@@ -509,7 +521,7 @@ def free_identity(root: Path, base: str) -> str:
 
 def facebook_call(article: dict) -> str:
     """The line above the guide's address: it promises only what that kind of guide holds."""
-    if article.get("shortTitle", "").lower().startswith("quand partir"):
+    if reel_formats.when_to_go(article):
         return "🔗 La meilleure période pour partir, et pourquoi, dans le guide complet :"
     return "🔗 Tous les prix, horaires et l’itinéraire dans le guide complet :"
 

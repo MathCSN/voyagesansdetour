@@ -114,11 +114,34 @@ def caption_emoji(value: str, label: str) -> str:
     """Price, duration, boat, journey, ticket, walk: the first that fits; a pin otherwise. A distance alone is not a
     walk, and a line is a journey by what it opens on: "le Grand Bouddha du Tōdai-ji, …, à 45 minutes par le train"
     is the fee of a temple, not a train."""
-    opening = " ".join(place_names.folded(label)[:place_names.OPENING_WORDS])
-    tests = (("💶", "€" in value), ("⏱️", re.search(r"\b(min|h|jours?)\b", value)),
-             ("⛴️", re.search(r"\b(?:ferry|bateau|rabelo)", opening)), ("🚆", place_names.journey(label)),
+    first = place_names.folded(label)[:place_names.OPENING_WORDS]
+    opening, ways = " ".join(first), place_names.ways(first)
+    # The pictogram of a journey is the one of the means of transport its line names: a bus is not a train ("le
+    # minibus Phantip", "bus de remplacement"), and a ticket for a town is no journey at all.
+    ride = ride_emoji(first, ways, label)
+    tests = (("💶", "€" in value), ("⏱️", re.search(r"\b(min|h|jours?)\b", value)), (ride, ride),
              ("🎟️", re.match(r"(?:l )?entree\b", opening)), ("🥾", re.search(r"marches|sentier|randonn|à pied", value + label)))
     return next((emoji for emoji, fits in tests if fits), "📍")
+
+
+def ride_emoji(first: list[str], ways: set[str], label: str) -> str | None:
+    if "water" in ways or "rabelo" in first:
+        return "⛴️"
+    if "road" in ways:
+        return "🚌"
+    if "urban" in ways:
+        return "🚇"
+    if "rail" in ways or place_names.journey(label):
+        return "🚆"
+    return None
+
+
+WHEN_TO_GO = "quand partir"
+
+
+def when_to_go(article: dict) -> bool:
+    """A guide that says when to go: its title promises a moment, not figures."""
+    return article.get("shortTitle", "").lower().startswith(WHEN_TO_GO)
 
 
 def caption_line(fact: dict) -> str:
@@ -127,6 +150,11 @@ def caption_line(fact: dict) -> str:
     value, label = fact["value"], fact["label"]
     flows = re.fullmatch(r"[\d\s]+", value) or re.match(r"(?:de|d’|d'|entre|pour|par|sur|depuis|jusqu)\b", label)
     return caption_emoji(value, label) + " " + value + (" " if flows else " : ") + label
+
+
+# What a figure holds under: left out, the figure would be promised to everyone, all day, all year.
+CONDITION = re.compile(r"\(?(?:aux? heures? (?:creuses|de pointe)|hors |en (?:semaine|basse saison|haute saison|prévente)|le week-end|"
+                       r"sur réservation|sous conditions?|à partir de |dès |uniquement|seulement|sauf |pour les moins de |avant \d|après \d)", re.IGNORECASE)
 
 
 def in_enumeration(label: str, cut: int) -> bool:
@@ -146,15 +174,27 @@ def short_label(label: str, limit: int = SHORT_LABEL) -> str:
         return label
     # Never inside a parenthesis: "(Bahia, tombeaux saadiens, El Badi)" is dropped whole or kept whole.
     # Never inside a list: "Valladolid, Chichén Itzá, Mérida, Uxmal et Tulum" keeps all its places or is shown whole.
+    # Never before what a price depends on: "le plafond du métro en zones 1-2, aux heures creuses" cut at its comma
+    # would promise that fare all day.
     cuts = [match.start() for match in re.finditer(r" \(| ; |, | : ", label)
             if label[:match.start()].count("(") == label[:match.start()].count(")")
-            and not (match.group() == ", " and in_enumeration(label, match.start()))]
+            and not (match.group() == ", " and in_enumeration(label, match.start()))
+            and not CONDITION.match(label[match.end():])]
     fitting = [cut for cut in cuts if MIN_SHORT_LABEL <= cut <= limit]
     if not fitting:
         # No punctuation in reach: stop before what only qualifies the figure ("… pour un étranger | depuis le 27 mars").
         fitting = [match.start() for match in SOFT_PAUSE.finditer(label)
                    if MIN_SHORT_LABEL <= match.start() <= limit and label[:match.start()].count("(") == label[:match.start()].count(")")]
     return label[:max(fitting)].rstrip() if fitting else label
+
+
+def promise_of(article: dict) -> str | None:
+    """What the guide's own title promises after its colon ("Quand partir en Thaïlande : le bon mois pour Bangkok, le
+    Nord, l'Andaman et Koh Samui"): the precise hook of a post that has no figure to open on."""
+    title = article.get("title", "")
+    promise = title.split(" : ", 1)[1].strip() if " : " in title else ""
+    promise = promise[:1].upper() + promise[1:]
+    return promise if 20 <= len(promise) <= 90 and checked(promise, 120) else None
 
 
 def seconds_for(detail: str | None) -> float:
@@ -290,7 +330,7 @@ def applicable(article: dict, facts: list[dict], page: str) -> list[str]:
         formats.append("itineraire")
     if table_of(article, page):
         # "When to go" is a table before anything else; elsewhere the table comes after the guide's own format.
-        formats.insert(0 if article.get("shortTitle", "").lower().startswith("quand partir") else len(formats), "tableau")
+        formats.insert(0 if when_to_go(article) else len(formats), "tableau")
     # No "express" any more: two figures in twelve seconds left a reel almost empty (Yucatán, 20/11/2026).
     return formats + ["liste"]
 
@@ -302,6 +342,11 @@ def ordered(formats: list[str], used: list[str]) -> list[str]:
 
 
 # --- plans -------------------------------------------------------------------
+
+# Names of sections that sum the guide up: above a figure they say nothing.
+SUMMED_UP = re.compile(r"\b(?:en bref|l.essentiel|avant tout|a retenir|resume|recapitulatif|comparatif|coup d.oeil)\b")
+# Where one waits for a ride: not a picture to stand for a whole place.
+STOPS = frozenset("gare station quai quais platform stazione estacao estacion terminal arret".split())
 
 # Words that name nothing: two texts that share only these are not about the same thing.
 EMPTY_WORDS = frozenset("pour entre dans avec sans sous vers chez depuis selon plus moins tout tous toute toutes cette leur leurs "
@@ -379,20 +424,20 @@ class Media:
         return place_names.pictured("", photo[2], str(photo[1].get("commonsTitle", "")), self.country)
 
     def places(self, text: str) -> set[str]:
-        """The precise places a fact names (Similan, Kinkaku-ji, Uxmal), the destination of the whole post aside."""
+        """The words of the precise places a fact names (Similan, Kinkaku-ji, Uxmal), the destination aside."""
         return place_names.proper(text, self.country)
 
     def located(self, text: str) -> bool:
         """The fact is about one place or one part of the destination: only a photo of it will do."""
-        return bool(self.places(text) or place_names.region(text))
+        return bool(place_names.names(text, self.country) or place_names.region(text))
 
-    def recorded(self, photo: tuple) -> set[str]:
-        """The precise places the record of a photo names (place_names.recorded)."""
-        return place_names.recorded(photo[0], photo[2], str(photo[1].get("commonsTitle", "")), self.country, self.family)
+    def recorded(self, photo: tuple) -> list:
+        """The precise places the record of a photo names, whole (place_names.record)."""
+        return place_names.record(photo[0], photo[2], str(photo[1].get("commonsTitle", "")), self.country, self.family)
 
-    def elsewhere(self, photo: tuple, places: set[str]) -> bool:
-        """The record of this photo names a precise place that is none of those of the fact, nor a quarter of one."""
-        return any(not place_names.widened({named}) & places for named in self.recorded(photo))
+    def fits(self, reading, photo: tuple) -> int:
+        """How well this photo is a photo of what a fact is about (place_names.fits), as production.py judges it."""
+        return place_names.fits(reading, self.described(photo), self.told(photo), self.recorded(photo))
 
     def beside(self, own: tuple, text: str, target: set[str]) -> set[str]:
         """What the photo the guide put beside a text that names no place shows of what the text says: the words the
@@ -403,23 +448,36 @@ class Media:
         """The free photos a fact that none of them shows may still take: none when the fact names a precise place or
         a part of the destination. "350 mm de pluie à Phuket" went over the inside of a sleeping car, and "42 €
         l'entrée de SantaPark" over huskies (13/11/2026): such a fact stays in the caption and in the guide."""
-        return [] if self.located(text) else [ph for ph in self.free() if ph[0] not in avoid]
+        if self.located(text):
+            return []
+        return [ph for ph in self.free() if ph[0] not in avoid and not place_names.brand_clash(text, self.described(ph))]
 
-    def above(self, section: dict | None, photo_id: str, place: str) -> str:
+    def above(self, section: dict | None, photo_id: str, place: str, label: str = "") -> str:
         """The label written above a figure: the name of its section over that section's own photo; over another
-        photo, or when the section has none, that name only if it says no place and no part of the destination
-        the photo is not of ("Le Nord" is not written over the Grand Palace of Bangkok, nor "Le Sud" over Tràng An,
-        "Aurores boréales" over a picture of the village); the place otherwise."""
-        label = kicker_of(section, place)
+        photo, or when the section has none, that name only if it says no place, no part of the destination and no
+        means of transport the photo is not of ("Le Nord" is not written over the Grand Palace of Bangkok, nor "Le
+        Sud" over Tràng An, nor "Dans le métro" over a taxi); the place otherwise. Never the name of a section that
+        sums the guide up ("En bref" says nothing), nor a name with a year over a figure of another year."""
+        name = kicker_of(section, place)
+        years, dated = set(YEAR.findall(name)), set(YEAR.findall(label))
+        if name != place and (SUMMED_UP.search(destinations.ascii_fold(name).lower()) or (years and dated and not years & dated)):
+            return place
         own = section.get("image") if section else None
         if own:
-            return label if photo_id == own else place
+            return name if photo_id == own else place
         photo = next((ph for ph in self.all if ph[0] == photo_id), None)
+        if not photo:
+            return name
+        shown = self.described(photo)
         # A title begins with a capital by grammar ("Budget", "Aurores boréales"): its first word alone is no place.
-        named, region = place_names.proper(label, self.country, sentence=True), place_names.region(label)
-        if not photo or not (named or region):
-            return label
-        return label if (named and named & self.described(photo)) or (region and not named and region & place_names.words(photo[2])) else place
+        named = place_names.names(name, self.country, sentence=True)
+        if named and not any(place_names.shows(one, place_names.widened(shown)) for one in named):
+            return place
+        region = place_names.region(name)
+        if region and not named and not region <= place_names.words(photo[2]):
+            return place
+        ways = place_names.ways(place_names.folded(name))
+        return place if ways and not ways & place_names.ways(shown) else name
 
     def spare(self) -> str | None:
         """The last photo left that can close the post: no plan takes it, whatever it names."""
@@ -445,49 +503,43 @@ class Media:
         """For a journey ("Tokyo → Kyoto en Nozomi"), a photo of the ride before a town it names: the guide's own
         photo of it, else the one that names the most places of the journey; a ride of the same kind as the one the
         text opens on (never a shinkansen for "Le bus 205 pour le Kinkaku-ji"), and never one that stands somewhere
-        else: its record names one of the places of the journey, or no place at all ("Hué → Đà Nẵng en train" went
-        over the train street of Hanoi, "Tokyo → Kyoto" over the sign of Shin-Fuji station)."""
-        places = self.places(text)
-        rides = [ph for ph in pool if place_names.ride(self.described(ph), text) and place_names.on_the_way(self.recorded(ph), places)]
+        else: its record names one of the places of the journey, whole, or no place at all ("Hué → Đà Nẵng en
+        train" went over the train street of Hanoi, "Tokyo → Kyoto" over the sign of Shin-Fuji station)."""
+        reading = place_names.read(text, self.country)
+        rides = [ph for ph in pool if place_names.ride(self.described(ph), text) and place_names.on_the_way(self.recorded(ph), reading)]
         if not rides:
             return None
+        places = self.places(text)
         return own if own in rides else max(rides, key=lambda ph: (len(places & self.described(ph)), self.shared(ph, target), self.shared(ph, wider)))
 
     def of_the_region(self, region: set[str], pool: list, own: tuple | None, section: dict | None) -> tuple | None:
         """The photo of the part of the destination a fact is about ("222 h de soleil au sud" went over Garachico, on
-        the north coast): the photo of its own section when that section is about that part ("Le sud : Costa Adeje"),
-        else a photo whose caption says that part, else one that names no precise place. None otherwise."""
-        said = lambda value: bool(region & place_names.words(value))
-        if own and said((section or {}).get("title", "")):
+        the north coast): a photo whose caption says that part; the photo of the fact's own section when that section
+        is about that part ("Le sud : Costa Adeje") and the photo names no precise place; else a photo that names no
+        precise place. Never a photo of a precise place whose caption does not say that part (Masca under "Le sud")."""
+        said = lambda value: region <= place_names.words(value)
+        if own and said(own[2]):
+            return own
+        if own and said((section or {}).get("title", "")) and not self.recorded(own):
             return own
         ranked = [ph for ph in pool if said(ph[2])] + [ph for ph in pool if not self.recorded(ph)]
-        return own if own in ranked else next(iter(ranked), None)
+        return next(iter(ranked), None)
 
-    def of_the_place(self, text: str, places: list[str], pool: list, own: tuple | None, target: set[str], wider: set[str]) -> tuple | None:
-        """The photo that names the place a fact names, None when none does. The first place a fact names is the one it
-        is about: "le Grand Bouddha du Tōdai-ji, à Nara, à 45 minutes de Kyoto" goes over Nara before Kyoto. A place
-        the fact names without a capital ("les tombeaux saadiens") is named by the photo that does (four letters at
-        least: "Chiang Mai" is not named by "la mi-mai")."""
-        # (Three letters at least to tie a photo to a place: "Tràng An" and "Hội An" share "An".)
-        about = [place for place in place_names.subjects(text, self.country) or places if len(place) >= 3]
-        said = {word for word in place_names.words(text) if len(word) >= 4} - set(places)
-        echoed = lambda ph: bool(place_names.proper(ph[2], self.country) & said)
-        naming = lambda ph: 2 * sum(len(about) - rank for rank, place in enumerate(about) if place in self.described(ph)) + echoed(ph)
-        # A photo names the place of a fact when it names the first place the fact names, or one of its places and no
-        # other, or when the fact says the place the photo names. The torii of Miyajima, filed under "hiroshima", is
-        # not the photo of "le musée du Mémorial pour la paix d'Hiroshima".
-        # A place the fact only names to situate itself ("à 45 minutes de Kyoto") makes no photo its photo.
-        # The first place is enough wherever the photo names it; another one only when the photo itself says so, in
-        # its caption or its title: the torii of Miyajima, filed "hiroshima", is not "le musée du Mémorial pour la paix
-        # d'Hiroshima".
-        first = {place for place in place_names.first_name(text, self.country) if len(place) >= 3} or set(about[:1])
-        fits = lambda ph: bool(first & self.described(ph)) or bool(set(about) & self.told(ph)) or echoed(ph)
-        named = [ph for ph in pool if naming(ph) and fits(ph)]
+    def of_the_place(self, text: str, pool: list, own: tuple | None, target: set[str], wider: set[str], also: str = "") -> tuple | None:
+        """The photo of the place a fact is about, None when none is: whole names, never a word of one ("la balade
+        en barque de Tràng An à Ninh Bình" went over the bay of Ha Long, filed "Quảng Ninh"). The first place a fact
+        names wins wherever the record names it; another place it lists, only when the photo's caption or title says
+        it; a place it only situates the first one in, only when the photo names no other place (place_names.fits)."""
+        reading = place_names.read(text, self.country)
+        named = [ph for ph in pool if self.fits(reading, ph)]
         if not named:
             return None
-        # Between two photos that name it as well, the one that shares more with the fact, a kind of place included
-        # ("le Grand Palais de Bangkok": the palace, not another temple of Bangkok); then the guide's own.
-        close = lambda ph: (naming(ph), len(words_shared(ph, target, self.family, kinds=True)))
+        # Between two photos of it, the one that shows what the plan then says ("Mérida et Uxmal" and its "l'entrée
+        # d'Uxmal": Uxmal), the more places of the fact, the closer; then the guide's own.
+        then = place_names.read(also, self.country).first if also else None
+        many = lambda ph: sum(place_names.shows(name, self.described(ph)) for name in ((reading.first,) if reading.first else ()) + reading.listed)
+        close = lambda ph: (bool(then and place_names.shows(then, self.described(ph))), many(ph), self.fits(reading, ph),
+                            len(words_shared(ph, target, self.family, kinds=True)))
         best = max(named, key=lambda ph: (close(ph), self.shared(ph, wider)))
         return own if own in named and close(own) >= close(best) else best
 
@@ -504,7 +556,9 @@ class Media:
         return best if best is not None and shared(best) else None
 
     def named(self, text: str, section: dict | None, avoid: frozenset = frozenset(), also: str = "") -> tuple | None:
-        """The photo that shows what `text` names: the one whose id, caption or title shares the most words with it.
+        """The photo that shows what `text` names. A fact about a place goes over a photo of that place, read as
+        production.py reads it (place_names.fits); a journey over a ride on the way; a part of the destination over a
+        photo of that part; any other fact over the photo whose id, caption or title shares the most words with it.
         The section's own photo wins when it shares a word, and stands in when no photo shares any; it gives way
         when it shows something else ("Chichén Itzá à l'ouverture" is not shown by the cenote of that afternoon), or
         when another photo shares all it shares and more (the Grand Palace, not Wat Arun, for "le Grand Palais de
@@ -513,7 +567,8 @@ class Media:
         Tulum en train direct" and its "train direct Mérida Teya → Tulum")."""
         target, wider = self.target(text), self.target(text + " " + also)
         wanted = section.get("image") if section else None
-        pool = [ph for ph in self.free() if ph[0] not in avoid]
+        # Never a photo of another train than the one the fact names ("Intercidades" over an Alfa Pendular).
+        pool = [ph for ph in self.free() if ph[0] not in avoid and not place_names.brand_clash(text, self.described(ph))]
         own = next((ph for ph in pool if ph[0] == wanted), None)
         if place_names.journey(text):
             pick = self.ride(text, pool, own, target, wider)
@@ -521,9 +576,8 @@ class Media:
                 return pick
         # A fact that names a precise place goes over a photo that names that place, or over none: a word they share
         # ("îles") is not enough, and a photo that names nothing is not a photo of that place either.
-        places = place_names.named(text, self.country)
-        if places:
-            return self.of_the_place(text, places, pool, own, target, wider)
+        if place_names.names(text, self.country):
+            return self.of_the_place(text, pool, own, target, wider, also)
         region = place_names.region(text)
         if region:
             return self.of_the_region(region, pool, own, section)
@@ -539,12 +593,19 @@ class Media:
         located = self.located(text)
         if not pick and (strict or located or len(self.photos) <= self.reserve):
             raise Held("no_photo_of_this_place" if strict or located else "not_enough_photos_or_figures")
-        kept, free = self.kept(), self.left_for(text, avoid)
+        kept, free = self.kept(), sorted(self.left_for(text, avoid), key=self.plain)
         pick = pick or next((ph for ph in free if ph[0] not in kept), free[0] if free else None)
         if not pick:
             raise Held("not_enough_photos_or_figures")
         self.photos.remove(pick)
         return ("photo", pick[0])
+
+    def plain(self, photo: tuple) -> tuple:
+        """How well a photo stands under a fact that names no place (a budget, a rate of exchange): a photo that stands
+        for the destination first; never before it a station, a platform, a vehicle or a detail of one paragraph
+        ("872 € le budget" went over the platform of Shin-Fuji, the rate of the euro over the deer of Nara)."""
+        detail = bool((place_names.RIDES | STOPS) & self.described(photo))
+        return (not photo[1].get("emblematic"), detail, bool(self.recorded(photo)))
 
     def closing(self, required: bool = True) -> tuple[str, str]:
         """The picture under the call to action: one that stands for the place, a photo marked `emblematic` by hand
@@ -601,12 +662,9 @@ def fact_plan(fact: dict, media: Media, place: str, tag: str, badge: str | None 
     picture = media.moving(fact["label"], fact["section"])
     # The label above the figure is the section's name only over that section's own photo, or when the section has
     # none: "Aurores boréales" is not written over a picture of the village.
-    kicker = media.above(fact["section"], picture[1], place)
     # …and a name that carries a year is not written over a figure of another year ("La ligne du Nord en 2026" over
     # "38,3 % des Alfa Pendular à l'heure en 2025").
-    years, dated = set(YEAR.findall(kicker)), set(YEAR.findall(fact["label"]))
-    if years and dated and not years & dated:
-        kicker = place
+    kicker = media.above(fact["section"], picture[1], place, fact["label"])
     excerpt, label = quoted(fact, tag)
     return plan("fact", picture, kicker, headline, seconds_for(detail), detail=detail,
                 facts=[{"source": "guide", "excerpt": excerpt}], tag=label, badge=badge)
@@ -630,6 +688,12 @@ class Brief:
         return numbered(self.facts, self.article)
 
     def hook(self, promise: str) -> dict:
+        # A "quand partir" guide promises a moment, not "4 chiffres": the hook says what its own title promises
+        # ("Le bon mois pour Bangkok, le Nord, l'Andaman et Koh Samui"), quoted from the guide (review of 13/11/2026).
+        told = promise_of(self.article) if when_to_go(self.article) else None
+        if told:
+            return plan("hook", self.media.opening(self.media.cover), self.kicker, self.title_lines + [promise], HOOK_SECONDS,
+                        detail=unbreakable(told), facts=[{"source": "guide", "excerpt": self.article["title"]}], tag=self.tag)
         return plan("hook", self.media.opening(self.media.cover), self.kicker, self.title_lines + [promise], HOOK_SECONDS,
                     facts=[{"source": "guide", "excerpt": self.opening}], tag=self.tag)
 

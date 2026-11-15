@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-algarve-sans-voiture-train-c",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "L’Algarve sans voiture : Faro, Tavira et Lagos en train, à partir de 1,60 €",
+  "pinTitle": "L’Algarve en train : les chiffres à connaître avant de partir",
+  "variant": "c",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/algarve-sans-voiture-train/",
+  "articleSha256": "7ffd3450c73e91f5be9e9c31caec81e8371fc6da55174ba22c1fab29d56e53b2",
+  "imageSha256": "a2584fce6b5e53cdc360c9971d902e39f1c5a2208db290f56f9766b3d0b71f5e",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "693b82a5423a7d939e4c6c3aaa8c1b5d305ae39d6fa095e55f96b591dfc9b24f",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "algarve-tavira",
+    "author": "Dmitry Tonkonog",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Tavira_river_bank_02.jpg",
+    "license": "CC BY-SA 3.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
+  }
+}

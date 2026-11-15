@@ -35,15 +35,8 @@ NOT_A_CLOSING = frozenset({
     "douro-pinhao-azulejos", "seville-alcazar", "amalfi-ravello", "amalfi-ferry", "cinque-train", "thailande-train-nuit",
     "costa-rica-monteverde", "japon-shinkansen", "japon-nara-cerfs", "laponie-husky", "tenerife-adeje"})
 
-# Files of Wikimedia Commons that are not the photograph as it was taken, never to be used whatever lists them: this
-# one is a landscape version (3074 × 2304) uploaded in 2024 by another account from a portrait original (1536 × 2048)
-# by Samuli Lintula; its margins were made up. Mathis's rule: real photographs only, no generated or extended image.
-# The whole stock was read again on Commons on 13/11/2026 (197 files) against photo_intake.derived: one more file fell,
-# an arch of Lisbon filed under "Retouched pictures" and "Digitally manipulated photographs". Its record in the old
-# catalogue carries no category, so the rule cannot see it there: it is named here. (It went out once, in the photo
-# post « Où dormir à Lisbonne » of 12/11/2026.)
-NOT_A_PHOTOGRAPH_AS_TAKEN = frozenset({"File:Snowball pyramid at Santa Claus' Village Large.jpg",
-                                       "File:Empty Arco da Rua Augusta during the COVID-19 lockdown, Lisbon, Portugal julesvernex2.jpg"})
+# Files of Wikimedia Commons that are not the photograph as it was taken: photo_intake.NOT_A_PHOTOGRAPH_AS_TAKEN.
+NOT_A_PHOTOGRAPH_AS_TAKEN = photo_intake.NOT_A_PHOTOGRAPH_AS_TAKEN
 
 # Photos that show numbers of their own (a display, a board of fares): a table is never laid over them, its figures
 # would be read among theirs. `train-alfa-220` is the display of an Alfa Pendular carriage: "220 km/h · 10:22 · 21 °C".
@@ -70,6 +63,14 @@ def focus_marks(photo_id: str, record: dict | None = None) -> dict:
     marks = {"focus": (record or {}).get("focus") or SITE_FOCUS.get(photo_id),
              "focusVertical": (record or {}).get("focusVertical") or SITE_FOCUS_VERTICAL.get(photo_id)}
     return {key: value for key, value in marks.items() if isinstance(value, list) and len(value) == 2}
+
+
+def load_captions(path: Path = Path(__file__).resolve().parent / "assets" / "photos" / "captions.json") -> dict:
+    """French captions of the photos of the old catalogue, which is sealed and keeps none (captions.json)."""
+    return json.loads(path.read_text())["captions"] if path.is_file() else {}
+
+
+CAPTIONS = load_captions()
 
 
 def commons_title(source_page: str) -> str | None:
@@ -103,7 +104,7 @@ def photo_candidates(article: dict, site_photos: dict, country: str, shared: dic
     for photo_id, record in (shared or {}).items():
         title = record.get("commonsTitle")
         if photo_id.split("-", 1)[0] in prefixes and isinstance(title, str) and title not in taken:
-            candidates.append({"id": photo_id, "title": title, "alt": record.get("alt") or fallback})
+            candidates.append({"id": photo_id, "title": title, "alt": record.get("alt") or CAPTIONS.get(photo_id) or fallback})
     return candidates
 
 
@@ -193,9 +194,11 @@ def featured_candidates(article: dict, names: list[str], country: str, searcher,
             # And it must be that place: "Porto Covo" names another town of the same country.
             if not names_place(title, names) or names_place(title, others):
                 continue
-            label = re.sub(r"\s+", " ", re.sub(r"\.(jpe?g)$", "", title.removeprefix("File:"), flags=re.IGNORECASE)).strip()
+            # Never a raw Commons file name as the text read out for a photo ("Lamp maker, Medina of Marrakech",
+            # "Maroc Marrakech Saadiens Luc Viatour 5"): its place only; the title stays in the record, where the
+            # choice of photo and production.py still read it.
             found.append({"id": slugged(article["destination"])[:40] + "-" + hashlib.sha1(title.encode()).hexdigest()[:8], "title": title,
-                          "alt": f"{article['destination']} ({country}) : {label}."[:300], "automatic": True, "countryNames": countries,
+                          "alt": f"{article['destination']} ({country}).", "automatic": True, "countryNames": countries,
                           "homonyms": others})
     return found
 

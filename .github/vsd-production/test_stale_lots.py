@@ -22,9 +22,11 @@ class Stock:
     """A stock of batches in a temporary folder; each post quotes one page of the site, and sometimes another site."""
 
     def __init__(self):
+        # The stock sits one level down: a file "outside" it is still inside this run's own temporary folder, never a
+        # name shared by two runs in the system's temporary directory.
         self.folder = tempfile.TemporaryDirectory()
-        self.root = Path(self.folder.name)
-        (self.root / "reviewed-social").mkdir()
+        self.root = Path(self.folder.name) / "stock"
+        (self.root / "reviewed-social").mkdir(parents=True)
         (self.root / "scenarios").mkdir()
         self.index = {"schemaVersion": 1, "items": [], "retirements": []}
         self.pages = {}

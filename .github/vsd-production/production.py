@@ -457,44 +457,45 @@ def photos_of_another_place(scenario, photos) -> list[str]:
     return [f"plan {number} {told}" for number, told in found if told]
 
 
-def on_the_route(said, shown, recorded, places) -> bool:
-    """A journey over a ride of its kind that does not stand elsewhere: its record names a place of the journey, or none."""
-    return place_names.journey(said) and place_names.ride(shown, said) and place_names.on_the_way(recorded, places)
-
-
 def another_place(scene, photos, everywhere) -> str | None:
-    """What one plan names and why its photo is not a photo of it; None when it is."""
+    """What one plan names and why its photo is not a photo of it; None when it is. Read as the generator reads it
+    (place_names): whole names, the same rules for a journey, a part of the destination and a train; never on the
+    word of the label written above the plan ("Le sud : Costa Adeje" does not make a photo of Masca one of the south)."""
     if scene.get("layout") == "table" or "photo" not in scene:
         return None
     said = draw.plain(" ".join(scene.get("headline") or []) + " " + str(scene.get("detail") or ""))
+    detail = str(scene.get("detail") or said)
     photo, caption = scene["photo"], str(scene.get("alt") or "")
     title = str((photos.get(photo) or {}).get("commonsTitle", ""))
     shown = place_names.pictured(photo, caption, title, everywhere)
-    recorded = place_names.recorded(photo, caption, title, everywhere)
-    places = place_names.named(said, everywhere)
-    if on_the_route(str(scene.get("detail") or said), shown, recorded, places):
+    found = place_names.record(photo, caption, title, everywhere)
+    listed = ", ".join(" ".join(name) for name in found) or "no place in its record"
+    if place_names.brand_clash(said, shown):
+        return f"names a train over {photo}, another train ({listed})"
+    if journey_shown(detail, shown, found, everywhere):
         return None
-    above = str(scene.get("kicker") or "")
-    if places:
-        return None if names_it(said, above, places, photo, caption, title, everywhere) else \
-            f"names {', '.join(places)} over {photo} ({', '.join(sorted(recorded)) or 'no place in its record'})"
-    region = place_names.region(said)
-    # The name of a section stands above a plan only over that section's own photo: it says which part this photo is of.
-    if region and recorded and not region & place_names.words(caption + " " + above):
-        return f"names the {', '.join(sorted(region))} over {photo} ({', '.join(sorted(recorded))})"
-    return None
+    reading = place_names.read(said, everywhere)
+    if not reading.all:
+        region = place_names.region(said)
+        missing = region and found and not region <= place_names.words(caption)
+        return f"names the {'-'.join(sorted(region))} over {photo} ({listed})" if missing else None
+    if place_names.fits(reading, shown, place_names.pictured("", caption, title, everywhere), found):
+        return None
+    return f"names {', '.join(' '.join(name) for name in reading.all)} over {photo} ({listed})"
 
 
-def names_it(said, above, places, photo, caption, title, everywhere) -> bool:
-    """The record of a photo names the place a plan is about. The first place a fact names counts wherever the record
-    names it; another one it is about, or the one written above the plan ("Choisissez Porto"), only in the caption or
-    the title, not in the identifier the photo is filed under ("japon-hiroshima-miyajima" is a photo of Miyajima). A
-    place the fact says without a capital is named by the photo that does ("les tombeaux saadiens")."""
-    first = {place for place in place_names.first_name(said, everywhere) if len(place) >= 3} or set(places[:1])
-    labelled = set() if place_names.words(above) <= everywhere else place_names.proper(above, sentence=True)
-    about = {place for place in set(place_names.subjects(said, everywhere) or places) | labelled if len(place) >= 3}
-    echoed = place_names.proper(caption, everywhere, sentence=True) & ({word for word in place_names.words(said) if len(word) >= 4} - set(places))
-    return bool(first & place_names.pictured(photo, caption, title, everywhere) or about & place_names.pictured("", caption, title, everywhere) or echoed)
+def journey_shown(detail, shown, found, everywhere) -> bool:
+    """A journey over a photo of its means of transport, taken on its way."""
+    return bool(place_names.journey(detail) and place_names.ride(shown, detail)
+                and place_names.on_the_way(found, place_names.read(detail, everywhere)))
+
+
+def tight_brackets(text: str) -> str:
+    """"Daniel Lu ( User:dllu )" → "Daniel Lu (User:dllu)", without a regular expression."""
+    opened = text.split("(")
+    text = "(".join([opened[0]] + [part.lstrip() for part in opened[1:]])
+    shut = text.split(")")
+    return ")".join([part.rstrip() for part in shut[:-1]] + [shut[-1]])
 
 
 def contract_of(scenario):
@@ -536,7 +537,9 @@ def credits_text(scenario, info):
             continue
         photo = info["photos"][scene["photo"]]
         share_alike |= "SA" in photo["licence"]
-        lines.append(f"{n}. {photo['author']} — « {photo['commonsTitle'].removeprefix('File:')} », Wikimedia Commons, {photo['sourcePage']}")
+        # "Daniel Lu ( User:dllu )": Commons' own spacing inside brackets is not kept.
+        author = tight_brackets(photo["author"])
+        lines.append(f"{n}. {author} — « {photo['commonsTitle'].removeprefix('File:')} », Wikimedia Commons, {photo['sourcePage']}")
         lines.append(f"   Licence {photo['licence']} : {photo['licenceUrl']}. Modifications : recadrage, "
                      + ("mouvement lent, " if scenario["kind"] == "reel" else "") + "dégradé et texte ajoutés.")
     if share_alike:
@@ -545,12 +548,14 @@ def credits_text(scenario, info):
         music = scenario["assets"]["music"]
         lines += ["", "MUSIQUE", f"« {music['title']} » — {music['author']} (incompetech.com), {music['sourceUrl']}",
                   f"Licence CC BY 4.0 : {music['licenseUrl']}. Modifications : extrait, fondus, niveau ajusté. Aucune voix."]
-    families = "DM Sans, Playfair Display et Noto Sans" if "fallbackRegular" in scenario["assets"] else "DM Sans et Playfair Display"
-    lines += ["", "POLICES", families + " — SIL Open Font License 1.1 (notices jointes).", "",
-              f"SOURCES (relevées le {info['sourceCheckedOn']})"]
+    # Only the notices published beside this file are said to be joined: Noto Sans's is not (public_media.py).
+    fonts = ["DM Sans et Playfair Display — SIL Open Font License 1.1 (notices jointes)."]
+    if "fallbackRegular" in scenario["assets"]:
+        fonts.append("Noto Sans — SIL Open Font License 1.1 : https://openfontlicense.org")
+    lines += ["", "POLICES", *fonts, "", f"SOURCES (relevées le {info['sourceCheckedOn']})"]
     for record in info["sources"].values():
         lines.append(f"- {record['publisher']} — {record['title']} : {record['url']} (relevé le {record['retrievedAt'][:10]})")
-    lines += ["", "Montage : Voyage Sans Détour, préparé avec l’aide d’outils d’IA ; faits relevés sur les pages officielles citées."]
+    lines += ["", "Montage : Voyage Sans Détour, préparé avec l’aide d’outils d’IA ; faits relevés dans les sources citées ci-dessus."]
     return "\n".join(lines) + "\n"
 
 

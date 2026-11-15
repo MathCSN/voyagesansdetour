@@ -78,6 +78,22 @@ DERIVED_TITLE = re.compile(r"\b(?:edit|edited|cropped|retouched|derivative|upsca
 ANOTHER_FILE = re.compile(r"\bFile:\S|\bderived from\b|\bderivative of\b|\bextracted from\b|\bcropped from\b|\bthis file was derived\b", re.IGNORECASE)
 
 
+# Files of Wikimedia Commons that are not the photograph as it was taken, never to be used whatever lists them: this
+# one is a landscape version (3074 × 2304) uploaded in 2024 by another account from a portrait original (1536 × 2048)
+# by Samuli Lintula; its margins were made up. Mathis's rule: real photographs only, no generated or extended image.
+# The whole stock was read again on Commons on 13/11/2026 (197 files) against photo_intake.derived: one more file fell,
+# an arch of Lisbon filed under "Retouched pictures" and "Digitally manipulated photographs". Its record in the old
+# catalogue carries no category, so the rule cannot see it there: it is named here. (It went out once, in the photo
+# post « Où dormir à Lisbonne » of 12/11/2026.)
+NOT_A_PHOTOGRAPH_AS_TAKEN = frozenset({"File:Snowball pyramid at Santa Claus' Village Large.jpg",
+                                       "File:Empty Arco da Rua Augusta during the COVID-19 lockdown, Lisbon, Portugal julesvernex2.jpg",
+                                       # No camera in the file's own data: its origin is not shown to be a photograph
+                                       # (the 57 files of the old catalogue read again on Commons on 15/11/2026).
+                                       "File:Miradouro de Santa Luzia View over Alfama, Lisbon (54733651122).jpg",
+                                       "File:Porto - Ponte Dom Luís I (8238600477).jpg"})
+# Read here, at intake, at reuse and at render (production.check_photo): the old catalogue keeps no Commons categories.
+
+
 class Refused(ValueError):
     pass
 
@@ -89,11 +105,18 @@ def derived(title: str, categories: str, source: str) -> bool:
 
 
 def derived_file(title: str, meta: dict) -> bool:
+    """A file to fetch that is not the photograph as taken: by its record, or because it is named in the denylist
+    (the retouched arch of rua Augusta carries no retouch mark in some of its records)."""
+    if title in NOT_A_PHOTOGRAPH_AS_TAKEN:
+        return True
     return derived(title, plain_text(meta.get("Categories", {}).get("value", "")), plain_text(meta.get("Credit", {}).get("value", "")))
 
 
 def derived_record(record: dict) -> bool:
-    """A catalogued file whose title, categories or source say it is not the photograph as it was taken."""
+    """A catalogued file whose title, categories or source say it is not the photograph as it was taken, or a file
+    known not to be (NOT_A_PHOTOGRAPH_AS_TAKEN)."""
+    if record.get("commonsTitle") in NOT_A_PHOTOGRAPH_AS_TAKEN:
+        return True
     return derived(str(record.get("commonsTitle") or ""), str(record.get("categories") or ""), str(record.get("commonsCredit") or ""))
 
 

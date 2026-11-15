@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-vietnam-itineraire-15-jours-c",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Vietnam en 15 jours : de Hanoï à Hô-Chi-Minh-Ville en train, étape par étape (itinéraire 2026)",
+  "pinTitle": "Le Vietnam en 15 jours : les chiffres à connaître avant de partir",
+  "variant": "c",
+  "targetUrl": "https://voyagesansdetour.fr/vietnam/vietnam-itineraire-15-jours/",
+  "articleSha256": "f0db54e88dab516bd578c19abb3f892e65610c053c4922e79586d1ad20ef5de7",
+  "imageSha256": "f1495348a72d8d9788141eaa1d8d03b5d9b356f5915f5420786ef08d318c8f51",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "693b82a5423a7d939e4c6c3aaa8c1b5d305ae39d6fa095e55f96b591dfc9b24f",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "vietnam-hue-citadelle",
+    "author": "Supanut Arunoprayote",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Gate_in_Imperial_City,_Hu%E1%BA%BF_(III).jpg",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0"
+  }
+}
