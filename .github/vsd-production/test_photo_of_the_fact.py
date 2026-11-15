@@ -317,5 +317,57 @@ class RetouchedPhotos(unittest.TestCase):
         self.assertTrue(photo_intake.derived_record({"commonsTitle": "File:Puente de Don Luis I, Oporto, Portugal, 2019-06-02, DD 29-31 HDR.jpg"}))
 
 
+class ReviewOfPullRequest54(unittest.TestCase):
+    """Review of PR 54 (15/11/2026): one test per point."""
+
+    def test_a_table_of_prices_in_several_columns_is_not_chosen(self):
+        cinque = {"title": "La Cinque Terre Card : laquelle acheter", "table": {"headers": ["Treno Card adulte 2026", "Jour A", "Jour B", "Jour C"],
+                  "rows": [["1 jour", "22 €", "29,50 €", "35 €"], ["2 jours", "36,50 €", "51 €", "61 €"], ["3 jours", "49 €", "68 €", "81 €"]]}}
+        page = p.normalized("Jour A 1 jour 22 € 2 jours 36,50 € 3 jours 49 €")
+        self.assertIsNone(reel_formats.table_of({"sections": [cinque]}, page))
+        algarve = {"title": "Une ligne", "table": {"headers": ["Trajet", "Prix régional", "Durée"],
+                   "rows": [["Faro → Olhão", "1,60 €", "quelques minutes"], ["Faro → Tavira", "3,60 €", "33 min"], ["Faro → Lagos", "8,30 €", "1 h 35"]]}}
+        page = p.normalized("Prix régional Faro → Olhão 1,60 € Faro → Tavira 3,60 € Faro → Lagos 8,30 €")
+        table = reel_formats.table_of({"sections": [algarve]}, page)
+        self.assertEqual(table["header"], "Prix régional")
+        self.assertTrue(all(line.startswith("💶") for line in reel_formats.table_lines("Prix régional", table["rows"])))
+
+    def test_a_journey_through_a_name_with_a_kind_of_place_or_by_a_named_train_is_strict(self):
+        belem = "8 min de train entre Cais do Sodré et Belém"
+        self.assertTrue(names.strict_journey(belem))
+        jeronimos = photo("lisbonne-jeronimos", "File:Jeronimos.jpg", "La façade sculptée du monastère des Jerónimos, à Belém.")
+        self.assertIsNone(reel_formats.Media([jeronimos], [], everywhere="Portugal Portugal").named(belem, None))
+        scene = {"photo": "lisbonne-jeronimos", "headline": ["*8 min*"], "detail": "de train entre Cais do Sodré et Belém", "alt": jeronimos[2]}
+        self.assertIn("no ride", p.another_place(scene, {"lisbonne-jeronimos": jeronimos[1]}, names.words("Portugal Lisbonne")))
+        self.assertTrue(names.strict_journey("de Tokyo à Kyoto en Nozomi"))
+        shibuya = photo("japon-tokyo-shibuya", "File:Shibuya.jpg", "Le carrefour de Shibuya, à Tokyo.")
+        self.assertIsNone(reel_formats.Media([shibuya], [], everywhere=JAPON).named("de Tokyo à Kyoto en Nozomi, 13 960 ¥", None))
+
+    def test_the_coach_is_a_means_of_transport_not_the_conjunction(self):
+        self.assertEqual(names.wanted_ways("3 h de car pour Essaouira : dès 100 dh chez Supratours"), {"road"})
+        self.assertTrue(names.journey("3 h de car pour Essaouira"))
+        self.assertEqual(names.wanted_ways("une ville à voir, car il y fait doux en hiver"), set())
+        boats = names.vehicle("marrakech-essaouira-port", "Des barques bleues au pied de la Skala du port, à Essaouira.", "File:Skala.jpg")
+        self.assertTrue(names.other_ride(boats, "3 h de car pour Essaouira"))
+
+    def test_a_title_line_never_ends_on_a_number_nor_cuts_a_name(self):
+        self.assertEqual(reel_formats.lines_of("Le Japon en 2 semaines", 16), ["Le Japon", "en 2 semaines"])
+        self.assertNotEqual(reel_formats.lines_of("Les Cinque Terre en train", 16), ["Les Cinque", "Terre en train"])
+        self.assertEqual(reel_formats.lines_of("du 28 octobre 2026 au 3 janvier 2027", 22), ["du 28 octobre 2026", "au 3 janvier 2027"])
+
+    def test_a_section_name_stands_over_a_figure_only_when_the_figure_speaks_of_it(self):
+        halong = photo("vietnam-halong", "File:Ha Long Bay.jpg", "Une jonque dans la baie d'Ha Long.")
+        media = reel_formats.Media([halong], [], everywhere=VIETNAM)
+        when = {"title": "Quand partir", "image": "vietnam-halong"}
+        self.assertEqual(media.above(when, "vietnam-halong", "Vietnam", "de séjour sans visa pour les Français"), "Vietnam")
+        self.assertEqual(media.above(when, "vietnam-halong", "Vietnam", "la meilleure période pour partir au nord"), "Quand partir")
+        days = {"title": "Jours 3 à 5 — Ninh Bình", "image": "vietnam-halong"}
+        self.assertEqual(media.above(days, "vietnam-halong", "Vietnam", "la balade en barque"), "Jours 3 à 5")
+        garden = photo("londres-covent-garden", "File:Covent Garden.jpg", "La halle de Covent Garden.")
+        calendar = {"title": "Le calendrier de l’hiver 2026", "image": "londres-covent-garden"}
+        london = reel_formats.Media([garden], [], everywhere="Royaume-Uni Londres")
+        self.assertEqual(london.above(calendar, "londres-covent-garden", "Londres", "le plafond quotidien du métro en zones 1-2, 2026"), "Londres")
+
+
 if __name__ == "__main__":
     unittest.main()

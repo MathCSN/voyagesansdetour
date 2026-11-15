@@ -42,6 +42,7 @@ BUDGET = re.compile(r"\bbudget\b|\bau total\b|\ben tout\b|\bpar personne\b|\btou
                     r"\bpour \d+ (?:jours|nuits|semaines)\b|\bpar jour\b", re.IGNORECASE)
 MIN_FACTS = 4                          # a reel that says fewer than four things is not worth a slot (audit of 12/11/2026)
 # One space at most between the parts: section titles are plain text, and nothing here can backtrack.
+DAY_HEAD = re.compile(r"Jours? \d", re.IGNORECASE)
 DAY = re.compile(r"(Jours? \d+(?: ?(?:à|et|[-–]) ?\d+)?) ?[—–:,-] ?(\S.*)", re.IGNORECASE)
 # The same file goes to Instagram and TikTok: "cette vidéo", never "ce reel".
 SAVE_NOTE = "Enregistrez cette vidéo pour votre voyage"
@@ -85,8 +86,18 @@ def lines_of(value: str, width: int = 34, most: int = 2) -> list[str] | None:
     fitting = [pair for pair in splits if max(map(len, pair)) <= width]
     if most < 2 or not fitting:
         return None
-    # Never a line that ends on an article or a preposition: "…pour Bangkok, le / Nord" cut a name in two.
-    return list(min(fitting, key=lambda pair: (dangling(pair[0]), max(map(len, pair)), -len(pair[0]))))
+    # Never a line that ends on an article, a preposition or a number ("…pour Bangkok, le / Nord", "Le Japon en 2 /
+    # semaines"), nor a cut inside a name ("Les Cinque / Terre en train").
+    spans = [(start, end) for _, start, end in place_names.names(value, sentence=True)]
+    cut_name = lambda pair: any(start < len(pair[0]) < end for start, end in spans)
+    return list(min(fitting, key=lambda pair: (dangling(pair[0]) or cut_name(pair) or cut_number(pair), max(map(len, pair)), -len(pair[0]))))
+
+
+def cut_number(pair: tuple[str, str]) -> bool:
+    """A number at the end of a line, cut from what it counts ("Le Japon en 2 / semaines"); a year before a preposition
+    is not ("du 28 octobre 2026 / au 3 janvier 2027")."""
+    last, following = pair[0].split()[-1], pair[1].split()[0].lower()
+    return last.isdigit() and following not in DANGLING
 
 
 # Small words that open what follows: a line never ends on one of them.
@@ -332,6 +343,11 @@ def table_of(article: dict, page: str) -> dict | None:
         named = naming_columns(rows)
         if not named or named >= len(headers):
             continue
+        # Prices in several columns ("Jour A", "Jour B", "Jour C" of the Treno Card): the first alone would say the
+        # cheapest is the price. Such a table stays in the guide.
+        priced = [column for column in range(named, len(headers)) if all(is_money(str(row[column])) for row in rows if len(row) > column)]
+        if len(priced) > 1:
+            continue
         cells = [[" ".join(str(cell).strip() for cell in row[:named]), str(row[named]).strip()] for row in rows]
         quoted = all(checked(a, 60) and checked(b, 60) and p.normalized(a + " " + b) in page for a, b in cells)
         title = lines_of(str(headers[named]).strip(), 22)
@@ -525,6 +541,8 @@ class Media:
         years, dated = set(YEAR.findall(name)), set(YEAR.findall(label))
         if name != place and (SUMMED_UP.search(destinations.ascii_fold(name).lower()) or (years and dated and not years & dated)):
             return place
+        if name != place and label and not self.announces(name, label, photo_id):
+            return place
         own = section.get("image") if section else None
         if own:
             return name if photo_id == own else place
@@ -541,6 +559,16 @@ class Media:
             return place
         ways = place_names.ways(place_names.folded(name))
         return place if ways and not ways & place_names.ways(shown) else name
+
+    def announces(self, name: str, label: str, photo_id: str) -> bool:
+        """The section's name speaks of this figure: a day of the itinerary ("Jours 3 à 5"), or a word the figure or
+        its photo shares with it ("Dans le train" over a train). "Quand partir" over "45 jours sans visa", "Le
+        calendrier de l'hiver 2026" over the cap of the Tube said nothing of the figure (review of PR 54)."""
+        if DAY_HEAD.match(name):
+            return True
+        photo = next((ph for ph in self.all if ph[0] == photo_id), None)
+        record = " ".join([photo[0].replace("-", " "), photo[2], str(photo[1].get("commonsTitle", ""))]) if photo else ""
+        return bool(words_of(name) & (words_of(label) | words_of(record)))
 
     def spare(self) -> str | None:
         """The last photo left that can close the post: no plan takes it, whatever it names."""
@@ -879,8 +907,9 @@ def table_lines(heading: str, rows: list[list[str]]) -> list[str]:
     Mai · Départ de Bangkok — N° 9 : 18 h 40"): four times alone, with nothing to say where they leave from, tell
     nothing (review of 12/11/2026). Only where that heading names something, two words that count at least: "Jour A
     — 1 jour : 22 €" or "Étape — 1 à 3 : Manuel Antonio" says less than the bare row."""
-    lines = [f"📅 {label} : {value}" for label, value in rows]
-    named = f"📅 {heading} — {rows[0][0]} : {rows[0][1]}"
+    mark = lambda value: "💶" if is_money(value) else "📅"
+    lines = [f"{mark(value)} {label} : {value}" for label, value in rows]
+    named = f"{mark(rows[0][1])} {heading} — {rows[0][0]} : {rows[0][1]}"
     telling = len(words_of(heading) - HOLLOW_HEADING) >= 2
     return [named if telling and len(named) <= CAPTION_LINE else lines[0]] + lines[1:]
 

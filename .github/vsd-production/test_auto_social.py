@@ -1634,7 +1634,8 @@ class RealGuideTests(unittest.TestCase):
         self.assertEqual(len(reel_formats.said_by(scenes[0], scenes[1:-1], "Phrase d’ouverture.")), 5)
         # The fares the table gives get no plan of their own; the caption gives the table, then what the reel shows next.
         self.assertEqual([scene["headline"][0].strip("*").replace(reel_formats.NBSP, " ") for scene in scenes[2:-1]], ["≈ 3 h", "38,3 %"])
-        self.assertEqual(lines[0], "📅 Alfa Pendular ou Intercidades · Aller simple 2026 — Alfa Pendular Turística : 35,70 €")
+        # Review of PR 54: a line of the table that gives a price opens on 💶, never 📅.
+        self.assertEqual(lines[0], "💶 Alfa Pendular ou Intercidades · Aller simple 2026 — Alfa Pendular Turística : 35,70 €")
         # Review of PR 53: over the inside of an Alfa, the plan's label is not "Alfa Pendular ou Intercidades".
         self.assertEqual(plan["kicker"], "Portugal")
         self.assertEqual(lines[3], "⏱️ ≈ 3 h de trajet en Alfa Pendular entre Santa Apolónia et Campanhã")
@@ -1650,11 +1651,13 @@ class RealGuideTests(unittest.TestCase):
 
     def test_the_first_caption_line_of_a_table_is_headed_only_by_a_heading_that_names_something(self):
         rows = [["1 jour", "22 €"], ["2 jours", "34 €"]]
-        for header, first in (("Départ de Bangkok", "📅 Départ de Bangkok — 1 jour : 22 €"), ("Aller simple 2026", "📅 Aller simple 2026 — 1 jour : 22 €"),
-                              ("Jour A", "📅 1 jour : 22 €"), ("Étape", "📅 1 jour : 22 €"), ("Notre choix", "📅 1 jour : 22 €"), ("Prix", "📅 1 jour : 22 €")):
-            self.assertEqual(reel_formats.table_lines(header, rows), [first, "📅 2 jours : 34 €"], header)
+        # Since the review of PR 54 a line that gives a price opens on 💶.
+        for header, first in (("Départ de Bangkok", "💶 Départ de Bangkok — 1 jour : 22 €"), ("Aller simple 2026", "💶 Aller simple 2026 — 1 jour : 22 €"),
+                              ("Jour A", "💶 1 jour : 22 €"), ("Étape", "💶 1 jour : 22 €"), ("Notre choix", "💶 1 jour : 22 €"), ("Prix", "💶 1 jour : 22 €")):
+            self.assertEqual(reel_formats.table_lines(header, rows), [first, "💶 2 jours : 34 €"], header)
+        self.assertEqual(reel_formats.table_lines("Étape", [["1 à 3", "Manuel Antonio"], ["4 et 5", "Monteverde"]])[0], "📅 1 à 3 : Manuel Antonio")
         # The name of the section, when the plan carries it, is part of what the heading names.
-        self.assertEqual(reel_formats.table_lines("Le train de nuit pour Chiang Mai · Prix", rows)[0], "📅 Le train de nuit pour Chiang Mai · Prix — 1 jour : 22 €")
+        self.assertEqual(reel_formats.table_lines("Le train de nuit pour Chiang Mai · Prix", rows)[0], "💶 Le train de nuit pour Chiang Mai · Prix — 1 jour : 22 €")
 
     def test_a_name_with_a_year_is_not_written_over_a_figure_of_another_year(self):
         # Verification of 12/11/2026: "La ligne du Nord en 2026" stood over "38,3 % des Alfa Pendular à l'heure en 2025".
@@ -1667,9 +1670,14 @@ class RealGuideTests(unittest.TestCase):
         self.assertEqual(reel_formats.fact_plan(late, media(), "Portugal", tag)["kicker"], "Portugal")
         # The same year, or no year on one side: the name of the section stays.
         works = {**late, "label": "des Alfa Pendular à l’heure en 2026, travaux compris"}
-        self.assertEqual(reel_formats.fact_plan(works, media(), "Portugal", tag)["kicker"], "La ligne du Nord en 2026")
+        # Since the review of PR 54 a section's name stands above a figure only when the figure or its photo speaks of
+        # it: "La ligne du Nord" shares no word with the punctuality of the Alfa Pendular, nor with its photo.
+        self.assertEqual(reel_formats.fact_plan(works, media(), "Portugal", tag)["kicker"], "Portugal")
+        north_photo = lambda: reel_formats.Media([("train-nord", {"commonsTitle": "File:Linha do Norte.jpg"}, "La ligne du Nord et ses caténaires.")], [])
+        self.assertEqual(reel_formats.fact_plan(works, north_photo(), "Portugal", tag)["kicker"], "La ligne du Nord en 2026")
         undated = {**late, "label": "des Alfa Pendular à l’heure, à 5 minutes près"}
-        self.assertEqual(reel_formats.fact_plan(undated, media(), "Portugal", tag)["kicker"], "La ligne du Nord en 2026")
+        self.assertEqual(reel_formats.fact_plan(undated, media(), "Portugal", tag)["kicker"], "Portugal")
+        self.assertEqual(reel_formats.fact_plan(undated, north_photo(), "Portugal", tag)["kicker"], "La ligne du Nord en 2026")
 
     def test_a_fact_that_names_a_place_never_goes_over_a_photo_of_another_one(self):
         # Review of 13/11/2026, two photo posts of the night: "la réouverture des îles Similan" over Ko Phi Phi (the two
@@ -1991,7 +1999,7 @@ class RealGuideTests(unittest.TestCase):
     def test_a_photo_post_whose_figures_all_belong_to_a_day_reads_day_after_day(self):
         days = {number: {"title": f"Jour {number} — {name}"} for number, name in ((1, "La médina"), (2, "Le jardin Majorelle"), (3, "Sortir de la ville"))}
         pairs = [("170 dh", "le jardin Majorelle en plein tarif", 2), ("100 dh", "l’entrée de la Bahia, des tombeaux saadiens ou d’El Badi", 1),
-                 ("3 h", "de car pour Essaouira : dès 100 dh chez Supratours", 3), ("150 km", "jusqu’aux cascades d’Ouzoud, soit 2 h 30 à 3 h de route", 3)]
+                 ("400 m", "de remparts de la Skala d’Essaouira, au bord de l’océan", 3), ("150 km", "jusqu’aux cascades d’Ouzoud, soit 2 h 30 à 3 h de route", 3)]
         photos = [self.MARRAKECH[0], self.MARRAKECH[1], self.MARRAKECH[2],
                   ("marrakech-essaouira-port", {"commonsTitle": "File:Skala.jpg"}, "Des barques bleues au pied de la Skala du port, à Essaouira."),
                   ("marrakech-ouzoud-cascades", {"commonsTitle": "File:Ouzoud.jpg"}, "Les cascades d’Ouzoud, dans le Moyen Atlas."),
@@ -2002,10 +2010,15 @@ class RealGuideTests(unittest.TestCase):
         scenes = made(pairs)
         self.assertEqual([(scene["kicker"], scene["headline"][0].strip("*"), scene["photo"]) for scene in scenes[1:-1]],
                          [("Jour 1", "100 dh", "marrakech-bahia"), ("Jour 2", "170 dh", "marrakech-majorelle"),
-                          ("Jour 3", "3 h", "marrakech-essaouira-port"), ("Jour 3", "150 km", "marrakech-ouzoud-cascades")])
+                          ("Jour 3", "400 m", "marrakech-essaouira-port"), ("Jour 3", "150 km", "marrakech-ouzoud-cascades")])
+        # Review of PR 54: "3 h de car pour Essaouira" is a journey by coach, never over the boats of Essaouira.
+        coach = "de car pour Essaouira : dès 100 dh chez Supratours"
+        import place_names
+        self.assertEqual(place_names.wanted_ways("3 h " + coach), {"road"})
+        self.assertIsNone(reel_formats.Media([photos[3]], [], everywhere="Maroc Marrakech").named("3 h " + coach, None))
         # One figure outside the days of the guide: the post keeps the order of the guide's figures.
         loose = made(pairs[:3] + [("150 km", "jusqu’aux cascades d’Ouzoud, soit 2 h 30 à 3 h de route", None)])
-        self.assertEqual([scene["headline"][0].strip("*") for scene in loose[1:-1]], ["170 dh", "100 dh", "3 h", "150 km"])
+        self.assertEqual([scene["headline"][0].strip("*") for scene in loose[1:-1]], ["170 dh", "100 dh", "400 m", "150 km"])
 
     def test_a_file_found_by_the_search_never_opens_a_post(self):
         media = reel_formats.Media(list(self.MARRAKECH), [], reserve=2, cover="marrakech-place-jemaa-el-fna",

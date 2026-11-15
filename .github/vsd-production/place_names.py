@@ -381,7 +381,8 @@ def linked(text: str) -> bool:
 
 def journey(text: str) -> bool:
     """A fact about a journey: an arrow or a dash between two names, or a means of transport in its first words."""
-    return linked(text) or bool(OPENERS & set(folded(text)[:OPENING_WORDS])) or travelled(text)
+    opening = folded(text)[:OPENING_WORDS]
+    return linked(text) or bool(OPENERS & set(opening)) or bool(CAR.search(" ".join(opening))) or travelled(text)
 
 
 # "SE3", "SE1": the trains of the Reunification line, named by their number.
@@ -391,13 +392,33 @@ AND_TO = re.compile(r"(?:^|\s)(?:à|a|et|jusqu[’']à)\s*$", re.IGNORECASE)
 HOURS = re.compile(r"\d\s?h\b")
 
 
+# "le car pour Essaouira", "3 h de car": the coach, never the conjunction ("car il pleut").
+CAR = re.compile(r"\b(?:de|en|le|du|un|au|par)\s+car\b", re.IGNORECASE)
+PARTICLE_WORDS = frozenset("do da dos das del della di du".split())
+
+
 def travelled(text: str) -> bool:
     """A journey that says its means further on: from one place to another ("de Hué à Đà Nẵng en train de jour", "entre
-    Ninh Bình (SE3, 21 h 35) et Hué"), with a means of transport, a train or an hour."""
+    Ninh Bình (SE3, 21 h 35) et Hué", "entre Cais do Sodré et Belém"), with a means of transport, a train by its brand
+    or its number ("de Tokyo à Kyoto en Nozomi"), the coach, or an hour."""
     found = names(text)
-    ends = any(FROM_TO.search(text[:one[1]]) and AND_TO.search(text[one[2]:other[1]])
-               for one, other in zip(found, found[1:]))
-    return ends and bool(RIDES & set(folded(text)) or TRAIN_NUMBER.search(text) or HOURS.search(text))
+    ends = any(starts_from(text[:one[1]]) and AND_TO.search(text[one[2]:other[1]]) for one, other in zip(found, found[1:]))
+    said = set(folded(text))
+    return ends and bool(RIDES & said or brands(said) or CAR.search(text) or TRAIN_NUMBER.search(text) or HOURS.search(text))
+
+
+def starts_from(before: str) -> bool:
+    """The words before a name open a journey ("de", "entre", "depuis"), past the kinds of places and the particles of
+    that name ("entre Cais do Sodré": "Cais" and "do" are part of it)."""
+    words = before.rstrip().split(" ")
+    while words:
+        if FROM_TO.search(" ".join(words) + " "):
+            return True
+        last = folded(words[-1])
+        if not last or not set(last) <= GENERIC | PARTICLE_WORDS:
+            return False
+        words.pop()
+    return False
 
 
 def wanted_ways(text: str) -> set[str]:
@@ -407,6 +428,8 @@ def wanted_ways(text: str) -> set[str]:
     found = ways(said[:OPENING_WORDS]) or ways(said)
     if found:
         return found
+    if CAR.search(text):
+        return {"road"}
     if brands(set(said)) or TRAIN_NUMBER.search(text):
         return {"rail"}
     # "le taxi à prix fixe depuis l'aéroport": a means no photo of a train, a tram or a bus shows.
