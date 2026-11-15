@@ -499,7 +499,7 @@ def another_place(scene, photos, everywhere) -> str | None:
         return f"names a journey over {photo}, another means of transport ({listed})"
     if journey_shown(detail, shown, found, everywhere):
         return None
-    if place_names.strict_journey(detail):
+    if place_names.strict_journey(said):
         return f"names a journey over {photo}, which shows no ride of it ({listed})"
     reading = place_names.read(said, everywhere)
     if not reading.all:

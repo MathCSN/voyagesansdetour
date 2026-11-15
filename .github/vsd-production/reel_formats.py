@@ -478,8 +478,10 @@ class Media:
 
     def about(self, fact: dict) -> str:
         """What a photo is chosen for: the fact, and the places of its section when it names none itself."""
+        # The figure with its label: "*10 trains* directs par jour entre Cordoue et Grenade" is a journey by train.
+        said = f"{fact['value']} {fact['label']}" if re.search(r"[^\W\d_]{3,}", fact["value"]) else fact["label"]
         where = self.where(fact)
-        return f"{fact['label']} ({where})" if where else fact["label"]
+        return f"{said} ({where})" if where else said
 
     def recorded(self, photo: tuple) -> list:
         """The precise places the record of a photo names, whole (place_names.record)."""

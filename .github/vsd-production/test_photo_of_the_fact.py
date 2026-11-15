@@ -170,6 +170,15 @@ class JourneysSaidFurtherOn(unittest.TestCase):
         scene = {"photo": "vietnam-hue", "headline": ["*2 h 32*"], "detail": self.DAY, "alt": gate[2]}
         self.assertIn("no ride", p.another_place(scene, {"vietnam-hue": gate[1]}, names.words(VIETNAM)))
 
+    def test_the_figure_tells_the_means_too(self):
+        mezquita = photo("cordoue-mezquita", "File:Mezquita.jpg", "Les arcs de la Mezquita de Cordoue.")
+        fact = {"value": "10 trains", "label": "directs par jour entre Cordoue et Grenade, 1 h 37 à 1 h 56", "section": None}
+        media = reel_formats.Media([mezquita], [], everywhere="Espagne Andalousie")
+        self.assertTrue(names.strict_journey(media.about(fact)))
+        self.assertIsNone(media.named(media.about(fact), None))
+        scene = {"photo": "cordoue-mezquita", "headline": ["*10 trains*"], "detail": fact["label"], "alt": mezquita[2]}
+        self.assertIn("no ride", p.another_place(scene, {"cordoue-mezquita": mezquita[1]}, names.words("Espagne Andalousie")))
+
     def test_a_taxi_never_goes_over_a_tram(self):
         taxi = "le taxi à prix fixe depuis l’aéroport de Lisbonne selon la zone et l’heure, bagages compris"
         tram = names.vehicle("lisbonne-tram28-rue", "Un tram jaune de la ligne 28 dans une rue pavée et pentue de Lisbonne.", "File:Tram 28.jpg")
