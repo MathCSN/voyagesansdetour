@@ -54,6 +54,7 @@ WEEK = dt.timedelta(days=7)
 REVIEW_VALIDITY = dt.timedelta(days=30)
 REPOST_COOLDOWN = dt.timedelta(days=42)
 CROSS_CHANNEL_GAP = dt.timedelta(days=4)
+NETWORK_GAP = dt.timedelta(days=14)    # the same guide twice on one network, whatever the form: two weeks apart at least
 MAX_GUIDE_SOURCE_AGE = dt.timedelta(days=45)
 DAY_LABEL = re.compile(r"Jours? (\d+)")
 MAX_NEW_PER_RUN = 6                    # what one workflow run renders
@@ -397,6 +398,9 @@ def guide_order(articles: list[dict], post: Post, rows: list[dict], slot: dt.dat
     for article in articles:
         everywhere = posts(article)
         mine = posts(article, mine=True)
+        # A reel and a carousel of one guide on Instagram five days apart: the same guide twice to the same people.
+        if any(row["channel"] == post.name and abs(row["dueAt"] - slot) < NETWORK_GAP for row in everywhere):
+            continue
         if not mine:
             fresh.append((bool(everywhere), article))
         elif slot - max(row["dueAt"] for row in mine) >= REPOST_COOLDOWN:

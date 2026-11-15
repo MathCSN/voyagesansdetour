@@ -1538,6 +1538,7 @@ class RealGuideTests(unittest.TestCase):
                   ("yucatan-merida-cathedrale", {"commonsTitle": "File:Catedral.jpg"}, "La cathédrale de Mérida."),
                   ("yucatan-tren-maya-merida", {"commonsTitle": "File:Tren Maya.jpg"}, "Une rame du Tren Maya en gare de Mérida-Teya."),
                   ("yucatan-valladolid-calzada", {"commonsTitle": "File:Calzada de los Frailes.jpg"}, "La calzada de los Frailes, à Valladolid."),
+                  ("yucatan-tren-maya-valladolid", {"commonsTitle": "File:Tren Maya Valladolid.jpg"}, "Une rame du Tren Maya en gare de Valladolid."),
                   ("yucatan-chichen-itza", {"commonsTitle": "File:El Castillo, Chichen Itza.jpg"}, "La pyramide d’El Castillo, à Chichén Itzá."),
                   ("yucatan-tulum", {"commonsTitle": "File:Tulum.jpg"}, "Les ruines de Tulum au-dessus de la mer."),
                   ("yucatan-uxmal-pyramide", {"commonsTitle": "File:Uxmal.jpg", "emblematic": True}, "La pyramide du Devin à Uxmal.")]
@@ -1550,11 +1551,12 @@ class RealGuideTests(unittest.TestCase):
         read = p.normalized(" ".join(day["title"] for day in days))
         scenes, _ = reel_formats.build("itineraire", article, facts, photos, [], "Phrase d’ouverture.", "Yucatán", "Mexique · Yucatán",
                                        "Guide Yucatán · sources du 12/11/2026", ["Yucatán en", "10 jours"], read)
-        # "Valladolid" is shown over Valladolid, though the train photo shares more words with the figure of that day.
+        # Since the review of PR 54 the figure of the first days is a journey ("de l'aéroport de Cancún à Valladolid en
+        # Tren Maya"): the stage takes the train at Valladolid, never the street of Valladolid that the guard refused.
         # The train to Tulum takes the train, not the ruins the guide put beside the days in Tulum, nor the cathedral that
         # shares "Mérida" as well: what the plan says of its figure decides between the two. Four stages, four figures.
         self.assertEqual([(scene["headline"], scene["photo"]) for scene in scenes[1:-1]],
-                         [(["Valladolid"], "yucatan-valladolid-calzada"), (["Chichén Itzá", "à l’ouverture"], "yucatan-chichen-itza"),
+                         [(["Valladolid"], "yucatan-tren-maya-valladolid"), (["Chichén Itzá", "à l’ouverture"], "yucatan-chichen-itza"),
                           (["Mérida–Tulum", "en train direct"], "yucatan-tren-maya-merida"), (["Tulum et le retour"], "yucatan-tulum")])
         self.assertEqual(scenes[0]["headline"][-1], "*jour par jour*")
         self.assertIn("*265 pesos*", scenes[4]["detail"])

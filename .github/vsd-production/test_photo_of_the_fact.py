@@ -369,5 +369,87 @@ class ReviewOfPullRequest54(unittest.TestCase):
         self.assertEqual(london.above(calendar, "londres-covent-garden", "Londres", "le plafond quotidien du métro en zones 1-2, 2026"), "Londres")
 
 
+class FollowUpOfPullRequest54(unittest.TestCase):
+    """The follow-up of the review of PR 54 (15/11/2026): one test per point."""
+
+    def test_a_journey_never_goes_over_a_ride_of_another_means_even_when_it_shows_the_place(self):
+        # Media.misleads: the ferry to Cacilhas is no train of Cacilhas, though both name the place.
+        train = photo("lisbonne-cacilhas-train", "File:Cacilhas.jpg", "Un train de banlieue en gare de Cacilhas.")
+        media = reel_formats.Media([train], [], everywhere="Portugal Portugal")
+        self.assertIsNone(media.named("le ferry pour Cacilhas, 10 minutes face à la ville", None))
+        self.assertEqual(media.left_for("la traversée en ferry, 10 minutes"), [])
+
+    def test_the_same_guide_never_twice_on_one_network_within_two_weeks(self):
+        import datetime as dt
+        import auto_social as a
+        slot = dt.datetime(2026, 11, 26, 8, tzinfo=dt.timezone.utc)
+        guide = {"slug": "vietnam-quand-partir", "country": "vietnam", "publishedOn": "2026-11-01"}
+        other = {"slug": "laponie-budget-rovaniemi", "country": "finlande", "publishedOn": "2026-10-01"}
+        url = a.guide_url(guide)
+        rows = [{"channel": "instagram", "kind": "reel", "url": url, "dueAt": slot - dt.timedelta(days=5)}]
+        order = a.guide_order([guide, other], a.Post("instagram", "carousel"), rows, slot)
+        self.assertEqual([article["slug"] for article in order], ["laponie-budget-rovaniemi"])
+        later = a.guide_order([guide, other], a.Post("instagram", "carousel"), rows, slot + dt.timedelta(days=10))
+        self.assertIn("vietnam-quand-partir", [article["slug"] for article in later])
+        facebook = a.guide_order([guide, other], a.Post("facebook", "carousel"), rows, slot)
+        self.assertIn("vietnam-quand-partir", [article["slug"] for article in facebook])
+
+    def test_a_titled_stretch_takes_its_brackets_whole(self):
+        self.assertEqual(names.titled("La mer d’Andaman (Phuket, Krabi) : décembre à mars", names.words("Thaïlande")), "Andaman (Phuket, Krabi)")
+        for title in ("Le golfe de Thaïlande (Koh Samui)", "La mer d’Andaman (Phuket, Krabi)", "Jours 6 et 7 — Hué"):
+            stretch = names.titled(title, names.words("Thaïlande Vietnam"))
+            self.assertEqual(stretch.count("("), stretch.count(")"), title)
+
+    def test_a_card_is_no_place(self):
+        self.assertEqual(names.names("La Cinque Terre Card : laquelle acheter", sentence=True)[0][0], ("cinque", "terre"))
+        self.assertEqual(names.titled("La Cinque Terre Card : laquelle acheter", names.words("Italie Cinque Terre")), "")
+
+    def test_a_table_of_journeys_goes_over_a_ride_of_its_means(self):
+        rows = [["Séville → Cordoue (AVE, Avant)", "40 à 48 min"], ["Cordoue → Grenade (AVE, Avant)", "1 h 37 à 1 h 56"],
+                ["Séville → Grenade (Avant)", "2 h 37 à 2 h 52"]]
+        self.assertEqual(names.journeys_table(rows, "Durée en direct"), {"rail"})
+        self.assertEqual(names.journeys_table([["Plage", "Novembre"], ["Teide", "Avril"], ["Masca", "Mai"]]), set())
+        table = {"photo": "cordoue-mezquita", "layout": "table", "kicker": "Andalousie", "headline": ["Durée en direct"], "rows": rows,
+                 "alt": "Les arcs de la Mezquita de Cordoue."}
+        everywhere = names.words("Espagne Andalousie")
+        self.assertIn("no ride", p.another_place(table, {"cordoue-mezquita": {"commonsTitle": "File:Mezquita.jpg"}}, everywhere))
+        ave = {**table, "photo": "andalousie-ave", "alt": "Un train AVE en gare de Cordoue."}
+        self.assertIsNone(p.another_place(ave, {"andalousie-ave": {"commonsTitle": "File:AVE Cordoba.jpg"}}, everywhere))
+        mezquita = photo("cordoue-mezquita", "File:Mezquita.jpg", "Les arcs de la Mezquita de Cordoue.")
+        brief_table = {"rows": rows, "header": "Durée en direct", "section": {"title": "Les trains : la boucle Séville, Cordoue, Grenade"}}
+        with self.assertRaises(reel_formats.Held):
+            reel_formats.Media([mezquita], [], everywhere="Espagne Andalousie").photo(reel_formats.table_ride(brief_table), brief_table["section"], strict=True)
+
+    def test_the_section_a_figure_comes_from_goes_from_the_generator_to_the_guard(self):
+        import auto_social as a
+        hue = {"title": "Jours 6 et 7 — Hué", "image": "vietnam-hue"}
+        def fact(value, label, section, heading):
+            return {"value": value, "label": label, "excerpt": value + " " + label, "section": section, "short": label,
+                    "shortExcerpt": value + " " + label, "heading": heading}
+        facts = [fact("150 000 ₫", "les tombeaux coûtent chacun", hue, "Jours 6 et 7 — Hué"),
+                 fact("1 200 000 ₫", "la croisière dans la baie d’Ha Long", {"title": "Jours 3 à 5 — Ha Long"}, "Jours 3 à 5 — Ha Long"),
+                 fact("120 000 ₫", "le billet de la vieille ville de Hội An", {"title": "Jours 8 à 10 — Hội An"}, "Jours 8 à 10 — Hội An"),
+                 fact("4 mm", "de pluie à Hô-Chi-Minh-Ville en février", {"title": "Jours 13 à 15 — Hô-Chi-Minh-Ville"}, "Jours 13 à 15 — Hô-Chi-Minh-Ville")]
+        photos = [photo("vietnam-train-hanoi", "File:Train street.jpg", "La rue du train de Hanoï.", emblematic=True),
+                  photo("vietnam-hue", "File:Hue citadel gate.jpg", "La porte de la cité impériale de Hué."),
+                  photo("vietnam-halong", "File:Ha Long Bay.jpg", "Une jonque dans la baie d’Ha Long."),
+                  photo("vietnam-hoi-an", "File:Hoi An.jpg", "Une maison aux lanternes de la vieille ville de Hội An."),
+                  photo("vietnam-saigon", "File:Saigon.jpg", "La poste centrale de Hô-Chi-Minh-Ville."),
+                  photo("vietnam-sapa", "File:Sapa.jpg", "Les rizières de Sa Pa.", emblematic=True)]
+        article = {"slug": "vietnam-itineraire-15-jours", "country": "vietnam", "destination": "Vietnam", "title": "Le Vietnam en 15 jours",
+                   "shortTitle": "Le Vietnam en 15 jours", "sourcesCheckedOn": "2026-10-24", "sections": [hue], "cover": "vietnam-train-hanoi"}
+        scenes = a.scenes_for(article, a.Post("instagram", "carousel"), facts, list(photos), "Phrase d’ouverture.", "Vietnam", "Vietnam")
+        tombs = next(scene for scene in scenes if "tombeaux" in (scene.get("detail") or ""))
+        self.assertEqual((tombs["photo"], tombs.get("where")), ("vietnam-hue", "Jours 6 et 7 — Hué"))
+        self.assertEqual(tombs["facts"][0]["excerpt"], "Jours 6 et 7 — Hué")
+        records = {identifier: record for identifier, record, _ in photos}
+        self.assertIsNone(p.another_place({**tombs, "alt": photos[1][2]}, records, names.words("Vietnam")))
+        self.assertIsNotNone(p.another_place({**tombs, "photo": "vietnam-halong", "alt": photos[2][2]}, records, names.words("Vietnam")))
+
+    def test_the_facade_of_a_station_is_no_train(self):
+        self.assertEqual(names.vehicle("train-campanha", "La façade de la gare de Porto-Campanhã.", "File:Campanha.jpg"), set())
+        self.assertEqual(names.vehicle("vietnam-trang-an", "Des barques sur la rivière de Tràng An.", "File:Trang An boats.jpg"), {"water"})
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -534,6 +534,12 @@ def table_elsewhere(scene, photos, everywhere) -> str | None:
     shown = place_names.pictured(photo, caption, str((photos.get(photo) or {}).get("commonsTitle", "")), everywhere)
     if place_names.label_clash(str(scene.get("kicker") or ""), shown):
         return f"labels a train over {photo}, another train"
+    rows = scene.get("rows") or []
+    said = " ".join([str(scene.get("kicker") or "")] + list(scene.get("headline") or []))
+    wanted = place_names.journeys_table(rows, said)
+    text = said + " " + " ".join(" ".join(map(str, row)) for row in rows)
+    if wanted and not place_names.ride(shown, text):
+        return f"lists journeys by {', '.join(sorted(wanted))} over {photo}, which shows no ride of them"
     return None
 
 

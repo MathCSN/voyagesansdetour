@@ -878,7 +878,10 @@ def stage_photo(media: Media, step: dict, later: list[dict]) -> tuple[str, str] 
     a later day ("Mérida–Tulum en train" does not take the ruins of "Tulum et le retour")."""
     kept = frozenset(other["section"].get("image") for other in later) - {step["section"].get("image"), None}
     name, figure = " ".join(step["lines"]), step["fact"]["short"]
-    for said, also in ((name, figure), (name + " " + figure, "")):
+    # A figure that is a journey with its two ends and its means ("de l'aéroport de Cancún à Valladolid en Tren Maya")
+    # goes over a ride of it, as the guard reads it: never over a street of Valladolid (review of PR 54).
+    tries = [(name + " " + figure, "")] if place_names.strict_journey(figure) else [(name, figure), (name + " " + figure, "")]
+    for said, also in tries:
         try:
             return media.photo(said, step["section"], strict=True, avoid=kept, also=also)
         except Held:
@@ -965,6 +968,14 @@ def under_table(brief: Brief, photo_id: str, rows: list[list[str]]) -> dict | No
     return None
 
 
+def table_ride(table: dict) -> str:
+    """The text a table of journeys is read as, to choose its photo ("" for any other table)."""
+    said = " ".join([table.get("header", ""), str((table.get("section") or {}).get("title", ""))])
+    if not place_names.journeys_table(table["rows"], said):
+        return ""
+    return said + " " + " ".join(" ".join(row) for row in table["rows"])
+
+
 def table_reel(brief: Brief) -> tuple[dict, list[dict], list[str]]:
     """"tableau": the guide's short table, whole, on one screen to pause; then two figures at most."""
     table = table_of(brief.article, brief.page)
@@ -975,7 +986,11 @@ def table_reel(brief: Brief) -> tuple[dict, list[dict], list[str]]:
     rows = table["rows"]
     # Never under a table a photo that shows numbers of its own (the display of a carriage, "220 km/h · 10:22 · 21 °C",
     # read around and behind the fares on 12/11/2026).
-    picture = brief.media.photo(section=table["section"], avoid=frozenset(photo[0] for photo in brief.media.all if photo[1].get("figures")))
+    figures = frozenset(photo[0] for photo in brief.media.all if photo[1].get("figures"))
+    # A table of journeys ("Séville → Cordoue (AVE) | 40 à 48 min") goes over a ride of its means, as a journey does:
+    # its train durations went over the Mezquita (review of PR 54).
+    ride = table_ride(table)
+    picture = brief.media.photo(ride, table["section"], strict=bool(ride), avoid=figures) if ride else brief.media.photo(section=table["section"], avoid=figures)
     # The table is named by its section ("Le train de nuit pour Chiang Mai" above "Départ de Bangkok"), and the price
     # the guide gives for what it lists is written under it.
     price = under_table(brief, picture[1], rows)
