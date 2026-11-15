@@ -443,24 +443,6 @@
       ]
     },
     {
-      "path": ".github/vsd-production/reviewed-social/ig-londres-noel-marches-2026-11-27-v1.json",
-      "fileSha256": "55cd7fde3332712a5215a5096ebe1cf50f16a560436065f20d9e00d5bf61dbe6",
-      "batchId": "ig-londres-noel-marches-2026-11-27-v1",
-      "batchSha256": "1193d8a4105743bcab438b202284220c6a7bf05a278ea2c7ef098765f95ff5e6",
-      "itemIds": [
-        "vsd-production:instagram:ig-londres-noel-marches-2026-11-27:photo-v1"
-      ]
-    },
-    {
-      "path": ".github/vsd-production/reviewed-social/ig-londres-noel-marches-2026-11-27-tiktok-v1.json",
-      "fileSha256": "0c388184209e3512d19f6d0c64b065e1c4e61c3ec1d84b0d792f85323245653e",
-      "batchId": "ig-londres-noel-marches-2026-11-27-tiktok-v1",
-      "batchSha256": "dc2c20b9fd0b2feec63151da5de0fa0a18f6ef2f4ac1a35384b1d61ae133be26",
-      "itemIds": [
-        "vsd-production:tiktok:ig-londres-noel-marches-2026-11-27:photo-v1"
-      ]
-    },
-    {
       "path": ".github/vsd-production/reviewed-social/ig-tenerife-quand-partir-2026-11-22-v1.json",
       "fileSha256": "ccd190418febd33afc9ea2528bf1a5f1aad7b80ef6fd71beb22419180ea3f0c5",
       "batchId": "ig-tenerife-quand-partir-2026-11-22-v1",
@@ -497,21 +479,39 @@
       ]
     },
     {
-      "path": ".github/vsd-production/reviewed-social/igc-vietnam-itineraire-15-jours-2026-11-26-v1.json",
-      "fileSha256": "008f9af1217055f382943cb93c21c9810aeb7d6e685df65222e2815b55e3602b",
-      "batchId": "igc-vietnam-itineraire-15-jours-2026-11-26-v1",
-      "batchSha256": "1df3b39abe035cfdf66d9d79bda131a5d6aaf2ff7650b7cb2a9ea0c1298bb872",
-      "itemIds": [
-        "vsd-production:instagram:igc-vietnam-itineraire-15-jours-2026-11-26:photo-v1"
-      ]
-    },
-    {
       "path": ".github/vsd-production/reviewed-social/fb-yucatan-itineraire-10-jours-2026-12-03-v1.json",
       "fileSha256": "403729ff75265b5e43ca22cb17dbe88c67a6ac475b06ca7a3e5c08803635a27b",
       "batchId": "fb-yucatan-itineraire-10-jours-2026-12-03-v1",
       "batchSha256": "5578ed91fd7023f5e59f1409d98ed40cdb2de98b1b7bc6a22212f57edcdbcfbc",
       "itemIds": [
         "vsd-production:facebook:fb-yucatan-itineraire-10-jours-2026-12-03:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-londres-noel-marches-2026-11-27-v1.json",
+      "fileSha256": "d9daecb7db1ac26b611c424d569f6894af99ab2944274e20defb897d55ae21ee",
+      "batchId": "ig-londres-noel-marches-2026-11-27-v1",
+      "batchSha256": "85d503b2edf93547270f9e783286e7c4c5695c2245f479eb6028636f2fe917a7",
+      "itemIds": [
+        "vsd-production:instagram:ig-londres-noel-marches-2026-11-27:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-londres-noel-marches-2026-11-27-tiktok-v1.json",
+      "fileSha256": "60be28c504a0c108ffa4879d449f95a3912f5be01f6a8a0b4484fae87ebd4f29",
+      "batchId": "ig-londres-noel-marches-2026-11-27-tiktok-v1",
+      "batchSha256": "4ce6f2278137e0c647b65ac9a2073938d8944dd9a5cd001a568188a191e51e89",
+      "itemIds": [
+        "vsd-production:tiktok:ig-londres-noel-marches-2026-11-27:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/igc-vietnam-itineraire-15-jours-2026-11-26-v1.json",
+      "fileSha256": "688964ae484dec0c5362b358b6d15c0cb8c30862545ee74531b93811b5bee4ab",
+      "batchId": "igc-vietnam-itineraire-15-jours-2026-11-26-v1",
+      "batchSha256": "36348e0f734f4beff2c63b3ccda815b338511ee4219d71f3b8f445d39fd066fd",
+      "itemIds": [
+        "vsd-production:instagram:igc-vietnam-itineraire-15-jours-2026-11-26:photo-v1"
       ]
     }
   ],

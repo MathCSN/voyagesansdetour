@@ -2,18 +2,18 @@
   "schemaVersion": 1,
   "contentId": "igc-vietnam-itineraire-15-jours-2026-11-26",
   "status": "rendered_not_published",
-  "fingerprint": "72c7c72a9fb07aa84e053871e9762ff579dfda8a39a69336ffaeb9af020f4d33",
-  "createdAt": "2026-11-15T09:46:10.510028Z",
-  "renderFinishedAt": "2026-11-15T09:46:12.114468Z",
+  "fingerprint": "168de151d4dca551feaf7d458b338eec85e7188c106056a6081c5274d9ce5b22",
+  "createdAt": "2026-11-15T10:40:13.079801Z",
+  "renderFinishedAt": "2026-11-15T10:40:14.728956Z",
   "rendererContractVersion": 3,
-  "rendererSha256": "534a47e62b5b85ce56b26d49d9bbc783e5811dbbc355e3b265f7c83e882e620a",
+  "rendererSha256": "2c6618fdcc537af1f1e25f2f5f6cb3e5591e2cdd61801c49f7c762caeaa2f691",
   "drawingSha256": "b78990f497d03baf754e3b2b68a795a5e9d3b91a0b6a2f8dad2ebcd7fec2907c",
-  "motionSha256": "e7456dc883109dfd1f238028827ef85bfa4253c225a50f1035a9c1d069f953c4",
+  "motionSha256": "9029b7f552929c69dcdcea595e65d9cc3bc8b872113b850e5a74010252289f08",
   "format": null,
   "kind": "carousel",
   "channel": "instagram",
   "publishAt": "2026-11-26T08:00:00Z",
-  "reviewValidUntil": "2026-12-15T09:38:06Z",
+  "reviewValidUntil": "2026-12-15T10:39:33Z",
   "sourceCheckedOn": "2026-11-15",
   "targetUrl": "https://voyagesansdetour.fr/vietnam/vietnam-itineraire-15-jours/",
   "voice": null,
@@ -58,8 +58,8 @@
   "files": [
     {
       "file": "apercu.jpg",
-      "sha256": "412aab058047bfdd6a22861a22a091f91bf7f698afd8f469a8674b975c1db8c6",
-      "bytes": 228681
+      "sha256": "73917200e7405fd4f86e72e9ecd999912d4239ccf04068fcf3d2fd2fb46ae82c",
+      "bytes": 228548
     },
     {
       "file": "credits.txt",
@@ -88,8 +88,8 @@
     },
     {
       "file": "scenario.json",
-      "sha256": "988ab66e4a556274e682f22f89ecff404772d949530fb2b2595ce6ca422311eb",
-      "bytes": 7105
+      "sha256": "19688d29322216c50b69d4756dca1636959e638be7ea09bfea2392b61ace9c31",
+      "bytes": 7100
     },
     {
       "file": "scene-01.jpg",
@@ -98,8 +98,8 @@
     },
     {
       "file": "scene-02.jpg",
-      "sha256": "6a75548986a028f245589752a046ede4fd4333e25fe206855582f42c3702b59a",
-      "bytes": 358137
+      "sha256": "52ebd2f08e3639083f349c32290508de4aa67845291bd79b30651c293d55461d",
+      "bytes": 356568
     },
     {
       "file": "scene-03.jpg",
@@ -123,7 +123,7 @@
     }
   ],
   "runtime": {
-    "wallSeconds": 1.023,
+    "wallSeconds": 1.079,
     "encoderThreads": 2,
     "pillowVersion": "11.3.0",
     "ffmpegVersion": null

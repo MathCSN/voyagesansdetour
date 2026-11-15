@@ -1699,37 +1699,6 @@
       ]
     },
     {
-      "contentId": "ig-londres-noel-marches-2026-11-27",
-      "approved": true,
-      "files": [
-        {
-          "name": "reel.mp4",
-          "sha256": "fac7bad94462d5ff161f2cc6e53145fc5f6dc6e416d902497591a0ac57cf08cb",
-          "bytes": 8172001
-        },
-        {
-          "name": "poster.jpg",
-          "sha256": "bcd3b718f87315d2f0661c1f5600e320eb8a828870f2fff4c64969fb259cb3ea",
-          "bytes": 485359
-        },
-        {
-          "name": "credits.txt",
-          "sha256": "3c20fbc6b15b1516e20091bc02d9213e533050e4a1ef61160e47556968f0c390",
-          "bytes": 3288
-        },
-        {
-          "name": "dmsans-OFL.txt",
-          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
-          "bytes": 4482
-        },
-        {
-          "name": "playfairdisplay-OFL.txt",
-          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
-          "bytes": 4449
-        }
-      ]
-    },
-    {
       "contentId": "ig-tenerife-quand-partir-2026-11-22",
       "approved": true,
       "files": [
@@ -1792,58 +1761,6 @@
       ]
     },
     {
-      "contentId": "igc-vietnam-itineraire-15-jours-2026-11-26",
-      "kind": "photos",
-      "approved": true,
-      "files": [
-        {
-          "name": "scene-01.jpg",
-          "sha256": "d94408d296c134d58c8c2bd2a160016549f173125f41d4819a6ff7c454dc0314",
-          "bytes": 378055
-        },
-        {
-          "name": "scene-02.jpg",
-          "sha256": "6a75548986a028f245589752a046ede4fd4333e25fe206855582f42c3702b59a",
-          "bytes": 358137
-        },
-        {
-          "name": "scene-03.jpg",
-          "sha256": "c3d10ebf6f919e7de71516fa872fcdec8130bb977fd8cbf6900abd7192762564",
-          "bytes": 488671
-        },
-        {
-          "name": "scene-04.jpg",
-          "sha256": "d901a8ca40ce0b7563c689ac1d67d6d9e2555327d26949521a6aedd11dcc6543",
-          "bytes": 350072
-        },
-        {
-          "name": "scene-05.jpg",
-          "sha256": "37a7641afe4c8edd5b1578463c253c3de43a0cda530dea1a592b0f05fe5f3b9e",
-          "bytes": 284517
-        },
-        {
-          "name": "scene-06.jpg",
-          "sha256": "50b33e52423ba4003ec94de1cc49ae5c4af310a7db1beb79623076a4d9582f67",
-          "bytes": 429465
-        },
-        {
-          "name": "credits.txt",
-          "sha256": "4a27e7be8591220b2ff33577eeb3e8c215688a72d3890047ecf5cbd8b0df7552",
-          "bytes": 2913
-        },
-        {
-          "name": "dmsans-OFL.txt",
-          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
-          "bytes": 4482
-        },
-        {
-          "name": "playfairdisplay-OFL.txt",
-          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
-          "bytes": 4449
-        }
-      ]
-    },
-    {
       "contentId": "fb-yucatan-itineraire-10-jours-2026-12-03",
       "kind": "photos",
       "approved": true,
@@ -1882,6 +1799,89 @@
           "name": "credits.txt",
           "sha256": "2a82ac892a26caa5ba2f940d605c2eb86c88b811b8e79c2123d78baea9a14c2b",
           "bytes": 2787
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "ig-londres-noel-marches-2026-11-27",
+      "approved": true,
+      "files": [
+        {
+          "name": "reel.mp4",
+          "sha256": "fc19760fb668f664b913a23d1735a8175222c8db02d9378f9e93af8d6831f559",
+          "bytes": 8168898
+        },
+        {
+          "name": "poster.jpg",
+          "sha256": "bcd3b718f87315d2f0661c1f5600e320eb8a828870f2fff4c64969fb259cb3ea",
+          "bytes": 485359
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "512ba46e9200ef094381ac3aeb0ccb06255f17c52b9a63485ddc5b5c67fb62d5",
+          "bytes": 3287
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "igc-vietnam-itineraire-15-jours-2026-11-26",
+      "kind": "photos",
+      "approved": true,
+      "files": [
+        {
+          "name": "scene-01.jpg",
+          "sha256": "d94408d296c134d58c8c2bd2a160016549f173125f41d4819a6ff7c454dc0314",
+          "bytes": 378055
+        },
+        {
+          "name": "scene-02.jpg",
+          "sha256": "52ebd2f08e3639083f349c32290508de4aa67845291bd79b30651c293d55461d",
+          "bytes": 356568
+        },
+        {
+          "name": "scene-03.jpg",
+          "sha256": "c3d10ebf6f919e7de71516fa872fcdec8130bb977fd8cbf6900abd7192762564",
+          "bytes": 488671
+        },
+        {
+          "name": "scene-04.jpg",
+          "sha256": "d901a8ca40ce0b7563c689ac1d67d6d9e2555327d26949521a6aedd11dcc6543",
+          "bytes": 350072
+        },
+        {
+          "name": "scene-05.jpg",
+          "sha256": "37a7641afe4c8edd5b1578463c253c3de43a0cda530dea1a592b0f05fe5f3b9e",
+          "bytes": 284517
+        },
+        {
+          "name": "scene-06.jpg",
+          "sha256": "50b33e52423ba4003ec94de1cc49ae5c4af310a7db1beb79623076a4d9582f67",
+          "bytes": 429465
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "4a27e7be8591220b2ff33577eeb3e8c215688a72d3890047ecf5cbd8b0df7552",
+          "bytes": 2913
         },
         {
           "name": "dmsans-OFL.txt",
