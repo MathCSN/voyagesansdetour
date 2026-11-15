@@ -537,7 +537,9 @@ class Media:
         return best if best is not None and shared(best) else None
 
     def named(self, text: str, section: dict | None, avoid: frozenset = frozenset(), also: str = "") -> tuple | None:
-        """The photo that shows what `text` names: the one whose id, caption or title shares the most words with it.
+        """The photo that shows what `text` names. A fact about a place goes over a photo of that place, read as
+        production.py reads it (place_names.fits); a journey over a ride on the way; a part of the destination over a
+        photo of that part; any other fact over the photo whose id, caption or title shares the most words with it.
         The section's own photo wins when it shares a word, and stands in when no photo shares any; it gives way
         when it shows something else ("Chichén Itzá à l'ouverture" is not shown by the cenote of that afternoon), or
         when another photo shares all it shares and more (the Grand Palace, not Wat Arun, for "le Grand Palais de

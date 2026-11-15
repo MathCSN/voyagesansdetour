@@ -6,7 +6,8 @@ pavillon d'Or du Kinkaku-ji" over the sign of Shin-Fuji station. This module say
 noun: Similan, Kinkaku-ji, Uxmal, Campanhã), which words never tie a figure to a photo (kinds of places: île, plage,
 temple, gare, train…), and what a journey is ("Tokyo → Kyoto en Nozomi" goes over a train first).
 
-Used by reel_formats.py (to choose the photo) and by production.py (to refuse a scenario that got it wrong).
+Used by reel_formats.py (to choose the photo), by pin_draft.py (the figures of a Pin) and by production.py (to
+refuse a scenario that got it wrong): one reading for the three.
 """
 from __future__ import annotations
 
@@ -174,6 +175,9 @@ def names(text: str, everywhere: frozenset | set = frozenset(), sentence: bool =
             run = None
             continue
         pieces = [] if acronym else [piece for piece in folded(match[0]) if names_a_place(piece, everywhere, adjacent and not first)]
+        # "Chiang Mai", "Chiang Rai", "Khao Sok": the head of the name is kept, or "mai" alone would be any May.
+        if pieces and run and not run[0] and run[1][-1:] and run[1][-1] in NAME_HEADS:
+            pieces = run[1][-1:] + pieces
         raw = [] if acronym else [piece for piece in folded(match[0]) if piece not in LEADING and piece not in everywhere]
         run = run or [[], [], match.start(), match.end()]
         run[0] += pieces
@@ -183,6 +187,7 @@ def names(text: str, everywhere: frozenset | set = frozenset(), sentence: bool =
     return found
 
 
+NAME_HEADS = frozenset("chiang khao".split())
 UNNAMED = GENERIC | LEADING | OPENERS | TRANSPORT | SHORT | NOT_PLACES | SMALL
 
 
@@ -255,11 +260,6 @@ def subjects(text: str, everywhere: frozenset | set = frozenset()) -> list[str]:
     return list(dict.fromkeys(piece for name in ((reading.first,) if reading.first else ()) + reading.listed for piece in name))
 
 
-def first_name(text: str, everywhere: frozenset | set = frozenset()) -> list[str]:
-    """The words of the first place a fact is about: "le Real Alcázar de Séville" is first about the Alcázar."""
-    return list(read(text, everywhere).first or ())
-
-
 def variants(name: Name) -> tuple:
     return (name,) + ALIASES.get(tuple(name), ())
 
@@ -291,7 +291,7 @@ CARDINAL = frozenset("nord sud ouest centre".split())
 EAST_AFTER = frozenset("cote rive versant facade".split())
 NAMED_AFTER_CARDINAL = frozenset("ligne gare station autoroute route".split())
 # "Corée du Sud", "Afrique du Sud", "la mer du Nord", "le cap Nord", "le pôle Sud": names, not parts of the destination.
-NAME_BEFORE_CARDINAL = frozenset("coree afrique amerique soudan irlande ossetie caroline dakota mer cap pole".split())
+NAME_BEFORE_CARDINAL = frozenset("coree afrique amerique soudan irlande ossetie caroline dakota mer cap pole asie".split())
 OPPOSITE = ({"nord", "sud"}, {"est", "ouest"})
 
 
@@ -303,6 +303,10 @@ def region(text: str) -> set[str]:
     not "le centre historique")."""
     raw = [match[0] for match in re.finditer(r"[^\W\d_]+", text.translate(PLAIN))]
     said = [destinations.ascii_fold(word).lower() for word in raw]
+    # "le sud-ouest", "Le Nord-Est": one part, both words; "l'Asie du Sud-Est", "le Sud-Est asiatique": a name.
+    compound = re.search(r"\b(nord|sud)-(est|ouest)\b(?!\s+(?:asiatique|americain|europeen|africain))", destinations.ascii_fold(text), re.IGNORECASE)
+    if compound and not NAME_BEFORE_CARDINAL & set(folded(text[:compound.start()])[-2:]):
+        return {compound[1].lower(), compound[2].lower()}
 
     def counts(index: int) -> bool:
         word, before = said[index], said[max(0, index - 2):index]
@@ -310,10 +314,9 @@ def region(text: str) -> set[str]:
             return False
         if word == "est":
             after = said[index + 1:index + 2]
-            joined = before[-1:] in (["nord"], ["sud"])
-            if not (joined or before[-1:] and before[-1] in EAST_AFTER or before[-2:] in (["a", "l"], ["de", "l"], ["dans", "l"], ["vers", "l"])):
-                return False
-            if not joined and after and after[0] not in ("de", "du", "des", "d", "l", "et"):
+            if not (before[-1:] and before[-1] in EAST_AFTER or before[-2:] in (["a", "l"], ["de", "l"], ["dans", "l"], ["vers", "l"])):
+                return False   # "Le Sud est plus chaud": the verb
+            if after and after[0] not in ("de", "du", "des", "d", "l", "et"):
                 return False   # "la côte est magnifique"
         elif word not in CARDINAL:
             return False
@@ -329,10 +332,12 @@ def region(text: str) -> set[str]:
     found = [index for index in range(len(said)) if counts(index)]
     if not found:
         return set()
-    if len(found) > 1 and found[1] == found[0] + 1:
-        pair = {said[found[0]], said[found[1]]}
-        # "nord-sud", "est et ouest": the whole of the place; "sud-ouest", "nord-est": one part, both words said.
-        return set() if pair in OPPOSITE else pair
+    if len(found) > 1 and {said[found[0]], said[found[1]]} in OPPOSITE:
+        # "nord-sud", "du nord au sud", "le Nord et le Sud": the whole of the place. Not a comparison of two parts:
+        # "222 h au sud, contre 150 h dans le nord" is about the south.
+        between = set(said[found[0] + 1:found[1]])
+        if not between & {"contre", "que", "plutot", "mais", "alors"}:
+            return set()
     return {said[found[0]]}
 
 
@@ -346,7 +351,7 @@ VIEWPOINT = re.compile(r"\b(?:from|depuis|behind|derrière|vue?s? (?:de|du|des|d
 # plus au sud que Tokyo", "Les îles Phi Phi, plus au sud que les Similan".
 COMPARED = re.compile(r"\b(?:près d[eu’']?|pres d[eu]?|à côté d[eu’']?|a cote d[eu]?|non loin d[eu’']?|loin d[eu’']?|near|next to|"
                       r"close to|au (?:nord|sud|large|pied)(?:-(?:est|ouest))? d[eu’']?|à l[’'](?:est|ouest) d[eu’']?|en face d[eu’']?|"
-                      r"face à|que|than|comme|like|vers|towards?|à \d[\d\s,]* ?km d[eu’']?)", re.IGNORECASE)
+                      r"face à|que|than|comme|like|vers|towards?|to(?=\s)|à destination d[eu’']?|à \d[\d\s,]* ?km d[eu’']?)", re.IGNORECASE)
 
 
 def subject(text: str) -> str:
@@ -404,11 +409,6 @@ def record(identifier: str, caption: str, title: str = "", everywhere: frozenset
     return list(dict.fromkeys(name for name, _, _ in names(subject(title), everywhere)))
 
 
-def recorded(identifier: str, caption: str, title: str = "", everywhere: frozenset | set = frozenset(), family: str | None = None) -> set[str]:
-    """The words of the precise places the record of a photo names (see `record`)."""
-    return {piece for name in record(identifier, caption, title, everywhere, family) for piece in name}
-
-
 def brands(said: set[str]) -> set[str]:
     """The trains these words name, by any word of their name ("alfa" in "train-alfa-220")."""
     return {brand for brand, pieces in BRANDS.items() if pieces & said}
@@ -429,17 +429,24 @@ def fits(reading: Reading, shown: set[str], told: set[str], recorded_names: list
     names no other place ("le Grand Bouddha du Tōdai-ji, à Nara" over deer of Nara, never over the tower of Belém for
     "le château São Jorge, à Lisbonne"); or the fact says, without a capital, the very place the record names ("les
     tombeaux saadiens")."""
-    if reading.first and shows(reading.first, shown if reading.listed else widened(shown)):
+    # A quarter shows its town only when the record names no other town ("l'église de Graça, à Faro" is no photo of Lisbon).
+    quarters = set(INSIDE) | set(INSIDE.values())
+    inside = not reading.listed and all(set(name) <= quarters for name in recorded_names)
+    if reading.first and shows(reading.first, widened(shown) if inside else shown):
         return 3
     if any(shows(name, told) for name in reading.listed):
         return 2
-    alone = all(any(same(name, other) for other in reading.all) for name in recorded_names)
+    # A place the fact only situates itself in: the photo's own record must name it, and nothing else (a record that
+    # names nothing is no proof: "…TO BANGKOK" in a title is where a train goes, not where the photo is).
+    alone = bool(recorded_names) and all(any(same(name, other) for other in reading.all) for name in recorded_names)
     if alone and any(shows(name, shown) for name in reading.situating):
         return 1
     # A word of four letters and more that the fact says without a capital, and that a name of the record holds:
     # "les tombeaux saadiens" over "Maroc Marrakech Saadiens Luc Viatour" (a name of the record may carry its author).
     capitalised = {piece for name in reading.all for piece in name}
-    if any(len(piece) >= 4 and piece in reading.said and piece not in capitalised for name in recorded_names for piece in name):
+    # Only a word that names a place: "Grand" or "Palais" said by the fact is no echo of the record's "Grand Palais".
+    if any(len(piece) >= 4 and piece in reading.said and piece not in capitalised and piece not in UNNAMED
+           for name in recorded_names for piece in name):
         return 1
     return 0
 
@@ -454,7 +461,12 @@ def ride(described: set[str], text: str = "") -> bool:
     on when it names one ("Le bus 205 pour…" does not go over a shinkansen)."""
     # The means a line opens on; else the one it names further on ("la traversée du Tage en ferry": a ferry, not a tram).
     wanted = ways(folded(text)[:OPENING_WORDS]) or ways(folded(text))
+    if not wanted and OTHER_MEANS & set(folded(text)):
+        return False   # "Hanoï → Hô-Chi-Minh-Ville en avion": no photo of a train
     return bool(ways(described) & wanted) if wanted else bool(RIDES & described)
+
+
+OTHER_MEANS = frozenset("avion avions vol vols taxi taxis voiture voitures velo pied".split())
 
 
 def on_the_way(recorded_names: list[Name], reading: Reading) -> bool:

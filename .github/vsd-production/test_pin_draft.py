@@ -73,6 +73,8 @@ class PinDraftTests(unittest.TestCase):
         self.assertFalse(fact_fits_photo(fare,lagos,everywhere))   # review of 13/11/2026
         self.assertTrue(fact_fits_photo({'value':'8,30 €','label':'Faro → Lagos, 1 h 35'},lagos,everywhere))
         self.assertTrue(fact_fits_photo({'value':'1,60 €','label':'le billet le moins cher de la ligne'},tavira,everywhere))
+        from pin_draft import commons_title_of
+        self.assertEqual(commons_title_of({'source_page':'https://commons.wikimedia.org/wiki/File:Castelo_de_S%C3%A3o_Jorge.jpg'}),'File:Castelo de São Jorge.jpg')
         draw=ImageDraw.Draw(Image.new('RGB',(10,10)))
         face=font(FONTS['regular'],34)
         cut=fitted_label(draw,'le budget serré pour 14 jours et 13 nuits (154 120 ¥), capsule ou dortoir, repas à 1 000 ¥, hors vol — estimation',face,860)

@@ -14,12 +14,14 @@ import hashlib
 import json
 from pathlib import Path
 import re
+import urllib.parse
 
 from PIL import Image, ImageDraw, ImageFont
 
 import destinations
 from photo_intake import ai_record
 import place_names
+import reel_formats
 import social_render as base
 
 HERE = Path(__file__).resolve().parent
@@ -111,7 +113,7 @@ def everywhere_of(article, site=SITE):
 
 def commons_title_of(photo):
     page = photo.get('source_page') or ''
-    return re.sub(r'_', ' ', page.rsplit('/wiki/', 1)[-1]) if '/wiki/' in page else ''
+    return urllib.parse.unquote(page.rsplit('/wiki/', 1)[-1]).replace('_', ' ') if '/wiki/' in page else ''
 
 
 def fact_fits_photo(fact, photo, everywhere):
@@ -139,9 +141,8 @@ def facts_for(article, photo, site=SITE, count=1):
     return [fact for fact in key_facts(article) if fact_fits_photo(fact, photo, everywhere)][:count]
 
 
-# What a figure holds under: a line is never cut before it ("aux heures creuses", "dès 14 ans").
-CONDITION = re.compile(r'\(?(?:aux? heures? (?:creuses|de pointe)|hors |en (?:semaine|basse saison|haute saison)|le week-end|'
-                       r'sur réservation|sous conditions?|à partir de |dès |uniquement|seulement|sauf |pour les moins de |avant \d|après \d)', re.IGNORECASE)
+# What a figure holds under: a line is never cut before it (the same list as the posts').
+CONDITION = reel_formats.CONDITION
 
 
 def fitted_label(draw, label, face, width, most=2):

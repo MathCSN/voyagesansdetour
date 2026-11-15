@@ -1745,7 +1745,7 @@ class RealGuideTests(unittest.TestCase):
         self.assertEqual([line.split(" names ")[0] for line in p.photos_of_another_place(post(*wrong), photos)], ["plan 2", "plan 3", "plan 4"])
         bouddha = reel_formats.place_names.read("le Grand Bouddha du Tōdai-ji, à Nara, à 45 minutes de Kyoto par le train JR")
         self.assertEqual((bouddha.first, bouddha.listed, bouddha.situating), (("todai",), (), (("nara",),)))
-        self.assertEqual(reel_formats.place_names.subjects("la fenêtre où Bangkok, Chiang Mai et la mer d’Andaman sont tous au sec"), ["bangkok", "mai", "andaman"])
+        self.assertEqual(reel_formats.place_names.subjects("la fenêtre où Bangkok, Chiang Mai et la mer d’Andaman sont tous au sec"), ["bangkok", "chiang", "mai", "andaman"])
         photos = {**photos, "japon-n700": {"commonsTitle": "File:N700 Series Shinkansen.jpg"}, "thailande-train-nuit": {"commonsTitle": "File:THAI RAILWAYS NIGHT SLEEPER TRAIN.jpg"},
                   "vietnam-train-hanoi": {"commonsTitle": "File:Hanoi train street with coffee.jpg"}, "tenerife-garachico": {"commonsTitle": "File:Vista de Garachico.jpg"},
                   "tenerife-adeje": {"commonsTitle": "File:Tenerife Playa El Duque R01.jpg"}}
@@ -1789,7 +1789,7 @@ class RealGuideTests(unittest.TestCase):
         # Capitals of any alphabet, and letters no accent rule folds.
         self.assertEqual(names.named("de Hué à Đà Nẵng puis Đà Lạt, Šibenik et Łódź"), ["hue", "nang", "lat", "sibenik", "lodz"])
         # Two names that begin alike are two places; a month is part of a name after another one.
-        self.assertEqual((names.named("la nuit à Chiang Rai"), names.named("le temple de Chiang Mai"), names.named("de mai à octobre, en Mai")), (["rai"], ["mai"], []))
+        self.assertEqual((names.named("la nuit à Chiang Rai"), names.named("le temple de Chiang Mai"), names.named("de mai à octobre, en Mai")), (["chiang", "rai"], ["chiang", "mai"], []))
         # The first word of a caption is its place when the photo's identifier or title says so.
         for caption, known, place in (("Vernazza et son port au coucher du soleil.", {"cinque", "vernazza"}, "vernazza"),
                                       ("Amalfi vue de la mer, sous les falaises.", {"amalfi", "ville"}, "amalfi"),
@@ -1802,7 +1802,7 @@ class RealGuideTests(unittest.TestCase):
         self.assertNotIn("bryant", names.pictured("new-york-esb", "", "File:Empire State Building behind Bryant Park trees.jpg"))
         self.assertNotIn("similan", names.pictured("thailande-phi-phi", "Les îles Phi Phi, plus au sud que les Similan."))
         self.assertNotIn("porto", names.pictured("alentejo-plage", "La plage de Porto Covo, en Alentejo."))
-        self.assertIn("alentejo", names.recorded("alentejo-plage", "La plage de Porto Covo, en Alentejo."))
+        self.assertIn(("alentejo",), names.record("alentejo-plage", "La plage de Porto Covo, en Alentejo."))
         # Another spelling, another name, a quarter of the town.
         for name, shown in ((("kinkaku",), {"kinkakuji"}), (("ho", "chi", "minh"), {"saigon"}), (("sapa",), {"sa", "pa"}), (("da", "nang"), {"danang"})):
             self.assertTrue(names.shows(name, shown), name)
@@ -1812,7 +1812,7 @@ class RealGuideTests(unittest.TestCase):
         # A quarter is in its town, for a fact that is first about that town.
         self.assertLessEqual({"lisbonne", "tokyo"}, names.widened({"belem", "shibuya"}))
         # A photo of the old catalogue has no caption of its own: its Commons title says what it names.
-        self.assertEqual(names.recorded("sintra-mouros-remparts", "Sintra (Portugal).", "File:Castelo dos Mouros in Sintra, Portugal.jpg", {"sintra", "portugal"}, "sintra"), {"mouros"})
+        self.assertEqual(names.record("sintra-mouros-remparts", "Sintra (Portugal).", "File:Castelo dos Mouros in Sintra, Portugal.jpg", {"sintra", "portugal"}, "sintra"), [("mouros",)])
         # A part of the destination: the first one a fact says, not the whole ("nord-sud"), not the name of a line.
         self.assertEqual([names.region(text) for text in ("de soleil en janvier au sud (aéroport Tenerife Sud), contre 150 h dans le nord",
                                                          "la meilleure fenêtre pour un voyage nord-sud", "La ligne du Nord en 2026", "sur la côte est de l’île")],
@@ -1851,7 +1851,7 @@ class RealGuideTests(unittest.TestCase):
         # Parts of the destination, and names that only look like them.
         for text, part in (("Corée du Sud", set()), ("l’Afrique du Sud", set()), ("l’Amérique du Sud", set()), ("le Sud-Est asiatique", set()),
                            ("le cap Nord", set()), ("dans le sud-ouest", {"sud", "ouest"}), ("La côte est magnifique", set()),
-                           ("Du nord au sud", {"nord"}), ("le centre historique", set())):
+                           ("Du nord au sud", set()), ("Le Sud-Ouest : 12 €", {"sud", "ouest"}), ("Le Sud est plus chaud", {"sud"}), ("l’Asie du Sud-Est", set()), ("le centre historique", set())):
             self.assertEqual(names.region(text), part, text)
         # LOW: two months are no journey.
         self.assertFalse(names.journey("Novembre–Avril : la saison sèche"))
@@ -1875,7 +1875,11 @@ class RealGuideTests(unittest.TestCase):
         lisbon = reel_formats.Media(list(belem), [], everywhere="Portugal Portugal")
         self.assertIsNone(lisbon.named("le château São Jorge, à Lisbonne", None))
         self.assertIsNone(lisbon.named("le château São Jorge à Lisbonne", None))
-        self.assertEqual(lisbon.named("1,90 € le ticket à Lisbonne", None)[0], "lisbonne-belem-tour")
+        self.assertEqual(reel_formats.Media([("lisbonne-belem-tour", {"commonsTitle": "File:Belem Tower.jpg"}, "La tour de Belém.")], [], everywhere="Portugal Portugal")
+                         .named("1,90 € le ticket à Lisbonne", None)[0], "lisbonne-belem-tour")
+        # A quarter shows its town only when the record names no other place: Graça of Faro, Gion "à Osaka" (review of the diff).
+        for caption in ("L’église de Graça, à Faro.", "La tour de Belém, au bord du Tage."):
+            self.assertIsNone(reel_formats.Media([("portugal-x", {"commonsTitle": "File:X.jpg"}, caption)], [], everywhere="Portugal Portugal").named("1,90 € le ticket à Lisbonne", None))
         self.assertEqual(len(guard("Portugal", plan("lisbonne-belem-tour", "le château São Jorge, à Lisbonne", belem[0][2]))), 1)
         # MEDIUM 7 and review of the diff M1: the label written above a plan never excuses its photo.
         self.assertEqual(len(guard("Portugal", plan("portugal-porto", "3 € la nuit à Lagos", "Les quais de Porto.", kicker="Où dormir à Porto"))), 1)
@@ -1911,6 +1915,18 @@ class RealGuideTests(unittest.TestCase):
         stages = lambda: reel_formats.Media(list(yucatan), [], everywhere="Mexique Yucatán")
         self.assertEqual(stages().named("Mérida–Tulum en train direct", None, also="le train direct Mérida Teya → Tulum de 7 h")[0], "yucatan-tren-maya-merida")
         self.assertEqual(stages().named("Mérida et Uxmal", None, also="l’entrée d’Uxmal pour un étranger, à 80 km de Mérida")[0], "yucatan-uxmal")
+        # Review of the diff of the third step (15/11/2026).
+        palace = [("thailande-bangkok-grand-palais", {"commonsTitle": "File:Roof.jpg"}, "Un toit du Grand Palais de Bangkok au lever du soleil.")]
+        self.assertIsNone(reel_formats.Media(palace, [], everywhere="Thaïlande Thaïlande").named("le Grand Bouddha de Phuket, 50 baht", None))
+        self.assertEqual(len(guard("Thaïlande", plan("thailande-bangkok-grand-palais", "le Grand Bouddha de Phuket, 50 baht", palace[0][2]))), 1)
+        sleeper = [("thailande-train-nuit", {"commonsTitle": "File:THAI RAILWAYS NIGHT SLEEPER TRAIN BUTTERWORTH(PENANG SENTRAL)MALAYSIA TO BANGKOK.jpg"},
+                    "L’intérieur d’une voiture-couchettes de deuxième classe.")]
+        palais = "le Grand Palais de Bangkok et le Wat Phra Kaew, de 8 h 30 à 16 h 30"
+        self.assertIsNone(reel_formats.Media(sleeper, [], everywhere="Thaïlande Thaïlande").named(palais, None))
+        self.assertEqual(len(guard("Thaïlande", plan("thailande-train-nuit", palais, sleeper[0][2], sleeper[0][1]["commonsTitle"]))), 1)
+        self.assertFalse(names.ride({"train", "couchettes"}, "Hanoï → Hô-Chi-Minh-Ville en avion, 2 h"))
+        self.assertIsNone(reel_formats.Media([("thailande-champ", {"commonsTitle": "File:Rice.jpg"}, "Un champ de riz en mai.")], [], everywhere="Thaïlande Thaïlande")
+                          .named("le temple blanc de Chiang Mai, 12 €", None))
         # Review of the diff M2: a capital that begins no word never stops the reading.
         self.assertEqual(names.names("Ⓐbc à Lisbonne"), [(("lisbonne",), 6, 14)])
 
