@@ -330,6 +330,12 @@ class GeneratorTests(unittest.TestCase):
                 "mime": "image/jpeg", "width": 4000, "height": 3000, "extmetadata": {"Categories": {"value": "Retouched pictures|Kyoto"}}}]}}}}):
             with self.assertRaisesRegex(photo_intake.Refused, "Not the photograph as taken"):
                 photo_intake.commons_info("File:Kyoto 9.jpg")
+        # A file of the denylist is refused at intake even when its record carries no retouch mark.
+        banned = "File:Empty Arco da Rua Augusta during the COVID-19 lockdown, Lisbon, Portugal julesvernex2.jpg"
+        with mock.patch.object(photo_intake, "fetch_json", return_value={"query": {"pages": {"1": {"imageinfo": [{
+                "mime": "image/jpeg", "width": 4000, "height": 3000, "extmetadata": {"Categories": {"value": "Lisbon"}}}]}}}}):
+            with self.assertRaisesRegex(photo_intake.Refused, "Not the photograph as taken"):
+                photo_intake.commons_info(banned)
         f = self.fixture()
         photos = media_library.Photos(f.root, NOW, lambda *args: self.fail("a derived file must not be downloaded"))
         self.assertIsNone(photos.get({"id": "kyoto-9", "title": "File:Kyoto temple (cropped).jpg", "alt": "Un temple."}))

@@ -105,6 +105,10 @@ def derived(title: str, categories: str, source: str) -> bool:
 
 
 def derived_file(title: str, meta: dict) -> bool:
+    """A file to fetch that is not the photograph as taken: by its record, or because it is named in the denylist
+    (the retouched arch of rua Augusta carries no retouch mark in some of its records)."""
+    if title in NOT_A_PHOTOGRAPH_AS_TAKEN:
+        return True
     return derived(title, plain_text(meta.get("Categories", {}).get("value", "")), plain_text(meta.get("Credit", {}).get("value", "")))
 
 
