@@ -1191,10 +1191,12 @@ class ShownTests(unittest.TestCase):
     def test_the_call_to_action_is_shown_over_an_emblematic_photo_never_a_detail(self):
         scenes, _ = self.build()
         self.assertEqual(scenes[-1]["photo"], "lap-pyramide")  # the one a human marked; the hut was free too
-        # Nothing emblematic left: the reel waits for such a photo rather than closing on a hut.
+        # Nothing emblematic left: since the review of PR 57 the reel closes on a photo of the destination it has not
+        # shown, rather than wait (Porto, the Japan budget and Lapland lost their reels for it).
         plain = [(photo_id, {"commonsTitle": record["commonsTitle"]}, alt) for photo_id, record, alt in self.PHOTOS]
-        with self.assertRaisesRegex(reel_formats.Held, "no_emblematic_photo_for_the_call"):
-            self.build(photos=plain)
+        scenes, _ = self.build(photos=plain)
+        self.assertEqual(scenes[-1]["photo"], "lap-cabane")
+        self.assertEqual(len({scene["photo"] for scene in scenes}), len(scenes))
 
     def test_a_figure_that_names_the_photo_kept_for_the_call_stays_in_the_guide(self):
         # One photo left that can close the post: no plan takes it, and the figure that names it is not put elsewhere.
@@ -2070,9 +2072,9 @@ class RealGuideTests(unittest.TestCase):
         # A photo post may close on any photo a person looked at, never on a found file.
         mixed = [self.MARRAKECH[0], ("marrakech-souk", {"commonsTitle": "File:Souk.jpg"}, "Une allée du souk.")] + [ph for ph in self.MARRAKECH if ph[1].get("automatic")]
         post = reel_formats.Media(mixed, [], reserve=2, cover=mixed[0][0], emblematic=reel_formats.emblematic(mixed))
-        self.assertEqual((post.opening(post.cover)[1], post.closing(required=False)[1]), ("marrakech-place-jemaa-el-fna", "marrakech-souk"))
-        with self.assertRaisesRegex(reel_formats.Held, "no_emblematic_photo_for_the_call"):
-            post.closing(required=False)
+        self.assertEqual((post.opening(post.cover)[1], post.closing()[1]), ("marrakech-place-jemaa-el-fna", "marrakech-souk"))
+        with self.assertRaisesRegex(reel_formats.Held, "no_photo_left_for_the_call"):
+            post.closing()
         # Even named as the cover (a guide whose own photos were all refused), a found file does not open the post.
         only = [photo for photo in self.MARRAKECH if photo[1].get("automatic")]
         with self.assertRaisesRegex(reel_formats.Held, "no_reviewed_photo_to_open_with"):

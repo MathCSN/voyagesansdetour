@@ -494,6 +494,17 @@ class OpeningAndSubject(unittest.TestCase):
         with self.assertRaises(reel_formats.Held):
             alone.opening(None)
 
+    def test_the_call_takes_any_photo_of_the_destination_left_when_no_emblematic_one_is(self):
+        # Porto, the Japan budget and Lapland waited for an emblematic photo their subjects had all used (review of PR 57):
+        # the end now takes a photo of the destination the post has not shown, never an outing nor a repeated subject.
+        port = photo("marrakech-essaouira-port", "File:Skala.jpg", "Des barques bleues au pied de la Skala du port, à Essaouira.")
+        souk = photo("marrakech-souk", "File:Souk.jpg", "Une ruelle des souks de la médina, à Marrakech.")
+        outings = names.outings(self.MARRAKECH, names.words("Maroc Marrakech"))
+        media = reel_formats.Media([port, souk], [], everywhere="Maroc Marrakech", outings=outings)
+        self.assertEqual(media.closing()[1], "marrakech-souk")
+        with self.assertRaisesRegex(reel_formats.Held, "no_photo_left_for_the_call"):
+            reel_formats.Media([port], [], everywhere="Maroc Marrakech", outings=outings).closing()
+
     def test_a_carousel_opens_on_the_guide_s_cover_when_no_plan_took_it(self):
         # Review of PR 57: the carousels opened on the photo their rotation put first; the guide's cover now comes first.
         jemaa = photo("marrakech-place-jemaa-el-fna", "File:Jemaa.jpg", "La place Jemaa el-Fna en fin de journée.", emblematic=True)
@@ -662,9 +673,8 @@ class RideToAnotherPlace(unittest.TestCase):
         self.assertFalse(media.misleads("35,70 € l’Alfa Pendular entre les deux villes", alfa))
         media.photo("35,70 € l’Alfa Pendular entre les deux villes")
         self.assertEqual([ph[0] for ph in media.free()], ["lisbonne-alfama"])
-        # A borrowed train never closes a post.
-        with self.assertRaises(reel_formats.Held):
-            media.closing()
+        # A borrowed train never closes a post: the roofs of Alfama do.
+        self.assertEqual(media.closing()[1], "lisbonne-alfama")
         # The guard: under a fact of another train, or a second one.
         everywhere = names.words(self.EVERYWHERE)
         records = {"train-alfa-pendular": alfa[1], "train-oriente": oriente[1]}
