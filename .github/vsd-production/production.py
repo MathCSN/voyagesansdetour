@@ -72,8 +72,13 @@ MOTION_BUTTON = "voyagesansdetour.fr"
 # destination): the two photo posts sealed that morning under the first rule keep their receipts.
 PLACES_FROM = "2026-11-13T09:00:00Z"
 # Since the review of PR 56 a fact that names its means of transport and another place than its photo goes over a
-# photo of that means (place_names.ride_needed); the posts reviewed before keep their receipts.
-RIDES_FROM = "2026-11-17T00:00:00Z"
+# photo of that means (place_names.ride_needed). The same date as PLACES_FROM: a later date let the posts made on 16/11
+# escape it, and the eight posts in the queue since PLACES_FROM pass it (review of PR 57).
+RIDES_FROM = PLACES_FROM
+# Since the review of PR 57: never one subject twice in a post, a town's ticket only over its metro, tram, bus or train,
+# a train borrowed from another guide only under the fact that names it, and never an opening on one of the guide's
+# outings. The posts in the queue were all checked before (the last at 09:42:58 on 15/11/2026) and stay as they are.
+REVIEW_57_FROM = "2026-11-15T10:00:00Z"
 MOTION_BUTTON_BEFORE = "voyagesansdetour.fr → lien en bio"
 # The small label of a plan may give the figure's own date ("chiffre de juillet 2026"): then the plan quotes it.
 OWN_DATE_TAG = re.compile(r" · chiffre (?:de |du |d’)(.+)\Z")
@@ -437,7 +442,8 @@ def validate_scenario(scenario, root, now):
         # keep their receipts; the two that used such a file were withdrawn by hand.
         altered = sorted(photo_id for photo_id, record in records.items() if derived_record(record))
         ensure(not altered, "Not the photograph as taken (retouched, cropped or made from another file): " + ", ".join(altered))
-        misplaced = photos_of_another_place(scenario, photos, checked >= instant(RIDES_FROM))
+        misplaced = photos_of_another_place(scenario, photos, checked >= instant(RIDES_FROM), outings_of(scenario, root),
+                                            checked >= instant(REVIEW_57_FROM))
         ensure(not misplaced, "Photo of another place than its plan names: " + " ; ".join(misplaced))
     duration = sum(scene.get("seconds", 0) for scene in scenes)
     if scenario["kind"] == "reel":
@@ -448,7 +454,7 @@ def validate_scenario(scenario, root, now):
     return {"duration": duration, "sources": sources, "photos": records, "clips": clip_records, "sourceCheckedOn": str(checked_on)}
 
 
-def photos_of_another_place(scenario, photos, rides: bool = True) -> list[str]:
+def photos_of_another_place(scenario, photos, rides: bool = True, outings: tuple = (), review57: bool = True) -> list[str]:
     """The plans of a post whose photo is not a photo of what they say, read as the generator reads them
     (place_names): a plan that names a precise place (a proper noun: Similan, Kinkaku-ji, Phuket) of which the
     record of its photo says nothing, whether that record names another place or none ("la réouverture des îles
@@ -456,12 +462,83 @@ def photos_of_another_place(scenario, photos, rides: bool = True) -> list[str]:
     a ride whose record names a place that is none of the journey's ("Hué → Đà Nẵng en train" over the train street
     of Hanoi); a plan about one part of the destination ("222 h de soleil au sud") over a photo of a precise place
     that does not say that part. The record is the photo's caption, its Commons title and its identifier. The
-    call to action and a table are no such plans; the opening is read for what it names beyond the guide's title."""
+    call to action and a table are no such plans; the opening is read for what it names beyond the guide's title.
+    Since the review of PR 57: never one subject twice in a post, never two trains borrowed from other guides nor one
+    under a fact of another train, and never an opening on one of the guide's outings."""
     scenes = scenario["scenes"]
     everywhere = place_names.words(str(scenario.get("destination", "")) + " " + str(scenes[0].get("kicker", "")))
-    found = [(number, another_place(scene, photos, everywhere, rides)) for number, scene in enumerate(scenes[1:-1], 2)]
-    found.insert(0, (1, opening_elsewhere(scenes[0], photos, str(scenario.get("title", "")), everywhere)))
+    found = [(number, another_place(scene, photos, everywhere, rides, review57)) for number, scene in enumerate(scenes[1:-1], 2)]
+    found.insert(0, (1, opening_elsewhere(scenes[0], photos, str(scenario.get("title", "")), everywhere)
+                     or (opening_on_an_outing(scenes[0], photos, outings, everywhere) if review57 else None)))
+    if review57:
+        found += borrowed_elsewhere(scenes, photos, everywhere) + subjects_repeated(scenes, photos, everywhere)
     return [f"plan {number} {told}" for number, told in found if told]
+
+
+def outings_of(scenario, root) -> tuple:
+    """The outings of the guide a post links to (place_names.outings), read in the site's articles; none when the
+    site is not beside the production folder (a copy for tests)."""
+    path = Path(root).resolve().parents[1] / "site-src" / "articles.json"
+    if not path.is_file():
+        return ()
+    slug = PurePosixPath(urlsplit(str(scenario.get("targetUrl", ""))).path).name
+    article = next((a for a in load_json(path) if isinstance(a, dict) and a.get("slug") == slug), None)
+    everywhere = place_names.words(str(scenario.get("destination", "")))
+    return place_names.outings(article, everywhere) if article else ()
+
+
+def opening_on_an_outing(scene, photos, outings, everywhere) -> str | None:
+    """The opening's photo shows a place the guide sends its reader to for a day out (Essaouira for Marrakech)."""
+    photo = scene.get("photo")
+    if not photo or not outings:
+        return None
+    record = photos.get(photo) or {}
+    caption, title = str(scene.get("alt") or ""), str(record.get("commonsTitle", ""))
+    return f"opens on an outing of the guide over {photo}" if place_names.on_an_outing(caption, title, outings, everywhere) else None
+
+
+def borrowed_elsewhere(scenes, photos, everywhere) -> list:
+    """A train borrowed from another guide's photos (media_library.vehicle_candidates) under a fact that does not name
+    it, two of them in one post, or one beside a photo of the same train; and a photo of a train of one brand under a
+    fact of trains that names none (« 85×55×35 cm … sur les trains internationaux CP » over an Alfa Pendular)."""
+    found, seen, shown = [], 0, []
+    for number, scene in enumerate(scenes, 1):
+        record = photos.get(scene.get("photo")) or {}
+        trains = place_names.brands(place_names.pictured("", str(scene.get("alt") or ""), str(record.get("commonsTitle", "")), everywhere))
+        shown.append((number, trains, bool(record.get("borrowedFor"))))
+        said = said_by(scene, everywhere)
+        named = place_names.brands(place_names.words(said))
+        if 1 < number < len(scenes) and trains and not named and "rail" in place_names.wanted_ways(said):
+            found.append((number, f"shows a train of a brand over a fact of trains that names none ({scene['photo']})"))
+        borrowed = set(record.get("borrowedFor") or ())
+        if not borrowed:
+            continue
+        seen += 1
+        if not borrowed & named:
+            found.append((number, f"borrows {scene['photo']} for a fact of another train"))
+        elif seen > 1:
+            found.append((number, f"borrows a second train ({scene['photo']})"))
+    for number, trains, lent in shown:
+        if lent and any(other != number and trains & others for other, others, _ in shown):
+            found.append((number, "borrows a train the post already shows"))
+    return found
+
+
+def subjects_repeated(scenes, photos, everywhere) -> list:
+    """Two photos of one subject in a post (place_names.photo_subjects): the arch of the rua Augusta twice, the
+    village of Santa Claus twice."""
+    found, first = [], {}
+    for number, scene in enumerate(scenes, 1):
+        photo = scene.get("photo")
+        if not photo:
+            continue
+        record = photos.get(photo) or {}
+        for subject in place_names.photo_subjects(str(scene.get("alt") or ""), str(record.get("commonsTitle", "")), everywhere):
+            other = first.setdefault(subject, (number, photo))
+            if other[1] != photo:
+                found.append((number, f"shows the subject of plan {other[0]} again over {photo}"))
+                break
+    return found
 
 
 def opening_elsewhere(scene, photos, title, everywhere) -> str | None:
@@ -477,7 +554,7 @@ def opening_elsewhere(scene, photos, title, everywhere) -> str | None:
     return f"opens on {', '.join(' '.join(name) for name in place_names.beyond(said, title, everywhere))} over {photo}"
 
 
-def another_place(scene, photos, everywhere, rides: bool = True) -> str | None:
+def another_place(scene, photos, everywhere, rides: bool = True, review57: bool = True) -> str | None:
     """What one plan names and why its photo is not a photo of it; None when it is. Read as the generator reads it
     (place_names): whole names, the same rules for a journey, a part of the destination and a train; never on the
     word of the label written above the plan ("Le sud : Costa Adeje" does not make a photo of Masca one of the south)."""
@@ -492,7 +569,7 @@ def another_place(scene, photos, everywhere, rides: bool = True) -> str | None:
     shown = place_names.pictured(photo, caption, title, everywhere)
     found = place_names.record(photo, caption, title, everywhere)
     listed = ", ".join(" ".join(name) for name in found) or "no place in its record"
-    ride = ride_elsewhere(said, detail, (photo, caption, title), shown, found, everywhere, rides)
+    ride = ride_elsewhere(said, detail, (photo, caption, title), shown, found, everywhere, rides, review57)
     if ride is not None:
         return f"{ride} ({listed})" if ride else None
     reading = place_names.read(said, everywhere)
@@ -515,7 +592,7 @@ def said_by(scene, everywhere) -> str:
     return said
 
 
-def ride_elsewhere(said, detail, record, shown, found, everywhere, rides: bool = True) -> str | None:
+def ride_elsewhere(said, detail, record, shown, found, everywhere, rides: bool = True, tickets: bool = True) -> str | None:
     """For a train or a journey: why its photo is not one of it (a reason), that it is ("" : nothing more to read), or
     None when the plan is no such thing and is read for its places."""
     photo, caption, title = record
@@ -530,7 +607,7 @@ def ride_elsewhere(said, detail, record, shown, found, everywhere, rides: bool =
         return ""
     if place_names.strict_journey(said):
         return f"names a journey over {photo}, which shows no ride of it"
-    if rides and place_names.ride_needed(said, shown, everywhere) and not place_names.ride(told, said):
+    if rides and place_names.ride_needed(said, shown, everywhere, tickets) and not place_names.ride(told, said):
         return f"names a ride to another place over {photo}, which shows no ride of it"
     return None
 

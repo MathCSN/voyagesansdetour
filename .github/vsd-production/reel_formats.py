@@ -442,30 +442,18 @@ def section_place(section: dict | None, country: frozenset | set) -> str:
     return place_names.titled(title, country)
 
 
-# The town a caption sets its photo in, at its end: "…, à Essaouira.", "…, près de Ninh Bình."
-# Read on the caption without its final full stop: no lazy group, no backtracking (SonarCloud S8786).
-SET_IN = re.compile(r",\s*(?:à|en|près de|près d’)\s+([^\s,.;()][^,.;()]*)$")
-
-
-def set_elsewhere(caption: str, country: frozenset | set) -> bool:
-    """The caption sets its photo in another town than the destination ("…, à Essaouira" in a guide of Marrakech)."""
-    where = SET_IN.search(caption.rstrip(". "))
-    if not where:
-        return False
-    # A quarter of the town is the town ("…, à Belém" in a guide of Lisbon).
-    named = [name for name, _, _ in place_names.names(where[1], country) if not place_names.widened(set(name)) & set(country)]
-    return bool(named)
-
-
 class Media:
     """Photos and clips still unused in this reel: a photo is never shown twice, and never under another place's name."""
 
     def __init__(self, photos: list[tuple[str, dict, str]], clips: list[tuple[str, dict]], reserve: int = 0, cover: str | None = None,
-                 emblematic: tuple[str, ...] = (), everywhere: str = "", local: bool = False):
+                 emblematic: tuple[str, ...] = (), everywhere: str = "", outings: tuple = (), reserved: str | None = None):
         self.photos, self.clips, self.reserve, self.cover = list(photos), list(clips), reserve, cover
-        # A guide of one town (Marrakech, Lisbon): a photo set in another town is an outing. A guide of a country
-        # (Japon, Vietnam) has its stages in many towns: none of them is an outing.
-        self.local = local
+        # The guide's own cover: the opening takes it first when no plan has (review of PR 57). A carousel otherwise
+        # opens on a photo that turns from post to post (`cover`).
+        self.reserved = reserved
+        # The places the guide sends its reader to for a day out (place_names.outings): Essaouira, Ouzoud, the Ourika
+        # for Marrakech. A photo of one of them never opens a post; a quarter or a nearby town is no outing.
+        self.outings = tuple(outings)
         self.all = list(photos)
         # The pictures that can stand for the whole place under the call to action, the best first.
         self.emblematic = [photo_id for photo_id in emblematic if photo_id != cover]
@@ -486,6 +474,10 @@ class Media:
         # A fact that names a place is not concerned: its photo is chosen by that place alone, and any free photo of it
         # will do ("44 620 ¥ Tokyo–Kyoto–Hiroshima" over Shibuya once the shinkansen is taken).
         if self.located(text):
+            return False
+        # A town's ticket is shown by any metro, tram, bus or train of the town: the metro taken by another plan does not
+        # keep it from a tram (review of PR 57).
+        if place_names.TOWN_TICKETS & set(place_names.folded(text)):
             return False
         target = self.target(text)
         return max((self.shared(ph, target) for ph in self.all), default=0) > max((self.shared(ph, target) for ph in self.free()), default=0)
@@ -558,6 +550,17 @@ class Media:
 
     def misleads(self, text: str, photo: tuple) -> bool:
         """The photo shows another train than the one the fact names, or another means of transport than its journey's."""
+        # A train borrowed from another guide's photos (media_library.vehicle_candidates) goes only under a fact that
+        # names it: "le train de Lisbonne à Sintra" went over an Alfa Pendular, which does not go to Sintra (review of
+        # PR 57).
+        borrowed = set(photo[1].get("borrowedFor") or ())
+        named = place_names.brands(place_names.words(text))
+        if borrowed and not borrowed & named:
+            return True
+        # A train of one brand never stands for trains the fact does not name: « 85×55×35 cm … sur les trains
+        # internationaux CP » went over an Alfa Pendular (review of PR 57).
+        if not named and "rail" in place_names.wanted_ways(text) and self.brands_shown(photo):
+            return True
         on = place_names.vehicle(photo[0], photo[2], str(photo[1].get("commonsTitle", "")))
         if place_names.brand_clash(text, self.described(photo)) or place_names.other_ride(on, text):
             return True
@@ -620,24 +623,42 @@ class Media:
         held = {self.spare(), self.cover if self.found else None}
         shown = self.subjects_shown()
         # Never the same subject twice in one post: El Castillo opened the carousel of Yucatán and came back on a plan
-        # under another file name (review of PR 56).
-        return [ph for ph in self.photos if ph[0] not in held and not (self.subject(ph) and self.subject(ph) in shown)]
+        # under another file name (review of PR 56). Never two trains borrowed from other guides in one post.
+        taken = self.taken()
+        borrowed = any(self.borrowed(ph) for ph in taken)
+        # A train borrowed from another guide never joins a post that shows that train already, nor the reverse: two
+        # Alfa Pendular stood in one post of « Portugal bagages » (review of PR 57).
+        trains = set().union(*(self.brands_shown(ph) for ph in taken)) if taken else set()
+        lent = set().union(*(self.brands_shown(ph) for ph in taken if self.borrowed(ph))) if borrowed else set()
+        return [ph for ph in self.photos if ph[0] not in held and not self.subjects(ph) & shown and not (borrowed and self.borrowed(ph))
+                and not (self.borrowed(ph) and self.brands_shown(ph) & trains) and not self.brands_shown(ph) & lent]
 
-    def subject(self, photo: tuple) -> frozenset:
-        """What a photo is of, when its caption says it whole: a site and where it stands, two places at least ("La
-        pyramide d'El Castillo, à Chichén Itzá"). A town alone ("…en gare de Rovaniemi") is no subject: many photos of
-        one post are taken in it."""
-        named = frozenset(name for name, _, _ in place_names.names(photo[2], self.country, sentence=True))
-        return named if len(named) >= 2 else frozenset()
+    def brands_shown(self, photo: tuple) -> set[str]:
+        """The trains a photo shows by name ("Un train Alfa Pendular de CP à quai")."""
+        return place_names.brands(self.told(photo))
 
-    def subjects_shown(self) -> set[frozenset]:
+    def taken(self) -> list:
+        """The photos this post has already taken."""
+        return [ph for ph in self.all if ph not in self.photos]
+
+    @staticmethod
+    def borrowed(photo: tuple) -> bool:
+        """A photo of a train filed under another guide, offered for the fact that names that train only."""
+        return bool(photo[1].get("borrowedFor"))
+
+    def subjects(self, photo: tuple) -> set:
+        """What a photo is of (place_names.photo_subjects): a monument of the table reviewed by hand, or the places its
+        caption names when it names two at least."""
+        return place_names.photo_subjects(photo[2], str(photo[1].get("commonsTitle", "")), self.country)
+
+    def subjects_shown(self) -> set:
         """The subjects of the photos this post has already taken."""
-        return {self.subject(ph) for ph in self.all if ph not in self.photos and self.subject(ph)}
+        return {subject for ph in self.taken() for subject in self.subjects(ph)}
 
     def excursion(self, photo: tuple) -> bool:
-        """A photo its caption sets in another town than the destination ("Des barques bleues au pied de la Skala du
-        port, à Essaouira" in a guide of Marrakech): an outing, not the place the post opens on (review of PR 56)."""
-        return self.local and set_elsewhere(photo[2], self.country)
+        """A photo of a place the guide sends its reader to for a day out ("Des barques bleues au pied de la Skala du
+        port, à Essaouira" in a guide of Marrakech): an outing, never the place the post opens on (review of PR 56)."""
+        return place_names.on_an_outing(photo[2], str(photo[1].get("commonsTitle", "")), self.outings, self.country)
 
     def room(self) -> int:
         return len(self.photos) + len(self.clips) - self.reserve
@@ -766,7 +787,7 @@ class Media:
         waits for such a photo; otherwise any photo a person looked at will do (a carousel). Never a file found by
         the search."""
         shown = self.subjects_shown()
-        fresh = [ph for ph in self.photos if not (self.subject(ph) and self.subject(ph) in shown)]
+        fresh = [ph for ph in self.photos if not self.subjects(ph) & shown and not self.borrowed(ph)]
         pick = next((ph for wanted in self.emblematic for ph in fresh if ph[0] == wanted), None)
         seen = [ph for ph in fresh if ph[0] not in self.found]
         if not pick and (required or not seen):
@@ -789,7 +810,7 @@ class Media:
         self.reserve = max(0, self.reserve - 1)
         spare = self.spare()
         shown = self.subjects_shown()
-        seen = [ph for ph in self.photos if ph[0] not in self.found and not (self.subject(ph) and self.subject(ph) in shown)]
+        seen = [ph for ph in self.photos if ph[0] not in self.found and not self.subjects(ph) & shown and not self.borrowed(ph)]
         left = [ph for ph in seen if ph[0] != spare]
         # A photo that shows numbers of its own (a display, a board of fares) opens a post only when no other can.
         left = [ph for ph in left if not ph[1].get("figures")] or left
@@ -797,8 +818,9 @@ class Media:
         # figure had taken Jemaa el-Fna): with only outings left, the post waits (review of PR 56).
         left = [ph for ph in left if not self.excursion(ph)]
         seen = [ph for ph in seen if not self.excursion(ph)]
-        pick = (next((ph for ph in seen if ph[0] == cover), None) or next((ph for ph in left if ph[0] in self.emblematic), None)
-                or (left[0] if left else None))
+        # The guide's own cover first (review of PR 57), then the photo this post opens on.
+        pick = (next((ph for ph in seen if ph[0] == self.reserved), None) or next((ph for ph in seen if ph[0] == cover), None)
+                or next((ph for ph in left if ph[0] in self.emblematic), None) or (left[0] if left else None))
         if not pick:
             raise Held("no_reviewed_photo_to_open_with")
         self.photos.remove(pick)
@@ -876,8 +898,13 @@ def placed(facts: list[dict], media: Media, limit: int, least: int):
     """The figures a post shows, as indexes of `facts`, each yielded when its photo is about to be taken: first those
     a free photo shows, up to `limit`; then, only to reach `least`, those that no photo of the post shows at all."""
     done = set()
+    # A town's ticket goes over any metro, tram, bus or train of the town: it comes after the other figures, which only
+    # one ride may show ("l'Andante Tour 3 : métro, bus et trains" took the metro on the bridge Luís I, and "2 min de
+    # métro D" was left without a photo: review of PR 57). The post still reads in the guide's order.
+    order = sorted(range(len(facts)), key=lambda index: bool(place_names.TOWN_TICKETS & set(place_names.folded(media.about(facts[index])))))
     for wanted, most in ((True, limit), (False, least)):
-        for index, fact in enumerate(facts):
+        for index in order:
+            fact = facts[index]
             about = media.about(fact)
             if index in done or len(done) >= most or media.shown_elsewhere(about):
                 continue
@@ -1124,22 +1151,24 @@ def marked(scenes: list[dict], photos: list) -> None:
 
 
 def build(fmt: str, article: dict, facts: list[dict], photos: list, clips: list, opening: str, place: str, kicker: str,
-          tag: str, title_lines: list[str], page: str, local: bool | None = None) -> tuple[list[dict], list[str]]:
-    """The plans of one reel and the useful lines of its caption. Raises Held when the guide cannot fill the format.
-    `local`: a guide of one town (Marrakech), not of a country; read from the kicker "Maroc · Marrakech" when not
-    given, but a long kicker is shortened to the place alone, so the caller says it (review of PR 57)."""
+          tag: str, title_lines: list[str], page: str) -> tuple[list[dict], list[str]]:
+    """The plans of one reel and the useful lines of its caption. Raises Held when the guide cannot fill the format."""
     # The body takes the photos that show what it names; the hook and the call keep two, the cover first.
     # The picture people see first: the guide's cover, or its first photo when the cover is too small for a reel.
     # Never a file found by the search: nobody looked at it.
     seen = [photo[0] for photo in photos if photo[1].get("automatic") is not True]
     # Never an outing in its place ("Des barques bleues… à Essaouira" opened the reels of Marrakech: review of PR 56).
-    captions = {photo[0]: photo[2] for photo in photos}
-    local = " · " in kicker if local is None else local
-    home = [photo_id for photo_id in seen if not (local and set_elsewhere(captions.get(photo_id, ""), place_names.words(kicker)))]
+    # The outings are read in the guide's sections, never in the kicker: a long kicker is cut to the place alone (Codex,
+    # review of PR 57), and a guide of a region or a quarter of the town is no outing (review of PR 57).
+    outings = place_names.outings(article, place_names.words(kicker))
+    records = {photo[0]: photo for photo in photos}
+    home = [photo_id for photo_id in seen if not place_names.on_an_outing(records[photo_id][2], str(records[photo_id][1].get("commonsTitle", "")),
+                                                                          outings, place_names.words(kicker))]
     cover = article.get("cover") if article.get("cover") in seen else None
     if cover is None and seen:
         cover = (home or seen)[0]
-    brief = Brief(article, facts, Media(photos, clips, reserve=2, cover=cover, emblematic=emblematic(photos), everywhere=kicker, local=local),
+    brief = Brief(article, facts, Media(photos, clips, reserve=2, cover=cover, emblematic=emblematic(photos), everywhere=kicker, outings=outings,
+                                        reserved=cover),
                   opening, place, kicker, tag, title_lines, page)
     if fmt in ("liste", "express", "prix"):
         hook, body, lines = figures_reel(fmt, brief)

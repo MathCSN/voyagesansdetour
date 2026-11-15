@@ -124,10 +124,11 @@ def vehicle_candidates(article: dict, site_photos: dict, shared: dict | None = N
         if not (isinstance(title, str) and alt) or title in seen:
             continue
         shown = place_names_module.words(" ".join([photo_id.replace("-", " "), alt, place_names_module.readable(title)]))
-        if place_names_module.brands(shown) & named and place_names_module.vehicle(photo_id, alt, title):
+        trains = place_names_module.brands(shown) & named
+        if trains and place_names_module.vehicle(photo_id, alt, title):
             seen.add(title)
-            # Borrowed for one fact, it never opens nor closes this guide's posts.
-            candidates.append({"id": photo_id, "title": title, "alt": alt, "emblematic": False})
+            # Borrowed for the facts that name its train only (Media.misleads), one per post, never to open or close it.
+            candidates.append({"id": photo_id, "title": title, "alt": alt, "emblematic": False, "borrowedFor": sorted(trains)})
     return candidates
 
 
@@ -298,12 +299,14 @@ def closing_mark(candidate: dict, record: dict) -> dict:
     the site may close a post (`emblematic`) unless it is listed in NOT_A_CLOSING; a file found by the search never
     closes nor opens one (`automatic`: nobody looked at it); a photo added by hand keeps what its reviewer wrote in
     reviewed.json."""
-    plain = {key: value for key, value in record.items() if key not in ("automatic", "emblematic")}
+    plain = {key: value for key, value in record.items() if key not in ("automatic", "emblematic", "borrowedFor")}
+    if candidate.get("borrowedFor"):
+        return {**plain, "borrowedFor": list(candidate["borrowedFor"])}
     if candidate.get("automatic"):
         return {**plain, "automatic": True}
     if "emblematic" in candidate:
         return {**plain, "emblematic": True} if candidate["emblematic"] else plain
-    return {key: value for key, value in record.items() if key != "automatic"}
+    return {key: value for key, value in record.items() if key not in ("automatic", "borrowedFor")}
 
 
 def new_photo(candidate: dict, photos: Photos, chosen: list) -> tuple[str, dict, str] | None:

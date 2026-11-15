@@ -402,6 +402,7 @@ HOURS = re.compile(r"\d\s?h\b")
 # "le car pour Essaouira", "3 h de car": the coach, never the conjunction ("car il pleut").
 CAR = re.compile(r"\b(?:de|en|le|du|un|au|par)\s+car\b", re.IGNORECASE)
 TOWN_TICKETS = frozenset("andante zapping navegante viagem carris oyster suica pasmo icoca".split())
+TICKET_WAYS = frozenset({"metro", "tram", "road", "rail"})
 PARTICLE_WORDS = frozenset("do da dos das del della di du".split())
 
 
@@ -433,14 +434,15 @@ def wanted_ways(text: str) -> set[str]:
     """The means of transport a journey is made by: the one it opens on, else the one it names further on; a train
     when it names one by its brand or its number ("Nozomi", "SE3")."""
     said = folded(text)
+    # A town's ticket ("le trajet Andante Z2", "zapping à Lisbonne", "ticket Carris/Metro"): its metro, tram, bus or
+    # train, whichever it names first, never a boat.
+    if TOWN_TICKETS & set(said):
+        return set(TICKET_WAYS)
     found = ways(said[:OPENING_WORDS]) or ways(said)
     if found:
         return found
     if CAR.search(text):
         return {"road"}
-    # A town's ticket ("le trajet Andante Z2", "zapping à Lisbonne"): its metro, tram, bus or train, never a boat.
-    if TOWN_TICKETS & set(said):
-        return {"metro", "tram", "road", "rail"}
     if brands(set(said)) or TRAIN_NUMBER.search(text):
         return {"rail"}
     # "le taxi à prix fixe depuis l'aéroport": a means no photo of a train, a tram or a bus shows.
@@ -461,7 +463,71 @@ def vehicle(identifier: str, caption: str, title: str) -> set[str]:
     """The means of transport a photo is of: the one its caption opens on, or its title names ("Des barques sur la
     rivière de Tràng An", "Trang An boats"); not boats "au premier plan" of a view of the Ribeira, nor the identifier it
     is filed under ("train-campanha" is the façade of a station, no train). `identifier` is kept for the callers."""
-    return ways(folded(unstationed(caption))[:OPENING_WORDS]) | ways(folded(readable(title)))
+    opening, titled = folded(unstationed(caption))[:OPENING_WORDS], folded(readable(title))
+    # A train named by its brand alone is a train: "Un Alfa Pendular à quai en gare de…" (review of PR 57).
+    branded = {"rail"} if brands(set(opening)) or brands(set(titled)) else set()
+    return ways(opening) | ways(titled) | branded
+
+
+# Photos of one subject, reviewed by hand (review of PR 57): two of them never stand in one post. A key is matched by
+# any of its names in the caption or the Commons title; one name is enough ("l'arc de la rue Augusta, sur la place du
+# Commerce" and "la statue équestre de la Praça do Comércio" are the same square).
+SUBJECTS = {
+    "arc-rua-augusta": ("rua augusta", "rue augusta", "praca do comercio", "place du commerce", "arco da victoria", "terreiro do paco"),
+    # The office of Santa Claus is filed on Commons as "Santa Claus Village.jpg" but shows the office: the caption decides.
+    "village-pere-noel": ("village du pere noel", "rovaniemi pajakyla"),
+    "ponta-da-piedade": ("ponta da piedade", "pres de lagos", "near lagos"),
+    "chichen-itza": ("el castillo", "kukulcan", "chichen itza"),
+    "mezquita": ("mezquita",),
+    "alhambra": ("alhambra", "cour des myrtes", "patio de los arrayanes"),
+    "tower-bridge": ("tower bridge",),
+    "westminster": ("big ben", "tour elizabeth", "elizabeth tower", "palais de westminster", "palace of westminster"),
+    "pont-luis": ("pont luis i", "ponte luis i", "ponte dom luis", "ponte de d luis", "puente don luis", "puente de don luis", "dom luis i bridge"),
+    "palais-de-pena": ("palais de pena", "palacio nacional da pena", "palacio da pena", "palais national pena", "pena palace"),
+    "gare-de-pinhao": ("gare de pinhao", "estacao ferroviaria do pinhao", "pinhao azulejos"),
+}
+
+
+def photo_subjects(caption: str, title: str = "", everywhere: frozenset | set = frozenset()) -> set:
+    """What a photo is of, when one of its names says it: the keys of SUBJECTS it names, and the places its caption
+    names whole when it names two at least (a site and where it stands: "La pyramide d'El Castillo, à Chichén Itzá").
+    A town alone ("…, à Rovaniemi") is no subject: many photos of one post are taken in it."""
+    flat = " " + " ".join(folded(caption + " " + readable(title))) + " "
+    found = {key for key, aliases in SUBJECTS.items() if any(" " + alias + " " in flat for alias in aliases)}
+    named = frozenset(name for name, _, _ in names(caption, everywhere, sentence=True))
+    return found | ({named} if len(named) >= 2 else set())
+
+
+# A section that takes the reader out of the destination: "Jour 3 — Sortir de la ville : Ouzoud, Essaouira ou
+# l'Ourika", "Kyoto, et Nara en excursion".
+OUTING = re.compile(r"sortir de la ville|excursions?|escapades?|day trips?|aux alentours|aux environs", re.IGNORECASE)
+
+
+def outings(article: dict, everywhere: frozenset | set = frozenset()) -> tuple:
+    """The places the guide sends its reader to for a day out, as its sections name them: the names after the colon of
+    a title that opens on such a word, else those of the stretch of the title that says it ("et Nara en excursion",
+    never Kyoto). A photo of one of them never opens a post (review of PR 57: only such places are outings, never a
+    quarter or a nearby town of the destination)."""
+    found = []
+    for section in article.get("sections") or []:
+        title = str(section.get("title") or "")
+        hit = OUTING.search(title)
+        if not hit:
+            continue
+        head, colon, tail = title.partition(":")
+        if colon and hit.start() < len(head):
+            stretch = tail
+        else:
+            stretch = next(part for part in re.split(r"\s[—–]\s|,|;|:", title) if OUTING.search(part))
+        # After the colon a list begins: its first name is a name, not the capital of a sentence.
+        found += [name for name, _, _ in names(stretch.strip(), everywhere)]
+    return tuple(dict.fromkeys(found))
+
+
+def on_an_outing(caption: str, title: str, places: tuple, everywhere: frozenset | set = frozenset()) -> bool:
+    """The photo shows one of the guide's outings (outings): its caption or its title names it."""
+    shown = widened(pictured("", caption, title, everywhere))
+    return any(shows(name, shown) for name in places)
 
 
 # A station is a place, not the vehicle it serves: "Estación de tren São Bento" is the hall of azulejos, "la station
@@ -490,7 +556,7 @@ def journeys_table(rows: list[list[str]], said: str = "") -> set[str]:
 BETWEEN_TOWNS = re.compile(r"\bentre (?:les )?deux (?:villes|gares|îles|iles|rives)\b", re.IGNORECASE)
 
 
-def ride_needed(text: str, shown: set[str], everywhere: frozenset | set = frozenset()) -> bool:
+def ride_needed(text: str, shown: set[str], everywhere: frozenset | set = frozenset(), tickets: bool = True) -> bool:
     """A fact that names its means of transport and another place than the photo's (where it goes or where it comes
     from: "la traversée du Tage en ferry vers Cacilhas", "le bus pour Sintra", "l'Alfa Pendular entre les deux villes")
     goes over a photo of that means, or stays in the guide. A fare or a time inside the town ("le taxi depuis
@@ -498,6 +564,10 @@ def ride_needed(text: str, shown: set[str], everywhere: frozenset | set = frozen
     PR 56: the wider rule cost a fifth of the posts)."""
     wanted = wanted_ways(text) - {"walk"}
     said = folded(text)
+    # A town's ticket goes over its metro, tram, bus or train, else it stays in the guide: "1,90 € ticket Carris/Metro"
+    # went over the roofs of Alfama (review of PR 57).
+    if tickets and TOWN_TICKETS & set(said):
+        return True
     if not wanted or not (journey(text) or brands(set(said)) or ways(said[:OPENING_WORDS])):
         return False
     if BETWEEN_TOWNS.search(text):

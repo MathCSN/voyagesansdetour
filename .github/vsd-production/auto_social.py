@@ -40,6 +40,7 @@ from media_library import AUTO, AUTO_PHOTOS, Clips, Photos, gather_photos
 import motion_render
 from paths import article_path
 import photo_intake
+import place_names
 import production as p
 import reel_formats
 from reel_formats import Held, caption_line, checked, kicker_of, lines_of, unbreakable
@@ -460,7 +461,8 @@ def scenes_for(article: dict, channel: Post, facts: list[dict], photos: list[tup
         raise Held("short_title_too_long")
     by_id = {photo[0]: photo for photo in photos}
     media = reel_formats.Media(photos, [], reserve=2, cover=photos[0][0], emblematic=reel_formats.emblematic(photos),
-                               local=place.lower() != country.lower(),
+                               reserved=article.get("cover"),
+                               outings=place_names.outings(article, place_names.words(place + " " + country)),
                                everywhere=place + " " + country)
     # As in a reel: a figure that a photo shows comes first and takes that photo (the fare over the train); a figure
     # that no photo shows only completes the post; a figure whose photo is already taken stays in the guide, never
@@ -627,7 +629,7 @@ def build_reel(root: Path, article: dict, slot: dt.datetime, now: dt.datetime, t
     kicker = place if country.lower() == place.lower() else f"{country} · {place}"
     kicker = kicker if len(kicker) <= 32 else place[:32]
     scenes, lines = reel_formats.build(fmt, article, facts, rotate(photos, variant), clips, opening_sentence(article, text), place, kicker, tag,
-                                       reel_title_lines(article, width), p.normalized(text), local=place.lower() != country.lower())
+                                       reel_title_lines(article, width), p.normalized(text))
     identity = free_identity(root, f"ig-{article['slug'][:70]}-{slot:%Y-%m-%d}")
     folder = f"{AUTO}/{identity}"
     stamp = p.stamp(now)

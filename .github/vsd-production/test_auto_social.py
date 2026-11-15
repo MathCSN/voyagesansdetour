@@ -1270,7 +1270,7 @@ class ShownTests(unittest.TestCase):
 
     def test_a_stage_takes_the_photo_of_what_it_says_and_its_caption_line_carries_its_price(self):
         media = reel_formats.Media([("yuc-castillo", {"commonsTitle": "File:Templo el Castillo - Chichen Itza.jpg"}, "La pyramide de Chichén Itzá."),
-                                    ("yuc-cenote", {"commonsTitle": "File:Cenote Ik Kil.jpg"}, "Un cenote entouré de lianes.")], [], cover="yuc-castillo")
+                                    ("yuc-cenote", {"commonsTitle": "File:Cenote Ik Kil.jpg"}, "Un cenote entouré de lianes.")], [])
         day = {"image": "yuc-cenote"}
         # The guide gives the cenote to the whole day; the plan only says "Chichén Itzá à l'ouverture, 697 pesos l'entrée".
         self.assertEqual(media.named("Chichén Itzá à l’ouverture l’entrée de Chichén Itzá pour un étranger", day)[0], "yuc-castillo")
@@ -1387,7 +1387,8 @@ class PhotoPostTests(unittest.TestCase):
                ("232 et 246 pesos", "Cancún–Playa del Carmen et Playa del Carmen–Tulum (octobre 2026)")]
 
     def scenes(self, figures=None, photos=None):
-        article = guide(shortTitle="Yucatán en 10 jours", destination="Yucatán", country="mexique", sourcesCheckedOn="2026-11-11", sections=[])
+        article = guide(shortTitle="Yucatán en 10 jours", destination="Yucatán", country="mexique", sourcesCheckedOn="2026-11-11", sections=[],
+                        cover="yuc-castillo")
         facts = [{"value": value, "label": label, "excerpt": value + " " + label, "section": None} for value, label in figures or self.FIGURES]
         return a.scenes_for(article, a.Post("facebook", "carousel"), facts, list(photos or self.PHOTOS), "Phrase d’ouverture.", "Yucatán", "Mexique")
 
@@ -1519,7 +1520,8 @@ class RealGuideTests(unittest.TestCase):
                  ("porto-metro-aeroport", {"commonsTitle": "File:Aeroporto metro station (Porto) - 3.jpg"}, "La station de métro Aeroporto, terminus de la ligne E à Porto."),
                  ("porto-rabelo", {"commonsTitle": "File:View of Ribeira (21).jpg"}, "Un bateau rabelo sur le Douro, face aux façades de la Ribeira.")]
         city = reel_formats.Media(porto, [], everywhere="Portugal · Porto")
-        self.assertEqual(city.named("l’Andante Tour 3 : métro, bus et trains urbains pendant 72 h", None)[0], "porto-metro-aeroport")
+        # A town's ticket goes over its metro, tram, bus or train: a metro station is none of them (review of PR 57).
+        self.assertIsNone(city.named("l’Andante Tour 3 : métro, bus et trains urbains pendant 72 h", None))
         self.assertEqual(city.named("la tour des Clérigos et son musée, billet de jour", None)[0], "porto-vue-clerigos")
         # The photo the guide put beside a day is that day's photo when the two share a kind of place: "Le pont en
         # métro" goes over the bridge, not over the quays that share "Douro" with it.
