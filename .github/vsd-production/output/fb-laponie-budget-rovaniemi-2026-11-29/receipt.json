@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 1,
+  "contentId": "fb-laponie-budget-rovaniemi-2026-11-29",
+  "status": "rendered_not_published",
+  "fingerprint": "391ac0497d33cfb3602abe4694fb214c4cd094edae84c08a095c56a4d492ad38",
+  "createdAt": "2026-11-16T13:49:39.621383Z",
+  "renderFinishedAt": "2026-11-16T13:49:41.390828Z",
+  "rendererContractVersion": 3,
+  "rendererSha256": "2cad356cfe58db78ba8eab495c75f2214f6822b0f2c19268adc45204314934b1",
+  "drawingSha256": "b78990f497d03baf754e3b2b68a795a5e9d3b91a0b6a2f8dad2ebcd7fec2907c",
+  "motionSha256": "9029b7f552929c69dcdcea595e65d9cc3bc8b872113b850e5a74010252289f08",
+  "format": null,
+  "kind": "carousel",
+  "channel": "facebook",
+  "publishAt": "2026-11-29T17:00:00Z",
+  "reviewValidUntil": "2026-12-16T13:48:45Z",
+  "sourceCheckedOn": "2026-11-16",
+  "targetUrl": "https://voyagesansdetour.fr/finlande/laponie-budget-rovaniemi/",
+  "voice": null,
+  "presenter": null,
+  "sourceUrls": [
+    "https://voyagesansdetour.fr/finlande/laponie-budget-rovaniemi/"
+  ],
+  "photos": {
+    "laponie-aurore": {
+      "licence": "CC BY-SA 4.0",
+      "author": "WikiLucas00",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Aurora_borealis_over_Saana_fell.jpg"
+    },
+    "laponie-train-nuit-rovaniemi": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Tyg728",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Sleeper_train_in_Rovaniemi_railway_station_20170201.jpg"
+    },
+    "laponie-bureau-pere-noel": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Floppyjb",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Santa_Claus_Village.jpg"
+    },
+    "laponie-traineau-renne": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Yair Haklai",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Reindeer_Sleigh_Ride-Lapland.jpg"
+    },
+    "laponie-huskies-rovaniemi": {
+      "licence": "CC0",
+      "author": "darkroomsg (Unsplash)",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Dog_sledding_in_Rovaniemi_(Unsplash).jpg"
+    },
+    "laponie-cabane-neige-rovaniemi": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Kim.schnackenberg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Schneebedeckte_H%C3%BCtte_in_Rovanimie,_Lapland,_Finland._24.02.2019.jpg"
+    }
+  },
+  "clips": {},
+  "video": null,
+  "files": [
+    {
+      "file": "apercu.jpg",
+      "sha256": "f662951bed059dddf2540cf6aa0a1bc039b583f3bcd0635379da39815460c7cb",
+      "bytes": 174540
+    },
+    {
+      "file": "credits.txt",
+      "sha256": "edf2d5f5316a9f1554cbd218953644abd035f73fedc4076fed6ac9619d3d38a3",
+      "bytes": 2645
+    },
+    {
+      "file": "dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "file": "legende.txt",
+      "sha256": "6e513fd0cc5aa86457a877d99e410e0cc2ea045f84dadccccabce1987657cfde",
+      "bytes": 814
+    },
+    {
+      "file": "notosans-OFL.txt",
+      "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a",
+      "bytes": 4396
+    },
+    {
+      "file": "playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    },
+    {
+      "file": "scenario.json",
+      "sha256": "07c1c9241321e94ea3dd21cbb2b66fcc85f31c186f11d84405d8db0a5e26d32a",
+      "bytes": 7003
+    },
+    {
+      "file": "scene-01.jpg",
+      "sha256": "90dcc31f0a6d9f7c2f3907f98322bc7d5cbe85109d7b6b7365b6a9c1758f119b",
+      "bytes": 176987
+    },
+    {
+      "file": "scene-02.jpg",
+      "sha256": "6b7411b79ae98a1de40e74d06e9518a7e46927ba1c7cb95923171c7c5df93c66",
+      "bytes": 179214
+    },
+    {
+      "file": "scene-03.jpg",
+      "sha256": "2d46e1ff9c9887f5e1c1fdf01856c8960913aae1889522e5226464327a585409",
+      "bytes": 286465
+    },
+    {
+      "file": "scene-04.jpg",
+      "sha256": "e64f9260bdc801c9c68f62d6f71a4c931629e709617df24f7ac407a5c5ae9fb0",
+      "bytes": 319156
+    },
+    {
+      "file": "scene-05.jpg",
+      "sha256": "38adc750c0c28e998d546706e944349907922c07e5a7f9527d77682579b2f1d7",
+      "bytes": 200252
+    },
+    {
+      "file": "scene-06.jpg",
+      "sha256": "0fd36ab45beac45d0146bdf87732c739d6fce73a8cf46be1384d8f9712116758",
+      "bytes": 351287
+    }
+  ],
+  "runtime": {
+    "wallSeconds": 1.436,
+    "encoderThreads": 2,
+    "pillowVersion": "11.3.0",
+    "ffmpegVersion": null
+  },
+  "publication": {
+    "uploaded": false,
+    "scheduled": false,
+    "published": false,
+    "readyForAutomaticImport": false
+  },
+  "cost": {
+    "newPaidService": false,
+    "providerCalls": 0,
+    "monetarySpendEur": 0
+  }
+}

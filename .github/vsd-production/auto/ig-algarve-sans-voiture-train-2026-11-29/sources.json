@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "checkedOn": "2026-11-16",
+  "method": "Page publiée du guide relevée automatiquement ; texte visible conservé tel quel, première ligne = URL.",
+  "sources": {
+    "guide": {
+      "url": "https://voyagesansdetour.fr/portugal/algarve-sans-voiture-train/",
+      "publisher": "Voyage Sans Détour",
+      "title": "L’Algarve sans voiture : Faro, Tavira et Lagos en train, à partir de 1,60 €",
+      "retrievedAt": "2026-11-16T13:48:45Z",
+      "snapshot": {
+        "file": "auto/ig-algarve-sans-voiture-train-2026-11-29/guide.txt",
+        "sha256": "4d712c4cc9cf2244ce4038d579a3fd3b9110c0a8ad6194e8349f317572ecde04"
+      }
+    }
+  }
+}

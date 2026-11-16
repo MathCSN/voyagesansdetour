@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 1,
+  "contentId": "fb-japon-budget-2-semaines-2026-12-06",
+  "status": "rendered_not_published",
+  "fingerprint": "3b346c693ca775938d781143b044c8794b6442598d4441cefa9484cda9358ef2",
+  "createdAt": "2026-11-16T13:49:37.563179Z",
+  "renderFinishedAt": "2026-11-16T13:49:39.472238Z",
+  "rendererContractVersion": 3,
+  "rendererSha256": "2cad356cfe58db78ba8eab495c75f2214f6822b0f2c19268adc45204314934b1",
+  "drawingSha256": "b78990f497d03baf754e3b2b68a795a5e9d3b91a0b6a2f8dad2ebcd7fec2907c",
+  "motionSha256": "9029b7f552929c69dcdcea595e65d9cc3bc8b872113b850e5a74010252289f08",
+  "format": null,
+  "kind": "carousel",
+  "channel": "facebook",
+  "publishAt": "2026-12-06T17:00:00Z",
+  "reviewValidUntil": "2026-12-16T13:48:45Z",
+  "sourceCheckedOn": "2026-11-16",
+  "targetUrl": "https://voyagesansdetour.fr/japon/japon-budget-2-semaines/",
+  "voice": null,
+  "presenter": null,
+  "sourceUrls": [
+    "https://voyagesansdetour.fr/japon/japon-budget-2-semaines/"
+  ],
+  "photos": {
+    "japon-tokyo-shibuya": {
+      "licence": "CC BY 4.0",
+      "author": "David Kernan",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Shibuya_Crossing,_Aerial.jpg"
+    },
+    "japon-kyoto-kiyomizu": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Basile Morin",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Four_ladies_wearing_a_yukata_in_front_of_the_North_Gate_of_Kiyomizu-dera_temple_Kyoto_Japan.jpg"
+    },
+    "japon-hiroshima-miyajima": {
+      "licence": "CC BY 4.0",
+      "author": "Jakub Hałun",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Itsukushima-jinja_torii_at_sunset,_Miyajima,_Japan,_20240816_1812_4144.jpg"
+    },
+    "japon-shinkansen-n700s-fuji": {
+      "licence": "CC BY-SA 2.0",
+      "author": "Takeshi Aida",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Shinkansen_N700S_series_photographed_at_Higashi-Tagonoura_with_Mount_Fuji_in_the_background,_10_April_2023.jpg"
+    },
+    "japon-osaka-dotonbori": {
+      "licence": "CC BY-SA 4.0",
+      "author": "DXR",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Dotonbori_Neon_Sign,_Osaka_20190415_1.jpg"
+    },
+    "japon-nara-cerfs": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Daniel Lu ( User:dllu )",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Sika_deer_doe_and_fawn_Nara_2026_dllu.jpg"
+    }
+  },
+  "clips": {},
+  "video": null,
+  "files": [
+    {
+      "file": "apercu.jpg",
+      "sha256": "0a3ba7984a62012610f50a20ba6c340b9307ab4bcbf306e411c2862c5ff1120f",
+      "bytes": 208670
+    },
+    {
+      "file": "credits.txt",
+      "sha256": "f449f1e67fcb971d8ffff272f34936cf22b71ae0105360038bf50aa5ac941fe0",
+      "bytes": 2899
+    },
+    {
+      "file": "dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "file": "legende.txt",
+      "sha256": "6cf548c23008c0694bbb4ae5e8e7cb0b7625e9f483f6e1de8414d5bfcb316324",
+      "bytes": 946
+    },
+    {
+      "file": "notosans-OFL.txt",
+      "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a",
+      "bytes": 4396
+    },
+    {
+      "file": "playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    },
+    {
+      "file": "scenario.json",
+      "sha256": "1826ae8f6ca32949fb969eace73bfc2abd5cc9472ff4d754e502e9df68c59a86",
+      "bytes": 7359
+    },
+    {
+      "file": "scene-01.jpg",
+      "sha256": "18957884dee2975d4074eff91c961ce3f804f2dd141dc6e7484c4692d57e8577",
+      "bytes": 477765
+    },
+    {
+      "file": "scene-02.jpg",
+      "sha256": "3e10d2ff859ef7a5e1940d49e3eaace34dd2c62f14def5ca0e32dae62359b95d",
+      "bytes": 395602
+    },
+    {
+      "file": "scene-03.jpg",
+      "sha256": "38b096b89def59f286ea7ea4c024de04deafa27129f5780584405866122093f7",
+      "bytes": 268503
+    },
+    {
+      "file": "scene-04.jpg",
+      "sha256": "ca72c8df531d92a1467820b10825a3a55f6dfb66c87a2b8f3cbcd8f20c2b80c3",
+      "bytes": 349247
+    },
+    {
+      "file": "scene-05.jpg",
+      "sha256": "b4d3c402eba19d65218b0857c3b840fcce5202cc17ba860590405d3f0822e8e0",
+      "bytes": 349062
+    },
+    {
+      "file": "scene-06.jpg",
+      "sha256": "5c555da2e00f648230464799955fa04ed9d43353cb39b902e21a3e1d739b402b",
+      "bytes": 223214
+    }
+  ],
+  "runtime": {
+    "wallSeconds": 1.553,
+    "encoderThreads": 2,
+    "pillowVersion": "11.3.0",
+    "ffmpegVersion": null
+  },
+  "publication": {
+    "uploaded": false,
+    "scheduled": false,
+    "published": false,
+    "readyForAutomaticImport": false
+  },
+  "cost": {
+    "newPaidService": false,
+    "providerCalls": 0,
+    "monetarySpendEur": 0
+  }
+}

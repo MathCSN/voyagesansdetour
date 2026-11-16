@@ -97,6 +97,15 @@
       "publicHtmlSha256": "ac5aa9bcbb3c564b7cc3b60b71cab03f400064753653d5840ec53666a421568c",
       "method": "published_guide_photo_template_v3",
       "publicationConfirmed": false
+    },
+    {
+      "id": "pin-algarve-sans-voiture-train",
+      "admittedAt": "2026-11-16T13:50:57.459239+00:00",
+      "articleSha256": "7ffd3450c73e91f5be9e9c31caec81e8371fc6da55174ba22c1fab29d56e53b2",
+      "imageSha256": "9d7bed74694e1a3eb64eb6f9ca7f3a91b221111f4e6120481e18763369856635",
+      "publicHtmlSha256": "f5ba3e4426e53f351520a855eae29c91b6e120f42cbeda33ecadb5d197e019d8",
+      "method": "published_guide_photo_template_v3",
+      "publicationConfirmed": false
     }
   ]
 }

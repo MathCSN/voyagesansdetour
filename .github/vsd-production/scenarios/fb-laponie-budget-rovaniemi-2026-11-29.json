@@ -1,0 +1,204 @@
+{
+  "schemaVersion": 2,
+  "id": "fb-laponie-budget-rovaniemi-2026-11-29",
+  "kind": "carousel",
+  "channel": "facebook",
+  "destination": "Laponie",
+  "title": "Laponie : le budget — 4 repères",
+  "targetUrl": "https://voyagesansdetour.fr/finlande/laponie-budget-rovaniemi/",
+  "publishAt": "2026-11-29T17:00:00Z",
+  "review": {
+    "status": "reviewed_for_render",
+    "checkedAt": "2026-11-16T13:48:45Z",
+    "validUntil": "2026-12-16T13:48:45Z",
+    "method": "Généré automatiquement (auto_social.py) depuis la page publiée du guide relevée le 16/11/2026 : chaque chiffre est cité mot pour mot ; photos réelles sous licence libre (Wikimedia Commons), aucune image générée par IA ; garde-fous de production.py passés avant la mise en file."
+  },
+  "sources": {
+    "file": "auto/fb-laponie-budget-rovaniemi-2026-11-29/sources.json",
+    "sha256": "ff78ccf7810c113b312c019848baec95cb68e8b2fdc5152258429c14e59c5056"
+  },
+  "photos": {
+    "file": "auto/fb-laponie-budget-rovaniemi-2026-11-29/photos.json",
+    "sha256": "7b5dfee20809768c42adad6fc68340bed68d4da93b2b75a8b936a041792a2899"
+  },
+  "caption": {
+    "hook": "💶 Combien coûte un voyage en Laponie ? Le budget de Rovaniemi 2026-2027, poste par poste",
+    "lines": [
+      "💶 59 € : la cabine privative du train de nuit Helsinki–Rovaniemi, prix pour la cabine entière",
+      "💶 0 € : rencontrer le Père Noël dans son bureau, tous les jours de l’année",
+      "💶 30 à 60 € : une balade en traîneau à renne de 400 ou 800 m au village du Père Noël",
+      "💶 63 € : la courte balade en huskies au village, du 30 novembre au 4 avril"
+    ],
+    "cta": "🔗 Tous les prix, horaires et l’itinéraire dans le guide complet :",
+    "hashtags": [
+      "#Laponie",
+      "#Finlande",
+      "#VoyageFinlande",
+      "#VoyagePasCher",
+      "#VoyageSansDetour"
+    ]
+  },
+  "scenes": [
+    {
+      "photo": "laponie-aurore",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Finlande · Laponie",
+      "headline": [
+        "Laponie : le budget",
+        "*4 chiffres* à connaître"
+      ],
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "À Rovaniemi, l’essentiel est gratuit : rencontrer le Père Noël dans son bureau et franchir le cercle polaire, au village situé à 8 km du centre."
+        }
+      ],
+      "tag": "Guide Laponie · sources du 24/10/2026",
+      "alt": "Une aurore boréale au-dessus du mont Saana, en Laponie finlandaise."
+    },
+    {
+      "photo": "laponie-train-nuit-rovaniemi",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Laponie",
+      "headline": [
+        "*59 €*"
+      ],
+      "detail": "la cabine privative du train de nuit Helsinki–Rovaniemi, prix pour la cabine entière",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "59 € la cabine privative du train de nuit Helsinki–Rovaniemi, prix pour la cabine entière"
+        }
+      ],
+      "tag": "Guide Laponie · sources du 24/10/2026",
+      "alt": "Le train de nuit à voitures-lits en gare de Rovaniemi, un soir d’hiver."
+    },
+    {
+      "photo": "laponie-bureau-pere-noel",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Laponie",
+      "headline": [
+        "*0 €*"
+      ],
+      "detail": "rencontrer le Père Noël dans son bureau, tous les jours de l’année",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "0 € rencontrer le Père Noël dans son bureau, tous les jours de l’année"
+        }
+      ],
+      "tag": "Guide Laponie · sources du 24/10/2026",
+      "alt": "Le bureau du Père Noël illuminé sous la neige, à Rovaniemi."
+    },
+    {
+      "photo": "laponie-traineau-renne",
+      "focus": [
+        0.78,
+        0.55
+      ],
+      "kicker": "Laponie",
+      "headline": [
+        "*30 à 60 €*"
+      ],
+      "detail": "une balade en traîneau à renne de 400 ou 800 m au village du Père Noël",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "30 à 60 € une balade en traîneau à renne de 400 ou 800 m au village du Père Noël"
+        }
+      ],
+      "tag": "Guide Laponie · sources du 24/10/2026",
+      "alt": "Une balade en traîneau tiré par un renne sur la neige, en Laponie."
+    },
+    {
+      "photo": "laponie-huskies-rovaniemi",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Laponie",
+      "headline": [
+        "*63 €*"
+      ],
+      "detail": "la courte balade en huskies au village, du 30 novembre au 4 avril",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "63 € la courte balade en huskies au village, du 30 novembre au 4 avril"
+        }
+      ],
+      "tag": "Guide Laponie · sources du 24/10/2026",
+      "alt": "Un attelage de huskies sur une piste enneigée, à Rovaniemi."
+    },
+    {
+      "photo": "laponie-cabane-neige-rovaniemi",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Le guide complet",
+      "headline": [
+        "Laponie : le budget"
+      ],
+      "detail": "Les prix 2026-2027 de Rovaniemi, relevés le 24 octobre.",
+      "alt": "Une cabane sous la neige dans la forêt de Rovaniemi, en Laponie.",
+      "cta": true
+    }
+  ],
+  "assets": {
+    "regular": {
+      "file": "assets/dmsans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9"
+    },
+    "bold": {
+      "file": "assets/dmsans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211"
+    },
+    "serif": {
+      "file": "assets/playfair.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+      },
+      "sha256": "adefc53e7b3d483f1fa5e85edd82b7689ca79db25a1f6786bd7949cdcfeec601"
+    },
+    "fallbackRegular": {
+      "file": "assets/notosans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "478c558ea716033cd60c03438f628dfa75694dcf6b5f6d505a2f05fd2b4f3823"
+    },
+    "fallbackBold": {
+      "file": "assets/notosans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "1df075a380fc7cb898acf64c1f7b3b4dd780de3caa860178bf929de35817a913"
+    }
+  }
+}

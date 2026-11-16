@@ -25,6 +25,15 @@
           "mediaId": "pin-lisbonne-porto-train",
           "width": 1000,
           "height": 1500
+        },
+        {
+          "id": "pin-algarve-sans-voiture-train",
+          "title": "L’Algarve sans voiture : Faro, Tavira et Lagos en train, à partir de 1,60 €",
+          "description": "La ligne électrifiée de Lagos à Vila Real de Santo António, les bateaux pour les îles, Ponta da Piedade et Benagil : 5 jours d’Algarve sans louer de voiture. 📌 Enregistrez ce guide pour préparer votre voyage au Portugal. Photo : Ana Rey from Sevilla, España — CC BY-SA 2.0. Crédits : https://voyagesansdetour.fr/social-media/production/pin-algarve-sans-voiture-train/credits.txt",
+          "linkPath": "/portugal/algarve-sans-voiture-train/",
+          "mediaId": "pin-algarve-sans-voiture-train",
+          "width": 1000,
+          "height": 1500
         }
       ]
     },

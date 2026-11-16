@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "contentId": "ig-algarve-sans-voiture-train-2026-11-29",
+  "status": "rendered_not_published",
+  "fingerprint": "957f009d51e55810e389239ec2c90adbc5209659a3692bcccc93dbadef270c1f",
+  "createdAt": "2026-11-16T13:49:43.510225Z",
+  "renderFinishedAt": "2026-11-16T13:50:15.143661Z",
+  "rendererContractVersion": 4,
+  "rendererSha256": "2cad356cfe58db78ba8eab495c75f2214f6822b0f2c19268adc45204314934b1",
+  "drawingSha256": "b78990f497d03baf754e3b2b68a795a5e9d3b91a0b6a2f8dad2ebcd7fec2907c",
+  "motionSha256": "9029b7f552929c69dcdcea595e65d9cc3bc8b872113b850e5a74010252289f08",
+  "format": "tableau",
+  "kind": "reel",
+  "channel": "instagram",
+  "publishAt": "2026-11-29T20:00:00Z",
+  "reviewValidUntil": "2026-12-16T13:48:45Z",
+  "sourceCheckedOn": "2026-11-16",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/algarve-sans-voiture-train/",
+  "voice": null,
+  "presenter": null,
+  "sourceUrls": [
+    "https://voyagesansdetour.fr/portugal/algarve-sans-voiture-train/"
+  ],
+  "photos": {
+    "algarve-tavira": {
+      "licence": "CC BY-SA 3.0",
+      "author": "Dmitry Tonkonog",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tavira_river_bank_02.jpg"
+    },
+    "algarve-train": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Kolforn",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:2017-08-19_Train_type_0450,_Tunes_railway_station_(1).JPG"
+    },
+    "algarve-ponta-piedade": {
+      "licence": "CC BY-SA 2.0",
+      "author": "Ana Rey from Sevilla, España",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Lagos_Ponta_da_Piedade_(50509745908).jpg"
+    },
+    "algarve-benagil": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Joseolgon",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Benagil_Cave_(10).jpg"
+    }
+  },
+  "clips": {},
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "durationSeconds": 15.4,
+    "videoCodec": "h264",
+    "pixelFormat": "yuv420p",
+    "videoBitrateBps": 2926464,
+    "audioCodec": "aac",
+    "audioSampleRate": 48000,
+    "audioBitrateBps": 96449,
+    "fullDecodePassed": true,
+    "loudness": {
+      "integratedLufs": -16.2,
+      "truePeakDbfs": -2.2
+    }
+  },
+  "files": [
+    {
+      "file": "apercu.jpg",
+      "sha256": "298e4de3b333e916694c920cffc90fe70b1396d5c46404d69fa0ae3fcb4b38c5",
+      "bytes": 165319
+    },
+    {
+      "file": "credits.txt",
+      "sha256": "396932a2b11491dfeeb94107075d941610688da35f742d684e304ca7168aa056",
+      "bytes": 2331
+    },
+    {
+      "file": "dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "file": "encode.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "legende.txt",
+      "sha256": "da60810fed41691b3610000c77f9077b2e6879e3f9d3d68b4375cdddd73c91e9",
+      "bytes": 657
+    },
+    {
+      "file": "notosans-OFL.txt",
+      "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a",
+      "bytes": 4396
+    },
+    {
+      "file": "playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    },
+    {
+      "file": "poster.jpg",
+      "sha256": "1694de9b4ba465e108d3347480bf7a084edf44ebab0524c2731d03f31980e7b4",
+      "bytes": 398568
+    },
+    {
+      "file": "reel.mp4",
+      "sha256": "18a14ca5513cfacd153b27d55fbe132b5df81ab66e24b0ab0bb073ec866aca93",
+      "bytes": 5837703
+    },
+    {
+      "file": "scenario.json",
+      "sha256": "8a387894c380ac73107877ac06c2bbc40c2c4d4d60a79d3e2475c9e9bc35b569",
+      "bytes": 7244
+    },
+    {
+      "file": "scene-01.jpg",
+      "sha256": "27e4ef2bcea502a5c0eb7b8dc9a3065df356fb7d5b806b05e44da8f19c3d952a",
+      "bytes": 363567
+    },
+    {
+      "file": "scene-02.jpg",
+      "sha256": "e39d8d7a284982d7881f654e228da580eb70fa7bec62e09c97d431de0ddaf728",
+      "bytes": 452019
+    },
+    {
+      "file": "scene-03.jpg",
+      "sha256": "d6e37515b3b6f530d342d64100c4e1d33f7b3051ae1d4ca6b67f48b9d22ab61f",
+      "bytes": 310838
+    },
+    {
+      "file": "scene-04.jpg",
+      "sha256": "b4179a6ccbdffd6b88fc7c6db97cf98e5452dce7b8930ddb9d8fcde9c4123e46",
+      "bytes": 578513
+    }
+  ],
+  "runtime": {
+    "wallSeconds": 31.286,
+    "encoderThreads": 2,
+    "pillowVersion": "11.3.0",
+    "ffmpegVersion": "ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers"
+  },
+  "publication": {
+    "uploaded": false,
+    "scheduled": false,
+    "published": false,
+    "readyForAutomaticImport": false
+  },
+  "cost": {
+    "newPaidService": false,
+    "providerCalls": 0,
+    "monetarySpendEur": 0
+  }
+}

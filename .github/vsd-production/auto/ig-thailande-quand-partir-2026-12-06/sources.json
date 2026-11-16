@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "checkedOn": "2026-11-16",
+  "method": "Page publiée du guide relevée automatiquement ; texte visible conservé tel quel, première ligne = URL.",
+  "sources": {
+    "guide": {
+      "url": "https://voyagesansdetour.fr/thailande/thailande-quand-partir/",
+      "publisher": "Voyage Sans Détour",
+      "title": "Quand partir en Thaïlande : le bon mois pour Bangkok, le Nord, l’Andaman et Koh Samui",
+      "retrievedAt": "2026-11-16T13:48:45Z",
+      "snapshot": {
+        "file": "auto/ig-thailande-quand-partir-2026-12-06/guide.txt",
+        "sha256": "faf6ecc1eee21115525e1a2ab2889b7599420dc058d7bbd3d99219ee33317690"
+      }
+    }
+  }
+}

@@ -1894,6 +1894,251 @@
           "bytes": 4449
         }
       ]
+    },
+    {
+      "contentId": "fb-japon-budget-2-semaines-2026-12-06",
+      "kind": "photos",
+      "approved": true,
+      "files": [
+        {
+          "name": "scene-01.jpg",
+          "sha256": "18957884dee2975d4074eff91c961ce3f804f2dd141dc6e7484c4692d57e8577",
+          "bytes": 477765
+        },
+        {
+          "name": "scene-02.jpg",
+          "sha256": "3e10d2ff859ef7a5e1940d49e3eaace34dd2c62f14def5ca0e32dae62359b95d",
+          "bytes": 395602
+        },
+        {
+          "name": "scene-03.jpg",
+          "sha256": "38b096b89def59f286ea7ea4c024de04deafa27129f5780584405866122093f7",
+          "bytes": 268503
+        },
+        {
+          "name": "scene-04.jpg",
+          "sha256": "ca72c8df531d92a1467820b10825a3a55f6dfb66c87a2b8f3cbcd8f20c2b80c3",
+          "bytes": 349247
+        },
+        {
+          "name": "scene-05.jpg",
+          "sha256": "b4d3c402eba19d65218b0857c3b840fcce5202cc17ba860590405d3f0822e8e0",
+          "bytes": 349062
+        },
+        {
+          "name": "scene-06.jpg",
+          "sha256": "5c555da2e00f648230464799955fa04ed9d43353cb39b902e21a3e1d739b402b",
+          "bytes": 223214
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "f449f1e67fcb971d8ffff272f34936cf22b71ae0105360038bf50aa5ac941fe0",
+          "bytes": 2899
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "fb-laponie-budget-rovaniemi-2026-11-29",
+      "kind": "photos",
+      "approved": true,
+      "files": [
+        {
+          "name": "scene-01.jpg",
+          "sha256": "90dcc31f0a6d9f7c2f3907f98322bc7d5cbe85109d7b6b7365b6a9c1758f119b",
+          "bytes": 176987
+        },
+        {
+          "name": "scene-02.jpg",
+          "sha256": "6b7411b79ae98a1de40e74d06e9518a7e46927ba1c7cb95923171c7c5df93c66",
+          "bytes": 179214
+        },
+        {
+          "name": "scene-03.jpg",
+          "sha256": "2d46e1ff9c9887f5e1c1fdf01856c8960913aae1889522e5226464327a585409",
+          "bytes": 286465
+        },
+        {
+          "name": "scene-04.jpg",
+          "sha256": "e64f9260bdc801c9c68f62d6f71a4c931629e709617df24f7ac407a5c5ae9fb0",
+          "bytes": 319156
+        },
+        {
+          "name": "scene-05.jpg",
+          "sha256": "38adc750c0c28e998d546706e944349907922c07e5a7f9527d77682579b2f1d7",
+          "bytes": 200252
+        },
+        {
+          "name": "scene-06.jpg",
+          "sha256": "0fd36ab45beac45d0146bdf87732c739d6fce73a8cf46be1384d8f9712116758",
+          "bytes": 351287
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "edf2d5f5316a9f1554cbd218953644abd035f73fedc4076fed6ac9619d3d38a3",
+          "bytes": 2645
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "fb-yucatan-itineraire-10-jours-2026-12-03-2",
+      "kind": "photos",
+      "approved": true,
+      "files": [
+        {
+          "name": "scene-01.jpg",
+          "sha256": "b0f162663f851a87d892b8f0ff6280cd646d5da0a04bce15f7f8358ab29321c0",
+          "bytes": 241768
+        },
+        {
+          "name": "scene-02.jpg",
+          "sha256": "e9d284914853e007f66b489e3185e7dccaf6b33cce0df4cbf1b6270cf9e291d6",
+          "bytes": 320674
+        },
+        {
+          "name": "scene-03.jpg",
+          "sha256": "774663ec0780f4cbd07282bdc0a4124adf4e7e75bd62a34d7480a9e3275ea6dd",
+          "bytes": 335708
+        },
+        {
+          "name": "scene-04.jpg",
+          "sha256": "08484caa0bf543966135f838d114b67e1e74631b5a6da56c112da0fc8b27d890",
+          "bytes": 279436
+        },
+        {
+          "name": "scene-05.jpg",
+          "sha256": "a857f526a495b71e3e0c5245b235a13cfc62c56f595998ba9b6cb75fed04d914",
+          "bytes": 271681
+        },
+        {
+          "name": "scene-06.jpg",
+          "sha256": "1b866a1e668b3238120ba4abdd98f973862205274b669d070a6b17f35a81e862",
+          "bytes": 295443
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "2a8df7b875c6295b1a056952b2a6ce6b6f226c555a164c363483515ef0c0e6e4",
+          "bytes": 2813
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "ig-algarve-sans-voiture-train-2026-11-29",
+      "approved": true,
+      "files": [
+        {
+          "name": "reel.mp4",
+          "sha256": "18a14ca5513cfacd153b27d55fbe132b5df81ab66e24b0ab0bb073ec866aca93",
+          "bytes": 5837703
+        },
+        {
+          "name": "poster.jpg",
+          "sha256": "1694de9b4ba465e108d3347480bf7a084edf44ebab0524c2731d03f31980e7b4",
+          "bytes": 398568
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "396932a2b11491dfeeb94107075d941610688da35f742d684e304ca7168aa056",
+          "bytes": 2331
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "ig-thailande-quand-partir-2026-12-06",
+      "approved": true,
+      "files": [
+        {
+          "name": "reel.mp4",
+          "sha256": "c4febb83d387de0d643bfdf827f2a80237c64af781c812071435220f325a2b68",
+          "bytes": 7270933
+        },
+        {
+          "name": "poster.jpg",
+          "sha256": "39f1e9dc52f1418f38215ac1b46fe9a6ec6ab9ec5395f0acfb2291c3461fe709",
+          "bytes": 303662
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "59ade2390b794ab432bcb9091d594733f68874c61ec6ee5ddabdb2565e779883",
+          "bytes": 3305
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "pin-algarve-sans-voiture-train",
+      "kind": "pin",
+      "approved": true,
+      "files": [
+        {
+          "name": "pin.jpg",
+          "bytes": 292754,
+          "sha256": "9d7bed74694e1a3eb64eb6f9ca7f3a91b221111f4e6120481e18763369856635"
+        },
+        {
+          "name": "credits.txt",
+          "bytes": 366,
+          "sha256": "701a97427dc9d514dce2804f18b73f8c21f516797cf0785fcb079948637036a5"
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "bytes": 4482,
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "bytes": 4449,
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+        }
+      ]
     }
   ]
 }

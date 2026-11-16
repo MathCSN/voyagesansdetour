@@ -228,6 +228,36 @@
       "notBefore": "2026-11-15T10:39:33Z",
       "file": "scenarios/igc-vietnam-itineraire-15-jours-2026-11-26.json",
       "sha256": "19688d29322216c50b69d4756dca1636959e638be7ea09bfea2392b61ace9c31"
+    },
+    {
+      "contentId": "fb-japon-budget-2-semaines-2026-12-06",
+      "notBefore": "2026-11-16T13:48:45Z",
+      "file": "scenarios/fb-japon-budget-2-semaines-2026-12-06.json",
+      "sha256": "1826ae8f6ca32949fb969eace73bfc2abd5cc9472ff4d754e502e9df68c59a86"
+    },
+    {
+      "contentId": "fb-laponie-budget-rovaniemi-2026-11-29",
+      "notBefore": "2026-11-16T13:48:45Z",
+      "file": "scenarios/fb-laponie-budget-rovaniemi-2026-11-29.json",
+      "sha256": "07c1c9241321e94ea3dd21cbb2b66fcc85f31c186f11d84405d8db0a5e26d32a"
+    },
+    {
+      "contentId": "fb-yucatan-itineraire-10-jours-2026-12-03-2",
+      "notBefore": "2026-11-16T13:48:45Z",
+      "file": "scenarios/fb-yucatan-itineraire-10-jours-2026-12-03-2.json",
+      "sha256": "1063b84f94e4717046fecb66b159d70384c90a896a397fdb06fadeed9de05f1a"
+    },
+    {
+      "contentId": "ig-algarve-sans-voiture-train-2026-11-29",
+      "notBefore": "2026-11-16T13:48:45Z",
+      "file": "scenarios/ig-algarve-sans-voiture-train-2026-11-29.json",
+      "sha256": "8a387894c380ac73107877ac06c2bbc40c2c4d4d60a79d3e2475c9e9bc35b569"
+    },
+    {
+      "contentId": "ig-thailande-quand-partir-2026-12-06",
+      "notBefore": "2026-11-16T13:48:45Z",
+      "file": "scenarios/ig-thailande-quand-partir-2026-12-06.json",
+      "sha256": "644e0b52610ef38ead5610a016537b6cbd185f8238a29d1a2de5d6109012c688"
     }
   ]
 }

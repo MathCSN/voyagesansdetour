@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 1,
+  "photos": {
+    "algarve-benagil": {
+      "camera": "DSC-RX100M4",
+      "file": "assets/photos/auto/algarve-benagil.jpg",
+      "sha256": "e541c7ce7dbd72cbfbefe50fafa276818a424ebeeaacf2511dc6299c16d339b3",
+      "width": 2400,
+      "height": 1600,
+      "commonsTitle": "File:Benagil Cave (10).jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Benagil_Cave_(10).jpg",
+      "author": "Joseolgon",
+      "commonsCredit": "Own work",
+      "categories": "Self-published work|Portugal photographs taken on 2021-08-04|Gruta de Benagil",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        5472,
+        3648
+      ],
+      "commonsSha1": "9f1881145b8f085bfe46d27cdcdce23da5e47558",
+      "retrievedAt": "2026-11-16T13:48:45Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux.",
+      "emblematic": true
+    },
+    "algarve-ponta-piedade": {
+      "camera": "NIKON D5600",
+      "file": "assets/photos/auto/algarve-ponta-piedade.jpg",
+      "sha256": "d73391aabd48987eeb386158bc7b3946c07d99afedfe48877d1f8a53cdd09c85",
+      "width": 2394,
+      "height": 1600,
+      "commonsTitle": "File:Lagos Ponta da Piedade (50509745908).jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Lagos_Ponta_da_Piedade_(50509745908).jpg",
+      "author": "Ana Rey from Sevilla, España",
+      "commonsCredit": "Lagos: Ponta da Piedade",
+      "categories": "Ponta da Piedade|Flickr images reviewed by FlickreviewR 2",
+      "licence": "CC BY-SA 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "originalSize": [
+        2992,
+        2000
+      ],
+      "commonsSha1": "39eec9c61f50031cfbbc5842dd45d0c99780f78b",
+      "retrievedAt": "2026-11-16T13:48:45Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux.",
+      "emblematic": true
+    },
+    "algarve-tavira": {
+      "camera": "Canon EOS REBEL T3i",
+      "file": "assets/photos/auto/algarve-tavira.jpg",
+      "sha256": "c24bf045221a81e288f80f59207a4371f71e999600f90215f8e81a2bcbe5be34",
+      "width": 2667,
+      "height": 1600,
+      "commonsTitle": "File:Tavira river bank 02.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tavira_river_bank_02.jpg",
+      "author": "Dmitry Tonkonog",
+      "commonsCredit": "Own work",
+      "categories": "Taken with Canon EOS 600D|Ponte antiga sobre o Rio Gilão|Self-published work|Portugal photographs taken on 2014-04-04|April 2014 in Algarve|Bridges over the Gilão River|Gilão River in Tavira",
+      "licence": "CC BY-SA 3.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "originalSize": [
+        3540,
+        2124
+      ],
+      "commonsSha1": "a924efa002efbcb010c88d2636bf89970ca0b188",
+      "retrievedAt": "2026-11-16T13:48:45Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux.",
+      "emblematic": true
+    },
+    "algarve-train": {
+      "camera": "Canon PowerShot SX400 IS",
+      "file": "assets/photos/auto/algarve-train.jpg",
+      "sha256": "e3237958deff7fcfe88bf859b75d46ce79346abae7ac3d239f89f777cde19988",
+      "width": 2133,
+      "height": 1600,
+      "commonsTitle": "File:2017-08-19 Train type 0450, Tunes railway station (1).JPG",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:2017-08-19_Train_type_0450,_Tunes_railway_station_(1).JPG",
+      "author": "Kolforn",
+      "commonsCredit": "Own work",
+      "categories": "Taken with Canon PowerShot SX400 IS|Tunes train station|Attribution only license|Overhead lines in Portugal|Train station platforms in Portugal|2017 in rail transport in Portugal|Images by Kolforn|Files with coordinates missing SDC location of creation|August 2017 in Algarve|Portugal photographs taken on 2017-08-19|Portuguese train type 0450 in blue livery",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        4608,
+        3456
+      ],
+      "commonsSha1": "db946a87688509c6946e27e6cef4762e269f8d19",
+      "retrievedAt": "2026-11-16T13:48:45Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    }
+  }
+}

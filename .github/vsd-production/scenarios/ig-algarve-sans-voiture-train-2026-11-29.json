@@ -1,0 +1,229 @@
+{
+  "schemaVersion": 3,
+  "id": "ig-algarve-sans-voiture-train-2026-11-29",
+  "kind": "reel",
+  "channel": "instagram",
+  "format": "tableau",
+  "destination": "Algarve",
+  "title": "L’Algarve en train : le tableau à garder",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/algarve-sans-voiture-train/",
+  "publishAt": "2026-11-29T20:00:00Z",
+  "review": {
+    "status": "reviewed_for_render",
+    "checkedAt": "2026-11-16T13:48:45Z",
+    "validUntil": "2026-12-16T13:48:45Z",
+    "method": "Généré automatiquement (auto_social.py) depuis la page publiée du guide relevée le 16/11/2026 : chaque chiffre, étape ou ligne de tableau est cité mot pour mot ; photos et vidéos réelles sous licence libre, aucune image ni vidéo générée par IA ; garde-fous de production.py passés avant la mise en file."
+  },
+  "sources": {
+    "file": "auto/ig-algarve-sans-voiture-train-2026-11-29/sources.json",
+    "sha256": "a662f34af941ca5c7b19a42a012d18f0bd49feff5cfeb1c268daeb87e0e333a3"
+  },
+  "photos": {
+    "file": "auto/ig-algarve-sans-voiture-train-2026-11-29/photos.json",
+    "sha256": "223887d454f72bf309e95f89dc4daa4a82040358acf0a78c3d6f98c47ecff9a2"
+  },
+  "caption": {
+    "hook": "🗺️ L’Algarve sans voiture : Faro, Tavira et Lagos en train, à partir de 1,60 €",
+    "lines": [
+      "💶 Faro → Olhão : 1,60 €",
+      "💶 Faro → Tavira : 3,60 €",
+      "💶 Faro → Lagos : 8,30 €",
+      "💶 Faro → Lagos (InterRegional) : 9,15 €",
+      "💶 Tavira → Lagos (direct) : 10,55 €"
+    ],
+    "cta": "📌 Enregistrez ce reel pour votre voyage. 🔗 Prix, horaires et détails : le guide complet est en lien dans la bio.",
+    "hashtags": [
+      "#Algarve",
+      "#Portugal",
+      "#VoyagePortugal",
+      "#Itineraire",
+      "#VoyageSansDetour"
+    ]
+  },
+  "scenes": [
+    {
+      "photo": "algarve-tavira",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "hook",
+      "kicker": "Portugal · Algarve",
+      "headline": [
+        "L’Algarve",
+        "en train",
+        "*le tableau à garder*"
+      ],
+      "seconds": 2.2,
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "Depuis juillet 2026, la ligne de l’Algarve est électrifiée et des trains directs relient Vila Real de Santo António à Lagos."
+        }
+      ],
+      "tag": "Guide Algarve · sources du 24/10/2026",
+      "alt": "Le vieux pont sur le Gilão et les maisons blanches de Tavira."
+    },
+    {
+      "photo": "algarve-train",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "table",
+      "kicker": "Algarve",
+      "headline": [
+        "Prix régional"
+      ],
+      "seconds": 7.0,
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "Faro → Olhão 1,60 €"
+        },
+        {
+          "source": "guide",
+          "excerpt": "Faro → Tavira 3,60 €"
+        },
+        {
+          "source": "guide",
+          "excerpt": "Faro → Lagos 8,30 €"
+        },
+        {
+          "source": "guide",
+          "excerpt": "Faro → Lagos (InterRegional) 9,15 €"
+        },
+        {
+          "source": "guide",
+          "excerpt": "Tavira → Lagos (direct) 10,55 €"
+        }
+      ],
+      "tag": "Guide Algarve · sources du 24/10/2026",
+      "rows": [
+        [
+          "Faro → Olhão",
+          "1,60 €"
+        ],
+        [
+          "Faro → Tavira",
+          "3,60 €"
+        ],
+        [
+          "Faro → Lagos",
+          "8,30 €"
+        ],
+        [
+          "Faro → Lagos (InterRegional)",
+          "9,15 €"
+        ],
+        [
+          "Tavira → Lagos (direct)",
+          "10,55 €"
+        ]
+      ],
+      "note": "Faites pause pour tout lire",
+      "alt": "Un train régional entre en gare de Tunes, carrefour ferroviaire de l’Algarve."
+    },
+    {
+      "photo": "algarve-ponta-piedade",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "fact",
+      "kicker": "Algarve",
+      "headline": [
+        "*182 marches*"
+      ],
+      "seconds": 3.8,
+      "detail": "pour descendre au pied des falaises de Ponta da Piedade",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "182 marches pour descendre au pied des falaises de Ponta da Piedade"
+        }
+      ],
+      "tag": "Guide Algarve · sources du 24/10/2026",
+      "alt": "Les arches de roche dorée et l’eau claire de Ponta da Piedade, près de Lagos."
+    },
+    {
+      "photo": "algarve-benagil",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "cta",
+      "kicker": "Le guide complet",
+      "headline": [
+        "L’Algarve",
+        "en train"
+      ],
+      "seconds": 2.4,
+      "note": "Enregistrez cette vidéo pour votre voyage",
+      "button": "voyagesansdetour.fr",
+      "alt": "La voûte percée de la grotte de Benagil au-dessus de sa petite plage."
+    }
+  ],
+  "musicStart": 8,
+  "assets": {
+    "regular": {
+      "file": "assets/dmsans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9"
+    },
+    "bold": {
+      "file": "assets/dmsans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211"
+    },
+    "serif": {
+      "file": "assets/playfair.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+      },
+      "sha256": "adefc53e7b3d483f1fa5e85edd82b7689ca79db25a1f6786bd7949cdcfeec601"
+    },
+    "fallbackRegular": {
+      "file": "assets/notosans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "478c558ea716033cd60c03438f628dfa75694dcf6b5f6d505a2f05fd2b4f3823"
+    },
+    "fallbackBold": {
+      "file": "assets/notosans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "1df075a380fc7cb898acf64c1f7b3b4dd780de3caa860178bf929de35817a913"
+    },
+    "music": {
+      "file": "assets/happy-alley.mp3",
+      "sha256": "f598c8ee624f1db9a2cd38886524a40baff4ce730dcf999c0763791268fa8265",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "commercialUseAllowed": true,
+      "title": "Happy Alley",
+      "author": "Kevin MacLeod",
+      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100482",
+      "provenance": {
+        "file": "evidence/happy-alley-provenance.json",
+        "sha256": "5a2ba8f3dba28b0a748b00089d3854db1fde92213429823746f6d01805f904ac"
+      }
+    }
+  }
+}

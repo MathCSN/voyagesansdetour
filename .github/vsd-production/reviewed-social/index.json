@@ -513,6 +513,69 @@
       "itemIds": [
         "vsd-production:instagram:igc-vietnam-itineraire-15-jours-2026-11-26:photo-v1"
       ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/fb-japon-budget-2-semaines-2026-12-06-v1.json",
+      "fileSha256": "86a7dd4fc419925b733603c89f2ab6d28136a01456b5211b5a9b2b4d96095e66",
+      "batchId": "fb-japon-budget-2-semaines-2026-12-06-v1",
+      "batchSha256": "d7c94bfba98131dcb4fe2d2b255b2e4a4a7b3eb60415b28e8750645b48e17d19",
+      "itemIds": [
+        "vsd-production:facebook:fb-japon-budget-2-semaines-2026-12-06:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/fb-laponie-budget-rovaniemi-2026-11-29-v1.json",
+      "fileSha256": "e73464eaee4651aa27c22174472bc38b29ce880410cedc436ce72a9de9b83e23",
+      "batchId": "fb-laponie-budget-rovaniemi-2026-11-29-v1",
+      "batchSha256": "15645becd21125b81913ced8badd01c8e09512426ed7eb8ca81d0d631d458e83",
+      "itemIds": [
+        "vsd-production:facebook:fb-laponie-budget-rovaniemi-2026-11-29:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/fb-yucatan-itineraire-10-jours-2026-12-03-2-v1.json",
+      "fileSha256": "ba6e777c2e316fe23b23ad1b7c9a22e7894562a7c32d81665c2aacd1c16c4746",
+      "batchId": "fb-yucatan-itineraire-10-jours-2026-12-03-2-v1",
+      "batchSha256": "3ae20cce192e19fb2183fea168d714394d45997377f3cb089ecb56851827de34",
+      "itemIds": [
+        "vsd-production:facebook:fb-yucatan-itineraire-10-jours-2026-12-03-2:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-algarve-sans-voiture-train-2026-11-29-v1.json",
+      "fileSha256": "321b722d11632ef1dfca1d9875dc94117a483c37bc855e16dbcc719e375f7c3f",
+      "batchId": "ig-algarve-sans-voiture-train-2026-11-29-v1",
+      "batchSha256": "8d8a90c6fa22f0897b5c6a6e2a4511816128f4f727dc484bc90a200b33b06207",
+      "itemIds": [
+        "vsd-production:instagram:ig-algarve-sans-voiture-train-2026-11-29:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-algarve-sans-voiture-train-2026-11-29-tiktok-v1.json",
+      "fileSha256": "8e7b7fc7a3ac503b72f834bbe042b9dbd3891061f7cb33c8e58e4b5921947c36",
+      "batchId": "ig-algarve-sans-voiture-train-2026-11-29-tiktok-v1",
+      "batchSha256": "e4eb44a5f9873519175de5f6e186d91866c5eea7437406cd2b94c455387dc4fa",
+      "itemIds": [
+        "vsd-production:tiktok:ig-algarve-sans-voiture-train-2026-11-29:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-thailande-quand-partir-2026-12-06-v1.json",
+      "fileSha256": "70e03b712d11393d8562b0a7f479689f991e0f44f587a8ff349a7e12ef310d01",
+      "batchId": "ig-thailande-quand-partir-2026-12-06-v1",
+      "batchSha256": "2ef09ec148bf69d26427614e564a4f11ac097641603ecb00034f7fe57f3a6694",
+      "itemIds": [
+        "vsd-production:instagram:ig-thailande-quand-partir-2026-12-06:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-thailande-quand-partir-2026-12-06-tiktok-v1.json",
+      "fileSha256": "ed64e2c24c95db484975d5536e411f6342644b3a7e45a03447fa0181c7ee875f",
+      "batchId": "ig-thailande-quand-partir-2026-12-06-tiktok-v1",
+      "batchSha256": "7e6534a95bfef916fbc7752a1e23a913b2f5d3412aea71dfa43688d75c9c8715",
+      "itemIds": [
+        "vsd-production:tiktok:ig-thailande-quand-partir-2026-12-06:photo-v1"
+      ]
     }
   ],
   "retirements": [

@@ -1,0 +1,183 @@
+{
+  "schemaVersion": 1,
+  "contentId": "ig-thailande-quand-partir-2026-12-06",
+  "status": "rendered_not_published",
+  "fingerprint": "c353145237ea4893bd458e8ad4259ae150528a5457010cc1f438db444ad3cf1c",
+  "createdAt": "2026-11-16T13:50:15.343287Z",
+  "renderFinishedAt": "2026-11-16T13:50:55.087296Z",
+  "rendererContractVersion": 4,
+  "rendererSha256": "2cad356cfe58db78ba8eab495c75f2214f6822b0f2c19268adc45204314934b1",
+  "drawingSha256": "b78990f497d03baf754e3b2b68a795a5e9d3b91a0b6a2f8dad2ebcd7fec2907c",
+  "motionSha256": "9029b7f552929c69dcdcea595e65d9cc3bc8b872113b850e5a74010252289f08",
+  "format": "liste",
+  "kind": "reel",
+  "channel": "instagram",
+  "publishAt": "2026-12-06T20:00:00Z",
+  "reviewValidUntil": "2026-12-16T13:48:45Z",
+  "sourceCheckedOn": "2026-11-16",
+  "targetUrl": "https://voyagesansdetour.fr/thailande/thailande-quand-partir/",
+  "voice": null,
+  "presenter": null,
+  "sourceUrls": [
+    "https://voyagesansdetour.fr/thailande/thailande-quand-partir/"
+  ],
+  "photos": {
+    "thailande-railay": {
+      "licence": "CC BY-SA 3.0",
+      "author": "kallerna",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Railay_Beach_5.jpg"
+    },
+    "thailande-phuket-promthep": {
+      "licence": "CC BY 2.0",
+      "author": "edwin.11",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Laem_Phromthep_in_Phuket_(5733631022).jpg"
+    },
+    "thailande-koh-samui": {
+      "licence": "CC BY 4.0",
+      "author": "© Vyacheslav Argenberg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Koh_Samui,_Beach,_Thailand.jpg"
+    },
+    "thailande-koh-samui-coral-cove": {
+      "licence": "CC BY 2.0",
+      "author": "Fabio Achilli from Milano, Italy",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Koh_Samui,_Coral_Cove_Beach_(6217274045).jpg"
+    },
+    "thailande-bangkok-grand-palais": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Bjørn Erik Pedersen",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:A_roof_of_a_building_at_the_Grand_Palace,_Bangkok,_sunrise,_2017.jpg"
+    },
+    "thailande-iles-similan": {
+      "licence": "CC BY 4.0",
+      "author": "Sgroey",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Donald_Duck_bay,_similan_islands.jpg"
+    },
+    "thailande-chiang-mai-doi-suthep": {
+      "licence": "CC BY 4.0",
+      "author": "Philip Nalangan",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Doi_Suthep_Temple_Chiang_Mai_Thailand.jpg"
+    }
+  },
+  "clips": {},
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "durationSeconds": 18.9,
+    "videoCodec": "h264",
+    "pixelFormat": "yuv420p",
+    "videoBitrateBps": 2971911,
+    "audioCodec": "aac",
+    "audioSampleRate": 48000,
+    "audioBitrateBps": 96216,
+    "fullDecodePassed": true,
+    "loudness": {
+      "integratedLufs": -16.0,
+      "truePeakDbfs": -2.3
+    }
+  },
+  "files": [
+    {
+      "file": "apercu.jpg",
+      "sha256": "1369ddd44eede3b8a12e3390e63f81a197c34d9e31cf8d37b549d50ef6e01106",
+      "bytes": 272299
+    },
+    {
+      "file": "credits.txt",
+      "sha256": "59ade2390b794ab432bcb9091d594733f68874c61ec6ee5ddabdb2565e779883",
+      "bytes": 3305
+    },
+    {
+      "file": "dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "file": "encode.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "legende.txt",
+      "sha256": "338dfd779d426558d144849b011add7a2d9c3df5bfe6e1af676ba225b4bda01a",
+      "bytes": 962
+    },
+    {
+      "file": "notosans-OFL.txt",
+      "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a",
+      "bytes": 4396
+    },
+    {
+      "file": "playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    },
+    {
+      "file": "poster.jpg",
+      "sha256": "39f1e9dc52f1418f38215ac1b46fe9a6ec6ab9ec5395f0acfb2291c3461fe709",
+      "bytes": 303662
+    },
+    {
+      "file": "reel.mp4",
+      "sha256": "c4febb83d387de0d643bfdf827f2a80237c64af781c812071435220f325a2b68",
+      "bytes": 7270933
+    },
+    {
+      "file": "scenario.json",
+      "sha256": "644e0b52610ef38ead5610a016537b6cbd185f8238a29d1a2de5d6109012c688",
+      "bytes": 8562
+    },
+    {
+      "file": "scene-01.jpg",
+      "sha256": "d800f2f87add897515e61c7bed1d39f9f21bf8431e2caa7bc3c97f03e11b4de5",
+      "bytes": 276864
+    },
+    {
+      "file": "scene-02.jpg",
+      "sha256": "159c5441d0ebf2165391d515f33264f04aa17fd01c71f33f47d303da1d7302d2",
+      "bytes": 393225
+    },
+    {
+      "file": "scene-03.jpg",
+      "sha256": "bcc51ea5271cd138a0872a841a0cf29042a93638e41866d7c1221fac12483599",
+      "bytes": 268655
+    },
+    {
+      "file": "scene-04.jpg",
+      "sha256": "0ed3711208dc5c42199761ac309a66eedcc938ea0d36893c8b209292a3831b01",
+      "bytes": 615310
+    },
+    {
+      "file": "scene-05.jpg",
+      "sha256": "c6016e22f098014999a9975f88b1c5b013da798abb4253e7c2576a626e0c9a52",
+      "bytes": 228128
+    },
+    {
+      "file": "scene-06.jpg",
+      "sha256": "691fc680601649661070355ea7bdb050f1f6227254fb00f40ba287fe80e10ef7",
+      "bytes": 441972
+    },
+    {
+      "file": "scene-07.jpg",
+      "sha256": "7e58c6555f4c6268fb5f499fd3a5ac95894cf9bf551b0ca5c051052b09020dba",
+      "bytes": 385817
+    }
+  ],
+  "runtime": {
+    "wallSeconds": 39.39,
+    "encoderThreads": 2,
+    "pillowVersion": "11.3.0",
+    "ffmpegVersion": "ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers"
+  },
+  "publication": {
+    "uploaded": false,
+    "scheduled": false,
+    "published": false,
+    "readyForAutomaticImport": false
+  },
+  "cost": {
+    "newPaidService": false,
+    "providerCalls": 0,
+    "monetarySpendEur": 0
+  }
+}
