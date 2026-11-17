@@ -106,6 +106,15 @@
       "publicHtmlSha256": "f5ba3e4426e53f351520a855eae29c91b6e120f42cbeda33ecadb5d197e019d8",
       "method": "published_guide_photo_template_v3",
       "publicationConfirmed": false
+    },
+    {
+      "id": "pin-costa-rica-itineraire-2-semaines",
+      "admittedAt": "2026-11-17T14:37:19.145895+00:00",
+      "articleSha256": "4de986d053ee58ec98f4f77f121591143bb1cd37ed469c5baee80e081e1cc854",
+      "imageSha256": "eb31c345e7ae8cc884b3e0bac451cb72b69e9a5b6570625e5c54387c8cbcc746",
+      "publicHtmlSha256": "f485d55327d75e08f7a76254deb42adb99649aa59d6f336e7f54612dde999478",
+      "method": "published_guide_photo_template_v3",
+      "publicationConfirmed": false
     }
   ]
 }

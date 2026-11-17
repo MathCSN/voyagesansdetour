@@ -59,7 +59,17 @@
       "countries": [
         "*"
       ],
-      "items": []
+      "items": [
+        {
+          "id": "pin-costa-rica-itineraire-2-semaines",
+          "title": "Le Costa Rica en 2 semaines : itinéraire jour par jour, prix et conseils",
+          "description": "Deux semaines au Costa Rica sans voiture : navettes de 70 à 84 $, Manuel Antonio à 18 $, ponts suspendus, Arenal et Caraïbes, où dormir et budget de 931 $. 📌 Enregistrez ce guide pour préparer votre voyage au Costa Rica. Photo : Rhododendrites — CC BY-SA 4.0. Crédits : https://voyagesansdetour.fr/social-media/production/pin-costa-rica-itineraire-2-semaines/credits.txt",
+          "linkPath": "/costa-rica/costa-rica-itineraire-2-semaines/",
+          "mediaId": "pin-costa-rica-itineraire-2-semaines",
+          "width": 1000,
+          "height": 1500
+        }
+      ]
     }
   ],
   "withdrawn": [

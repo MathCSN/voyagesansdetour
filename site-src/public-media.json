@@ -2139,6 +2139,33 @@
           "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
         }
       ]
+    },
+    {
+      "contentId": "pin-costa-rica-itineraire-2-semaines",
+      "kind": "pin",
+      "approved": true,
+      "files": [
+        {
+          "name": "pin.jpg",
+          "bytes": 275620,
+          "sha256": "eb31c345e7ae8cc884b3e0bac451cb72b69e9a5b6570625e5c54387c8cbcc746"
+        },
+        {
+          "name": "credits.txt",
+          "bytes": 337,
+          "sha256": "89541fbd3b62ced8d7f9fbe608ab1cf90cf71c019a7eb7673023c3e023d384ca"
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "bytes": 4482,
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "bytes": 4449,
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+        }
+      ]
     }
   ]
 }
