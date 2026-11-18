@@ -576,6 +576,24 @@
       "itemIds": [
         "vsd-production:tiktok:ig-thailande-quand-partir-2026-12-06:photo-v1"
       ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-marrakech-3-jours-2026-12-08-v1.json",
+      "fileSha256": "79833203a8e9d2ba33c6a78796d7eda344282c1730d81d14abadcdfe098dc59c",
+      "batchId": "ig-marrakech-3-jours-2026-12-08-v1",
+      "batchSha256": "343ce8a94e16d3d14275ab38118145be7e770e355b145bff447a93a13a5de213",
+      "itemIds": [
+        "vsd-production:instagram:ig-marrakech-3-jours-2026-12-08:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-marrakech-3-jours-2026-12-08-tiktok-v1.json",
+      "fileSha256": "b193485c342d042337ed53c840b3c2fd250a97b57e5b0e6f27e938b17ff3c63d",
+      "batchId": "ig-marrakech-3-jours-2026-12-08-tiktok-v1",
+      "batchSha256": "8f69b1d74f8c470fd30d667f8e34d9f58d7fb8c66d30e30ee8908114c1f72898",
+      "itemIds": [
+        "vsd-production:tiktok:ig-marrakech-3-jours-2026-12-08:photo-v1"
+      ]
     }
   ],
   "retirements": [

@@ -115,6 +115,15 @@
       "publicHtmlSha256": "f485d55327d75e08f7a76254deb42adb99649aa59d6f336e7f54612dde999478",
       "method": "published_guide_photo_template_v3",
       "publicationConfirmed": false
+    },
+    {
+      "id": "pin-andalousie-train-seville-cordoue-grenade-c",
+      "admittedAt": "2026-11-18T14:15:30.779311+00:00",
+      "articleSha256": "aeccd08d7e58bf87af71d92a603a055809039f94b4b4e11931ee8d13bd2d81ff",
+      "imageSha256": "52a6023ed62a9e04b4c479ada5cd3c6b219cc8e3cce527a3417c9848288e88a8",
+      "publicHtmlSha256": "ad5b5ecc32fc6a0fd4215096a066ac2114995fc50c7717af80e5642a79f0708b",
+      "method": "published_guide_photo_template_v3",
+      "publicationConfirmed": false
     }
   ]
 }

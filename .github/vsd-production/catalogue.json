@@ -258,6 +258,12 @@
       "notBefore": "2026-11-16T13:48:45Z",
       "file": "scenarios/ig-thailande-quand-partir-2026-12-06.json",
       "sha256": "644e0b52610ef38ead5610a016537b6cbd185f8238a29d1a2de5d6109012c688"
+    },
+    {
+      "contentId": "ig-marrakech-3-jours-2026-12-08",
+      "notBefore": "2026-11-18T14:14:05Z",
+      "file": "scenarios/ig-marrakech-3-jours-2026-12-08.json",
+      "sha256": "e8f7cfcbafb417c88c41354c662c698cafd506b98618f76b978357ead621aa41"
     }
   ]
 }

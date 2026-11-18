@@ -43,7 +43,18 @@
       "countries": [
         "espagne"
       ],
-      "items": []
+      "items": [
+        {
+          "id": "pin-andalousie-train-seville-cordoue-grenade-c",
+          "title": "L’Andalousie en train : la forêt d’arcs rouges et blancs de la Mezquita de Cordoue",
+          "description": "Séville–Cordoue en 40 minutes, l’Alhambra à 22,27 €, la Mezquita gratuite à 8 h 30 : l’itinéraire en train avec horaires et prix 2026. 📌 Enregistrez ce guide pour préparer votre voyage en Espagne. Photo : CEphoto, Uwe Aranas — CC BY-SA 3.0. Crédits : https://voyagesansdetour.fr/social-media/production/pin-andalousie-train-seville-cordoue-grenade-c/credits.txt",
+          "linkPath": "/espagne/andalousie-train-seville-cordoue-grenade/",
+          "mediaId": "pin-andalousie-train-seville-cordoue-grenade-c",
+          "width": 1000,
+          "height": 1500,
+          "linkQuery": "utm_source=pinterest&utm_medium=social&utm_content=pin-andalousie-train-seville-cordoue-grenade-c"
+        }
+      ]
     },
     {
       "file": "preparer-italie.xml",
