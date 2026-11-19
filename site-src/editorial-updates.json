@@ -60,6 +60,15 @@
         "paragraphSha256": "2fa8515c5f1387162a24d9e6547d9e0736a956bb0cc89d62c85d6dde3edcc228",
         "verification": "exact-paragraph-presence-v1"
       }
+    },
+    {
+      "id": "auto-6e088082535db181926c07c0",
+      "slug": "vietnam-itineraire-15-jours",
+      "approvalSha256": "87a2e33a296d67da46f6eb895be143f8672384c3fb996238c540e558d1af6e37",
+      "beforeSha256": "f0db54e88dab516bd578c19abb3f892e65610c053c4922e79586d1ad20ef5de7",
+      "afterSha256": "ee624befa83682222758228057f50c1aefb4f14bd14b3e92c4e9a8ea9bc85229",
+      "appliedAt": "2026-11-19T18:37:55Z",
+      "receipt": null
     }
   ]
 }

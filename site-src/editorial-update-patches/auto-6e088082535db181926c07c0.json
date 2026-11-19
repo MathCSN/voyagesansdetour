@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 2,
+  "id": "auto-6e088082535db181926c07c0",
+  "slug": "vietnam-itineraire-15-jours",
+  "baseArticleSha256": "f0db54e88dab516bd578c19abb3f892e65610c053c4922e79586d1ad20ef5de7",
+  "sectionId": "saigon",
+  "afterParagraphSha256": "e4990cc8ec56e9e7af673c01856e2f1c31f5e149a8d7ae165997a80703efd6ec",
+  "paragraph": "La ville de Hô-Chi-Minh-Ville compte une population de 14 002 598 habitants, selon les données de décembre 2024. Cette information est utile pour comprendre la taille et la densité de la ville, qui peut influencer les choix de logement, de transport et d'activités pour les visiteurs.",
+  "sources": [
+    {
+      "url": "https://fr.wikivoyage.org/wiki/H%C3%B4-Chi-Minh-Ville",
+      "sha256": "c58c690c468faba9fcbfd807246314a6b6cd80db4699c04ed2a26fcc779ca7d3",
+      "normalization": "visible-text-cp-node-v1"
+    }
+  ],
+  "reviewedAt": "2026-11-19T18:37:55Z",
+  "validUntil": "2026-11-21T18:37:55Z",
+  "reviewMethod": "source-grounded-model-review-v1",
+  "reviewEvidence": {
+    "proposal": {
+      "schemaVersion": 2,
+      "status": "update_ready_for_pilot_review",
+      "guideSlug": "vietnam-itineraire-15-jours",
+      "baseArticleSha256": "f0db54e88dab516bd578c19abb3f892e65610c053c4922e79586d1ad20ef5de7",
+      "factsSha256": "45a0285ea408b50fe9058c9c0768b6033a868a80e491a392d4ab4ec272fe5579",
+      "facts": [
+        {
+          "id": "c5",
+          "fact": "La ville de Hô-Chi-Minh-Ville a une population de 14 002 598 habitants",
+          "source": 0,
+          "quote": "Population 14 002 598 hab. ( 31 décembre 2024 )",
+          "usefulness": "Connaître la population de la ville de Hô-Chi-Minh-Ville",
+          "sourceContext": {
+            "url": "https://fr.wikivoyage.org/wiki/H%C3%B4-Chi-Minh-Ville",
+            "label": "Wikivoyage — Hô-Chi-Minh-Ville",
+            "excerpt": "e 7 Travailler 8 Manger 9 Boire un verre / Sortir 10 Se loger 10.1 Bon marché 10.2 Prix moyen 10.3 Luxe 11 Rester en contact 12 Gérer le quotidien 13 Santé 14 Aux environs Hô Chi Minh-Ville ( (vi) Thành phố Hồ Chí Minh ) Informations Pays Vietnam Région Viêt Nam méridional Mer Chine méridionale Cours d’eau rivière de Saïgon, Bến Nghé Channel Saïgon , Soài Rạp Altitude 13 m Superficie 6 772,59 km² Population 14 002 598 hab. ( 31 décembre 2024 ) Densité 2 067,54 hab./km² Population de l’agglomération 21 281 639 hab. ( 1 er avril 2019 ) Gentilé Saïgonaise, Saïgonais Code postal 70000–70999, 71000–71999, 72000–72999, 73000–73999, 74000–74999 Préfixe téléphonique 282, 283, 284, 285, 286, 287 Fuseau horaire Localisation 10°39′45″N 106°41′13″E Site officiel Site touristique modifier Hô Chi Minh-Ville (en vietnamien Thành phố Hồ Chí Minh ), no"
+          }
+        }
+      ],
+      "additions": [
+        {
+          "title": "Démographie de Hô-Chi-Minh-Ville",
+          "paragraph": "La ville de Hô-Chi-Minh-Ville compte une population de 14 002 598 habitants, selon les données de décembre 2024. Cette information est utile pour comprendre la taille et la densité de la ville, qui peut influencer les choix de logement, de transport et d'activités pour les visiteurs.",
+          "claims": [
+            "c5"
+          ],
+          "targetSectionId": "saigon"
+        }
+      ],
+      "review": {
+        "supported": true,
+        "issues": [],
+        "checkedClaimIds": [
+          "c5"
+        ]
+      },
+      "usage": {
+        "writer": {
+          "prompt_tokens": 4487,
+          "completion_tokens": 117,
+          "total_tokens": 4604
+        },
+        "reviewer": {
+          "prompt_tokens": 5466,
+          "completion_tokens": 19,
+          "total_tokens": 5485
+        }
+      },
+      "callsAttempted": 2,
+      "publicationApproved": false,
+      "sourceManifest": [
+        {
+          "url": "https://fr.wikivoyage.org/wiki/H%C3%B4-Chi-Minh-Ville",
+          "sha256": "c58c690c468faba9fcbfd807246314a6b6cd80db4699c04ed2a26fcc779ca7d3",
+          "normalizedSha256": "c58c690c468faba9fcbfd807246314a6b6cd80db4699c04ed2a26fcc779ca7d3"
+        }
+      ]
+    },
+    "entailment": {
+      "checks": [
+        {
+          "id": "c5",
+          "entailed": true,
+          "unsupportedDetails": []
+        }
+      ]
+    },
+    "novelty": {
+      "decisions": [
+        {
+          "id": "c5",
+          "supported": true,
+          "newInformation": true,
+          "useful": true,
+          "reason": "La proposition de fait est étayée par une source fiable (Wikivoyage) et fournit une information nouvelle et utile pour les voyageurs, à savoir la population de la ville de Hô-Chi-Minh-Ville."
+        }
+      ]
+    },
+    "observedAt": "2026-11-19T18:37:23+00:00"
+  },
+  "approvalSha256": "87a2e33a296d67da46f6eb895be143f8672384c3fb996238c540e558d1af6e37"
+}
