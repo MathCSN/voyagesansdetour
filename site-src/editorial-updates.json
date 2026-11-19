@@ -68,7 +68,13 @@
       "beforeSha256": "f0db54e88dab516bd578c19abb3f892e65610c053c4922e79586d1ad20ef5de7",
       "afterSha256": "ee624befa83682222758228057f50c1aefb4f14bd14b3e92c4e9a8ea9bc85229",
       "appliedAt": "2026-11-19T18:37:55Z",
-      "receipt": null
+      "receipt": {
+        "verifiedAt": "2026-11-19T18:40:30Z",
+        "url": "https://voyagesansdetour.fr/vietnam/vietnam-itineraire-15-jours/",
+        "htmlSha256": "5479996b6bc6cdb30478f1dadcc5fccbc8877bc0658f37ad9853b2f6c64df1dd",
+        "paragraphSha256": "a38d0b855638e258b3cb8b306ba9be4fcc07a75e94ab7b91228105b66f4789ec",
+        "verification": "exact-paragraph-presence-v1"
+      }
     }
   ]
 }
