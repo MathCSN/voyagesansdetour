@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 1,
+  "contentId": "igc-yucatan-itineraire-10-jours-2026-12-10",
+  "status": "rendered_not_published",
+  "fingerprint": "e2a137e91c86d8751cd407013fd3fb031d812d6f7de4d06aede999dcc12b180c",
+  "createdAt": "2026-11-19T14:34:12.369507Z",
+  "renderFinishedAt": "2026-11-19T14:34:14.059433Z",
+  "rendererContractVersion": 3,
+  "rendererSha256": "2cad356cfe58db78ba8eab495c75f2214f6822b0f2c19268adc45204314934b1",
+  "drawingSha256": "b78990f497d03baf754e3b2b68a795a5e9d3b91a0b6a2f8dad2ebcd7fec2907c",
+  "motionSha256": "9029b7f552929c69dcdcea595e65d9cc3bc8b872113b850e5a74010252289f08",
+  "format": null,
+  "kind": "carousel",
+  "channel": "instagram",
+  "publishAt": "2026-12-10T08:00:00Z",
+  "reviewValidUntil": "2026-12-19T14:33:20Z",
+  "sourceCheckedOn": "2026-11-19",
+  "targetUrl": "https://voyagesansdetour.fr/mexique/yucatan-itineraire-10-jours/",
+  "voice": null,
+  "presenter": null,
+  "sourceUrls": [
+    "https://voyagesansdetour.fr/mexique/yucatan-itineraire-10-jours/"
+  ],
+  "photos": {
+    "yucatan-merida-cathedrale": {
+      "licence": "CC BY 2.0",
+      "author": "xiquinhosilva",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:M%C3%A9rida_de_Yucat%C3%A1n_2023_-_5.jpg"
+    },
+    "yucatan-chichen-itza": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Diego Delso",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Templo_el_Castillo_-_Chichen_Itza-Yucatan-Mexico0222.jpg"
+    },
+    "yucatan-cenote": {
+      "licence": "CC BY 2.0",
+      "author": "Shinya Suzuki",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Cenote_Ik_Kil,_Yucatan,_Dec_2011_-_06.jpg"
+    },
+    "yucatan-tren-maya-merida": {
+      "licence": "CC BY-SA 4.0",
+      "author": "ProtoplasmaKid",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tren_X%27Trapolis_Ts%C3%ADimin_K%E2%80%99%C3%A1ak_arribando_a_la_estaci%C3%B3n_M%C3%A9rida_Teya.jpg"
+    },
+    "yucatan-tulum": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Martin Falbisoner",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tulum_-_God_of_the_Winds_Temple_04.JPG"
+    },
+    "yucatan-uxmal-pyramide": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Ulrich Dus",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Archaeological_and_Cultural_Heritage_-_Pir%C3%A1mide_del_Adivino,_Uxmal,_Mexico.jpg"
+    }
+  },
+  "clips": {},
+  "video": null,
+  "files": [
+    {
+      "file": "apercu.jpg",
+      "sha256": "c15127653eae9b48345f0c3898ee96610584a91b5958e80a75f77d3ba99d9d8f",
+      "bytes": 175902
+    },
+    {
+      "file": "credits.txt",
+      "sha256": "fd84c7a78661dd78028b011dc350f14a009373320686f6dd691234d683fde6fd",
+      "bytes": 2813
+    },
+    {
+      "file": "dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "file": "legende.txt",
+      "sha256": "fdafb6735f3445699b76f54dd30a76cdb406fd90a6a2325a9ff73b5478da0502",
+      "bytes": 929
+    },
+    {
+      "file": "notosans-OFL.txt",
+      "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a",
+      "bytes": 4396
+    },
+    {
+      "file": "playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    },
+    {
+      "file": "scenario.json",
+      "sha256": "df5124871298a5f48b0acc1ffb09b948fcef2d6cc629fa29ce2740a036cf5d6f",
+      "bytes": 7249
+    },
+    {
+      "file": "scene-01.jpg",
+      "sha256": "b0f162663f851a87d892b8f0ff6280cd646d5da0a04bce15f7f8358ab29321c0",
+      "bytes": 241768
+    },
+    {
+      "file": "scene-02.jpg",
+      "sha256": "e9d284914853e007f66b489e3185e7dccaf6b33cce0df4cbf1b6270cf9e291d6",
+      "bytes": 320674
+    },
+    {
+      "file": "scene-03.jpg",
+      "sha256": "774663ec0780f4cbd07282bdc0a4124adf4e7e75bd62a34d7480a9e3275ea6dd",
+      "bytes": 335708
+    },
+    {
+      "file": "scene-04.jpg",
+      "sha256": "08484caa0bf543966135f838d114b67e1e74631b5a6da56c112da0fc8b27d890",
+      "bytes": 279436
+    },
+    {
+      "file": "scene-05.jpg",
+      "sha256": "a857f526a495b71e3e0c5245b235a13cfc62c56f595998ba9b6cb75fed04d914",
+      "bytes": 271681
+    },
+    {
+      "file": "scene-06.jpg",
+      "sha256": "008720b027b86e6f2685c5665513f66016e30eb87375e03117bc4c77943529c1",
+      "bytes": 290674
+    }
+  ],
+  "runtime": {
+    "wallSeconds": 1.313,
+    "encoderThreads": 2,
+    "pillowVersion": "11.3.0",
+    "ffmpegVersion": null
+  },
+  "publication": {
+    "uploaded": false,
+    "scheduled": false,
+    "published": false,
+    "readyForAutomaticImport": false
+  },
+  "cost": {
+    "newPaidService": false,
+    "providerCalls": 0,
+    "monetarySpendEur": 0
+  }
+}

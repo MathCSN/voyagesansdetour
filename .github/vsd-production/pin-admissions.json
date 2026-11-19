@@ -124,6 +124,15 @@
       "publicHtmlSha256": "ad5b5ecc32fc6a0fd4215096a066ac2114995fc50c7717af80e5642a79f0708b",
       "method": "published_guide_photo_template_v3",
       "publicationConfirmed": false
+    },
+    {
+      "id": "pin-guimaraes-une-journee-sans-voiture",
+      "admittedAt": "2026-11-19T14:34:16.829005+00:00",
+      "articleSha256": "d28c4b2ff496dd9632a9f3f33adc9781e004fb2200626eacc2b07f8043fa13ed",
+      "imageSha256": "8c0f08f34e0f57bc90385fc8a66a428e3ec2ce9e9fe0e951980fca646a77e595",
+      "publicHtmlSha256": "0da0bf17be48ad3831ac54f103a77b1f54e339bea7327e5b9f3bde61315b53bb",
+      "method": "published_guide_photo_template_v3",
+      "publicationConfirmed": false
     }
   ]
 }

@@ -34,6 +34,15 @@
           "mediaId": "pin-algarve-sans-voiture-train",
           "width": 1000,
           "height": 1500
+        },
+        {
+          "id": "pin-guimaraes-une-journee-sans-voiture",
+          "title": "Guimarães en une journée : itinéraire, prix et conseils",
+          "description": "Guimarães en un jour depuis Porto : train CP à 3,60 € (1 h 15), Paço dos Duques et château pour 13 €, téléphérique de la Penha à 10 €, et où manger quartier par quartier. 📌 Enregistrez ce guide pour préparer votre voyage au Portugal. Photo : Krzysztof Golik — CC BY-SA 4.0. Crédits : https://voyagesansdetour.fr/social-media/production/pin-guimaraes-une-journee-sans-voiture/credits.txt",
+          "linkPath": "/portugal/guimaraes-une-journee-sans-voiture/",
+          "mediaId": "pin-guimaraes-une-journee-sans-voiture",
+          "width": 1000,
+          "height": 1500
         }
       ]
     },

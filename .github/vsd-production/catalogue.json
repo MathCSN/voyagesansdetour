@@ -264,6 +264,12 @@
       "notBefore": "2026-11-18T14:14:05Z",
       "file": "scenarios/ig-marrakech-3-jours-2026-12-08.json",
       "sha256": "e8f7cfcbafb417c88c41354c662c698cafd506b98618f76b978357ead621aa41"
+    },
+    {
+      "contentId": "igc-yucatan-itineraire-10-jours-2026-12-10",
+      "notBefore": "2026-11-19T14:33:20Z",
+      "file": "scenarios/igc-yucatan-itineraire-10-jours-2026-12-10.json",
+      "sha256": "df5124871298a5f48b0acc1ffb09b948fcef2d6cc629fa29ce2740a036cf5d6f"
     }
   ]
 }

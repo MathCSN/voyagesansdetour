@@ -594,6 +594,15 @@
       "itemIds": [
         "vsd-production:tiktok:ig-marrakech-3-jours-2026-12-08:photo-v1"
       ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/igc-yucatan-itineraire-10-jours-2026-12-10-v1.json",
+      "fileSha256": "822ecbea6af07782f1e01dc555ce09d958c76434a4ef0989ecccc1761d9924ed",
+      "batchId": "igc-yucatan-itineraire-10-jours-2026-12-10-v1",
+      "batchSha256": "35738cf43a7d007121022e79c7dd60ebc4f76a162ac050bb03659a195786a89d",
+      "itemIds": [
+        "vsd-production:instagram:igc-yucatan-itineraire-10-jours-2026-12-10:photo-v1"
+      ]
     }
   ],
   "retirements": [
