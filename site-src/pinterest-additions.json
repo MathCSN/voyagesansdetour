@@ -71,7 +71,18 @@
       "countries": [
         "italie"
       ],
-      "items": []
+      "items": [
+        {
+          "id": "pin-cinque-terre-sans-voiture-c",
+          "title": "Les Cinque Terre en train : les façades rouges et ocre de Riomaggiore au-dessus du port",
+          "description": "Cinque Terre Treno Card, trains de La Spezia à Levanto, Via dell’Amore, sentiers ouverts et ferries : les cinq villages en une ou deux journées, prix 2026. 📌 Enregistrez ce guide pour préparer votre voyage en Italie. Photo : Timothy A. Gonsalves — CC BY-SA 4.0. Crédits : https://voyagesansdetour.fr/social-media/production/pin-cinque-terre-sans-voiture-c/credits.txt",
+          "linkPath": "/italie/cinque-terre-sans-voiture/",
+          "mediaId": "pin-cinque-terre-sans-voiture-c",
+          "width": 1000,
+          "height": 1500,
+          "linkQuery": "utm_source=pinterest&utm_medium=social&utm_content=pin-cinque-terre-sans-voiture-c"
+        }
+      ]
     },
     {
       "file": "inspirations-voyage.xml",

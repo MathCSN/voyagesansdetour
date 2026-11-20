@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 1,
+  "contentId": "fb-vietnam-quand-partir-2026-12-10",
+  "status": "rendered_not_published",
+  "fingerprint": "c964234371c2d14a2219407712fb7b3665c7e71c67a156aebfdd2cdcdf1608bc",
+  "createdAt": "2026-11-20T14:10:41.411843Z",
+  "renderFinishedAt": "2026-11-20T14:10:43.339356Z",
+  "rendererContractVersion": 3,
+  "rendererSha256": "2cad356cfe58db78ba8eab495c75f2214f6822b0f2c19268adc45204314934b1",
+  "drawingSha256": "b78990f497d03baf754e3b2b68a795a5e9d3b91a0b6a2f8dad2ebcd7fec2907c",
+  "motionSha256": "9029b7f552929c69dcdcea595e65d9cc3bc8b872113b850e5a74010252289f08",
+  "format": null,
+  "kind": "carousel",
+  "channel": "facebook",
+  "publishAt": "2026-12-10T17:00:00Z",
+  "reviewValidUntil": "2026-12-20T14:10:10Z",
+  "sourceCheckedOn": "2026-11-20",
+  "targetUrl": "https://voyagesansdetour.fr/vietnam/vietnam-quand-partir/",
+  "voice": null,
+  "presenter": null,
+  "sourceUrls": [
+    "https://voyagesansdetour.fr/vietnam/vietnam-quand-partir/"
+  ],
+  "photos": {
+    "vietnam-halong": {
+      "licence": "CC BY-SA 2.0",
+      "author": "Romain Pontida",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Traditional_junk,_Halong_Bay,_Quang_Ninh,_Vietnam_-_V%E1%BB%8Bnh_H%E1%BA%A1_Long,_Qu%E1%BA%A3ng_Ninh,_Vi%E1%BB%87t_Nam_(10226220073).jpg"
+    },
+    "vietnam-ninh-binh": {
+      "licence": "CC BY 4.0",
+      "author": "Jakub Hałun",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Trang_An_Landscape_Complex,_Ninh_Binh_Province,_Vietnam,_20240202_1456_5313.jpg"
+    },
+    "vietnam-hue-citadelle": {
+      "licence": "CC BY 4.0",
+      "author": "Supanut Arunoprayote",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Gate_in_Imperial_City,_Hu%E1%BA%BF_(III).jpg"
+    },
+    "vietnam-train-hanoi": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Newone",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Newone_-_Hanoi_train_street_with_coffee_01.jpg"
+    },
+    "vietnam-hoi-an": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Steffen Schmitz (Carschten)",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:H%E1%BB%99i_An,_Museum_of_Trade_Ceramics,_2020-01_CN-02.jpg"
+    },
+    "vietnam-rizieres-sapa": {
+      "licence": "CC0",
+      "author": "Eerin25",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Rice_terraces_in_Sapa,_Vietnam.jpg"
+    }
+  },
+  "clips": {},
+  "video": null,
+  "files": [
+    {
+      "file": "apercu.jpg",
+      "sha256": "9bdbee9b36005d641d38df08f08ffa280f9ea73836cfe1e279a025652057be5d",
+      "bytes": 229577
+    },
+    {
+      "file": "credits.txt",
+      "sha256": "82a5a691ffe49d91184f056ec79814379bd41095a3f8b07241e9c53b210d06a8",
+      "bytes": 2871
+    },
+    {
+      "file": "dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "file": "legende.txt",
+      "sha256": "d721fe1376982e62766f88f88e5dbb41cf09cbe82032c544a43b7bdebb54968f",
+      "bytes": 847
+    },
+    {
+      "file": "notosans-OFL.txt",
+      "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a",
+      "bytes": 4396
+    },
+    {
+      "file": "playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    },
+    {
+      "file": "scenario.json",
+      "sha256": "b7d4decce850f1cc8d195cd0e0fcdae17139a25adfeecf19fa526a2a7b7bfdf4",
+      "bytes": 7235
+    },
+    {
+      "file": "scene-01.jpg",
+      "sha256": "cf44696d7d30f72e90850b3d54d7dcc554eee316db6fbcbb76d14afcf4043333",
+      "bytes": 356967
+    },
+    {
+      "file": "scene-02.jpg",
+      "sha256": "fb8727c492cb6b68c5197624431b81d4782f7b095b90f1ad32b31ae2700d3130",
+      "bytes": 485437
+    },
+    {
+      "file": "scene-03.jpg",
+      "sha256": "6cd190103b4ce2803f8e25d71e36f907a9930b850bbbb19774be48b5e16f4fa5",
+      "bytes": 346005
+    },
+    {
+      "file": "scene-04.jpg",
+      "sha256": "91c9d2d0c4ded5793c1e6d181fdd3eec94dd31b55abe6e604c2d8894f95cf7e9",
+      "bytes": 368563
+    },
+    {
+      "file": "scene-05.jpg",
+      "sha256": "d320716ce2517a5e16929198d935a7cbaccef1f05bc6520022e4ee6752dbf077",
+      "bytes": 289257
+    },
+    {
+      "file": "scene-06.jpg",
+      "sha256": "8874f7cf085e86575cffe22ca3ee934d3d661dbb820d4bfa24f781abf9bd0394",
+      "bytes": 439922
+    }
+  ],
+  "runtime": {
+    "wallSeconds": 1.538,
+    "encoderThreads": 2,
+    "pillowVersion": "11.3.0",
+    "ffmpegVersion": null
+  },
+  "publication": {
+    "uploaded": false,
+    "scheduled": false,
+    "published": false,
+    "readyForAutomaticImport": false
+  },
+  "cost": {
+    "newPaidService": false,
+    "providerCalls": 0,
+    "monetarySpendEur": 0
+  }
+}

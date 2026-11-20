@@ -1,0 +1,207 @@
+{
+  "schemaVersion": 2,
+  "id": "fb-vietnam-quand-partir-2026-12-10",
+  "kind": "carousel",
+  "channel": "facebook",
+  "destination": "Vietnam",
+  "title": "Quand partir au Vietnam : 4 repères",
+  "targetUrl": "https://voyagesansdetour.fr/vietnam/vietnam-quand-partir/",
+  "publishAt": "2026-12-10T17:00:00Z",
+  "review": {
+    "status": "reviewed_for_render",
+    "checkedAt": "2026-11-20T14:10:10Z",
+    "validUntil": "2026-12-20T14:10:10Z",
+    "method": "Généré automatiquement (auto_social.py) depuis la page publiée du guide relevée le 20/11/2026 : chaque chiffre est cité mot pour mot ; photos réelles sous licence libre (Wikimedia Commons), aucune image générée par IA ; garde-fous de production.py passés avant la mise en file."
+  },
+  "sources": {
+    "file": "auto/fb-vietnam-quand-partir-2026-12-10/sources.json",
+    "sha256": "f13b20946041033444144acea3f3ad5d50e4cb93dce05acf61933eda1056bc5b"
+  },
+  "photos": {
+    "file": "auto/fb-vietnam-quand-partir-2026-12-10/photos.json",
+    "sha256": "3feea4276f4356cee568191814f9a5151af11944b158fb629b1ac8465f4bc88f"
+  },
+  "caption": {
+    "hook": "🤔 Quand partir au Vietnam : le bon mois pour le Nord, le Centre et le Sud",
+    "lines": [
+      "📍 Février à avril : la meilleure fenêtre pour un voyage nord-sud : Centre au plus sec, Sud en saison sèche, Nord doux",
+      "📍 757 mm de pluie à Hué en octobre, le mois le plus arrosé du Centre (contre 43 mm en mars)",
+      "📍 16,4 °C : la température moyenne de Hanoï en janvier ; 29,2 °C en juillet",
+      "📍 6 février 2027 : le Tết, le Nouvel An lunaire : transports saturés et grandes villes vidées autour de cette date"
+    ],
+    "cta": "🔗 La meilleure période pour partir, et pourquoi, dans le guide complet :",
+    "hashtags": [
+      "#Vietnam",
+      "#VoyageVietnam",
+      "#IdeeVoyage",
+      "#VoyageSansDetour"
+    ]
+  },
+  "scenes": [
+    {
+      "photo": "vietnam-halong",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Vietnam",
+      "headline": [
+        "Le bon mois pour le Nord,",
+        "le Centre et le Sud"
+      ],
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "Quand partir au Vietnam : le bon mois pour le Nord, le Centre et le Sud"
+        },
+        {
+          "source": "guide",
+          "excerpt": "Le Vietnam a trois climats : un même mois peut être parfait à Saïgon et inondé à Hội An."
+        }
+      ],
+      "tag": "Guide Vietnam · sources du 26/10/2026",
+      "alt": "Une jonque aux voiles brunes entre les pitons calcaires couverts de forêt de la baie d’Ha Long."
+    },
+    {
+      "photo": "vietnam-ninh-binh",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Vietnam",
+      "headline": [
+        "*Février à avril*"
+      ],
+      "detail": "la meilleure fenêtre pour un voyage nord-sud : Centre au plus sec, Sud en saison sèche, Nord doux",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "Février à avril la meilleure fenêtre pour un voyage nord-sud : Centre au plus sec, Sud en saison sèche, Nord doux"
+        }
+      ],
+      "tag": "Guide Vietnam · sources du 26/10/2026",
+      "alt": "Les barques de Tràng An entre les pitons de Ninh Bình."
+    },
+    {
+      "photo": "vietnam-hue-citadelle",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Vietnam",
+      "headline": [
+        "*757 mm*"
+      ],
+      "detail": "de pluie à Hué en octobre, le mois le plus arrosé du Centre (contre 43 mm en mars)",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "757 mm de pluie à Hué en octobre, le mois le plus arrosé du Centre (contre 43 mm en mars)"
+        }
+      ],
+      "tag": "Guide Vietnam · sources du 26/10/2026",
+      "alt": "La cité impériale de Huế."
+    },
+    {
+      "photo": "vietnam-train-hanoi",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Vietnam",
+      "headline": [
+        "*16,4 °C*"
+      ],
+      "detail": "la température moyenne de Hanoï en janvier ; 29,2 °C en juillet",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "16,4 °C la température moyenne de Hanoï en janvier ; 29,2 °C en juillet"
+        }
+      ],
+      "tag": "Guide Vietnam · sources du 26/10/2026",
+      "alt": "Une rue de Hanoï longée par la voie ferrée."
+    },
+    {
+      "photo": "vietnam-hoi-an",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Vietnam",
+      "headline": [
+        "*6 février 2027*"
+      ],
+      "detail": "le Tết, le Nouvel An lunaire : transports saturés et grandes villes vidées autour de cette date",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "6 février 2027 le Tết, le Nouvel An lunaire : transports saturés et grandes villes vidées autour de cette date"
+        }
+      ],
+      "tag": "Guide Vietnam · sources du 26/10/2026",
+      "alt": "Une maison de bois de la vieille ville de Hội An, ornée de lanternes rouges et d’un bandeau de Nouvel An."
+    },
+    {
+      "photo": "vietnam-rizieres-sapa",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Le guide complet",
+      "headline": [
+        "Quand partir au Vietnam"
+      ],
+      "detail": "Le bon mois pour chaque région du Vietnam, avec les chiffres, les typhons et le Tết 2027.",
+      "alt": "Les rizières en terrasses autour de Sa Pa, dans le Nord.",
+      "cta": true
+    }
+  ],
+  "assets": {
+    "regular": {
+      "file": "assets/dmsans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9"
+    },
+    "bold": {
+      "file": "assets/dmsans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211"
+    },
+    "serif": {
+      "file": "assets/playfair.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+      },
+      "sha256": "adefc53e7b3d483f1fa5e85edd82b7689ca79db25a1f6786bd7949cdcfeec601"
+    },
+    "fallbackRegular": {
+      "file": "assets/notosans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "478c558ea716033cd60c03438f628dfa75694dcf6b5f6d505a2f05fd2b4f3823"
+    },
+    "fallbackBold": {
+      "file": "assets/notosans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "1df075a380fc7cb898acf64c1f7b3b4dd780de3caa860178bf929de35817a913"
+    }
+  }
+}

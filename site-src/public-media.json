@@ -2303,6 +2303,85 @@
           "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
         }
       ]
+    },
+    {
+      "contentId": "fb-vietnam-quand-partir-2026-12-10",
+      "kind": "photos",
+      "approved": true,
+      "files": [
+        {
+          "name": "scene-01.jpg",
+          "sha256": "cf44696d7d30f72e90850b3d54d7dcc554eee316db6fbcbb76d14afcf4043333",
+          "bytes": 356967
+        },
+        {
+          "name": "scene-02.jpg",
+          "sha256": "fb8727c492cb6b68c5197624431b81d4782f7b095b90f1ad32b31ae2700d3130",
+          "bytes": 485437
+        },
+        {
+          "name": "scene-03.jpg",
+          "sha256": "6cd190103b4ce2803f8e25d71e36f907a9930b850bbbb19774be48b5e16f4fa5",
+          "bytes": 346005
+        },
+        {
+          "name": "scene-04.jpg",
+          "sha256": "91c9d2d0c4ded5793c1e6d181fdd3eec94dd31b55abe6e604c2d8894f95cf7e9",
+          "bytes": 368563
+        },
+        {
+          "name": "scene-05.jpg",
+          "sha256": "d320716ce2517a5e16929198d935a7cbaccef1f05bc6520022e4ee6752dbf077",
+          "bytes": 289257
+        },
+        {
+          "name": "scene-06.jpg",
+          "sha256": "8874f7cf085e86575cffe22ca3ee934d3d661dbb820d4bfa24f781abf9bd0394",
+          "bytes": 439922
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "82a5a691ffe49d91184f056ec79814379bd41095a3f8b07241e9c53b210d06a8",
+          "bytes": 2871
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "pin-cinque-terre-sans-voiture-c",
+      "kind": "pin",
+      "approved": true,
+      "files": [
+        {
+          "name": "pin.jpg",
+          "bytes": 486038,
+          "sha256": "24edcb6971f341adfd197211bcd97e45136c496b78105676056619c14ea8080b"
+        },
+        {
+          "name": "credits.txt",
+          "bytes": 375,
+          "sha256": "670fd0de37db12c63c17d8620d5c7ea7d409e68342beffd617d4211f0654bba1"
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "bytes": 4482,
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "bytes": 4449,
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+        }
+      ]
     }
   ]
 }

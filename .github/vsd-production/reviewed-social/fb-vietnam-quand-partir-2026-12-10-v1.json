@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 1,
+  "batchId": "fb-vietnam-quand-partir-2026-12-10-v1",
+  "items": [
+    {
+      "contentId": "vsd-production:facebook:fb-vietnam-quand-partir-2026-12-10:photo-v1",
+      "deduplicationKey": "vsd-production:facebook:fb-vietnam-quand-partir-2026-12-10:photo-v1",
+      "title": "Quand partir au Vietnam : 4 repères",
+      "dueAt": "2026-12-10T17:00:00Z",
+      "payload": {
+        "schemaVersion": 1,
+        "channel": "facebook",
+        "kind": "photos",
+        "text": "🤔 Quand partir au Vietnam : le bon mois pour le Nord, le Centre et le Sud\n\n📍 Février à avril : la meilleure fenêtre pour un voyage nord-sud : Centre au plus sec, Sud en saison sèche, Nord doux\n📍 757 mm de pluie à Hué en octobre, le mois le plus arrosé du Centre (contre 43 mm en mars)\n📍 16,4 °C : la température moyenne de Hanoï en janvier ; 29,2 °C en juillet\n📍 6 février 2027 : le Tết, le Nouvel An lunaire : transports saturés et grandes villes vidées autour de cette date\n\n🔗 La meilleure période pour partir, et pourquoi, dans le guide complet :\nhttps://voyagesansdetour.fr/vietnam/vietnam-quand-partir/\n\nPhotos libres (Wikimedia Commons) — crédits : https://voyagesansdetour.fr/social-media/production/fb-vietnam-quand-partir-2026-12-10/credits.txt\n\n#Vietnam #VoyageVietnam #IdeeVoyage #VoyageSansDetour\n",
+        "aiGenerated": false,
+        "assets": [
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-vietnam-quand-partir-2026-12-10/scene-01.jpg",
+            "sha256": "cf44696d7d30f72e90850b3d54d7dcc554eee316db6fbcbb76d14afcf4043333",
+            "mimeType": "image/jpeg",
+            "altText": "Une jonque aux voiles brunes entre les pitons calcaires couverts de forêt de la baie d’Ha Long."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-vietnam-quand-partir-2026-12-10/scene-02.jpg",
+            "sha256": "fb8727c492cb6b68c5197624431b81d4782f7b095b90f1ad32b31ae2700d3130",
+            "mimeType": "image/jpeg",
+            "altText": "Les barques de Tràng An entre les pitons de Ninh Bình."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-vietnam-quand-partir-2026-12-10/scene-03.jpg",
+            "sha256": "6cd190103b4ce2803f8e25d71e36f907a9930b850bbbb19774be48b5e16f4fa5",
+            "mimeType": "image/jpeg",
+            "altText": "La cité impériale de Huế."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-vietnam-quand-partir-2026-12-10/scene-04.jpg",
+            "sha256": "91c9d2d0c4ded5793c1e6d181fdd3eec94dd31b55abe6e604c2d8894f95cf7e9",
+            "mimeType": "image/jpeg",
+            "altText": "Une rue de Hanoï longée par la voie ferrée."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-vietnam-quand-partir-2026-12-10/scene-05.jpg",
+            "sha256": "d320716ce2517a5e16929198d935a7cbaccef1f05bc6520022e4ee6752dbf077",
+            "mimeType": "image/jpeg",
+            "altText": "Une maison de bois de la vieille ville de Hội An, ornée de lanternes rouges et d’un bandeau de Nouvel An."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/fb-vietnam-quand-partir-2026-12-10/scene-06.jpg",
+            "sha256": "8874f7cf085e86575cffe22ca3ee934d3d661dbb820d4bfa24f781abf9bd0394",
+            "mimeType": "image/jpeg",
+            "altText": "Les rizières en terrasses autour de Sa Pa, dans le Nord."
+          }
+        ]
+      },
+      "review": {
+        "schemaVersion": 1,
+        "contentId": "vsd-production:facebook:fb-vietnam-quand-partir-2026-12-10:photo-v1",
+        "approved": true,
+        "reviewedAt": "2026-11-20T14:10:45Z",
+        "validUntil": "2026-12-20T14:10:10Z",
+        "payloadRevision": "d448d4096baf8503c3fcb13adcb9a8525f3ecea548db02931cc33bdd4bd3ec77",
+        "checks": {
+          "editorialApproved": true,
+          "rightsApproved": true,
+          "creditsPreserved": true,
+          "disclosurePreserved": true,
+          "formatRequirementsVerified": true,
+          "requiresPaidCall": false,
+          "sources": {
+            "status": "verified",
+            "observedAt": "2026-11-20T14:10:10Z",
+            "validUntil": "2026-12-20T14:10:10Z"
+          },
+          "syntheticPerson": false,
+          "providerSyntheticSettingVerified": false
+        },
+        "media": {
+          "required": true,
+          "url": null,
+          "sha256": null,
+          "items": [
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-vietnam-quand-partir-2026-12-10/scene-01.jpg",
+              "sha256": "cf44696d7d30f72e90850b3d54d7dcc554eee316db6fbcbb76d14afcf4043333",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-20T14:10:45Z",
+              "validUntil": "2026-12-20T14:10:10Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-vietnam-quand-partir-2026-12-10/scene-02.jpg",
+              "sha256": "fb8727c492cb6b68c5197624431b81d4782f7b095b90f1ad32b31ae2700d3130",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-20T14:10:45Z",
+              "validUntil": "2026-12-20T14:10:10Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-vietnam-quand-partir-2026-12-10/scene-03.jpg",
+              "sha256": "6cd190103b4ce2803f8e25d71e36f907a9930b850bbbb19774be48b5e16f4fa5",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-20T14:10:45Z",
+              "validUntil": "2026-12-20T14:10:10Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-vietnam-quand-partir-2026-12-10/scene-04.jpg",
+              "sha256": "91c9d2d0c4ded5793c1e6d181fdd3eec94dd31b55abe6e604c2d8894f95cf7e9",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-20T14:10:45Z",
+              "validUntil": "2026-12-20T14:10:10Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-vietnam-quand-partir-2026-12-10/scene-05.jpg",
+              "sha256": "d320716ce2517a5e16929198d935a7cbaccef1f05bc6520022e4ee6752dbf077",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-20T14:10:45Z",
+              "validUntil": "2026-12-20T14:10:10Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/fb-vietnam-quand-partir-2026-12-10/scene-06.jpg",
+              "sha256": "8874f7cf085e86575cffe22ca3ee934d3d661dbb820d4bfa24f781abf9bd0394",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-20T14:10:45Z",
+              "validUntil": "2026-12-20T14:10:10Z"
+            }
+          ]
+        },
+        "destination": {
+          "url": "https://voyagesansdetour.fr/vietnam/vietnam-quand-partir/",
+          "status": "verified",
+          "observedAt": "2026-11-20T14:10:45Z",
+          "validUntil": "2026-12-20T14:10:10Z"
+        },
+        "monetization": {
+          "containsAffiliateLinks": false,
+          "partnerApproved": false,
+          "linksVerified": false,
+          "disclosurePreserved": false
+        },
+        "formatCapability": {
+          "status": "verified",
+          "observedAt": "2026-11-20T14:10:45Z",
+          "validUntil": "2026-12-20T14:10:10Z",
+          "automaticPublishing": true,
+          "verificationMethod": "official_documentation",
+          "sourceUrls": [
+            "https://support.buffer.com/en-us/articles/using-facebook-with-buffer-jY1AM9fz2G",
+            "https://developers.buffer.com/types/FacebookPostMetadataInput.html",
+            "https://developers.buffer.com/guides/posts-and-scheduling.html"
+          ]
+        },
+        "evidence": {
+          "status": "rendered_local_bytes_verified_public_deploy_pending",
+          "format": "photo_carousel",
+          "rendererContractVersion": 3,
+          "receiptSha256": "0b6c28f11dce277fbe572aa58a4ea3be3e93b7ab66ef5459ee8ee54b4efcb3e4",
+          "scenarioFingerprint": "c964234371c2d14a2219407712fb7b3665c7e71c67a156aebfdd2cdcdf1608bc",
+          "sourceCheckedOn": "2026-11-20",
+          "sourceUrls": [
+            "https://voyagesansdetour.fr/vietnam/vietnam-quand-partir/"
+          ],
+          "creditsUrl": "https://voyagesansdetour.fr/social-media/production/fb-vietnam-quand-partir-2026-12-10/credits.txt",
+          "voice": null,
+          "music": null,
+          "note": "Les octets publics sont à contrôler après déploiement avec social_stock.py --verify-public. Un créneau prévu n'est pas une réservation Buffer."
+        }
+      }
+    }
+  ]
+}

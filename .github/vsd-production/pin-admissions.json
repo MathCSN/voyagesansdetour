@@ -133,6 +133,15 @@
       "publicHtmlSha256": "0da0bf17be48ad3831ac54f103a77b1f54e339bea7327e5b9f3bde61315b53bb",
       "method": "published_guide_photo_template_v3",
       "publicationConfirmed": false
+    },
+    {
+      "id": "pin-cinque-terre-sans-voiture-c",
+      "admittedAt": "2026-11-20T14:10:45.874961+00:00",
+      "articleSha256": "00739442f623e5c4d8667295ec447000e40f276c91af42fd7a9153e4e133f493",
+      "imageSha256": "24edcb6971f341adfd197211bcd97e45136c496b78105676056619c14ea8080b",
+      "publicHtmlSha256": "cefe5cb29371bd5e2c14ffb77f83ee878ea6b7e135a62d9d4724ca08b83701db",
+      "method": "published_guide_photo_template_v3",
+      "publicationConfirmed": false
     }
   ]
 }
