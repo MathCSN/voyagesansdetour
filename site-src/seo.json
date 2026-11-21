@@ -322,6 +322,20 @@
           "slug": "thailande-itineraire-2-semaines"
         }
       ]
+    },
+    "zanzibar-quand-partir": {
+      "title": "Quand partir à Zanzibar : pluie et chaleur mois par mois",
+      "description": "Avril reçoit 408 mm de pluie à Zanzibar, juillet 31 mm : le bon mois selon la pluie, la chaleur et les jours de pluie, relevés NOAA 1991-2020.",
+      "faq": [
+        {
+          "question": "Quel est le meilleur mois pour partir à Zanzibar ?",
+          "answer": "Juillet : 31 mm de pluie en moyenne et 4,3 jours de pluie, le mois le plus sec. Juin, août et septembre restent secs, avec 38 à 52 mm."
+        },
+        {
+          "question": "Quel est le mois le plus chaud à Zanzibar ?",
+          "answer": "Février : 33,2 °C de maximale moyenne et 24,3 °C de minimale. Le plus frais est juillet, avec 29,0 °C de maximale."
+        }
+      ]
     }
   }
 }

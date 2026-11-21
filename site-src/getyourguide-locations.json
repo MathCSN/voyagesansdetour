@@ -377,6 +377,12 @@
       "country": "Mexique",
       "path": "yucatan-l227",
       "place": "Yucatán"
+    },
+    "zanzibar|tanzanie": {
+      "checkedOn": "2026-11-21",
+      "country": "Tanzanie",
+      "path": "zanzibar-l871",
+      "place": "Zanzibar"
     }
   },
   "schemaVersion": 1
