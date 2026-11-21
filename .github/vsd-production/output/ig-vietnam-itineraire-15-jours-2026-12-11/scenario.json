@@ -1,0 +1,238 @@
+{
+  "schemaVersion": 3,
+  "id": "ig-vietnam-itineraire-15-jours-2026-12-11",
+  "kind": "reel",
+  "channel": "instagram",
+  "format": "liste",
+  "destination": "Vietnam",
+  "title": "Le Vietnam en 15 jours : les chiffres à connaître",
+  "targetUrl": "https://voyagesansdetour.fr/vietnam/vietnam-itineraire-15-jours/",
+  "publishAt": "2026-12-11T17:00:00Z",
+  "review": {
+    "status": "reviewed_for_render",
+    "checkedAt": "2026-11-21T13:34:46Z",
+    "validUntil": "2026-12-21T13:34:46Z",
+    "method": "Généré automatiquement (auto_social.py) depuis la page publiée du guide relevée le 21/11/2026 : chaque chiffre, étape ou ligne de tableau est cité mot pour mot ; photos et vidéos réelles sous licence libre, aucune image ni vidéo générée par IA ; garde-fous de production.py passés avant la mise en file."
+  },
+  "sources": {
+    "file": "auto/ig-vietnam-itineraire-15-jours-2026-12-11/sources.json",
+    "sha256": "37b5e2373e95da114566df5d5bbb10584ef70deb9162206d5d2506938fd0dcb4"
+  },
+  "photos": {
+    "file": "auto/ig-vietnam-itineraire-15-jours-2026-12-11/photos.json",
+    "sha256": "3feea4276f4356cee568191814f9a5151af11944b158fb629b1ac8465f4bc88f"
+  },
+  "caption": {
+    "hook": "🗺️ Vietnam en 15 jours : de Hanoï à Hô-Chi-Minh-Ville en train, étape par étape (itinéraire 2026)",
+    "lines": [
+      "⏱️ 45 jours de séjour sans visa pour les Français (e-visa à 25 $ au-delà, jusqu’à 90 jours)",
+      "💶 300 000 ₫ : la balade en barque de Tràng An à Ninh Bình, depuis janvier 2026 (≈ 10,70 €)",
+      "💶 200 000 ₫ : la cité impériale de Hué (≈ 7 €) ; les tombeaux coûtent 150 000 ₫ chacun",
+      "💶 120 000 ₫ : le billet de la vieille ville de Hội An, valable pour 5 sites sur 22 (≈ 4,30 €)",
+      "⏱️ 10 h 24 de nuit entre Ninh Bình (SE3, 21 h 35) et Hué (arrivée 7 h 59)"
+    ],
+    "cta": "📌 Enregistrez ce reel pour votre voyage. 🔗 Prix, horaires et détails : le guide complet est en lien dans la bio.",
+    "hashtags": [
+      "#Vietnam",
+      "#VoyageVietnam",
+      "#Itineraire",
+      "#VoyageSansDetour"
+    ]
+  },
+  "scenes": [
+    {
+      "photo": "vietnam-train-hanoi",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "hook",
+      "kicker": "Vietnam",
+      "headline": [
+        "Le Vietnam",
+        "en 15 jours",
+        "*4 chiffres à connaître*"
+      ],
+      "seconds": 2.2,
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "Deux nuits à Hanoï, deux à Ninh Bình, un train de nuit à 10 h 24 jusqu’à Hué, trois nuits à Hội An, puis quatre à Saïgon."
+        }
+      ],
+      "tag": "Guide Vietnam · sources du 24/10/2026",
+      "alt": "Une rue de Hanoï longée par la voie ferrée."
+    },
+    {
+      "photo": "vietnam-halong",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "fact",
+      "kicker": "Vietnam",
+      "headline": [
+        "*45 jours*"
+      ],
+      "seconds": 3.0,
+      "detail": "de séjour sans visa pour les Français",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "45 jours de séjour sans visa pour les Français"
+        }
+      ],
+      "tag": "Guide Vietnam · sources du 24/10/2026",
+      "badge": "1/4",
+      "alt": "Une jonque aux voiles brunes entre les pitons calcaires couverts de forêt de la baie d’Ha Long."
+    },
+    {
+      "photo": "vietnam-ninh-binh",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "fact",
+      "kicker": "Jours 3 à 5",
+      "headline": [
+        "*300 000 ₫*"
+      ],
+      "seconds": 4.0,
+      "detail": "la balade en barque de Tràng An à Ninh Bình, depuis janvier 2026",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "300 000 ₫ la balade en barque de Tràng An à Ninh Bình, depuis janvier 2026"
+        }
+      ],
+      "tag": "Guide Vietnam · sources du 24/10/2026",
+      "badge": "2/4",
+      "alt": "Les barques de Tràng An entre les pitons de Ninh Bình."
+    },
+    {
+      "photo": "vietnam-hue-citadelle",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "fact",
+      "kicker": "Jours 6 et 7",
+      "headline": [
+        "*200 000 ₫*"
+      ],
+      "seconds": 2.8,
+      "detail": "la cité impériale de Hué (≈ 7 €)",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "200 000 ₫ la cité impériale de Hué (≈ 7 €)"
+        }
+      ],
+      "tag": "Guide Vietnam · sources du 24/10/2026",
+      "badge": "3/4",
+      "alt": "La cité impériale de Huế."
+    },
+    {
+      "photo": "vietnam-hoi-an",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "fact",
+      "kicker": "Jours 8 à 10",
+      "headline": [
+        "*120 000 ₫*"
+      ],
+      "seconds": 3.1,
+      "detail": "le billet de la vieille ville de Hội An",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "120 000 ₫ le billet de la vieille ville de Hội An"
+        }
+      ],
+      "tag": "Guide Vietnam · sources du 24/10/2026",
+      "badge": "4/4",
+      "alt": "Une maison de bois de la vieille ville de Hội An, ornée de lanternes rouges et d’un bandeau de Nouvel An."
+    },
+    {
+      "photo": "vietnam-rizieres-sapa",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "cta",
+      "kicker": "Le guide complet",
+      "headline": [
+        "Le Vietnam",
+        "en 15 jours"
+      ],
+      "seconds": 2.4,
+      "note": "Enregistrez cette vidéo pour votre voyage",
+      "button": "voyagesansdetour.fr",
+      "alt": "Les rizières en terrasses autour de Sa Pa, dans le Nord."
+    }
+  ],
+  "musicStart": 0,
+  "assets": {
+    "regular": {
+      "file": "assets/dmsans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9"
+    },
+    "bold": {
+      "file": "assets/dmsans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211"
+    },
+    "serif": {
+      "file": "assets/playfair.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+      },
+      "sha256": "adefc53e7b3d483f1fa5e85edd82b7689ca79db25a1f6786bd7949cdcfeec601"
+    },
+    "fallbackRegular": {
+      "file": "assets/notosans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "478c558ea716033cd60c03438f628dfa75694dcf6b5f6d505a2f05fd2b4f3823"
+    },
+    "fallbackBold": {
+      "file": "assets/notosans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "1df075a380fc7cb898acf64c1f7b3b4dd780de3caa860178bf929de35817a913"
+    },
+    "music": {
+      "file": "assets/almost-bliss.mp3",
+      "sha256": "731e191cef927e43d352bd099ac63cd6ea54a6a84deec3cba77fb59e6903754c",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "commercialUseAllowed": true,
+      "title": "Almost Bliss",
+      "author": "Kevin MacLeod",
+      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1900015",
+      "provenance": {
+        "file": "evidence/almost-bliss-provenance.json",
+        "sha256": "2d2303c1a70fed68560808853466c997870cd8156737d96ca287a4332a5cd04d"
+      }
+    }
+  }
+}

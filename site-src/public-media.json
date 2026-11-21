@@ -2382,6 +2382,64 @@
           "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
         }
       ]
+    },
+    {
+      "contentId": "ig-vietnam-itineraire-15-jours-2026-12-11",
+      "approved": true,
+      "files": [
+        {
+          "name": "reel.mp4",
+          "sha256": "c04093f6a6a73f9da73996a59618c0cb950604d657b87835799de27274748f71",
+          "bytes": 8153679
+        },
+        {
+          "name": "poster.jpg",
+          "sha256": "ab5c64b1e086935755c4d6534bb01d58b39302e8d4f3d4c05c5fe4fbba92a8a9",
+          "bytes": 534733
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "1f4b7aa441782080e6cf802175e343d921ef42e77f7af173d22012bb35ca11eb",
+          "bytes": 3290
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "pin-laponie-budget-rovaniemi",
+      "kind": "pin",
+      "approved": true,
+      "files": [
+        {
+          "name": "pin.jpg",
+          "bytes": 265949,
+          "sha256": "37a309898f0f53cf9caaf8f6303b51207e88ce00b15d13ac6fe2737353fe1184"
+        },
+        {
+          "name": "credits.txt",
+          "bytes": 404,
+          "sha256": "e5907d56a130a77f29f9229fa3df2ca307cfb02e48b72ed63a3b3bbf7ecac752"
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "bytes": 4482,
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "bytes": 4449,
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+        }
+      ]
     }
   ]
 }

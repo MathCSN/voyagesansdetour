@@ -612,6 +612,24 @@
       "itemIds": [
         "vsd-production:facebook:fb-vietnam-quand-partir-2026-12-10:photo-v1"
       ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-vietnam-itineraire-15-jours-2026-12-11-v1.json",
+      "fileSha256": "9992ae11d7f48f39653dee305d667cff8397a927888402cc1db31955ed4fb2df",
+      "batchId": "ig-vietnam-itineraire-15-jours-2026-12-11-v1",
+      "batchSha256": "9f4adb1719e80716335ec1ead60f26d10f6275ca51d9f31a93d1b3bc99d22991",
+      "itemIds": [
+        "vsd-production:instagram:ig-vietnam-itineraire-15-jours-2026-12-11:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-vietnam-itineraire-15-jours-2026-12-11-tiktok-v1.json",
+      "fileSha256": "4b2c188877ffbec546a51361e56937e71d25b23cbfd2795092d6520bfb38c92a",
+      "batchId": "ig-vietnam-itineraire-15-jours-2026-12-11-tiktok-v1",
+      "batchSha256": "f1497a8f0e4eb4273ca184e850477fc557f55b21c9441bd4bfeb7a2071f3f978",
+      "itemIds": [
+        "vsd-production:tiktok:ig-vietnam-itineraire-15-jours-2026-12-11:photo-v1"
+      ]
     }
   ],
   "retirements": [

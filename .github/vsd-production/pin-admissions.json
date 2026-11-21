@@ -142,6 +142,15 @@
       "publicHtmlSha256": "cefe5cb29371bd5e2c14ffb77f83ee878ea6b7e135a62d9d4724ca08b83701db",
       "method": "published_guide_photo_template_v3",
       "publicationConfirmed": false
+    },
+    {
+      "id": "pin-laponie-budget-rovaniemi",
+      "admittedAt": "2026-11-21T13:36:18.775788+00:00",
+      "articleSha256": "0b543df4472cb0da25dde806d8878fde9fb27e5b74b0aad7ea81ef575f3db0bc",
+      "imageSha256": "37a309898f0f53cf9caaf8f6303b51207e88ce00b15d13ac6fe2737353fe1184",
+      "publicHtmlSha256": "4a4f851fd577a372f51fbf784b41104f93cd04d62aea2697adce451c4f50c0f4",
+      "method": "published_guide_photo_template_v3",
+      "publicationConfirmed": false
     }
   ]
 }

@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-zanzibar-quand-partir",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Quand partir à Zanzibar : grandes pluies, petites pluies, chaleur et mois les plus secs",
+  "pinTitle": "Quand partir à Zanzibar : grandes pluies, petites pluies, chaleur et mois les plus secs",
+  "variant": "a",
+  "targetUrl": "https://voyagesansdetour.fr/tanzanie/zanzibar-quand-partir/",
+  "articleSha256": "ef16a415f6f734fbf19a0188d64f7c9eb64579a12c40256cc6fd831cfe701690",
+  "imageSha256": "acbf40fb287261fef73ea70457b72280d64c57d00282d9a195006f47352be449",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "3a4397aab03be6d6cf764ab6d64b65bad2bb527586711f656ecf633b6bcd48f7",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "zanzibar-stone-town",
+    "author": "Timothy A. Gonsalves",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Sail_Boat_Sunset_Stone_Town_Zanzibar_Oct26_OM3_1123.jpg",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "alt_fr": "Un boutre de pêche passe devant le soleil couchant dans le port de Stone Town."
+  }
+}

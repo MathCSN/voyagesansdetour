@@ -276,6 +276,12 @@
       "notBefore": "2026-11-20T14:10:10Z",
       "file": "scenarios/fb-vietnam-quand-partir-2026-12-10.json",
       "sha256": "b7d4decce850f1cc8d195cd0e0fcdae17139a25adfeecf19fa526a2a7b7bfdf4"
+    },
+    {
+      "contentId": "ig-vietnam-itineraire-15-jours-2026-12-11",
+      "notBefore": "2026-11-21T13:34:46Z",
+      "file": "scenarios/ig-vietnam-itineraire-15-jours-2026-12-11.json",
+      "sha256": "044320556921d809a51b3ff5aa333b84a9adadae633f7c57d4bd7056d45d90f5"
     }
   ]
 }

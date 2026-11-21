@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-zanzibar-quand-partir-c",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Quand partir à Zanzibar : grandes pluies, petites pluies, chaleur et mois les plus secs",
+  "pinTitle": "Quand partir à Zanzibar : des vaches marchent sur la plage de Paje, sur la côte est de Zanzibar",
+  "variant": "c",
+  "targetUrl": "https://voyagesansdetour.fr/tanzanie/zanzibar-quand-partir/",
+  "articleSha256": "ef16a415f6f734fbf19a0188d64f7c9eb64579a12c40256cc6fd831cfe701690",
+  "imageSha256": "930e734a59236489e4775b07b485ddef845553fd32fa3964e63ed50f005e1835",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "3a4397aab03be6d6cf764ab6d64b65bad2bb527586711f656ecf633b6bcd48f7",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "zanzibar-paje",
+    "author": "AmyAbroad",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Cows_on_a_beach_in_Zanzibar.jpg",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "alt_fr": "Des vaches marchent sur la plage de Paje, sur la côte est de Zanzibar."
+  }
+}
