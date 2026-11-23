@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "checkedOn": "2026-11-23",
+  "method": "Page publiée du guide relevée automatiquement ; texte visible conservé tel quel, première ligne = URL.",
+  "sources": {
+    "guide": {
+      "url": "https://voyagesansdetour.fr/japon/japon-itineraire-2-semaines/",
+      "publisher": "Voyage Sans Détour",
+      "title": "Japon en 2 semaines : l’itinéraire en train de Tokyo à Kyoto, Nara et Hiroshima (prix 2026)",
+      "retrievedAt": "2026-11-23T16:22:43Z",
+      "snapshot": {
+        "file": "auto/ig-japon-itineraire-2-semaines-2026-12-13/guide.txt",
+        "sha256": "cda0a6192c940b6194b62dc4376e622e1c5bf4054514ee59a55473155b3aef74"
+      }
+    }
+  }
+}

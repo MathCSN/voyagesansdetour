@@ -1,0 +1,203 @@
+{
+  "schemaVersion": 2,
+  "id": "fb-londres-noel-marches-2026-12-13",
+  "kind": "carousel",
+  "channel": "facebook",
+  "destination": "Londres",
+  "title": "Londres en décembre : 4 repères",
+  "targetUrl": "https://voyagesansdetour.fr/royaume-uni/londres-noel-marches/",
+  "publishAt": "2026-12-13T17:00:00Z",
+  "review": {
+    "status": "reviewed_for_render",
+    "checkedAt": "2026-11-23T16:22:43Z",
+    "validUntil": "2026-12-23T16:22:43Z",
+    "method": "Généré automatiquement (auto_social.py) depuis la page publiée du guide relevée le 23/11/2026 : chaque chiffre est cité mot pour mot ; photos réelles sous licence libre (Wikimedia Commons), aucune image générée par IA ; garde-fous de production.py passés avant la mise en file."
+  },
+  "sources": {
+    "file": "auto/fb-londres-noel-marches-2026-12-13/sources.json",
+    "sha256": "643d85ebeeace1d960244ee32976d829300ad874971b28d0d530d2544d04f063"
+  },
+  "photos": {
+    "file": "auto/fb-londres-noel-marches-2026-12-13/photos.json",
+    "sha256": "fab5b0605e6ae7e42a1ac2e344f2ef4e097a424e39ee859f0649bb63a4663b4e"
+  },
+  "caption": {
+    "hook": "✈️ Londres en décembre 2026 : Winter Wonderland, patinoires et métro plafonné à 8,90 £",
+    "lines": [
+      "💶 8,90 £ : le plafond quotidien du métro en zones 1-2 en sans contact, 2026 (≈ 10,60 €)",
+      "💶 44,70 £ : le plafond du lundi au dimanche en zones 1-2",
+      "💶 1 £ : l’entrée de Winter Wonderland du lundi au jeudi en novembre, aux heures creuses",
+      "💶 15 à 28,50 £ : une séance de patin adulte à Somerset House, du 11 novembre au 10 janvier"
+    ],
+    "cta": "🔗 Tous les prix, horaires et l’itinéraire dans le guide complet :",
+    "hashtags": [
+      "#Londres",
+      "#RoyaumeUni",
+      "#VoyageRoyaumeUni",
+      "#ConseilsVoyage",
+      "#VoyageSansDetour"
+    ]
+  },
+  "scenes": [
+    {
+      "photo": "londres-tower-bridge",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Royaume-Uni · Londres",
+      "headline": [
+        "Londres en décembre",
+        "*4 chiffres* à connaître"
+      ],
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "Hyde Park Winter Wonderland ouvre du 19 novembre 2026 au 3 janvier 2027, tous les jours sauf le 25 décembre, avec une entrée à 1 £ du lundi au jeudi en novembre aux heures creuses."
+        }
+      ],
+      "tag": "Guide Londres · sources du 23/11/2026",
+      "alt": "Tower Bridge au-dessus de la Tamise."
+    },
+    {
+      "photo": "londres-covent-garden",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Londres",
+      "headline": [
+        "*8,90 £*"
+      ],
+      "detail": "le plafond quotidien du métro en zones 1-2 en sans contact, 2026 (≈ 10,60 €)",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "8,90 £ le plafond quotidien du métro en zones 1-2 en sans contact, 2026 (≈ 10,60 €)"
+        }
+      ],
+      "tag": "Guide Londres · sources du 23/11/2026",
+      "alt": "La halle de Covent Garden."
+    },
+    {
+      "photo": "londres-c7e87321",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Londres",
+      "headline": [
+        "*44,70 £*"
+      ],
+      "detail": "le plafond du lundi au dimanche en zones 1-2",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "44,70 £ le plafond du lundi au dimanche en zones 1-2"
+        }
+      ],
+      "tag": "Guide Londres · sources du 23/11/2026",
+      "alt": "Londres (Royaume-Uni)."
+    },
+    {
+      "photo": "londres-winter-wonderland",
+      "focus": [
+        0.62,
+        0.55
+      ],
+      "kicker": "Londres",
+      "headline": [
+        "*1 £*"
+      ],
+      "detail": "l’entrée de Winter Wonderland du lundi au jeudi en novembre, aux heures creuses",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "1 £ l’entrée de Winter Wonderland du lundi au jeudi en novembre, aux heures creuses"
+        }
+      ],
+      "tag": "Guide Londres · sources du 23/11/2026",
+      "alt": "La grande roue et les chalets illuminés de Winter Wonderland, à Hyde Park."
+    },
+    {
+      "photo": "londres-somerset-house-patinoire",
+      "focus": [
+        0.62,
+        0.5
+      ],
+      "kicker": "Londres",
+      "headline": [
+        "*15 à 28,50 £*"
+      ],
+      "detail": "une séance de patin adulte à Somerset House, du 11 novembre au 10 janvier",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "15 à 28,50 £ une séance de patin adulte à Somerset House, du 11 novembre au 10 janvier"
+        }
+      ],
+      "tag": "Guide Londres · sources du 23/11/2026",
+      "alt": "La patinoire de Somerset House et sa façade illuminée, un soir d’hiver."
+    },
+    {
+      "photo": "londres-big-ben",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Le guide complet",
+      "headline": [
+        "Londres en décembre"
+      ],
+      "alt": "Le palais de Westminster et la tour Elizabeth au bord de la Tamise.",
+      "cta": true
+    }
+  ],
+  "assets": {
+    "regular": {
+      "file": "assets/dmsans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9"
+    },
+    "bold": {
+      "file": "assets/dmsans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211"
+    },
+    "serif": {
+      "file": "assets/playfair.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+      },
+      "sha256": "adefc53e7b3d483f1fa5e85edd82b7689ca79db25a1f6786bd7949cdcfeec601"
+    },
+    "fallbackRegular": {
+      "file": "assets/notosans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "478c558ea716033cd60c03438f628dfa75694dcf6b5f6d505a2f05fd2b4f3823"
+    },
+    "fallbackBold": {
+      "file": "assets/notosans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "1df075a380fc7cb898acf64c1f7b3b4dd780de3caa860178bf929de35817a913"
+    }
+  }
+}

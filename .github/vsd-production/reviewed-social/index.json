@@ -630,6 +630,33 @@
       "itemIds": [
         "vsd-production:tiktok:ig-vietnam-itineraire-15-jours-2026-12-11:photo-v1"
       ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/fb-londres-noel-marches-2026-12-13-v1.json",
+      "fileSha256": "9cff204dea5a70e59f91131e1533013e3840dff4cc999a4d87426738091f326e",
+      "batchId": "fb-londres-noel-marches-2026-12-13-v1",
+      "batchSha256": "e733297d9f2cfc49570770b543fe2dc54a2fd24e00e430fd2a8c0e88fc45d173",
+      "itemIds": [
+        "vsd-production:facebook:fb-londres-noel-marches-2026-12-13:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-japon-itineraire-2-semaines-2026-12-13-v1.json",
+      "fileSha256": "01a43bd54d3f986fbb52bdeed502ba4ffa9bddf906c03fac51ddd094579d0ae0",
+      "batchId": "ig-japon-itineraire-2-semaines-2026-12-13-v1",
+      "batchSha256": "f2d0c52e98b5452fceaa350cea2b603b04d097e3d0ea5e7d9e94eb90e5fdf1a4",
+      "itemIds": [
+        "vsd-production:instagram:ig-japon-itineraire-2-semaines-2026-12-13:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-japon-itineraire-2-semaines-2026-12-13-tiktok-v1.json",
+      "fileSha256": "d673b73f6549e9478da0746ce30bd61627fc999975f5c21f2af0df4c73bf334b",
+      "batchId": "ig-japon-itineraire-2-semaines-2026-12-13-tiktok-v1",
+      "batchSha256": "ba5bca8d800cf178d13bdcfd334b17837d1ad8c54449e62ac6455560655394bd",
+      "itemIds": [
+        "vsd-production:tiktok:ig-japon-itineraire-2-semaines-2026-12-13:photo-v1"
+      ]
     }
   ],
   "retirements": [

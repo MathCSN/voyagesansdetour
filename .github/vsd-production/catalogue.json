@@ -282,6 +282,18 @@
       "notBefore": "2026-11-21T13:34:46Z",
       "file": "scenarios/ig-vietnam-itineraire-15-jours-2026-12-11.json",
       "sha256": "044320556921d809a51b3ff5aa333b84a9adadae633f7c57d4bd7056d45d90f5"
+    },
+    {
+      "contentId": "fb-londres-noel-marches-2026-12-13",
+      "notBefore": "2026-11-23T16:22:43Z",
+      "file": "scenarios/fb-londres-noel-marches-2026-12-13.json",
+      "sha256": "0145d7b7133bf8e7e0d876e30c4ea491906979c9c5df8b6b7ddf932f512d6252"
+    },
+    {
+      "contentId": "ig-japon-itineraire-2-semaines-2026-12-13",
+      "notBefore": "2026-11-23T16:22:43Z",
+      "file": "scenarios/ig-japon-itineraire-2-semaines-2026-12-13.json",
+      "sha256": "948fdb51d7b03d4a8b72fdadaa05f899d7e8a229412eb1960265ff91a32c1d74"
     }
   ]
 }

@@ -43,6 +43,16 @@
           "mediaId": "pin-guimaraes-une-journee-sans-voiture",
           "width": 1000,
           "height": 1500
+        },
+        {
+          "id": "pin-lisbonne-porto-train-b",
+          "title": "Lisbonne–Porto en train : trajets, horaires et prix",
+          "description": "Alfa Pendular ou Intercidades, prix 2026, billets Promo, gares de départ et d’arrivée : relier Lisbonne et Porto en 3 heures, sans stress. 📌 Enregistrez ce guide pour préparer votre voyage au Portugal. Photo : _morgado — CC BY 2.0. Crédits : https://voyagesansdetour.fr/social-media/production/pin-lisbonne-porto-train-b/credits.txt",
+          "linkPath": "/portugal/lisbonne-porto-train/",
+          "mediaId": "pin-lisbonne-porto-train-b",
+          "width": 1000,
+          "height": 1500,
+          "linkQuery": "utm_source=pinterest&utm_medium=social&utm_content=pin-lisbonne-porto-train-b"
         }
       ]
     },

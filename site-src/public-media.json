@@ -2440,6 +2440,116 @@
           "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
         }
       ]
+    },
+    {
+      "contentId": "fb-londres-noel-marches-2026-12-13",
+      "kind": "photos",
+      "approved": true,
+      "files": [
+        {
+          "name": "scene-01.jpg",
+          "sha256": "ba23eba70cb7adb9082d7c6c830216b9181311a39ba4608ecaed097fa401d89e",
+          "bytes": 337839
+        },
+        {
+          "name": "scene-02.jpg",
+          "sha256": "6433438b8f1933bdc5fe0b3ea0d01ae5dca545ea56a0648dde23909f5336b435",
+          "bytes": 428693
+        },
+        {
+          "name": "scene-03.jpg",
+          "sha256": "96670698ce02bfdb2262d6560658951c0784ae3dcb9753ca0df1f1d6191762f1",
+          "bytes": 445272
+        },
+        {
+          "name": "scene-04.jpg",
+          "sha256": "c4a0a5b9ba0f1d92edb4743a6a8d3a1bd287fe18fe8450aad25a81c8cd6b78c6",
+          "bytes": 319725
+        },
+        {
+          "name": "scene-05.jpg",
+          "sha256": "558bc5ed20857166d6e162ef3cc587335cf5c2bc9cb3b9e9660efa3fc15b94bc",
+          "bytes": 265855
+        },
+        {
+          "name": "scene-06.jpg",
+          "sha256": "8bed0b87da57d50190e23c49fb927ad3a155c944369d929d426a2ce40e8bf45a",
+          "bytes": 220809
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "09a15763a5bb82e0b31aaa1b43637b7fe40e1b993248d817663ee0483edd5a02",
+          "bytes": 2853
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "ig-japon-itineraire-2-semaines-2026-12-13",
+      "approved": true,
+      "files": [
+        {
+          "name": "reel.mp4",
+          "sha256": "ce073b3aa6a0128830539b561bf7155e59b0d9d418c13b9e447d8a0a97b7c798",
+          "bytes": 8280982
+        },
+        {
+          "name": "poster.jpg",
+          "sha256": "d0b1acbf699904330a5040340ac935743ffb08255fb943479677ba91417e3429",
+          "bytes": 616666
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "58624bf010d2249ca4d6c0a19dec2b01c2a43d51124ff6027b80fb6d3d35a3ea",
+          "bytes": 2958
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "pin-lisbonne-porto-train-b",
+      "kind": "pin",
+      "approved": true,
+      "files": [
+        {
+          "name": "pin.jpg",
+          "bytes": 369072,
+          "sha256": "3997212a852c35f1f4ab049551669c9d60873a8e0a9527ddd041ee6042c13690"
+        },
+        {
+          "name": "credits.txt",
+          "bytes": 330,
+          "sha256": "9cec00cacf29bce56894a8cc6032a39c8ff93aef2ebe13e0e03bc66c41bb7bd0"
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "bytes": 4482,
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "bytes": 4449,
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+        }
+      ]
     }
   ]
 }

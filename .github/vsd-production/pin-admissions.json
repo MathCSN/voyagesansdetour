@@ -151,6 +151,15 @@
       "publicHtmlSha256": "4a4f851fd577a372f51fbf784b41104f93cd04d62aea2697adce451c4f50c0f4",
       "method": "published_guide_photo_template_v3",
       "publicationConfirmed": false
+    },
+    {
+      "id": "pin-lisbonne-porto-train-b",
+      "admittedAt": "2026-11-23T16:24:57.805453+00:00",
+      "articleSha256": "09b3076b98418a846b1df5edf8f5d3925e345b4af34db8e3d831e473454824f9",
+      "imageSha256": "3997212a852c35f1f4ab049551669c9d60873a8e0a9527ddd041ee6042c13690",
+      "publicHtmlSha256": "dc024afd1bdd163ec656f009499a6ea50b7e268be935334bbf7a842c33b68535",
+      "method": "published_guide_photo_template_v3",
+      "publicationConfirmed": false
     }
   ]
 }
