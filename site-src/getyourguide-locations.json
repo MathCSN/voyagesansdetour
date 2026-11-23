@@ -1,7 +1,7 @@
 {
   "locations": {
     "alfa-pendular|portugal": {
-      "checkedOn": "2026-10-24",
+      "checkedOn": "2026-11-23",
       "country": "Portugal",
       "path": null,
       "place": "Alfa Pendular"
@@ -13,19 +13,19 @@
       "place": "Algarve"
     },
     "andalousie|espagne": {
-      "checkedOn": "2026-10-24",
+      "checkedOn": "2026-11-23",
       "country": "Espagne",
       "path": null,
       "place": "Andalousie"
     },
     "arenal|costa-rica": {
-      "checkedOn": "2026-10-24",
+      "checkedOn": "2026-11-23",
       "country": "Costa Rica",
       "path": null,
       "place": "Arenal"
     },
     "atlantique|portugal": {
-      "checkedOn": "2026-10-24",
+      "checkedOn": "2026-11-23",
       "country": "Portugal",
       "path": null,
       "place": "Atlantique"
@@ -37,7 +37,7 @@
       "place": "Bangkok"
     },
     "belem|portugal": {
-      "checkedOn": "2026-10-24",
+      "checkedOn": "2026-11-23",
       "country": "Portugal",
       "path": null,
       "place": "Belém"
@@ -49,7 +49,7 @@
       "place": "Centre"
     },
     "chi-minh-ville|vietnam": {
-      "checkedOn": "2026-10-24",
+      "checkedOn": "2026-11-23",
       "country": "Vietnam",
       "path": null,
       "place": "Chi-Minh-Ville"
@@ -67,7 +67,7 @@
       "place": "Chichén Itzá"
     },
     "cinque-terre|italie": {
-      "checkedOn": "2026-10-24",
+      "checkedOn": "2026-11-23",
       "country": "Italie",
       "path": null,
       "place": "Cinque Terre"
@@ -79,25 +79,25 @@
       "place": "Cordoue"
     },
     "costa-rica|costa-rica": {
-      "checkedOn": "2026-10-24",
+      "checkedOn": "2026-11-23",
       "country": "Costa Rica",
       "path": null,
       "place": "Costa Rica"
     },
     "cote-amalfitaine|italie": {
-      "checkedOn": "2026-10-24",
+      "checkedOn": "2026-11-23",
       "country": "Italie",
       "path": null,
       "place": "Côte amalfitaine"
     },
     "dieux|italie": {
-      "checkedOn": "2026-10-24",
+      "checkedOn": "2026-11-23",
       "country": "Italie",
       "path": null,
       "place": "Dieux"
     },
     "douro|portugal": {
-      "checkedOn": "2026-10-24",
+      "checkedOn": "2026-11-23",
       "country": "Portugal",
       "path": null,
       "place": "Douro"
@@ -109,7 +109,7 @@
       "place": "Faro"
     },
     "gaia|portugal": {
-      "checkedOn": "2026-10-24",
+      "checkedOn": "2026-11-23",
       "country": "Portugal",
       "path": null,
       "place": "Gaia"
@@ -133,7 +133,7 @@
       "place": "Hanoï"
     },
     "japon|japon": {
-      "checkedOn": "2026-10-24",
+      "checkedOn": "2026-11-23",
       "country": "Japon",
       "path": null,
       "place": "Japon"
@@ -175,7 +175,7 @@
       "place": "Londres"
     },
     "luis|portugal": {
-      "checkedOn": "2026-10-24",
+      "checkedOn": "2026-11-23",
       "country": "Portugal",
       "path": null,
       "place": "Luís"
@@ -223,7 +223,7 @@
       "place": "New York"
     },
     "noel|etats-unis": {
-      "checkedOn": "2026-10-24",
+      "checkedOn": "2026-11-23",
       "country": "États-Unis",
       "path": null,
       "place": "Noël"
@@ -247,7 +247,7 @@
       "place": "Paço"
     },
     "pena|portugal": {
-      "checkedOn": "2026-10-24",
+      "checkedOn": "2026-11-23",
       "country": "Portugal",
       "path": null,
       "place": "Pena"
@@ -259,9 +259,9 @@
       "place": "Penha"
     },
     "pinhao|portugal": {
-      "checkedOn": "2026-10-24",
+      "checkedOn": "2026-11-23",
       "country": "Portugal",
-      "path": null,
+      "path": "pinhao-l89870",
       "place": "Pinhão"
     },
     "porto|portugal": {
@@ -271,19 +271,19 @@
       "place": "Porto"
     },
     "portugal|portugal": {
-      "checkedOn": "2026-10-24",
+      "checkedOn": "2026-11-23",
       "country": "Portugal",
       "path": null,
       "place": "Portugal"
     },
     "promo|portugal": {
-      "checkedOn": "2026-10-24",
+      "checkedOn": "2026-11-23",
       "country": "Portugal",
       "path": null,
       "place": "Promo"
     },
     "rockefeller-center|etats-unis": {
-      "checkedOn": "2026-10-24",
+      "checkedOn": "2026-11-23",
       "country": "États-Unis",
       "path": null,
       "place": "Rockefeller Center"
@@ -337,7 +337,7 @@
       "place": "Tenerife"
     },
     "thailande|thailande": {
-      "checkedOn": "2026-10-24",
+      "checkedOn": "2026-11-23",
       "country": "Thaïlande",
       "path": null,
       "place": "Thaïlande"
@@ -355,19 +355,19 @@
       "place": "Valladolid"
     },
     "via|italie": {
-      "checkedOn": "2026-10-24",
+      "checkedOn": "2026-11-23",
       "country": "Italie",
       "path": null,
       "place": "Via"
     },
     "vietnam|vietnam": {
-      "checkedOn": "2026-10-24",
+      "checkedOn": "2026-11-23",
       "country": "Vietnam",
       "path": null,
       "place": "Vietnam"
     },
     "winter-wonderland|royaume-uni": {
-      "checkedOn": "2026-10-24",
+      "checkedOn": "2026-11-23",
       "country": "Royaume-Uni",
       "path": null,
       "place": "Winter Wonderland"
