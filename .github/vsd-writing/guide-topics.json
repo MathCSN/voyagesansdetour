@@ -676,7 +676,7 @@
       3,
       4
     ],
-    "priority": 61,
+    "priority": 10,
     "demand": {
       "googleSuggest": 49,
       "googleTrends": 64,
@@ -818,7 +818,7 @@
       2,
       3
     ],
-    "priority": 60,
+    "priority": 10,
     "demand": {
       "googleSuggest": 53,
       "googleTrends": 89,
@@ -1525,7 +1525,7 @@
       2,
       3
     ],
-    "priority": 54,
+    "priority": 62,
     "demand": {
       "googleSuggest": 21,
       "googleTrends": 89,
@@ -1741,7 +1741,7 @@
       3,
       4
     ],
-    "priority": 50,
+    "priority": 58,
     "demand": {
       "googleSuggest": 48,
       "googleTrends": 64,
@@ -1812,7 +1812,7 @@
       1,
       2
     ],
-    "priority": 50,
+    "priority": 10,
     "demand": {
       "googleSuggest": 46,
       "googleTrends": 35,
@@ -5216,7 +5216,7 @@
       3,
       4
     ],
-    "priority": 62,
+    "priority": 10,
     "sources": [
       {
         "label": "Wikivoyage — Tenerife",
@@ -6422,6 +6422,389 @@
       "tango",
       "°c",
       "pesos"
+    ]
+  },
+  {
+    "slug": "chili-itineraire-2-semaines",
+    "destination": "Chili",
+    "country": "chili",
+    "continent": "amerique-du-sud",
+    "type": "itineraire",
+    "question": "Quel itinéraire de deux semaines au Chili : Santiago, Valparaíso, désert d'Atacama et Patagonie, avec les vols intérieurs, les durées et les parcs à réserver ?",
+    "travelMonths": [
+      11,
+      12,
+      1,
+      2,
+      3
+    ],
+    "priority": 42,
+    "sources": [
+      {
+        "label": "Wikivoyage — Chili",
+        "url": "https://fr.wikivoyage.org/wiki/Chili"
+      },
+      {
+        "label": "Wikipedia — Atacama Desert",
+        "url": "https://en.wikipedia.org/wiki/Atacama_Desert"
+      },
+      {
+        "label": "Chile Travel — office de tourisme officiel",
+        "url": "https://www.chile.travel/en/"
+      }
+    ],
+    "photos": [
+      {
+        "id": "chili-valle-de-la-luna",
+        "query": "Valle de la Luna Atacama",
+        "must": [
+          "luna",
+          "atacama"
+        ],
+        "alt": "La vallée de la Lune, dans le désert d'Atacama."
+      },
+      {
+        "id": "chili-torres-del-paine",
+        "query": "Torres del Paine",
+        "must": [
+          "torres"
+        ],
+        "alt": "Les tours du Paine, en Patagonie chilienne."
+      },
+      {
+        "id": "chili-valparaiso",
+        "query": "Valparaíso Chile",
+        "must": [
+          "valpara"
+        ],
+        "alt": "Les maisons colorées de Valparaíso."
+      },
+      {
+        "id": "chili-santiago-plaza-de-armas",
+        "query": "Santiago de Chile Plaza de Armas",
+        "must": [
+          "santiago",
+          "plaza de armas"
+        ],
+        "alt": "La place d'Armes, à Santiago du Chili."
+      }
+    ],
+    "keywords": [
+      "vol",
+      "heures",
+      "km",
+      "atacama",
+      "valparaíso",
+      "patagonie",
+      "santiago",
+      "°c",
+      "pesos"
+    ]
+  },
+  {
+    "slug": "nepal-annapurna-trek",
+    "destination": "Népal",
+    "country": "nepal",
+    "continent": "asie",
+    "type": "itineraire",
+    "question": "Comment organiser un trek dans les Annapurnas au Népal : Tour ou camp de base, durée, permis, saison, altitude et budget par jour ?",
+    "travelMonths": [
+      3,
+      4,
+      5,
+      10,
+      11
+    ],
+    "priority": 40,
+    "sources": [
+      {
+        "label": "Wikivoyage — Népal",
+        "url": "https://fr.wikivoyage.org/wiki/N%C3%A9pal"
+      },
+      {
+        "label": "Wikipedia — Annapurna Circuit",
+        "url": "https://en.wikipedia.org/wiki/Annapurna_Circuit"
+      },
+      {
+        "label": "Welcome Nepal — Nepal Tourism Board",
+        "url": "https://www.welcomenepal.com/"
+      }
+    ],
+    "photos": [
+      {
+        "id": "nepal-annapurna-base-camp",
+        "query": "Annapurna Base Camp trek",
+        "must": [
+          "annapurna"
+        ],
+        "alt": "Le sentier du camp de base de l'Annapurna."
+      },
+      {
+        "id": "nepal-thorong-la",
+        "query": "Annapurna Circuit Thorong La",
+        "must": [
+          "thorong",
+          "annapurna"
+        ],
+        "alt": "Le col du Thorong La, sur le Tour des Annapurnas."
+      },
+      {
+        "id": "nepal-pokhara-phewa",
+        "query": "Pokhara Phewa lake",
+        "must": [
+          "phewa",
+          "pokhara"
+        ],
+        "alt": "Le lac Phewa, à Pokhara."
+      },
+      {
+        "id": "nepal-katmandou-boudhanath",
+        "query": "Kathmandu Boudhanath",
+        "must": [
+          "boudha"
+        ],
+        "alt": "Le stûpa de Boudhanath, à Katmandou."
+      }
+    ],
+    "keywords": [
+      "trek",
+      "jours",
+      "m d'altitude",
+      "permis",
+      "tims",
+      "pokhara",
+      "katmandou",
+      "roupies",
+      "°c",
+      "km"
+    ]
+  },
+  {
+    "slug": "guatemala-itineraire-10-jours",
+    "destination": "Guatemala",
+    "country": "guatemala",
+    "continent": "amerique-centrale-caraibes",
+    "type": "itineraire",
+    "question": "Quel itinéraire de 10 jours au Guatemala : Antigua, lac Atitlán, Semuc Champey et Tikal, avec les navettes, les durées de route et la saison sèche ?",
+    "travelMonths": [
+      11,
+      12,
+      1,
+      2,
+      3,
+      4
+    ],
+    "priority": 38,
+    "sources": [
+      {
+        "label": "Wikivoyage — Guatemala",
+        "url": "https://fr.wikivoyage.org/wiki/Guatemala"
+      },
+      {
+        "label": "Wikipedia — Tikal",
+        "url": "https://en.wikipedia.org/wiki/Tikal"
+      },
+      {
+        "label": "Wikipedia — Antigua Guatemala",
+        "url": "https://en.wikipedia.org/wiki/Antigua_Guatemala"
+      }
+    ],
+    "photos": [
+      {
+        "id": "guatemala-tikal",
+        "query": "Tikal Temple I Guatemala",
+        "must": [
+          "tikal"
+        ],
+        "alt": "Le temple du Grand Jaguar, à Tikal."
+      },
+      {
+        "id": "guatemala-antigua-arche",
+        "query": "Antigua Guatemala Arco de Santa Catalina",
+        "must": [
+          "antigua",
+          "santa catalina"
+        ],
+        "alt": "L'arche de Santa Catalina, à Antigua Guatemala."
+      },
+      {
+        "id": "guatemala-lac-atitlan",
+        "query": "Lake Atitlán",
+        "must": [
+          "atit"
+        ],
+        "alt": "Le lac Atitlán et ses volcans."
+      },
+      {
+        "id": "guatemala-semuc-champey",
+        "query": "Semuc Champey",
+        "must": [
+          "semuc"
+        ],
+        "alt": "Les vasques turquoise de Semuc Champey."
+      }
+    ],
+    "keywords": [
+      "heures",
+      "km",
+      "navette",
+      "quetzal",
+      "antigua",
+      "atitlán",
+      "tikal",
+      "semuc",
+      "°c",
+      "saison sèche"
+    ]
+  },
+  {
+    "slug": "senegal-quand-partir",
+    "destination": "Sénégal",
+    "country": "senegal",
+    "continent": "afrique",
+    "type": "quand-partir",
+    "question": "Quand partir au Sénégal : saison sèche, hivernage, températures, mer et meilleurs mois pour Dakar, Saint-Louis, le lac Rose et la Casamance ?",
+    "travelMonths": [
+      11,
+      12,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "priority": 40,
+    "sources": [
+      {
+        "label": "Wikivoyage — Sénégal",
+        "url": "https://fr.wikivoyage.org/wiki/S%C3%A9n%C3%A9gal"
+      },
+      {
+        "label": "Wikipédia — Tourisme au Sénégal",
+        "url": "https://fr.wikipedia.org/wiki/Tourisme_au_S%C3%A9n%C3%A9gal"
+      },
+      {
+        "label": "Wikivoyage — Dakar",
+        "url": "https://fr.wikivoyage.org/wiki/Dakar"
+      }
+    ],
+    "photos": [
+      {
+        "id": "senegal-lac-rose",
+        "query": "Lac Rose Senegal",
+        "must": [
+          "rose",
+          "retba"
+        ],
+        "alt": "Le lac Rose, ou lac Retba, près de Dakar."
+      },
+      {
+        "id": "senegal-goree",
+        "query": "Gorée island Senegal",
+        "must": [
+          "gor"
+        ],
+        "alt": "L'île de Gorée, au large de Dakar."
+      },
+      {
+        "id": "senegal-saint-louis",
+        "query": "Saint-Louis Senegal pont Faidherbe",
+        "must": [
+          "saint-louis",
+          "faidherbe"
+        ],
+        "alt": "Le pont Faidherbe, à Saint-Louis du Sénégal."
+      },
+      {
+        "id": "senegal-dakar-renaissance",
+        "query": "Monument de la Renaissance africaine Dakar",
+        "must": [
+          "renaissance"
+        ],
+        "alt": "Le monument de la Renaissance africaine, à Dakar."
+      }
+    ],
+    "keywords": [
+      "°c",
+      "mm",
+      "saison sèche",
+      "hivernage",
+      "mois",
+      "dakar",
+      "saint-louis",
+      "casamance",
+      "humidité"
+    ]
+  },
+  {
+    "slug": "slovenie-road-trip-10-jours",
+    "destination": "Slovénie",
+    "country": "slovenie",
+    "continent": "europe",
+    "type": "road-trip",
+    "question": "Quel road trip de 10 jours en Slovénie : Ljubljana, lac de Bled, gorges de Vintgar, grotte de Postojna et château de Predjama, avec les distances et la vignette autoroutière ?",
+    "travelMonths": [
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "priority": 30,
+    "sources": [
+      {
+        "label": "Wikivoyage — Slovénie",
+        "url": "https://fr.wikivoyage.org/wiki/Slov%C3%A9nie"
+      },
+      {
+        "label": "Wikipedia — Slovenia",
+        "url": "https://en.wikipedia.org/wiki/Slovenia"
+      }
+    ],
+    "photos": [
+      {
+        "id": "slovenie-lac-de-bled",
+        "query": "Lake Bled island church",
+        "must": [
+          "bled"
+        ],
+        "alt": "Le lac de Bled et son île."
+      },
+      {
+        "id": "slovenie-ljubljana",
+        "query": "Ljubljana Triple Bridge",
+        "must": [
+          "ljubljana"
+        ],
+        "alt": "Le Triple pont, à Ljubljana."
+      },
+      {
+        "id": "slovenie-predjama",
+        "query": "Predjama Castle",
+        "must": [
+          "predjama"
+        ],
+        "alt": "Le château de Predjama, dans la falaise."
+      },
+      {
+        "id": "slovenie-vintgar",
+        "query": "Vintgar Gorge",
+        "must": [
+          "vintgar"
+        ],
+        "alt": "Les gorges de Vintgar, près de Bled."
+      }
+    ],
+    "keywords": [
+      "km",
+      "heures",
+      "vignette",
+      "bled",
+      "ljubljana",
+      "postojna",
+      "vintgar",
+      "°c",
+      "euros"
     ]
   }
 ]
