@@ -2550,6 +2550,33 @@
           "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
         }
       ]
+    },
+    {
+      "contentId": "pin-marrakech-3-jours",
+      "kind": "pin",
+      "approved": true,
+      "files": [
+        {
+          "name": "pin.jpg",
+          "bytes": 238923,
+          "sha256": "300f74ae29ad6968c9c292454ef9832880c32d0b97a661b69fe22607fce424aa"
+        },
+        {
+          "name": "credits.txt",
+          "bytes": 358,
+          "sha256": "08c3177b82ee85bbeaed73ceb1711c9a32620e19f0031ebd67165e094f7aecf1"
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "bytes": 4482,
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "bytes": 4449,
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+        }
+      ]
     }
   ]
 }

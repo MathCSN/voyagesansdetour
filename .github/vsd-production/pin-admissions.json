@@ -160,6 +160,15 @@
       "publicHtmlSha256": "dc024afd1bdd163ec656f009499a6ea50b7e268be935334bbf7a842c33b68535",
       "method": "published_guide_photo_template_v3",
       "publicationConfirmed": false
+    },
+    {
+      "id": "pin-marrakech-3-jours",
+      "admittedAt": "2026-11-24T16:00:43.004374+00:00",
+      "articleSha256": "15f90f30307d26f7f00ee623f1b6feafda9ecdfeb262ee7e6a5d384c8dd548a5",
+      "imageSha256": "300f74ae29ad6968c9c292454ef9832880c32d0b97a661b69fe22607fce424aa",
+      "publicHtmlSha256": "8c25f318cbe011703940cd13e8041f1cea5517e3ce89b410e9f489f1819f2b49",
+      "method": "published_guide_photo_template_v3",
+      "publicationConfirmed": false
     }
   ]
 }

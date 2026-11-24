@@ -118,6 +118,15 @@
           "mediaId": "pin-laponie-budget-rovaniemi",
           "width": 1000,
           "height": 1500
+        },
+        {
+          "id": "pin-marrakech-3-jours",
+          "title": "Marrakech en 3 jours : médina, Majorelle, palais et une escapade, sans se faire plumer",
+          "description": "Majorelle à 170 dh en ligne, palais à 100 dh dès 9 h, Essaouira à 3 h de car, taxi de l’aéroport par zone : trois jours à Marrakech, entrées relevées en novembre 2026. 📌 Enregistrez ce guide pour préparer votre voyage au Maroc. Photo : Jakub Hałun — CC BY 4.0. Crédits : https://voyagesansdetour.fr/social-media/production/pin-marrakech-3-jours/credits.txt",
+          "linkPath": "/maroc/marrakech-3-jours/",
+          "mediaId": "pin-marrakech-3-jours",
+          "width": 1000,
+          "height": 1500
         }
       ]
     }
