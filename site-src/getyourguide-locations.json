@@ -204,6 +204,12 @@
       "path": "merida-l1903",
       "place": "Mérida"
     },
+    "mexique|mexique": {
+      "checkedOn": "2026-11-25",
+      "country": "Mexique",
+      "path": null,
+      "place": "Mexique"
+    },
     "monteverde|costa-rica": {
       "checkedOn": "2026-10-24",
       "country": "Costa Rica",

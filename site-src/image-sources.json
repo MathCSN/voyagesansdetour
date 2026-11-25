@@ -1253,6 +1253,42 @@
       "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
       "alt_fr": "Des vaches marchent sur la plage de Paje, sur la côte est de Zanzibar.",
       "credit_fr": "Paje — AmyAbroad / Wikimedia Commons — CC BY-SA 4.0."
+    },
+    {
+      "id": "mexique-oaxaca",
+      "file": "photos/mexique-oaxaca.jpg",
+      "width": 1600,
+      "height": 1180,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Church_of_Santo_Domingo_in_Oaxaca.jpg",
+      "author": "Roman Bonnefoy",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "alt_fr": "La façade de l’église Santo Domingo, à Oaxaca.",
+      "credit_fr": "Roman Bonnefoy / Wikimedia Commons — CC BY-SA 4.0."
+    },
+    {
+      "id": "mexique-mexico-zocalo",
+      "file": "photos/mexique-mexico-zocalo.jpg",
+      "width": 1600,
+      "height": 758,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Zocalo_-_West_Side_-_Mexico_2024.jpg",
+      "author": "José Luiz Bernardes Ribeiro",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "alt_fr": "Le Zócalo et la cathédrale de Mexico.",
+      "credit_fr": "José Luiz Bernardes Ribeiro / Wikimedia Commons — CC BY-SA 4.0."
+    },
+    {
+      "id": "mexique-isla-mujeres",
+      "file": "photos/mexique-isla-mujeres.jpg",
+      "width": 1600,
+      "height": 930,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Hermosa_Caleta_beach_Isla_Mujeres_QR_01.jpg",
+      "author": "Bernard DUPONT",
+      "license": "CC BY-SA 2.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/2.0",
+      "alt_fr": "L’eau turquoise de la plage Hermosa Caleta, à Isla Mujeres.",
+      "credit_fr": "Bernard DUPONT / Wikimedia Commons — CC BY-SA 2.0."
     }
   ]
 }

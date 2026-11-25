@@ -336,6 +336,26 @@
           "answer": "Février : 33,2 °C de maximale moyenne et 24,3 °C de minimale. Le plus frais est juillet, avec 29,0 °C de maximale."
         }
       ]
+    },
+    "mexique-quand-partir": {
+      "title": "Quand partir au Mexique : pluie et chaleur mois par mois",
+      "description": "Mexico reçoit 5 mm de pluie en décembre et 176 mm en août, Cancún 242 mm en octobre : le bon mois par région, ouragans et sargasses compris.",
+      "faq": [
+        {
+          "question": "Quel est le meilleur mois pour partir au Mexique ?",
+          "answer": "Février : 5,7 mm de pluie à Mexico, 4,6 mm à Oaxaca et 42,7 mm à Cancún, avec 24,3 °C de maximale à Mexico. De décembre à mars, les trois régions restent sèches."
+        },
+        {
+          "question": "Quand éviter le Mexique à cause des ouragans ?",
+          "answer": "Évitez septembre et octobre sur les Caraïbes. L’Atlantique est en saison des ouragans du 1er juin au 30 novembre, avec un pic moyen le 10 septembre ; le Pacifique du 15 mai au 30 novembre (NHC)."
+        }
+      ],
+      "links": [
+        {
+          "phrase": "notre guide du Yucatán en 10 jours",
+          "slug": "yucatan-itineraire-10-jours"
+        }
+      ]
     }
   }
 }
