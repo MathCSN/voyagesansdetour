@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "checkedOn": "2026-11-25",
+  "method": "Page publiée du guide relevée automatiquement ; texte visible conservé tel quel, première ligne = URL.",
+  "sources": {
+    "guide": {
+      "url": "https://voyagesansdetour.fr/portugal/lisbonne-ou-porto/",
+      "publisher": "Voyage Sans Détour",
+      "title": "Lisbonne ou Porto : laquelle choisir pour un premier séjour sans voiture ?",
+      "retrievedAt": "2026-11-25T15:48:10Z",
+      "snapshot": {
+        "file": "auto/ig-lisbonne-ou-porto-2026-12-15/guide.txt",
+        "sha256": "8279ab3f788526a0c568e45d79f11eaffc8d835e62d9dc45843d24ac7a367ea4"
+      }
+    }
+  }
+}

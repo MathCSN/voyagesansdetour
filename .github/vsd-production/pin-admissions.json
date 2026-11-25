@@ -169,6 +169,15 @@
       "publicHtmlSha256": "8c25f318cbe011703940cd13e8041f1cea5517e3ce89b410e9f489f1819f2b49",
       "method": "published_guide_photo_template_v3",
       "publicationConfirmed": false
+    },
+    {
+      "id": "pin-cote-amalfitaine-sans-voiture-c",
+      "admittedAt": "2026-11-25T15:50:34.396894+00:00",
+      "articleSha256": "3bc19b255a1102b957a9d8bf6c2aa2fa9db3447ef1e856514d687b172256b2d6",
+      "imageSha256": "9d052b0ef6e445085552a731b4f687a779534bdb2571ce960c5485173600639c",
+      "publicHtmlSha256": "8c5fd7b4681e4f9fae764ba0040ca5ed8bce0febe73e6db0223514518a7c1266",
+      "method": "published_guide_photo_template_v3",
+      "publicationConfirmed": false
     }
   ]
 }

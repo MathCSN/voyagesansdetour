@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-mexique-quand-partir",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Quand partir au Mexique : saison sèche, pluies, ouragans et sargasses, mois par mois",
+  "pinTitle": "Quand partir au Mexique : saison sèche, pluies, ouragans et sargasses, mois par mois",
+  "variant": "a",
+  "targetUrl": "https://voyagesansdetour.fr/mexique/mexique-quand-partir/",
+  "articleSha256": "8d6684d8d8716f60f9e6456138f3210a73b793e6dac7593b63725c2f454711dc",
+  "imageSha256": "c845db3bb8010b6e37d960242dab7090fa90cdf7428d5518862f5c640c036db4",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "3a4397aab03be6d6cf764ab6d64b65bad2bb527586711f656ecf633b6bcd48f7",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "mexique-oaxaca",
+    "author": "Roman Bonnefoy",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Church_of_Santo_Domingo_in_Oaxaca.jpg",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "alt_fr": "La façade de l’église Santo Domingo, à Oaxaca."
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "pin-mexique-quand-partir-c",
+  "status": "draft_requires_review",
+  "publicationApproved": false,
+  "title": "Quand partir au Mexique : saison sèche, pluies, ouragans et sargasses, mois par mois",
+  "pinTitle": "Quand partir au Mexique : l’eau turquoise de la plage Hermosa Caleta, à Isla Mujeres",
+  "variant": "c",
+  "targetUrl": "https://voyagesansdetour.fr/mexique/mexique-quand-partir/",
+  "articleSha256": "8d6684d8d8716f60f9e6456138f3210a73b793e6dac7593b63725c2f454711dc",
+  "imageSha256": "782afe0d80ddb1f2d629cbc08ee2b2ae55d1b4fae31f97bc33fb125c9ac3672d",
+  "width": 1000,
+  "height": 1500,
+  "templateVersion": 2,
+  "rendererSha256": "3a4397aab03be6d6cf764ab6d64b65bad2bb527586711f656ecf633b6bcd48f7",
+  "originalComposition": true,
+  "externalPhotographs": true,
+  "limitations": [
+    "Draft only; target publication, board, caption, duplicate registry and rendered layout require review."
+  ],
+  "photo": {
+    "id": "mexique-isla-mujeres",
+    "author": "Bernard DUPONT",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Hermosa_Caleta_beach_Isla_Mujeres_QR_01.jpg",
+    "license": "CC BY-SA 2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0",
+    "alt_fr": "L’eau turquoise de la plage Hermosa Caleta, à Isla Mujeres."
+  }
+}

@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "contentId": "ig-lisbonne-ou-porto-2026-12-15",
+  "status": "rendered_not_published",
+  "fingerprint": "05adb9b58b87c5b11efef93a5007881fe3663038d64374f6d128e4d2e713d78f",
+  "createdAt": "2026-11-25T15:49:54.958247Z",
+  "renderFinishedAt": "2026-11-25T15:50:30.917756Z",
+  "rendererContractVersion": 4,
+  "rendererSha256": "2cad356cfe58db78ba8eab495c75f2214f6822b0f2c19268adc45204314934b1",
+  "drawingSha256": "b78990f497d03baf754e3b2b68a795a5e9d3b91a0b6a2f8dad2ebcd7fec2907c",
+  "motionSha256": "9029b7f552929c69dcdcea595e65d9cc3bc8b872113b850e5a74010252289f08",
+  "format": "tableau",
+  "kind": "reel",
+  "channel": "instagram",
+  "publishAt": "2026-12-15T18:00:00Z",
+  "reviewValidUntil": "2026-12-25T15:48:10Z",
+  "sourceCheckedOn": "2026-11-25",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/lisbonne-ou-porto/",
+  "voice": null,
+  "presenter": null,
+  "sourceUrls": [
+    "https://voyagesansdetour.fr/portugal/lisbonne-ou-porto/"
+  ],
+  "photos": {
+    "lisbonne-tram28-rue": {
+      "licence": "CC BY 2.0",
+      "author": "Shadowgate from Novara, ITALY",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tram_28_(34791358090).jpg"
+    },
+    "lisbonne": {
+      "licence": "CC BY-SA 4.0",
+      "author": "SIryn",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:City_view_of_Lisbon_with_Castelo_de_S%C3%A3o_Jorge.jpg"
+    },
+    "porto-luis-nuit": {
+      "licence": "CC BY-SA 4.0",
+      "author": "T meltzer",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Ponte_de_D._Lu%C3%ADs_2.jpg"
+    },
+    "porto-rabelo": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Krzysztof Golik",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:View_of_Ribeira_(21).jpg"
+    },
+    "lisbonne-alfama-toits": {
+      "licence": "CC BY 4.0",
+      "author": "Jakub Hałun",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Lisbon_Alfama_Sao_Vicente_Pantheon_from_Sao_Jorge_Castle,_20250604_1714_9404.jpg"
+    }
+  },
+  "clips": {},
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "durationSeconds": 17.4,
+    "videoCodec": "h264",
+    "pixelFormat": "yuv420p",
+    "videoBitrateBps": 3597460,
+    "audioCodec": "aac",
+    "audioSampleRate": 48000,
+    "audioBitrateBps": 97655,
+    "fullDecodePassed": true,
+    "loudness": {
+      "integratedLufs": -16.4,
+      "truePeakDbfs": -3.9
+    }
+  },
+  "files": [
+    {
+      "file": "apercu.jpg",
+      "sha256": "5369bd78ec7ba2c54417d48fefb9294e44cc143e6af9eaacbc28dd1c73246663",
+      "bytes": 229986
+    },
+    {
+      "file": "credits.txt",
+      "sha256": "2ddc351d7930008fe692ed5e8d89dac8f6b05090b19e9a15d315adf662bf05a7",
+      "bytes": 2659
+    },
+    {
+      "file": "dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "file": "encode.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "legende.txt",
+      "sha256": "e909cfd93139567ad6870622d8dad5db4581902dcb6fb0b4bff0bf97a45220d6",
+      "bytes": 660
+    },
+    {
+      "file": "notosans-OFL.txt",
+      "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a",
+      "bytes": 4396
+    },
+    {
+      "file": "playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    },
+    {
+      "file": "poster.jpg",
+      "sha256": "8586bee5b77facf86dd66513bbf40e3b5cf50ef166eef9a7308f6244e06ae3c6",
+      "bytes": 483344
+    },
+    {
+      "file": "reel.mp4",
+      "sha256": "b5c32bc49c17dfc95347e5d238121619f2a01715a0699446abd7fb4c0dde76ea",
+      "bytes": 8057675
+    },
+    {
+      "file": "scenario.json",
+      "sha256": "59d1c6fb2a91d8f27b9471aeb9631defd51142d730ed12d4bae3dabe3f7ef06c",
+      "bytes": 7408
+    },
+    {
+      "file": "scene-01.jpg",
+      "sha256": "e51f37710823c92db60d2598a4feeed0ad08c1d41d703c412024e72e528e9cbe",
+      "bytes": 443419
+    },
+    {
+      "file": "scene-02.jpg",
+      "sha256": "496e5893ddcfe5437b3af87df9982068ea9878a46387c13b63eb831b7882838d",
+      "bytes": 433205
+    },
+    {
+      "file": "scene-03.jpg",
+      "sha256": "04c99d65e0d70c7ce61c8644400b59c55e94b22dc037053a6d3146e694233822",
+      "bytes": 474651
+    },
+    {
+      "file": "scene-04.jpg",
+      "sha256": "5156170e3f7fdc4ddf1eb1228e631c41f3ba661a0b170e1fd772d27bd3eed530",
+      "bytes": 479307
+    },
+    {
+      "file": "scene-05.jpg",
+      "sha256": "a2d89e2c880f5c5e0b2cab50d98db425e6eb261bba61c1123f66b86e0adc9c73",
+      "bytes": 423435
+    }
+  ],
+  "runtime": {
+    "wallSeconds": 35.543,
+    "encoderThreads": 2,
+    "pillowVersion": "11.3.0",
+    "ffmpegVersion": "ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers"
+  },
+  "publication": {
+    "uploaded": false,
+    "scheduled": false,
+    "published": false,
+    "readyForAutomaticImport": false
+  },
+  "cost": {
+    "newPaidService": false,
+    "providerCalls": 0,
+    "monetarySpendEur": 0
+  }
+}

@@ -294,6 +294,12 @@
       "notBefore": "2026-11-23T16:22:43Z",
       "file": "scenarios/ig-japon-itineraire-2-semaines-2026-12-13.json",
       "sha256": "948fdb51d7b03d4a8b72fdadaa05f899d7e8a229412eb1960265ff91a32c1d74"
+    },
+    {
+      "contentId": "ig-lisbonne-ou-porto-2026-12-15",
+      "notBefore": "2026-11-25T15:48:10Z",
+      "file": "scenarios/ig-lisbonne-ou-porto-2026-12-15.json",
+      "sha256": "59d1c6fb2a91d8f27b9471aeb9631defd51142d730ed12d4bae3dabe3f7ef06c"
     }
   ]
 }

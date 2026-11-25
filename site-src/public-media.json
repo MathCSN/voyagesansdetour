@@ -2577,6 +2577,64 @@
           "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
         }
       ]
+    },
+    {
+      "contentId": "ig-lisbonne-ou-porto-2026-12-15",
+      "approved": true,
+      "files": [
+        {
+          "name": "reel.mp4",
+          "sha256": "b5c32bc49c17dfc95347e5d238121619f2a01715a0699446abd7fb4c0dde76ea",
+          "bytes": 8057675
+        },
+        {
+          "name": "poster.jpg",
+          "sha256": "8586bee5b77facf86dd66513bbf40e3b5cf50ef166eef9a7308f6244e06ae3c6",
+          "bytes": 483344
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "2ddc351d7930008fe692ed5e8d89dac8f6b05090b19e9a15d315adf662bf05a7",
+          "bytes": 2659
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "pin-cote-amalfitaine-sans-voiture-c",
+      "kind": "pin",
+      "approved": true,
+      "files": [
+        {
+          "name": "pin.jpg",
+          "bytes": 445909,
+          "sha256": "9d052b0ef6e445085552a731b4f687a779534bdb2571ce960c5485173600639c"
+        },
+        {
+          "name": "credits.txt",
+          "bytes": 341,
+          "sha256": "c6709577710efcc0899921d197160be34bcfce8273fc8c209fc97b0b8b384bb5"
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "bytes": 4482,
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "bytes": 4449,
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+        }
+      ]
     }
   ]
 }

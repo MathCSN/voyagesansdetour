@@ -657,6 +657,24 @@
       "itemIds": [
         "vsd-production:tiktok:ig-japon-itineraire-2-semaines-2026-12-13:photo-v1"
       ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-lisbonne-ou-porto-2026-12-15-v1.json",
+      "fileSha256": "00a279fdf064364a037a2bd651b9094b8bc723d2a6e3e51e143e560c7f8a0f2b",
+      "batchId": "ig-lisbonne-ou-porto-2026-12-15-v1",
+      "batchSha256": "823149ce0e0be30f37f8d168ab3b73480c7aadb85731248037b98101993d948b",
+      "itemIds": [
+        "vsd-production:instagram:ig-lisbonne-ou-porto-2026-12-15:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-lisbonne-ou-porto-2026-12-15-tiktok-v1.json",
+      "fileSha256": "667c83f5d431230156765af7073ff627f0fe694cd7a9dacf0f2844b1a463c040",
+      "batchId": "ig-lisbonne-ou-porto-2026-12-15-tiktok-v1",
+      "batchSha256": "71dd8be54943ef506ed590d08d29ce5ca11792dde66ef53ce26e65c227a43ba4",
+      "itemIds": [
+        "vsd-production:tiktok:ig-lisbonne-ou-porto-2026-12-15:photo-v1"
+      ]
     }
   ],
   "retirements": [

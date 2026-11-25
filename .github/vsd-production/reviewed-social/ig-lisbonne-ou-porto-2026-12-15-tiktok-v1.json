@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "batchId": "ig-lisbonne-ou-porto-2026-12-15-tiktok-v1",
+  "items": [
+    {
+      "contentId": "vsd-production:tiktok:ig-lisbonne-ou-porto-2026-12-15:photo-v1",
+      "deduplicationKey": "vsd-production:tiktok:ig-lisbonne-ou-porto-2026-12-15:photo-v1",
+      "title": "Lisbonne ou Porto ? — le tableau à garder",
+      "dueAt": "2026-12-15T19:00:00Z",
+      "payload": {
+        "schemaVersion": 1,
+        "channel": "tiktok",
+        "kind": "reel",
+        "text": "🤔 Lisbonne ou Porto : laquelle choisir pour un premier séjour sans voiture ?\n\n📅 2 à 3 jours : Porto\n📅 4 à 5 jours : Lisbonne\n📅 7 jours : Les deux\n📍 41 km² : la commune de Porto, contre 100 km² pour Lisbonne\n💶 3 € / 4 € : la taxe touristique par nuit : Porto / Lisbonne\n\n📌 Enregistrez cette vidéo pour votre voyage. 🔗 Prix, horaires et détails : le guide complet sur voyagesansdetour.fr\n\nPhotos libres (Wikimedia Commons) et musique de Kevin MacLeod (CC BY 4.0) — crédits : https://voyagesansdetour.fr/social-media/production/ig-lisbonne-ou-porto-2026-12-15/credits.txt\n\n#Portugal #VoyagePortugal #IdeeVoyage #VoyageSansDetour\n",
+        "aiGenerated": false,
+        "assets": [
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/ig-lisbonne-ou-porto-2026-12-15/reel.mp4",
+            "sha256": "b5c32bc49c17dfc95347e5d238121619f2a01715a0699446abd7fb4c0dde76ea",
+            "mimeType": "video/mp4"
+          }
+        ]
+      },
+      "review": {
+        "schemaVersion": 1,
+        "contentId": "vsd-production:tiktok:ig-lisbonne-ou-porto-2026-12-15:photo-v1",
+        "approved": true,
+        "reviewedAt": "2026-11-25T15:50:34Z",
+        "validUntil": "2026-12-25T15:48:10Z",
+        "payloadRevision": "0d052ddb3cba894594c510d8cd11b25c0cc44074cbfc234bb958e9f3fbacdee0",
+        "checks": {
+          "editorialApproved": true,
+          "rightsApproved": true,
+          "creditsPreserved": true,
+          "disclosurePreserved": true,
+          "formatRequirementsVerified": true,
+          "requiresPaidCall": false,
+          "sources": {
+            "status": "verified",
+            "observedAt": "2026-11-25T15:48:10Z",
+            "validUntil": "2026-12-25T15:48:10Z"
+          },
+          "syntheticPerson": false,
+          "providerSyntheticSettingVerified": false
+        },
+        "media": {
+          "url": "https://voyagesansdetour.fr/social-media/production/ig-lisbonne-ou-porto-2026-12-15/reel.mp4",
+          "mimeType": "video/mp4",
+          "sha256": "b5c32bc49c17dfc95347e5d238121619f2a01715a0699446abd7fb4c0dde76ea",
+          "required": true,
+          "status": "verified",
+          "observedAt": "2026-11-25T15:50:34Z",
+          "validUntil": "2026-12-25T15:48:10Z"
+        },
+        "destination": {
+          "url": "https://voyagesansdetour.fr/portugal/lisbonne-ou-porto/",
+          "status": "verified",
+          "observedAt": "2026-11-25T15:50:34Z",
+          "validUntil": "2026-12-25T15:48:10Z"
+        },
+        "monetization": {
+          "containsAffiliateLinks": false,
+          "partnerApproved": false,
+          "linksVerified": false,
+          "disclosurePreserved": false
+        },
+        "formatCapability": {
+          "status": "verified",
+          "observedAt": "2026-11-25T15:50:34Z",
+          "validUntil": "2026-12-25T15:48:10Z",
+          "automaticPublishing": true,
+          "verificationMethod": "official_documentation",
+          "sourceUrls": [
+            "https://support.buffer.com/article/559-using-tiktok-with-buffer",
+            "https://developers.buffer.com/types/TikTokPostMetadataInput.html",
+            "https://developers.buffer.com/guides/posts-and-scheduling.html"
+          ]
+        },
+        "evidence": {
+          "status": "rendered_local_bytes_verified_public_deploy_pending",
+          "format": "photo_reel",
+          "rendererContractVersion": 4,
+          "receiptSha256": "33eb8e9a7f961b94f41f0078bb8f60739573b03a5995f3f18c9e43c87c93abc0",
+          "scenarioFingerprint": "05adb9b58b87c5b11efef93a5007881fe3663038d64374f6d128e4d2e713d78f",
+          "sourceCheckedOn": "2026-11-25",
+          "sourceUrls": [
+            "https://voyagesansdetour.fr/portugal/lisbonne-ou-porto/"
+          ],
+          "creditsUrl": "https://voyagesansdetour.fr/social-media/production/ig-lisbonne-ou-porto-2026-12-15/credits.txt",
+          "voice": null,
+          "music": "Almost Bliss",
+          "note": "Les octets publics sont à contrôler après déploiement avec social_stock.py --verify-public. Un créneau prévu n'est pas une réservation Buffer."
+        }
+      }
+    }
+  ]
+}
