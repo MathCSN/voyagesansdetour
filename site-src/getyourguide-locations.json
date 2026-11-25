@@ -43,7 +43,7 @@
       "place": "Belém"
     },
     "centre|vietnam": {
-      "checkedOn": "2026-10-26",
+      "checkedOn": "2026-11-25",
       "country": "Vietnam",
       "path": null,
       "place": "Centre"
@@ -241,7 +241,7 @@
       "place": "Nord"
     },
     "nord|vietnam": {
-      "checkedOn": "2026-10-26",
+      "checkedOn": "2026-11-25",
       "country": "Vietnam",
       "path": null,
       "place": "Nord"
@@ -325,7 +325,7 @@
       "place": "Sintra"
     },
     "sud|vietnam": {
-      "checkedOn": "2026-10-26",
+      "checkedOn": "2026-11-25",
       "country": "Vietnam",
       "path": null,
       "place": "Sud"
