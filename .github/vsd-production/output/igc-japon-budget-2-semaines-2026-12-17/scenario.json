@@ -1,0 +1,203 @@
+{
+  "schemaVersion": 2,
+  "id": "igc-japon-budget-2-semaines-2026-12-17",
+  "kind": "carousel",
+  "channel": "instagram",
+  "destination": "Japon",
+  "title": "Budget Japon, 2 semaines : 4 repères",
+  "targetUrl": "https://voyagesansdetour.fr/japon/japon-budget-2-semaines/",
+  "publishAt": "2026-12-17T08:00:00Z",
+  "review": {
+    "status": "reviewed_for_render",
+    "checkedAt": "2026-11-26T15:27:50Z",
+    "validUntil": "2026-12-26T15:27:50Z",
+    "method": "Généré automatiquement (auto_social.py) depuis la page publiée du guide relevée le 26/11/2026 : chaque chiffre est cité mot pour mot ; photos réelles sous licence libre (Wikimedia Commons), aucune image générée par IA ; garde-fous de production.py passés avant la mise en file."
+  },
+  "sources": {
+    "file": "auto/igc-japon-budget-2-semaines-2026-12-17/sources.json",
+    "sha256": "ecce7964573a606f3fe91af75a12713beb97378e846fc31841b6ca3ebb78b500"
+  },
+  "photos": {
+    "file": "auto/igc-japon-budget-2-semaines-2026-12-17/photos.json",
+    "sha256": "91b0fd4cf40128ecc512d4e7ef96681e9038f922c295da0e458f195d156af73d"
+  },
+  "caption": {
+    "hook": "💶 Budget Japon 2 semaines : de 870 à 1 370 € sans le vol, poste par poste (prix 2026)",
+    "lines": [
+      "💶 872 € : le budget serré pour 14 jours et 13 nuits (154 120 ¥), capsule ou dortoir, repas à 1 000 ¥, hors vol — estimation",
+      "💶 1 367 € : le budget confort (241 620 ¥) en business hôtel à deux, repas variés, visites — estimation",
+      "💶 44 620 ¥ : Tokyo–Kyoto–Hiroshima–Tokyo en billets à l’unité (≈ 252 €), contre 80 000 ¥ (≈ 453 €) pour un JR Pass 14 jours",
+      "💶 3 000 à 5 000 ¥ : une nuit en capsule ; 7 000 à 20 000 ¥ la chambre en business hôtel (relevé de mars 2025)"
+    ],
+    "cta": "📌 Enregistrez ce carrousel pour votre voyage. 🔗 Prix, horaires et détails : le guide complet est en lien dans la bio.",
+    "hashtags": [
+      "#Japon",
+      "#VoyageJapon",
+      "#VoyagePasCher",
+      "#VoyageSansDetour"
+    ]
+  },
+  "scenes": [
+    {
+      "photo": "japon-tokyo-shibuya",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Japon",
+      "headline": [
+        "Budget Japon, 2 semaines",
+        "*4 chiffres* à connaître"
+      ],
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "Deux semaines au Japon coûtent environ 870 € en version serrée et 1 370 € en version confort, par personne, vol non compris."
+        }
+      ],
+      "tag": "Guide Japon · sources du 07/11/2026",
+      "alt": "Le carrefour de Shibuya, à Tokyo."
+    },
+    {
+      "photo": "japon-kyoto-kiyomizu",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Japon",
+      "headline": [
+        "*872 €*"
+      ],
+      "detail": "le budget serré pour 14 jours et 13 nuits (154 120 ¥), capsule ou dortoir, repas à 1 000 ¥, hors vol — estimation",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "872 € le budget serré pour 14 jours et 13 nuits (154 120 ¥), capsule ou dortoir, repas à 1 000 ¥, hors vol — estimation"
+        }
+      ],
+      "tag": "Guide Japon · sources du 07/11/2026",
+      "alt": "Des promeneuses en yukata devant la porte nord du Kiyomizu-dera, à Kyoto."
+    },
+    {
+      "photo": "japon-hiroshima-miyajima",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Japon",
+      "headline": [
+        "*1 367 €*"
+      ],
+      "detail": "le budget confort (241 620 ¥) en business hôtel à deux, repas variés, visites — estimation",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "1 367 € le budget confort (241 620 ¥) en business hôtel à deux, repas variés, visites — estimation"
+        }
+      ],
+      "tag": "Guide Japon · sources du 07/11/2026",
+      "alt": "Le grand torii flottant d’Itsukushima, sur l’île de Miyajima."
+    },
+    {
+      "photo": "japon-shinkansen-n700s-fuji",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Japon",
+      "headline": [
+        "*44 620 ¥*"
+      ],
+      "detail": "Tokyo–Kyoto–Hiroshima–Tokyo en billets à l’unité (≈ 252 €), contre 80 000 ¥ (≈ 453 €) pour un JR Pass 14 jours",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "44 620 ¥ Tokyo–Kyoto–Hiroshima–Tokyo en billets à l’unité (≈ 252 €), contre 80 000 ¥ (≈ 453 €) pour un JR Pass 14 jours"
+        }
+      ],
+      "tag": "Guide Japon · sources du 07/11/2026",
+      "alt": "Un shinkansen N700S devant le mont Fuji, sur la ligne Tōkaidō entre Tokyo et Kyoto."
+    },
+    {
+      "photo": "japon-osaka-dotonbori",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "kicker": "Japon",
+      "headline": [
+        "*3 000 à 5 000 ¥*"
+      ],
+      "detail": "une nuit en capsule ; 7 000 à 20 000 ¥ la chambre en business hôtel (relevé de mars 2025)",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "3 000 à 5 000 ¥ une nuit en capsule ; 7 000 à 20 000 ¥ la chambre en business hôtel (relevé de mars 2025)"
+        }
+      ],
+      "tag": "Guide Japon · chiffre de mars 2025",
+      "alt": "Les enseignes lumineuses du canal de Dotonbori, à Osaka."
+    },
+    {
+      "photo": "japon-nara-cerfs",
+      "focus": [
+        0.68,
+        0.5
+      ],
+      "kicker": "Le guide complet",
+      "headline": [
+        "Budget Japon, 2 semaines"
+      ],
+      "detail": "Deux budgets chiffrés en yens et en euros, relevés en novembre 2026.",
+      "alt": "Des cerfs en liberté dans le parc de Nara.",
+      "cta": true
+    }
+  ],
+  "assets": {
+    "regular": {
+      "file": "assets/dmsans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9"
+    },
+    "bold": {
+      "file": "assets/dmsans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211"
+    },
+    "serif": {
+      "file": "assets/playfair.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+      },
+      "sha256": "adefc53e7b3d483f1fa5e85edd82b7689ca79db25a1f6786bd7949cdcfeec601"
+    },
+    "fallbackRegular": {
+      "file": "assets/notosans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "478c558ea716033cd60c03438f628dfa75694dcf6b5f6d505a2f05fd2b4f3823"
+    },
+    "fallbackBold": {
+      "file": "assets/notosans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "1df075a380fc7cb898acf64c1f7b3b4dd780de3caa860178bf929de35817a913"
+    }
+  }
+}

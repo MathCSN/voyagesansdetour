@@ -1,0 +1,174 @@
+{
+  "schemaVersion": 1,
+  "batchId": "igc-japon-budget-2-semaines-2026-12-17-v1",
+  "items": [
+    {
+      "contentId": "vsd-production:instagram:igc-japon-budget-2-semaines-2026-12-17:photo-v1",
+      "deduplicationKey": "vsd-production:instagram:igc-japon-budget-2-semaines-2026-12-17:photo-v1",
+      "title": "Budget Japon, 2 semaines : 4 repères",
+      "dueAt": "2026-12-17T08:00:00Z",
+      "payload": {
+        "schemaVersion": 1,
+        "channel": "instagram",
+        "kind": "carousel",
+        "text": "💶 Budget Japon 2 semaines : de 870 à 1 370 € sans le vol, poste par poste (prix 2026)\n\n💶 872 € : le budget serré pour 14 jours et 13 nuits (154 120 ¥), capsule ou dortoir, repas à 1 000 ¥, hors vol — estimation\n💶 1 367 € : le budget confort (241 620 ¥) en business hôtel à deux, repas variés, visites — estimation\n💶 44 620 ¥ : Tokyo–Kyoto–Hiroshima–Tokyo en billets à l’unité (≈ 252 €), contre 80 000 ¥ (≈ 453 €) pour un JR Pass 14 jours\n💶 3 000 à 5 000 ¥ : une nuit en capsule ; 7 000 à 20 000 ¥ la chambre en business hôtel (relevé de mars 2025)\n\n📌 Enregistrez ce carrousel pour votre voyage. 🔗 Prix, horaires et détails : le guide complet est en lien dans la bio.\n\nPhotos libres (Wikimedia Commons) — crédits : https://voyagesansdetour.fr/social-media/production/igc-japon-budget-2-semaines-2026-12-17/credits.txt\n\n#Japon #VoyageJapon #VoyagePasCher #VoyageSansDetour\n",
+        "aiGenerated": false,
+        "assets": [
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/igc-japon-budget-2-semaines-2026-12-17/scene-01.jpg",
+            "sha256": "18957884dee2975d4074eff91c961ce3f804f2dd141dc6e7484c4692d57e8577",
+            "mimeType": "image/jpeg",
+            "altText": "Le carrefour de Shibuya, à Tokyo."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/igc-japon-budget-2-semaines-2026-12-17/scene-02.jpg",
+            "sha256": "3e10d2ff859ef7a5e1940d49e3eaace34dd2c62f14def5ca0e32dae62359b95d",
+            "mimeType": "image/jpeg",
+            "altText": "Des promeneuses en yukata devant la porte nord du Kiyomizu-dera, à Kyoto."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/igc-japon-budget-2-semaines-2026-12-17/scene-03.jpg",
+            "sha256": "38b096b89def59f286ea7ea4c024de04deafa27129f5780584405866122093f7",
+            "mimeType": "image/jpeg",
+            "altText": "Le grand torii flottant d’Itsukushima, sur l’île de Miyajima."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/igc-japon-budget-2-semaines-2026-12-17/scene-04.jpg",
+            "sha256": "ca72c8df531d92a1467820b10825a3a55f6dfb66c87a2b8f3cbcd8f20c2b80c3",
+            "mimeType": "image/jpeg",
+            "altText": "Un shinkansen N700S devant le mont Fuji, sur la ligne Tōkaidō entre Tokyo et Kyoto."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/igc-japon-budget-2-semaines-2026-12-17/scene-05.jpg",
+            "sha256": "b4d3c402eba19d65218b0857c3b840fcce5202cc17ba860590405d3f0822e8e0",
+            "mimeType": "image/jpeg",
+            "altText": "Les enseignes lumineuses du canal de Dotonbori, à Osaka."
+          },
+          {
+            "url": "https://voyagesansdetour.fr/social-media/production/igc-japon-budget-2-semaines-2026-12-17/scene-06.jpg",
+            "sha256": "a2fff732cea4f43117ace9d960c960380e23ca414c15a714dd6cd7312a9f8356",
+            "mimeType": "image/jpeg",
+            "altText": "Des cerfs en liberté dans le parc de Nara."
+          }
+        ]
+      },
+      "review": {
+        "schemaVersion": 1,
+        "contentId": "vsd-production:instagram:igc-japon-budget-2-semaines-2026-12-17:photo-v1",
+        "approved": true,
+        "reviewedAt": "2026-11-26T15:28:59Z",
+        "validUntil": "2026-12-26T15:27:50Z",
+        "payloadRevision": "fd5766109426e1159c90aea3c26680be09065e2f29f850ab1f61221cb7b021cc",
+        "checks": {
+          "editorialApproved": true,
+          "rightsApproved": true,
+          "creditsPreserved": true,
+          "disclosurePreserved": true,
+          "formatRequirementsVerified": true,
+          "requiresPaidCall": false,
+          "sources": {
+            "status": "verified",
+            "observedAt": "2026-11-26T15:27:50Z",
+            "validUntil": "2026-12-26T15:27:50Z"
+          },
+          "syntheticPerson": false,
+          "providerSyntheticSettingVerified": false
+        },
+        "media": {
+          "required": true,
+          "url": null,
+          "sha256": null,
+          "items": [
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/igc-japon-budget-2-semaines-2026-12-17/scene-01.jpg",
+              "sha256": "18957884dee2975d4074eff91c961ce3f804f2dd141dc6e7484c4692d57e8577",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-26T15:28:59Z",
+              "validUntil": "2026-12-26T15:27:50Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/igc-japon-budget-2-semaines-2026-12-17/scene-02.jpg",
+              "sha256": "3e10d2ff859ef7a5e1940d49e3eaace34dd2c62f14def5ca0e32dae62359b95d",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-26T15:28:59Z",
+              "validUntil": "2026-12-26T15:27:50Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/igc-japon-budget-2-semaines-2026-12-17/scene-03.jpg",
+              "sha256": "38b096b89def59f286ea7ea4c024de04deafa27129f5780584405866122093f7",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-26T15:28:59Z",
+              "validUntil": "2026-12-26T15:27:50Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/igc-japon-budget-2-semaines-2026-12-17/scene-04.jpg",
+              "sha256": "ca72c8df531d92a1467820b10825a3a55f6dfb66c87a2b8f3cbcd8f20c2b80c3",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-26T15:28:59Z",
+              "validUntil": "2026-12-26T15:27:50Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/igc-japon-budget-2-semaines-2026-12-17/scene-05.jpg",
+              "sha256": "b4d3c402eba19d65218b0857c3b840fcce5202cc17ba860590405d3f0822e8e0",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-26T15:28:59Z",
+              "validUntil": "2026-12-26T15:27:50Z"
+            },
+            {
+              "url": "https://voyagesansdetour.fr/social-media/production/igc-japon-budget-2-semaines-2026-12-17/scene-06.jpg",
+              "sha256": "a2fff732cea4f43117ace9d960c960380e23ca414c15a714dd6cd7312a9f8356",
+              "mimeType": "image/jpeg",
+              "status": "verified",
+              "observedAt": "2026-11-26T15:28:59Z",
+              "validUntil": "2026-12-26T15:27:50Z"
+            }
+          ]
+        },
+        "destination": {
+          "url": "https://voyagesansdetour.fr/japon/japon-budget-2-semaines/",
+          "status": "verified",
+          "observedAt": "2026-11-26T15:28:59Z",
+          "validUntil": "2026-12-26T15:27:50Z"
+        },
+        "monetization": {
+          "containsAffiliateLinks": false,
+          "partnerApproved": false,
+          "linksVerified": false,
+          "disclosurePreserved": false
+        },
+        "formatCapability": {
+          "status": "verified",
+          "observedAt": "2026-11-26T15:28:59Z",
+          "validUntil": "2026-12-26T15:27:50Z",
+          "automaticPublishing": true,
+          "verificationMethod": "official_documentation",
+          "sourceUrls": [
+            "https://support.buffer.com/en-us/articles/sharing-videos-through-buffer-LOe2p2rnAI",
+            "https://developers.buffer.com/types/InstagramPostMetadataInput.html",
+            "https://developers.buffer.com/guides/posts-and-scheduling.html"
+          ]
+        },
+        "evidence": {
+          "status": "rendered_local_bytes_verified_public_deploy_pending",
+          "format": "photo_carousel",
+          "rendererContractVersion": 3,
+          "receiptSha256": "801dcb0ab91a028b3d0913fdf4bf8893e98658b679a1d8ca6a92f3e83b24c6a1",
+          "scenarioFingerprint": "d638082cf0d2278120cafbdc6c73554ea52285673c5017a62af0ed8c6b16fb8d",
+          "sourceCheckedOn": "2026-11-26",
+          "sourceUrls": [
+            "https://voyagesansdetour.fr/japon/japon-budget-2-semaines/"
+          ],
+          "creditsUrl": "https://voyagesansdetour.fr/social-media/production/igc-japon-budget-2-semaines-2026-12-17/credits.txt",
+          "voice": null,
+          "music": null,
+          "note": "Les octets publics sont à contrôler après déploiement avec social_stock.py --verify-public. Un créneau prévu n'est pas une réservation Buffer."
+        }
+      }
+    }
+  ]
+}

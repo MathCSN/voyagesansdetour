@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "checkedOn": "2026-11-26",
+  "method": "Page publiée du guide relevée automatiquement ; texte visible conservé tel quel, première ligne = URL.",
+  "sources": {
+    "guide": {
+      "url": "https://voyagesansdetour.fr/japon/japon-budget-2-semaines/",
+      "publisher": "Voyage Sans Détour",
+      "title": "Budget Japon 2 semaines : de 870 à 1 370 € sans le vol, poste par poste (prix 2026)",
+      "retrievedAt": "2026-11-26T15:27:50Z",
+      "snapshot": {
+        "file": "auto/igc-japon-budget-2-semaines-2026-12-17/guide.txt",
+        "sha256": "37a0ee6835936cf2a8216bb6d2144eda76b48462244eb86165b39aeda55ba3dd"
+      }
+    }
+  }
+}

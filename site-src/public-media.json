@@ -2635,6 +2635,85 @@
           "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
         }
       ]
+    },
+    {
+      "contentId": "igc-japon-budget-2-semaines-2026-12-17",
+      "kind": "photos",
+      "approved": true,
+      "files": [
+        {
+          "name": "scene-01.jpg",
+          "sha256": "18957884dee2975d4074eff91c961ce3f804f2dd141dc6e7484c4692d57e8577",
+          "bytes": 477765
+        },
+        {
+          "name": "scene-02.jpg",
+          "sha256": "3e10d2ff859ef7a5e1940d49e3eaace34dd2c62f14def5ca0e32dae62359b95d",
+          "bytes": 395602
+        },
+        {
+          "name": "scene-03.jpg",
+          "sha256": "38b096b89def59f286ea7ea4c024de04deafa27129f5780584405866122093f7",
+          "bytes": 268503
+        },
+        {
+          "name": "scene-04.jpg",
+          "sha256": "ca72c8df531d92a1467820b10825a3a55f6dfb66c87a2b8f3cbcd8f20c2b80c3",
+          "bytes": 349247
+        },
+        {
+          "name": "scene-05.jpg",
+          "sha256": "b4d3c402eba19d65218b0857c3b840fcce5202cc17ba860590405d3f0822e8e0",
+          "bytes": 349062
+        },
+        {
+          "name": "scene-06.jpg",
+          "sha256": "a2fff732cea4f43117ace9d960c960380e23ca414c15a714dd6cd7312a9f8356",
+          "bytes": 219397
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "c95414d9d4cc3343c25ee05b1e272134998d27a193f087f9d5385f8816a69254",
+          "bytes": 2899
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "pin-tenerife-quand-partir-c",
+      "kind": "pin",
+      "approved": true,
+      "files": [
+        {
+          "name": "pin.jpg",
+          "bytes": 528175,
+          "sha256": "9ff387923779dfc85da31cfa82cf3abb671ad49baff551076eb239afc198014a"
+        },
+        {
+          "name": "credits.txt",
+          "bytes": 331,
+          "sha256": "33d0c56c3015f5506f0d9a2b36a26e6ae8969bbab777d842902d0eeaae53e2b0"
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "bytes": 4482,
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "bytes": 4449,
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+        }
+      ]
     }
   ]
 }

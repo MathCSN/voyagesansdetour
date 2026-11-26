@@ -675,6 +675,15 @@
       "itemIds": [
         "vsd-production:tiktok:ig-lisbonne-ou-porto-2026-12-15:photo-v1"
       ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/igc-japon-budget-2-semaines-2026-12-17-v1.json",
+      "fileSha256": "184995358993b154827b860cb5e36ed79e0c2332e8dea6ff248a6ce05bd81ed1",
+      "batchId": "igc-japon-budget-2-semaines-2026-12-17-v1",
+      "batchSha256": "64745e2a470a2557942bcb430123d2f2ea3cd2e57d8981331645cd90082ab574",
+      "itemIds": [
+        "vsd-production:instagram:igc-japon-budget-2-semaines-2026-12-17:photo-v1"
+      ]
     }
   ],
   "retirements": [

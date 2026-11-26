@@ -300,6 +300,12 @@
       "notBefore": "2026-11-25T15:48:10Z",
       "file": "scenarios/ig-lisbonne-ou-porto-2026-12-15.json",
       "sha256": "59d1c6fb2a91d8f27b9471aeb9631defd51142d730ed12d4bae3dabe3f7ef06c"
+    },
+    {
+      "contentId": "igc-japon-budget-2-semaines-2026-12-17",
+      "notBefore": "2026-11-26T15:27:50Z",
+      "file": "scenarios/igc-japon-budget-2-semaines-2026-12-17.json",
+      "sha256": "baac0fbfd8676a26cc00c78feb303ea7328d65a33b3eaff50df35dab23261cfe"
     }
   ]
 }
