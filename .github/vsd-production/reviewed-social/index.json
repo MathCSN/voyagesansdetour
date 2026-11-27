@@ -684,6 +684,15 @@
       "itemIds": [
         "vsd-production:instagram:igc-japon-budget-2-semaines-2026-12-17:photo-v1"
       ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/fb-vietnam-itineraire-15-jours-2026-12-17-v1.json",
+      "fileSha256": "37403dfd03d04b2e5af8806d9f63182a77fedf6df59518bc5ba97e9552c42702",
+      "batchId": "fb-vietnam-itineraire-15-jours-2026-12-17-v1",
+      "batchSha256": "3dd28e96afdead1e1fc50a955f9427b4763ea443a77a6750f1a233b9cf895017",
+      "itemIds": [
+        "vsd-production:facebook:fb-vietnam-itineraire-15-jours-2026-12-17:photo-v1"
+      ]
     }
   ],
   "retirements": [

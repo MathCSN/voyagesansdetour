@@ -2714,6 +2714,85 @@
           "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
         }
       ]
+    },
+    {
+      "contentId": "fb-vietnam-itineraire-15-jours-2026-12-17",
+      "kind": "photos",
+      "approved": true,
+      "files": [
+        {
+          "name": "scene-01.jpg",
+          "sha256": "cb77b8d711063cca6f43d9025bc7bfecf07fb30ab0c7097ffbc0052473e59b2d",
+          "bytes": 379326
+        },
+        {
+          "name": "scene-02.jpg",
+          "sha256": "b0a404dc6b3572d6b23e0ef899a9696f19e9ecad7676198799136eca20352f84",
+          "bytes": 356537
+        },
+        {
+          "name": "scene-03.jpg",
+          "sha256": "400569ab64377714d4115dc8112f9a4fc6d6c2f4d9d991005e5f4d203dcf97b7",
+          "bytes": 488141
+        },
+        {
+          "name": "scene-04.jpg",
+          "sha256": "49ee7fb85edeca05a3738f361403657048ef5e95fecfa7368aa1ba6d7d55352f",
+          "bytes": 349626
+        },
+        {
+          "name": "scene-05.jpg",
+          "sha256": "7fcf4285ee81ff2d774870e25b1a80b7da458446849dfc30a45d2cb6cf839b7b",
+          "bytes": 284405
+        },
+        {
+          "name": "scene-06.jpg",
+          "sha256": "a307d52b686aec2880b57b5b5d90771cd6e269bd7233d187e636758dab76a9bf",
+          "bytes": 432672
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "6cd6fcdb8f98d34ea62ad223f808344b218c58853652cabef9136bcbf860f81e",
+          "bytes": 2913
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "pin-douro-train-depuis-porto-c",
+      "kind": "pin",
+      "approved": true,
+      "files": [
+        {
+          "name": "pin.jpg",
+          "bytes": 592965,
+          "sha256": "8066b10f9c744df4a908e0e7849f39220d3dfb37014ea070123a2be3b1265ddb"
+        },
+        {
+          "name": "credits.txt",
+          "bytes": 343,
+          "sha256": "b34309a79ec27da967f8318d1ce99ece2efe3dea16a03758ed57f5b7ba5fa204"
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "bytes": 4482,
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "bytes": 4449,
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+        }
+      ]
     }
   ]
 }

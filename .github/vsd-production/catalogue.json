@@ -306,6 +306,12 @@
       "notBefore": "2026-11-26T15:27:50Z",
       "file": "scenarios/igc-japon-budget-2-semaines-2026-12-17.json",
       "sha256": "baac0fbfd8676a26cc00c78feb303ea7328d65a33b3eaff50df35dab23261cfe"
+    },
+    {
+      "contentId": "fb-vietnam-itineraire-15-jours-2026-12-17",
+      "notBefore": "2026-11-27T15:15:01Z",
+      "file": "scenarios/fb-vietnam-itineraire-15-jours-2026-12-17.json",
+      "sha256": "846efba47ee43f52f630a4e2aff6eb9fdbe23a7981fc604b8e73e5549fd8e55c"
     }
   ]
 }

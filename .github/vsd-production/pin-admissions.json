@@ -187,6 +187,15 @@
       "publicHtmlSha256": "451f9d726d41928df610a9ee515fafe8332c25b18235a1396d4efa578cdab942",
       "method": "published_guide_photo_template_v3",
       "publicationConfirmed": false
+    },
+    {
+      "id": "pin-douro-train-depuis-porto-c",
+      "admittedAt": "2026-11-27T15:15:42.600560+00:00",
+      "articleSha256": "b3ef4e88d55e1c310de0b5ce250c58095ada53ade9ac2651522409b3a6c1edaa",
+      "imageSha256": "8066b10f9c744df4a908e0e7849f39220d3dfb37014ea070123a2be3b1265ddb",
+      "publicHtmlSha256": "5dd6a0d51160007ffb7dee646dd909d59132394cda987627dde9f7c319ed605f",
+      "method": "published_guide_photo_template_v3",
+      "publicationConfirmed": false
     }
   ]
 }
