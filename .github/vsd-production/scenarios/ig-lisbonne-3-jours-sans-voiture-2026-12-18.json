@@ -1,0 +1,239 @@
+{
+  "schemaVersion": 3,
+  "id": "ig-lisbonne-3-jours-sans-voiture-2026-12-18",
+  "kind": "reel",
+  "channel": "instagram",
+  "format": "liste",
+  "destination": "Lisbonne",
+  "title": "Lisbonne en 3 jours : les chiffres à connaître",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/lisbonne-3-jours-sans-voiture/",
+  "publishAt": "2026-12-18T17:00:00Z",
+  "review": {
+    "status": "reviewed_for_render",
+    "checkedAt": "2026-11-28T14:20:33Z",
+    "validUntil": "2026-12-28T14:20:33Z",
+    "method": "Généré automatiquement (auto_social.py) depuis la page publiée du guide relevée le 28/11/2026 : chaque chiffre, étape ou ligne de tableau est cité mot pour mot ; photos et vidéos réelles sous licence libre, aucune image ni vidéo générée par IA ; garde-fous de production.py passés avant la mise en file."
+  },
+  "sources": {
+    "file": "auto/ig-lisbonne-3-jours-sans-voiture-2026-12-18/sources.json",
+    "sha256": "85ec53bf69421d91cb5e93ce85ea19922ef41d4f24aa323f47e9de94f18292d3"
+  },
+  "photos": {
+    "file": "auto/ig-lisbonne-3-jours-sans-voiture-2026-12-18/photos.json",
+    "sha256": "be02db7c65119537de8077b89fef1217bfeeb6f31c30f186b965648ee1eef095"
+  },
+  "caption": {
+    "hook": "🗺️ Lisbonne en 3 jours sans voiture : tram 28, miradouros et Belém à 1,90 € le trajet",
+    "lines": [
+      "💶 2 € : la traversée du Tage en ferry vers Cacilhas, 10 minutes face à la ville",
+      "💶 17 € : le château São Jorge, ouvert de 9 h à 18 h depuis le 1er novembre (21 h en été)",
+      "💶 1,90 € : le ticket Carris/Metro sur carte Navegante : 1 h de bus et tram + 1 entrée métro",
+      "💶 7,25 € : le pass 24 h bus, tram et métro (11,40 € avec les trains CP)",
+      "⏱️ 8 min de train entre Cais do Sodré et Belém"
+    ],
+    "cta": "📌 Enregistrez ce reel pour votre voyage. 🔗 Prix, horaires et détails : le guide complet est en lien dans la bio.",
+    "hashtags": [
+      "#Lisbonne",
+      "#Portugal",
+      "#VoyagePortugal",
+      "#Itineraire",
+      "#VoyageSansDetour"
+    ]
+  },
+  "scenes": [
+    {
+      "photo": "lisbonne-jeronimos",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "hook",
+      "kicker": "Portugal · Lisbonne",
+      "headline": [
+        "Lisbonne",
+        "en 3 jours",
+        "*4 chiffres à connaître*"
+      ],
+      "seconds": 2.2,
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "Jour 1 : Baixa, Chiado et coucher de soleil au château São Jorge (17 €)."
+        }
+      ],
+      "tag": "Guide Lisbonne · sources du 16/11/2026",
+      "alt": "La façade sculptée du monastère des Jerónimos, à Belém."
+    },
+    {
+      "photo": "lisbonne-cacilhas-ferry",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "fact",
+      "kicker": "Lisbonne",
+      "headline": [
+        "*2 €*"
+      ],
+      "seconds": 3.3,
+      "detail": "la traversée du Tage en ferry vers Cacilhas",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "2 € la traversée du Tage en ferry vers Cacilhas"
+        }
+      ],
+      "tag": "Guide Lisbonne · sources du 16/11/2026",
+      "badge": "1/4",
+      "alt": "Un ferry orange et blanc traverse le Tage entre Cais do Sodré et Cacilhas."
+    },
+    {
+      "photo": "lisbonne",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "fact",
+      "kicker": "Lisbonne",
+      "headline": [
+        "*17 €*"
+      ],
+      "seconds": 2.4,
+      "detail": "le château São Jorge",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "17 € le château São Jorge"
+        }
+      ],
+      "tag": "Guide Lisbonne · sources du 16/11/2026",
+      "badge": "2/4",
+      "alt": "Les toits de Lisbonne, le château São Jorge et le pont du 25 Avril sous un ciel bleu."
+    },
+    {
+      "photo": "lisbonne-tram28-rue",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "fact",
+      "kicker": "Lisbonne",
+      "headline": [
+        "*1,90 €*"
+      ],
+      "seconds": 3.2,
+      "detail": "le ticket Carris/Metro sur carte Navegante",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "1,90 € le ticket Carris/Metro sur carte Navegante"
+        }
+      ],
+      "tag": "Guide Lisbonne · sources du 16/11/2026",
+      "badge": "3/4",
+      "alt": "Un tram jaune de la ligne 28 dans une rue pavée et pentue de Lisbonne."
+    },
+    {
+      "photo": "lisbonne-arc-rua-augusta-tram",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "fact",
+      "kicker": "Lisbonne",
+      "headline": [
+        "*7,25 €*"
+      ],
+      "seconds": 4.0,
+      "detail": "le pass 24 h bus, tram et métro (11,40 € avec les trains CP)",
+      "facts": [
+        {
+          "source": "guide",
+          "excerpt": "7,25 € le pass 24 h bus, tram et métro (11,40 € avec les trains CP)"
+        }
+      ],
+      "tag": "Guide Lisbonne · sources du 16/11/2026",
+      "badge": "4/4",
+      "alt": "L’arc de la rue Augusta et un tram rouge sur la place du Commerce, à Lisbonne."
+    },
+    {
+      "photo": "lisbonne-alfama-toits",
+      "focus": [
+        0.5,
+        0.5
+      ],
+      "layout": "cta",
+      "kicker": "Le guide complet",
+      "headline": [
+        "Lisbonne",
+        "en 3 jours"
+      ],
+      "seconds": 2.4,
+      "note": "Enregistrez cette vidéo pour votre voyage",
+      "button": "voyagesansdetour.fr",
+      "alt": "Les toits d’Alfama et le monastère de São Vicente de Fora vus depuis le château São Jorge."
+    }
+  ],
+  "musicStart": 8,
+  "assets": {
+    "regular": {
+      "file": "assets/dmsans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "b0ae3e89a7d3ef2b1838bb4b1ceb0b17cc3435af061eee809d76aa623ff116e9"
+    },
+    "bold": {
+      "file": "assets/dmsans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/dmsans-OFL.txt",
+        "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+      },
+      "sha256": "2a8e7f713ee79fbccdef3cef5c787aff47580299f7da60144961e7db2ec08211"
+    },
+    "serif": {
+      "file": "assets/playfair.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/playfairdisplay-OFL.txt",
+        "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+      },
+      "sha256": "adefc53e7b3d483f1fa5e85edd82b7689ca79db25a1f6786bd7949cdcfeec601"
+    },
+    "fallbackRegular": {
+      "file": "assets/notosans-regular.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "478c558ea716033cd60c03438f628dfa75694dcf6b5f6d505a2f05fd2b4f3823"
+    },
+    "fallbackBold": {
+      "file": "assets/notosans-bold.ttf",
+      "license": "OFL-1.1",
+      "licenseFile": {
+        "file": "assets/notosans-OFL.txt",
+        "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a"
+      },
+      "sha256": "1df075a380fc7cb898acf64c1f7b3b4dd780de3caa860178bf929de35817a913"
+    },
+    "music": {
+      "file": "assets/happy-alley.mp3",
+      "sha256": "f598c8ee624f1db9a2cd38886524a40baff4ce730dcf999c0763791268fa8265",
+      "license": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "commercialUseAllowed": true,
+      "title": "Happy Alley",
+      "author": "Kevin MacLeod",
+      "sourceUrl": "https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100482",
+      "provenance": {
+        "file": "evidence/happy-alley-provenance.json",
+        "sha256": "5a2ba8f3dba28b0a748b00089d3854db1fde92213429823746f6d01805f904ac"
+      }
+    }
+  }
+}

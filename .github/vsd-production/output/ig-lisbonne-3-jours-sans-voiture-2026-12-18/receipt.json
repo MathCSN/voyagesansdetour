@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 1,
+  "contentId": "ig-lisbonne-3-jours-sans-voiture-2026-12-18",
+  "status": "rendered_not_published",
+  "fingerprint": "36bcd58022f053dcd08308a5d9c560b6370c07fe4ddc3f1e2ad0d6eb57ad038a",
+  "createdAt": "2026-11-28T14:21:49.908930Z",
+  "renderFinishedAt": "2026-11-28T14:22:15.509903Z",
+  "rendererContractVersion": 4,
+  "rendererSha256": "2cad356cfe58db78ba8eab495c75f2214f6822b0f2c19268adc45204314934b1",
+  "drawingSha256": "b78990f497d03baf754e3b2b68a795a5e9d3b91a0b6a2f8dad2ebcd7fec2907c",
+  "motionSha256": "9029b7f552929c69dcdcea595e65d9cc3bc8b872113b850e5a74010252289f08",
+  "format": "liste",
+  "kind": "reel",
+  "channel": "instagram",
+  "publishAt": "2026-12-18T17:00:00Z",
+  "reviewValidUntil": "2026-12-28T14:20:33Z",
+  "sourceCheckedOn": "2026-11-28",
+  "targetUrl": "https://voyagesansdetour.fr/portugal/lisbonne-3-jours-sans-voiture/",
+  "voice": null,
+  "presenter": null,
+  "sourceUrls": [
+    "https://voyagesansdetour.fr/portugal/lisbonne-3-jours-sans-voiture/"
+  ],
+  "photos": {
+    "lisbonne-jeronimos": {
+      "licence": "CC BY-SA 4.0",
+      "author": "NorbertNagel",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Jer%C3%B3nimos_Monastery_in_Bel%C3%A9m_-_Lisbon_-_Portugal_-_02.jpg"
+    },
+    "lisbonne-cacilhas-ferry": {
+      "licence": "CC BY 2.0",
+      "author": "Pedro Simões from Lisboa, Portugal",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Cacilheiro.jpg"
+    },
+    "lisbonne": {
+      "licence": "CC BY-SA 4.0",
+      "author": "SIryn",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:City_view_of_Lisbon_with_Castelo_de_S%C3%A3o_Jorge.jpg"
+    },
+    "lisbonne-tram28-rue": {
+      "licence": "CC BY 2.0",
+      "author": "Shadowgate from Novara, ITALY",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tram_28_(34791358090).jpg"
+    },
+    "lisbonne-arc-rua-augusta-tram": {
+      "licence": "CC BY-SA 4.0",
+      "author": "Ingo Mehling",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Lissabon_-_Arco_da_Victoria_-_0.jpg"
+    },
+    "lisbonne-alfama-toits": {
+      "licence": "CC BY 4.0",
+      "author": "Jakub Hałun",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Lisbon_Alfama_Sao_Vicente_Pantheon_from_Sao_Jorge_Castle,_20250604_1714_9404.jpg"
+    }
+  },
+  "clips": {},
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "durationSeconds": 17.5,
+    "videoCodec": "h264",
+    "pixelFormat": "yuv420p",
+    "videoBitrateBps": 3258960,
+    "audioCodec": "aac",
+    "audioSampleRate": 48000,
+    "audioBitrateBps": 96531,
+    "fullDecodePassed": true,
+    "loudness": {
+      "integratedLufs": -16.1,
+      "truePeakDbfs": -2.2
+    }
+  },
+  "files": [
+    {
+      "file": "apercu.jpg",
+      "sha256": "0bd625c610f2bf2c92cbd6aad268b6ceb9bbdd11d5502ba8c08cd00dce501539",
+      "bytes": 262993
+    },
+    {
+      "file": "credits.txt",
+      "sha256": "ea4000fe6a3865c6aa776866b8e39733e4e9d28bf501d8badaf97166a0c91057",
+      "bytes": 3075
+    },
+    {
+      "file": "dmsans-OFL.txt",
+      "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+      "bytes": 4482
+    },
+    {
+      "file": "encode.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "file": "legende.txt",
+      "sha256": "4785489bbc3bcf1071ae797edf478dd23646fba045875c33d1bff47d0afe2be7",
+      "bytes": 900
+    },
+    {
+      "file": "notosans-OFL.txt",
+      "sha256": "cee9892f9f0cc8fe882c9e9537ee6a89621d86ee7ceaf70b02e2b2b1c25c061a",
+      "bytes": 4396
+    },
+    {
+      "file": "playfairdisplay-OFL.txt",
+      "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+      "bytes": 4449
+    },
+    {
+      "file": "poster.jpg",
+      "sha256": "639f4e161d9b1472b6a88a7f9417102cd5d039245c5981b28702b686ac756a46",
+      "bytes": 496220
+    },
+    {
+      "file": "reel.mp4",
+      "sha256": "9086be85a5c0a68d9f5ff7ccb504e15255bc395134a767a6b1cf30b0633319e7",
+      "bytes": 7361067
+    },
+    {
+      "file": "scenario.json",
+      "sha256": "0f864f9953114685ef3018123b0f98d89492755395cf6e78433494043e6ebb50",
+      "bytes": 7943
+    },
+    {
+      "file": "scene-01.jpg",
+      "sha256": "b294cbf97bafcaeff678161c9eb49d1015dcb7c23eeb7df20f25ead092896bcb",
+      "bytes": 451822
+    },
+    {
+      "file": "scene-02.jpg",
+      "sha256": "007ce3df2103b7bf8952b35acf270c1164aa5fb3473146e958d2e58aea9ef5a2",
+      "bytes": 277053
+    },
+    {
+      "file": "scene-03.jpg",
+      "sha256": "2673478eec13135c198dc763aab7f95d9a6913700d84280c860af4449bfb8e76",
+      "bytes": 454971
+    },
+    {
+      "file": "scene-04.jpg",
+      "sha256": "7a69c94f5b0e37baf5132b16950bc8be63a77ac0cddde03639632cf041896b49",
+      "bytes": 452114
+    },
+    {
+      "file": "scene-05.jpg",
+      "sha256": "6f9638455920d48c4a75517e0b6200948e7ba57dafada84a120304e944a12cfd",
+      "bytes": 430931
+    },
+    {
+      "file": "scene-06.jpg",
+      "sha256": "9c5381f448e65348bed23558eeb6d66249e653fb6222ae117ee0033d9e51ac21",
+      "bytes": 424118
+    }
+  ],
+  "runtime": {
+    "wallSeconds": 25.272,
+    "encoderThreads": 2,
+    "pillowVersion": "11.3.0",
+    "ffmpegVersion": "ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers"
+  },
+  "publication": {
+    "uploaded": false,
+    "scheduled": false,
+    "published": false,
+    "readyForAutomaticImport": false
+  },
+  "cost": {
+    "newPaidService": false,
+    "providerCalls": 0,
+    "monetarySpendEur": 0
+  }
+}

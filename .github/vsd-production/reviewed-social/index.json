@@ -693,6 +693,24 @@
       "itemIds": [
         "vsd-production:facebook:fb-vietnam-itineraire-15-jours-2026-12-17:photo-v1"
       ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-lisbonne-3-jours-sans-voiture-2026-12-18-v1.json",
+      "fileSha256": "ba0af66db42c764bce05d7906eb27faf9acd1098e7e8954dd8a293fbc7c98c52",
+      "batchId": "ig-lisbonne-3-jours-sans-voiture-2026-12-18-v1",
+      "batchSha256": "7ae126260eecab5bd3f2da0fa24340bae160d4a61567490fbed66f859699d476",
+      "itemIds": [
+        "vsd-production:instagram:ig-lisbonne-3-jours-sans-voiture-2026-12-18:photo-v1"
+      ]
+    },
+    {
+      "path": ".github/vsd-production/reviewed-social/ig-lisbonne-3-jours-sans-voiture-2026-12-18-tiktok-v1.json",
+      "fileSha256": "2329abcf7248393f53de5e75d80c7aab0ca057d77c99edceead1a63dc0c8b9fc",
+      "batchId": "ig-lisbonne-3-jours-sans-voiture-2026-12-18-tiktok-v1",
+      "batchSha256": "c35c71e7b28af8ff87150c11330c8cb2bbe0b06dcb3243eb94b09b04e5df2da1",
+      "itemIds": [
+        "vsd-production:tiktok:ig-lisbonne-3-jours-sans-voiture-2026-12-18:photo-v1"
+      ]
     }
   ],
   "retirements": [

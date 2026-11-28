@@ -157,6 +157,15 @@
           "mediaId": "pin-marrakech-3-jours",
           "width": 1000,
           "height": 1500
+        },
+        {
+          "id": "pin-mexique-quand-partir",
+          "title": "Quand partir au Mexique : saison sèche, pluies, ouragans et sargasses, mois par mois",
+          "description": "Mexico reçoit 5 mm de pluie en décembre et 176 mm en août, Cancún 242 mm en octobre : le bon mois selon la région, avec relevés, ouragans et sargasses. 📌 Enregistrez ce guide pour préparer votre voyage au Mexique. Photo : Roman Bonnefoy — CC BY-SA 4.0. Crédits : https://voyagesansdetour.fr/social-media/production/pin-mexique-quand-partir/credits.txt",
+          "linkPath": "/mexique/mexique-quand-partir/",
+          "mediaId": "pin-mexique-quand-partir",
+          "width": 1000,
+          "height": 1500
         }
       ]
     }

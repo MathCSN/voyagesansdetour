@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 1,
+  "photos": {
+    "lisbonne": {
+      "camera": "X-T20",
+      "file": "assets/photos/auto/lisbonne.jpg",
+      "sha256": "81d42d97450d6e3ede1cce2f2c856a4083429eb961c0417172534a21e359dd4c",
+      "width": 2400,
+      "height": 1600,
+      "commonsTitle": "File:City view of Lisbon with Castelo de São Jorge.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:City_view_of_Lisbon_with_Castelo_de_S%C3%A3o_Jorge.jpg",
+      "author": "SIryn",
+      "commonsCredit": "own work by the original uploader",
+      "categories": "Castelo de São Jorge|Uploaded with pattypan|September 2018 in Lisbon",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        6000,
+        4000
+      ],
+      "commonsSha1": "d5b9709fadc645c18110e6f1503a06379fe518fb",
+      "retrievedAt": "2026-11-15T09:38:06Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux.",
+      "emblematic": true
+    },
+    "lisbonne-alfama-toits": {
+      "camera": "NIKON D750",
+      "file": "assets/photos/auto/lisbonne-alfama-toits.jpg",
+      "sha256": "3e15c6f8b6e17ff8417c0602acbe315cf051fde636f91962eb73edb5c502b279",
+      "width": 2397,
+      "height": 1600,
+      "commonsTitle": "File:Lisbon Alfama Sao Vicente Pantheon from Sao Jorge Castle, 20250604 1714 9404.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Lisbon_Alfama_Sao_Vicente_Pantheon_from_Sao_Jorge_Castle,_20250604_1714_9404.jpg",
+      "author": "Jakub Hałun",
+      "commonsCredit": "Own work",
+      "categories": "Self-published work|Files with coordinates missing SDC location of creation|Mosteiro de São Vicente de Fora from Castelo de São Jorge",
+      "licence": "CC BY 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "originalSize": [
+        5923,
+        3954
+      ],
+      "commonsSha1": "672dd1e71f5d42200487c11d40a477aeb0f6abb5",
+      "retrievedAt": "2026-11-15T09:38:06Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux.",
+      "emblematic": true
+    },
+    "lisbonne-arc-rua-augusta-tram": {
+      "file": "assets/photos/lisbonne-arc-rua-augusta-tram.jpg",
+      "sha256": "02e767d9684d1074ad3c14df25456b3d80e5b66dd8e08a6aaf50b86ebeac4795",
+      "width": 2036,
+      "height": 1600,
+      "commonsTitle": "File:Lissabon - Arco da Victoria - 0.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Lissabon_-_Arco_da_Victoria_-_0.jpg",
+      "author": "Ingo Mehling",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        4761,
+        3742
+      ],
+      "commonsSha1": "ee58126921aa7dd2972be3ab509f67c18758b60f",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "lisbonne-cacilhas-ferry": {
+      "camera": "NIKON D2X",
+      "file": "assets/photos/auto/lisbonne-cacilhas-ferry.jpg",
+      "sha256": "f507de0694e9df1f3bb350997cd5556d8b2775fbfea4f4095015643d778acd21",
+      "width": 2409,
+      "height": 1600,
+      "commonsTitle": "File:Cacilheiro.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Cacilheiro.jpg",
+      "author": "Pedro Simões from Lisboa, Portugal",
+      "commonsCredit": "\"Cacilheiro\"",
+      "categories": "Taken with Nikon D2X|Ferries in Lisbon|Palmelense (ship, 1982)|Flickr images reviewed by FlickreviewR|Photos by Pedro Ribeiro Simões",
+      "licence": "CC BY 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "originalSize": [
+        3859,
+        2563
+      ],
+      "commonsSha1": "e98ae39dfc666efd693cfb3f1177095fb7620116",
+      "retrievedAt": "2026-11-28T14:20:33Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux."
+    },
+    "lisbonne-jeronimos": {
+      "camera": "ILCE-6700",
+      "file": "assets/photos/auto/lisbonne-jeronimos.jpg",
+      "sha256": "ca24acae5fdac262935d730f641eea6b3fc7fec468571a3ea53f501c11c59ce1",
+      "width": 2352,
+      "height": 1600,
+      "commonsTitle": "File:Jerónimos Monastery in Belém - Lisbon - Portugal - 02.jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Jer%C3%B3nimos_Monastery_in_Bel%C3%A9m_-_Lisbon_-_Portugal_-_02.jpg",
+      "author": "NorbertNagel",
+      "commonsCredit": "Own work",
+      "categories": "Exterior of the Church of Santa Maria de Belém|Self-published work|South portal of Mosteiro dos Jerónimos|Files with coordinates missing SDC location of creation|Jerónimos",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "originalSize": [
+        5899,
+        4013
+      ],
+      "commonsSha1": "b32ef2ac2df7a1ad6fd4cf9b890c20f6f7c77faa",
+      "retrievedAt": "2026-11-28T14:20:33Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux.",
+      "emblematic": true
+    },
+    "lisbonne-tram28-rue": {
+      "file": "assets/photos/lisbonne-tram28-rue.jpg",
+      "sha256": "3bbd629e7b78cc6233c85ae7011d19203f61c72385cb112a378e6779bf0d6d3c",
+      "width": 2400,
+      "height": 1600,
+      "commonsTitle": "File:Tram 28 (34791358090).jpg",
+      "sourcePage": "https://commons.wikimedia.org/wiki/File:Tram_28_(34791358090).jpg",
+      "author": "Shadowgate from Novara, ITALY",
+      "licence": "CC BY 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "originalSize": [
+        4272,
+        2848
+      ],
+      "commonsSha1": "f38a38c41298bf38dd98d87ad696b178b6469be1",
+      "retrievedAt": "2026-10-24T06:33:21Z",
+      "modifications": "Redimensionnée, recadrée et légendée pour les réseaux sociaux.",
+      "emblematic": true
+    }
+  }
+}

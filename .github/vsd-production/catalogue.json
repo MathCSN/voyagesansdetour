@@ -312,6 +312,12 @@
       "notBefore": "2026-11-27T15:15:01Z",
       "file": "scenarios/fb-vietnam-itineraire-15-jours-2026-12-17.json",
       "sha256": "846efba47ee43f52f630a4e2aff6eb9fdbe23a7981fc604b8e73e5549fd8e55c"
+    },
+    {
+      "contentId": "ig-lisbonne-3-jours-sans-voiture-2026-12-18",
+      "notBefore": "2026-11-28T14:20:33Z",
+      "file": "scenarios/ig-lisbonne-3-jours-sans-voiture-2026-12-18.json",
+      "sha256": "0f864f9953114685ef3018123b0f98d89492755395cf6e78433494043e6ebb50"
     }
   ]
 }

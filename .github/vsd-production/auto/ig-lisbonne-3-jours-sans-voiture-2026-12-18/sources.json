@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "checkedOn": "2026-11-28",
+  "method": "Page publiée du guide relevée automatiquement ; texte visible conservé tel quel, première ligne = URL.",
+  "sources": {
+    "guide": {
+      "url": "https://voyagesansdetour.fr/portugal/lisbonne-3-jours-sans-voiture/",
+      "publisher": "Voyage Sans Détour",
+      "title": "Lisbonne en 3 jours sans voiture : tram 28, miradouros et Belém à 1,90 € le trajet",
+      "retrievedAt": "2026-11-28T14:20:33Z",
+      "snapshot": {
+        "file": "auto/ig-lisbonne-3-jours-sans-voiture-2026-12-18/guide.txt",
+        "sha256": "394cddf7b14fef74392fe45be2aea220fad7b5e8ecb50405583f36e6968f4722"
+      }
+    }
+  }
+}

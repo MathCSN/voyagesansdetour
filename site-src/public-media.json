@@ -2793,6 +2793,64 @@
           "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
         }
       ]
+    },
+    {
+      "contentId": "ig-lisbonne-3-jours-sans-voiture-2026-12-18",
+      "approved": true,
+      "files": [
+        {
+          "name": "reel.mp4",
+          "sha256": "9086be85a5c0a68d9f5ff7ccb504e15255bc395134a767a6b1cf30b0633319e7",
+          "bytes": 7361067
+        },
+        {
+          "name": "poster.jpg",
+          "sha256": "639f4e161d9b1472b6a88a7f9417102cd5d039245c5981b28702b686ac756a46",
+          "bytes": 496220
+        },
+        {
+          "name": "credits.txt",
+          "sha256": "ea4000fe6a3865c6aa776866b8e39733e4e9d28bf501d8badaf97166a0c91057",
+          "bytes": 3075
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1",
+          "bytes": 4482
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e",
+          "bytes": 4449
+        }
+      ]
+    },
+    {
+      "contentId": "pin-mexique-quand-partir",
+      "kind": "pin",
+      "approved": true,
+      "files": [
+        {
+          "name": "pin.jpg",
+          "bytes": 769252,
+          "sha256": "c845db3bb8010b6e37d960242dab7090fa90cdf7428d5518862f5c640c036db4"
+        },
+        {
+          "name": "credits.txt",
+          "bytes": 347,
+          "sha256": "8de6def498e353309f1894f453e015d8a420d76c0148d2a8f4080aefee9c3441"
+        },
+        {
+          "name": "dmsans-OFL.txt",
+          "bytes": 4482,
+          "sha256": "9af36190332437f5ecd09974de43c1f7c77a310a996cdd8ceb25628b458840e1"
+        },
+        {
+          "name": "playfairdisplay-OFL.txt",
+          "bytes": 4449,
+          "sha256": "566be814f8e96e93dfa16101331557eb6b5467e9e03f627c0910fe93ca12300e"
+        }
+      ]
     }
   ]
 }
